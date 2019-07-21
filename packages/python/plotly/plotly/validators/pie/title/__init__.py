@@ -1,16 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class TextValidator(_plotly_utils.basevalidators.StringValidator):
-
-    def __init__(self, plotly_name='text', parent_name='pie.title', **kwargs):
+    def __init__(self, plotly_name="text", parent_name="pie.title", **kwargs):
         super(TextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -19,20 +16,23 @@ import _plotly_utils.basevalidators
 
 
 class PositionValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='position', parent_name='pie.title', **kwargs
-    ):
+    def __init__(self, plotly_name="position", parent_name="pie.title", **kwargs):
         super(PositionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                'values', [
-                    'top left', 'top center', 'top right', 'middle center',
-                    'bottom left', 'bottom center', 'bottom right'
-                ]
+                "values",
+                [
+                    "top left",
+                    "top center",
+                    "top right",
+                    "middle center",
+                    "bottom left",
+                    "bottom center",
+                    "bottom right",
+                ],
             ),
             **kwargs
         )
@@ -42,14 +42,14 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(self, plotly_name='font', parent_name='pie.title', **kwargs):
+    def __init__(self, plotly_name="font", parent_name="pie.title", **kwargs):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Font'),
+            data_class_str=kwargs.pop("data_class_str", "Font"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             colorsrc
@@ -79,7 +79,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
             sizesrc
                 Sets the source reference on plot.ly for  size
                 .
-"""
+""",
             ),
             **kwargs
         )

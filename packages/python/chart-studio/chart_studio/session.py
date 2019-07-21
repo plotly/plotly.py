@@ -14,41 +14,37 @@ import six
 import _plotly_utils.exceptions
 
 
-_session = {
-    'credentials': {},
-    'config': {},
-    'plot_options': {}
-}
+_session = {"credentials": {}, "config": {}, "plot_options": {}}
 
 CREDENTIALS_KEYS = {
-    'username': six.string_types,
-    'api_key': six.string_types,
-    'proxy_username': six.string_types,
-    'proxy_password': six.string_types,
-    'stream_ids': list
+    "username": six.string_types,
+    "api_key": six.string_types,
+    "proxy_username": six.string_types,
+    "proxy_password": six.string_types,
+    "stream_ids": list,
 }
 
 CONFIG_KEYS = {
-    'plotly_domain': six.string_types,
-    'plotly_streaming_domain': six.string_types,
-    'plotly_api_domain': six.string_types,
-    'plotly_ssl_verification': bool,
-    'plotly_proxy_authorization': bool,
-    'world_readable': bool,
-    'auto_open': bool,
-    'sharing': six.string_types
+    "plotly_domain": six.string_types,
+    "plotly_streaming_domain": six.string_types,
+    "plotly_api_domain": six.string_types,
+    "plotly_ssl_verification": bool,
+    "plotly_proxy_authorization": bool,
+    "world_readable": bool,
+    "auto_open": bool,
+    "sharing": six.string_types,
 }
 
 PLOT_OPTIONS = {
-    'filename': six.string_types,
-    'fileopt': six.string_types,
-    'validate': bool,
-    'world_readable': bool,
-    'auto_open': bool,
-    'sharing': six.string_types
+    "filename": six.string_types,
+    "fileopt": six.string_types,
+    "validate": bool,
+    "world_readable": bool,
+    "auto_open": bool,
+    "sharing": six.string_types,
 }
 
-SHARING_OPTIONS = ['public', 'private', 'secret']
+SHARING_OPTIONS = ["public", "private", "secret"]
 
 
 def sign_in(username, api_key, **kwargs):
@@ -88,26 +84,27 @@ def sign_in(username, api_key, **kwargs):
         if key in kwargs:
             if not isinstance(kwargs[key], CREDENTIALS_KEYS[key]):
                 raise _plotly_utils.exceptions.PlotlyError(
-                    "{} must be of type '{}'"
-                    .format(key, CREDENTIALS_KEYS[key])
+                    "{} must be of type '{}'".format(key, CREDENTIALS_KEYS[key])
                 )
-            _session['credentials'][key] = kwargs[key]
+            _session["credentials"][key] = kwargs[key]
 
     # add config, raise error if type is wrong.
     for key in CONFIG_KEYS:
         if key in kwargs:
             if not isinstance(kwargs[key], CONFIG_KEYS[key]):
-                raise _plotly_utils.exceptions.PlotlyError("{} must be of type '{}'"
-                                                    .format(key, CONFIG_KEYS[key]))
-            _session['config'][key] = kwargs.get(key)
+                raise _plotly_utils.exceptions.PlotlyError(
+                    "{} must be of type '{}'".format(key, CONFIG_KEYS[key])
+                )
+            _session["config"][key] = kwargs.get(key)
 
     # add plot options, raise error if type is wrong.
     for key in PLOT_OPTIONS:
         if key in kwargs:
             if not isinstance(kwargs[key], CONFIG_KEYS[key]):
-                raise _plotly_utils.exceptions.PlotlyError("{} must be of type '{}'"
-                                                    .format(key, CONFIG_KEYS[key]))
-            _session['plot_options'][key] = kwargs.get(key)
+                raise _plotly_utils.exceptions.PlotlyError(
+                    "{} must be of type '{}'".format(key, CONFIG_KEYS[key])
+                )
+            _session["plot_options"][key] = kwargs.get(key)
 
 
 def update_session_plot_options(**kwargs):
@@ -129,31 +126,33 @@ def update_session_plot_options(**kwargs):
                 "{} is not a valid config or plot option key".format(key)
             )
         if not isinstance(kwargs[key], PLOT_OPTIONS[key]):
-            raise _plotly_utils.exceptions.PlotlyError("{} must be of type '{}'"
-                                                .format(key, PLOT_OPTIONS[key]))
+            raise _plotly_utils.exceptions.PlotlyError(
+                "{} must be of type '{}'".format(key, PLOT_OPTIONS[key])
+            )
 
         # raise exception if sharing is invalid
-        if (key == 'sharing' and not (kwargs[key] in SHARING_OPTIONS)):
-            raise _plotly_utils.exceptions.PlotlyError("'{0}' must be of either '{1}', '{2}'"
-                                         " or '{3}'"
-                                                .format(key, *SHARING_OPTIONS))
+        if key == "sharing" and not (kwargs[key] in SHARING_OPTIONS):
+            raise _plotly_utils.exceptions.PlotlyError(
+                "'{0}' must be of either '{1}', '{2}'"
+                " or '{3}'".format(key, *SHARING_OPTIONS)
+            )
 
     # update local _session dict with new plot options
-    _session['plot_options'].update(kwargs)
+    _session["plot_options"].update(kwargs)
 
 
 def get_session_plot_options():
     """ Returns a copy of the user supplied plot options.
     Use `update_plot_options()` to change.
     """
-    return copy.deepcopy(_session['plot_options'])
+    return copy.deepcopy(_session["plot_options"])
 
 
 def get_session_config():
     """Returns either module config or file config."""
-    return copy.deepcopy(_session['config'])
+    return copy.deepcopy(_session["config"])
 
 
 def get_session_credentials():
     """Returns the credentials that will be sent to plotly."""
-    return copy.deepcopy(_session['credentials'])
+    return copy.deepcopy(_session["credentials"])

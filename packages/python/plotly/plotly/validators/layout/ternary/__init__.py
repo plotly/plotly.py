@@ -1,18 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
     def __init__(
-        self, plotly_name='uirevision', parent_name='layout.ternary', **kwargs
+        self, plotly_name="uirevision", parent_name="layout.ternary", **kwargs
     ):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,16 +18,13 @@ import _plotly_utils.basevalidators
 
 
 class SumValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='sum', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="sum", parent_name="layout.ternary", **kwargs):
         super(SumValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -39,16 +33,14 @@ import _plotly_utils.basevalidators
 
 
 class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='domain', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="domain", parent_name="layout.ternary", **kwargs):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Domain'),
+            data_class_str=kwargs.pop("data_class_str", "Domain"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             column
                 If there is a layout grid, use the domain for
                 this column in the grid for this ternary
@@ -62,7 +54,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
                 Sets the vertical domain of this ternary
                 subplot (in plot fraction).
-"""
+""",
             ),
             **kwargs
         )
@@ -72,16 +64,14 @@ import _plotly_utils.basevalidators
 
 
 class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='caxis', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="caxis", parent_name="layout.ternary", **kwargs):
         super(CaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Caxis'),
+            data_class_str=kwargs.pop("data_class_str", "Caxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -224,9 +214,9 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.ternary.caxis.Tickform
-                atstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.ternary.
+                caxis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.ternary.caxis.tickformatstopdefaults), sets
@@ -272,7 +262,7 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.ternary.caxis.Title
+                plotly.graph_objects.layout.ternary.caxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -285,7 +275,7 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis `min`, and `title` if in `editable: true`
                 configuration. Defaults to
                 `ternary<N>.uirevision`.
-"""
+""",
             ),
             **kwargs
         )
@@ -295,15 +285,12 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='bgcolor', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="bgcolor", parent_name="layout.ternary", **kwargs):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -312,16 +299,14 @@ import _plotly_utils.basevalidators
 
 
 class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='baxis', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="baxis", parent_name="layout.ternary", **kwargs):
         super(BaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Baxis'),
+            data_class_str=kwargs.pop("data_class_str", "Baxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -464,9 +449,9 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.ternary.baxis.Tickform
-                atstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.ternary.
+                baxis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.ternary.baxis.tickformatstopdefaults), sets
@@ -512,7 +497,7 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.ternary.baxis.Title
+                plotly.graph_objects.layout.ternary.baxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -525,7 +510,7 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis `min`, and `title` if in `editable: true`
                 configuration. Defaults to
                 `ternary<N>.uirevision`.
-"""
+""",
             ),
             **kwargs
         )
@@ -535,16 +520,14 @@ import _plotly_utils.basevalidators
 
 
 class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='aaxis', parent_name='layout.ternary', **kwargs
-    ):
+    def __init__(self, plotly_name="aaxis", parent_name="layout.ternary", **kwargs):
         super(AaxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Aaxis'),
+            data_class_str=kwargs.pop("data_class_str", "Aaxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets default for all colors associated with
                 this axis all at once: line, font, tick, and
@@ -687,9 +670,9 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.ternary.aaxis.Tickform
-                atstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.ternary.
+                aaxis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.ternary.aaxis.tickformatstopdefaults), sets
@@ -735,7 +718,7 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.ternary.aaxis.Title
+                plotly.graph_objects.layout.ternary.aaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -748,7 +731,7 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis `min`, and `title` if in `editable: true`
                 configuration. Defaults to
                 `ternary<N>.uirevision`.
-"""
+""",
             ),
             **kwargs
         )

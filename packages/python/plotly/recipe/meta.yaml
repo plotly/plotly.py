@@ -1,4 +1,4 @@
-{% set data = load_setup_py_data() %}
+{% set data = load_setup_py_data(setup_file='../setup.py', from_recipe_dir=True) %}
 {% set version = data.get('version') %}
 
 package:
@@ -6,11 +6,14 @@ package:
   version: {{ version }}
 
 source:
-  path: ../
+  path: ../../../../
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -q"
+  script: |
+    cd packages/python/plotly
+    {{ PYTHON }} setup.py sdist
+    {{ PYTHON }} -m pip install dist/plotly-{{ version }}.tar.gz --no-deps --ignore-installed --no-cache-dir -q
   noarch: python
 
 requirements:
@@ -18,13 +21,9 @@ requirements:
     - python
     - pip
     - nodejs
+    - setuptools
   run:
     - python
-    - setuptools
-    - decorator >=4.0.6
-    - nbformat >=4.2
-    - pytz
-    - requests
     - retrying >=1.3.3
     - six
 

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -23,11 +21,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['below']
+        return self["below"]
 
     @below.setter
     def below(self, val):
-        self['below'] = val
+        self["below"] = val
 
     # circle
     # ------
@@ -51,11 +49,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Circle
         """
-        return self['circle']
+        return self["circle"]
 
     @circle.setter
     def circle(self, val):
-        self['circle'] = val
+        self["circle"] = val
 
     # color
     # -----
@@ -105,22 +103,22 @@ class Layer(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # fill
     # ----
@@ -144,11 +142,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Fill
         """
-        return self['fill']
+        return self["fill"]
 
     @fill.setter
     def fill(self, val):
-        self['fill'] = val
+        self["fill"] = val
 
     # line
     # ----
@@ -179,11 +177,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # maxzoom
     # -------
@@ -201,11 +199,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['maxzoom']
+        return self["maxzoom"]
 
     @maxzoom.setter
     def maxzoom(self, val):
-        self['maxzoom'] = val
+        self["maxzoom"] = val
 
     # minzoom
     # -------
@@ -222,11 +220,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['minzoom']
+        return self["minzoom"]
 
     @minzoom.setter
     def minzoom(self, val):
-        self['minzoom'] = val
+        self["minzoom"] = val
 
     # name
     # ----
@@ -249,11 +247,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # opacity
     # -------
@@ -276,11 +274,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # source
     # ------
@@ -298,11 +296,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['source']
+        return self["source"]
 
     @source.setter
     def source(self, val):
-        self['source'] = val
+        self["source"] = val
 
     # sourcelayer
     # -----------
@@ -321,11 +319,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['sourcelayer']
+        return self["sourcelayer"]
 
     @sourcelayer.setter
     def sourcelayer(self, val):
-        self['sourcelayer'] = val
+        self["sourcelayer"] = val
 
     # sourcetype
     # ----------
@@ -343,11 +341,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['sourcetype']
+        return self["sourcetype"]
 
     @sourcetype.setter
     def sourcetype(self, val):
-        self['sourcetype'] = val
+        self["sourcetype"] = val
 
     # symbol
     # ------
@@ -395,11 +393,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.Symbol
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
     # templateitemname
     # ----------------
@@ -423,11 +421,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # type
     # ----
@@ -446,11 +444,11 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # visible
     # -------
@@ -466,17 +464,17 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox'
+        return "layout.mapbox"
 
     # Self properties description
     # ---------------------------
@@ -488,8 +486,8 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objs.layout.mapbox.layer.Circle instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Circle
+            instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -501,11 +499,11 @@ class Layer(_BaseLayoutHierarchyType):
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
         fill
-            plotly.graph_objs.layout.mapbox.layer.Fill instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Fill instance
+            or dict with compatible properties
         line
-            plotly.graph_objs.layout.mapbox.layer.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Line instance
+            or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -548,8 +546,8 @@ class Layer(_BaseLayoutHierarchyType):
             "raster", "image" and "video" source types is coming
             soon.
         symbol
-            plotly.graph_objs.layout.mapbox.layer.Symbol instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Symbol
+            instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -603,8 +601,8 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objs.layout.mapbox.layer.Circle instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Circle
+            instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -616,11 +614,11 @@ class Layer(_BaseLayoutHierarchyType):
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
         fill
-            plotly.graph_objs.layout.mapbox.layer.Fill instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Fill instance
+            or dict with compatible properties
         line
-            plotly.graph_objs.layout.mapbox.layer.Line instance or
-            dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Line instance
+            or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -663,8 +661,8 @@ class Layer(_BaseLayoutHierarchyType):
             "raster", "image" and "video" source types is coming
             soon.
         symbol
-            plotly.graph_objs.layout.mapbox.layer.Symbol instance
-            or dict with compatible properties
+            plotly.graph_objects.layout.mapbox.layer.Symbol
+            instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -687,7 +685,7 @@ class Layer(_BaseLayoutHierarchyType):
         -------
         Layer
         """
-        super(Layer, self).__init__('layers')
+        super(Layer, self).__init__("layers")
 
         # Validate arg
         # ------------
@@ -707,67 +705,67 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox import (layer as v_layer)
+        from plotly.validators.layout.mapbox import layer as v_layer
 
         # Initialize validators
         # ---------------------
-        self._validators['below'] = v_layer.BelowValidator()
-        self._validators['circle'] = v_layer.CircleValidator()
-        self._validators['color'] = v_layer.ColorValidator()
-        self._validators['fill'] = v_layer.FillValidator()
-        self._validators['line'] = v_layer.LineValidator()
-        self._validators['maxzoom'] = v_layer.MaxzoomValidator()
-        self._validators['minzoom'] = v_layer.MinzoomValidator()
-        self._validators['name'] = v_layer.NameValidator()
-        self._validators['opacity'] = v_layer.OpacityValidator()
-        self._validators['source'] = v_layer.SourceValidator()
-        self._validators['sourcelayer'] = v_layer.SourcelayerValidator()
-        self._validators['sourcetype'] = v_layer.SourcetypeValidator()
-        self._validators['symbol'] = v_layer.SymbolValidator()
-        self._validators['templateitemname'
-                        ] = v_layer.TemplateitemnameValidator()
-        self._validators['type'] = v_layer.TypeValidator()
-        self._validators['visible'] = v_layer.VisibleValidator()
+        self._validators["below"] = v_layer.BelowValidator()
+        self._validators["circle"] = v_layer.CircleValidator()
+        self._validators["color"] = v_layer.ColorValidator()
+        self._validators["fill"] = v_layer.FillValidator()
+        self._validators["line"] = v_layer.LineValidator()
+        self._validators["maxzoom"] = v_layer.MaxzoomValidator()
+        self._validators["minzoom"] = v_layer.MinzoomValidator()
+        self._validators["name"] = v_layer.NameValidator()
+        self._validators["opacity"] = v_layer.OpacityValidator()
+        self._validators["source"] = v_layer.SourceValidator()
+        self._validators["sourcelayer"] = v_layer.SourcelayerValidator()
+        self._validators["sourcetype"] = v_layer.SourcetypeValidator()
+        self._validators["symbol"] = v_layer.SymbolValidator()
+        self._validators["templateitemname"] = v_layer.TemplateitemnameValidator()
+        self._validators["type"] = v_layer.TypeValidator()
+        self._validators["visible"] = v_layer.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('below', None)
-        self['below'] = below if below is not None else _v
-        _v = arg.pop('circle', None)
-        self['circle'] = circle if circle is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('fill', None)
-        self['fill'] = fill if fill is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
-        _v = arg.pop('maxzoom', None)
-        self['maxzoom'] = maxzoom if maxzoom is not None else _v
-        _v = arg.pop('minzoom', None)
-        self['minzoom'] = minzoom if minzoom is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('source', None)
-        self['source'] = source if source is not None else _v
-        _v = arg.pop('sourcelayer', None)
-        self['sourcelayer'] = sourcelayer if sourcelayer is not None else _v
-        _v = arg.pop('sourcetype', None)
-        self['sourcetype'] = sourcetype if sourcetype is not None else _v
-        _v = arg.pop('symbol', None)
-        self['symbol'] = symbol if symbol is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("below", None)
+        self["below"] = below if below is not None else _v
+        _v = arg.pop("circle", None)
+        self["circle"] = circle if circle is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("fill", None)
+        self["fill"] = fill if fill is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
+        _v = arg.pop("maxzoom", None)
+        self["maxzoom"] = maxzoom if maxzoom is not None else _v
+        _v = arg.pop("minzoom", None)
+        self["minzoom"] = minzoom if minzoom is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("source", None)
+        self["source"] = source if source is not None else _v
+        _v = arg.pop("sourcelayer", None)
+        self["sourcelayer"] = sourcelayer if sourcelayer is not None else _v
+        _v = arg.pop("sourcetype", None)
+        self["sourcetype"] = sourcetype if sourcetype is not None else _v
+        _v = arg.pop("symbol", None)
+        self["symbol"] = symbol if symbol is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -800,11 +798,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -822,11 +820,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -848,11 +846,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -874,17 +872,17 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox'
+        return "layout.mapbox"
 
     # Self properties description
     # ---------------------------
@@ -905,9 +903,7 @@ class Domain(_BaseLayoutHierarchyType):
             plot fraction).
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -933,7 +929,7 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -953,29 +949,29 @@ an instance of plotly.graph_objs.layout.mapbox.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox import (domain as v_domain)
+        from plotly.validators.layout.mapbox import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1006,11 +1002,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lat']
+        return self["lat"]
 
     @lat.setter
     def lat(self, val):
-        self['lat'] = val
+        self["lat"] = val
 
     # lon
     # ---
@@ -1026,17 +1022,17 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lon']
+        return self["lon"]
 
     @lon.setter
     def lon(self, val):
-        self['lon'] = val
+        self["lon"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox'
+        return "layout.mapbox"
 
     # Self properties description
     # ---------------------------
@@ -1071,7 +1067,7 @@ class Center(_BaseLayoutHierarchyType):
         -------
         Center
         """
-        super(Center, self).__init__('center')
+        super(Center, self).__init__("center")
 
         # Validate arg
         # ------------
@@ -1091,23 +1087,23 @@ an instance of plotly.graph_objs.layout.mapbox.Center"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox import (center as v_center)
+        from plotly.validators.layout.mapbox import center as v_center
 
         # Initialize validators
         # ---------------------
-        self._validators['lat'] = v_center.LatValidator()
-        self._validators['lon'] = v_center.LonValidator()
+        self._validators["lat"] = v_center.LatValidator()
+        self._validators["lon"] = v_center.LonValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('lat', None)
-        self['lat'] = lat if lat is not None else _v
-        _v = arg.pop('lon', None)
-        self['lon'] = lon if lon is not None else _v
+        _v = arg.pop("lat", None)
+        self["lat"] = lat if lat is not None else _v
+        _v = arg.pop("lon", None)
+        self["lon"] = lon if lon is not None else _v
 
         # Process unknown kwargs
         # ----------------------

@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -22,11 +20,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['icon']
+        return self["icon"]
 
     @icon.setter
     def icon(self, val):
-        self['icon'] = val
+        self["icon"] = val
 
     # iconsize
     # --------
@@ -43,11 +41,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['iconsize']
+        return self["iconsize"]
 
     @iconsize.setter
     def iconsize(self, val):
-        self['iconsize'] = val
+        self["iconsize"] = val
 
     # placement
     # ---------
@@ -69,11 +67,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['placement']
+        return self["placement"]
 
     @placement.setter
     def placement(self, val):
-        self['placement'] = val
+        self["placement"] = val
 
     # text
     # ----
@@ -90,11 +88,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     # textfont
     # --------
@@ -137,11 +135,11 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.mapbox.layer.symbol.Textfont
         """
-        return self['textfont']
+        return self["textfont"]
 
     @textfont.setter
     def textfont(self, val):
-        self['textfont'] = val
+        self["textfont"] = val
 
     # textposition
     # ------------
@@ -161,17 +159,17 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['textposition']
+        return self["textposition"]
 
     @textposition.setter
     def textposition(self, val):
-        self['textposition'] = val
+        self["textposition"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox.layer'
+        return "layout.mapbox.layer"
 
     # Self properties description
     # ---------------------------
@@ -253,7 +251,7 @@ class Symbol(_BaseLayoutHierarchyType):
         -------
         Symbol
         """
-        super(Symbol, self).__init__('symbol')
+        super(Symbol, self).__init__("symbol")
 
         # Validate arg
         # ------------
@@ -273,35 +271,35 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox.layer import (symbol as v_symbol)
+        from plotly.validators.layout.mapbox.layer import symbol as v_symbol
 
         # Initialize validators
         # ---------------------
-        self._validators['icon'] = v_symbol.IconValidator()
-        self._validators['iconsize'] = v_symbol.IconsizeValidator()
-        self._validators['placement'] = v_symbol.PlacementValidator()
-        self._validators['text'] = v_symbol.TextValidator()
-        self._validators['textfont'] = v_symbol.TextfontValidator()
-        self._validators['textposition'] = v_symbol.TextpositionValidator()
+        self._validators["icon"] = v_symbol.IconValidator()
+        self._validators["iconsize"] = v_symbol.IconsizeValidator()
+        self._validators["placement"] = v_symbol.PlacementValidator()
+        self._validators["text"] = v_symbol.TextValidator()
+        self._validators["textfont"] = v_symbol.TextfontValidator()
+        self._validators["textposition"] = v_symbol.TextpositionValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('icon', None)
-        self['icon'] = icon if icon is not None else _v
-        _v = arg.pop('iconsize', None)
-        self['iconsize'] = iconsize if iconsize is not None else _v
-        _v = arg.pop('placement', None)
-        self['placement'] = placement if placement is not None else _v
-        _v = arg.pop('text', None)
-        self['text'] = text if text is not None else _v
-        _v = arg.pop('textfont', None)
-        self['textfont'] = textfont if textfont is not None else _v
-        _v = arg.pop('textposition', None)
-        self['textposition'] = textposition if textposition is not None else _v
+        _v = arg.pop("icon", None)
+        self["icon"] = icon if icon is not None else _v
+        _v = arg.pop("iconsize", None)
+        self["iconsize"] = iconsize if iconsize is not None else _v
+        _v = arg.pop("placement", None)
+        self["placement"] = placement if placement is not None else _v
+        _v = arg.pop("text", None)
+        self["text"] = text if text is not None else _v
+        _v = arg.pop("textfont", None)
+        self["textfont"] = textfont if textfont is not None else _v
+        _v = arg.pop("textposition", None)
+        self["textposition"] = textposition if textposition is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -333,11 +331,11 @@ class Line(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['dash']
+        return self["dash"]
 
     @dash.setter
     def dash(self, val):
-        self['dash'] = val
+        self["dash"] = val
 
     # dashsrc
     # -------
@@ -353,11 +351,11 @@ class Line(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['dashsrc']
+        return self["dashsrc"]
 
     @dashsrc.setter
     def dashsrc(self, val):
-        self['dashsrc'] = val
+        self["dashsrc"] = val
 
     # width
     # -----
@@ -374,17 +372,17 @@ class Line(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox.layer'
+        return "layout.mapbox.layer"
 
     # Self properties description
     # ---------------------------
@@ -402,9 +400,7 @@ class Line(_BaseLayoutHierarchyType):
             Has an effect only when `type` is set to "line".
         """
 
-    def __init__(
-        self, arg=None, dash=None, dashsrc=None, width=None, **kwargs
-    ):
+    def __init__(self, arg=None, dash=None, dashsrc=None, width=None, **kwargs):
         """
         Construct a new Line object
         
@@ -428,7 +424,7 @@ class Line(_BaseLayoutHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -448,26 +444,26 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox.layer import (line as v_line)
+        from plotly.validators.layout.mapbox.layer import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['dash'] = v_line.DashValidator()
-        self._validators['dashsrc'] = v_line.DashsrcValidator()
-        self._validators['width'] = v_line.WidthValidator()
+        self._validators["dash"] = v_line.DashValidator()
+        self._validators["dashsrc"] = v_line.DashsrcValidator()
+        self._validators["width"] = v_line.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('dash', None)
-        self['dash'] = dash if dash is not None else _v
-        _v = arg.pop('dashsrc', None)
-        self['dashsrc'] = dashsrc if dashsrc is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("dash", None)
+        self["dash"] = dash if dash is not None else _v
+        _v = arg.pop("dashsrc", None)
+        self["dashsrc"] = dashsrc if dashsrc is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -527,28 +523,28 @@ class Fill(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['outlinecolor']
+        return self["outlinecolor"]
 
     @outlinecolor.setter
     def outlinecolor(self, val):
-        self['outlinecolor'] = val
+        self["outlinecolor"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox.layer'
+        return "layout.mapbox.layer"
 
     # Self properties description
     # ---------------------------
@@ -580,7 +576,7 @@ class Fill(_BaseLayoutHierarchyType):
         -------
         Fill
         """
-        super(Fill, self).__init__('fill')
+        super(Fill, self).__init__("fill")
 
         # Validate arg
         # ------------
@@ -600,20 +596,20 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Fill"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox.layer import (fill as v_fill)
+        from plotly.validators.layout.mapbox.layer import fill as v_fill
 
         # Initialize validators
         # ---------------------
-        self._validators['outlinecolor'] = v_fill.OutlinecolorValidator()
+        self._validators["outlinecolor"] = v_fill.OutlinecolorValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('outlinecolor', None)
-        self['outlinecolor'] = outlinecolor if outlinecolor is not None else _v
+        _v = arg.pop("outlinecolor", None)
+        self["outlinecolor"] = outlinecolor if outlinecolor is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -645,17 +641,17 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['radius']
+        return self["radius"]
 
     @radius.setter
     def radius(self, val):
-        self['radius'] = val
+        self["radius"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.mapbox.layer'
+        return "layout.mapbox.layer"
 
     # Self properties description
     # ---------------------------
@@ -687,7 +683,7 @@ class Circle(_BaseLayoutHierarchyType):
         -------
         Circle
         """
-        super(Circle, self).__init__('circle')
+        super(Circle, self).__init__("circle")
 
         # Validate arg
         # ------------
@@ -707,20 +703,20 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.mapbox.layer import (circle as v_circle)
+        from plotly.validators.layout.mapbox.layer import circle as v_circle
 
         # Initialize validators
         # ---------------------
-        self._validators['radius'] = v_circle.RadiusValidator()
+        self._validators["radius"] = v_circle.RadiusValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('radius', None)
-        self['radius'] = radius if radius is not None else _v
+        _v = arg.pop("radius", None)
+        self["radius"] = radius if radius is not None else _v
 
         # Process unknown kwargs
         # ----------------------

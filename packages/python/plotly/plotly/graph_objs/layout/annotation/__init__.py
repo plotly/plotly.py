@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -50,22 +48,22 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bordercolor
     # -----------
@@ -111,22 +109,22 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # font
     # ----
@@ -168,17 +166,17 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.annotation.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.annotation'
+        return "layout.annotation"
 
     # Self properties description
     # ---------------------------
@@ -199,9 +197,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
             `hoverlabel.bordercolor`.
         """
 
-    def __init__(
-        self, arg=None, bgcolor=None, bordercolor=None, font=None, **kwargs
-    ):
+    def __init__(self, arg=None, bgcolor=None, bordercolor=None, font=None, **kwargs):
         """
         Construct a new Hoverlabel object
         
@@ -228,7 +224,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         -------
         Hoverlabel
         """
-        super(Hoverlabel, self).__init__('hoverlabel')
+        super(Hoverlabel, self).__init__("hoverlabel")
 
         # Validate arg
         # ------------
@@ -248,28 +244,26 @@ an instance of plotly.graph_objs.layout.annotation.Hoverlabel"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.annotation import (
-            hoverlabel as v_hoverlabel
-        )
+        from plotly.validators.layout.annotation import hoverlabel as v_hoverlabel
 
         # Initialize validators
         # ---------------------
-        self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
-        self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
-        self._validators['font'] = v_hoverlabel.FontValidator()
+        self._validators["bgcolor"] = v_hoverlabel.BgcolorValidator()
+        self._validators["bordercolor"] = v_hoverlabel.BordercolorValidator()
+        self._validators["font"] = v_hoverlabel.FontValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -326,22 +320,22 @@ class Font(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -368,11 +362,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -386,17 +380,17 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.annotation'
+        return "layout.annotation"
 
     # Self properties description
     # ---------------------------
@@ -457,7 +451,7 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -477,26 +471,26 @@ an instance of plotly.graph_objs.layout.annotation.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.annotation import (font as v_font)
+        from plotly.validators.layout.annotation import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['size'] = v_font.SizeValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["size"] = v_font.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------

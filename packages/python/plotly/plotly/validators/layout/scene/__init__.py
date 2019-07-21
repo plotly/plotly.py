@@ -1,19 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='zaxis', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="zaxis", parent_name="layout.scene", **kwargs):
         super(ZAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ZAxis'),
+            data_class_str=kwargs.pop("data_class_str", "ZAxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autorange
                 Determines whether or not the range of this
                 axis is computed in relation to the input data.
@@ -226,9 +222,9 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.zaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.za
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.zaxis.tickformatstopdefaults), sets
@@ -274,7 +270,7 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.zaxis.Title
+                plotly.graph_objects.layout.scene.zaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -300,7 +296,7 @@ class ZAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line color of the zero line.
             zerolinewidth
                 Sets the width (in px) of the zero line.
-"""
+""",
             ),
             **kwargs
         )
@@ -310,16 +306,14 @@ import _plotly_utils.basevalidators
 
 
 class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='yaxis', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="yaxis", parent_name="layout.scene", **kwargs):
         super(YAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'YAxis'),
+            data_class_str=kwargs.pop("data_class_str", "YAxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autorange
                 Determines whether or not the range of this
                 axis is computed in relation to the input data.
@@ -532,9 +526,9 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.yaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.ya
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.yaxis.tickformatstopdefaults), sets
@@ -580,7 +574,7 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.yaxis.Title
+                plotly.graph_objects.layout.scene.yaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -606,7 +600,7 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line color of the zero line.
             zerolinewidth
                 Sets the width (in px) of the zero line.
-"""
+""",
             ),
             **kwargs
         )
@@ -616,16 +610,14 @@ import _plotly_utils.basevalidators
 
 
 class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='xaxis', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="xaxis", parent_name="layout.scene", **kwargs):
         super(XAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'XAxis'),
+            data_class_str=kwargs.pop("data_class_str", "XAxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autorange
                 Determines whether or not the range of this
                 axis is computed in relation to the input data.
@@ -838,9 +830,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.scene.xaxis.Tickformat
-                stop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.scene.xa
+                xis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.scene.xaxis.tickformatstopdefaults), sets
@@ -886,7 +878,7 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.scene.xaxis.Title
+                plotly.graph_objects.layout.scene.xaxis.Title
                 instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
@@ -912,7 +904,7 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the line color of the zero line.
             zerolinewidth
                 Sets the width (in px) of the zero line.
-"""
+""",
             ),
             **kwargs
         )
@@ -922,15 +914,12 @@ import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="layout.scene", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -939,16 +928,13 @@ import _plotly_utils.basevalidators
 
 
 class HovermodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='hovermode', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="hovermode", parent_name="layout.scene", **kwargs):
         super(HovermodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'modebar'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['closest', False]),
+            edit_type=kwargs.pop("edit_type", "modebar"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["closest", False]),
             **kwargs
         )
 
@@ -957,18 +943,13 @@ import _plotly_utils.basevalidators
 
 
 class DragmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='dragmode', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="dragmode", parent_name="layout.scene", **kwargs):
         super(DragmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop(
-                'values', ['orbit', 'turntable', 'zoom', 'pan', False]
-            ),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["orbit", "turntable", "zoom", "pan", False]),
             **kwargs
         )
 
@@ -977,16 +958,14 @@ import _plotly_utils.basevalidators
 
 
 class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='domain', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="domain", parent_name="layout.scene", **kwargs):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Domain'),
+            data_class_str=kwargs.pop("data_class_str", "Domain"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             column
                 If there is a layout grid, use the domain for
                 this column in the grid for this scene subplot
@@ -1000,7 +979,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
                 Sets the vertical domain of this scene subplot
                 (in plot fraction).
-"""
+""",
             ),
             **kwargs
         )
@@ -1010,16 +989,14 @@ import _plotly_utils.basevalidators
 
 
 class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='camera', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="camera", parent_name="layout.scene", **kwargs):
         super(CameraValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Camera'),
+            data_class_str=kwargs.pop("data_class_str", "Camera"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             center
                 Sets the (x,y,z) components of the 'center'
                 camera vector This vector determines the
@@ -1031,15 +1008,16 @@ class CameraValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vector. This vector determines the view point
                 about the origin of this scene.
             projection
-                plotly.graph_objs.layout.scene.camera.Projectio
-                n instance or dict with compatible properties
+                plotly.graph_objects.layout.scene.camera.Projec
+                tion instance or dict with compatible
+                properties
             up
                 Sets the (x,y,z) components of the 'up' camera
                 vector. This vector determines the up direction
                 of this scene with respect to the page. The
                 default is *{x: 0, y: 0, z: 1}* which means
                 that the z axis points up.
-"""
+""",
             ),
             **kwargs
         )
@@ -1049,15 +1027,12 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='bgcolor', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="bgcolor", parent_name="layout.scene", **kwargs):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -1066,23 +1041,21 @@ import _plotly_utils.basevalidators
 
 
 class AspectratioValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='aspectratio', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="aspectratio", parent_name="layout.scene", **kwargs):
         super(AspectratioValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Aspectratio'),
+            data_class_str=kwargs.pop("data_class_str", "Aspectratio"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             x
 
             y
 
             z
 
-"""
+""",
             ),
             **kwargs
         )
@@ -1092,17 +1065,14 @@ import _plotly_utils.basevalidators
 
 
 class AspectmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='aspectmode', parent_name='layout.scene', **kwargs
-    ):
+    def __init__(self, plotly_name="aspectmode", parent_name="layout.scene", **kwargs):
         super(AspectmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'cube', 'data', 'manual']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "cube", "data", "manual"]),
             **kwargs
         )
 
@@ -1111,19 +1081,18 @@ import _plotly_utils.basevalidators
 
 
 class AnnotationValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='annotationdefaults',
-        parent_name='layout.scene',
-        **kwargs
+        self, plotly_name="annotationdefaults", parent_name="layout.scene", **kwargs
     ):
         super(AnnotationValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Annotation'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Annotation"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -1131,19 +1100,15 @@ class AnnotationValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class AnnotationsValidator(
-    _plotly_utils.basevalidators.CompoundArrayValidator
-):
-
-    def __init__(
-        self, plotly_name='annotations', parent_name='layout.scene', **kwargs
-    ):
+class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(self, plotly_name="annotations", parent_name="layout.scene", **kwargs):
         super(AnnotationsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Annotation'),
+            data_class_str=kwargs.pop("data_class_str", "Annotation"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
@@ -1198,8 +1163,8 @@ class AnnotationsValidator(
                 (default) lets the text set the box height.
                 Taller text will be clipped.
             hoverlabel
-                plotly.graph_objs.layout.scene.annotation.Hover
-                label instance or dict with compatible
+                plotly.graph_objects.layout.scene.annotation.Ho
+                verlabel instance or dict with compatible
                 properties
             hovertext
                 Sets text to appear when hovering over this
@@ -1321,7 +1286,7 @@ class AnnotationsValidator(
                 many pixels.
             z
                 Sets the annotation's z position.
-"""
+""",
             ),
             **kwargs
         )

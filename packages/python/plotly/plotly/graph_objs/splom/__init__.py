@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -33,17 +31,17 @@ class Unselected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.unselected.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -51,8 +49,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.splom.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.splom.unselected.Marker instance
+            or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -65,14 +63,14 @@ class Unselected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Unselected
         marker
-            plotly.graph_objs.splom.unselected.Marker instance or
-            dict with compatible properties
+            plotly.graph_objects.splom.unselected.Marker instance
+            or dict with compatible properties
 
         Returns
         -------
         Unselected
         """
-        super(Unselected, self).__init__('unselected')
+        super(Unselected, self).__init__("unselected")
 
         # Validate arg
         # ------------
@@ -92,20 +90,20 @@ an instance of plotly.graph_objs.splom.Unselected"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (unselected as v_unselected)
+        from plotly.validators.splom import unselected as v_unselected
 
         # Initialize validators
         # ---------------------
-        self._validators['marker'] = v_unselected.MarkerValidator()
+        self._validators["marker"] = v_unselected.MarkerValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('marker', None)
-        self['marker'] = marker if marker is not None else _v
+        _v = arg.pop("marker", None)
+        self["marker"] = marker if marker is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -138,11 +136,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     # token
     # -----
@@ -159,17 +157,17 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -210,7 +208,7 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__('stream')
+        super(Stream, self).__init__("stream")
 
         # Validate arg
         # ------------
@@ -230,23 +228,23 @@ an instance of plotly.graph_objs.splom.Stream"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (stream as v_stream)
+        from plotly.validators.splom import stream as v_stream
 
         # Initialize validators
         # ---------------------
-        self._validators['maxpoints'] = v_stream.MaxpointsValidator()
-        self._validators['token'] = v_stream.TokenValidator()
+        self._validators["maxpoints"] = v_stream.MaxpointsValidator()
+        self._validators["token"] = v_stream.TokenValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('maxpoints', None)
-        self['maxpoints'] = maxpoints if maxpoints is not None else _v
-        _v = arg.pop('token', None)
-        self['token'] = token if token is not None else _v
+        _v = arg.pop("maxpoints", None)
+        self["maxpoints"] = maxpoints if maxpoints is not None else _v
+        _v = arg.pop("token", None)
+        self["token"] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -287,17 +285,17 @@ class Selected(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.selected.Marker
         """
-        return self['marker']
+        return self["marker"]
 
     @marker.setter
     def marker(self, val):
-        self['marker'] = val
+        self["marker"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -305,7 +303,7 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objs.splom.selected.Marker instance or
+            plotly.graph_objects.splom.selected.Marker instance or
             dict with compatible properties
         """
 
@@ -319,14 +317,14 @@ class Selected(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Selected
         marker
-            plotly.graph_objs.splom.selected.Marker instance or
+            plotly.graph_objects.splom.selected.Marker instance or
             dict with compatible properties
 
         Returns
         -------
         Selected
         """
-        super(Selected, self).__init__('selected')
+        super(Selected, self).__init__("selected")
 
         # Validate arg
         # ------------
@@ -346,20 +344,20 @@ an instance of plotly.graph_objs.splom.Selected"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (selected as v_selected)
+        from plotly.validators.splom import selected as v_selected
 
         # Initialize validators
         # ---------------------
-        self._validators['marker'] = v_selected.MarkerValidator()
+        self._validators["marker"] = v_selected.MarkerValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('marker', None)
-        self['marker'] = marker if marker is not None else _v
+        _v = arg.pop("marker", None)
+        self["marker"] = marker if marker is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -396,11 +394,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['autocolorscale']
+        return self["autocolorscale"]
 
     @autocolorscale.setter
     def autocolorscale(self, val):
-        self['autocolorscale'] = val
+        self["autocolorscale"] = val
 
     # cauto
     # -----
@@ -421,11 +419,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['cauto']
+        return self["cauto"]
 
     @cauto.setter
     def cauto(self, val):
-        self['cauto'] = val
+        self["cauto"] = val
 
     # cmax
     # ----
@@ -444,11 +442,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmax']
+        return self["cmax"]
 
     @cmax.setter
     def cmax(self, val):
-        self['cmax'] = val
+        self["cmax"] = val
 
     # cmid
     # ----
@@ -468,11 +466,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmid']
+        return self["cmid"]
 
     @cmid.setter
     def cmid(self, val):
-        self['cmid'] = val
+        self["cmid"] = val
 
     # cmin
     # ----
@@ -491,11 +489,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['cmin']
+        return self["cmin"]
 
     @cmin.setter
     def cmin(self, val):
-        self['cmin'] = val
+        self["cmin"] = val
 
     # color
     # -----
@@ -542,12 +540,12 @@ class Marker(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A number that will be interpreted as a color
             according to splom.marker.colorscale
           - A list or array of any of the above
@@ -556,11 +554,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # coloraxis
     # ---------
@@ -583,11 +581,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['coloraxis']
+        return self["coloraxis"]
 
     @coloraxis.setter
     def coloraxis(self, val):
-        self['coloraxis'] = val
+        self["coloraxis"] = val
 
     # colorbar
     # --------
@@ -727,9 +725,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    plotly.graph_objs.splom.marker.colorbar.Tickfor
-                    matstop instance or dict with compatible
-                    properties
+                    A tuple of plotly.graph_objects.splom.marker.co
+                    lorbar.Tickformatstop instances or dicts with
+                    compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.splom.marker.colorbar.tickformatstopdefaults)
@@ -776,8 +774,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objs.splom.marker.colorbar.Title
-                    instance or dict with compatible properties
+                    plotly.graph_objects.splom.marker.colorbar.Titl
+                    e instance or dict with compatible properties
                 titlefont
                     Deprecated: Please use
                     splom.marker.colorbar.title.font instead. Sets
@@ -817,11 +815,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.marker.ColorBar
         """
-        return self['colorbar']
+        return self["colorbar"]
 
     @colorbar.setter
     def colorbar(self, val):
-        self['colorbar'] = val
+        self["colorbar"] = val
 
     # colorscale
     # ----------
@@ -842,24 +840,38 @@ class Marker(_BaseTraceHierarchyType):
     
         The 'colorscale' property is a colorscale and may be
         specified as:
+          - A list of colors that will be spaced evenly to create the colorscale.
+            Many predefined colorscale lists are included in the sequential, diverging,
+            and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
             normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
-                ['Greys', 'YlGnBu', 'Greens', 'YlOrRd', 'Bluered', 'RdBu',
-                'Reds', 'Blues', 'Picnic', 'Rainbow', 'Portland', 'Jet',
-                'Hot', 'Blackbody', 'Earth', 'Electric', 'Viridis', 'Cividis']
+                ['aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+                 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+                 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+                 'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+                 'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+                 'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+                 'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
 
         Returns
         -------
         str
         """
-        return self['colorscale']
+        return self["colorscale"]
 
     @colorscale.setter
     def colorscale(self, val):
-        self['colorscale'] = val
+        self["colorscale"] = val
 
     # colorsrc
     # --------
@@ -875,11 +887,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # line
     # ----
@@ -987,11 +999,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # opacity
     # -------
@@ -1008,11 +1020,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # opacitysrc
     # ----------
@@ -1028,11 +1040,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['opacitysrc']
+        return self["opacitysrc"]
 
     @opacitysrc.setter
     def opacitysrc(self, val):
-        self['opacitysrc'] = val
+        self["opacitysrc"] = val
 
     # reversescale
     # ------------
@@ -1051,11 +1063,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['reversescale']
+        return self["reversescale"]
 
     @reversescale.setter
     def reversescale(self, val):
-        self['reversescale'] = val
+        self["reversescale"] = val
 
     # showscale
     # ---------
@@ -1073,11 +1085,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['showscale']
+        return self["showscale"]
 
     @showscale.setter
     def showscale(self, val):
-        self['showscale'] = val
+        self["showscale"] = val
 
     # size
     # ----
@@ -1094,11 +1106,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # sizemin
     # -------
@@ -1116,11 +1128,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['sizemin']
+        return self["sizemin"]
 
     @sizemin.setter
     def sizemin(self, val):
-        self['sizemin'] = val
+        self["sizemin"] = val
 
     # sizemode
     # --------
@@ -1139,11 +1151,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['sizemode']
+        return self["sizemode"]
 
     @sizemode.setter
     def sizemode(self, val):
-        self['sizemode'] = val
+        self["sizemode"] = val
 
     # sizeref
     # -------
@@ -1161,11 +1173,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['sizeref']
+        return self["sizeref"]
 
     @sizeref.setter
     def sizeref(self, val):
-        self['sizeref'] = val
+        self["sizeref"] = val
 
     # sizesrc
     # -------
@@ -1181,11 +1193,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     # symbol
     # ------
@@ -1266,11 +1278,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['symbol']
+        return self["symbol"]
 
     @symbol.setter
     def symbol(self, val):
-        self['symbol'] = val
+        self["symbol"] = val
 
     # symbolsrc
     # ---------
@@ -1286,17 +1298,17 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['symbolsrc']
+        return self["symbolsrc"]
 
     @symbolsrc.setter
     def symbolsrc(self, val):
-        self['symbolsrc'] = val
+        self["symbolsrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -1350,7 +1362,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.splom.marker.ColorBar instance or
+            plotly.graph_objects.splom.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1369,7 +1381,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.splom.marker.Line instance or dict
+            plotly.graph_objects.splom.marker.Line instance or dict
             with compatible properties
         opacity
             Sets the marker opacity.
@@ -1494,7 +1506,7 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objs.splom.marker.ColorBar instance or
+            plotly.graph_objects.splom.marker.ColorBar instance or
             dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1513,7 +1525,7 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objs.splom.marker.Line instance or dict
+            plotly.graph_objects.splom.marker.Line instance or dict
             with compatible properties
         opacity
             Sets the marker opacity.
@@ -1559,7 +1571,7 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__('marker')
+        super(Marker, self).__init__("marker")
 
         # Validate arg
         # ------------
@@ -1579,84 +1591,83 @@ an instance of plotly.graph_objs.splom.Marker"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (marker as v_marker)
+        from plotly.validators.splom import marker as v_marker
 
         # Initialize validators
         # ---------------------
-        self._validators['autocolorscale'] = v_marker.AutocolorscaleValidator()
-        self._validators['cauto'] = v_marker.CautoValidator()
-        self._validators['cmax'] = v_marker.CmaxValidator()
-        self._validators['cmid'] = v_marker.CmidValidator()
-        self._validators['cmin'] = v_marker.CminValidator()
-        self._validators['color'] = v_marker.ColorValidator()
-        self._validators['coloraxis'] = v_marker.ColoraxisValidator()
-        self._validators['colorbar'] = v_marker.ColorBarValidator()
-        self._validators['colorscale'] = v_marker.ColorscaleValidator()
-        self._validators['colorsrc'] = v_marker.ColorsrcValidator()
-        self._validators['line'] = v_marker.LineValidator()
-        self._validators['opacity'] = v_marker.OpacityValidator()
-        self._validators['opacitysrc'] = v_marker.OpacitysrcValidator()
-        self._validators['reversescale'] = v_marker.ReversescaleValidator()
-        self._validators['showscale'] = v_marker.ShowscaleValidator()
-        self._validators['size'] = v_marker.SizeValidator()
-        self._validators['sizemin'] = v_marker.SizeminValidator()
-        self._validators['sizemode'] = v_marker.SizemodeValidator()
-        self._validators['sizeref'] = v_marker.SizerefValidator()
-        self._validators['sizesrc'] = v_marker.SizesrcValidator()
-        self._validators['symbol'] = v_marker.SymbolValidator()
-        self._validators['symbolsrc'] = v_marker.SymbolsrcValidator()
+        self._validators["autocolorscale"] = v_marker.AutocolorscaleValidator()
+        self._validators["cauto"] = v_marker.CautoValidator()
+        self._validators["cmax"] = v_marker.CmaxValidator()
+        self._validators["cmid"] = v_marker.CmidValidator()
+        self._validators["cmin"] = v_marker.CminValidator()
+        self._validators["color"] = v_marker.ColorValidator()
+        self._validators["coloraxis"] = v_marker.ColoraxisValidator()
+        self._validators["colorbar"] = v_marker.ColorBarValidator()
+        self._validators["colorscale"] = v_marker.ColorscaleValidator()
+        self._validators["colorsrc"] = v_marker.ColorsrcValidator()
+        self._validators["line"] = v_marker.LineValidator()
+        self._validators["opacity"] = v_marker.OpacityValidator()
+        self._validators["opacitysrc"] = v_marker.OpacitysrcValidator()
+        self._validators["reversescale"] = v_marker.ReversescaleValidator()
+        self._validators["showscale"] = v_marker.ShowscaleValidator()
+        self._validators["size"] = v_marker.SizeValidator()
+        self._validators["sizemin"] = v_marker.SizeminValidator()
+        self._validators["sizemode"] = v_marker.SizemodeValidator()
+        self._validators["sizeref"] = v_marker.SizerefValidator()
+        self._validators["sizesrc"] = v_marker.SizesrcValidator()
+        self._validators["symbol"] = v_marker.SymbolValidator()
+        self._validators["symbolsrc"] = v_marker.SymbolsrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autocolorscale', None)
-        self['autocolorscale'
-            ] = autocolorscale if autocolorscale is not None else _v
-        _v = arg.pop('cauto', None)
-        self['cauto'] = cauto if cauto is not None else _v
-        _v = arg.pop('cmax', None)
-        self['cmax'] = cmax if cmax is not None else _v
-        _v = arg.pop('cmid', None)
-        self['cmid'] = cmid if cmid is not None else _v
-        _v = arg.pop('cmin', None)
-        self['cmin'] = cmin if cmin is not None else _v
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('coloraxis', None)
-        self['coloraxis'] = coloraxis if coloraxis is not None else _v
-        _v = arg.pop('colorbar', None)
-        self['colorbar'] = colorbar if colorbar is not None else _v
-        _v = arg.pop('colorscale', None)
-        self['colorscale'] = colorscale if colorscale is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('opacitysrc', None)
-        self['opacitysrc'] = opacitysrc if opacitysrc is not None else _v
-        _v = arg.pop('reversescale', None)
-        self['reversescale'] = reversescale if reversescale is not None else _v
-        _v = arg.pop('showscale', None)
-        self['showscale'] = showscale if showscale is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('sizemin', None)
-        self['sizemin'] = sizemin if sizemin is not None else _v
-        _v = arg.pop('sizemode', None)
-        self['sizemode'] = sizemode if sizemode is not None else _v
-        _v = arg.pop('sizeref', None)
-        self['sizeref'] = sizeref if sizeref is not None else _v
-        _v = arg.pop('sizesrc', None)
-        self['sizesrc'] = sizesrc if sizesrc is not None else _v
-        _v = arg.pop('symbol', None)
-        self['symbol'] = symbol if symbol is not None else _v
-        _v = arg.pop('symbolsrc', None)
-        self['symbolsrc'] = symbolsrc if symbolsrc is not None else _v
+        _v = arg.pop("autocolorscale", None)
+        self["autocolorscale"] = autocolorscale if autocolorscale is not None else _v
+        _v = arg.pop("cauto", None)
+        self["cauto"] = cauto if cauto is not None else _v
+        _v = arg.pop("cmax", None)
+        self["cmax"] = cmax if cmax is not None else _v
+        _v = arg.pop("cmid", None)
+        self["cmid"] = cmid if cmid is not None else _v
+        _v = arg.pop("cmin", None)
+        self["cmin"] = cmin if cmin is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("coloraxis", None)
+        self["coloraxis"] = coloraxis if coloraxis is not None else _v
+        _v = arg.pop("colorbar", None)
+        self["colorbar"] = colorbar if colorbar is not None else _v
+        _v = arg.pop("colorscale", None)
+        self["colorscale"] = colorscale if colorscale is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("opacitysrc", None)
+        self["opacitysrc"] = opacitysrc if opacitysrc is not None else _v
+        _v = arg.pop("reversescale", None)
+        self["reversescale"] = reversescale if reversescale is not None else _v
+        _v = arg.pop("showscale", None)
+        self["showscale"] = showscale if showscale is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("sizemin", None)
+        self["sizemin"] = sizemin if sizemin is not None else _v
+        _v = arg.pop("sizemode", None)
+        self["sizemode"] = sizemode if sizemode is not None else _v
+        _v = arg.pop("sizeref", None)
+        self["sizeref"] = sizeref if sizeref is not None else _v
+        _v = arg.pop("sizesrc", None)
+        self["sizesrc"] = sizesrc if sizesrc is not None else _v
+        _v = arg.pop("symbol", None)
+        self["symbol"] = symbol if symbol is not None else _v
+        _v = arg.pop("symbolsrc", None)
+        self["symbolsrc"] = symbolsrc if symbolsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1691,11 +1702,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -1711,11 +1722,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # bgcolor
     # -------
@@ -1759,23 +1770,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bgcolorsrc
     # ----------
@@ -1791,11 +1802,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
     # bordercolor
     # -----------
@@ -1839,23 +1850,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # bordercolorsrc
     # --------------
@@ -1871,11 +1882,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolorsrc']
+        return self["bordercolorsrc"]
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self['bordercolorsrc'] = val
+        self["bordercolorsrc"] = val
 
     # font
     # ----
@@ -1926,11 +1937,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # namelength
     # ----------
@@ -1953,11 +1964,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
     # namelengthsrc
     # -------------
@@ -1973,17 +1984,17 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['namelengthsrc']
+        return self["namelengthsrc"]
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self['namelengthsrc'] = val
+        self["namelengthsrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -2075,7 +2086,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super(Hoverlabel, self).__init__('hoverlabel')
+        super(Hoverlabel, self).__init__("hoverlabel")
 
         # Validate arg
         # ------------
@@ -2095,48 +2106,44 @@ an instance of plotly.graph_objs.splom.Hoverlabel"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (hoverlabel as v_hoverlabel)
+        from plotly.validators.splom import hoverlabel as v_hoverlabel
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_hoverlabel.AlignValidator()
-        self._validators['alignsrc'] = v_hoverlabel.AlignsrcValidator()
-        self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
-        self._validators['bgcolorsrc'] = v_hoverlabel.BgcolorsrcValidator()
-        self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
-        self._validators['bordercolorsrc'
-                        ] = v_hoverlabel.BordercolorsrcValidator()
-        self._validators['font'] = v_hoverlabel.FontValidator()
-        self._validators['namelength'] = v_hoverlabel.NamelengthValidator()
-        self._validators['namelengthsrc'
-                        ] = v_hoverlabel.NamelengthsrcValidator()
+        self._validators["align"] = v_hoverlabel.AlignValidator()
+        self._validators["alignsrc"] = v_hoverlabel.AlignsrcValidator()
+        self._validators["bgcolor"] = v_hoverlabel.BgcolorValidator()
+        self._validators["bgcolorsrc"] = v_hoverlabel.BgcolorsrcValidator()
+        self._validators["bordercolor"] = v_hoverlabel.BordercolorValidator()
+        self._validators["bordercolorsrc"] = v_hoverlabel.BordercolorsrcValidator()
+        self._validators["font"] = v_hoverlabel.FontValidator()
+        self._validators["namelength"] = v_hoverlabel.NamelengthValidator()
+        self._validators["namelengthsrc"] = v_hoverlabel.NamelengthsrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bgcolorsrc', None)
-        self['bgcolorsrc'] = bgcolorsrc if bgcolorsrc is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('bordercolorsrc', None)
-        self['bordercolorsrc'
-            ] = bordercolorsrc if bordercolorsrc is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('namelength', None)
-        self['namelength'] = namelength if namelength is not None else _v
-        _v = arg.pop('namelengthsrc', None)
-        self['namelengthsrc'
-            ] = namelengthsrc if namelengthsrc is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bgcolorsrc", None)
+        self["bgcolorsrc"] = bgcolorsrc if bgcolorsrc is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("bordercolorsrc", None)
+        self["bordercolorsrc"] = bordercolorsrc if bordercolorsrc is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("namelength", None)
+        self["namelength"] = namelength if namelength is not None else _v
+        _v = arg.pop("namelengthsrc", None)
+        self["namelengthsrc"] = namelengthsrc if namelengthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -2181,11 +2188,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.splom.dimension.Axis
         """
-        return self['axis']
+        return self["axis"]
 
     @axis.setter
     def axis(self, val):
-        self['axis'] = val
+        self["axis"] = val
 
     # label
     # -----
@@ -2202,11 +2209,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     # name
     # ----
@@ -2229,11 +2236,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # templateitemname
     # ----------------
@@ -2257,11 +2264,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # values
     # ------
@@ -2277,11 +2284,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['values']
+        return self["values"]
 
     @values.setter
     def values(self, val):
-        self['values'] = val
+        self["values"] = val
 
     # valuessrc
     # ---------
@@ -2297,11 +2304,11 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['valuessrc']
+        return self["valuessrc"]
 
     @valuessrc.setter
     def valuessrc(self, val):
-        self['valuessrc'] = val
+        self["valuessrc"] = val
 
     # visible
     # -------
@@ -2319,17 +2326,17 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -2337,8 +2344,8 @@ class Dimension(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            plotly.graph_objs.splom.dimension.Axis instance or dict
-            with compatible properties
+            plotly.graph_objects.splom.dimension.Axis instance or
+            dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -2392,8 +2399,8 @@ class Dimension(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.splom.Dimension
         axis
-            plotly.graph_objs.splom.dimension.Axis instance or dict
-            with compatible properties
+            plotly.graph_objects.splom.dimension.Axis instance or
+            dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -2429,7 +2436,7 @@ class Dimension(_BaseTraceHierarchyType):
         -------
         Dimension
         """
-        super(Dimension, self).__init__('dimensions')
+        super(Dimension, self).__init__("dimensions")
 
         # Validate arg
         # ------------
@@ -2449,40 +2456,40 @@ an instance of plotly.graph_objs.splom.Dimension"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (dimension as v_dimension)
+        from plotly.validators.splom import dimension as v_dimension
 
         # Initialize validators
         # ---------------------
-        self._validators['axis'] = v_dimension.AxisValidator()
-        self._validators['label'] = v_dimension.LabelValidator()
-        self._validators['name'] = v_dimension.NameValidator()
-        self._validators['templateitemname'
-                        ] = v_dimension.TemplateitemnameValidator()
-        self._validators['values'] = v_dimension.ValuesValidator()
-        self._validators['valuessrc'] = v_dimension.ValuessrcValidator()
-        self._validators['visible'] = v_dimension.VisibleValidator()
+        self._validators["axis"] = v_dimension.AxisValidator()
+        self._validators["label"] = v_dimension.LabelValidator()
+        self._validators["name"] = v_dimension.NameValidator()
+        self._validators["templateitemname"] = v_dimension.TemplateitemnameValidator()
+        self._validators["values"] = v_dimension.ValuesValidator()
+        self._validators["valuessrc"] = v_dimension.ValuessrcValidator()
+        self._validators["visible"] = v_dimension.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('axis', None)
-        self['axis'] = axis if axis is not None else _v
-        _v = arg.pop('label', None)
-        self['label'] = label if label is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('values', None)
-        self['values'] = values if values is not None else _v
-        _v = arg.pop('valuessrc', None)
-        self['valuessrc'] = valuessrc if valuessrc is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("axis", None)
+        self["axis"] = axis if axis is not None else _v
+        _v = arg.pop("label", None)
+        self["label"] = label if label is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("values", None)
+        self["values"] = values if values is not None else _v
+        _v = arg.pop("valuessrc", None)
+        self["valuessrc"] = valuessrc if valuessrc is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -2514,17 +2521,17 @@ class Diagonal(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom'
+        return "splom"
 
     # Self properties description
     # ---------------------------
@@ -2553,7 +2560,7 @@ class Diagonal(_BaseTraceHierarchyType):
         -------
         Diagonal
         """
-        super(Diagonal, self).__init__('diagonal')
+        super(Diagonal, self).__init__("diagonal")
 
         # Validate arg
         # ------------
@@ -2573,20 +2580,20 @@ an instance of plotly.graph_objs.splom.Diagonal"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom import (diagonal as v_diagonal)
+        from plotly.validators.splom import diagonal as v_diagonal
 
         # Initialize validators
         # ---------------------
-        self._validators['visible'] = v_diagonal.VisibleValidator()
+        self._validators["visible"] = v_diagonal.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

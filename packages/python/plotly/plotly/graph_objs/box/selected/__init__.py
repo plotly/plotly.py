@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -48,22 +46,22 @@ class Marker(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # opacity
     # -------
@@ -79,11 +77,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['opacity']
+        return self["opacity"]
 
     @opacity.setter
     def opacity(self, val):
-        self['opacity'] = val
+        self["opacity"] = val
 
     # size
     # ----
@@ -99,17 +97,17 @@ class Marker(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'box.selected'
+        return "box.selected"
 
     # Self properties description
     # ---------------------------
@@ -124,9 +122,7 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker size of selected points.
         """
 
-    def __init__(
-        self, arg=None, color=None, opacity=None, size=None, **kwargs
-    ):
+    def __init__(self, arg=None, color=None, opacity=None, size=None, **kwargs):
         """
         Construct a new Marker object
         
@@ -146,7 +142,7 @@ class Marker(_BaseTraceHierarchyType):
         -------
         Marker
         """
-        super(Marker, self).__init__('marker')
+        super(Marker, self).__init__("marker")
 
         # Validate arg
         # ------------
@@ -166,26 +162,26 @@ an instance of plotly.graph_objs.box.selected.Marker"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.box.selected import (marker as v_marker)
+        from plotly.validators.box.selected import marker as v_marker
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_marker.ColorValidator()
-        self._validators['opacity'] = v_marker.OpacityValidator()
-        self._validators['size'] = v_marker.SizeValidator()
+        self._validators["color"] = v_marker.ColorValidator()
+        self._validators["opacity"] = v_marker.OpacityValidator()
+        self._validators["size"] = v_marker.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('opacity', None)
-        self['opacity'] = opacity if opacity is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("opacity", None)
+        self["opacity"] = opacity if opacity is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------

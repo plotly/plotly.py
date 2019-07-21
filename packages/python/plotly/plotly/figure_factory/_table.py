@@ -3,7 +3,7 @@ from __future__ import absolute_import
 from plotly import exceptions, optional_imports
 from plotly.graph_objs import graph_objs
 
-pd = optional_imports.get_module('pandas')
+pd = optional_imports.get_module("pandas")
 
 
 def validate_table(table_text, font_colors):
@@ -19,13 +19,22 @@ def validate_table(table_text, font_colors):
     """
     font_colors_len_options = [1, 3, len(table_text)]
     if len(font_colors) not in font_colors_len_options:
-        raise exceptions.PlotlyError("Oops, font_colors should be a list "
-                                     "of length 1, 3 or len(text)")
+        raise exceptions.PlotlyError(
+            "Oops, font_colors should be a list " "of length 1, 3 or len(text)"
+        )
 
 
-def create_table(table_text, colorscale=None, font_colors=None,
-                 index=False, index_title='', annotation_offset=.45,
-                 height_constant=30, hoverinfo='none', **kwargs):
+def create_table(
+    table_text,
+    colorscale=None,
+    font_colors=None,
+    index=False,
+    index_title="",
+    annotation_offset=0.45,
+    height_constant=30,
+    hoverinfo="none",
+    **kwargs
+):
     """
     BETA function that creates data tables
 
@@ -98,35 +107,68 @@ def create_table(table_text, colorscale=None, font_colors=None,
     """
 
     # Avoiding mutables in the call signature
-    colorscale = \
-        colorscale if colorscale is not None else [[0, '#00083e'],
-                                                   [.5, '#ededee'],
-                                                   [1, '#ffffff']]
-    font_colors = font_colors if font_colors is not None else ['#ffffff',
-                                                               '#000000',
-                                                               '#000000']
+    colorscale = (
+        colorscale
+        if colorscale is not None
+        else [[0, "#00083e"], [0.5, "#ededee"], [1, "#ffffff"]]
+    )
+    font_colors = (
+        font_colors if font_colors is not None else ["#ffffff", "#000000", "#000000"]
+    )
 
     validate_table(table_text, font_colors)
-    table_matrix = _Table(table_text, colorscale, font_colors, index,
-                          index_title, annotation_offset,
-                          **kwargs).get_table_matrix()
-    annotations = _Table(table_text, colorscale, font_colors, index,
-                         index_title, annotation_offset,
-                         **kwargs).make_table_annotations()
+    table_matrix = _Table(
+        table_text,
+        colorscale,
+        font_colors,
+        index,
+        index_title,
+        annotation_offset,
+        **kwargs
+    ).get_table_matrix()
+    annotations = _Table(
+        table_text,
+        colorscale,
+        font_colors,
+        index,
+        index_title,
+        annotation_offset,
+        **kwargs
+    ).make_table_annotations()
 
-    trace = dict(type='heatmap', z=table_matrix, opacity=.75,
-                 colorscale=colorscale, showscale=False,
-                 hoverinfo=hoverinfo, **kwargs)
+    trace = dict(
+        type="heatmap",
+        z=table_matrix,
+        opacity=0.75,
+        colorscale=colorscale,
+        showscale=False,
+        hoverinfo=hoverinfo,
+        **kwargs
+    )
 
     data = [trace]
-    layout = dict(annotations=annotations,
-                  height=len(table_matrix) * height_constant + 50,
-                  margin=dict(t=0, b=0, r=0, l=0),
-                  yaxis=dict(autorange='reversed', zeroline=False,
-                             gridwidth=2, ticks='', dtick=1, tick0=.5,
-                             showticklabels=False),
-                  xaxis=dict(zeroline=False, gridwidth=2, ticks='',
-                             dtick=1, tick0=-0.5, showticklabels=False))
+    layout = dict(
+        annotations=annotations,
+        height=len(table_matrix) * height_constant + 50,
+        margin=dict(t=0, b=0, r=0, l=0),
+        yaxis=dict(
+            autorange="reversed",
+            zeroline=False,
+            gridwidth=2,
+            ticks="",
+            dtick=1,
+            tick0=0.5,
+            showticklabels=False,
+        ),
+        xaxis=dict(
+            zeroline=False,
+            gridwidth=2,
+            ticks="",
+            dtick=1,
+            tick0=-0.5,
+            showticklabels=False,
+        ),
+    )
     return graph_objs.Figure(data=data, layout=layout)
 
 
@@ -134,8 +176,17 @@ class _Table(object):
     """
     Refer to TraceFactory.create_table() for docstring
     """
-    def __init__(self, table_text, colorscale, font_colors, index,
-                 index_title, annotation_offset, **kwargs):
+
+    def __init__(
+        self,
+        table_text,
+        colorscale,
+        font_colors,
+        index,
+        index_title,
+        annotation_offset,
+        **kwargs
+    ):
         if pd and isinstance(table_text, pd.DataFrame):
             headers = table_text.columns.tolist()
             table_text_index = table_text.index.tolist()
@@ -161,7 +212,7 @@ class _Table(object):
             table coloring.
         """
         header = [0] * len(self.table_text[0])
-        odd_row = [.5] * len(self.table_text[0])
+        odd_row = [0.5] * len(self.table_text[0])
         even_row = [1] * len(self.table_text[0])
         table_matrix = [None] * len(self.table_text)
         table_matrix[0] = header
@@ -186,7 +237,7 @@ class _Table(object):
             in table.
         """
         if len(self.font_colors) == 1:
-            all_font_colors = self.font_colors*len(self.table_text)
+            all_font_colors = self.font_colors * len(self.table_text)
         elif len(self.font_colors) == 3:
             all_font_colors = list(range(len(self.table_text)))
             all_font_colors[0] = self.font_colors[0]
@@ -197,7 +248,7 @@ class _Table(object):
         elif len(self.font_colors) == len(self.table_text):
             all_font_colors = self.font_colors
         else:
-            all_font_colors = ['#000000']*len(self.table_text)
+            all_font_colors = ["#000000"] * len(self.table_text)
         return all_font_colors
 
     def make_table_annotations(self):
@@ -213,21 +264,26 @@ class _Table(object):
         for n, row in enumerate(self.table_text):
             for m, val in enumerate(row):
                 # Bold text in header and index
-                format_text = ('<b>' + str(val) + '</b>' if n == 0 or
-                               self.index and m < 1 else str(val))
+                format_text = (
+                    "<b>" + str(val) + "</b>"
+                    if n == 0 or self.index and m < 1
+                    else str(val)
+                )
                 # Match font color of index to font color of header
-                font_color = (self.font_colors[0] if self.index and m == 0
-                              else all_font_colors[n])
+                font_color = (
+                    self.font_colors[0] if self.index and m == 0 else all_font_colors[n]
+                )
                 annotations.append(
                     graph_objs.layout.Annotation(
                         text=format_text,
                         x=self.x[m] - self.annotation_offset,
                         y=self.y[n],
-                        xref='x1',
-                        yref='y1',
+                        xref="x1",
+                        yref="y1",
                         align="left",
                         xanchor="left",
                         font=dict(color=font_color),
-                        showarrow=False)
+                        showarrow=False,
+                    )
                 )
         return annotations

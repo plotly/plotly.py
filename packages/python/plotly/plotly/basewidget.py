@@ -2,16 +2,16 @@ import uuid
 from importlib import import_module
 import os
 import numbers
+
 try:
     from urllib import parse
 except ImportError:
-     from urlparse import urlparse as parse
+    from urlparse import urlparse as parse
 
 import ipywidgets as widgets
 from traitlets import List, Unicode, Dict, observe, Integer
 from .basedatatypes import BaseFigure, BasePlotlyType
-from .callbacks import (BoxSelector, LassoSelector,
-                        InputDeviceState, Points)
+from .callbacks import BoxSelector, LassoSelector, InputDeviceState, Points
 from .serializers import custom_serializers
 from .version import __frontend_version__
 
@@ -27,12 +27,12 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # -------------
     # Widget traitlets are automatically synchronized with the FigureModel
     # JavaScript object
-    _view_name = Unicode('FigureView').tag(sync=True)
-    _view_module = Unicode('plotlywidget').tag(sync=True)
+    _view_name = Unicode("FigureView").tag(sync=True)
+    _view_module = Unicode("plotlywidget").tag(sync=True)
     _view_module_version = Unicode(__frontend_version__).tag(sync=True)
 
-    _model_name = Unicode('FigureModel').tag(sync=True)
-    _model_module = Unicode('plotlywidget').tag(sync=True)
+    _model_name = Unicode("FigureModel").tag(sync=True)
+    _model_module = Unicode("plotlywidget").tag(sync=True)
     _model_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     # ### _data and _layout ###
@@ -57,26 +57,19 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     #
     # See JSDoc comments in the FigureModel class in js/src/Figure.js for
     # detailed descriptions of the messages.
-    _py2js_addTraces = Dict(allow_none=True).tag(sync=True,
-                                                 **custom_serializers)
-    _py2js_restyle = Dict(allow_none=True).tag(sync=True,
-                                               **custom_serializers)
-    _py2js_relayout = Dict(allow_none=True).tag(sync=True,
-                                                **custom_serializers)
-    _py2js_update = Dict(allow_none=True).tag(sync=True,
-                                              **custom_serializers)
-    _py2js_animate = Dict(allow_none=True).tag(sync=True,
-                                               **custom_serializers)
+    _py2js_addTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_restyle = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_relayout = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_update = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_animate = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
-    _py2js_deleteTraces = Dict(allow_none=True).tag(sync=True,
-                                                    **custom_serializers)
-    _py2js_moveTraces = Dict(allow_none=True).tag(sync=True,
-                                                  **custom_serializers)
+    _py2js_deleteTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _py2js_moveTraces = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
-    _py2js_removeLayoutProps = Dict(allow_none=True).tag(sync=True,
-                                                         **custom_serializers)
-    _py2js_removeTraceProps = Dict(allow_none=True).tag(sync=True,
-                                                        **custom_serializers)
+    _py2js_removeLayoutProps = Dict(allow_none=True).tag(
+        sync=True, **custom_serializers
+    )
+    _py2js_removeTraceProps = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
     # ### JS -> Python message properties ###
     # These properties are used to receive messages from the frontend.
@@ -88,18 +81,12 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     #
     # See JSDoc comments in the FigureModel class in js/src/Figure.js for
     # detailed descriptions of the messages.
-    _js2py_traceDeltas = Dict(allow_none=True).tag(sync=True,
-                                                   **custom_serializers)
-    _js2py_layoutDelta = Dict(allow_none=True).tag(sync=True,
-                                                   **custom_serializers)
-    _js2py_restyle = Dict(allow_none=True).tag(sync=True,
-                                               **custom_serializers)
-    _js2py_relayout = Dict(allow_none=True).tag(sync=True,
-                                                **custom_serializers)
-    _js2py_update = Dict(allow_none=True).tag(sync=True,
-                                              **custom_serializers)
-    _js2py_pointsCallback = Dict(allow_none=True).tag(sync=True,
-                                                      **custom_serializers)
+    _js2py_traceDeltas = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_layoutDelta = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_restyle = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_relayout = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_update = Dict(allow_none=True).tag(sync=True, **custom_serializers)
+    _js2py_pointsCallback = Dict(allow_none=True).tag(sync=True, **custom_serializers)
 
     # ### Message tracking properties ###
     # The _last_layout_edit_id and _last_trace_edit_id properties are used
@@ -117,23 +104,22 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # Constructor
     # -----------
-    def __init__(self,
-                 data=None,
-                 layout=None,
-                 frames=None,
-                 skip_invalid=False,
-                 **kwargs):
+    def __init__(
+        self, data=None, layout=None, frames=None, skip_invalid=False, **kwargs
+    ):
 
         # Call superclass constructors
         # ----------------------------
         # Note: We rename layout to layout_plotly because to deconflict it
         # with the `layout` constructor parameter of the `widgets.DOMWidget`
         # ipywidgets class
-        super(BaseFigureWidget, self).__init__(data=data,
-                                               layout_plotly=layout,
-                                               frames=frames,
-                                               skip_invalid=skip_invalid,
-                                               **kwargs)
+        super(BaseFigureWidget, self).__init__(
+            data=data,
+            layout_plotly=layout,
+            frames=frames,
+            skip_invalid=skip_invalid,
+            **kwargs
+        )
 
         # Validate Frames
         # ---------------
@@ -197,9 +183,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         msg_data = {
-            'relayout_data': layout_data,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id
+            "relayout_data": layout_data,
+            "layout_edit_id": layout_edit_id,
+            "source_view_id": source_view_id,
         }
 
         # Send message
@@ -207,8 +193,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         self._py2js_relayout = msg_data
         self._py2js_relayout = None
 
-    def _send_restyle_msg(self, restyle_data, trace_indexes=None,
-                          source_view_id=None):
+    def _send_restyle_msg(self, restyle_data, trace_indexes=None, source_view_id=None):
         """
         Send Plotly.restyle message to the frontend
 
@@ -242,11 +227,11 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         restyle_msg = {
-            'restyle_data': restyle_data,
-            'restyle_traces': trace_indexes,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id,
+            "restyle_data": restyle_data,
+            "restyle_traces": trace_indexes,
+            "trace_edit_id": trace_edit_id,
+            "layout_edit_id": layout_edit_id,
+            "source_view_id": source_view_id,
         }
 
         # Send message
@@ -277,9 +262,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         add_traces_msg = {
-            'trace_data': new_traces_data,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id
+            "trace_data": new_traces_data,
+            "trace_edit_id": trace_edit_id,
+            "layout_edit_id": layout_edit_id,
         }
 
         # Send message
@@ -301,21 +286,16 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Build message
         # -------------
-        move_msg = {
-            'current_trace_inds': current_inds,
-            'new_trace_inds': new_inds
-        }
+        move_msg = {"current_trace_inds": current_inds, "new_trace_inds": new_inds}
 
         # Send message
         # ------------
         self._py2js_moveTraces = move_msg
         self._py2js_moveTraces = None
 
-    def _send_update_msg(self,
-                         restyle_data,
-                         relayout_data,
-                         trace_indexes=None,
-                         source_view_id=None):
+    def _send_update_msg(
+        self, restyle_data, relayout_data, trace_indexes=None, source_view_id=None
+    ):
         """
         Send Plotly.update message to the frontend
 
@@ -350,12 +330,12 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         update_msg = {
-            'style_data': restyle_data,
-            'layout_data': relayout_data,
-            'style_traces': trace_indexes,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': source_view_id
+            "style_data": restyle_data,
+            "layout_data": relayout_data,
+            "style_traces": trace_indexes,
+            "trace_edit_id": trace_edit_id,
+            "layout_edit_id": layout_edit_id,
+            "source_view_id": source_view_id,
         }
 
         # Send message
@@ -363,11 +343,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         self._py2js_update = update_msg
         self._py2js_update = None
 
-    def _send_animate_msg(self,
-                          styles_data,
-                          relayout_data,
-                          trace_indexes,
-                          animation_opts):
+    def _send_animate_msg(
+        self, styles_data, relayout_data, trace_indexes, animation_opts
+    ):
         """
         Send Plotly.update message to the frontend
 
@@ -401,13 +379,13 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         animate_msg = {
-            'style_data': styles_data,
-            'layout_data': relayout_data,
-            'style_traces': trace_indexes,
-            'animation_opts': animation_opts,
-            'trace_edit_id': trace_edit_id,
-            'layout_edit_id': layout_edit_id,
-            'source_view_id': None
+            "style_data": styles_data,
+            "layout_data": relayout_data,
+            "style_traces": trace_indexes,
+            "animation_opts": animation_opts,
+            "trace_edit_id": trace_edit_id,
+            "layout_edit_id": layout_edit_id,
+            "source_view_id": None,
         }
 
         # Send message
@@ -438,9 +416,9 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
         # Build message
         # -------------
         delete_msg = {
-            'delete_inds': delete_inds,
-            'layout_edit_id': layout_edit_id,
-            'trace_edit_id': trace_edit_id
+            "delete_inds": delete_inds,
+            "layout_edit_id": layout_edit_id,
+            "trace_edit_id": trace_edit_id,
         }
 
         # Send message
@@ -450,7 +428,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
     # JavaScript -> Python Messages
     # -----------------------------
-    @observe('_js2py_traceDeltas')
+    @observe("_js2py_traceDeltas")
     def _handler_js2py_traceDeltas(self, change):
         """
         Process trace deltas message from the frontend
@@ -458,13 +436,13 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        msg_data = change['new']
+        msg_data = change["new"]
         if not msg_data:
             self._js2py_traceDeltas = None
             return
 
-        trace_deltas = msg_data['trace_deltas']
-        trace_edit_id = msg_data['trace_edit_id']
+        trace_deltas = msg_data["trace_deltas"]
+        trace_edit_id = msg_data["trace_edit_id"]
 
         # Apply deltas
         # ------------
@@ -476,33 +454,34 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             for delta in trace_deltas:
 
                 # #### Find existing trace for uid ###
-                trace_uid = delta['uid']
+                trace_uid = delta["uid"]
                 trace_uids = [trace.uid for trace in self.data]
                 trace_index = trace_uids.index(trace_uid)
                 uid_trace = self.data[trace_index]
 
                 # #### Transform defaults to delta ####
                 delta_transform = BaseFigureWidget._transform_data(
-                    uid_trace._prop_defaults, delta)
+                    uid_trace._prop_defaults, delta
+                )
 
                 # #### Remove overlapping properties ####
                 # If a property is present in both _props and _prop_defaults
                 # then we remove the copy from _props
                 remove_props = self._remove_overlapping_props(
-                    uid_trace._props, uid_trace._prop_defaults)
+                    uid_trace._props, uid_trace._prop_defaults
+                )
 
                 # #### Notify frontend model of property removal ####
                 if remove_props:
                     remove_trace_props_msg = {
-                        'remove_trace': trace_index,
-                        'remove_props': remove_props
+                        "remove_trace": trace_index,
+                        "remove_props": remove_props,
                     }
                     self._py2js_removeTraceProps = remove_trace_props_msg
                     self._py2js_removeTraceProps = None
 
                 # #### Dispatch change callbacks ####
-                self._dispatch_trace_change_callbacks(delta_transform,
-                                                      [trace_index])
+                self._dispatch_trace_change_callbacks(delta_transform, [trace_index])
 
             # ### Trace edits no longer in process ###
             self._trace_edit_in_process = False
@@ -514,7 +493,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         self._js2py_traceDeltas = None
 
-    @observe('_js2py_layoutDelta')
+    @observe("_js2py_layoutDelta")
     def _handler_js2py_layoutDelta(self, change):
         """
         Process layout delta message from the frontend
@@ -522,13 +501,13 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        msg_data = change['new']
+        msg_data = change["new"]
         if not msg_data:
             self._js2py_layoutDelta = None
             return
 
-        layout_delta = msg_data['layout_delta']
-        layout_edit_id = msg_data['layout_edit_id']
+        layout_delta = msg_data["layout_delta"]
+        layout_edit_id = msg_data["layout_edit_id"]
 
         # Apply delta
         # -----------
@@ -538,19 +517,19 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
             # ### Transform defaults to delta ###
             delta_transform = BaseFigureWidget._transform_data(
-                self._layout_defaults, layout_delta)
+                self._layout_defaults, layout_delta
+            )
 
             # ### Remove overlapping properties ###
             # If a property is present in both _layout and _layout_defaults
             # then we remove the copy from _layout
             removed_props = self._remove_overlapping_props(
-                self._layout, self._layout_defaults)
+                self._layout, self._layout_defaults
+            )
 
             # ### Notify frontend model of property removal ###
             if removed_props:
-                remove_props_msg = {
-                    'remove_props': removed_props
-                }
+                remove_props_msg = {"remove_props": removed_props}
 
                 self._py2js_removeLayoutProps = remove_props_msg
                 self._py2js_removeLayoutProps = None
@@ -578,7 +557,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         self._js2py_layoutDelta = None
 
-    @observe('_js2py_restyle')
+    @observe("_js2py_restyle")
     def _handler_js2py_restyle(self, change):
         """
         Process Plotly.restyle message from the frontend
@@ -586,25 +565,27 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        restyle_msg = change['new']
+        restyle_msg = change["new"]
 
         if not restyle_msg:
             self._js2py_restyle = None
             return
 
-        style_data = restyle_msg['style_data']
-        style_traces = restyle_msg['style_traces']
-        source_view_id = restyle_msg['source_view_id']
+        style_data = restyle_msg["style_data"]
+        style_traces = restyle_msg["style_traces"]
+        source_view_id = restyle_msg["source_view_id"]
 
         # Perform restyle
         # ---------------
-        self.plotly_restyle(restyle_data=style_data,
-                            trace_indexes=style_traces,
-                            source_view_id=source_view_id)
+        self.plotly_restyle(
+            restyle_data=style_data,
+            trace_indexes=style_traces,
+            source_view_id=source_view_id,
+        )
 
         self._js2py_restyle = None
 
-    @observe('_js2py_update')
+    @observe("_js2py_update")
     def _handler_js2py_update(self, change):
         """
         Process Plotly.update message from the frontend
@@ -612,26 +593,29 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        update_msg = change['new']
+        update_msg = change["new"]
 
         if not update_msg:
             self._js2py_update = None
             return
 
-        style = update_msg['style_data']
-        trace_indexes = update_msg['style_traces']
-        layout = update_msg['layout_data']
-        source_view_id = update_msg['source_view_id']
+        style = update_msg["style_data"]
+        trace_indexes = update_msg["style_traces"]
+        layout = update_msg["layout_data"]
+        source_view_id = update_msg["source_view_id"]
 
         # Perform update
         # --------------
-        self.plotly_update(restyle_data=style, relayout_data=layout,
-                           trace_indexes=trace_indexes,
-                           source_view_id=source_view_id)
+        self.plotly_update(
+            restyle_data=style,
+            relayout_data=layout,
+            trace_indexes=trace_indexes,
+            source_view_id=source_view_id,
+        )
 
         self._js2py_update = None
 
-    @observe('_js2py_relayout')
+    @observe("_js2py_relayout")
     def _handler_js2py_relayout(self, change):
         """
         Process Plotly.relayout message from the frontend
@@ -639,29 +623,28 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        relayout_msg = change['new']
+        relayout_msg = change["new"]
 
         if not relayout_msg:
             self._js2py_relayout = None
             return
 
-        relayout_data = relayout_msg['relayout_data']
-        source_view_id = relayout_msg['source_view_id']
+        relayout_data = relayout_msg["relayout_data"]
+        source_view_id = relayout_msg["source_view_id"]
 
-        if 'lastInputTime' in relayout_data:
+        if "lastInputTime" in relayout_data:
             # Remove 'lastInputTime'. Seems to be an internal plotly
             # property that is introduced for some plot types, but it is not
             # actually a property in the schema
-            relayout_data.pop('lastInputTime')
+            relayout_data.pop("lastInputTime")
 
         # Perform relayout
         # ----------------
-        self.plotly_relayout(relayout_data=relayout_data,
-                             source_view_id=source_view_id)
+        self.plotly_relayout(relayout_data=relayout_data, source_view_id=source_view_id)
 
         self._js2py_relayout = None
 
-    @observe('_js2py_pointsCallback')
+    @observe("_js2py_pointsCallback")
     def _handler_js2py_pointsCallback(self, change):
         """
         Process points callback message from the frontend
@@ -669,7 +652,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Receive message
         # ---------------
-        callback_data = change['new']
+        callback_data = change["new"]
 
         if not callback_data:
             self._js2py_pointsCallback = None
@@ -677,53 +660,56 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
 
         # Get event type
         # --------------
-        event_type = callback_data['event_type']
+        event_type = callback_data["event_type"]
 
         # Build Selector Object
         # ---------------------
-        if callback_data.get('selector', None):
-            selector_data = callback_data['selector']
-            selector_type = selector_data['type']
-            selector_state = selector_data['selector_state']
-            if selector_type == 'box':
+        if callback_data.get("selector", None):
+            selector_data = callback_data["selector"]
+            selector_type = selector_data["type"]
+            selector_state = selector_data["selector_state"]
+            if selector_type == "box":
                 selector = BoxSelector(**selector_state)
-            elif selector_type == 'lasso':
+            elif selector_type == "lasso":
                 selector = LassoSelector(**selector_state)
             else:
-                raise ValueError('Unsupported selector type: %s'
-                                 % selector_type)
+                raise ValueError("Unsupported selector type: %s" % selector_type)
         else:
             selector = None
 
         # Build Input Device State Object
         # -------------------------------
-        if callback_data.get('device_state', None):
-            device_state_data = callback_data['device_state']
+        if callback_data.get("device_state", None):
+            device_state_data = callback_data["device_state"]
             state = InputDeviceState(**device_state_data)
         else:
             state = None
 
         # Build Trace Points Dictionary
         # -----------------------------
-        points_data = callback_data['points']
+        points_data = callback_data["points"]
         trace_points = {
-            trace_ind:
-                {'point_inds': [],
-                 'xs': [],
-                 'ys': [],
-                 'trace_name': self._data_objs[trace_ind].name,
-                 'trace_index': trace_ind}
-            for trace_ind in range(len(self._data_objs))}
+            trace_ind: {
+                "point_inds": [],
+                "xs": [],
+                "ys": [],
+                "trace_name": self._data_objs[trace_ind].name,
+                "trace_index": trace_ind,
+            }
+            for trace_ind in range(len(self._data_objs))
+        }
 
-        for x, y, point_ind, trace_ind in zip(points_data['xs'],
-                                              points_data['ys'],
-                                              points_data['point_indexes'],
-                                              points_data['trace_indexes']):
+        for x, y, point_ind, trace_ind in zip(
+            points_data["xs"],
+            points_data["ys"],
+            points_data["point_indexes"],
+            points_data["trace_indexes"],
+        ):
 
             trace_dict = trace_points[trace_ind]
-            trace_dict['xs'].append(x)
-            trace_dict['ys'].append(y)
-            trace_dict['point_inds'].append(point_ind)
+            trace_dict["xs"].append(x)
+            trace_dict["ys"].append(y)
+            trace_dict["point_inds"].append(point_ind)
 
         # Dispatch callbacks
         # ------------------
@@ -731,18 +717,27 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
             points = Points(**trace_points_data)
             trace = self.data[trace_ind]
 
-            if event_type == 'plotly_click':
+            if event_type == "plotly_click":
                 trace._dispatch_on_click(points, state)
-            elif event_type == 'plotly_hover':
+            elif event_type == "plotly_hover":
                 trace._dispatch_on_hover(points, state)
-            elif event_type == 'plotly_unhover':
+            elif event_type == "plotly_unhover":
                 trace._dispatch_on_unhover(points, state)
-            elif event_type == 'plotly_selected':
+            elif event_type == "plotly_selected":
                 trace._dispatch_on_selection(points, selector)
-            elif event_type == 'plotly_deselect':
+            elif event_type == "plotly_deselect":
                 trace._dispatch_on_deselect(points)
 
         self._js2py_pointsCallback = None
+
+    # Display
+    # -------
+    def _ipython_display_(self):
+        """
+        Handle rich display of figures in ipython contexts
+        """
+        # Override BaseFigure's display to make sure we display the widget version
+        widgets.DOMWidget._ipython_display_(self)
 
     # Callbacks
     # ---------
@@ -829,15 +824,14 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             assert isinstance(delta_data, dict)
 
             for p, delta_val in delta_data.items():
-                if (isinstance(delta_val, dict) or
-                        BaseFigure._is_dict_list(delta_val)):
+                if isinstance(delta_val, dict) or BaseFigure._is_dict_list(delta_val):
                     if p in input_data:
                         # ### Recurse ###
                         input_val = input_data[p]
                         recur_prop_path = prop_path + (p,)
-                        recur_removed = (
-                            BaseFigureWidget._remove_overlapping_props(
-                                input_val, delta_val, recur_prop_path))
+                        recur_removed = BaseFigureWidget._remove_overlapping_props(
+                            input_val, delta_val, recur_prop_path
+                        )
                         removed.extend(recur_removed)
 
                         # Check whether the last property in input_val
@@ -846,7 +840,7 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                             input_data.pop(p)
                             removed.append(recur_prop_path)
 
-                elif p in input_data and p != 'uid':
+                elif p in input_data and p != "uid":
                     # ### Remove property ###
                     input_data.pop(p)
                     removed.append(prop_path + (p,))
@@ -861,25 +855,24 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                     break
 
                 input_val = input_data[i]
-                if (input_val is not None and
-                        isinstance(delta_val, dict) or
-                        BaseFigure._is_dict_list(delta_val)):
+                if (
+                    input_val is not None
+                    and isinstance(delta_val, dict)
+                    or BaseFigure._is_dict_list(delta_val)
+                ):
 
                     # ### Recurse ###
                     recur_prop_path = prop_path + (i,)
-                    recur_removed = (
-                        BaseFigureWidget._remove_overlapping_props(
-                            input_val, delta_val, recur_prop_path))
+                    recur_removed = BaseFigureWidget._remove_overlapping_props(
+                        input_val, delta_val, recur_prop_path
+                    )
 
                     removed.extend(recur_removed)
 
         return removed
 
     @staticmethod
-    def _transform_data(to_data,
-                        from_data,
-                        should_remove=True,
-                        relayout_path=()):
+    def _transform_data(to_data, from_data, should_remove=True, relayout_path=()):
         """
         Transform to_data into from_data and return relayout-style
         description of the transformation
@@ -906,22 +899,21 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             # ### Validate from_data ###
             if not isinstance(from_data, dict):
                 raise ValueError(
-                    'Mismatched data types: {to_dict} {from_data}'.
-                    format(to_dict=to_data, from_data=from_data))
+                    "Mismatched data types: {to_dict} {from_data}".format(
+                        to_dict=to_data, from_data=from_data
+                    )
+                )
 
             # ### Add/modify properties ###
             # Loop over props/vals
             for from_prop, from_val in from_data.items():
 
                 # #### Handle compound vals recursively ####
-                if (isinstance(from_val, dict) or
-                        BaseFigure._is_dict_list(from_val)):
+                if isinstance(from_val, dict) or BaseFigure._is_dict_list(from_val):
 
                     # ##### Init property value if needed #####
                     if from_prop not in to_data:
-                        to_data[from_prop] = ({}
-                                              if isinstance(from_val, dict)
-                                              else [])
+                        to_data[from_prop] = {} if isinstance(from_val, dict) else []
 
                     # ##### Transform property val recursively #####
                     input_val = to_data[from_prop]
@@ -930,13 +922,15 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                             input_val,
                             from_val,
                             should_remove=should_remove,
-                            relayout_path=relayout_path + (from_prop,)))
+                            relayout_path=relayout_path + (from_prop,),
+                        )
+                    )
 
                 # #### Handle simple vals directly ####
                 else:
-                    if (from_prop not in to_data or
-                            not BasePlotlyType._vals_equal(
-                                to_data[from_prop], from_val)):
+                    if from_prop not in to_data or not BasePlotlyType._vals_equal(
+                        to_data[from_prop], from_val
+                    ):
 
                         to_data[from_prop] = from_val
                         relayout_path_prop = relayout_path + (from_prop,)
@@ -945,7 +939,8 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             # ### Remove properties ###
             if should_remove:
                 for remove_prop in set(to_data.keys()).difference(
-                        set(from_data.keys())):
+                    set(from_data.keys())
+                ):
                     to_data.pop(remove_prop)
 
         # Handle list
@@ -955,8 +950,10 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
             # ### Validate from_data ###
             if not isinstance(from_data, list):
                 raise ValueError(
-                    'Mismatched data types: to_data: {to_data} {from_data}'.
-                    format(to_data=to_data, from_data=from_data))
+                    "Mismatched data types: to_data: {to_data} {from_data}".format(
+                        to_data=to_data, from_data=from_data
+                    )
+                )
 
             # ### Add/modify properties ###
             # Loop over indexes / elements
@@ -968,21 +965,23 @@ Note: Frames are supported by the plotly.graph_objs.Figure class"""
                 input_val = to_data[i]
 
                 # #### Handle compound element recursively ####
-                if (input_val is not None and
-                        (isinstance(from_val, dict) or
-                         BaseFigure._is_dict_list(from_val))):
+                if input_val is not None and (
+                    isinstance(from_val, dict) or BaseFigure._is_dict_list(from_val)
+                ):
 
                     relayout_data.update(
                         BaseFigureWidget._transform_data(
                             input_val,
                             from_val,
                             should_remove=should_remove,
-                            relayout_path=relayout_path + (i, )))
+                            relayout_path=relayout_path + (i,),
+                        )
+                    )
 
                 # #### Handle simple elements directly ####
                 else:
                     if not BasePlotlyType._vals_equal(to_data[i], from_val):
                         to_data[i] = from_val
-                        relayout_data[relayout_path + (i, )] = from_val
+                        relayout_data[relayout_path + (i,)] = from_val
 
         return relayout_data

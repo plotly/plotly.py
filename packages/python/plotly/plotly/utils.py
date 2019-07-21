@@ -1,10 +1,8 @@
 from __future__ import absolute_import, division
 
 import textwrap
-from collections import deque
 from pprint import PrettyPrinter
 
-from decorator import decorator
 from _plotly_utils.utils import *
 
 
@@ -26,24 +24,27 @@ def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):
     str
     """
     if isinstance(v, list):
-        open_char, close_char = '[', ']'
+        open_char, close_char = "[", "]"
     elif isinstance(v, tuple):
-        open_char, close_char = '(', ')'
+        open_char, close_char = "(", ")"
     else:
-        raise ValueError('Invalid value of type: %s' % type(v))
+        raise ValueError("Invalid value of type: %s" % type(v))
 
     if len(v) <= threshold:
         disp_v = v
     else:
-        disp_v = (list(v[:edgeitems])
-                  + ['...'] +
-                  list(v[-edgeitems:]))
+        disp_v = list(v[:edgeitems]) + ["..."] + list(v[-edgeitems:])
 
-    v_str = open_char + ', '.join([str(e) for e in disp_v]) + close_char
+    v_str = open_char + ", ".join([str(e) for e in disp_v]) + close_char
 
-    v_wrapped = '\n'.join(textwrap.wrap(v_str, width=width,
-                          initial_indent=' ' * (indent + 1),
-                          subsequent_indent =' ' * (indent + 1))).strip()
+    v_wrapped = "\n".join(
+        textwrap.wrap(
+            v_str,
+            width=width,
+            initial_indent=" " * (indent + 1),
+            subsequent_indent=" " * (indent + 1),
+        )
+    ).strip()
     return v_wrapped
 
 
@@ -53,6 +54,7 @@ class ElidedWrapper(object):
     __repr__() that may be elided and is suitable for use during pretty
     printing
     """
+
     def __init__(self, v, threshold, indent):
         self.v = v
         self.indent = indent
@@ -60,10 +62,8 @@ class ElidedWrapper(object):
 
     @staticmethod
     def is_wrappable(v):
-        numpy = get_module('numpy')
-        if (isinstance(v, (list, tuple)) and
-                len(v) > 0 and
-                not isinstance(v[0], dict)):
+        numpy = get_module("numpy")
+        if isinstance(v, (list, tuple)) and len(v) > 0 and not isinstance(v[0], dict):
             return True
         elif numpy and isinstance(v, numpy.ndarray):
             return True
@@ -73,12 +73,12 @@ class ElidedWrapper(object):
             return False
 
     def __repr__(self):
-        numpy = get_module('numpy')
+        numpy = get_module("numpy")
         if isinstance(self.v, (list, tuple)):
             # Handle lists/tuples
-            res = _list_repr_elided(self.v,
-                                    threshold=self.threshold,
-                                    indent=self.indent)
+            res = _list_repr_elided(
+                self.v, threshold=self.threshold, indent=self.indent
+            )
             return res
         elif numpy and isinstance(self.v, numpy.ndarray):
             # Handle numpy arrays
@@ -88,16 +88,14 @@ class ElidedWrapper(object):
 
             # Set threshold to self.max_list_elements
             numpy.set_printoptions(
-                **dict(orig_opts,
-                       threshold=self.threshold,
-                       edgeitems=3,
-                       linewidth=80))
+                **dict(orig_opts, threshold=self.threshold, edgeitems=3, linewidth=80)
+            )
 
             res = self.v.__repr__()
 
             # Add indent to all but the first line
-            res_lines = res.split('\n')
-            res = ('\n' + ' '*self.indent).join(res_lines)
+            res_lines = res.split("\n")
+            res = ("\n" + " " * self.indent).join(res_lines)
 
             # Restore print opts
             numpy.set_printoptions(**orig_opts)
@@ -105,8 +103,7 @@ class ElidedWrapper(object):
         elif isinstance(self.v, str):
             # Handle strings
             if len(self.v) > 80:
-                return ('(' + repr(self.v[:30]) +
-                        ' ... ' + repr(self.v[-30:]) + ')')
+                return "(" + repr(self.v[:30]) + " ... " + repr(self.v[-30:]) + ")"
             else:
                 return self.v.__repr__()
         else:
@@ -117,20 +114,20 @@ class ElidedPrettyPrinter(PrettyPrinter):
     """
     PrettyPrinter subclass that elides long lists/arrays/strings
     """
+
     def __init__(self, *args, **kwargs):
-        self.threshold = kwargs.pop('threshold', 200)
+        self.threshold = kwargs.pop("threshold", 200)
         PrettyPrinter.__init__(self, *args, **kwargs)
 
     def _format(self, val, stream, indent, allowance, context, level):
         if ElidedWrapper.is_wrappable(val):
-            elided_val = ElidedWrapper(
-                val, self.threshold, indent)
+            elided_val = ElidedWrapper(val, self.threshold, indent)
 
-            return self._format(
-                elided_val, stream, indent, allowance, context, level)
+            return self._format(elided_val, stream, indent, allowance, context, level)
         else:
             return PrettyPrinter._format(
-                self, val, stream, indent, allowance, context, level)
+                self, val, stream, indent, allowance, context, level
+            )
 
 
 def node_generator(node, path=()):
@@ -162,7 +159,7 @@ def node_generator(node, path=()):
     yield node, path
     for key, val in node.items():
         if isinstance(val, dict):
-            for item in node_generator(val, path + (key, )):
+            for item in node_generator(val, path + (key,)):
                 yield item
 
 
@@ -210,47 +207,3 @@ def decode_unicode(coll):
                     pass
             coll[str(key)] = coll.pop(key)
     return coll
-
-
-def memoize(maxsize=128):
-    """
-    Memoize a function by its arguments. Note, if the wrapped function returns
-    a mutable result, the caller is responsible for *not* mutating the result
-    as it will mutate the cache itself.
-
-    :param (int|None) maxsize: Limit the number of cached results. This is a
-                               simple way to prevent memory leaks. Setting this
-                               to `None` will remember *all* calls. The 128
-                               number is used for parity with the Python 3.2
-                               `functools.lru_cache` tool.
-
-    """
-    keys = deque()
-    cache = {}
-
-    def _memoize(*all_args, **kwargs):
-        func = all_args[0]
-        args = all_args[1:]
-        key = _default_memoize_key_function(*args, **kwargs)
-
-        if key in keys:
-            return cache[key]
-
-        if maxsize is not None and len(keys) == maxsize:
-            cache.pop(keys.pop())
-
-        result = func(*args, **kwargs)
-        keys.appendleft(key)
-        cache[key] = result
-        return result
-
-    return decorator(_memoize)
-
-
-def _default_memoize_key_function(*args, **kwargs):
-    """Factored out in case we want to allow callers to specify this func."""
-    if kwargs:
-        # frozenset is used to ensure hashability
-        return args, frozenset(kwargs.items())
-    else:
-        return args

@@ -1,18 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self, plotly_name='showscale', parent_name='barpolar.marker', **kwargs
+        self, plotly_name="showscale", parent_name="barpolar.marker", **kwargs
     ):
         super(ShowscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,18 +18,14 @@ import _plotly_utils.basevalidators
 
 
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='reversescale',
-        parent_name='barpolar.marker',
-        **kwargs
+        self, plotly_name="reversescale", parent_name="barpolar.marker", **kwargs
     ):
         super(ReversescaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -41,18 +34,14 @@ import _plotly_utils.basevalidators
 
 
 class OpacitysrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='opacitysrc',
-        parent_name='barpolar.marker',
-        **kwargs
+        self, plotly_name="opacitysrc", parent_name="barpolar.marker", **kwargs
     ):
         super(OpacitysrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -61,18 +50,15 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='opacity', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="opacity", parent_name="barpolar.marker", **kwargs):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -81,16 +67,14 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='line', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="line", parent_name="barpolar.marker", **kwargs):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_class_str=kwargs.pop("data_class_str", "Line"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             autocolorscale
                 Determines whether the colorscale is a default
                 palette (`autocolorscale: true`) or the palette
@@ -179,7 +163,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             widthsrc
                 Sets the source reference on plot.ly for  width
                 .
-"""
+""",
             ),
             **kwargs
         )
@@ -189,15 +173,12 @@ import _plotly_utils.basevalidators
 
 
 class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
-    def __init__(
-        self, plotly_name='colorsrc', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="colorsrc", parent_name="barpolar.marker", **kwargs):
         super(ColorsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -206,21 +187,15 @@ import _plotly_utils.basevalidators
 
 
 class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-
     def __init__(
-        self,
-        plotly_name='colorscale',
-        parent_name='barpolar.marker',
-        **kwargs
+        self, plotly_name="colorscale", parent_name="barpolar.marker", **kwargs
     ):
         super(ColorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop(
-                'implied_edits', {'autocolorscale': False}
-            ),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -229,16 +204,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='colorbar', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="colorbar", parent_name="barpolar.marker", **kwargs):
         super(ColorBarValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'ColorBar'),
+            data_class_str=kwargs.pop("data_class_str", "ColorBar"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             bgcolor
                 Sets the color of padded area.
             bordercolor
@@ -364,9 +337,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.barpolar.marker.colorbar.Tick
-                formatstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.barpolar.marker
+                .colorbar.Tickformatstop instances or dicts
+                with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.barpolar.marker.colorbar.tickformatstopdefaul
@@ -413,8 +386,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.barpolar.marker.colorbar.Titl
-                e instance or dict with compatible properties
+                plotly.graph_objects.barpolar.marker.colorbar.T
+                itle instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 barpolar.marker.colorbar.title.font instead.
@@ -449,7 +423,7 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             ypad
                 Sets the amount of padding (in px) along the y
                 direction.
-"""
+""",
             ),
             **kwargs
         )
@@ -459,17 +433,16 @@ import _plotly_utils.basevalidators
 
 
 class ColoraxisValidator(_plotly_utils.basevalidators.SubplotidValidator):
-
     def __init__(
-        self, plotly_name='coloraxis', parent_name='barpolar.marker', **kwargs
+        self, plotly_name="coloraxis", parent_name="barpolar.marker", **kwargs
     ):
         super(ColoraxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            dflt=kwargs.pop('dflt', None),
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            regex=kwargs.pop('regex', '/^coloraxis([2-9]|[1-9][0-9]+)?$/'),
-            role=kwargs.pop('role', 'info'),
+            dflt=kwargs.pop("dflt", None),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            regex=kwargs.pop("regex", "/^coloraxis([2-9]|[1-9][0-9]+)?$/"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -478,19 +451,14 @@ import _plotly_utils.basevalidators
 
 
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='color', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="color", parent_name="barpolar.marker", **kwargs):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            role=kwargs.pop('role', 'style'),
-            colorscale_path=kwargs.pop(
-                'colorscale_path', 'barpolar.marker.colorscale'
-            ),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "style"),
+            colorscale_path=kwargs.pop("colorscale_path", "barpolar.marker.colorscale"),
             **kwargs
         )
 
@@ -499,16 +467,13 @@ import _plotly_utils.basevalidators
 
 
 class CminValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmin', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmin", parent_name="barpolar.marker", **kwargs):
         super(CminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -517,16 +482,13 @@ import _plotly_utils.basevalidators
 
 
 class CmidValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmid', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmid", parent_name="barpolar.marker", **kwargs):
         super(CmidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -535,16 +497,13 @@ import _plotly_utils.basevalidators
 
 
 class CmaxValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='cmax', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cmax", parent_name="barpolar.marker", **kwargs):
         super(CmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            implied_edits=kwargs.pop('implied_edits', {'cauto': False}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            implied_edits=kwargs.pop("implied_edits", {"cauto": False}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -553,16 +512,13 @@ import _plotly_utils.basevalidators
 
 
 class CautoValidator(_plotly_utils.basevalidators.BooleanValidator):
-
-    def __init__(
-        self, plotly_name='cauto', parent_name='barpolar.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="cauto", parent_name="barpolar.marker", **kwargs):
         super(CautoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -571,18 +527,14 @@ import _plotly_utils.basevalidators
 
 
 class AutocolorscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='autocolorscale',
-        parent_name='barpolar.marker',
-        **kwargs
+        self, plotly_name="autocolorscale", parent_name="barpolar.marker", **kwargs
     ):
         super(AutocolorscaleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

@@ -1,21 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class OpacitysrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='opacitysrc',
-        parent_name='choropleth.marker',
-        **kwargs
+        self, plotly_name="opacitysrc", parent_name="choropleth.marker", **kwargs
     ):
         super(OpacitysrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -24,18 +18,17 @@ import _plotly_utils.basevalidators
 
 
 class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self, plotly_name='opacity', parent_name='choropleth.marker', **kwargs
+        self, plotly_name="opacity", parent_name="choropleth.marker", **kwargs
     ):
         super(OpacityValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            array_ok=kwargs.pop('array_ok', True),
-            edit_type=kwargs.pop('edit_type', 'style'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "style"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -44,16 +37,14 @@ import _plotly_utils.basevalidators
 
 
 class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='line', parent_name='choropleth.marker', **kwargs
-    ):
+    def __init__(self, plotly_name="line", parent_name="choropleth.marker", **kwargs):
         super(LineValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Line'),
+            data_class_str=kwargs.pop("data_class_str", "Line"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets themarker.linecolor. It accepts either a
                 specific color or an array of numbers that are
@@ -70,7 +61,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
             widthsrc
                 Sets the source reference on plot.ly for  width
                 .
-"""
+""",
             ),
             **kwargs
         )

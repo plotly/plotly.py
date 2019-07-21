@@ -1,7 +1,7 @@
 import warnings
 
 warnings.filterwarnings(
-    'default', r'plotly\.graph_objs\.\w+ is deprecated', DeprecationWarning
+    "default", r"plotly\.graph_objs\.\w+ is deprecated", DeprecationWarning
 )
 
 
@@ -36,7 +36,8 @@ Please replace it with a list or tuple of instances of the following types
   - plotly.graph_objs.Area
   - plotly.graph_objs.Histogram
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Data, self).__init__(*args, **kwargs)
 
@@ -63,7 +64,8 @@ Please replace it with a list or tuple of instances of the following types
 Please replace it with a list or tuple of instances of the following types
   - plotly.graph_objs.layout.Annotation
   - plotly.graph_objs.layout.scene.Annotation
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Annotations, self).__init__(*args, **kwargs)
 
@@ -87,7 +89,8 @@ Please replace it with a list or tuple of instances of the following types
             """plotly.graph_objs.Frames is deprecated.
 Please replace it with a list or tuple of instances of the following types
   - plotly.graph_objs.Frame
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Frames, self).__init__(*args, **kwargs)
 
@@ -114,7 +117,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.AngularAxis
   - plotly.graph_objs.layout.polar.AngularAxis
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(AngularAxis, self).__init__(*args, **kwargs)
 
@@ -141,7 +145,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.Annotation
   - plotly.graph_objs.layout.scene.Annotation
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Annotation, self).__init__(*args, **kwargs)
 
@@ -171,7 +176,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.marker.ColorBar
   - plotly.graph_objs.surface.ColorBar
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(ColorBar, self).__init__(*args, **kwargs)
 
@@ -201,7 +207,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.contour.Contours
   - plotly.graph_objs.surface.Contours
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Contours, self).__init__(*args, **kwargs)
 
@@ -231,7 +238,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.ErrorX
   - plotly.graph_objs.histogram.ErrorX
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(ErrorX, self).__init__(*args, **kwargs)
 
@@ -261,7 +269,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.ErrorY
   - plotly.graph_objs.histogram.ErrorY
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(ErrorY, self).__init__(*args, **kwargs)
 
@@ -285,7 +294,8 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.ErrorZ is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter3d.ErrorZ
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(ErrorZ, self).__init__(*args, **kwargs)
 
@@ -315,7 +325,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.Font
   - plotly.graph_objs.layout.hoverlabel.Font
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Font, self).__init__(*args, **kwargs)
 
@@ -339,7 +350,8 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.Legend is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.Legend
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Legend, self).__init__(*args, **kwargs)
 
@@ -369,7 +381,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.Line
   - plotly.graph_objs.layout.shape.Line
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Line, self).__init__(*args, **kwargs)
 
@@ -393,7 +406,8 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.Margin is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.Margin
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Margin, self).__init__(*args, **kwargs)
 
@@ -423,7 +437,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.Marker
   - plotly.graph_objs.histogram.selected.Marker
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Marker, self).__init__(*args, **kwargs)
 
@@ -450,7 +465,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.RadialAxis
   - plotly.graph_objs.layout.polar.RadialAxis
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(RadialAxis, self).__init__(*args, **kwargs)
 
@@ -474,7 +490,8 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.Scene is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.Scene
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Scene, self).__init__(*args, **kwargs)
 
@@ -501,7 +518,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.scatter.Stream
   - plotly.graph_objs.area.Stream
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Stream, self).__init__(*args, **kwargs)
 
@@ -528,7 +546,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.XAxis
   - plotly.graph_objs.layout.scene.XAxis
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(XAxis, self).__init__(*args, **kwargs)
 
@@ -555,7 +574,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.YAxis
   - plotly.graph_objs.layout.scene.YAxis
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(YAxis, self).__init__(*args, **kwargs)
 
@@ -579,7 +599,8 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.ZAxis is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.layout.scene.ZAxis
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(ZAxis, self).__init__(*args, **kwargs)
 
@@ -606,7 +627,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.histogram.XBins
   - plotly.graph_objs.histogram2d.XBins
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(XBins, self).__init__(*args, **kwargs)
 
@@ -633,7 +655,8 @@ Please replace it with one of the following more specific types
 Please replace it with one of the following more specific types
   - plotly.graph_objs.histogram.YBins
   - plotly.graph_objs.histogram2d.YBins
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(YBins, self).__init__(*args, **kwargs)
 
@@ -669,7 +692,8 @@ Please replace it with one of the following more specific types
   - plotly.graph_objs.Area
   - plotly.graph_objs.Histogram
   - etc.
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Trace, self).__init__(*args, **kwargs)
 
@@ -693,6 +717,7 @@ Please replace it with one of the following more specific types
             """plotly.graph_objs.Histogram2dcontour is deprecated.
 Please replace it with one of the following more specific types
   - plotly.graph_objs.Histogram2dContour
-""", DeprecationWarning
+""",
+            DeprecationWarning,
         )
         super(Histogram2dcontour, self).__init__(*args, **kwargs)

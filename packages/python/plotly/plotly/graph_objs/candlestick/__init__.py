@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -22,11 +20,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     # token
     # -----
@@ -43,17 +41,17 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'candlestick'
+        return "candlestick"
 
     # Self properties description
     # ---------------------------
@@ -94,7 +92,7 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__('stream')
+        super(Stream, self).__init__("stream")
 
         # Validate arg
         # ------------
@@ -114,23 +112,23 @@ an instance of plotly.graph_objs.candlestick.Stream"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.candlestick import (stream as v_stream)
+        from plotly.validators.candlestick import stream as v_stream
 
         # Initialize validators
         # ---------------------
-        self._validators['maxpoints'] = v_stream.MaxpointsValidator()
-        self._validators['token'] = v_stream.TokenValidator()
+        self._validators["maxpoints"] = v_stream.MaxpointsValidator()
+        self._validators["token"] = v_stream.TokenValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('maxpoints', None)
-        self['maxpoints'] = maxpoints if maxpoints is not None else _v
-        _v = arg.pop('token', None)
-        self['token'] = token if token is not None else _v
+        _v = arg.pop("maxpoints", None)
+        self["maxpoints"] = maxpoints if maxpoints is not None else _v
+        _v = arg.pop("token", None)
+        self["token"] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -163,17 +161,17 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'candlestick'
+        return "candlestick"
 
     # Self properties description
     # ---------------------------
@@ -206,7 +204,7 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -226,20 +224,20 @@ an instance of plotly.graph_objs.candlestick.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.candlestick import (line as v_line)
+        from plotly.validators.candlestick import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['width'] = v_line.WidthValidator()
+        self._validators["width"] = v_line.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -300,22 +298,22 @@ class Increasing(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
     # line
     # ----
@@ -340,17 +338,17 @@ class Increasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.candlestick.increasing.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'candlestick'
+        return "candlestick"
 
     # Self properties description
     # ---------------------------
@@ -362,8 +360,8 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.increasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.increasing.Line
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -380,14 +378,14 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.increasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.increasing.Line
+            instance or dict with compatible properties
 
         Returns
         -------
         Increasing
         """
-        super(Increasing, self).__init__('increasing')
+        super(Increasing, self).__init__("increasing")
 
         # Validate arg
         # ------------
@@ -407,23 +405,23 @@ an instance of plotly.graph_objs.candlestick.Increasing"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.candlestick import (increasing as v_increasing)
+        from plotly.validators.candlestick import increasing as v_increasing
 
         # Initialize validators
         # ---------------------
-        self._validators['fillcolor'] = v_increasing.FillcolorValidator()
-        self._validators['line'] = v_increasing.LineValidator()
+        self._validators["fillcolor"] = v_increasing.FillcolorValidator()
+        self._validators["line"] = v_increasing.LineValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('fillcolor', None)
-        self['fillcolor'] = fillcolor if fillcolor is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
+        _v = arg.pop("fillcolor", None)
+        self["fillcolor"] = fillcolor if fillcolor is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -458,11 +456,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -478,11 +476,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # bgcolor
     # -------
@@ -526,23 +524,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bgcolorsrc
     # ----------
@@ -558,11 +556,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
     # bordercolor
     # -----------
@@ -606,23 +604,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # bordercolorsrc
     # --------------
@@ -638,11 +636,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolorsrc']
+        return self["bordercolorsrc"]
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self['bordercolorsrc'] = val
+        self["bordercolorsrc"] = val
 
     # font
     # ----
@@ -693,11 +691,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.candlestick.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # namelength
     # ----------
@@ -720,11 +718,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
     # namelengthsrc
     # -------------
@@ -740,11 +738,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['namelengthsrc']
+        return self["namelengthsrc"]
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self['namelengthsrc'] = val
+        self["namelengthsrc"] = val
 
     # split
     # -----
@@ -761,17 +759,17 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['split']
+        return self["split"]
 
     @split.setter
     def split(self, val):
-        self['split'] = val
+        self["split"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'candlestick'
+        return "candlestick"
 
     # Self properties description
     # ---------------------------
@@ -870,7 +868,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super(Hoverlabel, self).__init__('hoverlabel')
+        super(Hoverlabel, self).__init__("hoverlabel")
 
         # Validate arg
         # ------------
@@ -890,51 +888,47 @@ an instance of plotly.graph_objs.candlestick.Hoverlabel"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.candlestick import (hoverlabel as v_hoverlabel)
+        from plotly.validators.candlestick import hoverlabel as v_hoverlabel
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_hoverlabel.AlignValidator()
-        self._validators['alignsrc'] = v_hoverlabel.AlignsrcValidator()
-        self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
-        self._validators['bgcolorsrc'] = v_hoverlabel.BgcolorsrcValidator()
-        self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
-        self._validators['bordercolorsrc'
-                        ] = v_hoverlabel.BordercolorsrcValidator()
-        self._validators['font'] = v_hoverlabel.FontValidator()
-        self._validators['namelength'] = v_hoverlabel.NamelengthValidator()
-        self._validators['namelengthsrc'
-                        ] = v_hoverlabel.NamelengthsrcValidator()
-        self._validators['split'] = v_hoverlabel.SplitValidator()
+        self._validators["align"] = v_hoverlabel.AlignValidator()
+        self._validators["alignsrc"] = v_hoverlabel.AlignsrcValidator()
+        self._validators["bgcolor"] = v_hoverlabel.BgcolorValidator()
+        self._validators["bgcolorsrc"] = v_hoverlabel.BgcolorsrcValidator()
+        self._validators["bordercolor"] = v_hoverlabel.BordercolorValidator()
+        self._validators["bordercolorsrc"] = v_hoverlabel.BordercolorsrcValidator()
+        self._validators["font"] = v_hoverlabel.FontValidator()
+        self._validators["namelength"] = v_hoverlabel.NamelengthValidator()
+        self._validators["namelengthsrc"] = v_hoverlabel.NamelengthsrcValidator()
+        self._validators["split"] = v_hoverlabel.SplitValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bgcolorsrc', None)
-        self['bgcolorsrc'] = bgcolorsrc if bgcolorsrc is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('bordercolorsrc', None)
-        self['bordercolorsrc'
-            ] = bordercolorsrc if bordercolorsrc is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('namelength', None)
-        self['namelength'] = namelength if namelength is not None else _v
-        _v = arg.pop('namelengthsrc', None)
-        self['namelengthsrc'
-            ] = namelengthsrc if namelengthsrc is not None else _v
-        _v = arg.pop('split', None)
-        self['split'] = split if split is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bgcolorsrc", None)
+        self["bgcolorsrc"] = bgcolorsrc if bgcolorsrc is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("bordercolorsrc", None)
+        self["bordercolorsrc"] = bordercolorsrc if bordercolorsrc is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("namelength", None)
+        self["namelength"] = namelength if namelength is not None else _v
+        _v = arg.pop("namelengthsrc", None)
+        self["namelengthsrc"] = namelengthsrc if namelengthsrc is not None else _v
+        _v = arg.pop("split", None)
+        self["split"] = split if split is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -995,22 +989,22 @@ class Decreasing(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['fillcolor']
+        return self["fillcolor"]
 
     @fillcolor.setter
     def fillcolor(self, val):
-        self['fillcolor'] = val
+        self["fillcolor"] = val
 
     # line
     # ----
@@ -1035,17 +1029,17 @@ class Decreasing(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.candlestick.decreasing.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'candlestick'
+        return "candlestick"
 
     # Self properties description
     # ---------------------------
@@ -1057,8 +1051,8 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.decreasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.decreasing.Line
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -1075,14 +1069,14 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            plotly.graph_objs.candlestick.decreasing.Line instance
-            or dict with compatible properties
+            plotly.graph_objects.candlestick.decreasing.Line
+            instance or dict with compatible properties
 
         Returns
         -------
         Decreasing
         """
-        super(Decreasing, self).__init__('decreasing')
+        super(Decreasing, self).__init__("decreasing")
 
         # Validate arg
         # ------------
@@ -1102,23 +1096,23 @@ an instance of plotly.graph_objs.candlestick.Decreasing"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.candlestick import (decreasing as v_decreasing)
+        from plotly.validators.candlestick import decreasing as v_decreasing
 
         # Initialize validators
         # ---------------------
-        self._validators['fillcolor'] = v_decreasing.FillcolorValidator()
-        self._validators['line'] = v_decreasing.LineValidator()
+        self._validators["fillcolor"] = v_decreasing.FillcolorValidator()
+        self._validators["line"] = v_decreasing.LineValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('fillcolor', None)
-        self['fillcolor'] = fillcolor if fillcolor is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
+        _v = arg.pop("fillcolor", None)
+        self["fillcolor"] = fillcolor if fillcolor is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------

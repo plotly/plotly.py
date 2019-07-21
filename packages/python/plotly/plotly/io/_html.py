@@ -23,17 +23,19 @@ if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}\
 </script>"""
 
 
-def to_html(fig,
-            config=None,
-            auto_play=True,
-            include_plotlyjs=True,
-            include_mathjax=False,
-            post_script=None,
-            full_html=True,
-            animation_opts=None,
-            default_width='100%',
-            default_height='100%',
-            validate=True):
+def to_html(
+    fig,
+    config=None,
+    auto_play=True,
+    include_plotlyjs=True,
+    include_mathjax=False,
+    post_script=None,
+    full_html=True,
+    animation_opts=None,
+    default_width="100%",
+    default_height="100%",
+    validate=True,
+):
     """
     Convert a figure to an HTML string representation.
 
@@ -133,17 +135,14 @@ def to_html(fig,
 
     # ## Serialize figure ##
     jdata = json.dumps(
-        fig_dict.get('data', []),
-        cls=utils.PlotlyJSONEncoder,
-        sort_keys=True)
+        fig_dict.get("data", []), cls=utils.PlotlyJSONEncoder, sort_keys=True
+    )
     jlayout = json.dumps(
-        fig_dict.get('layout', {}),
-        cls=utils.PlotlyJSONEncoder,
-        sort_keys=True)
+        fig_dict.get("layout", {}), cls=utils.PlotlyJSONEncoder, sort_keys=True
+    )
 
-    if fig_dict.get('frames', None):
-        jframes = json.dumps(
-            fig_dict.get('frames', []), cls=utils.PlotlyJSONEncoder)
+    if fig_dict.get("frames", None):
+        jframes = json.dumps(fig_dict.get("frames", []), cls=utils.PlotlyJSONEncoder)
     else:
         jframes = None
 
@@ -151,21 +150,14 @@ def to_html(fig,
     config = _get_jconfig(config)
 
     # Set responsive
-    config.setdefault('responsive', True)
-
-    jconfig = json.dumps(config)
+    config.setdefault("responsive", True)
 
     # Get div width/height
-    layout_dict = fig_dict.get('layout', {})
-    template_dict = (fig_dict
-                     .get('layout', {})
-                     .get('template', {})
-                     .get('layout', {}))
+    layout_dict = fig_dict.get("layout", {})
+    template_dict = fig_dict.get("layout", {}).get("template", {}).get("layout", {})
 
-    div_width = layout_dict.get(
-        'width', template_dict.get('width', default_width))
-    div_height = layout_dict.get(
-        'height', template_dict.get('height', default_height))
+    div_width = layout_dict.get("width", template_dict.get("width", default_width))
+    div_height = layout_dict.get("height", template_dict.get("height", default_height))
 
     # Add 'px' suffix to numeric widths
     try:
@@ -173,23 +165,38 @@ def to_html(fig,
     except (ValueError, TypeError):
         pass
     else:
-        div_width = str(div_width) + 'px'
+        div_width = str(div_width) + "px"
 
     try:
         float(div_height)
     except (ValueError, TypeError):
         pass
     else:
-        div_height = str(div_height) + 'px'
+        div_height = str(div_height) + "px"
 
     # ## Get platform URL ##
-    plotly_platform_url = config.get('plotlyServerURL', 'https://plot.ly')
+    if config.get("showLink", False) or config.get("showSendToCloud", False):
+        # Figure is going to include a Chart Studio link or send-to-cloud button,
+        # So we need to configure the PLOTLYENV.BASE_URL property
+        base_url_line = """
+                    window.PLOTLYENV.BASE_URL='{plotly_platform_url}';\
+""".format(
+            plotly_platform_url=config.get("plotlyServerURL", "https://plot.ly")
+        )
+    else:
+        # Figure is not going to include a Chart Studio link or send-to-cloud button,
+        # In this case we don't want https://plot.ly to show up anywhere in the HTML
+        # output
+        config.pop("plotlyServerURL", None)
+        config.pop("linkText", None)
+        config.pop("showLink", None)
+        base_url_line = ""
 
     # ## Build script body ##
     # This is the part that actually calls Plotly.js
 
     # build post script snippet(s)
-    then_post_script = ''
+    then_post_script = ""
     if post_script:
         if not isinstance(post_script, (list, tuple)):
             post_script = [post_script]
@@ -197,24 +204,31 @@ def to_html(fig,
             then_post_script += """.then(function(){{
                             {post_script}
                         }})""".format(
-                post_script=ps.replace('{plot_id}', plotdivid))
+                post_script=ps.replace("{plot_id}", plotdivid)
+            )
 
-    then_addframes = ''
-    then_animate = ''
+    then_addframes = ""
+    then_animate = ""
     if jframes:
         then_addframes = """.then(function(){{
                             Plotly.addFrames('{id}', {frames});
-                        }})""".format(id=plotdivid, frames=jframes)
+                        }})""".format(
+            id=plotdivid, frames=jframes
+        )
 
         if auto_play:
             if animation_opts:
-                animation_opts_arg = ', ' + json.dumps(animation_opts)
+                animation_opts_arg = ", " + json.dumps(animation_opts)
             else:
-                animation_opts_arg = ''
+                animation_opts_arg = ""
             then_animate = """.then(function(){{
                             Plotly.animate('{id}', null{animation_opts});
-                        }})""".format(id=plotdivid,
-                                      animation_opts=animation_opts_arg)
+                        }})""".format(
+                id=plotdivid, animation_opts=animation_opts_arg
+            )
+
+    # Serialize config dict to JSON
+    jconfig = json.dumps(config)
 
     script = """
                 if (document.getElementById("{id}")) {{
@@ -231,7 +245,8 @@ def to_html(fig,
         config=jconfig,
         then_addframes=then_addframes,
         then_animate=then_animate,
-        then_post_script=then_post_script)
+        then_post_script=then_post_script,
+    )
 
     # ## Handle loading/initializing plotly.js ##
     include_plotlyjs_orig = include_plotlyjs
@@ -239,44 +254,51 @@ def to_html(fig,
         include_plotlyjs = include_plotlyjs.lower()
 
     # Start/end of requirejs block (if any)
-    require_start = ''
-    require_end = ''
+    require_start = ""
+    require_end = ""
 
     # Init and load
-    load_plotlyjs = ''
+    load_plotlyjs = ""
 
     # Init plotlyjs. This block needs to run before plotly.js is loaded in
     # order for MathJax configuration to work properly
-    if include_plotlyjs == 'require':
+    if include_plotlyjs == "require":
         require_start = 'require(["plotly"], function(Plotly) {'
-        require_end = '});'
+        require_end = "});"
 
-    elif include_plotlyjs == 'cdn':
+    elif include_plotlyjs == "cdn":
         load_plotlyjs = """\
         {win_config}
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>\
-    """.format(win_config=_window_plotly_config)
+    """.format(
+            win_config=_window_plotly_config
+        )
 
-    elif include_plotlyjs == 'directory':
+    elif include_plotlyjs == "directory":
         load_plotlyjs = """\
         {win_config}
         <script src="plotly.min.js"></script>\
-    """.format(win_config=_window_plotly_config)
+    """.format(
+            win_config=_window_plotly_config
+        )
 
-    elif (isinstance(include_plotlyjs, six.string_types) and
-          include_plotlyjs.endswith('.js')):
+    elif isinstance(include_plotlyjs, six.string_types) and include_plotlyjs.endswith(
+        ".js"
+    ):
         load_plotlyjs = """\
         {win_config}
         <script src="{url}"></script>\
-    """.format(win_config=_window_plotly_config,
-               url=include_plotlyjs_orig)
+    """.format(
+            win_config=_window_plotly_config, url=include_plotlyjs_orig
+        )
 
     elif include_plotlyjs:
         load_plotlyjs = """\
         {win_config}
         <script type="text/javascript">{plotlyjs}</script>\
-    """.format(win_config=_window_plotly_config,
-               plotlyjs=get_plotlyjs())
+    """.format(
+            win_config=_window_plotly_config, plotlyjs=get_plotlyjs()
+        )
 
     # ## Handle loading/initializing MathJax ##
     include_mathjax_orig = include_mathjax
@@ -286,25 +308,36 @@ def to_html(fig,
     mathjax_template = """\
     <script src="{url}?config=TeX-AMS-MML_SVG"></script>"""
 
-    if include_mathjax == 'cdn':
-        mathjax_script = mathjax_template.format(
-            url=('https://cdnjs.cloudflare.com'
-                 '/ajax/libs/mathjax/2.7.5/MathJax.js')) + _mathjax_config
+    if include_mathjax == "cdn":
+        mathjax_script = (
+            mathjax_template.format(
+                url=(
+                    "https://cdnjs.cloudflare.com" "/ajax/libs/mathjax/2.7.5/MathJax.js"
+                )
+            )
+            + _mathjax_config
+        )
 
-    elif (isinstance(include_mathjax, six.string_types) and
-          include_mathjax.endswith('.js')):
+    elif isinstance(include_mathjax, six.string_types) and include_mathjax.endswith(
+        ".js"
+    ):
 
-        mathjax_script = mathjax_template.format(
-            url=include_mathjax_orig) + _mathjax_config
+        mathjax_script = (
+            mathjax_template.format(url=include_mathjax_orig) + _mathjax_config
+        )
     elif not include_mathjax:
-        mathjax_script = ''
+        mathjax_script = ""
     else:
-        raise ValueError("""\
+        raise ValueError(
+            """\
 Invalid value of type {typ} received as the include_mathjax argument
     Received value: {val}
 
 include_mathjax may be specified as False, 'cdn', or a string ending with '.js' 
-    """.format(typ=type(include_mathjax), val=repr(include_mathjax)))
+    """.format(
+                typ=type(include_mathjax), val=repr(include_mathjax)
+            )
+        )
 
     plotly_html_div = """\
 <div>
@@ -314,8 +347,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 style="height:{height}; width:{width};"></div>
             <script type="text/javascript">
                 {require_start}
-                    window.PLOTLYENV=window.PLOTLYENV || {{}};
-                    window.PLOTLYENV.BASE_URL='{plotly_platform_url}';
+                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}
                     {script};
                 {require_end}
             </script>
@@ -325,10 +357,11 @@ style="height:{height}; width:{width};"></div>
         id=plotdivid,
         width=div_width,
         height=div_height,
-        plotly_platform_url=plotly_platform_url,
+        base_url_line=base_url_line,
         require_start=require_start,
         script=script,
-        require_end=require_end)
+        require_end=require_end,
+    )
 
     if full_html:
         return """\
@@ -337,24 +370,28 @@ style="height:{height}; width:{width};"></div>
 <body>
     {div}
 </body>
-</html>""".format(div=plotly_html_div)
+</html>""".format(
+            div=plotly_html_div
+        )
     else:
         return plotly_html_div
 
 
-def write_html(fig,
-               file,
-               config=None,
-               auto_play=True,
-               include_plotlyjs=True,
-               include_mathjax=False,
-               post_script=None,
-               full_html=True,
-               animation_opts=None,
-               validate=True,
-               default_width='100%',
-               default_height='100%',
-               auto_open=False):
+def write_html(
+    fig,
+    file,
+    config=None,
+    auto_play=True,
+    include_plotlyjs=True,
+    include_mathjax=False,
+    post_script=None,
+    full_html=True,
+    animation_opts=None,
+    validate=True,
+    default_width="100%",
+    default_height="100%",
+    auto_open=False,
+):
     """
     Write a figure to an HTML file representation
 
@@ -487,21 +524,20 @@ def write_html(fig,
 
     # Write HTML string
     if file_is_str:
-        with open(file, 'w') as f:
+        with open(file, "w") as f:
             f.write(html_str)
     else:
         file.write(html_str)
 
     # Check if we should copy plotly.min.js to output directory
-    if file_is_str and full_html and include_plotlyjs == 'directory':
-        bundle_path = os.path.join(
-            os.path.dirname(file), 'plotly.min.js')
+    if file_is_str and full_html and include_plotlyjs == "directory":
+        bundle_path = os.path.join(os.path.dirname(file), "plotly.min.js")
 
         if not os.path.exists(bundle_path):
-            with open(bundle_path, 'w') as f:
+            with open(bundle_path, "w") as f:
                 f.write(get_plotlyjs())
 
     # Handle auto_open
     if file_is_str and full_html and auto_open:
-        url = 'file://' + os.path.abspath(file)
+        url = "file://" + os.path.abspath(file)
         webbrowser.open(url)

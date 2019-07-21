@@ -7,8 +7,9 @@ from plotly.graph_objs import graph_objs
 from plotly.figure_factory import utils
 
 
-def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
-                  angle=math.pi / 9, scaleratio=None, **kwargs):
+def create_quiver(
+    x, y, u, v, scale=0.1, arrow_scale=0.3, angle=math.pi / 9, scaleratio=None, **kwargs
+):
     """
     Returns data for a quiver plot.
 
@@ -121,31 +122,28 @@ def create_quiver(x, y, u, v, scale=.1, arrow_scale=.3,
     barb_x, barb_y = quiver_obj.get_barbs()
     arrow_x, arrow_y = quiver_obj.get_quiver_arrows()
 
-    quiver_plot = graph_objs.Scatter(x=barb_x + arrow_x,
-                                y=barb_y + arrow_y,
-                                mode='lines', **kwargs)
+    quiver_plot = graph_objs.Scatter(
+        x=barb_x + arrow_x, y=barb_y + arrow_y, mode="lines", **kwargs
+    )
 
     data = [quiver_plot]
 
     if scaleratio is None:
-        layout = graph_objs.Layout(hovermode='closest')
+        layout = graph_objs.Layout(hovermode="closest")
     else:
         layout = graph_objs.Layout(
-            hovermode='closest',
-            yaxis=dict(
-                scaleratio = scaleratio,
-                scaleanchor = "x"
-                )
-            )
+            hovermode="closest", yaxis=dict(scaleratio=scaleratio, scaleanchor="x")
+        )
 
     return graph_objs.Figure(data=data, layout=layout)
+
 
 class _Quiver(object):
     """
     Refer to FigureFactory.create_quiver() for docstring
     """
-    def __init__(self, x, y, u, v,
-                 scale, arrow_scale, angle, scaleratio=1, **kwargs):
+
+    def __init__(self, x, y, u, v, scale, arrow_scale, angle, scaleratio=1, **kwargs):
         try:
             x = utils.flatten(x)
         except exceptions.PlotlyError:

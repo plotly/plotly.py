@@ -1,19 +1,14 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class YpadValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='ypad', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="ypad", parent_name="mesh3d.colorbar", **kwargs):
         super(YpadValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -22,16 +17,13 @@ import _plotly_utils.basevalidators
 
 
 class YanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='yanchor', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="yanchor", parent_name="mesh3d.colorbar", **kwargs):
         super(YanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['top', 'middle', 'bottom']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["top", "middle", "bottom"]),
             **kwargs
         )
 
@@ -40,17 +32,14 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='y', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="y", parent_name="mesh3d.colorbar", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -59,16 +48,13 @@ import _plotly_utils.basevalidators
 
 
 class XpadValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='xpad', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="xpad", parent_name="mesh3d.colorbar", **kwargs):
         super(XpadValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -77,16 +63,13 @@ import _plotly_utils.basevalidators
 
 
 class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='xanchor', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="xanchor", parent_name="mesh3d.colorbar", **kwargs):
         super(XanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['left', 'center', 'right']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["left", "center", "right"]),
             **kwargs
         )
 
@@ -95,17 +78,14 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='x', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="x", parent_name="mesh3d.colorbar", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            max=kwargs.pop('max', 3),
-            min=kwargs.pop('min', -2),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            max=kwargs.pop("max", 3),
+            min=kwargs.pop("min", -2),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -114,16 +94,14 @@ import _plotly_utils.basevalidators
 
 
 class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
-
-    def __init__(
-        self, plotly_name='title', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="title", parent_name="mesh3d.colorbar", **kwargs):
         super(TitleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Title'),
+            data_class_str=kwargs.pop("data_class_str", "Title"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             font
                 Sets this color bar's title font. Note that the
                 title's font used to be set by the now
@@ -139,7 +117,7 @@ class TitleValidator(_plotly_utils.basevalidators.TitleValidator):
                 title's contents used to be defined as the
                 `title` attribute itself. This behavior has
                 been deprecated.
-"""
+""",
             ),
             **kwargs
         )
@@ -149,16 +127,15 @@ import _plotly_utils.basevalidators
 
 
 class TickwidthValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self, plotly_name='tickwidth', parent_name='mesh3d.colorbar', **kwargs
+        self, plotly_name="tickwidth", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickwidthValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -167,18 +144,14 @@ import _plotly_utils.basevalidators
 
 
 class TickvalssrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='tickvalssrc',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="tickvalssrc", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickvalssrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -187,15 +160,12 @@ import _plotly_utils.basevalidators
 
 
 class TickvalsValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='tickvals', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="tickvals", parent_name="mesh3d.colorbar", **kwargs):
         super(TickvalsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -204,18 +174,14 @@ import _plotly_utils.basevalidators
 
 
 class TicktextsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-
     def __init__(
-        self,
-        plotly_name='ticktextsrc',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="ticktextsrc", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TicktextsrcValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -224,15 +190,12 @@ import _plotly_utils.basevalidators
 
 
 class TicktextValidator(_plotly_utils.basevalidators.DataArrayValidator):
-
-    def __init__(
-        self, plotly_name='ticktext', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="ticktext", parent_name="mesh3d.colorbar", **kwargs):
         super(TicktextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'data'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -241,18 +204,14 @@ import _plotly_utils.basevalidators
 
 
 class TicksuffixValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='ticksuffix',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="ticksuffix", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TicksuffixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -261,16 +220,13 @@ import _plotly_utils.basevalidators
 
 
 class TicksValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='ticks', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="ticks", parent_name="mesh3d.colorbar", **kwargs):
         super(TicksValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['outside', 'inside', '']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["outside", "inside", ""]),
             **kwargs
         )
 
@@ -279,18 +235,14 @@ import _plotly_utils.basevalidators
 
 
 class TickprefixValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='tickprefix',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="tickprefix", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickprefixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -299,17 +251,14 @@ import _plotly_utils.basevalidators
 
 
 class TickmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='tickmode', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="tickmode", parent_name="mesh3d.colorbar", **kwargs):
         super(TickmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            implied_edits=kwargs.pop('implied_edits', {}),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['auto', 'linear', 'array']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            implied_edits=kwargs.pop("implied_edits", {}),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["auto", "linear", "array"]),
             **kwargs
         )
 
@@ -318,16 +267,13 @@ import _plotly_utils.basevalidators
 
 
 class TicklenValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='ticklen', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="ticklen", parent_name="mesh3d.colorbar", **kwargs):
         super(TicklenValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -336,19 +282,21 @@ import _plotly_utils.basevalidators
 
 
 class TickformatstopValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
         self,
-        plotly_name='tickformatstopdefaults',
-        parent_name='mesh3d.colorbar',
+        plotly_name="tickformatstopdefaults",
+        parent_name="mesh3d.colorbar",
         **kwargs
     ):
         super(TickformatstopValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Tickformatstop'),
-            data_docs=kwargs.pop('data_docs', """
-"""),
+            data_class_str=kwargs.pop("data_class_str", "Tickformatstop"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
             **kwargs
         )
 
@@ -356,22 +304,17 @@ class TickformatstopValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class TickformatstopsValidator(
-    _plotly_utils.basevalidators.CompoundArrayValidator
-):
-
+class TickformatstopsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
     def __init__(
-        self,
-        plotly_name='tickformatstops',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="tickformatstops", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickformatstopsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Tickformatstop'),
+            data_class_str=kwargs.pop("data_class_str", "Tickformatstop"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             dtickrange
                 range [*min*, *max*], where "min", "max" -
                 dtick values which describe some zoom level, it
@@ -405,7 +348,7 @@ class TickformatstopsValidator(
             value
                 string - dtickformat for described zoom level,
                 the same as "tickformat"
-"""
+""",
             ),
             **kwargs
         )
@@ -415,18 +358,14 @@ import _plotly_utils.basevalidators
 
 
 class TickformatValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='tickformat',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="tickformat", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -435,16 +374,14 @@ import _plotly_utils.basevalidators
 
 
 class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='tickfont', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="tickfont", parent_name="mesh3d.colorbar", **kwargs):
         super(TickfontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Tickfont'),
+            data_class_str=kwargs.pop("data_class_str", "Tickfont"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -465,7 +402,7 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )
@@ -475,15 +412,14 @@ import _plotly_utils.basevalidators
 
 
 class TickcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self, plotly_name='tickcolor', parent_name='mesh3d.colorbar', **kwargs
+        self, plotly_name="tickcolor", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -492,15 +428,14 @@ import _plotly_utils.basevalidators
 
 
 class TickangleValidator(_plotly_utils.basevalidators.AngleValidator):
-
     def __init__(
-        self, plotly_name='tickangle', parent_name='mesh3d.colorbar', **kwargs
+        self, plotly_name="tickangle", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(TickangleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -509,16 +444,13 @@ import _plotly_utils.basevalidators
 
 
 class Tick0Validator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='tick0', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="tick0", parent_name="mesh3d.colorbar", **kwargs):
         super(Tick0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            implied_edits=kwargs.pop('implied_edits', {'tickmode': 'linear'}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -527,19 +459,15 @@ import _plotly_utils.basevalidators
 
 
 class ThicknessmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='thicknessmode',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="thicknessmode", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ThicknessmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['fraction', 'pixels']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["fraction", "pixels"]),
             **kwargs
         )
 
@@ -548,16 +476,15 @@ import _plotly_utils.basevalidators
 
 
 class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self, plotly_name='thickness', parent_name='mesh3d.colorbar', **kwargs
+        self, plotly_name="thickness", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ThicknessValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -565,22 +492,16 @@ class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
 import _plotly_utils.basevalidators
 
 
-class ShowticksuffixValidator(
-    _plotly_utils.basevalidators.EnumeratedValidator
-):
-
+class ShowticksuffixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
     def __init__(
-        self,
-        plotly_name='showticksuffix',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="showticksuffix", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ShowticksuffixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['all', 'first', 'last', 'none']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["all", "first", "last", "none"]),
             **kwargs
         )
 
@@ -588,22 +509,16 @@ class ShowticksuffixValidator(
 import _plotly_utils.basevalidators
 
 
-class ShowtickprefixValidator(
-    _plotly_utils.basevalidators.EnumeratedValidator
-):
-
+class ShowtickprefixValidator(_plotly_utils.basevalidators.EnumeratedValidator):
     def __init__(
-        self,
-        plotly_name='showtickprefix',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="showtickprefix", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ShowtickprefixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['all', 'first', 'last', 'none']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["all", "first", "last", "none"]),
             **kwargs
         )
 
@@ -612,18 +527,14 @@ import _plotly_utils.basevalidators
 
 
 class ShowticklabelsValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='showticklabels',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="showticklabels", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ShowticklabelsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -632,19 +543,15 @@ import _plotly_utils.basevalidators
 
 
 class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='showexponent',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="showexponent", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ShowexponentValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['all', 'first', 'last', 'none']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["all", "first", "last", "none"]),
             **kwargs
         )
 
@@ -652,21 +559,15 @@ class ShowexponentValidator(_plotly_utils.basevalidators.EnumeratedValidator):
 import _plotly_utils.basevalidators
 
 
-class SeparatethousandsValidator(
-    _plotly_utils.basevalidators.BooleanValidator
-):
-
+class SeparatethousandsValidator(_plotly_utils.basevalidators.BooleanValidator):
     def __init__(
-        self,
-        plotly_name='separatethousands',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="separatethousands", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(SeparatethousandsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -675,19 +576,15 @@ import _plotly_utils.basevalidators
 
 
 class OutlinewidthValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='outlinewidth',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="outlinewidth", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(OutlinewidthValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -696,18 +593,14 @@ import _plotly_utils.basevalidators
 
 
 class OutlinecolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self,
-        plotly_name='outlinecolor',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="outlinecolor", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(OutlinecolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -716,16 +609,13 @@ import _plotly_utils.basevalidators
 
 
 class NticksValidator(_plotly_utils.basevalidators.IntegerValidator):
-
-    def __init__(
-        self, plotly_name='nticks', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="nticks", parent_name="mesh3d.colorbar", **kwargs):
         super(NticksValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -734,16 +624,13 @@ import _plotly_utils.basevalidators
 
 
 class LenmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='lenmode', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="lenmode", parent_name="mesh3d.colorbar", **kwargs):
         super(LenmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['fraction', 'pixels']),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["fraction", "pixels"]),
             **kwargs
         )
 
@@ -752,16 +639,13 @@ import _plotly_utils.basevalidators
 
 
 class LenValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='len', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="len", parent_name="mesh3d.colorbar", **kwargs):
         super(LenValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -769,24 +653,16 @@ class LenValidator(_plotly_utils.basevalidators.NumberValidator):
 import _plotly_utils.basevalidators
 
 
-class ExponentformatValidator(
-    _plotly_utils.basevalidators.EnumeratedValidator
-):
-
+class ExponentformatValidator(_plotly_utils.basevalidators.EnumeratedValidator):
     def __init__(
-        self,
-        plotly_name='exponentformat',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="exponentformat", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(ExponentformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop(
-                'values', ['none', 'e', 'E', 'power', 'SI', 'B']
-            ),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["none", "e", "E", "power", "SI", "B"]),
             **kwargs
         )
 
@@ -795,16 +671,13 @@ import _plotly_utils.basevalidators
 
 
 class DtickValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='dtick', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="dtick", parent_name="mesh3d.colorbar", **kwargs):
         super(DtickValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            implied_edits=kwargs.pop('implied_edits', {'tickmode': 'linear'}),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            implied_edits=kwargs.pop("implied_edits", {"tickmode": "linear"}),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -813,19 +686,15 @@ import _plotly_utils.basevalidators
 
 
 class BorderwidthValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='borderwidth',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="borderwidth", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(BorderwidthValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -834,18 +703,14 @@ import _plotly_utils.basevalidators
 
 
 class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
     def __init__(
-        self,
-        plotly_name='bordercolor',
-        parent_name='mesh3d.colorbar',
-        **kwargs
+        self, plotly_name="bordercolor", parent_name="mesh3d.colorbar", **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -854,14 +719,11 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='bgcolor', parent_name='mesh3d.colorbar', **kwargs
-    ):
+    def __init__(self, plotly_name="bgcolor", parent_name="mesh3d.colorbar", **kwargs):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'colorbars'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "colorbars"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )

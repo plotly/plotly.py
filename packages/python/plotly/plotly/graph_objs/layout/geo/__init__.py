@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -26,11 +24,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['parallels']
+        return self["parallels"]
 
     @parallels.setter
     def parallels(self, val):
-        self['parallels'] = val
+        self["parallels"] = val
 
     # rotation
     # --------
@@ -60,11 +58,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.geo.projection.Rotation
         """
-        return self['rotation']
+        return self["rotation"]
 
     @rotation.setter
     def rotation(self, val):
-        self['rotation'] = val
+        self["rotation"] = val
 
     # scale
     # -----
@@ -81,11 +79,11 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['scale']
+        return self["scale"]
 
     @scale.setter
     def scale(self, val):
-        self['scale'] = val
+        self["scale"] = val
 
     # type
     # ----
@@ -108,17 +106,17 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['type']
+        return self["type"]
 
     @type.setter
     def type(self, val):
-        self['type'] = val
+        self["type"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo'
+        return "layout.geo"
 
     # Self properties description
     # ---------------------------
@@ -129,7 +127,7 @@ class Projection(_BaseLayoutHierarchyType):
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            plotly.graph_objs.layout.geo.projection.Rotation
+            plotly.graph_objects.layout.geo.projection.Rotation
             instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1
@@ -140,13 +138,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
 
     def __init__(
-        self,
-        arg=None,
-        parallels=None,
-        rotation=None,
-        scale=None,
-        type=None,
-        **kwargs
+        self, arg=None, parallels=None, rotation=None, scale=None, type=None, **kwargs
     ):
         """
         Construct a new Projection object
@@ -160,7 +152,7 @@ class Projection(_BaseLayoutHierarchyType):
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            plotly.graph_objs.layout.geo.projection.Rotation
+            plotly.graph_objects.layout.geo.projection.Rotation
             instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1
@@ -173,7 +165,7 @@ class Projection(_BaseLayoutHierarchyType):
         -------
         Projection
         """
-        super(Projection, self).__init__('projection')
+        super(Projection, self).__init__("projection")
 
         # Validate arg
         # ------------
@@ -193,29 +185,29 @@ an instance of plotly.graph_objs.layout.geo.Projection"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo import (projection as v_projection)
+        from plotly.validators.layout.geo import projection as v_projection
 
         # Initialize validators
         # ---------------------
-        self._validators['parallels'] = v_projection.ParallelsValidator()
-        self._validators['rotation'] = v_projection.RotationValidator()
-        self._validators['scale'] = v_projection.ScaleValidator()
-        self._validators['type'] = v_projection.TypeValidator()
+        self._validators["parallels"] = v_projection.ParallelsValidator()
+        self._validators["rotation"] = v_projection.RotationValidator()
+        self._validators["scale"] = v_projection.ScaleValidator()
+        self._validators["type"] = v_projection.TypeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('parallels', None)
-        self['parallels'] = parallels if parallels is not None else _v
-        _v = arg.pop('rotation', None)
-        self['rotation'] = rotation if rotation is not None else _v
-        _v = arg.pop('scale', None)
-        self['scale'] = scale if scale is not None else _v
-        _v = arg.pop('type', None)
-        self['type'] = type if type is not None else _v
+        _v = arg.pop("parallels", None)
+        self["parallels"] = parallels if parallels is not None else _v
+        _v = arg.pop("rotation", None)
+        self["rotation"] = rotation if rotation is not None else _v
+        _v = arg.pop("scale", None)
+        self["scale"] = scale if scale is not None else _v
+        _v = arg.pop("type", None)
+        self["type"] = type if type is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -246,11 +238,11 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # gridcolor
     # ---------
@@ -294,22 +286,22 @@ class Lonaxis(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     # gridwidth
     # ---------
@@ -325,11 +317,11 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     # range
     # -----
@@ -351,11 +343,11 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # showgrid
     # --------
@@ -371,11 +363,11 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     # tick0
     # -----
@@ -391,17 +383,17 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo'
+        return "layout.geo"
 
     # Self properties description
     # ---------------------------
@@ -460,7 +452,7 @@ class Lonaxis(_BaseLayoutHierarchyType):
         -------
         Lonaxis
         """
-        super(Lonaxis, self).__init__('lonaxis')
+        super(Lonaxis, self).__init__("lonaxis")
 
         # Validate arg
         # ------------
@@ -480,35 +472,35 @@ an instance of plotly.graph_objs.layout.geo.Lonaxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo import (lonaxis as v_lonaxis)
+        from plotly.validators.layout.geo import lonaxis as v_lonaxis
 
         # Initialize validators
         # ---------------------
-        self._validators['dtick'] = v_lonaxis.DtickValidator()
-        self._validators['gridcolor'] = v_lonaxis.GridcolorValidator()
-        self._validators['gridwidth'] = v_lonaxis.GridwidthValidator()
-        self._validators['range'] = v_lonaxis.RangeValidator()
-        self._validators['showgrid'] = v_lonaxis.ShowgridValidator()
-        self._validators['tick0'] = v_lonaxis.Tick0Validator()
+        self._validators["dtick"] = v_lonaxis.DtickValidator()
+        self._validators["gridcolor"] = v_lonaxis.GridcolorValidator()
+        self._validators["gridwidth"] = v_lonaxis.GridwidthValidator()
+        self._validators["range"] = v_lonaxis.RangeValidator()
+        self._validators["showgrid"] = v_lonaxis.ShowgridValidator()
+        self._validators["tick0"] = v_lonaxis.Tick0Validator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('gridcolor', None)
-        self['gridcolor'] = gridcolor if gridcolor is not None else _v
-        _v = arg.pop('gridwidth', None)
-        self['gridwidth'] = gridwidth if gridwidth is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('showgrid', None)
-        self['showgrid'] = showgrid if showgrid is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("gridcolor", None)
+        self["gridcolor"] = gridcolor if gridcolor is not None else _v
+        _v = arg.pop("gridwidth", None)
+        self["gridwidth"] = gridwidth if gridwidth is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("showgrid", None)
+        self["showgrid"] = showgrid if showgrid is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -539,11 +531,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # gridcolor
     # ---------
@@ -587,22 +579,22 @@ class Lataxis(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['gridcolor']
+        return self["gridcolor"]
 
     @gridcolor.setter
     def gridcolor(self, val):
-        self['gridcolor'] = val
+        self["gridcolor"] = val
 
     # gridwidth
     # ---------
@@ -618,11 +610,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['gridwidth']
+        return self["gridwidth"]
 
     @gridwidth.setter
     def gridwidth(self, val):
-        self['gridwidth'] = val
+        self["gridwidth"] = val
 
     # range
     # -----
@@ -644,11 +636,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # showgrid
     # --------
@@ -664,11 +656,11 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showgrid']
+        return self["showgrid"]
 
     @showgrid.setter
     def showgrid(self, val):
-        self['showgrid'] = val
+        self["showgrid"] = val
 
     # tick0
     # -----
@@ -684,17 +676,17 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo'
+        return "layout.geo"
 
     # Self properties description
     # ---------------------------
@@ -753,7 +745,7 @@ class Lataxis(_BaseLayoutHierarchyType):
         -------
         Lataxis
         """
-        super(Lataxis, self).__init__('lataxis')
+        super(Lataxis, self).__init__("lataxis")
 
         # Validate arg
         # ------------
@@ -773,35 +765,35 @@ an instance of plotly.graph_objs.layout.geo.Lataxis"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo import (lataxis as v_lataxis)
+        from plotly.validators.layout.geo import lataxis as v_lataxis
 
         # Initialize validators
         # ---------------------
-        self._validators['dtick'] = v_lataxis.DtickValidator()
-        self._validators['gridcolor'] = v_lataxis.GridcolorValidator()
-        self._validators['gridwidth'] = v_lataxis.GridwidthValidator()
-        self._validators['range'] = v_lataxis.RangeValidator()
-        self._validators['showgrid'] = v_lataxis.ShowgridValidator()
-        self._validators['tick0'] = v_lataxis.Tick0Validator()
+        self._validators["dtick"] = v_lataxis.DtickValidator()
+        self._validators["gridcolor"] = v_lataxis.GridcolorValidator()
+        self._validators["gridwidth"] = v_lataxis.GridwidthValidator()
+        self._validators["range"] = v_lataxis.RangeValidator()
+        self._validators["showgrid"] = v_lataxis.ShowgridValidator()
+        self._validators["tick0"] = v_lataxis.Tick0Validator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('gridcolor', None)
-        self['gridcolor'] = gridcolor if gridcolor is not None else _v
-        _v = arg.pop('gridwidth', None)
-        self['gridwidth'] = gridwidth if gridwidth is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('showgrid', None)
-        self['showgrid'] = showgrid if showgrid is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("gridcolor", None)
+        self["gridcolor"] = gridcolor if gridcolor is not None else _v
+        _v = arg.pop("gridwidth", None)
+        self["gridwidth"] = gridwidth if gridwidth is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("showgrid", None)
+        self["showgrid"] = showgrid if showgrid is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -837,11 +829,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -862,11 +854,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -890,11 +882,11 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -918,17 +910,17 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo'
+        return "layout.geo"
 
     # Self properties description
     # ---------------------------
@@ -961,9 +953,7 @@ class Domain(_BaseLayoutHierarchyType):
             both.
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -1001,7 +991,7 @@ class Domain(_BaseLayoutHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -1021,29 +1011,29 @@ an instance of plotly.graph_objs.layout.geo.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo import (domain as v_domain)
+        from plotly.validators.layout.geo import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1076,11 +1066,11 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lat']
+        return self["lat"]
 
     @lat.setter
     def lat(self, val):
-        self['lat'] = val
+        self["lat"] = val
 
     # lon
     # ---
@@ -1099,17 +1089,17 @@ class Center(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['lon']
+        return self["lon"]
 
     @lon.setter
     def lon(self, val):
-        self['lon'] = val
+        self["lon"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.geo'
+        return "layout.geo"
 
     # Self properties description
     # ---------------------------
@@ -1150,7 +1140,7 @@ class Center(_BaseLayoutHierarchyType):
         -------
         Center
         """
-        super(Center, self).__init__('center')
+        super(Center, self).__init__("center")
 
         # Validate arg
         # ------------
@@ -1170,23 +1160,23 @@ an instance of plotly.graph_objs.layout.geo.Center"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.geo import (center as v_center)
+        from plotly.validators.layout.geo import center as v_center
 
         # Initialize validators
         # ---------------------
-        self._validators['lat'] = v_center.LatValidator()
-        self._validators['lon'] = v_center.LonValidator()
+        self._validators["lat"] = v_center.LatValidator()
+        self._validators["lon"] = v_center.LonValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('lat', None)
-        self['lat'] = lat if lat is not None else _v
-        _v = arg.pop('lon', None)
-        self['lon'] = lon if lon is not None else _v
+        _v = arg.pop("lat", None)
+        self["lat"] = lat if lat is not None else _v
+        _v = arg.pop("lon", None)
+        self["lon"] = lon if lon is not None else _v
 
         # Process unknown kwargs
         # ----------------------

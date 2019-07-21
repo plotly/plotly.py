@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -46,23 +44,23 @@ class Font(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # colorsrc
     # --------
@@ -78,11 +76,11 @@ class Font(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # family
     # ------
@@ -110,11 +108,11 @@ class Font(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # familysrc
     # ---------
@@ -130,11 +128,11 @@ class Font(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['familysrc']
+        return self["familysrc"]
 
     @familysrc.setter
     def familysrc(self, val):
-        self['familysrc'] = val
+        self["familysrc"] = val
 
     # size
     # ----
@@ -149,11 +147,11 @@ class Font(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # sizesrc
     # -------
@@ -169,17 +167,17 @@ class Font(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'splom.hoverlabel'
+        return "splom.hoverlabel"
 
     # Self properties description
     # ---------------------------
@@ -262,7 +260,7 @@ class Font(_BaseTraceHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -282,35 +280,35 @@ an instance of plotly.graph_objs.splom.hoverlabel.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.splom.hoverlabel import (font as v_font)
+        from plotly.validators.splom.hoverlabel import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['colorsrc'] = v_font.ColorsrcValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['familysrc'] = v_font.FamilysrcValidator()
-        self._validators['size'] = v_font.SizeValidator()
-        self._validators['sizesrc'] = v_font.SizesrcValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["colorsrc"] = v_font.ColorsrcValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["familysrc"] = v_font.FamilysrcValidator()
+        self._validators["size"] = v_font.SizeValidator()
+        self._validators["sizesrc"] = v_font.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('familysrc', None)
-        self['familysrc'] = familysrc if familysrc is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('sizesrc', None)
-        self['sizesrc'] = sizesrc if sizesrc is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("familysrc", None)
+        self["familysrc"] = familysrc if familysrc is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("sizesrc", None)
+        self["sizesrc"] = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

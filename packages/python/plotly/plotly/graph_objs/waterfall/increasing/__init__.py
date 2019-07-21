@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -48,22 +46,22 @@ class Marker(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # line
     # ----
@@ -87,17 +85,17 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.waterfall.increasing.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'waterfall.increasing'
+        return "waterfall.increasing"
 
     # Self properties description
     # ---------------------------
@@ -107,7 +105,7 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objs.waterfall.increasing.marker.Line
+            plotly.graph_objects.waterfall.increasing.marker.Line
             instance or dict with compatible properties
         """
 
@@ -124,14 +122,14 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objs.waterfall.increasing.marker.Line
+            plotly.graph_objects.waterfall.increasing.marker.Line
             instance or dict with compatible properties
 
         Returns
         -------
         Marker
         """
-        super(Marker, self).__init__('marker')
+        super(Marker, self).__init__("marker")
 
         # Validate arg
         # ------------
@@ -151,23 +149,23 @@ an instance of plotly.graph_objs.waterfall.increasing.Marker"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.waterfall.increasing import (marker as v_marker)
+        from plotly.validators.waterfall.increasing import marker as v_marker
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_marker.ColorValidator()
-        self._validators['line'] = v_marker.LineValidator()
+        self._validators["color"] = v_marker.ColorValidator()
+        self._validators["line"] = v_marker.LineValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------

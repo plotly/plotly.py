@@ -34,7 +34,7 @@ from _plotly_utils.basevalidators import CompoundValidator, is_array
 from _plotly_utils.utils import PlotlyJSONEncoder
 
 from chart_studio import files, session, tools, utils, exceptions
-from chart_studio.api import v1, v2
+from chart_studio.api import v2
 from chart_studio.plotly import chunked_requests
 from chart_studio.grid_objs import Grid
 from chart_studio.dashboard_objs import dashboard_objs as dashboard
@@ -45,21 +45,14 @@ from chart_studio.config import get_config, get_credentials
 __all__ = None
 
 DEFAULT_PLOT_OPTIONS = {
-    'filename': "plot from API",
-    'fileopt': "new",
-    'world_readable': files.FILE_CONTENT[files.CONFIG_FILE]['world_readable'],
-    'auto_open': files.FILE_CONTENT[files.CONFIG_FILE]['auto_open'],
-    'validate': True,
-    'sharing': files.FILE_CONTENT[files.CONFIG_FILE]['sharing']
+    "world_readable": files.FILE_CONTENT[files.CONFIG_FILE]["world_readable"],
+    "auto_open": files.FILE_CONTENT[files.CONFIG_FILE]["auto_open"],
+    "validate": True,
+    "sharing": files.FILE_CONTENT[files.CONFIG_FILE]["sharing"],
 }
 
-warnings.filterwarnings(
-    'default', r'The fileopt parameter is deprecated .*', DeprecationWarning
-)
-
 SHARING_ERROR_MSG = (
-    "Whoops, sharing can only be set to either 'public', 'private', or "
-    "'secret'."
+    "Whoops, sharing can only be set to either 'public', 'private', or " "'secret'."
 )
 
 
@@ -71,7 +64,8 @@ def sign_in(username, api_key, **kwargs):
         # with the given, username, api_key, and plotly_api_domain.
         v2.users.current()
     except exceptions.PlotlyRequestError:
-        raise _plotly_utils.exceptions.PlotlyError('Sign in failed.')
+        raise _plotly_utils.exceptions.PlotlyError("Sign in failed.")
+
 
 update_plot_options = session.update_session_plot_options
 
@@ -91,35 +85,21 @@ def _plot_option_logic(plot_options_from_args):
     session_options = session.get_session_plot_options()
     plot_options_from_args = copy.deepcopy(plot_options_from_args)
 
-    # fileopt deprecation warnings
-    fileopt_warning = ('The fileopt parameter is deprecated '
-                       'and will be removed in plotly.py version 4')
-    if ('filename' in plot_options_from_args and
-            plot_options_from_args.get('fileopt', 'overwrite') != 'overwrite'):
-        warnings.warn(fileopt_warning, DeprecationWarning)
-
-    if ('filename' not in plot_options_from_args and
-            plot_options_from_args.get('fileopt', 'new') != 'new'):
-        warnings.warn(fileopt_warning, DeprecationWarning)
-
     # Validate options and fill in defaults w world_readable and sharing
-    for option_set in [plot_options_from_args,
-                       session_options, file_options]:
+    for option_set in [plot_options_from_args, session_options, file_options]:
         utils.validate_world_readable_and_sharing_settings(option_set)
         utils.set_sharing_and_world_readable(option_set)
-
-        # dynamic defaults
-        if ('filename' in option_set and
-                'fileopt' not in option_set):
-            option_set['fileopt'] = 'overwrite'
 
     user_plot_options = {}
     user_plot_options.update(default_plot_options)
     user_plot_options.update(file_options)
     user_plot_options.update(session_options)
     user_plot_options.update(plot_options_from_args)
-    user_plot_options = {k: v for k, v in user_plot_options.items()
-                         if k in default_plot_options}
+    user_plot_options = {
+        k: v
+        for k, v in user_plot_options.items()
+        if k in default_plot_options or k == "filename"
+    }
 
     return user_plot_options
 
@@ -129,11 +109,6 @@ def iplot(figure_or_data, **plot_options):
 
     plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
-    fileopt ('new' | 'overwrite' | 'extend' | 'append')
-        - 'new': create a new, unique url for this plot
-        - 'overwrite': overwrite the file associated with `filename` with this
-        - 'extend': add additional numbers (data) to existing traces
-        - 'append': add additional traces to existing data lists
     sharing ('public' | 'private' | 'secret') -- Toggle who can view this graph
         - 'public': Anyone can view this graph. It will appear in your profile
                     and can appear in search engines. You do not need to be
@@ -154,12 +129,13 @@ def iplot(figure_or_data, **plot_options):
                                      Make this figure private/public
     """
     from plotly.basedatatypes import BaseFigure, BaseLayoutType
-    if 'auto_open' not in plot_options:
-        plot_options['auto_open'] = False
+
+    if "auto_open" not in plot_options:
+        plot_options["auto_open"] = False
     url = plot(figure_or_data, **plot_options)
 
     if isinstance(figure_or_data, dict):
-        layout = figure_or_data.get('layout', {})
+        layout = figure_or_data.get("layout", {})
         if isinstance(layout, BaseLayoutType):
             layout = layout.to_plotly_json()
     elif isinstance(figure_or_data, BaseFigure):
@@ -168,21 +144,21 @@ def iplot(figure_or_data, **plot_options):
         layout = {}
 
     embed_options = dict()
-    embed_options['width'] = layout.get('width', '100%')
-    embed_options['height'] = layout.get('height', 525)
+    embed_options["width"] = layout.get("width", "100%")
+    embed_options["height"] = layout.get("height", 525)
     try:
-        float(embed_options['width'])
+        float(embed_options["width"])
     except (ValueError, TypeError):
         pass
     else:
-        embed_options['width'] = str(embed_options['width']) + 'px'
+        embed_options["width"] = str(embed_options["width"]) + "px"
 
     try:
-        float(embed_options['height'])
+        float(embed_options["height"])
     except (ValueError, TypeError):
         pass
     else:
-        embed_options['height'] = str(embed_options['height']) + 'px'
+        embed_options["height"] = str(embed_options["height"]) + "px"
 
     return tools.embed(url, **embed_options)
 
@@ -192,11 +168,6 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     plot_options keyword arguments:
     filename (string) -- the name that will be associated with this figure
-    fileopt ('new' | 'overwrite' | 'extend' | 'append') -- 'new' creates a
-        'new': create a new, unique url for this plot
-        'overwrite': overwrite the file associated with `filename` with this
-        'extend': add additional numbers (data) to existing traces
-        'append': add additional traces to existing data lists
     auto_open (default=True) -- Toggle browser options
         True: open this plot in a new browser tab
         False: do not open plot in the browser, but do return the unique url
@@ -222,55 +193,114 @@ def plot(figure_or_data, validate=True, **plot_options):
 
     """
     import plotly.tools
+
     figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, validate)
-    for entry in figure['data']:
-        if ('type' in entry) and (entry['type'] == 'scattergl'):
+    for entry in figure["data"]:
+        if ("type" in entry) and (entry["type"] == "scattergl"):
             continue
         for key, val in list(entry.items()):
             try:
                 if len(val) > 40000:
-                    msg = ("Woah there! Look at all those points! Due to "
-                           "browser limitations, the Plotly SVG drawing "
-                           "functions have a hard time "
-                           "graphing more than 500k data points for line "
-                           "charts, or 40k points for other types of charts. "
-                           "Here are some suggestions:\n"
-                           "(1) Use the `plotly.graph_objs.Scattergl` "
-                           "trace object to generate a WebGl graph.\n"
-                           "(2) Trying using the image API to return an image "
-                           "instead of a graph URL\n"
-                           "(3) Use matplotlib\n"
-                           "(4) See if you can create your visualization with "
-                           "fewer data points\n\n"
-                           "If the visualization you're using aggregates "
-                           "points (e.g., box plot, histogram, etc.) you can "
-                           "disregard this warning.")
+                    msg = (
+                        "Woah there! Look at all those points! Due to "
+                        "browser limitations, the Plotly SVG drawing "
+                        "functions have a hard time "
+                        "graphing more than 500k data points for line "
+                        "charts, or 40k points for other types of charts. "
+                        "Here are some suggestions:\n"
+                        "(1) Use the `plotly.graph_objs.Scattergl` "
+                        "trace object to generate a WebGl graph.\n"
+                        "(2) Trying using the image API to return an image "
+                        "instead of a graph URL\n"
+                        "(3) Use matplotlib\n"
+                        "(4) See if you can create your visualization with "
+                        "fewer data points\n\n"
+                        "If the visualization you're using aggregates "
+                        "points (e.g., box plot, histogram, etc.) you can "
+                        "disregard this warning."
+                    )
                     warnings.warn(msg)
             except TypeError:
                 pass
 
     plot_options = _plot_option_logic(plot_options)
 
-    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
-    data = fig.get('data', [])
-    plot_options['layout'] = fig.get('layout', {})
-    response = v1.clientresp(data, **plot_options)
+    # Initialize API payload
+    payload = {"figure": figure, "world_readable": True}
 
-    # Check if the url needs a secret key
-    url = response.json()['url']
-    if plot_options['sharing'] == 'secret':
-        if 'share_key=' not in url:
-            # add_share_key_to_url updates the url to include the share_key
-            url = add_share_key_to_url(url)
+    # Process filename
+    filename = plot_options.get("filename", None)
+    if filename:
+        # Strip trailing slash
+        if filename[-1] == "/":
+            filename = filename[0:-1]
 
-    if plot_options['auto_open']:
-        _open_url(url)
+        # split off any parent directory
+        paths = filename.split("/")
+        parent_path = "/".join(paths[0:-1])
+        filename = paths[-1]
 
-    return url
+        # Create parent directory
+        if parent_path:
+            file_ops.ensure_dirs(parent_path)
+            payload["parent_path"] = parent_path
+
+        payload["filename"] = filename
+    else:
+        parent_path = ""
+
+    # Process sharing
+    sharing = plot_options.get("sharing", None)
+    if sharing == "public":
+        payload["world_readable"] = True
+    elif sharing == "private":
+        payload["world_readable"] = False
+    elif sharing == "secret":
+        payload["world_readable"] = False
+        payload["share_key_enabled"] = True
+    else:
+        raise _plotly_utils.exceptions.PlotlyError(SHARING_ERROR_MSG)
+
+    # Extract grid
+    figure, grid = _extract_grid_from_fig_like(figure)
+
+    # Upload grid if anything was extracted
+    if len(grid) > 0:
+        if not filename:
+            grid_filename = None
+        elif parent_path:
+            grid_filename = parent_path + "/" + filename + "_grid"
+        else:
+            grid_filename = filename + "_grid"
+
+        grid_ops.upload(
+            grid=grid,
+            filename=grid_filename,
+            world_readable=payload["world_readable"],
+            auto_open=False,
+        )
+
+        _set_grid_column_references(figure, grid)
+        payload["figure"] = figure
+
+    file_info = _create_or_update(payload, "plot")
+
+    # Compute viewing URL
+    if sharing == "secret":
+        web_url = file_info["web_url"][:-1] + "?share_key=" + file_info["share_key"]
+    else:
+        web_url = file_info["web_url"]
+
+    # Handle auto_open
+    auto_open = plot_options.get("auto_open", None)
+    if auto_open:
+        _open_url(web_url)
+
+    # Return URL
+    return web_url
 
 
-def iplot_mpl(fig, resize=True, strip_style=False, update=None,
-              **plot_options):
+def iplot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
     """Replot a matplotlib figure with plotly in IPython.
 
     This function:
@@ -292,6 +322,7 @@ def iplot_mpl(fig, resize=True, strip_style=False, update=None,
 
     """
     import plotly.tools
+
     fig = plotly.tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update and isinstance(update, dict):
         fig.update(update)
@@ -325,6 +356,7 @@ def plot_mpl(fig, resize=True, strip_style=False, update=None, **plot_options):
 
     """
     import plotly.tools
+
     fig = plotly.tools.mpl_to_plotly(fig, resize=resize, strip_style=strip_style)
     if update and isinstance(update, dict):
         fig.update(update)
@@ -355,34 +387,36 @@ def _swap_keys(obj, key1, key2):
 
 def _swap_xy_data(data_obj):
     """Swap x and y data and references"""
-    swaps = [('x', 'y'),
-             ('x0', 'y0'),
-             ('dx', 'dy'),
-             ('xbins', 'ybins'),
-             ('nbinsx', 'nbinsy'),
-             ('autobinx', 'autobiny'),
-             ('error_x', 'error_y')]
+    swaps = [
+        ("x", "y"),
+        ("x0", "y0"),
+        ("dx", "dy"),
+        ("xbins", "ybins"),
+        ("nbinsx", "nbinsy"),
+        ("autobinx", "autobiny"),
+        ("error_x", "error_y"),
+    ]
     for swap in swaps:
         _swap_keys(data_obj, swap[0], swap[1])
     try:
-        rows = len(data_obj['z'])
-        cols = len(data_obj['z'][0])
-        for row in data_obj['z']:
+        rows = len(data_obj["z"])
+        cols = len(data_obj["z"][0])
+        for row in data_obj["z"]:
             if len(row) != cols:
                 raise TypeError
 
         # if we can't do transpose, we hit an exception before here
-        z = data_obj.pop('z')
-        data_obj['z'] = [[0 for rrr in range(rows)] for ccc in range(cols)]
+        z = data_obj.pop("z")
+        data_obj["z"] = [[0 for rrr in range(rows)] for ccc in range(cols)]
         for iii in range(rows):
             for jjj in range(cols):
-                data_obj['z'][jjj][iii] = z[iii][jjj]
+                data_obj["z"][jjj][iii] = z[iii][jjj]
     except (KeyError, TypeError, IndexError) as err:
         warn = False
         try:
-            if data_obj['z'] is not None:
+            if data_obj["z"] is not None:
                 warn = True
-            if len(data_obj['z']) == 0:
+            if len(data_obj["z"]) == 0:
                 warn = False
         except (KeyError, TypeError):
             pass
@@ -397,12 +431,11 @@ def _swap_xy_data(data_obj):
 def byteify(input):
     """Convert unicode strings in JSON object to byte strings"""
     if isinstance(input, dict):
-        return {byteify(key): byteify(value)
-                for key, value in input.iteritems()}
+        return {byteify(key): byteify(value) for key, value in input.iteritems()}
     elif isinstance(input, list):
         return [byteify(element) for element in input]
     elif isinstance(input, unicode):
-        return input.encode('utf-8')
+        return input.encode("utf-8")
     else:
         return input
 
@@ -445,20 +478,22 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
 
     """
     import plotly.tools
-    plotly_rest_url = get_config()['plotly_domain']
+
+    plotly_rest_url = get_config()["plotly_domain"]
     if file_id is None:  # assume we're using a url
         url = file_owner_or_url
-        if url[:len(plotly_rest_url)] != plotly_rest_url:
+        if url[: len(plotly_rest_url)] != plotly_rest_url:
             raise _plotly_utils.exceptions.PlotlyError(
                 "Because you didn't supply a 'file_id' in the call, "
                 "we're assuming you're trying to snag a figure from a url. "
                 "You supplied the url, '{0}', we expected it to start with "
                 "'{1}'."
                 "\nRun help on this function for more information."
-                "".format(url, plotly_rest_url))
+                "".format(url, plotly_rest_url)
+            )
         head = plotly_rest_url + "/~"
-        file_owner = url.replace(head, "").split('/')[0]
-        file_id = url.replace(head, "").split('/')[1]
+        file_owner = url.replace(head, "").split("/")[0]
+        file_id = url.replace(head, "").split("/")[1]
     else:
         file_owner = file_owner_or_url
     try:
@@ -475,50 +510,51 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
             "The 'file_id' argument must be a non-negative number."
         )
 
-    fid = '{}:{}'.format(file_owner, file_id)
+    fid = "{}:{}".format(file_owner, file_id)
     response = v2.plots.content(fid, inline_data=True)
     figure = response.json()
     if six.PY2:
         figure = byteify(figure)
     # Fix 'histogramx', 'histogramy', and 'bardir' stuff
-    for index, entry in enumerate(figure['data']):
+    for index, entry in enumerate(figure["data"]):
         try:
             # Use xbins to bin data in x, and ybins to bin data in y
-            if all((entry['type'] == 'histogramy', 'xbins' in entry,
-                    'ybins' not in entry)):
-                entry['ybins'] = entry.pop('xbins')
+            if all(
+                (entry["type"] == "histogramy", "xbins" in entry, "ybins" not in entry)
+            ):
+                entry["ybins"] = entry.pop("xbins")
 
             # Convert bardir to orientation, and put the data into the axes
             # it's eventually going to be used with
-            if entry['type'] in ['histogramx', 'histogramy']:
-                entry['type'] = 'histogram'
-            if 'bardir' in entry:
-                entry['orientation'] = entry.pop('bardir')
-                if entry['type'] == 'bar':
-                    if entry['orientation'] == 'h':
+            if entry["type"] in ["histogramx", "histogramy"]:
+                entry["type"] = "histogram"
+            if "bardir" in entry:
+                entry["orientation"] = entry.pop("bardir")
+                if entry["type"] == "bar":
+                    if entry["orientation"] == "h":
                         _swap_xy_data(entry)
-                if entry['type'] == 'histogram':
-                    if ('x' in entry) and ('y' not in entry):
-                        if entry['orientation'] == 'h':
+                if entry["type"] == "histogram":
+                    if ("x" in entry) and ("y" not in entry):
+                        if entry["orientation"] == "h":
                             _swap_xy_data(entry)
-                        del entry['orientation']
-                    if ('y' in entry) and ('x' not in entry):
-                        if entry['orientation'] == 'v':
+                        del entry["orientation"]
+                    if ("y" in entry) and ("x" not in entry):
+                        if entry["orientation"] == "v":
                             _swap_xy_data(entry)
-                        del entry['orientation']
-            figure['data'][index] = entry
+                        del entry["orientation"]
+            figure["data"][index] = entry
         except KeyError:
             pass
 
     # Remove stream dictionary if found in a data trace
     # (it has private tokens in there we need to hide!)
-    for index, entry in enumerate(figure['data']):
-        if 'stream' in entry:
-            del figure['data'][index]['stream']
+    for index, entry in enumerate(figure["data"]):
+        if "stream" in entry:
+            del figure["data"][index]["stream"]
 
     if raw:
         return figure
-    return plotly.tools.get_graph_obj(figure, obj_type='Figure')
+    return plotly.tools.get_graph_obj(figure, obj_type="Figure")
 
 
 @_plotly_utils.utils.template_doc(**tools.get_config_file())
@@ -577,28 +613,27 @@ class Stream:
         Returns the streaming server, port, ssl_enabled flag, and headers.
 
         """
-        streaming_url = get_config()['plotly_streaming_domain']
-        ssl_verification_enabled = get_config()['plotly_ssl_verification']
-        ssl_enabled = 'https' in streaming_url
+        streaming_url = get_config()["plotly_streaming_domain"]
+        ssl_verification_enabled = get_config()["plotly_ssl_verification"]
+        ssl_enabled = "https" in streaming_url
         port = self.HTTPS_PORT if ssl_enabled else self.HTTP_PORT
 
         # If no scheme (https/https) is included in the streaming_url, the
         # host will be None. Use streaming_url in this case.
-        host = (six.moves.urllib.parse.urlparse(streaming_url).hostname or
-                streaming_url)
+        host = six.moves.urllib.parse.urlparse(streaming_url).hostname or streaming_url
 
-        headers = {'Host': host, 'plotly-streamtoken': self.stream_id}
+        headers = {"Host": host, "plotly-streamtoken": self.stream_id}
         streaming_specs = {
-            'server': host,
-            'port': port,
-            'ssl_enabled': ssl_enabled,
-            'ssl_verification_enabled': ssl_verification_enabled,
-            'headers': headers
+            "server": host,
+            "port": port,
+            "ssl_enabled": ssl_enabled,
+            "ssl_verification_enabled": ssl_verification_enabled,
+            "headers": headers,
         }
 
         return streaming_specs
 
-    def heartbeat(self, reconnect_on=(200, '', 408, 502)):
+    def heartbeat(self, reconnect_on=(200, "", 408, 502)):
         """
         Keep stream alive. Streams will close after ~1 min of inactivity.
 
@@ -608,7 +643,7 @@ class Stream:
 
         """
         try:
-            self._stream.write('\n', reconnect_on=reconnect_on)
+            self._stream.write("\n", reconnect_on=reconnect_on)
         except AttributeError:
             raise _plotly_utils.exceptions.PlotlyError(
                 "Stream has not been opened yet, "
@@ -635,8 +670,7 @@ class Stream:
         streaming_specs = self.get_streaming_specs()
         self._stream = chunked_requests.Stream(**streaming_specs)
 
-    def write(self, trace, layout=None,
-              reconnect_on=(200, '', 408, 502)):
+    def write(self, trace, layout=None, reconnect_on=(200, "", 408, 502)):
         """
         Write to an open stream.
 
@@ -681,13 +715,14 @@ class Stream:
 
         # Convert trace objects to dictionaries
         from plotly.basedatatypes import BaseTraceType
+
         if isinstance(trace, BaseTraceType):
             stream_object = trace.to_plotly_json()
         else:
             stream_object = copy.deepcopy(trace)
 
         # Remove 'type' if present since this trace type cannot be changed
-        stream_object.pop('type', None)
+        stream_object.pop("type", None)
 
         if layout is not None:
             stream_object.update(dict(layout=layout))
@@ -702,7 +737,8 @@ class Stream:
             raise _plotly_utils.exceptions.PlotlyError(
                 "Stream has not been opened yet, "
                 "cannot write to a closed connection. "
-                "Call `open()` on the stream to open the stream.")
+                "Call `open()` on the stream to open the stream."
+            )
 
     def close(self):
         """
@@ -716,7 +752,9 @@ class Stream:
         try:
             self._stream.close()
         except AttributeError:
-            raise _plotly_utils.exceptions.PlotlyError("Stream has not been opened yet.")
+            raise _plotly_utils.exceptions.PlotlyError(
+                "Stream has not been opened yet."
+            )
 
 
 class image:
@@ -724,8 +762,9 @@ class image:
     Helper functions wrapped around plotly's static image generation api.
 
     """
+
     @staticmethod
-    def get(figure_or_data, format='png', width=None, height=None, scale=None):
+    def get(figure_or_data, format="png", width=None, height=None, scale=None):
         """Return a static image of the plot described by `figure_or_data`.
 
         positional arguments:
@@ -750,9 +789,10 @@ class image:
         """
         # TODO: format is a built-in name... we shouldn't really use it
         import plotly.tools
+
         figure = plotly.tools.return_figure_from_figure_or_data(figure_or_data, True)
 
-        if format not in ['png', 'svg', 'jpeg', 'pdf', 'emf']:
+        if format not in ["png", "svg", "jpeg", "pdf", "emf"]:
             raise _plotly_utils.exceptions.PlotlyError(
                 "Invalid format. This version of your Plotly-Python "
                 "package currently only supports png, svg, jpeg, and pdf. "
@@ -768,30 +808,30 @@ class image:
                     "Invalid scale parameter. Scale must be a number."
                 )
 
-        payload = {'figure': figure, 'format': format}
+        payload = {"figure": figure, "format": format}
         if width is not None:
-            payload['width'] = width
+            payload["width"] = width
         if height is not None:
-            payload['height'] = height
+            payload["height"] = height
         if scale is not None:
-            payload['scale'] = scale
+            payload["scale"] = scale
 
         response = v2.images.create(payload)
 
         headers = response.headers
-        if ('content-type' in headers and
-            headers['content-type'] in ['image/png', 'image/jpeg',
-                                        'application/pdf',
-                                        'image/svg+xml',
-                                        'image/emf']):
+        if "content-type" in headers and headers["content-type"] in [
+            "image/png",
+            "image/jpeg",
+            "application/pdf",
+            "image/svg+xml",
+            "image/emf",
+        ]:
             return response.content
-        elif ('content-type' in headers and
-              'json' in headers['content-type']):
-            return response.json()['image']
+        elif "content-type" in headers and "json" in headers["content-type"]:
+            return response.json()["image"]
 
     @classmethod
-    def ishow(cls, figure_or_data, format='png', width=None, height=None,
-              scale=None):
+    def ishow(cls, figure_or_data, format="png", width=None, height=None, scale=None):
         """Display a static image of the plot described by `figure_or_data`
         in an IPython Notebook.
 
@@ -812,23 +852,26 @@ class image:
         fig = {'data': [{'x': [1, 2, 3], 'y': [3, 1, 5], 'type': 'bar'}]}
         py.image.ishow(fig, 'png', scale=3)
         """
-        if format == 'pdf':
+        if format == "pdf":
             raise _plotly_utils.exceptions.PlotlyError(
                 "Aw, snap! "
                 "It's not currently possible to embed a pdf into "
                 "an IPython notebook. You can save the pdf "
                 "with the `image.save_as` or you can "
-                "embed an png, jpeg, or svg.")
+                "embed an png, jpeg, or svg."
+            )
         img = cls.get(figure_or_data, format, width, height, scale)
         from IPython.display import display, Image, SVG
-        if format == 'svg':
+
+        if format == "svg":
             display(SVG(img))
         else:
             display(Image(img))
 
     @classmethod
-    def save_as(cls, figure_or_data, filename, format=None, width=None,
-                height=None, scale=None):
+    def save_as(
+        cls, figure_or_data, filename, format=None, width=None, height=None, scale=None
+    ):
         """Save a image of the plot described by `figure_or_data` locally as
         `filename`.
 
@@ -858,15 +901,15 @@ class image:
         # todo: format shadows built-in name
         (base, ext) = os.path.splitext(filename)
         if not ext and not format:
-            filename += '.png'
+            filename += ".png"
         elif ext and not format:
             format = ext[1:]
         elif not ext and format:
-            filename += '.' + format
+            filename += "." + format
 
         img = cls.get(figure_or_data, format, width, height, scale)
 
-        f = open(filename, 'wb')
+        f = open(filename, "wb")
         f.write(img)
         f.close()
 
@@ -901,7 +944,7 @@ class file_ops:
         >> mkdirs('new/folder/path')
 
         """
-        response = v2.folders.create({'path': folder_path})
+        response = v2.folders.create({"path": folder_path})
         return response.status_code
 
     @classmethod
@@ -913,7 +956,7 @@ class file_ops:
         try:
             cls.mkdirs(folder_path)
         except exceptions.PlotlyRequestError as e:
-            if 'already exists' in e.message:
+            if "already exists" in e.message:
                 pass
             else:
                 raise e
@@ -937,13 +980,13 @@ class grid_ops:
     To delete one of your grid objects, see `grid_ops.delete`.
 
     """
+
     @classmethod
-    def _fill_in_response_column_ids(cls, request_columns,
-                                     response_columns, grid_id):
+    def _fill_in_response_column_ids(cls, request_columns, response_columns, grid_id):
         for req_col in request_columns:
             for resp_col in response_columns:
-                if resp_col['name'] == req_col.name:
-                    req_col.id = '{0}:{1}'.format(grid_id, resp_col['uid'])
+                if resp_col["name"] == req_col.name:
+                    req_col.id = "{0}:{1}".format(grid_id, resp_col["uid"])
                     response_columns.remove(resp_col)
 
     @staticmethod
@@ -951,13 +994,14 @@ class grid_ops:
         if fid:
             return
         raise _plotly_utils.exceptions.PlotlyError(
-            'This operation requires that the grid has already been uploaded '
-            'to Plotly. Try `uploading` first.'
+            "This operation requires that the grid has already been uploaded "
+            "to Plotly. Try `uploading` first."
         )
 
     @classmethod
-    def upload(cls, grid, filename=None,
-               world_readable=True, auto_open=True, meta=None):
+    def upload(
+        cls, grid, filename=None, world_readable=True, auto_open=True, meta=None
+    ):
         """
         Upload a grid to your Plotly account with the specified filename.
 
@@ -1020,42 +1064,31 @@ class grid_ops:
         # transmorgify grid object into plotly's format
         grid_json = grid._to_plotly_grid_json()
         if meta is not None:
-            grid_json['metadata'] = meta
+            grid_json["metadata"] = meta
+
+        payload = {"data": grid_json, "world_readable": world_readable}
 
         # Make a folder path
         if filename:
-            if filename[-1] == '/':
+            if filename[-1] == "/":
                 filename = filename[0:-1]
 
-            paths = filename.split('/')
-            parent_path = '/'.join(paths[0:-1])
+            paths = filename.split("/")
+            parent_path = "/".join(paths[0:-1])
             filename = paths[-1]
 
-            if parent_path != '':
+            if parent_path != "":
                 file_ops.ensure_dirs(parent_path)
-        else:
-            # Create anonymous grid name
-            hash_val = hash(json.dumps(grid_json, sort_keys=True))
-            id = base64.urlsafe_b64encode(str(hash_val).encode('utf8'))
-            id_str = id.decode(encoding='utf8').replace('=', '')
-            filename = 'grid_' + id_str
-            # filename = 'grid_' + str(hash_val)
-            parent_path = ''
 
-        payload = {
-            'filename': filename,
-            'data': grid_json,
-            'world_readable': world_readable
-        }
+            payload["filename"] = filename
+            if parent_path:
+                payload["parent_path"] = parent_path
 
-        if parent_path != '':
-            payload['parent_path'] = parent_path
+        file_info = _create_or_overwrite_grid(payload)
 
-        file_info = _create_or_update(payload, 'grid')
-
-        cols = file_info['cols']
-        fid = file_info['fid']
-        web_url = file_info['web_url']
+        cols = file_info["cols"]
+        fid = file_info["fid"]
+        web_url = file_info["web_url"]
 
         # mutate the grid columns with the id's returned from the server
         cls._fill_in_response_column_ids(grid, cols, fid)
@@ -1123,14 +1156,12 @@ class grid_ops:
             raise exceptions.InputError(err)
 
         # This is sorta gross, we need to double-encode this.
-        body = {
-            'cols': _json.dumps(columns, cls=PlotlyJSONEncoder)
-        }
+        body = {"cols": _json.dumps(columns, cls=PlotlyJSONEncoder)}
         fid = grid_id
         response = v2.grids.col_create(fid, body)
         parsed_content = response.json()
 
-        cls._fill_in_response_column_ids(columns, parsed_content['cols'], fid)
+        cls._fill_in_response_column_ids(columns, parsed_content["cols"], fid)
 
         if grid:
             grid.extend(columns)
@@ -1192,21 +1223,24 @@ class grid_ops:
                         "The number of entries in "
                         "each row needs to equal the number of columns in "
                         "the grid. Row {0} has {1} {2} but your "
-                        "grid has {3} {4}. "
-                        .format(row_i, len(row),
-                                'entry' if len(row) == 1 else 'entries',
-                                n_columns,
-                                'column' if n_columns == 1 else 'columns'))
+                        "grid has {3} {4}. ".format(
+                            row_i,
+                            len(row),
+                            "entry" if len(row) == 1 else "entries",
+                            n_columns,
+                            "column" if n_columns == 1 else "columns",
+                        )
+                    )
 
         fid = grid_id
-        v2.grids.row(fid, {'rows': rows})
+        v2.grids.row(fid, {"rows": rows})
 
         if grid:
             longest_column_length = max([len(col.data) for col in grid])
 
             for column in grid:
                 n_empty_rows = longest_column_length - len(column.data)
-                empty_string_rows = ['' for _ in range(n_empty_rows)]
+                empty_string_rows = ["" for _ in range(n_empty_rows)]
                 column.data.extend(empty_string_rows)
 
             column_extensions = zip(*rows)
@@ -1309,7 +1343,7 @@ class meta_ops:
 
         """
         fid = parse_grid_id_args(grid, grid_url)
-        return v2.grids.update(fid, {'metadata': meta}).json()
+        return v2.grids.update(fid, {"metadata": meta}).json()
 
 
 def parse_grid_id_args(grid, grid_url):
@@ -1324,10 +1358,11 @@ def parse_grid_id_args(grid, grid_url):
     else:
         id_from_grid = None
     args = [id_from_grid, grid_url]
-    arg_names = ('grid', 'grid_url')
+    arg_names = ("grid", "grid_url")
 
-    supplied_arg_names = [arg_name for arg_name, arg
-                          in zip(arg_names, args) if arg is not None]
+    supplied_arg_names = [
+        arg_name for arg_name, arg in zip(arg_names, args) if arg is not None
+    ]
 
     if not supplied_arg_names:
         raise exceptions.InputError(
@@ -1340,15 +1375,14 @@ def parse_grid_id_args(grid, grid_url):
         )
     elif len(supplied_arg_names) > 1:
         raise exceptions.InputError(
-            "Only one of `grid` or `grid_url` is required. \n"
-            "You supplied both. \n"
+            "Only one of `grid` or `grid_url` is required. \n" "You supplied both. \n"
         )
     else:
         supplied_arg_name = supplied_arg_names.pop()
-        if supplied_arg_name == 'grid_url':
+        if supplied_arg_name == "grid_url":
             path = six.moves.urllib.parse.urlparse(grid_url).path
-            file_owner, file_id = path.replace("/~", "").split('/')[0:2]
-            return '{0}:{1}'.format(file_owner, file_id)
+            file_owner, file_id = path.replace("/~", "").split("/")[0:2]
+            return "{0}:{1}".format(file_owner, file_id)
         else:
             return grid.id
 
@@ -1359,10 +1393,10 @@ def add_share_key_to_url(plot_url, attempt=0):
 
     """
     urlsplit = six.moves.urllib.parse.urlparse(plot_url)
-    username = urlsplit.path.split('/')[1].split('~')[1]
-    idlocal = urlsplit.path.split('/')[2]
-    fid = '{}:{}'.format(username, idlocal)
-    body = {'share_key_enabled': True, 'world_readable': False}
+    username = urlsplit.path.split("/")[1].split("~")[1]
+    idlocal = urlsplit.path.split("/")[2]
+    fid = "{}:{}".format(username, idlocal)
+    body = {"share_key_enabled": True, "world_readable": False}
     response = v2.files.update(fid, body)
 
     # Sometimes a share key is added, but access is still denied.
@@ -1370,7 +1404,7 @@ def add_share_key_to_url(plot_url, attempt=0):
     # retry if this is not the case
     # https://github.com/plotly/streambed/issues/4089
     time.sleep(4)
-    share_key_enabled = v2.files.retrieve(fid).json()['share_key_enabled']
+    share_key_enabled = v2.files.retrieve(fid).json()["share_key_enabled"]
     if not share_key_enabled:
         attempt += 1
         if attempt == 50:
@@ -1380,26 +1414,8 @@ def add_share_key_to_url(plot_url, attempt=0):
             )
         add_share_key_to_url(plot_url, attempt)
 
-    url_share_key = plot_url + '?share_key=' + response.json()['share_key']
+    url_share_key = plot_url + "?share_key=" + response.json()["share_key"]
     return url_share_key
-
-
-def _send_to_plotly(figure, **plot_options):
-    import plotly.tools
-    fig = plotly.tools._replace_newline(figure)  # does not mutate figure
-    data = fig.get('data', [])
-    response = v1.clientresp(data, **plot_options)
-
-    parsed_content = response.json()
-
-    # Check if the url needs a secret key
-    if plot_options['sharing'] == 'secret':
-        url = parsed_content['url']
-        if 'share_key=' not in url:
-            # add_share_key_to_url updates the url to include the share_key
-            parsed_content['url'] = add_share_key_to_url(url)
-
-    return parsed_content
 
 
 def get_grid(grid_url, raw=False):
@@ -1421,46 +1437,50 @@ def get_grid(grid_url, raw=False):
 
 def _create_or_update(data, filetype):
     """
-    Create or update (if file exists) and grid, plot, spectacle, or dashboard
+    Create or update (if file exists) and plot, spectacle, or dashboard
     object
-
     Parameters
     ----------
     data: dict
         update/create API payload
     filetype: str
         One of 'plot', 'grid', 'spectacle_presentation', or 'dashboard'
-
     Returns
     -------
     dict
         File info from API response
     """
-    api_module = getattr(v2, filetype + 's')
+    api_module = getattr(v2, filetype + "s")
 
     # lookup if pre-existing filename already exists
-    if 'parent_path' in data:
-        filename = data['parent_path'] + '/' + data['filename']
+    if "parent_path" in data:
+        filename = data["parent_path"] + "/" + data["filename"]
     else:
-        filename = data.get('filename', None)
+        filename = data.get("filename", None)
 
     if filename:
         try:
             lookup_res = v2.files.lookup(filename)
-            matching_file = json.loads(lookup_res.content)
+            if isinstance(lookup_res.content, bytes):
+                content = lookup_res.content.decode("utf-8")
+            else:
+                content = lookup_res.content
 
-            if matching_file['filetype'] == filetype:
-                fid = matching_file['fid']
+            matching_file = json.loads(content)
+
+            if matching_file["filetype"] == filetype:
+                fid = matching_file["fid"]
                 res = api_module.update(fid, data)
             else:
-                raise _plotly_utils.exceptions.PlotlyError("""
+                raise _plotly_utils.exceptions.PlotlyError(
+                    """
 '{filename}' is already a {other_filetype} in your account. 
 While you can overwrite {filetype}s with the same name, you can't overwrite
 files with a different type. Try deleting '{filename}' in your account or
 changing the filename.""".format(
-                    filename=filename,
-                    filetype=filetype,
-                    other_filetype=matching_file['filetype']
+                        filename=filename,
+                        filetype=filetype,
+                        other_filetype=matching_file["filetype"],
                     )
                 )
 
@@ -1474,7 +1494,72 @@ changing the filename.""".format(
 
     # Get resulting file content
     file_info = res.json()
-    file_info = file_info.get('file', file_info)
+    file_info = file_info.get("file", file_info)
+
+    return file_info
+
+
+def _create_or_overwrite_grid(data, max_retries=3):
+    """
+    Create or overwrite (if file exists) a grid
+
+    Parameters
+    ----------
+    data: dict
+        update/create API payload
+    filetype: str
+        One of 'plot', 'grid', 'spectacle_presentation', or 'dashboard'
+
+    Returns
+    -------
+    dict
+        File info from API response
+    """
+    api_module = v2.grids
+
+    # lookup if pre-existing filename already exists
+    if "parent_path" in data:
+        filename = data["parent_path"] + "/" + data["filename"]
+    else:
+        filename = data.get("filename", None)
+
+    if filename:
+        try:
+            lookup_res = v2.files.lookup(filename)
+            if isinstance(lookup_res.content, bytes):
+                content = lookup_res.content.decode("utf-8")
+            else:
+                content = lookup_res.content
+
+            matching_file = json.loads(content)
+
+            fid = matching_file["fid"]
+
+            # Delete fid
+            # This requires sending file to trash and then deleting it
+            res = api_module.destroy(fid)
+            res.raise_for_status()
+
+        except exceptions.PlotlyRequestError as e:
+            # Raise on trash or permanent delete
+            # Pass through to try creating the file anyway
+            pass
+
+    # Create file
+    try:
+        res = api_module.create(data)
+    except exceptions.PlotlyRequestError as e:
+        if max_retries > 0 and "already exists" in e.message:
+            # Retry _create_or_overwrite
+            time.sleep(1)
+            return _create_or_overwrite_grid(data, max_retries=max_retries - 1)
+        else:
+            raise
+
+    # Get resulting file content
+    res.raise_for_status()
+    file_info = res.json()
+    file_info = file_info.get("file", file_info)
 
     return file_info
 
@@ -1527,8 +1612,9 @@ class dashboard_ops:
     first_dboard.get_preview()
     ```
     """
+
     @classmethod
-    def upload(cls, dashboard, filename, sharing='public', auto_open=True):
+    def upload(cls, dashboard, filename, sharing="public", auto_open=True):
         """
         BETA function for uploading/overwriting dashboards to Plotly.
 
@@ -1546,28 +1632,28 @@ class dashboard_ops:
         :param (bool) auto_open: automatically opens the dashboard in the
             browser.
         """
-        if sharing == 'public':
+        if sharing == "public":
             world_readable = True
-        elif sharing == 'private':
+        elif sharing == "private":
             world_readable = False
-        elif sharing == 'secret':
+        elif sharing == "secret":
             world_readable = False
 
         data = {
-            'content': json.dumps(dashboard),
-            'filename': filename,
-            'world_readable': world_readable
+            "content": json.dumps(dashboard),
+            "filename": filename,
+            "world_readable": world_readable,
         }
 
-        file_info = _create_or_update(data, 'dashboard')
+        file_info = _create_or_update(data, "dashboard")
 
-        url = file_info['web_url']
+        url = file_info["web_url"]
 
-        if sharing == 'secret':
+        if sharing == "secret":
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(file_info['web_url'])
+            webbrowser.open_new(file_info["web_url"])
 
         return url
 
@@ -1576,14 +1662,14 @@ class dashboard_ops:
         dashboards = []
         res = v2.dashboards.list().json()
 
-        for dashboard in res['results']:
-            if not dashboard['deleted']:
+        for dashboard in res["results"]:
+            if not dashboard["deleted"]:
                 dashboards.append(dashboard)
-        while res['next']:
-            res = v2.utils.request('get', res['next']).json()
+        while res["next"]:
+            res = v2.utils.request("get", res["next"]).json()
 
-            for dashboard in res['results']:
-                if not dashboard['deleted']:
+            for dashboard in res["results"]:
+                if not dashboard["deleted"]:
                     dashboards.append(dashboard)
         return dashboards
 
@@ -1591,14 +1677,14 @@ class dashboard_ops:
     def _get_dashboard_json(cls, dashboard_name, only_content=True):
         dashboards = cls._get_all_dashboards()
         for index, dboard in enumerate(dashboards):
-            if dboard['filename'] == dashboard_name:
+            if dboard["filename"] == dashboard_name:
                 break
 
         dashboard = v2.utils.request(
-            'get', dashboards[index]['api_urls']['dashboards']
+            "get", dashboards[index]["api_urls"]["dashboards"]
         ).json()
         if only_content:
-            dashboard_json = json.loads(dashboard['content'])
+            dashboard_json = json.loads(dashboard["content"])
             return dashboard_json
         else:
             return dashboard
@@ -1613,15 +1699,16 @@ class dashboard_ops:
     def get_dashboard_names(cls):
         """Return list of all active dashboard names from users' account."""
         dashboards = cls._get_all_dashboards()
-        return [str(dboard['filename']) for dboard in dashboards]
+        return [str(dboard["filename"]) for dboard in dashboards]
 
 
 class presentation_ops:
     """
     Interface to Plotly's Spectacle-Presentations API.
     """
+
     @classmethod
-    def upload(cls, presentation, filename, sharing='public', auto_open=True):
+    def upload(cls, presentation, filename, sharing="public", auto_open=True):
         """
         Function for uploading presentations to Plotly.
 
@@ -1643,29 +1730,27 @@ class presentation_ops:
 
         See the documentation online for examples.
         """
-        if sharing == 'public':
+        if sharing == "public":
             world_readable = True
-        elif sharing in ['private', 'secret']:
+        elif sharing in ["private", "secret"]:
             world_readable = False
         else:
-            raise _plotly_utils.exceptions.PlotlyError(
-                SHARING_ERROR_MSG
-            )
+            raise _plotly_utils.exceptions.PlotlyError(SHARING_ERROR_MSG)
         data = {
-            'content': json.dumps(presentation),
-            'filename': filename,
-            'world_readable': world_readable
+            "content": json.dumps(presentation),
+            "filename": filename,
+            "world_readable": world_readable,
         }
 
-        file_info = _create_or_update(data, 'spectacle_presentation')
+        file_info = _create_or_update(data, "spectacle_presentation")
 
-        url = file_info['web_url']
+        url = file_info["web_url"]
 
-        if sharing == 'secret':
+        if sharing == "secret":
             url = add_share_key_to_url(url)
 
         if auto_open:
-            webbrowser.open_new(file_info['web_url'])
+            webbrowser.open_new(file_info["web_url"])
 
         return url
 
@@ -1695,13 +1780,13 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
     from chart_studio.grid_objs import Column
 
     for prop in list(obj_dict.keys()):
-        propsrc = '{}src'.format(prop)
+        propsrc = "{}src".format(prop)
         if propsrc in reference_obj:
             val = obj_dict[prop]
             if is_array(val):
                 column = Column(val, path + prop)
                 grid.append(column)
-                obj_dict[propsrc] = 'TBD'
+                obj_dict[propsrc] = "TBD"
                 del obj_dict[prop]
 
         elif prop in reference_obj:
@@ -1712,7 +1797,8 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
                     obj_dict[prop],
                     reference_obj[prop],
                     grid,
-                    '{path}{prop}.'.format(path=path, prop=prop))
+                    "{path}{prop}.".format(path=path, prop=prop),
+                )
 
             # Chart studio doesn't handle links to columns inside object
             # arrays, so we don't extract them for now.  Logic below works
@@ -1730,7 +1816,7 @@ def _extract_grid_graph_obj(obj_dict, reference_obj, grid, path):
             #         )
 
 
-def _extract_grid_from_fig_like(fig, grid=None, path=''):
+def _extract_grid_from_fig_like(fig, grid=None, path=""):
     """
     Extract inline data arrays from a figure and place them in a grid
 
@@ -1767,26 +1853,27 @@ def _extract_grid_from_fig_like(fig, grid=None, path=''):
     elif isinstance(fig, dict):
         fig_dict = copy.deepcopy(fig) if copy_fig else fig
     else:
-        raise ValueError('Invalid figure type {}'.format(type(fig)))
+        raise ValueError("Invalid figure type {}".format(type(fig)))
 
     # Process traces
     reference_fig = Figure()
     reference_traces = {}
-    for i, trace_dict in enumerate(fig_dict.get('data', [])):
-        trace_type = trace_dict.get('type', 'scatter')
+    for i, trace_dict in enumerate(fig_dict.get("data", [])):
+        trace_type = trace_dict.get("type", "scatter")
         if trace_type not in reference_traces:
             reference_traces[trace_type] = reference_fig.add_trace(
-                {'type': trace_type})
+                {"type": trace_type}
+            ).data[-1]
 
         reference_trace = reference_traces[trace_type]
         _extract_grid_graph_obj(
-            trace_dict, reference_trace, grid, path + 'data.{}.'.format(i))
+            trace_dict, reference_trace, grid, path + "data.{}.".format(i)
+        )
 
     # Process frames
-    if 'frames' in fig_dict:
-        for i, frame_dict in enumerate(fig_dict['frames']):
-            _extract_grid_from_fig_like(
-                frame_dict, grid, 'frames.{}.'.format(i))
+    if "frames" in fig_dict:
+        for i, frame_dict in enumerate(fig_dict["frames"]):
+            _extract_grid_from_fig_like(frame_dict, grid, "frames.{}.".format(i))
 
     return fig_dict, grid
 
@@ -1809,16 +1896,17 @@ def _set_grid_column_references(figure, grid):
         Function modifies figure in-place
     """
     from plotly.basedatatypes import BaseFigure
+
     for col in grid:
         prop_path = BaseFigure._str_to_dict_path(col.name)
         prop_parent = figure
         for prop in prop_path[:-1]:
             prop_parent = prop_parent[prop]
 
-        prop_parent[prop_path[-1] + 'src'] = col.id
+        prop_parent[prop_path[-1] + "src"] = col.id
 
 
-def create_animations(figure, filename=None, sharing='public', auto_open=True):
+def create_animations(figure, filename=None, sharing="public", auto_open=True):
     """
     BETA function that creates plots with animations via `frames`.
 
@@ -1984,77 +2072,12 @@ def create_animations(figure, filename=None, sharing='public', auto_open=True):
     py.create_animations(figure, 'growing_circles')
     ```
     """
-    payload = {
-        'figure': figure,
-        'world_readable': True
-    }
-
-    # set filename if specified
-    if filename:
-        # Strip trailing slash
-        if filename[-1] == '/':
-            filename = filename[0:-1]
-
-        # split off any parent directory
-        paths = filename.split('/')
-        parent_path = '/'.join(paths[0:-1])
-        filename = paths[-1]
-
-        # Create parent directory
-        if parent_path != '':
-            file_ops.ensure_dirs(parent_path)
-            payload['parent_path'] = parent_path
-
-        payload['filename'] = filename
-    else:
-        parent_path = ''
-
-    # set sharing
-    if sharing == 'public':
-        payload['world_readable'] = True
-    elif sharing == 'private':
-        payload['world_readable'] = False
-    elif sharing == 'secret':
-        payload['world_readable'] = False
-        payload['share_key_enabled'] = True
-    else:
-        raise _plotly_utils.exceptions.PlotlyError(
-            SHARING_ERROR_MSG
-        )
-
-    # Extract grid
-    figure, grid = _extract_grid_from_fig_like(figure)
-
-    if len(grid) > 0:
-        if not filename:
-            grid_filename = None
-        elif parent_path:
-            grid_filename = parent_path + '/' + filename + '_grid'
-        else:
-            grid_filename = filename + '_grid'
-
-        grid_ops.upload(grid=grid,
-                        filename=grid_filename,
-                        world_readable=payload['world_readable'],
-                        auto_open=False)
-        _set_grid_column_references(figure, grid)
-        payload['figure'] = figure
-
-    file_info = _create_or_update(payload, 'plot')
-
-    if sharing == 'secret':
-        web_url = (file_info['web_url'][:-1] +
-                   '?share_key=' + file_info['share_key'])
-    else:
-        web_url = file_info['web_url']
-
-    if auto_open:
-        _open_url(web_url)
-
-    return web_url
+    # This function is no longer needed since plot now supports figures with
+    # frames.  Delegate to this implementation for compatibility
+    return plot(figure, filename=filename, sharing=sharing, auto_open=auto_open)
 
 
-def icreate_animations(figure, filename=None, sharing='public', auto_open=False):
+def icreate_animations(figure, filename=None, sharing="public", auto_open=False):
     """
     Create a unique url for this animated plot in Plotly and open in IPython.
 
@@ -2062,10 +2085,11 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
     create_animations` Doc String for param descriptions.
     """
     from plotly.basedatatypes import BaseFigure, BaseLayoutType
+
     url = create_animations(figure, filename, sharing, auto_open)
 
     if isinstance(figure, dict):
-        layout = figure.get('layout', {})
+        layout = figure.get("layout", {})
         if isinstance(layout, BaseLayoutType):
             layout = layout.to_plotly_json()
     elif isinstance(figure, BaseFigure):
@@ -2074,21 +2098,21 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
         layout = {}
 
     embed_options = dict()
-    embed_options['width'] = layout.get('width', '100%')
-    embed_options['height'] = layout.get('height', 525)
+    embed_options["width"] = layout.get("width", "100%")
+    embed_options["height"] = layout.get("height", 525)
     try:
-        float(embed_options['width'])
+        float(embed_options["width"])
     except (ValueError, TypeError):
         pass
     else:
-        embed_options['width'] = str(embed_options['width']) + 'px'
+        embed_options["width"] = str(embed_options["width"]) + "px"
 
     try:
-        float(embed_options['height'])
+        float(embed_options["height"])
     except (ValueError, TypeError):
         pass
     else:
-        embed_options['height'] = str(embed_options['height']) + 'px'
+        embed_options["height"] = str(embed_options["height"]) + "px"
 
     return tools.embed(url, **embed_options)
 
@@ -2096,6 +2120,7 @@ def icreate_animations(figure, filename=None, sharing='public', auto_open=False)
 def _open_url(url):
     try:
         from webbrowser import open as wbopen
+
         wbopen(url)
     except:  # TODO: what should we except here? this is dangerous
         pass

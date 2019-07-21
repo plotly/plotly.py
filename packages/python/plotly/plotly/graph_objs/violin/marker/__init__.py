@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -51,22 +49,22 @@ class Line(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # outliercolor
     # ------------
@@ -111,22 +109,22 @@ class Line(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['outliercolor']
+        return self["outliercolor"]
 
     @outliercolor.setter
     def outliercolor(self, val):
-        self['outliercolor'] = val
+        self["outliercolor"] = val
 
     # outlierwidth
     # ------------
@@ -143,11 +141,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['outlierwidth']
+        return self["outlierwidth"]
 
     @outlierwidth.setter
     def outlierwidth(self, val):
-        self['outlierwidth'] = val
+        self["outlierwidth"] = val
 
     # width
     # -----
@@ -163,17 +161,17 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'violin.marker'
+        return "violin.marker"
 
     # Self properties description
     # ---------------------------
@@ -234,7 +232,7 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -254,29 +252,29 @@ an instance of plotly.graph_objs.violin.marker.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.violin.marker import (line as v_line)
+        from plotly.validators.violin.marker import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_line.ColorValidator()
-        self._validators['outliercolor'] = v_line.OutliercolorValidator()
-        self._validators['outlierwidth'] = v_line.OutlierwidthValidator()
-        self._validators['width'] = v_line.WidthValidator()
+        self._validators["color"] = v_line.ColorValidator()
+        self._validators["outliercolor"] = v_line.OutliercolorValidator()
+        self._validators["outlierwidth"] = v_line.OutlierwidthValidator()
+        self._validators["width"] = v_line.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('outliercolor', None)
-        self['outliercolor'] = outliercolor if outliercolor is not None else _v
-        _v = arg.pop('outlierwidth', None)
-        self['outlierwidth'] = outlierwidth if outlierwidth is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("outliercolor", None)
+        self["outliercolor"] = outliercolor if outliercolor is not None else _v
+        _v = arg.pop("outlierwidth", None)
+        self["outlierwidth"] = outlierwidth if outlierwidth is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

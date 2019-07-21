@@ -21,8 +21,10 @@ from _plotly_utils.files import ensure_writable_plotly_dir
 from chart_studio import session, utils
 from chart_studio.files import CONFIG_FILE, CREDENTIALS_FILE, FILE_CONTENT
 
-ipython_core_display = optional_imports.get_module('IPython.core.display')
-sage_salvus = optional_imports.get_module('sage_salvus')
+ipython_core_display = optional_imports.get_module("IPython.core.display")
+ipython_display = optional_imports.get_module("IPython.display")
+
+sage_salvus = optional_imports.get_module("sage_salvus")
 
 
 def get_config_defaults():
@@ -64,22 +66,27 @@ def ensure_local_plotly_files():
                 utils.save_json_dict(fn, contents)
 
     else:
-        warnings.warn("Looks like you don't have 'read-write' permission to "
-                      "your 'home' ('~') directory or to our '~/.plotly' "
-                      "directory. That means plotly's python api can't setup "
-                      "local configuration files. No problem though! You'll "
-                      "just have to sign-in using 'plotly.plotly.sign_in()'. "
-                      "For help with that: 'help(plotly.plotly.sign_in)'."
-                      "\nQuestions? Visit https://support.plot.ly")
+        warnings.warn(
+            "Looks like you don't have 'read-write' permission to "
+            "your 'home' ('~') directory or to our '~/.plotly' "
+            "directory. That means plotly's python api can't setup "
+            "local configuration files. No problem though! You'll "
+            "just have to sign-in using 'plotly.plotly.sign_in()'. "
+            "For help with that: 'help(plotly.plotly.sign_in)'."
+            "\nQuestions? Visit https://support.plot.ly"
+        )
 
 
 ### credentials tools ###
 
-def set_credentials_file(username=None,
-                         api_key=None,
-                         stream_ids=None,
-                         proxy_username=None,
-                         proxy_password=None):
+
+def set_credentials_file(
+    username=None,
+    api_key=None,
+    stream_ids=None,
+    proxy_username=None,
+    proxy_password=None,
+):
     """Set the keyword-value pairs in `~/.plotly_credentials`.
 
     :param (str) username: The username you'd use to sign in to Plotly
@@ -90,20 +97,21 @@ def set_credentials_file(username=None,
 
     """
     if not ensure_writable_plotly_dir():
-        raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
-                                     "to run this function.")
+        raise _plotly_utils.exceptions.PlotlyError(
+            "You don't have proper file permissions " "to run this function."
+        )
     ensure_local_plotly_files()  # make sure what's there is OK
     credentials = get_credentials_file()
     if isinstance(username, six.string_types):
-        credentials['username'] = username
+        credentials["username"] = username
     if isinstance(api_key, six.string_types):
-        credentials['api_key'] = api_key
+        credentials["api_key"] = api_key
     if isinstance(proxy_username, six.string_types):
-        credentials['proxy_username'] = proxy_username
+        credentials["proxy_username"] = proxy_username
     if isinstance(proxy_password, six.string_types):
-        credentials['proxy_password'] = proxy_password
+        credentials["proxy_password"] = proxy_password
     if isinstance(stream_ids, (list, tuple)):
-        credentials['stream_ids'] = stream_ids
+        credentials["stream_ids"] = stream_ids
     utils.save_json_dict(CREDENTIALS_FILE, credentials)
     ensure_local_plotly_files()  # make sure what we just put there is OK
 
@@ -134,14 +142,17 @@ def reset_credentials_file():
 
 ### config tools ###
 
-def set_config_file(plotly_domain=None,
-                    plotly_streaming_domain=None,
-                    plotly_api_domain=None,
-                    plotly_ssl_verification=None,
-                    plotly_proxy_authorization=None,
-                    world_readable=None,
-                    sharing=None,
-                    auto_open=None):
+
+def set_config_file(
+    plotly_domain=None,
+    plotly_streaming_domain=None,
+    plotly_api_domain=None,
+    plotly_ssl_verification=None,
+    plotly_proxy_authorization=None,
+    world_readable=None,
+    sharing=None,
+    auto_open=None,
+):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
     :param (str) plotly_domain: ex - https://plot.ly
@@ -153,52 +164,54 @@ def set_config_file(plotly_domain=None,
 
     """
     if not ensure_writable_plotly_dir():
-        raise _plotly_utils.exceptions.PlotlyError("You don't have proper file permissions "
-                                     "to run this function.")
+        raise _plotly_utils.exceptions.PlotlyError(
+            "You don't have proper file permissions " "to run this function."
+        )
     ensure_local_plotly_files()  # make sure what's there is OK
-    utils.validate_world_readable_and_sharing_settings({
-        'sharing': sharing, 'world_readable': world_readable})
+    utils.validate_world_readable_and_sharing_settings(
+        {"sharing": sharing, "world_readable": world_readable}
+    )
 
     settings = get_config_file()
     if isinstance(plotly_domain, six.string_types):
-        settings['plotly_domain'] = plotly_domain
+        settings["plotly_domain"] = plotly_domain
     elif plotly_domain is not None:
-        raise TypeError('plotly_domain should be a string')
+        raise TypeError("plotly_domain should be a string")
     if isinstance(plotly_streaming_domain, six.string_types):
-        settings['plotly_streaming_domain'] = plotly_streaming_domain
+        settings["plotly_streaming_domain"] = plotly_streaming_domain
     elif plotly_streaming_domain is not None:
-        raise TypeError('plotly_streaming_domain should be a string')
+        raise TypeError("plotly_streaming_domain should be a string")
     if isinstance(plotly_api_domain, six.string_types):
-        settings['plotly_api_domain'] = plotly_api_domain
+        settings["plotly_api_domain"] = plotly_api_domain
     elif plotly_api_domain is not None:
-        raise TypeError('plotly_api_domain should be a string')
+        raise TypeError("plotly_api_domain should be a string")
     if isinstance(plotly_ssl_verification, (six.string_types, bool)):
-        settings['plotly_ssl_verification'] = plotly_ssl_verification
+        settings["plotly_ssl_verification"] = plotly_ssl_verification
     elif plotly_ssl_verification is not None:
-        raise TypeError('plotly_ssl_verification should be a boolean')
+        raise TypeError("plotly_ssl_verification should be a boolean")
     if isinstance(plotly_proxy_authorization, (six.string_types, bool)):
-        settings['plotly_proxy_authorization'] = plotly_proxy_authorization
+        settings["plotly_proxy_authorization"] = plotly_proxy_authorization
     elif plotly_proxy_authorization is not None:
-        raise TypeError('plotly_proxy_authorization should be a boolean')
+        raise TypeError("plotly_proxy_authorization should be a boolean")
     if isinstance(auto_open, bool):
-        settings['auto_open'] = auto_open
+        settings["auto_open"] = auto_open
     elif auto_open is not None:
-        raise TypeError('auto_open should be a boolean')
+        raise TypeError("auto_open should be a boolean")
 
     # validate plotly_domain and plotly_api_domain
     utils.validate_plotly_domains(
-        {'plotly_domain': plotly_domain, 'plotly_api_domain': plotly_api_domain}
+        {"plotly_domain": plotly_domain, "plotly_api_domain": plotly_api_domain}
     )
 
     if isinstance(world_readable, bool):
-        settings['world_readable'] = world_readable
-        settings.pop('sharing')
+        settings["world_readable"] = world_readable
+        settings.pop("sharing")
     elif world_readable is not None:
-        raise TypeError('Input should be a boolean')
+        raise TypeError("Input should be a boolean")
     if isinstance(sharing, six.string_types):
-        settings['sharing'] = sharing
+        settings["sharing"] = sharing
     elif sharing is not None:
-        raise TypeError('sharing should be a string')
+        raise TypeError("sharing should be a string")
     utils.set_sharing_and_world_readable(settings)
 
     utils.save_json_dict(CONFIG_FILE, settings)
@@ -225,12 +238,69 @@ def get_config_file(*args):
 
 def reset_config_file():
     ensure_local_plotly_files()  # make sure what's there is OK
-    f = open(CONFIG_FILE, 'w')
+    f = open(CONFIG_FILE, "w")
     f.close()
     ensure_local_plotly_files()  # put the defaults back
 
 
 ### embed tools ###
+def _get_embed_url(file_owner_or_url, file_id=None):
+    plotly_rest_url = (
+        session.get_session_config().get("plotly_domain")
+        or get_config_file()["plotly_domain"]
+    )
+    if file_id is None:  # assume we're using a url
+        url = file_owner_or_url
+        if url[: len(plotly_rest_url)] != plotly_rest_url:
+            raise _plotly_utils.exceptions.PlotlyError(
+                "Because you didn't supply a 'file_id' in the call, "
+                "we're assuming you're trying to snag a figure from a url. "
+                "You supplied the url, '{0}', we expected it to start with "
+                "'{1}'."
+                "\nRun help on this function for more information."
+                "".format(url, plotly_rest_url)
+            )
+        urlsplit = six.moves.urllib.parse.urlparse(url)
+        file_owner = urlsplit.path.split("/")[1].split("~")[1]
+        file_id = urlsplit.path.split("/")[2]
+
+        # to check for share_key we check urlsplit.query
+        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
+        if query_dict:
+            share_key = query_dict["share_key"][-1]
+        else:
+            share_key = ""
+    else:
+        file_owner = file_owner_or_url
+        share_key = ""
+    try:
+        test_if_int = int(file_id)
+    except ValueError:
+        raise _plotly_utils.exceptions.PlotlyError(
+            "The 'file_id' argument was not able to be converted into an "
+            "integer number. Make sure that the positional 'file_id' argument "
+            "is a number that can be converted into an integer or a string "
+            "that can be converted into an integer."
+        )
+    if int(file_id) < 0:
+        raise _plotly_utils.exceptions.PlotlyError(
+            "The 'file_id' argument must be a non-negative number."
+        )
+
+    if share_key is "":
+        return "{plotly_rest_url}/~{file_owner}/{file_id}.embed".format(
+            plotly_rest_url=plotly_rest_url, file_owner=file_owner, file_id=file_id
+        )
+    else:
+        return (
+            "{plotly_rest_url}/~{file_owner}/" "{file_id}.embed?share_key={share_key}"
+        ).format(
+            plotly_rest_url=plotly_rest_url,
+            file_owner=file_owner,
+            file_id=file_id,
+            share_key=share_key,
+        )
+
 
 def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
     """Returns HTML code to embed figure on a webpage as an <iframe>
@@ -255,66 +325,15 @@ def get_embed(file_owner_or_url, file_id=None, width="100%", height=525):
                               figure
 
     """
-    plotly_rest_url = (session.get_session_config().get('plotly_domain') or
-                       get_config_file()['plotly_domain'])
-    if file_id is None:  # assume we're using a url
-        url = file_owner_or_url
-        if url[:len(plotly_rest_url)] != plotly_rest_url:
-            raise _plotly_utils.exceptions.PlotlyError(
-                "Because you didn't supply a 'file_id' in the call, "
-                "we're assuming you're trying to snag a figure from a url. "
-                "You supplied the url, '{0}', we expected it to start with "
-                "'{1}'."
-                "\nRun help on this function for more information."
-                "".format(url, plotly_rest_url))
-        urlsplit = six.moves.urllib.parse.urlparse(url)
-        file_owner = urlsplit.path.split('/')[1].split('~')[1]
-        file_id = urlsplit.path.split('/')[2]
+    embed_url = _get_embed_url(file_owner_or_url, file_id)
 
-        # to check for share_key we check urlsplit.query
-        query_dict = six.moves.urllib.parse.parse_qs(urlsplit.query)
-        if query_dict:
-            share_key = query_dict['share_key'][-1]
-        else:
-            share_key = ''
-    else:
-        file_owner = file_owner_or_url
-        share_key = ''
-    try:
-        test_if_int = int(file_id)
-    except ValueError:
-        raise _plotly_utils.exceptions.PlotlyError(
-            "The 'file_id' argument was not able to be converted into an "
-            "integer number. Make sure that the positional 'file_id' argument "
-            "is a number that can be converted into an integer or a string "
-            "that can be converted into an integer."
-        )
-    if int(file_id) < 0:
-        raise _plotly_utils.exceptions.PlotlyError(
-            "The 'file_id' argument must be a non-negative number."
-        )
-    if share_key is '':
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id,
-            iframe_height=height, iframe_width=width)
-    else:
-        s = ("<iframe id=\"igraph\" scrolling=\"no\" style=\"border:none;\" "
-             "seamless=\"seamless\" "
-             "src=\"{plotly_rest_url}/"
-             "~{file_owner}/{file_id}.embed?share_key={share_key}\" "
-             "height=\"{iframe_height}\" width=\"{iframe_width}\">"
-             "</iframe>").format(
-            plotly_rest_url=plotly_rest_url,
-            file_owner=file_owner, file_id=file_id, share_key=share_key,
-            iframe_height=height, iframe_width=width)
-
-    return s
+    return (
+        '<iframe id="igraph" scrolling="no" style="border:none;" '
+        'seamless="seamless" '
+        'src="{embed_url}" '
+        'height="{iframe_height}" width="{iframe_width}">'
+        "</iframe>"
+    ).format(embed_url=embed_url, iframe_height=height, iframe_width=width)
 
 
 def embed(file_owner_or_url, file_id=None, width="100%", height=525):
@@ -341,8 +360,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
 
     """
     try:
-        s = get_embed(file_owner_or_url, file_id=file_id, width=width,
-                      height=height)
+        s = get_embed(file_owner_or_url, file_id=file_id, width=width, height=height)
 
         # see if we are in the SageMath Cloud
         if sage_salvus:
@@ -352,48 +370,31 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
     if ipython_core_display:
         if file_id:
             plotly_domain = (
-                    session.get_session_config().get('plotly_domain') or
-                    get_config_file()['plotly_domain']
+                session.get_session_config().get("plotly_domain")
+                or get_config_file()["plotly_domain"]
             )
             url = "{plotly_domain}/~{un}/{fid}".format(
-                plotly_domain=plotly_domain,
-                un=file_owner_or_url,
-                fid=file_id)
+                plotly_domain=plotly_domain, un=file_owner_or_url, fid=file_id
+            )
         else:
             url = file_owner_or_url
-        return PlotlyDisplay(url, width, height)
+
+        embed_url = _get_embed_url(url, file_id)
+        return ipython_display.IFrame(embed_url, width, height)
     else:
-        if (get_config_defaults()['plotly_domain']
-                != session.get_session_config()['plotly_domain']):
-            feedback_contact = 'Visit support.plot.ly'
+        if (
+            get_config_defaults()["plotly_domain"]
+            != session.get_session_config()["plotly_domain"]
+        ):
+            feedback_contact = "Visit support.plot.ly"
         else:
 
             # different domain likely means enterprise
-            feedback_contact = 'Contact your On-Premise account executive'
+            feedback_contact = "Contact your On-Premise account executive"
 
         warnings.warn(
             "Looks like you're not using IPython or Sage to embed this "
             "plot. If you just want the *embed code*,\ntry using "
             "`get_embed()` instead."
-            '\nQuestions? {}'.format(feedback_contact))
-
-
-### graph_objs related tools ###
-if ipython_core_display:
-    class PlotlyDisplay(ipython_core_display.HTML):
-        """An IPython display object for use with plotly urls
-
-        PlotlyDisplay objects should be instantiated with a url for a plot.
-        IPython will *choose* the proper display representation from any
-        Python object, and using provided methods if they exist. By defining
-        the following, if an HTML display is unusable, the PlotlyDisplay
-        object can provide alternate representations.
-
-        """
-        def __init__(self, url, width, height):
-            self.resource = url
-            self.embed_code = get_embed(url, width=width, height=height)
-            super(PlotlyDisplay, self).__init__(data=self.embed_code)
-
-        def _repr_html_(self):
-            return self.embed_code
+            "\nQuestions? {}".format(feedback_contact)
+        )

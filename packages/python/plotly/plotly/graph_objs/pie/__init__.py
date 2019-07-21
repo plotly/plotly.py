@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -56,11 +54,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.pie.title.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # position
     # --------
@@ -80,11 +78,11 @@ class Title(_BaseTraceHierarchyType):
         -------
         Any
         """
-        return self['position']
+        return self["position"]
 
     @position.setter
     def position(self, val):
-        self['position'] = val
+        self["position"] = val
 
     # text
     # ----
@@ -104,17 +102,17 @@ class Title(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -137,9 +135,7 @@ class Title(_BaseTraceHierarchyType):
             deprecated.
         """
 
-    def __init__(
-        self, arg=None, font=None, position=None, text=None, **kwargs
-    ):
+    def __init__(self, arg=None, font=None, position=None, text=None, **kwargs):
         """
         Construct a new Title object
         
@@ -167,7 +163,7 @@ class Title(_BaseTraceHierarchyType):
         -------
         Title
         """
-        super(Title, self).__init__('title')
+        super(Title, self).__init__("title")
 
         # Validate arg
         # ------------
@@ -187,26 +183,26 @@ an instance of plotly.graph_objs.pie.Title"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (title as v_title)
+        from plotly.validators.pie import title as v_title
 
         # Initialize validators
         # ---------------------
-        self._validators['font'] = v_title.FontValidator()
-        self._validators['position'] = v_title.PositionValidator()
-        self._validators['text'] = v_title.TextValidator()
+        self._validators["font"] = v_title.FontValidator()
+        self._validators["position"] = v_title.PositionValidator()
+        self._validators["text"] = v_title.TextValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('position', None)
-        self['position'] = position if position is not None else _v
-        _v = arg.pop('text', None)
-        self['text'] = text if text is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("position", None)
+        self["position"] = position if position is not None else _v
+        _v = arg.pop("text", None)
+        self["text"] = text if text is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -263,23 +259,23 @@ class Textfont(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # colorsrc
     # --------
@@ -295,11 +291,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # family
     # ------
@@ -327,11 +323,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # familysrc
     # ---------
@@ -347,11 +343,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['familysrc']
+        return self["familysrc"]
 
     @familysrc.setter
     def familysrc(self, val):
-        self['familysrc'] = val
+        self["familysrc"] = val
 
     # size
     # ----
@@ -366,11 +362,11 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # sizesrc
     # -------
@@ -386,17 +382,17 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -479,7 +475,7 @@ class Textfont(_BaseTraceHierarchyType):
         -------
         Textfont
         """
-        super(Textfont, self).__init__('textfont')
+        super(Textfont, self).__init__("textfont")
 
         # Validate arg
         # ------------
@@ -499,35 +495,35 @@ an instance of plotly.graph_objs.pie.Textfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (textfont as v_textfont)
+        from plotly.validators.pie import textfont as v_textfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_textfont.ColorValidator()
-        self._validators['colorsrc'] = v_textfont.ColorsrcValidator()
-        self._validators['family'] = v_textfont.FamilyValidator()
-        self._validators['familysrc'] = v_textfont.FamilysrcValidator()
-        self._validators['size'] = v_textfont.SizeValidator()
-        self._validators['sizesrc'] = v_textfont.SizesrcValidator()
+        self._validators["color"] = v_textfont.ColorValidator()
+        self._validators["colorsrc"] = v_textfont.ColorsrcValidator()
+        self._validators["family"] = v_textfont.FamilyValidator()
+        self._validators["familysrc"] = v_textfont.FamilysrcValidator()
+        self._validators["size"] = v_textfont.SizeValidator()
+        self._validators["sizesrc"] = v_textfont.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('familysrc', None)
-        self['familysrc'] = familysrc if familysrc is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('sizesrc', None)
-        self['sizesrc'] = sizesrc if sizesrc is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("familysrc", None)
+        self["familysrc"] = familysrc if familysrc is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("sizesrc", None)
+        self["sizesrc"] = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -560,11 +556,11 @@ class Stream(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['maxpoints']
+        return self["maxpoints"]
 
     @maxpoints.setter
     def maxpoints(self, val):
-        self['maxpoints'] = val
+        self["maxpoints"] = val
 
     # token
     # -----
@@ -581,17 +577,17 @@ class Stream(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['token']
+        return self["token"]
 
     @token.setter
     def token(self, val):
-        self['token'] = val
+        self["token"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -632,7 +628,7 @@ class Stream(_BaseTraceHierarchyType):
         -------
         Stream
         """
-        super(Stream, self).__init__('stream')
+        super(Stream, self).__init__("stream")
 
         # Validate arg
         # ------------
@@ -652,23 +648,23 @@ an instance of plotly.graph_objs.pie.Stream"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (stream as v_stream)
+        from plotly.validators.pie import stream as v_stream
 
         # Initialize validators
         # ---------------------
-        self._validators['maxpoints'] = v_stream.MaxpointsValidator()
-        self._validators['token'] = v_stream.TokenValidator()
+        self._validators["maxpoints"] = v_stream.MaxpointsValidator()
+        self._validators["token"] = v_stream.TokenValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('maxpoints', None)
-        self['maxpoints'] = maxpoints if maxpoints is not None else _v
-        _v = arg.pop('token', None)
-        self['token'] = token if token is not None else _v
+        _v = arg.pop("maxpoints", None)
+        self["maxpoints"] = maxpoints if maxpoints is not None else _v
+        _v = arg.pop("token", None)
+        self["token"] = token if token is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -725,23 +721,23 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # colorsrc
     # --------
@@ -757,11 +753,11 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # family
     # ------
@@ -789,11 +785,11 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # familysrc
     # ---------
@@ -809,11 +805,11 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['familysrc']
+        return self["familysrc"]
 
     @familysrc.setter
     def familysrc(self, val):
-        self['familysrc'] = val
+        self["familysrc"] = val
 
     # size
     # ----
@@ -828,11 +824,11 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # sizesrc
     # -------
@@ -848,17 +844,17 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -941,7 +937,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         -------
         Outsidetextfont
         """
-        super(Outsidetextfont, self).__init__('outsidetextfont')
+        super(Outsidetextfont, self).__init__("outsidetextfont")
 
         # Validate arg
         # ------------
@@ -961,37 +957,35 @@ an instance of plotly.graph_objs.pie.Outsidetextfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (
-            outsidetextfont as v_outsidetextfont
-        )
+        from plotly.validators.pie import outsidetextfont as v_outsidetextfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_outsidetextfont.ColorValidator()
-        self._validators['colorsrc'] = v_outsidetextfont.ColorsrcValidator()
-        self._validators['family'] = v_outsidetextfont.FamilyValidator()
-        self._validators['familysrc'] = v_outsidetextfont.FamilysrcValidator()
-        self._validators['size'] = v_outsidetextfont.SizeValidator()
-        self._validators['sizesrc'] = v_outsidetextfont.SizesrcValidator()
+        self._validators["color"] = v_outsidetextfont.ColorValidator()
+        self._validators["colorsrc"] = v_outsidetextfont.ColorsrcValidator()
+        self._validators["family"] = v_outsidetextfont.FamilyValidator()
+        self._validators["familysrc"] = v_outsidetextfont.FamilysrcValidator()
+        self._validators["size"] = v_outsidetextfont.SizeValidator()
+        self._validators["sizesrc"] = v_outsidetextfont.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('familysrc', None)
-        self['familysrc'] = familysrc if familysrc is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('sizesrc', None)
-        self['sizesrc'] = sizesrc if sizesrc is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("familysrc", None)
+        self["familysrc"] = familysrc if familysrc is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("sizesrc", None)
+        self["sizesrc"] = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1023,11 +1017,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['colors']
+        return self["colors"]
 
     @colors.setter
     def colors(self, val):
-        self['colors'] = val
+        self["colors"] = val
 
     # colorssrc
     # ---------
@@ -1043,11 +1037,11 @@ class Marker(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorssrc']
+        return self["colorssrc"]
 
     @colorssrc.setter
     def colorssrc(self, val):
-        self['colorssrc'] = val
+        self["colorssrc"] = val
 
     # line
     # ----
@@ -1079,17 +1073,17 @@ class Marker(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.pie.marker.Line
         """
-        return self['line']
+        return self["line"]
 
     @line.setter
     def line(self, val):
-        self['line'] = val
+        self["line"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -1103,13 +1097,11 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.pie.marker.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.pie.marker.Line instance or dict
+            with compatible properties
         """
 
-    def __init__(
-        self, arg=None, colors=None, colorssrc=None, line=None, **kwargs
-    ):
+    def __init__(self, arg=None, colors=None, colorssrc=None, line=None, **kwargs):
         """
         Construct a new Marker object
         
@@ -1125,14 +1117,14 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objs.pie.marker.Line instance or dict with
-            compatible properties
+            plotly.graph_objects.pie.marker.Line instance or dict
+            with compatible properties
 
         Returns
         -------
         Marker
         """
-        super(Marker, self).__init__('marker')
+        super(Marker, self).__init__("marker")
 
         # Validate arg
         # ------------
@@ -1152,26 +1144,26 @@ an instance of plotly.graph_objs.pie.Marker"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (marker as v_marker)
+        from plotly.validators.pie import marker as v_marker
 
         # Initialize validators
         # ---------------------
-        self._validators['colors'] = v_marker.ColorsValidator()
-        self._validators['colorssrc'] = v_marker.ColorssrcValidator()
-        self._validators['line'] = v_marker.LineValidator()
+        self._validators["colors"] = v_marker.ColorsValidator()
+        self._validators["colorssrc"] = v_marker.ColorssrcValidator()
+        self._validators["line"] = v_marker.LineValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('colors', None)
-        self['colors'] = colors if colors is not None else _v
-        _v = arg.pop('colorssrc', None)
-        self['colorssrc'] = colorssrc if colorssrc is not None else _v
-        _v = arg.pop('line', None)
-        self['line'] = line if line is not None else _v
+        _v = arg.pop("colors", None)
+        self["colors"] = colors if colors is not None else _v
+        _v = arg.pop("colorssrc", None)
+        self["colorssrc"] = colorssrc if colorssrc is not None else _v
+        _v = arg.pop("line", None)
+        self["line"] = line if line is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1228,23 +1220,23 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # colorsrc
     # --------
@@ -1260,11 +1252,11 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # family
     # ------
@@ -1292,11 +1284,11 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         str|numpy.ndarray
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # familysrc
     # ---------
@@ -1312,11 +1304,11 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['familysrc']
+        return self["familysrc"]
 
     @familysrc.setter
     def familysrc(self, val):
-        self['familysrc'] = val
+        self["familysrc"] = val
 
     # size
     # ----
@@ -1331,11 +1323,11 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # sizesrc
     # -------
@@ -1351,17 +1343,17 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['sizesrc']
+        return self["sizesrc"]
 
     @sizesrc.setter
     def sizesrc(self, val):
-        self['sizesrc'] = val
+        self["sizesrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -1444,7 +1436,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         -------
         Insidetextfont
         """
-        super(Insidetextfont, self).__init__('insidetextfont')
+        super(Insidetextfont, self).__init__("insidetextfont")
 
         # Validate arg
         # ------------
@@ -1464,35 +1456,35 @@ an instance of plotly.graph_objs.pie.Insidetextfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (insidetextfont as v_insidetextfont)
+        from plotly.validators.pie import insidetextfont as v_insidetextfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_insidetextfont.ColorValidator()
-        self._validators['colorsrc'] = v_insidetextfont.ColorsrcValidator()
-        self._validators['family'] = v_insidetextfont.FamilyValidator()
-        self._validators['familysrc'] = v_insidetextfont.FamilysrcValidator()
-        self._validators['size'] = v_insidetextfont.SizeValidator()
-        self._validators['sizesrc'] = v_insidetextfont.SizesrcValidator()
+        self._validators["color"] = v_insidetextfont.ColorValidator()
+        self._validators["colorsrc"] = v_insidetextfont.ColorsrcValidator()
+        self._validators["family"] = v_insidetextfont.FamilyValidator()
+        self._validators["familysrc"] = v_insidetextfont.FamilysrcValidator()
+        self._validators["size"] = v_insidetextfont.SizeValidator()
+        self._validators["sizesrc"] = v_insidetextfont.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('familysrc', None)
-        self['familysrc'] = familysrc if familysrc is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('sizesrc', None)
-        self['sizesrc'] = sizesrc if sizesrc is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("familysrc", None)
+        self["familysrc"] = familysrc if familysrc is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("sizesrc", None)
+        self["sizesrc"] = sizesrc if sizesrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1527,11 +1519,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Any|numpy.ndarray
         """
-        return self['align']
+        return self["align"]
 
     @align.setter
     def align(self, val):
-        self['align'] = val
+        self["align"] = val
 
     # alignsrc
     # --------
@@ -1547,11 +1539,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['alignsrc']
+        return self["alignsrc"]
 
     @alignsrc.setter
     def alignsrc(self, val):
-        self['alignsrc'] = val
+        self["alignsrc"] = val
 
     # bgcolor
     # -------
@@ -1595,23 +1587,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bgcolorsrc
     # ----------
@@ -1627,11 +1619,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bgcolorsrc']
+        return self["bgcolorsrc"]
 
     @bgcolorsrc.setter
     def bgcolorsrc(self, val):
-        self['bgcolorsrc'] = val
+        self["bgcolorsrc"] = val
 
     # bordercolor
     # -----------
@@ -1675,23 +1667,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # bordercolorsrc
     # --------------
@@ -1707,11 +1699,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['bordercolorsrc']
+        return self["bordercolorsrc"]
 
     @bordercolorsrc.setter
     def bordercolorsrc(self, val):
-        self['bordercolorsrc'] = val
+        self["bordercolorsrc"] = val
 
     # font
     # ----
@@ -1762,11 +1754,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.pie.hoverlabel.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # namelength
     # ----------
@@ -1789,11 +1781,11 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         int|numpy.ndarray
         """
-        return self['namelength']
+        return self["namelength"]
 
     @namelength.setter
     def namelength(self, val):
-        self['namelength'] = val
+        self["namelength"] = val
 
     # namelengthsrc
     # -------------
@@ -1809,17 +1801,17 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['namelengthsrc']
+        return self["namelengthsrc"]
 
     @namelengthsrc.setter
     def namelengthsrc(self, val):
-        self['namelengthsrc'] = val
+        self["namelengthsrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -1911,7 +1903,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         -------
         Hoverlabel
         """
-        super(Hoverlabel, self).__init__('hoverlabel')
+        super(Hoverlabel, self).__init__("hoverlabel")
 
         # Validate arg
         # ------------
@@ -1931,48 +1923,44 @@ an instance of plotly.graph_objs.pie.Hoverlabel"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (hoverlabel as v_hoverlabel)
+        from plotly.validators.pie import hoverlabel as v_hoverlabel
 
         # Initialize validators
         # ---------------------
-        self._validators['align'] = v_hoverlabel.AlignValidator()
-        self._validators['alignsrc'] = v_hoverlabel.AlignsrcValidator()
-        self._validators['bgcolor'] = v_hoverlabel.BgcolorValidator()
-        self._validators['bgcolorsrc'] = v_hoverlabel.BgcolorsrcValidator()
-        self._validators['bordercolor'] = v_hoverlabel.BordercolorValidator()
-        self._validators['bordercolorsrc'
-                        ] = v_hoverlabel.BordercolorsrcValidator()
-        self._validators['font'] = v_hoverlabel.FontValidator()
-        self._validators['namelength'] = v_hoverlabel.NamelengthValidator()
-        self._validators['namelengthsrc'
-                        ] = v_hoverlabel.NamelengthsrcValidator()
+        self._validators["align"] = v_hoverlabel.AlignValidator()
+        self._validators["alignsrc"] = v_hoverlabel.AlignsrcValidator()
+        self._validators["bgcolor"] = v_hoverlabel.BgcolorValidator()
+        self._validators["bgcolorsrc"] = v_hoverlabel.BgcolorsrcValidator()
+        self._validators["bordercolor"] = v_hoverlabel.BordercolorValidator()
+        self._validators["bordercolorsrc"] = v_hoverlabel.BordercolorsrcValidator()
+        self._validators["font"] = v_hoverlabel.FontValidator()
+        self._validators["namelength"] = v_hoverlabel.NamelengthValidator()
+        self._validators["namelengthsrc"] = v_hoverlabel.NamelengthsrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('align', None)
-        self['align'] = align if align is not None else _v
-        _v = arg.pop('alignsrc', None)
-        self['alignsrc'] = alignsrc if alignsrc is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bgcolorsrc', None)
-        self['bgcolorsrc'] = bgcolorsrc if bgcolorsrc is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('bordercolorsrc', None)
-        self['bordercolorsrc'
-            ] = bordercolorsrc if bordercolorsrc is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('namelength', None)
-        self['namelength'] = namelength if namelength is not None else _v
-        _v = arg.pop('namelengthsrc', None)
-        self['namelengthsrc'
-            ] = namelengthsrc if namelengthsrc is not None else _v
+        _v = arg.pop("align", None)
+        self["align"] = align if align is not None else _v
+        _v = arg.pop("alignsrc", None)
+        self["alignsrc"] = alignsrc if alignsrc is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bgcolorsrc", None)
+        self["bgcolorsrc"] = bgcolorsrc if bgcolorsrc is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("bordercolorsrc", None)
+        self["bordercolorsrc"] = bordercolorsrc if bordercolorsrc is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("namelength", None)
+        self["namelength"] = namelength if namelength is not None else _v
+        _v = arg.pop("namelengthsrc", None)
+        self["namelengthsrc"] = namelengthsrc if namelengthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -2005,11 +1993,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['column']
+        return self["column"]
 
     @column.setter
     def column(self, val):
-        self['column'] = val
+        self["column"] = val
 
     # row
     # ---
@@ -2027,11 +2015,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         int
         """
-        return self['row']
+        return self["row"]
 
     @row.setter
     def row(self, val):
-        self['row'] = val
+        self["row"] = val
 
     # x
     # -
@@ -2053,11 +2041,11 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # y
     # -
@@ -2078,17 +2066,17 @@ class Domain(_BaseTraceHierarchyType):
         -------
         list
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'pie'
+        return "pie"
 
     # Self properties description
     # ---------------------------
@@ -2109,9 +2097,7 @@ class Domain(_BaseTraceHierarchyType):
             fraction).
         """
 
-    def __init__(
-        self, arg=None, column=None, row=None, x=None, y=None, **kwargs
-    ):
+    def __init__(self, arg=None, column=None, row=None, x=None, y=None, **kwargs):
         """
         Construct a new Domain object
         
@@ -2137,7 +2123,7 @@ class Domain(_BaseTraceHierarchyType):
         -------
         Domain
         """
-        super(Domain, self).__init__('domain')
+        super(Domain, self).__init__("domain")
 
         # Validate arg
         # ------------
@@ -2157,29 +2143,29 @@ an instance of plotly.graph_objs.pie.Domain"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.pie import (domain as v_domain)
+        from plotly.validators.pie import domain as v_domain
 
         # Initialize validators
         # ---------------------
-        self._validators['column'] = v_domain.ColumnValidator()
-        self._validators['row'] = v_domain.RowValidator()
-        self._validators['x'] = v_domain.XValidator()
-        self._validators['y'] = v_domain.YValidator()
+        self._validators["column"] = v_domain.ColumnValidator()
+        self._validators["row"] = v_domain.RowValidator()
+        self._validators["x"] = v_domain.XValidator()
+        self._validators["y"] = v_domain.YValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('column', None)
-        self['column'] = column if column is not None else _v
-        _v = arg.pop('row', None)
-        self['row'] = row if row is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
+        _v = arg.pop("column", None)
+        self["column"] = column if column is not None else _v
+        _v = arg.pop("row", None)
+        self["row"] = row if row is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
 
         # Process unknown kwargs
         # ----------------------

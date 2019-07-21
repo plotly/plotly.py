@@ -25,16 +25,23 @@ class TemplatesConfig(object):
     """
     Singleton object containing the current figure templates (aka themes)
     """
+
     def __init__(self):
 
         # Initialize properties dict
         self._templates = {}
 
         # Initialize built-in templates
-        default_templates = ['ggplot2', 'seaborn',
-                             'plotly', 'plotly_white',
-                             'plotly_dark', 'presentation', 'xgridoff',
-                             'plotly_v4_colors']
+        default_templates = [
+            "ggplot2",
+            "seaborn",
+            "plotly",
+            "plotly_white",
+            "plotly_dark",
+            "presentation",
+            "xgridoff",
+            "none",
+        ]
 
         for template_name in default_templates:
             self._templates[template_name] = Lazy
@@ -58,13 +65,18 @@ class TemplatesConfig(object):
         if template is Lazy:
             from plotly.graph_objs.layout import Template
 
-            # Load template from package data
-            path = os.path.join('package_data', 'templates', item + '.json')
-            template_str = pkgutil.get_data('plotly', path).decode('utf-8')
-            template_dict = json.loads(template_str)
-            template = Template(template_dict)
+            if item == "none":
+                # "none" is a special built-in named template that applied no defaults
+                template = Template()
+                self._templates[item] = template
+            else:
+                # Load template from package data
+                path = os.path.join("package_data", "templates", item + ".json")
+                template_str = pkgutil.get_data("plotly", path).decode("utf-8")
+                template_dict = json.loads(template_str)
+                template = Template(template_dict)
 
-            self._templates[item] = template
+                self._templates[item] = template
 
         return template
 
@@ -82,6 +94,7 @@ class TemplatesConfig(object):
     def _validate(self, value):
         if not self._validator:
             from plotly.validators.layout import TemplateValidator
+
             self._validator = TemplateValidator()
 
         return self._validator.validate_coerce(value)
@@ -147,20 +160,23 @@ Templates configuration
     Default template: {default}
     Available templates:
 {available}
-""".format(default=repr(self.default),
-           available=self._available_templates_str())
+""".format(
+            default=repr(self.default), available=self._available_templates_str()
+        )
 
     def _available_templates_str(self):
         """
         Return nicely wrapped string representation of all
         available template names
         """
-        available = '\n'.join(textwrap.wrap(
-            repr(list(self)),
-            width=79 - 8,
-            initial_indent=' ' * 8,
-            subsequent_indent=' ' * 9
-        ))
+        available = "\n".join(
+            textwrap.wrap(
+                repr(list(self)),
+                width=79 - 8,
+                initial_indent=" " * 8,
+                subsequent_indent=" " * 9,
+            )
+        )
         return available
 
     def merge_templates(self, *args):
@@ -195,6 +211,7 @@ Templates configuration
             return reduce(self._merge_2_templates, args)
         else:
             from plotly.graph_objs.layout import Template
+
             return Template()
 
     def _merge_2_templates(self, template1, template2):
@@ -221,16 +238,17 @@ Templates configuration
             other_traces = other.data[trace_type]
 
             if result_traces and other_traces:
-                lcm = (len(result_traces) * len(other_traces) //
-                       gcd(len(result_traces), len(other_traces)))
+                lcm = (
+                    len(result_traces)
+                    * len(other_traces)
+                    // gcd(len(result_traces), len(other_traces))
+                )
 
                 # Cycle result traces
-                result.data[trace_type] = result_traces * (
-                        lcm // len(result_traces))
+                result.data[trace_type] = result_traces * (lcm // len(result_traces))
 
                 # Cycle other traces
-                other.data[trace_type] = other_traces * (
-                    lcm // len(other_traces))
+                other.data[trace_type] = other_traces * (lcm // len(other_traces))
 
         # Perform update
         result.update(other)
@@ -257,10 +275,13 @@ def walk_push_to_template(fig_obj, template_obj, skip):
         Set of names of properties to skip
     """
     from _plotly_utils.basevalidators import (
-        CompoundValidator, CompoundArrayValidator, is_array)
+        CompoundValidator,
+        CompoundArrayValidator,
+        is_array,
+    )
 
     for prop in list(fig_obj._props):
-        if prop == 'template' or prop in skip:
+        if prop == "template" or prop in skip:
             # Avoid infinite recursion
             continue
 
@@ -277,7 +298,7 @@ def walk_push_to_template(fig_obj, template_obj, skip):
         elif isinstance(validator, CompoundArrayValidator) and fig_val:
             template_elements = list(template_val)
             template_element_names = [el.name for el in template_elements]
-            template_propdefaults = template_obj[prop[:-1] + 'defaults']
+            template_propdefaults = template_obj[prop[:-1] + "defaults"]
 
             for fig_el in fig_val:
                 element_name = fig_el.name
@@ -312,7 +333,7 @@ def walk_push_to_template(fig_obj, template_obj, skip):
                 pass
 
 
-def to_templated(fig, skip=('title', 'text')):
+def to_templated(fig, skip=("title", "text")):
     """
     Return a copy of a figure where all styling properties have been moved
     into the figure's template.  The template property of the resulting figure
@@ -404,6 +425,7 @@ def to_templated(fig, skip=('title', 'text')):
     # process fig
     from plotly.basedatatypes import BaseFigure
     from plotly.graph_objs import Figure
+
     if not isinstance(fig, BaseFigure):
         fig = Figure(fig)
 
@@ -414,15 +436,15 @@ def to_templated(fig, skip=('title', 'text')):
         skip = set(skip)
 
     # Always skip uids
-    skip.add('uid')
+    skip.add("uid")
 
     # Initialize templated figure with deep copy of input figure
     templated_fig = copy.deepcopy(fig)
 
     # Handle layout
-    walk_push_to_template(templated_fig.layout,
-                          templated_fig.layout.template.layout,
-                          skip=skip)
+    walk_push_to_template(
+        templated_fig.layout, templated_fig.layout.template.layout, skip=skip
+    )
 
     # Handle traces
     trace_type_indexes = {}
@@ -450,8 +472,7 @@ def to_templated(fig, skip=('title', 'text')):
     # Remove useless trace arrays
     for trace_type in templated_fig.layout.template.data:
         traces = templated_fig.layout.template.data[trace_type]
-        is_empty = [trace.to_plotly_json() == {'type': trace_type}
-                    for trace in traces]
+        is_empty = [trace.to_plotly_json() == {"type": trace_type} for trace in traces]
         if all(is_empty):
             templated_fig.layout.template.data[trace_type] = None
 

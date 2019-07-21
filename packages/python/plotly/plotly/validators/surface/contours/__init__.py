@@ -1,19 +1,15 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='z', parent_name='surface.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="z", parent_name="surface.contours", **kwargs):
         super(ZValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Z'),
+            data_class_str=kwargs.pop("data_class_str", "Z"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the color of the contour lines.
             end
@@ -29,7 +25,7 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objs.surface.contours.z.Project
+                plotly.graph_objects.surface.contours.z.Project
                 instance or dict with compatible properties
             show
                 Determines whether or not contour lines about
@@ -46,7 +42,7 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace "colorscale".
             width
                 Sets the width of the contour lines.
-"""
+""",
             ),
             **kwargs
         )
@@ -56,16 +52,14 @@ import _plotly_utils.basevalidators
 
 
 class YValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='y', parent_name='surface.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="y", parent_name="surface.contours", **kwargs):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Y'),
+            data_class_str=kwargs.pop("data_class_str", "Y"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the color of the contour lines.
             end
@@ -81,7 +75,7 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objs.surface.contours.y.Project
+                plotly.graph_objects.surface.contours.y.Project
                 instance or dict with compatible properties
             show
                 Determines whether or not contour lines about
@@ -98,7 +92,7 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace "colorscale".
             width
                 Sets the width of the contour lines.
-"""
+""",
             ),
             **kwargs
         )
@@ -108,16 +102,14 @@ import _plotly_utils.basevalidators
 
 
 class XValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='x', parent_name='surface.contours', **kwargs
-    ):
+    def __init__(self, plotly_name="x", parent_name="surface.contours", **kwargs):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'X'),
+            data_class_str=kwargs.pop("data_class_str", "X"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
                 Sets the color of the contour lines.
             end
@@ -133,7 +125,7 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objs.surface.contours.x.Project
+                plotly.graph_objects.surface.contours.x.Project
                 instance or dict with compatible properties
             show
                 Determines whether or not contour lines about
@@ -150,7 +142,7 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace "colorscale".
             width
                 Sets the width of the contour lines.
-"""
+""",
             ),
             **kwargs
         )

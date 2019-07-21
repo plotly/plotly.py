@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -49,23 +47,23 @@ class Line(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
           - A list or array of any of the above
 
         Returns
         -------
         str|numpy.ndarray
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # colorsrc
     # --------
@@ -81,11 +79,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['colorsrc']
+        return self["colorsrc"]
 
     @colorsrc.setter
     def colorsrc(self, val):
-        self['colorsrc'] = val
+        self["colorsrc"] = val
 
     # width
     # -----
@@ -102,11 +100,11 @@ class Line(_BaseTraceHierarchyType):
         -------
         int|float|numpy.ndarray
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # widthsrc
     # --------
@@ -122,17 +120,17 @@ class Line(_BaseTraceHierarchyType):
         -------
         str
         """
-        return self['widthsrc']
+        return self["widthsrc"]
 
     @widthsrc.setter
     def widthsrc(self, val):
-        self['widthsrc'] = val
+        self["widthsrc"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'funnelarea.marker'
+        return "funnelarea.marker"
 
     # Self properties description
     # ---------------------------
@@ -152,13 +150,7 @@ class Line(_BaseTraceHierarchyType):
         """
 
     def __init__(
-        self,
-        arg=None,
-        color=None,
-        colorsrc=None,
-        width=None,
-        widthsrc=None,
-        **kwargs
+        self, arg=None, color=None, colorsrc=None, width=None, widthsrc=None, **kwargs
     ):
         """
         Construct a new Line object
@@ -183,7 +175,7 @@ class Line(_BaseTraceHierarchyType):
         -------
         Line
         """
-        super(Line, self).__init__('line')
+        super(Line, self).__init__("line")
 
         # Validate arg
         # ------------
@@ -203,29 +195,29 @@ an instance of plotly.graph_objs.funnelarea.marker.Line"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.funnelarea.marker import (line as v_line)
+        from plotly.validators.funnelarea.marker import line as v_line
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_line.ColorValidator()
-        self._validators['colorsrc'] = v_line.ColorsrcValidator()
-        self._validators['width'] = v_line.WidthValidator()
-        self._validators['widthsrc'] = v_line.WidthsrcValidator()
+        self._validators["color"] = v_line.ColorValidator()
+        self._validators["colorsrc"] = v_line.ColorsrcValidator()
+        self._validators["width"] = v_line.WidthValidator()
+        self._validators["widthsrc"] = v_line.WidthsrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('colorsrc', None)
-        self['colorsrc'] = colorsrc if colorsrc is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
-        _v = arg.pop('widthsrc', None)
-        self['widthsrc'] = widthsrc if widthsrc is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("colorsrc", None)
+        self["colorsrc"] = colorsrc if colorsrc is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
+        _v = arg.pop("widthsrc", None)
+        self["widthsrc"] = widthsrc if widthsrc is not None else _v
 
         # Process unknown kwargs
         # ----------------------

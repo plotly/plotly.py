@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -46,11 +44,11 @@ class Title(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.title.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # text
     # ----
@@ -69,17 +67,17 @@ class Title(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['text']
+        return self["text"]
 
     @text.setter
     def text(self, val):
-        self['text'] = val
+        self["text"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis'
+        return "layout.xaxis"
 
     # Self properties description
     # ---------------------------
@@ -120,7 +118,7 @@ class Title(_BaseLayoutHierarchyType):
         -------
         Title
         """
-        super(Title, self).__init__('title')
+        super(Title, self).__init__("title")
 
         # Validate arg
         # ------------
@@ -140,23 +138,23 @@ an instance of plotly.graph_objs.layout.xaxis.Title"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis import (title as v_title)
+        from plotly.validators.layout.xaxis import title as v_title
 
         # Initialize validators
         # ---------------------
-        self._validators['font'] = v_title.FontValidator()
-        self._validators['text'] = v_title.TextValidator()
+        self._validators["font"] = v_title.FontValidator()
+        self._validators["text"] = v_title.TextValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('text', None)
-        self['text'] = text if text is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("text", None)
+        self["text"] = text if text is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -192,11 +190,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['dtickrange']
+        return self["dtickrange"]
 
     @dtickrange.setter
     def dtickrange(self, val):
-        self['dtickrange'] = val
+        self["dtickrange"] = val
 
     # enabled
     # -------
@@ -213,11 +211,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['enabled']
+        return self["enabled"]
 
     @enabled.setter
     def enabled(self, val):
-        self['enabled'] = val
+        self["enabled"] = val
 
     # name
     # ----
@@ -240,11 +238,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # templateitemname
     # ----------------
@@ -268,11 +266,11 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # value
     # -----
@@ -290,17 +288,17 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['value']
+        return self["value"]
 
     @value.setter
     def value(self, val):
-        self['value'] = val
+        self["value"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis'
+        return "layout.xaxis"
 
     # Self properties description
     # ---------------------------
@@ -393,7 +391,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         -------
         Tickformatstop
         """
-        super(Tickformatstop, self).__init__('tickformatstops')
+        super(Tickformatstop, self).__init__("tickformatstops")
 
         # Validate arg
         # ------------
@@ -413,36 +411,36 @@ an instance of plotly.graph_objs.layout.xaxis.Tickformatstop"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis import (
-            tickformatstop as v_tickformatstop
-        )
+        from plotly.validators.layout.xaxis import tickformatstop as v_tickformatstop
 
         # Initialize validators
         # ---------------------
-        self._validators['dtickrange'] = v_tickformatstop.DtickrangeValidator()
-        self._validators['enabled'] = v_tickformatstop.EnabledValidator()
-        self._validators['name'] = v_tickformatstop.NameValidator()
-        self._validators['templateitemname'
-                        ] = v_tickformatstop.TemplateitemnameValidator()
-        self._validators['value'] = v_tickformatstop.ValueValidator()
+        self._validators["dtickrange"] = v_tickformatstop.DtickrangeValidator()
+        self._validators["enabled"] = v_tickformatstop.EnabledValidator()
+        self._validators["name"] = v_tickformatstop.NameValidator()
+        self._validators[
+            "templateitemname"
+        ] = v_tickformatstop.TemplateitemnameValidator()
+        self._validators["value"] = v_tickformatstop.ValueValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('dtickrange', None)
-        self['dtickrange'] = dtickrange if dtickrange is not None else _v
-        _v = arg.pop('enabled', None)
-        self['enabled'] = enabled if enabled is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('value', None)
-        self['value'] = value if value is not None else _v
+        _v = arg.pop("dtickrange", None)
+        self["dtickrange"] = dtickrange if dtickrange is not None else _v
+        _v = arg.pop("enabled", None)
+        self["enabled"] = enabled if enabled is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("value", None)
+        self["value"] = value if value is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -499,22 +497,22 @@ class Tickfont(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -541,11 +539,11 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -559,17 +557,17 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis'
+        return "layout.xaxis"
 
     # Self properties description
     # ---------------------------
@@ -630,7 +628,7 @@ class Tickfont(_BaseLayoutHierarchyType):
         -------
         Tickfont
         """
-        super(Tickfont, self).__init__('tickfont')
+        super(Tickfont, self).__init__("tickfont")
 
         # Validate arg
         # ------------
@@ -650,26 +648,26 @@ an instance of plotly.graph_objs.layout.xaxis.Tickfont"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis import (tickfont as v_tickfont)
+        from plotly.validators.layout.xaxis import tickfont as v_tickfont
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_tickfont.ColorValidator()
-        self._validators['family'] = v_tickfont.FamilyValidator()
-        self._validators['size'] = v_tickfont.SizeValidator()
+        self._validators["color"] = v_tickfont.ColorValidator()
+        self._validators["family"] = v_tickfont.FamilyValidator()
+        self._validators["size"] = v_tickfont.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -702,11 +700,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['autorange']
+        return self["autorange"]
 
     @autorange.setter
     def autorange(self, val):
-        self['autorange'] = val
+        self["autorange"] = val
 
     # bgcolor
     # -------
@@ -750,22 +748,22 @@ class Rangeslider(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bordercolor
     # -----------
@@ -809,22 +807,22 @@ class Rangeslider(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # borderwidth
     # -----------
@@ -841,11 +839,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     # range
     # -----
@@ -871,11 +869,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['range']
+        return self["range"]
 
     @range.setter
     def range(self, val):
-        self['range'] = val
+        self["range"] = val
 
     # thickness
     # ---------
@@ -892,11 +890,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
     # visible
     # -------
@@ -913,11 +911,11 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # yaxis
     # -----
@@ -948,17 +946,17 @@ class Rangeslider(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeslider.YAxis
         """
-        return self['yaxis']
+        return self["yaxis"]
 
     @yaxis.setter
     def yaxis(self, val):
-        self['yaxis'] = val
+        self["yaxis"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis'
+        return "layout.xaxis"
 
     # Self properties description
     # ---------------------------
@@ -993,7 +991,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            plotly.graph_objs.layout.xaxis.rangeslider.YAxis
+            plotly.graph_objects.layout.xaxis.rangeslider.YAxis
             instance or dict with compatible properties
         """
 
@@ -1047,14 +1045,14 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            plotly.graph_objs.layout.xaxis.rangeslider.YAxis
+            plotly.graph_objects.layout.xaxis.rangeslider.YAxis
             instance or dict with compatible properties
 
         Returns
         -------
         Rangeslider
         """
-        super(Rangeslider, self).__init__('rangeslider')
+        super(Rangeslider, self).__init__("rangeslider")
 
         # Validate arg
         # ------------
@@ -1074,43 +1072,41 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeslider"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis import (
-            rangeslider as v_rangeslider
-        )
+        from plotly.validators.layout.xaxis import rangeslider as v_rangeslider
 
         # Initialize validators
         # ---------------------
-        self._validators['autorange'] = v_rangeslider.AutorangeValidator()
-        self._validators['bgcolor'] = v_rangeslider.BgcolorValidator()
-        self._validators['bordercolor'] = v_rangeslider.BordercolorValidator()
-        self._validators['borderwidth'] = v_rangeslider.BorderwidthValidator()
-        self._validators['range'] = v_rangeslider.RangeValidator()
-        self._validators['thickness'] = v_rangeslider.ThicknessValidator()
-        self._validators['visible'] = v_rangeslider.VisibleValidator()
-        self._validators['yaxis'] = v_rangeslider.YAxisValidator()
+        self._validators["autorange"] = v_rangeslider.AutorangeValidator()
+        self._validators["bgcolor"] = v_rangeslider.BgcolorValidator()
+        self._validators["bordercolor"] = v_rangeslider.BordercolorValidator()
+        self._validators["borderwidth"] = v_rangeslider.BorderwidthValidator()
+        self._validators["range"] = v_rangeslider.RangeValidator()
+        self._validators["thickness"] = v_rangeslider.ThicknessValidator()
+        self._validators["visible"] = v_rangeslider.VisibleValidator()
+        self._validators["yaxis"] = v_rangeslider.YAxisValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('autorange', None)
-        self['autorange'] = autorange if autorange is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('borderwidth', None)
-        self['borderwidth'] = borderwidth if borderwidth is not None else _v
-        _v = arg.pop('range', None)
-        self['range'] = range if range is not None else _v
-        _v = arg.pop('thickness', None)
-        self['thickness'] = thickness if thickness is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('yaxis', None)
-        self['yaxis'] = yaxis if yaxis is not None else _v
+        _v = arg.pop("autorange", None)
+        self["autorange"] = autorange if autorange is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("borderwidth", None)
+        self["borderwidth"] = borderwidth if borderwidth is not None else _v
+        _v = arg.pop("range", None)
+        self["range"] = range if range is not None else _v
+        _v = arg.pop("thickness", None)
+        self["thickness"] = thickness if thickness is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("yaxis", None)
+        self["yaxis"] = yaxis if yaxis is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1169,22 +1165,22 @@ class Rangeselector(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['activecolor']
+        return self["activecolor"]
 
     @activecolor.setter
     def activecolor(self, val):
-        self['activecolor'] = val
+        self["activecolor"] = val
 
     # bgcolor
     # -------
@@ -1228,22 +1224,22 @@ class Rangeselector(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bordercolor
     # -----------
@@ -1287,22 +1283,22 @@ class Rangeselector(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # borderwidth
     # -----------
@@ -1319,11 +1315,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     # buttons
     # -------
@@ -1391,11 +1387,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.xaxis.rangeselector.Button]
         """
-        return self['buttons']
+        return self["buttons"]
 
     @buttons.setter
     def buttons(self, val):
-        self['buttons'] = val
+        self["buttons"] = val
 
     # buttondefaults
     # --------------
@@ -1419,11 +1415,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeselector.Button
         """
-        return self['buttondefaults']
+        return self["buttondefaults"]
 
     @buttondefaults.setter
     def buttondefaults(self, val):
-        self['buttondefaults'] = val
+        self["buttondefaults"] = val
 
     # font
     # ----
@@ -1464,11 +1460,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.xaxis.rangeselector.Font
         """
-        return self['font']
+        return self["font"]
 
     @font.setter
     def font(self, val):
-        self['font'] = val
+        self["font"] = val
 
     # visible
     # -------
@@ -1486,11 +1482,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # x
     # -
@@ -1507,11 +1503,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # xanchor
     # -------
@@ -1530,11 +1526,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     # y
     # -
@@ -1551,11 +1547,11 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # yanchor
     # -------
@@ -1574,17 +1570,17 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.xaxis'
+        return "layout.xaxis"
 
     # Self properties description
     # ---------------------------
@@ -1704,7 +1700,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         -------
         Rangeselector
         """
-        super(Rangeselector, self).__init__('rangeselector')
+        super(Rangeselector, self).__init__("rangeselector")
 
         # Validate arg
         # ------------
@@ -1724,59 +1720,53 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.xaxis import (
-            rangeselector as v_rangeselector
-        )
+        from plotly.validators.layout.xaxis import rangeselector as v_rangeselector
 
         # Initialize validators
         # ---------------------
-        self._validators['activecolor'] = v_rangeselector.ActivecolorValidator(
-        )
-        self._validators['bgcolor'] = v_rangeselector.BgcolorValidator()
-        self._validators['bordercolor'] = v_rangeselector.BordercolorValidator(
-        )
-        self._validators['borderwidth'] = v_rangeselector.BorderwidthValidator(
-        )
-        self._validators['buttons'] = v_rangeselector.ButtonsValidator()
-        self._validators['buttondefaults'] = v_rangeselector.ButtonValidator()
-        self._validators['font'] = v_rangeselector.FontValidator()
-        self._validators['visible'] = v_rangeselector.VisibleValidator()
-        self._validators['x'] = v_rangeselector.XValidator()
-        self._validators['xanchor'] = v_rangeselector.XanchorValidator()
-        self._validators['y'] = v_rangeselector.YValidator()
-        self._validators['yanchor'] = v_rangeselector.YanchorValidator()
+        self._validators["activecolor"] = v_rangeselector.ActivecolorValidator()
+        self._validators["bgcolor"] = v_rangeselector.BgcolorValidator()
+        self._validators["bordercolor"] = v_rangeselector.BordercolorValidator()
+        self._validators["borderwidth"] = v_rangeselector.BorderwidthValidator()
+        self._validators["buttons"] = v_rangeselector.ButtonsValidator()
+        self._validators["buttondefaults"] = v_rangeselector.ButtonValidator()
+        self._validators["font"] = v_rangeselector.FontValidator()
+        self._validators["visible"] = v_rangeselector.VisibleValidator()
+        self._validators["x"] = v_rangeselector.XValidator()
+        self._validators["xanchor"] = v_rangeselector.XanchorValidator()
+        self._validators["y"] = v_rangeselector.YValidator()
+        self._validators["yanchor"] = v_rangeselector.YanchorValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('activecolor', None)
-        self['activecolor'] = activecolor if activecolor is not None else _v
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('borderwidth', None)
-        self['borderwidth'] = borderwidth if borderwidth is not None else _v
-        _v = arg.pop('buttons', None)
-        self['buttons'] = buttons if buttons is not None else _v
-        _v = arg.pop('buttondefaults', None)
-        self['buttondefaults'
-            ] = buttondefaults if buttondefaults is not None else _v
-        _v = arg.pop('font', None)
-        self['font'] = font if font is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('xanchor', None)
-        self['xanchor'] = xanchor if xanchor is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('yanchor', None)
-        self['yanchor'] = yanchor if yanchor is not None else _v
+        _v = arg.pop("activecolor", None)
+        self["activecolor"] = activecolor if activecolor is not None else _v
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("borderwidth", None)
+        self["borderwidth"] = borderwidth if borderwidth is not None else _v
+        _v = arg.pop("buttons", None)
+        self["buttons"] = buttons if buttons is not None else _v
+        _v = arg.pop("buttondefaults", None)
+        self["buttondefaults"] = buttondefaults if buttondefaults is not None else _v
+        _v = arg.pop("font", None)
+        self["font"] = font if font is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("xanchor", None)
+        self["xanchor"] = xanchor if xanchor is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("yanchor", None)
+        self["yanchor"] = yanchor if yanchor is not None else _v
 
         # Process unknown kwargs
         # ----------------------

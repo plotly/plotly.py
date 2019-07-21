@@ -1,16 +1,12 @@
-import datetime
 import decimal
 import json as _json
 import sys
 import re
-import pytz
 
 from _plotly_utils.optional_imports import get_module
 
 
-PY36_OR_LATER = (
-    sys.version_info.major == 3 and sys.version_info.minor >= 6
-)
+PY36_OR_LATER = sys.version_info.major == 3 and sys.version_info.minor >= 6
 
 
 class PlotlyJSONEncoder(_json.JSONEncoder):
@@ -31,7 +27,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         """
         # before python 2.7, 'true', 'false', 'null', were include here.
-        if const in ('Infinity', '-Infinity', 'NaN'):
+        if const in ("Infinity", "-Infinity", "NaN"):
             return None
         else:
             return const
@@ -51,8 +47,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
         try:
-            new_o = _json.loads(encoded_o,
-                                parse_constant=self.coerce_to_strict)
+            new_o = _json.loads(encoded_o, parse_constant=self.coerce_to_strict)
         except ValueError:
 
             # invalid separators will fail here. raise a helpful exception
@@ -61,10 +56,12 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
                 "valid JSON separators?"
             )
         else:
-            return _json.dumps(new_o, sort_keys=self.sort_keys,
-                               indent=self.indent,
-                               separators=(self.item_separator,
-                                           self.key_separator))
+            return _json.dumps(
+                new_o,
+                sort_keys=self.sort_keys,
+                indent=self.indent,
+                separators=(self.item_separator, self.key_separator),
+            )
 
     def default(self, obj):
         """
@@ -103,10 +100,10 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_sage,
             self.encode_as_numpy,
             self.encode_as_pandas,
-            self.encode_as_datetime_v4,
+            self.encode_as_datetime,
             self.encode_as_date,
             self.encode_as_list,  # because some values have `tolist` do last.
-            self.encode_as_decimal
+            self.encode_as_decimal,
         )
         for encoding_method in encoding_methods:
             try:
@@ -126,7 +123,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_list(obj):
         """Attempt to use `tolist` method to convert to normal Python list."""
-        if hasattr(obj, 'tolist'):
+        if hasattr(obj, "tolist"):
             return obj.tolist()
         else:
             raise NotEncodable
@@ -134,7 +131,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_sage(obj):
         """Attempt to convert sage.all.RR to floats and sage.all.ZZ to ints"""
-        sage_all = get_module('sage.all')
+        sage_all = get_module("sage.all")
         if not sage_all:
             raise NotEncodable
 
@@ -148,7 +145,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_pandas(obj):
         """Attempt to convert pandas.NaT"""
-        pandas = get_module('pandas')
+        pandas = get_module("pandas")
         if not pandas:
             raise NotEncodable
 
@@ -160,49 +157,22 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_numpy(obj):
         """Attempt to convert numpy.ma.core.masked"""
-        numpy = get_module('numpy')
+        numpy = get_module("numpy")
         if not numpy:
             raise NotEncodable
 
         if obj is numpy.ma.core.masked:
-            return float('nan')
+            return float("nan")
         else:
             raise NotEncodable
 
     @staticmethod
-    def encode_as_datetime_v4(obj):
+    def encode_as_datetime(obj):
         """Convert datetime objects to iso-format strings"""
         try:
             return obj.isoformat()
         except AttributeError:
             raise NotEncodable
-
-    @staticmethod
-    def encode_as_datetime(obj):
-        """Attempt to convert to utc-iso time string using datetime methods."""
-        # Since PY36, isoformat() converts UTC
-        # datetime.datetime objs to UTC T04:00:00
-        if not (PY36_OR_LATER and (isinstance(obj, datetime.datetime) and
-                                   obj.tzinfo is None)):
-            try:
-                obj = obj.astimezone(pytz.utc)
-            except ValueError:
-                # we'll get a value error if trying to convert with naive datetime
-                pass
-            except TypeError:
-                # pandas throws a typeerror here instead of a value error, it's OK
-                pass
-            except AttributeError:
-                # we'll get an attribute error if astimezone DNE
-                raise NotEncodable
-
-        # now we need to get a nicely formatted time string
-        try:
-            time_string = obj.isoformat()
-        except AttributeError:
-            raise NotEncodable
-        else:
-            return iso_to_plotly_time_string(time_string)
 
     @staticmethod
     def encode_as_date(obj):
@@ -230,32 +200,33 @@ class NotEncodable(Exception):
 def iso_to_plotly_time_string(iso_string):
     """Remove timezone info and replace 'T' delimeter with ' ' (ws)."""
     # make sure we don't send timezone info to plotly
-    if (iso_string.split('-')[:3] is '00:00') or\
-            (iso_string.split('+')[0] is '00:00'):
-        raise Exception("Plotly won't accept timestrings with timezone info.\n"
-                        "All timestrings are assumed to be in UTC.")
+    if (iso_string.split("-")[:3] is "00:00") or (iso_string.split("+")[0] is "00:00"):
+        raise Exception(
+            "Plotly won't accept timestrings with timezone info.\n"
+            "All timestrings are assumed to be in UTC."
+        )
 
-    iso_string = iso_string.replace('-00:00', '').replace('+00:00', '')
+    iso_string = iso_string.replace("-00:00", "").replace("+00:00", "")
 
-    if iso_string.endswith('T00:00:00'):
-        return iso_string.replace('T00:00:00', '')
+    if iso_string.endswith("T00:00:00"):
+        return iso_string.replace("T00:00:00", "")
     else:
-        return iso_string.replace('T', ' ')
+        return iso_string.replace("T", " ")
 
 
 def template_doc(**names):
     def _decorator(func):
-        if sys.version[:3] != '3.2':
+        if sys.version[:3] != "3.2":
             if func.__doc__ is not None:
                 func.__doc__ = func.__doc__.format(**names)
         return func
+
     return _decorator
 
 
 def _natural_sort_strings(vals, reverse=False):
-
     def key(v):
-        v_parts = re.split(r'(\d+)', v)
+        v_parts = re.split(r"(\d+)", v)
         for i in range(len(v_parts)):
             try:
                 v_parts[i] = int(v_parts[i])

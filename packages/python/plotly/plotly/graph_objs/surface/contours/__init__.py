@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyType
 import copy as _copy
 
@@ -48,22 +46,22 @@ class Z(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # end
     # ---
@@ -80,11 +78,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['end']
+        return self["end"]
 
     @end.setter
     def end(self, val):
-        self['end'] = val
+        self["end"] = val
 
     # highlight
     # ---------
@@ -101,11 +99,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['highlight']
+        return self["highlight"]
 
     @highlight.setter
     def highlight(self, val):
-        self['highlight'] = val
+        self["highlight"] = val
 
     # highlightcolor
     # --------------
@@ -149,22 +147,22 @@ class Z(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['highlightcolor']
+        return self["highlightcolor"]
 
     @highlightcolor.setter
     def highlightcolor(self, val):
-        self['highlightcolor'] = val
+        self["highlightcolor"] = val
 
     # highlightwidth
     # --------------
@@ -180,11 +178,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['highlightwidth']
+        return self["highlightwidth"]
 
     @highlightwidth.setter
     def highlightwidth(self, val):
-        self['highlightwidth'] = val
+        self["highlightwidth"] = val
 
     # project
     # -------
@@ -222,11 +220,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.z.Project
         """
-        return self['project']
+        return self["project"]
 
     @project.setter
     def project(self, val):
-        self['project'] = val
+        self["project"] = val
 
     # show
     # ----
@@ -243,11 +241,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # size
     # ----
@@ -263,11 +261,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # start
     # -----
@@ -284,11 +282,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
     # usecolormap
     # -----------
@@ -305,11 +303,11 @@ class Z(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['usecolormap']
+        return self["usecolormap"]
 
     @usecolormap.setter
     def usecolormap(self, val):
-        self['usecolormap'] = val
+        self["usecolormap"] = val
 
     # width
     # -----
@@ -325,17 +323,17 @@ class Z(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'surface.contours'
+        return "surface.contours"
 
     # Self properties description
     # ---------------------------
@@ -355,8 +353,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.z.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.z.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -410,8 +408,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.z.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.z.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -431,7 +429,7 @@ class Z(_BaseTraceHierarchyType):
         -------
         Z
         """
-        super(Z, self).__init__('z')
+        super(Z, self).__init__("z")
 
         # Validate arg
         # ------------
@@ -451,52 +449,50 @@ an instance of plotly.graph_objs.surface.contours.Z"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.surface.contours import (z as v_z)
+        from plotly.validators.surface.contours import z as v_z
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_z.ColorValidator()
-        self._validators['end'] = v_z.EndValidator()
-        self._validators['highlight'] = v_z.HighlightValidator()
-        self._validators['highlightcolor'] = v_z.HighlightcolorValidator()
-        self._validators['highlightwidth'] = v_z.HighlightwidthValidator()
-        self._validators['project'] = v_z.ProjectValidator()
-        self._validators['show'] = v_z.ShowValidator()
-        self._validators['size'] = v_z.SizeValidator()
-        self._validators['start'] = v_z.StartValidator()
-        self._validators['usecolormap'] = v_z.UsecolormapValidator()
-        self._validators['width'] = v_z.WidthValidator()
+        self._validators["color"] = v_z.ColorValidator()
+        self._validators["end"] = v_z.EndValidator()
+        self._validators["highlight"] = v_z.HighlightValidator()
+        self._validators["highlightcolor"] = v_z.HighlightcolorValidator()
+        self._validators["highlightwidth"] = v_z.HighlightwidthValidator()
+        self._validators["project"] = v_z.ProjectValidator()
+        self._validators["show"] = v_z.ShowValidator()
+        self._validators["size"] = v_z.SizeValidator()
+        self._validators["start"] = v_z.StartValidator()
+        self._validators["usecolormap"] = v_z.UsecolormapValidator()
+        self._validators["width"] = v_z.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('end', None)
-        self['end'] = end if end is not None else _v
-        _v = arg.pop('highlight', None)
-        self['highlight'] = highlight if highlight is not None else _v
-        _v = arg.pop('highlightcolor', None)
-        self['highlightcolor'
-            ] = highlightcolor if highlightcolor is not None else _v
-        _v = arg.pop('highlightwidth', None)
-        self['highlightwidth'
-            ] = highlightwidth if highlightwidth is not None else _v
-        _v = arg.pop('project', None)
-        self['project'] = project if project is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('start', None)
-        self['start'] = start if start is not None else _v
-        _v = arg.pop('usecolormap', None)
-        self['usecolormap'] = usecolormap if usecolormap is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("end", None)
+        self["end"] = end if end is not None else _v
+        _v = arg.pop("highlight", None)
+        self["highlight"] = highlight if highlight is not None else _v
+        _v = arg.pop("highlightcolor", None)
+        self["highlightcolor"] = highlightcolor if highlightcolor is not None else _v
+        _v = arg.pop("highlightwidth", None)
+        self["highlightwidth"] = highlightwidth if highlightwidth is not None else _v
+        _v = arg.pop("project", None)
+        self["project"] = project if project is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("start", None)
+        self["start"] = start if start is not None else _v
+        _v = arg.pop("usecolormap", None)
+        self["usecolormap"] = usecolormap if usecolormap is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -555,22 +551,22 @@ class Y(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # end
     # ---
@@ -587,11 +583,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['end']
+        return self["end"]
 
     @end.setter
     def end(self, val):
-        self['end'] = val
+        self["end"] = val
 
     # highlight
     # ---------
@@ -608,11 +604,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['highlight']
+        return self["highlight"]
 
     @highlight.setter
     def highlight(self, val):
-        self['highlight'] = val
+        self["highlight"] = val
 
     # highlightcolor
     # --------------
@@ -656,22 +652,22 @@ class Y(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['highlightcolor']
+        return self["highlightcolor"]
 
     @highlightcolor.setter
     def highlightcolor(self, val):
-        self['highlightcolor'] = val
+        self["highlightcolor"] = val
 
     # highlightwidth
     # --------------
@@ -687,11 +683,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['highlightwidth']
+        return self["highlightwidth"]
 
     @highlightwidth.setter
     def highlightwidth(self, val):
-        self['highlightwidth'] = val
+        self["highlightwidth"] = val
 
     # project
     # -------
@@ -729,11 +725,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.y.Project
         """
-        return self['project']
+        return self["project"]
 
     @project.setter
     def project(self, val):
-        self['project'] = val
+        self["project"] = val
 
     # show
     # ----
@@ -750,11 +746,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # size
     # ----
@@ -770,11 +766,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # start
     # -----
@@ -791,11 +787,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
     # usecolormap
     # -----------
@@ -812,11 +808,11 @@ class Y(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['usecolormap']
+        return self["usecolormap"]
 
     @usecolormap.setter
     def usecolormap(self, val):
-        self['usecolormap'] = val
+        self["usecolormap"] = val
 
     # width
     # -----
@@ -832,17 +828,17 @@ class Y(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'surface.contours'
+        return "surface.contours"
 
     # Self properties description
     # ---------------------------
@@ -862,8 +858,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.y.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.y.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -917,8 +913,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.y.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.y.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -938,7 +934,7 @@ class Y(_BaseTraceHierarchyType):
         -------
         Y
         """
-        super(Y, self).__init__('y')
+        super(Y, self).__init__("y")
 
         # Validate arg
         # ------------
@@ -958,52 +954,50 @@ an instance of plotly.graph_objs.surface.contours.Y"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.surface.contours import (y as v_y)
+        from plotly.validators.surface.contours import y as v_y
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_y.ColorValidator()
-        self._validators['end'] = v_y.EndValidator()
-        self._validators['highlight'] = v_y.HighlightValidator()
-        self._validators['highlightcolor'] = v_y.HighlightcolorValidator()
-        self._validators['highlightwidth'] = v_y.HighlightwidthValidator()
-        self._validators['project'] = v_y.ProjectValidator()
-        self._validators['show'] = v_y.ShowValidator()
-        self._validators['size'] = v_y.SizeValidator()
-        self._validators['start'] = v_y.StartValidator()
-        self._validators['usecolormap'] = v_y.UsecolormapValidator()
-        self._validators['width'] = v_y.WidthValidator()
+        self._validators["color"] = v_y.ColorValidator()
+        self._validators["end"] = v_y.EndValidator()
+        self._validators["highlight"] = v_y.HighlightValidator()
+        self._validators["highlightcolor"] = v_y.HighlightcolorValidator()
+        self._validators["highlightwidth"] = v_y.HighlightwidthValidator()
+        self._validators["project"] = v_y.ProjectValidator()
+        self._validators["show"] = v_y.ShowValidator()
+        self._validators["size"] = v_y.SizeValidator()
+        self._validators["start"] = v_y.StartValidator()
+        self._validators["usecolormap"] = v_y.UsecolormapValidator()
+        self._validators["width"] = v_y.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('end', None)
-        self['end'] = end if end is not None else _v
-        _v = arg.pop('highlight', None)
-        self['highlight'] = highlight if highlight is not None else _v
-        _v = arg.pop('highlightcolor', None)
-        self['highlightcolor'
-            ] = highlightcolor if highlightcolor is not None else _v
-        _v = arg.pop('highlightwidth', None)
-        self['highlightwidth'
-            ] = highlightwidth if highlightwidth is not None else _v
-        _v = arg.pop('project', None)
-        self['project'] = project if project is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('start', None)
-        self['start'] = start if start is not None else _v
-        _v = arg.pop('usecolormap', None)
-        self['usecolormap'] = usecolormap if usecolormap is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("end", None)
+        self["end"] = end if end is not None else _v
+        _v = arg.pop("highlight", None)
+        self["highlight"] = highlight if highlight is not None else _v
+        _v = arg.pop("highlightcolor", None)
+        self["highlightcolor"] = highlightcolor if highlightcolor is not None else _v
+        _v = arg.pop("highlightwidth", None)
+        self["highlightwidth"] = highlightwidth if highlightwidth is not None else _v
+        _v = arg.pop("project", None)
+        self["project"] = project if project is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("start", None)
+        self["start"] = start if start is not None else _v
+        _v = arg.pop("usecolormap", None)
+        self["usecolormap"] = usecolormap if usecolormap is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -1062,22 +1056,22 @@ class X(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # end
     # ---
@@ -1094,11 +1088,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['end']
+        return self["end"]
 
     @end.setter
     def end(self, val):
-        self['end'] = val
+        self["end"] = val
 
     # highlight
     # ---------
@@ -1115,11 +1109,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['highlight']
+        return self["highlight"]
 
     @highlight.setter
     def highlight(self, val):
-        self['highlight'] = val
+        self["highlight"] = val
 
     # highlightcolor
     # --------------
@@ -1163,22 +1157,22 @@ class X(_BaseTraceHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['highlightcolor']
+        return self["highlightcolor"]
 
     @highlightcolor.setter
     def highlightcolor(self, val):
-        self['highlightcolor'] = val
+        self["highlightcolor"] = val
 
     # highlightwidth
     # --------------
@@ -1194,11 +1188,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['highlightwidth']
+        return self["highlightwidth"]
 
     @highlightwidth.setter
     def highlightwidth(self, val):
-        self['highlightwidth'] = val
+        self["highlightwidth"] = val
 
     # project
     # -------
@@ -1236,11 +1230,11 @@ class X(_BaseTraceHierarchyType):
         -------
         plotly.graph_objs.surface.contours.x.Project
         """
-        return self['project']
+        return self["project"]
 
     @project.setter
     def project(self, val):
-        self['project'] = val
+        self["project"] = val
 
     # show
     # ----
@@ -1257,11 +1251,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['show']
+        return self["show"]
 
     @show.setter
     def show(self, val):
-        self['show'] = val
+        self["show"] = val
 
     # size
     # ----
@@ -1277,11 +1271,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # start
     # -----
@@ -1298,11 +1292,11 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['start']
+        return self["start"]
 
     @start.setter
     def start(self, val):
-        self['start'] = val
+        self["start"] = val
 
     # usecolormap
     # -----------
@@ -1319,11 +1313,11 @@ class X(_BaseTraceHierarchyType):
         -------
         bool
         """
-        return self['usecolormap']
+        return self["usecolormap"]
 
     @usecolormap.setter
     def usecolormap(self, val):
-        self['usecolormap'] = val
+        self["usecolormap"] = val
 
     # width
     # -----
@@ -1339,17 +1333,17 @@ class X(_BaseTraceHierarchyType):
         -------
         int|float
         """
-        return self['width']
+        return self["width"]
 
     @width.setter
     def width(self, val):
-        self['width'] = val
+        self["width"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'surface.contours'
+        return "surface.contours"
 
     # Self properties description
     # ---------------------------
@@ -1369,8 +1363,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.x.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.x.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
@@ -1424,8 +1418,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objs.surface.contours.x.Project instance
-            or dict with compatible properties
+            plotly.graph_objects.surface.contours.x.Project
+            instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
@@ -1445,7 +1439,7 @@ class X(_BaseTraceHierarchyType):
         -------
         X
         """
-        super(X, self).__init__('x')
+        super(X, self).__init__("x")
 
         # Validate arg
         # ------------
@@ -1465,52 +1459,50 @@ an instance of plotly.graph_objs.surface.contours.X"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.surface.contours import (x as v_x)
+        from plotly.validators.surface.contours import x as v_x
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_x.ColorValidator()
-        self._validators['end'] = v_x.EndValidator()
-        self._validators['highlight'] = v_x.HighlightValidator()
-        self._validators['highlightcolor'] = v_x.HighlightcolorValidator()
-        self._validators['highlightwidth'] = v_x.HighlightwidthValidator()
-        self._validators['project'] = v_x.ProjectValidator()
-        self._validators['show'] = v_x.ShowValidator()
-        self._validators['size'] = v_x.SizeValidator()
-        self._validators['start'] = v_x.StartValidator()
-        self._validators['usecolormap'] = v_x.UsecolormapValidator()
-        self._validators['width'] = v_x.WidthValidator()
+        self._validators["color"] = v_x.ColorValidator()
+        self._validators["end"] = v_x.EndValidator()
+        self._validators["highlight"] = v_x.HighlightValidator()
+        self._validators["highlightcolor"] = v_x.HighlightcolorValidator()
+        self._validators["highlightwidth"] = v_x.HighlightwidthValidator()
+        self._validators["project"] = v_x.ProjectValidator()
+        self._validators["show"] = v_x.ShowValidator()
+        self._validators["size"] = v_x.SizeValidator()
+        self._validators["start"] = v_x.StartValidator()
+        self._validators["usecolormap"] = v_x.UsecolormapValidator()
+        self._validators["width"] = v_x.WidthValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('end', None)
-        self['end'] = end if end is not None else _v
-        _v = arg.pop('highlight', None)
-        self['highlight'] = highlight if highlight is not None else _v
-        _v = arg.pop('highlightcolor', None)
-        self['highlightcolor'
-            ] = highlightcolor if highlightcolor is not None else _v
-        _v = arg.pop('highlightwidth', None)
-        self['highlightwidth'
-            ] = highlightwidth if highlightwidth is not None else _v
-        _v = arg.pop('project', None)
-        self['project'] = project if project is not None else _v
-        _v = arg.pop('show', None)
-        self['show'] = show if show is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
-        _v = arg.pop('start', None)
-        self['start'] = start if start is not None else _v
-        _v = arg.pop('usecolormap', None)
-        self['usecolormap'] = usecolormap if usecolormap is not None else _v
-        _v = arg.pop('width', None)
-        self['width'] = width if width is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("end", None)
+        self["end"] = end if end is not None else _v
+        _v = arg.pop("highlight", None)
+        self["highlight"] = highlight if highlight is not None else _v
+        _v = arg.pop("highlightcolor", None)
+        self["highlightcolor"] = highlightcolor if highlightcolor is not None else _v
+        _v = arg.pop("highlightwidth", None)
+        self["highlightwidth"] = highlightwidth if highlightwidth is not None else _v
+        _v = arg.pop("project", None)
+        self["project"] = project if project is not None else _v
+        _v = arg.pop("show", None)
+        self["show"] = show if show is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
+        _v = arg.pop("start", None)
+        self["start"] = start if start is not None else _v
+        _v = arg.pop("usecolormap", None)
+        self["usecolormap"] = usecolormap if usecolormap is not None else _v
+        _v = arg.pop("width", None)
+        self["width"] = width if width is not None else _v
 
         # Process unknown kwargs
         # ----------------------

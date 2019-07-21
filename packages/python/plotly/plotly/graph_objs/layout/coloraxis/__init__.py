@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -48,22 +46,22 @@ class ColorBar(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bgcolor']
+        return self["bgcolor"]
 
     @bgcolor.setter
     def bgcolor(self, val):
-        self['bgcolor'] = val
+        self["bgcolor"] = val
 
     # bordercolor
     # -----------
@@ -107,22 +105,22 @@ class ColorBar(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['bordercolor']
+        return self["bordercolor"]
 
     @bordercolor.setter
     def bordercolor(self, val):
-        self['bordercolor'] = val
+        self["bordercolor"] = val
 
     # borderwidth
     # -----------
@@ -138,11 +136,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['borderwidth']
+        return self["borderwidth"]
 
     @borderwidth.setter
     def borderwidth(self, val):
-        self['borderwidth'] = val
+        self["borderwidth"] = val
 
     # dtick
     # -----
@@ -176,11 +174,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['dtick']
+        return self["dtick"]
 
     @dtick.setter
     def dtick(self, val):
-        self['dtick'] = val
+        self["dtick"] = val
 
     # exponentformat
     # --------------
@@ -201,11 +199,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['exponentformat']
+        return self["exponentformat"]
 
     @exponentformat.setter
     def exponentformat(self, val):
-        self['exponentformat'] = val
+        self["exponentformat"] = val
 
     # len
     # ---
@@ -223,11 +221,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['len']
+        return self["len"]
 
     @len.setter
     def len(self, val):
-        self['len'] = val
+        self["len"] = val
 
     # lenmode
     # -------
@@ -246,11 +244,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['lenmode']
+        return self["lenmode"]
 
     @lenmode.setter
     def lenmode(self, val):
-        self['lenmode'] = val
+        self["lenmode"] = val
 
     # nticks
     # ------
@@ -270,11 +268,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int
         """
-        return self['nticks']
+        return self["nticks"]
 
     @nticks.setter
     def nticks(self, val):
-        self['nticks'] = val
+        self["nticks"] = val
 
     # outlinecolor
     # ------------
@@ -318,22 +316,22 @@ class ColorBar(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['outlinecolor']
+        return self["outlinecolor"]
 
     @outlinecolor.setter
     def outlinecolor(self, val):
-        self['outlinecolor'] = val
+        self["outlinecolor"] = val
 
     # outlinewidth
     # ------------
@@ -349,11 +347,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['outlinewidth']
+        return self["outlinewidth"]
 
     @outlinewidth.setter
     def outlinewidth(self, val):
-        self['outlinewidth'] = val
+        self["outlinewidth"] = val
 
     # separatethousands
     # -----------------
@@ -369,11 +367,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['separatethousands']
+        return self["separatethousands"]
 
     @separatethousands.setter
     def separatethousands(self, val):
-        self['separatethousands'] = val
+        self["separatethousands"] = val
 
     # showexponent
     # ------------
@@ -393,11 +391,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showexponent']
+        return self["showexponent"]
 
     @showexponent.setter
     def showexponent(self, val):
-        self['showexponent'] = val
+        self["showexponent"] = val
 
     # showticklabels
     # --------------
@@ -413,11 +411,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['showticklabels']
+        return self["showticklabels"]
 
     @showticklabels.setter
     def showticklabels(self, val):
-        self['showticklabels'] = val
+        self["showticklabels"] = val
 
     # showtickprefix
     # --------------
@@ -437,11 +435,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showtickprefix']
+        return self["showtickprefix"]
 
     @showtickprefix.setter
     def showtickprefix(self, val):
-        self['showtickprefix'] = val
+        self["showtickprefix"] = val
 
     # showticksuffix
     # --------------
@@ -458,11 +456,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['showticksuffix']
+        return self["showticksuffix"]
 
     @showticksuffix.setter
     def showticksuffix(self, val):
-        self['showticksuffix'] = val
+        self["showticksuffix"] = val
 
     # thickness
     # ---------
@@ -479,11 +477,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['thickness']
+        return self["thickness"]
 
     @thickness.setter
     def thickness(self, val):
-        self['thickness'] = val
+        self["thickness"] = val
 
     # thicknessmode
     # -------------
@@ -502,11 +500,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['thicknessmode']
+        return self["thicknessmode"]
 
     @thicknessmode.setter
     def thicknessmode(self, val):
-        self['thicknessmode'] = val
+        self["thicknessmode"] = val
 
     # tick0
     # -----
@@ -529,11 +527,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tick0']
+        return self["tick0"]
 
     @tick0.setter
     def tick0(self, val):
-        self['tick0'] = val
+        self["tick0"] = val
 
     # tickangle
     # ---------
@@ -553,11 +551,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickangle']
+        return self["tickangle"]
 
     @tickangle.setter
     def tickangle(self, val):
-        self['tickangle'] = val
+        self["tickangle"] = val
 
     # tickcolor
     # ---------
@@ -601,22 +599,22 @@ class ColorBar(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['tickcolor']
+        return self["tickcolor"]
 
     @tickcolor.setter
     def tickcolor(self, val):
-        self['tickcolor'] = val
+        self["tickcolor"] = val
 
     # tickfont
     # --------
@@ -657,11 +655,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.coloraxis.colorbar.Tickfont
         """
-        return self['tickfont']
+        return self["tickfont"]
 
     @tickfont.setter
     def tickfont(self, val):
-        self['tickfont'] = val
+        self["tickfont"] = val
 
     # tickformat
     # ----------
@@ -686,11 +684,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickformat']
+        return self["tickformat"]
 
     @tickformat.setter
     def tickformat(self, val):
-        self['tickformat'] = val
+        self["tickformat"] = val
 
     # tickformatstops
     # ---------------
@@ -743,11 +741,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         tuple[plotly.graph_objs.layout.coloraxis.colorbar.Tickformatstop]
         """
-        return self['tickformatstops']
+        return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
-        self['tickformatstops'] = val
+        self["tickformatstops"] = val
 
     # tickformatstopdefaults
     # ----------------------
@@ -771,11 +769,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.coloraxis.colorbar.Tickformatstop
         """
-        return self['tickformatstopdefaults']
+        return self["tickformatstopdefaults"]
 
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
-        self['tickformatstopdefaults'] = val
+        self["tickformatstopdefaults"] = val
 
     # ticklen
     # -------
@@ -791,11 +789,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ticklen']
+        return self["ticklen"]
 
     @ticklen.setter
     def ticklen(self, val):
-        self['ticklen'] = val
+        self["ticklen"] = val
 
     # tickmode
     # --------
@@ -818,11 +816,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['tickmode']
+        return self["tickmode"]
 
     @tickmode.setter
     def tickmode(self, val):
-        self['tickmode'] = val
+        self["tickmode"] = val
 
     # tickprefix
     # ----------
@@ -839,11 +837,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickprefix']
+        return self["tickprefix"]
 
     @tickprefix.setter
     def tickprefix(self, val):
-        self['tickprefix'] = val
+        self["tickprefix"] = val
 
     # ticks
     # -----
@@ -862,11 +860,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['ticks']
+        return self["ticks"]
 
     @ticks.setter
     def ticks(self, val):
-        self['ticks'] = val
+        self["ticks"] = val
 
     # ticksuffix
     # ----------
@@ -883,11 +881,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticksuffix']
+        return self["ticksuffix"]
 
     @ticksuffix.setter
     def ticksuffix(self, val):
-        self['ticksuffix'] = val
+        self["ticksuffix"] = val
 
     # ticktext
     # --------
@@ -905,11 +903,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['ticktext']
+        return self["ticktext"]
 
     @ticktext.setter
     def ticktext(self, val):
-        self['ticktext'] = val
+        self["ticktext"] = val
 
     # ticktextsrc
     # -----------
@@ -925,11 +923,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['ticktextsrc']
+        return self["ticktextsrc"]
 
     @ticktextsrc.setter
     def ticktextsrc(self, val):
-        self['ticktextsrc'] = val
+        self["ticktextsrc"] = val
 
     # tickvals
     # --------
@@ -946,11 +944,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         numpy.ndarray
         """
-        return self['tickvals']
+        return self["tickvals"]
 
     @tickvals.setter
     def tickvals(self, val):
-        self['tickvals'] = val
+        self["tickvals"] = val
 
     # tickvalssrc
     # -----------
@@ -966,11 +964,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['tickvalssrc']
+        return self["tickvalssrc"]
 
     @tickvalssrc.setter
     def tickvalssrc(self, val):
-        self['tickvalssrc'] = val
+        self["tickvalssrc"] = val
 
     # tickwidth
     # ---------
@@ -986,11 +984,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['tickwidth']
+        return self["tickwidth"]
 
     @tickwidth.setter
     def tickwidth(self, val):
-        self['tickwidth'] = val
+        self["tickwidth"] = val
 
     # title
     # -----
@@ -1025,11 +1023,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         plotly.graph_objs.layout.coloraxis.colorbar.Title
         """
-        return self['title']
+        return self["title"]
 
     @title.setter
     def title(self, val):
-        self['title'] = val
+        self["title"] = val
 
     # titlefont
     # ---------
@@ -1073,11 +1071,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         
         """
-        return self['titlefont']
+        return self["titlefont"]
 
     @titlefont.setter
     def titlefont(self, val):
-        self['titlefont'] = val
+        self["titlefont"] = val
 
     # titleside
     # ---------
@@ -1097,11 +1095,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         
         """
-        return self['titleside']
+        return self["titleside"]
 
     @titleside.setter
     def titleside(self, val):
-        self['titleside'] = val
+        self["titleside"] = val
 
     # x
     # -
@@ -1117,11 +1115,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['x']
+        return self["x"]
 
     @x.setter
     def x(self, val):
-        self['x'] = val
+        self["x"] = val
 
     # xanchor
     # -------
@@ -1140,11 +1138,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['xanchor']
+        return self["xanchor"]
 
     @xanchor.setter
     def xanchor(self, val):
-        self['xanchor'] = val
+        self["xanchor"] = val
 
     # xpad
     # ----
@@ -1160,11 +1158,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['xpad']
+        return self["xpad"]
 
     @xpad.setter
     def xpad(self, val):
-        self['xpad'] = val
+        self["xpad"] = val
 
     # y
     # -
@@ -1180,11 +1178,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['y']
+        return self["y"]
 
     @y.setter
     def y(self, val):
-        self['y'] = val
+        self["y"] = val
 
     # yanchor
     # -------
@@ -1203,11 +1201,11 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['yanchor']
+        return self["yanchor"]
 
     @yanchor.setter
     def yanchor(self, val):
-        self['yanchor'] = val
+        self["yanchor"] = val
 
     # ypad
     # ----
@@ -1223,17 +1221,17 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['ypad']
+        return self["ypad"]
 
     @ypad.setter
     def ypad(self, val):
-        self['ypad'] = val
+        self["ypad"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.coloraxis'
+        return "layout.coloraxis"
 
     # Self properties description
     # ---------------------------
@@ -1351,8 +1349,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.coloraxis.colorbar.Tickformats
-            top instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.coloraxis.colorb
+            ar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1392,7 +1391,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.coloraxis.colorbar.Title
+            plotly.graph_objects.layout.coloraxis.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use
@@ -1429,8 +1428,8 @@ class ColorBar(_BaseLayoutHierarchyType):
         """
 
     _mapped_properties = {
-        'titlefont': ('title', 'font'),
-        'titleside': ('title', 'side')
+        "titlefont": ("title", "font"),
+        "titleside": ("title", "side"),
     }
 
     def __init__(
@@ -1601,8 +1600,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            plotly.graph_objs.layout.coloraxis.colorbar.Tickformats
-            top instance or dict with compatible properties
+            A tuple of plotly.graph_objects.layout.coloraxis.colorb
+            ar.Tickformatstop instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1642,7 +1642,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objs.layout.coloraxis.colorbar.Title
+            plotly.graph_objects.layout.coloraxis.colorbar.Title
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use
@@ -1681,7 +1681,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         -------
         ColorBar
         """
-        super(ColorBar, self).__init__('colorbar')
+        super(ColorBar, self).__init__("colorbar")
 
         # Validate arg
         # ------------
@@ -1701,164 +1701,154 @@ an instance of plotly.graph_objs.layout.coloraxis.ColorBar"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.coloraxis import (colorbar as v_colorbar)
+        from plotly.validators.layout.coloraxis import colorbar as v_colorbar
 
         # Initialize validators
         # ---------------------
-        self._validators['bgcolor'] = v_colorbar.BgcolorValidator()
-        self._validators['bordercolor'] = v_colorbar.BordercolorValidator()
-        self._validators['borderwidth'] = v_colorbar.BorderwidthValidator()
-        self._validators['dtick'] = v_colorbar.DtickValidator()
-        self._validators['exponentformat'
-                        ] = v_colorbar.ExponentformatValidator()
-        self._validators['len'] = v_colorbar.LenValidator()
-        self._validators['lenmode'] = v_colorbar.LenmodeValidator()
-        self._validators['nticks'] = v_colorbar.NticksValidator()
-        self._validators['outlinecolor'] = v_colorbar.OutlinecolorValidator()
-        self._validators['outlinewidth'] = v_colorbar.OutlinewidthValidator()
-        self._validators['separatethousands'
-                        ] = v_colorbar.SeparatethousandsValidator()
-        self._validators['showexponent'] = v_colorbar.ShowexponentValidator()
-        self._validators['showticklabels'
-                        ] = v_colorbar.ShowticklabelsValidator()
-        self._validators['showtickprefix'
-                        ] = v_colorbar.ShowtickprefixValidator()
-        self._validators['showticksuffix'
-                        ] = v_colorbar.ShowticksuffixValidator()
-        self._validators['thickness'] = v_colorbar.ThicknessValidator()
-        self._validators['thicknessmode'] = v_colorbar.ThicknessmodeValidator()
-        self._validators['tick0'] = v_colorbar.Tick0Validator()
-        self._validators['tickangle'] = v_colorbar.TickangleValidator()
-        self._validators['tickcolor'] = v_colorbar.TickcolorValidator()
-        self._validators['tickfont'] = v_colorbar.TickfontValidator()
-        self._validators['tickformat'] = v_colorbar.TickformatValidator()
-        self._validators['tickformatstops'
-                        ] = v_colorbar.TickformatstopsValidator()
-        self._validators['tickformatstopdefaults'
-                        ] = v_colorbar.TickformatstopValidator()
-        self._validators['ticklen'] = v_colorbar.TicklenValidator()
-        self._validators['tickmode'] = v_colorbar.TickmodeValidator()
-        self._validators['tickprefix'] = v_colorbar.TickprefixValidator()
-        self._validators['ticks'] = v_colorbar.TicksValidator()
-        self._validators['ticksuffix'] = v_colorbar.TicksuffixValidator()
-        self._validators['ticktext'] = v_colorbar.TicktextValidator()
-        self._validators['ticktextsrc'] = v_colorbar.TicktextsrcValidator()
-        self._validators['tickvals'] = v_colorbar.TickvalsValidator()
-        self._validators['tickvalssrc'] = v_colorbar.TickvalssrcValidator()
-        self._validators['tickwidth'] = v_colorbar.TickwidthValidator()
-        self._validators['title'] = v_colorbar.TitleValidator()
-        self._validators['x'] = v_colorbar.XValidator()
-        self._validators['xanchor'] = v_colorbar.XanchorValidator()
-        self._validators['xpad'] = v_colorbar.XpadValidator()
-        self._validators['y'] = v_colorbar.YValidator()
-        self._validators['yanchor'] = v_colorbar.YanchorValidator()
-        self._validators['ypad'] = v_colorbar.YpadValidator()
+        self._validators["bgcolor"] = v_colorbar.BgcolorValidator()
+        self._validators["bordercolor"] = v_colorbar.BordercolorValidator()
+        self._validators["borderwidth"] = v_colorbar.BorderwidthValidator()
+        self._validators["dtick"] = v_colorbar.DtickValidator()
+        self._validators["exponentformat"] = v_colorbar.ExponentformatValidator()
+        self._validators["len"] = v_colorbar.LenValidator()
+        self._validators["lenmode"] = v_colorbar.LenmodeValidator()
+        self._validators["nticks"] = v_colorbar.NticksValidator()
+        self._validators["outlinecolor"] = v_colorbar.OutlinecolorValidator()
+        self._validators["outlinewidth"] = v_colorbar.OutlinewidthValidator()
+        self._validators["separatethousands"] = v_colorbar.SeparatethousandsValidator()
+        self._validators["showexponent"] = v_colorbar.ShowexponentValidator()
+        self._validators["showticklabels"] = v_colorbar.ShowticklabelsValidator()
+        self._validators["showtickprefix"] = v_colorbar.ShowtickprefixValidator()
+        self._validators["showticksuffix"] = v_colorbar.ShowticksuffixValidator()
+        self._validators["thickness"] = v_colorbar.ThicknessValidator()
+        self._validators["thicknessmode"] = v_colorbar.ThicknessmodeValidator()
+        self._validators["tick0"] = v_colorbar.Tick0Validator()
+        self._validators["tickangle"] = v_colorbar.TickangleValidator()
+        self._validators["tickcolor"] = v_colorbar.TickcolorValidator()
+        self._validators["tickfont"] = v_colorbar.TickfontValidator()
+        self._validators["tickformat"] = v_colorbar.TickformatValidator()
+        self._validators["tickformatstops"] = v_colorbar.TickformatstopsValidator()
+        self._validators[
+            "tickformatstopdefaults"
+        ] = v_colorbar.TickformatstopValidator()
+        self._validators["ticklen"] = v_colorbar.TicklenValidator()
+        self._validators["tickmode"] = v_colorbar.TickmodeValidator()
+        self._validators["tickprefix"] = v_colorbar.TickprefixValidator()
+        self._validators["ticks"] = v_colorbar.TicksValidator()
+        self._validators["ticksuffix"] = v_colorbar.TicksuffixValidator()
+        self._validators["ticktext"] = v_colorbar.TicktextValidator()
+        self._validators["ticktextsrc"] = v_colorbar.TicktextsrcValidator()
+        self._validators["tickvals"] = v_colorbar.TickvalsValidator()
+        self._validators["tickvalssrc"] = v_colorbar.TickvalssrcValidator()
+        self._validators["tickwidth"] = v_colorbar.TickwidthValidator()
+        self._validators["title"] = v_colorbar.TitleValidator()
+        self._validators["x"] = v_colorbar.XValidator()
+        self._validators["xanchor"] = v_colorbar.XanchorValidator()
+        self._validators["xpad"] = v_colorbar.XpadValidator()
+        self._validators["y"] = v_colorbar.YValidator()
+        self._validators["yanchor"] = v_colorbar.YanchorValidator()
+        self._validators["ypad"] = v_colorbar.YpadValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('bgcolor', None)
-        self['bgcolor'] = bgcolor if bgcolor is not None else _v
-        _v = arg.pop('bordercolor', None)
-        self['bordercolor'] = bordercolor if bordercolor is not None else _v
-        _v = arg.pop('borderwidth', None)
-        self['borderwidth'] = borderwidth if borderwidth is not None else _v
-        _v = arg.pop('dtick', None)
-        self['dtick'] = dtick if dtick is not None else _v
-        _v = arg.pop('exponentformat', None)
-        self['exponentformat'
-            ] = exponentformat if exponentformat is not None else _v
-        _v = arg.pop('len', None)
-        self['len'] = len if len is not None else _v
-        _v = arg.pop('lenmode', None)
-        self['lenmode'] = lenmode if lenmode is not None else _v
-        _v = arg.pop('nticks', None)
-        self['nticks'] = nticks if nticks is not None else _v
-        _v = arg.pop('outlinecolor', None)
-        self['outlinecolor'] = outlinecolor if outlinecolor is not None else _v
-        _v = arg.pop('outlinewidth', None)
-        self['outlinewidth'] = outlinewidth if outlinewidth is not None else _v
-        _v = arg.pop('separatethousands', None)
-        self['separatethousands'
-            ] = separatethousands if separatethousands is not None else _v
-        _v = arg.pop('showexponent', None)
-        self['showexponent'] = showexponent if showexponent is not None else _v
-        _v = arg.pop('showticklabels', None)
-        self['showticklabels'
-            ] = showticklabels if showticklabels is not None else _v
-        _v = arg.pop('showtickprefix', None)
-        self['showtickprefix'
-            ] = showtickprefix if showtickprefix is not None else _v
-        _v = arg.pop('showticksuffix', None)
-        self['showticksuffix'
-            ] = showticksuffix if showticksuffix is not None else _v
-        _v = arg.pop('thickness', None)
-        self['thickness'] = thickness if thickness is not None else _v
-        _v = arg.pop('thicknessmode', None)
-        self['thicknessmode'
-            ] = thicknessmode if thicknessmode is not None else _v
-        _v = arg.pop('tick0', None)
-        self['tick0'] = tick0 if tick0 is not None else _v
-        _v = arg.pop('tickangle', None)
-        self['tickangle'] = tickangle if tickangle is not None else _v
-        _v = arg.pop('tickcolor', None)
-        self['tickcolor'] = tickcolor if tickcolor is not None else _v
-        _v = arg.pop('tickfont', None)
-        self['tickfont'] = tickfont if tickfont is not None else _v
-        _v = arg.pop('tickformat', None)
-        self['tickformat'] = tickformat if tickformat is not None else _v
-        _v = arg.pop('tickformatstops', None)
-        self['tickformatstops'
-            ] = tickformatstops if tickformatstops is not None else _v
-        _v = arg.pop('tickformatstopdefaults', None)
-        self[
-            'tickformatstopdefaults'
-        ] = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        _v = arg.pop('ticklen', None)
-        self['ticklen'] = ticklen if ticklen is not None else _v
-        _v = arg.pop('tickmode', None)
-        self['tickmode'] = tickmode if tickmode is not None else _v
-        _v = arg.pop('tickprefix', None)
-        self['tickprefix'] = tickprefix if tickprefix is not None else _v
-        _v = arg.pop('ticks', None)
-        self['ticks'] = ticks if ticks is not None else _v
-        _v = arg.pop('ticksuffix', None)
-        self['ticksuffix'] = ticksuffix if ticksuffix is not None else _v
-        _v = arg.pop('ticktext', None)
-        self['ticktext'] = ticktext if ticktext is not None else _v
-        _v = arg.pop('ticktextsrc', None)
-        self['ticktextsrc'] = ticktextsrc if ticktextsrc is not None else _v
-        _v = arg.pop('tickvals', None)
-        self['tickvals'] = tickvals if tickvals is not None else _v
-        _v = arg.pop('tickvalssrc', None)
-        self['tickvalssrc'] = tickvalssrc if tickvalssrc is not None else _v
-        _v = arg.pop('tickwidth', None)
-        self['tickwidth'] = tickwidth if tickwidth is not None else _v
-        _v = arg.pop('title', None)
-        self['title'] = title if title is not None else _v
-        _v = arg.pop('titlefont', None)
+        _v = arg.pop("bgcolor", None)
+        self["bgcolor"] = bgcolor if bgcolor is not None else _v
+        _v = arg.pop("bordercolor", None)
+        self["bordercolor"] = bordercolor if bordercolor is not None else _v
+        _v = arg.pop("borderwidth", None)
+        self["borderwidth"] = borderwidth if borderwidth is not None else _v
+        _v = arg.pop("dtick", None)
+        self["dtick"] = dtick if dtick is not None else _v
+        _v = arg.pop("exponentformat", None)
+        self["exponentformat"] = exponentformat if exponentformat is not None else _v
+        _v = arg.pop("len", None)
+        self["len"] = len if len is not None else _v
+        _v = arg.pop("lenmode", None)
+        self["lenmode"] = lenmode if lenmode is not None else _v
+        _v = arg.pop("nticks", None)
+        self["nticks"] = nticks if nticks is not None else _v
+        _v = arg.pop("outlinecolor", None)
+        self["outlinecolor"] = outlinecolor if outlinecolor is not None else _v
+        _v = arg.pop("outlinewidth", None)
+        self["outlinewidth"] = outlinewidth if outlinewidth is not None else _v
+        _v = arg.pop("separatethousands", None)
+        self["separatethousands"] = (
+            separatethousands if separatethousands is not None else _v
+        )
+        _v = arg.pop("showexponent", None)
+        self["showexponent"] = showexponent if showexponent is not None else _v
+        _v = arg.pop("showticklabels", None)
+        self["showticklabels"] = showticklabels if showticklabels is not None else _v
+        _v = arg.pop("showtickprefix", None)
+        self["showtickprefix"] = showtickprefix if showtickprefix is not None else _v
+        _v = arg.pop("showticksuffix", None)
+        self["showticksuffix"] = showticksuffix if showticksuffix is not None else _v
+        _v = arg.pop("thickness", None)
+        self["thickness"] = thickness if thickness is not None else _v
+        _v = arg.pop("thicknessmode", None)
+        self["thicknessmode"] = thicknessmode if thicknessmode is not None else _v
+        _v = arg.pop("tick0", None)
+        self["tick0"] = tick0 if tick0 is not None else _v
+        _v = arg.pop("tickangle", None)
+        self["tickangle"] = tickangle if tickangle is not None else _v
+        _v = arg.pop("tickcolor", None)
+        self["tickcolor"] = tickcolor if tickcolor is not None else _v
+        _v = arg.pop("tickfont", None)
+        self["tickfont"] = tickfont if tickfont is not None else _v
+        _v = arg.pop("tickformat", None)
+        self["tickformat"] = tickformat if tickformat is not None else _v
+        _v = arg.pop("tickformatstops", None)
+        self["tickformatstops"] = tickformatstops if tickformatstops is not None else _v
+        _v = arg.pop("tickformatstopdefaults", None)
+        self["tickformatstopdefaults"] = (
+            tickformatstopdefaults if tickformatstopdefaults is not None else _v
+        )
+        _v = arg.pop("ticklen", None)
+        self["ticklen"] = ticklen if ticklen is not None else _v
+        _v = arg.pop("tickmode", None)
+        self["tickmode"] = tickmode if tickmode is not None else _v
+        _v = arg.pop("tickprefix", None)
+        self["tickprefix"] = tickprefix if tickprefix is not None else _v
+        _v = arg.pop("ticks", None)
+        self["ticks"] = ticks if ticks is not None else _v
+        _v = arg.pop("ticksuffix", None)
+        self["ticksuffix"] = ticksuffix if ticksuffix is not None else _v
+        _v = arg.pop("ticktext", None)
+        self["ticktext"] = ticktext if ticktext is not None else _v
+        _v = arg.pop("ticktextsrc", None)
+        self["ticktextsrc"] = ticktextsrc if ticktextsrc is not None else _v
+        _v = arg.pop("tickvals", None)
+        self["tickvals"] = tickvals if tickvals is not None else _v
+        _v = arg.pop("tickvalssrc", None)
+        self["tickvalssrc"] = tickvalssrc if tickvalssrc is not None else _v
+        _v = arg.pop("tickwidth", None)
+        self["tickwidth"] = tickwidth if tickwidth is not None else _v
+        _v = arg.pop("title", None)
+        self["title"] = title if title is not None else _v
+        _v = arg.pop("titlefont", None)
         _v = titlefont if titlefont is not None else _v
         if _v is not None:
-            self['titlefont'] = _v
-        _v = arg.pop('titleside', None)
+            self["titlefont"] = _v
+        _v = arg.pop("titleside", None)
         _v = titleside if titleside is not None else _v
         if _v is not None:
-            self['titleside'] = _v
-        _v = arg.pop('x', None)
-        self['x'] = x if x is not None else _v
-        _v = arg.pop('xanchor', None)
-        self['xanchor'] = xanchor if xanchor is not None else _v
-        _v = arg.pop('xpad', None)
-        self['xpad'] = xpad if xpad is not None else _v
-        _v = arg.pop('y', None)
-        self['y'] = y if y is not None else _v
-        _v = arg.pop('yanchor', None)
-        self['yanchor'] = yanchor if yanchor is not None else _v
-        _v = arg.pop('ypad', None)
-        self['ypad'] = ypad if ypad is not None else _v
+            self["titleside"] = _v
+        _v = arg.pop("x", None)
+        self["x"] = x if x is not None else _v
+        _v = arg.pop("xanchor", None)
+        self["xanchor"] = xanchor if xanchor is not None else _v
+        _v = arg.pop("xpad", None)
+        self["xpad"] = xpad if xpad is not None else _v
+        _v = arg.pop("y", None)
+        self["y"] = y if y is not None else _v
+        _v = arg.pop("yanchor", None)
+        self["yanchor"] = yanchor if yanchor is not None else _v
+        _v = arg.pop("ypad", None)
+        self["ypad"] = ypad if ypad is not None else _v
 
         # Process unknown kwargs
         # ----------------------

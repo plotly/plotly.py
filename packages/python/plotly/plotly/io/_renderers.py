@@ -5,18 +5,32 @@ from copy import copy
 
 import six
 import os
+from distutils.version import LooseVersion
 
 from plotly import optional_imports
 
 from plotly.io._base_renderers import (
-    MimetypeRenderer, ExternalRenderer, PlotlyRenderer, NotebookRenderer,
-    KaggleRenderer, ColabRenderer, JsonRenderer, PngRenderer, JpegRenderer,
-    SvgRenderer, PdfRenderer, BrowserRenderer, IFrameRenderer,
-    SphinxGalleryRenderer)
+    MimetypeRenderer,
+    ExternalRenderer,
+    PlotlyRenderer,
+    NotebookRenderer,
+    KaggleRenderer,
+    AzureRenderer,
+    ColabRenderer,
+    JsonRenderer,
+    PngRenderer,
+    JpegRenderer,
+    SvgRenderer,
+    PdfRenderer,
+    BrowserRenderer,
+    IFrameRenderer,
+    SphinxGalleryRenderer,
+)
 from plotly.io._utils import validate_coerce_fig_to_dict
 
-ipython = optional_imports.get_module('IPython')
-ipython_display = optional_imports.get_module('IPython.display')
+ipython = optional_imports.get_module("IPython")
+ipython_display = optional_imports.get_module("IPython.display")
+nbformat = optional_imports.get_module("nbformat")
 
 
 # Renderer configuration class
@@ -25,6 +39,7 @@ class RenderersConfig(object):
     """
     Singleton object containing the current renderer configurations
     """
+
     def __init__(self):
         self._renderers = {}
         self._default_name = None
@@ -49,9 +64,13 @@ class RenderersConfig(object):
 
     def __setitem__(self, key, value):
         if not isinstance(value, (MimetypeRenderer, ExternalRenderer)):
-            raise ValueError("""\
+            raise ValueError(
+                """\
 Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
-    Received value with type: {typ}""".format(typ=type(value)))
+    Received value with type: {typ}""".format(
+                    typ=type(value)
+                )
+            )
 
         self._renderers[key] = value
 
@@ -123,7 +142,7 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         if not value:
             # _default_name should always be a string so we can do
             # pio.renderers.default.split('+')
-            self._default_name = ''
+            self._default_name = ""
             self._default_renderers = []
             return
 
@@ -160,8 +179,9 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         cls
             Only activate renders that are subclasses of this class
         """
-        to_activate_with_cls = [r for r in self._to_activate
-                                if cls and isinstance(r, cls)]
+        to_activate_with_cls = [
+            r for r in self._to_activate if cls and isinstance(r, cls)
+        ]
 
         while to_activate_with_cls:
             # Activate renderers from left to right so that right-most
@@ -169,8 +189,9 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
             renderer = to_activate_with_cls.pop(0)
             renderer.activate()
 
-        self._to_activate = [r for r in self._to_activate
-                             if not (cls and isinstance(r, cls))]
+        self._to_activate = [
+            r for r in self._to_activate if not (cls and isinstance(r, cls))
+        ]
 
     def _validate_coerce_renderers(self, renderers_string):
         """
@@ -188,13 +209,17 @@ Renderer must be a subclass of MimetypeRenderer or ExternalRenderer.
         """
         # Validate value
         if not isinstance(renderers_string, six.string_types):
-            raise ValueError('Renderer must be specified as a string')
+            raise ValueError("Renderer must be specified as a string")
 
-        renderer_names = renderers_string.split('+')
+        renderer_names = renderers_string.split("+")
         invalid = [name for name in renderer_names if name not in self]
         if invalid:
-            raise ValueError("""
-Invalid named renderer(s) received: {}""".format(str(invalid)))
+            raise ValueError(
+                """
+Invalid named renderer(s) received: {}""".format(
+                    str(invalid)
+                )
+            )
 
         return renderer_names
 
@@ -205,20 +230,23 @@ Renderers configuration
     Default renderer: {default}
     Available renderers:
 {available}
-""".format(default=repr(self.default),
-           available=self._available_renderers_str())
+""".format(
+            default=repr(self.default), available=self._available_renderers_str()
+        )
 
     def _available_renderers_str(self):
         """
         Return nicely wrapped string representation of all
         available renderer names
         """
-        available = '\n'.join(textwrap.wrap(
-            repr(list(self)),
-            width=79 - 8,
-            initial_indent=' ' * 8,
-            subsequent_indent=' ' * 9
-        ))
+        available = "\n".join(
+            textwrap.wrap(
+                repr(list(self)),
+                width=79 - 8,
+                initial_indent=" " * 8,
+                subsequent_indent=" " * 9,
+            )
+        )
         return available
 
     def _build_mime_bundle(self, fig_dict, renderers_string=None, **kwargs):
@@ -267,8 +295,7 @@ Renderers configuration
 
         return bundle
 
-    def _perform_external_rendering(
-            self, fig_dict, renderers_string=None, **kwargs):
+    def _perform_external_rendering(self, fig_dict, renderers_string=None, **kwargs):
         """
         Perform external rendering for each ExternalRenderer specified
         in either the default renderer string, or in the supplied
@@ -344,18 +371,22 @@ def show(fig, renderer=None, validate=True, **kwargs):
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Mimetype renderers
-    bundle = renderers._build_mime_bundle(
-        fig_dict, renderers_string=renderer, **kwargs)
+    bundle = renderers._build_mime_bundle(fig_dict, renderers_string=renderer, **kwargs)
     if bundle:
         if not ipython_display:
             raise ValueError(
-                'Mime type rendering requires ipython but it is not installed')
+                "Mime type rendering requires ipython but it is not installed"
+            )
+
+        if not nbformat or LooseVersion(nbformat.__version__) < LooseVersion("4.2.0"):
+            raise ValueError(
+                "Mime type rendering requires nbformat>=4.2.0 but it is not installed"
+            )
 
         ipython_display.display(bundle, raw=True)
 
     # external renderers
-    renderers._perform_external_rendering(
-        fig_dict, renderers_string=renderer, **kwargs)
+    renderers._perform_external_rendering(fig_dict, renderers_string=renderer, **kwargs)
 
 
 # Register renderers
@@ -363,38 +394,39 @@ def show(fig, renderer=None, validate=True, **kwargs):
 
 # Plotly mime type
 plotly_renderer = PlotlyRenderer()
-renderers['plotly_mimetype'] = plotly_renderer
-renderers['jupyterlab'] = plotly_renderer
-renderers['nteract'] = plotly_renderer
-renderers['vscode'] = plotly_renderer
+renderers["plotly_mimetype"] = plotly_renderer
+renderers["jupyterlab"] = plotly_renderer
+renderers["nteract"] = plotly_renderer
+renderers["vscode"] = plotly_renderer
 
 # HTML-based
 config = {}
-renderers['notebook'] = NotebookRenderer(config=config)
-renderers['notebook_connected'] = NotebookRenderer(
-    config=config, connected=True)
-renderers['kaggle'] = KaggleRenderer(config=config)
-renderers['colab'] = ColabRenderer(config=config)
+renderers["notebook"] = NotebookRenderer(config=config)
+renderers["notebook_connected"] = NotebookRenderer(config=config, connected=True)
+renderers["kaggle"] = KaggleRenderer(config=config)
+renderers["azure"] = AzureRenderer(config=config)
+renderers["colab"] = ColabRenderer(config=config)
 
 # JSON
-renderers['json'] = JsonRenderer()
+renderers["json"] = JsonRenderer()
 
 # Static Image
 img_kwargs = dict(height=450, width=700)
-renderers['png'] = PngRenderer(**img_kwargs)
+renderers["png"] = PngRenderer(**img_kwargs)
 jpeg_renderer = JpegRenderer(**img_kwargs)
-renderers['jpeg'] = jpeg_renderer
-renderers['jpg'] = jpeg_renderer
-renderers['svg'] = SvgRenderer(**img_kwargs)
-renderers['pdf'] = PdfRenderer(**img_kwargs)
+renderers["jpeg"] = jpeg_renderer
+renderers["jpg"] = jpeg_renderer
+renderers["svg"] = SvgRenderer(**img_kwargs)
+renderers["pdf"] = PdfRenderer(**img_kwargs)
 
 # External
-renderers['browser'] = BrowserRenderer(config=config)
-renderers['firefox'] = BrowserRenderer(config=config, using='firefox')
-renderers['chrome'] = BrowserRenderer(config=config, using='chrome')
-renderers['chromium'] = BrowserRenderer(config=config, using='chromium')
-renderers['iframe'] = IFrameRenderer(config=config)
-renderers['sphinx_gallery'] = SphinxGalleryRenderer()
+renderers["browser"] = BrowserRenderer(config=config)
+renderers["firefox"] = BrowserRenderer(config=config, using="firefox")
+renderers["chrome"] = BrowserRenderer(config=config, using="chrome")
+renderers["chromium"] = BrowserRenderer(config=config, using="chromium")
+renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
+renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
+renderers["sphinx_gallery"] = SphinxGalleryRenderer()
 
 # Set default renderer
 # --------------------
@@ -402,14 +434,18 @@ renderers['sphinx_gallery'] = SphinxGalleryRenderer()
 default_renderer = None
 
 # Handle the PLOTLY_RENDERER environment variable
-env_renderer = os.environ.get('PLOTLY_RENDERER', None)
+env_renderer = os.environ.get("PLOTLY_RENDERER", None)
 if env_renderer:
     try:
         renderers._validate_coerce_renderers(env_renderer)
     except ValueError:
-        raise ValueError("""
+        raise ValueError(
+            """
 Invalid named renderer(s) specified in the 'PLOTLY_RENDERER'
-environment variable: {env_renderer}""".format(env_renderer=env_renderer))
+environment variable: {env_renderer}""".format(
+                env_renderer=env_renderer
+            )
+        )
 
     default_renderer = env_renderer
 elif ipython and ipython.get_ipython():
@@ -419,30 +455,50 @@ elif ipython and ipython.get_ipython():
         try:
             import google.colab
 
-            default_renderer = 'colab'
+            default_renderer = "colab"
         except ImportError:
             pass
 
     # Check if we're running in a Kaggle notebook
-    if not default_renderer and os.path.exists('/kaggle/input'):
-        default_renderer = 'kaggle'
+    if not default_renderer and os.path.exists("/kaggle/input"):
+        default_renderer = "kaggle"
+
+    # Check if we're running in an Azure Notebook
+    if not default_renderer and "AZURE_NOTEBOOKS_HOST" in os.environ:
+        default_renderer = "azure"
 
     # Check if we're running in VSCode
-    if not default_renderer and 'VSCODE_PID' in os.environ:
-        default_renderer = 'vscode'
+    if not default_renderer and "VSCODE_PID" in os.environ:
+        default_renderer = "vscode"
+
+    # Check if we're running in nteract
+    if not default_renderer and "NTERACT_EXE" in os.environ:
+        default_renderer = "nteract"
+
+    # Check if we're running in spyder and orca is installed
+    if not default_renderer and "SPYDER_ARGS" in os.environ:
+        try:
+            from plotly.io.orca import validate_executable
+
+            validate_executable()
+            default_renderer = "svg"
+        except ValueError:
+            # orca not found
+            pass
 
     # Fallback to renderer combination that will work automatically
     # in the classic notebook (offline), jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
     if not default_renderer:
-        default_renderer = 'plotly_mimetype+notebook'
+        default_renderer = "plotly_mimetype+notebook"
 else:
     # If ipython isn't available, try to display figures in the default
     # browser
     import webbrowser
+
     try:
         webbrowser.get()
-        default_renderer = 'browser'
+        default_renderer = "browser"
     except webbrowser.Error:
         # Default browser could not be loaded
         pass

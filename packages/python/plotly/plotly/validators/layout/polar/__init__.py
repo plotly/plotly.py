@@ -1,18 +1,13 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-
-    def __init__(
-        self, plotly_name='uirevision', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="uirevision", parent_name="layout.polar", **kwargs):
         super(UirevisionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'none'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -21,26 +16,19 @@ import _plotly_utils.basevalidators
 
 
 class SectorValidator(_plotly_utils.basevalidators.InfoArrayValidator):
-
-    def __init__(
-        self, plotly_name='sector', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="sector", parent_name="layout.polar", **kwargs):
         super(SectorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
+            edit_type=kwargs.pop("edit_type", "plot"),
             items=kwargs.pop(
-                'items', [
-                    {
-                        'valType': 'number',
-                        'editType': 'plot'
-                    }, {
-                        'valType': 'number',
-                        'editType': 'plot'
-                    }
-                ]
+                "items",
+                [
+                    {"valType": "number", "editType": "plot"},
+                    {"valType": "number", "editType": "plot"},
+                ],
             ),
-            role=kwargs.pop('role', 'info'),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -49,16 +37,14 @@ import _plotly_utils.basevalidators
 
 
 class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='radialaxis', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="radialaxis", parent_name="layout.polar", **kwargs):
         super(RadialAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'RadialAxis'),
+            data_class_str=kwargs.pop("data_class_str", "RadialAxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             angle
                 Sets the angle (in degrees) from which the
                 radial axis is drawn. Note that by default,
@@ -263,9 +249,9 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.polar.radialaxis.Tickf
-                ormatstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.polar.ra
+                dialaxis.Tickformatstop instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.polar.radialaxis.tickformatstopdefaults),
@@ -312,8 +298,8 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objs.layout.polar.radialaxis.Title
-                instance or dict with compatible properties
+                plotly.graph_objects.layout.polar.radialaxis.Ti
+                tle instance or dict with compatible properties
             titlefont
                 Deprecated: Please use
                 layout.polar.radialaxis.title.font instead.
@@ -335,7 +321,7 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 preserving interaction like dragging. Default
                 is true when a cheater plot is present on the
                 axis, otherwise false
-"""
+""",
             ),
             **kwargs
         )
@@ -345,17 +331,14 @@ import _plotly_utils.basevalidators
 
 
 class HoleValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='hole', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="hole", parent_name="layout.polar", **kwargs):
         super(HoleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -364,16 +347,13 @@ import _plotly_utils.basevalidators
 
 
 class GridshapeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='gridshape', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="gridshape", parent_name="layout.polar", **kwargs):
         super(GridshapeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
-            values=kwargs.pop('values', ['circular', 'linear']),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
+            values=kwargs.pop("values", ["circular", "linear"]),
             **kwargs
         )
 
@@ -382,16 +362,14 @@ import _plotly_utils.basevalidators
 
 
 class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='domain', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="domain", parent_name="layout.polar", **kwargs):
         super(DomainValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Domain'),
+            data_class_str=kwargs.pop("data_class_str", "Domain"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             column
                 If there is a layout grid, use the domain for
                 this column in the grid for this polar subplot
@@ -405,7 +383,7 @@ class DomainValidator(_plotly_utils.basevalidators.CompoundValidator):
             y
                 Sets the vertical domain of this polar subplot
                 (in plot fraction).
-"""
+""",
             ),
             **kwargs
         )
@@ -415,15 +393,12 @@ import _plotly_utils.basevalidators
 
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-
-    def __init__(
-        self, plotly_name='bgcolor', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="bgcolor", parent_name="layout.polar", **kwargs):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'plot'),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -432,16 +407,13 @@ import _plotly_utils.basevalidators
 
 
 class BarmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
-    def __init__(
-        self, plotly_name='barmode', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="barmode", parent_name="layout.polar", **kwargs):
         super(BarmodeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['stack', 'overlay']),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["stack", "overlay"]),
             **kwargs
         )
 
@@ -450,17 +422,14 @@ import _plotly_utils.basevalidators
 
 
 class BargapValidator(_plotly_utils.basevalidators.NumberValidator):
-
-    def __init__(
-        self, plotly_name='bargap', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="bargap", parent_name="layout.polar", **kwargs):
         super(BargapValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'calc'),
-            max=kwargs.pop('max', 1),
-            min=kwargs.pop('min', 0),
-            role=kwargs.pop('role', 'style'),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            max=kwargs.pop("max", 1),
+            min=kwargs.pop("min", 0),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
@@ -469,16 +438,14 @@ import _plotly_utils.basevalidators
 
 
 class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
-
-    def __init__(
-        self, plotly_name='angularaxis', parent_name='layout.polar', **kwargs
-    ):
+    def __init__(self, plotly_name="angularaxis", parent_name="layout.polar", **kwargs):
         super(AngularAxisValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'AngularAxis'),
+            data_class_str=kwargs.pop("data_class_str", "AngularAxis"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             categoryarray
                 Sets the order in which categories on this axis
                 appear. Only has an effect if `categoryorder`
@@ -662,9 +629,9 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                plotly.graph_objs.layout.polar.angularaxis.Tick
-                formatstop instance or dict with compatible
-                properties
+                A tuple of plotly.graph_objects.layout.polar.an
+                gularaxis.Tickformatstop instances or dicts
+                with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.polar.angularaxis.tickformatstopdefaults),
@@ -725,7 +692,7 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 preserving interaction like dragging. Default
                 is true when a cheater plot is present on the
                 axis, otherwise false
-"""
+""",
             ),
             **kwargs
         )

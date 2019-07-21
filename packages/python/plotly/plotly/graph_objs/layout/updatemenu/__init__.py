@@ -1,5 +1,3 @@
-
-
 from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
 import copy as _copy
 
@@ -21,11 +19,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['b']
+        return self["b"]
 
     @b.setter
     def b(self, val):
-        self['b'] = val
+        self["b"] = val
 
     # l
     # -
@@ -42,11 +40,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['l']
+        return self["l"]
 
     @l.setter
     def l(self, val):
-        self['l'] = val
+        self["l"] = val
 
     # r
     # -
@@ -63,11 +61,11 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['r']
+        return self["r"]
 
     @r.setter
     def r(self, val):
-        self['r'] = val
+        self["r"] = val
 
     # t
     # -
@@ -83,17 +81,17 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['t']
+        return self["t"]
 
     @t.setter
     def t(self, val):
-        self['t'] = val
+        self["t"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.updatemenu'
+        return "layout.updatemenu"
 
     # Self properties description
     # ---------------------------
@@ -142,7 +140,7 @@ class Pad(_BaseLayoutHierarchyType):
         -------
         Pad
         """
-        super(Pad, self).__init__('pad')
+        super(Pad, self).__init__("pad")
 
         # Validate arg
         # ------------
@@ -162,29 +160,29 @@ an instance of plotly.graph_objs.layout.updatemenu.Pad"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.updatemenu import (pad as v_pad)
+        from plotly.validators.layout.updatemenu import pad as v_pad
 
         # Initialize validators
         # ---------------------
-        self._validators['b'] = v_pad.BValidator()
-        self._validators['l'] = v_pad.LValidator()
-        self._validators['r'] = v_pad.RValidator()
-        self._validators['t'] = v_pad.TValidator()
+        self._validators["b"] = v_pad.BValidator()
+        self._validators["l"] = v_pad.LValidator()
+        self._validators["r"] = v_pad.RValidator()
+        self._validators["t"] = v_pad.TValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('b', None)
-        self['b'] = b if b is not None else _v
-        _v = arg.pop('l', None)
-        self['l'] = l if l is not None else _v
-        _v = arg.pop('r', None)
-        self['r'] = r if r is not None else _v
-        _v = arg.pop('t', None)
-        self['t'] = t if t is not None else _v
+        _v = arg.pop("b", None)
+        self["b"] = b if b is not None else _v
+        _v = arg.pop("l", None)
+        self["l"] = l if l is not None else _v
+        _v = arg.pop("r", None)
+        self["r"] = r if r is not None else _v
+        _v = arg.pop("t", None)
+        self["t"] = t if t is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -241,22 +239,22 @@ class Font(_BaseLayoutHierarchyType):
                 orchid, palegoldenrod, palegreen, paleturquoise,
                 palevioletred, papayawhip, peachpuff, peru, pink,
                 plum, powderblue, purple, red, rosybrown,
-                royalblue, saddlebrown, salmon, sandybrown,
-                seagreen, seashell, sienna, silver, skyblue,
-                slateblue, slategray, slategrey, snow, springgreen,
-                steelblue, tan, teal, thistle, tomato, turquoise,
-                violet, wheat, white, whitesmoke, yellow,
-                yellowgreen
+                royalblue, rebeccapurple, saddlebrown, salmon,
+                sandybrown, seagreen, seashell, sienna, silver,
+                skyblue, slateblue, slategray, slategrey, snow,
+                springgreen, steelblue, tan, teal, thistle, tomato,
+                turquoise, violet, wheat, white, whitesmoke,
+                yellow, yellowgreen
 
         Returns
         -------
         str
         """
-        return self['color']
+        return self["color"]
 
     @color.setter
     def color(self, val):
-        self['color'] = val
+        self["color"] = val
 
     # family
     # ------
@@ -283,11 +281,11 @@ class Font(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['family']
+        return self["family"]
 
     @family.setter
     def family(self, val):
-        self['family'] = val
+        self["family"] = val
 
     # size
     # ----
@@ -301,17 +299,17 @@ class Font(_BaseLayoutHierarchyType):
         -------
         int|float
         """
-        return self['size']
+        return self["size"]
 
     @size.setter
     def size(self, val):
-        self['size'] = val
+        self["size"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.updatemenu'
+        return "layout.updatemenu"
 
     # Self properties description
     # ---------------------------
@@ -372,7 +370,7 @@ class Font(_BaseLayoutHierarchyType):
         -------
         Font
         """
-        super(Font, self).__init__('font')
+        super(Font, self).__init__("font")
 
         # Validate arg
         # ------------
@@ -392,26 +390,26 @@ an instance of plotly.graph_objs.layout.updatemenu.Font"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.updatemenu import (font as v_font)
+        from plotly.validators.layout.updatemenu import font as v_font
 
         # Initialize validators
         # ---------------------
-        self._validators['color'] = v_font.ColorValidator()
-        self._validators['family'] = v_font.FamilyValidator()
-        self._validators['size'] = v_font.SizeValidator()
+        self._validators["color"] = v_font.ColorValidator()
+        self._validators["family"] = v_font.FamilyValidator()
+        self._validators["size"] = v_font.SizeValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('color', None)
-        self['color'] = color if color is not None else _v
-        _v = arg.pop('family', None)
-        self['family'] = family if family is not None else _v
-        _v = arg.pop('size', None)
-        self['size'] = size if size is not None else _v
+        _v = arg.pop("color", None)
+        self["color"] = color if color is not None else _v
+        _v = arg.pop("family", None)
+        self["family"] = family if family is not None else _v
+        _v = arg.pop("size", None)
+        self["size"] = size if size is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -447,11 +445,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         list
         """
-        return self['args']
+        return self["args"]
 
     @args.setter
     def args(self, val):
-        self['args'] = val
+        self["args"] = val
 
     # execute
     # -------
@@ -473,11 +471,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['execute']
+        return self["execute"]
 
     @execute.setter
     def execute(self, val):
-        self['execute'] = val
+        self["execute"] = val
 
     # label
     # -----
@@ -494,11 +492,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['label']
+        return self["label"]
 
     @label.setter
     def label(self, val):
-        self['label'] = val
+        self["label"] = val
 
     # method
     # ------
@@ -519,11 +517,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Any
         """
-        return self['method']
+        return self["method"]
 
     @method.setter
     def method(self, val):
-        self['method'] = val
+        self["method"] = val
 
     # name
     # ----
@@ -546,11 +544,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['name']
+        return self["name"]
 
     @name.setter
     def name(self, val):
-        self['name'] = val
+        self["name"] = val
 
     # templateitemname
     # ----------------
@@ -574,11 +572,11 @@ class Button(_BaseLayoutHierarchyType):
         -------
         str
         """
-        return self['templateitemname']
+        return self["templateitemname"]
 
     @templateitemname.setter
     def templateitemname(self, val):
-        self['templateitemname'] = val
+        self["templateitemname"] = val
 
     # visible
     # -------
@@ -594,17 +592,17 @@ class Button(_BaseLayoutHierarchyType):
         -------
         bool
         """
-        return self['visible']
+        return self["visible"]
 
     @visible.setter
     def visible(self, val):
-        self['visible'] = val
+        self["visible"] = val
 
     # property parent name
     # --------------------
     @property
     def _parent_path_str(self):
-        return 'layout.updatemenu'
+        return "layout.updatemenu"
 
     # Self properties description
     # ---------------------------
@@ -723,7 +721,7 @@ class Button(_BaseLayoutHierarchyType):
         -------
         Button
         """
-        super(Button, self).__init__('buttons')
+        super(Button, self).__init__("buttons")
 
         # Validate arg
         # ------------
@@ -743,40 +741,40 @@ an instance of plotly.graph_objs.layout.updatemenu.Button"""
 
         # Handle skip_invalid
         # -------------------
-        self._skip_invalid = kwargs.pop('skip_invalid', False)
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
 
         # Import validators
         # -----------------
-        from plotly.validators.layout.updatemenu import (button as v_button)
+        from plotly.validators.layout.updatemenu import button as v_button
 
         # Initialize validators
         # ---------------------
-        self._validators['args'] = v_button.ArgsValidator()
-        self._validators['execute'] = v_button.ExecuteValidator()
-        self._validators['label'] = v_button.LabelValidator()
-        self._validators['method'] = v_button.MethodValidator()
-        self._validators['name'] = v_button.NameValidator()
-        self._validators['templateitemname'
-                        ] = v_button.TemplateitemnameValidator()
-        self._validators['visible'] = v_button.VisibleValidator()
+        self._validators["args"] = v_button.ArgsValidator()
+        self._validators["execute"] = v_button.ExecuteValidator()
+        self._validators["label"] = v_button.LabelValidator()
+        self._validators["method"] = v_button.MethodValidator()
+        self._validators["name"] = v_button.NameValidator()
+        self._validators["templateitemname"] = v_button.TemplateitemnameValidator()
+        self._validators["visible"] = v_button.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
-        _v = arg.pop('args', None)
-        self['args'] = args if args is not None else _v
-        _v = arg.pop('execute', None)
-        self['execute'] = execute if execute is not None else _v
-        _v = arg.pop('label', None)
-        self['label'] = label if label is not None else _v
-        _v = arg.pop('method', None)
-        self['method'] = method if method is not None else _v
-        _v = arg.pop('name', None)
-        self['name'] = name if name is not None else _v
-        _v = arg.pop('templateitemname', None)
-        self['templateitemname'
-            ] = templateitemname if templateitemname is not None else _v
-        _v = arg.pop('visible', None)
-        self['visible'] = visible if visible is not None else _v
+        _v = arg.pop("args", None)
+        self["args"] = args if args is not None else _v
+        _v = arg.pop("execute", None)
+        self["execute"] = execute if execute is not None else _v
+        _v = arg.pop("label", None)
+        self["label"] = label if label is not None else _v
+        _v = arg.pop("method", None)
+        self["method"] = method if method is not None else _v
+        _v = arg.pop("name", None)
+        self["name"] = name if name is not None else _v
+        _v = arg.pop("templateitemname", None)
+        self["templateitemname"] = (
+            templateitemname if templateitemname is not None else _v
+        )
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------

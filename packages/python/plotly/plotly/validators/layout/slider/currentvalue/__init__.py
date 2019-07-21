@@ -1,22 +1,16 @@
-
-
 import _plotly_utils.basevalidators
 
 
 class XanchorValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-
     def __init__(
-        self,
-        plotly_name='xanchor',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="xanchor", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(XanchorValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
-            values=kwargs.pop('values', ['left', 'center', 'right']),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["left", "center", "right"]),
             **kwargs
         )
 
@@ -25,18 +19,14 @@ import _plotly_utils.basevalidators
 
 
 class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
-
     def __init__(
-        self,
-        plotly_name='visible',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="visible", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -45,18 +35,14 @@ import _plotly_utils.basevalidators
 
 
 class SuffixValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='suffix',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="suffix", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(SuffixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -65,18 +51,14 @@ import _plotly_utils.basevalidators
 
 
 class PrefixValidator(_plotly_utils.basevalidators.StringValidator):
-
     def __init__(
-        self,
-        plotly_name='prefix',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="prefix", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(PrefixValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -85,18 +67,14 @@ import _plotly_utils.basevalidators
 
 
 class OffsetValidator(_plotly_utils.basevalidators.NumberValidator):
-
     def __init__(
-        self,
-        plotly_name='offset',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="offset", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(OffsetValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop('edit_type', 'arraydraw'),
-            role=kwargs.pop('role', 'info'),
+            edit_type=kwargs.pop("edit_type", "arraydraw"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -105,19 +83,16 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-
     def __init__(
-        self,
-        plotly_name='font',
-        parent_name='layout.slider.currentvalue',
-        **kwargs
+        self, plotly_name="font", parent_name="layout.slider.currentvalue", **kwargs
     ):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop('data_class_str', 'Font'),
+            data_class_str=kwargs.pop("data_class_str", "Font"),
             data_docs=kwargs.pop(
-                'data_docs', """
+                "data_docs",
+                """
             color
 
             family
@@ -138,7 +113,7 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Narrow", "Raleway", "Times New Roman".
             size
 
-"""
+""",
             ),
             **kwargs
         )

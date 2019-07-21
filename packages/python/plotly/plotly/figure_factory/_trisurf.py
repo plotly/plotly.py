@@ -4,7 +4,7 @@ from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.graph_objs import graph_objs
 
-np = optional_imports.get_module('numpy')
+np = optional_imports.get_module("numpy")
 
 
 def map_face2color(face, colormap, scale, vmin, vmax):
@@ -18,10 +18,12 @@ def map_face2color(face, colormap, scale, vmin, vmax):
 
     """
     if vmin >= vmax:
-        raise exceptions.PlotlyError("Incorrect relation between vmin "
-                                     "and vmax. The vmin value cannot be "
-                                     "bigger than or equal to the value "
-                                     "of vmax.")
+        raise exceptions.PlotlyError(
+            "Incorrect relation between vmin "
+            "and vmax. The vmin value cannot be "
+            "bigger than or equal to the value "
+            "of vmax."
+        )
     if len(colormap) == 1:
         # color each triangle face with the same color in colormap
         face_color = colormap[0]
@@ -39,12 +41,12 @@ def map_face2color(face, colormap, scale, vmin, vmax):
             # find the normalized distance t of a triangle face between
             # vmin and vmax where the distance is between 0 and 1
             t = (face - vmin) / float((vmax - vmin))
-            low_color_index = int(t / (1./(len(colormap) - 1)))
+            low_color_index = int(t / (1.0 / (len(colormap) - 1)))
 
             face_color = clrs.find_intermediate_color(
                 colormap[low_color_index],
                 colormap[low_color_index + 1],
-                t * (len(colormap) - 1) - low_color_index
+                t * (len(colormap) - 1) - low_color_index,
             )
 
             face_color = clrs.convert_to_RGB_255(face_color)
@@ -55,7 +57,7 @@ def map_face2color(face, colormap, scale, vmin, vmax):
 
             low_color_index = 0
             for k in range(len(scale) - 1):
-                if scale[k] <= t < scale[k+1]:
+                if scale[k] <= t < scale[k + 1]:
                     break
                 low_color_index += 1
 
@@ -65,7 +67,7 @@ def map_face2color(face, colormap, scale, vmin, vmax):
             face_color = clrs.find_intermediate_color(
                 colormap[low_color_index],
                 colormap[low_color_index + 1],
-                (t - low_scale_val)/(high_scale_val - low_scale_val)
+                (t - low_scale_val) / (high_scale_val - low_scale_val),
             )
 
             face_color = clrs.convert_to_RGB_255(face_color)
@@ -73,16 +75,28 @@ def map_face2color(face, colormap, scale, vmin, vmax):
         return face_color
 
 
-def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
-            colormap=None, color_func=None, plot_edges=False, x_edge=None,
-            y_edge=None, z_edge=None, facecolor=None):
+def trisurf(
+    x,
+    y,
+    z,
+    simplices,
+    show_colorbar,
+    edges_color,
+    scale,
+    colormap=None,
+    color_func=None,
+    plot_edges=False,
+    x_edge=None,
+    y_edge=None,
+    z_edge=None,
+    facecolor=None,
+):
     """
     Refer to FigureFactory.create_trisurf() for docstring
     """
     # numpy import check
     if not np:
-        raise ImportError("FigureFactory._trisurf() requires "
-                          "numpy imported.")
+        raise ImportError("FigureFactory._trisurf() requires " "numpy imported.")
     points3D = np.vstack((x, y, z)).T
     simplices = np.atleast_2d(simplices)
 
@@ -96,13 +110,15 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     elif isinstance(color_func, (list, np.ndarray)):
         # Pre-computed list / array of values to map onto color
         if len(color_func) != len(simplices):
-            raise ValueError("If color_func is a list/array, it must "
-                             "be the same length as simplices.")
+            raise ValueError(
+                "If color_func is a list/array, it must "
+                "be the same length as simplices."
+            )
 
         # convert all colors in color_func to rgb
         for index in range(len(color_func)):
             if isinstance(color_func[index], str):
-                if '#' in color_func[index]:
+                if "#" in color_func[index]:
                     foo = clrs.hex_to_rgb(color_func[index])
                     color_func[index] = clrs.label_rgb(foo)
 
@@ -133,16 +149,18 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
         if facecolor is None:
             facecolor = []
         for index in range(len(mean_dists)):
-            color = map_face2color(mean_dists[index], colormap, scale,
-                                   min_mean_dists, max_mean_dists)
+            color = map_face2color(
+                mean_dists[index], colormap, scale, min_mean_dists, max_mean_dists
+            )
             facecolor.append(color)
 
     # Make sure facecolor is a list so output is consistent across Pythons
     facecolor = np.asarray(facecolor)
     ii, jj, kk = simplices.T
 
-    triangles = graph_objs.Mesh3d(x=x, y=y, z=z, facecolor=facecolor,
-                                  i=ii, j=jj, k=kk, name='')
+    triangles = graph_objs.Mesh3d(
+        x=x, y=y, z=z, facecolor=facecolor, i=ii, j=jj, k=kk, name=""
+    )
 
     mean_dists_are_numbers = not isinstance(mean_dists[0], str)
 
@@ -155,14 +173,15 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
             x=x[:1],
             y=y[:1],
             z=z[:1],
-            mode='markers',
+            mode="markers",
             marker=dict(
                 size=0.1,
                 color=[min_mean_dists, max_mean_dists],
                 colorscale=colorscale,
-                showscale=True),
-            hoverinfo='none',
-            showlegend=False
+                showscale=True,
+            ),
+            hoverinfo="none",
+            showlegend=False,
         )
 
     # the triangle sides are not plotted
@@ -178,8 +197,9 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     is_none = [ii is None for ii in [x_edge, y_edge, z_edge]]
     if any(is_none):
         if not all(is_none):
-            raise ValueError("If any (x_edge, y_edge, z_edge) is None, "
-                             "all must be None")
+            raise ValueError(
+                "If any (x_edge, y_edge, z_edge) is None, " "all must be None"
+            )
         else:
             x_edge = []
             y_edge = []
@@ -188,12 +208,15 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     # Pull indices we care about, then add a None column to separate tris
     ixs_triangles = [0, 1, 2, 0]
     pull_edges = tri_vertices[:, ixs_triangles, :]
-    x_edge_pull = np.hstack([pull_edges[:, :, 0],
-                             np.tile(None, [pull_edges.shape[0], 1])])
-    y_edge_pull = np.hstack([pull_edges[:, :, 1],
-                             np.tile(None, [pull_edges.shape[0], 1])])
-    z_edge_pull = np.hstack([pull_edges[:, :, 2],
-                             np.tile(None, [pull_edges.shape[0], 1])])
+    x_edge_pull = np.hstack(
+        [pull_edges[:, :, 0], np.tile(None, [pull_edges.shape[0], 1])]
+    )
+    y_edge_pull = np.hstack(
+        [pull_edges[:, :, 1], np.tile(None, [pull_edges.shape[0], 1])]
+    )
+    z_edge_pull = np.hstack(
+        [pull_edges[:, :, 2], np.tile(None, [pull_edges.shape[0], 1])]
+    )
 
     # Now unravel the edges into a 1-d vector for plotting
     x_edge = np.hstack([x_edge, x_edge_pull.reshape([1, -1])[0]])
@@ -201,17 +224,18 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
     z_edge = np.hstack([z_edge, z_edge_pull.reshape([1, -1])[0]])
 
     if not (len(x_edge) == len(y_edge) == len(z_edge)):
-        raise exceptions.PlotlyError("The lengths of x_edge, y_edge and "
-                                     "z_edge are not the same.")
+        raise exceptions.PlotlyError(
+            "The lengths of x_edge, y_edge and " "z_edge are not the same."
+        )
 
     # define the lines for plotting
     lines = graph_objs.Scatter3d(
-        x=x_edge, y=y_edge, z=z_edge, mode='lines',
-        line=graph_objs.scatter3d.Line(
-            color=edges_color,
-            width=1.5
-        ),
-        showlegend=False
+        x=x_edge,
+        y=y_edge,
+        z=z_edge,
+        mode="lines",
+        line=graph_objs.scatter3d.Line(color=edges_color, width=1.5),
+        showlegend=False,
     )
 
     if mean_dists_are_numbers and show_colorbar is True:
@@ -220,15 +244,26 @@ def trisurf(x, y, z, simplices, show_colorbar, edges_color, scale,
         return [triangles, lines]
 
 
-def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
-                   scale=None, color_func=None, title='Trisurf Plot',
-                   plot_edges=True, showbackground=True,
-                   backgroundcolor='rgb(230, 230, 230)',
-                   gridcolor='rgb(255, 255, 255)',
-                   zerolinecolor='rgb(255, 255, 255)',
-                   edges_color='rgb(50, 50, 50)',
-                   height=800, width=800,
-                   aspectratio=None):
+def create_trisurf(
+    x,
+    y,
+    z,
+    simplices,
+    colormap=None,
+    show_colorbar=True,
+    scale=None,
+    color_func=None,
+    title="Trisurf Plot",
+    plot_edges=True,
+    showbackground=True,
+    backgroundcolor="rgb(230, 230, 230)",
+    gridcolor="rgb(255, 255, 255)",
+    zerolinecolor="rgb(255, 255, 255)",
+    edges_color="rgb(50, 50, 50)",
+    height=800,
+    width=800,
+    aspectratio=None,
+):
     """
     Returns figure for a triangulated surface plot
 
@@ -452,18 +487,26 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
     ```
     """
     if aspectratio is None:
-        aspectratio = {'x': 1, 'y': 1, 'z': 1}
+        aspectratio = {"x": 1, "y": 1, "z": 1}
 
     # Validate colormap
     clrs.validate_colors(colormap)
     colormap, scale = clrs.convert_colors_to_same_type(
-        colormap, colortype='tuple',
-        return_default_colors=True, scale=scale
+        colormap, colortype="tuple", return_default_colors=True, scale=scale
     )
 
-    data1 = trisurf(x, y, z, simplices, show_colorbar=show_colorbar,
-                    color_func=color_func, colormap=colormap, scale=scale,
-                    edges_color=edges_color, plot_edges=plot_edges)
+    data1 = trisurf(
+        x,
+        y,
+        z,
+        simplices,
+        show_colorbar=show_colorbar,
+        color_func=color_func,
+        colormap=colormap,
+        scale=scale,
+        edges_color=edges_color,
+        plot_edges=plot_edges,
+    )
 
     axis = dict(
         showbackground=showbackground,
@@ -480,10 +523,9 @@ def create_trisurf(x, y, z, simplices, colormap=None, show_colorbar=True,
             yaxis=graph_objs.layout.scene.YAxis(**axis),
             zaxis=graph_objs.layout.scene.ZAxis(**axis),
             aspectratio=dict(
-                x=aspectratio['x'],
-                y=aspectratio['y'],
-                z=aspectratio['z']),
-        )
+                x=aspectratio["x"], y=aspectratio["y"], z=aspectratio["z"]
+            ),
+        ),
     )
 
     return graph_objs.Figure(data=data1, layout=layout)
