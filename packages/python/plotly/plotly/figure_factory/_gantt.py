@@ -9,9 +9,9 @@ import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
 
-pd = optional_imports.get_module('pandas')
+pd = optional_imports.get_module("pandas")
 
-REQUIRED_GANTT_KEYS = ['Task', 'Start', 'Finish']
+REQUIRED_GANTT_KEYS = ["Task", "Start", "Finish"]
 
 
 def get_corner_points(x0, y0, x1, y1):
@@ -25,10 +25,8 @@ def get_corner_points(x0, y0, x1, y1):
     :return: ([x], [y]), tuple of lists containing the x and y values
     """
 
-    return (
-        [x0, x1, x1, x0],
-        [y0, y0, y1, y1]
-    )
+    return ([x0, x1, x1, x0], [y0, y0, y1, y1])
+
 
 def validate_gantt(df):
     """
@@ -40,8 +38,7 @@ def validate_gantt(df):
             if key not in df:
                 raise exceptions.PlotlyError(
                     "The columns in your dataframe must include the "
-                    "following keys: {0}".format(
-                        ', '.join(REQUIRED_GANTT_KEYS))
+                    "following keys: {0}".format(", ".join(REQUIRED_GANTT_KEYS))
                 )
 
         num_of_rows = len(df.index)
@@ -56,22 +53,36 @@ def validate_gantt(df):
 
     # validate if df is a list
     if not isinstance(df, list):
-        raise exceptions.PlotlyError("You must input either a dataframe "
-                                     "or a list of dictionaries.")
+        raise exceptions.PlotlyError(
+            "You must input either a dataframe " "or a list of dictionaries."
+        )
 
     # validate if df is empty
     if len(df) <= 0:
-        raise exceptions.PlotlyError("Your list is empty. It must contain "
-                                     "at least one dictionary.")
+        raise exceptions.PlotlyError(
+            "Your list is empty. It must contain " "at least one dictionary."
+        )
     if not isinstance(df[0], dict):
-        raise exceptions.PlotlyError("Your list must only "
-                                     "include dictionaries.")
+        raise exceptions.PlotlyError("Your list must only " "include dictionaries.")
     return df
 
 
-def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
-          width, tasks=None, task_names=None, data=None, group_tasks=False,
-          show_hover_fill=True, show_colorbar=True):
+def gantt(
+    chart,
+    colors,
+    title,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+    show_hover_fill=True,
+    show_colorbar=True,
+):
     """
     Refer to create_gantt() for docstring
     """
@@ -83,11 +94,13 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         data = []
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     # create a scatter trace for every task group
@@ -103,7 +116,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         "y": [],
         "mode": "none",
         "fill": "toself",
-        "hoverinfo": hoverinfo
+        "hoverinfo": hoverinfo,
     }
 
     scatter_data_dict["centers"] = {
@@ -113,12 +126,12 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         "text": [],
         "marker": dict(color=[], size=1),
         "name": "",
-        "showlegend": False
+        "showlegend": False,
     }
 
     # create the list of task names
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
+        tn = tasks[index]["name"]
         # Is added to task_names if group_tasks is set to False,
         # or if the option is used (True) it only adds them if the
         # name is not already in the list
@@ -131,22 +144,22 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
 
     color_index = 0
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
-        del tasks[index]['name']
+        tn = tasks[index]["name"]
+        del tasks[index]["name"]
 
         # If group_tasks is True, all tasks with the same name belong
         # to the same row.
         groupID = index
         if group_tasks:
             groupID = task_names.index(tn)
-        tasks[index]['y0'] = groupID - bar_width
-        tasks[index]['y1'] = groupID + bar_width
+        tasks[index]["y0"] = groupID - bar_width
+        tasks[index]["y1"] = groupID + bar_width
 
         # check if colors need to be looped
         if color_index >= len(colors):
             color_index = 0
-        tasks[index]['fillcolor'] = colors[color_index]
-        color_id = tasks[index]['fillcolor']
+        tasks[index]["fillcolor"] = colors[color_index]
+        color_id = tasks[index]["fillcolor"]
 
         if color_id not in scatter_data_dict:
             scatter_data_dict[color_id] = copy.deepcopy(scatter_data_template)
@@ -157,22 +170,24 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         # if there are already values append the gap
         if len(scatter_data_dict[color_id]["x"]) > 0:
             # a gap on the scatterplot separates the rectangles from each other
-            scatter_data_dict[color_id]["x"].append(scatter_data_dict[color_id]["x"][-1])
+            scatter_data_dict[color_id]["x"].append(
+                scatter_data_dict[color_id]["x"][-1]
+            )
             scatter_data_dict[color_id]["y"].append(None)
 
         xs, ys = get_corner_points(
-            tasks[index]['x0'],
-            tasks[index]['y0'],
-            tasks[index]['x1'],
-            tasks[index]['y1']
+            tasks[index]["x0"],
+            tasks[index]["y0"],
+            tasks[index]["x1"],
+            tasks[index]["y1"],
         )
 
         scatter_data_dict[color_id]["x"] += xs
         scatter_data_dict[color_id]["y"] += ys
 
         # append dummy markers for showing start and end of interval
-        scatter_data_dict["centers"]["x"].append(tasks[index]['x0'])
-        scatter_data_dict["centers"]["x"].append(tasks[index]['x1'])
+        scatter_data_dict["centers"]["x"].append(tasks[index]["x0"])
+        scatter_data_dict["centers"]["x"].append(tasks[index]["x1"])
         scatter_data_dict["centers"]["y"].append(groupID)
         scatter_data_dict["centers"]["y"].append(groupID)
         scatter_data_dict["centers"]["marker"]["color"].append(color_id)
@@ -181,7 +196,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         if "description" in tasks[index]:
             scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
             scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
-            del tasks[index]['description']
+            del tasks[index]["description"]
         else:
             scatter_data_dict["centers"]["text"].append(None)
             scatter_data_dict["centers"]["text"].append(None)
@@ -196,7 +211,7 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -209,42 +224,44 @@ def gantt(chart, colors, title, bar_width, showgrid_x, showgrid_y, height,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
 
-    fig = dict(data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout)
+    fig = dict(
+        data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout
+    )
     return fig
 
 
-def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
-                     showgrid_x, showgrid_y, height, width, tasks=None,
-                     task_names=None, data=None, group_tasks=False,
-                     show_hover_fill=True):
+def gantt_colorscale(
+    chart,
+    colors,
+    title,
+    index_col,
+    show_colorbar,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+    show_hover_fill=True,
+):
     """
     Refer to FigureFactory.create_gantt() for docstring
     """
@@ -257,11 +274,13 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
     showlegend = False
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     # create a scatter trace for every task group
@@ -278,7 +297,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         "mode": "none",
         "fill": "toself",
         "showlegend": False,
-        "hoverinfo" : hoverinfo
+        "hoverinfo": hoverinfo,
     }
 
     scatter_data_dict["centers"] = {
@@ -286,10 +305,9 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         "y": [],
         "mode": "markers",
         "text": [],
-        "marker": dict(color=[],
-                       size=1),
+        "marker": dict(color=[], size=1),
         "name": "",
-        "showlegend": False
+        "showlegend": False,
     }
 
     index_vals = []
@@ -312,7 +330,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         # create the list of task names
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
+            tn = tasks[index]["name"]
             # Is added to task_names if group_tasks is set to False,
             # or if the option is used (True) it only adds them if the
             # name is not already in the list
@@ -324,16 +342,16 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             task_names.reverse()
 
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
-            del tasks[index]['name']
+            tn = tasks[index]["name"]
+            del tasks[index]["name"]
 
             # If group_tasks is True, all tasks with the same name belong
             # to the same row.
             groupID = index
             if group_tasks:
                 groupID = task_names.index(tn)
-            tasks[index]['y0'] = groupID - bar_width
-            tasks[index]['y1'] = groupID + bar_width
+            tasks[index]["y0"] = groupID - bar_width
+            tasks[index]["y1"] = groupID + bar_width
 
             # unlabel color
             colors = clrs.color_parser(colors, clrs.unlabel_rgb)
@@ -341,14 +359,10 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             highcolor = colors[1]
 
             intermed = (chart[index][index_col]) / 100.0
-            intermed_color = clrs.find_intermediate_color(
-                lowcolor, highcolor, intermed
-            )
-            intermed_color = clrs.color_parser(
-                intermed_color, clrs.label_rgb
-            )
-            tasks[index]['fillcolor'] = intermed_color
-            color_id = tasks[index]['fillcolor']
+            intermed_color = clrs.find_intermediate_color(lowcolor, highcolor, intermed)
+            intermed_color = clrs.color_parser(intermed_color, clrs.label_rgb)
+            tasks[index]["fillcolor"] = intermed_color
+            color_id = tasks[index]["fillcolor"]
 
             if color_id not in scatter_data_dict:
                 scatter_data_dict[color_id] = copy.deepcopy(scatter_data_template)
@@ -362,22 +376,24 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             # if there are already values append the gap
             if len(scatter_data_dict[color_id]["x"]) > 0:
                 # a gap on the scatterplot separates the rectangles from each other
-                scatter_data_dict[color_id]["x"].append(scatter_data_dict[color_id]["x"][-1])
+                scatter_data_dict[color_id]["x"].append(
+                    scatter_data_dict[color_id]["x"][-1]
+                )
                 scatter_data_dict[color_id]["y"].append(None)
 
             xs, ys = get_corner_points(
-                tasks[index]['x0'],
-                tasks[index]['y0'],
-                tasks[index]['x1'],
-                tasks[index]['y1']
+                tasks[index]["x0"],
+                tasks[index]["y0"],
+                tasks[index]["x1"],
+                tasks[index]["y1"],
             )
 
             scatter_data_dict[color_id]["x"] += xs
             scatter_data_dict[color_id]["y"] += ys
 
             # append dummy markers for showing start and end of interval
-            scatter_data_dict["centers"]["x"].append(tasks[index]['x0'])
-            scatter_data_dict["centers"]["x"].append(tasks[index]['x1'])
+            scatter_data_dict["centers"]["x"].append(tasks[index]["x0"])
+            scatter_data_dict["centers"]["x"].append(tasks[index]["x1"])
             scatter_data_dict["centers"]["y"].append(groupID)
             scatter_data_dict["centers"]["y"].append(groupID)
             scatter_data_dict["centers"]["marker"]["color"].append(color_id)
@@ -386,17 +402,19 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             if "description" in tasks[index]:
                 scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
                 scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
-                del tasks[index]['description']
+                del tasks[index]["description"]
             else:
                 scatter_data_dict["centers"]["text"].append(None)
                 scatter_data_dict["centers"]["text"].append(None)
 
         if show_colorbar is True:
-            scatter_data_dict["centers"]["marker"].update(dict(
-                colorscale = [[0, colors[0]], [1, colors[1]]],
-                showscale = True,
-                cmax = 100,
-                cmin = 0)
+            scatter_data_dict["centers"]["marker"].update(
+                dict(
+                    colorscale=[[0, colors[0]], [1, colors[1]]],
+                    showscale=True,
+                    cmax=100,
+                    cmin=0,
+                )
             )
 
     if isinstance(chart[0][index_col], str):
@@ -426,7 +444,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
 
         # create the list of task names
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
+            tn = tasks[index]["name"]
             # Is added to task_names if group_tasks is set to False,
             # or if the option is used (True) it only adds them if the
             # name is not already in the list
@@ -438,21 +456,19 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             task_names.reverse()
 
         for index in range(len(tasks)):
-            tn = tasks[index]['name']
-            del tasks[index]['name']
+            tn = tasks[index]["name"]
+            del tasks[index]["name"]
 
             # If group_tasks is True, all tasks with the same name belong
             # to the same row.
             groupID = index
             if group_tasks:
                 groupID = task_names.index(tn)
-            tasks[index]['y0'] = groupID - bar_width
-            tasks[index]['y1'] = groupID + bar_width
+            tasks[index]["y0"] = groupID - bar_width
+            tasks[index]["y1"] = groupID + bar_width
 
-            tasks[index]['fillcolor'] = index_vals_dict[
-                chart[index][index_col]
-            ]
-            color_id = tasks[index]['fillcolor']
+            tasks[index]["fillcolor"] = index_vals_dict[chart[index][index_col]]
+            color_id = tasks[index]["fillcolor"]
 
             if color_id not in scatter_data_dict:
                 scatter_data_dict[color_id] = copy.deepcopy(scatter_data_template)
@@ -466,22 +482,24 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             # if there are already values append the gap
             if len(scatter_data_dict[color_id]["x"]) > 0:
                 # a gap on the scatterplot separates the rectangles from each other
-                scatter_data_dict[color_id]["x"].append(scatter_data_dict[color_id]["x"][-1])
+                scatter_data_dict[color_id]["x"].append(
+                    scatter_data_dict[color_id]["x"][-1]
+                )
                 scatter_data_dict[color_id]["y"].append(None)
 
             xs, ys = get_corner_points(
-                tasks[index]['x0'],
-                tasks[index]['y0'],
-                tasks[index]['x1'],
-                tasks[index]['y1']
+                tasks[index]["x0"],
+                tasks[index]["y0"],
+                tasks[index]["x1"],
+                tasks[index]["y1"],
             )
 
             scatter_data_dict[color_id]["x"] += xs
             scatter_data_dict[color_id]["y"] += ys
 
             # append dummy markers for showing start and end of interval
-            scatter_data_dict["centers"]["x"].append(tasks[index]['x0'])
-            scatter_data_dict["centers"]["x"].append(tasks[index]['x1'])
+            scatter_data_dict["centers"]["x"].append(tasks[index]["x0"])
+            scatter_data_dict["centers"]["x"].append(tasks[index]["x1"])
             scatter_data_dict["centers"]["y"].append(groupID)
             scatter_data_dict["centers"]["y"].append(groupID)
             scatter_data_dict["centers"]["marker"]["color"].append(color_id)
@@ -490,7 +508,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             if "description" in tasks[index]:
                 scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
                 scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
-                del tasks[index]['description']
+                del tasks[index]["description"]
             else:
                 scatter_data_dict["centers"]["text"].append(None)
                 scatter_data_dict["centers"]["text"].append(None)
@@ -507,7 +525,7 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -520,41 +538,44 @@ def gantt_colorscale(chart, colors, title, index_col, show_colorbar, bar_width,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
 
-    fig = dict(data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout)
+    fig = dict(
+        data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout
+    )
     return fig
 
 
-def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
-               showgrid_x, showgrid_y, height, width, tasks=None,
-               task_names=None, data=None, group_tasks=False, show_hover_fill=True):
+def gantt_dict(
+    chart,
+    colors,
+    title,
+    index_col,
+    show_colorbar,
+    bar_width,
+    showgrid_x,
+    showgrid_y,
+    height,
+    width,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+    show_hover_fill=True,
+):
     """
     Refer to FigureFactory.create_gantt() for docstring
     """
@@ -568,11 +589,13 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
     showlegend = False
 
     for index in range(len(chart)):
-        task = dict(x0=chart[index]['Start'],
-                    x1=chart[index]['Finish'],
-                    name=chart[index]['Task'])
-        if 'Description' in chart[index]:
-            task['description'] = chart[index]['Description']
+        task = dict(
+            x0=chart[index]["Start"],
+            x1=chart[index]["Finish"],
+            name=chart[index]["Task"],
+        )
+        if "Description" in chart[index]:
+            task["description"] = chart[index]["Description"]
         tasks.append(task)
 
     # create a scatter trace for every task group
@@ -588,7 +611,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         "y": [],
         "mode": "none",
         "fill": "toself",
-        "hoverinfo" : hoverinfo
+        "hoverinfo": hoverinfo,
     }
 
     scatter_data_dict["centers"] = {
@@ -598,7 +621,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         "text": [],
         "marker": dict(color=[], size=1),
         "name": "",
-        "showlegend": False
+        "showlegend": False,
     }
 
     index_vals = []
@@ -618,7 +641,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
 
     # create the list of task names
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
+        tn = tasks[index]["name"]
         # Is added to task_names if group_tasks is set to False,
         # or if the option is used (True) it only adds them if the
         # name is not already in the list
@@ -630,19 +653,19 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         task_names.reverse()
 
     for index in range(len(tasks)):
-        tn = tasks[index]['name']
-        del tasks[index]['name']
+        tn = tasks[index]["name"]
+        del tasks[index]["name"]
 
         # If group_tasks is True, all tasks with the same name belong
         # to the same row.
         groupID = index
         if group_tasks:
             groupID = task_names.index(tn)
-        tasks[index]['y0'] = groupID - bar_width
-        tasks[index]['y1'] = groupID + bar_width
+        tasks[index]["y0"] = groupID - bar_width
+        tasks[index]["y1"] = groupID + bar_width
 
-        tasks[index]['fillcolor'] = colors[chart[index][index_col]]
-        color_id = tasks[index]['fillcolor']
+        tasks[index]["fillcolor"] = colors[chart[index][index_col]]
+        color_id = tasks[index]["fillcolor"]
 
         if color_id not in scatter_data_dict:
             scatter_data_dict[color_id] = copy.deepcopy(scatter_data_template)
@@ -652,22 +675,24 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         # if there are already values append the gap
         if len(scatter_data_dict[color_id]["x"]) > 0:
             # a gap on the scatterplot separates the rectangles from each other
-            scatter_data_dict[color_id]["x"].append(scatter_data_dict[color_id]["x"][-1])
+            scatter_data_dict[color_id]["x"].append(
+                scatter_data_dict[color_id]["x"][-1]
+            )
             scatter_data_dict[color_id]["y"].append(None)
 
         xs, ys = get_corner_points(
-            tasks[index]['x0'],
-            tasks[index]['y0'],
-            tasks[index]['x1'],
-            tasks[index]['y1']
+            tasks[index]["x0"],
+            tasks[index]["y0"],
+            tasks[index]["x1"],
+            tasks[index]["y1"],
         )
 
         scatter_data_dict[color_id]["x"] += xs
         scatter_data_dict[color_id]["y"] += ys
 
         # append dummy markers for showing start and end of interval
-        scatter_data_dict["centers"]["x"].append(tasks[index]['x0'])
-        scatter_data_dict["centers"]["x"].append(tasks[index]['x1'])
+        scatter_data_dict["centers"]["x"].append(tasks[index]["x0"])
+        scatter_data_dict["centers"]["x"].append(tasks[index]["x1"])
         scatter_data_dict["centers"]["y"].append(groupID)
         scatter_data_dict["centers"]["y"].append(groupID)
         scatter_data_dict["centers"]["marker"]["color"].append(color_id)
@@ -676,7 +701,7 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
         if "description" in tasks[index]:
             scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
             scatter_data_dict["centers"]["text"].append(tasks[index]["description"])
-            del tasks[index]['description']
+            del tasks[index]["description"]
         else:
             scatter_data_dict["centers"]["text"].append(None)
             scatter_data_dict["centers"]["text"].append(None)
@@ -687,14 +712,13 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
     for index_value in index_vals:
         scatter_data_dict[colors[index_value]]["name"] = str(index_value)
 
-
     layout = dict(
         title=title,
         showlegend=showlegend,
         height=height,
         width=width,
         shapes=[],
-        hovermode='closest',
+        hovermode="closest",
         yaxis=dict(
             showgrid=showgrid_y,
             ticktext=task_names,
@@ -707,42 +731,45 @@ def gantt_dict(chart, colors, title, index_col, show_colorbar, bar_width,
             showgrid=showgrid_x,
             zeroline=False,
             rangeselector=dict(
-                buttons=list([
-                    dict(count=7,
-                         label='1w',
-                         step='day',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='1m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=6,
-                         label='6m',
-                         step='month',
-                         stepmode='backward'),
-                    dict(count=1,
-                         label='YTD',
-                         step='year',
-                         stepmode='todate'),
-                    dict(count=1,
-                         label='1y',
-                         step='year',
-                         stepmode='backward'),
-                    dict(step='all')
-                ])
+                buttons=list(
+                    [
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all"),
+                    ]
+                )
             ),
-            type='date'
-        )
+            type="date",
+        ),
     )
 
-    fig = dict(data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout)
+    fig = dict(
+        data=[scatter_data_dict[k] for k in sorted(scatter_data_dict)], layout=layout
+    )
     return fig
 
 
-def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
-                 reverse_colors=False, title='Gantt Chart', bar_width=0.2,
-                 showgrid_x=False, showgrid_y=False, height=600, width=900,
-                 tasks=None, task_names=None, data=None, group_tasks=False, show_hover_fill=True):
+def create_gantt(
+    df,
+    colors=None,
+    index_col=None,
+    show_colorbar=False,
+    reverse_colors=False,
+    title="Gantt Chart",
+    bar_width=0.2,
+    showgrid_x=False,
+    showgrid_y=False,
+    height=600,
+    width=900,
+    tasks=None,
+    task_names=None,
+    data=None,
+    group_tasks=False,
+    show_hover_fill=True,
+):
     """
     Returns figure for a gantt chart
     :param (array|list) df: input data for gantt chart. Must be either a
@@ -892,7 +919,8 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 "In order to use an indexing column and assign colors to "
                 "the values of the index, you must choose an actual "
                 "column name in the dataframe or key if a list of "
-                "dictionaries is being used.")
+                "dictionaries is being used."
+            )
 
         # validate gantt index column
         index_list = []
@@ -902,9 +930,9 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
 
     # Validate colors
     if isinstance(colors, dict):
-        colors = clrs.validate_colors_dict(colors, 'rgb')
+        colors = clrs.validate_colors_dict(colors, "rgb")
     else:
-        colors = clrs.validate_colors(colors, 'rgb')
+        colors = clrs.validate_colors(colors, "rgb")
 
     if reverse_colors is True:
         colors.reverse()
@@ -917,26 +945,58 @@ def create_gantt(df, colors=None, index_col=None, show_colorbar=False,
                 "assigning colors to particular values in a dictioanry."
             )
         fig = gantt(
-            chart, colors, title, bar_width, showgrid_x, showgrid_y,
-            height, width, tasks=None, task_names=None, data=None,
-            group_tasks=group_tasks, show_hover_fill=show_hover_fill,
-            show_colorbar=show_colorbar
+            chart,
+            colors,
+            title,
+            bar_width,
+            showgrid_x,
+            showgrid_y,
+            height,
+            width,
+            tasks=None,
+            task_names=None,
+            data=None,
+            group_tasks=group_tasks,
+            show_hover_fill=show_hover_fill,
+            show_colorbar=show_colorbar,
         )
         return fig
     else:
         if not isinstance(colors, dict):
             fig = gantt_colorscale(
-                chart, colors, title, index_col, show_colorbar, bar_width,
-                showgrid_x, showgrid_y, height, width,
-                tasks=None, task_names=None, data=None, group_tasks=group_tasks,
-                show_hover_fill=show_hover_fill
+                chart,
+                colors,
+                title,
+                index_col,
+                show_colorbar,
+                bar_width,
+                showgrid_x,
+                showgrid_y,
+                height,
+                width,
+                tasks=None,
+                task_names=None,
+                data=None,
+                group_tasks=group_tasks,
+                show_hover_fill=show_hover_fill,
             )
             return fig
         else:
             fig = gantt_dict(
-                chart, colors, title, index_col, show_colorbar, bar_width,
-                showgrid_x, showgrid_y, height, width,
-                tasks=None, task_names=None, data=None, group_tasks=group_tasks,
-                show_hover_fill=show_hover_fill
+                chart,
+                colors,
+                title,
+                index_col,
+                show_colorbar,
+                bar_width,
+                showgrid_x,
+                showgrid_y,
+                height,
+                width,
+                tasks=None,
+                task_names=None,
+                data=None,
+                group_tasks=group_tasks,
+                show_hover_fill=show_hover_fill,
             )
             return fig
