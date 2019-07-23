@@ -228,15 +228,15 @@ docs = dict(
     ],
     marginal=[
         "(string, one of `'rug'`, `'box'`, `'violin'`, `'histogram'`)",
-        "If set, a subplot is drawn alongside the main plot, visulizing the distribution.",
+        "If set, a subplot is drawn alongside the main plot, visualizing the distribution.",
     ],
     marginal_x=[
         "(string, one of `'rug'`, `'box'`, `'violin'`, `'histogram'`)",
-        "If set, a horizontal subplot is drawn above the main plot, visulizing the x-distribution.",
+        "If set, a horizontal subplot is drawn above the main plot, visualizing the x-distribution.",
     ],
     marginal_y=[
         "(string, one of `'rug'`, `'box'`, `'violin'`, `'histogram'`)",
-        "If set, a vertical subplot is drawn to the right of the main plot, visulizing the y-distribution.",
+        "If set, a vertical subplot is drawn to the right of the main plot, visualizing the y-distribution.",
     ],
     trendline=[
         "(string, one of `'ols'` or `'lowess'`, default `None`)",
