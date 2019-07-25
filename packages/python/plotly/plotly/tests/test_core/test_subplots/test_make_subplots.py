@@ -1547,31 +1547,25 @@ class TestMakeSubplots(TestCase):
     def test_subplot_titles_array(self):
         # Pass python array
         expected = tls.make_subplots(
-            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
-            subplot_titles=("", "Inset"),
+            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}], subplot_titles=("", "Inset")
         )
         fig = tls.make_subplots(
-            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
-            subplot_titles=["", "Inset"],
+            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}], subplot_titles=["", "Inset"]
         )
         self.assertEqual(fig, expected)
 
     def test_subplot_titles_empty(self):
         # Pass empty array
-        expected = tls.make_subplots(
-            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
-        )
+        expected = tls.make_subplots(insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}])
         fig = tls.make_subplots(
-            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
-            subplot_titles=[],
+            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}], subplot_titles=[]
         )
         self.assertEqual(fig, expected)
 
     def test_subplot_titles_numpy_array(self):
         # Pass numpy array
         expected = tls.make_subplots(
-            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
-            subplot_titles=("", "Inset"),
+            insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}], subplot_titles=("", "Inset")
         )
         fig = tls.make_subplots(
             insets=[{"cell": (1, 1), "l": 0.7, "b": 0.3}],
