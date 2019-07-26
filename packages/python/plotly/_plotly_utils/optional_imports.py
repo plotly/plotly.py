@@ -6,6 +6,7 @@ from __future__ import absolute_import
 
 from importlib import import_module
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 _not_importable = set()
@@ -20,6 +21,8 @@ def get_module(name):
     :return: (module|None) If import succeeds, the module will be returned.
 
     """
+    if name in sys.modules:
+        return sys.modules[name]
     if name not in _not_importable:
         try:
             return import_module(name)
