@@ -127,7 +127,7 @@ def gantt(
         "text": [],
         "marker": dict(color="", size=1, opacity=0),
         "name": "",
-        "showlegend": False
+        "showlegend": False,
     }
 
     # create the list of task names
@@ -309,7 +309,7 @@ def gantt_colorscale(
         "fill": "toself",
         "showlegend": False,
         "hoverinfo": hoverinfo,
-        "legendgroup": ""
+        "legendgroup": "",
     }
 
     marker_data_template = {
@@ -537,9 +537,9 @@ def gantt_colorscale(
                 marker_data_dict[color_id]["text"].append(None)
 
         if show_colorbar is True:
-                showlegend = True
-                for k in scatter_data_dict:
-                    scatter_data_dict[k]["showlegend"] = showlegend
+            showlegend = True
+            for k in scatter_data_dict:
+                scatter_data_dict[k]["showlegend"] = showlegend
     # add colorbar to one of the traces randomly just for display
     # if show_colorbar is True:
     #     k = list(marker_data_dict.keys())[0]
@@ -651,7 +651,7 @@ def gantt_dict(
         "mode": "none",
         "fill": "toself",
         "hoverinfo": hoverinfo,
-        "legendgroup": ""
+        "legendgroup": "",
     }
 
     marker_data_template = {
@@ -661,7 +661,7 @@ def gantt_dict(
         "text": [],
         "marker": dict(color="", size=1, opacity=0),
         "name": "",
-        "showlegend": False
+        "showlegend": False,
     }
 
     index_vals = []
