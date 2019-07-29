@@ -711,6 +711,10 @@ def apply_default_cascade(args):
     if args.get("facet_row", None) and args.get("marginal_x", None):
         args["marginal_x"] = None
 
+    if "template_label" in args:
+        if args["template_label"] is None:
+            args["template_label"] = "{key}={val}"
+
 
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
@@ -856,6 +860,34 @@ def get_orderings(args, grouper, grouped):
     return orders, group_names
 
 
+def get_trace_name(args, labels):
+    """
+    Format the trace name according to args["template_label"] string.
+    Labels hue key must be suffixed by `_key` and labels hue value must be
+    formatted as `hue_val`.
+
+    Ex:
+        fig = data_frame(df, x="date", y="value", color="vars", symbol="symbol",
+            template_label="{station_key} = {station_val"} ({symbol_val})",
+            labels={"vars": "station"}
+        )
+    """
+    template = args["template_label"]
+    if template == "{key}={val}":
+        return ", ".join(k + "=" + v for k, v in labels.items())
+
+    dict_format_default = {
+        **{k+"_key": k for k in labels.keys()},
+        **{k+"_val": v for k, v in labels.items()}
+    }
+    dict_format = {}
+    for k, v in dict_format_default.items():
+        if k in template:
+            dict_format.update({k: v})
+    template = template.format(**dict_format)
+    return template
+
+
 def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     apply_default_cascade(args)
 
@@ -889,7 +921,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                     trace_name_labels[key] = str(val)
                 if m.variable == "animation_frame":
                     frame_name = val
-        trace_name = ", ".join(k + "=" + v for k, v in trace_name_labels.items())
+        trace_name = get_trace_name(args, trace_name_labels)
         if frame_name not in trace_names_by_frame:
             trace_names_by_frame[frame_name] = set()
         trace_names = trace_names_by_frame[frame_name]

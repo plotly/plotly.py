@@ -45,6 +45,7 @@ def scatter(
     template=None,
     width=None,
     height=None,
+    template_label=None,
 ):
     """
     In a scatter plot, each row of `data_frame` is represented by a symbol mark in 2D space.
