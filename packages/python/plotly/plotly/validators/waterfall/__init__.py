@@ -35,7 +35,6 @@ class Y0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(Y0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -50,7 +49,6 @@ class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -94,7 +92,6 @@ class X0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(X0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -109,7 +106,6 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -183,7 +179,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -720,7 +715,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -865,7 +859,9 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
             extras=kwargs.pop("extras", ["all", "none", "skip"]),
-            flags=kwargs.pop("flags", ["x", "y", "z", "text", "name"]),
+            flags=kwargs.pop(
+                "flags", ["name", "x", "y", "text", "initial", "delta", "final"]
+            ),
             role=kwargs.pop("role", "info"),
             **kwargs
         )
@@ -879,7 +875,6 @@ class DyValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -894,7 +889,6 @@ class DxValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs

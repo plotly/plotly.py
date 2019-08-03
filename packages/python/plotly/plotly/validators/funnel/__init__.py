@@ -35,7 +35,6 @@ class Y0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(Y0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -50,7 +49,6 @@ class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -94,7 +92,6 @@ class X0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(X0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -109,7 +106,6 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -169,7 +165,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -604,14 +599,14 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hex, hsl, hsv, or named color string. At
                 minimum, a mapping for the lowest (0) and
                 highest (1) values are required. For example,
-                `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-                control the bounds of the colorscale in color
-                space, use`marker.cmin` and `marker.cmax`.
-                Alternatively, `colorscale` may be a palette
-                name string of the following list: Greys,YlGnBu
-                ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
-                ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
-                c,Viridis,Cividis.
+                `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+                To control the bounds of the colorscale in
+                color space, use`marker.cmin` and
+                `marker.cmax`. Alternatively, `colorscale` may
+                be a palette name string of the following list:
+                Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
+                ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
+                arth,Electric,Viridis,Cividis.
             colorsrc
                 Sets the source reference on plot.ly for  color
                 .
@@ -738,7 +733,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -906,7 +900,6 @@ class DyValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -921,7 +914,6 @@ class DxValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs

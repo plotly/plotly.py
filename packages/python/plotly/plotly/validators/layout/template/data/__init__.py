@@ -499,6 +499,26 @@ class IsosurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 import _plotly_utils.basevalidators
 
 
+class IndicatorsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(
+        self, plotly_name="indicator", parent_name="layout.template.data", **kwargs
+    ):
+        super(IndicatorsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Indicator"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class HistogramsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
     def __init__(
         self, plotly_name="histogram", parent_name="layout.template.data", **kwargs
@@ -642,6 +662,26 @@ class FunnelareasValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 import _plotly_utils.basevalidators
 
 
+class DensitymapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(
+        self, plotly_name="densitymapbox", parent_name="layout.template.data", **kwargs
+    ):
+        super(DensitymapboxsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Densitymapbox"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ContoursValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
     def __init__(
         self, plotly_name="contour", parent_name="layout.template.data", **kwargs
@@ -710,6 +750,29 @@ class ChoroplethsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             data_class_str=kwargs.pop("data_class_str", "Choropleth"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ChoroplethmapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(
+        self,
+        plotly_name="choroplethmapbox",
+        parent_name="layout.template.data",
+        **kwargs
+    ):
+        super(ChoroplethmapboxsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Choroplethmapbox"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """

@@ -144,6 +144,29 @@ class Data(_BaseLayoutHierarchyType):
     def carpet(self, val):
         self["carpet"] = val
 
+    # choroplethmapbox
+    # ----------------
+    @property
+    def choroplethmapbox(self):
+        """
+        The 'choroplethmapbox' property is a tuple of instances of
+        Choroplethmapbox that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Choroplethmapbox
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Choroplethmapbox constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Choroplethmapbox]
+        """
+        return self["choroplethmapbox"]
+
+    @choroplethmapbox.setter
+    def choroplethmapbox(self, val):
+        self["choroplethmapbox"] = val
+
     # choropleth
     # ----------
     @property
@@ -235,6 +258,29 @@ class Data(_BaseLayoutHierarchyType):
     @contour.setter
     def contour(self, val):
         self["contour"] = val
+
+    # densitymapbox
+    # -------------
+    @property
+    def densitymapbox(self):
+        """
+        The 'densitymapbox' property is a tuple of instances of
+        Densitymapbox that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Densitymapbox
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Densitymapbox constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Densitymapbox]
+        """
+        return self["densitymapbox"]
+
+    @densitymapbox.setter
+    def densitymapbox(self, val):
+        self["densitymapbox"] = val
 
     # funnelarea
     # ----------
@@ -396,6 +442,29 @@ class Data(_BaseLayoutHierarchyType):
     @histogram.setter
     def histogram(self, val):
         self["histogram"] = val
+
+    # indicator
+    # ---------
+    @property
+    def indicator(self):
+        """
+        The 'indicator' property is a tuple of instances of
+        Indicator that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Indicator
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Indicator constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Indicator]
+        """
+        return self["indicator"]
+
+    @indicator.setter
+    def indicator(self, val):
+        self["indicator"] = val
 
     # isosurface
     # ----------
@@ -1001,6 +1070,9 @@ class Data(_BaseLayoutHierarchyType):
         carpet
             A tuple of plotly.graph_objects.Carpet instances or
             dicts with compatible properties
+        choroplethmapbox
+            A tuple of plotly.graph_objects.Choroplethmapbox
+            instances or dicts with compatible properties
         choropleth
             A tuple of plotly.graph_objects.Choropleth instances or
             dicts with compatible properties
@@ -1013,6 +1085,9 @@ class Data(_BaseLayoutHierarchyType):
         contour
             A tuple of plotly.graph_objects.Contour instances or
             dicts with compatible properties
+        densitymapbox
+            A tuple of plotly.graph_objects.Densitymapbox instances
+            or dicts with compatible properties
         funnelarea
             A tuple of plotly.graph_objects.Funnelarea instances or
             dicts with compatible properties
@@ -1033,6 +1108,9 @@ class Data(_BaseLayoutHierarchyType):
             or dicts with compatible properties
         histogram
             A tuple of plotly.graph_objects.Histogram instances or
+            dicts with compatible properties
+        indicator
+            A tuple of plotly.graph_objects.Indicator instances or
             dicts with compatible properties
         isosurface
             A tuple of plotly.graph_objects.Isosurface instances or
@@ -1120,10 +1198,12 @@ class Data(_BaseLayoutHierarchyType):
         box=None,
         candlestick=None,
         carpet=None,
+        choroplethmapbox=None,
         choropleth=None,
         cone=None,
         contourcarpet=None,
         contour=None,
+        densitymapbox=None,
         funnelarea=None,
         funnel=None,
         heatmapgl=None,
@@ -1131,6 +1211,7 @@ class Data(_BaseLayoutHierarchyType):
         histogram2dcontour=None,
         histogram2d=None,
         histogram=None,
+        indicator=None,
         isosurface=None,
         mesh3d=None,
         ohlc=None,
@@ -1184,6 +1265,9 @@ class Data(_BaseLayoutHierarchyType):
         carpet
             A tuple of plotly.graph_objects.Carpet instances or
             dicts with compatible properties
+        choroplethmapbox
+            A tuple of plotly.graph_objects.Choroplethmapbox
+            instances or dicts with compatible properties
         choropleth
             A tuple of plotly.graph_objects.Choropleth instances or
             dicts with compatible properties
@@ -1196,6 +1280,9 @@ class Data(_BaseLayoutHierarchyType):
         contour
             A tuple of plotly.graph_objects.Contour instances or
             dicts with compatible properties
+        densitymapbox
+            A tuple of plotly.graph_objects.Densitymapbox instances
+            or dicts with compatible properties
         funnelarea
             A tuple of plotly.graph_objects.Funnelarea instances or
             dicts with compatible properties
@@ -1216,6 +1303,9 @@ class Data(_BaseLayoutHierarchyType):
             or dicts with compatible properties
         histogram
             A tuple of plotly.graph_objects.Histogram instances or
+            dicts with compatible properties
+        indicator
+            A tuple of plotly.graph_objects.Indicator instances or
             dicts with compatible properties
         isosurface
             A tuple of plotly.graph_objects.Isosurface instances or
@@ -1331,10 +1421,12 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators["box"] = v_data.BoxsValidator()
         self._validators["candlestick"] = v_data.CandlesticksValidator()
         self._validators["carpet"] = v_data.CarpetsValidator()
+        self._validators["choroplethmapbox"] = v_data.ChoroplethmapboxsValidator()
         self._validators["choropleth"] = v_data.ChoroplethsValidator()
         self._validators["cone"] = v_data.ConesValidator()
         self._validators["contourcarpet"] = v_data.ContourcarpetsValidator()
         self._validators["contour"] = v_data.ContoursValidator()
+        self._validators["densitymapbox"] = v_data.DensitymapboxsValidator()
         self._validators["funnelarea"] = v_data.FunnelareasValidator()
         self._validators["funnel"] = v_data.FunnelsValidator()
         self._validators["heatmapgl"] = v_data.HeatmapglsValidator()
@@ -1342,6 +1434,7 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators["histogram2dcontour"] = v_data.Histogram2dContoursValidator()
         self._validators["histogram2d"] = v_data.Histogram2dsValidator()
         self._validators["histogram"] = v_data.HistogramsValidator()
+        self._validators["indicator"] = v_data.IndicatorsValidator()
         self._validators["isosurface"] = v_data.IsosurfacesValidator()
         self._validators["mesh3d"] = v_data.Mesh3dsValidator()
         self._validators["ohlc"] = v_data.OhlcsValidator()
@@ -1382,6 +1475,10 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self["candlestick"] = candlestick if candlestick is not None else _v
         _v = arg.pop("carpet", None)
         self["carpet"] = carpet if carpet is not None else _v
+        _v = arg.pop("choroplethmapbox", None)
+        self["choroplethmapbox"] = (
+            choroplethmapbox if choroplethmapbox is not None else _v
+        )
         _v = arg.pop("choropleth", None)
         self["choropleth"] = choropleth if choropleth is not None else _v
         _v = arg.pop("cone", None)
@@ -1390,6 +1487,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self["contourcarpet"] = contourcarpet if contourcarpet is not None else _v
         _v = arg.pop("contour", None)
         self["contour"] = contour if contour is not None else _v
+        _v = arg.pop("densitymapbox", None)
+        self["densitymapbox"] = densitymapbox if densitymapbox is not None else _v
         _v = arg.pop("funnelarea", None)
         self["funnelarea"] = funnelarea if funnelarea is not None else _v
         _v = arg.pop("funnel", None)
@@ -1406,6 +1505,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self["histogram2d"] = histogram2d if histogram2d is not None else _v
         _v = arg.pop("histogram", None)
         self["histogram"] = histogram if histogram is not None else _v
+        _v = arg.pop("indicator", None)
+        self["indicator"] = indicator if indicator is not None else _v
         _v = arg.pop("isosurface", None)
         self["isosurface"] = isosurface if isosurface is not None else _v
         _v = arg.pop("mesh3d", None)
