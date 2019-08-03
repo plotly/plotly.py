@@ -35,7 +35,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -241,9 +240,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hex, hsl, hsv, or named color string. At
                 minimum, a mapping for the lowest (0) and
                 highest (1) values are required. For example,
-                `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-                control the bounds of the colorscale in color
-                space, use`line.cmin` and `line.cmax`.
+                `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+                To control the bounds of the colorscale in
+                color space, use`line.cmin` and `line.cmax`.
                 Alternatively, `colorscale` may be a palette
                 name string of the following list: Greys,YlGnBu
                 ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
@@ -259,8 +258,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this

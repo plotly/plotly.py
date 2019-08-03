@@ -1422,12 +1422,13 @@ class Marker(_BaseTraceHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -1538,7 +1539,7 @@ class Marker(_BaseTraceHierarchyType):
         containing arrays mapping a normalized value to an rgb, rgba,
         hex, hsl, hsv, or named color string. At minimum, a mapping for
         the lowest (0) and highest (1) values are required. For
-        example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
+        example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To
         control the bounds of the colorscale in color space,
         use`marker.cmin` and `marker.cmax`. Alternatively, `colorscale`
         may be a palette name string of the following list: Greys,YlGnB
@@ -1677,9 +1678,9 @@ class Marker(_BaseTraceHierarchyType):
                     rgba, hex, hsl, hsv, or named color string. At
                     minimum, a mapping for the lowest (0) and
                     highest (1) values are required. For example,
-                    `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-                    control the bounds of the colorscale in color
-                    space, use`marker.line.cmin` and
+                    `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+                    To control the bounds of the colorscale in
+                    color space, use`marker.line.cmin` and
                     `marker.line.cmax`. Alternatively, `colorscale`
                     may be a palette name string of the following
                     list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,R
@@ -1865,7 +1866,7 @@ class Marker(_BaseTraceHierarchyType):
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
-            example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
             use`marker.cmin` and `marker.cmax`. Alternatively,
             `colorscale` may be a palette name string of the
@@ -1977,7 +1978,7 @@ class Marker(_BaseTraceHierarchyType):
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
-            example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
             use`marker.cmin` and `marker.cmax`. Alternatively,
             `colorscale` may be a palette name string of the
@@ -3129,7 +3130,7 @@ class ErrorY(_BaseTraceHierarchyType):
         constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
         `value`. If "sqrt", the bar lengths correspond to the sqaure of
-        the underlying data. If "array", the bar lengths are set with
+        the underlying data. If "data", the bar lengths are set with
         data set `array`.
     
         The 'type' property is an enumeration that may be specified as:
@@ -3275,7 +3276,7 @@ class ErrorY(_BaseTraceHierarchyType):
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If "array", the bar lengths are set with data set
+            data. If "data", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is
@@ -3355,7 +3356,7 @@ class ErrorY(_BaseTraceHierarchyType):
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If "array", the bar lengths are set with data set
+            data. If "data", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is
@@ -3718,7 +3719,7 @@ class ErrorX(_BaseTraceHierarchyType):
         constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
         `value`. If "sqrt", the bar lengths correspond to the sqaure of
-        the underlying data. If "array", the bar lengths are set with
+        the underlying data. If "data", the bar lengths are set with
         data set `array`.
     
         The 'type' property is an enumeration that may be specified as:
@@ -3866,7 +3867,7 @@ class ErrorX(_BaseTraceHierarchyType):
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If "array", the bar lengths are set with data set
+            data. If "data", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is
@@ -3949,7 +3950,7 @@ class ErrorX(_BaseTraceHierarchyType):
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
             lengths correspond to the sqaure of the underlying
-            data. If "array", the bar lengths are set with data set
+            data. If "data", the bar lengths are set with data set
             `array`.
         value
             Sets the value of either the percentage (if `type` is

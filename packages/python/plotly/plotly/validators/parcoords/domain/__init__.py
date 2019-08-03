@@ -6,12 +6,12 @@ class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "min": 0, "max": 1, "editType": "calc"},
-                    {"valType": "number", "min": 0, "max": 1, "editType": "calc"},
+                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
+                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
                 ],
             ),
             role=kwargs.pop("role", "info"),
@@ -27,12 +27,12 @@ class XValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "min": 0, "max": 1, "editType": "calc"},
-                    {"valType": "number", "min": 0, "max": 1, "editType": "calc"},
+                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
+                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
                 ],
             ),
             role=kwargs.pop("role", "info"),
@@ -48,7 +48,7 @@ class RowValidator(_plotly_utils.basevalidators.IntegerValidator):
         super(RowValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -63,7 +63,7 @@ class ColumnValidator(_plotly_utils.basevalidators.IntegerValidator):
         super(ColumnValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             min=kwargs.pop("min", 0),
             role=kwargs.pop("role", "info"),
             **kwargs

@@ -120,6 +120,28 @@ class Layer(_BaseLayoutHierarchyType):
     def color(self, val):
         self["color"] = val
 
+    # coordinates
+    # -----------
+    @property
+    def coordinates(self):
+        """
+        Sets the coordinates array contains [longitude, latitude] pairs
+        for the image corners listed in clockwise order: top left, top
+        right, bottom right, bottom left. Only has an effect for
+        "image" `sourcetype`.
+    
+        The 'coordinates' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["coordinates"]
+
+    @coordinates.setter
+    def coordinates(self, val):
+        self["coordinates"] = val
+
     # fill
     # ----
     @property
@@ -285,10 +307,12 @@ class Layer(_BaseLayoutHierarchyType):
     @property
     def source(self):
         """
-        Sets the source data for this layer (mapbox.layer.source).
-        Source can be either a URL, a geojson object (with `sourcetype`
-        set to "geojson") or an array of tile URLS (with `sourcetype`
-        set to "vector").
+        Sets the source data for this layer (mapbox.layer.source). When
+        `sourcetype` is set to "geojson", `source` can be a URL to a
+        GeoJSON or a GeoJSON object. When `sourcetype` is set to
+        "vector" or "raster", `source` can be a URL or an array of tile
+        URLs. When `sourcetype` is set to "image", `source` can be a
+        URL to an image.
     
         The 'source' property accepts values of any type
 
@@ -301,6 +325,27 @@ class Layer(_BaseLayoutHierarchyType):
     @source.setter
     def source(self, val):
         self["source"] = val
+
+    # sourceattribution
+    # -----------------
+    @property
+    def sourceattribution(self):
+        """
+        Sets the attribution for this source.
+    
+        The 'sourceattribution' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["sourceattribution"]
+
+    @sourceattribution.setter
+    def sourceattribution(self, val):
+        self["sourceattribution"] = val
 
     # sourcelayer
     # -----------
@@ -330,12 +375,12 @@ class Layer(_BaseLayoutHierarchyType):
     @property
     def sourcetype(self):
         """
-        Sets the source type for this layer. Support for "raster",
-        "image" and "video" source types is coming soon.
+        Sets the source type for this layer, that is the type of the
+        layer data.
     
         The 'sourcetype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['geojson', 'vector']
+                ['geojson', 'vector', 'raster', 'image']
 
         Returns
         -------
@@ -432,13 +477,18 @@ class Layer(_BaseLayoutHierarchyType):
     @property
     def type(self):
         """
-        Sets the layer type (mapbox.layer.type). Support for "raster",
-        "background" types is coming soon. Note that "line" and "fill"
-        are not compatible with Point GeoJSON geometries.
+        Sets the layer type, that is the how the layer data set in
+        `source` will be rendered With `sourcetype` set to "geojson",
+        the following values are allowed: "circle", "line", "fill" and
+        "symbol". but note that "line" and "fill" are not compatible
+        with Point GeoJSON geometries. With `sourcetype` set to
+        "vector", the following values are allowed:  "circle", "line",
+        "fill" and "symbol". With `sourcetype` set to "raster" or
+        `*image*`, only the "raster" value is allowed.
     
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['circle', 'line', 'fill', 'symbol']
+                ['circle', 'line', 'fill', 'symbol', 'raster']
 
         Returns
         -------
@@ -498,6 +548,12 @@ class Layer(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.fill-color) If `type` is "symbol",
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
+        coordinates
+            Sets the coordinates array contains [longitude,
+            latitude] pairs for the image corners listed in
+            clockwise order: top left, top right, bottom right,
+            bottom left. Only has an effect for "image"
+            `sourcetype`.
         fill
             plotly.graph_objects.layout.mapbox.layer.Fill instance
             or dict with compatible properties
@@ -533,18 +589,21 @@ class Layer(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.text-opacity)
         source
             Sets the source data for this layer
-            (mapbox.layer.source). Source can be either a URL, a
-            geojson object (with `sourcetype` set to "geojson") or
-            an array of tile URLS (with `sourcetype` set to
-            "vector").
+            (mapbox.layer.source). When `sourcetype` is set to
+            "geojson", `source` can be a URL to a GeoJSON or a
+            GeoJSON object. When `sourcetype` is set to "vector" or
+            "raster", `source` can be a URL or an array of tile
+            URLs. When `sourcetype` is set to "image", `source` can
+            be a URL to an image.
+        sourceattribution
+            Sets the attribution for this source.
         sourcelayer
             Specifies the layer to use from a vector tile source
             (mapbox.layer.source-layer). Required for "vector"
             source type that supports multiple layers.
         sourcetype
-            Sets the source type for this layer. Support for
-            "raster", "image" and "video" source types is coming
-            soon.
+            Sets the source type for this layer, that is the type
+            of the layer data.
         symbol
             plotly.graph_objects.layout.mapbox.layer.Symbol
             instance or dict with compatible properties
@@ -559,10 +618,15 @@ class Layer(_BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type (mapbox.layer.type). Support for
-            "raster", "background" types is coming soon. Note that
-            "line" and "fill" are not compatible with Point GeoJSON
-            geometries.
+            Sets the layer type, that is the how the layer data set
+            in `source` will be rendered With `sourcetype` set to
+            "geojson", the following values are allowed: "circle",
+            "line", "fill" and "symbol". but note that "line" and
+            "fill" are not compatible with Point GeoJSON
+            geometries. With `sourcetype` set to "vector", the
+            following values are allowed:  "circle", "line", "fill"
+            and "symbol". With `sourcetype` set to "raster" or
+            `*image*`, only the "raster" value is allowed.
         visible
             Determines whether this layer is displayed
         """
@@ -573,6 +637,7 @@ class Layer(_BaseLayoutHierarchyType):
         below=None,
         circle=None,
         color=None,
+        coordinates=None,
         fill=None,
         line=None,
         maxzoom=None,
@@ -580,6 +645,7 @@ class Layer(_BaseLayoutHierarchyType):
         name=None,
         opacity=None,
         source=None,
+        sourceattribution=None,
         sourcelayer=None,
         sourcetype=None,
         symbol=None,
@@ -613,6 +679,12 @@ class Layer(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.fill-color) If `type` is "symbol",
             color corresponds to the icon color
             (mapbox.layer.paint.icon-color)
+        coordinates
+            Sets the coordinates array contains [longitude,
+            latitude] pairs for the image corners listed in
+            clockwise order: top left, top right, bottom right,
+            bottom left. Only has an effect for "image"
+            `sourcetype`.
         fill
             plotly.graph_objects.layout.mapbox.layer.Fill instance
             or dict with compatible properties
@@ -648,18 +720,21 @@ class Layer(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.text-opacity)
         source
             Sets the source data for this layer
-            (mapbox.layer.source). Source can be either a URL, a
-            geojson object (with `sourcetype` set to "geojson") or
-            an array of tile URLS (with `sourcetype` set to
-            "vector").
+            (mapbox.layer.source). When `sourcetype` is set to
+            "geojson", `source` can be a URL to a GeoJSON or a
+            GeoJSON object. When `sourcetype` is set to "vector" or
+            "raster", `source` can be a URL or an array of tile
+            URLs. When `sourcetype` is set to "image", `source` can
+            be a URL to an image.
+        sourceattribution
+            Sets the attribution for this source.
         sourcelayer
             Specifies the layer to use from a vector tile source
             (mapbox.layer.source-layer). Required for "vector"
             source type that supports multiple layers.
         sourcetype
-            Sets the source type for this layer. Support for
-            "raster", "image" and "video" source types is coming
-            soon.
+            Sets the source type for this layer, that is the type
+            of the layer data.
         symbol
             plotly.graph_objects.layout.mapbox.layer.Symbol
             instance or dict with compatible properties
@@ -674,10 +749,15 @@ class Layer(_BaseLayoutHierarchyType):
             matching item, this item will be hidden unless you
             explicitly show it with `visible: true`.
         type
-            Sets the layer type (mapbox.layer.type). Support for
-            "raster", "background" types is coming soon. Note that
-            "line" and "fill" are not compatible with Point GeoJSON
-            geometries.
+            Sets the layer type, that is the how the layer data set
+            in `source` will be rendered With `sourcetype` set to
+            "geojson", the following values are allowed: "circle",
+            "line", "fill" and "symbol". but note that "line" and
+            "fill" are not compatible with Point GeoJSON
+            geometries. With `sourcetype` set to "vector", the
+            following values are allowed:  "circle", "line", "fill"
+            and "symbol". With `sourcetype` set to "raster" or
+            `*image*`, only the "raster" value is allowed.
         visible
             Determines whether this layer is displayed
 
@@ -716,6 +796,7 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self._validators["below"] = v_layer.BelowValidator()
         self._validators["circle"] = v_layer.CircleValidator()
         self._validators["color"] = v_layer.ColorValidator()
+        self._validators["coordinates"] = v_layer.CoordinatesValidator()
         self._validators["fill"] = v_layer.FillValidator()
         self._validators["line"] = v_layer.LineValidator()
         self._validators["maxzoom"] = v_layer.MaxzoomValidator()
@@ -723,6 +804,7 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self._validators["name"] = v_layer.NameValidator()
         self._validators["opacity"] = v_layer.OpacityValidator()
         self._validators["source"] = v_layer.SourceValidator()
+        self._validators["sourceattribution"] = v_layer.SourceattributionValidator()
         self._validators["sourcelayer"] = v_layer.SourcelayerValidator()
         self._validators["sourcetype"] = v_layer.SourcetypeValidator()
         self._validators["symbol"] = v_layer.SymbolValidator()
@@ -738,6 +820,8 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self["circle"] = circle if circle is not None else _v
         _v = arg.pop("color", None)
         self["color"] = color if color is not None else _v
+        _v = arg.pop("coordinates", None)
+        self["coordinates"] = coordinates if coordinates is not None else _v
         _v = arg.pop("fill", None)
         self["fill"] = fill if fill is not None else _v
         _v = arg.pop("line", None)
@@ -752,6 +836,10 @@ an instance of plotly.graph_objs.layout.mapbox.Layer"""
         self["opacity"] = opacity if opacity is not None else _v
         _v = arg.pop("source", None)
         self["source"] = source if source is not None else _v
+        _v = arg.pop("sourceattribution", None)
+        self["sourceattribution"] = (
+            sourceattribution if sourceattribution is not None else _v
+        )
         _v = arg.pop("sourcelayer", None)
         self["sourcelayer"] = sourcelayer if sourcelayer is not None else _v
         _v = arg.pop("sourcetype", None)
