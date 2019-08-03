@@ -2042,109 +2042,121 @@ class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
         test_gantt_chart = ff.create_gantt(df)
 
-        exp_gantt_chart = {
-            "data": [
-                {
-                    "marker": {"color": "white"},
-                    "name": "",
-                    "type": "scatter",
-                    "x": ["2009-01-01", "2009-02-30"],
-                    "y": [0, 0],
-                },
-                {
-                    "marker": {"color": "white"},
-                    "name": "",
-                    "type": "scatter",
-                    "x": ["2009-03-05", "2009-04-15"],
-                    "y": [1, 1],
-                },
-            ],
-            "layout": {
-                "height": 600,
-                "hovermode": "closest",
-                "shapes": [
+        exp_gantt_chart = go.Figure(
+            **{
+                "data": [
                     {
-                        "fillcolor": "rgb(31, 119, 180)",
-                        "line": {"width": 0},
-                        "opacity": 1,
-                        "type": "rect",
-                        "x0": "2009-01-01",
-                        "x1": "2009-02-30",
-                        "xref": "x",
-                        "y0": -0.2,
-                        "y1": 0.2,
-                        "yref": "y",
+                        "x": ("2009-03-05", "2009-04-15", "2009-04-15", "2009-03-05"),
+                        "y": [0.8, 0.8, 1.2, 1.2],
+                        "mode": "none",
+                        "fill": "toself",
+                        "hoverinfo": "name",
+                        "fillcolor": "rgb(255, 127, 14)",
+                        "name": "Job B",
+                        "legendgroup": "rgb(255, 127, 14)",
                     },
                     {
-                        "fillcolor": "rgb(255, 127, 14)",
-                        "line": {"width": 0},
-                        "opacity": 1,
-                        "type": "rect",
-                        "x0": "2009-03-05",
-                        "x1": "2009-04-15",
-                        "xref": "x",
-                        "y0": 0.8,
-                        "y1": 1.2,
-                        "yref": "y",
+                        "x": ("2009-01-01", "2009-02-30", "2009-02-30", "2009-01-01"),
+                        "y": [-0.2, -0.2, 0.2, 0.2],
+                        "mode": "none",
+                        "fill": "toself",
+                        "hoverinfo": "name",
+                        "fillcolor": "rgb(31, 119, 180)",
+                        "name": "Job A",
+                        "legendgroup": "rgb(31, 119, 180)",
+                    },
+                    {
+                        "x": ("2009-03-05", "2009-04-15"),
+                        "y": [1, 1],
+                        "mode": "markers",
+                        "text": [None, None],
+                        "marker": {
+                            "color": "rgb(255, 127, 14)",
+                            "size": 1,
+                            "opacity": 0,
+                        },
+                        "name": "",
+                        "showlegend": False,
+                        "legendgroup": "rgb(255, 127, 14)",
+                    },
+                    {
+                        "x": ("2009-01-01", "2009-02-30"),
+                        "y": [0, 0],
+                        "mode": "markers",
+                        "text": [None, None],
+                        "marker": {
+                            "color": "rgb(31, 119, 180)",
+                            "size": 1,
+                            "opacity": 0,
+                        },
+                        "name": "",
+                        "showlegend": False,
+                        "legendgroup": "rgb(31, 119, 180)",
                     },
                 ],
-                "showlegend": False,
-                "title": {"text": "Gantt Chart"},
-                "width": 800,
-                "xaxis": {
-                    "rangeselector": {
-                        "buttons": [
-                            {
-                                "count": 7,
-                                "label": "1w",
-                                "step": "day",
-                                "stepmode": "backward",
-                            },
-                            {
-                                "count": 1,
-                                "label": "1m",
-                                "step": "month",
-                                "stepmode": "backward",
-                            },
-                            {
-                                "count": 6,
-                                "label": "6m",
-                                "step": "month",
-                                "stepmode": "backward",
-                            },
-                            {
-                                "count": 1,
-                                "label": "YTD",
-                                "step": "year",
-                                "stepmode": "todate",
-                            },
-                            {
-                                "count": 1,
-                                "label": "1y",
-                                "step": "year",
-                                "stepmode": "backward",
-                            },
-                            {"step": "all"},
-                        ]
+                "layout": {
+                    "title": "Gantt Chart",
+                    "showlegend": False,
+                    "height": 600,
+                    "width": 900,
+                    "shapes": [],
+                    "hovermode": "closest",
+                    "yaxis": {
+                        "showgrid": False,
+                        "ticktext": ["Job A", "Job B"],
+                        "tickvals": [0, 1],
+                        "range": [-1, 3],
+                        "autorange": False,
+                        "zeroline": False,
                     },
-                    "showgrid": False,
-                    "type": "date",
-                    "zeroline": False,
+                    "xaxis": {
+                        "showgrid": False,
+                        "zeroline": False,
+                        "rangeselector": {
+                            "buttons": [
+                                {
+                                    "count": 7,
+                                    "label": "1w",
+                                    "step": "day",
+                                    "stepmode": "backward",
+                                },
+                                {
+                                    "count": 1,
+                                    "label": "1m",
+                                    "step": "month",
+                                    "stepmode": "backward",
+                                },
+                                {
+                                    "count": 6,
+                                    "label": "6m",
+                                    "step": "month",
+                                    "stepmode": "backward",
+                                },
+                                {
+                                    "count": 1,
+                                    "label": "YTD",
+                                    "step": "year",
+                                    "stepmode": "todate",
+                                },
+                                {
+                                    "count": 1,
+                                    "label": "1y",
+                                    "step": "year",
+                                    "stepmode": "backward",
+                                },
+                                {"step": "all"},
+                            ]
+                        },
+                        "type": "date",
+                    },
                 },
-                "yaxis": {
-                    "autorange": False,
-                    "range": [-1, 3],
-                    "showgrid": False,
-                    "ticktext": ["Job A", "Job B"],
-                    "tickvals": [0, 1],
-                    "zeroline": False,
-                },
-            },
-        }
+            }
+        )
 
-        self.assert_fig_equal(test_gantt_chart["data"][0], exp_gantt_chart["data"][0])
-
-        self.assert_fig_equal(test_gantt_chart["layout"], exp_gantt_chart["layout"])
+        self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
+        self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
+        self.assert_fig_equal(test_gantt_chart["data"][2], exp_gantt_chart["data"][2])
+        self.assert_fig_equal(test_gantt_chart["data"][3], exp_gantt_chart["data"][3])
 
 
 class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):

@@ -1554,7 +1554,7 @@ class TestTable(TestCaseNoTemplate, NumpyTestUtilsMixin):
         self.assert_fig_equal(index_table["layout"], exp_index_table["layout"])
 
 
-class TestGantt(TestCase):
+class TestGantt(TestCaseNoTemplate, NumpyTestUtilsMixin):
     def test_validate_gantt(self):
 
         # validate the basic gantt inputs
@@ -1810,204 +1810,170 @@ class TestGantt(TestCase):
         )
 
         exp_gantt_chart = graph_objs.Figure(
-            {
-                "data": [
-                    {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "showlegend": False,
-                        "text": "Task A - 1",
-                        "x": ["2008-10-05", "2009-04-15"],
-                        "y": [2, 2],
-                    },
-                    {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "showlegend": False,
-                        "text": "Task B - 1",
-                        "x": ["2008-12-06", "2009-03-15"],
-                        "y": [1, 1],
-                    },
-                    {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "showlegend": False,
-                        "text": "Task C - 1",
-                        "x": ["2008-09-07", "2009-03-15"],
-                        "y": [0, 0],
-                    },
-                    {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "showlegend": False,
-                        "text": "Task C - 2",
-                        "x": ["2009-05-08", "2009-04-15"],
-                        "y": [0, 0],
-                    },
-                    {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "showlegend": False,
-                        "text": "Task A - 2",
-                        "x": ["2009-04-20", "2009-05-30"],
-                        "y": [2, 2],
-                    },
-                    {
-                        "hoverinfo": "none",
-                        "marker": {"color": "rgb(220, 0, 0)", "size": 1},
-                        "name": "TA",
-                        "showlegend": True,
-                        "x": ["2009-04-20", "2009-04-20"],
-                        "y": [0, 0],
-                    },
-                    {
-                        "hoverinfo": "none",
-                        "marker": {"color": "rgb(170, 14, 200)", "size": 1},
-                        "name": "TB",
-                        "showlegend": True,
-                        "x": ["2009-04-20", "2009-04-20"],
-                        "y": [1, 1],
-                    },
-                    {
-                        "hoverinfo": "none",
-                        "marker": {"color": "rgb(255, 230, 41)", "size": 1},
-                        "name": "TC",
-                        "showlegend": True,
-                        "x": ["2009-04-20", "2009-04-20"],
-                        "y": [2, 2],
-                    },
-                ],
+            **{
                 "layout": {
-                    "height": 600,
-                    "hovermode": "closest",
-                    "shapes": [
-                        {
-                            "fillcolor": "rgb(220, 0, 0)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2008-10-05",
-                            "x1": "2009-04-15",
-                            "xref": "x",
-                            "y0": 1.8,
-                            "y1": 2.2,
-                            "yref": "y",
-                        },
-                        {
-                            "fillcolor": "rgb(170, 14, 200)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2008-12-06",
-                            "x1": "2009-03-15",
-                            "xref": "x",
-                            "y0": 0.8,
-                            "y1": 1.2,
-                            "yref": "y",
-                        },
-                        {
-                            "fillcolor": "rgb(255, 230, 41)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2008-09-07",
-                            "x1": "2009-03-15",
-                            "xref": "x",
-                            "y0": -0.2,
-                            "y1": 0.2,
-                            "yref": "y",
-                        },
-                        {
-                            "fillcolor": "rgb(255, 230, 41)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2009-05-08",
-                            "x1": "2009-04-15",
-                            "xref": "x",
-                            "y0": -0.2,
-                            "y1": 0.2,
-                            "yref": "y",
-                        },
-                        {
-                            "fillcolor": "rgb(220, 0, 0)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2009-04-20",
-                            "x1": "2009-05-30",
-                            "xref": "x",
-                            "y0": 1.8,
-                            "y1": 2.2,
-                            "yref": "y",
-                        },
-                    ],
                     "showlegend": True,
+                    "yaxis": {
+                        "range": [-1, 4],
+                        "zeroline": False,
+                        "ticktext": ["Task C", "Task B", "Task A"],
+                        "tickvals": [0, 1, 2],
+                        "autorange": False,
+                        "showgrid": False,
+                    },
                     "title": "Gantt Chart",
-                    "width": 800,
+                    "height": 600,
+                    "shapes": [],
+                    "width": 900,
                     "xaxis": {
+                        "zeroline": False,
                         "rangeselector": {
                             "buttons": [
                                 {
                                     "count": 7,
-                                    "label": "1w",
                                     "step": "day",
                                     "stepmode": "backward",
+                                    "label": "1w",
                                 },
                                 {
                                     "count": 1,
-                                    "label": "1m",
                                     "step": "month",
                                     "stepmode": "backward",
+                                    "label": "1m",
                                 },
                                 {
                                     "count": 6,
-                                    "label": "6m",
                                     "step": "month",
                                     "stepmode": "backward",
+                                    "label": "6m",
                                 },
                                 {
                                     "count": 1,
-                                    "label": "YTD",
                                     "step": "year",
                                     "stepmode": "todate",
+                                    "label": "YTD",
                                 },
                                 {
                                     "count": 1,
-                                    "label": "1y",
                                     "step": "year",
                                     "stepmode": "backward",
+                                    "label": "1y",
                                 },
                                 {"step": "all"},
                             ]
                         },
-                        "showgrid": False,
                         "type": "date",
-                        "zeroline": False,
-                    },
-                    "yaxis": {
-                        "autorange": False,
-                        "range": [-1, 4],
                         "showgrid": False,
-                        "ticktext": ["Task C", "Task B", "Task A"],
-                        "tickvals": [0, 1, 2],
-                        "zeroline": False,
                     },
+                    "hovermode": "closest",
                 },
+                "data": [
+                    {
+                        "legendgroup": "rgb(170, 14, 200)",
+                        "name": "TB",
+                        "fillcolor": "rgb(170, 14, 200)",
+                        "mode": "none",
+                        "hoverinfo": "name",
+                        "y": [0.8, 0.8, 1.2, 1.2],
+                        "x": ["2008-12-06", "2009-03-15", "2009-03-15", "2008-12-06"],
+                        "fill": "toself",
+                    },
+                    {
+                        "legendgroup": "rgb(220, 0, 0)",
+                        "name": "TA",
+                        "fillcolor": "rgb(220, 0, 0)",
+                        "mode": "none",
+                        "hoverinfo": "name",
+                        "y": [1.8, 1.8, 2.2, 2.2, None, 1.8, 1.8, 2.2, 2.2],
+                        "x": [
+                            "2008-10-05",
+                            "2009-04-15",
+                            "2009-04-15",
+                            "2008-10-05",
+                            "2008-10-05",
+                            "2009-04-20",
+                            "2009-05-30",
+                            "2009-05-30",
+                            "2009-04-20",
+                        ],
+                        "fill": "toself",
+                    },
+                    {
+                        "legendgroup": "rgb(255, 230, 41)",
+                        "name": "TC",
+                        "fillcolor": "rgb(255, 230, 41)",
+                        "mode": "none",
+                        "hoverinfo": "name",
+                        "y": [-0.2, -0.2, 0.2, 0.2, None, -0.2, -0.2, 0.2, 0.2],
+                        "x": [
+                            "2008-09-07",
+                            "2009-03-15",
+                            "2009-03-15",
+                            "2008-09-07",
+                            "2008-09-07",
+                            "2009-05-08",
+                            "2009-04-15",
+                            "2009-04-15",
+                            "2009-05-08",
+                        ],
+                        "fill": "toself",
+                    },
+                    {
+                        "showlegend": False,
+                        "legendgroup": "rgb(170, 14, 200)",
+                        "name": "",
+                        "text": ["Task B - 1", "Task B - 1"],
+                        "y": [1, 1],
+                        "mode": "markers",
+                        "marker": {
+                            "opacity": 0,
+                            "color": "rgb(170, 14, 200)",
+                            "size": 1,
+                        },
+                        "x": ["2008-12-06", "2009-03-15"],
+                    },
+                    {
+                        "showlegend": False,
+                        "legendgroup": "rgb(220, 0, 0)",
+                        "name": "",
+                        "text": [
+                            "Task A - 1",
+                            "Task A - 1",
+                            "Task A - 2",
+                            "Task A - 2",
+                        ],
+                        "y": [2, 2, 2, 2],
+                        "mode": "markers",
+                        "marker": {"opacity": 0, "color": "rgb(220, 0, 0)", "size": 1},
+                        "x": ["2008-10-05", "2009-04-15", "2009-04-20", "2009-05-30"],
+                    },
+                    {
+                        "showlegend": False,
+                        "legendgroup": "rgb(255, 230, 41)",
+                        "name": "",
+                        "text": [
+                            "Task C - 1",
+                            "Task C - 1",
+                            "Task C - 2",
+                            "Task C - 2",
+                        ],
+                        "y": [0, 0, 0, 0],
+                        "mode": "markers",
+                        "marker": {
+                            "opacity": 0,
+                            "color": "rgb(255, 230, 41)",
+                            "size": 1,
+                        },
+                        "x": ["2008-09-07", "2009-03-15", "2009-05-08", "2009-04-15"],
+                    },
+                ],
             }
         )
 
-        self.assertEqual(test_gantt_chart["data"][0], exp_gantt_chart["data"][0])
-
-        self.assertEqual(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
-
-        self.assertEqual(test_gantt_chart["data"][2], exp_gantt_chart["data"][2])
-
-        self.assertEqual(test_gantt_chart["data"][3], exp_gantt_chart["data"][3])
-
-        self.assertEqual(test_gantt_chart["data"][4], exp_gantt_chart["data"][4])
-
-        self.assertEqual(test_gantt_chart["layout"], exp_gantt_chart["layout"])
+        self.assert_fig_equal(test_gantt_chart["data"][0], exp_gantt_chart["data"][0])
+        self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
+        self.assert_fig_equal(test_gantt_chart["data"][2], exp_gantt_chart["data"][2])
+        self.assert_fig_equal(test_gantt_chart["data"][3], exp_gantt_chart["data"][3])
 
     def test_gantt_all_args(self):
 
@@ -2042,54 +2008,77 @@ class TestGantt(TestCase):
         )
 
         exp_gantt_chart = graph_objs.Figure(
-            {
+            **{
                 "data": [
                     {
-                        "marker": {"color": "white"},
-                        "name": "",
-                        "x": ["2010-01-01", "2011-02-02"],
-                        "y": [0, 0],
+                        "x": ["2011-01-01", "2012-06-05", "2012-06-05", "2011-01-01"],
+                        "y": [0.5, 0.5, 1.5, 1.5],
+                        "mode": "none",
+                        "fill": "toself",
+                        "showlegend": False,
+                        "hoverinfo": "name",
+                        "legendgroup": "rgb(166.25, 167.5, 208.0)",
+                        "fillcolor": "rgb(166.25, 167.5, 208.0)",
+                        "name": "25",
                     },
                     {
-                        "marker": {"color": "white"},
-                        "name": "",
+                        "x": ["2010-01-01", "2011-02-02", "2011-02-02", "2010-01-01"],
+                        "y": [-0.5, -0.5, 0.5, 0.5],
+                        "mode": "none",
+                        "fill": "toself",
+                        "showlegend": False,
+                        "hoverinfo": "name",
+                        "legendgroup": "rgb(220.0, 220.0, 220.0)",
+                        "fillcolor": "rgb(220.0, 220.0, 220.0)",
+                        "name": "0",
+                    },
+                    {
                         "x": ["2011-01-01", "2012-06-05"],
                         "y": [1, 1],
+                        "mode": "markers",
+                        "text": [None, None],
+                        "marker": {
+                            "color": "rgb(166.25, 167.5, 208.0)",
+                            "size": 1,
+                            "opacity": 0,
+                        },
+                        "name": "",
+                        "showlegend": False,
+                        "legendgroup": "rgb(166.25, 167.5, 208.0)",
+                    },
+                    {
+                        "x": ["2010-01-01", "2011-02-02"],
+                        "y": [0, 0],
+                        "mode": "markers",
+                        "text": [None, None],
+                        "marker": {
+                            "color": "rgb(220.0, 220.0, 220.0)",
+                            "size": 1,
+                            "opacity": 0,
+                        },
+                        "name": "",
+                        "showlegend": False,
+                        "legendgroup": "rgb(220.0, 220.0, 220.0)",
                     },
                 ],
                 "layout": {
-                    "height": 500,
-                    "hovermode": "closest",
-                    "shapes": [
-                        {
-                            "fillcolor": "rgb(220.0, 220.0, 220.0)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2010-01-01",
-                            "x1": "2011-02-02",
-                            "xref": "x",
-                            "y0": -0.5,
-                            "y1": 0.5,
-                            "yref": "y",
-                        },
-                        {
-                            "fillcolor": "rgb(166.25, 167.5, 208.0)",
-                            "line": {"width": 0},
-                            "opacity": 1,
-                            "type": "rect",
-                            "x0": "2011-01-01",
-                            "x1": "2012-06-05",
-                            "xref": "x",
-                            "y0": 0.5,
-                            "y1": 1.5,
-                            "yref": "y",
-                        },
-                    ],
-                    "showlegend": False,
                     "title": "Title",
+                    "showlegend": False,
+                    "height": 500,
                     "width": 500,
+                    "shapes": [],
+                    "hovermode": "closest",
+                    "yaxis": {
+                        "showgrid": True,
+                        "ticktext": ["Run", "Fast"],
+                        "tickvals": [0, 1],
+                        "range": [-1, 3],
+                        "autorange": False,
+                        "zeroline": False,
+                    },
                     "xaxis": {
+                        "showgrid": True,
+                        "zeroline": False,
                         "rangeselector": {
                             "buttons": [
                                 {
@@ -2125,27 +2114,19 @@ class TestGantt(TestCase):
                                 {"step": "all"},
                             ]
                         },
-                        "showgrid": True,
                         "type": "date",
-                        "zeroline": False,
-                    },
-                    "yaxis": {
-                        "autorange": False,
-                        "range": [-1, 3],
-                        "showgrid": True,
-                        "ticktext": ["Run", "Fast"],
-                        "tickvals": [0, 1],
-                        "zeroline": False,
                     },
                 },
             }
         )
 
-        self.assertEqual(test_gantt_chart["data"][0], exp_gantt_chart["data"][0])
+        self.assert_fig_equal(test_gantt_chart["data"][0], exp_gantt_chart["data"][0])
 
-        self.assertEqual(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
+        self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
 
-        self.assertEqual(test_gantt_chart["layout"], exp_gantt_chart["layout"])
+        self.assert_fig_equal(test_gantt_chart["data"][2], exp_gantt_chart["data"][2])
+
+        self.assert_fig_equal(test_gantt_chart["layout"], exp_gantt_chart["layout"])
 
 
 class Test2D_Density(TestCaseNoTemplate, NumpyTestUtilsMixin):
