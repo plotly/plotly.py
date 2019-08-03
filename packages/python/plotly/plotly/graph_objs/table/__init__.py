@@ -756,8 +756,9 @@ class Header(_BaseTraceHierarchyType):
     def format(self):
         """
         Sets the cell value formatting rule using d3 formatting mini-
-        language which is similar to those of Python. See https://githu
-        b.com/d3/d3-format/blob/master/README.md#locale_format
+        language which is similar to those of Python. See
+        https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format
     
         The 'format' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1000,9 +1001,9 @@ class Header(_BaseTraceHierarchyType):
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See 
-            https://github.com/d3/d3-format/blob/master/README.md#l
-            ocale_format
+            mini-language which is similar to those of Python. See
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format
         formatsrc
             Sets the source reference on plot.ly for  format .
         height
@@ -1071,9 +1072,9 @@ class Header(_BaseTraceHierarchyType):
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See 
-            https://github.com/d3/d3-format/blob/master/README.md#l
-            ocale_format
+            mini-language which is similar to those of Python. See
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format
         formatsrc
             Sets the source reference on plot.ly for  format .
         height
@@ -1532,8 +1533,9 @@ class Cells(_BaseTraceHierarchyType):
     def format(self):
         """
         Sets the cell value formatting rule using d3 formatting mini-
-        language which is similar to those of Python. See https://githu
-        b.com/d3/d3-format/blob/master/README.md#locale_format
+        language which is similar to those of Python. See
+        https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format
     
         The 'format' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -1776,9 +1778,9 @@ class Cells(_BaseTraceHierarchyType):
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See 
-            https://github.com/d3/d3-format/blob/master/README.md#l
-            ocale_format
+            mini-language which is similar to those of Python. See
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format
         formatsrc
             Sets the source reference on plot.ly for  format .
         height
@@ -1847,9 +1849,9 @@ class Cells(_BaseTraceHierarchyType):
             with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
-            mini-language which is similar to those of Python. See 
-            https://github.com/d3/d3-format/blob/master/README.md#l
-            ocale_format
+            mini-language which is similar to those of Python. See
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format
         formatsrc
             Sets the source reference on plot.ly for  format .
         height

@@ -48,6 +48,8 @@ from plotly.graph_objs import Mesh3d
 
 from plotly.graph_objs import Isosurface
 
+from plotly.graph_objs import Indicator
+
 from plotly.graph_objs import Histogram
 
 from plotly.graph_objs import Histogram2d
@@ -62,6 +64,8 @@ from plotly.graph_objs import Funnel
 
 from plotly.graph_objs import Funnelarea
 
+from plotly.graph_objs import Densitymapbox
+
 from plotly.graph_objs import Contour
 
 from plotly.graph_objs import Contourcarpet
@@ -69,6 +73,8 @@ from plotly.graph_objs import Contourcarpet
 from plotly.graph_objs import Cone
 
 from plotly.graph_objs import Choropleth
+
+from plotly.graph_objs import Choroplethmapbox
 
 from plotly.graph_objs import Carpet
 

@@ -35,7 +35,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -264,9 +263,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 hex, hsl, hsv, or named color string. At
                 minimum, a mapping for the lowest (0) and
                 highest (1) values are required. For example,
-                `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To
-                control the bounds of the colorscale in color
-                space, use`line.cmin` and `line.cmax`.
+                `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
+                To control the bounds of the colorscale in
+                color space, use`line.cmin` and `line.cmax`.
                 Alternatively, `colorscale` may be a palette
                 name string of the following list: Greys,YlGnBu
                 ,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,R
@@ -287,6 +286,21 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in `line.color`is set to a numerical array.
 """,
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class LabelsideValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+    def __init__(self, plotly_name="labelside", parent_name="parcoords", **kwargs):
+        super(LabelsideValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["top", "bottom"]),
             **kwargs
         )
 
@@ -332,6 +346,20 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class LabelangleValidator(_plotly_utils.basevalidators.AngleValidator):
+    def __init__(self, plotly_name="labelangle", parent_name="parcoords", **kwargs):
+        super(LabelangleValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class IdssrcValidator(_plotly_utils.basevalidators.SrcValidator):
     def __init__(self, plotly_name="idssrc", parent_name="parcoords", **kwargs):
         super(IdssrcValidator, self).__init__(
@@ -351,7 +379,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -461,9 +488,18 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 you explicitly show it with `visible: true`.
             tickformat
                 Sets the tick label formatting rule using d3
-                formatting mini-language which is similar to
-                those of Python. See https://github.com/d3/d3-f
-                ormat/blob/master/README.md#locale_format
+                formatting mini-languages which are very
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
+                for fractional seconds with n digits. For
+                example, *2016-10-13 09:15:23.456* with
+                tickformat "%H~%M~%S.%2f" would display
+                "09~15~23.46"
             ticktext
                 Sets the text displayed at the ticks position
                 via `tickvals`.

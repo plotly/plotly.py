@@ -1948,11 +1948,11 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -2619,11 +2619,12 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -2868,11 +2869,12 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"

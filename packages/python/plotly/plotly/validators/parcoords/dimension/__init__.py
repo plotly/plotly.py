@@ -8,7 +8,7 @@ class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
         super(VisibleValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
         )
@@ -72,7 +72,7 @@ class TickvalsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(TickvalsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "data"),
             **kwargs
         )
@@ -104,7 +104,7 @@ class TicktextValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(TicktextValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "data"),
             **kwargs
         )
@@ -120,7 +120,7 @@ class TickformatValidator(_plotly_utils.basevalidators.StringValidator):
         super(TickformatValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "style"),
             **kwargs
         )
@@ -155,12 +155,12 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(RangeValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "calc"},
-                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "plot"},
+                    {"valType": "number", "editType": "plot"},
                 ],
             ),
             role=kwargs.pop("role", "info"),
@@ -192,7 +192,7 @@ class MultiselectValidator(_plotly_utils.basevalidators.BooleanValidator):
         super(MultiselectValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
         )
@@ -208,7 +208,7 @@ class LabelValidator(_plotly_utils.basevalidators.StringValidator):
         super(LabelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
         )
@@ -225,13 +225,13 @@ class ConstraintrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             dimensions=kwargs.pop("dimensions", "1-2"),
-            edit_type=kwargs.pop("edit_type", "calc"),
+            edit_type=kwargs.pop("edit_type", "plot"),
             free_length=kwargs.pop("free_length", True),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "calc"},
-                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "plot"},
+                    {"valType": "number", "editType": "plot"},
                 ],
             ),
             role=kwargs.pop("role", "info"),

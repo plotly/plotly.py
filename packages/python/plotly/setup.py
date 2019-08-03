@@ -31,6 +31,7 @@ def plotly_js_version():
     with open(path, "rt") as f:
         package_json = json.load(f)
         version = package_json["dependencies"]["plotly.js"]
+        version = version.replace("^", "")
 
     return version
 

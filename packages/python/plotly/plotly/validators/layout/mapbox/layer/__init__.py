@@ -24,7 +24,7 @@ class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["circle", "line", "fill", "symbol"]),
+            values=kwargs.pop("values", ["circle", "line", "fill", "symbol", "raster"]),
             **kwargs
         )
 
@@ -108,7 +108,7 @@ class SourcetypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["geojson", "vector"]),
+            values=kwargs.pop("values", ["geojson", "vector", "raster", "image"]),
             **kwargs
         )
 
@@ -121,6 +121,25 @@ class SourcelayerValidator(_plotly_utils.basevalidators.StringValidator):
         self, plotly_name="sourcelayer", parent_name="layout.mapbox.layer", **kwargs
     ):
         super(SourcelayerValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class SourceattributionValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(
+        self,
+        plotly_name="sourceattribution",
+        parent_name="layout.mapbox.layer",
+        **kwargs
+    ):
+        super(SourceattributionValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "plot"),
@@ -260,6 +279,22 @@ class FillValidator(_plotly_utils.basevalidators.CompoundValidator):
                 effect only when `type` is set to "fill".
 """,
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class CoordinatesValidator(_plotly_utils.basevalidators.AnyValidator):
+    def __init__(
+        self, plotly_name="coordinates", parent_name="layout.mapbox.layer", **kwargs
+    ):
+        super(CoordinatesValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 

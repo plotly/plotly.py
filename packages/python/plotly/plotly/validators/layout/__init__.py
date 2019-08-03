@@ -131,12 +131,13 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/blob/master/READ
-                ME.md#locale_format And for dates see:
-                https://github.com/d3/d3-time-
-                format/blob/master/README.md#locale_format We
-                add one item to d3's date formatter: "%{n}f"
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
                 for fractional seconds with n digits. For
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
@@ -324,12 +325,13 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformat
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/blob/master/READ
-                ME.md#locale_format And for dates see:
-                https://github.com/d3/d3-time-
-                format/blob/master/README.md#locale_format We
-                add one item to d3's date formatter: "%{n}f"
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
                 for fractional seconds with n digits. For
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
@@ -559,12 +561,13 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             hoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/blob/master/READ
-                ME.md#locale_format And for dates see:
-                https://github.com/d3/d3-time-
-                format/blob/master/README.md#locale_format We
-                add one item to d3's date formatter: "%{n}f"
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
                 for fractional seconds with n digits. For
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
@@ -758,12 +761,13 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformat
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/blob/master/READ
-                ME.md#locale_format And for dates see:
-                https://github.com/d3/d3-time-
-                format/blob/master/README.md#locale_format We
-                add one item to d3's date formatter: "%{n}f"
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
                 for fractional seconds with n digits. For
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display
@@ -2020,7 +2024,11 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the mapbox access token to be used for
                 this mapbox map. Alternatively, the mapbox
                 access token can be set in the configuration
-                options under `mapboxAccessToken`.
+                options under `mapboxAccessToken`. Note that
+                accessToken are only required when `style` (e.g
+                with values : basic, streets, outdoors, light,
+                dark, satellite, satellite-streets ) and/or a
+                layout layer references the Mapbox server.
             bearing
                 Sets the bearing angle of the map in degrees
                 counter-clockwise from North (mapbox.bearing).
@@ -2044,9 +2052,34 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 where 0 means perpendicular to the surface of
                 the map) (mapbox.pitch).
             style
-                Sets the Mapbox map style. Either input one of
-                the default Mapbox style names or the URL to a
-                custom style or a valid Mapbox style JSON.
+                Defines the map layers that are rendered by
+                default below the trace layers defined in
+                `data`, which are themselves by default
+                rendered below the layers defined in
+                `layout.mapbox.layers`.  These layers can be
+                defined either explicitly as a Mapbox Style
+                object which can contain multiple layer
+                definitions that load data from any public or
+                private Tile Map Service (TMS or XYZ) or Web
+                Map Service (WMS) or implicitly by using one of
+                the built-in style objects which use WMSes
+                which do not require any access tokens, or by
+                using a default Mapbox style or custom Mapbox
+                style URL, both of which require a Mapbox
+                access token  Note that Mapbox access token can
+                be set in the `accesstoken` attribute or in the
+                `mapboxAccessToken` config option.  Mapbox
+                Style objects are of the form described in the
+                Mapbox GL JS documentation available at
+                https://docs.mapbox.com/mapbox-gl-js/style-spec
+                The built-in plotly.js styles objects are:
+                open-street-map, white-bg, carto-positron,
+                carto-darkmatter, stamen-terrain, stamen-toner,
+                stamen-watercolor  The built-in Mapbox styles
+                are: basic, streets, outdoors, light, dark,
+                satellite, satellite-streets  Mapbox style URLs
+                are of the form:
+                mapbox://mapbox.mapbox-<name>-<version>
             uirevision
                 Controls persistence of user-driven changes in
                 the view: `center`, `zoom`, `bearing`, `pitch`.
@@ -2879,7 +2912,7 @@ class ColoraxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a

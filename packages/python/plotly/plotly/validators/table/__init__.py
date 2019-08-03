@@ -35,7 +35,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -134,7 +133,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -256,8 +254,9 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
-                those of Python. See https://github.com/d3/d3-f
-                ormat/blob/master/README.md#locale_format
+                those of Python. See
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             formatsrc
                 Sets the source reference on plot.ly for
                 format .
@@ -438,8 +437,9 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
-                those of Python. See https://github.com/d3/d3-f
-                ormat/blob/master/README.md#locale_format
+                those of Python. See
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             formatsrc
                 Sets the source reference on plot.ly for
                 format .

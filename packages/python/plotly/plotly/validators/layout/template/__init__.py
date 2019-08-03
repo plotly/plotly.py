@@ -46,6 +46,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             carpet
                 A tuple of plotly.graph_objects.Carpet
                 instances or dicts with compatible properties
+            choroplethmapbox
+                A tuple of
+                plotly.graph_objects.Choroplethmapbox instances
+                or dicts with compatible properties
             choropleth
                 A tuple of plotly.graph_objects.Choropleth
                 instances or dicts with compatible properties
@@ -57,6 +61,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instances or dicts with compatible properties
             contour
                 A tuple of plotly.graph_objects.Contour
+                instances or dicts with compatible properties
+            densitymapbox
+                A tuple of plotly.graph_objects.Densitymapbox
                 instances or dicts with compatible properties
             funnelarea
                 A tuple of plotly.graph_objects.Funnelarea
@@ -79,6 +86,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instances or dicts with compatible properties
             histogram
                 A tuple of plotly.graph_objects.Histogram
+                instances or dicts with compatible properties
+            indicator
+                A tuple of plotly.graph_objects.Indicator
                 instances or dicts with compatible properties
             isosurface
                 A tuple of plotly.graph_objects.Isosurface

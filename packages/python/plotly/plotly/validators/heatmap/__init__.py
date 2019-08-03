@@ -217,7 +217,6 @@ class Y0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(Y0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             implied_edits=kwargs.pop("implied_edits", {"ytype": "scaled"}),
             role=kwargs.pop("role", "info"),
@@ -233,7 +232,6 @@ class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             implied_edits=kwargs.pop("implied_edits", {"ytype": "array"}),
             role=kwargs.pop("role", "data"),
@@ -343,7 +341,6 @@ class X0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(X0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "scaled"}),
             role=kwargs.pop("role", "info"),
@@ -359,7 +356,6 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "array"}),
             role=kwargs.pop("role", "data"),
@@ -404,7 +400,6 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -589,7 +584,6 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -745,7 +739,6 @@ class DyValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"ytype": "scaled"}),
             role=kwargs.pop("role", "info"),
@@ -761,7 +754,6 @@ class DxValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"xtype": "scaled"}),
             role=kwargs.pop("role", "info"),
@@ -952,12 +944,13 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickformat
                 Sets the tick label formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. For numbers, see: h
-                ttps://github.com/d3/d3-format/blob/master/READ
-                ME.md#locale_format And for dates see:
-                https://github.com/d3/d3-time-
-                format/blob/master/README.md#locale_format We
-                add one item to d3's date formatter: "%{n}f"
+                similar to those in Python. For numbers, see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                And for dates see:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                We add one item to d3's date formatter: "%{n}f"
                 for fractional seconds with n digits. For
                 example, *2016-10-13 09:15:23.456* with
                 tickformat "%H~%M~%S.%2f" would display

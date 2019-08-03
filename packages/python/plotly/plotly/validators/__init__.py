@@ -530,8 +530,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -539,6 +540,7 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
+                variables `initial`, `delta` and `final`.
                 Anything contained in tag `<extra>` is
                 displayed in the secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
@@ -818,7 +820,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -861,8 +863,9 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -1096,8 +1099,9 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -1520,7 +1524,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -1567,8 +1571,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -1772,8 +1777,9 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -1989,7 +1995,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -2025,8 +2031,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -2235,8 +2242,9 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -2486,8 +2494,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -2732,8 +2741,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -2991,8 +3001,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -3182,6 +3193,13 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            below
+                Determines if this scattermapbox trace's layers
+                are to be inserted before the layer with the
+                specified ID. By default, scattermapbox layers
+                are inserted above all the base layers. To
+                place the scattermapbox layers above every
+                other layer, set `below` to "''".
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the provided data arrays are
@@ -3225,8 +3243,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -3479,8 +3498,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -3722,8 +3742,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -3978,8 +3999,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -4195,8 +4217,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -4485,8 +4508,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -4844,8 +4868,9 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
             valueformat
                 Sets the value formatting rule using d3
                 formatting mini-language which is similar to
-                those of Python. See https://github.com/d3/d3-f
-                ormat/blob/master/README.md#locale_format
+                those of Python. See
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             valuesuffix
                 Adds a unit to follow the value in the hover
                 tooltip. Add a space if a separation is
@@ -5095,8 +5120,9 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -5322,8 +5348,22 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            labelangle
+                Sets the angle of the labels with respect to
+                the horizontal. For example, a `tickangle` of
+                -90 draws the labels vertically. Tilted labels
+                with "labelangle" may be positioned better
+                inside margins when `labelposition` is set to
+                "bottom".
             labelfont
                 Sets the font for the `dimension` labels.
+            labelside
+                Specifies the location of the `label`. "top"
+                positions labels above, next to the title
+                "bottom" positions labels below the graph
+                Tilted labels with "labelangle" may be
+                positioned better inside margins when
+                `labelposition` is set to "bottom".
             line
                 plotly.graph_objects.parcoords.Line instance or
                 dict with compatible properties
@@ -5452,8 +5492,9 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -5805,7 +5846,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -5860,8 +5901,9 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -6131,7 +6173,7 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -6174,8 +6216,9 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -6337,6 +6380,121 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="indicator", parent_name="", **kwargs):
+        super(IndicatorValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Indicator"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+            align
+                Sets the horizontal alignment of the `text`
+                within the box. Note that this attribute has no
+                effect if an angular gauge is displayed: in
+                this case, it is always centered
+            customdata
+                Assigns extra data each datum. This may be
+                useful when listening to hover, click and
+                selection events. Note that, "scatter" traces
+                also appends customdata items in the markers
+                DOM elements
+            customdatasrc
+                Sets the source reference on plot.ly for
+                customdata .
+            delta
+                plotly.graph_objects.indicator.Delta instance
+                or dict with compatible properties
+            domain
+                plotly.graph_objects.indicator.Domain instance
+                or dict with compatible properties
+            gauge
+                The gauge of the Indicator plot.
+            ids
+                Assigns id labels to each datum. These ids for
+                object constancy of data points during
+                animation. Should be an array of strings, not
+                numbers or any other type.
+            idssrc
+                Sets the source reference on plot.ly for  ids .
+            meta
+                Assigns extra meta information associated with
+                this trace that can be used in various text
+                attributes. Attributes such as trace `name`,
+                graph, axis and colorbar `title.text`,
+                annotation `text` `rangeselector`,
+                `updatemenues` and `sliders` `label` text all
+                support `meta`. To access the trace `meta`
+                values in an attribute in the same trace,
+                simply use `%{meta[i]}` where `i` is the index
+                or key of the `meta` item in question. To
+                access trace `meta` in layout attributes, use
+                `%{data[n[.meta[i]}` where `i` is the index or
+                key of the `meta` and `n` is the trace index.
+            metasrc
+                Sets the source reference on plot.ly for  meta
+                .
+            mode
+                Determines how the value is displayed on the
+                graph. `number` displays the value numerically
+                in text. `delta` displays the difference to a
+                reference value in text. Finally, `gauge`
+                displays the value graphically on an axis.
+            name
+                Sets the trace name. The trace name appear as
+                the legend item and on hover.
+            number
+                plotly.graph_objects.indicator.Number instance
+                or dict with compatible properties
+            stream
+                plotly.graph_objects.indicator.Stream instance
+                or dict with compatible properties
+            title
+                plotly.graph_objects.indicator.Title instance
+                or dict with compatible properties
+            uid
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
+            value
+                Sets the number to be displayed.
+            visible
+                Determines whether or not this trace is
+                visible. If "legendonly", the trace is not
+                drawn, but can appear as a legend item
+                (provided that the legend itself is visible).
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="histogram2dcontour", parent_name="", **kwargs):
         super(Histogram2dContourValidator, self).__init__(
@@ -6395,7 +6553,7 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -6461,8 +6619,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -6642,9 +6801,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
             zhoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. See: https://github
-                .com/d3/d3-format/blob/master/README.md#locale_
-                format
+                similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
@@ -6722,7 +6881,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -6785,8 +6944,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -6955,9 +7115,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
             zhoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. See: https://github
-                .com/d3/d3-format/blob/master/README.md#locale_
-                format
+                similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
@@ -7088,8 +7248,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -7306,7 +7467,7 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -7528,7 +7689,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -7573,8 +7734,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -7737,9 +7899,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
             zhoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. See: https://github
-                .com/d3/d3-format/blob/master/README.md#locale_
-                format
+                similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
@@ -7816,8 +7978,9 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -8038,8 +8201,9 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -8255,6 +8419,255 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="densitymapbox", parent_name="", **kwargs):
+        super(DensitymapboxValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Densitymapbox"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+            autocolorscale
+                Determines whether the colorscale is a default
+                palette (`autocolorscale: true`) or the palette
+                determined by `colorscale`. In case
+                `colorscale` is unspecified or `autocolorscale`
+                is true, the default  palette will be chosen
+                according to whether numbers in the `color`
+                array are all positive, all negative or mixed.
+            below
+                Determines if the densitymapbox trace will be
+                inserted before the layer with the specified
+                ID. By default, densitymapbox traces are placed
+                below the first layer of type symbol If set to
+                '', the layer will be inserted above every
+                existing layer.
+            coloraxis
+                Sets a reference to a shared color axis.
+                References to these shared color axes are
+                "coloraxis", "coloraxis2", "coloraxis3", etc.
+                Settings for these shared color axes are set in
+                the layout, under `layout.coloraxis`,
+                `layout.coloraxis2`, etc. Note that multiple
+                color scales can be linked to the same color
+                axis.
+            colorbar
+                plotly.graph_objects.densitymapbox.ColorBar
+                instance or dict with compatible properties
+            colorscale
+                Sets the colorscale. The colorscale must be an
+                array containing arrays mapping a normalized
+                value to an rgb, rgba, hex, hsl, hsv, or named
+                color string. At minimum, a mapping for the
+                lowest (0) and highest (1) values are required.
+                For example, `[[0, 'rgb(0,0,255)'], [1,
+                'rgb(255,0,0)']]`. To control the bounds of the
+                colorscale in color space, use`zmin` and
+                `zmax`. Alternatively, `colorscale` may be a
+                palette name string of the following list: Grey
+                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                ,Electric,Viridis,Cividis.
+            customdata
+                Assigns extra data each datum. This may be
+                useful when listening to hover, click and
+                selection events. Note that, "scatter" traces
+                also appends customdata items in the markers
+                DOM elements
+            customdatasrc
+                Sets the source reference on plot.ly for
+                customdata .
+            hoverinfo
+                Determines which trace information appear on
+                hover. If `none` or `skip` are set, no
+                information is displayed upon hovering. But, if
+                `none` is set, click and hover events are still
+                fired.
+            hoverinfosrc
+                Sets the source reference on plot.ly for
+                hoverinfo .
+            hoverlabel
+                plotly.graph_objects.densitymapbox.Hoverlabel
+                instance or dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                Anything contained in tag `<extra>` is
+                displayed in the secondary box, for example
+                "<extra>{fullData.name}</extra>". To hide the
+                secondary box completely, use an empty tag
+                `<extra></extra>`.
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Sets hover text elements associated with each
+                (lon,lat) pair If a single string, the same
+                string appears over all the data points. If an
+                array of string, the items are mapped in order
+                to the this trace's (lon,lat) coordinates. To
+                be seen, trace `hoverinfo` must contain a
+                "text" flag.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
+            ids
+                Assigns id labels to each datum. These ids for
+                object constancy of data points during
+                animation. Should be an array of strings, not
+                numbers or any other type.
+            idssrc
+                Sets the source reference on plot.ly for  ids .
+            lat
+                Sets the latitude coordinates (in degrees
+                North).
+            latsrc
+                Sets the source reference on plot.ly for  lat .
+            lon
+                Sets the longitude coordinates (in degrees
+                East).
+            lonsrc
+                Sets the source reference on plot.ly for  lon .
+            meta
+                Assigns extra meta information associated with
+                this trace that can be used in various text
+                attributes. Attributes such as trace `name`,
+                graph, axis and colorbar `title.text`,
+                annotation `text` `rangeselector`,
+                `updatemenues` and `sliders` `label` text all
+                support `meta`. To access the trace `meta`
+                values in an attribute in the same trace,
+                simply use `%{meta[i]}` where `i` is the index
+                or key of the `meta` item in question. To
+                access trace `meta` in layout attributes, use
+                `%{data[n[.meta[i]}` where `i` is the index or
+                key of the `meta` and `n` is the trace index.
+            metasrc
+                Sets the source reference on plot.ly for  meta
+                .
+            name
+                Sets the trace name. The trace name appear as
+                the legend item and on hover.
+            opacity
+                Sets the opacity of the trace.
+            radius
+                Sets the radius of influence of one `lon` /
+                `lat` point in pixels. Increasing the value
+                makes the densitymapbox trace smoother, but
+                less detailed.
+            radiussrc
+                Sets the source reference on plot.ly for
+                radius .
+            reversescale
+                Reverses the color mapping if true. If true,
+                `zmin` will correspond to the last color in the
+                array and `zmax` will correspond to the first
+                color.
+            showscale
+                Determines whether or not a colorbar is
+                displayed for this trace.
+            stream
+                plotly.graph_objects.densitymapbox.Stream
+                instance or dict with compatible properties
+            subplot
+                Sets a reference between this trace's data
+                coordinates and a mapbox subplot. If "mapbox"
+                (the default value), the data refer to
+                `layout.mapbox`. If "mapbox2", the data refer
+                to `layout.mapbox2`, and so on.
+            text
+                Sets text elements associated with each
+                (lon,lat) pair If a single string, the same
+                string appears over all the data points. If an
+                array of string, the items are mapped in order
+                to the this trace's (lon,lat) coordinates. If
+                trace `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
+                seen in the hover labels.
+            textsrc
+                Sets the source reference on plot.ly for  text
+                .
+            uid
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
+            visible
+                Determines whether or not this trace is
+                visible. If "legendonly", the trace is not
+                drawn, but can appear as a legend item
+                (provided that the legend itself is visible).
+            z
+                Sets the points' weight. For example, a value
+                of 10 would be equivalent to having 10 points
+                of weight 1 in the same spot
+            zauto
+                Determines whether or not the color domain is
+                computed with respect to the input data (here
+                in `z`) or the bounds set in `zmin` and `zmax`
+                Defaults to `false` when `zmin` and `zmax` are
+                set by the user.
+            zmax
+                Sets the upper bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmin` must be set as well.
+            zmid
+                Sets the mid-point of the color domain by
+                scaling `zmin` and/or `zmax` to be equidistant
+                to this point. Value should have the same units
+                as in `z`. Has no effect when `zauto` is
+                `false`.
+            zmin
+                Sets the lower bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmax` must be set as well.
+            zsrc
+                Sets the source reference on plot.ly for  z .
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="contourcarpet", parent_name="", **kwargs):
         super(ContourcarpetValidator, self).__init__(
@@ -8327,7 +8740,7 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -8557,7 +8970,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -8610,8 +9023,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -8785,9 +9199,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
             zhoverformat
                 Sets the hover text formatting rule using d3
                 formatting mini-languages which are very
-                similar to those in Python. See: https://github
-                .com/d3/d3-format/blob/master/README.md#locale_
-                format
+                similar to those in Python. See:
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
             zmax
                 Sets the upper bound of the color domain. Value
                 should have the same units as in `z` and if
@@ -8873,7 +9287,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`cmin` and
                 `cmax`. Alternatively, `colorscale` may be a
@@ -8909,8 +9323,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -9087,6 +9502,252 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="choroplethmapbox", parent_name="", **kwargs):
+        super(ChoroplethmapboxValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Choroplethmapbox"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+            autocolorscale
+                Determines whether the colorscale is a default
+                palette (`autocolorscale: true`) or the palette
+                determined by `colorscale`. In case
+                `colorscale` is unspecified or `autocolorscale`
+                is true, the default  palette will be chosen
+                according to whether numbers in the `color`
+                array are all positive, all negative or mixed.
+            below
+                Determines if the choropleth polygons will be
+                inserted before the layer with the specified
+                ID. By default, choroplethmapbox traces are
+                placed above the water layers. If set to '',
+                the layer will be inserted above every existing
+                layer.
+            coloraxis
+                Sets a reference to a shared color axis.
+                References to these shared color axes are
+                "coloraxis", "coloraxis2", "coloraxis3", etc.
+                Settings for these shared color axes are set in
+                the layout, under `layout.coloraxis`,
+                `layout.coloraxis2`, etc. Note that multiple
+                color scales can be linked to the same color
+                axis.
+            colorbar
+                plotly.graph_objects.choroplethmapbox.ColorBar
+                instance or dict with compatible properties
+            colorscale
+                Sets the colorscale. The colorscale must be an
+                array containing arrays mapping a normalized
+                value to an rgb, rgba, hex, hsl, hsv, or named
+                color string. At minimum, a mapping for the
+                lowest (0) and highest (1) values are required.
+                For example, `[[0, 'rgb(0,0,255)'], [1,
+                'rgb(255,0,0)']]`. To control the bounds of the
+                colorscale in color space, use`zmin` and
+                `zmax`. Alternatively, `colorscale` may be a
+                palette name string of the following list: Grey
+                s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
+                Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
+                ,Electric,Viridis,Cividis.
+            customdata
+                Assigns extra data each datum. This may be
+                useful when listening to hover, click and
+                selection events. Note that, "scatter" traces
+                also appends customdata items in the markers
+                DOM elements
+            customdatasrc
+                Sets the source reference on plot.ly for
+                customdata .
+            geojson
+                Sets the GeoJSON data associated with this
+                trace. Can be set as a valid GeoJSON object or
+                as URL string Note that we only accept GeoJSON
+                of type "FeatureCollection" and "Feature" with
+                geometries of type "Polygon" and
+                "MultiPolygon".
+            hoverinfo
+                Determines which trace information appear on
+                hover. If `none` or `skip` are set, no
+                information is displayed upon hovering. But, if
+                `none` is set, click and hover events are still
+                fired.
+            hoverinfosrc
+                Sets the source reference on plot.ly for
+                hoverinfo .
+            hoverlabel
+                plotly.graph_objects.choroplethmapbox.Hoverlabe
+                l instance or dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                variable `properties` Anything contained in tag
+                `<extra>` is displayed in the secondary box,
+                for example "<extra>{fullData.name}</extra>".
+                To hide the secondary box completely, use an
+                empty tag `<extra></extra>`.
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Same as `text`.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
+            ids
+                Assigns id labels to each datum. These ids for
+                object constancy of data points during
+                animation. Should be an array of strings, not
+                numbers or any other type.
+            idssrc
+                Sets the source reference on plot.ly for  ids .
+            locations
+                Sets which features found in "geojson" to plot
+                using their feature `id` field.
+            locationssrc
+                Sets the source reference on plot.ly for
+                locations .
+            marker
+                plotly.graph_objects.choroplethmapbox.Marker
+                instance or dict with compatible properties
+            meta
+                Assigns extra meta information associated with
+                this trace that can be used in various text
+                attributes. Attributes such as trace `name`,
+                graph, axis and colorbar `title.text`,
+                annotation `text` `rangeselector`,
+                `updatemenues` and `sliders` `label` text all
+                support `meta`. To access the trace `meta`
+                values in an attribute in the same trace,
+                simply use `%{meta[i]}` where `i` is the index
+                or key of the `meta` item in question. To
+                access trace `meta` in layout attributes, use
+                `%{data[n[.meta[i]}` where `i` is the index or
+                key of the `meta` and `n` is the trace index.
+            metasrc
+                Sets the source reference on plot.ly for  meta
+                .
+            name
+                Sets the trace name. The trace name appear as
+                the legend item and on hover.
+            reversescale
+                Reverses the color mapping if true. If true,
+                `zmin` will correspond to the last color in the
+                array and `zmax` will correspond to the first
+                color.
+            selected
+                plotly.graph_objects.choroplethmapbox.Selected
+                instance or dict with compatible properties
+            selectedpoints
+                Array containing integer indices of selected
+                points. Has an effect only for traces that
+                support selections. Note that an empty array
+                means an empty selection where the `unselected`
+                are turned on for all points, whereas, any
+                other non-array values means no selection all
+                where the `selected` and `unselected` styles
+                have no effect.
+            showscale
+                Determines whether or not a colorbar is
+                displayed for this trace.
+            stream
+                plotly.graph_objects.choroplethmapbox.Stream
+                instance or dict with compatible properties
+            subplot
+                Sets a reference between this trace's data
+                coordinates and a mapbox subplot. If "mapbox"
+                (the default value), the data refer to
+                `layout.mapbox`. If "mapbox2", the data refer
+                to `layout.mapbox2`, and so on.
+            text
+                Sets the text elements associated with each
+                location.
+            textsrc
+                Sets the source reference on plot.ly for  text
+                .
+            uid
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
+            unselected
+                plotly.graph_objects.choroplethmapbox.Unselecte
+                d instance or dict with compatible properties
+            visible
+                Determines whether or not this trace is
+                visible. If "legendonly", the trace is not
+                drawn, but can appear as a legend item
+                (provided that the legend itself is visible).
+            z
+                Sets the color values.
+            zauto
+                Determines whether or not the color domain is
+                computed with respect to the input data (here
+                in `z`) or the bounds set in `zmin` and `zmax`
+                Defaults to `false` when `zmin` and `zmax` are
+                set by the user.
+            zmax
+                Sets the upper bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmin` must be set as well.
+            zmid
+                Sets the mid-point of the color domain by
+                scaling `zmin` and/or `zmax` to be equidistant
+                to this point. Value should have the same units
+                as in `z`. Has no effect when `zauto` is
+                `false`.
+            zmin
+                Sets the lower bound of the color domain. Value
+                should have the same units as in `z` and if
+                set, `zmax` must be set as well.
+            zsrc
+                Sets the source reference on plot.ly for  z .
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="choropleth", parent_name="", **kwargs):
         super(ChoroplethValidator, self).__init__(
@@ -9122,7 +9783,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value to an rgb, rgba, hex, hsl, hsv, or named
                 color string. At minimum, a mapping for the
                 lowest (0) and highest (1) values are required.
-                For example, `[[0, 'rgb(0,0,255)', [1,
+                For example, `[[0, 'rgb(0,0,255)'], [1,
                 'rgb(255,0,0)']]`. To control the bounds of the
                 colorscale in color space, use`zmin` and
                 `zmax`. Alternatively, `colorscale` may be a
@@ -9165,8 +9826,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -9744,8 +10406,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -10004,8 +10667,9 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -10243,8 +10907,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 inserted using %{variable}, for example "y:
                 %{y}". Numbers are formatted using d3-format's
                 syntax %{variable:d3-format}, for example
-                "Price: %{y:$.2f}". See https://github.com/d3/d
-                3-format/blob/master/README.md#locale_format
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
                 for details on the formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
@@ -10658,9 +11323,11 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "candlestick": "Candlestick",
                 "carpet": "Carpet",
                 "choropleth": "Choropleth",
+                "choroplethmapbox": "Choroplethmapbox",
                 "cone": "Cone",
                 "contour": "Contour",
                 "contourcarpet": "Contourcarpet",
+                "densitymapbox": "Densitymapbox",
                 "funnel": "Funnel",
                 "funnelarea": "Funnelarea",
                 "heatmap": "Heatmap",
@@ -10668,6 +11335,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "histogram": "Histogram",
                 "histogram2d": "Histogram2d",
                 "histogram2dcontour": "Histogram2dContour",
+                "indicator": "Indicator",
                 "isosurface": "Isosurface",
                 "mesh3d": "Mesh3d",
                 "ohlc": "Ohlc",

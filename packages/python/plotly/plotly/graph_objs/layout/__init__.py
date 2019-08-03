@@ -570,11 +570,11 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Sets the hover text formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -1470,11 +1470,11 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -2184,11 +2184,12 @@ class YAxis(_BaseLayoutHierarchyType):
         hoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -2360,11 +2361,12 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -2641,11 +2643,12 @@ class YAxis(_BaseLayoutHierarchyType):
         hoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -2817,11 +2820,12 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -3743,11 +3747,11 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the hover text formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -4770,11 +4774,11 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -5484,11 +5488,12 @@ class XAxis(_BaseLayoutHierarchyType):
         hoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -5666,11 +5671,12 @@ class XAxis(_BaseLayoutHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -5949,11 +5955,12 @@ class XAxis(_BaseLayoutHierarchyType):
         hoverformat
             Sets the hover text formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -6131,11 +6138,12 @@ class XAxis(_BaseLayoutHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -8062,12 +8070,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8145,12 +8154,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8289,12 +8299,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8372,12 +8383,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8575,12 +8587,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8658,12 +8671,13 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -8999,6 +9013,10 @@ class Template(_BaseLayoutHierarchyType):
                 carpet
                     A tuple of plotly.graph_objects.Carpet
                     instances or dicts with compatible properties
+                choroplethmapbox
+                    A tuple of
+                    plotly.graph_objects.Choroplethmapbox instances
+                    or dicts with compatible properties
                 choropleth
                     A tuple of plotly.graph_objects.Choropleth
                     instances or dicts with compatible properties
@@ -9010,6 +9028,9 @@ class Template(_BaseLayoutHierarchyType):
                     instances or dicts with compatible properties
                 contour
                     A tuple of plotly.graph_objects.Contour
+                    instances or dicts with compatible properties
+                densitymapbox
+                    A tuple of plotly.graph_objects.Densitymapbox
                     instances or dicts with compatible properties
                 funnelarea
                     A tuple of plotly.graph_objects.Funnelarea
@@ -9032,6 +9053,9 @@ class Template(_BaseLayoutHierarchyType):
                     instances or dicts with compatible properties
                 histogram
                     A tuple of plotly.graph_objects.Histogram
+                    instances or dicts with compatible properties
+                indicator
+                    A tuple of plotly.graph_objects.Indicator
                     instances or dicts with compatible properties
                 isosurface
                     A tuple of plotly.graph_objects.Isosurface
@@ -11913,12 +11937,13 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -12026,12 +12051,13 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -12223,12 +12249,13 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -12336,12 +12363,13 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -12533,12 +12561,13 @@ class Scene(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -12646,12 +12675,13 @@ class Scene(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -13553,12 +13583,13 @@ class Polar(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -13647,12 +13678,13 @@ class Polar(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -14028,12 +14060,13 @@ class Polar(_BaseLayoutHierarchyType):
                 hoverformat
                     Sets the hover text formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -14128,12 +14161,13 @@ class Polar(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -15074,7 +15108,10 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         Sets the mapbox access token to be used for this mapbox map.
         Alternatively, the mapbox access token can be set in the
-        configuration options under `mapboxAccessToken`.
+        configuration options under `mapboxAccessToken`. Note that
+        accessToken are only required when `style` (e.g with values :
+        basic, streets, outdoors, light, dark, satellite, satellite-
+        streets ) and/or a layout layer references the Mapbox server.
     
         The 'accesstoken' property is a string and must be specified as:
           - A non-empty string
@@ -15208,6 +15245,12 @@ class Mapbox(_BaseLayoutHierarchyType):
                     (mapbox.layer.paint.fill-color) If `type` is
                     "symbol", color corresponds to the icon color
                     (mapbox.layer.paint.icon-color)
+                coordinates
+                    Sets the coordinates array contains [longitude,
+                    latitude] pairs for the image corners listed in
+                    clockwise order: top left, top right, bottom
+                    right, bottom left. Only has an effect for
+                    "image" `sourcetype`.
                 fill
                     plotly.graph_objects.layout.mapbox.layer.Fill
                     instance or dict with compatible properties
@@ -15246,19 +15289,23 @@ class Mapbox(_BaseLayoutHierarchyType):
                     opacity)
                 source
                     Sets the source data for this layer
-                    (mapbox.layer.source). Source can be either a
-                    URL, a geojson object (with `sourcetype` set to
-                    "geojson") or an array of tile URLS (with
-                    `sourcetype` set to "vector").
+                    (mapbox.layer.source). When `sourcetype` is set
+                    to "geojson", `source` can be a URL to a
+                    GeoJSON or a GeoJSON object. When `sourcetype`
+                    is set to "vector" or "raster", `source` can be
+                    a URL or an array of tile URLs. When
+                    `sourcetype` is set to "image", `source` can be
+                    a URL to an image.
+                sourceattribution
+                    Sets the attribution for this source.
                 sourcelayer
                     Specifies the layer to use from a vector tile
                     source (mapbox.layer.source-layer). Required
                     for "vector" source type that supports multiple
                     layers.
                 sourcetype
-                    Sets the source type for this layer. Support
-                    for "raster", "image" and "video" source types
-                    is coming soon.
+                    Sets the source type for this layer, that is
+                    the type of the layer data.
                 symbol
                     plotly.graph_objects.layout.mapbox.layer.Symbol
                     instance or dict with compatible properties
@@ -15274,10 +15321,17 @@ class Mapbox(_BaseLayoutHierarchyType):
                     matching item, this item will be hidden unless
                     you explicitly show it with `visible: true`.
                 type
-                    Sets the layer type (mapbox.layer.type).
-                    Support for "raster", "background" types is
-                    coming soon. Note that "line" and "fill" are
-                    not compatible with Point GeoJSON geometries.
+                    Sets the layer type, that is the how the layer
+                    data set in `source` will be rendered With
+                    `sourcetype` set to "geojson", the following
+                    values are allowed: "circle", "line", "fill"
+                    and "symbol". but note that "line" and "fill"
+                    are not compatible with Point GeoJSON
+                    geometries. With `sourcetype` set to "vector",
+                    the following values are allowed:  "circle",
+                    "line", "fill" and "symbol". With `sourcetype`
+                    set to "raster" or `*image*`, only the "raster"
+                    value is allowed.
                 visible
                     Determines whether this layer is displayed
 
@@ -15344,9 +15398,26 @@ class Mapbox(_BaseLayoutHierarchyType):
     @property
     def style(self):
         """
-        Sets the Mapbox map style. Either input one of the default
-        Mapbox style names or the URL to a custom style or a valid
-        Mapbox style JSON.
+        Defines the map layers that are rendered by default below the
+        trace layers defined in `data`, which are themselves by default
+        rendered below the layers defined in `layout.mapbox.layers`.
+        These layers can be defined either explicitly as a Mapbox Style
+        object which can contain multiple layer definitions that load
+        data from any public or private Tile Map Service (TMS or XYZ)
+        or Web Map Service (WMS) or implicitly by using one of the
+        built-in style objects which use WMSes which do not require any
+        access tokens, or by using a default Mapbox style or custom
+        Mapbox style URL, both of which require a Mapbox access token
+        Note that Mapbox access token can be set in the `accesstoken`
+        attribute or in the `mapboxAccessToken` config option.  Mapbox
+        Style objects are of the form described in the Mapbox GL JS
+        documentation available at https://docs.mapbox.com/mapbox-gl-
+        js/style-spec  The built-in plotly.js styles objects are: open-
+        street-map, white-bg, carto-positron, carto-darkmatter, stamen-
+        terrain, stamen-toner, stamen-watercolor  The built-in Mapbox
+        styles are: basic, streets, outdoors, light, dark, satellite,
+        satellite-streets  Mapbox style URLs are of the form:
+        mapbox://mapbox.mapbox-<name>-<version>
     
         The 'style' property accepts values of any type
 
@@ -15416,6 +15487,10 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the mapbox access token to be used for this mapbox
             map. Alternatively, the mapbox access token can be set
             in the configuration options under `mapboxAccessToken`.
+            Note that accessToken are only required when `style`
+            (e.g with values : basic, streets, outdoors, light,
+            dark, satellite, satellite-streets ) and/or a layout
+            layer references the Mapbox server.
         bearing
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
@@ -15438,9 +15513,30 @@ class Mapbox(_BaseLayoutHierarchyType):
             means perpendicular to the surface of the map)
             (mapbox.pitch).
         style
-            Sets the Mapbox map style. Either input one of the
-            default Mapbox style names or the URL to a custom style
-            or a valid Mapbox style JSON.
+            Defines the map layers that are rendered by default
+            below the trace layers defined in `data`, which are
+            themselves by default rendered below the layers defined
+            in `layout.mapbox.layers`.  These layers can be defined
+            either explicitly as a Mapbox Style object which can
+            contain multiple layer definitions that load data from
+            any public or private Tile Map Service (TMS or XYZ) or
+            Web Map Service (WMS) or implicitly by using one of the
+            built-in style objects which use WMSes which do not
+            require any access tokens, or by using a default Mapbox
+            style or custom Mapbox style URL, both of which require
+            a Mapbox access token  Note that Mapbox access token
+            can be set in the `accesstoken` attribute or in the
+            `mapboxAccessToken` config option.  Mapbox Style
+            objects are of the form described in the Mapbox GL JS
+            documentation available at
+            https://docs.mapbox.com/mapbox-gl-js/style-spec  The
+            built-in plotly.js styles objects are: open-street-map,
+            white-bg, carto-positron, carto-darkmatter, stamen-
+            terrain, stamen-toner, stamen-watercolor  The built-in
+            Mapbox styles are: basic, streets, outdoors, light,
+            dark, satellite, satellite-streets  Mapbox style URLs
+            are of the form:
+            mapbox://mapbox.mapbox-<name>-<version>
         uirevision
             Controls persistence of user-driven changes in the
             view: `center`, `zoom`, `bearing`, `pitch`. Defaults to
@@ -15476,6 +15572,10 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the mapbox access token to be used for this mapbox
             map. Alternatively, the mapbox access token can be set
             in the configuration options under `mapboxAccessToken`.
+            Note that accessToken are only required when `style`
+            (e.g with values : basic, streets, outdoors, light,
+            dark, satellite, satellite-streets ) and/or a layout
+            layer references the Mapbox server.
         bearing
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
@@ -15498,9 +15598,30 @@ class Mapbox(_BaseLayoutHierarchyType):
             means perpendicular to the surface of the map)
             (mapbox.pitch).
         style
-            Sets the Mapbox map style. Either input one of the
-            default Mapbox style names or the URL to a custom style
-            or a valid Mapbox style JSON.
+            Defines the map layers that are rendered by default
+            below the trace layers defined in `data`, which are
+            themselves by default rendered below the layers defined
+            in `layout.mapbox.layers`.  These layers can be defined
+            either explicitly as a Mapbox Style object which can
+            contain multiple layer definitions that load data from
+            any public or private Tile Map Service (TMS or XYZ) or
+            Web Map Service (WMS) or implicitly by using one of the
+            built-in style objects which use WMSes which do not
+            require any access tokens, or by using a default Mapbox
+            style or custom Mapbox style URL, both of which require
+            a Mapbox access token  Note that Mapbox access token
+            can be set in the `accesstoken` attribute or in the
+            `mapboxAccessToken` config option.  Mapbox Style
+            objects are of the form described in the Mapbox GL JS
+            documentation available at
+            https://docs.mapbox.com/mapbox-gl-js/style-spec  The
+            built-in plotly.js styles objects are: open-street-map,
+            white-bg, carto-positron, carto-darkmatter, stamen-
+            terrain, stamen-toner, stamen-watercolor  The built-in
+            Mapbox styles are: basic, streets, outdoors, light,
+            dark, satellite, satellite-streets  Mapbox style URLs
+            are of the form:
+            mapbox://mapbox.mapbox-<name>-<version>
         uirevision
             Controls persistence of user-driven changes in the
             view: `center`, `zoom`, `bearing`, `pitch`. Defaults to
@@ -19970,12 +20091,13 @@ class Coloraxis(_BaseLayoutHierarchyType):
                 tickformat
                     Sets the tick label formatting rule using d3
                     formatting mini-languages which are very
-                    similar to those in Python. For numbers, see: h
-                    ttps://github.com/d3/d3-format/blob/master/READ
-                    ME.md#locale_format And for dates see:
-                    https://github.com/d3/d3-time-
-                    format/blob/master/README.md#locale_format We
-                    add one item to d3's date formatter: "%{n}f"
+                    similar to those in Python. For numbers, see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Formatting.md#d3_format
+                    And for dates see:
+                    https://github.com/d3/d3-3.x-api-
+                    reference/blob/master/Time-Formatting.md#format
+                    We add one item to d3's date formatter: "%{n}f"
                     for fractional seconds with n digits. For
                     example, *2016-10-13 09:15:23.456* with
                     tickformat "%H~%M~%S.%2f" would display
@@ -20087,7 +20209,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         arrays mapping a normalized value to an rgb, rgba, hex, hsl,
         hsv, or named color string. At minimum, a mapping for the
         lowest (0) and highest (1) values are required. For example,
-        `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`. To control the
+        `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`. To control the
         bounds of the colorscale in color space, use`cmin` and `cmax`.
         Alternatively, `colorscale` may be a palette name string of the
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
@@ -20217,7 +20339,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             containing arrays mapping a normalized value to an rgb,
             rgba, hex, hsl, hsv, or named color string. At minimum,
             a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
@@ -20289,7 +20411,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
             containing arrays mapping a normalized value to an rgb,
             rgba, hex, hsl, hsv, or named color string. At minimum,
             a mapping for the lowest (0) and highest (1) values are
-            required. For example, `[[0, 'rgb(0,0,255)', [1,
+            required. For example, `[[0, 'rgb(0,0,255)'], [1,
             'rgb(255,0,0)']]`. To control the bounds of the
             colorscale in color space, use`cmin` and `cmax`.
             Alternatively, `colorscale` may be a palette name
