@@ -511,13 +511,13 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
 
     # ### vertical_spacing ###
     if vertical_spacing is None:
-        if subplot_titles:
+        if subplot_titles is not None:
             vertical_spacing = 0.5 / rows
         else:
             vertical_spacing = 0.3 / rows
 
     # ### subplot titles ###
-    if not subplot_titles:
+    if subplot_titles is None:
         subplot_titles = [""] * rows * cols
 
     # ### column_widths ###
