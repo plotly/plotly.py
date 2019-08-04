@@ -25,6 +25,8 @@ from plotly.io._base_renderers import (
     BrowserRenderer,
     IFrameRenderer,
     SphinxGalleryRenderer,
+    CoCalcRenderer,
+    DatabricksRenderer,
 )
 from plotly.io._utils import validate_coerce_fig_to_dict
 
@@ -406,6 +408,8 @@ renderers["notebook_connected"] = NotebookRenderer(config=config, connected=True
 renderers["kaggle"] = KaggleRenderer(config=config)
 renderers["azure"] = AzureRenderer(config=config)
 renderers["colab"] = ColabRenderer(config=config)
+renderers["cocalc"] = CoCalcRenderer()
+renderers["databricks"] = DatabricksRenderer()
 
 # JSON
 renderers["json"] = JsonRenderer()
@@ -474,6 +478,13 @@ elif ipython and ipython.get_ipython():
     # Check if we're running in nteract
     if not default_renderer and "NTERACT_EXE" in os.environ:
         default_renderer = "nteract"
+
+    # Check if we're running in CoCalc
+    if not default_renderer and "COCALC_PROJECT_ID" in os.environ:
+        default_renderer = "cocalc"
+
+    if not default_renderer and "DATABRICKS_RUNTIME_VERSION" in os.environ:
+        default_renderer = "databricks"
 
     # Check if we're running in spyder and orca is installed
     if not default_renderer and "SPYDER_ARGS" in os.environ:
