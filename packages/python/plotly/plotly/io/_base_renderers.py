@@ -746,6 +746,29 @@ class DatabricksRenderer(ExternalRenderer):
         self.post_script = post_script
         self.animation_opts = animation_opts
         self.include_plotlyjs = include_plotlyjs
+        self._displayHTML = None
+
+    @property
+    def displayHTML(self):
+        import inspect
+
+        if self._displayHTML is None:
+            for frame in inspect.getouterframes(inspect.currentframe()):
+                global_names = set(frame.frame.f_globals)
+                # Check for displayHTML plus a few others to reduce chance of a false
+                # hit.
+                if all(v in global_names for v in ["displayHTML", "display", "spark"]):
+                    self._displayHTML = frame.frame.f_globals["displayHTML"]
+                    break
+
+            if self._displayHTML is None:
+                raise EnvironmentError(
+                    """
+Unable to detect the Databricks displayHTML function. The 'databricks' renderer is only
+supported when called from within the Databricks notebook environment."""
+                )
+
+        return self._displayHTML
 
     def render(self, fig_dict):
         from plotly.io import to_html
@@ -765,7 +788,7 @@ class DatabricksRenderer(ExternalRenderer):
         )
 
         # displayHTML is a Databricks notebook built-in function
-        displayHTML(html)
+        self.displayHTML(html)
 
 
 class SphinxGalleryRenderer(ExternalRenderer):

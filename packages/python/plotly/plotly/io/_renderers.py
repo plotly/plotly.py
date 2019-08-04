@@ -483,7 +483,7 @@ elif ipython and ipython.get_ipython():
     if not default_renderer and "COCALC_PROJECT_ID" in os.environ:
         default_renderer = "cocalc"
 
-    if not default_renderer and "displayHTML" in globals():
+    if not default_renderer and "DATABRICKS_RUNTIME_VERSION" in os.environ:
         default_renderer = "databricks"
 
     # Check if we're running in spyder and orca is installed
