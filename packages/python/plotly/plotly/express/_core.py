@@ -1122,7 +1122,7 @@ def init_figure(
         specs=specs,
         shared_xaxes="all",
         shared_yaxes="all",
-        row_titles=row_titles,
+        row_titles=list(reversed(row_titles)),
         column_titles=column_titles,
         horizontal_spacing=horizontal_spacing,
         vertical_spacing=vertical_spacing,
