@@ -1063,7 +1063,7 @@ def init_figure(
     row_titles = [None] * nrows
     for frame in frame_list:
         for trace in frame["data"]:
-            row0 = nrows - trace._subplot_row
+            row0 = trace._subplot_row - 1
             col0 = trace._subplot_col - 1
 
             if isinstance(trace, go.Splom):
