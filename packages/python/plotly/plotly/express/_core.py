@@ -29,7 +29,7 @@ class PxDefaults(object):
 defaults = PxDefaults()
 del PxDefaults
 
-MAPBOX_TOKEN = ""
+MAPBOX_TOKEN = None
 
 
 def set_mapbox_access_token(token):
