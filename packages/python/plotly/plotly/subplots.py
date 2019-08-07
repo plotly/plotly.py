@@ -753,12 +753,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     if row_titles:
         domains_list = []
-        if row_dir < 0:
-            rows_iter = range(rows - 1, -1, -1)
-        else:
-            rows_iter = range(rows)
-
-        for r in rows_iter:
+        for r in range(rows):
             domain_pair = domains_grid[r][-1]
             if domain_pair:
                 domains_list.extend(domain_pair)
