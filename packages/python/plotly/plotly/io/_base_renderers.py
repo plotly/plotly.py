@@ -532,6 +532,7 @@ class IFrameRenderer(MimetypeRenderer):
         post_script=None,
         animation_opts=None,
         include_plotlyjs=True,
+        html_directory="iframe_figures",
     ):
 
         self.config = config
@@ -539,6 +540,7 @@ class IFrameRenderer(MimetypeRenderer):
         self.post_script = post_script
         self.animation_opts = animation_opts
         self.include_plotlyjs = include_plotlyjs
+        self.html_directory = html_directory
 
     def to_mimebundle(self, fig_dict):
         from plotly.io import write_html
@@ -559,15 +561,10 @@ class IFrameRenderer(MimetypeRenderer):
             iframe_height = str(525 + iframe_buffer) + "px"
 
         # Build filename using ipython cell number
-        ip = IPython.get_ipython()
-        cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1
-        dirname = "iframe_figures"
-        filename = "{dirname}/figure_{cell_number}.html".format(
-            dirname=dirname, cell_number=cell_number
-        )
+        filename = self.build_filename()
 
         # Make directory for
-        os.makedirs(dirname, exist_ok=True)
+        os.makedirs(self.html_directory, exist_ok=True)
 
         write_html(
             fig_dict,
@@ -595,10 +592,37 @@ class IFrameRenderer(MimetypeRenderer):
     allowfullscreen
 ></iframe>
 """.format(
-            width=iframe_width, height=iframe_height, src=filename
+            width=iframe_width, height=iframe_height, src=self.build_url(filename)
         )
 
         return {"text/html": iframe_html}
+
+    def build_filename(self):
+        ip = IPython.get_ipython()
+        cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1
+        filename = "{dirname}/figure_{cell_number}.html".format(
+            dirname=self.html_directory, cell_number=cell_number
+        )
+        return filename
+
+    def build_url(self, filename):
+        return filename
+
+
+class CoCalcRenderer(IFrameRenderer):
+
+    _render_count = 0
+
+    def build_filename(self):
+        filename = "{dirname}/figure_{render_count}.html".format(
+            dirname=self.html_directory, render_count=CoCalcRenderer._render_count
+        )
+
+        CoCalcRenderer._render_count += 1
+        return filename
+
+    def build_url(self, filename):
+        return "{filename}?fullscreen=kiosk".format(filename=filename)
 
 
 class ExternalRenderer(BaseRenderer):
@@ -705,6 +729,66 @@ class BrowserRenderer(ExternalRenderer):
             validate=False,
         )
         open_html_in_browser(html, self.using, self.new, self.autoraise)
+
+
+class DatabricksRenderer(ExternalRenderer):
+    def __init__(
+        self,
+        config=None,
+        auto_play=False,
+        post_script=None,
+        animation_opts=None,
+        include_plotlyjs="cdn",
+    ):
+
+        self.config = config
+        self.auto_play = auto_play
+        self.post_script = post_script
+        self.animation_opts = animation_opts
+        self.include_plotlyjs = include_plotlyjs
+        self._displayHTML = None
+
+    @property
+    def displayHTML(self):
+        import inspect
+
+        if self._displayHTML is None:
+            for frame in inspect.getouterframes(inspect.currentframe()):
+                global_names = set(frame.frame.f_globals)
+                # Check for displayHTML plus a few others to reduce chance of a false
+                # hit.
+                if all(v in global_names for v in ["displayHTML", "display", "spark"]):
+                    self._displayHTML = frame.frame.f_globals["displayHTML"]
+                    break
+
+            if self._displayHTML is None:
+                raise EnvironmentError(
+                    """
+Unable to detect the Databricks displayHTML function. The 'databricks' renderer is only
+supported when called from within the Databricks notebook environment."""
+                )
+
+        return self._displayHTML
+
+    def render(self, fig_dict):
+        from plotly.io import to_html
+
+        html = to_html(
+            fig_dict,
+            config=self.config,
+            auto_play=self.auto_play,
+            include_plotlyjs=self.include_plotlyjs,
+            include_mathjax="cdn",
+            post_script=self.post_script,
+            full_html=True,
+            animation_opts=self.animation_opts,
+            default_width="100%",
+            default_height="100%",
+            validate=False,
+        )
+
+        # displayHTML is a Databricks notebook built-in function
+        self.displayHTML(html)
 
 
 class SphinxGalleryRenderer(ExternalRenderer):

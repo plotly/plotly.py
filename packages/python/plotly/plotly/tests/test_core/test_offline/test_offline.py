@@ -316,9 +316,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
     @attr("nodev")
     def test_plotlyjs_version(self):
-        path = os.path.join(
-            packages_root, "javascript", "jupyterlab-plotly", "package.json"
-        )
+        path = os.path.join(packages_root, "javascript", "plotlywidget", "package.json")
         with open(path, "rt") as f:
             package_json = json.load(f)
             expected_version = package_json["dependencies"]["plotly.js"]

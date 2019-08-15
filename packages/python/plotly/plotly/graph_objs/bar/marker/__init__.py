@@ -228,7 +228,7 @@ class Line(_BaseTraceHierarchyType):
         must be an array containing arrays mapping a normalized value
         to an rgb, rgba, hex, hsl, hsv, or named color string. At
         minimum, a mapping for the lowest (0) and highest (1) values
-        are required. For example, `[[0, 'rgb(0,0,255)', [1,
+        are required. For example, `[[0, 'rgb(0,0,255)'], [1,
         'rgb(255,0,0)']]`. To control the bounds of the colorscale in
         color space, use`marker.line.cmin` and `marker.line.cmax`.
         Alternatively, `colorscale` may be a palette name string of the
@@ -424,7 +424,7 @@ class Line(_BaseTraceHierarchyType):
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
-            example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
             use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
@@ -528,7 +528,7 @@ class Line(_BaseTraceHierarchyType):
             normalized value to an rgb, rgba, hex, hsl, hsv, or
             named color string. At minimum, a mapping for the
             lowest (0) and highest (1) values are required. For
-            example, `[[0, 'rgb(0,0,255)', [1, 'rgb(255,0,0)']]`.
+            example, `[[0, 'rgb(0,0,255)'], [1, 'rgb(255,0,0)']]`.
             To control the bounds of the colorscale in color space,
             use`marker.line.cmin` and `marker.line.cmax`.
             Alternatively, `colorscale` may be a palette name
@@ -1300,11 +1300,11 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         Sets the tick label formatting rule using d3 formatting mini-
         languages which are very similar to those in Python. For
-        numbers, see: https://github.com/d3/d3-format/blob/master/READM
-        E.md#locale_format And for dates see:
-        https://github.com/d3/d3-time-
-        format/blob/master/README.md#locale_format We add one item to
-        d3's date formatter: "%{n}f" for fractional seconds with n
+        numbers, see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Formatting.md#d3_format And for dates
+        see: https://github.com/d3/d3-3.x-api-
+        reference/blob/master/Time-Formatting.md#format We add one item
+        to d3's date formatter: "%{n}f" for fractional seconds with n
         digits. For example, *2016-10-13 09:15:23.456* with tickformat
         "%H~%M~%S.%2f" would display "09~15~23.46"
     
@@ -1970,11 +1970,12 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
@@ -2219,11 +2220,12 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat
             Sets the tick label formatting rule using d3 formatting
             mini-languages which are very similar to those in
-            Python. For numbers, see: https://github.com/d3/d3-form
-            at/blob/master/README.md#locale_format And for dates
-            see: https://github.com/d3/d3-time-
-            format/blob/master/README.md#locale_format We add one
-            item to d3's date formatter: "%{n}f" for fractional
+            Python. For numbers, see:
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format And for
+            dates see: https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format We add
+            one item to d3's date formatter: "%{n}f" for fractional
             seconds with n digits. For example, *2016-10-13
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"

@@ -29,7 +29,7 @@ class PxDefaults(object):
 defaults = PxDefaults()
 del PxDefaults
 
-MAPBOX_TOKEN = ""
+MAPBOX_TOKEN = None
 
 
 def set_mapbox_access_token(token):
@@ -352,12 +352,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Add axis titles to non-marginal subplots
     y_title = get_decorated_label(args, args["y"], "y")
-    for row in range(1, nrows):
-        fig.update_yaxes(title_text=y_title, row=row, col=1)
+    if args["marginal_x"]:
+        fig.update_yaxes(title_text=y_title, row=1, col=1)
+    else:
+        for row in range(1, nrows + 1):
+            fig.update_yaxes(title_text=y_title, row=row, col=1)
 
     x_title = get_decorated_label(args, args["x"], "x")
-    for col in range(1, ncols):
-        fig.update_xaxes(title_text=x_title, row=1, col=col)
+    if args["marginal_y"]:
+        fig.update_xaxes(title_text=x_title, row=1, col=1)
+    else:
+        for col in range(1, ncols + 1):
+            fig.update_xaxes(title_text=x_title, row=1, col=col)
 
     # Configure axis type across all x-axes
     if "log_x" in args and args["log_x"]:
@@ -958,7 +964,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                     row = m.val_map[val]
                     trace._subplot_row_val = val
                 else:
-                    if trace_spec.marginal == "x":
+                    if has_marginal_x and trace_spec.marginal != "x":
                         row = 2
                     else:
                         row = 1
@@ -1039,7 +1045,11 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 continue
 
             _set_trace_grid_reference(
-                trace, fig.layout, fig._grid_ref, trace._subplot_row, trace._subplot_col
+                trace,
+                fig.layout,
+                fig._grid_ref,
+                nrows - trace._subplot_row + 1,
+                trace._subplot_col,
             )
 
     # Add traces, layout and frames to figure
@@ -1063,7 +1073,7 @@ def init_figure(
     row_titles = [None] * nrows
     for frame in frame_list:
         for trace in frame["data"]:
-            row0 = nrows - trace._subplot_row
+            row0 = trace._subplot_row - 1
             col0 = trace._subplot_col - 1
 
             if isinstance(trace, go.Splom):
@@ -1122,7 +1132,7 @@ def init_figure(
         specs=specs,
         shared_xaxes="all",
         shared_yaxes="all",
-        row_titles=row_titles,
+        row_titles=list(reversed(row_titles)),
         column_titles=column_titles,
         horizontal_spacing=horizontal_spacing,
         vertical_spacing=vertical_spacing,
