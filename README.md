@@ -53,7 +53,7 @@ Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introdu
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
+`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
 
 [Contact us](https://plot.ly/products/consulting-and-oem/) for Plotly.js consulting, dashboard development, application integration, and feature additions. Sharing your graphs online or in dashboards? Consider a [plot.ly subscription](https://plot.ly/products/cloud).
 
@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==3.7.1
+pip install plotly==4.1.0
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=3.7.1
+conda install -c plotly plotly==4.1.0
 ```
 
 ### Jupyter Notebook Support
@@ -91,13 +91,13 @@ For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
 packages using pip...
 
 ```
-pip install "notebook>=5.3" "ipywidgets>=7.2"
+pip install "notebook>=5.3" "ipywidgets==7.5"
 ```
 
 or conda.
 
 ```
-conda install "notebook>=5.3" "ipywidgets>=7.2"
+conda install "notebook>=5.3" "ipywidgets=7.5"
 ```
 
 ### JupyterLab Support (Python 3.5+)
@@ -105,13 +105,13 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
 
 ```
-pip install jupyterlab==0.35 "ipywidgets>=7.2"
+pip install jupyterlab==1.0 "ipywidgets==7.5"
 ```
 
 or conda.
 
 ```
-conda install jupyterlab=0.35 "ipywidgets>=7.2"
+conda install jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions:
@@ -123,16 +123,16 @@ export NODE_OPTIONS=--max-old-space-size=4096
 set NODE_OPTIONS=--max-old-space-size=4096
 
 # Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38 --no-build
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@0.8.0 --no-build
+jupyter labextension install plotlywidget@1.1.0 --no-build
 
-# offline iplot support
-jupyter labextension install @jupyterlab/plotly-extension@0.18.2 --no-build
+# and jupyterlab renderer support
+jupyter labextension install jupyterlab-plotly@1.1.0 --no-build
 
 # JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.1 --no-build
+jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
@@ -168,12 +168,41 @@ If you get an error message stating that the `orca` executable that was found is
 
 `plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`
 
+### Extended Geo Support
+Some plotly.py features rely on fairly large geographic shape files. The county
+choropleth figure factory is one such example. These shape files are distributed as a
+separate `plotly-geo` package.  This package can be installed using pip...
+
+```
+pip install plotly-geo==1.0.0
+```
+
+or conda
+```
+conda install -c plotly plotly-geo=1.0.0
+```
+
+### Chart Studio support
+The `chart-studio` package can be used to upload plotly figures to Plotly's Chart
+Studio Cloud or On-Prem service.  This package can be installed using pip...
+
+```
+pip install chart-studio==1.0.0
+```
+
+or conda
+```
+conda install -c plotly chart-studio=1.0.0
+```
+
 ## Migration
-If you're migrating from plotly.py version 2, please check out the [migration guide](migration-guide.md)
+If you're migrating from plotly.py version 3, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
+
+If you're migrating from plotly.py version 2, please check out the [Version 3 migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.
 
-Code released under the [MIT license](LICENSE.txt).
+Code released under the [MIT license](packages/python/chart-studio/LICENSE.txt).
 
 Docs released under the [Creative Commons license](https://github.com/plotly/documentation/blob/source/LICENSE).

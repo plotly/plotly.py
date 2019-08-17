@@ -4,6 +4,9 @@
 
 *.gz
 
+# Don't ignore dataset files
+!*.csv.gz
+
 *.ipynb
 
 *.coverage
@@ -20,7 +23,7 @@ plotly/presentation_objs/
 
 .idea
 
-js/node_modules/
+node_modules/
 
 .pytest_cache
 
@@ -35,3 +38,5 @@ plotly.egg-info/
 
 plotly/tests/test_orca/images/*/failed
 plotly/tests/test_orca/images/*/tmp
+/plotly-package/plotly/tests/test_core/test_offline/plotly.min.js
+temp-plot.html

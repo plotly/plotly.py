@@ -1,0 +1,32 @@
+{% set sdata = load_setup_py_data() %}
+
+package:
+  name: plotly-geo
+  version: {{ sdata['version'] }}
+
+source:
+  path: ..
+
+build:
+  noarch: python
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -q"
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    {% for dep in sdata.get('install_requires',{}) %}
+    - {{ dep }}
+    {% endfor %}
+
+test:
+  imports:
+    - _plotly_geo
+
+about:
+  home: {{ sdata['url'] }}
+  summary: {{ sdata['description'] }}
+  license: {{ sdata['license'] }}
+  license_file: LICENSE.txt
