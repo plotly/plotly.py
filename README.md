@@ -162,6 +162,12 @@ pip install psutil
 
 and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
+#### Troubleshooting
+##### Wrong Executable found
+If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
+
+`plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`
+
 ### Extended Geo Support
 Some plotly.py features rely on fairly large geographic shape files. The county
 choropleth figure factory is one such example. These shape files are distributed as a
