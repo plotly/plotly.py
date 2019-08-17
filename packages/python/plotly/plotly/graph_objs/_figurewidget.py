@@ -15081,7 +15081,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_coloraxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_coloraxes(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
@@ -15097,6 +15099,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all coloraxis objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -15113,7 +15119,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_coloraxes(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15175,7 +15181,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_geos(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_geos(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
@@ -15191,6 +15199,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all geo objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -15207,7 +15219,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_geos(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15269,7 +15281,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_mapboxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_mapboxes(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
@@ -15285,6 +15299,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all mapbox objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -15301,7 +15319,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_mapboxes(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15363,7 +15381,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_polars(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_polars(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
@@ -15379,6 +15399,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all polar objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -15395,7 +15419,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_polars(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15457,7 +15481,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_scenes(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_scenes(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
@@ -15473,6 +15499,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all scene objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -15489,7 +15519,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_scenes(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15551,7 +15581,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_ternaries(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_ternaries(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
@@ -15567,6 +15599,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all ternary objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -15583,7 +15619,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_ternaries(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15645,7 +15681,9 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_xaxes(self, patch=None, selector=None, row=None, col=None, **kwargs):
+    def update_xaxes(
+        self, patch=None, selector=None, overwrite=False, row=None, col=None, **kwargs
+    ):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
@@ -15661,6 +15699,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all xaxis objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -15677,7 +15719,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self.select_xaxes(selector=selector, row=row, col=col):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self
 
@@ -15768,7 +15810,14 @@ class FigureWidget(BaseFigureWidget):
         return self
 
     def update_yaxes(
-        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self,
+        patch=None,
+        selector=None,
+        overwrite=False,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
     ):
         """
         Perform a property update operation on all yaxis objects
@@ -15785,6 +15834,10 @@ class FigureWidget(BaseFigureWidget):
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all yaxis objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -15815,6 +15868,6 @@ class FigureWidget(BaseFigureWidget):
         for obj in self.select_yaxes(
             selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self

@@ -438,7 +438,7 @@ class BaseFigure(object):
         else:
             print (repr(self))
 
-    def update(self, dict1=None, **kwargs):
+    def update(self, dict1=None, overwrite=False, **kwargs):
         """
         Update the properties of the figure with a dict and/or with
         keyword arguments.
@@ -450,6 +450,10 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         kwargs :
             Keyword/value pair of properties to be updated
 
@@ -484,10 +488,11 @@ class BaseFigure(object):
                 if d:
                     for k, v in d.items():
                         update_target = self[k]
-                        if update_target == ():
-                            # existing data or frames property is empty
-                            # In this case we accept the v as is.
+                        if update_target == () or overwrite:
                             if k == "data":
+                                # Overwrite all traces as special due to
+                                # restrictions on trace assignment
+                                self.data = ()
                                 self.add_traces(v)
                             else:
                                 # Accept v
@@ -843,7 +848,14 @@ class BaseFigure(object):
         return self
 
     def update_traces(
-        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self,
+        patch=None,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        overwrite=False,
+        **kwargs
     ):
         """
         Perform a property update operation on all traces that satisfy the
@@ -877,6 +889,10 @@ class BaseFigure(object):
             created using plotly.subplots.make_subplots. See the docstring
             for the specs argument to make_subplots for more info on
             creating subplots with secondary y-axes.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         **kwargs
             Additional property updates to apply to each selected trace. If
             a property is specified in both patch and in **kwargs then the
@@ -890,10 +906,10 @@ class BaseFigure(object):
         for trace in self.select_traces(
             selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
-            trace.update(patch, **kwargs)
+            trace.update(patch, overwrite=overwrite, **kwargs)
         return self
 
-    def update_layout(self, dict1=None, **kwargs):
+    def update_layout(self, dict1=None, overwrite=False, **kwargs):
         """
         Update the properties of the figure's layout with a dict and/or with
         keyword arguments.
@@ -905,6 +921,10 @@ class BaseFigure(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         kwargs :
             Keyword/value pair of properties to be updated
 
@@ -913,7 +933,7 @@ class BaseFigure(object):
         BaseFigure
             The Figure object that the update_layout method was called on
         """
-        self.layout.update(dict1, **kwargs)
+        self.layout.update(dict1, overwrite=overwrite, **kwargs)
         return self
 
     def _select_layout_subplots_by_prefix(
@@ -2697,7 +2717,7 @@ Invalid property path '{key_path_str}' for layout
         return isinstance(v, list) and len(v) > 0 and isinstance(v[0], dict)
 
     @staticmethod
-    def _perform_update(plotly_obj, update_obj):
+    def _perform_update(plotly_obj, update_obj, overwrite=False):
         """
         Helper to support the update() methods on :class:`BaseFigure` and
         :class:`BasePlotlyType`
@@ -2747,6 +2767,12 @@ Invalid property path '{key_path_str}' for layout
             # ------------------------
             for key in update_obj:
                 val = update_obj[key]
+
+                if overwrite:
+                    # Don't recurse and assign property as-is
+                    plotly_obj[key] = val
+                    continue
+
                 validator = plotly_obj._get_prop_validator(key)
 
                 if isinstance(validator, CompoundValidator) and isinstance(val, dict):
@@ -3530,7 +3556,7 @@ class BasePlotlyType(object):
                 )
             )
 
-    def update(self, dict1=None, **kwargs):
+    def update(self, dict1=None, overwrite=False, **kwargs):
         """
         Update the properties of an object with a dict and/or with
         keyword arguments.
@@ -3542,6 +3568,10 @@ class BasePlotlyType(object):
         ----------
         dict1 : dict
             Dictionary of properties to be updated
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         kwargs :
             Keyword/value pair of properties to be updated
 
@@ -3552,11 +3582,11 @@ class BasePlotlyType(object):
         """
         if self.figure:
             with self.figure.batch_update():
-                BaseFigure._perform_update(self, dict1)
-                BaseFigure._perform_update(self, kwargs)
+                BaseFigure._perform_update(self, dict1, overwrite=overwrite)
+                BaseFigure._perform_update(self, kwargs, overwrite=overwrite)
         else:
-            BaseFigure._perform_update(self, dict1)
-            BaseFigure._perform_update(self, kwargs)
+            BaseFigure._perform_update(self, dict1, overwrite=overwrite)
+            BaseFigure._perform_update(self, kwargs, overwrite=overwrite)
 
         return self
 
