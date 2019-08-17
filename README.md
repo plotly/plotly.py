@@ -66,7 +66,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 - [Online Documentation](https://plot.ly/python)
 - [Contributing](contributing.md)
-- [Changelog](packages/python/plotly-geo/CHANGELOG.md)
+- [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Version 3 Migration Guide](migration-guide.md)
 - [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
