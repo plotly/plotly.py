@@ -171,7 +171,7 @@ from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyTy
 import copy as _copy
 
 
-class Steps(_BaseTraceHierarchyType):
+class Step(_BaseTraceHierarchyType):
 
     # color
     # -----
@@ -239,7 +239,7 @@ class Steps(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.steps.Line
+          - An instance of plotly.graph_objs.indicator.gauge.step.Line
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -254,7 +254,7 @@ class Steps(_BaseTraceHierarchyType):
 
         Returns
         -------
-        plotly.graph_objs.indicator.gauge.steps.Line
+        plotly.graph_objs.indicator.gauge.step.Line
         """
         return self["line"]
 
@@ -377,8 +377,8 @@ class Steps(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.steps.Line
-            instance or dict with compatible properties
+            plotly.graph_objects.indicator.gauge.step.Line instance
+            or dict with compatible properties
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -417,18 +417,18 @@ class Steps(_BaseTraceHierarchyType):
         **kwargs
     ):
         """
-        Construct a new Steps object
+        Construct a new Step object
         
         Parameters
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.indicator.gauge.Steps
+            an instance of plotly.graph_objs.indicator.gauge.Step
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.steps.Line
-            instance or dict with compatible properties
+            plotly.graph_objects.indicator.gauge.step.Line instance
+            or dict with compatible properties
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -456,9 +456,9 @@ class Steps(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Steps
+        Step
         """
-        super(Steps, self).__init__("stepss")
+        super(Step, self).__init__("steps")
 
         # Validate arg
         # ------------
@@ -471,9 +471,9 @@ class Steps(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.Steps 
+The first argument to the plotly.graph_objs.indicator.gauge.Step 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.Steps"""
+an instance of plotly.graph_objs.indicator.gauge.Step"""
             )
 
         # Handle skip_invalid
@@ -482,16 +482,16 @@ an instance of plotly.graph_objs.indicator.gauge.Steps"""
 
         # Import validators
         # -----------------
-        from plotly.validators.indicator.gauge import steps as v_steps
+        from plotly.validators.indicator.gauge import step as v_step
 
         # Initialize validators
         # ---------------------
-        self._validators["color"] = v_steps.ColorValidator()
-        self._validators["line"] = v_steps.LineValidator()
-        self._validators["name"] = v_steps.NameValidator()
-        self._validators["range"] = v_steps.RangeValidator()
-        self._validators["templateitemname"] = v_steps.TemplateitemnameValidator()
-        self._validators["thickness"] = v_steps.ThicknessValidator()
+        self._validators["color"] = v_step.ColorValidator()
+        self._validators["line"] = v_step.LineValidator()
+        self._validators["name"] = v_step.NameValidator()
+        self._validators["range"] = v_step.RangeValidator()
+        self._validators["templateitemname"] = v_step.TemplateitemnameValidator()
+        self._validators["thickness"] = v_step.ThicknessValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -1910,6 +1910,6 @@ an instance of plotly.graph_objs.indicator.gauge.Axis"""
 
 
 from plotly.graph_objs.indicator.gauge import threshold
-from plotly.graph_objs.indicator.gauge import steps
+from plotly.graph_objs.indicator.gauge import step
 from plotly.graph_objs.indicator.gauge import bar
 from plotly.graph_objs.indicator.gauge import axis

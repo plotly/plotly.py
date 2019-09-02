@@ -42761,7 +42761,7 @@
                     },
                     "steps": {
                         "items": {
-                            "steps": {
+                            "step": {
                                 "color": {
                                     "valType": "color",
                                     "editType": "plot",
