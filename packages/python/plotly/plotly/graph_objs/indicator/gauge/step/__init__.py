@@ -87,7 +87,7 @@ class Line(_BaseTraceHierarchyType):
     # --------------------
     @property
     def _parent_path_str(self):
-        return "indicator.gauge.steps"
+        return "indicator.gauge.step"
 
     # Self properties description
     # ---------------------------
@@ -110,7 +110,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.indicator.gauge.steps.Line
+            plotly.graph_objs.indicator.gauge.step.Line
         color
             Sets the color of the line enclosing each sector.
         width
@@ -134,9 +134,9 @@ class Line(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.indicator.gauge.steps.Line 
+The first argument to the plotly.graph_objs.indicator.gauge.step.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.steps.Line"""
+an instance of plotly.graph_objs.indicator.gauge.step.Line"""
             )
 
         # Handle skip_invalid
@@ -145,7 +145,7 @@ an instance of plotly.graph_objs.indicator.gauge.steps.Line"""
 
         # Import validators
         # -----------------
-        from plotly.validators.indicator.gauge.steps import line as v_line
+        from plotly.validators.indicator.gauge.step import line as v_line
 
         # Initialize validators
         # ---------------------

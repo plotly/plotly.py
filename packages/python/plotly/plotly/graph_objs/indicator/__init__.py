@@ -921,23 +921,23 @@ class Gauge(_BaseTraceHierarchyType):
     def shape(self, val):
         self["shape"] = val
 
-    # stepss
-    # ------
+    # steps
+    # -----
     @property
-    def stepss(self):
+    def steps(self):
         """
-        The 'stepss' property is a tuple of instances of
-        Steps that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.indicator.gauge.Steps
+        The 'steps' property is a tuple of instances of
+        Step that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.indicator.gauge.Step
           - A list or tuple of dicts of string/value properties that
-            will be passed to the Steps constructor
+            will be passed to the Step constructor
     
             Supported dict properties:
                 
                 color
                     Sets the background color of the arc.
                 line
-                    plotly.graph_objects.indicator.gauge.steps.Line
+                    plotly.graph_objects.indicator.gauge.step.Line
                     instance or dict with compatible properties
                 name
                     When used in a template, named items are
@@ -968,41 +968,41 @@ class Gauge(_BaseTraceHierarchyType):
 
         Returns
         -------
-        tuple[plotly.graph_objs.indicator.gauge.Steps]
+        tuple[plotly.graph_objs.indicator.gauge.Step]
         """
-        return self["stepss"]
+        return self["steps"]
 
-    @stepss.setter
-    def stepss(self, val):
-        self["stepss"] = val
+    @steps.setter
+    def steps(self, val):
+        self["steps"] = val
 
-    # stepsdefaults
-    # -------------
+    # stepdefaults
+    # ------------
     @property
-    def stepsdefaults(self):
+    def stepdefaults(self):
         """
         When used in a template (as
-        layout.template.data.indicator.gauge.stepsdefaults), sets the
+        layout.template.data.indicator.gauge.stepdefaults), sets the
         default property values to use for elements of
         indicator.gauge.steps
     
-        The 'stepsdefaults' property is an instance of Steps
+        The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.Steps
+          - An instance of plotly.graph_objs.indicator.gauge.Step
           - A dict of string/value properties that will be passed
-            to the Steps constructor
+            to the Step constructor
     
             Supported dict properties:
 
         Returns
         -------
-        plotly.graph_objs.indicator.gauge.Steps
+        plotly.graph_objs.indicator.gauge.Step
         """
-        return self["stepsdefaults"]
+        return self["stepdefaults"]
 
-    @stepsdefaults.setter
-    def stepsdefaults(self, val):
-        self["stepsdefaults"] = val
+    @stepdefaults.setter
+    def stepdefaults(self, val):
+        self["stepdefaults"] = val
 
     # threshold
     # ---------
@@ -1062,12 +1062,12 @@ class Gauge(_BaseTraceHierarchyType):
             gauge.
         shape
             Set the shape of the gauge
-        stepss
-            A tuple of plotly.graph_objects.indicator.gauge.Steps
+        steps
+            A tuple of plotly.graph_objects.indicator.gauge.Step
             instances or dicts with compatible properties
-        stepsdefaults
+        stepdefaults
             When used in a template (as
-            layout.template.data.indicator.gauge.stepsdefaults),
+            layout.template.data.indicator.gauge.stepdefaults),
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
@@ -1084,8 +1084,8 @@ class Gauge(_BaseTraceHierarchyType):
         bordercolor=None,
         borderwidth=None,
         shape=None,
-        stepss=None,
-        stepsdefaults=None,
+        steps=None,
+        stepdefaults=None,
         threshold=None,
         **kwargs
     ):
@@ -1113,12 +1113,12 @@ class Gauge(_BaseTraceHierarchyType):
             gauge.
         shape
             Set the shape of the gauge
-        stepss
-            A tuple of plotly.graph_objects.indicator.gauge.Steps
+        steps
+            A tuple of plotly.graph_objects.indicator.gauge.Step
             instances or dicts with compatible properties
-        stepsdefaults
+        stepdefaults
             When used in a template (as
-            layout.template.data.indicator.gauge.stepsdefaults),
+            layout.template.data.indicator.gauge.stepdefaults),
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
@@ -1163,8 +1163,8 @@ an instance of plotly.graph_objs.indicator.Gauge"""
         self._validators["bordercolor"] = v_gauge.BordercolorValidator()
         self._validators["borderwidth"] = v_gauge.BorderwidthValidator()
         self._validators["shape"] = v_gauge.ShapeValidator()
-        self._validators["stepss"] = v_gauge.StepssValidator()
-        self._validators["stepsdefaults"] = v_gauge.StepsValidator()
+        self._validators["steps"] = v_gauge.StepsValidator()
+        self._validators["stepdefaults"] = v_gauge.StepValidator()
         self._validators["threshold"] = v_gauge.ThresholdValidator()
 
         # Populate data dict with properties
@@ -1181,10 +1181,10 @@ an instance of plotly.graph_objs.indicator.Gauge"""
         self["borderwidth"] = borderwidth if borderwidth is not None else _v
         _v = arg.pop("shape", None)
         self["shape"] = shape if shape is not None else _v
-        _v = arg.pop("stepss", None)
-        self["stepss"] = stepss if stepss is not None else _v
-        _v = arg.pop("stepsdefaults", None)
-        self["stepsdefaults"] = stepsdefaults if stepsdefaults is not None else _v
+        _v = arg.pop("steps", None)
+        self["steps"] = steps if steps is not None else _v
+        _v = arg.pop("stepdefaults", None)
+        self["stepdefaults"] = stepdefaults if stepdefaults is not None else _v
         _v = arg.pop("threshold", None)
         self["threshold"] = threshold if threshold is not None else _v
 

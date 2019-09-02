@@ -3,7 +3,7 @@ import _plotly_utils.basevalidators
 
 class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
     def __init__(
-        self, plotly_name="width", parent_name="indicator.gauge.steps.line", **kwargs
+        self, plotly_name="width", parent_name="indicator.gauge.step.line", **kwargs
     ):
         super(WidthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -20,7 +20,7 @@ import _plotly_utils.basevalidators
 
 class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
     def __init__(
-        self, plotly_name="color", parent_name="indicator.gauge.steps.line", **kwargs
+        self, plotly_name="color", parent_name="indicator.gauge.step.line", **kwargs
     ):
         super(ColorValidator, self).__init__(
             plotly_name=plotly_name,

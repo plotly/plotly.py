@@ -30,14 +30,14 @@ class ThresholdValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class StepsValidator(_plotly_utils.basevalidators.CompoundValidator):
+class StepValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(
-        self, plotly_name="stepsdefaults", parent_name="indicator.gauge", **kwargs
+        self, plotly_name="stepdefaults", parent_name="indicator.gauge", **kwargs
     ):
-        super(StepsValidator, self).__init__(
+        super(StepValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Steps"),
+            data_class_str=kwargs.pop("data_class_str", "Step"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
@@ -50,19 +50,19 @@ class StepsValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
-class StepssValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(self, plotly_name="stepss", parent_name="indicator.gauge", **kwargs):
-        super(StepssValidator, self).__init__(
+class StepsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(self, plotly_name="steps", parent_name="indicator.gauge", **kwargs):
+        super(StepsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Steps"),
+            data_class_str=kwargs.pop("data_class_str", "Step"),
             data_docs=kwargs.pop(
                 "data_docs",
                 """
             color
                 Sets the background color of the arc.
             line
-                plotly.graph_objects.indicator.gauge.steps.Line
+                plotly.graph_objects.indicator.gauge.step.Line
                 instance or dict with compatible properties
             name
                 When used in a template, named items are

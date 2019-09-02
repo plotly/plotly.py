@@ -254,13 +254,13 @@ class GaugeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the gauge.
             shape
                 Set the shape of the gauge
-            stepss
+            steps
                 A tuple of
-                plotly.graph_objects.indicator.gauge.Steps
+                plotly.graph_objects.indicator.gauge.Step
                 instances or dicts with compatible properties
-            stepsdefaults
+            stepdefaults
                 When used in a template (as layout.template.dat
-                a.indicator.gauge.stepsdefaults), sets the
+                a.indicator.gauge.stepdefaults), sets the
                 default property values to use for elements of
                 indicator.gauge.steps
             threshold
