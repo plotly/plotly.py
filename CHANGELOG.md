@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  - The width of a figure produced buy the `create_gantt` figure factory now resizes responsively ([#1724](https://github.com/plotly/plotly.py/pull/1724))
  
 ### Fixed
+ - The name of the steps property of `graph_objects.indicator.Guage` has been renamed from `stepss` to `steps`
  - Avoid crash in iframe renderers when running outside iPython ([#1723](https://github.com/plotly/plotly.py/pull/1723))
 
 ## [4.1.0] - 2019-08-06
