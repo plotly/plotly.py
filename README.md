@@ -129,7 +129,7 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 --no-build
 jupyter labextension install plotlywidget@1.1.1 --no-build
 
 # and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.1.1 --no-build
+jupyter labextension install jupyterlab-plotly@1.1.2 --no-build
 
 # JupyterLab chart editor support (optional)
 jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
