@@ -102,7 +102,7 @@ jobs:
       - run:
           name: Build html figures
           command: |
-            python tests/percy/plotly.express.py
+            python test/percy/plotly-express.py
       - run:
           name: Run percy snapshots
           command: |
