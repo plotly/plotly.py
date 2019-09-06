@@ -394,6 +394,7 @@ workflows:
       - python-3.5-core
       - python-3.6-core
       - python-3.7-core
+      - python-3.7-percy
       - python-2.7-optional
       - python-3.5-optional
       - python-3.6-optional
