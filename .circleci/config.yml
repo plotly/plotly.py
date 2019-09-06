@@ -92,17 +92,14 @@ jobs:
           name: Inject Percy Environment variables
           command: |
             echo 'export PERCY_TOKEN="$PERCY_PYTHON_TOKEN_V0"' >> $BASH_ENV
-
       - run:
           name: Install requirements
           command: |
             pip install -e ./packages/python/plotly
-
       - run:
           name: Build html figures
           command: |
             python tests/percy/plotly.express.py
-
       - run:
           name: Run percy snapshots
           command: |
