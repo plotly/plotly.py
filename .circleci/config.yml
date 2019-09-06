@@ -102,6 +102,7 @@ jobs:
       - run:
           name: Build html figures
           command: |
+            . venv/bin/activate
             python test/percy/plotly-express.py
       - run:
           name: Run percy snapshots
