@@ -1,6 +1,7 @@
 ## This script uses px functions to generate html figures, which will be
 ## tested with percy.
 
+# this directory
 import os
 dir_name = os.path.join("test", "percy")
 
