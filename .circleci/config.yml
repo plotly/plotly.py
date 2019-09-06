@@ -103,7 +103,7 @@ jobs:
           name: Build html figures
           command: |
             . venv/bin/activate
-            pip install pandas
+            pip install pandas statsmodels
             python test/percy/plotly-express.py
       - run:
           name: Run percy snapshots
