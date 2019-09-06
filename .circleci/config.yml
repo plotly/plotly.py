@@ -95,6 +95,9 @@ jobs:
       - run:
           name: Install requirements
           command: |
+            sudo pip install --upgrade virtualenv
+            python -m venv venv || virtualenv venv
+            . venv/bin/activate
             pip install -e ./packages/python/plotly
       - run:
           name: Build html figures
