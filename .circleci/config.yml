@@ -82,8 +82,7 @@ jobs:
   python-3.7-percy:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-
-    environment:
+        environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
 
