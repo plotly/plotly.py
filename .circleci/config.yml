@@ -106,7 +106,6 @@ jobs:
             npx percy snapshot tests/percy/
             rm tests/percy/*.html
 
-
   # Optional
   python-2.7-optional:
     docker:
