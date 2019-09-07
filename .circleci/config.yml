@@ -108,7 +108,7 @@ jobs:
       - run:
           name: Run percy snapshots
           command: |
-                  npx percy snapshot test/percy/
+            npx percy snapshot test/percy/
             rm test/percy/*.html
 
   # Optional
