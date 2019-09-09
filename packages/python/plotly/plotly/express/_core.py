@@ -916,6 +916,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                         if constructor_to_use == go.Scatter
                         else go.Scatterpolargl
                     )
+            # Create the trace
             trace = constructor_to_use(name=trace_name)
             if trace_spec.constructor not in [
                 go.Parcats,
