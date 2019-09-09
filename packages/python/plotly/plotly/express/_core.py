@@ -46,7 +46,7 @@ def set_mapbox_access_token(token):
 def get_trendline_results(fig):
     """
     Extracts fit statistics for trendlines (when applied to figures generated with
-    the `trendline` argument set to `"ols"`).
+    the `trendline` argument set to `"ols"` and `"huber"`).
 
     Arguments:
         fig: the output of a `plotly_express` charting call
@@ -192,7 +192,12 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if trace_spec.constructor == go.Histogram:
                     mapping_labels["count"] = "%{x}"
             elif k == "trendline":
-                if v in ["ols", "lowess"] and args["x"] and args["y"] and len(g) > 1:
+                if (
+                    v in ["ols", "lowess", "huber", "theil-sen"]
+                    and args["x"]
+                    and args["y"]
+                    and len(g) > 1
+                ):
                     import statsmodels.api as sm
                     import numpy as np
 
@@ -222,6 +227,41 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         hover_header += (
                             "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
                         )
+                    elif v == "huber":
+                        huber_t = sm.RLM(
+                            y, sm.add_constant(x), M=sm.robust.norms.HuberT()
+                        )
+                        fit_results = huber_t.fit()
+                        result["y"] = fit_results.predict()
+                        hover_header = "<b>Huber's trendline</b><br>"
+                        hover_header += "%s = %f * %s + %f<br>" % (
+                            args["y"],
+                            fit_results.params[1],
+                            args["x"],
+                            fit_results.params[0],
+                        )
+                        rsquared = 1 - np.sum((y - result["y"]) ** 2) / np.sum(
+                            (y - np.mean(y)) ** 2
+                        )
+                        hover_header += "R<sup>2</sup>=%f<br><br>" % rsquared
+                    elif v == "theil-sen":
+                        from scipy.stats.mstats import theilslopes
+
+                        medslope, medintercept, lo_slope, hi_slope = theilslopes(
+                            y, x, alpha=0.95
+                        )
+                        result["y"] = medslope * x + medintercept
+                        hover_header = "<b>Theil-Sen's trendline</b><br>"
+                        hover_header += "%s = %f * %s + %f<br>" % (
+                            args["y"],
+                            medslope,
+                            args["x"],
+                            medintercept,
+                        )
+                        rsquared = 1 - np.sum((y - result["y"]) ** 2) / np.sum(
+                            (y - np.mean(y)) ** 2
+                        )
+                        hover_header += "R<sup>2</sup>=%f<br><br>" % rsquared
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
 

@@ -239,9 +239,11 @@ docs = dict(
         "If set, a vertical subplot is drawn to the right of the main plot, visualizing the y-distribution.",
     ],
     trendline=[
-        "(string, one of `'ols'` or `'lowess'`, default `None`)",
+        "(string, one of `'ols'` , `'lowess'`, `'huber'` or `'theil-sen'`, default `None`)",
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
+        "If `'huber'`, an Huber regression line with default t=1.345 turning parameter will be drawn for each discrete-color/symbol group.",
+        "If `'theil-sen'`, an Theil–Sen regression line will be drawn for each discrete-color/symbol group.",
     ],
     trendline_color_override=[
         "(string, valid CSS color)",
