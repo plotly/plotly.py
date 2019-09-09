@@ -111,6 +111,10 @@ docs = dict(
         colref_list,
         "Values from these columns appear as extra data in the hover tooltip.",
     ],
+    custom_data=[
+        colref_list,
+        "Values from these columns are extra data, to be used in widgets or Dash callbacks for example.",
+    ],
     text=[colref, "Values from this column appear in the figure as text labels."],
     locationmode=[
         "(string, one of 'ISO-3', 'USA-states', 'country names')",
