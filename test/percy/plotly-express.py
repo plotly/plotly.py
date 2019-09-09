@@ -314,6 +314,31 @@ fig = px.line_ternary(
 )
 fig.write_html(os.path.join(dir_name, "line_ternary.html"))
 
+# #### 3D Coordinates
+
+import plotly.express as px
+
+election = px.data.election()
+fig = px.scatter_3d(
+    election,
+    x="Joly",
+    y="Coderre",
+    z="Bergeron",
+    color="winner",
+    size="total",
+    hover_name="district",
+    symbol="result",
+    color_discrete_map={"Joly": "blue", "Bergeron": "green", "Coderre": "red"},
+)
+fig.write_html(os.path.join(dir_name, "scatter_3d.html"))
+
+import plotly.express as px
+
+election = px.data.election()
+fig = px.line_3d(
+    election, x="Joly", y="Coderre", z="Bergeron", color="winner", line_dash="winner"
+)
+fig.write_html(os.path.join(dir_name, "line_3d.html"))
 
 # #### Polar Coordinates
 
@@ -357,6 +382,29 @@ fig = px.bar_polar(
 fig.write_html(os.path.join(dir_name, "bar_polar.html"))
 
 # #### Maps
+
+import plotly.express as px
+
+carshare = px.data.carshare()
+fig = px.scatter_mapbox(
+    carshare,
+    lat="centroid_lat",
+    lon="centroid_lon",
+    color="peak_hour",
+    size="car_hours",
+    color_continuous_scale=px.colors.cyclical.IceFire,
+    size_max=15,
+    zoom=10,
+)
+fig.write_html(os.path.join(dir_name, "scatter_mapbox.html"))
+
+import plotly.express as px
+
+carshare = px.data.carshare()
+fig = px.line_mapbox(
+    carshare, lat="centroid_lat", lon="centroid_lon", color="peak_hour"
+)
+fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
 
 import plotly.express as px
 
