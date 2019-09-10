@@ -1333,7 +1333,7 @@ for the specs argument to plotly.subplots.make_subplots for more information.
 Trace type '{typ}' is not compatible with subplot type '{subplot_type}'
 at grid position ({row}, {col}) 
 
-See the docstring for the specs argument to plotly.subplots.make_subplot 
+See the docstring for the specs argument to plotly.subplots.make_subplots 
 for more information on subplot types""".format(
                     typ=trace.type,
                     subplot_type=subplot_refs[0].subplot_type,
