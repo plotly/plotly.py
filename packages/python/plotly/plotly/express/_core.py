@@ -258,9 +258,8 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     result[error_xy] = {}
                 result[error_xy][arr] = g[v]
             elif k == "custom_data":
-                result["customdata"] = np.hstack(
-                                (result["customdata"], g[v].values))
-                custom_data_len += len(v) # number of custom data columns
+                result["customdata"] = np.hstack((result["customdata"], g[v].values))
+                custom_data_len += len(v)  # number of custom data columns
             elif k == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -277,11 +276,13 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     go.Histogram2dContour,
                 ]:
                     result["customdata"] = np.hstack(
-                                (result["customdata"], g[v].values))
+                        (result["customdata"], g[v].values)
+                    )
                     for i, col in enumerate(v):
                         v_label_col = get_decorated_label(args, col, None)
-                        mapping_labels[v_label_col] = (
-                                "%%{customdata[%d]}" % (i + custom_data_len))
+                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % (
+                            i + custom_data_len
+                        )
             elif k == "color":
                 if trace_spec.constructor == go.Choropleth:
                     result["z"] = g[v]
@@ -753,8 +754,9 @@ def apply_default_cascade(args):
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
-        ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
-        + ["dimensions", "custom_data", "hover_name", "hover_data", "text", "error_x", "error_x_minus"]
+        ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
+        + ["custom_data", "hover_name", "hover_data", "text"]
+        + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
     )
