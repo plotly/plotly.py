@@ -165,7 +165,7 @@ fig = px.scatter(
     range_x=[100, 100000],
     range_y=[25, 90],
 )
-fig.write_html(os.path.join(dir_name, "scatter_log.html"))
+fig.write_html(os.path.join(dir_name, "scatter_log.html"), auto_play=False)
 
 import plotly.express as px
 
@@ -418,7 +418,7 @@ fig = px.scatter_geo(
     animation_frame="year",
     projection="natural earth",
 )
-fig.write_html(os.path.join(dir_name, "scatter_geo.html"))
+fig.write_html(os.path.join(dir_name, "scatter_geo.html"), auto_play=False)
 
 import plotly.express as px
 
@@ -442,4 +442,4 @@ fig = px.choropleth(
     animation_frame="year",
     range_color=[20, 80],
 )
-fig.write_html(os.path.join(dir_name, "choropleth.html"))
+fig.write_html(os.path.join(dir_name, "choropleth.html"), auto_play=False)
