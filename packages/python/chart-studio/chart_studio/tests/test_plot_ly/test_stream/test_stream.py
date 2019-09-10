@@ -75,6 +75,7 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(0.5)
         my_stream.close()
 
+    @nottest
     @attr("slow")
     def test_stream_layout(self):
         py.sign_in(un, ak)
