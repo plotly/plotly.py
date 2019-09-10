@@ -85,7 +85,7 @@ class TestStreaming(PlotlyTestCase):
             world_readable=True,
             filename="stream-test3",
         )
-        time.sleep(0.5)
+        time.sleep(2)
         title_0 = "some title i picked first"
         title_1 = "this other title i picked second"
         my_stream = py.Stream(tk)
