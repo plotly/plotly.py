@@ -7,7 +7,6 @@ from __future__ import absolute_import
 import time
 
 from nose.plugins.attrib import attr
-from nose.tools import nottest
 
 from chart_studio import plotly as py
 from plotly.graph_objs import Layout, Scatter, Stream
@@ -60,7 +59,6 @@ class TestStreaming(PlotlyTestCase):
         my_stream.close()
 
     @attr("slow")
-    @nottest
     def test_stream_multiple_points(self):
         py.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
@@ -77,7 +75,6 @@ class TestStreaming(PlotlyTestCase):
         time.sleep(0.5)
         my_stream.close()
 
-    @nottest
     @attr("slow")
     def test_stream_layout(self):
         py.sign_in(un, ak)
@@ -88,7 +85,7 @@ class TestStreaming(PlotlyTestCase):
             world_readable=True,
             filename="stream-test3",
         )
-        time.sleep(2)
+        time.sleep(0.5)
         title_0 = "some title i picked first"
         title_1 = "this other title i picked second"
         my_stream = py.Stream(tk)
