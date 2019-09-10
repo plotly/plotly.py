@@ -7,6 +7,7 @@ from __future__ import absolute_import
 import time
 
 from nose.plugins.attrib import attr
+from nose.tools import nottest
 
 from chart_studio import plotly as py
 from plotly.graph_objs import Layout, Scatter, Stream
