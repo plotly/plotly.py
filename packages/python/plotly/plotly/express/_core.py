@@ -275,13 +275,19 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    result["customdata"] = np.hstack(
-                        (result["customdata"], g[v].values)
+                    for col in v:
+                        try:
+                            position = args["custom_data"].index(col) + 1
+                        except ValueError:
+                            position = custom_data_len
+                            custom_data_len += 1
+                            result["customdata"] = np.hstack(
+                                    (result["customdata"],
+                                     g[col].values[:, None])
                     )
-                    for i, col in enumerate(v):
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (
-                            i + custom_data_len
+                            position
                         )
             elif k == "color":
                 if trace_spec.constructor == go.Choropleth:
