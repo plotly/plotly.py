@@ -60,6 +60,7 @@ class TestStreaming(PlotlyTestCase):
         my_stream.close()
 
     @attr("slow")
+    @nottest
     def test_stream_multiple_points(self):
         py.sign_in(un, ak)
         stream = Stream(token=tk, maxpoints=50)
