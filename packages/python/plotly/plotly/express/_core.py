@@ -275,7 +275,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     for col in v:
                         try:
                             position = args["custom_data"].index(col)
-                        except (ValueError, AttributeError):
+                        except (ValueError, AttributeError, KeyError):
                             position = custom_data_len
                             custom_data_len += 1
                             if "customdata" in result:
