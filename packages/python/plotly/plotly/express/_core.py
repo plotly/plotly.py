@@ -282,13 +282,10 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                             position = custom_data_len
                             custom_data_len += 1
                             result["customdata"] = np.hstack(
-                                    (result["customdata"],
-                                     g[col].values[:, None])
-                    )
+                                (result["customdata"], g[col].values[:, None])
+                            )
                         v_label_col = get_decorated_label(args, col, None)
-                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % (
-                            position
-                        )
+                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
                 if trace_spec.constructor == go.Choropleth:
                     result["z"] = g[v]
