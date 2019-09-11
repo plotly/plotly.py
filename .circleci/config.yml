@@ -79,6 +79,38 @@ jobs:
           command: 'cd packages/python/plotly; tox -e py37-core'
           no_output_timeout: 20m
 
+  python-3.7-percy:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PERCY_ENABLED: True
+          PERCY_PROJECT: plotly/plotly.py
+
+    steps:
+      - checkout
+      - run:
+          name: Inject Percy Environment variables
+          command: |
+            echo 'export PERCY_TOKEN="$PERCY_PYTHON_TOKEN_V0"' >> $BASH_ENV
+      - run:
+          name: Install requirements
+          command: |
+            sudo pip install --upgrade virtualenv
+            python -m venv venv || virtualenv venv
+            . venv/bin/activate
+            pip install -e ./packages/python/plotly
+      - run:
+          name: Build html figures
+          command: |
+            . venv/bin/activate
+            pip install pandas statsmodels --quiet
+            python test/percy/plotly-express.py
+      - run:
+          name: Run percy snapshots
+          command: |
+            npx percy snapshot test/percy/
+            rm test/percy/*.html
+
   # Optional
   python-2.7-optional:
     docker:
@@ -367,6 +399,7 @@ workflows:
       - python-3.5-core
       - python-3.6-core
       - python-3.7-core
+      - python-3.7-percy
       - python-2.7-optional
       - python-3.5-optional
       - python-3.6-optional
