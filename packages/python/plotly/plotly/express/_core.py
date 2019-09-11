@@ -166,10 +166,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
     result = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
-    custom_data_len = 1
-    # parcats does not have customdata
-    if trace_spec.constructor != go.Parcats:
-        result["customdata"] = g.index.values[:, None]
+    custom_data_len = 0
     for k in trace_spec.attrs:
         v = args[k]
         v_label = get_decorated_label(args, v, k)
@@ -258,8 +255,8 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     result[error_xy] = {}
                 result[error_xy][arr] = g[v]
             elif k == "custom_data":
-                result["customdata"] = np.hstack((result["customdata"], g[v].values))
-                custom_data_len += len(v)  # number of custom data columns
+                result["customdata"] = g[v].values
+                custom_data_len = len(v)  # number of custom data columns
             elif k == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -277,13 +274,16 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 ]:
                     for col in v:
                         try:
-                            position = args["custom_data"].index(col) + 1
-                        except ValueError:
+                            position = args["custom_data"].index(col)
+                        except (ValueError, AttributeError):
                             position = custom_data_len
                             custom_data_len += 1
-                            result["customdata"] = np.hstack(
-                                (result["customdata"], g[col].values[:, None])
-                            )
+                            if "customdata" in result:
+                                result["customdata"] = np.hstack(
+                                    (result["customdata"], g[col].values[:, None])
+                                )
+                            else:
+                                result["customdata"] = g[col].values[:, None]
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
