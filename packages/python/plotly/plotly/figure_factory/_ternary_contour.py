@@ -615,7 +615,6 @@ def create_ternary_contour(
     The create_ternary_contour figure factory requires the scipy package"""
         )
     sk_measure = optional_imports.get_module("skimage")
-    print(sk_measure)
     if sk_measure is None:
         raise ImportError(
             """\
