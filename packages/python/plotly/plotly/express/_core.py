@@ -6,6 +6,7 @@ from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
 import math
 import pandas
+import numpy as np
 
 from plotly.subplots import (
     make_subplots,
@@ -137,12 +138,35 @@ def make_mapping(args, variable):
 
 
 def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
+    """Populates a dict with arguments to update trace
 
+    Parameters
+    ----------
+    args : dict
+        args to be used for the trace
+    trace_spec : NamedTuple
+        which kind of trace to be used (has constructor, marginal etc.
+        attributes)
+    g : pandas DataFrame
+        data
+    mapping_labels : dict
+        to be used for hovertemplate
+    sizeref : float
+        marker sizeref
+
+    Returns
+    -------
+    result : dict
+        dict to be used to update trace
+    fit_results : dict
+        fit information to be used for trendlines
+    """
     if "line_close" in args and args["line_close"]:
         g = g.append(g.iloc[0])
     result = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
+    custom_data_len = 0
     for k in trace_spec.attrs:
         v = args[k]
         v_label = get_decorated_label(args, v, k)
@@ -194,7 +218,6 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
             elif k == "trendline":
                 if v in ["ols", "lowess"] and args["x"] and args["y"] and len(g) > 1:
                     import statsmodels.api as sm
-                    import numpy as np
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     g2 = g.sort_values(by=args["x"])
@@ -231,6 +254,9 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if error_xy not in result:
                     result[error_xy] = {}
                 result[error_xy][arr] = g[v]
+            elif k == "custom_data":
+                result["customdata"] = g[v].values
+                custom_data_len = len(v)  # number of custom data columns
             elif k == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -246,10 +272,20 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    result["customdata"] = g[v].values
-                    for i, col in enumerate(v):
+                    for col in v:
+                        try:
+                            position = args["custom_data"].index(col)
+                        except (ValueError, AttributeError, KeyError):
+                            position = custom_data_len
+                            custom_data_len += 1
+                            if "customdata" in result:
+                                result["customdata"] = np.hstack(
+                                    (result["customdata"], g[col].values[:, None])
+                                )
+                            else:
+                                result["customdata"] = g[col].values[:, None]
                         v_label_col = get_decorated_label(args, col, None)
-                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % i
+                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
                 if trace_spec.constructor == go.Choropleth:
                     result["z"] = g[v]
@@ -721,12 +757,13 @@ def apply_default_cascade(args):
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
-        ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
-        + ["dimensions", "hover_name", "hover_data", "text", "error_x", "error_x_minus"]
+        ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
+        + ["custom_data", "hover_name", "hover_data", "text"]
+        + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
     )
-    array_attrables = ["dimensions", "hover_data"]
+    array_attrables = ["dimensions", "custom_data", "hover_data"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 
     # Validate that the strings provided as attribute values reference columns
@@ -916,6 +953,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                         if constructor_to_use == go.Scatter
                         else go.Scatterpolargl
                     )
+            # Create the trace
             trace = constructor_to_use(name=trace_name)
             if trace_spec.constructor not in [
                 go.Parcats,
