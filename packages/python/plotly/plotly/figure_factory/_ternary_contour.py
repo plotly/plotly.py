@@ -8,6 +8,7 @@ from plotly.graph_objs import graph_objs as go
 np = optional_imports.get_module("numpy")
 scipy_interp = optional_imports.get_module("scipy.interpolate")
 
+from skimage import measure
 
 # -------------------------- Layout ------------------------------
 
@@ -304,8 +305,8 @@ def _extract_contours(im, values, colors):
     all_contours1, all_values1, all_areas1, all_colors1 = [], [], [], []
     all_contours2, all_values2, all_areas2, all_colors2 = [], [], [], []
     for i, val in enumerate(values):
-        contour_level1 = sk_measure.find_contours(zz_min, val)
-        contour_level2 = sk_measure.find_contours(zz_max, val)
+        contour_level1 = measure.find_contours(zz_min, val)
+        contour_level2 = measure.find_contours(zz_max, val)
         all_contours1.extend(contour_level1)
         all_contours2.extend(contour_level2)
         all_values1.extend([val] * len(contour_level1))
@@ -613,12 +614,7 @@ def create_ternary_contour(
             """\
     The create_ternary_contour figure factory requires the scipy package"""
         )
-    try:
-        import skimage.measure as skm
-        print("skimage installed")
-    except ImportError:
-        print("skimage not installed")
-    sk_measure = optional_imports.get_module("skimage.measure")
+    sk_measure = optional_imports.get_module("skimage")
     print(sk_measure)
     if sk_measure is None:
         raise ImportError(
