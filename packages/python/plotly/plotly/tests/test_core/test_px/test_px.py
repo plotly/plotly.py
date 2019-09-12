@@ -47,3 +47,7 @@ def test_custom_data_scatter():
     )
     assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
     assert fig.data[0].customdata.shape[1] == 4
+    assert (
+        fig.data[0].hovertemplate
+        == "sepal_width=%{x}<br>sepal_length=%{y}<br>petal_length=%{customdata[2]}<br>petal_width=%{customdata[3]}<br>species_id=%{customdata[0]}"
+    )
