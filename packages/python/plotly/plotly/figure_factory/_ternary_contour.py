@@ -6,7 +6,6 @@ from plotly import optional_imports
 from plotly.graph_objs import graph_objs as go
 
 np = optional_imports.get_module("numpy")
-sk_measure = optional_imports.get_module("skimage.measure")
 scipy_interp = optional_imports.get_module("scipy.interpolate")
 
 
@@ -614,6 +613,12 @@ def create_ternary_contour(
             """\
     The create_ternary_contour figure factory requires the scipy package"""
         )
+    try:
+        import skimage
+        print("skimage installed")
+    except ImportError:
+        print("skimage not installed")
+    sk_measure = optional_imports.get_module("skimage.measure")
     if sk_measure is None:
         raise ImportError(
             """\
