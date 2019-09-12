@@ -10,3 +10,27 @@ def test_scatter():
     assert np.all(fig.data[0].y == iris.sepal_length)
     # test defaults
     assert fig.data[0].mode == "markers"
+
+
+def test_custom_data_scatter():
+    iris = px.data.iris()
+    # No hover, no custom data
+    fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species")
+    assert fig.data[0].customdata is None
+    # Hover, no custom data
+    fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species",
+                     hover_data=["petal_length", "petal_width"])
+    for data in fig.data:
+        assert np.all(np.in1d(data.customdata[:, 1], iris.petal_width))
+    # Hover and custom data, no repeated arguments
+    fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+                     hover_data=["petal_length", "petal_width"],
+                     custom_data=['species_id', 'species'])
+    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
+    assert fig.data[0].customdata.shape[1] == 4
+    # Hover and custom data, with repeated arguments
+    fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+                     hover_data=["petal_length", "petal_width", 'species_id'],
+                     custom_data=['species_id', 'species'])
+    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
+    assert fig.data[0].customdata.shape[1] == 4
