@@ -113,7 +113,7 @@ docs = dict(
     ],
     custom_data=[
         colref_list,
-        "Values from these columns are extra data, to be used in widgets or Dash callbacks for example.",
+        "Values from these columns are extra data, to be used in widgets or Dash callbacks for example. This data is not user-visible but is included in events emitted by the figure (lasso selection etc.)",
     ],
     text=[colref, "Values from this column appear in the figure as text labels."],
     locationmode=[

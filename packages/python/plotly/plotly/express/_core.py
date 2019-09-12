@@ -144,7 +144,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
     ----------
     args : dict
         args to be used for the trace
-    trace_spec : dict
+    trace_spec : NamedTuple
         which kind of trace to be used (has constructor, marginal etc.
         attributes)
     g : pandas DataFrame
