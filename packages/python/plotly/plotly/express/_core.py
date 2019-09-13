@@ -5,7 +5,7 @@ from collections import namedtuple, OrderedDict
 from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
 import math
-import pandas
+import pandas as pd
 import numpy as np
 
 from plotly.subplots import (
@@ -754,6 +754,42 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
+def build_or_augment_dataframe(args, attrables, array_attrables):
+    """
+    Constructs an implicit dataframe and modifies `args` in-place.
+    `attrables` is a list of keys into `args`, all of whose corresponding
+    values are converted into columns of a dataframe.
+    Used to be support calls to plotting function that elide a dataframe
+    argument; for example `scatter(x=[1,2], y=[3,4])`.
+    """
+    if args.get("data_frame") is None:
+        df = pd.DataFrame()
+    else:
+        df = args["data_frame"]
+        df = df.reset_index()
+    data_frame_columns = {}
+    for field in attrables:
+        if field in array_attrables:
+            continue
+        argument = args.get(field)
+        if argument is None:
+            continue
+        elif isinstance(argument, str) and argument in df.columns:
+            continue
+        else:  # args[field] should be an array or df or index now
+            try:
+                col_name = argument.name  # pandas df
+            except AttributeError:
+                labels = args.get("labels")
+                col_name = labels[field] if labels and labels.get(field) else field
+            df[col_name] = argument
+            # This sets the label of an attribute to be
+            # the name of the attribute.
+            args[field] = col_name
+    args["data_frame"] = df
+    return args
+
+
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
@@ -765,6 +801,9 @@ def infer_config(args, constructor, trace_patch):
     )
     array_attrables = ["dimensions", "custom_data", "hover_data"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
+
+    all_attrables = attrables + group_attrables + ["color"]
+    build_or_augment_dataframe(args, all_attrables, array_attrables)
 
     # Validate that the strings provided as attribute values reference columns
     # in the provided data_frame
@@ -1095,7 +1134,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     fig.layout.update(layout_patch)
     fig.frames = frame_list if len(frames) > 1 else []
 
-    fig._px_trendlines = pandas.DataFrame(trendline_rows)
+    fig._px_trendlines = pd.DataFrame(trendline_rows)
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)

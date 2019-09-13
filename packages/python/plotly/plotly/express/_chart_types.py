@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 
 
 def scatter(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -57,7 +57,7 @@ scatter.__doc__ = make_docstring(scatter)
 
 
 def density_contour(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     z=None,
@@ -113,7 +113,7 @@ density_contour.__doc__ = make_docstring(density_contour)
 
 
 def density_heatmap(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     z=None,
@@ -167,7 +167,7 @@ density_heatmap.__doc__ = make_docstring(density_heatmap)
 
 
 def line(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     line_group=None,
@@ -212,7 +212,7 @@ line.__doc__ = make_docstring(line)
 
 
 def area(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     line_group=None,
@@ -257,7 +257,7 @@ area.__doc__ = make_docstring(area)
 
 
 def bar(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -307,7 +307,7 @@ bar.__doc__ = make_docstring(bar)
 
 
 def histogram(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -364,7 +364,7 @@ histogram.__doc__ = make_docstring(histogram)
 
 
 def violin(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -415,7 +415,7 @@ violin.__doc__ = make_docstring(violin)
 
 
 def box(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -461,7 +461,7 @@ box.__doc__ = make_docstring(box)
 
 
 def strip(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     color=None,
@@ -511,7 +511,7 @@ strip.__doc__ = make_docstring(strip)
 
 
 def scatter_3d(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     z=None,
@@ -562,7 +562,7 @@ scatter_3d.__doc__ = make_docstring(scatter_3d)
 
 
 def line_3d(
-    data_frame,
+    data_frame=None,
     x=None,
     y=None,
     z=None,
@@ -608,7 +608,7 @@ line_3d.__doc__ = make_docstring(line_3d)
 
 
 def scatter_ternary(
-    data_frame,
+    data_frame=None,
     a=None,
     b=None,
     c=None,
@@ -647,7 +647,7 @@ scatter_ternary.__doc__ = make_docstring(scatter_ternary)
 
 
 def line_ternary(
-    data_frame,
+    data_frame=None,
     a=None,
     b=None,
     c=None,
@@ -682,7 +682,7 @@ line_ternary.__doc__ = make_docstring(line_ternary)
 
 
 def scatter_polar(
-    data_frame,
+    data_frame=None,
     r=None,
     theta=None,
     color=None,
@@ -726,7 +726,7 @@ scatter_polar.__doc__ = make_docstring(scatter_polar)
 
 
 def line_polar(
-    data_frame,
+    data_frame=None,
     r=None,
     theta=None,
     color=None,
@@ -766,7 +766,7 @@ line_polar.__doc__ = make_docstring(line_polar)
 
 
 def bar_polar(
-    data_frame,
+    data_frame=None,
     r=None,
     theta=None,
     color=None,
@@ -804,7 +804,7 @@ bar_polar.__doc__ = make_docstring(bar_polar)
 
 
 def choropleth(
-    data_frame,
+    data_frame=None,
     lat=None,
     lon=None,
     locations=None,
@@ -844,7 +844,7 @@ choropleth.__doc__ = make_docstring(choropleth)
 
 
 def scatter_geo(
-    data_frame,
+    data_frame=None,
     lat=None,
     lon=None,
     locations=None,
@@ -888,7 +888,7 @@ scatter_geo.__doc__ = make_docstring(scatter_geo)
 
 
 def line_geo(
-    data_frame,
+    data_frame=None,
     lat=None,
     lon=None,
     locations=None,
@@ -930,7 +930,7 @@ line_geo.__doc__ = make_docstring(line_geo)
 
 
 def scatter_mapbox(
-    data_frame,
+    data_frame=None,
     lat=None,
     lon=None,
     color=None,
@@ -966,7 +966,7 @@ scatter_mapbox.__doc__ = make_docstring(scatter_mapbox)
 
 
 def line_mapbox(
-    data_frame,
+    data_frame=None,
     lat=None,
     lon=None,
     color=None,
@@ -997,7 +997,7 @@ line_mapbox.__doc__ = make_docstring(line_mapbox)
 
 
 def scatter_matrix(
-    data_frame,
+    data_frame=None,
     dimensions=None,
     color=None,
     symbol=None,
@@ -1035,7 +1035,7 @@ scatter_matrix.__doc__ = make_docstring(scatter_matrix)
 
 
 def parallel_coordinates(
-    data_frame,
+    data_frame=None,
     dimensions=None,
     color=None,
     labels={},
@@ -1059,7 +1059,7 @@ parallel_coordinates.__doc__ = make_docstring(parallel_coordinates)
 
 
 def parallel_categories(
-    data_frame,
+    data_frame=None,
     dimensions=None,
     color=None,
     labels={},
