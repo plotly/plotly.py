@@ -1,6 +1,7 @@
 import plotly.express as px
 import numpy as np
 import pandas as pd
+import pytest
 
 
 def test_numpy():
@@ -27,3 +28,8 @@ def test_with_index():
 def test_mixed_case():
     df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
     fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9])
+
+
+def test_wrong_column_name():
+    with pytest.raises(ValueError):
+        fig = px.scatter(px.data.tips(), x="bla", y="wrong")

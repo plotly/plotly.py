@@ -774,7 +774,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
         argument = args.get(field)
         if argument is None:
             continue
-        elif isinstance(argument, str) and argument in df.columns:
+        elif isinstance(argument, str):
             continue
         else:  # args[field] should be an array or df or index now
             try:
