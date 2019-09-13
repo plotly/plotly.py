@@ -754,7 +754,7 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def build_or_augment_dataframe(args, attrables, array_attrables):
+def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     """
     Constructs an implicit dataframe and modifies `args` in-place.
     `attrables` is a list of keys into `args`, all of whose corresponding
@@ -766,7 +766,9 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
         df = pd.DataFrame()
     else:
         df = args["data_frame"]
-        df = df.reset_index()
+        # we don't want to add an index to functions grabbing all cols
+        if constructor != go.Splom and constructor != go.Parcoords:
+            df = df.reset_index()
     data_frame_columns = {}
     for field in attrables:
         if field in array_attrables:
@@ -803,7 +805,7 @@ def infer_config(args, constructor, trace_patch):
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 
     all_attrables = attrables + group_attrables + ["color"]
-    build_or_augment_dataframe(args, all_attrables, array_attrables)
+    build_or_augment_dataframe(args, all_attrables, array_attrables, constructor)
 
     # Validate that the strings provided as attribute values reference columns
     # in the provided data_frame
