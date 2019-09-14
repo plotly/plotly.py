@@ -762,30 +762,30 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     Used to be support calls to plotting function that elide a dataframe
     argument; for example `scatter(x=[1,2], y=[3,4])`.
     """
+    # This will be changed so that we start from an empty dataframe
     if args.get("data_frame") is None:
         df = pd.DataFrame()
     else:
         df = args["data_frame"]
-    data_frame_columns = {}
     for field in attrables:
-        labels = args.get("labels")
+        labels = args.get("labels") # labels or None
+        # hack, needs to be changed when we start from empty df
         if field in array_attrables:
             continue
         argument = args.get(field)
         if argument is None:
             continue
-        elif isinstance(argument, str):
+        elif isinstance(argument, str): # needs to change
             continue
+        # Case of index
         elif isinstance(argument, pd.core.indexes.range.RangeIndex):
             col_name = argument.name if argument.name else "index"
-            print (col_name, labels)
             col_name = labels[field] if labels and labels.get(field) else col_name
-            print (col_name)
             try:
                 df.insert(0, col_name, argument)
-            except ValueError:
-                pass
-        else:  # args[field] should be an array or df or index now
+            except ValueError: # if col named index already exists, replace
+                df['col_name'] = argument
+        else:  # args[field] should be an array or df column
             try:
                 col_name = argument.name  # pandas df
             except AttributeError:
