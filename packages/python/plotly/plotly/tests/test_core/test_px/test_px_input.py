@@ -5,6 +5,7 @@ import pytest
 import plotly.graph_objects as go
 import plotly
 from plotly.express._core import build_or_augment_dataframe
+from pandas.util.testing import assert_frame_equal
 
 attrables = (
     ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
@@ -60,7 +61,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert df.sort_index(axis=1) == out["data_frame"].sort_index(axis=1)
+    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
 
@@ -69,7 +70,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert df.sort_index(axis=1) == out["data_frame"].sort_index(axis=1)
+    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
 
@@ -82,7 +83,7 @@ def test_build_df_from_lists():
     _ = args_wo_labels.pop("labels")
     df = pd.DataFrame(args_wo_labels).rename(columns=labels)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert df.equals(out["data_frame"])
+    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
 
 
 def test_build_df_with_index():
@@ -90,13 +91,13 @@ def test_build_df_with_index():
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     changed_output = dict(x="index")
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert out["data_frame"].equals(tips)
+    assert_frame_equal(tips.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == args
 
     tips = px.data.tips()
     args = dict(data_frame=tips, x="index", y=tips.total_bill)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert out["data_frame"].equals(tips)
+    assert_frame_equal(tips.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == args
