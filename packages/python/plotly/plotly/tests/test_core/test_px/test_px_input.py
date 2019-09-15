@@ -60,9 +60,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    print(df)
-    print(out["data_frame"])
-    assert df.equals(out["data_frame"])
+    assert df.sort_index(axis=1) == out["data_frame"].sort_index(axis=1)
     out.pop("data_frame")
     assert out == output
 
@@ -71,7 +69,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert df.equals(out["data_frame"])
+    assert df.sort_index(axis=1) == out["data_frame"].sort_index(axis=1)
     out.pop("data_frame")
     assert out == output
 
