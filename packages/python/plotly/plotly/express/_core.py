@@ -757,6 +757,13 @@ def apply_default_cascade(args):
 def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     """
     Constructs an implicit dataframe and modifies `args` in-place.
+
+    Parameters
+    ----------
+    args : OrderedDict
+        
+    constructor : go Trace object
+        trace function. It is used to fine-tune some options.
     `attrables` is a list of keys into `args`, all of whose corresponding
     values are converted into columns of a dataframe.
     Used to be support calls to plotting function that elide a dataframe
@@ -772,7 +779,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
         df = pd.DataFrame()
 
     # Retrieve labels (to change column names)
-    labels = args.get("labels")  # labels or None
+    # labels = args.get("labels")  # labels or None
 
     # Valid column names
     df_columns = (
@@ -817,7 +824,6 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
             # Case of index
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):
                 col_name = argument.name if argument.name else "index"
-                col_name = labels[field] if labels and labels.get(field) else col_name
                 try:
                     df.insert(0, col_name, argument)
                 except ValueError:  # if col named index already exists, replace
@@ -827,7 +833,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
                 try:
                     col_name = argument.name  # pandas df
                 except AttributeError:
-                    col_name = labels[field] if labels and labels.get(field) else field
+                    col_name = field
                 df[col_name] = argument
             # Update argument with column name now that column exists
             if field_name not in array_attrables:

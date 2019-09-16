@@ -116,17 +116,6 @@ def test_build_df_from_lists():
     out.pop("data_frame")
     assert out == output
 
-    # Lists, changing one label
-    labels = {"x": "time"}
-    args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9], labels=labels)
-    output = {key: key for key in args}
-    output.update(labels)
-    args_wo_labels = args.copy()
-    _ = args_wo_labels.pop("labels")
-    df = pd.DataFrame(args_wo_labels).rename(columns=labels)
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
-
 
 def test_build_df_with_index():
     tips = px.data.tips()
