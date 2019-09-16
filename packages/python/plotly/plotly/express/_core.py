@@ -762,13 +762,18 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     Used to be support calls to plotting function that elide a dataframe
     argument; for example `scatter(x=[1,2], y=[3,4])`.
     """
-    df = pd.DataFrame()
+    if constructor in [go.Splom, go.Parcats, go.Parcoords]:  # we take all dimensions
+        df = args["data_frame"]
+    else:
+        df = pd.DataFrame()
     labels = args.get("labels")  # labels or None
     df_columns = (
         args["data_frame"].columns if args.get("data_frame") is not None else None
     )
-    if "symbol" in args:
-        attrables += ["symbol"]
+    group_attrs = ["symbol", "line_dash"]
+    for group_attr in group_attrs:
+        if group_attr in args:
+            attrables += [group_attr]
     for field_name in attrables:
         argument_list = (
             [args.get(field_name)]
