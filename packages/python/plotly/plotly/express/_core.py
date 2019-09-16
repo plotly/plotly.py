@@ -762,12 +762,13 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     Used to be support calls to plotting function that elide a dataframe
     argument; for example `scatter(x=[1,2], y=[3,4])`.
     """
-    # This will be changed so that we start from an empty dataframe
-    if args.get("data_frame") is None:
-        df = pd.DataFrame()
-    else:
-        df = args["data_frame"]
+    df = pd.DataFrame()
     labels = args.get("labels")  # labels or None
+    df_columns = (
+        args["data_frame"].columns if args.get("data_frame") is not None else None
+    )
+    if "symbol" in args:
+        attrables += ["symbol"]
     for field_name in attrables:
         argument_list = (
             [args.get(field_name)]
@@ -785,7 +786,15 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
             if argument is None:
                 continue
             elif isinstance(argument, str):  # needs to change
-                continue
+                try:
+                    df[argument] = args["data_frame"][argument]
+                    continue
+                except KeyError:
+                    raise ValueError(
+                        "Value of '%s' is not the name of a column in 'data_frame'. "
+                        "Expected one of %s but received: %s"
+                        % (field, str(list(df_columns)), argument)
+                    )
             # Case of index
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):
                 col_name = argument.name if argument.name else "index"

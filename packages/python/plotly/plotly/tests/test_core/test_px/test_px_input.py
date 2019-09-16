@@ -35,14 +35,20 @@ def test_with_index():
     tips = px.data.tips()
     fig = px.scatter(tips, x=tips.index, y="total_bill")
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
-    tips = px.data.tips()
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
     # I was not expecting this to work but it does...
-    fig = px.scatter(tips, x="index", y=10 * tips.total_bill)
+    fig = px.scatter(tips, x=tips.index, y=10 * tips.total_bill)
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill, labels={"index": "number"})
     assert fig.data[0]["hovertemplate"] == "number=%{x}<br>total_bill=%{y}"
+    # We do not allow "x=index"
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.scatter(tips, x="index", y="total_bill")
+        assert (
+            "ValueError: Value of 'x' is not the name of a column in 'data_frame'"
+            in str(err_msg.value)
+        )
 
 
 def test_mixed_case():
@@ -127,13 +133,6 @@ def test_build_df_with_index():
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     changed_output = dict(x="index")
     out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert_frame_equal(tips.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
-    out.pop("data_frame")
-    assert out == args
-
-    tips = px.data.tips()
-    args = dict(data_frame=tips, x="index", y=tips.total_bill)
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
-    assert_frame_equal(tips.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
+    assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
     out.pop("data_frame")
     assert out == args
