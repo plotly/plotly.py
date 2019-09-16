@@ -762,11 +762,19 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     Used to be support calls to plotting function that elide a dataframe
     argument; for example `scatter(x=[1,2], y=[3,4])`.
     """
+
+    # We start from an empty DataFrame except for the case of functions which
+    # implicitely need all dimensions: Splom, Parcats, Parcoords
+    # This could be refined when dimensions is given
     if constructor in [go.Splom, go.Parcats, go.Parcoords]:  # we take all dimensions
         df = args["data_frame"]
     else:
         df = pd.DataFrame()
+
+    # Retrieve labels (to change column names)
     labels = args.get("labels")  # labels or None
+
+    # Valid column names
     df_columns = (
         args["data_frame"].columns if args.get("data_frame") is not None else None
     )
@@ -774,23 +782,29 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     for group_attr in group_attrs:
         if group_attr in args:
             attrables += [group_attr]
+
+    # Loop over possible arguments
     for field_name in attrables:
         argument_list = (
             [args.get(field_name)]
             if field_name not in array_attrables
             else args.get(field_name)
         )
-        if argument_list is None:
+        if argument_list is None:  # argument not specified, continue
             continue
+        # Argument name: field_name if the argument is a list
+        # Else we give names like ["hover_data_0, hover_data_1"] etc.
         field_list = (
             [field_name]
             if field_name not in array_attrables
             else [field_name + "_" + str(i) for i in range(len(argument_list))]
         )
+        # argument_list and field_list ready, iterate over them
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
             if argument is None:
                 continue
-            elif isinstance(argument, str):  # needs to change
+            elif isinstance(argument, str):  # just a column name
+                # Check validity of column name
                 try:
                     df[argument] = args["data_frame"][argument]
                     continue
@@ -807,14 +821,15 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
                 try:
                     df.insert(0, col_name, argument)
                 except ValueError:  # if col named index already exists, replace
-                    df["col_name"] = argument
-            else:  # args[field] should be an array or df column
+                    df[col_name] = argument
+            # Case of numpy array or df column
+            else:
                 try:
                     col_name = argument.name  # pandas df
                 except AttributeError:
                     col_name = labels[field] if labels and labels.get(field) else field
                 df[col_name] = argument
-            # This sets the label of an attribute to be
+            # Update argument with column name now that column exists
             if field_name not in array_attrables:
                 args[field_name] = col_name
             else:
@@ -837,28 +852,6 @@ def infer_config(args, constructor, trace_patch):
 
     all_attrables = attrables + group_attrables + ["color"]
     build_or_augment_dataframe(args, all_attrables, array_attrables, constructor)
-
-    # Validate that the strings provided as attribute values reference columns
-    # in the provided data_frame
-    df_columns = args["data_frame"].columns
-
-    for attr in attrables + group_attrables + ["color"]:
-        if attr in args and args[attr] is not None:
-            maybe_col_list = [args[attr]] if attr not in array_attrables else args[attr]
-            for maybe_col in maybe_col_list:
-                try:
-                    in_cols = maybe_col in df_columns
-                except TypeError:
-                    in_cols = False
-                if not in_cols:
-                    value_str = (
-                        "Element of value" if attr in array_attrables else "Value"
-                    )
-                    raise ValueError(
-                        "%s of '%s' is not the name of a column in 'data_frame'. "
-                        "Expected one of %s but received: %s"
-                        % (value_str, attr, str(list(df_columns)), str(maybe_col))
-                    )
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []

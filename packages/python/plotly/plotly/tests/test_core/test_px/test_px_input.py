@@ -136,3 +136,9 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
     out.pop("data_frame")
     assert out == args
+
+
+def test_splom_case():
+    iris = px.data.iris()
+    fig = px.scatter_matrix(iris)
+    assert len(fig.data[0].dimensions) == len(iris.columns)
