@@ -50,9 +50,45 @@ def test_mixed_case():
     fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9])
 
 
+def test_arrayattrable_numpy():
+    tips = px.data.tips()
+    fig = px.scatter(
+        tips, x="total_bill", y="tip", hover_data=[np.random.random(tips.shape[0])]
+    )
+    assert (
+        fig.data[0]["hovertemplate"]
+        == "total_bill=%{x}<br>tip=%{y}<br>hover_data_0=%{customdata[0]}"
+    )
+    tips = px.data.tips()
+    fig = px.scatter(
+        tips,
+        x="total_bill",
+        y="tip",
+        hover_data=[np.random.random(tips.shape[0])],
+        labels={"hover_data_0": "suppl"},
+    )
+    assert (
+        fig.data[0]["hovertemplate"]
+        == "total_bill=%{x}<br>tip=%{y}<br>suppl=%{customdata[0]}"
+    )
+
+
 def test_wrong_column_name():
     with pytest.raises(ValueError):
         fig = px.scatter(px.data.tips(), x="bla", y="wrong")
+
+
+def test_wrong_dimensions_of_array():
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
+        assert "Length of values does not match length of index" in str(err_msg.value)
+
+
+def test_wrong_dimensions_mixed_cqse():
+    with pytest.raises(ValueError) as err_msg:
+        df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
+        fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
+        assert "Length of values does not match length of index" in str(err_msg.value)
 
 
 def test_build_df_from_lists():

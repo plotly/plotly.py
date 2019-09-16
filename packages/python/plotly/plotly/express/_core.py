@@ -767,33 +767,44 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
         df = pd.DataFrame()
     else:
         df = args["data_frame"]
-    for field in attrables:
-        labels = args.get("labels")  # labels or None
-        # hack, needs to be changed when we start from empty df
-        if field in array_attrables:
+    labels = args.get("labels")  # labels or None
+    for field_name in attrables:
+        argument_list = (
+            [args.get(field_name)]
+            if field_name not in array_attrables
+            else args.get(field_name)
+        )
+        if argument_list is None:
             continue
-        argument = args.get(field)
-        if argument is None:
-            continue
-        elif isinstance(argument, str):  # needs to change
-            continue
-        # Case of index
-        elif isinstance(argument, pd.core.indexes.range.RangeIndex):
-            col_name = argument.name if argument.name else "index"
-            col_name = labels[field] if labels and labels.get(field) else col_name
-            try:
-                df.insert(0, col_name, argument)
-            except ValueError:  # if col named index already exists, replace
-                df["col_name"] = argument
-        else:  # args[field] should be an array or df column
-            try:
-                col_name = argument.name  # pandas df
-            except AttributeError:
-                col_name = labels[field] if labels and labels.get(field) else field
-            df[col_name] = argument
-        # This sets the label of an attribute to be
-        # the name of the attribute.
-        args[field] = col_name
+        field_list = (
+            [field_name]
+            if field_name not in array_attrables
+            else [field_name + "_" + str(i) for i in range(len(argument_list))]
+        )
+        for i, (argument, field) in enumerate(zip(argument_list, field_list)):
+            if argument is None:
+                continue
+            elif isinstance(argument, str):  # needs to change
+                continue
+            # Case of index
+            elif isinstance(argument, pd.core.indexes.range.RangeIndex):
+                col_name = argument.name if argument.name else "index"
+                col_name = labels[field] if labels and labels.get(field) else col_name
+                try:
+                    df.insert(0, col_name, argument)
+                except ValueError:  # if col named index already exists, replace
+                    df["col_name"] = argument
+            else:  # args[field] should be an array or df column
+                try:
+                    col_name = argument.name  # pandas df
+                except AttributeError:
+                    col_name = labels[field] if labels and labels.get(field) else field
+                df[col_name] = argument
+            # This sets the label of an attribute to be
+            if field_name not in array_attrables:
+                args[field_name] = col_name
+            else:
+                args[field_name][i] = col_name
     args["data_frame"] = df
     return args
 
