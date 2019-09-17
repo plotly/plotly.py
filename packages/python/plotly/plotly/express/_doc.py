@@ -1,7 +1,7 @@
 import inspect
 
-colref = "(string: name of column in `data_frame`)"
-colref_list = "(list of string: names of columns in `data_frame`)"
+colref = "(string: name of column in `data_frame`, or array_like object)"
+colref_list = "(list of string: names of columns in `data_frame`, or array_like objects)"
 
 # TODO contents of columns
 # TODO explain categorical
@@ -15,50 +15,50 @@ docs = dict(
     data_frame=["A 'tidy' `pandas.DataFrame`"],
     x=[
         colref,
-        "Values from this column are used to position marks along the x axis in cartesian coordinates.",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
         "For horizontal `histogram`s, these values are used as inputs to `histfunc`.",
     ],
     y=[
         colref,
-        "Values from this column are used to position marks along the y axis in cartesian coordinates.",
+        "Values from this column or array_like are used to position marks along the y axis in cartesian coordinates.",
         "For vertical `histogram`s, these values are used as inputs to `histfunc`.",
     ],
     z=[
         colref,
-        "Values from this column are used to position marks along the z axis in cartesian coordinates.",
+        "Values from this column or array_like are used to position marks along the z axis in cartesian coordinates.",
         "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
     ],
     a=[
         colref,
-        "Values from this column are used to position marks along the a axis in ternary coordinates.",
+        "Values from this column or array_like are used to position marks along the a axis in ternary coordinates.",
     ],
     b=[
         colref,
-        "Values from this column are used to position marks along the b axis in ternary coordinates.",
+        "Values from this column or array_like are used to position marks along the b axis in ternary coordinates.",
     ],
     c=[
         colref,
-        "Values from this column are used to position marks along the c axis in ternary coordinates.",
+        "Values from this column or array_like are used to position marks along the c axis in ternary coordinates.",
     ],
     r=[
         colref,
-        "Values from this column are used to position marks along the radial axis in polar coordinates.",
+        "Values from this column or array_like are used to position marks along the radial axis in polar coordinates.",
     ],
     theta=[
         colref,
-        "Values from this column are used to position marks along the angular axis in polar coordinates.",
+        "Values from this column or array_like are used to position marks along the angular axis in polar coordinates.",
     ],
     lat=[
         colref,
-        "Values from this column are used to position marks according to latitude on a map.",
+        "Values from this column or array_like are used to position marks according to latitude on a map.",
     ],
     lon=[
         colref,
-        "Values from this column are used to position marks according to longitude on a map.",
+        "Values from this column or array_like are used to position marks according to longitude on a map.",
     ],
     locations=[
         colref,
-        "Values from this column are be interpreted according to `locationmode` and mapped to longitude/latitude.",
+        "Values from this column or array_like are be interpreted according to `locationmode` and mapped to longitude/latitude.",
     ],
     dimensions=[
         "(list of strings, names of columns in `data_frame`)",
@@ -66,47 +66,47 @@ docs = dict(
     ],
     error_x=[
         colref,
-        "Values from this column are used to size x-axis error bars.",
+        "Values from this column or array_like are used to size x-axis error bars.",
         "If `error_x_minus` is `None`, error bars will be symmetrical, otherwise `error_x` is used for the positive direction only.",
     ],
     error_x_minus=[
         colref,
-        "Values from this column are used to size x-axis error bars in the negative direction.",
+        "Values from this column or array_like are used to size x-axis error bars in the negative direction.",
         "Ignored if `error_x` is `None`.",
     ],
     error_y=[
         colref,
-        "Values from this column are used to size y-axis error bars.",
+        "Values from this column or array_like are used to size y-axis error bars.",
         "If `error_y_minus` is `None`, error bars will be symmetrical, otherwise `error_y` is used for the positive direction only.",
     ],
     error_y_minus=[
         colref,
-        "Values from this column are used to size y-axis error bars in the negative direction.",
+        "Values from this column or array_like are used to size y-axis error bars in the negative direction.",
         "Ignored if `error_y` is `None`.",
     ],
     error_z=[
         colref,
-        "Values from this column are used to size z-axis error bars.",
+        "Values from this column or array_like are used to size z-axis error bars.",
         "If `error_z_minus` is `None`, error bars will be symmetrical, otherwise `error_z` is used for the positive direction only.",
     ],
     error_z_minus=[
         colref,
-        "Values from this column are used to size z-axis error bars in the negative direction.",
+        "Values from this column or array_like are used to size z-axis error bars in the negative direction.",
         "Ignored if `error_z` is `None`.",
     ],
-    color=[colref, "Values from this column are used to assign color to marks."],
+    color=[colref, "Values from this column or array_like are used to assign color to marks."],
     opacity=["(number, between 0 and 1) Sets the opacity for markers."],
     line_dash=[
         colref,
-        "Values from this column are used to assign dash-patterns to lines.",
+        "Values from this column or array_like are used to assign dash-patterns to lines.",
     ],
     line_group=[
         colref,
-        "Values from this column are used to group rows of `data_frame` into lines.",
+        "Values from this column or array_like are used to group rows of `data_frame` into lines.",
     ],
-    symbol=[colref, "Values from this column are used to assign symbols to marks."],
-    size=[colref, "Values from this column are used to assign mark sizes."],
-    hover_name=[colref, "Values from this column appear in bold in the hover tooltip."],
+    symbol=[colref, "Values from this column or array_like are used to assign symbols to marks."],
+    size=[colref, "Values from this column or array_like are used to assign mark sizes."],
+    hover_name=[colref, "Values from this column or array_like appear in bold in the hover tooltip."],
     hover_data=[
         colref_list,
         "Values from these columns appear as extra data in the hover tooltip.",
@@ -115,26 +115,26 @@ docs = dict(
         colref_list,
         "Values from these columns are extra data, to be used in widgets or Dash callbacks for example. This data is not user-visible but is included in events emitted by the figure (lasso selection etc.)",
     ],
-    text=[colref, "Values from this column appear in the figure as text labels."],
+    text=[colref, "Values from this column or array_like appear in the figure as text labels."],
     locationmode=[
         "(string, one of 'ISO-3', 'USA-states', 'country names')",
         "Determines the set of locations used to match entries in `locations` to regions on the map.",
     ],
     facet_row=[
         colref,
-        "Values from this column are used to assign marks to facetted subplots in the vertical direction.",
+        "Values from this column or array_like are used to assign marks to facetted subplots in the vertical direction.",
     ],
     facet_col=[
         colref,
-        "Values from this column are used to assign marks to facetted subplots in the horizontal direction.",
+        "Values from this column or array_like are used to assign marks to facetted subplots in the horizontal direction.",
     ],
     animation_frame=[
         colref,
-        "Values from this column are used to assign marks to animation frames.",
+        "Values from this column or array_like are used to assign marks to animation frames.",
     ],
     animation_group=[
         colref,
-        "Values from this column are used to provide object-constancy across animation frames: rows with matching `animation_group`s will be treated as if they describe the same object in each frame.",
+        "Values from this column or array_like are used to provide object-constancy across animation frames: rows with matching `animation_group`s will be treated as if they describe the same object in each frame.",
     ],
     symbol_sequence=[
         "(list of strings defining plotly.js symbols)",
