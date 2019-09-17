@@ -1,7 +1,9 @@
 import inspect
 
 colref = "(string: name of column in `data_frame`, or array_like object)"
-colref_list = "(list of string: names of columns in `data_frame`, or array_like objects)"
+colref_list = (
+    "(list of string: names of columns in `data_frame`, or array_like objects)"
+)
 
 # TODO contents of columns
 # TODO explain categorical
@@ -94,7 +96,10 @@ docs = dict(
         "Values from this column or array_like are used to size z-axis error bars in the negative direction.",
         "Ignored if `error_z` is `None`.",
     ],
-    color=[colref, "Values from this column or array_like are used to assign color to marks."],
+    color=[
+        colref,
+        "Values from this column or array_like are used to assign color to marks.",
+    ],
     opacity=["(number, between 0 and 1) Sets the opacity for markers."],
     line_dash=[
         colref,
@@ -104,9 +109,18 @@ docs = dict(
         colref,
         "Values from this column or array_like are used to group rows of `data_frame` into lines.",
     ],
-    symbol=[colref, "Values from this column or array_like are used to assign symbols to marks."],
-    size=[colref, "Values from this column or array_like are used to assign mark sizes."],
-    hover_name=[colref, "Values from this column or array_like appear in bold in the hover tooltip."],
+    symbol=[
+        colref,
+        "Values from this column or array_like are used to assign symbols to marks.",
+    ],
+    size=[
+        colref,
+        "Values from this column or array_like are used to assign mark sizes.",
+    ],
+    hover_name=[
+        colref,
+        "Values from this column or array_like appear in bold in the hover tooltip.",
+    ],
     hover_data=[
         colref_list,
         "Values from these columns appear as extra data in the hover tooltip.",
@@ -115,7 +129,10 @@ docs = dict(
         colref_list,
         "Values from these columns are extra data, to be used in widgets or Dash callbacks for example. This data is not user-visible but is included in events emitted by the figure (lasso selection etc.)",
     ],
-    text=[colref, "Values from this column or array_like appear in the figure as text labels."],
+    text=[
+        colref,
+        "Values from this column or array_like appear in the figure as text labels.",
+    ],
     locationmode=[
         "(string, one of 'ISO-3', 'USA-states', 'country names')",
         "Determines the set of locations used to match entries in `locations` to regions on the map.",
