@@ -779,7 +779,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
     df = pd.DataFrame()
 
     if "dimensions" in args and args["dimensions"] is None:
-        if args.get("data_frame") is None or args["data_frame"] is None:
+        if args["data_frame"] is None:
             raise ValueError(
                 "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
             )
@@ -788,9 +788,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             df[df_args.columns] = df_args[df_args.columns]
 
     # Valid column names
-    df_columns = (
-        args["data_frame"].columns if args.get("data_frame") is not None else None
-    )
+    df_columns = args["data_frame"].columns if args["data_frame"] is not None else None
     group_attrs = ["symbol", "line_dash"]
     for group_attr in group_attrs:
         if group_attr in args:

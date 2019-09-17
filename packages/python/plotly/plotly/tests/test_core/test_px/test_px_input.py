@@ -110,6 +110,7 @@ def test_build_df_from_lists():
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
     output = {key: key for key in args}
     df = pd.DataFrame(args)
+    args["data_frame"] = None
     out = build_or_augment_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
@@ -119,6 +120,7 @@ def test_build_df_from_lists():
     args = dict(x=np.array([1, 2, 3]), y=np.array([2, 3, 4]), color=[1, 3, 9])
     output = {key: key for key in args}
     df = pd.DataFrame(args)
+    args["data_frame"] = None
     out = build_or_augment_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
