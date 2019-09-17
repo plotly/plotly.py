@@ -829,6 +829,8 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                 df[argument] = args["data_frame"][argument]
                 continue
             # Case of index
+            elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
+                raise TypeError("pandas MultiIndex is not supported by plotly express")
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):
                 col_name = argument.name if argument.name else "index"
                 try:

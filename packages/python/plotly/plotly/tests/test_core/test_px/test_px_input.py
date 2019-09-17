@@ -121,6 +121,20 @@ def test_wrong_dimensions():
         # assert "All arguments should have the same length." in str(err_msg.value)
 
 
+def test_multiindex_raise_error():
+    index = pd.MultiIndex.from_product(
+        [[1, 2, 3], ["a", "b"]], names=["first", "second"]
+    )
+    df = pd.DataFrame(np.random.random((6, 3)), index=index, columns=["A", "B", "C"])
+    # This is ok
+    fig = px.scatter(df, x="A", y="B")
+    with pytest.raises(TypeError) as err_msg:
+        fig = px.scatter(df, x=df.index, y="B")
+        assert "pandas MultiIndex is not supported by plotly express" in str(
+            err_msg.value
+        )
+
+
 def test_build_df_from_lists():
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
