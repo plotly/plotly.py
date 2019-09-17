@@ -764,7 +764,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
 
     Parameters
     ----------
-placebo    args : OrderedDict
+    args : OrderedDict
         arguments passed to the px function and subsequently modified
     attrables : list
         list of keys into `args`, all of whose corresponding values are
@@ -845,7 +845,7 @@ placebo    args : OrderedDict
                         # we do not want to keep the name, revert to field
                         col_name = (
                             col_name
-                            if args["data_frame"][col_name].equals(argument)
+                            if argument is args["data_frame"][col_name]
                             else field
                         )
                 except AttributeError:  # numpy array, list...
