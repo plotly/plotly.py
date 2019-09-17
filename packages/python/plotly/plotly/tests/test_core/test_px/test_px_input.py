@@ -102,7 +102,7 @@ def test_build_df_from_lists():
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
     output = {key: key for key in args}
     df = pd.DataFrame(args)
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
+    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -111,7 +111,7 @@ def test_build_df_from_lists():
     args = dict(x=np.array([1, 2, 3]), y=np.array([2, 3, 4]), color=[1, 3, 9])
     output = {key: key for key in args}
     df = pd.DataFrame(args)
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
+    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -121,7 +121,7 @@ def test_build_df_with_index():
     tips = px.data.tips()
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     changed_output = dict(x="index")
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables, go.Scatter)
+    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
     out.pop("data_frame")
     assert out == args

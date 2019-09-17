@@ -754,16 +754,13 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
+def build_or_augment_dataframe(args, attrables, array_attrables):
     """
     Constructs an implicit dataframe and modifies `args` in-place.
 
     Parameters
     ----------
     args : OrderedDict
-        
-    constructor : go Trace object
-        trace function. It is used to fine-tune some options.
     `attrables` is a list of keys into `args`, all of whose corresponding
     values are converted into columns of a dataframe.
     Used to be support calls to plotting function that elide a dataframe
@@ -773,13 +770,14 @@ def build_or_augment_dataframe(args, attrables, array_attrables, constructor):
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
-    if constructor in [go.Splom, go.Parcats, go.Parcoords]:  # we take all dimensions
-        df = args["data_frame"]
-    else:
-        df = pd.DataFrame()
+    df = pd.DataFrame()
 
-    # Retrieve labels (to change column names)
-    # labels = args.get("labels")  # labels or None
+    if "dimensions" in args and args["dimensions"] is None:
+        if args.get("data_frame") is None or args["data_frame"] is None:
+            raise ValueError("No data were provided")
+        else:
+            df_args = args["data_frame"]
+            df[df_args.columns] = df_args[df_args.columns]
 
     # Valid column names
     df_columns = (
@@ -857,7 +855,7 @@ def infer_config(args, constructor, trace_patch):
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 
     all_attrables = attrables + group_attrables + ["color"]
-    build_or_augment_dataframe(args, all_attrables, array_attrables, constructor)
+    build_or_augment_dataframe(args, all_attrables, array_attrables)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
