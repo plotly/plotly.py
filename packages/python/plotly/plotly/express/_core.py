@@ -756,15 +756,21 @@ def apply_default_cascade(args):
 
 def build_or_augment_dataframe(args, attrables, array_attrables):
     """
-    Constructs an implicit dataframe and modifies `args` in-place.
+    Constructs a dataframe and modifies `args` in-place.
+
+    The argument values in `args` can be either strings corresponding to
+    existing columns of a dataframe, or data arrays (lists, numpy arrays,
+    pandas columns, series).
 
     Parameters
     ----------
     args : OrderedDict
-    `attrables` is a list of keys into `args`, all of whose corresponding
-    values are converted into columns of a dataframe.
-    Used to be support calls to plotting function that elide a dataframe
-    argument; for example `scatter(x=[1,2], y=[3,4])`.
+        arguments passed to the px function and subsequently modified
+    attrables : list
+        list of keys into `args`, all of whose corresponding values are
+        converted into columns of a dataframe.
+    array_attrables : list
+        argument names corresponding to iterables, such as `hover_data`, ...
     """
 
     # We start from an empty DataFrame except for the case of functions which
@@ -820,6 +826,11 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
                         % (field, str(list(df_columns)), argument)
+                    )
+                except TypeError:
+                    raise ValueError(
+                        "String arguments are only possible when a DataFrame"
+                        "is provided in the `data_frame` argument."
                     )
             # Case of index
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):

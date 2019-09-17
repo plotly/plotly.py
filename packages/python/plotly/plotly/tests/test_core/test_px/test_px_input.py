@@ -84,6 +84,14 @@ def test_wrong_column_name():
         fig = px.scatter(px.data.tips(), x="bla", y="wrong")
 
 
+def test_missing_data_frame():
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.scatter(x="arg1", y="arg2")
+        assert "String arguments are only possible when a DataFrame" in str(
+            err_msg.value
+        )
+
+
 def test_wrong_dimensions_of_array():
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
