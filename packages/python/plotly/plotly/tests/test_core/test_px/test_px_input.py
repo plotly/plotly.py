@@ -80,8 +80,11 @@ def test_arrayattrable_numpy():
 
 
 def test_wrong_column_name():
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(px.data.tips(), x="bla", y="wrong")
+        assert "Value of 'x' is not the name of a column in 'data_frame'" in str(
+            err_msg.value
+        )
 
 
 def test_missing_data_frame():

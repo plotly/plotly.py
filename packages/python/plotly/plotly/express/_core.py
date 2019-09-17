@@ -817,15 +817,15 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         "is provided in the `data_frame` argument."
                     )
                 # Check validity of column name
-                try:
-                    df[argument] = args["data_frame"][argument]
-                    continue
-                except KeyError:
+                if argument not in df_columns:
                     raise ValueError(
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
                         % (field, str(list(df_columns)), argument)
                     )
+
+                df[argument] = args["data_frame"][argument]
+                continue
             # Case of index
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):
                 col_name = argument.name if argument.name else "index"
