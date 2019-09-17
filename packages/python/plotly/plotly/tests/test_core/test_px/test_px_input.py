@@ -37,9 +37,9 @@ def test_with_index():
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
-    # I was not expecting this to work but it does...
+    # If we tinker with the column then the name is the one of the kw argument
     fig = px.scatter(tips, x=tips.index, y=10 * tips.total_bill)
-    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
+    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>y=%{y}"
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill, labels={"index": "number"})
     assert fig.data[0]["hovertemplate"] == "number=%{x}<br>total_bill=%{y}"
     # We do not allow "x=index"

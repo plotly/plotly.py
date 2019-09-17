@@ -774,7 +774,9 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
 
     if "dimensions" in args and args["dimensions"] is None:
         if args.get("data_frame") is None or args["data_frame"] is None:
-            raise ValueError("No data were provided")
+            raise ValueError(
+                "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
+            )
         else:
             df_args = args["data_frame"]
             df[df_args.columns] = df_args[df_args.columns]
@@ -830,7 +832,18 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             else:
                 try:
                     col_name = argument.name  # pandas df
-                except AttributeError:
+                    if (
+                        args.get("data_frame") is not None
+                        and col_name in args["data_frame"]
+                    ):
+                        # If the name exists but the values have changed
+                        # we do not want to keep the name, revert to field
+                        col_name = (
+                            col_name
+                            if args["data_frame"][col_name].equals(argument)
+                            else field
+                        )
+                except AttributeError:  # numpy array, list...
                     col_name = field
                 df[col_name] = argument
             # Update argument with column name now that column exists
