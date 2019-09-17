@@ -764,7 +764,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
 
     Parameters
     ----------
-    args : OrderedDict
+placebo    args : OrderedDict
         arguments passed to the px function and subsequently modified
     attrables : list
         list of keys into `args`, all of whose corresponding values are
@@ -789,11 +789,6 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
 
     # Valid column names
     df_columns = args["data_frame"].columns if args["data_frame"] is not None else None
-    group_attrs = ["symbol", "line_dash"]
-    for group_attr in group_attrs:
-        if group_attr in args:
-            attrables += [group_attr]
-
     # Loop over possible arguments
     for field_name in attrables:
         argument_list = (
@@ -876,8 +871,12 @@ def infer_config(args, constructor, trace_patch):
     )
     array_attrables = ["dimensions", "custom_data", "hover_data"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
-
     all_attrables = attrables + group_attrables + ["color"]
+    group_attrs = ["symbol", "line_dash"]
+    for group_attr in group_attrs:
+        if group_attr in args:
+            all_attrables += [group_attr]
+
     build_or_augment_dataframe(args, all_attrables, array_attrables)
 
     attrs = [k for k in attrables if k in args]
