@@ -808,6 +808,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
         )
         # argument_list and field_list ready, iterate over them
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
+            length = len(df)
             if argument is None:
                 continue
             elif isinstance(argument, str):  # just a column name
@@ -823,7 +824,8 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         "Expected one of %s but received: %s"
                         % (field, str(list(df_columns)), argument)
                     )
-
+                if length and len(args["data_frame"][argument]) != length:
+                    raise ValueError("All arguments should have the same length.")
                 df[argument] = args["data_frame"][argument]
                 continue
             # Case of index
@@ -850,6 +852,8 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         )
                 except AttributeError:  # numpy array, list...
                     col_name = field
+                if length and len(argument) != length:
+                    raise ValueError("All arguments should have the same length.")
                 df[col_name] = argument
             # Update argument with column name now that column exists
             if field_name not in array_attrables:

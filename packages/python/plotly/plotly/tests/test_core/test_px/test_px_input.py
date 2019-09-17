@@ -98,14 +98,27 @@ def test_missing_data_frame():
 def test_wrong_dimensions_of_array():
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
-        assert "Length of values does not match length of index" in str(err_msg.value)
+        assert "All arguments should have the same length." in str(err_msg.value)
 
 
-def test_wrong_dimensions_mixed_cqse():
+def test_wrong_dimensions_mixed_case():
     with pytest.raises(ValueError) as err_msg:
         df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
         fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
-        assert "Length of values does not match length of index" in str(err_msg.value)
+        assert "All arguments should have the same length." in str(err_msg.value)
+
+
+def test_wrong_dimensions():
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.scatter(px.data.tips(), x="tip", y=[1, 2, 3])
+        assert "All arguments should have the same length." in str(err_msg.value)
+    # the order matters
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.scatter(px.data.tips(), x=[1, 2, 3], y="tip")
+        assert "All arguments should have the same length." in str(err_msg.value)
+    with pytest.raises(ValueError):
+        fig = px.scatter(px.data.tips(), x=px.data.iris().index, y="tip")
+        # assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_build_df_from_lists():
