@@ -818,6 +818,11 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             if argument is None:
                 continue
             elif isinstance(argument, str):  # just a column name
+                if not isinstance(args.get("data_frame"), pd.DataFrame):
+                    raise ValueError(
+                        "String arguments are only possible when a DataFrame"
+                        "is provided in the `data_frame` argument."
+                    )
                 # Check validity of column name
                 try:
                     df[argument] = args["data_frame"][argument]
@@ -827,11 +832,6 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
                         % (field, str(list(df_columns)), argument)
-                    )
-                except TypeError:
-                    raise ValueError(
-                        "String arguments are only possible when a DataFrame"
-                        "is provided in the `data_frame` argument."
                     )
             # Case of index
             elif isinstance(argument, pd.core.indexes.range.RangeIndex):
