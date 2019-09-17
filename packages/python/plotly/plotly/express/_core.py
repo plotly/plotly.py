@@ -803,7 +803,8 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             if field_name not in array_attrables
             else args.get(field_name)
         )
-        if argument_list is None:  # argument not specified, continue
+        # argument not specified, continue
+        if argument_list is None or argument_list is [None]:
             continue
         # Argument name: field_name if the argument is a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
