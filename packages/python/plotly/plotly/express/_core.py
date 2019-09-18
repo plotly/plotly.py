@@ -778,7 +778,6 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
     ):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
 
-
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
@@ -851,16 +850,14 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             # Case of index
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
                 raise TypeError("pandas MultiIndex is not supported by plotly express")
-            elif isinstance(argument, pd.core.indexes.range.RangeIndex):
-                col_name = argument.name if argument.name else "index"
-                try:
-                    df.insert(0, col_name, argument)
-                except ValueError:  # if col named index already exists, replace
-                    df[col_name] = argument
             # Case of numpy array or df column
             else:
                 try:
                     col_name = argument.name  # pandas df
+                    if col_name is None and isinstance(
+                        argument, pd.core.indexes.range.RangeIndex
+                    ):
+                        col_name = "index"
                     if (
                         args.get("data_frame") is not None
                         and col_name in args["data_frame"]
