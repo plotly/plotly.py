@@ -788,7 +788,11 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             df[df_args.columns] = df_args[df_args.columns]
 
     # Valid column names
-    df_columns = args["data_frame"].columns if args["data_frame"] is not None else None
+    df_columns = (
+        args["data_frame"].columns
+        if isinstance(args["data_frame"], pd.DataFrame)
+        else None
+    )
     # Loop over possible arguments
     for field_name in attrables:
         argument_list = (
@@ -811,14 +815,18 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             length = len(df)
             if argument is None:
                 continue
-            elif isinstance(argument, str):  # just a column name
-                if not isinstance(args.get("data_frame"), pd.DataFrame):
+            elif isinstance(argument, str) or isinstance(
+                argument, int
+            ):  # just a column name
+                if not isinstance(
+                    args.get("data_frame"), pd.DataFrame
+                ) and not isinstance(args.get("data_frame"), np.ndarray):
                     raise ValueError(
                         "String arguments are only possible when a DataFrame"
                         "is provided in the `data_frame` argument."
                     )
                 # Check validity of column name
-                if argument not in df_columns:
+                if df_columns is not None and argument not in df_columns:
                     raise ValueError(
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
@@ -826,7 +834,12 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                     )
                 if length and len(args["data_frame"][argument]) != length:
                     raise ValueError("All arguments should have the same length.")
-                df[argument] = args["data_frame"][argument]
+                df[str(argument)] = args["data_frame"][argument]
+                if isinstance(argument, int):
+                    if field_name not in array_attrables:
+                        args[field_name] = str(argument)
+                    else:
+                        args[field_name][i] = str(argument)
                 continue
             # Case of index
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):

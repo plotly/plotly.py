@@ -171,3 +171,14 @@ def test_splom_case():
     iris = px.data.iris()
     fig = px.scatter_matrix(iris)
     assert len(fig.data[0].dimensions) == len(iris.columns)
+
+
+def test_int_col_names():
+    # DataFrame with int column names
+    lengths = pd.DataFrame(np.random.random(100))
+    fig = px.histogram(lengths, x=0)
+    assert np.all(np.array(lengths).flatten() == fig.data[0].x)
+    # Numpy array
+    ar = np.arange(100).reshape((10, 10))
+    fig = px.scatter(ar, x=2, y=8)
+    assert np.all(fig.data[0].x == ar[2])
