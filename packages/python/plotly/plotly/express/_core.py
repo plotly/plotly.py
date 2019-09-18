@@ -772,6 +772,12 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
     array_attrables : list
         argument names corresponding to iterables, such as `hover_data`, ...
     """
+    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
+    if args["data_frame"] is not None and not isinstance(
+        args["data_frame"], pd.DataFrame
+    ):
+        args["data_frame"] = pd.DataFrame(args["data_frame"])
+
 
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
@@ -786,12 +792,6 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
         else:
             df_args = args["data_frame"]
             df[df_args.columns] = df_args[df_args.columns]
-
-    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
-    if args["data_frame"] is not None and not isinstance(
-        args["data_frame"], pd.DataFrame
-    ):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
 
     # Valid column names
     df_columns = (
