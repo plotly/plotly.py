@@ -169,9 +169,9 @@ def test_splom_case():
     iris = px.data.iris()
     fig = px.scatter_matrix(iris)
     assert len(fig.data[0].dimensions) == len(iris.columns)
-    dic = {'a':[1, 2, 3], 'b':[4, 5, 6], 'c':[7, 8, 9]}
+    dic = {"a": [1, 2, 3], "b": [4, 5, 6], "c": [7, 8, 9]}
     fig = px.scatter_matrix(dic)
-    assert np.all(fig.data[0].dimensions[0].values == np.array(dic['a']))
+    assert np.all(fig.data[0].dimensions[0].values == np.array(dic["a"]))
     ar = np.arange(9).reshape((3, 3))
     fig = px.scatter_matrix(ar)
     assert np.all(fig.data[0].dimensions[0].values == ar[:, 0])
