@@ -90,9 +90,7 @@ def test_wrong_column_name():
 def test_missing_data_frame():
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(x="arg1", y="arg2")
-        assert "String arguments are only possible when a DataFrame" in str(
-            err_msg.value
-        )
+        assert "String or int arguments are only possible" in str(err_msg.value)
 
 
 def test_wrong_dimensions_of_array():
@@ -181,4 +179,10 @@ def test_int_col_names():
     # Numpy array
     ar = np.arange(100).reshape((10, 10))
     fig = px.scatter(ar, x=2, y=8)
-    assert np.all(fig.data[0].x == ar[2])
+    assert np.all(fig.data[0].x == ar[:, 2])
+
+
+def test_data_frame_from_dict():
+    fig = px.scatter({"time": [0, 1], "money": [1, 2]}, x="time", y="money")
+    assert fig.data[0].hovertemplate == "time=%{x}<br>money=%{y}"
+    assert np.all(fig.data[0].x == [0, 1])

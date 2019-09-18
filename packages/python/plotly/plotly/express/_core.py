@@ -787,6 +787,12 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             df_args = args["data_frame"]
             df[df_args.columns] = df_args[df_args.columns]
 
+    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
+    if args["data_frame"] is not None and not isinstance(
+        args["data_frame"], pd.DataFrame
+    ):
+        args["data_frame"] = pd.DataFrame(args["data_frame"])
+
     # Valid column names
     df_columns = (
         args["data_frame"].columns
@@ -822,8 +828,9 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                     args.get("data_frame"), pd.DataFrame
                 ) and not isinstance(args.get("data_frame"), np.ndarray):
                     raise ValueError(
-                        "String arguments are only possible when a DataFrame"
-                        "is provided in the `data_frame` argument."
+                        "String or int arguments are only possible when a"
+                        "DataFrame or an array is provided in the `data_frame`"
+                        "argument."
                     )
                 # Check validity of column name
                 if df_columns is not None and argument not in df_columns:
