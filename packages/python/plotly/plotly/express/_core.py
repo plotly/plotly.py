@@ -823,13 +823,12 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             elif isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name
-                if not isinstance(
-                    args.get("data_frame"), pd.DataFrame
-                ) and not isinstance(args.get("data_frame"), np.ndarray):
+                if not isinstance(args.get("data_frame"), pd.DataFrame):
                     raise ValueError(
                         "String or int arguments are only possible when a"
                         "DataFrame or an array is provided in the `data_frame`"
-                        "argument."
+                        "argument. No DataFrame was provided, but argument '%s'"
+                        "is of type str or int." % field
                     )
                 # Check validity of column name
                 if df_columns is not None and argument not in df_columns:
@@ -839,7 +838,12 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         % (field, str(list(df_columns)), argument)
                     )
                 if length and len(args["data_frame"][argument]) != length:
-                    raise ValueError("All arguments should have the same length.")
+                    raise ValueError(
+                        "All arguments should have the same length."
+                        "The length of column argument `df[%s]` is %d, whereas the"
+                        "length of previous arguments is %d"
+                        % (field, len(args["data_frame"][argument]), length)
+                    )
                 df[str(argument)] = args["data_frame"][argument]
                 if isinstance(argument, int):
                     if field_name not in array_attrables:
@@ -849,10 +853,13 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                 continue
             # Case of index
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
-                raise TypeError("pandas MultiIndex is not supported by plotly express")
+                raise TypeError(
+                    "Argument '%s' is a pandas MultiIndex."
+                    "pandas MultiIndex is not supported by plotly express" % field
+                )
             # Case of numpy array or df column
             else:
-                try:
+                if hasattr(argument, "name"):
                     col_name = argument.name  # pandas df
                     if col_name is None and isinstance(
                         argument, pd.core.indexes.range.RangeIndex
@@ -869,10 +876,15 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                             if argument is args["data_frame"][col_name]
                             else field
                         )
-                except AttributeError:  # numpy array, list...
+                else:  # numpy array, list...
                     col_name = field
                 if length and len(argument) != length:
-                    raise ValueError("All arguments should have the same length.")
+                    raise ValueError(
+                        "All arguments should have the same length."
+                        "The length of argument `%s` is %d, whereas the"
+                        "length of previous arguments is %d"
+                        % (field, len(argument), length)
+                    )
                 df[col_name] = argument
             # Update argument with column name now that column exists
             if field_name not in array_attrables:
