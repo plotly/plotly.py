@@ -859,11 +859,13 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                 )
             # Case of numpy array or df column
             else:
-                if hasattr(argument, "name"):
+                is_index = isinstance(argument, pd.core.indexes.range.RangeIndex)
+                # pandas series have a name but it's None
+                if (
+                    hasattr(argument, "name") and argument.name is not None
+                ) or is_index:
                     col_name = argument.name  # pandas df
-                    if col_name is None and isinstance(
-                        argument, pd.core.indexes.range.RangeIndex
-                    ):
+                    if col_name is None and is_index:
                         col_name = "index"
                     if (
                         args.get("data_frame") is not None

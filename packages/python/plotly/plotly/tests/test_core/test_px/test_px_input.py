@@ -51,6 +51,13 @@ def test_with_index():
         )
 
 
+def test_pandas_series():
+    tips = px.data.tips()
+    before_tip = tips.total_bill - tips.tip
+    fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
+    assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
+
+
 def test_mixed_case():
     df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
     fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9])
