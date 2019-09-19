@@ -754,7 +754,23 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def build_or_augment_dataframe(args, attrables, array_attrables):
+def _name_heuristic(argument, field_name, df):
+    print (argument, field_name, df.columns)
+    if isinstance(argument, int):
+        argument = str(argument)
+    if argument not in df.columns:
+        print ("no pb", argument)
+        return argument
+    elif field_name not in df.columns:
+        print ("fallback field", field_name)
+        return field_name
+    elif field_name + argument not in df.columns:
+        return field_name + "_" + argument
+    else:
+        raise NameError("A name conflict was encountered.")
+
+
+def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
 
@@ -844,13 +860,14 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                         "length of previous arguments is %d"
                         % (field, len(args["data_frame"][argument]), length)
                     )
-                df[str(argument)] = args["data_frame"][argument]
+                col_name = _name_heuristic(argument, field_name, df)
+                df[col_name] = args["data_frame"][argument]
                 if isinstance(argument, int):
                     if field_name not in array_attrables:
-                        args[field_name] = str(argument)
+                        args[field_name] = col_name
                     else:
-                        args[field_name][i] = str(argument)
-                continue
+                        args[field_name][i] = col_name
+                # continue
             # Case of index
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
                 raise TypeError(
@@ -878,8 +895,10 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
                             if argument is args["data_frame"][col_name]
                             else field
                         )
+                    col_name = _name_heuristic(col_name, field_name, df)
                 else:  # numpy array, list...
                     col_name = field
+                    # col_name = _name_heuristic(field, field, df)
                 if length and len(argument) != length:
                     raise ValueError(
                         "All arguments should have the same length."
@@ -894,6 +913,7 @@ def build_or_augment_dataframe(args, attrables, array_attrables):
             else:
                 args[field_name][i] = col_name
     args["data_frame"] = df
+    print (df)
     return args
 
 
@@ -914,7 +934,7 @@ def infer_config(args, constructor, trace_patch):
         if group_attr in args:
             all_attrables += [group_attr]
 
-    build_or_augment_dataframe(args, all_attrables, array_attrables)
+    build_dataframe(args, all_attrables, array_attrables)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []

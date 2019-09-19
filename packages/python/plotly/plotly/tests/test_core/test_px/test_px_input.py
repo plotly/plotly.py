@@ -4,7 +4,7 @@ import pandas as pd
 import pytest
 import plotly.graph_objects as go
 import plotly
-from plotly.express._core import build_or_augment_dataframe
+from plotly.express._core import build_dataframe
 from pandas.util.testing import assert_frame_equal
 
 attrables = (
@@ -56,6 +56,17 @@ def test_pandas_series():
     before_tip = tips.total_bill - tips.tip
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
+
+
+def test_name_conflict():
+    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
+    fig = px.scatter(df, x=[10, 1], y="y", color="x")
+    assert np.all(fig.data[0].x == np.array([10, 1]))
+    fig = px.scatter(df, x=[10, 1], y="y", color=df.x)
+    assert np.all(fig.data[0].x == np.array([10, 1]))
+    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], color=[1, 2]))
+    fig = px.scatter(df, x=[10, 1], y="y", size="color", color=df.x)
+    assert np.all(fig.data[0].x == np.array([10, 1]))
 
 
 def test_mixed_case():
@@ -146,7 +157,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     args["data_frame"] = None
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -156,7 +167,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     args["data_frame"] = None
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -166,7 +177,7 @@ def test_build_df_with_index():
     tips = px.data.tips()
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     changed_output = dict(x="index")
-    out = build_or_augment_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
     out.pop("data_frame")
     assert out == args
