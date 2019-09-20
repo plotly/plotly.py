@@ -100,6 +100,11 @@ or conda.
 conda install "notebook>=5.3" "ipywidgets=7.5"
 ```
 
+In order to install plotly jupyter extension, your system should have installed and path to:
+
+1.  git
+2.  node.js
+
 ### JupyterLab Support (Python 3.5+)
 For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip... 
