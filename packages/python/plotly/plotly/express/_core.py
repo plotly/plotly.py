@@ -770,6 +770,11 @@ def _name_heuristic(argument, field_name, reserved_names):
 
 
 def _get_reserved_names(args, attrables, array_attrables):
+    """
+    This function builds a list of columns of the data_frame argument used
+    as arguments, either as str/int arguments or given as columns
+    (pandas series type).
+    """
     df = args["data_frame"]
     reserved_names = []
     for field in args:

@@ -85,6 +85,16 @@ def test_name_conflict():
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<br>size=%{marker.size}"
 
+    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
+    df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
+    df3 = pd.DataFrame(dict(y=[0.1, 0.2]))
+    fig = px.scatter(x=df.y, y=df2.y, hover_data=[df3.y])
+    assert np.all(fig.data[0].x == np.array([3, 4]))
+    assert np.all(fig.data[0].y == np.array([23, 24]))
+    assert (
+        fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<br>hover_data_0=%{customdata[0]}"
+    )
+
 
 def test_repeated_name():
     iris = px.data.iris()
