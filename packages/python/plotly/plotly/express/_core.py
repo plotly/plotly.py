@@ -776,7 +776,7 @@ def _get_reserved_names(args, attrables, array_attrables):
     (pandas series type).
     """
     df = args["data_frame"]
-    reserved_names = []
+    reserved_names = set()
     for field in args:
         if field not in attrables:
             continue
@@ -786,16 +786,15 @@ def _get_reserved_names(args, attrables, array_attrables):
         for arg in names:
             if arg is None:
                 continue
-            if isinstance(arg, str) and arg not in reserved_names:
-                reserved_names.append(arg)
-            if isinstance(arg, int) and str(arg) not in reserved_names:
-                reserved_names.append(str(arg))
+            if isinstance(arg, str):
+                reserved_names.add(arg)
+            if isinstance(arg, int):
+                reserved_names.add(str(arg))
             if isinstance(arg, pd.DataFrame) or isinstance(arg, pd.core.series.Series):
                 arg_name = arg.name
                 if arg_name:
                     in_df = arg is df[arg_name]
-                    if arg_name not in reserved_names:
-                        reserved_names.append(arg_name)
+                    reserved_names.add(arg_name)
 
     return reserved_names
 
@@ -827,9 +826,9 @@ def build_dataframe(args, attrables, array_attrables):
     if args["data_frame"] is not None:
         reserved_names = _get_reserved_names(args, attrables, array_attrables)
     else:
-        reserved_names = []
+        reserved_names = set()
     canbechanged_names = {}
-    forbidden_names = list(reserved_names)  # copy method compatible with Py2
+    forbidden_names = set(reserved_names)  # copy method compatible with Py2
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
@@ -956,10 +955,9 @@ def build_dataframe(args, attrables, array_attrables):
                         % (field, len(argument), length)
                     )
                 df[str(col_name)] = argument
-                if col_name not in reserved_names:
-                    reserved_names.append(str(col_name))
-                    forbidden_names.append(str(col_name))
-                    canbechanged_names[str(col_name)] = (field_name, i)
+                reserved_names.add(str(col_name))
+                forbidden_names.add(str(col_name))
+                canbechanged_names[str(col_name)] = (field_name, i)
             # Update argument with column name now that column exists
             if field_name not in array_attrables:
                 args[field_name] = str(col_name)
