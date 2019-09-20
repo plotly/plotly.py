@@ -671,7 +671,7 @@ def one_group(x):
 
 
 def apply_default_cascade(args):
-    # first we apply px.defaults to unspecified args
+    # https://github.com/plotly/dash-table/issues/597first we apply px.defaults to unspecified args
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
         + ["symbol_sequence", "line_dash_sequence", "template"]
@@ -754,14 +754,12 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def _name_heuristic(argument, field_name, df):
+def _name_heuristic(argument, field_name, reserved_names):
     if isinstance(argument, int):
         argument = str(argument)
-    if argument not in df.columns:
-        return argument
-    elif field_name not in df.columns:
+    elif field_name not in reserved_names:
         return field_name
-    elif field_name + argument not in df.columns:
+    elif field_name + argument not in reserved_names:
         return field_name + "_" + argument
     else:
         raise NameError(
@@ -772,8 +770,29 @@ def _name_heuristic(argument, field_name, df):
 
 
 def _get_reserved_names(args, attrables, array_attrables):
-    df = args['data_frame']
+    df = args["data_frame"]
+    reserved_names = []
     for field in args:
+        if field not in attrables:
+            continue
+        names = args[field] if field in array_attrables else [args[field]]
+        if names is None:
+            continue
+        for arg in names:
+            if arg is None:
+                continue
+            if isinstance(arg, str) and arg not in reserved_names:
+                reserved_names.append(arg)
+            if isinstance(arg, int) and str(arg) not in reserved_names:
+                reserved_names.append(str(arg))
+            if isinstance(arg, pd.DataFrame) or isinstance(arg, pd.core.series.Series):
+                arg_name = arg.name
+                if arg_name:
+                    in_df = arg is df[arg_name]
+                    if arg_name not in reserved_names:
+                        reserved_names.append(arg_name)
+
+    return reserved_names
 
 
 def build_dataframe(args, attrables, array_attrables):
@@ -802,6 +821,10 @@ def build_dataframe(args, attrables, array_attrables):
 
     if args["data_frame"] is not None:
         reserved_names = _get_reserved_names(args, attrables, array_attrables)
+    else:
+        reserved_names = []
+    canbechanged_names = {}
+    forbidden_names = reserved_names.copy()
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
@@ -868,14 +891,13 @@ def build_dataframe(args, attrables, array_attrables):
                         "length of previous arguments is %d"
                         % (field, len(args["data_frame"][argument]), length)
                     )
-                col_name = _name_heuristic(argument, field_name, df)
-                df[col_name] = args["data_frame"][argument]
+                df[str(argument)] = args["data_frame"][argument]
                 if isinstance(argument, int):
                     if field_name not in array_attrables:
-                        args[field_name] = col_name
+                        args[field_name] = str(argument)
                     else:
-                        args[field_name][i] = col_name
-                # continue
+                        args[field_name][i] = str(argument)
+                continue
             # Case of index
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
                 raise TypeError(
@@ -892,21 +914,35 @@ def build_dataframe(args, attrables, array_attrables):
                     col_name = argument.name  # pandas df
                     if col_name is None and is_index:
                         col_name = "index"
-                    if (
-                        args.get("data_frame") is not None
-                        and col_name in args["data_frame"]
-                    ):
+                    # revert previous argument
+                    if col_name in canbechanged_names:
+                        if argument is not df[col_name]:
+                            old_field, old_i = canbechanged_names[col_name]
+                            # old_field_name = old_field + str(i) if else old_field
+                            df.rename(columns={col_name: old_field}, inplace=True)
+                            args[old_field] = old_field
+                            del canbechanged_names[col_name]
+                            reserved_names.remove(col_name)
+                    if col_name in forbidden_names:
                         # If the name exists but the values have changed
                         # we do not want to keep the name, revert to field
+                        name_in_dataframe = (
+                            args["data_frame"] is not None
+                            and col_name in args["data_frame"].columns
+                        )
+                        keep_name = (
+                            (argument is args["data_frame"][col_name])
+                            if name_in_dataframe
+                            else (col_name in df and argument is df[col_name])
+                        )
                         col_name = (
                             col_name
-                            if argument is args["data_frame"][col_name]
-                            else field
+                            if keep_name
+                            else _name_heuristic(col_name, field, reserved_names)
                         )
-                    col_name = _name_heuristic(col_name, field_name, df)
                 else:  # numpy array, list...
-                    col_name = field
-                    # col_name = _name_heuristic(field, field, df)
+                    # col_name = field
+                    col_name = _name_heuristic(field, field, reserved_names)
                 if length and len(argument) != length:
                     raise ValueError(
                         "All arguments should have the same length."
@@ -914,12 +950,16 @@ def build_dataframe(args, attrables, array_attrables):
                         "length of previous arguments is %d"
                         % (field, len(argument), length)
                     )
-                df[col_name] = argument
+                df[str(col_name)] = argument
+                if col_name not in reserved_names:
+                    reserved_names.append(str(col_name))
+                    forbidden_names.append(str(col_name))
+                    canbechanged_names[str(col_name)] = (field_name, i)
             # Update argument with column name now that column exists
             if field_name not in array_attrables:
-                args[field_name] = col_name
+                args[field_name] = str(col_name)
             else:
-                args[field_name][i] = col_name
+                args[field_name][i] = str(col_name)
     args["data_frame"] = df
     return args
 
