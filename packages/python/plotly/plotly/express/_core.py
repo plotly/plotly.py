@@ -835,7 +835,8 @@ def build_dataframe(args, attrables, array_attrables):
     else:
         used_col_names = set()
     canbechanged_names = {}
-    forbidden_names = set(used_col_names)  # copy method compatible with Py2
+    # Names which are already taken
+    reserved_names = set(used_col_names)  # copy method compatible with Py2
 
     if "dimensions" in args and args["dimensions"] is None:
         if not df_provided:
@@ -855,6 +856,7 @@ def build_dataframe(args, attrables, array_attrables):
 
     # Loop over possible arguments
     for field_name in attrables:
+        # Massaging variables
         argument_list = (
             [args.get(field_name)]
             if field_name not in array_attrables
@@ -871,6 +873,7 @@ def build_dataframe(args, attrables, array_attrables):
             else [field_name + "_" + str(i) for i in range(len(argument_list))]
         )
         # argument_list and field_list ready, iterate over them
+        # Core of the loop starts here
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
             length = len(df)
             if argument is None:
@@ -926,19 +929,18 @@ def build_dataframe(args, attrables, array_attrables):
                     # revert previous argument
                     if col_name in canbechanged_names:
                         if not argument.equals(df[col_name]):
-                            print ("will revert", col_name)
                             old_field, old_i = canbechanged_names[col_name]
                             df.rename(columns={col_name: old_field}, inplace=True)
                             args[old_field] = old_field
                             del canbechanged_names[col_name]
                             used_col_names.remove(col_name)
-                    if col_name in forbidden_names:
+                    if col_name in reserved_names:
                         name_in_dataframe = (
                             args["data_frame"] is not None
                             and col_name in args["data_frame"].columns
                         )
                         keep_name = (
-                            (argument is args["data_frame"][col_name])
+                            argument is args["data_frame"][col_name]
                             if name_in_dataframe
                             else (col_name in df and argument is df[col_name])
                         )
@@ -958,7 +960,7 @@ def build_dataframe(args, attrables, array_attrables):
                     )
                 df[str(col_name)] = argument
                 used_col_names.add(str(col_name))
-                forbidden_names.add(str(col_name))
+                reserved_names.add(str(col_name))
                 canbechanged_names[str(col_name)] = (field_name, i)
 
             # Finally, update argument with column name now that column exists
