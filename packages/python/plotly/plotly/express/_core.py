@@ -767,8 +767,8 @@ def _name_heuristic(argument, field_name, df):
         raise NameError(
             "A name conflict was encountered for argument %s."
             "Columns with names %s, %s and %s are already used"
-            % (field_name, argument, field_name, field_name + '_' + argument)
-            )
+            % (field_name, argument, field_name, field_name + "_" + argument)
+        )
 
 
 def build_dataframe(args, attrables, array_attrables):
