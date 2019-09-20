@@ -771,6 +771,11 @@ def _name_heuristic(argument, field_name, df):
         )
 
 
+def _get_reserved_names(args, attrables, array_attrables):
+    df = args['data_frame']
+    for field in args:
+
+
 def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
@@ -795,6 +800,8 @@ def build_dataframe(args, attrables, array_attrables):
     ):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
 
+    if args["data_frame"] is not None:
+        reserved_names = _get_reserved_names(args, attrables, array_attrables)
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
