@@ -824,7 +824,7 @@ def build_dataframe(args, attrables, array_attrables):
     else:
         reserved_names = []
     canbechanged_names = {}
-    forbidden_names = reserved_names.copy()
+    forbidden_names = list(reserved_names)  # copy method compatible with Py2
     # We start from an empty DataFrame except for the case of functions which
     # implicitely need all dimensions: Splom, Parcats, Parcoords
     # This could be refined when dimensions is given
