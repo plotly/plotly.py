@@ -755,19 +755,20 @@ def apply_default_cascade(args):
 
 
 def _name_heuristic(argument, field_name, df):
-    print (argument, field_name, df.columns)
     if isinstance(argument, int):
         argument = str(argument)
     if argument not in df.columns:
-        print ("no pb", argument)
         return argument
     elif field_name not in df.columns:
-        print ("fallback field", field_name)
         return field_name
     elif field_name + argument not in df.columns:
         return field_name + "_" + argument
     else:
-        raise NameError("A name conflict was encountered.")
+        raise NameError(
+            "A name conflict was encountered for argument %s."
+            "Columns with names %s, %s and %s are already used"
+            % (field_name, argument, field_name, field_name + '_' + argument)
+            )
 
 
 def build_dataframe(args, attrables, array_attrables):
@@ -913,7 +914,6 @@ def build_dataframe(args, attrables, array_attrables):
             else:
                 args[field_name][i] = col_name
     args["data_frame"] = df
-    print (df)
     return args
 
 
