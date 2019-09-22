@@ -436,7 +436,7 @@ def box(
     log_y=False,
     range_x=None,
     range_y=None,
-    points=None,
+    points="outliers",
     notched=False,
     title=None,
     template=None,
