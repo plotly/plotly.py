@@ -283,18 +283,20 @@ docs = dict(
     ],
     barnorm=[
         "(string, one of `'fraction'` or `'percent'`, default is `None`)",
-        "If set to `'fraction'`, the value of each bar is divided by the sum of all values at that location coordinate.",
+        "If `'fraction'`, the value of each bar is divided by the sum of all values at that location coordinate.",
         "`'percent'` is the same but multiplied by 100 to show percentages.",
+        "`None` will stack up all values at each location coordinate.",
     ],
     groupnorm=[
         "(string, one of `'fraction'` or `'percent'`, default is `None`)",
-        "If set to `'fraction'`, the value of each point is divided by the sum of all values at that location coordinate.",
+        "If `'fraction'`, the value of each point is divided by the sum of all values at that location coordinate.",
         "`'percent'` is the same but multiplied by 100 to show percentages.",
+        "`None` will stack up all values at each location coordinate.",
     ],
     barmode=[
         "(string, one of `'group'`, `'overlay'` or `'relative'`. Default is `'relative'`)",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
-        "In `'overlay'` mode, bars are on drawn top of one another.",
+        "In `'overlay'` mode, bars are drawn on top of one another.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
