@@ -57,6 +57,7 @@ def test_pandas_series():
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
 
+
 def test_name_conflict():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     fig = px.scatter(df, x=[10, 1], y="y", color="x")
@@ -70,7 +71,10 @@ def test_name_conflict():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], color=[1, 2]))
     fig = px.scatter(df, x=[10, 1], y="y", size="color", color=df.x)
     assert np.all(fig.data[0].x == np.array([10, 1]))
-    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>color=%{marker.size}<br>x=%{marker.color}"
+    assert (
+        fig.data[0].hovertemplate
+        == "x_x=%{x}<br>y=%{y}<br>color=%{marker.size}<br>x=%{marker.color}"
+    )
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
@@ -114,7 +118,6 @@ def test_repeated_name():
         custom_data=["species_id", "species"],
     )
     assert fig.data[0].customdata.shape[1] == 4
-
 
 
 def test_arrayattrable_numpy():

@@ -14,7 +14,11 @@ colref_list = (
 # TODO standardize positioning and casing of 'default'
 
 docs = dict(
-    data_frame=["A 'tidy' `pandas.DataFrame`"],
+    data_frame=[
+        "A `pandas.DataFrame`, or a `NumPy` array or a dictionary",
+        "which are tranformed internally to `pandas.DataFrame`. This argument needs"
+        "to be passed for column names (and not keyword names) to be used.",
+    ],
     x=[
         colref,
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",

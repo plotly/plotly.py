@@ -880,11 +880,11 @@ def build_dataframe(args, attrables, array_attrables):
                         "is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in args['data_frame'].columns:
+                if argument not in args["data_frame"].columns:
                     raise ValueError(
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
-                        % (field, str(list(args['data_frame'].columns)), argument)
+                        % (field, str(list(args["data_frame"].columns)), argument)
                     )
                 if length and len(args["data_frame"][argument]) != length:
                     raise ValueError(
@@ -921,7 +921,11 @@ def build_dataframe(args, attrables, array_attrables):
                         col_name = field
                     else:
                         keep_name = argument is getattr(args["data_frame"], col_name)
-                        col_name = col_name if keep_name else _name_heuristic(col_name, field, used_col_names)
+                        col_name = (
+                            col_name
+                            if keep_name
+                            else _name_heuristic(col_name, field, used_col_names)
+                        )
                 else:  # numpy array, list...
                     col_name = _name_heuristic(field, field, used_col_names)
                 if length and len(argument) != length:
