@@ -822,12 +822,11 @@ def build_dataframe(args, attrables, array_attrables):
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
 
-    # We start from an empty DataFrame except for the case of functions which
-    # implicitely need all dimensions: Splom, Parcats, Parcoords
-    # This could be refined when dimensions is given
+    # We start from an empty DataFrame
     df = pd.DataFrame()
 
-    # Initialize sets of column names
+    # Initialize set of column names
+    # These are reserved names
     if df_provided:
         used_col_names = _initialize_argument_col_names(
             args, attrables, array_attrables
@@ -835,6 +834,7 @@ def build_dataframe(args, attrables, array_attrables):
     else:
         used_col_names = set()
 
+    # Case of functions with a "dimensions" kw: scatter_matrix, parcats, parcoords
     if "dimensions" in args and args["dimensions"] is None:
         if not df_provided:
             raise ValueError(
@@ -843,13 +843,6 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_args = args["data_frame"]
             df[df_args.columns] = df_args[df_args.columns]
-
-    # Valid column names
-    df_columns = (
-        args["data_frame"].columns
-        if isinstance(args["data_frame"], pd.DataFrame)
-        else None
-    )
 
     # Loop over possible arguments
     for field_name in attrables:
@@ -862,7 +855,7 @@ def build_dataframe(args, attrables, array_attrables):
         # argument not specified, continue
         if argument_list is None or argument_list is [None]:
             continue
-        # Argument name: field_name if the argument is a list
+        # Argument name: field_name if the argument is not a list
         # Else we give names like ["hover_data_0, hover_data_1"] etc.
         field_list = (
             [field_name]
@@ -887,11 +880,11 @@ def build_dataframe(args, attrables, array_attrables):
                         "is of type str or int." % field
                     )
                 # Check validity of column name
-                if df_columns is not None and argument not in df_columns:
+                if argument not in args['data_frame'].columns:
                     raise ValueError(
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
-                        % (field, str(list(df_columns)), argument)
+                        % (field, str(list(args['data_frame'].columns)), argument)
                     )
                 if length and len(args["data_frame"][argument]) != length:
                     raise ValueError(
@@ -907,7 +900,7 @@ def build_dataframe(args, attrables, array_attrables):
                     else:
                         args[field_name][i] = str(argument)
                 continue
-            # Case of index
+            # Case of multiindex
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
                 raise TypeError(
                     "Argument '%s' is a pandas MultiIndex."

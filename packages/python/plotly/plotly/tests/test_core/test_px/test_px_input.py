@@ -34,7 +34,7 @@ def test_numpy_labels():
 def test_with_index():
     tips = px.data.tips()
     fig = px.scatter(tips, x=tips.index, y="total_bill")
-    fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
+    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
     # If we tinker with the column then the name is the one of the kw argument
@@ -61,13 +61,16 @@ def test_name_conflict():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     fig = px.scatter(df, x=[10, 1], y="y", color="x")
     assert np.all(fig.data[0].x == np.array([10, 1]))
+    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>x=%{marker.color}"
 
     fig = px.scatter(df, x=[10, 1], y="y", color=df.x)
     assert np.all(fig.data[0].x == np.array([10, 1]))
+    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>x=%{marker.color}"
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], color=[1, 2]))
     fig = px.scatter(df, x=[10, 1], y="y", size="color", color=df.x)
     assert np.all(fig.data[0].x == np.array([10, 1]))
+    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>color=%{marker.size}<br>x=%{marker.color}"
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
@@ -98,7 +101,7 @@ def test_name_conflict():
     fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([0, 1]))
-    assert fig.data[0].hovertemplate == "y=%{x}<br>x=%{y}"
+    assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}"
 
 
 def test_repeated_name():
@@ -112,10 +115,6 @@ def test_repeated_name():
     )
     assert fig.data[0].customdata.shape[1] == 4
 
-
-def test_mixed_case():
-    df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
-    fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9])
 
 
 def test_arrayattrable_numpy():
