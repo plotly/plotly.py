@@ -58,6 +58,15 @@ def test_pandas_series():
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
 
 
+def test_several_dataframes():
+    df = pd.DataFrame(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
+    df2 = pd.DataFrame(dict(time=[23, 26], money=[100, 200]))
+    fig = px.scatter(df, x="z", y=df2.money, size="y")
+    assert fig.data[0].hovertemplate == "z=%{x}<br>y_money=%{y}<br>y=%{marker.size}"
+    fig = px.scatter(df2, x=df.z, y=df2.money, size=df.y)
+    assert fig.data[0].hovertemplate == "x=%{x}<br>money=%{y}<br>size=%{marker.size}"
+
+
 def test_name_conflict():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     fig = px.scatter(df, x=[10, 1], y="y", color="x")

@@ -792,9 +792,10 @@ def _initialize_argument_col_names(args, attrables, array_attrables):
                 used_col_names.add(str(arg))
             if isinstance(arg, pd.DataFrame) or isinstance(arg, pd.core.series.Series):
                 arg_name = arg.name
-                if arg_name:
+                if arg_name and hasattr(df, arg_name):
                     in_df = arg is df[arg_name]
-                    used_col_names.add(arg_name)
+                    if in_df:
+                        used_col_names.add(arg_name)
 
     return used_col_names
 
@@ -828,11 +829,11 @@ def build_dataframe(args, attrables, array_attrables):
     # Initialize set of column names
     # These are reserved names
     if df_provided:
-        used_col_names = _initialize_argument_col_names(
+        reserved_names = _initialize_argument_col_names(
             args, attrables, array_attrables
         )
     else:
-        used_col_names = set()
+        reserved_names = set()
 
     # Case of functions with a "dimensions" kw: scatter_matrix, parcats, parcoords
     if "dimensions" in args and args["dimensions"] is None:
@@ -920,14 +921,16 @@ def build_dataframe(args, attrables, array_attrables):
                     if not df_provided:
                         col_name = field
                     else:
-                        keep_name = argument is getattr(args["data_frame"], col_name)
+                        keep_name = hasattr(
+                            args["data_frame"], col_name
+                        ) and argument is getattr(args["data_frame"], col_name)
                         col_name = (
                             col_name
                             if keep_name
-                            else _name_heuristic(col_name, field, used_col_names)
+                            else _name_heuristic(col_name, field, reserved_names)
                         )
                 else:  # numpy array, list...
-                    col_name = _name_heuristic(field, field, used_col_names)
+                    col_name = _name_heuristic(field, field, reserved_names)
                 if length and len(argument) != length:
                     raise ValueError(
                         "All arguments should have the same length."
