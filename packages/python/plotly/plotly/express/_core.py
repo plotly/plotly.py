@@ -757,7 +757,7 @@ def apply_default_cascade(args):
 def _name_heuristic(argument, field_name, used_col_names):
     if isinstance(argument, int):
         argument = str(argument)
-    elif field_name not in used_col_names:
+    if field_name not in used_col_names:
         return field_name
     elif field_name + argument not in used_col_names:
         return field_name + "_" + argument
@@ -788,8 +788,6 @@ def _initialize_argument_col_names(args, attrables, array_attrables):
                 continue
             if isinstance(arg, str):
                 used_col_names.add(arg)
-            if isinstance(arg, int):
-                used_col_names.add(str(arg))
             if isinstance(arg, pd.DataFrame) or isinstance(arg, pd.core.series.Series):
                 arg_name = arg.name
                 if arg_name and hasattr(df, arg_name):
@@ -894,12 +892,14 @@ def build_dataframe(args, attrables, array_attrables):
                         "length of previous arguments is %d"
                         % (field, len(args["data_frame"][argument]), length)
                     )
-                df[str(argument)] = args["data_frame"][argument]
+                col_name = argument
                 if isinstance(argument, int):
+                    col_name = _name_heuristic(argument, field, reserved_names)
                     if field_name not in array_attrables:
-                        args[field_name] = str(argument)
+                        args[field_name] = col_name
                     else:
-                        args[field_name][i] = str(argument)
+                        args[field_name][i] = col_name
+                df[col_name] = args["data_frame"][argument]
                 continue
             # Case of multiindex
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
