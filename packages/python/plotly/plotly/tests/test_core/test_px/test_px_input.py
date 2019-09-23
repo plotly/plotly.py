@@ -57,7 +57,6 @@ def test_pandas_series():
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
 
-
 def test_name_conflict():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     fig = px.scatter(df, x=[10, 1], y="y", color="x")
@@ -96,10 +95,10 @@ def test_name_conflict():
     )
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
-    fig = px.scatter(x=df.y, y=df.x, size=df.y)
+    fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([0, 1]))
-    assert fig.data[0].hovertemplate == "y=%{x}<br>x=%{y}<br>size=%{marker.size}"
+    assert fig.data[0].hovertemplate == "y=%{x}<br>x=%{y}"
 
 
 def test_repeated_name():

@@ -834,9 +834,6 @@ def build_dataframe(args, attrables, array_attrables):
         )
     else:
         used_col_names = set()
-    canbechanged_names = {}
-    # Names which are already taken
-    reserved_names = set(used_col_names)  # copy method compatible with Py2
 
     if "dimensions" in args and args["dimensions"] is None:
         if not df_provided:
@@ -919,6 +916,7 @@ def build_dataframe(args, attrables, array_attrables):
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.core.indexes.range.RangeIndex)
+                # First pandas
                 # pandas series have a name but it's None
                 if (
                     hasattr(argument, "name") and argument.name is not None
@@ -926,29 +924,11 @@ def build_dataframe(args, attrables, array_attrables):
                     col_name = argument.name  # pandas df
                     if col_name is None and is_index:
                         col_name = "index"
-                    # revert previous argument
-                    if col_name in canbechanged_names:
-                        if not argument.equals(df[col_name]):
-                            old_field, old_i = canbechanged_names[col_name]
-                            df.rename(columns={col_name: old_field}, inplace=True)
-                            args[old_field] = old_field
-                            del canbechanged_names[col_name]
-                            used_col_names.remove(col_name)
-                    if col_name in reserved_names:
-                        name_in_dataframe = (
-                            args["data_frame"] is not None
-                            and col_name in args["data_frame"].columns
-                        )
-                        keep_name = (
-                            argument is args["data_frame"][col_name]
-                            if name_in_dataframe
-                            else (col_name in df and argument is df[col_name])
-                        )
-                        col_name = (
-                            col_name
-                            if keep_name
-                            else _name_heuristic(col_name, field, used_col_names)
-                        )
+                    if not df_provided:
+                        col_name = field
+                    else:
+                        keep_name = argument is getattr(args["data_frame"], col_name)
+                        col_name = col_name if keep_name else _name_heuristic(col_name, field, used_col_names)
                 else:  # numpy array, list...
                     col_name = _name_heuristic(field, field, used_col_names)
                 if length and len(argument) != length:
@@ -959,9 +939,6 @@ def build_dataframe(args, attrables, array_attrables):
                         % (field, len(argument), length)
                     )
                 df[str(col_name)] = argument
-                used_col_names.add(str(col_name))
-                reserved_names.add(str(col_name))
-                canbechanged_names[str(col_name)] = (field_name, i)
 
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
