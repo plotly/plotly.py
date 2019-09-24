@@ -910,7 +910,8 @@ def build_dataframe(args, attrables, array_attrables):
             elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
                 raise TypeError(
                     "Argument '%s' is a pandas MultiIndex."
-                    "pandas MultiIndex is not supported by plotly express" % field
+                    "pandas MultiIndex is not supported by plotly express "
+                    "at the moment." % field
                 )
             # ----------------- argument is a column / array / list.... -------
             else:

@@ -22,6 +22,9 @@ all_attrables = attrables + group_attrables + ["color"]
 
 def test_numpy():
     fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
+    assert np.all(fig.data[0].x == np.array([1, 2, 3]))
+    assert np.all(fig.data[0].y == np.array([2, 3, 4]))
+    assert np.all(fig.data[0].marker.color == np.array([1, 3, 9]))
 
 
 def test_numpy_labels():
