@@ -227,11 +227,8 @@ def test_build_df_from_lists():
 def test_build_df_with_index():
     tips = px.data.tips()
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
-    changed_output = dict(x="index")
     out = build_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
-    out.pop("data_frame")
-    assert out == args
 
 
 def test_splom_case():
@@ -261,3 +258,23 @@ def test_data_frame_from_dict():
     fig = px.scatter({"time": [0, 1], "money": [1, 2]}, x="time", y="money")
     assert fig.data[0].hovertemplate == "time=%{x}<br>money=%{y}"
     assert np.all(fig.data[0].x == [0, 1])
+
+
+def test_arguments_not_modified():
+    iris = px.data.iris()
+    petal_length = iris.petal_length
+    fig = px.scatter(iris, x=petal_length, y="petal_width")
+    assert iris.petal_length.equals(petal_length)
+
+
+def test_pass_df_columns():
+    tips = px.data.tips()
+    fig = px.histogram(
+        tips,
+        x="total_bill",
+        y="tip",
+        color="sex",
+        marginal="rug",
+        hover_data=tips.columns,
+    )
+    assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns)

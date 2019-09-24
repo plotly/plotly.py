@@ -795,7 +795,7 @@ def _initialize_argument_col_names(args, attrables, array_attrables):
     return used_col_names
 
 
-def build_dataframe(args, attrables, array_attrables):
+def build_dataframe(input_args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
 
@@ -813,6 +813,12 @@ def build_dataframe(args, attrables, array_attrables):
     array_attrables : list
         argument names corresponding to iterables, such as `hover_data`, ...
     """
+    args = dict(input_args)
+    for field in args:
+        if field in array_attrables and isinstance(
+            args[field], pd.core.indexes.base.Index
+        ):
+            args[field] = list(args[field])
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
@@ -864,8 +870,15 @@ def build_dataframe(args, attrables, array_attrables):
             length = len(df)
             if argument is None:
                 continue
+            # Case of multiindex
+            if isinstance(argument, pd.core.indexes.multi.MultiIndex):
+                raise TypeError(
+                    "Argument '%s' is a pandas MultiIndex."
+                    "pandas MultiIndex is not supported by plotly express "
+                    "at the moment." % field
+                )
             ## ----------------- argument is a col name ----------------------
-            elif isinstance(argument, str) or isinstance(
+            if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
                 if not df_provided:
@@ -902,19 +915,7 @@ def build_dataframe(args, attrables, array_attrables):
                 col_name = argument
                 if isinstance(argument, int):
                     col_name = _name_heuristic(argument, field, reserved_names)
-                    if field_name not in array_attrables:
-                        args[field_name] = col_name
-                    else:
-                        args[field_name][i] = col_name
                 df[col_name] = args["data_frame"][argument]
-                continue
-            # Case of multiindex
-            elif isinstance(argument, pd.core.indexes.multi.MultiIndex):
-                raise TypeError(
-                    "Argument '%s' is a pandas MultiIndex."
-                    "pandas MultiIndex is not supported by plotly express "
-                    "at the moment." % field
-                )
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.core.indexes.range.RangeIndex)
@@ -980,7 +981,7 @@ def infer_config(args, constructor, trace_patch):
         if group_attr in args:
             all_attrables += [group_attr]
 
-    build_dataframe(args, all_attrables, array_attrables)
+    args = build_dataframe(args, all_attrables, array_attrables)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
@@ -1058,7 +1059,7 @@ def infer_config(args, constructor, trace_patch):
 
     # Create trace specs
     trace_specs = make_trace_spec(args, constructor, attrs, trace_patch)
-    return trace_specs, grouped_mappings, sizeref, show_colorbar
+    return args, trace_specs, grouped_mappings, sizeref, show_colorbar
 
 
 def get_orderings(args, grouper, grouped):
@@ -1096,7 +1097,7 @@ def get_orderings(args, grouper, grouped):
 def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     apply_default_cascade(args)
 
-    trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
+    args, trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
