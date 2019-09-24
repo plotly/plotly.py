@@ -671,7 +671,7 @@ def one_group(x):
 
 
 def apply_default_cascade(args):
-    # https://github.com/plotly/dash-table/issues/597first we apply px.defaults to unspecified args
+    # first we apply px.defaults to unspecified args
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
         + ["symbol_sequence", "line_dash_sequence", "template"]
