@@ -759,13 +759,10 @@ def _name_heuristic(argument, field_name, used_col_names):
         argument = str(argument)
     if field_name not in used_col_names:
         return field_name
-    elif field_name + argument not in used_col_names:
-        return field_name + "_" + argument
     else:
         raise NameError(
-            "A name conflict was encountered for argument %s."
-            "Columns with names %s, %s and %s are already used"
-            % (field_name, argument, field_name, field_name + "_" + argument)
+            "A name conflict was encountered for argument %s. "
+            "A column with name %s is already used." % (field_name, field_name)
         )
 
 

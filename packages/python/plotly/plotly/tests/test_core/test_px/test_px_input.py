@@ -67,30 +67,19 @@ def test_pandas_series():
 def test_several_dataframes():
     df = pd.DataFrame(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
     df2 = pd.DataFrame(dict(time=[23, 26], money=[100, 200]))
-    fig = px.scatter(df, x="z", y=df2.money, size="y")
-    assert fig.data[0].hovertemplate == "z=%{x}<br>y_money=%{y}<br>y=%{marker.size}"
-    fig = px.scatter(df2, x=df.z, y=df2.money, size=df.y)
+    fig = px.scatter(df, x="z", y=df2.money, size="x")
+    assert fig.data[0].hovertemplate == "z=%{x}<br>y=%{y}<br>x=%{marker.size}"
+    fig = px.scatter(df2, x=df.z, y=df2.money, size=df.z)
     assert fig.data[0].hovertemplate == "x=%{x}<br>money=%{y}<br>size=%{marker.size}"
+    # Name conflict
+    with pytest.raises(NameError) as err_msg:
+        fig = px.scatter(df, x="z", y=df2.money, size="y")
+        assert "A name conflict was encountered for argument y" in str(err_msg.value)
+    with pytest.raises(NameError) as err_msg:
+        fig = px.scatter(df, x="z", y=df2.money, size=df.y)
+        assert "A name conflict was encountered for argument y" in str(err_msg.value)
 
-
-def test_name_conflict():
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
-    fig = px.scatter(df, x=[10, 1], y="y", color="x")
-    assert np.all(fig.data[0].x == np.array([10, 1]))
-    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>x=%{marker.color}"
-
-    fig = px.scatter(df, x=[10, 1], y="y", color=df.x)
-    assert np.all(fig.data[0].x == np.array([10, 1]))
-    assert fig.data[0].hovertemplate == "x_x=%{x}<br>y=%{y}<br>x=%{marker.color}"
-
-    df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], color=[1, 2]))
-    fig = px.scatter(df, x=[10, 1], y="y", size="color", color=df.x)
-    assert np.all(fig.data[0].x == np.array([10, 1]))
-    assert (
-        fig.data[0].hovertemplate
-        == "x_x=%{x}<br>y=%{y}<br>color=%{marker.size}<br>x=%{marker.color}"
-    )
-
+    # No conflict when the dataframe is not given, fields are used
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
     fig = px.scatter(x=df.y, y=df2.y)
@@ -116,6 +105,8 @@ def test_name_conflict():
         fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<br>hover_data_0=%{customdata[0]}"
     )
 
+
+def test_name_heuristics():
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4], z=[0.1, 0.2]))
     fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
