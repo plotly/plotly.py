@@ -877,11 +877,16 @@ def build_dataframe(args, attrables, array_attrables):
                     )
                 # Check validity of column name
                 if argument not in args["data_frame"].columns:
-                    raise ValueError(
+                    err_msg = (
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
                         % (field, str(list(args["data_frame"].columns)), argument)
                     )
+                    if argument == "index":
+                        err_msg += (
+                            "\n To use the index, pass it in directly as `df.index`."
+                        )
+                    raise ValueError(err_msg)
                 if length and len(args["data_frame"][argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "

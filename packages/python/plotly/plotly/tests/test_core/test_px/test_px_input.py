@@ -45,9 +45,8 @@ def test_with_index():
     # We do not allow "x=index"
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(tips, x="index", y="total_bill")
-        assert (
-            "ValueError: Value of 'x' is not the name of a column in 'data_frame'"
-            in str(err_msg.value)
+        assert "To use the index, pass it in directly as `df.index`." in str(
+            err_msg.value
         )
     tips = px.data.tips()
     tips.index.name = "item"
