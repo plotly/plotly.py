@@ -788,7 +788,7 @@ def _initialize_argument_col_names(args, attrables, array_attrables):
                 continue
             if isinstance(arg, str):
                 used_col_names.add(arg)
-            if isinstance(arg, pd.DataFrame) or isinstance(arg, pd.core.series.Series):
+            if isinstance(arg, pd.core.series.Series):
                 arg_name = arg.name
                 if arg_name and hasattr(df, arg_name):
                     in_df = arg is df[arg_name]

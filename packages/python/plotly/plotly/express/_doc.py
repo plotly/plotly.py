@@ -1,9 +1,7 @@
 import inspect
 
-colref = "(string or int: name of column in `data_frame`, or array_like object)"
-colref_list = (
-    "(list of string or int: names of columns in `data_frame`, or array_like objects)"
-)
+colref = "(string or int: name of column in `data_frame`, or pandas Series, or array_like object)"
+colref_list = "(list of string or int: names of columns in `data_frame`, or pandas Series, or array_like objects)"
 
 # TODO contents of columns
 # TODO explain categorical
