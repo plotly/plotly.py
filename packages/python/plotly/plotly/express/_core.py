@@ -887,10 +887,15 @@ def build_dataframe(args, attrables, array_attrables):
                     )
                 if length and len(args["data_frame"][argument]) != length:
                     raise ValueError(
-                        "All arguments should have the same length."
-                        "The length of column argument `df[%s]` is %d, whereas the"
-                        "length of previous arguments is %d"
-                        % (field, len(args["data_frame"][argument]), length)
+                        "All arguments should have the same length. "
+                        "The length of column argument `df[%s]` is %d, whereas the "
+                        "length of previous arguments %s is %d"
+                        % (
+                            field,
+                            len(args["data_frame"][argument]),
+                            str(list(df.columns)),
+                            length,
+                        )
                     )
                 col_name = argument
                 if isinstance(argument, int):
@@ -935,8 +940,8 @@ def build_dataframe(args, attrables, array_attrables):
                     raise ValueError(
                         "All arguments should have the same length."
                         "The length of argument `%s` is %d, whereas the"
-                        "length of previous arguments is %d"
-                        % (field, len(argument), length)
+                        "length of previous arguments %s is %d"
+                        % (field, len(argument), str(list(df.columns)), length)
                     )
                 df[str(col_name)] = argument
 
