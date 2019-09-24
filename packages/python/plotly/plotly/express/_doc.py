@@ -1,8 +1,8 @@
 import inspect
 
-colref = "(string: name of column in `data_frame`, or array_like object)"
+colref = "(string or int: name of column in `data_frame`, or array_like object)"
 colref_list = (
-    "(list of string: names of columns in `data_frame`, or array_like objects)"
+    "(list of string or int: names of columns in `data_frame`, or array_like objects)"
 )
 
 # TODO contents of columns
