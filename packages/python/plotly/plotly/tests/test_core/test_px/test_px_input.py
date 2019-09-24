@@ -49,6 +49,10 @@ def test_with_index():
             "ValueError: Value of 'x' is not the name of a column in 'data_frame'"
             in str(err_msg.value)
         )
+    tips = px.data.tips()
+    tips.index.name = "item"
+    fig = px.scatter(tips, x=tips.index, y="total_bill")
+    assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}"
 
 
 def test_pandas_series():

@@ -927,9 +927,14 @@ def build_dataframe(args, attrables, array_attrables):
                     if not df_provided:
                         col_name = field
                     else:
-                        keep_name = hasattr(
-                            args["data_frame"], col_name
-                        ) and argument is getattr(args["data_frame"], col_name)
+                        if is_index:
+                            keep_name = (
+                                df_provided and argument is args["data_frame"].index
+                            )
+                        else:
+                            keep_name = hasattr(
+                                args["data_frame"], col_name
+                            ) and argument is getattr(args["data_frame"], col_name)
                         col_name = (
                             col_name
                             if keep_name
