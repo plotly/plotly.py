@@ -40,9 +40,6 @@ def test_with_index():
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
     assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
-    # If we tinker with the column then the name is the one of the kw argument
-    fig = px.scatter(tips, x=tips.index, y=10 * tips.total_bill)
-    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>y=%{y}"
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill, labels={"index": "number"})
     assert fig.data[0]["hovertemplate"] == "number=%{x}<br>total_bill=%{y}"
     # We do not allow "x=index"
@@ -57,6 +54,8 @@ def test_with_index():
 def test_pandas_series():
     tips = px.data.tips()
     before_tip = tips.total_bill - tips.tip
+    fig = px.bar(tips, x="day", y=before_tip)
+    assert fig.data[0].hovertemplate == "day=%{x}<br>y=%{y}"
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
 
