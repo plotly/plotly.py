@@ -815,7 +815,11 @@ def build_dataframe(args, attrables, array_attrables):
     """
     for field in args:
         if field in array_attrables and args[field] is not None:
-            args[field] = list(args[field])
+            args[field] = (
+                dict(args[field])
+                if isinstance(args[field], dict)
+                else list(args[field])
+            )
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
