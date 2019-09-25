@@ -280,3 +280,5 @@ def test_pass_df_columns():
         hover_data=tips.columns,
     )
     assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns)
+    tips_copy = px.data.tips()
+    assert tips_copy.columns.equals(tips.columns)

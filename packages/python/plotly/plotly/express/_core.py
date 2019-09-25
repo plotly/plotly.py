@@ -795,7 +795,7 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
-def build_dataframe(input_args, attrables, array_attrables):
+def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
 
@@ -813,7 +813,6 @@ def build_dataframe(input_args, attrables, array_attrables):
     array_attrables : list
         argument names corresponding to iterables, such as `hover_data`, ...
     """
-    args = input_args.copy()
     for field in args:
         if field in array_attrables and args[field] is not None:
             args[field] = list(args[field])
