@@ -813,11 +813,9 @@ def build_dataframe(input_args, attrables, array_attrables):
     array_attrables : list
         argument names corresponding to iterables, such as `hover_data`, ...
     """
-    args = dict(input_args)
+    args = input_args.copy()
     for field in args:
-        if field in array_attrables and isinstance(
-            args[field], pd.core.indexes.base.Index
-        ):
+        if field in array_attrables and args[field] is not None:
             args[field] = list(args[field])
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None

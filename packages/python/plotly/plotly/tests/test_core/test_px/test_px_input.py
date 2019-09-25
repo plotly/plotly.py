@@ -263,8 +263,10 @@ def test_data_frame_from_dict():
 def test_arguments_not_modified():
     iris = px.data.iris()
     petal_length = iris.petal_length
-    fig = px.scatter(iris, x=petal_length, y="petal_width")
+    hover_data = [iris.sepal_length]
+    fig = px.scatter(iris, x=petal_length, y="petal_width", hover_data=hover_data)
     assert iris.petal_length.equals(petal_length)
+    assert iris.sepal_length.equals(hover_data[0])
 
 
 def test_pass_df_columns():
