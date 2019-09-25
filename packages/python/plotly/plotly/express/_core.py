@@ -821,9 +821,10 @@ def build_dataframe(input_args, attrables, array_attrables):
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
+    df_input = args["data_frame"]
 
     # We start from an empty DataFrame
-    df = pd.DataFrame()
+    df_output = pd.DataFrame()
 
     # Initialize set of column names
     # These are reserved names
@@ -839,8 +840,7 @@ def build_dataframe(input_args, attrables, array_attrables):
                 "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
             )
         else:
-            df_args = args["data_frame"]
-            df[df_args.columns] = df_args[df_args.columns]
+            df_output[df_input.columns] = df_input[df_input.columns]
 
     # Loop over possible arguments
     for field_name in attrables:
@@ -863,7 +863,7 @@ def build_dataframe(input_args, attrables, array_attrables):
         # argument_list and field_list ready, iterate over them
         # Core of the loop starts here
         for i, (argument, field) in enumerate(zip(argument_list, field_list)):
-            length = len(df)
+            length = len(df_output)
             if argument is None:
                 continue
             # Case of multiindex
@@ -885,33 +885,33 @@ def build_dataframe(input_args, attrables, array_attrables):
                         "is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in args["data_frame"].columns:
+                if argument not in df_input.columns:
                     err_msg = (
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
-                        % (field, str(list(args["data_frame"].columns)), argument)
+                        % (field, str(list(df_input.columns)), argument)
                     )
                     if argument == "index":
                         err_msg += (
                             "\n To use the index, pass it in directly as `df.index`."
                         )
                     raise ValueError(err_msg)
-                if length and len(args["data_frame"][argument]) != length:
+                if length and len(df_input[argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
                         "length of previous arguments %s is %d"
                         % (
                             field,
-                            len(args["data_frame"][argument]),
-                            str(list(df.columns)),
+                            len(df_input[argument]),
+                            str(list(df_output.columns)),
                             length,
                         )
                     )
                 col_name = argument
                 if isinstance(argument, int):
                     col_name = _name_heuristic(argument, field, reserved_names)
-                df[col_name] = args["data_frame"][argument]
+                df_output[col_name] = df_input[argument]
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.core.indexes.range.RangeIndex)
@@ -927,13 +927,12 @@ def build_dataframe(input_args, attrables, array_attrables):
                         col_name = field
                     else:
                         if is_index:
-                            keep_name = (
-                                df_provided and argument is args["data_frame"].index
-                            )
+                            keep_name = df_provided and argument is df_input.index
                         else:
+                            # we use getattr/hasattr because of index
                             keep_name = hasattr(
-                                args["data_frame"], col_name
-                            ) and argument is getattr(args["data_frame"], col_name)
+                                df_input, col_name
+                            ) and argument is getattr(df_input, col_name)
                         col_name = (
                             col_name
                             if keep_name
@@ -946,9 +945,9 @@ def build_dataframe(input_args, attrables, array_attrables):
                         "All arguments should have the same length."
                         "The length of argument `%s` is %d, whereas the"
                         "length of previous arguments %s is %d"
-                        % (field, len(argument), str(list(df.columns)), length)
+                        % (field, len(argument), str(list(df_output.columns)), length)
                     )
-                df[str(col_name)] = argument
+                df_output[str(col_name)] = argument
 
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
@@ -956,7 +955,7 @@ def build_dataframe(input_args, attrables, array_attrables):
             else:
                 args[field_name][i] = str(col_name)
 
-    args["data_frame"] = df
+    args["data_frame"] = df_output
     return args
 
 
