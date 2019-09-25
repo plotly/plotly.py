@@ -754,10 +754,10 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def _name_heuristic(argument, field_name, used_col_names):
+def _name_heuristic(argument, field_name, reserved_names):
     if isinstance(argument, int):
         argument = str(argument)
-    if field_name not in used_col_names:
+    if field_name not in reserved_names:
         return field_name
     else:
         raise NameError(
@@ -766,14 +766,14 @@ def _name_heuristic(argument, field_name, used_col_names):
         )
 
 
-def _initialize_argument_col_names(args, attrables, array_attrables):
+def _get_reserved_col_names(args, attrables, array_attrables):
     """
     This function builds a list of columns of the data_frame argument used
     as arguments, either as str/int arguments or given as columns
     (pandas series type).
     """
     df = args["data_frame"]
-    used_col_names = set()
+    reserved_names = set()
     for field in args:
         if field not in attrables:
             continue
@@ -784,15 +784,15 @@ def _initialize_argument_col_names(args, attrables, array_attrables):
             if arg is None:
                 continue
             if isinstance(arg, str):
-                used_col_names.add(arg)
+                reserved_names.add(arg)
             if isinstance(arg, pd.core.series.Series):
                 arg_name = arg.name
                 if arg_name and hasattr(df, arg_name):
                     in_df = arg is df[arg_name]
                     if in_df:
-                        used_col_names.add(arg_name)
+                        reserved_names.add(arg_name)
 
-    return used_col_names
+    return reserved_names
 
 
 def build_dataframe(input_args, attrables, array_attrables):
@@ -828,9 +828,7 @@ def build_dataframe(input_args, attrables, array_attrables):
     # Initialize set of column names
     # These are reserved names
     if df_provided:
-        reserved_names = _initialize_argument_col_names(
-            args, attrables, array_attrables
-        )
+        reserved_names = _get_reserved_col_names(args, attrables, array_attrables)
     else:
         reserved_names = set()
 
