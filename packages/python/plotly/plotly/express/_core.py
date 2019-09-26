@@ -754,9 +754,7 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
-def _name_heuristic(argument, field_name, reserved_names):
-    if isinstance(argument, int):
-        argument = str(argument)
+def _check_name_not_reserved(field_name, reserved_names):
     if field_name not in reserved_names:
         return field_name
     else:
@@ -783,9 +781,9 @@ def _get_reserved_col_names(args, attrables, array_attrables):
         for arg in names:
             if arg is None:
                 continue
-            if isinstance(arg, str):
+            elif isinstance(arg, str):  # no need to add ints since kw arg are not ints
                 reserved_names.add(arg)
-            if isinstance(arg, pd.core.series.Series):
+            elif isinstance(arg, pd.Series):
                 arg_name = arg.name
                 if arg_name and hasattr(df, arg_name):
                     in_df = arg is df[arg_name]
@@ -870,7 +868,7 @@ def build_dataframe(args, attrables, array_attrables):
             if argument is None:
                 continue
             # Case of multiindex
-            if isinstance(argument, pd.core.indexes.multi.MultiIndex):
+            if isinstance(argument, pd.MultiIndex):
                 raise TypeError(
                     "Argument '%s' is a pandas MultiIndex."
                     "pandas MultiIndex is not supported by plotly express "
@@ -911,13 +909,11 @@ def build_dataframe(args, attrables, array_attrables):
                             length,
                         )
                     )
-                col_name = argument
-                if isinstance(argument, int):
-                    col_name = _name_heuristic(argument, field, reserved_names)
+                col_name = str(argument)
                 df_output[col_name] = df_input[argument]
             # ----------------- argument is a column / array / list.... -------
             else:
-                is_index = isinstance(argument, pd.core.indexes.range.RangeIndex)
+                is_index = isinstance(argument, pd.RangeIndex)
                 # First pandas
                 # pandas series have a name but it's None
                 if (
@@ -939,10 +935,10 @@ def build_dataframe(args, attrables, array_attrables):
                         col_name = (
                             col_name
                             if keep_name
-                            else _name_heuristic(col_name, field, reserved_names)
+                            else _check_name_not_reserved(field, reserved_names)
                         )
                 else:  # numpy array, list...
-                    col_name = _name_heuristic(field, field, reserved_names)
+                    col_name = _check_name_not_reserved(field, reserved_names)
                 if length and len(argument) != length:
                     raise ValueError(
                         "All arguments should have the same length."
