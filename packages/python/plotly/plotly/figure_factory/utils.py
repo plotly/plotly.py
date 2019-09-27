@@ -172,14 +172,10 @@ def endpts_to_intervals(endpts):
                 "numbers."
             )
     else:
-        intervals = []
         # add -inf to intervals
-        intervals.append([float("-inf"), endpts[0]])
+        intervals = [[float("-inf"), endpts[0]]]
         for k in range(length - 1):
-            interval = []
-            interval.append(endpts[k])
-            interval.append(endpts[k + 1])
-            intervals.append(interval)
+            intervals.append([endpts[k],endpts[k + 1]])
         # add +inf to intervals
         intervals.append([endpts[length - 1], float("inf")])
         return intervals

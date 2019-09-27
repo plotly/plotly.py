@@ -1236,7 +1236,7 @@ class grid_ops:
         v2.grids.row(fid, {"rows": rows})
 
         if grid:
-            longest_column_length = max([len(col.data) for col in grid])
+            longest_column_length = max(len(col.data) for col in grid)
 
             for column in grid:
                 n_empty_rows = longest_column_length - len(column.data)

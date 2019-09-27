@@ -766,20 +766,14 @@ def colorscale_to_colors(colorscale):
     """
     Extracts the colors from colorscale as a list
     """
-    color_list = []
-    for item in colorscale:
-        color_list.append(item[1])
-    return color_list
+    return [item[1] for item in colorscale]
 
 
 def colorscale_to_scale(colorscale):
     """
     Extracts the interpolation scale values from colorscale as a list
     """
-    scale_list = []
-    for item in colorscale:
-        scale_list.append(item[0])
-    return scale_list
+    return [item[0] for item in colorscale]
 
 
 def convert_colorscale_to_rgb(colorscale):

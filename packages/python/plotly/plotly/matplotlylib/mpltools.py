@@ -70,7 +70,7 @@ def convert_dash(mpl_dash):
 
         # If we can't find the dash pattern in the map, convert it
         # into custom values in px, e.g. '7,5' -> '7px,5px'
-        dashpx = ",".join([x + "px" for x in dash_array])
+        dashpx = ",".join(x + "px" for x in dash_array)
 
         # TODO: rewrite the convert_dash code
         # only strings 'solid', 'dashed', etc allowed
@@ -283,7 +283,7 @@ def get_bar_gap(bar_starts, bar_ends, tol=1e-10):
         sides2 = bar_ends[:-1]
         gaps = [s2 - s1 for s2, s1 in zip(sides1, sides2)]
         gap0 = gaps[0]
-        uniform = all([abs(gap0 - gap) < tol for gap in gaps])
+        uniform = all(abs(gap0 - gap) < tol for gap in gaps)
         if uniform:
             return gap0
 
@@ -444,7 +444,7 @@ def prep_ticks(ax, index, ax_type, props):
                 round(tickvalues[i] - tickvalues[i - 1], 12)
                 for i in range(1, len(tickvalues) - 1)
             ]
-            if all([dticks[i] == dticks[i - 1] for i in range(1, len(dticks) - 1)]):
+            if all(dticks[i] == dticks[i - 1] for i in range(1, len(dticks) - 1)):
                 dtick = tickvalues[1] - tickvalues[0]
             else:
                 warnings.warn(

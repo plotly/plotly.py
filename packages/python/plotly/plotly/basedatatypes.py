@@ -632,15 +632,13 @@ class BaseFigure(object):
         # -----------
 
         # ### Compute new index for each remaining trace ###
-        new_inds = []
-        for uid in uids_post_removal:
-            new_inds.append(new_uids.index(uid))
+        new_inds = [new_uids.index(uid) for uid in uids_post_removal]
 
         # ### Compute current index for each remaining trace ###
         current_inds = list(range(len(traces_props_post_removal)))
 
         # ### Check whether a move is needed ###
-        if not all([i1 == i2 for i1, i2 in zip(new_inds, current_inds)]):
+        if not all(i1 == i2 for i1, i2 in zip(new_inds, current_inds)):
 
             # #### Save off index lists for moveTraces message ####
             msg_current_inds = current_inds
@@ -2367,15 +2365,13 @@ Invalid property path '{key_path_str}' for layout
         # Handle Style / Trace Indexes
         # ----------------------------
         batch_style_commands = self._batch_trace_edits
-        trace_indexes = sorted(set([trace_ind for trace_ind in batch_style_commands]))
+        trace_indexes = sorted(set(trace_ind for trace_ind in batch_style_commands))
 
         all_props = sorted(
-            set(
-                [
-                    prop
-                    for trace_style in self._batch_trace_edits.values()
-                    for prop in trace_style
-                ]
+            set(                
+                prop
+                for trace_style in self._batch_trace_edits.values()
+                for prop in trace_style                
             )
         )
 
@@ -3999,7 +3995,7 @@ on_change callbacks are not supported in this case.
 
         # Normalize args to path tuples
         # -----------------------------
-        arg_tuples = tuple([BaseFigure._str_to_dict_path(a) for a in args])
+        arg_tuples = tuple(BaseFigure._str_to_dict_path(a) for a in args)
 
         # Initialize callbacks list
         # -------------------------

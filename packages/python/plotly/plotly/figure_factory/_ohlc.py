@@ -326,9 +326,7 @@ class _OHLC(object):
             )
         )
         if self.dates is not None:
-            date_dif = []
-            for i in range(len(self.dates) - 1):
-                date_dif.append(self.dates[i + 1] - self.dates[i])
+            date_dif = [self.dates[i + 1] - self.dates[i] for i in range(len(self.dates) - 1)]
             date_dif_min = (min(date_dif)) / 5
             self.all_x = [
                 [x - date_dif_min, x, x, x, x, x + date_dif_min, None]

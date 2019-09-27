@@ -276,8 +276,8 @@ class _AnnotatedHeatmap(object):
             z_min = np.amin(self.z)
             z_max = np.amax(self.z)
         else:
-            z_min = min([v for row in self.z for v in row])
-            z_max = max([v for row in self.z for v in row])
+            z_min = min(v for row in self.z for v in row)
+            z_max = max(v for row in self.z for v in row)
         z_mid = (z_max + z_min) / 2
         return z_mid
 

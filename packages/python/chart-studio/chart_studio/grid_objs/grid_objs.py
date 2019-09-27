@@ -164,9 +164,7 @@ class Grid(MutableSequence):
                 raise exceptions.InputError(err)
 
             # create columns from dataframe
-            all_columns = []
-            for name in columns_or_json.columns:
-                all_columns.append(Column(columns_or_json[name].tolist(), name))
+            all_columns = [Column(columns_or_json[name].tolist(), name) for name in columns_or_json.columns]
             self._columns = all_columns
             self.id = ""
 
@@ -199,9 +197,7 @@ class Grid(MutableSequence):
                         )
             # collect and sort all orders in case orders do not start
             # at zero or there are jump discontinuities between them
-            all_orders = []
-            for column_name in columns_or_json["cols"].keys():
-                all_orders.append(columns_or_json["cols"][column_name]["order"])
+            all_orders = [columns_or_json["cols"][column_name]["order"] for column_name in columns_or_json["cols"].keys()]
             all_orders.sort()
 
             # put columns in order in a list

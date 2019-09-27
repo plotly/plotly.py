@@ -203,15 +203,13 @@ class PlotlyRenderer(Renderer):
     def draw_bars(self, bars):
 
         # sort bars according to bar containers
-        mpl_traces = []
-        for container in self.bar_containers:
-            mpl_traces.append(
+        mpl_traces = (
                 [
                     bar_props
                     for bar_props in self.current_bars
                     if bar_props["mplobj"] in container
-                ]
-            )
+                ] for container in self.bar_containers
+        )
         for trace in mpl_traces:
             self.draw_bar(trace)
 

@@ -67,7 +67,7 @@ def build_figure_py(
     buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
     # ### Import trace graph_obj classes ###
-    trace_types_csv = ", ".join([n.name_datatype_class for n in trace_nodes])
+    trace_types_csv = ", ".join(n.name_datatype_class for n in trace_nodes)
     buffer.write(f"from plotly.graph_objs import ({trace_types_csv})\n")
 
     # Write class definition

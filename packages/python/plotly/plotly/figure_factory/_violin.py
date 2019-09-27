@@ -216,10 +216,7 @@ def violin_no_colorscale(
     """
 
     # collect all group names
-    group_name = []
-    for name in data[group_header]:
-        if name not in group_name:
-            group_name.append(name)
+    group_name = list({name for name in data[group_header]})
     if sort:
         group_name.sort()
 
@@ -283,10 +280,7 @@ def violin_colorscale(
     """
 
     # collect all group names
-    group_name = []
-    for name in data[group_header]:
-        if name not in group_name:
-            group_name.append(name)
+    group_name = list({name for name in data[group_header]})
     if sort:
         group_name.sort()
 
@@ -311,9 +305,7 @@ def violin_colorscale(
     highcolor = clrs.color_parser(colors[1], clrs.unlabel_rgb)
 
     # find min and max values in group_stats
-    group_stats_values = []
-    for key in group_stats:
-        group_stats_values.append(group_stats[key])
+    group_stats_values = [group_stats[key] for key in group_stats]
 
     max_value = max(group_stats_values)
     min_value = min(group_stats_values)
@@ -386,10 +378,7 @@ def violin_dict(
     """
 
     # collect all group names
-    group_name = []
-    for name in data[group_header]:
-        if name not in group_name:
-            group_name.append(name)
+    group_name = list({name for name in data[group_header]})
 
     if sort:
         group_name.sort()
