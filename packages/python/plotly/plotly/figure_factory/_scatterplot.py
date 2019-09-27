@@ -57,10 +57,7 @@ def endpts_to_intervals(endpts):
         # add -inf to intervals
         intervals = [[float("-inf"), endpts[0]]]
         for k in range(length - 1):
-            interval = []
-            interval.append(endpts[k])
-            interval.append(endpts[k + 1])
-            intervals.append(interval)
+            intervals.append([endpts[k],endpts[k + 1]])
         # add +inf to intervals
         intervals.append([endpts[length - 1], float("inf")])
         return intervals
