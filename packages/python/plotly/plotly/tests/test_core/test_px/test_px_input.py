@@ -282,3 +282,9 @@ def test_pass_df_columns():
     assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns)
     tips_copy = px.data.tips()
     assert tips_copy.columns.equals(tips.columns)
+
+
+def test_size_column():
+    df = px.data.tips()
+    fig = px.scatter(df, x=df["size"], y=df.tip)
+    assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}"

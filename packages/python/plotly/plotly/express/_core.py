@@ -929,9 +929,9 @@ def build_dataframe(args, attrables, array_attrables):
                             keep_name = df_provided and argument is df_input.index
                         else:
                             # we use getattr/hasattr because of index
-                            keep_name = hasattr(
-                                df_input, col_name
-                            ) and argument is getattr(df_input, col_name)
+                            keep_name = col_name in df_input and argument.equals(
+                                df_input[col_name]
+                            )
                         col_name = (
                             col_name
                             if keep_name
