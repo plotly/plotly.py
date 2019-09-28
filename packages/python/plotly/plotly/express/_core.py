@@ -870,7 +870,7 @@ def build_dataframe(args, attrables, array_attrables):
             # Case of multiindex
             if isinstance(argument, pd.MultiIndex):
                 raise TypeError(
-                    "Argument '%s' is a pandas MultiIndex."
+                    "Argument '%s' is a pandas MultiIndex. "
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
@@ -880,10 +880,10 @@ def build_dataframe(args, attrables, array_attrables):
             ):  # just a column name given as str or int
                 if not df_provided:
                     raise ValueError(
-                        "String or int arguments are only possible when a"
-                        "DataFrame or an array is provided in the `data_frame`"
-                        "argument. No DataFrame was provided, but argument '%s'"
-                        "is of type str or int." % field
+                        "String or int arguments are only possible when a "
+                        "DataFrame or an array is provided in the `data_frame` "
+                        "argument. No DataFrame was provided, but argument "
+                        "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
                 if argument not in df_input.columns:
@@ -941,8 +941,8 @@ def build_dataframe(args, attrables, array_attrables):
                     col_name = _check_name_not_reserved(field, reserved_names)
                 if length and len(argument) != length:
                     raise ValueError(
-                        "All arguments should have the same length."
-                        "The length of argument `%s` is %d, whereas the"
+                        "All arguments should have the same length. "
+                        "The length of argument `%s` is %d, whereas the "
                         "length of previous arguments %s is %d"
                         % (field, len(argument), str(list(df_output.columns)), length)
                     )
