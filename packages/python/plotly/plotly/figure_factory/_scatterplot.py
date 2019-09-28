@@ -57,7 +57,7 @@ def endpts_to_intervals(endpts):
         # add -inf to intervals
         intervals = [[float("-inf"), endpts[0]]]
         for k in range(length - 1):
-            intervals.append([endpts[k],endpts[k + 1]])
+            intervals.append([endpts[k], endpts[k + 1]])
         # add +inf to intervals
         intervals.append([endpts[length - 1], float("inf")])
         return intervals
@@ -234,10 +234,7 @@ def scatterplot_dict(
     for listy in dataframe:
         for listx in dataframe:
             # create a dictionary for index_vals
-            unique_index_vals = {}
-            for name in index_vals:
-                if name not in unique_index_vals:
-                    unique_index_vals[name] = []
+            unique_index_vals = {unique_index_vals[name]: [] for name in index_vals}
 
             # Fill all the rest of the names into the dictionary
             for name in sorted(unique_index_vals.keys()):
@@ -378,7 +375,7 @@ def scatterplot_theme(
 
     # Check if index is made of string values
     if isinstance(index_vals[0], str):
-        unique_index_vals = [name for name in index_vals if name not in unique_index_vals]
+        unique_index_vals = list(set(name for name in index_vals))
         n_colors_len = len(unique_index_vals)
 
         # Convert colormap to list of n RGB tuples
@@ -701,7 +698,10 @@ def scatterplot_theme(
             if len(theme) <= 1:
                 theme.append(theme[0])
 
-            color = [[1.0 / (len(theme) - 1) * incr, theme[incr]] for incr in range(len(theme))]
+            color = [
+                [1.0 / (len(theme) - 1) * incr, theme[incr]]
+                for incr in range(len(theme))
+            ]
 
             dim = len(dataframe)
             fig = make_subplots(rows=dim, cols=dim, print_grid=False)

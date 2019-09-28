@@ -534,7 +534,10 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
         widths = [(max_width - horizontal_spacing * (cols - 1)) / cols] * cols
     elif isinstance(column_widths, (list, tuple)) and len(column_widths) == cols:
         cum_sum = float(sum(column_widths))
-        widths = [(max_width - horizontal_spacing * (cols - 1)) * (w / cum_sum) for w in column_widths]
+        widths = [
+            (max_width - horizontal_spacing * (cols - 1)) * (w / cum_sum)
+            for w in column_widths
+        ]
     else:
         raise ValueError(
             """
@@ -550,7 +553,9 @@ length {cols}.
         heights = [(1.0 - vertical_spacing * (rows - 1)) / rows] * rows
     elif isinstance(row_heights, (list, tuple)) and len(row_heights) == rows:
         cum_sum = float(sum(row_heights))
-        heights = [(1.0 - vertical_spacing * (rows - 1)) * (h / cum_sum) for h in row_heights]
+        heights = [
+            (1.0 - vertical_spacing * (rows - 1)) * (h / cum_sum) for h in row_heights
+        ]
         if row_dir < 0 and not use_legacy_row_heights_order:
             heights = list(reversed(heights))
     else:

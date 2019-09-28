@@ -352,7 +352,11 @@ def _list_of_slides(markdown_string):
 
     text_blocks = re.split("\n-{2,}\n", markdown_string)
 
-    list_of_slides = [text for text in text_blocks if not all(char in ["\n", "-", " "] for char in text)]
+    list_of_slides = [
+        text
+        for text in text_blocks
+        if not all(char in ["\n", "-", " "] for char in text)
+    ]
 
     if "\n-\n" in markdown_string:
         msg = (
@@ -1037,7 +1041,9 @@ class Presentation(dict):
                             slide_trans = _remove_extra_whitespace_from_line(
                                 slide_trans
                             )
-                            slide_transition_list = [key for key in VALID_TRANSITIONS if key in slide_trans]
+                            slide_transition_list = [
+                                key for key in VALID_TRANSITIONS if key in slide_trans
+                            ]
 
                             if slide_transition_list == []:
                                 slide_transition_list.append("slide")

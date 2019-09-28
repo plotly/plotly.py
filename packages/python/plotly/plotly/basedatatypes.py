@@ -2368,10 +2368,10 @@ Invalid property path '{key_path_str}' for layout
         trace_indexes = sorted(set(trace_ind for trace_ind in batch_style_commands))
 
         all_props = sorted(
-            set(                
+            set(
                 prop
                 for trace_style in self._batch_trace_edits.values()
-                for prop in trace_style                
+                for prop in trace_style
             )
         )
 

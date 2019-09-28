@@ -296,7 +296,7 @@ class Dashboard(dict):
         all_nodes.sort(key=lambda x: x[1])
 
         # remove path 'second' as it's always an empty box
-        all_paths =  [node[1] for node in all_nodes]
+        all_paths = [node[1] for node in all_nodes]
         path_second = ("second",)
         if path_second in all_paths:
             all_paths.remove(path_second)

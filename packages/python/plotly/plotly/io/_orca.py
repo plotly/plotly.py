@@ -1577,9 +1577,9 @@ with the following error:
 Try setting the `validate` argument to True to check for errors in the
 figure specification"""
         elif response.status_code == 525:
-            any_mapbox = any(                
+            any_mapbox = any(
                 trace.get("type", None) == "scattermapbox"
-                for trace in fig_dict.get("data", [])                
+                for trace in fig_dict.get("data", [])
             )
             if any_mapbox and config.mapbox_access_token is None:
                 err_message += """

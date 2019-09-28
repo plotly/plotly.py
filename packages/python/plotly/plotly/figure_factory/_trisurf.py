@@ -131,8 +131,13 @@ def trisurf(
         # apply user inputted function to calculate
         # custom coloring for triangle vertices
         mean_dists = np.asarray(
-                [np.mean([color_func(vertex[0], vertex[1], vertex[2])for vertex in triangle]) for triangle in tri_vertices]
-            )
+            [
+                np.mean(
+                    [color_func(vertex[0], vertex[1], vertex[2]) for vertex in triangle]
+                )
+                for triangle in tri_vertices
+            ]
+        )
     # Check if facecolors are already strings and can be skipped
     if isinstance(mean_dists[0], str):
         facecolor = mean_dists
