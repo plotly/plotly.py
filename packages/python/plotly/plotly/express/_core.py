@@ -928,8 +928,8 @@ def build_dataframe(args, attrables, array_attrables):
                         if is_index:
                             keep_name = df_provided and argument is df_input.index
                         else:
-                            keep_name = col_name in df_input and argument.equals(
-                                df_input[col_name]
+                            keep_name = (
+                                col_name in df_input and argument is df_input[col_name]
                             )
                         col_name = (
                             col_name
