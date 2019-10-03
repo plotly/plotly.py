@@ -92739,3 +92739,5 @@ from ._deprecations import (
     Trace,
     Histogram2dcontour,
 )
+
+__all__ = ["Scatter", "Bar"]
