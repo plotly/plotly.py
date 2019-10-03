@@ -974,18 +974,14 @@ class Presentation(dict):
                 raise _plotly_utils.exceptions.PlotlyError(CODE_ENV_ERROR)
 
             # find code blocks
-            code_indices = []
-            code_blocks = []
+            code_indices = [
+                j for j in range(len(slide)) if slide[j : j + wdw_size] == "```"
+            ]
+            code_blocks = [
+                slide[code_indices[2 * k] : code_indices[(2 * k) + 1]]
+                for k in range(int(len(code_indices) / 2))
+            ]
             wdw_size = len("```")
-            for j in range(len(slide)):
-                if slide[j : j + wdw_size] == "```":
-                    code_indices.append(j)
-
-            for k in range(int(len(code_indices) / 2)):
-                code_blocks.append(
-                    slide[code_indices[2 * k] : code_indices[(2 * k) + 1]]
-                )
-
             lang_and_code_tuples = []
             for code_block in code_blocks:
                 # validate code blocks

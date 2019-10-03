@@ -292,9 +292,7 @@ class Grid(MutableSequence):
                 break
 
         if column_id is None:
-            col_names = []
-            for column in self._columns:
-                col_names.append(column.name)
+            col_names = [column.name for column in self._columns]
             raise _plotly_utils.exceptions.PlotlyError(
                 "Whoops, that column name doesn't match any of the column "
                 "names in your grid. You must pick from {cols}".format(cols=col_names)

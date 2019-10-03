@@ -1659,15 +1659,12 @@ class dashboard_ops:
 
     @classmethod
     def _get_all_dashboards(cls):
-        dashboards = []
         res = v2.dashboards.list().json()
-
-        for dashboard in res["results"]:
-            if not dashboard["deleted"]:
-                dashboards.append(dashboard)
+        dashboards = [
+            dashboard for dashboard in res["results"] if not dashboard["deleted"]
+        ]
         while res["next"]:
             res = v2.utils.request("get", res["next"]).json()
-
             for dashboard in res["results"]:
                 if not dashboard["deleted"]:
                     dashboards.append(dashboard)
