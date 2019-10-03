@@ -75,7 +75,7 @@ def validate_response(response):
     if isinstance(parsed_content, dict):
         errors = parsed_content.get("errors", [])
         messages = [error.get("message") for error in errors]
-        message = "\n".join(msg for msg in messages if msg)
+        message = "\n".join([msg for msg in messages if msg])
     if not message:
         message = content if content else "No Content"
 
