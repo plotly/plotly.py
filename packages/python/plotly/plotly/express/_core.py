@@ -5,7 +5,7 @@ from collections import namedtuple, OrderedDict
 from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
 import math
-import pandas
+import pandas as pd
 import numpy as np
 
 from plotly.subplots import (
@@ -754,6 +754,209 @@ def apply_default_cascade(args):
         args["marginal_x"] = None
 
 
+def _check_name_not_reserved(field_name, reserved_names):
+    if field_name not in reserved_names:
+        return field_name
+    else:
+        raise NameError(
+            "A name conflict was encountered for argument %s. "
+            "A column with name %s is already used." % (field_name, field_name)
+        )
+
+
+def _get_reserved_col_names(args, attrables, array_attrables):
+    """
+    This function builds a list of columns of the data_frame argument used
+    as arguments, either as str/int arguments or given as columns
+    (pandas series type).
+    """
+    df = args["data_frame"]
+    reserved_names = set()
+    for field in args:
+        if field not in attrables:
+            continue
+        names = args[field] if field in array_attrables else [args[field]]
+        if names is None:
+            continue
+        for arg in names:
+            if arg is None:
+                continue
+            elif isinstance(arg, str):  # no need to add ints since kw arg are not ints
+                reserved_names.add(arg)
+            elif isinstance(arg, pd.Series):
+                arg_name = arg.name
+                if arg_name and hasattr(df, arg_name):
+                    in_df = arg is df[arg_name]
+                    if in_df:
+                        reserved_names.add(arg_name)
+
+    return reserved_names
+
+
+def build_dataframe(args, attrables, array_attrables):
+    """
+    Constructs a dataframe and modifies `args` in-place.
+
+    The argument values in `args` can be either strings corresponding to
+    existing columns of a dataframe, or data arrays (lists, numpy arrays,
+    pandas columns, series).
+
+    Parameters
+    ----------
+    args : OrderedDict
+        arguments passed to the px function and subsequently modified
+    attrables : list
+        list of keys into `args`, all of whose corresponding values are
+        converted into columns of a dataframe.
+    array_attrables : list
+        argument names corresponding to iterables, such as `hover_data`, ...
+    """
+    for field in args:
+        if field in array_attrables and args[field] is not None:
+            args[field] = (
+                dict(args[field])
+                if isinstance(args[field], dict)
+                else list(args[field])
+            )
+    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
+    df_provided = args["data_frame"] is not None
+    if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
+        args["data_frame"] = pd.DataFrame(args["data_frame"])
+    df_input = args["data_frame"]
+
+    # We start from an empty DataFrame
+    df_output = pd.DataFrame()
+
+    # Initialize set of column names
+    # These are reserved names
+    if df_provided:
+        reserved_names = _get_reserved_col_names(args, attrables, array_attrables)
+    else:
+        reserved_names = set()
+
+    # Case of functions with a "dimensions" kw: scatter_matrix, parcats, parcoords
+    if "dimensions" in args and args["dimensions"] is None:
+        if not df_provided:
+            raise ValueError(
+                "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
+            )
+        else:
+            df_output[df_input.columns] = df_input[df_input.columns]
+
+    # Loop over possible arguments
+    for field_name in attrables:
+        # Massaging variables
+        argument_list = (
+            [args.get(field_name)]
+            if field_name not in array_attrables
+            else args.get(field_name)
+        )
+        # argument not specified, continue
+        if argument_list is None or argument_list is [None]:
+            continue
+        # Argument name: field_name if the argument is not a list
+        # Else we give names like ["hover_data_0, hover_data_1"] etc.
+        field_list = (
+            [field_name]
+            if field_name not in array_attrables
+            else [field_name + "_" + str(i) for i in range(len(argument_list))]
+        )
+        # argument_list and field_list ready, iterate over them
+        # Core of the loop starts here
+        for i, (argument, field) in enumerate(zip(argument_list, field_list)):
+            length = len(df_output)
+            if argument is None:
+                continue
+            # Case of multiindex
+            if isinstance(argument, pd.MultiIndex):
+                raise TypeError(
+                    "Argument '%s' is a pandas MultiIndex. "
+                    "pandas MultiIndex is not supported by plotly express "
+                    "at the moment." % field
+                )
+            ## ----------------- argument is a col name ----------------------
+            if isinstance(argument, str) or isinstance(
+                argument, int
+            ):  # just a column name given as str or int
+                if not df_provided:
+                    raise ValueError(
+                        "String or int arguments are only possible when a "
+                        "DataFrame or an array is provided in the `data_frame` "
+                        "argument. No DataFrame was provided, but argument "
+                        "'%s' is of type str or int." % field
+                    )
+                # Check validity of column name
+                if argument not in df_input.columns:
+                    err_msg = (
+                        "Value of '%s' is not the name of a column in 'data_frame'. "
+                        "Expected one of %s but received: %s"
+                        % (field, str(list(df_input.columns)), argument)
+                    )
+                    if argument == "index":
+                        err_msg += (
+                            "\n To use the index, pass it in directly as `df.index`."
+                        )
+                    raise ValueError(err_msg)
+                if length and len(df_input[argument]) != length:
+                    raise ValueError(
+                        "All arguments should have the same length. "
+                        "The length of column argument `df[%s]` is %d, whereas the "
+                        "length of previous arguments %s is %d"
+                        % (
+                            field,
+                            len(df_input[argument]),
+                            str(list(df_output.columns)),
+                            length,
+                        )
+                    )
+                col_name = str(argument)
+                df_output[col_name] = df_input[argument]
+            # ----------------- argument is a column / array / list.... -------
+            else:
+                is_index = isinstance(argument, pd.RangeIndex)
+                # First pandas
+                # pandas series have a name but it's None
+                if (
+                    hasattr(argument, "name") and argument.name is not None
+                ) or is_index:
+                    col_name = argument.name  # pandas df
+                    if col_name is None and is_index:
+                        col_name = "index"
+                    if not df_provided:
+                        col_name = field
+                    else:
+                        if is_index:
+                            keep_name = df_provided and argument is df_input.index
+                        else:
+                            keep_name = (
+                                col_name in df_input and argument is df_input[col_name]
+                            )
+                        col_name = (
+                            col_name
+                            if keep_name
+                            else _check_name_not_reserved(field, reserved_names)
+                        )
+                else:  # numpy array, list...
+                    col_name = _check_name_not_reserved(field, reserved_names)
+                if length and len(argument) != length:
+                    raise ValueError(
+                        "All arguments should have the same length. "
+                        "The length of argument `%s` is %d, whereas the "
+                        "length of previous arguments %s is %d"
+                        % (field, len(argument), str(list(df_output.columns)), length)
+                    )
+                df_output[str(col_name)] = argument
+
+            # Finally, update argument with column name now that column exists
+            if field_name not in array_attrables:
+                args[field_name] = str(col_name)
+            else:
+                args[field_name][i] = str(col_name)
+
+    args["data_frame"] = df_output
+    return args
+
+
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
@@ -765,28 +968,13 @@ def infer_config(args, constructor, trace_patch):
     )
     array_attrables = ["dimensions", "custom_data", "hover_data"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
+    all_attrables = attrables + group_attrables + ["color"]
+    group_attrs = ["symbol", "line_dash"]
+    for group_attr in group_attrs:
+        if group_attr in args:
+            all_attrables += [group_attr]
 
-    # Validate that the strings provided as attribute values reference columns
-    # in the provided data_frame
-    df_columns = args["data_frame"].columns
-
-    for attr in attrables + group_attrables + ["color"]:
-        if attr in args and args[attr] is not None:
-            maybe_col_list = [args[attr]] if attr not in array_attrables else args[attr]
-            for maybe_col in maybe_col_list:
-                try:
-                    in_cols = maybe_col in df_columns
-                except TypeError:
-                    in_cols = False
-                if not in_cols:
-                    value_str = (
-                        "Element of value" if attr in array_attrables else "Value"
-                    )
-                    raise ValueError(
-                        "%s of '%s' is not the name of a column in 'data_frame'. "
-                        "Expected one of %s but received: %s"
-                        % (value_str, attr, str(list(df_columns)), str(maybe_col))
-                    )
+    args = build_dataframe(args, all_attrables, array_attrables)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
@@ -864,7 +1052,7 @@ def infer_config(args, constructor, trace_patch):
 
     # Create trace specs
     trace_specs = make_trace_spec(args, constructor, attrs, trace_patch)
-    return trace_specs, grouped_mappings, sizeref, show_colorbar
+    return args, trace_specs, grouped_mappings, sizeref, show_colorbar
 
 
 def get_orderings(args, grouper, grouped):
@@ -902,7 +1090,7 @@ def get_orderings(args, grouper, grouped):
 def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     apply_default_cascade(args)
 
-    trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
+    args, trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
@@ -1095,7 +1283,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     fig.layout.update(layout_patch)
     fig.frames = frame_list if len(frames) > 1 else []
 
-    fig._px_trendlines = pandas.DataFrame(trendline_rows)
+    fig._px_trendlines = pd.DataFrame(trendline_rows)
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
