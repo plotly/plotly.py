@@ -973,6 +973,7 @@ class Presentation(dict):
             if slide.count("```") % 2 != 0:
                 raise _plotly_utils.exceptions.PlotlyError(CODE_ENV_ERROR)
 
+            wdw_size = len("```")
             # find code blocks
             code_indices = [
                 j for j in range(len(slide)) if slide[j : j + wdw_size] == "```"
@@ -981,7 +982,6 @@ class Presentation(dict):
                 slide[code_indices[2 * k] : code_indices[(2 * k) + 1]]
                 for k in range(int(len(code_indices) / 2))
             ]
-            wdw_size = len("```")
             lang_and_code_tuples = []
             for code_block in code_blocks:
                 # validate code blocks
