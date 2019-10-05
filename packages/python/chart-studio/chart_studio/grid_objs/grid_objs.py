@@ -200,22 +200,17 @@ class Grid(MutableSequence):
                         )
             # collect and sort all orders in case orders do not start
             # at zero or there are jump discontinuities between them
-            all_orders = [
-                columns_or_json["cols"][column_name]["order"]
-                for column_name in columns_or_json["cols"].keys()
-            ]
+            all_orders = [value["order"] for value in columns_or_json["cols"].values()]
             all_orders.sort()
 
             # put columns in order in a list
             ordered_columns = []
             for order in all_orders:
-                for column_name in columns_or_json["cols"].keys():
-                    if columns_or_json["cols"][column_name]["order"] == order:
+                for value in columns_or_json["cols"].values():
+                    if value["order"] == order:
                         break
 
-                ordered_columns.append(
-                    Column(columns_or_json["cols"][column_name]["data"], column_name)
-                )
+                ordered_columns.append(Column(value["data"], column_name))
             self._columns = ordered_columns
 
             # fill in column_ids
