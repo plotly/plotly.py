@@ -978,6 +978,49 @@ class BaseFigure(object):
 
                 yield self.layout[k]
 
+    def _select_annotations_like(
+            self, property, selector=None, row=None, col=None, secondary_y=None
+    ):
+        xref_to_col = {}
+        yref_to_row = {}
+        yref_to_secondary_y = {}
+        if row is not None or col is not None or secondary_y is not None:
+            grid_ref = self._validate_get_grid_ref()
+            for r, subplot_row in enumerate(grid_ref):
+                for c, subplot_refs in enumerate(subplot_row):
+                    if not subplot_refs:
+                        continue
+
+                    for i, subplot_ref in enumerate(subplot_refs):
+                        if subplot_ref.subplot_type == 'xy':
+                            is_secondary_y = i == 1
+                            xaxis, yaxis = subplot_ref.layout_keys[0]
+                            xref = xaxis.replace('axis', '')
+                            yref = yaxis.replace('axis', '')
+                            xref_to_col[xref] = c + 1
+                            yref_to_row[yref] = r + 1
+                            yref_to_secondary_y[yref] = is_secondary_y
+
+        for obj in self.layout[property]:
+            # Filter by row
+            if col is not None and xref_to_col.get(obj.xref, None) != col:
+                continue
+
+            # Filter by col
+            if row is not None and yref_to_row.get(obj.yref, None) != row:
+                continue
+
+            # Filter by secondary y
+            if (secondary_y is not None and
+                    yref_to_secondary_y.get(obj.yref, None) != secondary_y):
+                continue
+
+            # Filter by selector
+            if not self._selector_matches(self.layout[k], selector):
+                continue
+
+            yield obj
+
     # Restyle
     # -------
     def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
