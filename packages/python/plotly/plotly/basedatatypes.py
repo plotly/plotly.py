@@ -979,8 +979,12 @@ class BaseFigure(object):
                 yield self.layout[k]
 
     def _select_annotations_like(
-            self, property, selector=None, row=None, col=None, secondary_y=None
+        self, property, selector=None, row=None, col=None, secondary_y=None
     ):
+        """
+        Helper to select annotation-like elements from a layout object array.
+        Compatible with layout.annotations, layout.shapes, and layout.images
+        """
         xref_to_col = {}
         yref_to_row = {}
         yref_to_secondary_y = {}
@@ -992,34 +996,240 @@ class BaseFigure(object):
                         continue
 
                     for i, subplot_ref in enumerate(subplot_refs):
-                        if subplot_ref.subplot_type == 'xy':
+                        if subplot_ref.subplot_type == "xy":
                             is_secondary_y = i == 1
-                            xaxis, yaxis = subplot_ref.layout_keys[0]
-                            xref = xaxis.replace('axis', '')
-                            yref = yaxis.replace('axis', '')
+                            xaxis, yaxis = subplot_ref.layout_keys
+                            xref = xaxis.replace("axis", "")
+                            yref = yaxis.replace("axis", "")
                             xref_to_col[xref] = c + 1
                             yref_to_row[yref] = r + 1
                             yref_to_secondary_y[yref] = is_secondary_y
 
         for obj in self.layout[property]:
             # Filter by row
-            if col is not None and xref_to_col.get(obj.xref, None) != col:
-                continue
+            if col is not None:
+                if col == "paper" and obj.xref != "paper":
+                    continue
+                elif col != "paper" and xref_to_col.get(obj.xref, None) != col:
+                    continue
 
             # Filter by col
-            if row is not None and yref_to_row.get(obj.yref, None) != row:
-                continue
+            if row is not None:
+                if row == "paper" and obj.yref != "paper":
+                    continue
+                elif row != "paper" and yref_to_row.get(obj.yref, None) != row:
+                    continue
 
             # Filter by secondary y
-            if (secondary_y is not None and
-                    yref_to_secondary_y.get(obj.yref, None) != secondary_y):
+            if (
+                secondary_y is not None
+                and yref_to_secondary_y.get(obj.yref, None) != secondary_y
+            ):
                 continue
 
             # Filter by selector
-            if not self._selector_matches(self.layout[k], selector):
+            if not self._selector_matches(obj, selector):
                 continue
 
             yield obj
+
+    def select_annotations(self, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Select annotations from a particular subplot cell and/or annotations
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all annotations are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of annotations to select.
+            To select annotations by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            annotation that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all annotations are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select annotations associated with the secondary
+              y-axis of the subplot.
+            * If False, only select annotations associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter annotations based on secondary
+              y-axis.
+
+            To select annotations by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the annotations that satisfy
+            all of the specified selection criteria
+        """
+        return self._select_annotations_like(
+            "annotations", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def _for_each_annotation_like(
+        self, property, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
+        """
+        Helper to perform for-each on selected annotation-like elements from a
+        layout object array.
+        Compatible with layout.annotations, layout.shapes, and layout.images
+        """
+        for obj in self._select_annotations_like(
+            property=property,
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def for_each_annotation(self, fn, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Apply a function to all annotations that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single annotation object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all annotations are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of annotations to select.
+            To select annotations by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            annotations that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all annotations are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select annotations associated with the secondary
+              y-axis of the subplot.
+            * If False, only select annotations associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter annotations based on secondary
+              y-axis.
+
+            To select annotations by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            property='annotations',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def _update_annotations_like(
+        self,
+        property,
+        patch,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        """
+        Helper to update selected annotation-like elements from a layout object
+        array.
+        Compatible with layout.annotations, layout.shapes, and layout.images
+        """
+        for obj in self._select_annotations_like(
+            property=property,
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def update_annotations(
+        self,
+        patch,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        """
+        Perform a property update operation on all annotations that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all annotations that
+            satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all annotations are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of annotations to select.
+            To select annotations by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            annotation that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all annotations are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select annotations associated with the secondary
+              y-axis of the subplot.
+            * If False, only select annotations associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter annotations based on secondary
+              y-axis.
+
+            To select annotations by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected annotation. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            property='annotations',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
 
     # Restyle
     # -------
