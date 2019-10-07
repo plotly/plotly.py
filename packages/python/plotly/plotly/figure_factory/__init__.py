@@ -30,3 +30,22 @@ from plotly.figure_factory._violin import create_violin
 
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
+
+__all__ = [
+    "create_2d_density",
+    "create_annotated_heatmap",
+    "create_bullet",
+    "create_candlestick",
+    "create_dendrogram",
+    "create_distplot",
+    "create_facet_grid",
+    "create_gantt",
+    "create_ohlc",
+    "create_quiver",
+    "create_scatterplotmatrix",
+    "create_streamline",
+    "create_table",
+    "create_ternary_contour",
+    "create_trisurf",
+    "create_violin",
+]
