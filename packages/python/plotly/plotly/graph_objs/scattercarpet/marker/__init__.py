@@ -2728,4 +2728,6 @@ an instance of plotly.graph_objs.scattercarpet.marker.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "Gradient", "Line", "colorbar"]
+
 from plotly.graph_objs.scattercarpet.marker import colorbar

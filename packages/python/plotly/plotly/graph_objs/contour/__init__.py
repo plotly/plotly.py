@@ -3225,6 +3225,17 @@ an instance of plotly.graph_objs.contour.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Contours",
+    "Hoverlabel",
+    "Line",
+    "Stream",
+    "colorbar",
+    "contours",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.contour import hoverlabel
 from plotly.graph_objs.contour import contours
 from plotly.graph_objs.contour import colorbar

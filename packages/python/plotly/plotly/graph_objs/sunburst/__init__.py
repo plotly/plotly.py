@@ -2066,5 +2066,18 @@ an instance of plotly.graph_objs.sunburst.Domain"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Domain",
+    "Hoverlabel",
+    "Insidetextfont",
+    "Leaf",
+    "Marker",
+    "Outsidetextfont",
+    "Stream",
+    "Textfont",
+    "hoverlabel",
+    "marker",
+]
+
 from plotly.graph_objs.sunburst import marker
 from plotly.graph_objs.sunburst import hoverlabel

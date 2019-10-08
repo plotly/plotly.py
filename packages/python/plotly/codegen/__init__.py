@@ -176,19 +176,22 @@ def perform_codegen():
     # ### Data (traces) validator ###
     write_data_validator_py(outdir, base_traces_node)
 
+    # Alls
+    # ----
+    alls = {}
+
     # Write out datatypes
     # -------------------
-    # ### Layout ###
-    for node in compound_layout_nodes:
+    for node in all_compound_nodes:
         write_datatype_py(outdir, node)
-
-    # ### Trace ###
-    for node in compound_trace_nodes:
-        write_datatype_py(outdir, node)
-
-    # ### Frames ###
-    for node in compound_frame_nodes:
-        write_datatype_py(outdir, node)
+        alls.setdefault(node.path_parts, [])
+        alls[node.path_parts].extend(
+            c.name_datatype_class for c in node.child_compound_datatypes
+        )
+        if node.parent_path_parts == ():
+            # Add top-level classes to alls
+            alls.setdefault((), [])
+            alls[node.parent_path_parts].append(node.name_datatype_class)
 
     # ### Deprecated ###
     # These are deprecated legacy datatypes like graph_objs.Marker
@@ -222,6 +225,7 @@ def perform_codegen():
             path_to_datatype_import_info.setdefault(key, []).append(
                 (f"plotly.graph_objs{node.parent_dotpath_str}", node.name_undercase)
             )
+            alls[node.parent_path_parts].append(node.name_undercase)
 
     # ### Write plotly/graph_objs/graph_objs.py ###
     # This if for backward compatibility. It just imports everything from
@@ -231,8 +235,18 @@ def perform_codegen():
     # ### Add Figure and FigureWidget ###
     root_datatype_imports = path_to_datatype_import_info[()]
     root_datatype_imports.append(("._figure", "Figure"))
+    alls[()].append("Figure")
 
-    optional_figure_widget_import = """
+    # ### Add deprecations ###
+    root_datatype_imports.append(("._deprecations", DEPRECATED_DATATYPES.keys()))
+    alls[()].extend(DEPRECATED_DATATYPES.keys())
+
+    # Sort alls
+    for k, v in alls.items():
+        alls[k] = list(sorted(v))
+
+    optional_figure_widget_import = f"""
+__all__ = {alls[()]}
 try:
     import ipywidgets
     from distutils.version import LooseVersion
@@ -240,22 +254,36 @@ try:
         from ._figurewidget import FigureWidget
     del LooseVersion
     del ipywidgets
+    __all__.append("FigureWidget")
 except ImportError:
     pass
 """
     root_datatype_imports.append(optional_figure_widget_import)
 
-    # ### Add deprecations ###
-    root_datatype_imports.append(("._deprecations", DEPRECATED_DATATYPES.keys()))
+    # ### __all__ ###
+    for path_parts, class_names in alls.items():
+        if path_parts and class_names:
+            filepath = opath.join(outdir, "graph_objs", *path_parts, "__init__.py")
+            with open(filepath, "at") as f:
+                f.write(f"\n__all__ = {class_names}")
 
     # ### Output datatype __init__.py files ###
     graph_objs_pkg = opath.join(outdir, "graph_objs")
     for path_parts, import_pairs in path_to_datatype_import_info.items():
         write_init_py(graph_objs_pkg, path_parts, import_pairs)
 
+    # ### Output graph_objects.py alias
+    graph_objects_path = opath.join(outdir, "graph_objects.py")
+    with open(graph_objects_path, "wt") as f:
+        f.write(f"""\
+from __future__ import absolute_import
+from plotly.graph_objs import *
+__all__ = {alls[()]}""")
+
     # ### Run black code formatter on output directories ###
     subprocess.call(["black", "--target-version=py27", validators_pkgdir])
     subprocess.call(["black", "--target-version=py27", graph_objs_pkgdir])
+    subprocess.call(["black", "--target-version=py27", graph_objects_path])
 
 
 if __name__ == "__main__":

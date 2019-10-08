@@ -1909,6 +1909,18 @@ an instance of plotly.graph_objs.indicator.gauge.Axis"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Axis",
+    "Bar",
+    "Step",
+    "Step",
+    "Threshold",
+    "axis",
+    "bar",
+    "step",
+    "threshold",
+]
+
 from plotly.graph_objs.indicator.gauge import threshold
 from plotly.graph_objs.indicator.gauge import step
 from plotly.graph_objs.indicator.gauge import bar

@@ -1963,6 +1963,17 @@ an instance of plotly.graph_objs.table.Cells"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Cells",
+    "Domain",
+    "Header",
+    "Hoverlabel",
+    "Stream",
+    "cells",
+    "header",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.table import hoverlabel
 from plotly.graph_objs.table import header
 from plotly.graph_objs.table import cells

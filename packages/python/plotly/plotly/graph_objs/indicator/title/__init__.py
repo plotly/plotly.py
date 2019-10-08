@@ -223,3 +223,6 @@ an instance of plotly.graph_objs.indicator.title.Font"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Font"]

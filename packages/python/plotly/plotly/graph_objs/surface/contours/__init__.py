@@ -1513,6 +1513,8 @@ an instance of plotly.graph_objs.surface.contours.X"""
         self._skip_invalid = False
 
 
+__all__ = ["X", "Y", "Z", "x", "y", "z"]
+
 from plotly.graph_objs.surface.contours import z
 from plotly.graph_objs.surface.contours import y
 from plotly.graph_objs.surface.contours import x

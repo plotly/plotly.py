@@ -1123,6 +1123,17 @@ an instance of plotly.graph_objs.candlestick.Decreasing"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Decreasing",
+    "Hoverlabel",
+    "Increasing",
+    "Line",
+    "Stream",
+    "decreasing",
+    "hoverlabel",
+    "increasing",
+]
+
 from plotly.graph_objs.candlestick import increasing
 from plotly.graph_objs.candlestick import hoverlabel
 from plotly.graph_objs.candlestick import decreasing

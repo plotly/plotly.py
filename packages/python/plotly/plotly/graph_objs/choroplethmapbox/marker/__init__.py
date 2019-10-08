@@ -235,3 +235,6 @@ an instance of plotly.graph_objs.choroplethmapbox.marker.Line"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Line"]

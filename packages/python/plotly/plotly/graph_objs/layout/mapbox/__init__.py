@@ -1202,4 +1202,6 @@ an instance of plotly.graph_objs.layout.mapbox.Center"""
         self._skip_invalid = False
 
 
+__all__ = ["Center", "Domain", "Layer", "Layer", "layer"]
+
 from plotly.graph_objs.layout.mapbox import layer

@@ -2476,5 +2476,7 @@ an instance of plotly.graph_objs.densitymapbox.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "Hoverlabel", "Stream", "colorbar", "hoverlabel"]
+
 from plotly.graph_objs.densitymapbox import hoverlabel
 from plotly.graph_objs.densitymapbox import colorbar

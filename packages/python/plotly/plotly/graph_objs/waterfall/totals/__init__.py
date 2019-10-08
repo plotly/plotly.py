@@ -181,4 +181,6 @@ an instance of plotly.graph_objs.waterfall.totals.Marker"""
         self._skip_invalid = False
 
 
+__all__ = ["Marker", "marker"]
+
 from plotly.graph_objs.waterfall.totals import marker

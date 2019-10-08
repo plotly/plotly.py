@@ -1056,4 +1056,6 @@ an instance of plotly.graph_objs.area.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = ["Hoverlabel", "Marker", "Stream", "hoverlabel"]
+
 from plotly.graph_objs.area import hoverlabel

@@ -3040,5 +3040,16 @@ an instance of plotly.graph_objs.histogram2d.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Hoverlabel",
+    "Marker",
+    "Stream",
+    "XBins",
+    "YBins",
+    "colorbar",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.histogram2d import hoverlabel
 from plotly.graph_objs.histogram2d import colorbar

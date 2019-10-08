@@ -1858,4 +1858,6 @@ an instance of plotly.graph_objs.parcats.line.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "colorbar"]
+
 from plotly.graph_objs.parcats.line import colorbar
