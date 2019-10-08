@@ -275,10 +275,12 @@ except ImportError:
     # ### Output graph_objects.py alias
     graph_objects_path = opath.join(outdir, "graph_objects.py")
     with open(graph_objects_path, "wt") as f:
-        f.write(f"""\
+        f.write(
+            f"""\
 from __future__ import absolute_import
 from plotly.graph_objs import *
-__all__ = {alls[()]}""")
+__all__ = {alls[()]}"""
+        )
 
     # ### Run black code formatter on output directories ###
     subprocess.call(["black", "--target-version=py27", validators_pkgdir])
