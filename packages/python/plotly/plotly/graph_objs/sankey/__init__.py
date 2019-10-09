@@ -2561,6 +2561,18 @@ an instance of plotly.graph_objs.sankey.Domain"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Domain",
+    "Hoverlabel",
+    "Link",
+    "Node",
+    "Stream",
+    "Textfont",
+    "hoverlabel",
+    "link",
+    "node",
+]
+
 from plotly.graph_objs.sankey import node
 from plotly.graph_objs.sankey import link
 from plotly.graph_objs.sankey import hoverlabel

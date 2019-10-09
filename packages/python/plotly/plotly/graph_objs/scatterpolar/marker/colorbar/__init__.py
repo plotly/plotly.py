@@ -720,4 +720,6 @@ an instance of plotly.graph_objs.scatterpolar.marker.colorbar.Tickfont"""
         self._skip_invalid = False
 
 
+__all__ = ["Tickfont", "Tickformatstop", "Tickformatstop", "Title", "title"]
+
 from plotly.graph_objs.scatterpolar.marker.colorbar import title

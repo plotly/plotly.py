@@ -2807,6 +2807,19 @@ an instance of plotly.graph_objs.funnel.Connector"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Connector",
+    "Hoverlabel",
+    "Insidetextfont",
+    "Marker",
+    "Outsidetextfont",
+    "Stream",
+    "Textfont",
+    "connector",
+    "hoverlabel",
+    "marker",
+]
+
 from plotly.graph_objs.funnel import marker
 from plotly.graph_objs.funnel import hoverlabel
 from plotly.graph_objs.funnel import connector

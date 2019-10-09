@@ -176,4 +176,6 @@ an instance of plotly.graph_objs.waterfall.decreasing.Marker"""
         self._skip_invalid = False
 
 
+__all__ = ["Marker", "marker"]
+
 from plotly.graph_objs.waterfall.decreasing import marker

@@ -4287,5 +4287,7 @@ an instance of plotly.graph_objs.layout.polar.AngularAxis"""
         self._skip_invalid = False
 
 
+__all__ = ["AngularAxis", "Domain", "RadialAxis", "angularaxis", "radialaxis"]
+
 from plotly.graph_objs.layout.polar import radialaxis
 from plotly.graph_objs.layout.polar import angularaxis

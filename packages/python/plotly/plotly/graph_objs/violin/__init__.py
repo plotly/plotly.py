@@ -1887,6 +1887,22 @@ an instance of plotly.graph_objs.violin.Box"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Box",
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Meanline",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "box",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.violin import unselected
 from plotly.graph_objs.violin import selected
 from plotly.graph_objs.violin import marker

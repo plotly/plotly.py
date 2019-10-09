@@ -1856,6 +1856,19 @@ an instance of plotly.graph_objs.funnelarea.Domain"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Domain",
+    "Hoverlabel",
+    "Insidetextfont",
+    "Marker",
+    "Stream",
+    "Textfont",
+    "Title",
+    "hoverlabel",
+    "marker",
+    "title",
+]
+
 from plotly.graph_objs.funnelarea import title
 from plotly.graph_objs.funnelarea import marker
 from plotly.graph_objs.funnelarea import hoverlabel

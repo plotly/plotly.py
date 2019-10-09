@@ -501,4 +501,6 @@ an instance of plotly.graph_objs.layout.annotation.Font"""
         self._skip_invalid = False
 
 
+__all__ = ["Font", "Hoverlabel", "hoverlabel"]
+
 from plotly.graph_objs.layout.annotation import hoverlabel

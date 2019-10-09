@@ -9477,6 +9477,22 @@ an instance of plotly.graph_objs.layout.scene.Annotation"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Annotation",
+    "Annotation",
+    "Aspectratio",
+    "Camera",
+    "Domain",
+    "XAxis",
+    "YAxis",
+    "ZAxis",
+    "annotation",
+    "camera",
+    "xaxis",
+    "yaxis",
+    "zaxis",
+]
+
 from plotly.graph_objs.layout.scene import zaxis
 from plotly.graph_objs.layout.scene import yaxis
 from plotly.graph_objs.layout.scene import xaxis

@@ -4112,6 +4112,22 @@ an instance of plotly.graph_objs.scatter.ErrorX"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ErrorX",
+    "ErrorY",
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Textfont",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.scatter import unselected
 from plotly.graph_objs.scatter import selected
 from plotly.graph_objs.scatter import marker

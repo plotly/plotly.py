@@ -727,4 +727,6 @@ an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
         self._skip_invalid = False
 
 
+__all__ = ["Circle", "Fill", "Line", "Symbol", "symbol"]
+
 from plotly.graph_objs.layout.mapbox.layer import symbol

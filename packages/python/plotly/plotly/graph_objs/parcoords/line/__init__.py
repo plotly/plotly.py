@@ -1859,4 +1859,6 @@ an instance of plotly.graph_objs.parcoords.line.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "colorbar"]
+
 from plotly.graph_objs.parcoords.line import colorbar

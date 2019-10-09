@@ -561,3 +561,6 @@ an instance of plotly.graph_objs.indicator.delta.Decreasing"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Decreasing", "Font", "Increasing"]

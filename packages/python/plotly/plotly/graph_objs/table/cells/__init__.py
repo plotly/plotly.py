@@ -707,3 +707,6 @@ an instance of plotly.graph_objs.table.cells.Fill"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Fill", "Font", "Line"]

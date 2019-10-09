@@ -176,4 +176,6 @@ an instance of plotly.graph_objs.waterfall.increasing.Marker"""
         self._skip_invalid = False
 
 
+__all__ = ["Marker", "marker"]
+
 from plotly.graph_objs.waterfall.increasing import marker

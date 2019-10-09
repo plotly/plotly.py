@@ -1567,4 +1567,6 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._skip_invalid = False
 
 
+__all__ = ["Data", "Layout", "data"]
+
 from plotly.graph_objs.layout.template import data

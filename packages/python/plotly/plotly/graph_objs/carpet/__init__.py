@@ -5308,6 +5308,17 @@ an instance of plotly.graph_objs.carpet.Aaxis"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Aaxis",
+    "Baxis",
+    "Font",
+    "Hoverlabel",
+    "Stream",
+    "aaxis",
+    "baxis",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.carpet import hoverlabel
 from plotly.graph_objs.carpet import baxis
 from plotly.graph_objs.carpet import aaxis

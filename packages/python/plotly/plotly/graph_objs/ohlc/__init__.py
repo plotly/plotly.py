@@ -1030,6 +1030,17 @@ an instance of plotly.graph_objs.ohlc.Decreasing"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Decreasing",
+    "Hoverlabel",
+    "Increasing",
+    "Line",
+    "Stream",
+    "decreasing",
+    "hoverlabel",
+    "increasing",
+]
+
 from plotly.graph_objs.ohlc import increasing
 from plotly.graph_objs.ohlc import hoverlabel
 from plotly.graph_objs.ohlc import decreasing

@@ -158,3 +158,6 @@ an instance of plotly.graph_objs.layout.geo.projection.Rotation"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Rotation"]

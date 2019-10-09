@@ -3142,6 +3142,18 @@ an instance of plotly.graph_objs.surface.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Contours",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Stream",
+    "colorbar",
+    "contours",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.surface import hoverlabel
 from plotly.graph_objs.surface import contours
 from plotly.graph_objs.surface import colorbar

@@ -4060,6 +4060,23 @@ an instance of plotly.graph_objs.bar.ErrorX"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ErrorX",
+    "ErrorY",
+    "Hoverlabel",
+    "Insidetextfont",
+    "Marker",
+    "Outsidetextfont",
+    "Selected",
+    "Stream",
+    "Textfont",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.bar import unselected
 from plotly.graph_objs.bar import selected
 from plotly.graph_objs.bar import marker

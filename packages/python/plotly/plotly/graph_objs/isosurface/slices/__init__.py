@@ -626,3 +626,6 @@ an instance of plotly.graph_objs.isosurface.slices.X"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["X", "Y", "Z"]

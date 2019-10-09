@@ -566,3 +566,6 @@ an instance of plotly.graph_objs.layout.scene.camera.Center"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Center", "Eye", "Projection", "Up"]

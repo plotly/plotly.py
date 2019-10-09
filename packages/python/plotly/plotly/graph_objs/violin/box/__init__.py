@@ -163,3 +163,6 @@ an instance of plotly.graph_objs.violin.box.Line"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Line"]

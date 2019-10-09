@@ -1931,6 +1931,18 @@ an instance of plotly.graph_objs.barpolar.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Hoverlabel",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.barpolar import unselected
 from plotly.graph_objs.barpolar import selected
 from plotly.graph_objs.barpolar import marker

@@ -2181,4 +2181,15 @@ an instance of plotly.graph_objs.parcats.Dimension"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Dimension",
+    "Dimension",
+    "Domain",
+    "Labelfont",
+    "Line",
+    "Stream",
+    "Tickfont",
+    "line",
+]
+
 from plotly.graph_objs.parcats import line

@@ -446,3 +446,6 @@ an instance of plotly.graph_objs.isosurface.caps.X"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["X", "Y", "Z"]

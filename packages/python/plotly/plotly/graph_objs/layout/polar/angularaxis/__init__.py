@@ -512,3 +512,6 @@ an instance of plotly.graph_objs.layout.polar.angularaxis.Tickfont"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Tickfont", "Tickformatstop", "Tickformatstop"]

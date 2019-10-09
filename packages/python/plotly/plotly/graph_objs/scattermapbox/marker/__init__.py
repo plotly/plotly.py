@@ -1863,4 +1863,6 @@ an instance of plotly.graph_objs.scattermapbox.marker.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "colorbar"]
+
 from plotly.graph_objs.scattermapbox.marker import colorbar

@@ -3137,5 +3137,16 @@ an instance of plotly.graph_objs.mesh3d.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Contour",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Stream",
+    "colorbar",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.mesh3d import hoverlabel
 from plotly.graph_objs.mesh3d import colorbar

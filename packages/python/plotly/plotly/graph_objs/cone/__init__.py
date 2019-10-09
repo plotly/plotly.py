@@ -2943,5 +2943,15 @@ an instance of plotly.graph_objs.cone.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Stream",
+    "colorbar",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.cone import hoverlabel
 from plotly.graph_objs.cone import colorbar

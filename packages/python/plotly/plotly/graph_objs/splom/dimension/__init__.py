@@ -139,3 +139,6 @@ an instance of plotly.graph_objs.splom.dimension.Axis"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Axis"]

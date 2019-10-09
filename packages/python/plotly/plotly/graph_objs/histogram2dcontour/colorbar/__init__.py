@@ -718,4 +718,6 @@ an instance of plotly.graph_objs.histogram2dcontour.colorbar.Tickfont"""
         self._skip_invalid = False
 
 
+__all__ = ["Tickfont", "Tickformatstop", "Tickformatstop", "Title", "title"]
+
 from plotly.graph_objs.histogram2dcontour.colorbar import title

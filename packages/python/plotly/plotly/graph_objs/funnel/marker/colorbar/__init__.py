@@ -718,4 +718,6 @@ an instance of plotly.graph_objs.funnel.marker.colorbar.Tickfont"""
         self._skip_invalid = False
 
 
+__all__ = ["Tickfont", "Tickformatstop", "Tickformatstop", "Title", "title"]
+
 from plotly.graph_objs.funnel.marker.colorbar import title

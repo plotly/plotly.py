@@ -3950,6 +3950,23 @@ an instance of plotly.graph_objs.volume.Caps"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Caps",
+    "ColorBar",
+    "Contour",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Slices",
+    "Spaceframe",
+    "Stream",
+    "Surface",
+    "caps",
+    "colorbar",
+    "hoverlabel",
+    "slices",
+]
+
 from plotly.graph_objs.volume import slices
 from plotly.graph_objs.volume import hoverlabel
 from plotly.graph_objs.volume import colorbar

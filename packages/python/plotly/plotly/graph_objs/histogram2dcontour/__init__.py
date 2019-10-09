@@ -3804,6 +3804,20 @@ an instance of plotly.graph_objs.histogram2dcontour.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Contours",
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Stream",
+    "XBins",
+    "YBins",
+    "colorbar",
+    "contours",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.histogram2dcontour import hoverlabel
 from plotly.graph_objs.histogram2dcontour import contours
 from plotly.graph_objs.histogram2dcontour import colorbar

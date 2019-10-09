@@ -2488,4 +2488,6 @@ an instance of plotly.graph_objs.bar.marker.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "Line", "colorbar"]
+
 from plotly.graph_objs.bar.marker import colorbar

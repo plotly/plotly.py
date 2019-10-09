@@ -701,4 +701,6 @@ an instance of plotly.graph_objs.sankey.node.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = ["Hoverlabel", "Line", "hoverlabel"]
+
 from plotly.graph_objs.sankey.node import hoverlabel

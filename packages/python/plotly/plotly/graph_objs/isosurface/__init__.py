@@ -3955,6 +3955,23 @@ an instance of plotly.graph_objs.isosurface.Caps"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Caps",
+    "ColorBar",
+    "Contour",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Slices",
+    "Spaceframe",
+    "Stream",
+    "Surface",
+    "caps",
+    "colorbar",
+    "hoverlabel",
+    "slices",
+]
+
 from plotly.graph_objs.isosurface import slices
 from plotly.graph_objs.isosurface import hoverlabel
 from plotly.graph_objs.isosurface import colorbar

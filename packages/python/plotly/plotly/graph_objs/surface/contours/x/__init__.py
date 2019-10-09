@@ -185,3 +185,6 @@ an instance of plotly.graph_objs.surface.contours.x.Project"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Project"]

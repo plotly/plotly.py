@@ -226,3 +226,6 @@ an instance of plotly.graph_objs.sunburst.marker.Line"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Line"]

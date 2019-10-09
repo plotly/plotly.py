@@ -1244,4 +1244,6 @@ an instance of plotly.graph_objs.layout.slider.Currentvalue"""
         self._skip_invalid = False
 
 
+__all__ = ["Currentvalue", "Font", "Pad", "Step", "Step", "Transition", "currentvalue"]
+
 from plotly.graph_objs.layout.slider import currentvalue

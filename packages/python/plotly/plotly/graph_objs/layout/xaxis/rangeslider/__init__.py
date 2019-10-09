@@ -143,3 +143,6 @@ an instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["YAxis"]

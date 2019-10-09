@@ -2605,6 +2605,22 @@ an instance of plotly.graph_objs.splom.Diagonal"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Diagonal",
+    "Dimension",
+    "Dimension",
+    "Hoverlabel",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "dimension",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.splom import unselected
 from plotly.graph_objs.splom import selected
 from plotly.graph_objs.splom import marker

@@ -2090,6 +2090,23 @@ an instance of plotly.graph_objs.waterfall.Connector"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Connector",
+    "Decreasing",
+    "Hoverlabel",
+    "Increasing",
+    "Insidetextfont",
+    "Outsidetextfont",
+    "Stream",
+    "Textfont",
+    "Totals",
+    "connector",
+    "decreasing",
+    "hoverlabel",
+    "increasing",
+    "totals",
+]
+
 from plotly.graph_objs.waterfall import totals
 from plotly.graph_objs.waterfall import increasing
 from plotly.graph_objs.waterfall import hoverlabel

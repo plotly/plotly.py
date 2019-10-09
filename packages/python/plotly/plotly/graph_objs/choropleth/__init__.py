@@ -2870,6 +2870,20 @@ an instance of plotly.graph_objs.choropleth.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Hoverlabel",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "colorbar",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.choropleth import unselected
 from plotly.graph_objs.choropleth import selected
 from plotly.graph_objs.choropleth import marker
