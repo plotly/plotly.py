@@ -3788,6 +3788,23 @@ an instance of plotly.graph_objs.histogram.Cumulative"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Cumulative",
+    "ErrorX",
+    "ErrorY",
+    "Hoverlabel",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "XBins",
+    "YBins",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.histogram import unselected
 from plotly.graph_objs.histogram import selected
 from plotly.graph_objs.histogram import marker

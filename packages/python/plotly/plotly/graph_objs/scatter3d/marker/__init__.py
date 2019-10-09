@@ -2464,4 +2464,6 @@ an instance of plotly.graph_objs.scatter3d.marker.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = ["ColorBar", "Line", "colorbar"]
+
 from plotly.graph_objs.scatter3d.marker import colorbar

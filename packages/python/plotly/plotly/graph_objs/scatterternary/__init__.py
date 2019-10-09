@@ -2912,6 +2912,20 @@ an instance of plotly.graph_objs.scatterternary.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Textfont",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.scatterternary import unselected
 from plotly.graph_objs.scatterternary import selected
 from plotly.graph_objs.scatterternary import marker

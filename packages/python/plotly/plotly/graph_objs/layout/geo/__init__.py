@@ -1187,4 +1187,6 @@ an instance of plotly.graph_objs.layout.geo.Center"""
         self._skip_invalid = False
 
 
+__all__ = ["Center", "Domain", "Lataxis", "Lonaxis", "Projection", "projection"]
+
 from plotly.graph_objs.layout.geo import projection

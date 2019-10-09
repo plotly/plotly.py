@@ -2910,6 +2910,20 @@ an instance of plotly.graph_objs.scattercarpet.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Textfont",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.scattercarpet import unselected
 from plotly.graph_objs.scattercarpet import selected
 from plotly.graph_objs.scattercarpet import marker

@@ -1736,6 +1736,19 @@ an instance of plotly.graph_objs.indicator.Delta"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Delta",
+    "Domain",
+    "Gauge",
+    "Number",
+    "Stream",
+    "Title",
+    "delta",
+    "gauge",
+    "number",
+    "title",
+]
+
 from plotly.graph_objs.indicator import title
 from plotly.graph_objs.indicator import number
 from plotly.graph_objs.indicator import gauge

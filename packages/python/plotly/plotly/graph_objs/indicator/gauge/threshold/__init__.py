@@ -164,3 +164,6 @@ an instance of plotly.graph_objs.indicator.gauge.threshold.Line"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Line"]

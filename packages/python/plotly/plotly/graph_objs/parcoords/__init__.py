@@ -2472,4 +2472,16 @@ an instance of plotly.graph_objs.parcoords.Dimension"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Dimension",
+    "Dimension",
+    "Domain",
+    "Labelfont",
+    "Line",
+    "Rangefont",
+    "Stream",
+    "Tickfont",
+    "line",
+]
+
 from plotly.graph_objs.parcoords import line

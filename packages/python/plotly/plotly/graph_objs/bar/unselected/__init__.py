@@ -313,3 +313,6 @@ an instance of plotly.graph_objs.bar.unselected.Marker"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Marker", "Textfont"]

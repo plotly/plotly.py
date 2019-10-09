@@ -5361,6 +5361,8 @@ an instance of plotly.graph_objs.layout.ternary.Aaxis"""
         self._skip_invalid = False
 
 
+__all__ = ["Aaxis", "Baxis", "Caxis", "Domain", "aaxis", "baxis", "caxis"]
+
 from plotly.graph_objs.layout.ternary import caxis
 from plotly.graph_objs.layout.ternary import baxis
 from plotly.graph_objs.layout.ternary import aaxis

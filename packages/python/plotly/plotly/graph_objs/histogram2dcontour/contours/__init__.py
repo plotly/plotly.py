@@ -228,3 +228,6 @@ an instance of plotly.graph_objs.histogram2dcontour.contours.Labelfont"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Labelfont"]

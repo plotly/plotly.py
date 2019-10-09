@@ -1440,6 +1440,19 @@ an instance of plotly.graph_objs.box.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Selected",
+    "Stream",
+    "Unselected",
+    "hoverlabel",
+    "marker",
+    "selected",
+    "unselected",
+]
+
 from plotly.graph_objs.box import unselected
 from plotly.graph_objs.box import selected
 from plotly.graph_objs.box import marker

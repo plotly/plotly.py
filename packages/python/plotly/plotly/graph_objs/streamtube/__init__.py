@@ -3198,5 +3198,16 @@ an instance of plotly.graph_objs.streamtube.ColorBar"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ColorBar",
+    "Hoverlabel",
+    "Lighting",
+    "Lightposition",
+    "Starts",
+    "Stream",
+    "colorbar",
+    "hoverlabel",
+]
+
 from plotly.graph_objs.streamtube import hoverlabel
 from plotly.graph_objs.streamtube import colorbar

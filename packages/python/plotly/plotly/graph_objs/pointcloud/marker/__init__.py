@@ -175,3 +175,6 @@ an instance of plotly.graph_objs.pointcloud.marker.Border"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Border"]

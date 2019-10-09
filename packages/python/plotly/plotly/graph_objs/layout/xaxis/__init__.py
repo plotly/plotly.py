@@ -1777,6 +1777,18 @@ an instance of plotly.graph_objs.layout.xaxis.Rangeselector"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Rangeselector",
+    "Rangeslider",
+    "Tickfont",
+    "Tickformatstop",
+    "Tickformatstop",
+    "Title",
+    "rangeselector",
+    "rangeslider",
+    "title",
+]
+
 from plotly.graph_objs.layout.xaxis import title
 from plotly.graph_objs.layout.xaxis import rangeslider
 from plotly.graph_objs.layout.xaxis import rangeselector

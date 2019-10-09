@@ -2176,6 +2176,20 @@ an instance of plotly.graph_objs.pie.Domain"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "Domain",
+    "Hoverlabel",
+    "Insidetextfont",
+    "Marker",
+    "Outsidetextfont",
+    "Stream",
+    "Textfont",
+    "Title",
+    "hoverlabel",
+    "marker",
+    "title",
+]
+
 from plotly.graph_objs.pie import title
 from plotly.graph_objs.pie import marker
 from plotly.graph_objs.pie import hoverlabel

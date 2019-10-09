@@ -4987,6 +4987,22 @@ an instance of plotly.graph_objs.scatter3d.ErrorX"""
         self._skip_invalid = False
 
 
+__all__ = [
+    "ErrorX",
+    "ErrorY",
+    "ErrorZ",
+    "Hoverlabel",
+    "Line",
+    "Marker",
+    "Projection",
+    "Stream",
+    "Textfont",
+    "hoverlabel",
+    "line",
+    "marker",
+    "projection",
+]
+
 from plotly.graph_objs.scatter3d import projection
 from plotly.graph_objs.scatter3d import marker
 from plotly.graph_objs.scatter3d import line

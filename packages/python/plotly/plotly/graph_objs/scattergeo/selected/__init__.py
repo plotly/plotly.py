@@ -332,3 +332,6 @@ an instance of plotly.graph_objs.scattergeo.selected.Marker"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Marker", "Textfont"]

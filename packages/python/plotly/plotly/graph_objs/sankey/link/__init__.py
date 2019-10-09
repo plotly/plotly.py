@@ -1049,4 +1049,6 @@ an instance of plotly.graph_objs.sankey.link.Colorscale"""
         self._skip_invalid = False
 
 
+__all__ = ["Colorscale", "Colorscale", "Hoverlabel", "Line", "hoverlabel"]
+
 from plotly.graph_objs.sankey.link import hoverlabel

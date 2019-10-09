@@ -955,5 +955,7 @@ an instance of plotly.graph_objs.pointcloud.Hoverlabel"""
         self._skip_invalid = False
 
 
+__all__ = ["Hoverlabel", "Marker", "Stream", "hoverlabel", "marker"]
+
 from plotly.graph_objs.pointcloud import marker
 from plotly.graph_objs.pointcloud import hoverlabel

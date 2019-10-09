@@ -783,3 +783,6 @@ an instance of plotly.graph_objs.layout.updatemenu.Button"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Button", "Button", "Font", "Pad"]

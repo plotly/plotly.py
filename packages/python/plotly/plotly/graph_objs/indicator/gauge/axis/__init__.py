@@ -512,3 +512,6 @@ an instance of plotly.graph_objs.indicator.gauge.axis.Tickfont"""
         # Reset skip_invalid
         # ------------------
         self._skip_invalid = False
+
+
+__all__ = ["Tickfont", "Tickformatstop", "Tickformatstop"]
