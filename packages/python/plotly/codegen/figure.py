@@ -353,6 +353,172 @@ class {fig_classname}({base_classname}):\n"""
         return self"""
         )
 
+    # update annotations/shapes/images
+    # --------------------------------
+    for singular_name in ["annotation", "shape", "image"]:
+        plural_name = plural_name = inflect_eng.plural_noun(singular_name)
+
+        buffer.write(
+            f"""
+    def select_{plural_name}(
+        self, selector=None, row=None, col=None, secondary_y=None
+    ):
+        \"\"\"
+        Select {plural_name} from a particular subplot cell and/or {plural_name}
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {singular_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the {plural_name} that satisfy
+            all of the specified selection criteria
+        \"\"\"
+        return self._select_annotations_like(
+            "{plural_name}", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def for_each_{singular_name}(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
+        \"\"\"
+        Apply a function to all {plural_name} that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single {singular_name} object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {plural_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self._select_annotations_like(
+            property='{plural_name}',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def update_{plural_name}(
+        self,
+        patch,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        \"\"\"
+        Perform a property update operation on all {plural_name} that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all {plural_name} that
+            satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {singular_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected {singular_name}. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self._select_annotations_like(
+            property='{plural_name}',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+"""
+        )
+
     # Return source string
     # --------------------
     buffer.write("\n")
