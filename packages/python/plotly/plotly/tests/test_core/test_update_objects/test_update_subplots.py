@@ -563,3 +563,12 @@ class TestSelectForEachUpdateSubplots(TestCase):
             row=1,
             selector={"title.text": "A"},
         )
+
+    def test_update_subplot_overwrite(self):
+        fig = go.Figure(layout_xaxis_title_text="Axis title")
+        fig.update_xaxes(overwrite=True, title={"font": {"family": "Courier"}})
+
+        self.assertEqual(
+            fig.layout.xaxis.to_plotly_json(),
+            {"title": {"font": {"family": "Courier"}}},
+        )

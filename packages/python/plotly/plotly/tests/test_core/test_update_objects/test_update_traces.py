@@ -362,3 +362,18 @@ class TestSelectForEachUpdateTraces(TestCase):
         )
 
         self.assert_update_traces([9], {"marker.size": 6}, col=1, secondary_y=True)
+
+    def test_update_traces_overwrite(self):
+        fig = go.Figure(
+            data=[go.Scatter(marker_line_color="red"), go.Bar(marker_line_color="red")]
+        )
+
+        fig.update_traces(overwrite=True, marker={"line": {"width": 10}})
+
+        self.assertEqual(
+            fig.to_plotly_json()["data"],
+            [
+                {"type": "scatter", "marker": {"line": {"width": 10}}},
+                {"type": "bar", "marker": {"line": {"width": 10}}},
+            ],
+        )
