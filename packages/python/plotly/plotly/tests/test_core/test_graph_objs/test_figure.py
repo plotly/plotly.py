@@ -5,6 +5,11 @@ from plotly.tests.utils import TestCaseNoTemplate
 
 
 class FigureTest(TestCaseNoTemplate):
+    def setUp(self):
+        import plotly.io as pio
+
+        pio.templates.default = None
+
     def test_instantiation(self):
 
         native_figure = {"data": [], "layout": {}, "frames": []}
@@ -166,3 +171,31 @@ class FigureTest(TestCaseNoTemplate):
         fig = go.Figure(layout=go.Layout(width=1000))
         with self.assertRaises(KeyError):
             fig.pop("bogus")
+
+    def test_update_overwrite_layout(self):
+        fig = go.Figure(layout=go.Layout(width=1000))
+
+        # By default, update works recursively so layout.width should remain
+        fig.update(layout={"title": {"text": "Fig Title"}})
+        fig.layout.pop("template")
+        self.assertEqual(
+            fig.layout.to_plotly_json(), {"title": {"text": "Fig Title"}, "width": 1000}
+        )
+
+        # With overwrite=True, all existing layout properties should be
+        # removed
+        fig.update(overwrite=True, layout={"title": {"text": "Fig2 Title"}})
+        fig.layout.pop("template")
+        self.assertEqual(fig.layout.to_plotly_json(), {"title": {"text": "Fig2 Title"}})
+
+    def test_update_overwrite_data(self):
+        fig = go.Figure(
+            data=[go.Bar(marker_color="blue"), go.Bar(marker_color="yellow")]
+        )
+
+        fig.update(overwrite=True, data=[go.Marker(y=[1, 3, 2], line_color="yellow")])
+
+        self.assertEqual(
+            fig.to_plotly_json()["data"],
+            [{"type": "scatter", "y": [1, 3, 2], "line": {"color": "yellow"}}],
+        )

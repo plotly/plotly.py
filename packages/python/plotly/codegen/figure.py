@@ -313,6 +313,7 @@ class {fig_classname}({base_classname}):\n"""
             self,
             patch=None,
             selector=None,
+            overwrite=False,
             row=None, col=None{secondary_y_1},
             **kwargs):
         \"\"\"
@@ -330,6 +331,10 @@ class {fig_classname}({base_classname}):\n"""
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
             (the default), all {singular_name} objects are selected.
+        overwrite: bool
+            If True, overwrite existing properties. If False, apply updates
+            to existing properties recursively, preserving existing
+            properties that are not specified in the update operation.
         row, col: int or None (default None)
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
@@ -348,7 +353,7 @@ class {fig_classname}({base_classname}):\n"""
         \"\"\"
         for obj in self.select_{plural_name}(
                 selector=selector, row=row, col=col{secondary_y_2}):
-            obj.update(patch, **kwargs)
+            obj.update(patch, overwrite=overwrite, **kwargs)
 
         return self"""
         )

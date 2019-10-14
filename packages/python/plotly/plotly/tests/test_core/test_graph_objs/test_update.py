@@ -157,3 +157,51 @@ class TestUpdateMethod(TestCase):
         }
 
         self.assertEqual(layout.to_plotly_json(), expected)
+
+    def test_overwrite_compound_prop(self):
+        layout = go.Layout(title_font_family="Courier")
+
+        # First update with default (recursive) behavior
+        layout.update(title={"text": "Fig Title"})
+        expected = {"title": {"text": "Fig Title", "font": {"family": "Courier"}}}
+        self.assertEqual(layout.to_plotly_json(), expected)
+
+        # Update with overwrite behavior
+        layout.update(title={"text": "Fig Title2"}, overwrite=True)
+        expected = {"title": {"text": "Fig Title2"}}
+        self.assertEqual(layout.to_plotly_json(), expected)
+
+    def test_overwrite_tuple_prop(self):
+        layout = go.Layout(
+            annotations=[
+                go.layout.Annotation(text="one"),
+                go.layout.Annotation(text="two"),
+            ]
+        )
+
+        layout.update(
+            overwrite=True,
+            annotations=[
+                go.layout.Annotation(width=10),
+                go.layout.Annotation(width=20),
+                go.layout.Annotation(width=30),
+                go.layout.Annotation(width=40),
+                go.layout.Annotation(width=50),
+            ],
+        )
+
+        expected = {
+            "annotations": [
+                {"width": 10},
+                {"width": 20},
+                {"width": 30},
+                {"width": 40},
+                {"width": 50},
+            ]
+        }
+
+        self.assertEqual(layout.to_plotly_json(), expected)
+
+        # Remove all annotations
+        layout.update(overwrite=True, annotations=None)
+        self.assertEqual(layout.to_plotly_json(), {})
