@@ -450,7 +450,7 @@ class {fig_classname}({base_classname}):\n"""
             Returns the Figure object that the method was called on
         \"\"\"
         for obj in self._select_annotations_like(
-            property='{plural_name}',
+            prop='{plural_name}',
             selector=selector,
             row=row,
             col=col,
@@ -513,7 +513,7 @@ class {fig_classname}({base_classname}):\n"""
             Returns the Figure object that the method was called on
         \"\"\"
         for obj in self._select_annotations_like(
-            property='{plural_name}',
+            prop='{plural_name}',
             selector=selector,
             row=row,
             col=col,

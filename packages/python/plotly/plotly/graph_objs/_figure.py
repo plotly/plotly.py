@@ -15902,7 +15902,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="annotations",
+            prop="annotations",
             selector=selector,
             row=row,
             col=col,
@@ -15959,7 +15959,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="annotations",
+            prop="annotations",
             selector=selector,
             row=row,
             col=col,
@@ -16403,11 +16403,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="images",
-            selector=selector,
-            row=row,
-            col=col,
-            secondary_y=secondary_y,
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
             fn(obj)
 
@@ -16460,11 +16456,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="images",
-            selector=selector,
-            row=row,
-            col=col,
-            secondary_y=secondary_y,
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
             obj.update(patch, **kwargs)
 
@@ -16683,11 +16675,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="shapes",
-            selector=selector,
-            row=row,
-            col=col,
-            secondary_y=secondary_y,
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
             fn(obj)
 
@@ -16740,11 +16728,7 @@ class Figure(BaseFigure):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            property="shapes",
-            selector=selector,
-            row=row,
-            col=col,
-            secondary_y=secondary_y,
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
         ):
             obj.update(patch, **kwargs)
 
