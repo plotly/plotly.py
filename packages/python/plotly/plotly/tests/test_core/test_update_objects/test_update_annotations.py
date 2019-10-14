@@ -129,6 +129,42 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_selected("annotations", [0, 1], row="paper", col="paper")
         self.assert_selected("annotations", [4], secondary_y=True)
 
+    def test_select_shapes(self):
+        (
+            self.fig.add_shape(opacity=0.1, fillcolor="red")
+            .add_shape(opacity=0.2, fillcolor="blue")
+            .add_shape(opacity=0.3, fillcolor="red", row=1, col=1)
+            .add_shape(opacity=0.4, row=1, col=2)
+            .add_shape(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_shape(opacity=0.6, fillcolor="blue", row=2, col=1)
+        )
+
+        # Test selections
+        self.assert_selected("shapes", [0, 1, 2, 3, 4, 5])
+        self.assert_selected("shapes", [0, 2], selector=dict(fillcolor="red"))
+        self.assert_selected("shapes", [2, 3, 4], row=1)
+        self.assert_selected("shapes", [2], selector=dict(fillcolor="red"), row=1)
+        self.assert_selected("shapes", [0, 1], row="paper", col="paper")
+        self.assert_selected("shapes", [4], secondary_y=True)
+
+    def test_select_images(self):
+        (
+            self.fig.add_image(opacity=0.1, source="red")
+            .add_image(opacity=0.2, source="blue")
+            .add_image(opacity=0.3, source="red", row=1, col=1)
+            .add_image(opacity=0.4, row=1, col=2)
+            .add_image(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_image(opacity=0.6, source="blue", row=2, col=1)
+        )
+
+        # Test selections
+        self.assert_selected("images", [0, 1, 2, 3, 4, 5])
+        self.assert_selected("images", [0, 2], selector=dict(source="red"))
+        self.assert_selected("images", [2, 3, 4], row=1)
+        self.assert_selected("images", [2], selector=dict(source="red"), row=1)
+        self.assert_selected("images", [0, 1], row="paper", col="paper")
+        self.assert_selected("images", [4], secondary_y=True)
+
     def test_update_annotations(self):
         (
             self.fig.add_annotation(text="A1", arrowcolor="red")
@@ -153,3 +189,39 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update(
             "annotations", [4], patch=dict(showarrow=False), secondary_y=True
         )
+
+    def test_update_shapes(self):
+        (
+            self.fig.add_shape(opacity=0.1, fillcolor="red")
+            .add_shape(opacity=0.2, fillcolor="blue")
+            .add_shape(opacity=0.3, fillcolor="red", row=1, col=1)
+            .add_shape(opacity=0.4, row=1, col=2)
+            .add_shape(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_shape(opacity=0.6, fillcolor="blue", row=2, col=1)
+        )
+
+        self.assert_update("shapes", [0, 1, 2, 3, 4, 5], patch=dict(opacity=0))
+        self.assert_update(
+            "shapes", [1, 5], patch=dict(opacity=0), selector=dict(fillcolor="blue")
+        )
+        self.assert_update("shapes", [2, 3, 4], patch=dict(opacity=0), row=1)
+        self.assert_update("shapes", [2, 5], patch=dict(opacity=0), col=1)
+        self.assert_update("shapes", [4], patch=dict(opacity=0), secondary_y=True)
+
+    def test_update_images(self):
+        (
+            self.fig.add_image(opacity=0.1, source="red")
+            .add_image(opacity=0.2, source="blue")
+            .add_image(opacity=0.3, source="red", row=1, col=1)
+            .add_image(opacity=0.4, row=1, col=2)
+            .add_image(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_image(opacity=0.6, source="blue", row=2, col=1)
+        )
+
+        self.assert_update("images", [0, 1, 2, 3, 4, 5], patch=dict(opacity=0))
+        self.assert_update(
+            "images", [1, 5], patch=dict(opacity=0), selector=dict(source="blue")
+        )
+        self.assert_update("images", [2, 3, 4], patch=dict(opacity=0), row=1)
+        self.assert_update("images", [2, 5], patch=dict(opacity=0), col=1)
+        self.assert_update("images", [4], patch=dict(opacity=0), secondary_y=True)
