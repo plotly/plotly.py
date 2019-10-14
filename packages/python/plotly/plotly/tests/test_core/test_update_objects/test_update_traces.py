@@ -238,7 +238,7 @@ class TestSelectForEachUpdateTraces(TestCase):
 
         # Check that names were altered
         self.assertTrue(
-            all([t.name == n.lower() for t, n in zip(result_fig.data, original_names)])
+            all(t.name == n.lower() for t, n in zip(result_fig.data, original_names))
         )
 
     # test update_traces

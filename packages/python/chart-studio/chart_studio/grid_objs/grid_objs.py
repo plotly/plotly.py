@@ -164,9 +164,10 @@ class Grid(MutableSequence):
                 raise exceptions.InputError(err)
 
             # create columns from dataframe
-            all_columns = []
-            for name in columns_or_json.columns:
-                all_columns.append(Column(columns_or_json[name].tolist(), name))
+            all_columns = [
+                Column(columns_or_json[name].tolist(), name)
+                for name in columns_or_json.columns
+            ]
             self._columns = all_columns
             self.id = ""
 
@@ -199,21 +200,17 @@ class Grid(MutableSequence):
                         )
             # collect and sort all orders in case orders do not start
             # at zero or there are jump discontinuities between them
-            all_orders = []
-            for column_name in columns_or_json["cols"].keys():
-                all_orders.append(columns_or_json["cols"][column_name]["order"])
+            all_orders = [value["order"] for value in columns_or_json["cols"].values()]
             all_orders.sort()
 
             # put columns in order in a list
             ordered_columns = []
             for order in all_orders:
-                for column_name in columns_or_json["cols"].keys():
-                    if columns_or_json["cols"][column_name]["order"] == order:
+                for value in columns_or_json["cols"].values():
+                    if value["order"] == order:
                         break
 
-                ordered_columns.append(
-                    Column(columns_or_json["cols"][column_name]["data"], column_name)
-                )
+                ordered_columns.append(Column(value["data"], column_name))
             self._columns = ordered_columns
 
             # fill in column_ids
@@ -290,9 +287,7 @@ class Grid(MutableSequence):
                 break
 
         if column_id is None:
-            col_names = []
-            for column in self._columns:
-                col_names.append(column.name)
+            col_names = [column.name for column in self._columns]
             raise _plotly_utils.exceptions.PlotlyError(
                 "Whoops, that column name doesn't match any of the column "
                 "names in your grid. You must pick from {cols}".format(cols=col_names)

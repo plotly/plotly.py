@@ -1629,7 +1629,7 @@ class ColorscaleValidator(BaseValidator):
         elif isinstance(v, string_types):
             return v
         else:
-            return tuple([tuple(e) for e in v])
+            return tuple(tuple(e) for e in v)
 
 
 class AngleValidator(BaseValidator):
@@ -1821,10 +1821,10 @@ class FlaglistValidator(BaseValidator):
         split_vals = [e.strip() for e in re.split("[,+]", v)]
 
         # Are all flags valid names?
-        all_flags_valid = all([f in self.all_flags for f in split_vals])
+        all_flags_valid = all(f in self.all_flags for f in split_vals)
 
         # Are any 'extras' flags present?
-        has_extras = any([f in self.extras for f in split_vals])
+        has_extras = any(f in self.extras for f in split_vals)
 
         # For flaglist to be valid all flags must be valid, and if we have
         # any extras present, there must be only one flag (the single extras
@@ -2705,7 +2705,7 @@ class BaseTemplateValidator(CompoundValidator):
             # multiple template names joined on '+' characters
             elif isinstance(v, string_types):
                 template_names = v.split("+")
-                if all([name in pio.templates for name in template_names]):
+                if all(name in pio.templates for name in template_names):
                     return pio.templates.merge_templates(*template_names)
 
         except TypeError:

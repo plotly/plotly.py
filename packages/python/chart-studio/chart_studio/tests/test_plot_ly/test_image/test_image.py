@@ -77,7 +77,7 @@ for args in itertools.product(
     ]:
 
         _test = test_generator(*args)
-        arg_string = ", ".join([str(a) for a in args])
+        arg_string = ", ".join(str(a) for a in args)
         test_name = test_generator.__name__.replace("_generate", "test")
         test_name += "({})".format(arg_string)
         setattr(TestImage, test_name, _test)

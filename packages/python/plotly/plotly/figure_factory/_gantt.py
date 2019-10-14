@@ -42,14 +42,7 @@ def validate_gantt(df):
                 )
 
         num_of_rows = len(df.index)
-        chart = []
-        for index in range(num_of_rows):
-            task_dict = {}
-            for key in df:
-                task_dict[key] = df.ix[index][key]
-            chart.append(task_dict)
-
-        return chart
+        return [{key: df.ix[index][key] for key in df} for index in range(num_of_rows)]
 
     # validate if df is a list
     if not isinstance(df, list):
@@ -323,11 +316,7 @@ def gantt_colorscale(
         "legendgroup": "",
     }
 
-    index_vals = []
-    for row in range(len(tasks)):
-        if chart[row][index_col] not in index_vals:
-            index_vals.append(chart[row][index_col])
-
+    index_vals = list({chart[row][index_col] for row in range(len(tasks))})
     index_vals.sort()
 
     # compute the color for task based on indexing column
@@ -437,10 +426,7 @@ def gantt_colorscale(
             )
 
     if isinstance(chart[0][index_col], str):
-        index_vals = []
-        for row in range(len(tasks)):
-            if chart[row][index_col] not in index_vals:
-                index_vals.append(chart[row][index_col])
+        index_vals = list({chart[row][index_col] for row in range(len(tasks))})
 
         index_vals.sort()
 
@@ -664,10 +650,7 @@ def gantt_dict(
         "showlegend": False,
     }
 
-    index_vals = []
-    for row in range(len(tasks)):
-        if chart[row][index_col] not in index_vals:
-            index_vals.append(chart[row][index_col])
+    index_vals = list({chart[row][index_col] for row in range(len(tasks))})
 
     index_vals.sort()
 
@@ -971,9 +954,7 @@ def create_gantt(
             )
 
         # validate gantt index column
-        index_list = []
-        for dictionary in chart:
-            index_list.append(dictionary[index_col])
+        index_list = [dictionary[index_col] for dictionary in chart]
         utils.validate_index(index_list)
 
     # Validate colors

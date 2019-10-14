@@ -138,9 +138,7 @@ def _create_us_counties_df(st_to_state_name_dict, state_to_st_dict):
     gdf_reduced = gdf[["FIPS", "STATEFP", "COUNTY_NAME", "geometry"]]
     gdf_statefp = gdf_reduced.merge(df_state[["STATEFP", "STATE_NAME"]], on="STATEFP")
 
-    ST = []
-    for n in gdf_statefp["STATE_NAME"]:
-        ST.append(state_to_st_dict[n])
+    ST = [state_to_st_dict[n] for n in gdf_statefp["STATE_NAME"]]
 
     gdf_statefp["ST"] = ST
     return gdf_statefp, df_state
