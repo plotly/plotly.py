@@ -45,6 +45,7 @@ from plotly.graph_objs import (
     Violin,
     Volume,
     Waterfall,
+    layout as _layout,
 )
 
 
@@ -15968,152 +15969,359 @@ class Figure(BaseFigure):
 
         return self
 
-    def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
-        """
-        Select shapes from a particular subplot cell and/or shapes
-        that satisfy custom selection criteria.
-
-        Parameters
-        ----------
-        selector: dict or None (default None)
-            Dict to use as selection criteria.
-            Annotations will be selected if they contain properties corresponding
-            to all of the dictionary's keys, with values that exactly match
-            the supplied values. If None (the default), all shapes are
-            selected.
-        row, col: int or None (default None)
-            Subplot row and column index of shapes to select.
-            To select shapes by row and column, the Figure must have been
-            created using plotly.subplots.make_subplots.  To select only those
-            shape that are in paper coordinates, set row and col to the
-            string 'paper'.  If None (the default), all shapes are selected.
-        secondary_y: boolean or None (default None)
-            * If True, only select shapes associated with the secondary
-              y-axis of the subplot.
-            * If False, only select shapes associated with the primary
-              y-axis of the subplot.
-            * If None (the default), do not filter shapes based on secondary
-              y-axis.
-
-            To select shapes by secondary y-axis, the Figure must have been
-            created using plotly.subplots.make_subplots. See the docstring
-            for the specs argument to make_subplots for more info on
-            creating subplots with secondary y-axes.
-        Returns
-        -------
-        generator
-            Generator that iterates through all of the shapes that satisfy
-            all of the specified selection criteria
-        """
-        return self._select_annotations_like(
-            "shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
-        )
-
-    def for_each_shape(self, fn, selector=None, row=None, col=None, secondary_y=None):
-        """
-        Apply a function to all shapes that satisfy the specified selection
-        criteria
-
-        Parameters
-        ----------
-        fn:
-            Function that inputs a single shape object.
-        selector: dict or None (default None)
-            Dict to use as selection criteria.
-            Traces will be selected if they contain properties corresponding
-            to all of the dictionary's keys, with values that exactly match
-            the supplied values. If None (the default), all shapes are
-            selected.
-        row, col: int or None (default None)
-            Subplot row and column index of shapes to select.
-            To select shapes by row and column, the Figure must have been
-            created using plotly.subplots.make_subplots.  To select only those
-            shapes that are in paper coordinates, set row and col to the
-            string 'paper'.  If None (the default), all shapes are selected.
-        secondary_y: boolean or None (default None)
-            * If True, only select shapes associated with the secondary
-              y-axis of the subplot.
-            * If False, only select shapes associated with the primary
-              y-axis of the subplot.
-            * If None (the default), do not filter shapes based on secondary
-              y-axis.
-
-            To select shapes by secondary y-axis, the Figure must have been
-            created using plotly.subplots.make_subplots. See the docstring
-            for the specs argument to make_subplots for more info on
-            creating subplots with secondary y-axes.
-        Returns
-        -------
-        self
-            Returns the Figure object that the method was called on
-        """
-        for obj in self._select_annotations_like(
-            property="shapes",
-            selector=selector,
-            row=row,
-            col=col,
-            secondary_y=secondary_y,
-        ):
-            fn(obj)
-
-        return self
-
-    def update_shapes(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+    def add_annotation(
+        self,
+        arg=None,
+        align=None,
+        arrowcolor=None,
+        arrowhead=None,
+        arrowside=None,
+        arrowsize=None,
+        arrowwidth=None,
+        ax=None,
+        axref=None,
+        ay=None,
+        ayref=None,
+        bgcolor=None,
+        bordercolor=None,
+        borderpad=None,
+        borderwidth=None,
+        captureevents=None,
+        clicktoshow=None,
+        font=None,
+        height=None,
+        hoverlabel=None,
+        hovertext=None,
+        name=None,
+        opacity=None,
+        showarrow=None,
+        standoff=None,
+        startarrowhead=None,
+        startarrowsize=None,
+        startstandoff=None,
+        templateitemname=None,
+        text=None,
+        textangle=None,
+        valign=None,
+        visible=None,
+        width=None,
+        x=None,
+        xanchor=None,
+        xclick=None,
+        xref=None,
+        xshift=None,
+        y=None,
+        yanchor=None,
+        yclick=None,
+        yref=None,
+        yshift=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
     ):
         """
-        Perform a property update operation on all shapes that satisfy the
-        specified selection criteria
-
+        Create and add a new annotation to the figure's layout
+        
         Parameters
         ----------
-        patch: dict or None (default None)
-            Dictionary of property updates to be applied to all shapes that
-            satisfy the selection criteria.
-        selector: dict or None (default None)
-            Dict to use as selection criteria.
-            Traces will be selected if they contain properties corresponding
-            to all of the dictionary's keys, with values that exactly match
-            the supplied values. If None (the default), all shapes are
-            selected.
-        row, col: int or None (default None)
-            Subplot row and column index of shapes to select.
-            To select shapes by row and column, the Figure must have been
-            created using plotly.subplots.make_subplots.  To select only those
-            shape that are in paper coordinates, set row and col to the
-            string 'paper'.  If None (the default), all shapes are selected.
-        secondary_y: boolean or None (default None)
-            * If True, only select shapes associated with the secondary
-              y-axis of the subplot.
-            * If False, only select shapes associated with the primary
-              y-axis of the subplot.
-            * If None (the default), do not filter shapes based on secondary
-              y-axis.
-
-            To select shapes by secondary y-axis, the Figure must have been
-            created using plotly.subplots.make_subplots. See the docstring
-            for the specs argument to make_subplots for more info on
-            creating subplots with secondary y-axes.
-        **kwargs
-            Additional property updates to apply to each selected shape. If
-            a property is specified in both patch and in **kwargs then the
-            one in **kwargs takes precedence.
+        arg
+            instance of Annotation or dict with compatible
+            properties
+        align
+            Sets the horizontal alignment of the `text` within the
+            box. Has an effect only if `text` spans more two or
+            more lines (i.e. `text` contains one or more <br> HTML
+            tags) or if an explicit width is set to override the
+            text width.
+        arrowcolor
+            Sets the color of the annotation arrow.
+        arrowhead
+            Sets the end annotation arrow head style.
+        arrowside
+            Sets the annotation arrow head position.
+        arrowsize
+            Sets the size of the end annotation arrow head,
+            relative to `arrowwidth`. A value of 1 (default) gives
+            a head about 3x as wide as the line.
+        arrowwidth
+            Sets the width (in px) of annotation arrow line.
+        ax
+            Sets the x component of the arrow tail about the arrow
+            head. If `axref` is `pixel`, a positive (negative)
+            component corresponds to an arrow pointing from right
+            to left (left to right). If `axref` is an axis, this is
+            an absolute value on that axis, like `x`, NOT a
+            relative value.
+        axref
+            Indicates in what terms the tail of the annotation
+            (ax,ay)  is specified. If `pixel`, `ax` is a relative
+            offset in pixels  from `x`. If set to an x axis id
+            (e.g. "x" or "x2"), `ax` is  specified in the same
+            terms as that axis. This is useful  for trendline
+            annotations which should continue to indicate  the
+            correct trend when zoomed.
+        ay
+            Sets the y component of the arrow tail about the arrow
+            head. If `ayref` is `pixel`, a positive (negative)
+            component corresponds to an arrow pointing from bottom
+            to top (top to bottom). If `ayref` is an axis, this is
+            an absolute value on that axis, like `y`, NOT a
+            relative value.
+        ayref
+            Indicates in what terms the tail of the annotation
+            (ax,ay)  is specified. If `pixel`, `ay` is a relative
+            offset in pixels  from `y`. If set to a y axis id (e.g.
+            "y" or "y2"), `ay` is  specified in the same terms as
+            that axis. This is useful  for trendline annotations
+            which should continue to indicate  the correct trend
+            when zoomed.
+        bgcolor
+            Sets the background color of the annotation.
+        bordercolor
+            Sets the color of the border enclosing the annotation
+            `text`.
+        borderpad
+            Sets the padding (in px) between the `text` and the
+            enclosing border.
+        borderwidth
+            Sets the width (in px) of the border enclosing the
+            annotation `text`.
+        captureevents
+            Determines whether the annotation text box captures
+            mouse move and click events, or allows those events to
+            pass through to data points in the plot that may be
+            behind the annotation. By default `captureevents` is
+            False unless `hovertext` is provided. If you use the
+            event `plotly_clickannotation` without `hovertext` you
+            must explicitly enable `captureevents`.
+        clicktoshow
+            Makes this annotation respond to clicks on the plot. If
+            you click a data point that exactly matches the `x` and
+            `y` values of this annotation, and it is hidden
+            (visible: false), it will appear. In "onoff" mode, you
+            must click the same point again to make it disappear,
+            so if you click multiple points, you can show multiple
+            annotations. In "onout" mode, a click anywhere else in
+            the plot (on another data point or not) will hide this
+            annotation. If you need to show/hide this annotation in
+            response to different `x` or `y` values, you can set
+            `xclick` and/or `yclick`. This is useful for example to
+            label the side of a bar. To label markers though,
+            `standoff` is preferred over `xclick` and `yclick`.
+        font
+            Sets the annotation text font.
+        height
+            Sets an explicit height for the text box. null
+            (default) lets the text set the box height. Taller text
+            will be clipped.
+        hoverlabel
+            plotly.graph_objects.layout.annotation.Hoverlabel
+            instance or dict with compatible properties
+        hovertext
+            Sets text to appear when hovering over this annotation.
+            If omitted or blank, no hover label will appear.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        opacity
+            Sets the opacity of the annotation (text + arrow).
+        showarrow
+            Determines whether or not the annotation is drawn with
+            an arrow. If True, `text` is placed near the arrow's
+            tail. If False, `text` lines up with the `x` and `y`
+            provided.
+        standoff
+            Sets a distance, in pixels, to move the end arrowhead
+            away from the position it is pointing at, for example
+            to point at the edge of a marker independent of zoom.
+            Note that this shortens the arrow from the `ax` / `ay`
+            vector, in contrast to `xshift` / `yshift` which moves
+            everything by this amount.
+        startarrowhead
+            Sets the start annotation arrow head style.
+        startarrowsize
+            Sets the size of the start annotation arrow head,
+            relative to `arrowwidth`. A value of 1 (default) gives
+            a head about 3x as wide as the line.
+        startstandoff
+            Sets a distance, in pixels, to move the start arrowhead
+            away from the position it is pointing at, for example
+            to point at the edge of a marker independent of zoom.
+            Note that this shortens the arrow from the `ax` / `ay`
+            vector, in contrast to `xshift` / `yshift` which moves
+            everything by this amount.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        text
+            Sets the text associated with this annotation. Plotly
+            uses a subset of HTML tags to do things like newline
+            (<br>), bold (<b></b>), italics (<i></i>), hyperlinks
+            (<a href='...'></a>). Tags <em>, <sup>, <sub> <span>
+            are also supported.
+        textangle
+            Sets the angle at which the `text` is drawn with
+            respect to the horizontal.
+        valign
+            Sets the vertical alignment of the `text` within the
+            box. Has an effect only if an explicit height is set to
+            override the text height.
+        visible
+            Determines whether or not this annotation is visible.
+        width
+            Sets an explicit width for the text box. null (default)
+            lets the text set the box width. Wider text will be
+            clipped. There is no automatic wrapping; use <br> to
+            start a new line.
+        x
+            Sets the annotation's x position. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
+            strings, like date data, though Date objects and unix
+            milliseconds will be accepted and converted to strings.
+            If the axis `type` is "category", it should be numbers,
+            using the scale where each category is assigned a
+            serial number from zero in the order it appears.
+        xanchor
+            Sets the text box's horizontal position anchor This
+            anchor binds the `x` position to the "left", "center"
+            or "right" of the annotation. For example, if `x` is
+            set to 1, `xref` to "paper" and `xanchor` to "right"
+            then the right-most portion of the annotation lines up
+            with the right-most edge of the plotting area. If
+            "auto", the anchor is equivalent to "center" for data-
+            referenced annotations or if there is an arrow, whereas
+            for paper-referenced with no arrow, the anchor picked
+            corresponds to the closest side.
+        xclick
+            Toggle this annotation when clicking a data point whose
+            `x` value is `xclick` rather than the annotation's `x`
+            value.
+        xref
+            Sets the annotation's x coordinate axis. If set to an x
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            an x coordinate If set to "paper", the `x` position
+            refers to the distance from the left side of the
+            plotting area in normalized coordinates where 0 (1)
+            corresponds to the left (right) side.
+        xshift
+            Shifts the position of the whole annotation and arrow
+            to the right (positive) or left (negative) by this many
+            pixels.
+        y
+            Sets the annotation's y position. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", it should be date
+            strings, like date data, though Date objects and unix
+            milliseconds will be accepted and converted to strings.
+            If the axis `type` is "category", it should be numbers,
+            using the scale where each category is assigned a
+            serial number from zero in the order it appears.
+        yanchor
+            Sets the text box's vertical position anchor This
+            anchor binds the `y` position to the "top", "middle" or
+            "bottom" of the annotation. For example, if `y` is set
+            to 1, `yref` to "paper" and `yanchor` to "top" then the
+            top-most portion of the annotation lines up with the
+            top-most edge of the plotting area. If "auto", the
+            anchor is equivalent to "middle" for data-referenced
+            annotations or if there is an arrow, whereas for paper-
+            referenced with no arrow, the anchor picked corresponds
+            to the closest side.
+        yclick
+            Toggle this annotation when clicking a data point whose
+            `y` value is `yclick` rather than the annotation's `y`
+            value.
+        yref
+            Sets the annotation's y coordinate axis. If set to an y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top).
+        yshift
+            Shifts the position of the whole annotation and arrow
+            up (positive) or down (negative) by this many pixels.
+        row
+            Subplot row for annotation
+        col
+            Subplot column for annotation
+        secondary_y
+            Whether to add annotation to secondary y-axis
 
         Returns
         -------
-        self
-            Returns the Figure object that the method was called on
+        Figure
         """
-        for obj in self._select_annotations_like(
-            property="shapes",
-            selector=selector,
+        new_obj = _layout.Annotation(
+            arg,
+            align=align,
+            arrowcolor=arrowcolor,
+            arrowhead=arrowhead,
+            arrowside=arrowside,
+            arrowsize=arrowsize,
+            arrowwidth=arrowwidth,
+            ax=ax,
+            axref=axref,
+            ay=ay,
+            ayref=ayref,
+            bgcolor=bgcolor,
+            bordercolor=bordercolor,
+            borderpad=borderpad,
+            borderwidth=borderwidth,
+            captureevents=captureevents,
+            clicktoshow=clicktoshow,
+            font=font,
+            height=height,
+            hoverlabel=hoverlabel,
+            hovertext=hovertext,
+            name=name,
+            opacity=opacity,
+            showarrow=showarrow,
+            standoff=standoff,
+            startarrowhead=startarrowhead,
+            startarrowsize=startarrowsize,
+            startstandoff=startstandoff,
+            templateitemname=templateitemname,
+            text=text,
+            textangle=textangle,
+            valign=valign,
+            visible=visible,
+            width=width,
+            x=x,
+            xanchor=xanchor,
+            xclick=xclick,
+            xref=xref,
+            xshift=xshift,
+            y=y,
+            yanchor=yanchor,
+            yclick=yclick,
+            yref=yref,
+            yshift=yshift,
+            **kwargs
+        )
+        return self._add_annotation_like(
+            "annotation",
+            "annotations",
+            new_obj,
             row=row,
             col=col,
             secondary_y=secondary_y,
-        ):
-            obj.update(patch, **kwargs)
-
-        return self
+        )
 
     def select_images(self, selector=None, row=None, col=None, secondary_y=None):
         """
@@ -16261,3 +16469,485 @@ class Figure(BaseFigure):
             obj.update(patch, **kwargs)
 
         return self
+
+    def add_image(
+        self,
+        arg=None,
+        layer=None,
+        name=None,
+        opacity=None,
+        sizex=None,
+        sizey=None,
+        sizing=None,
+        source=None,
+        templateitemname=None,
+        visible=None,
+        x=None,
+        xanchor=None,
+        xref=None,
+        y=None,
+        yanchor=None,
+        yref=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        """
+        Create and add a new image to the figure's layout
+        
+        Parameters
+        ----------
+        arg
+            instance of Image or dict with compatible properties
+        layer
+            Specifies whether images are drawn below or above
+            traces. When `xref` and `yref` are both set to `paper`,
+            image is drawn below the entire plot area.
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        opacity
+            Sets the opacity of the image.
+        sizex
+            Sets the image container size horizontally. The image
+            will be sized based on the `position` value. When
+            `xref` is set to `paper`, units are sized relative to
+            the plot width.
+        sizey
+            Sets the image container size vertically. The image
+            will be sized based on the `position` value. When
+            `yref` is set to `paper`, units are sized relative to
+            the plot height.
+        sizing
+            Specifies which dimension of the image to constrain.
+        source
+            Specifies the URL of the image to be used. The URL must
+            be accessible from the domain where the plot code is
+            run, and can be either relative or absolute.
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        visible
+            Determines whether or not this image is visible.
+        x
+            Sets the image's x position. When `xref` is set to
+            `paper`, units are sized relative to the plot height.
+            See `xref` for more info
+        xanchor
+            Sets the anchor for the x position
+        xref
+            Sets the images's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            data coordinate If set to "paper", the `x` position
+            refers to the distance from the left of plot in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right).
+        y
+            Sets the image's y position. When `yref` is set to
+            `paper`, units are sized relative to the plot height.
+            See `yref` for more info
+        yanchor
+            Sets the anchor for the y position.
+        yref
+            Sets the images's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            data coordinate. If set to "paper", the `y` position
+            refers to the distance from the bottom of the plot in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top).
+        row
+            Subplot row for image
+        col
+            Subplot column for image
+        secondary_y
+            Whether to add image to secondary y-axis
+
+        Returns
+        -------
+        Figure
+        """
+        new_obj = _layout.Image(
+            arg,
+            layer=layer,
+            name=name,
+            opacity=opacity,
+            sizex=sizex,
+            sizey=sizey,
+            sizing=sizing,
+            source=source,
+            templateitemname=templateitemname,
+            visible=visible,
+            x=x,
+            xanchor=xanchor,
+            xref=xref,
+            y=y,
+            yanchor=yanchor,
+            yref=yref,
+            **kwargs
+        )
+        return self._add_annotation_like(
+            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Select shapes from a particular subplot cell and/or shapes
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all shapes are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of shapes to select.
+            To select shapes by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            shape that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all shapes are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select shapes associated with the secondary
+              y-axis of the subplot.
+            * If False, only select shapes associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter shapes based on secondary
+              y-axis.
+
+            To select shapes by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the shapes that satisfy
+            all of the specified selection criteria
+        """
+        return self._select_annotations_like(
+            "shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def for_each_shape(self, fn, selector=None, row=None, col=None, secondary_y=None):
+        """
+        Apply a function to all shapes that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single shape object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all shapes are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of shapes to select.
+            To select shapes by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            shapes that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all shapes are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select shapes associated with the secondary
+              y-axis of the subplot.
+            * If False, only select shapes associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter shapes based on secondary
+              y-axis.
+
+            To select shapes by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            property="shapes",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def update_shapes(
+        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+    ):
+        """
+        Perform a property update operation on all shapes that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all shapes that
+            satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all shapes are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of shapes to select.
+            To select shapes by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            shape that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all shapes are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select shapes associated with the secondary
+              y-axis of the subplot.
+            * If False, only select shapes associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter shapes based on secondary
+              y-axis.
+
+            To select shapes by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected shape. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        """
+        for obj in self._select_annotations_like(
+            property="shapes",
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+
+    def add_shape(
+        self,
+        arg=None,
+        fillcolor=None,
+        layer=None,
+        line=None,
+        name=None,
+        opacity=None,
+        path=None,
+        templateitemname=None,
+        type=None,
+        visible=None,
+        x0=None,
+        x1=None,
+        xanchor=None,
+        xref=None,
+        xsizemode=None,
+        y0=None,
+        y1=None,
+        yanchor=None,
+        yref=None,
+        ysizemode=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        """
+        Create and add a new shape to the figure's layout
+        
+        Parameters
+        ----------
+        arg
+            instance of Shape or dict with compatible properties
+        fillcolor
+            Sets the color filling the shape's interior.
+        layer
+            Specifies whether shapes are drawn below or above
+            traces.
+        line
+            plotly.graph_objects.layout.shape.Line instance or dict
+            with compatible properties
+        name
+            When used in a template, named items are created in the
+            output figure in addition to any items the figure
+            already has in this array. You can modify these items
+            in the output figure by making your own item with
+            `templateitemname` matching this `name` alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). Has no effect outside of a
+            template.
+        opacity
+            Sets the opacity of the shape.
+        path
+            For `type` "path" - a valid SVG path with the pixel
+            values replaced by data values in
+            `xsizemode`/`ysizemode` being "scaled" and taken
+            unmodified as pixels relative to `xanchor` and
+            `yanchor` in case of "pixel" size mode. There are a few
+            restrictions / quirks only absolute instructions, not
+            relative. So the allowed segments are: M, L, H, V, Q,
+            C, T, S, and Z arcs (A) are not allowed because radius
+            rx and ry are relative. In the future we could consider
+            supporting relative commands, but we would have to
+            decide on how to handle date and log axes. Note that
+            even as is, Q and C Bezier paths that are smooth on
+            linear axes may not be smooth on log, and vice versa.
+            no chained "polybezier" commands - specify the segment
+            type for each one. On category axes, values are numbers
+            scaled to the serial numbers of categories because
+            using the categories themselves there would be no way
+            to describe fractional positions On data axes: because
+            space and T are both normal components of path strings,
+            we can't use either to separate date from time parts.
+            Therefore we'll use underscore for this purpose:
+            2015-02-21_13:45:56.789
+        templateitemname
+            Used to refer to a named item in this array in the
+            template. Named items from the template will be created
+            even without a matching item in the input figure, but
+            you can modify one by making an item with
+            `templateitemname` matching its `name`, alongside your
+            modifications (including `visible: false` or `enabled:
+            false` to hide it). If there is no template or no
+            matching item, this item will be hidden unless you
+            explicitly show it with `visible: true`.
+        type
+            Specifies the shape type to be drawn. If "line", a line
+            is drawn from (`x0`,`y0`) to (`x1`,`y1`) with respect
+            to the axes' sizing mode. If "circle", a circle is
+            drawn from ((`x0`+`x1`)/2, (`y0`+`y1`)/2)) with radius
+            (|(`x0`+`x1`)/2 - `x0`|, |(`y0`+`y1`)/2 -`y0`)|) with
+            respect to the axes' sizing mode. If "rect", a
+            rectangle is drawn linking (`x0`,`y0`), (`x1`,`y0`),
+            (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect to
+            the axes' sizing mode. If "path", draw a custom SVG
+            path using `path`. with respect to the axes' sizing
+            mode.
+        visible
+            Determines whether or not this shape is visible.
+        x0
+            Sets the shape's starting x position. See `type` and
+            `xsizemode` for more info.
+        x1
+            Sets the shape's end x position. See `type` and
+            `xsizemode` for more info.
+        xanchor
+            Only relevant in conjunction with `xsizemode` set to
+            "pixel". Specifies the anchor point on the x axis to
+            which `x0`, `x1` and x coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `xsizemode` not
+            set to "pixel".
+        xref
+            Sets the shape's x coordinate axis. If set to an x axis
+            id (e.g. "x" or "x2"), the `x` position refers to an x
+            coordinate. If set to "paper", the `x` position refers
+            to the distance from the left side of the plotting area
+            in normalized coordinates where 0 (1) corresponds to
+            the left (right) side. If the axis `type` is "log",
+            then you must take the log of your desired range. If
+            the axis `type` is "date", then you must convert the
+            date to unix time in milliseconds.
+        xsizemode
+            Sets the shapes's sizing mode along the x axis. If set
+            to "scaled", `x0`, `x1` and x coordinates within `path`
+            refer to data values on the x axis or a fraction of the
+            plot area's width (`xref` set to "paper"). If set to
+            "pixel", `xanchor` specifies the x position in terms of
+            data or plot fraction but `x0`, `x1` and x coordinates
+            within `path` are pixels relative to `xanchor`. This
+            way, the shape can have a fixed width while maintaining
+            a position relative to data or plot fraction.
+        y0
+            Sets the shape's starting y position. See `type` and
+            `ysizemode` for more info.
+        y1
+            Sets the shape's end y position. See `type` and
+            `ysizemode` for more info.
+        yanchor
+            Only relevant in conjunction with `ysizemode` set to
+            "pixel". Specifies the anchor point on the y axis to
+            which `y0`, `y1` and y coordinates within `path` are
+            relative to. E.g. useful to attach a pixel sized shape
+            to a certain data value. No effect when `ysizemode` not
+            set to "pixel".
+        yref
+            Sets the annotation's y coordinate axis. If set to an y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            an y coordinate If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top).
+        ysizemode
+            Sets the shapes's sizing mode along the y axis. If set
+            to "scaled", `y0`, `y1` and y coordinates within `path`
+            refer to data values on the y axis or a fraction of the
+            plot area's height (`yref` set to "paper"). If set to
+            "pixel", `yanchor` specifies the y position in terms of
+            data or plot fraction but `y0`, `y1` and y coordinates
+            within `path` are pixels relative to `yanchor`. This
+            way, the shape can have a fixed height while
+            maintaining a position relative to data or plot
+            fraction.
+        row
+            Subplot row for shape
+        col
+            Subplot column for shape
+        secondary_y
+            Whether to add shape to secondary y-axis
+
+        Returns
+        -------
+        Figure
+        """
+        new_obj = _layout.Shape(
+            arg,
+            fillcolor=fillcolor,
+            layer=layer,
+            line=line,
+            name=name,
+            opacity=opacity,
+            path=path,
+            templateitemname=templateitemname,
+            type=type,
+            visible=visible,
+            x0=x0,
+            x1=x1,
+            xanchor=xanchor,
+            xref=xref,
+            xsizemode=xsizemode,
+            y0=y0,
+            y1=y1,
+            yanchor=yanchor,
+            yref=yref,
+            ysizemode=ysizemode,
+            **kwargs
+        )
+        return self._add_annotation_like(
+            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y
+        )

@@ -25,6 +25,7 @@ def build_figure_py(
     layout_validator,
     frame_validator,
     subplot_nodes,
+    layout_array_nodes,
 ):
     """
 
@@ -47,6 +48,8 @@ def build_figure_py(
         FrameValidator instance
     subplot_nodes: list of str
         List of names of all of the layout subplot properties
+    layout_array_nodes: list of PlotlyNode
+        List of array nodes under layout that can be positioned using xref/yref
     Returns
     -------
     str
@@ -66,8 +69,10 @@ def build_figure_py(
     # ### Import base class ###
     buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
-    # ### Import trace graph_obj classes ###
-    trace_types_csv = ", ".join([n.name_datatype_class for n in trace_nodes])
+    # ### Import trace graph_obj classes / layout ###
+    trace_types_csv = ", ".join(
+        [n.name_datatype_class for n in trace_nodes] + ["layout as _layout"]
+    )
     buffer.write(f"from plotly.graph_objs import ({trace_types_csv})\n")
 
     # Write class definition
@@ -355,8 +360,9 @@ class {fig_classname}({base_classname}):\n"""
 
     # update annotations/shapes/images
     # --------------------------------
-    for singular_name in ["annotation", "shape", "image"]:
-        plural_name = plural_name = inflect_eng.plural_noun(singular_name)
+    for node in layout_array_nodes:
+        singular_name = node.plotly_name
+        plural_name = node.name_property
 
         buffer.write(
             f"""
@@ -518,6 +524,66 @@ class {fig_classname}({base_classname}):\n"""
         return self
 """
         )
+        # Add layout array items
+        buffer.write(
+            f"""
+    def add_{singular_name}(self"""
+        )
+        add_constructor_params(
+            buffer,
+            node.child_datatypes,
+            prepend_extras=["arg"],
+            append_extras=["row", "col", "secondary_y"],
+        )
+
+        prepend_extras = [
+            (
+                "arg",
+                f"instance of {node.name_datatype_class} or dict with "
+                "compatible properties",
+            )
+        ]
+        append_extras = [
+            ("row", f"Subplot row for {singular_name}"),
+            ("col", f"Subplot column for {singular_name}"),
+            ("secondary_y", f"Whether to add {singular_name} to secondary y-axis"),
+        ]
+        add_docstring(
+            buffer,
+            node,
+            header=f"Create and add a new {singular_name} to the figure's layout",
+            prepend_extras=prepend_extras,
+            append_extras=append_extras,
+            return_type=fig_classname,
+        )
+
+        # #### Function body ####
+        buffer.write(
+            f"""
+        new_obj = _layout.{node.name_datatype_class}(arg,
+            """
+        )
+
+        for i, subtype_node in enumerate(node.child_datatypes):
+            subtype_prop_name = subtype_node.name_property
+            buffer.write(
+                f"""
+                {subtype_prop_name}={subtype_prop_name},"""
+            )
+
+        buffer.write("""**kwargs)""")
+
+        buffer.write(
+            f"""
+        return self._add_annotation_like(
+            '{singular_name}',
+            '{plural_name}',
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        )"""
+        )
 
     # Return source string
     # --------------------
@@ -526,7 +592,13 @@ class {fig_classname}({base_classname}):\n"""
 
 
 def write_figure_classes(
-    outdir, trace_node, data_validator, layout_validator, frame_validator, subplot_nodes
+    outdir,
+    trace_node,
+    data_validator,
+    layout_validator,
+    frame_validator,
+    subplot_nodes,
+    layout_array_nodes,
 ):
     """
     Construct source code for the Figure and FigureWidget classes and
@@ -546,9 +618,10 @@ def write_figure_classes(
         LayoutValidator instance
     frame_validator : CompoundArrayValidator
         FrameValidator instance
-    subplot_nodes: list of str
+    subplot_nodes: list of PlotlyNode
         List of names of all of the layout subplot properties
-
+    layout_array_nodes: list of PlotlyNode
+        List of array nodes under layout that can be positioned using xref/yref
     Returns
     -------
     None
@@ -581,6 +654,7 @@ def write_figure_classes(
             layout_validator,
             frame_validator,
             subplot_nodes,
+            layout_array_nodes,
         )
 
         # ### Format and write to file###

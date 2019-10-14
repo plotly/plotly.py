@@ -979,7 +979,7 @@ class BaseFigure(object):
                 yield self.layout[k]
 
     def _select_annotations_like(
-        self, property, selector=None, row=None, col=None, secondary_y=None
+        self, prop, selector=None, row=None, col=None, secondary_y=None
     ):
         """
         Helper to select annotation-like elements from a layout object array.
@@ -988,7 +988,7 @@ class BaseFigure(object):
         xref_to_col = {}
         yref_to_row = {}
         yref_to_secondary_y = {}
-        if row is not None or col is not None or secondary_y is not None:
+        if isinstance(row, int) or isinstance(col, int) or secondary_y is not None:
             grid_ref = self._validate_get_grid_ref()
             for r, subplot_row in enumerate(grid_ref):
                 for c, subplot_refs in enumerate(subplot_row):
@@ -1005,7 +1005,7 @@ class BaseFigure(object):
                             yref_to_row[yref] = r + 1
                             yref_to_secondary_y[yref] = is_secondary_y
 
-        for obj in self.layout[property]:
+        for obj in self.layout[prop]:
             # Filter by row
             if col is not None:
                 if col == "paper" and obj.xref != "paper":
@@ -1032,6 +1032,64 @@ class BaseFigure(object):
                 continue
 
             yield obj
+
+    def _add_annotation_like(
+        self, prop_singular, prop_plural, new_obj, row=None, col=None, secondary_y=None
+    ):
+        # Make sure we have both row and col or neither
+        if row is not None and col is None:
+            raise ValueError(
+                "Received row parameter but not col.\n"
+                "row and col must be specified together"
+            )
+        elif col is not None and row is None:
+            raise ValueError(
+                "Received col parameter but not row.\n"
+                "row and col must be specified together"
+            )
+
+        # Get grid_ref if specific row or column requested
+        if row is not None:
+            grid_ref = self._validate_get_grid_ref()
+            refs = grid_ref[row - 1][col - 1]
+
+            if not refs:
+                raise ValueError(
+                    "No subplot found at position ({r}, {c})".format(r=row, c=col)
+                )
+
+            if refs[0].subplot_type != "xy":
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+is of type {subplot_type}.""".format(
+                        prop_singular=prop_singular,
+                        r=row,
+                        c=col,
+                        subplot_type=refs[0].subplot_type,
+                    )
+                )
+            if len(refs) == 1 and secondary_y:
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+because subplot does not have a secondary y-axis"""
+                )
+            if secondary_y:
+                xaxis, yaxis = refs[1].layout_keys
+            else:
+                xaxis, yaxis = refs[0].layout_keys
+            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            new_obj.update(xref=xref, yref=yref)
+
+        if new_obj.xref is None:
+            new_obj.xref = "paper"
+        if new_obj.yref is None:
+            new_obj.yref = "paper"
+
+        self.layout[prop_plural] += (new_obj,)
+
+        return self
 
     # Restyle
     # -------
@@ -1526,13 +1584,6 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
-        # Validate row/col
-        if row is not None and not isinstance(row, int):
-            pass
-
-        if col is not None and not isinstance(col, int):
-            pass
-
         # Make sure we have both row and col or neither
         if row is not None and col is None:
             raise ValueError(
