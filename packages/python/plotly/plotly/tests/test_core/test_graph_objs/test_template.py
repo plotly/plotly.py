@@ -513,6 +513,13 @@ class TestMergeTemplates(TestCase):
         expected = self.expected1_2
         self.assertEqual(result, expected)
 
+    def test_update_template_with_flaglist(self):
+        fig = go.Figure()
+        fig.update(layout_template="template1+template2")
+        result = fig.layout.template
+        expected = self.expected1_2
+        self.assertEqual(result, expected)
+
     def test_set_default_template(self):
         orig_default = pio.templates.default
         pio.templates.default = "plotly"

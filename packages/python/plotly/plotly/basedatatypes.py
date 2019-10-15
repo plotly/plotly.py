@@ -492,7 +492,10 @@ class BaseFigure(object):
                             else:
                                 # Accept v
                                 self[k] = v
-                        elif isinstance(update_target, BasePlotlyType) or (
+                        elif (
+                            isinstance(update_target, BasePlotlyType)
+                            and isinstance(v, (dict, BasePlotlyType))
+                        ) or (
                             isinstance(update_target, tuple)
                             and isinstance(update_target[0], BasePlotlyType)
                         ):
