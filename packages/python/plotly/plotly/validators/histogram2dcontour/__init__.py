@@ -686,7 +686,7 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the amount of smoothing for the contour
                 lines, where 0 corresponds to no smoothing.
             width
-                Sets the line width (in px).
+                Sets the contour line width in (in px)
 """,
             ),
             **kwargs

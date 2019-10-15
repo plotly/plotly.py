@@ -359,8 +359,9 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             color
-                Sets the color of the contour level. Has no if
-                `contours.coloring` is set to "lines".
+                Sets the color of the contour level. Has no
+                effect if `contours.coloring` is set to
+                "lines".
             dash
                 Sets the dash style of lines. Set to a dash
                 type string ("solid", "dot", "dash",
@@ -370,7 +371,10 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the amount of smoothing for the contour
                 lines, where 0 corresponds to no smoothing.
             width
-                Sets the line width (in px).
+                Sets the contour line width in (in px) Defaults
+                to 0.5 when `contours.type` is "levels".
+                Defaults to 2 when `contour.type` is
+                "constraint".
 """,
             ),
             **kwargs
@@ -447,92 +451,6 @@ class HovertextValidator(_plotly_utils.basevalidators.DataArrayValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
-    def __init__(self, plotly_name="hoverlabel", parent_name="contourcarpet", **kwargs):
-        super(HoverlabelValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Hoverlabel"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-            align
-                Sets the horizontal alignment of the text
-                content within hover label box. Has an effect
-                only if the hover label text spans more two or
-                more lines
-            alignsrc
-                Sets the source reference on plot.ly for  align
-                .
-            bgcolor
-                Sets the background color of the hover labels
-                for this trace
-            bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
-            bordercolor
-                Sets the border color of the hover labels for
-                this trace.
-            bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
-            font
-                Sets the font used in hover labels.
-            namelength
-                Sets the default length (in number of
-                characters) of the trace name in the hover
-                labels for all traces. -1 shows the whole name
-                regardless of length. 0-3 shows the first 0-3
-                characters, and an integer >3 will show the
-                whole name if it is less than that many
-                characters, but if it is longer, will truncate
-                to `namelength - 3` characters and add an
-                ellipsis.
-            namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HoverinfosrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self, plotly_name="hoverinfosrc", parent_name="contourcarpet", **kwargs
-    ):
-        super(HoverinfosrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
-    def __init__(self, plotly_name="hoverinfo", parent_name="contourcarpet", **kwargs):
-        super(HoverinfoValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "none"),
-            extras=kwargs.pop("extras", ["all", "none", "skip"]),
-            flags=kwargs.pop("flags", ["x", "y", "z", "text", "name"]),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )
 

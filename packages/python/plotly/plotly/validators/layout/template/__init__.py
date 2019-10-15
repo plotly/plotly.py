@@ -156,6 +156,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             table
                 A tuple of plotly.graph_objects.Table instances
                 or dicts with compatible properties
+            treemap
+                A tuple of plotly.graph_objects.Treemap
+                instances or dicts with compatible properties
             violin
                 A tuple of plotly.graph_objects.Violin
                 instances or dicts with compatible properties

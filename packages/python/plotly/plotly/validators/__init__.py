@@ -159,6 +159,17 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 you can set `false` to disable. Colors provided
                 in the trace, using `marker.colors`, are never
                 extended.
+            extendtreemapcolors
+                If `true`, the treemap slice colors (whether
+                given by `treemapcolorway` or inherited from
+                `colorway`) will be extended to three times its
+                original length by first repeating every color
+                20% lighter then each color 20% darker. This is
+                intended to reduce the likelihood of reusing
+                the same color when you have many slices, but
+                you can set `false` to disable. Colors provided
+                in the trace, using `marker.colors`, are never
+                extended.
             font
                 Sets the global font. Note that fonts used in
                 traces and other layout components inherit from
@@ -251,7 +262,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in various `text` attributes. Attributes such
                 as the graph, axis and colorbar `title.text`,
                 annotation `text` `trace.name` in legend items,
-                `rangeselector`, `updatemenues` and `sliders`
+                `rangeselector`, `updatemenus` and `sliders`
                 `label` text all support `meta`. One can access
                 `meta` fields using template strings:
                 `%{meta[i]}` where `i` is the index of the
@@ -383,6 +394,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             transition
                 Sets transition options used during
                 Plotly.react updates.
+            treemapcolorway
+                Sets the default treemap slice colors. Defaults
+                to the main `colorway` used for trace colors.
+                If you specify a new list here it can still be
+                extended with lighter and darker colors, see
+                `extendtreemapcolors`.
             uirevision
                 Used to allow user interactions with the plot
                 to persist after `Plotly.react` calls that are
@@ -533,7 +550,13 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -686,6 +709,30 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `initial`, `delta`,
+                `final` and `label`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             totals
                 plotly.graph_objects.waterfall.Totals instance
                 or dict with compatible properties
@@ -866,7 +913,13 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -1102,7 +1155,13 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -1344,6 +1403,256 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="treemap", parent_name="", **kwargs):
+        super(TreemapValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Treemap"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+            branchvalues
+                Determines how the items in `values` are
+                summed. When set to "total", items in `values`
+                are taken to be value of all its descendants.
+                When set to "remainder", items in `values`
+                corresponding to the root and the branches
+                sectors are taken to be the extra part not part
+                of the sum of the values at their leaves.
+            count
+                Determines default for `values` when it is not
+                provided, by inferring a 1 for each of the
+                "leaves" and/or "branches", otherwise 0.
+            customdata
+                Assigns extra data each datum. This may be
+                useful when listening to hover, click and
+                selection events. Note that, "scatter" traces
+                also appends customdata items in the markers
+                DOM elements
+            customdatasrc
+                Sets the source reference on plot.ly for
+                customdata .
+            domain
+                plotly.graph_objects.treemap.Domain instance or
+                dict with compatible properties
+            hoverinfo
+                Determines which trace information appear on
+                hover. If `none` or `skip` are set, no
+                information is displayed upon hovering. But, if
+                `none` is set, click and hover events are still
+                fired.
+            hoverinfosrc
+                Sets the source reference on plot.ly for
+                hoverinfo .
+            hoverlabel
+                plotly.graph_objects.treemap.Hoverlabel
+                instance or dict with compatible properties
+            hovertemplate
+                Template string used for rendering the
+                information that appear on hover box. Note that
+                this will override `hoverinfo`. Variables are
+                inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
+                variables available in `hovertemplate` are the
+                ones emitted as event data described at this
+                link https://plot.ly/javascript/plotlyjs-
+                events/#event-data. Additionally, every
+                attributes that can be specified per-point (the
+                ones that are `arrayOk: true`) are available.
+                variables `currentPath`, `root`, `entry`,
+                `percentRoot`, `percentEntry` and
+                `percentParent`. Anything contained in tag
+                `<extra>` is displayed in the secondary box,
+                for example "<extra>{fullData.name}</extra>".
+                To hide the secondary box completely, use an
+                empty tag `<extra></extra>`.
+            hovertemplatesrc
+                Sets the source reference on plot.ly for
+                hovertemplate .
+            hovertext
+                Sets hover text elements associated with each
+                sector. If a single string, the same string
+                appears for all data points. If an array of
+                string, the items are mapped in order of this
+                trace's sectors. To be seen, trace `hoverinfo`
+                must contain a "text" flag.
+            hovertextsrc
+                Sets the source reference on plot.ly for
+                hovertext .
+            ids
+                Assigns id labels to each datum. These ids for
+                object constancy of data points during
+                animation. Should be an array of strings, not
+                numbers or any other type.
+            idssrc
+                Sets the source reference on plot.ly for  ids .
+            insidetextfont
+                Sets the font used for `textinfo` lying inside
+                the sector.
+            labels
+                Sets the labels of each of the sectors.
+            labelssrc
+                Sets the source reference on plot.ly for
+                labels .
+            level
+                Sets the level from which this trace hierarchy
+                is rendered. Set `level` to `''` to start from
+                the root node in the hierarchy. Must be an "id"
+                if `ids` is filled in, otherwise plotly
+                attempts to find a matching item in `labels`.
+            marker
+                plotly.graph_objects.treemap.Marker instance or
+                dict with compatible properties
+            maxdepth
+                Sets the number of rendered sectors from any
+                given `level`. Set `maxdepth` to "-1" to render
+                all the levels in the hierarchy.
+            meta
+                Assigns extra meta information associated with
+                this trace that can be used in various text
+                attributes. Attributes such as trace `name`,
+                graph, axis and colorbar `title.text`,
+                annotation `text` `rangeselector`,
+                `updatemenues` and `sliders` `label` text all
+                support `meta`. To access the trace `meta`
+                values in an attribute in the same trace,
+                simply use `%{meta[i]}` where `i` is the index
+                or key of the `meta` item in question. To
+                access trace `meta` in layout attributes, use
+                `%{data[n[.meta[i]}` where `i` is the index or
+                key of the `meta` and `n` is the trace index.
+            metasrc
+                Sets the source reference on plot.ly for  meta
+                .
+            name
+                Sets the trace name. The trace name appear as
+                the legend item and on hover.
+            opacity
+                Sets the opacity of the trace.
+            outsidetextfont
+                Sets the font used for `textinfo` lying outside
+                the sector.
+            parents
+                Sets the parent sectors for each of the
+                sectors. Empty string items '' are understood
+                to reference the root node in the hierarchy. If
+                `ids` is filled, `parents` items are understood
+                to be "ids" themselves. When `ids` is not set,
+                plotly attempts to find matching items in
+                `labels`, but beware they must be unique.
+            parentssrc
+                Sets the source reference on plot.ly for
+                parents .
+            pathbar
+                plotly.graph_objects.treemap.Pathbar instance
+                or dict with compatible properties
+            stream
+                plotly.graph_objects.treemap.Stream instance or
+                dict with compatible properties
+            text
+                Sets text elements associated with each sector.
+                If trace `textinfo` contains a "text" flag,
+                these elements will be seen on the chart. If
+                trace `hoverinfo` contains a "text" flag and
+                "hovertext" is not set, these elements will be
+                seen in the hover labels.
+            textfont
+                Sets the font used for `textinfo`.
+            textinfo
+                Determines which trace information appear on
+                the graph.
+            textposition
+                Sets the positions of the `text` elements.
+            textsrc
+                Sets the source reference on plot.ly for  text
+                .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `currentPath`, `root`,
+                `entry`, `percentRoot`, `percentEntry`,
+                `percentParent`, `label` and `value`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
+            tiling
+                plotly.graph_objects.treemap.Tiling instance or
+                dict with compatible properties
+            uid
+                Assign an id to this trace, Use this to provide
+                object constancy between traces during
+                animations and transitions.
+            uirevision
+                Controls persistence of some user-driven
+                changes to the trace: `constraintrange` in
+                `parcoords` traces, as well as some `editable:
+                true` modifications such as `name` and
+                `colorbar.title`. Defaults to
+                `layout.uirevision`. Note that other user-
+                driven trace attribute changes are controlled
+                by `layout` attributes: `trace.visible` is
+                controlled by `layout.legend.uirevision`,
+                `selectedpoints` is controlled by
+                `layout.selectionrevision`, and
+                `colorbar.(x|y)` (accessible with `config:
+                {editable: true}`) is controlled by
+                `layout.editrevision`. Trace changes are
+                tracked by `uid`, which only falls back on
+                trace index if no `uid` is provided. So if your
+                app can add/remove traces before the end of the
+                `data` array, such that the same trace has a
+                different index, you can still preserve user-
+                driven changes if you give each trace a `uid`
+                that stays with it as it moves.
+            values
+                Sets the values associated with each of the
+                sectors. Use with `branchvalues` to determine
+                how the values are summed.
+            valuessrc
+                Sets the source reference on plot.ly for
+                values .
+            visible
+                Determines whether or not this trace is
+                visible. If "legendonly", the trace is not
+                drawn, but can appear as a legend item
+                (provided that the legend itself is visible).
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="table", parent_name="", **kwargs):
         super(TableValidator, self).__init__(
@@ -1574,7 +1883,13 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -1746,6 +2061,10 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 corresponding to the root and the branches
                 sectors are taken to be the extra part not part
                 of the sum of the values at their leaves.
+            count
+                Determines default for `values` when it is not
+                provided, by inferring a 1 for each of the
+                "leaves" and/or "branches", otherwise 0.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -1780,18 +2099,26 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                Anything contained in tag `<extra>` is
-                displayed in the secondary box, for example
-                "<extra>{fullData.name}</extra>". To hide the
-                secondary box completely, use an empty tag
-                `<extra></extra>`.
+                variables `currentPath`, `root`, `entry`,
+                `percentRoot`, `percentEntry` and
+                `percentParent`. Anything contained in tag
+                `<extra>` is displayed in the secondary box,
+                for example "<extra>{fullData.name}</extra>".
+                To hide the secondary box completely, use an
+                empty tag `<extra></extra>`.
             hovertemplatesrc
                 Sets the source reference on plot.ly for
                 hovertemplate .
@@ -1816,8 +2143,7 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the font used for `textinfo` lying inside
                 the sector.
             labels
-                Sets the labels of each of the sunburst
-                sectors.
+                Sets the labels of each of the sectors.
             labelssrc
                 Sets the source reference on plot.ly for
                 labels .
@@ -1825,19 +2151,18 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly.graph_objects.sunburst.Leaf instance or
                 dict with compatible properties
             level
-                Sets the level from which this sunburst trace
-                hierarchy is rendered. Set `level` to `''` to
-                start the sunburst from the root node in the
-                hierarchy. Must be an "id" if `ids` is filled
-                in, otherwise plotly attempts to find a
-                matching item in `labels`.
+                Sets the level from which this trace hierarchy
+                is rendered. Set `level` to `''` to start from
+                the root node in the hierarchy. Must be an "id"
+                if `ids` is filled in, otherwise plotly
+                attempts to find a matching item in `labels`.
             marker
                 plotly.graph_objects.sunburst.Marker instance
                 or dict with compatible properties
             maxdepth
-                Sets the number of rendered sunburst rings from
-                any given `level`. Set `maxdepth` to "-1" to
-                render all the levels in the hierarchy.
+                Sets the number of rendered sectors from any
+                given `level`. Set `maxdepth` to "-1" to render
+                all the levels in the hierarchy.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -1865,13 +2190,12 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the sector.
             parents
                 Sets the parent sectors for each of the
-                sunburst sectors. Empty string items '' are
-                understood to reference the root node in the
-                hierarchy. If `ids` is filled, `parents` items
-                are understood to be "ids" themselves. When
-                `ids` is not set, plotly attempts to find
-                matching items in `labels`, but beware they
-                must be unique.
+                sectors. Empty string items '' are understood
+                to reference the root node in the hierarchy. If
+                `ids` is filled, `parents` items are understood
+                to be "ids" themselves. When `ids` is not set,
+                plotly attempts to find matching items in
+                `labels`, but beware they must be unique.
             parentssrc
                 Sets the source reference on plot.ly for
                 parents .
@@ -1893,6 +2217,31 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `currentPath`, `root`,
+                `entry`, `percentRoot`, `percentEntry`,
+                `percentParent`, `label` and `value`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -1921,8 +2270,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 that stays with it as it moves.
             values
                 Sets the values associated with each of the
-                sunburst sectors. Use with `branchvalues` to
-                determine how the values are summed.
+                sectors. Use with `branchvalues` to determine
+                how the values are summed.
             valuessrc
                 Sets the source reference on plot.ly for
                 values .
@@ -2034,7 +2383,13 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -2245,7 +2600,13 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -2497,7 +2858,13 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -2620,6 +2987,29 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `a`, `b`, `c` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -2744,7 +3134,13 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -2868,6 +3264,29 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `r`, `theta` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             theta
                 Sets the angular coordinates
             theta0
@@ -3004,7 +3423,13 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -3128,6 +3553,29 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `r`, `theta` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             theta
                 Sets the angular coordinates
             theta0
@@ -3246,7 +3694,13 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -3371,6 +3825,29 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `lat`, `lon` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -3501,7 +3978,13 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -3606,6 +4089,29 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -3745,7 +4251,13 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -3879,6 +4391,30 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `lat`, `lon`, `location`
+                and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -3941,7 +4477,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  b .
             carpet
                 An identifier for this carpet, so that
-                `scattercarpet` and `scattercontour` traces can
+                `scattercarpet` and `contourcarpet` traces can
                 specify a carpet plot on which they lie
             connectgaps
                 Determines whether or not gaps (i.e. {nan} or
@@ -4002,7 +4538,13 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -4112,6 +4654,29 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `a`, `b` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -4220,7 +4785,13 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -4336,6 +4907,29 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -4511,7 +5105,13 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -4671,6 +5271,29 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             tsrc
                 Sets the source reference on plot.ly for  t .
             uid
@@ -5123,7 +5746,13 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -5251,6 +5880,30 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `label`, `color`, `value`,
+                `percent` and `text`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             title
                 plotly.graph_objects.pie.Title instance or dict
                 with compatible properties
@@ -5495,7 +6148,13 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -5904,7 +6563,13 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -6219,7 +6884,13 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -6622,7 +7293,13 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -6947,7 +7624,13 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -7251,7 +7934,13 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -7737,7 +8426,13 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -7981,15 +8676,21 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                variables `label`, `color`, `value`, `percent`
-                and `text`. Anything contained in tag `<extra>`
+                variables `label`, `color`, `value`, `text` and
+                `percent`. Anything contained in tag `<extra>`
                 is displayed in the secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
                 secondary box completely, use an empty tag
@@ -8091,6 +8792,30 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `label`, `color`, `value`,
+                `text` and `percent`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             title
                 plotly.graph_objects.funnelarea.Title instance
                 or dict with compatible properties
@@ -8204,7 +8929,13 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -8349,6 +9080,31 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available. variables `percentInitial`,
+                `percentPrevious`, `percentTotal`, `label` and
+                `value`.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -8500,7 +9256,13 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -8771,18 +9533,6 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "constraint". Defaults to a half-transparent
                 variant of the line color, marker color, or
                 marker line color, whichever is available.
-            hoverinfo
-                Determines which trace information appear on
-                hover. If `none` or `skip` are set, no
-                information is displayed upon hovering. But, if
-                `none` is set, click and hover events are still
-                fired.
-            hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
-            hoverlabel
-                plotly.graph_objects.contourcarpet.Hoverlabel
-                instance or dict with compatible properties
             hovertext
                 Same as `text`.
             hovertextsrc
@@ -9026,7 +9776,13 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -9326,7 +10082,13 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -9590,7 +10352,13 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -9829,7 +10597,13 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -10019,7 +10793,7 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  b .
             carpet
                 An identifier for this carpet, so that
-                `scattercarpet` and `scattercontour` traces can
+                `scattercarpet` and `contourcarpet` traces can
                 specify a carpet plot on which they lie
             cheaterslope
                 The shift applied to each successive row of
@@ -10049,18 +10823,6 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             font
                 The default font used for axis & tick labels on
                 this carpet
-            hoverinfo
-                Determines which trace information appear on
-                hover. If `none` or `skip` are set, no
-                information is displayed upon hovering. But, if
-                `none` is set, click and hover events are still
-                fired.
-            hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
-            hoverlabel
-                plotly.graph_objects.carpet.Hoverlabel instance
-                or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -10409,7 +11171,13 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -10670,7 +11438,13 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -10910,7 +11684,13 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "Price: %{y:$.2f}".
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
-                for details on the formatting syntax. The
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
                 link https://plot.ly/javascript/plotlyjs-
@@ -11062,6 +11842,29 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             textsrc
                 Sets the source reference on plot.ly for  text
                 .
+            texttemplate
+                Template string used for rendering the
+                information text that appear on points. Note
+                that this will override `textinfo`. Variables
+                are inserted using %{variable}, for example "y:
+                %{y}". Numbers are formatted using d3-format's
+                syntax %{variable:d3-format}, for example
+                "Price: %{y:$.2f}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Formatting.md#d3_format
+                for details on the formatting syntax. Dates are
+                formatted using d3-time-format's syntax
+                %{variable|d3-time-format}, for example "Day:
+                %{2019-01-01|%A}".
+                https://github.com/d3/d3-3.x-api-
+                reference/blob/master/Time-Formatting.md#format
+                for details on the date formatting syntax.
+                Every attributes that can be specified per-
+                point (the ones that are `arrayOk: true`) are
+                available.
+            texttemplatesrc
+                Sets the source reference on plot.ly for
+                texttemplate .
             tsrc
                 Sets the source reference on plot.ly for  t .
             uid
@@ -11358,6 +12161,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "sunburst": "Sunburst",
                 "surface": "Surface",
                 "table": "Table",
+                "treemap": "Treemap",
                 "violin": "Violin",
                 "volume": "Volume",
                 "waterfall": "Waterfall",
