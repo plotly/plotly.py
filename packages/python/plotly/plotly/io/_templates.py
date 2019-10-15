@@ -8,6 +8,8 @@ import os
 import json
 from functools import reduce
 
+from six import string_types
+
 try:
     from math import gcd
 except ImportError:
@@ -61,24 +63,34 @@ class TemplatesConfig(object):
         return iter(self._templates)
 
     def __getitem__(self, item):
-        template = self._templates[item]
-        if template is Lazy:
-            from plotly.graph_objs.layout import Template
+        if isinstance(item, string_types):
+            template_names = item.split("+")
+        else:
+            template_names = [item]
 
-            if item == "none":
-                # "none" is a special built-in named template that applied no defaults
-                template = Template()
-                self._templates[item] = template
-            else:
-                # Load template from package data
-                path = os.path.join("package_data", "templates", item + ".json")
-                template_str = pkgutil.get_data("plotly", path).decode("utf-8")
-                template_dict = json.loads(template_str)
-                template = Template(template_dict)
+        templates = []
+        for template_name in template_names:
+            template = self._templates[template_name]
+            if template is Lazy:
+                from plotly.graph_objs.layout import Template
 
-                self._templates[item] = template
+                if template_name == "none":
+                    # "none" is a special built-in named template that applied no defaults
+                    template = Template()
+                    self._templates[template_name] = template
+                else:
+                    # Load template from package data
+                    path = os.path.join(
+                        "package_data", "templates", template_name + ".json"
+                    )
+                    template_str = pkgutil.get_data("plotly", path).decode("utf-8")
+                    template_dict = json.loads(template_str)
+                    template = Template(template_dict)
 
-        return template
+                    self._templates[template_name] = template
+            templates.append(self._templates[template_name])
+
+        return self.merge_templates(*templates)
 
     def __setitem__(self, key, value):
         self._templates[key] = self._validate(value)
