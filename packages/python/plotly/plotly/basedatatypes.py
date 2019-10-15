@@ -998,6 +998,119 @@ class BaseFigure(object):
 
                 yield self.layout[k]
 
+    def _select_annotations_like(
+        self, prop, selector=None, row=None, col=None, secondary_y=None
+    ):
+        """
+        Helper to select annotation-like elements from a layout object array.
+        Compatible with layout.annotations, layout.shapes, and layout.images
+        """
+        xref_to_col = {}
+        yref_to_row = {}
+        yref_to_secondary_y = {}
+        if isinstance(row, int) or isinstance(col, int) or secondary_y is not None:
+            grid_ref = self._validate_get_grid_ref()
+            for r, subplot_row in enumerate(grid_ref):
+                for c, subplot_refs in enumerate(subplot_row):
+                    if not subplot_refs:
+                        continue
+
+                    for i, subplot_ref in enumerate(subplot_refs):
+                        if subplot_ref.subplot_type == "xy":
+                            is_secondary_y = i == 1
+                            xaxis, yaxis = subplot_ref.layout_keys
+                            xref = xaxis.replace("axis", "")
+                            yref = yaxis.replace("axis", "")
+                            xref_to_col[xref] = c + 1
+                            yref_to_row[yref] = r + 1
+                            yref_to_secondary_y[yref] = is_secondary_y
+
+        for obj in self.layout[prop]:
+            # Filter by row
+            if col is not None:
+                if col == "paper" and obj.xref != "paper":
+                    continue
+                elif col != "paper" and xref_to_col.get(obj.xref, None) != col:
+                    continue
+
+            # Filter by col
+            if row is not None:
+                if row == "paper" and obj.yref != "paper":
+                    continue
+                elif row != "paper" and yref_to_row.get(obj.yref, None) != row:
+                    continue
+
+            # Filter by secondary y
+            if (
+                secondary_y is not None
+                and yref_to_secondary_y.get(obj.yref, None) != secondary_y
+            ):
+                continue
+
+            # Filter by selector
+            if not self._selector_matches(obj, selector):
+                continue
+
+            yield obj
+
+    def _add_annotation_like(
+        self, prop_singular, prop_plural, new_obj, row=None, col=None, secondary_y=None
+    ):
+        # Make sure we have both row and col or neither
+        if row is not None and col is None:
+            raise ValueError(
+                "Received row parameter but not col.\n"
+                "row and col must be specified together"
+            )
+        elif col is not None and row is None:
+            raise ValueError(
+                "Received col parameter but not row.\n"
+                "row and col must be specified together"
+            )
+
+        # Get grid_ref if specific row or column requested
+        if row is not None:
+            grid_ref = self._validate_get_grid_ref()
+            refs = grid_ref[row - 1][col - 1]
+
+            if not refs:
+                raise ValueError(
+                    "No subplot found at position ({r}, {c})".format(r=row, c=col)
+                )
+
+            if refs[0].subplot_type != "xy":
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+is of type {subplot_type}.""".format(
+                        prop_singular=prop_singular,
+                        r=row,
+                        c=col,
+                        subplot_type=refs[0].subplot_type,
+                    )
+                )
+            if len(refs) == 1 and secondary_y:
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+because subplot does not have a secondary y-axis"""
+                )
+            if secondary_y:
+                xaxis, yaxis = refs[1].layout_keys
+            else:
+                xaxis, yaxis = refs[0].layout_keys
+            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            new_obj.update(xref=xref, yref=yref)
+
+        if new_obj.xref is None:
+            new_obj.xref = "paper"
+        if new_obj.yref is None:
+            new_obj.yref = "paper"
+
+        self.layout[prop_plural] += (new_obj,)
+
+        return self
+
     # Restyle
     # -------
     def plotly_restyle(self, restyle_data, trace_indexes=None, **kwargs):
@@ -1491,13 +1604,6 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
         """
-        # Validate row/col
-        if row is not None and not isinstance(row, int):
-            pass
-
-        if col is not None and not isinstance(col, int):
-            pass
-
         # Make sure we have both row and col or neither
         if row is not None and col is None:
             raise ValueError(

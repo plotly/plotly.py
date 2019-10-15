@@ -25,6 +25,7 @@ def build_figure_py(
     layout_validator,
     frame_validator,
     subplot_nodes,
+    layout_array_nodes,
 ):
     """
 
@@ -47,6 +48,8 @@ def build_figure_py(
         FrameValidator instance
     subplot_nodes: list of str
         List of names of all of the layout subplot properties
+    layout_array_nodes: list of PlotlyNode
+        List of array nodes under layout that can be positioned using xref/yref
     Returns
     -------
     str
@@ -66,8 +69,10 @@ def build_figure_py(
     # ### Import base class ###
     buffer.write(f"from plotly.{base_package} import {base_classname}\n")
 
-    # ### Import trace graph_obj classes ###
-    trace_types_csv = ", ".join([n.name_datatype_class for n in trace_nodes])
+    # ### Import trace graph_obj classes / layout ###
+    trace_types_csv = ", ".join(
+        [n.name_datatype_class for n in trace_nodes] + ["layout as _layout"]
+    )
     buffer.write(f"from plotly.graph_objs import ({trace_types_csv})\n")
 
     # Write class definition
@@ -358,6 +363,239 @@ class {fig_classname}({base_classname}):\n"""
         return self"""
         )
 
+    # update annotations/shapes/images
+    # --------------------------------
+    for node in layout_array_nodes:
+        singular_name = node.plotly_name
+        plural_name = node.name_property
+
+        if singular_name == "image":
+            # Rename image to layout_image to avoid conflict with an image trace
+            method_prefix = "layout_"
+        else:
+            method_prefix = ""
+
+        buffer.write(
+            f"""
+    def select_{method_prefix}{plural_name}(
+        self, selector=None, row=None, col=None, secondary_y=None
+    ):
+        \"\"\"
+        Select {plural_name} from a particular subplot cell and/or {plural_name}
+        that satisfy custom selection criteria.
+
+        Parameters
+        ----------
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Annotations will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {singular_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        generator
+            Generator that iterates through all of the {plural_name} that satisfy
+            all of the specified selection criteria
+        \"\"\"
+        return self._select_annotations_like(
+            "{plural_name}", selector=selector, row=row, col=col, secondary_y=secondary_y
+        )
+
+    def for_each_{method_prefix}{singular_name}(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
+        \"\"\"
+        Apply a function to all {plural_name} that satisfy the specified selection
+        criteria
+
+        Parameters
+        ----------
+        fn:
+            Function that inputs a single {singular_name} object.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {plural_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self._select_annotations_like(
+            prop='{plural_name}',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            fn(obj)
+
+        return self
+
+    def update_{method_prefix}{plural_name}(
+        self,
+        patch,
+        selector=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        \"\"\"
+        Perform a property update operation on all {plural_name} that satisfy the
+        specified selection criteria
+
+        Parameters
+        ----------
+        patch: dict or None (default None)
+            Dictionary of property updates to be applied to all {plural_name} that
+            satisfy the selection criteria.
+        selector: dict or None (default None)
+            Dict to use as selection criteria.
+            Traces will be selected if they contain properties corresponding
+            to all of the dictionary's keys, with values that exactly match
+            the supplied values. If None (the default), all {plural_name} are
+            selected.
+        row, col: int or None (default None)
+            Subplot row and column index of {plural_name} to select.
+            To select {plural_name} by row and column, the Figure must have been
+            created using plotly.subplots.make_subplots.  To select only those
+            {singular_name} that are in paper coordinates, set row and col to the
+            string 'paper'.  If None (the default), all {plural_name} are selected.
+        secondary_y: boolean or None (default None)
+            * If True, only select {plural_name} associated with the secondary
+              y-axis of the subplot.
+            * If False, only select {plural_name} associated with the primary
+              y-axis of the subplot.
+            * If None (the default), do not filter {plural_name} based on secondary
+              y-axis.
+
+            To select {plural_name} by secondary y-axis, the Figure must have been
+            created using plotly.subplots.make_subplots. See the docstring
+            for the specs argument to make_subplots for more info on
+            creating subplots with secondary y-axes.
+        **kwargs
+            Additional property updates to apply to each selected {singular_name}. If
+            a property is specified in both patch and in **kwargs then the
+            one in **kwargs takes precedence.
+
+        Returns
+        -------
+        self
+            Returns the Figure object that the method was called on
+        \"\"\"
+        for obj in self._select_annotations_like(
+            prop='{plural_name}',
+            selector=selector,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        ):
+            obj.update(patch, **kwargs)
+
+        return self
+"""
+        )
+        # Add layout array items
+        buffer.write(
+            f"""
+    def add_{method_prefix}{singular_name}(self"""
+        )
+        add_constructor_params(
+            buffer,
+            node.child_datatypes,
+            prepend_extras=["arg"],
+            append_extras=["row", "col", "secondary_y"],
+        )
+
+        prepend_extras = [
+            (
+                "arg",
+                f"instance of {node.name_datatype_class} or dict with "
+                "compatible properties",
+            )
+        ]
+        append_extras = [
+            ("row", f"Subplot row for {singular_name}"),
+            ("col", f"Subplot column for {singular_name}"),
+            ("secondary_y", f"Whether to add {singular_name} to secondary y-axis"),
+        ]
+        add_docstring(
+            buffer,
+            node,
+            header=f"Create and add a new {singular_name} to the figure's layout",
+            prepend_extras=prepend_extras,
+            append_extras=append_extras,
+            return_type=fig_classname,
+        )
+
+        # #### Function body ####
+        buffer.write(
+            f"""
+        new_obj = _layout.{node.name_datatype_class}(arg,
+            """
+        )
+
+        for i, subtype_node in enumerate(node.child_datatypes):
+            subtype_prop_name = subtype_node.name_property
+            buffer.write(
+                f"""
+                {subtype_prop_name}={subtype_prop_name},"""
+            )
+
+        buffer.write("""**kwargs)""")
+
+        buffer.write(
+            f"""
+        return self._add_annotation_like(
+            '{singular_name}',
+            '{plural_name}',
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+        )"""
+        )
+
     # Return source string
     # --------------------
     buffer.write("\n")
@@ -365,7 +603,13 @@ class {fig_classname}({base_classname}):\n"""
 
 
 def write_figure_classes(
-    outdir, trace_node, data_validator, layout_validator, frame_validator, subplot_nodes
+    outdir,
+    trace_node,
+    data_validator,
+    layout_validator,
+    frame_validator,
+    subplot_nodes,
+    layout_array_nodes,
 ):
     """
     Construct source code for the Figure and FigureWidget classes and
@@ -385,9 +629,10 @@ def write_figure_classes(
         LayoutValidator instance
     frame_validator : CompoundArrayValidator
         FrameValidator instance
-    subplot_nodes: list of str
+    subplot_nodes: list of PlotlyNode
         List of names of all of the layout subplot properties
-
+    layout_array_nodes: list of PlotlyNode
+        List of array nodes under layout that can be positioned using xref/yref
     Returns
     -------
     None
@@ -420,6 +665,7 @@ def write_figure_classes(
             layout_validator,
             frame_validator,
             subplot_nodes,
+            layout_array_nodes,
         )
 
         # ### Format and write to file###
