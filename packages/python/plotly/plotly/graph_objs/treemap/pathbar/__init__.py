@@ -2,7 +2,7 @@ from plotly.basedatatypes import BaseTraceHierarchyType as _BaseTraceHierarchyTy
 import copy as _copy
 
 
-class Font(_BaseTraceHierarchyType):
+class Textfont(_BaseTraceHierarchyType):
 
     # color
     # -----
@@ -177,7 +177,7 @@ class Font(_BaseTraceHierarchyType):
     # --------------------
     @property
     def _parent_path_str(self):
-        return "carpet.hoverlabel"
+        return "treemap.pathbar"
 
     # Self properties description
     # ---------------------------
@@ -222,15 +222,16 @@ class Font(_BaseTraceHierarchyType):
         **kwargs
     ):
         """
-        Construct a new Font object
+        Construct a new Textfont object
         
-        Sets the font used in hover labels.
+        Sets the font used inside `pathbar`.
 
         Parameters
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.carpet.hoverlabel.Font
+            an instance of
+            plotly.graph_objs.treemap.pathbar.Textfont
         color
 
         colorsrc
@@ -258,9 +259,9 @@ class Font(_BaseTraceHierarchyType):
 
         Returns
         -------
-        Font
+        Textfont
         """
-        super(Font, self).__init__("font")
+        super(Textfont, self).__init__("textfont")
 
         # Validate arg
         # ------------
@@ -273,9 +274,9 @@ class Font(_BaseTraceHierarchyType):
         else:
             raise ValueError(
                 """\
-The first argument to the plotly.graph_objs.carpet.hoverlabel.Font 
+The first argument to the plotly.graph_objs.treemap.pathbar.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.hoverlabel.Font"""
+an instance of plotly.graph_objs.treemap.pathbar.Textfont"""
             )
 
         # Handle skip_invalid
@@ -284,16 +285,16 @@ an instance of plotly.graph_objs.carpet.hoverlabel.Font"""
 
         # Import validators
         # -----------------
-        from plotly.validators.carpet.hoverlabel import font as v_font
+        from plotly.validators.treemap.pathbar import textfont as v_textfont
 
         # Initialize validators
         # ---------------------
-        self._validators["color"] = v_font.ColorValidator()
-        self._validators["colorsrc"] = v_font.ColorsrcValidator()
-        self._validators["family"] = v_font.FamilyValidator()
-        self._validators["familysrc"] = v_font.FamilysrcValidator()
-        self._validators["size"] = v_font.SizeValidator()
-        self._validators["sizesrc"] = v_font.SizesrcValidator()
+        self._validators["color"] = v_textfont.ColorValidator()
+        self._validators["colorsrc"] = v_textfont.ColorsrcValidator()
+        self._validators["family"] = v_textfont.FamilyValidator()
+        self._validators["familysrc"] = v_textfont.FamilysrcValidator()
+        self._validators["size"] = v_textfont.SizeValidator()
+        self._validators["sizesrc"] = v_textfont.SizesrcValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -319,4 +320,4 @@ an instance of plotly.graph_objs.carpet.hoverlabel.Font"""
         self._skip_invalid = False
 
 
-__all__ = ["Font"]
+__all__ = ["Textfont"]

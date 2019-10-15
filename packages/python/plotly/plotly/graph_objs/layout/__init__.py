@@ -9123,6 +9123,9 @@ class Template(_BaseLayoutHierarchyType):
                 table
                     A tuple of plotly.graph_objects.Table instances
                     or dicts with compatible properties
+                treemap
+                    A tuple of plotly.graph_objects.Treemap
+                    instances or dicts with compatible properties
                 violin
                     A tuple of plotly.graph_objects.Violin
                     instances or dicts with compatible properties
@@ -14859,6 +14862,10 @@ class Margin(_BaseLayoutHierarchyType):
     @property
     def autoexpand(self):
         """
+        Turns on/off margin expansion computations. Legends, colorbars,
+        updatemenus, sliders, axis rangeselector and rangeslider are
+        allowed to push the margins by defaults.
+    
         The 'autoexpand' property must be specified as a bool
         (either True, or False)
 
@@ -14985,7 +14992,10 @@ class Margin(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         autoexpand
-
+            Turns on/off margin expansion computations. Legends,
+            colorbars, updatemenus, sliders, axis rangeselector and
+            rangeslider are allowed to push the margins by
+            defaults.
         b
             Sets the bottom margin (in px).
         l
@@ -15019,7 +15029,10 @@ class Margin(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Margin
         autoexpand
-
+            Turns on/off margin expansion computations. Legends,
+            colorbars, updatemenus, sliders, axis rangeselector and
+            rangeslider are allowed to push the margins by
+            defaults.
         b
             Sets the bottom margin (in px).
         l
@@ -16083,6 +16096,8 @@ class Legend(_BaseLayoutHierarchyType):
     def x(self):
         """
         Sets the x position (in normalized coordinates) of the legend.
+        Defaults to 1.02 for vertical legends and defaults to 0 for
+        horizontal legends.
     
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
@@ -16104,7 +16119,10 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Sets the legend's horizontal position anchor. This anchor binds
         the `x` position to the "left", "center" or "right" of the
-        legend.
+        legend. Value "auto" anchors legends to the right for `x`
+        values greater than or equal to 2/3, anchors legends to the
+        left for `x` values less than or equal to 1/3 and anchors
+        legends with respect to their center otherwise.
     
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -16126,6 +16144,10 @@ class Legend(_BaseLayoutHierarchyType):
     def y(self):
         """
         Sets the y position (in normalized coordinates) of the legend.
+        Defaults to 1 for vertical legends, defaults to "-0.1" for
+        horizontal legends on graphs w/o range sliders and defaults to
+        1.1 for horizontal legends on graph with one or multiple range
+        sliders.
     
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
@@ -16147,7 +16169,10 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Sets the legend's vertical position anchor This anchor binds
         the `y` position to the "top", "middle" or "bottom" of the
-        legend.
+        legend. Value "auto" anchors legends at their bottom for `y`
+        values less than or equal to 1/3, anchors legends to at their
+        top for `y` values greater than or equal to 2/3 and anchors
+        legends with respect to their middle otherwise.
     
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -16222,18 +16247,30 @@ class Legend(_BaseLayoutHierarchyType):
             to their associated text.
         x
             Sets the x position (in normalized coordinates) of the
-            legend.
+            legend. Defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends.
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
-            or "right" of the legend.
+            or "right" of the legend. Value "auto" anchors legends
+            to the right for `x` values greater than or equal to
+            2/3, anchors legends to the left for `x` values less
+            than or equal to 1/3 and anchors legends with respect
+            to their center otherwise.
         y
             Sets the y position (in normalized coordinates) of the
-            legend.
+            legend. Defaults to 1 for vertical legends, defaults to
+            "-0.1" for horizontal legends on graphs w/o range
+            sliders and defaults to 1.1 for horizontal legends on
+            graph with one or multiple range sliders.
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
-            "bottom" of the legend.
+            "bottom" of the legend. Value "auto" anchors legends at
+            their bottom for `y` values less than or equal to 1/3,
+            anchors legends to at their top for `y` values greater
+            than or equal to 2/3 and anchors legends with respect
+            to their middle otherwise.
         """
 
     def __init__(
@@ -16313,18 +16350,30 @@ class Legend(_BaseLayoutHierarchyType):
             to their associated text.
         x
             Sets the x position (in normalized coordinates) of the
-            legend.
+            legend. Defaults to 1.02 for vertical legends and
+            defaults to 0 for horizontal legends.
         xanchor
             Sets the legend's horizontal position anchor. This
             anchor binds the `x` position to the "left", "center"
-            or "right" of the legend.
+            or "right" of the legend. Value "auto" anchors legends
+            to the right for `x` values greater than or equal to
+            2/3, anchors legends to the left for `x` values less
+            than or equal to 1/3 and anchors legends with respect
+            to their center otherwise.
         y
             Sets the y position (in normalized coordinates) of the
-            legend.
+            legend. Defaults to 1 for vertical legends, defaults to
+            "-0.1" for horizontal legends on graphs w/o range
+            sliders and defaults to 1.1 for horizontal legends on
+            graph with one or multiple range sliders.
         yanchor
             Sets the legend's vertical position anchor This anchor
             binds the `y` position to the "top", "middle" or
-            "bottom" of the legend.
+            "bottom" of the legend. Value "auto" anchors legends at
+            their bottom for `y` values less than or equal to 1/3,
+            anchors legends to at their top for `y` values greater
+            than or equal to 2/3 and anchors legends with respect
+            to their middle otherwise.
 
         Returns
         -------

@@ -3,10 +3,7 @@ import _plotly_utils.basevalidators
 
 class NamelengthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
     def __init__(
-        self,
-        plotly_name="namelengthsrc",
-        parent_name="contourcarpet.hoverlabel",
-        **kwargs
+        self, plotly_name="namelengthsrc", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(NamelengthsrcValidator, self).__init__(
             plotly_name=plotly_name,
@@ -22,7 +19,7 @@ import _plotly_utils.basevalidators
 
 class NamelengthValidator(_plotly_utils.basevalidators.IntegerValidator):
     def __init__(
-        self, plotly_name="namelength", parent_name="contourcarpet.hoverlabel", **kwargs
+        self, plotly_name="namelength", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(NamelengthValidator, self).__init__(
             plotly_name=plotly_name,
@@ -39,9 +36,7 @@ import _plotly_utils.basevalidators
 
 
 class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
-    def __init__(
-        self, plotly_name="font", parent_name="contourcarpet.hoverlabel", **kwargs
-    ):
+    def __init__(self, plotly_name="font", parent_name="treemap.hoverlabel", **kwargs):
         super(FontValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
@@ -89,10 +84,7 @@ import _plotly_utils.basevalidators
 
 class BordercolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
     def __init__(
-        self,
-        plotly_name="bordercolorsrc",
-        parent_name="contourcarpet.hoverlabel",
-        **kwargs
+        self, plotly_name="bordercolorsrc", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(BordercolorsrcValidator, self).__init__(
             plotly_name=plotly_name,
@@ -108,10 +100,7 @@ import _plotly_utils.basevalidators
 
 class BordercolorValidator(_plotly_utils.basevalidators.ColorValidator):
     def __init__(
-        self,
-        plotly_name="bordercolor",
-        parent_name="contourcarpet.hoverlabel",
-        **kwargs
+        self, plotly_name="bordercolor", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(BordercolorValidator, self).__init__(
             plotly_name=plotly_name,
@@ -128,7 +117,7 @@ import _plotly_utils.basevalidators
 
 class BgcolorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
     def __init__(
-        self, plotly_name="bgcolorsrc", parent_name="contourcarpet.hoverlabel", **kwargs
+        self, plotly_name="bgcolorsrc", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(BgcolorsrcValidator, self).__init__(
             plotly_name=plotly_name,
@@ -144,7 +133,7 @@ import _plotly_utils.basevalidators
 
 class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
     def __init__(
-        self, plotly_name="bgcolor", parent_name="contourcarpet.hoverlabel", **kwargs
+        self, plotly_name="bgcolor", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(BgcolorValidator, self).__init__(
             plotly_name=plotly_name,
@@ -161,7 +150,7 @@ import _plotly_utils.basevalidators
 
 class AlignsrcValidator(_plotly_utils.basevalidators.SrcValidator):
     def __init__(
-        self, plotly_name="alignsrc", parent_name="contourcarpet.hoverlabel", **kwargs
+        self, plotly_name="alignsrc", parent_name="treemap.hoverlabel", **kwargs
     ):
         super(AlignsrcValidator, self).__init__(
             plotly_name=plotly_name,
@@ -176,9 +165,7 @@ import _plotly_utils.basevalidators
 
 
 class AlignValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-    def __init__(
-        self, plotly_name="align", parent_name="contourcarpet.hoverlabel", **kwargs
-    ):
+    def __init__(self, plotly_name="align", parent_name="treemap.hoverlabel", **kwargs):
         super(AlignValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,

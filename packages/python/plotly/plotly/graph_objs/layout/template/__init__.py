@@ -972,6 +972,29 @@ class Data(_BaseLayoutHierarchyType):
     def table(self, val):
         self["table"] = val
 
+    # treemap
+    # -------
+    @property
+    def treemap(self):
+        """
+        The 'treemap' property is a tuple of instances of
+        Treemap that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.template.data.Treemap
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Treemap constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.template.data.Treemap]
+        """
+        return self["treemap"]
+
+    @treemap.setter
+    def treemap(self, val):
+        self["treemap"] = val
+
     # violin
     # ------
     @property
@@ -1178,6 +1201,9 @@ class Data(_BaseLayoutHierarchyType):
         table
             A tuple of plotly.graph_objects.Table instances or
             dicts with compatible properties
+        treemap
+            A tuple of plotly.graph_objects.Treemap instances or
+            dicts with compatible properties
         violin
             A tuple of plotly.graph_objects.Violin instances or
             dicts with compatible properties
@@ -1234,6 +1260,7 @@ class Data(_BaseLayoutHierarchyType):
         sunburst=None,
         surface=None,
         table=None,
+        treemap=None,
         violin=None,
         volume=None,
         waterfall=None,
@@ -1373,6 +1400,9 @@ class Data(_BaseLayoutHierarchyType):
         table
             A tuple of plotly.graph_objects.Table instances or
             dicts with compatible properties
+        treemap
+            A tuple of plotly.graph_objects.Treemap instances or
+            dicts with compatible properties
         violin
             A tuple of plotly.graph_objects.Violin instances or
             dicts with compatible properties
@@ -1457,6 +1487,7 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self._validators["sunburst"] = v_data.SunburstsValidator()
         self._validators["surface"] = v_data.SurfacesValidator()
         self._validators["table"] = v_data.TablesValidator()
+        self._validators["treemap"] = v_data.TreemapsValidator()
         self._validators["violin"] = v_data.ViolinsValidator()
         self._validators["volume"] = v_data.VolumesValidator()
         self._validators["waterfall"] = v_data.WaterfallsValidator()
@@ -1551,6 +1582,8 @@ an instance of plotly.graph_objs.layout.template.Data"""
         self["surface"] = surface if surface is not None else _v
         _v = arg.pop("table", None)
         self["table"] = table if table is not None else _v
+        _v = arg.pop("treemap", None)
+        self["treemap"] = treemap if treemap is not None else _v
         _v = arg.pop("violin", None)
         self["violin"] = violin if violin is not None else _v
         _v = arg.pop("volume", None)

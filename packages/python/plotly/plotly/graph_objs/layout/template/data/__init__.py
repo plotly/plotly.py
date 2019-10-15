@@ -4,6 +4,8 @@ from plotly.graph_objs import Volume
 
 from plotly.graph_objs import Violin
 
+from plotly.graph_objs import Treemap
+
 from plotly.graph_objs import Table
 
 from plotly.graph_objs import Surface
@@ -131,6 +133,7 @@ __all__ = [
     "Sunburst",
     "Surface",
     "Table",
+    "Treemap",
     "Violin",
     "Volume",
     "Waterfall",
