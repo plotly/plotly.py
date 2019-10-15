@@ -71,6 +71,19 @@ class TestSelectForEachUpdateAnnotations(TestCase):
                 # Check object unchanged
                 self.assertEqual(obj, obj_orig)
 
+    def test_add_annotation_no_grid(self):
+        # Paper annotation
+        fig = go.Figure()
+        fig.add_annotation(text="A")
+        annot = fig.layout.annotations[-1]
+        self.assertEqual(annot.text, "A")
+        self.assertEqual(annot.xref, "paper")
+        self.assertEqual(annot.yref, "paper")
+
+        # Not valid to add annotation by row/col
+        with self.assertRaisesRegexp(Exception, "make_subplots"):
+            fig.add_annotation(text="B", row=1, col=1)
+
     def test_add_annotations(self):
         # Paper annotation
         self.fig.add_annotation(text="A")
@@ -110,6 +123,16 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         # Try to add to (2, 2), which not a valid
         with self.assertRaisesRegexp(ValueError, "of type polar"):
             self.fig.add_annotation(text="D", row=2, col=2)
+
+    def test_select_annotations_no_grid(self):
+        (
+            self.fig.add_annotation(text="A1", arrowcolor="red")
+            .add_annotation(text="A2", arrowcolor="blue")
+            .add_annotation(text="A3", arrowcolor="blue")
+        )
+        self.assert_selected("annotations", [0, 1, 2])
+        self.assert_selected("annotations", [0], selector=dict(arrowcolor="red"))
+        self.assert_selected("annotations", [1, 2], selector=dict(arrowcolor="blue"))
 
     def test_select_annotations(self):
         (
