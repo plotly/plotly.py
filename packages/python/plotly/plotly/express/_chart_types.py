@@ -779,7 +779,7 @@ def bar_polar(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    barnorm="",
+    barnorm=None,
     barmode="relative",
     direction="clockwise",
     start_angle=90,
