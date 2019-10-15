@@ -18,7 +18,8 @@ class TestSelectForEachUpdateAnnotations(TestCase):
     ):
         # ## Test select_*
         # Get select_ method
-        fn = getattr(self.fig, "select_" + prop)
+        prefix = "layout_" if prop == "images" else ""
+        fn = getattr(self.fig, "select_" + prefix + prop)
 
         # Perform selection
         res = fn(selector=selector, row=row, col=col, secondary_y=secondary_y)
@@ -34,7 +35,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
 
         # ## Test for_each_*
         objs = []
-        fn = getattr(self.fig, "for_each_" + prop[:-1])
+        fn = getattr(self.fig, "for_each_" + prefix + prop[:-1])
         fn(
             lambda v: objs.append(v),
             selector=selector,
@@ -50,9 +51,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self, prop, inds, patch, selector=None, row=None, col=None, secondary_y=None
     ):
         # Copy figure and perform update
+        prefix = "layout_" if prop == "images" else ""
         fig_orig = go.Figure(self.fig)
         fig = go.Figure(self.fig)
-        fn = getattr(fig, "update_" + prop)
+        fn = getattr(fig, "update_" + prefix + prop)
         fn(patch, selector=selector, row=row, col=col, secondary_y=secondary_y)
 
         # Get original up updated object lis
@@ -172,12 +174,12 @@ class TestSelectForEachUpdateAnnotations(TestCase):
 
     def test_select_images(self):
         (
-            self.fig.add_image(opacity=0.1, source="red")
-            .add_image(opacity=0.2, source="blue")
-            .add_image(opacity=0.3, source="red", row=1, col=1)
-            .add_image(opacity=0.4, row=1, col=2)
-            .add_image(opacity=0.5, row=1, col=2, secondary_y=True)
-            .add_image(opacity=0.6, source="blue", row=2, col=1)
+            self.fig.add_layout_image(opacity=0.1, source="red")
+            .add_layout_image(opacity=0.2, source="blue")
+            .add_layout_image(opacity=0.3, source="red", row=1, col=1)
+            .add_layout_image(opacity=0.4, row=1, col=2)
+            .add_layout_image(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_layout_image(opacity=0.6, source="blue", row=2, col=1)
         )
 
         # Test selections
@@ -233,12 +235,12 @@ class TestSelectForEachUpdateAnnotations(TestCase):
 
     def test_update_images(self):
         (
-            self.fig.add_image(opacity=0.1, source="red")
-            .add_image(opacity=0.2, source="blue")
-            .add_image(opacity=0.3, source="red", row=1, col=1)
-            .add_image(opacity=0.4, row=1, col=2)
-            .add_image(opacity=0.5, row=1, col=2, secondary_y=True)
-            .add_image(opacity=0.6, source="blue", row=2, col=1)
+            self.fig.add_layout_image(opacity=0.1, source="red")
+            .add_layout_image(opacity=0.2, source="blue")
+            .add_layout_image(opacity=0.3, source="red", row=1, col=1)
+            .add_layout_image(opacity=0.4, row=1, col=2)
+            .add_layout_image(opacity=0.5, row=1, col=2, secondary_y=True)
+            .add_layout_image(opacity=0.6, source="blue", row=2, col=1)
         )
 
         self.assert_update("images", [0, 1, 2, 3, 4, 5], patch=dict(opacity=0))

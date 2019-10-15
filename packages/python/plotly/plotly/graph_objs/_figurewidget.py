@@ -16323,7 +16323,7 @@ class FigureWidget(BaseFigureWidget):
             secondary_y=secondary_y,
         )
 
-    def select_images(self, selector=None, row=None, col=None, secondary_y=None):
+    def select_layout_images(self, selector=None, row=None, col=None, secondary_y=None):
         """
         Select images from a particular subplot cell and/or images
         that satisfy custom selection criteria.
@@ -16364,7 +16364,9 @@ class FigureWidget(BaseFigureWidget):
             "images", selector=selector, row=row, col=col, secondary_y=secondary_y
         )
 
-    def for_each_image(self, fn, selector=None, row=None, col=None, secondary_y=None):
+    def for_each_layout_image(
+        self, fn, selector=None, row=None, col=None, secondary_y=None
+    ):
         """
         Apply a function to all images that satisfy the specified selection
         criteria
@@ -16409,7 +16411,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def update_images(
+    def update_layout_images(
         self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
@@ -16462,7 +16464,7 @@ class FigureWidget(BaseFigureWidget):
 
         return self
 
-    def add_image(
+    def add_layout_image(
         self,
         arg=None,
         layer=None,

@@ -364,9 +364,15 @@ class {fig_classname}({base_classname}):\n"""
         singular_name = node.plotly_name
         plural_name = node.name_property
 
+        if singular_name == "image":
+            # Rename image to layout_image to avoid conflict with an image trace
+            method_prefix = "layout_"
+        else:
+            method_prefix = ""
+
         buffer.write(
             f"""
-    def select_{plural_name}(
+    def select_{method_prefix}{plural_name}(
         self, selector=None, row=None, col=None, secondary_y=None
     ):
         \"\"\"
@@ -409,7 +415,7 @@ class {fig_classname}({base_classname}):\n"""
             "{plural_name}", selector=selector, row=row, col=col, secondary_y=secondary_y
         )
 
-    def for_each_{singular_name}(
+    def for_each_{method_prefix}{singular_name}(
         self, fn, selector=None, row=None, col=None, secondary_y=None
     ):
         \"\"\"
@@ -460,7 +466,7 @@ class {fig_classname}({base_classname}):\n"""
 
         return self
 
-    def update_{plural_name}(
+    def update_{method_prefix}{plural_name}(
         self,
         patch,
         selector=None,
@@ -527,7 +533,7 @@ class {fig_classname}({base_classname}):\n"""
         # Add layout array items
         buffer.write(
             f"""
-    def add_{singular_name}(self"""
+    def add_{method_prefix}{singular_name}(self"""
         )
         add_constructor_params(
             buffer,
