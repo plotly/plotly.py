@@ -70,6 +70,7 @@ class Y0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(Y0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -84,6 +85,7 @@ class YValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(YValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -162,6 +164,7 @@ class X0Validator(_plotly_utils.basevalidators.AnyValidator):
         super(X0Validator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -176,6 +179,7 @@ class XValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(XValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -273,6 +277,7 @@ class UidValidator(_plotly_utils.basevalidators.StringValidator):
         super(UidValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -288,6 +293,35 @@ class TsrcValidator(_plotly_utils.basevalidators.SrcValidator):
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class TexttemplatesrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="texttemplatesrc", parent_name="bar", **kwargs):
+        super(TexttemplatesrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class TexttemplateValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(self, plotly_name="texttemplate", parent_name="bar", **kwargs):
+        super(TexttemplateValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            array_ok=kwargs.pop("array_ok", True),
+            edit_type=kwargs.pop("edit_type", "plot"),
             role=kwargs.pop("role", "info"),
             **kwargs
         )
@@ -908,6 +942,7 @@ class IdsValidator(_plotly_utils.basevalidators.DataArrayValidator):
         super(IdsValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "data"),
             **kwargs
@@ -1212,6 +1247,7 @@ class DyValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DyValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs
@@ -1226,6 +1262,7 @@ class DxValidator(_plotly_utils.basevalidators.NumberValidator):
         super(DxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
+            anim=kwargs.pop("anim", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs

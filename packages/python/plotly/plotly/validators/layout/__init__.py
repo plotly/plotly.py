@@ -1107,6 +1107,20 @@ class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
 import _plotly_utils.basevalidators
 
 
+class TreemapcolorwayValidator(_plotly_utils.basevalidators.ColorlistValidator):
+    def __init__(self, plotly_name="treemapcolorway", parent_name="layout", **kwargs):
+        super(TreemapcolorwayValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class TransitionValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="transition", parent_name="layout", **kwargs):
         super(TransitionValidator, self).__init__(
@@ -1990,7 +2004,10 @@ class MarginValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             autoexpand
-
+                Turns on/off margin expansion computations.
+                Legends, colorbars, updatemenus, sliders, axis
+                rangeselector and rangeslider are allowed to
+                push the margins by defaults.
             b
                 Sets the bottom margin (in px).
             l
@@ -2157,18 +2174,34 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 respect to their associated text.
             x
                 Sets the x position (in normalized coordinates)
-                of the legend.
+                of the legend. Defaults to 1.02 for vertical
+                legends and defaults to 0 for horizontal
+                legends.
             xanchor
                 Sets the legend's horizontal position anchor.
                 This anchor binds the `x` position to the
                 "left", "center" or "right" of the legend.
+                Value "auto" anchors legends to the right for
+                `x` values greater than or equal to 2/3,
+                anchors legends to the left for `x` values less
+                than or equal to 1/3 and anchors legends with
+                respect to their center otherwise.
             y
                 Sets the y position (in normalized coordinates)
-                of the legend.
+                of the legend. Defaults to 1 for vertical
+                legends, defaults to "-0.1" for horizontal
+                legends on graphs w/o range sliders and
+                defaults to 1.1 for horizontal legends on graph
+                with one or multiple range sliders.
             yanchor
                 Sets the legend's vertical position anchor This
                 anchor binds the `y` position to the "top",
-                "middle" or "bottom" of the legend.
+                "middle" or "bottom" of the legend. Value
+                "auto" anchors legends at their bottom for `y`
+                values less than or equal to 1/3, anchors
+                legends to at their top for `y` values greater
+                than or equal to 2/3 and anchors legends with
+                respect to their middle otherwise.
 """,
             ),
             **kwargs
@@ -2705,6 +2738,22 @@ class FontValidator(_plotly_utils.basevalidators.CompoundValidator):
 
 """,
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class ExtendtreemapcolorsValidator(_plotly_utils.basevalidators.BooleanValidator):
+    def __init__(
+        self, plotly_name="extendtreemapcolors", parent_name="layout", **kwargs
+    ):
+        super(ExtendtreemapcolorsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "style"),
             **kwargs
         )
 
