@@ -893,6 +893,12 @@ class PlotlyNode:
         """
         return [n for n in self.children if n.is_literal]
 
+    def has_child(self, name) -> bool:
+        """
+        Check whether node has child of the specified name
+        """
+        return bool([n for n in self.children if n.plotly_name == name])
+
     def get_constructor_params_docstring(self, indent=12):
         """
         Return a docstring-style string containing the names and
