@@ -6,6 +6,7 @@ from importlib import import_module
 from io import StringIO
 from typing import List
 import re
+import errno
 
 
 # Source code utilities
@@ -30,7 +31,11 @@ def write_source_py(py_source, filepath, leading_newlines=0):
         # Make dir if needed
         # ------------------
         filedir = opath.dirname(filepath)
-        os.makedirs(filedir, exist_ok=True)
+        try:
+            os.makedirs(filedir)
+        except OSError as error:
+            if error.errno != errno.EEXIST:
+                raise
 
         # Write file
         # ----------

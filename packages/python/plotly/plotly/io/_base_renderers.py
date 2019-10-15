@@ -4,6 +4,7 @@ import json
 import webbrowser
 import inspect
 import os
+import errno
 
 import six
 from plotly.io import to_json, to_image, write_image, write_html
@@ -564,7 +565,11 @@ class IFrameRenderer(MimetypeRenderer):
         filename = self.build_filename()
 
         # Make directory for
-        os.makedirs(self.html_directory, exist_ok=True)
+        try:
+            os.makedirs(self.html_directory)
+        except OSError as error:
+            if error.errno != errno.EEXIST:
+                raise
 
         write_html(
             fig_dict,
