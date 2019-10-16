@@ -4,7 +4,7 @@ import json
 import webbrowser
 import inspect
 import os
-import errno
+from os.path import isdir
 
 import six
 from plotly.io import to_json, to_image, write_image, write_html
@@ -568,7 +568,7 @@ class IFrameRenderer(MimetypeRenderer):
         try:
             os.makedirs(self.html_directory)
         except OSError as error:
-            if error.errno != errno.EEXIST:
+            if not isdir(self.html_directory):
                 raise
 
         write_html(

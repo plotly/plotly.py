@@ -31,11 +31,9 @@ def write_source_py(py_source, filepath, leading_newlines=0):
         # Make dir if needed
         # ------------------
         filedir = opath.dirname(filepath)
-        try:
-            os.makedirs(filedir)
-        except OSError as error:
-            if error.errno != errno.EEXIST:
-                raise
+        # The exist_ok kwarg is only supported with Python 3, but that's ok since
+        # codegen is only supported with Python 3 anyway
+        os.makedirs(filedir, exist_ok=True)
 
         # Write file
         # ----------
