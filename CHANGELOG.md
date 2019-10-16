@@ -2,6 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.0] - 2019-10-16
+
+### Updated
+ - Updated Plotly.js to version 1.50.1. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1501----2019-10-15)
+ for more information
+ 
+### Added
+ - Added `treemap` trace type ([plotly.js#4185](https://github.com/plotly/plotly.js/pull/4185), [plotly.js#4219](https://github.com/plotly/plotly.js/pull/4219), [plotly.js#4227](https://github.com/plotly/plotly.js/pull/4227), [plotly.js#4242](https://github.com/plotly/plotly.js/pull/4242))
+ - Added `add_*`/`select_*`/`for_each_*`/`update_*` convenience figure methods for annotations, shapes, and images ([#1817](https://github.com/plotly/plotly.py/pull/1817))
+ - Added `overwrite` kwarg to `update*` figure methods to fully replace property values, rather than update them recursively ([#1726](https://github.com/plotly/plotly.py/pull/1726))
+ - Added `texttemplate` attribute to all traces that support on-graph text ([plotly.js#4071](https://github.com/plotly/plotly.js/pull/4071), [plotly.js#4179](https://github.com/plotly/plotly.js/pull/4179))
+ - Added date custom formatting in `hovertemplate` and `texttemplate` e.g. `'%{x|%b %-d, %Y}'` ([plotly.js#4071](https://github.com/plotly/plotly.js/pull/4071))
+ - Added transition support to `bar` trace length, width, on-graph text positioning, marker style and error bars ([plotly.js#4180](https://github.com/plotly/plotly.js/pull/4180), [plotly.js#4186](https://github.com/plotly/plotly.js/pull/4186))
+ - Added support for legend scrolling via touch interactions ([plotly.js#3873](https://github.com/plotly/plotly.js/pull/3873), [plotly.js#4214](https://github.com/plotly/plotly.js/pull/4214))
+
+### Fixed
+ - Fixed `iframe` renderer on Python 2 ([#1822](https://github.com/plotly/plotly.py/pull/1822))
+ - Fixed use of merged templates in plotly.express ([#1819](https://github.com/plotly/plotly.py/pull/1819))
+
 ## [4.1.1] - 2019-09-02
 
 ### Updated
