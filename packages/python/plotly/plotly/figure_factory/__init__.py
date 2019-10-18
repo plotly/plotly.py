@@ -29,9 +29,19 @@ from plotly.figure_factory._violin import create_violin
 
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
+else:
+
+    def create_choropleth(*args, **kwargs):
+        raise ImportError("Please install pandas to use `create_choropleth`")
+
 
 if optional_imports.get_module("skimage") is not None:
     from plotly.figure_factory._ternary_contour import create_ternary_contour
+else:
+
+    def create_ternary_contour(*args, **kwargs):
+        raise ImportError("Please install scikit-image to use `create_ternary_contour`")
+
 
 __all__ = [
     "create_2d_density",
