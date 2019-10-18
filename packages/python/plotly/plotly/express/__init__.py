@@ -2,6 +2,16 @@
 `plotly_express` is a terse, consistent, high-level wrapper around `plotly` for rapid \
 data exploration and figure generation. See the gallery at https://plotly.github.io/plotly_express
 """
+from __future__ import absolute_import
+from plotly import optional_imports
+
+pd = optional_imports.get_module("pandas")
+if pd is None:
+    raise ImportError(
+        """\
+Plotly express requires pandas to be installed."""
+    )
+
 
 from ._chart_types import (  # noqa: F401
     scatter,
