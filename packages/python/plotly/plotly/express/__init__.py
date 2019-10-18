@@ -4,6 +4,7 @@ data exploration and figure generation. See the gallery at https://plotly.github
 """
 from __future__ import absolute_import
 from plotly import optional_imports
+
 pd = optional_imports.get_module("pandas")
 if pd is None:
     raise ImportError(
