@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.2.1] - 2019-10-18
+### Fixed
+ - Fixed regression in 4.2.0 that caused all figure factories to require that scikit-image be installed ([#1832](https://github.com/plotly/plotly.py/pull/1832))
+
 ## [4.2.0] - 2019-10-16
 
 ### Updated

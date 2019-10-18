@@ -78,12 +78,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 
 plotly.py may be installed using pip...
 ```
-pip install plotly==4.2.0
+pip install plotly==4.2.1
 ```
 
 or conda.
 ```
-conda install -c plotly plotly=4.2.0
+conda install -c plotly plotly=4.2.1
 ```
 
 ### Jupyter Notebook Support
