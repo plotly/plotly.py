@@ -405,7 +405,7 @@ docs = dict(
 
 
 def make_docstring(fn):
-    result = (fn.__doc__ or "") + "\nArguments:\n"
+    result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for arg in inspect.getargspec(fn)[0]:
         d = (
             " ".join(docs[arg] or "")
@@ -414,5 +414,6 @@ def make_docstring(fn):
         )
         result += "    %s: %s\n" % (arg, d)
     result += "Returns:\n"
+    result += "\nReturns\n-------\n"
     result += "    A `Figure` object."
     return result
