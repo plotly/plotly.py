@@ -238,49 +238,40 @@ def create_bullet(
         for more information on valid params.
 
     Example 1: Use a Dictionary
-    ```
-    import plotly
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
+    
+    >>> import plotly.figure_factory as ff
 
-    data = [
-      {"label": "Revenue", "sublabel": "US$, in thousands",
-       "range": [150, 225, 300], "performance": [220,270], "point": [250]},
-      {"label": "Profit", "sublabel": "%", "range": [20, 25, 30],
-       "performance": [21, 23], "point": [26]},
-      {"label": "Order Size", "sublabel":"US$, average","range": [350, 500, 600],
-       "performance": [100,320],"point": [550]},
-      {"label": "New Customers", "sublabel": "count", "range": [1400, 2000, 2500],
-       "performance": [1000, 1650],"point": [2100]},
-      {"label": "Satisfaction", "sublabel": "out of 5","range": [3.5, 4.25, 5],
-       "performance": [3.2, 4.7], "point": [4.4]}
-    ]
+    >>> data = [
+    ...   {"label": "revenue", "sublabel": "us$, in thousands",
+    ...    "range": [150, 225, 300], "performance": [220,270], "point": [250]},
+    ...   {"label": "Profit", "sublabel": "%", "range": [20, 25, 30],
+    ...    "performance": [21, 23], "point": [26]},
+    ...   {"label": "Order Size", "sublabel":"US$, average","range": [350, 500, 600],
+    ...    "performance": [100,320],"point": [550]},
+    ...   {"label": "New Customers", "sublabel": "count", "range": [1400, 2000, 2500],
+    ...    "performance": [1000, 1650],"point": [2100]},
+    ...   {"label": "Satisfaction", "sublabel": "out of 5","range": [3.5, 4.25, 5],
+    ...    "performance": [3.2, 4.7], "point": [4.4]}
+    ... ]
 
-    fig = ff.create_bullet(
-        data, titles='label', subtitles='sublabel', markers='point',
-        measures='performance', ranges='range', orientation='h',
-        title='my simple bullet chart'
-    )
-    py.iplot(fig)
-    ```
+    >>> fig = ff.create_bullet(
+    ...     data, titles='label', subtitles='sublabel', markers='point',
+    ...     measures='performance', ranges='range', orientation='h',
+    ...     title='my simple bullet chart'
+    ... )
+    >>> fig.show()
 
     Example 2: Use a DataFrame with Custom Colors
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> data = pd.read_json('https://cdn.rawgit.com/plotly/datasets/master/BulletData.json')
 
-    data = pd.read_json('https://cdn.rawgit.com/plotly/datasets/master/BulletData.json')
-
-    fig = ff.create_bullet(
-        data, titles='title', markers='markers', measures='measures',
-        orientation='v', measure_colors=['rgb(14, 52, 75)', 'rgb(31, 141, 127)'],
-        scatter_options={'marker': {'symbol': 'circle'}}, width=700
-
-    )
-    py.iplot(fig)
-    ```
+    >>> fig = ff.create_bullet(
+    ...     data, titles='title', markers='markers', measures='measures',
+    ...     orientation='v', measure_colors=['rgb(14, 52, 75)', 'rgb(31, 141, 127)'],
+    ...     scatter_options={'marker': {'symbol': 'circle'}}, width=700)
+    >>> fig.show()
     """
     # validate df
     if not pd:
