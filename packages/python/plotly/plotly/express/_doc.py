@@ -2,12 +2,6 @@ import inspect
 from textwrap import fill, indent
 
 
-colref = ("str or int or Series or array-like",
-          "Either a name of a column in `data_frame`, or a pandas Series or array_like object.")
-
-colref_list = ("list of str or int, or Series or array-like",
-               "Either names of columns in `data_frame`, or pandas Series, or array_like objects")
-
 # TODO contents of columns
 # TODO explain categorical
 # TODO handle color
@@ -15,6 +9,12 @@ colref_list = ("list of str or int, or Series or array-like",
 # TODO handle details of column selection with `dimensions`
 # TODO document "or `None`, default `None`" in various places
 # TODO standardize positioning and casing of 'default'
+
+colref = ("str or int or Series or array-like",
+          "Either a name of a column in `data_frame`, or a pandas Series or array_like object.")
+
+colref_list = ("list of str or int, or Series or array-like",
+               "Either names of columns in `data_frame`, or pandas Series, or array_like objects")
 
 docs = dict(
     data_frame=[
@@ -70,7 +70,7 @@ docs = dict(
         "Values from this column or array_like are to be interpreted according to `locationmode` and mapped to longitude/latitude.",
     ],
     dimensions=[
-        "list of strings",
+        "list of str",
         "Names of columns in `data_frame` to be used in multidimensional visualization.",
     ],
     error_x=[
@@ -143,7 +143,7 @@ docs = dict(
         "Values from this column or array_like appear in the figure as text labels.",
     ],
     locationmode=[
-        "string",
+        "str",
         "One of 'ISO-3', 'USA-states', or 'country names'",
         "Determines the set of locations used to match entries in `locations` to regions on the map.",
     ],
@@ -164,41 +164,41 @@ docs = dict(
         "Values from this column or array_like are used to provide object-constancy across animation frames: rows with matching `animation_group`s will be treated as if they describe the same object in each frame.",
     ],
     symbol_sequence=[
-         "list of strings"
+         "list of str"
          "Strings should define valid plotly.js symbols.",
         "When `symbol` is set, values in that column are assigned symbols by cycling through `symbol_sequence` in the order described in `category_orders`, unless the value of `symbol` is a key in `symbol_map`.",
     ],
     symbol_map=[
-        "dict with string keys and string values (default `{}`)",
+        "dict with str keys and str values (default `{}`)",
         "String values should define plotly.js symbols",
         "Used to override `symbol_sequence` to assign a specific symbols to marks corresponding with specific values.",
         "Keys in `symbol_map` should be values in the column denoted by `symbol`.",
     ],
     line_dash_map=[
-        "dict with string keys and string values (default `{}`)",
+        "dict with str keys and str values (default `{}`)",
         "Strings values define plotly.js dash-patterns.",
         "Used to override `line_dash_sequences` to assign a specific dash-patterns to lines corresponding with specific values.",
         "Keys in `line_dash_map` should be values in the column denoted by `line_dash`.",
     ],
     line_dash_sequence=[
-        "list of strings",
+        "list of str",
         "Strings should define valid plotly.js dash-patterns.",
         "When `line_dash` is set, values in that column are assigned dash-patterns by cycling through `line_dash_sequence` in the order described in `category_orders`, unless the value of `line_dash` is a key in `line_dash_map`.",
     ],
     color_discrete_sequence=[
-        "list of strings",
+        "list of str",
         "Strings should define valid CSS-colors.",
         "When `color` is set and the values in the corresponding column are not numeric, values in that column are assigned colors by cycling through `color_discrete_sequence` in the order described in `category_orders`, unless the value of `color` is a key in `color_discrete_map`.",
         "Various useful color sequences are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.qualitative`.",
     ],
     color_discrete_map=[
-        "dict with string keys and string values (default `{}`)",
+        "dict with str keys and str values (default `{}`)",
         "String values should define valid CSS-colors",
         "Used to override `color_discrete_sequence` to assign a specific colors to marks corresponding with specific values.",
         "Keys in `color_discrete_map` should be values in the column denoted by `color`.",
     ],
     color_continuous_scale=[
-        "list of strings",
+        "list of str",
         "Strings should define valid CSS-colors",
         "This list is used to build a continuous color scale when the column denoted by `color` contains numeric data.",
         "Various useful color scales are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.sequential`, `plotly_express.colors.diverging` and `plotly_express.colors.cyclical`.",
@@ -208,7 +208,7 @@ docs = dict(
         "If set, computes the bounds of the continuous color scale to have the desired midpoint.",
         "Setting this value is recommended when using `plotly_express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
-    size_max=["integer (default `20`)", "Set the maximum mark size when using `size`."],
+    size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
     log_x=[
         "boolean (default `False`)",
         "If `True`, the x-axis is log-scaled in cartesian coordinates.",
@@ -245,53 +245,53 @@ docs = dict(
         "list of two numbers",
         "If provided, overrides auto-scaling on the radial axis in polar coordinates.",
     ],
-    title=["string", "The figure title."],
+    title=["str", "The figure title."],
     template=[
-        "string or Plotly.py template object",
+        "str or Plotly.py template object",
         "The figure template name or definition.",
     ],
-    width=["integer (default `None`)", "The figure width in pixels."],
-    height=["integer (default `600`)", "The figure height in pixels."],
+    width=["int (default `None`)", "The figure width in pixels."],
+    height=["int (default `600`)", "The figure height in pixels."],
     labels=[
-        "dict with string keys and string values (default `{}`)",
+        "dict with str keys and str values (default `{}`)",
         "By default, column names are used in the figure for axis titles, legend entries and hovers.",
         "This parameter allows this to be overridden.",
         "The keys of this dict should correspond to column names, and the values should correspond to the desired label to be displayed.",
     ],
     category_orders=[
-        "dict with string keys and list-of-string values (default `{}`)",
+        "dict with str keys and list of str values (default `{}`)",
         "By default, in Python 3.6+, the order of categorical values in axes, legends and facets depends on the order in which these values are first encountered in `data_frame` (and no order is guaranteed by default in Python below 3.6).",
         "This parameter is used to force a specific ordering of values per column.",
         "The keys of this dict should correspond to column names, and the values should be lists of strings corresponding to the specific display order desired.",
     ],
     marginal=[
-        "string",
+        "str",
         "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
         "If set, a subplot is drawn alongside the main plot, visualizing the distribution.",
     ],
     marginal_x=[
-        "string",
+        "str",
         "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
         "If set, a horizontal subplot is drawn above the main plot, visualizing the x-distribution.",
     ],
     marginal_y=[
-        "string",
+        "str",
         "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
         "If set, a vertical subplot is drawn to the right of the main plot, visualizing the y-distribution.",
     ],
     trendline=[
-        "string",
+        "str",
         "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
     ],
     trendline_color_override=[
-        "string",
+        "str",
         "Valid CSS color.",
         "If provided, and if `trendline` is set, all trendlines will be drawn in this color.",
     ],
     render_mode=[
-        "string",
+        "str",
         "One of `'auto'`, `'svg'` or `'webgl'`, default `'auto'`",
         "Controls the browser API used to draw marks.",
         "`'svg`' is appropriate for figures of less than 1000 data points, and will allow for fully-vectorized output.",
@@ -299,16 +299,16 @@ docs = dict(
         "`'auto'` uses heuristics to choose the mode.",
     ],
     direction=[
-        "string",
+        "str",
         "One of '`counterclockwise'`, `'clockwise'`. Default is `'clockwise'`",
         "Sets the direction in which increasing values of the angular axis are drawn.",
     ],
     start_angle=[
-        "integer (default `90`)",
+        "int (default `90`)",
         "Sets start angle for the angular axis, with 0 being due east and 90 being due north.",
     ],
     histfunc=[
-        "string (default `'count'`)",
+        "str (default `'count'`)",
         "One of `'count'`, `'sum'`, `'avg'`, `'min'`, `'max'`."
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
         "The arguments to this function for `histogram` are the values of `y` if `orientation` is `'v'`,",
@@ -316,7 +316,7 @@ docs = dict(
         "The arguments to this function for `density_heatmap` and `density_contour` are the values of `z`.",
     ],
     histnorm=[
-        "string (default `None`)",
+        "str (default `None`)",
         "One of `'percent'`, `'probability'`, `'density'`, `'probability density'`",
         "If `None`, the output of `histfunc` is used as is.",
         "If `'probability'`, the output of `histfunc` for a given bin is divided by the sum of the output of `histfunc` for all bins.",
@@ -325,66 +325,66 @@ docs = dict(
         "If `'probability density'`, the output of `histfunc` for a given bin is normalized such that it corresponds to the probability that a random event whose distribution is described by the output of `histfunc` will fall into that bin.",
     ],
     barnorm=[
-        "string (default `None`)",
+        "str (default `None`)",
         "One of `'fraction'` or `'percent'`.",
         "If `'fraction'`, the value of each bar is divided by the sum of all values at that location coordinate.",
         "`'percent'` is the same but multiplied by 100 to show percentages.",
         "`None` will stack up all values at each location coordinate.",
     ],
     groupnorm=[
-        "string (default `None`)",
+        "str (default `None`)",
         "One of `'fraction'` or `'percent'`.",
         "If `'fraction'`, the value of each point is divided by the sum of all values at that location coordinate.",
         "`'percent'` is the same but multiplied by 100 to show percentages.",
         "`None` will stack up all values at each location coordinate.",
     ],
     barmode=[
-        "string (default `'relative'`)"
+        "str (default `'relative'`)"
         "One of `'group'`, `'overlay'` or `'relative'`",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
         "In `'overlay'` mode, bars are drawn on top of one another.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
-        "string (default `'group'`)"
+        "str (default `'group'`)"
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, boxes are on drawn top of one another.",
         "In `'group'` mode, baxes are placed beside each other.",
     ],
     violinmode=[
-        "string (default `'group'`)"
+        "str (default `'group'`)"
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, violins are on drawn top of one another.",
         "In `'group'` mode, violins are placed beside each other.",
     ],
     stripmode=[
-        "string (default `'group'`)"
+        "str (default `'group'`)"
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, strips are on drawn top of one another.",
         "In `'group'` mode, strips are placed beside each other.",
     ],
-    zoom=["integer (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
+    zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
-        "string (default `'v'`)", "One of `'h'` for horizontal or `'v'` for vertical)",
+        "str (default `'v'`)", "One of `'h'` for horizontal or `'v'` for vertical)",
     ],
     line_close=[
         "boolean (default `False`)",
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
-    line_shape=["string (default `'linear'`)", "One of `'linear'` or `'spline'`."],
+    line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
     scope=[
-        "string (default `'world'`).",
+        "str (default `'world'`).",
         "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`)"
         "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`."
     ],
     projection=[
-        "string ",
+        "str ",
         "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, `'sinusoidal'`"
         "Default depends on `scope`."
     ],
     center=["dict", "Dict keys are `'lat'` and `'lon'`", "Sets the center point of the map."],
     points=[
-        "string or boolean (default `'outliers'`)",
+        "str or boolean (default `'outliers'`)",
         "One of `'all'`, `'outliers'`, or `False`.",
         "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
         "If `'all'`, all sample points are shown.",
