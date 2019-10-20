@@ -1,4 +1,5 @@
 import inspect
+from textwrap import fill, indent
 
 
 colref = ("str or int or Series or array-like",
@@ -406,14 +407,13 @@ docs = dict(
 
 def make_docstring(fn):
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
-    for arg in inspect.getargspec(fn)[0]:
-        d = (
-            " ".join(docs[arg] or "")
-            if arg in docs
-            else "(documentation missing from map)"
-        )
-        result += "    %s: %s\n" % (arg, d)
-    result += "Returns:\n"
+    for param in inspect.getargspec(fn)[0]:
+        param_desc_list = docs[param][1:]
+        param_desc = (indent(fill(" ".join(param_desc_list or "")), '    ')
+                      if param in docs
+                      else "(documentation missing from map)")
+        param_type = docs[param][0]
+        result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"
     result += "    A `Figure` object."
     return result
