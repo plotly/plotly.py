@@ -10,17 +10,21 @@ from textwrap import fill, indent
 # TODO document "or `None`, default `None`" in various places
 # TODO standardize positioning and casing of 'default'
 
-colref = ("str or int or Series or array-like",
-          "Either a name of a column in `data_frame`, or a pandas Series or array_like object.")
+colref = (
+    "str or int or Series or array-like",
+    "Either a name of a column in `data_frame`, or a pandas Series or array_like object.",
+)
 
-colref_list = ("list of str or int, or Series or array-like",
-               "Either names of columns in `data_frame`, or pandas Series, or array_like objects")
+colref_list = (
+    "list of str or int, or Series or array-like",
+    "Either names of columns in `data_frame`, or pandas Series, or array_like objects",
+)
 
 docs = dict(
     data_frame=[
         "DataFrame or array-like or dict",
         "This argument needs to be passed for column names (and not keyword names) to be used.",
-        "Array-like and dict are tranformed internally to a pandas DataFrame."
+        "Array-like and dict are tranformed internally to a pandas DataFrame.",
     ],
     x=[
         *colref,
@@ -107,9 +111,7 @@ docs = dict(
         *colref,
         "Values from this column or array_like are used to assign color to marks.",
     ],
-    opacity=[
-        "float",
-        "Value between 0 and 1. Sets the opacity for markers."],
+    opacity=["float", "Value between 0 and 1. Sets the opacity for markers."],
     line_dash=[
         *colref,
         "Values from this column or array_like are used to assign dash-patterns to lines.",
@@ -164,8 +166,8 @@ docs = dict(
         "Values from this column or array_like are used to provide object-constancy across animation frames: rows with matching `animation_group`s will be treated as if they describe the same object in each frame.",
     ],
     symbol_sequence=[
-         "list of str"
-         "Strings should define valid plotly.js symbols.",
+        "list of str",
+        "Strings should define valid plotly.js symbols.",
         "When `symbol` is set, values in that column are assigned symbols by cycling through `symbol_sequence` in the order described in `category_orders`, unless the value of `symbol` is a key in `symbol_map`.",
     ],
     symbol_map=[
@@ -339,33 +341,34 @@ docs = dict(
         "`None` will stack up all values at each location coordinate.",
     ],
     barmode=[
-        "str (default `'relative'`)"
+        "str (default `'relative'`)",
         "One of `'group'`, `'overlay'` or `'relative'`",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
         "In `'overlay'` mode, bars are drawn on top of one another.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
-        "str (default `'group'`)"
+        "str (default `'group'`)",
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, boxes are on drawn top of one another.",
         "In `'group'` mode, baxes are placed beside each other.",
     ],
     violinmode=[
-        "str (default `'group'`)"
+        "str (default `'group'`)",
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, violins are on drawn top of one another.",
         "In `'group'` mode, violins are placed beside each other.",
     ],
     stripmode=[
-        "str (default `'group'`)"
+        "str (default `'group'`)",
         "One of `'group'` or `'overlay'`",
         "In `'overlay'` mode, strips are on drawn top of one another.",
         "In `'group'` mode, strips are placed beside each other.",
     ],
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
-        "str (default `'v'`)", "One of `'h'` for horizontal or `'v'` for vertical)",
+        "str (default `'v'`)",
+        "One of `'h'` for horizontal or `'v'` for vertical)",
     ],
     line_close=[
         "boolean (default `False`)",
@@ -375,14 +378,18 @@ docs = dict(
     scope=[
         "str (default `'world'`).",
         "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`)"
-        "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`."
+        "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`.",
     ],
     projection=[
         "str ",
         "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, `'sinusoidal'`"
-        "Default depends on `scope`."
+        "Default depends on `scope`.",
     ],
-    center=["dict", "Dict keys are `'lat'` and `'lon'`", "Sets the center point of the map."],
+    center=[
+        "dict",
+        "Dict keys are `'lat'` and `'lon'`",
+        "Sets the center point of the map.",
+    ],
     points=[
         "str or boolean (default `'outliers'`)",
         "One of `'all'`, `'outliers'`, or `False`.",
@@ -390,10 +397,7 @@ docs = dict(
         "If `'all'`, all sample points are shown.",
         "If `False`, no sample points are shown",
     ],
-    box=[
-        "boolean (default `False`)",
-        "If `True`, boxes are drawn inside the violins.",
-    ],
+    box=["boolean (default `False`)", "If `True`, boxes are drawn inside the violins."],
     notched=["boolean (default `False`)", "If `True`, boxes are drawn with notches."],
     cumulative=[
         "boolean (default `False`)",
@@ -409,9 +413,11 @@ def make_docstring(fn):
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
         param_desc_list = docs[param][1:]
-        param_desc = (indent(fill(" ".join(param_desc_list or "")), '    ')
-                      if param in docs
-                      else "(documentation missing from map)")
+        param_desc = (
+            indent(fill(" ".join(param_desc_list or "")), "    ")
+            if param in docs
+            else "(documentation missing from map)"
+        )
         param_type = docs[param][0]
         result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"
