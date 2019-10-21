@@ -1,5 +1,5 @@
 import inspect
-from textwrap import fill, indent
+from textwrap import TextWrapper
 
 
 # TODO contents of columns
@@ -437,11 +437,12 @@ docs = dict(
 
 
 def make_docstring(fn):
+    tw = TextWrapper(width=79, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
         param_desc_list = docs[param][1:]
         param_desc = (
-            indent(fill(" ".join(param_desc_list or "")), "    ")
+            tw.fill(" ".join(param_desc_list or ""))
             if param in docs
             else "(documentation missing from map)"
         )
