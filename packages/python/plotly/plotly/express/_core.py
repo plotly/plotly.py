@@ -747,10 +747,10 @@ def apply_default_cascade(args):
             ]
 
     # If both marginals and faceting are specified, faceting wins
-    if args.get("facet_col", None) and args.get("marginal_y", None):
+    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
         args["marginal_y"] = None
 
-    if args.get("facet_row", None) and args.get("marginal_x", None):
+    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
         args["marginal_x"] = None
 
 
@@ -874,7 +874,7 @@ def build_dataframe(args, attrables, array_attrables):
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
-            ## ----------------- argument is a col name ----------------------
+            # ----------------- argument is a col name ----------------------
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
@@ -1042,6 +1042,13 @@ def infer_config(args, constructor, trace_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    if (
+        args.get("marginal_x", None) is not None
+        or args.get("marginal_y", None) is not None
+        or args.get("facet_row", None) is not None
+    ):
+        args["facet_col_wrap"] = 0
+
     # Compute applicable grouping attributes
     for k in group_attrables:
         if k in args:
@@ -1098,15 +1105,14 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
 
     orders, sorted_group_names = get_orderings(args, grouper, grouped)
 
-    has_marginal_x = bool(args.get("marginal_x", False))
-    has_marginal_y = bool(args.get("marginal_y", False))
-
     subplot_type = _subplot_type_for_trace_type(constructor().type)
 
     trace_names_by_frame = {}
     frames = OrderedDict()
     trendline_rows = []
     nrows = ncols = 1
+    col_labels = []
+    row_labels = []
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
         mapping_labels = OrderedDict()
@@ -1188,26 +1194,35 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 # Find row for trace, handling facet_row and marginal_x
                 if m.facet == "row":
                     row = m.val_map[val]
-                    trace._subplot_row_val = val
+                    if args["facet_row"] and len(row_labels) < row:
+                        row_labels.append(args["facet_row"] + "=" + str(val))
                 else:
-                    if has_marginal_x and trace_spec.marginal != "x":
+                    if (
+                        bool(args.get("marginal_x", False))
+                        and trace_spec.marginal != "x"
+                    ):
                         row = 2
                     else:
                         row = 1
 
-                nrows = max(nrows, row)
-                if row > 1:
-                    trace._subplot_row = row
-
+                facet_col_wrap = args.get("facet_col_wrap", 0)
                 # Find col for trace, handling facet_col and marginal_y
                 if m.facet == "col":
                     col = m.val_map[val]
-                    trace._subplot_col_val = val
+                    if args["facet_col"] and len(col_labels) < col:
+                        col_labels.append(args["facet_col"] + "=" + str(val))
+                    if facet_col_wrap:  # assumes no facet_row, no marginals
+                        row = 1 + ((col - 1) // facet_col_wrap)
+                        col = 1 + ((col - 1) % facet_col_wrap)
                 else:
                     if trace_spec.marginal == "y":
                         col = 2
                     else:
                         col = 1
+
+                nrows = max(nrows, row)
+                if row > 1:
+                    trace._subplot_row = row
 
                 ncols = max(ncols, col)
                 if col > 1:
@@ -1238,7 +1253,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     if show_colorbar:
         colorvar = "z" if constructor == go.Histogram2d else "color"
         range_color = args["range_color"] or [None, None]
-        d = len(args["color_continuous_scale"]) - 1
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
         layout_patch["coloraxis1"] = dict(
@@ -1260,7 +1274,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
         layout_patch["legend"]["itemsizing"] = "constant"
 
     fig = init_figure(
-        args, subplot_type, frame_list, ncols, nrows, has_marginal_x, has_marginal_y
+        args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels
     )
 
     # Position traces in subplots
@@ -1290,30 +1304,18 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     return fig
 
 
-def init_figure(
-    args, subplot_type, frame_list, ncols, nrows, has_marginal_x, has_marginal_y
-):
+def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
     specs = [[{}] * ncols for _ in range(nrows)]
-    column_titles = [None] * ncols
-    row_titles = [None] * nrows
     for frame in frame_list:
         for trace in frame["data"]:
             row0 = trace._subplot_row - 1
             col0 = trace._subplot_col - 1
-
             if isinstance(trace, go.Splom):
                 # Splom not compatible with make_subplots, treat as domain
                 specs[row0][col0] = {"type": "domain"}
             else:
                 specs[row0][col0] = {"type": trace.type}
-            if args.get("facet_row", None) and hasattr(trace, "_subplot_row_val"):
-                row_titles[row0] = args["facet_row"] + "=" + str(trace._subplot_row_val)
-
-            if args.get("facet_col", None) and hasattr(trace, "_subplot_col_val"):
-                column_titles[col0] = (
-                    args["facet_col"] + "=" + str(trace._subplot_col_val)
-                )
 
     # Default row/column widths uniform
     column_widths = [1.0] * ncols
@@ -1321,7 +1323,7 @@ def init_figure(
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
-        if has_marginal_x:
+        if bool(args.get("marginal_x", False)):
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -1329,10 +1331,12 @@ def init_figure(
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
+        elif args.get("facet_col_wrap", 0):
+            vertical_spacing = 0.07
         else:
             vertical_spacing = 0.03
 
-        if has_marginal_y:
+        if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -1351,6 +1355,15 @@ def init_figure(
         vertical_spacing = 0.1
         horizontal_spacing = 0.1
 
+    facet_col_wrap = args.get("facet_col_wrap", 0)
+    if facet_col_wrap:
+        subplot_labels = [None] * nrows * ncols
+        while len(col_labels) < nrows * ncols:
+            col_labels.append(None)
+        for i in range(nrows):
+            for j in range(ncols):
+                subplot_labels[i * ncols + j] = col_labels[(nrows - 1 - i) * ncols + j]
+
     # Create figure with subplots
     fig = make_subplots(
         rows=nrows,
@@ -1358,8 +1371,9 @@ def init_figure(
         specs=specs,
         shared_xaxes="all",
         shared_yaxes="all",
-        row_titles=list(reversed(row_titles)),
-        column_titles=column_titles,
+        row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
+        column_titles=[] if facet_col_wrap else col_labels,
+        subplot_titles=subplot_labels if facet_col_wrap else [],
         horizontal_spacing=horizontal_spacing,
         vertical_spacing=vertical_spacing,
         row_heights=row_heights,

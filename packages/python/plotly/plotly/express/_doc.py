@@ -183,6 +183,11 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign marks to facetted subplots in the horizontal direction.",
     ],
+    facet_col_wrap=[
+        "int",
+        "Wrap the column variable at this width, so that the column facets span multiple rows.",
+        "Forced to 0 if `facet_row` or a `marginal` is set.",
+    ],
     animation_frame=[
         colref_type,
         colref_desc,
