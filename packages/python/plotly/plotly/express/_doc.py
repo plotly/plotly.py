@@ -223,7 +223,7 @@ docs = dict(
         "If `True`, the radial axis is log-scaled in polar coordinates.",
     ],
     range_x=[
-        "(list of two numbers)",
+        "list of two numbers",
         "If provided, overrides auto-scaling on the x-axis in cartesian coordinates.",
     ],
     range_y=[
