@@ -61,6 +61,9 @@ def test_pandas_series():
     assert fig.data[0].hovertemplate == "day=%{x}<br>y=%{y}"
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
     assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
+    # lock down that we can pass df.col to facet_*
+    fig = px.bar(tips, x="day", y="tip", facet_row=tips.day, facet_col=tips.day)
+    assert fig.data[0].hovertemplate == "day=%{x}<br>tip=%{y}"
 
 
 def test_several_dataframes():
