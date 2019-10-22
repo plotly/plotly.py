@@ -82,8 +82,9 @@ docs = dict(
         "Values from this column or array_like are to be interpreted according to `locationmode` and mapped to longitude/latitude.",
     ],
     dimensions=[
-        "list of str",
-        "Names of columns in `data_frame` to be used in multidimensional visualization.",
+        colref_list_type,
+        colref_list_desc,
+        "Values from these columns are used for multidimensional visualization.",
     ],
     error_x=[
         colref_type,
