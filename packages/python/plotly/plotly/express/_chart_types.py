@@ -48,7 +48,8 @@ def scatter(
     height=None,
 ):
     """
-    In a scatter plot, each row of `data_frame` is represented by a symbol mark in 2D space.
+    In a scatter plot, each row of `data_frame` is represented by a symbol mark
+    in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
 
@@ -90,9 +91,9 @@ def density_contour(
     height=None,
 ):
     """
-    In a density contour plot, rows of `data_frame` are grouped together into contour marks to \
-    visualize the 2D distribution of an aggregate function `histfunc` (e.g. the count or sum) \
-    of the value `z`.
+    In a density contour plot, rows of `data_frame` are grouped together into
+    contour marks to visualize the 2D distribution of an aggregate function
+    `histfunc` (e.g. the count or sum) of the value `z`.
     """
     return make_figure(
         args=locals(),
@@ -145,9 +146,9 @@ def density_heatmap(
     height=None,
 ):
     """
-    In a density heatmap, rows of `data_frame` are grouped together into colored \
-    rectangular tiles to visualize the 2D distribution of an aggregate function \
-    `histfunc` (e.g. the count or sum) of the value `z`.
+    In a density heatmap, rows of `data_frame` are grouped together into
+    colored rectangular tiles to visualize the 2D distribution of an aggregate
+    function `histfunc` (e.g. the count or sum) of the value `z`.
     """
     return make_figure(
         args=locals(),
@@ -203,7 +204,8 @@ def line(
     height=None,
 ):
     """
-    In a 2D line plot, each row of `data_frame` is represented as vertex of a polyline mark in 2D space.
+    In a 2D line plot, each row of `data_frame` is represented as vertex of a
+    polyline mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
 
@@ -242,7 +244,9 @@ def area(
     height=None,
 ):
     """
-    In a stacked area plot, each row of `data_frame` is represented as vertex of a polyline mark in 2D space. The area between successive polylines is filled.
+    In a stacked area plot, each row of `data_frame` is represented as vertex
+    of a polyline mark in 2D space. The area between successive polylines is
+    filled.
     """
     return make_figure(
         args=locals(),
@@ -293,7 +297,8 @@ def bar(
     height=None,
 ):
     """
-    In a bar plot, each row of `data_frame` is represented as a rectangular mark.
+    In a bar plot, each row of `data_frame` is represented as a rectangular
+    mark.
     """
     return make_figure(
         args=locals(),
@@ -340,9 +345,10 @@ def histogram(
     height=None,
 ):
     """
-    In a histogram, rows of `data_frame` are grouped together into a rectangular mark to \
-    visualize the 1D distribution of an aggregate function `histfunc` (e.g. the count or sum) \
-    of the value `y` (or `x` if `orientation` is `'h'`).
+    In a histogram, rows of `data_frame` are grouped together into a
+    rectangular mark to visualize the 1D distribution of an aggregate function
+    `histfunc` (e.g. the count or sum) of the value `y` (or `x` if
+    `orientation` is `'h'`).
     """
     return make_figure(
         args=locals(),
@@ -393,8 +399,8 @@ def violin(
     height=None,
 ):
     """
-    In a violin plot, rows of `data_frame` are grouped together into a curved mark to \
-    visualize their distribution.
+    In a violin plot, rows of `data_frame` are grouped together into a curved
+    mark to visualize their distribution.
     """
     return make_figure(
         args=locals(),
@@ -444,8 +450,8 @@ def box(
     height=None,
 ):
     """
-    In a box plot, rows of `data_frame` are grouped together into a box-and-whisker mark to \
-    visualize their distribution.
+    In a box plot, rows of `data_frame` are grouped together into a
+    box-and-whisker mark to visualize their distribution.
     """
     return make_figure(
         args=locals(),
@@ -488,7 +494,8 @@ def strip(
     height=None,
 ):
     """
-    In a strip plot each row of `data_frame` is represented as a jittered mark within categories.
+    In a strip plot each row of `data_frame` is represented as a jittered mark
+    within categories.
     """
     return make_figure(
         args=locals(),
@@ -553,7 +560,8 @@ def scatter_3d(
     height=None,
 ):
     """
-    In a 3D scatter plot, each row of `data_frame` is represented by a symbol mark in 3D space.
+    In a 3D scatter plot, each row of `data_frame` is represented by a symbol
+    mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
 
@@ -599,7 +607,8 @@ def line_3d(
     height=None,
 ):
     """
-    In a 3D line plot, each row of `data_frame` is represented as vertex of a polyline mark in 3D space.
+    In a 3D line plot, each row of `data_frame` is represented as vertex of a
+    polyline mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
 
@@ -638,7 +647,8 @@ def scatter_ternary(
     height=None,
 ):
     """
-    In a ternary scatter plot, each row of `data_frame` is represented by a symbol mark in ternary coordinates.
+    In a ternary scatter plot, each row of `data_frame` is represented by a
+    symbol mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -673,7 +683,8 @@ def line_ternary(
     height=None,
 ):
     """
-    In a ternary line plot, each row of `data_frame` is represented as vertex of a polyline mark in ternary coordinates.
+    In a ternary line plot, each row of `data_frame` is represented as vertex
+    of a polyline mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -716,8 +727,8 @@ def scatter_polar(
     height=None,
 ):
     """
-    In a polar scatter plot, each row of `data_frame` is represented by a symbol mark in
-    polar coordinates.
+    In a polar scatter plot, each row of `data_frame` is represented by a
+    symbol mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -757,7 +768,8 @@ def line_polar(
     height=None,
 ):
     """
-    In a polar line plot, each row of `data_frame` is represented as vertex of a polyline mark in polar coordinates.
+    In a polar line plot, each row of `data_frame` is represented as vertex of
+    a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -791,7 +803,8 @@ def bar_polar(
     height=None,
 ):
     """
-    In a polar bar plot, each row of `data_frame` is represented as a wedge mark in polar coordinates.
+    In a polar bar plot, each row of `data_frame` is represented as a wedge
+    mark in polar coordinates.
     """
     return make_figure(
         args=locals(),
@@ -831,7 +844,8 @@ def choropleth(
     height=None,
 ):
     """
-    In a choropleth map, each row of `data_frame` is represented by a colored region mark on a map.
+    In a choropleth map, each row of `data_frame` is represented by a colored
+    region mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -875,7 +889,8 @@ def scatter_geo(
     height=None,
 ):
     """
-    In a geographic scatter plot, each row of `data_frame` is represented by a symbol mark on a map.
+    In a geographic scatter plot, each row of `data_frame` is represented by a
+    symbol mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -917,7 +932,8 @@ def line_geo(
     height=None,
 ):
     """
-    In a geographic line plot, each row of `data_frame` is represented as vertex of a polyline mark on a map.
+    In a geographic line plot, each row of `data_frame` is represented as
+    vertex of a polyline mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -957,7 +973,8 @@ def scatter_mapbox(
     height=None,
 ):
     """
-    In a Mapbox scatter plot, each row of `data_frame` is represented by a symbol mark on a Mapbox map.
+    In a Mapbox scatter plot, each row of `data_frame` is represented by a
+    symbol mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
@@ -988,7 +1005,8 @@ def line_mapbox(
     height=None,
 ):
     """
-    In a Mapbox line plot, each row of `data_frame` is represented as vertex of a polyline mark on a Mapbox map.
+    In a Mapbox line plot, each row of `data_frame` is represented as vertex of
+    a polyline mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
@@ -1022,9 +1040,9 @@ def scatter_matrix(
     height=None,
 ):
     """
-    In a scatter plot matrix (or SPLOM), each row of `data_frame` is represented \
-    by a multiple symbol marks, one in each cell of a grid of 2D scatter plots, which \
-    plot each pair of `dimensions` against each other.
+    In a scatter plot matrix (or SPLOM), each row of `data_frame` is
+    represented by a multiple symbol marks, one in each cell of a grid of 2D
+    scatter plots, which plot each pair of `dimensions` against each other.
     """
     return make_figure(
         args=locals(), constructor=go.Splom, layout_patch=dict(dragmode="select")
@@ -1048,8 +1066,8 @@ def parallel_coordinates(
     height=None,
 ):
     """
-    In a parallel coordinates plot, each row of `data_frame` is represented \
-    by a polyline mark which traverses a set of parallel axes, one for each of the \
+    In a parallel coordinates plot, each row of `data_frame` is represented by
+    a polyline mark which traverses a set of parallel axes, one for each of the
     `dimensions`.
     """
     return make_figure(args=locals(), constructor=go.Parcoords)
@@ -1072,9 +1090,10 @@ def parallel_categories(
     height=None,
 ):
     """
-    In a parallel categories (or parallel sets) plot, each row of `data_frame` is \
-    grouped with other rows that share the same values of `dimensions` and then plotted \
-    as a polyline mark through a set of parallel axes, one for each of the `dimensions`.
+    In a parallel categories (or parallel sets) plot, each row of `data_frame`
+    is grouped with other rows that share the same values of `dimensions` and
+    then plotted as a polyline mark through a set of parallel axes, one for
+    each of the `dimensions`.
     """
     return make_figure(args=locals(), constructor=go.Parcats)
 
