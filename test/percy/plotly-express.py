@@ -184,6 +184,33 @@ fig.write_html(os.path.join(dir_name, "line.html"))
 
 import plotly.express as px
 
+tips = px.data.tips()
+fig = px.scatter(
+    tips,
+    x="day",
+    y="tip",
+    facet_col="day",
+    facet_col_wrap=2,
+    category_orders={"day": ["Thur", "Fri", "Sat", "Sun"]},
+)
+fig.write_html(os.path.join(dir_name, "facet_wrap_neat.html"))
+
+import plotly.express as px
+
+tips = px.data.tips()
+fig = px.scatter(
+    tips,
+    x="day",
+    y="tip",
+    color="sex",
+    facet_col="day",
+    facet_col_wrap=3,
+    category_orders={"day": ["Thur", "Fri", "Sat", "Sun"]},
+)
+fig.write_html(os.path.join(dir_name, "facet_wrap_ragged.html"))
+
+import plotly.express as px
+
 gapminder = px.data.gapminder()
 fig = px.area(gapminder, x="year", y="pop", color="continent", line_group="country")
 fig.write_html(os.path.join(dir_name, "area.html"))
