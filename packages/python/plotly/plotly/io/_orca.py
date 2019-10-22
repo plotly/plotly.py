@@ -1001,7 +1001,7 @@ If you haven't installed orca yet, you can do so using conda as follows:
     $ conda install -c plotly plotly-orca
 
 Alternatively, see other installation methods in the orca project README at
-https://github.com/plotly/orca.
+https://github.com/plotly/orca
 
 After installation is complete, no further configuration should be needed.
 
