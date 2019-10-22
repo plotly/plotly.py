@@ -233,7 +233,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         result["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif v == "ols":
-                        fit_results = sm.OLS(y, sm.add_constant(x)).fit()
+                        fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
                         result["y"] = fit_results.predict()
                         hover_header = "<b>OLS trendline</b><br>"
                         hover_header += "%s = %f * %s + %f<br>" % (
