@@ -224,13 +224,13 @@ figure['layout'].update(key1=val1, key2=val2, key3=val3)  # (option 3)
 
 ###style() has been deprecated
 
-All style parameters need to be declared within their resepctive objects.
+All style parameters need to be declared within their respective objects.
 That is, layout styles must be declared within the layout dictionary and data
 object styles must be declared within their respective dictionaries.
 
 ###`plotly.stream` is now `plotly.plotly.Stream`, core functionality remains.
 
-Aside from the class name being capitalized, the functionlity of the
+Aside from the class name being capitalized, the functionality of the
 streaming class has improved. Run help(plotly.plotly.Stream) for more
 information.
 
