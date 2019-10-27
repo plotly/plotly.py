@@ -46,7 +46,7 @@ fig.layout.title = 'Hello FigureWidget'
 
 See the [Python documentation](https://plot.ly/python/) for more examples.
 
-Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6)
+Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-is-here-offline-only-express-first-displayable-anywhere-fc444e5659ee)
 
 ## Overview
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
@@ -68,8 +68,8 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 - [Contributing](contributing.md)
 - [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Version 3 Migration Guide](migration-guide.md)
-- [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
+- [Version 4 Migration Guide](https://plot.ly/python/next/v4-migration/)
+- [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
 - [Community](https://community.plot.ly/c/api/python)
 
 ***
@@ -196,9 +196,9 @@ conda install -c plotly chart-studio=1.0.0
 ```
 
 ## Migration
-If you're migrating from plotly.py version 3, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
+If you're migrating from plotly.py v3 to v4, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
 
-If you're migrating from plotly.py version 2, please check out the [Version 3 migration guide](migration-guide.md)
+If you're migrating from plotly.py v2 to v3, please check out the [Version 3 migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.
