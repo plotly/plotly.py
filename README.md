@@ -26,9 +26,9 @@
 
 ## Quickstart
 
-`pip install plotly==4.2.1 "notebook>=5.3" "ipywidgets>=7.2"`
+`pip install plotly==4.2.1`
 
-Inside [Jupyter notebook](https://jupyter.org/install):
+Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 ```python
 import plotly.graph_objects as go
 fig = go.Figure()
