@@ -30,18 +30,12 @@
 
 Inside [Jupyter notebook](https://jupyter.org/install):
 ```python
-import plotly.graph_objs as go
-fig = go.FigureWidget()
-# Display an empty figure
-fig
-```
-```python
-# Add a scatter chart
-fig.add_scatter(y=[2, 1, 4, 3])
-# Add a bar chart
-fig.add_bar(y=[1, 4, 3, 2])
-# Add a title
-fig.layout.title = 'Hello FigureWidget'
+import plotly.graph_objects as go
+fig = go.Figure()
+fig.add_trace(go.Scatter(y=[2, 1, 4, 3]))
+fig.add_trace(go.Bar(y=[1, 4, 3, 2]))
+fig.update_layout(title = 'Hello Figure')
+fig.show()
 ```
 
 See the [Python documentation](https://plot.ly/python/) for more examples.
@@ -53,9 +47,9 @@ Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
+`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online using [Chart Studio Cloud](https://chart-studio.plot.ly/feed/).
 
-[Contact us](https://plot.ly/products/consulting-and-oem/) for Plotly.js consulting, dashboard development, application integration, and feature additions. Sharing your graphs online or in dashboards? Consider a [plot.ly subscription](https://plot.ly/products/cloud).
+[Contact us](https://plot.ly/products/consulting-and-oem/) for consulting, dashboard development, application integration, and feature additions.
 
 <p align="center">
     <a href="https://plot.ly/python" target="_blank">
