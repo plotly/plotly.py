@@ -263,6 +263,12 @@ class ButtonsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             args
                 Sets the arguments values to be passed to the
                 Plotly method set in `method` on click.
+            args2
+                Sets a 2nd set of `args`, these arguments
+                values are passed to the Plotly method set in
+                `method` when clicking this button while in the
+                active state. Use this to create toggle
+                buttons.
             execute
                 When true, the API method is executed. When
                 false, all other behaviors are the same and

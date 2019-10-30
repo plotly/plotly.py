@@ -1834,6 +1834,18 @@ class YAxis(_BaseLayoutHierarchyType):
                     Sets this axis' title font. Note that the
                     title's font used to be customized by the now
                     deprecated `titlefont` attribute.
+                standoff
+                    Sets the standoff distance (in px) between the
+                    axis labels and the title text The default
+                    value is a function of the axis tick labels,
+                    the title `font.size` and the axis `linewidth`.
+                    Note that the axis title position is always
+                    constrained within the margins, so the actual
+                    standoff distance is always less than the set
+                    or default value. By setting `standoff` and
+                    turning on `automargin`, plotly.js will push
+                    the margins to fit the axis title at given
+                    standoff distance.
                 text
                     Sets the title of this axis. Note that before
                     the existence of `title.text`, the title's
@@ -5138,6 +5150,18 @@ class XAxis(_BaseLayoutHierarchyType):
                     Sets this axis' title font. Note that the
                     title's font used to be customized by the now
                     deprecated `titlefont` attribute.
+                standoff
+                    Sets the standoff distance (in px) between the
+                    axis labels and the title text The default
+                    value is a function of the axis tick labels,
+                    the title `font.size` and the axis `linewidth`.
+                    Note that the axis title position is always
+                    constrained within the margins, so the actual
+                    standoff distance is always less than the set
+                    or default value. By setting `standoff` and
+                    turning on `automargin`, plotly.js will push
+                    the margins to fit the axis title at given
+                    standoff distance.
                 text
                     Sets the title of this axis. Note that before
                     the existence of `title.text`, the title's
@@ -6681,6 +6705,12 @@ class Updatemenu(_BaseLayoutHierarchyType):
                 args
                     Sets the arguments values to be passed to the
                     Plotly method set in `method` on click.
+                args2
+                    Sets a 2nd set of `args`, these arguments
+                    values are passed to the Plotly method set in
+                    `method` when clicking this button while in the
+                    active state. Use this to create toggle
+                    buttons.
                 execute
                     When true, the API method is executed. When
                     false, all other behaviors are the same and
@@ -9054,6 +9084,9 @@ class Template(_BaseLayoutHierarchyType):
                 histogram
                     A tuple of plotly.graph_objects.Histogram
                     instances or dicts with compatible properties
+                image
+                    A tuple of plotly.graph_objects.Image instances
+                    or dicts with compatible properties
                 indicator
                     A tuple of plotly.graph_objects.Indicator
                     instances or dicts with compatible properties

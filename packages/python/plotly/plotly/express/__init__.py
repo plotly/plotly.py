@@ -41,6 +41,8 @@ from ._chart_types import (  # noqa: F401
     density_heatmap,
 )
 
+from ._imshow import imshow
+
 from ._core import (  # noqa: F401
     set_mapbox_access_token,
     defaults,
@@ -79,4 +81,5 @@ __all__ = [
     "colors",
     "set_mapbox_access_token",
     "get_trendline_results",
+    "imshow",
 ]
