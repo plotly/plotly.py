@@ -87,6 +87,9 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             histogram
                 A tuple of plotly.graph_objects.Histogram
                 instances or dicts with compatible properties
+            image
+                A tuple of plotly.graph_objects.Image instances
+                or dicts with compatible properties
             indicator
                 A tuple of plotly.graph_objects.Indicator
                 instances or dicts with compatible properties
