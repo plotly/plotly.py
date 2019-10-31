@@ -45,8 +45,7 @@ def _infer_zmax_from_type(img):
         return img[np.isfinite(img)].max()
 
 
-def imshow(
-    img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=True):
+def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=True):
     """
     Display an image, i.e. data on a 2D regular raster.
 
