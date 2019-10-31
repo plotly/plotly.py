@@ -46,8 +46,7 @@ def _infer_zmax_from_type(img):
 
 
 def imshow(
-    img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=True, **kwargs
-):
+    img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=True):
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -79,8 +78,6 @@ def imshow(
     showticks : bool, default True
         if False, no tick labels are shown for pixel indices.
 
-    ** kwargs : additional arguments to be passed to the Heatmap (grayscale) or Image (RGB) trace.
-
     Returns
     -------
     fig : graph_objects.Figure containing the displayed image
@@ -88,8 +85,13 @@ def imshow(
     See also
     --------
 
-    graph_objects.Image : image trace
-    graph_objects.Heatmap : heatmap trace
+    plotly.graph_objects.Image : image trace
+    plotly.graph_objects.Heatmap : heatmap trace
+
+    Notes
+    -----
+
+    In order to update and customize the returned figure, use `go.Figure.update_traces` or `go.Figure.update_layout`.
     """
     img = np.asanyarray(img)
     # Cast bools to uint8 (also one byte)
@@ -100,7 +102,7 @@ def imshow(
     if img.ndim == 2:
         if colorscale is None:
             colorscale = "gray"
-        trace = go.Heatmap(z=img, zmin=zmin, zmax=zmax, colorscale=colorscale, **kwargs)
+        trace = go.Heatmap(z=img, zmin=zmin, zmax=zmax, colorscale=colorscale)
         autorange = True if origin == "lower" else "reversed"
         layout = dict(
             xaxis=dict(scaleanchor="y", constrain="domain"),
@@ -111,7 +113,7 @@ def imshow(
         if zmax is None and img.dtype is not np.uint8:
             zmax = _infer_zmax_from_type(img)
         zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
-        trace = go.Image(z=img, zmin=zmin, zmax=zmax, **kwargs)
+        trace = go.Image(z=img, zmin=zmin, zmax=zmax)
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
