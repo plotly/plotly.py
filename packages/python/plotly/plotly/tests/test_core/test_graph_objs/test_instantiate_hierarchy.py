@@ -24,7 +24,7 @@ class HierarchyTest(TestCase):
                 try:
                     v = obj()
                 except Exception:
-                    print (
+                    print(
                         "Failed to construct {obj} in module {module}".format(
                             obj=obj, module=datatypes_module
                         )

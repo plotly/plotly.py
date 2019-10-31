@@ -436,7 +436,7 @@ class BaseFigure(object):
         if pio.renderers.render_on_display and pio.renderers.default:
             pio.show(self)
         else:
-            print (repr(self))
+            print(repr(self))
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -1751,7 +1751,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             raise Exception(
                 "Use plotly.tools.make_subplots " "to create a subplot grid."
             )
-        print (self._grid_str)
+        print(self._grid_str)
 
     def append_trace(self, trace, row, col):
         """

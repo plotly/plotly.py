@@ -4,6 +4,8 @@
 
 *.gz
 
+*~
+
 # Don't ignore dataset files
 !*.csv.gz
 

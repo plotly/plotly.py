@@ -235,7 +235,7 @@ def test_browser_renderer_show(fig1, renderer):
         request_responses.append(requests.get(url))
 
     def open_url(url, new=0, autoraise=True):
-        print ("open url")
+        print("open url")
         # Perform request in thread so that we don't block
         request_thread = threading.Thread(target=lambda: perform_request(url))
         request_thread.daemon = True

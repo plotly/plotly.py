@@ -226,8 +226,8 @@ class TestJSONEncoder(TestCase):
 
     def test_pandas_json_encoding(self):
         j1 = _json.dumps(df["col 1"], cls=utils.PlotlyJSONEncoder)
-        print (j1)
-        print ("\n")
+        print(j1)
+        print("\n")
         assert j1 == '[1, 2, 3, "2014-01-05T00:00:00", null, null, null]'
 
         # Test that data wasn't mutated
@@ -257,7 +257,7 @@ class TestJSONEncoder(TestCase):
     def test_numpy_masked_json_encoding(self):
         l = [1, 2, np.ma.core.masked]
         j1 = _json.dumps(l, cls=utils.PlotlyJSONEncoder)
-        print (j1)
+        print(j1)
         assert j1 == "[1, 2, null]"
 
     def test_numpy_dates(self):
@@ -300,6 +300,6 @@ if matplotlylib:
         jy = _json.dumps(
             renderer.plotly_fig["data"][1]["y"], cls=utils.PlotlyJSONEncoder
         )
-        print (jy)
+        print(jy)
         array = _json.loads(jy)
         assert array == [-398.11793027, -398.11792966, -398.11786308, None]
