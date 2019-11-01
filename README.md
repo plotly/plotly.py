@@ -108,7 +108,7 @@ or conda.
 conda install jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
-Then run the following commands to install the required JupyterLab extensions:
+Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 ```
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
