@@ -125,9 +125,6 @@ jupyter labextension install plotlywidget@1.2.0 --no-build
 # and jupyterlab renderer support
 jupyter labextension install jupyterlab-plotly@1.2.0 --no-build
 
-# JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
-
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
 
