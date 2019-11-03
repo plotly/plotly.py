@@ -375,16 +375,12 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(
-            showticklabels=False, showgrid=args["marginal_x"] == "histogram", row=nrows
-        )
-        fig.update_xaxes(showgrid=True, row=nrows)
+        fig.update_yaxes(showticklabels=False, row=nrows)
+        fig.update_xaxes(row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(
-            showticklabels=False, showgrid=args["marginal_y"] == "histogram", col=ncols
-        )
-        fig.update_yaxes(showgrid=True, col=ncols)
+        fig.update_xaxes(showticklabels=False, col=ncols)
+        fig.update_yaxes(col=ncols)
 
     # Add axis titles to non-marginal subplots
     y_title = get_decorated_label(args, args["y"], "y")
