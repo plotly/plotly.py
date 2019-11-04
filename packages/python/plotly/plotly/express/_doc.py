@@ -426,7 +426,9 @@ docs = dict(
     ],
     points=[
         "str or boolean (default `'outliers'`)",
-        "One of `'all'`, `'outliers'`, or `False`.",
+        "One of `'outliers'`, `'suspectedoutliers'`, `'all'`, or `False`.",
+        "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
+        "If `'suspectedoutliers'`, all outlier points are shown and those less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted with the marker's `'outliercolor'`.",
         "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
         "If `'all'`, all sample points are shown.",
         "If `False`, no sample points are shown",
