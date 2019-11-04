@@ -92,23 +92,11 @@ def mpl():
         ticks="outside",
         showline=True,
     )
-
     # semi-transparent black and no outline
-    # annotation_clr = "rgb(67,103,167)"
-    # shape_defaults = dict(fillcolor=annotation_clr, line={"width": 0}, opacity=0.5)
-    # Near black line color, no fill
-    annotation_clr = plotly_clrs["Rhino Core"]
-    shape_defaults = dict(line_color=annotation_clr)
+    shape_defaults = dict(fillcolor="black", line={"width": 0}, opacity=0.3)
 
     # Remove arrow head and make line thinner
-    # annotation_defaults = {"arrowcolor": annotation_clr}
-
-    # Remove arrow head and make line thinner
-    annotation_defaults = {
-        "arrowcolor": annotation_clr,
-        "arrowhead": 0,
-        "arrowwidth": 1,
-    }
+    annotation_defaults = {"arrowhead": 0, "arrowwidth": 1}
 
     template = initialize_template(
         paper_clr="white",
