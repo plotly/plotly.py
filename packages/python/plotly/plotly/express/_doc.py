@@ -302,17 +302,17 @@ docs = dict(
     ],
     marginal=[
         "str",
-        "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
+        "One of `'rug'`, `'box'`, `'violin'`, or `'histogram'`.",
         "If set, a subplot is drawn alongside the main plot, visualizing the distribution.",
     ],
     marginal_x=[
         "str",
-        "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
+        "One of `'rug'`, `'box'`, `'violin'`, or `'histogram'`.",
         "If set, a horizontal subplot is drawn above the main plot, visualizing the x-distribution.",
     ],
     marginal_y=[
         "str",
-        "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
+        "One of `'rug'`, `'box'`, `'violin'`, or `'histogram'`.",
         "If set, a vertical subplot is drawn to the right of the main plot, visualizing the y-distribution.",
     ],
     trendline=[
@@ -336,7 +336,7 @@ docs = dict(
     ],
     direction=[
         "str",
-        "One of '`counterclockwise'`, `'clockwise'`. Default is `'clockwise'`",
+        "One of '`counterclockwise'` or `'clockwise'`. Default is `'clockwise'`",
         "Sets the direction in which increasing values of the angular axis are drawn.",
     ],
     start_angle=[
@@ -345,7 +345,7 @@ docs = dict(
     ],
     histfunc=[
         "str (default `'count'`)",
-        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, `'max'`."
+        "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`."
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
         "The arguments to this function for `histogram` are the values of `y` if `orientation` is `'v'`,",
         "otherwise the arguements are the values of `x`.",
@@ -353,7 +353,7 @@ docs = dict(
     ],
     histnorm=[
         "str (default `None`)",
-        "One of `'percent'`, `'probability'`, `'density'`, `'probability density'`",
+        "One of `'percent'`, `'probability'`, `'density'`, or `'probability density'`",
         "If `None`, the output of `histfunc` is used as is.",
         "If `'probability'`, the output of `histfunc` for a given bin is divided by the sum of the output of `histfunc` for all bins.",
         "If `'percent'`, the output of `histfunc` for a given bin is divided by the sum of the output of `histfunc` for all bins and multiplied by 100.",
@@ -411,12 +411,12 @@ docs = dict(
     line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
     scope=[
         "str (default `'world'`).",
-        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`)"
+        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, or `'south america'`)"
         "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`.",
     ],
     projection=[
         "str ",
-        "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, `'sinusoidal'`"
+        "One of `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'`, or `'sinusoidal'`"
         "Default depends on `scope`.",
     ],
     center=[
