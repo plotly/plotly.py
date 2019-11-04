@@ -431,7 +431,7 @@ docs = dict(
         "If `'suspectedoutliers'`, all outlier points are shown and those less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted with the marker's `'outliercolor'`.",
         "If `'outliers'`, only the sample points lying outside the whiskers are shown.",
         "If `'all'`, all sample points are shown.",
-        "If `False`, no sample points are shown",
+        "If `False`, no sample points are shown and the whiskers extend to the full range of the sample.",
     ],
     box=["boolean (default `False`)", "If `True`, boxes are drawn inside the violins."],
     notched=["boolean (default `False`)", "If `True`, boxes are drawn with notches."],
