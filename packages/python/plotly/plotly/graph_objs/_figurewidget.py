@@ -1613,7 +1613,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -14865,7 +14865,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
