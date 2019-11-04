@@ -20,14 +20,14 @@ class ZminValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(ZminValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
+            edit_type=kwargs.pop("edit_type", "calc"),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
                 ],
             ),
             role=kwargs.pop("role", "info"),
@@ -43,14 +43,14 @@ class ZmaxValidator(_plotly_utils.basevalidators.InfoArrayValidator):
         super(ZmaxValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
+            edit_type=kwargs.pop("edit_type", "calc"),
             items=kwargs.pop(
                 "items",
                 [
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
-                    {"valType": "number", "editType": "plot"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
+                    {"valType": "number", "editType": "calc"},
                 ],
             ),
             role=kwargs.pop("role", "info"),
@@ -520,7 +520,7 @@ class ColormodelValidator(_plotly_utils.basevalidators.EnumeratedValidator):
         super(ColormodelValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
+            edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["rgb", "rgba", "hsl", "hsla"]),
             **kwargs

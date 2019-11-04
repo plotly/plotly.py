@@ -17587,7 +17587,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -17640,7 +17640,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -17776,7 +17776,7 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y
+            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y,
         )
 
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
@@ -17859,7 +17859,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -17912,7 +17912,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -18117,5 +18117,5 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y
+            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y,
         )

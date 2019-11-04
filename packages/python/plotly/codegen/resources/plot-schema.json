@@ -16848,7 +16848,7 @@
                     ],
                     "dflt": "rgb",
                     "role": "info",
-                    "editType": "plot",
+                    "editType": "calc",
                     "description": "Color model used to map the numerical color components described in `z` into colors."
                 },
                 "zmin": {
@@ -16856,23 +16856,23 @@
                     "items": [
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         }
                     ],
                     "role": "info",
-                    "editType": "plot",
+                    "editType": "calc",
                     "description": "Array defining the lower bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the `hsla` colormodel, it is [0, 0, 0, 0]."
                 },
                 "zmax": {
@@ -16880,23 +16880,23 @@
                     "items": [
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         },
                         {
                             "valType": "number",
-                            "editType": "plot"
+                            "editType": "calc"
                         }
                     ],
                     "role": "info",
-                    "editType": "plot",
+                    "editType": "calc",
                     "description": "Array defining the higher bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [255, 255, 255]. For the `rgba` colormodel, it is [255, 255, 255, 1]. For the `hsl` colormodel, it is [360, 100, 100]. For the `hsla` colormodel, it is [360, 100, 100, 1]."
                 },
                 "x0": {
