@@ -1330,7 +1330,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
                 main_size = 0.84
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
-            vertical_spacing = 0.012
+            vertical_spacing = 0.012 * 600 / args['height']
         elif args.get("facet_col_wrap", 0):
             vertical_spacing = 0.07
         else:
@@ -1343,7 +1343,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
                 main_size = 0.84
 
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
-            horizontal_spacing = 0.01
+            horizontal_spacing = 0.012 * 600 / args['width']
         else:
             horizontal_spacing = 0.02
     else:
