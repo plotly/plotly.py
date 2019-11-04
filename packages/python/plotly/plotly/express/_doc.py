@@ -444,7 +444,7 @@ docs = dict(
 
 
 def make_docstring(fn):
-    tw = TextWrapper(width=79, initial_indent="    ", subsequent_indent="    ")
+    tw = TextWrapper(width=77, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
         param_desc_list = docs[param][1:]
