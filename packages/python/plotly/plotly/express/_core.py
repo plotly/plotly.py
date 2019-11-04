@@ -374,13 +374,27 @@ def configure_cartesian_marginal_axes(args, fig, orders):
         set_cartesian_axis_opts(args, xaxis, "x", orders)
 
     # Configure axis ticks on marginal subplots
+    # Don't change the marginal grid settings if the template already specifies `showgrid`
+    if isinstance(
+        pio.templates[args["template"]].layout.xaxis.showgrid, bool
+    ) or isinstance(pio.templates[args["template"]].layout.yaxis.showgrid, bool):
+        grid_set = True
+    else:
+        grid_set = False
+
     if args["marginal_x"]:
         fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
         fig.update_xaxes(row=nrows)
+        if not grid_set:
+            fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
+            fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
         fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
         fig.update_yaxes(col=ncols)
+        if not grid_set:
+            fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
+            fig.update_yaxes(showgrid=True, col=ncols)
 
     # Add axis titles to non-marginal subplots
     y_title = get_decorated_label(args, args["y"], "y")
