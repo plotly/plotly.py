@@ -87,7 +87,7 @@ def mpl():
     # Common axis common properties
     axis_common = dict(
         showgrid=False,
-        gridcolor=plotly_clrs["Rhino Light 2"],
+        gridcolor=colors["gray91"],
         linecolor=colors["gray14"],
         ticks="outside",
         showline=True,
