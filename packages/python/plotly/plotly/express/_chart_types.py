@@ -461,6 +461,7 @@ def box(
     """
     In a box plot, rows of `data_frame` are grouped together into a
     box-and-whisker mark to visualize their distribution.
+
     Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
     second quartile (Q2) is marked by a line inside the box. By
     default, the whiskers correspond to the box' edges +/- 1.5
