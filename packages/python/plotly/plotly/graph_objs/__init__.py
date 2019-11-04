@@ -5533,7 +5533,8 @@ class Violin(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the violins are shown
-        with no sample points
+        with no sample points and the whiskers extend to the range of the
+        sample.
     
         The 'points' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -6278,7 +6279,7 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -6610,7 +6611,7 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -83296,7 +83297,8 @@ class Box(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the box(es) are shown
-        with no sample points
+        with no sample points and the whiskers extend to the range of the
+        sample.
     
         The 'boxpoints' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -84562,7 +84564,7 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -84868,7 +84870,7 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
