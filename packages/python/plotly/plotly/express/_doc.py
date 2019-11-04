@@ -317,7 +317,7 @@ docs = dict(
     ],
     trendline=[
         "str",
-        "One of `'rug'`, `'box'`, `'violin'`, `'histogram'`.",
+        "One of `'ols'` or `'lowess'`.",
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
     ],
