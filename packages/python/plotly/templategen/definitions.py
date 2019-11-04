@@ -142,6 +142,9 @@ def mpl():
     opts = {"marker": {"line": {"width": 1, "color": "white"}}}
     template.data.histogram = [opts]
 
+    # Add transparency to scatter markers to indicate saturation
+    template.data.scatter = [{"marker": {"opacity": 0.65}}]
+
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
