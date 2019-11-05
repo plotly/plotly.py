@@ -522,7 +522,7 @@ builders["presentation"] = presentation
 
 def xgridoff():
     """
-    Tempalate to disable x-grid by default
+    Template to disable x-grid by default
     """
     # Create blank template
     template = Template()
@@ -532,3 +532,32 @@ def xgridoff():
 
 
 builders["xgridoff"] = xgridoff
+
+
+def ygridoff():
+    """
+    Template to disable y-grid by default
+    """
+    # Create blank template
+    template = Template()
+    template.layout.yaxis.showgrid = False
+
+    return template
+
+
+builders["ygridoff"] = ygridoff
+
+
+def gridon():
+    """
+    Template to enable x and y-grid by default
+    """
+    # Create blank template
+    template = Template()
+    template.layout.xaxis.showgrid = True
+    template.layout.yaxis.showgrid = True
+
+    return template
+
+
+builders["gridon"] = gridon

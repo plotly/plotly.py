@@ -42,6 +42,8 @@ class TemplatesConfig(object):
             "plotly_dark",
             "presentation",
             "xgridoff",
+            "ygridoff",
+            "gridon",
             "none",
         ]
 
