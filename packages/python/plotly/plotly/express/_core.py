@@ -1295,7 +1295,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     # Add traces, layout and frames to figure
     fig.add_traces(frame_list[0]["data"] if len(frame_list) > 0 else [])
     fig.layout.update(layout_patch)
-     if "template" in args and args["template"] is not None:
+    if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
 
     fig.frames = frame_list if len(frames) > 1 else []
