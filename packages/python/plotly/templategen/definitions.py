@@ -74,7 +74,7 @@ def ggplot2():
 builders["ggplot2"] = ggplot2
 
 
-def mpl():
+def simple_white():
     # Set colorbar_common
     colorbar_common = dict(
         outlinewidth=10,
@@ -152,7 +152,7 @@ def mpl():
     return template
 
 
-builders["mpl"] = mpl
+builders["simple_white"] = simple_white
 
 
 def seaborn():

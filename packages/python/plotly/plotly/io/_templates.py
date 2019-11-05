@@ -37,7 +37,7 @@ class TemplatesConfig(object):
         default_templates = [
             "ggplot2",
             "seaborn",
-            "mpl",
+            "simple_white",
             "plotly",
             "plotly_white",
             "plotly_dark",
