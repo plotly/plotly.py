@@ -139,7 +139,7 @@ def simple_white():
     template.layout.yaxis.update(zeroline=False)
 
     # Separate histogram bins wit ha white line
-    opts = {"marker": {"line": {"width": 1, "color": "white"}}}
+    opts = {"marker": {"line": {"width": 0.6, "color": "white"}}}
     template.data.histogram = [opts]
 
     # Mapbox light style
