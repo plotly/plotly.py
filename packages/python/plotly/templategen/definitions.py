@@ -142,12 +142,6 @@ def simple_white():
     opts = {"marker": {"line": {"width": 1, "color": "white"}}}
     template.data.histogram = [opts]
 
-    # Add transparency to scatter markers to indicate saturation
-    template.data.scatter = [{"marker": {"opacity": 0.65}}]
-
-    # Add transparency to scatter matrix markers to indicate saturation
-    template.data.splom = [{"marker": {"opacity": 0.4}}]
-
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
