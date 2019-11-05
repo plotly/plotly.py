@@ -470,3 +470,13 @@ fig = px.choropleth(
     range_color=[20, 80],
 )
 fig.write_html(os.path.join(dir_name, "choropleth.html"), auto_play=False)
+
+### test template overriding (should be white background, courier font)
+
+import plotly.express as px
+
+iris = px.data.iris()
+fig = px.scatter(
+    iris, x="sepal_width", y="sepal_length", template=dict(layout_font_family="Courier")
+)
+fig.write_html(os.path.join(dir_name, "scatter.html"))
