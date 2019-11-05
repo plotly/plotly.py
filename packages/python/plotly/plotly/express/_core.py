@@ -375,12 +375,11 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     # Don't change the marginal grid settings if the template already specifies `showgrid`
-    if isinstance(
-        pio.templates[args["template"]].layout.xaxis.showgrid, bool
-    ) or isinstance(pio.templates[args["template"]].layout.yaxis.showgrid, bool):
-        grid_set = True
-    else:
+    if (pio.templates[args["template"]].layout.xaxis.showgrid is None
+            or pio.templates[args["template"]].layout.yaxis.showgrid is None):
         grid_set = False
+    else:
+        grid_set = True
 
     if args["marginal_x"]:
         fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
