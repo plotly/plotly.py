@@ -145,6 +145,9 @@ def simple_white():
     # Add transparency to scatter markers to indicate saturation
     template.data.scatter = [{"marker": {"opacity": 0.65}}]
 
+    # Add transparency to scatter matrix markers to indicate saturation
+    template.data.splom = [{"marker": {"opacity": 0.4}}]
+
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
