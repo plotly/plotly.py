@@ -43,6 +43,7 @@ class TemplatesConfig(object):
             "presentation",
             "xgridoff",
             "ygridoff",
+            "gridon",
             "none",
         ]
 

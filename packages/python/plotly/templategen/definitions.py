@@ -547,3 +547,17 @@ def ygridoff():
 
 builders["ygridoff"] = ygridoff
 
+
+def gridon():
+    """
+    Template to enable x and y-grid by default
+    """
+    # Create blank template
+    template = Template()
+    template.layout.xaxis.showgrid = True
+    template.layout.yaxis.showgrid = True
+
+    return template
+
+
+builders["gridon"] = gridon
