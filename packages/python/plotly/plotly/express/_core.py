@@ -384,14 +384,12 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     if args["marginal_x"]:
         fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
-        fig.update_xaxes(row=nrows)
         if not grid_set:
             fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
             fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
         fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
-        fig.update_yaxes(col=ncols)
         if not grid_set:
             fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
             fig.update_yaxes(showgrid=True, col=ncols)
