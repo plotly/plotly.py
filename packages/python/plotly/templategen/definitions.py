@@ -522,7 +522,7 @@ builders["presentation"] = presentation
 
 def xgridoff():
     """
-    Tempalate to disable x-grid by default
+    Template to disable x-grid by default
     """
     # Create blank template
     template = Template()
