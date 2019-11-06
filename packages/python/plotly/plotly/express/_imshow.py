@@ -45,7 +45,7 @@ def _infer_zmax_from_type(img):
         return img[np.isfinite(img)].max()
 
 
-def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=True):
+def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -73,9 +73,6 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=Tr
     colorscale : str
         colormap used to map scalar data to colors (for a 2D image). This parameter is not used for
         RGB or RGBA images.
-
-    showticks : bool, default True
-        if False, no tick labels are shown for pixel indices.
 
     Returns
     -------
@@ -122,7 +119,4 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None, showticks=Tr
             "An image of shape %s was provided" % str(img.shape)
         )
     fig = go.Figure(data=trace, layout=layout)
-    if not showticks:
-        fig.update_xaxes(showticklabels=False)
-        fig.update_yaxes(showticklabels=False)
     return fig
