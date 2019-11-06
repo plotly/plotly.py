@@ -27,7 +27,7 @@ def _swatches(module_names, module_contents):
             for name, colors in reversed(sequences)
         ],
         layout=dict(
-            title=module_names,
+            title=module_names.split('.')[-1].capitalize() + ' colorscales',
             barmode="stack",
             barnorm="fraction",
             template=px.defaults.template,
