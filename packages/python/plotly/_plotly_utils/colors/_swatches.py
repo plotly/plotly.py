@@ -34,6 +34,7 @@ def _swatches(module_names, module_contents):
             bargap=0.5,
             showlegend=False,
             xaxis=dict(range=[-0.02, 1.02], showticklabels=False, showgrid=False),
-            height=max(600, 40 * len(sequences)),
+            height=max(px.defaults.height, 40 * len(sequences)),
+            width=px.defaults.width
         ),
     )
