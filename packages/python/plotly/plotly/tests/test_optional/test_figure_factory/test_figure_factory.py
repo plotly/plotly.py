@@ -4305,5 +4305,5 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
                 **arg_set
             )
             # This test does not work for ilr interpolation
-            print (len(fig.data))
+            print(len(fig.data))
             assert len(fig.data) == ncontours + 2 + arg_set["showscale"]

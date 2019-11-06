@@ -8,7 +8,7 @@ dir_name = os.path.join("test", "percy")
 
 import plotly.express as px
 
-print (px.data.iris.__doc__)
+print(px.data.iris.__doc__)
 px.data.iris().head()
 
 # #### Scatter and Line plots

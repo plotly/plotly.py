@@ -115,7 +115,7 @@ def mpl_to_plotly(fig, resize=False, strip_style=False, verbose=False):
         if strip_style:
             renderer.strip_style()
         if verbose:
-            print (renderer.msg)
+            print(renderer.msg)
         return renderer.plotly_fig
     else:
         warnings.warn(
@@ -221,7 +221,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
             plot_num += 1
 
     if print_grid:
-        print ("This is the format of your plot grid!")
+        print("This is the format of your plot grid!")
         grid_string = ""
         plot = 1
         for rrr in range(rows):
@@ -230,7 +230,7 @@ def get_subplots(rows=1, columns=1, print_grid=False, **kwargs):
                 grid_line += "[{0}]\t".format(plot)
                 plot += 1
             grid_string = grid_line + "\n" + grid_string
-        print (grid_string)
+        print(grid_string)
 
     return graph_objs.Figure(fig)  # forces us to validate what we just did...
 

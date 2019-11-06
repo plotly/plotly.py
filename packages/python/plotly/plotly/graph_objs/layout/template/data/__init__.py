@@ -52,6 +52,8 @@ from plotly.graph_objs import Isosurface
 
 from plotly.graph_objs import Indicator
 
+from plotly.graph_objs import Image
+
 from plotly.graph_objs import Histogram
 
 from plotly.graph_objs import Histogram2d
@@ -110,6 +112,7 @@ __all__ = [
     "Histogram",
     "Histogram2d",
     "Histogram2dContour",
+    "Image",
     "Indicator",
     "Isosurface",
     "Mesh3d",

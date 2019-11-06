@@ -683,6 +683,20 @@ class HovertemplateValidator(_plotly_utils.basevalidators.StringValidator):
 import _plotly_utils.basevalidators
 
 
+class HoverongapsValidator(_plotly_utils.basevalidators.BooleanValidator):
+    def __init__(self, plotly_name="hoverongaps", parent_name="contour", **kwargs):
+        super(HoverongapsValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "style"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="hoverlabel", parent_name="contour", **kwargs):
         super(HoverlabelValidator, self).__init__(

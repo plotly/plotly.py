@@ -451,6 +451,32 @@ class Button(_BaseLayoutHierarchyType):
     def args(self, val):
         self["args"] = val
 
+    # args2
+    # -----
+    @property
+    def args2(self):
+        """
+        Sets a 2nd set of `args`, these arguments values are passed to
+        the Plotly method set in `method` when clicking this button
+        while in the active state. Use this to create toggle buttons.
+    
+        The 'args2' property is an info array that may be specified as:
+    
+        * a list or tuple of up to 3 elements where:
+    (0) The 'args2[0]' property accepts values of any type
+    (1) The 'args2[1]' property accepts values of any type
+    (2) The 'args2[2]' property accepts values of any type
+
+        Returns
+        -------
+        list
+        """
+        return self["args2"]
+
+    @args2.setter
+    def args2(self, val):
+        self["args2"] = val
+
     # execute
     # -------
     @property
@@ -612,6 +638,11 @@ class Button(_BaseLayoutHierarchyType):
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on click.
+        args2
+            Sets a 2nd set of `args`, these arguments values are
+            passed to the Plotly method set in `method` when
+            clicking this button while in the active state. Use
+            this to create toggle buttons.
         execute
             When true, the API method is executed. When false, all
             other behaviors are the same and command execution is
@@ -657,6 +688,7 @@ class Button(_BaseLayoutHierarchyType):
         self,
         arg=None,
         args=None,
+        args2=None,
         execute=None,
         label=None,
         method=None,
@@ -677,6 +709,11 @@ class Button(_BaseLayoutHierarchyType):
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on click.
+        args2
+            Sets a 2nd set of `args`, these arguments values are
+            passed to the Plotly method set in `method` when
+            clicking this button while in the active state. Use
+            this to create toggle buttons.
         execute
             When true, the API method is executed. When false, all
             other behaviors are the same and command execution is
@@ -750,6 +787,7 @@ an instance of plotly.graph_objs.layout.updatemenu.Button"""
         # Initialize validators
         # ---------------------
         self._validators["args"] = v_button.ArgsValidator()
+        self._validators["args2"] = v_button.Args2Validator()
         self._validators["execute"] = v_button.ExecuteValidator()
         self._validators["label"] = v_button.LabelValidator()
         self._validators["method"] = v_button.MethodValidator()
@@ -761,6 +799,8 @@ an instance of plotly.graph_objs.layout.updatemenu.Button"""
         # ----------------------------------
         _v = arg.pop("args", None)
         self["args"] = args if args is not None else _v
+        _v = arg.pop("args2", None)
+        self["args2"] = args2 if args2 is not None else _v
         _v = arg.pop("execute", None)
         self["execute"] = execute if execute is not None else _v
         _v = arg.pop("label", None)

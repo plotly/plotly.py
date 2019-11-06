@@ -16,7 +16,7 @@ else:
 # ---------
 project_root = os.path.dirname(os.path.realpath(plotly.__file__))
 images_root = os.path.join(project_root, "tests", "test_orca", "images")
-print (images_root)
+print(images_root)
 if sys.platform.startswith("linux"):
     images_dir = os.path.join(images_root, "linux")
 elif sys.platform == "darwin":
@@ -174,7 +174,7 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
 
     except (OSError, AssertionError) as e:
         failed_path = os.path.join(failed_dir, file_name)
-        print ('Saving failed image to "{failed_path}"'.format(failed_path=failed_path))
+        print('Saving failed image to "{failed_path}"'.format(failed_path=failed_path))
 
         if not os.path.exists(failed_dir):
             os.mkdir(failed_dir)

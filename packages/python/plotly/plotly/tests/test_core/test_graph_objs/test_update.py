@@ -10,7 +10,7 @@ from unittest import TestCase
 
 class TestUpdateMethod(TestCase):
     def setUp(self):
-        print ("Setup!")
+        print("Setup!")
 
     def test_update_dict(self):
         title = "this"
