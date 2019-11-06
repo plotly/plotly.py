@@ -1343,7 +1343,8 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
                 main_size = 0.84
 
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
-            horizontal_spacing = 0.012 * 600 / args["width"]
+            width_adjustment = 1 if args["width"] is None else 600 / args["width"]
+            horizontal_spacing = 0.012 * width_adjustment
         else:
             horizontal_spacing = 0.02
     else:
