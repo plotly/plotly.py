@@ -158,4 +158,3 @@ def test_px_templates():
     assert fig.layout.xaxis3.showgrid is None
     assert fig.layout.yaxis2.showgrid
     assert fig.layout.yaxis3.showgrid
-
