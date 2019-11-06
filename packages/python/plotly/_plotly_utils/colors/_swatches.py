@@ -6,6 +6,7 @@ def _swatches(module_names, module_contents):
         template's background.
     """
     import plotly.graph_objs as go
+    import plotly.express as px
 
     sequences = [
         (k, v)
@@ -29,6 +30,7 @@ def _swatches(module_names, module_contents):
             title=module_names,
             barmode="stack",
             barnorm="fraction",
+            template=px.defaults.template,
             bargap=0.5,
             showlegend=False,
             xaxis=dict(range=[-0.02, 1.02], showticklabels=False, showgrid=False),
