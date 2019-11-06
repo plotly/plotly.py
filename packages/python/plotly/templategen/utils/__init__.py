@@ -82,8 +82,12 @@ def initialize_template(
     template.layout.plot_bgcolor = panel_background_clr
     template.layout.polar.bgcolor = panel_background_clr
     template.layout.ternary.bgcolor = panel_background_clr
-    set_all_colorbars(template, colorbar_common)
+
     cartesian_axis = dict(axis_common, zerolinecolor=zerolinecolor_clr)
+
+    # Colorbars
+    set_all_colorbars(template, colorbar_common)
+    template.layout.coloraxis.colorbar = colorbar_common
 
     # Colorscales
     template.layout.colorscale.sequential = colorscale
