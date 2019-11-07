@@ -2,6 +2,7 @@ from plotly.graph_objs.layout import Template
 from templategen.utils import initialize_template
 from .utils.colors import colors
 import colorcet as cc
+import plotly.express as px
 
 # dict of template builder functions
 # This way we can loop over definitions in __init__.py
@@ -71,6 +72,82 @@ def ggplot2():
 
 
 builders["ggplot2"] = ggplot2
+
+
+def simple_white():
+    # Set colorbar_common
+    colorbar_common = dict(
+        outlinewidth=10,
+        tickcolor=colors["gray14"],
+        ticks="outside",
+        tickwidth=2,
+        ticklen=8,
+    )
+
+    # Common axis common properties
+    axis_common = dict(
+        showgrid=False,
+        gridcolor=colors["gray91"],
+        linecolor=colors["gray14"],
+        ticks="outside",
+        showline=True,
+    )
+    # semi-transparent black and no outline
+    shape_defaults = dict(fillcolor="black", line={"width": 0}, opacity=0.3)
+
+    # Remove arrow head and make line thinner
+    annotation_defaults = {"arrowhead": 0, "arrowwidth": 1}
+
+    template = initialize_template(
+        paper_clr="white",
+        font_clr=colors["gray14"],
+        panel_background_clr="white",
+        panel_grid_clr="white",
+        axis_ticks_clr=colors["gray14"],
+        zerolinecolor_clr=colors["gray14"],
+        table_cell_clr=colors["gray93"],
+        table_header_clr=colors["gray85"],
+        table_line_clr="white",
+        colorway=px.colors.qualitative.D3,
+        colorbar_common=colorbar_common,
+        colorscale=px.colors.sequential.Viridis,
+        colorscale_diverging=px.colors.diverging.RdBu,
+        axis_common=axis_common,
+        annotation_defaults=annotation_defaults,
+        shape_defaults=shape_defaults,
+    )
+
+    # Left align title
+    template.layout.title.x = 0.05
+
+    # Increase grid width for 3d plots
+    opts = dict(gridwidth=2, gridcolor=plotly_clrs["gray91"], zeroline=False)
+    template.layout.scene.xaxis.update(opts)
+    template.layout.scene.yaxis.update(opts)
+    template.layout.scene.zaxis.update(opts)
+
+    # Darken ternary
+    opts = dict(linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"])
+    template.layout.ternary.aaxis.update(opts)
+    template.layout.ternary.baxis.update(opts)
+    template.layout.ternary.caxis.update(opts)
+
+    # Remove lines through the origin
+    template.layout.xaxis.update(zeroline=False)
+    template.layout.yaxis.update(zeroline=False)
+
+    # Separate histogram bins wit ha white line
+    opts = {"marker": {"line": {"width": 0.6, "color": "white"}}}
+    template.data.histogram = [opts]
+
+    # Mapbox light style
+    template.layout.mapbox.style = "light"
+
+    # Set table header font color to white
+    return template
+
+
+builders["simple_white"] = simple_white
 
 
 def seaborn():
