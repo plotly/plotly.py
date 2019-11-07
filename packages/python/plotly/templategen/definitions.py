@@ -121,14 +121,14 @@ def simple_white():
     template.layout.title.x = 0.05
 
     # Increase grid width for 3d plots
-    opts = dict(gridwidth=2, gridcolor=plotly_clrs["Rhino Light 1"], zeroline=False)
+    opts = dict(gridwidth=2, gridcolor=plotly_clrs["gray91"], zeroline=False)
     template.layout.scene.xaxis.update(opts)
     template.layout.scene.yaxis.update(opts)
     template.layout.scene.zaxis.update(opts)
 
     # Darken ternary
     opts = dict(
-        linecolor=plotly_clrs["Rhino Medium 1"], gridcolor=plotly_clrs["Rhino Light 1"]
+        linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"]
     )
     template.layout.ternary.aaxis.update(opts)
     template.layout.ternary.baxis.update(opts)
