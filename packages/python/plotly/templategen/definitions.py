@@ -127,9 +127,7 @@ def simple_white():
     template.layout.scene.zaxis.update(opts)
 
     # Darken ternary
-    opts = dict(
-        linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"]
-    )
+    opts = dict(linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"])
     template.layout.ternary.aaxis.update(opts)
     template.layout.ternary.baxis.update(opts)
     template.layout.ternary.caxis.update(opts)
