@@ -39,10 +39,19 @@ def _vectorize_zvalue(z):
 
 def _infer_zmax_from_type(img):
     dt = img.dtype.type
+    rtol = 1.05
     if dt in _integer_types:
         return _integer_ranges[dt][1]
     else:
-        return img[np.isfinite(img)].max()
+        im_max = img[np.isfinite(img)].max()
+        if im_max <= 1 * rtol:
+            return 1
+        elif im_max <= 255 * rtol:
+            return 255
+        elif im_max <= 65535 * rtol:
+            return 65535
+        else:
+            return 2 ** 32
 
 
 def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
@@ -63,8 +72,10 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
     zmin, zmax : scalar or iterable, optional
         zmin and zmax define the scalar range that the colormap covers. By default,
         zmin and zmax correspond to the min and max values of the datatype for integer
-        datatypes (ie [0-255] for uint8 images, [0, 65535] for uint16 images, etc.), and
-        to the min and max values of the image for an image of floats.
+        datatypes (ie [0-255] for uint8 images, [0, 65535] for uint16 images, etc.). For
+        a multichannel image of floats, the max of the image is computed and zmax is the
+        smallest power of 256 (1, 255, 65535) greater than this max value, 
+        with a 5% tolerance. For a single-channel image, the max of the image is used.
 
     origin : str, 'upper' or 'lower' (default 'upper')
         position of the [0, 0] pixel of the image array, in the upper left or lower left
@@ -87,7 +98,8 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
     Notes
     -----
 
-    In order to update and customize the returned figure, use `go.Figure.update_traces` or `go.Figure.update_layout`.
+    In order to update and customize the returned figure, use
+    `go.Figure.update_traces` or `go.Figure.update_layout`.
     """
     img = np.asanyarray(img)
     # Cast bools to uint8 (also one byte)

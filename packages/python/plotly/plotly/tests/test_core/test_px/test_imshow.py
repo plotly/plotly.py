@@ -71,3 +71,28 @@ def test_nan_inf_data():
         # the case of 2d/heatmap is handled gracefully by the JS trace but I don't know how to check it
         fig = px.imshow(np.dstack((img,) * 3))
         assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
+
+
+def test_zmax_floats():
+    # RGB
+    imgs = [
+        np.ones((5, 5, 3)),
+        1.02 * np.ones((5, 5, 3)),
+        2 * np.ones((5, 5, 3)),
+        1000 * np.ones((5, 5, 3)),
+    ]
+    zmaxs = [1, 1, 255, 65535]
+    for zmax, img in zip(zmaxs, imgs):
+        fig = px.imshow(img)
+        assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
+    # single-channel
+    imgs = [
+        np.ones((5, 5)),
+        1.02 * np.ones((5, 5)),
+        2 * np.ones((5, 5)),
+        1000 * np.ones((5, 5)),
+    ]
+    for zmax, img in zip(zmaxs, imgs):
+        fig = px.imshow(img)
+        print(fig.data[0]["zmax"], zmax)
+        assert fig.data[0]["zmax"] == None
