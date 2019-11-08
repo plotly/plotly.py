@@ -97,7 +97,9 @@ def imshow(
 
     color_continuous_scale : str or list of str
         colormap used to map scalar data to colors (for a 2D image). This parameter is
-        not used for RGB or RGBA images.
+        not used for RGB or RGBA images. If a string is provided, it should be the name
+        of a known color scale, and if a list is provided, it should be a list of CSS-
+        compatible colors.
 
     color_continuous_midpoint : number
         If set, computes the bounds of the continuous color scale to have the desired
@@ -106,6 +108,18 @@ def imshow(
     range_color : list of two numbers
         If provided, overrides auto-scaling on the continuous color scale, including
         overriding `color_continuous_midpoint`.
+
+    title : str
+        The figure title.
+
+    template : str or dict or plotly.graph_objects.layout.Template instance
+        The figure template name or definition.
+
+    width : number
+        The figure width in pixels.
+
+    height: number
+        The figure height in pixels, defaults to 600.
 
     Returns
     -------
