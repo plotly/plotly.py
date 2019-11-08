@@ -58,7 +58,11 @@ development version of `FigureWidget`,
     $ jupyter nbextension enable --py widgetsnbextension
     $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
     $ jupyter nbextension enable --py --sys-prefix plotlywidget
-    
+
+To make plotly plots show up in JupyterLab, you also need to [install the plotly jupyterlab extensions][plotly-jl].
+
+[plotly-jl]: https://plot.ly/python/getting-started/#jupyterlab-support-python-35
+
 ### Setup Submodules
 
 This project uses git submodules. They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
