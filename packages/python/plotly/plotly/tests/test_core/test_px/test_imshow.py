@@ -50,9 +50,10 @@ def test_origin():
 
 def test_colorscale():
     fig = px.imshow(img_gray)
-    assert fig.data[0].colorscale[0] == (0.0, "rgb(0, 0, 0)")
-    fig = px.imshow(img_gray, colorscale="Viridis")
-    assert fig.data[0].colorscale[0] == (0.0, "#440154")
+    plasma_first_color = px.colors.sequential.Plasma[0]
+    assert fig.layout.coloraxis1.colorscale[0] == (0.0, plasma_first_color)
+    fig = px.imshow(img_gray, color_continuous_scale="Viridis")
+    assert fig.layout.coloraxis1.colorscale[0] == (0.0, "#440154")
 
 
 def test_wrong_dimensions():

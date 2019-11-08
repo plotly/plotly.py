@@ -283,7 +283,7 @@ docs = dict(
     ],
     title=["str", "The figure title."],
     template=[
-        "str or Plotly.py template object",
+        "or dict or plotly.graph_objects.layout.Template instance",
         "The figure template name or definition.",
     ],
     width=["int (default `None`)", "The figure width in pixels."],
