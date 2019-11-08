@@ -28,9 +28,16 @@ cd plotly.py
 ```
 
 ### Create a virtual environment for plotly development
-TODO: Use virtualenv or conda, activate it
 
-http://docs.python-guide.org/en/latest/dev/virtualenvs/
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.
+
+```bash
+conda create -n plotly-dev python
+conda activate plotly-dev
+```
+
+[conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
+[virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 ### Install requirements
 
