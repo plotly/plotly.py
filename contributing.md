@@ -535,4 +535,6 @@ From `packages/python/plotly-geo`, build the conda packge
 Then upload to the plotly anaconda channel as described above
 
 ## Contributing to the Figure Factories
-If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.
+If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation][ff-home] to learn how.
+
+[ff-home]: packages/python/plotly/plotly/figure_factory/README.md
