@@ -1,5 +1,6 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
+from ._core import apply_default_cascade
 import numpy as np  # is it fine to depend on np here?
 
 _float_types = []
@@ -63,6 +64,10 @@ def imshow(
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -118,6 +123,9 @@ def imshow(
     In order to update and customize the returned figure, use
     `go.Figure.update_traces` or `go.Figure.update_layout`.
     """
+    args = locals()
+    apply_default_cascade(args)
+
     img = np.asanyarray(img)
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
@@ -134,7 +142,9 @@ def imshow(
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
         range_color = range_color or [None, None]
         layout["coloraxis1"] = dict(
-            colorscale=colorscale_validator.validate_coerce(color_continuous_scale),
+            colorscale=colorscale_validator.validate_coerce(
+                args["color_continuous_scale"]
+            ),
             cmid=color_continuous_midpoint,
             cmin=range_color[0],
             cmax=range_color[1],
@@ -154,5 +164,14 @@ def imshow(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
             "An image of shape %s was provided" % str(img.shape)
         )
+
+    layout_patch = dict()
+    for v in ["title", "height", "width"]:
+        if args[v]:
+            layout_patch[v] = args[v]
+    if "title" not in layout_patch and args["template"].layout.margin.t is None:
+        layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
+    fig.update_layout(layout_patch)
+    fig.update_layout(template=args["template"], overwrite=True)
     return fig
