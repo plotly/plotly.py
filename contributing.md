@@ -70,7 +70,7 @@ This project uses git submodules. They're both helpful and, at times, difficult 
 **DO THIS (run this command in your new `plotly.py` directory)**
 
 ```bash
-python update_submodules.py
+python setup_submodules.py
 ```
 
 That's going to initialize the submodules we use in this project, update them so that they're synced to the proper commit, and copy files to the appropriate locations in your local repo.
