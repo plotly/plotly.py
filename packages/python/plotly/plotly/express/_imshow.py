@@ -1,4 +1,5 @@
 import plotly.graph_objs as go
+from _plotly_utils.basevalidators import ColorscaleValidator
 import numpy as np  # is it fine to depend on np here?
 
 _float_types = []
@@ -54,7 +55,15 @@ def _infer_zmax_from_type(img):
             return 2 ** 32
 
 
-def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
+def imshow(
+    img,
+    zmin=None,
+    zmax=None,
+    origin=None,
+    color_continuous_scale=None,
+    color_continuous_midpoint=None,
+    range_color=None,
+):
     """
     Display an image, i.e. data on a 2D regular raster.
 
@@ -74,16 +83,24 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
         zmin and zmax correspond to the min and max values of the datatype for integer
         datatypes (ie [0-255] for uint8 images, [0, 65535] for uint16 images, etc.). For
         a multichannel image of floats, the max of the image is computed and zmax is the
-        smallest power of 256 (1, 255, 65535) greater than this max value, 
+        smallest power of 256 (1, 255, 65535) greater than this max value,
         with a 5% tolerance. For a single-channel image, the max of the image is used.
 
     origin : str, 'upper' or 'lower' (default 'upper')
         position of the [0, 0] pixel of the image array, in the upper left or lower left
         corner. The convention 'upper' is typically used for matrices and images.
 
-    colorscale : str
-        colormap used to map scalar data to colors (for a 2D image). This parameter is not used for
-        RGB or RGBA images.
+    color_continuous_scale : str or list of str
+        colormap used to map scalar data to colors (for a 2D image). This parameter is
+        not used for RGB or RGBA images.
+
+    color_continuous_midpoint : number
+        If set, computes the bounds of the continuous color scale to have the desired
+        midpoint.
+
+    range_color : list of two numbers
+        If provided, overrides auto-scaling on the continuous color scale, including
+        overriding `color_continuous_midpoint`.
 
     Returns
     -------
@@ -108,14 +125,21 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
 
     # For 2d data, use Heatmap trace
     if img.ndim == 2:
-        if colorscale is None:
-            colorscale = "gray"
-        trace = go.Heatmap(z=img, zmin=zmin, zmax=zmax, colorscale=colorscale)
+        trace = go.Heatmap(z=img, zmin=zmin, zmax=zmax, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
         layout = dict(
             xaxis=dict(scaleanchor="y", constrain="domain"),
             yaxis=dict(autorange=autorange, constrain="domain"),
         )
+        colorscale_validator = ColorscaleValidator("colorscale", "imshow")
+        range_color = range_color or [None, None]
+        layout["coloraxis1"] = dict(
+            colorscale=colorscale_validator.validate_coerce(color_continuous_scale),
+            cmid=color_continuous_midpoint,
+            cmin=range_color[0],
+            cmax=range_color[1],
+        )
+
     # For 2D+RGB data, use Image trace
     elif img.ndim == 3 and img.shape[-1] in [3, 4]:
         if zmax is None and img.dtype is not np.uint8:
@@ -127,7 +151,7 @@ def imshow(img, zmin=None, zmax=None, origin=None, colorscale=None):
             layout["yaxis"] = dict(autorange=True)
     else:
         raise ValueError(
-            "px.imshow only accepts 2D grayscale, RGB or RGBA images. "
+            "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
             "An image of shape %s was provided" % str(img.shape)
         )
     fig = go.Figure(data=trace, layout=layout)
