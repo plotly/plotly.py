@@ -24,6 +24,7 @@ First, you'll need to *get* our project. This is the appropriate *clone* command
 
 ```bash
 git clone https://github.com/your_github_username/plotly.py.git
+cd plotly.py
 ```
 
 ### Create a virtual environment for plotly development
@@ -32,15 +33,18 @@ TODO: Use virtualenv or conda, activate it
 http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 ### Install requirements
-    $ pip install -r requirements.txt
-    $ pip install -r optional-requirements.txt
+
+    $ pip install -r packages/python/plotly/requirements.txt
+    $ pip install -r packages/python/plotly/optional-requirements.txt
 
 ### Editable install of plotly packages
+
     $ pip install -e packages/python/plotly/
     $ pip install -e packages/python/chart-studio/
     $ pip install -e packages/python/plotly-geo/
 
 ### ipywidgets development install
+
 Run the following commands in your virtual environment to use the
 development version of `FigureWidget`, 
 
