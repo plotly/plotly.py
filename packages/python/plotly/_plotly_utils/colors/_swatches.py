@@ -38,7 +38,7 @@ def _swatches(module_names, module_contents, template=None):
             for name, colors in reversed(sequences)
         ],
         layout=dict(
-            title=module_names,
+            title="plotly.colors." + module_names.split(".")[-1],
             barmode="stack",
             barnorm="fraction",
             bargap=0.5,
