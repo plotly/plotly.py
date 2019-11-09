@@ -487,98 +487,92 @@ def create_violin(
     :param (str) title: the title of the violin plot.
 
     Example 1: Single Violin Plot
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_violin
-    from plotly.graph_objs import graph_objs
 
-    import numpy as np
-    from scipy import stats
+    >>> from plotly.figure_factory import create_violin
+    >>> import plotly.graph_objs as graph_objects
 
-    # create list of random values
-    data_list = np.random.randn(100)
-    data_list.tolist()
+    >>> import numpy as np
+    >>> from scipy import stats
 
-    # create violin fig
-    fig = create_violin(data_list, colors='#604d9e')
+    >>> # create list of random values
+    >>> data_list = np.random.randn(100)
+    >>> data_list.tolist()
 
-    # plot
-    py.iplot(fig, filename='Violin Plot')
-    ```
+    >>> # create violin fig
+    >>> fig = create_violin(data_list, colors='#604d9e')
+
+    >>> # plot
+    >>> fig.show()
 
     Example 2: Multiple Violin Plots with Qualitative Coloring
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_violin
-    from plotly.graph_objs import graph_objs
 
-    import numpy as np
-    import pandas as pd
-    from scipy import stats
+    >>> from plotly.figure_factory import create_violin
+    >>> import plotly.graph_objs as graph_objects
 
-    # create dataframe
-    np.random.seed(619517)
-    Nr=250
-    y = np.random.randn(Nr)
-    gr = np.random.choice(list("ABCDE"), Nr)
-    norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
+    >>> import numpy as np
+    >>> import pandas as pd
+    >>> from scipy import stats
 
-    for i, letter in enumerate("ABCDE"):
-        y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
-    df = pd.DataFrame(dict(Score=y, Group=gr))
+    >>> # create dataframe
+    >>> np.random.seed(619517)
+    >>> Nr=250
+    >>> y = np.random.randn(Nr)
+    >>> gr = np.random.choice(list("ABCDE"), Nr)
+    >>> norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
 
-    # create violin fig
-    fig = create_violin(df, data_header='Score', group_header='Group',
-                        sort=True, height=600, width=1000)
+    >>> for i, letter in enumerate("ABCDE"):
+    ...     y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+    >>> df = pd.DataFrame(dict(Score=y, Group=gr))
 
-    # plot
-    py.iplot(fig, filename='Violin Plot with Coloring')
-    ```
+    >>> # create violin fig
+    >>> fig = create_violin(df, data_header='Score', group_header='Group',
+    ...                    sort=True, height=600, width=1000)
+
+    >>> # plot
+    >>> fig.show()
 
     Example 3: Violin Plots with Colorscale
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_violin
-    from plotly.graph_objs import graph_objs
 
-    import numpy as np
-    import pandas as pd
-    from scipy import stats
+    >>> from plotly.figure_factory import create_violin
+    >>> import plotly.graph_objs as graph_objects
 
-    # create dataframe
-    np.random.seed(619517)
-    Nr=250
-    y = np.random.randn(Nr)
-    gr = np.random.choice(list("ABCDE"), Nr)
-    norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
+    >>> import numpy as np
+    >>> import pandas as pd
+    >>> from scipy import stats
 
-    for i, letter in enumerate("ABCDE"):
-        y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
-    df = pd.DataFrame(dict(Score=y, Group=gr))
+    >>> # create dataframe
+    >>> np.random.seed(619517)
+    >>> Nr=250
+    >>> y = np.random.randn(Nr)
+    >>> gr = np.random.choice(list("ABCDE"), Nr)
+    >>> norm_params=[(0, 1.2), (0.7, 1), (-0.5, 1.4), (0.3, 1), (0.8, 0.9)]
 
-    # define header params
-    data_header = 'Score'
-    group_header = 'Group'
+    >>> for i, letter in enumerate("ABCDE"):
+    ...     y[gr == letter] *=norm_params[i][1]+ norm_params[i][0]
+    >>> df = pd.DataFrame(dict(Score=y, Group=gr))
 
-    # make groupby object with pandas
-    group_stats = {}
-    groupby_data = df.groupby([group_header])
+    >>> # define header params
+    >>> data_header = 'Score'
+    >>> group_header = 'Group'
 
-    for group in "ABCDE":
-        data_from_group = groupby_data.get_group(group)[data_header]
-        # take a stat of the grouped data
-        stat = np.median(data_from_group)
-        # add to dictionary
-        group_stats[group] = stat
+    >>> # make groupby object with pandas
+    >>> group_stats = {}
+    >>> groupby_data = df.groupby([group_header])
 
-    # create violin fig
-    fig = create_violin(df, data_header='Score', group_header='Group',
-                        height=600, width=1000, use_colorscale=True,
-                        group_stats=group_stats)
+    >>> for group in "ABCDE":
+    ...     data_from_group = groupby_data.get_group(group)[data_header]
+    ...     # take a stat of the grouped data
+    ...     stat = np.median(data_from_group)
+    ...     # add to dictionary
+    ...     group_stats[group] = stat
 
-    # plot
-    py.iplot(fig, filename='Violin Plot with Colorscale')
-    ```
+    >>> # create violin fig
+    >>> fig = create_violin(df, data_header='Score', group_header='Group',
+    ...                     height=600, width=1000, use_colorscale=True,
+    ...                     group_stats=group_stats)
+
+    >>> # plot
+    >>> fig.show()
     """
 
     # Validate colors
