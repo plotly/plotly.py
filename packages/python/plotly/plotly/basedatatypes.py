@@ -1593,16 +1593,19 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         Examples
         --------
+
         >>> from plotly import subplots
         >>> import plotly.graph_objs as go
 
         Add two Scatter traces to a figure
+
         >>> fig = go.Figure()
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
 
 
         Add two Scatter traces to vertically stacked subplots
+
         >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
         >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
@@ -1665,15 +1668,18 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         Examples
         --------
+
         >>> from plotly import subplots
         >>> import plotly.graph_objs as go
 
         Add two Scatter traces to a figure
+
         >>> fig = go.Figure()
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])])
 
         Add two Scatter traces to vertically stacked subplots
+
         >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
@@ -1773,10 +1779,12 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         Examples
         --------
+
         >>> from plotly import tools
         >>> import plotly.graph_objs as go
-        # stack two subplots vertically
+        >>> # stack two subplots vertically
         >>> fig = tools.make_subplots(rows=2)
+
         This is the format of your plot grid:
         [ (1,1) x1,y1 ]
         [ (2,1) x2,y2 ]
@@ -2425,6 +2433,7 @@ Invalid property path '{key_path_str}' for layout
         --------
         For example, suppose we have a figure widget, `fig`, with a single
         trace.
+
         >>> import plotly.graph_objs as go
         >>> fig = go.FigureWidget(data=[{'y': [3, 4, 2]}])
 
@@ -3055,6 +3064,7 @@ class BasePlotlyType(object):
 
         Examples
         --------
+
         >>> import plotly.graph_objs as go
         >>> go.Layout()._parent_path_str
         ''
@@ -4582,6 +4592,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Examples
         --------
+
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4641,6 +4652,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Examples
         --------
+
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4700,6 +4712,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Examples
         --------
+
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4758,6 +4771,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Examples
         --------
+
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
@@ -4823,6 +4837,7 @@ class BaseTraceType(BaseTraceHierarchyType):
 
         Examples
         --------
+
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
