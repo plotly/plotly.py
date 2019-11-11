@@ -80,7 +80,7 @@ def test_px_templates():
 
     # accept objects in args
     fig = px.scatter(template={})
-    assert fig.layout.template == go.layout.Template()
+    assert fig.layout.template == go.layout.Template(data_scatter=[{}])
 
     # read colorway from the template
     fig = px.scatter(
