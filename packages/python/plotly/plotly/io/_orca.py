@@ -1568,7 +1568,7 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
 Plotly.py was unable to communicate with the orca server at {server_url}
 
 Please check that the server is running and accessible.
-"""
+""".format(server_url=config.server_url)
             )
 
         else:
