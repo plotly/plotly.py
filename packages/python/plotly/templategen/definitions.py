@@ -360,8 +360,7 @@ def plotly():
 
     # Common axis common properties
     axis_common = dict(
-        gridcolor="white", linecolor="white", ticks="", 
-        title=dict(standoff=15),
+        gridcolor="white", linecolor="white", ticks="", title=dict(standoff=15),
     )
 
     # Near black line color, no fill
@@ -504,8 +503,7 @@ def plotly_dark():
     # Common axis common properties
     grid_color = plotly_clrs["Rhino Dark"]
     axis_common = dict(
-        gridcolor=grid_color, linecolor=grid_color, ticks="", 
-        title=dict(standoff=15),
+        gridcolor=grid_color, linecolor=grid_color, ticks="", title=dict(standoff=15),
     )
 
     # Near white line color, no fill
