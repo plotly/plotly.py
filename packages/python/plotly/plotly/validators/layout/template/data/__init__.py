@@ -539,6 +539,26 @@ class IndicatorsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 import _plotly_utils.basevalidators
 
 
+class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
+    def __init__(
+        self, plotly_name="image", parent_name="layout.template.data", **kwargs
+    ):
+        super(ImagesValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Image"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class HistogramsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
     def __init__(
         self, plotly_name="histogram", parent_name="layout.template.data", **kwargs

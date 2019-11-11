@@ -120,7 +120,7 @@ def make_subplots(
         Empty strings ("") can be included in the list if no subplot title
         is desired in that space so that the titles are properly indexed.
 
-    specs: list of lists of dictionaries or None (default None)
+    specs: list of lists of dict or None (default None)
         Per subplot specifications of subplot type, row/column spanning, and
         spacing.
 
@@ -173,7 +173,7 @@ def make_subplots(
         - Note: Use 'horizontal_spacing' and 'vertical_spacing' to adjust
           the spacing in between the subplots.
 
-    insets: list of dictionaries or None (default None):
+    insets: list of dict or None (default None):
         Inset specifications.  Insets are subplots that overlay grid subplots
 
         - Each item in 'insets' is a dictionary.
@@ -794,7 +794,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     # Handle displaying grid information
     if print_grid:
-        print (grid_str)
+        print(grid_str)
 
     # Build resulting figure
     fig = go.Figure(layout=layout)

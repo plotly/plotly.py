@@ -37,11 +37,14 @@ class TemplatesConfig(object):
         default_templates = [
             "ggplot2",
             "seaborn",
+            "simple_white",
             "plotly",
             "plotly_white",
             "plotly_dark",
             "presentation",
             "xgridoff",
+            "ygridoff",
+            "gridon",
             "none",
         ]
 
