@@ -1027,18 +1027,12 @@ class BaseFigure(object):
 
         for obj in self.layout[prop]:
             # Filter by row
-            if col is not None:
-                if col == "paper" and obj.xref != "paper":
-                    continue
-                elif col != "paper" and xref_to_col.get(obj.xref, None) != col:
-                    continue
+            if col is not None and xref_to_col.get(obj.xref, None) != col:
+                continue
 
             # Filter by col
-            if row is not None:
-                if row == "paper" and obj.yref != "paper":
-                    continue
-                elif row != "paper" and yref_to_row.get(obj.yref, None) != row:
-                    continue
+            if row is not None and yref_to_row.get(obj.yref, None) != row:
+                continue
 
             # Filter by secondary y
             if (
@@ -1101,11 +1095,6 @@ because subplot does not have a secondary y-axis"""
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             new_obj.update(xref=xref, yref=yref)
-
-        if new_obj.xref is None:
-            new_obj.xref = "paper"
-        if new_obj.yref is None:
-            new_obj.yref = "paper"
 
         self.layout[prop_plural] += (new_obj,)
 

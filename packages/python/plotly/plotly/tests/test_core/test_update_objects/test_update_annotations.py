@@ -76,10 +76,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
     def test_add_annotation_no_grid(self):
         # Paper annotation
         fig = go.Figure()
-        fig.add_annotation(text="A")
+        fig.add_annotation(text="A", yref="paper")
         annot = fig.layout.annotations[-1]
         self.assertEqual(annot.text, "A")
-        self.assertEqual(annot.xref, "paper")
+        self.assertEqual(annot.xref, None)
         self.assertEqual(annot.yref, "paper")
 
         # Not valid to add annotation by row/col
@@ -88,10 +88,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
 
     def test_add_annotations(self):
         # Paper annotation
-        self.fig.add_annotation(text="A")
+        self.fig.add_annotation(text="A", yref="paper")
         annot = self.fig.layout.annotations[-1]
         self.assertEqual(annot.text, "A")
-        self.assertEqual(annot.xref, "paper")
+        self.assertEqual(annot.xref, None)
         self.assertEqual(annot.yref, "paper")
 
         # (1, 1) annotation
@@ -138,8 +138,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
 
     def test_select_annotations(self):
         (
-            self.fig.add_annotation(text="A1", arrowcolor="red")
-            .add_annotation(text="A2", arrowcolor="blue")
+            self.fig.add_annotation(
+                text="A1", arrowcolor="red", xref="paper", yref="paper"
+            )
+            .add_annotation(text="A2", arrowcolor="blue", xref="paper", yref="paper")
             .add_annotation(text="B", arrowcolor="red", row=1, col=1)
             .add_annotation(text="C1", row=1, col=2)
             .add_annotation(text="C2", row=1, col=2, secondary_y=True)
@@ -151,13 +153,13 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_selected("annotations", [0, 2], selector=dict(arrowcolor="red"))
         self.assert_selected("annotations", [2, 3, 4], row=1)
         self.assert_selected("annotations", [2], selector=dict(arrowcolor="red"), row=1)
-        self.assert_selected("annotations", [0, 1], row="paper", col="paper")
+        self.assert_selected("annotations", [0, 1], dict(yref="paper", xref="paper"))
         self.assert_selected("annotations", [4], secondary_y=True)
 
     def test_select_shapes(self):
         (
-            self.fig.add_shape(opacity=0.1, fillcolor="red")
-            .add_shape(opacity=0.2, fillcolor="blue")
+            self.fig.add_shape(opacity=0.1, fillcolor="red", xref="paper", yref="paper")
+            .add_shape(opacity=0.2, fillcolor="blue", xref="paper", yref="paper")
             .add_shape(opacity=0.3, fillcolor="red", row=1, col=1)
             .add_shape(opacity=0.4, row=1, col=2)
             .add_shape(opacity=0.5, row=1, col=2, secondary_y=True)
@@ -169,13 +171,15 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_selected("shapes", [0, 2], selector=dict(fillcolor="red"))
         self.assert_selected("shapes", [2, 3, 4], row=1)
         self.assert_selected("shapes", [2], selector=dict(fillcolor="red"), row=1)
-        self.assert_selected("shapes", [0, 1], row="paper", col="paper")
+        self.assert_selected("shapes", [0, 1], dict(yref="paper", xref="paper"))
         self.assert_selected("shapes", [4], secondary_y=True)
 
     def test_select_images(self):
         (
-            self.fig.add_layout_image(opacity=0.1, source="red")
-            .add_layout_image(opacity=0.2, source="blue")
+            self.fig.add_layout_image(
+                opacity=0.1, source="red", xref="paper", yref="paper"
+            )
+            .add_layout_image(opacity=0.2, source="blue", xref="paper", yref="paper")
             .add_layout_image(opacity=0.3, source="red", row=1, col=1)
             .add_layout_image(opacity=0.4, row=1, col=2)
             .add_layout_image(opacity=0.5, row=1, col=2, secondary_y=True)
@@ -187,7 +191,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_selected("images", [0, 2], selector=dict(source="red"))
         self.assert_selected("images", [2, 3, 4], row=1)
         self.assert_selected("images", [2], selector=dict(source="red"), row=1)
-        self.assert_selected("images", [0, 1], row="paper", col="paper")
+        self.assert_selected("images", [0, 1], dict(yref="paper", xref="paper"))
         self.assert_selected("images", [4], secondary_y=True)
 
     def test_update_annotations(self):
