@@ -2602,6 +2602,7 @@ Invalid property path '{key_path_str}' for layout
 
         2) Animate a change in the size and color of the trace's markers
         over 2 seconds using the elastic-in-out easing method
+
         >>> with fig.batch_update(duration=2000, easing='elastic-in-out'):
         ...     fig.data[0].marker.color = 'green'
         ...     fig.data[0].marker.size = 20
