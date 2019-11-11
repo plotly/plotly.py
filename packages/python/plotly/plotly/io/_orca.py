@@ -381,6 +381,48 @@ Failed to write orca configuration file at '{path}'""".format(
             )
 
     @property
+    def server_url(self):
+        """
+        The server URL to use for an external orca server, or None if orca
+        should be managed locally
+
+        Overrides executable, port, timeout, mathjax, topojson,
+        and mapbox_access_token
+
+        Returns
+        -------
+        str or None
+        """
+        return self._props.get("server_url", None)
+
+    @server_url.setter
+    def server_url(self, val):
+
+        if val is None:
+            self._props.pop("server_url", None)
+            return
+        if not isinstance(val, str):
+            raise ValueError(
+                """
+The server_url property must be a string, but received value of type {typ}.
+    Received value: {val}""".format(
+                    typ=type(val), val=val
+                )
+            )
+
+        if not val.startswith("http://") and not val.startswith("https://"):
+            val = "http://" + val
+
+        shutdown_server()
+        self.executable = None
+        self.port = None
+        self.timeout = None
+        self.mathjax = None
+        self.topojson = None
+        self.mapbox_access_token = None
+        self._props["server_url"] = val
+
+    @property
     def port(self):
         """
         The specific port to use to communicate with the orca server, or
@@ -777,6 +819,7 @@ The use_xvfb property must be one of {valid_vals}
         return """\
 orca configuration
 ------------------
+    server_url: {server_url}
     executable: {executable}
     port: {port}
     timeout: {timeout}
@@ -795,6 +838,7 @@ constants
     config_file: {config_file}
 
 """.format(
+            server_url=self.server_url,
             port=self.port,
             executable=self.executable,
             timeout=self.timeout,
@@ -1344,62 +1388,65 @@ Install using conda:
     if status.state == "unvalidated":
         validate_executable()
 
-    # Acquire lock to make sure that we keep the properties of orca_state
-    # consistent across threads
-    with orca_lock:
-        # Cancel the current shutdown timer, if any
-        if orca_state["shutdown_timer"] is not None:
-            orca_state["shutdown_timer"].cancel()
+    if not config.server_url:
+        # Acquire lock to make sure that we keep the properties of orca_state
+        # consistent across threads
+        with orca_lock:
+            # Cancel the current shutdown timer, if any
+            if orca_state["shutdown_timer"] is not None:
+                orca_state["shutdown_timer"].cancel()
 
-        # Start a new server process if none is active
-        if orca_state["proc"] is None:
+            # Start a new server process if none is active
+            if orca_state["proc"] is None:
 
-            # Determine server port
-            if config.port is None:
-                orca_state["port"] = find_open_port()
-            else:
-                orca_state["port"] = config.port
+                # Determine server port
+                if config.port is None:
+                    orca_state["port"] = find_open_port()
+                else:
+                    orca_state["port"] = config.port
 
-            # Build orca command list
-            cmd_list = status._props["executable_list"] + [
-                "serve",
-                "-p",
-                str(orca_state["port"]),
-                "--plotly",
-                config.plotlyjs,
-                "--graph-only",
-            ]
+                # Build orca command list
+                cmd_list = status._props["executable_list"] + [
+                    "serve",
+                    "-p",
+                    str(orca_state["port"]),
+                    "--plotly",
+                    config.plotlyjs,
+                    "--graph-only",
+                ]
 
-            if config.topojson:
-                cmd_list.extend(["--topojson", config.topojson])
+                if config.topojson:
+                    cmd_list.extend(["--topojson", config.topojson])
 
-            if config.mathjax:
-                cmd_list.extend(["--mathjax", config.mathjax])
+                if config.mathjax:
+                    cmd_list.extend(["--mathjax", config.mathjax])
 
-            if config.mapbox_access_token:
-                cmd_list.extend(["--mapbox-access-token", config.mapbox_access_token])
+                if config.mapbox_access_token:
+                    cmd_list.extend(
+                        ["--mapbox-access-token", config.mapbox_access_token]
+                    )
 
-            # Create subprocess that launches the orca server on the
-            # specified port.
-            DEVNULL = open(os.devnull, "wb")
-            with orca_env():
-                orca_state["proc"] = subprocess.Popen(cmd_list, stdout=DEVNULL)
+                # Create subprocess that launches the orca server on the
+                # specified port.
+                DEVNULL = open(os.devnull, "wb")
+                with orca_env():
+                    orca_state["proc"] = subprocess.Popen(cmd_list, stdout=DEVNULL)
 
-            # Update orca.status so the user has an accurate view
-            # of the state of the orca server
-            status._props["state"] = "running"
-            status._props["pid"] = orca_state["proc"].pid
-            status._props["port"] = orca_state["port"]
-            status._props["command"] = cmd_list
+                # Update orca.status so the user has an accurate view
+                # of the state of the orca server
+                status._props["state"] = "running"
+                status._props["pid"] = orca_state["proc"].pid
+                status._props["port"] = orca_state["port"]
+                status._props["command"] = cmd_list
 
-        # Create new shutdown timer if a timeout was specified
-        if config.timeout is not None:
-            t = threading.Timer(config.timeout, shutdown_server)
-            # Make it a daemon thread so that exit won't wait for timer to
-            # complete
-            t.daemon = True
-            t.start()
-            orca_state["shutdown_timer"] = t
+            # Create new shutdown timer if a timeout was specified
+            if config.timeout is not None:
+                t = threading.Timer(config.timeout, shutdown_server)
+                # Make it a daemon thread so that exit won't wait for timer to
+                # complete
+                t.daemon = True
+                t.start()
+                orca_state["shutdown_timer"] = t
 
 
 @retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=60000)
@@ -1410,9 +1457,12 @@ def request_image_with_retrying(**kwargs):
     """
     from requests import post
 
-    server_url = "http://{hostname}:{port}".format(
-        hostname="localhost", port=orca_state["port"]
-    )
+    if config.server_url:
+        server_url = config.server_url
+    else:
+        server_url = "http://{hostname}:{port}".format(
+            hostname="localhost", port=orca_state["port"]
+        )
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
     json_str = json.dumps(request_params, cls=_plotly_utils.utils.PlotlyJSONEncoder)
@@ -1513,13 +1563,25 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
         # Get current status string
         status_str = repr(status)
 
-        # Check if the orca server process exists
-        pid_exists = psutil.pid_exists(status.pid)
-
-        # Raise error message based on whether the server process existed
-        if pid_exists:
+        if config.server_url:
             raise ValueError(
                 """
+Plotly.py was unable to communicate with the orca server at {server_url}
+
+Please check that the server is running and accessible.
+""".format(
+                    server_url=config.server_url
+                )
+            )
+
+        else:
+            # Check if the orca server process exists
+            pid_exists = psutil.pid_exists(status.pid)
+
+            # Raise error message based on whether the server process existed
+            if pid_exists:
+                raise ValueError(
+                    """
 For some reason plotly.py was unable to communicate with the
 local orca server process, even though the server process seems to be running.
 
@@ -1527,15 +1589,15 @@ Please review the process and connection information below:
 
 {info}
 """.format(
-                    info=status_str
+                        info=status_str
+                    )
                 )
-            )
-        else:
-            # Reset the status so that if the user tries again, we'll try to
-            # start the server again
-            reset_status()
-            raise ValueError(
-                """
+            else:
+                # Reset the status so that if the user tries again, we'll try to
+                # start the server again
+                reset_status()
+                raise ValueError(
+                    """
 For some reason the orca server process is no longer running.
 
 Please review the process and connection information below:
@@ -1544,9 +1606,9 @@ Please review the process and connection information below:
 plotly.py will attempt to start the local server process again the next time
 an image export operation is performed.
 """.format(
-                    info=status_str
+                        info=status_str
+                    )
                 )
-            )
 
     # Check response
     # --------------

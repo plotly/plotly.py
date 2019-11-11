@@ -7,10 +7,14 @@ import requests
 import time
 import psutil
 import pytest
+import plotly.graph_objects as go
 
 
 # Fixtures
 # --------
+from plotly.io._orca import find_open_port, which, orca_env
+
+
 @pytest.fixture()
 def setup():
     # Set problematic environment variables
@@ -150,3 +154,45 @@ def test_server_timeout_shutdown():
 
     # Check that ping is no longer answered
     assert not ping_pongs(server_url)
+
+
+def test_external_server_url():
+    # Build server url
+    port = find_open_port()
+    server_url = "http://{hostname}:{port}".format(hostname="localhost", port=port)
+
+    # Build external orca command
+    orca_path = which("orca")
+    cmd_list = [orca_path] + [
+        "serve",
+        "-p",
+        str(port),
+        "--plotly",
+        pio.orca.config.plotlyjs,
+        "--graph-only",
+    ]
+
+    # Run orca as subprocess to simulate external orca server
+    DEVNULL = open(os.devnull, "wb")
+    with orca_env():
+        proc = subprocess.Popen(cmd_list, stdout=DEVNULL)
+
+    # Start plotly managed orca server so we can ensure it gets shut down properly
+    pio.orca.config.port = port
+    pio.orca.ensure_server()
+    assert pio.orca.status.state == "running"
+
+    # Configure orca to use external server
+    pio.orca.config.server_url = server_url
+
+    # Make sure that the locally managed orca server has been shutdown and the local
+    # config options have been cleared
+    assert pio.orca.status.state == "unvalidated"
+    assert pio.orca.config.port is None
+
+    fig = go.Figure()
+    img_bytes = pio.to_image(fig, format="svg")
+    assert img_bytes.startswith(b"<svg class")
+
+    # Kill server orca process
+    proc.terminate()
