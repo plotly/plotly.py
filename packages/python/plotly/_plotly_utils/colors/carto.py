@@ -9,8 +9,8 @@ CARTOColors are made available under a Creative Commons Attribution license: htt
 from ._swatches import _swatches
 
 
-def swatches():
-    return _swatches(__name__, globals())
+def swatches(template=None):
+    return _swatches(__name__, globals(), template)
 
 
 swatches.__doc__ = _swatches.__doc__

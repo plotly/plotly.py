@@ -9,8 +9,8 @@ cmocean is made available under an MIT license: https://github.com/matplotlib/cm
 from ._swatches import _swatches
 
 
-def swatches():
-    return _swatches(__name__, globals())
+def swatches(template=None):
+    return _swatches(__name__, globals(), template)
 
 
 swatches.__doc__ = _swatches.__doc__
