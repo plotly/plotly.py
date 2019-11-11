@@ -1565,10 +1565,10 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
         if config.server_url:
             raise ValueError(
                 """
-    Plotly.py was unable to communicate with the orca server at {server_url}
+Plotly.py was unable to communicate with the orca server at {server_url}
 
-    Please check that the server is running and accessible.
-    """
+Please check that the server is running and accessible.
+"""
             )
 
         else:
@@ -1579,13 +1579,13 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
             if pid_exists:
                 raise ValueError(
                     """
-    For some reason plotly.py was unable to communicate with the
-    local orca server process, even though the server process seems to be running.
+For some reason plotly.py was unable to communicate with the
+local orca server process, even though the server process seems to be running.
 
-    Please review the process and connection information below:
+Please review the process and connection information below:
 
-    {info}
-    """.format(
+{info}
+""".format(
                         info=status_str
                     )
                 )
@@ -1595,14 +1595,14 @@ def to_image(fig, format=None, width=None, height=None, scale=None, validate=Tru
                 reset_status()
                 raise ValueError(
                     """
-    For some reason the orca server process is no longer running.
+For some reason the orca server process is no longer running.
 
-    Please review the process and connection information below:
+Please review the process and connection information below:
 
-    {info}
-    plotly.py will attempt to start the local server process again the next time
-    an image export operation is performed.
-    """.format(
+{info}
+plotly.py will attempt to start the local server process again the next time
+an image export operation is performed.
+""".format(
                         info=status_str
                     )
                 )
