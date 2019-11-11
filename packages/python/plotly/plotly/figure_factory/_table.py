@@ -58,52 +58,46 @@ def create_table(
         call help(plotly.graph_objs.Heatmap)
 
     Example 1: Simple Plotly Table
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_table
 
-    text = [['Country', 'Year', 'Population'],
-            ['US', 2000, 282200000],
-            ['Canada', 2000, 27790000],
-            ['US', 2010, 309000000],
-            ['Canada', 2010, 34000000]]
+    >>> from plotly.figure_factory import create_table
 
-    table = create_table(text)
-    py.iplot(table)
-    ```
+    >>> text = [['Country', 'Year', 'Population'],
+    ...         ['US', 2000, 282200000],
+    ...         ['Canada', 2000, 27790000],
+    ...         ['US', 2010, 309000000],
+    ...         ['Canada', 2010, 34000000]]
+
+    >>> table = create_table(text)
+    >>> table.show()
 
     Example 2: Table with Custom Coloring
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_table
 
-    text = [['Country', 'Year', 'Population'],
-            ['US', 2000, 282200000],
-            ['Canada', 2000, 27790000],
-            ['US', 2010, 309000000],
-            ['Canada', 2010, 34000000]]
+    >>> from plotly.figure_factory import create_table
 
-    table = create_table(text,
-                         colorscale=[[0, '#000000'],
-                                     [.5, '#80beff'],
-                                     [1, '#cce5ff']],
-                         font_colors=['#ffffff', '#000000',
-                                    '#000000'])
-    py.iplot(table)
-    ```
+    >>> text = [['Country', 'Year', 'Population'],
+    ...         ['US', 2000, 282200000],
+    ...         ['Canada', 2000, 27790000],
+    ...         ['US', 2010, 309000000],
+    ...         ['Canada', 2010, 34000000]]
+
+    >>> table = create_table(text,
+    ...                      colorscale=[[0, '#000000'],
+    ...                                  [.5, '#80beff'],
+    ...                                  [1, '#cce5ff']],
+    ...                      font_colors=['#ffffff', '#000000',
+    ...                                 '#000000'])
+    >>> table.show()
+
     Example 3: Simple Plotly Table with Pandas
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_table
 
-    import pandas as pd
+    >>> from plotly.figure_factory import create_table
+    >>> import pandas as pd
 
-    df = pd.read_csv('http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt', sep='\t')
-    df_p = df[0:25]
+    >>> df = pd.read_csv('http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt', sep='\t')
+    >>> df_p = df[0:25]
 
-    table_simple = create_table(df_p)
-    py.iplot(table_simple)
-    ```
+    >>> table_simple = create_table(df_p)
+    >>> table_simple.show()
     """
 
     # Avoiding mutables in the call signature

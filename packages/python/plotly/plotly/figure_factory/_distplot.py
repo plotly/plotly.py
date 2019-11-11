@@ -85,96 +85,83 @@ def create_distplot(
     :return (dict): Representation of a distplot figure.
 
     Example 1: Simple distplot of 1 data set
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_distplot
 
-    hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
-                  3.5, 4.1, 4.4, 4.5, 4.5,
-                  5.0, 5.0, 5.2, 5.5, 5.5,
-                  5.5, 5.5, 5.5, 6.1, 7.0]]
+    >>> from plotly.figure_factory import create_distplot
 
-    group_labels = ['distplot example']
+    >>> hist_data = [[1.1, 1.1, 2.5, 3.0, 3.5,
+    ...               3.5, 4.1, 4.4, 4.5, 4.5,
+    ...               5.0, 5.0, 5.2, 5.5, 5.5,
+    ...               5.5, 5.5, 5.5, 6.1, 7.0]]
+    >>> group_labels = ['distplot example']
+    >>> fig = create_distplot(hist_data, group_labels)
+    >>> fig.show()
 
-    fig = create_distplot(hist_data, group_labels)
-
-    url = py.plot(fig, filename='Simple distplot', validate=False)
-    ```
 
     Example 2: Two data sets and added rug text
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_distplot
+    
+    >>> from plotly.figure_factory import create_distplot
+    >>> # Add histogram data
+    >>> hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
+    ...            -0.9, -0.07, 1.95, 0.9, -0.2,
+    ...            -0.5, 0.3, 0.4, -0.37, 0.6]
+    >>> hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
+    ...            1.0, 0.8, 1.7, 0.5, 0.8,
+    ...            -0.3, 1.2, 0.56, 0.3, 2.2]
 
-    # Add histogram data
-    hist1_x = [0.8, 1.2, 0.2, 0.6, 1.6,
-               -0.9, -0.07, 1.95, 0.9, -0.2,
-               -0.5, 0.3, 0.4, -0.37, 0.6]
-    hist2_x = [0.8, 1.5, 1.5, 0.6, 0.59,
-               1.0, 0.8, 1.7, 0.5, 0.8,
-               -0.3, 1.2, 0.56, 0.3, 2.2]
+    >>> # Group data together
+    >>> hist_data = [hist1_x, hist2_x]
 
-    # Group data together
-    hist_data = [hist1_x, hist2_x]
+    >>> group_labels = ['2012', '2013']
 
-    group_labels = ['2012', '2013']
+    >>> # Add text
+    >>> rug_text_1 = ['a1', 'b1', 'c1', 'd1', 'e1',
+    ...       'f1', 'g1', 'h1', 'i1', 'j1',
+    ...       'k1', 'l1', 'm1', 'n1', 'o1']
 
-    # Add text
-    rug_text_1 = ['a1', 'b1', 'c1', 'd1', 'e1',
-          'f1', 'g1', 'h1', 'i1', 'j1',
-          'k1', 'l1', 'm1', 'n1', 'o1']
+    >>> rug_text_2 = ['a2', 'b2', 'c2', 'd2', 'e2',
+    ...       'f2', 'g2', 'h2', 'i2', 'j2',
+    ...       'k2', 'l2', 'm2', 'n2', 'o2']
 
-    rug_text_2 = ['a2', 'b2', 'c2', 'd2', 'e2',
-          'f2', 'g2', 'h2', 'i2', 'j2',
-          'k2', 'l2', 'm2', 'n2', 'o2']
+    >>> # Group text together
+    >>> rug_text_all = [rug_text_1, rug_text_2]
 
-    # Group text together
-    rug_text_all = [rug_text_1, rug_text_2]
+    >>> # Create distplot
+    >>> fig = create_distplot(
+    ...     hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
 
-    # Create distplot
-    fig = create_distplot(
-        hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
+    >>> # Add title
+    >>> fig['layout'].update(title='Dist Plot')
+    >>> fig.show()
 
-    # Add title
-    fig['layout'].update(title='Dist Plot')
-
-    # Plot!
-    url = py.plot(fig, filename='Distplot with rug text', validate=False)
-    ```
 
     Example 3: Plot with normal curve and hide rug plot
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_distplot
-    import numpy as np
+    
+    >>> from plotly.figure_factory import create_distplot
+    >>> import numpy as np
 
-    x1 = np.random.randn(190)
-    x2 = np.random.randn(200)+1
-    x3 = np.random.randn(200)-1
-    x4 = np.random.randn(210)+2
+    >>> x1 = np.random.randn(190)
+    >>> x2 = np.random.randn(200)+1
+    >>> x3 = np.random.randn(200)-1
+    >>> x4 = np.random.randn(210)+2
 
-    hist_data = [x1, x2, x3, x4]
-    group_labels = ['2012', '2013', '2014', '2015']
+    >>> hist_data = [x1, x2, x3, x4]
+    >>> group_labels = ['2012', '2013', '2014', '2015']
 
-    fig = create_distplot(
-        hist_data, group_labels, curve_type='normal',
-        show_rug=False, bin_size=.4)
+    >>> fig = create_distplot(
+    ...     hist_data, group_labels, curve_type='normal',
+    ...     show_rug=False, bin_size=.4)
 
-    url = py.plot(fig, filename='hist and normal curve', validate=False)
 
     Example 4: Distplot with Pandas
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_distplot
-    import numpy as np
-    import pandas as pd
+    
+    >>> from plotly.figure_factory import create_distplot
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    df = pd.DataFrame({'2012': np.random.randn(200),
-                       '2013': np.random.randn(200)+1})
-    py.iplot(create_distplot([df[c] for c in df.columns], df.columns),
-                             filename='examples/distplot with pandas',
-                             validate=False)
-    ```
+    >>> df = pd.DataFrame({'2012': np.random.randn(200),
+    >>>                    '2013': np.random.randn(200)+1})
+    >>> fig = create_distplot([df[c] for c in df.columns], df.columns)
+    >>> fig.show()
     """
     if colors is None:
         colors = []

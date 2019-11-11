@@ -305,186 +305,166 @@ def create_trisurf(
         the x, y and z axes. 'x', 'y' and 'z' take (int|float) values
 
     Example 1: Sphere
-    ```
-    # Necessary Imports for Trisurf
-    import numpy as np
-    from scipy.spatial import Delaunay
 
-    import plotly.plotly as py
-    from plotly.figure_factory import create_trisurf
-    from plotly.graph_objs import graph_objs
+    >>> # Necessary Imports for Trisurf
+    >>> import numpy as np
+    >>> from scipy.spatial import Delaunay
 
-    # Make data for plot
-    u = np.linspace(0, 2*np.pi, 20)
-    v = np.linspace(0, np.pi, 20)
-    u,v = np.meshgrid(u,v)
-    u = u.flatten()
-    v = v.flatten()
+    >>> from plotly.figure_factory import create_trisurf
+    >>> from plotly.graph_objs import graph_objs
 
-    x = np.sin(v)*np.cos(u)
-    y = np.sin(v)*np.sin(u)
-    z = np.cos(v)
+    >>> # Make data for plot
+    >>> u = np.linspace(0, 2*np.pi, 20)
+    >>> v = np.linspace(0, np.pi, 20)
+    >>> u,v = np.meshgrid(u,v)
+    >>> u = u.flatten()
+    >>> v = v.flatten()
 
-    points2D = np.vstack([u,v]).T
-    tri = Delaunay(points2D)
-    simplices = tri.simplices
+    >>> x = np.sin(v)*np.cos(u)
+    >>> y = np.sin(v)*np.sin(u)
+    >>> z = np.cos(v)
 
-    # Create a figure
-    fig1 = create_trisurf(x=x, y=y, z=z, colormap="Rainbow",
-                          simplices=simplices)
-    # Plot the data
-    py.iplot(fig1, filename='trisurf-plot-sphere')
-    ```
+    >>> points2D = np.vstack([u,v]).T
+    >>> tri = Delaunay(points2D)
+    >>> simplices = tri.simplices
+
+    >>> # Create a figure
+    >>> fig1 = create_trisurf(x=x, y=y, z=z, colormap="Rainbow",
+    ...                       simplices=simplices)
 
     Example 2: Torus
-    ```
-    # Necessary Imports for Trisurf
-    import numpy as np
-    from scipy.spatial import Delaunay
 
-    import plotly.plotly as py
-    from plotly.figure_factory import create_trisurf
-    from plotly.graph_objs import graph_objs
+    >>> # Necessary Imports for Trisurf
+    >>> import numpy as np
+    >>> from scipy.spatial import Delaunay
 
-    # Make data for plot
-    u = np.linspace(0, 2*np.pi, 20)
-    v = np.linspace(0, 2*np.pi, 20)
-    u,v = np.meshgrid(u,v)
-    u = u.flatten()
-    v = v.flatten()
+    >>> from plotly.figure_factory import create_trisurf
+    >>> from plotly.graph_objs import graph_objs
 
-    x = (3 + (np.cos(v)))*np.cos(u)
-    y = (3 + (np.cos(v)))*np.sin(u)
-    z = np.sin(v)
+    >>> # Make data for plot
+    >>> u = np.linspace(0, 2*np.pi, 20)
+    >>> v = np.linspace(0, 2*np.pi, 20)
+    >>> u,v = np.meshgrid(u,v)
+    >>> u = u.flatten()
+    >>> v = v.flatten()
 
-    points2D = np.vstack([u,v]).T
-    tri = Delaunay(points2D)
-    simplices = tri.simplices
+    >>> x = (3 + (np.cos(v)))*np.cos(u)
+    >>> y = (3 + (np.cos(v)))*np.sin(u)
+    >>> z = np.sin(v)
 
-    # Create a figure
-    fig1 = create_trisurf(x=x, y=y, z=z, colormap="Viridis",
-                          simplices=simplices)
-    # Plot the data
-    py.iplot(fig1, filename='trisurf-plot-torus')
-    ```
+    >>> points2D = np.vstack([u,v]).T
+    >>> tri = Delaunay(points2D)
+    >>> simplices = tri.simplices
+
+    >>> # Create a figure
+    >>> fig1 = create_trisurf(x=x, y=y, z=z, colormap="Viridis",
+    ...                       simplices=simplices)
 
     Example 3: Mobius Band
-    ```
-    # Necessary Imports for Trisurf
-    import numpy as np
-    from scipy.spatial import Delaunay
 
-    import plotly.plotly as py
-    from plotly.figure_factory import create_trisurf
-    from plotly.graph_objs import graph_objs
+    >>> # Necessary Imports for Trisurf
+    >>> import numpy as np
+    >>> from scipy.spatial import Delaunay
 
-    # Make data for plot
-    u = np.linspace(0, 2*np.pi, 24)
-    v = np.linspace(-1, 1, 8)
-    u,v = np.meshgrid(u,v)
-    u = u.flatten()
-    v = v.flatten()
+    >>> from plotly.figure_factory import create_trisurf
+    >>> from plotly.graph_objs import graph_objs
 
-    tp = 1 + 0.5*v*np.cos(u/2.)
-    x = tp*np.cos(u)
-    y = tp*np.sin(u)
-    z = 0.5*v*np.sin(u/2.)
+    >>> # Make data for plot
+    >>> u = np.linspace(0, 2*np.pi, 24)
+    >>> v = np.linspace(-1, 1, 8)
+    >>> u,v = np.meshgrid(u,v)
+    >>> u = u.flatten()
+    >>> v = v.flatten()
 
-    points2D = np.vstack([u,v]).T
-    tri = Delaunay(points2D)
-    simplices = tri.simplices
+    >>> tp = 1 + 0.5*v*np.cos(u/2.)
+    >>> x = tp*np.cos(u)
+    >>> y = tp*np.sin(u)
+    >>> z = 0.5*v*np.sin(u/2.)
 
-    # Create a figure
-    fig1 = create_trisurf(x=x, y=y, z=z, colormap=[(0.2, 0.4, 0.6), (1, 1, 1)],
-                          simplices=simplices)
-    # Plot the data
-    py.iplot(fig1, filename='trisurf-plot-mobius-band')
-    ```
+    >>> points2D = np.vstack([u,v]).T
+    >>> tri = Delaunay(points2D)
+    >>> simplices = tri.simplices
+
+    >>> # Create a figure
+    >>> fig1 = create_trisurf(x=x, y=y, z=z, colormap=[(0.2, 0.4, 0.6), (1, 1, 1)],
+    ...                       simplices=simplices)
 
     Example 4: Using a Custom Colormap Function with Light Cone
-    ```
-    # Necessary Imports for Trisurf
-    import numpy as np
-    from scipy.spatial import Delaunay
 
-    import plotly.plotly as py
-    from plotly.figure_factory import create_trisurf
-    from plotly.graph_objs import graph_objs
+    >>> # Necessary Imports for Trisurf
+    >>> import numpy as np
+    >>> from scipy.spatial import Delaunay
 
-    # Make data for plot
-    u=np.linspace(-np.pi, np.pi, 30)
-    v=np.linspace(-np.pi, np.pi, 30)
-    u,v=np.meshgrid(u,v)
-    u=u.flatten()
-    v=v.flatten()
+    >>> from plotly.figure_factory import create_trisurf
+    >>> from plotly.graph_objs import graph_objs
 
-    x = u
-    y = u*np.cos(v)
-    z = u*np.sin(v)
+    >>> # Make data for plot
+    >>> u=np.linspace(-np.pi, np.pi, 30)
+    >>> v=np.linspace(-np.pi, np.pi, 30)
+    >>> u,v=np.meshgrid(u,v)
+    >>> u=u.flatten()
+    >>> v=v.flatten()
 
-    points2D = np.vstack([u,v]).T
-    tri = Delaunay(points2D)
-    simplices = tri.simplices
+    >>> x = u
+    >>> y = u*np.cos(v)
+    >>> z = u*np.sin(v)
 
-    # Define distance function
-    def dist_origin(x, y, z):
-        return np.sqrt((1.0 * x)**2 + (1.0 * y)**2 + (1.0 * z)**2)
+    >>> points2D = np.vstack([u,v]).T
+    >>> tri = Delaunay(points2D)
+    >>> simplices = tri.simplices
 
-    # Create a figure
-    fig1 = create_trisurf(x=x, y=y, z=z,
-                          colormap=['#FFFFFF', '#E4FFFE',
-                                    '#A4F6F9', '#FF99FE',
-                                    '#BA52ED'],
-                          scale=[0, 0.6, 0.71, 0.89, 1],
-                          simplices=simplices,
-                          color_func=dist_origin)
-    # Plot the data
-    py.iplot(fig1, filename='trisurf-plot-custom-coloring')
-    ```
+    >>> # Define distance function
+    >>> def dist_origin(x, y, z):
+    ...     return np.sqrt((1.0 * x)**2 + (1.0 * y)**2 + (1.0 * z)**2)
+
+    >>> # Create a figure
+    >>> fig1 = create_trisurf(x=x, y=y, z=z,
+    ...                       colormap=['#FFFFFF', '#E4FFFE',
+    ...                                 '#A4F6F9', '#FF99FE',
+    ...                                 '#BA52ED'],
+    ...                       scale=[0, 0.6, 0.71, 0.89, 1],
+    ...                       simplices=simplices,
+    ...                       color_func=dist_origin)
 
     Example 5: Enter color_func as a list of colors
-    ```
-    # Necessary Imports for Trisurf
-    import numpy as np
-    from scipy.spatial import Delaunay
-    import random
 
-    import plotly.plotly as py
-    from plotly.figure_factory import create_trisurf
-    from plotly.graph_objs import graph_objs
+    >>> # Necessary Imports for Trisurf
+    >>> import numpy as np
+    >>> from scipy.spatial import Delaunay
+    >>> import random
 
-    # Make data for plot
-    u=np.linspace(-np.pi, np.pi, 30)
-    v=np.linspace(-np.pi, np.pi, 30)
-    u,v=np.meshgrid(u,v)
-    u=u.flatten()
-    v=v.flatten()
+    >>> from plotly.figure_factory import create_trisurf
+    >>> from plotly.graph_objs import graph_objs
 
-    x = u
-    y = u*np.cos(v)
-    z = u*np.sin(v)
+    >>> # Make data for plot
+    >>> u=np.linspace(-np.pi, np.pi, 30)
+    >>> v=np.linspace(-np.pi, np.pi, 30)
+    >>> u,v=np.meshgrid(u,v)
+    >>> u=u.flatten()
+    >>> v=v.flatten()
 
-    points2D = np.vstack([u,v]).T
-    tri = Delaunay(points2D)
-    simplices = tri.simplices
+    >>> x = u
+    >>> y = u*np.cos(v)
+    >>> z = u*np.sin(v)
+
+    >>> points2D = np.vstack([u,v]).T
+    >>> tri = Delaunay(points2D)
+    >>> simplices = tri.simplices
 
 
-    colors = []
-    color_choices = ['rgb(0, 0, 0)', '#6c4774', '#d6c7dd']
+    >>> colors = []
+    >>> color_choices = ['rgb(0, 0, 0)', '#6c4774', '#d6c7dd']
 
-    for index in range(len(simplices)):
-        colors.append(random.choice(color_choices))
+    >>> for index in range(len(simplices)):
+    >>>     colors.append(random.choice(color_choices))
 
-    fig = create_trisurf(
-        x, y, z, simplices,
-        color_func=colors,
-        show_colorbar=True,
-        edges_color='rgb(2, 85, 180)',
-        title=' Modern Art'
-    )
-
-    py.iplot(fig, filename="trisurf-plot-modern-art")
-    ```
+    >>> fig = create_trisurf(
+    ...     x, y, z, simplices,
+    ...     color_func=colors,
+    ...     show_colorbar=True,
+    ...     edges_color='rgb(2, 85, 180)',
+    ...     title=' Modern Art'
+    ... )
     """
     if aspectratio is None:
         aspectratio = {"x": 1, "y": 1, "z": 1}

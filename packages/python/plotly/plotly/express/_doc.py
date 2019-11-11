@@ -27,13 +27,13 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
-        "For horizontal `histogram`s, these values are used as inputs to `histfunc`.",
+        "For horizontal histograms, these values are used as inputs to `histfunc`.",
     ],
     y=[
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the y axis in cartesian coordinates.",
-        "For vertical `histogram`s, these values are used as inputs to `histfunc`.",
+        "For vertical histograms, these values are used as inputs to `histfunc`.",
     ],
     z=[
         colref_type,
@@ -455,6 +455,7 @@ def make_docstring(fn):
             if param in docs
             else "(documentation missing from map)"
         )
+
         param_type = docs[param][0]
         result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"

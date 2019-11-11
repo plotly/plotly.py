@@ -720,121 +720,94 @@ def create_facet_grid(
     :param (dict) kwargs: a dictionary of scatterplot arguments.
 
     Examples 1: One Way Faceting
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
 
-    mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
-
-    fig = ff.create_facet_grid(
-        mpg,
-        x='displ',
-        y='cty',
-        facet_col='cyl',
-    )
-    py.iplot(fig, filename='facet_grid_mpg_one_way_facet')
-    ```
+    >>> fig = ff.create_facet_grid(
+    ...     mpg,
+    ...     x='displ',
+    ...     y='cty',
+    ...     facet_col='cyl',
+    ... )
+    >>> fig.show()
 
     Example 2: Two Way Faceting
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
+    >>> import plotly.figure_factory as ff
 
-    mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+    >>> import pandas as pd
 
-    fig = ff.create_facet_grid(
-        mpg,
-        x='displ',
-        y='cty',
-        facet_row='drv',
-        facet_col='cyl',
-    )
-    py.iplot(fig, filename='facet_grid_mpg_two_way_facet')
-    ```
+    >>> mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+
+    >>> fig = ff.create_facet_grid(
+    ...     mpg,
+    ...     x='displ',
+    ...     y='cty',
+    ...     facet_row='drv',
+    ...     facet_col='cyl',
+    ... )
+    >>> fig.show()
 
     Example 3: Categorical Coloring
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
-
-    mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
-
-    fig = ff.create_facet_grid(
-        mtcars,
-        x='mpg',
-        y='wt',
-        facet_col='cyl',
-        color_name='cyl',
-        color_is_cat=True,
-    )
-    py.iplot(fig, filename='facet_grid_mpg_default_colors')
-    ```
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+    >>> fig = ff.create_facet_grid(
+    ...     mtcars,
+    ...     x='mpg',
+    ...     y='wt',
+    ...     facet_col='cyl',
+    ...     color_name='cyl',
+    ...     color_is_cat=True,
+    ... )
+    >>> fig.show()
 
     Example 4: Sequential Coloring
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> tips = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/tips.csv')
 
-    tips = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/tips.csv')
-
-    fig = ff.create_facet_grid(
-        tips,
-        x='total_bill',
-        y='tip',
-        facet_row='sex',
-        facet_col='smoker',
-        color_name='size',
-        colormap='Viridis',
-    )
-    py.iplot(fig, filename='facet_grid_tips_sequential_colors')
-    ```
+    >>> fig = ff.create_facet_grid(
+    >>>     tips,
+    ...     x='total_bill',
+    ...     y='tip',
+    ...     facet_row='sex',
+    ...     facet_col='smoker',
+    ...     color_name='size',
+    ...     colormap='Viridis',
+    ... )
+    >>> fig.show()
 
     Example 5: Custom labels
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
-
-    mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
-
-    fig = ff.create_facet_grid(
-        mtcars,
-        x='wt',
-        y='mpg',
-        facet_col='cyl',
-        facet_col_labels={4: "$\\alpha$", 6: '$\\beta$', 8: '$\sqrt[y]{x}$'},
-    )
-
-    py.iplot(fig, filename='facet_grid_mtcars_custom_labels')
-    ```
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+    >>> fig = ff.create_facet_grid(
+    ...     mtcars,
+    ...     x='wt',
+    ...     y='mpg',
+    ...     facet_col='cyl',
+    ...     facet_col_labels={4: "$\\alpha$", 6: '$\\beta$', 8: '$\sqrt[y]{x}$'},
+    ... )
+    >>> fig.show()
 
     Example 6: Other Trace Type
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
 
-    import pandas as pd
-
-    mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
-
-    fig = ff.create_facet_grid(
-        mtcars,
-        x='wt',
-        facet_col='cyl',
-        trace_type='histogram',
-    )
-
-    py.iplot(fig, filename='facet_grid_mtcars_other_trace_type')
-    ```
+    >>> import plotly.figure_factory as ff
+    >>> import pandas as pd
+    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+    >>> fig = ff.create_facet_grid(
+    ...     mtcars,
+    ...     x='wt',
+    ...     facet_col='cyl',
+    ...     trace_type='histogram',
+    ... )
+    >>> fig.show()
     """
     if not pd:
         raise ImportError("'pandas' must be installed for this figure_factory.")

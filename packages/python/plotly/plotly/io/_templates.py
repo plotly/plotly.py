@@ -213,6 +213,7 @@ Templates configuration
 
         Examples
         --------
+
         >>> pio.templates.merge_templates(
         ...     go.layout.Template(layout={'font': {'size': 20}}),
         ...     go.layout.Template(data={'scatter': [{'mode': 'markers'}]}),
@@ -367,10 +368,12 @@ def to_templated(fig, skip=("title", "text")):
     Examples
     --------
     Imports
+
     >>> import plotly.graph_objs as go
     >>> import plotly.io as pio
 
     Construct a figure with large courier text
+
     >>> fig = go.Figure(layout={'title': 'Figure Title',
     ...                         'font': {'size': 20, 'family': 'Courier'}})
     >>> fig
@@ -382,6 +385,7 @@ def to_templated(fig, skip=("title", "text")):
 
     Convert to a figure with a template. Note how the 'font' properties have
     been moved into the template property.
+
     >>> templated_fig = pio.to_templated(fig)
     >>> templated_fig
     Figure({
@@ -407,6 +411,7 @@ def to_templated(fig, skip=("title", "text")):
     The default font in fig2 will now be size 20 Courier.
 
     Next, register as a named template...
+
     >>> pio.templates['large_courier'] = templated_fig.layout.template
 
     and specify this template by name when constructing a figure.
@@ -434,7 +439,7 @@ def to_templated(fig, skip=("title", "text")):
 
     Returns
     -------
-    figure
+    go.Figure
     """
 
     # process fig

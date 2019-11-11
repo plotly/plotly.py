@@ -40,46 +40,38 @@ def create_dendrogram(
     :param (double) color_threshold: Value at which the separation of clusters will be made
 
     Example 1: Simple bottom oriented dendrogram
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_dendrogram
 
-    import numpy as np
+    >>> from plotly.figure_factory import create_dendrogram
 
-    X = np.random.rand(10,10)
-    dendro = create_dendrogram(X)
-    plot_url = py.plot(dendro, filename='simple-dendrogram')
+    >>> import numpy as np
 
-    ```
+    >>> X = np.random.rand(10,10)
+    >>> fig = create_dendrogram(X)
+    >>> fig.show()
 
     Example 2: Dendrogram to put on the left of the heatmap
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_dendrogram
+    
+    >>> from plotly.figure_factory import create_dendrogram
 
-    import numpy as np
+    >>> import numpy as np
 
-    X = np.random.rand(5,5)
-    names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
-    dendro = create_dendrogram(X, orientation='right', labels=names)
-    dendro['layout'].update({'width':700, 'height':500})
-
-    py.iplot(dendro, filename='vertical-dendrogram')
-    ```
+    >>> X = np.random.rand(5,5)
+    >>> names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
+    >>> dendro = create_dendrogram(X, orientation='right', labels=names)
+    >>> dendro['layout'].update({'width':700, 'height':500})
+    >>> dendro.show()
 
     Example 3: Dendrogram with Pandas
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_dendrogram
+    
+    >>> from plotly.figure_factory import create_dendrogram
 
-    import numpy as np
-    import pandas as pd
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    Index= ['A','B','C','D','E','F','G','H','I','J']
-    df = pd.DataFrame(abs(np.random.randn(10, 10)), index=Index)
-    fig = create_dendrogram(df, labels=Index)
-    url = py.plot(fig, filename='pandas-dendrogram')
-    ```
+    >>> Index= ['A','B','C','D','E','F','G','H','I','J']
+    >>> df = pd.DataFrame(abs(np.random.randn(10, 10)), index=Index)
+    >>> fig = create_dendrogram(df, labels=Index)
+    >>> fig.show()
     """
     if not scp or not scs or not sch:
         raise ImportError(
