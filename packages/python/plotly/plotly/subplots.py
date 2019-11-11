@@ -787,7 +787,7 @@ The row_titles argument to make_subplots must be a list or tuple
 
     # Handle displaying grid information
     if print_grid:
-        print (grid_str)
+        print(grid_str)
 
     # Build resulting figure
     fig = go.Figure(layout=layout)

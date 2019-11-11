@@ -13,7 +13,7 @@ from plotly.exceptions import PlotlyError
 
 
 def test_trivial():
-    print (Scatter())
+    print(Scatter())
     assert Scatter().to_plotly_json() == dict(type="scatter")
 
 

@@ -108,7 +108,7 @@ or conda.
 conda install jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
-Then run the following commands to install the required JupyterLab extensions:
+Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 ```
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
@@ -124,9 +124,6 @@ jupyter labextension install plotlywidget@1.2.0 --no-build
 
 # and jupyterlab renderer support
 jupyter labextension install jupyterlab-plotly@1.2.0 --no-build
-
-# JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build

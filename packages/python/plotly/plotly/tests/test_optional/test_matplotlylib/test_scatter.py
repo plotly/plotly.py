@@ -22,9 +22,9 @@ def test_simple_scatter():
         d1, d2 = strip_dict_params(
             data_dict, SIMPLE_SCATTER["data"][data_no], ignore=["uid"]
         )
-        print (d1)
-        print ("\n")
-        print (d2)
+        print(d1)
+        print("\n")
+        print(d2)
         assert d1 == d2
 
     equivalent, msg = compare_dict(
@@ -43,9 +43,9 @@ def test_double_scatter():
         d1, d2 = strip_dict_params(
             data_dict, DOUBLE_SCATTER["data"][data_no], ignore=["uid"]
         )
-        print (d1)
-        print ("\n")
-        print (d2)
+        print(d1)
+        print("\n")
+        print(d2)
         assert d1 == d2
 
     equivalent, msg = compare_dict(

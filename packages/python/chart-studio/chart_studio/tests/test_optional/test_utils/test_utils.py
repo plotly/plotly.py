@@ -27,7 +27,7 @@ class TestJSONEncoder(TestCase):
         json_columns = _json.dumps(
             columns, cls=_plotly_utils.utils.PlotlyJSONEncoder, sort_keys=True
         )
-        print (json_columns)
+        print(json_columns)
         assert (
             '[{"data": [1, 2, 3], "name": "col 1"}, '
             '{"data": [1, "A", "2014-01-05T00:00:00", '
