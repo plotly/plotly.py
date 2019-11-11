@@ -20,12 +20,12 @@ docs = dict(
     x=[
         colref,
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
-        "For horizontal `histogram`s, these values are used as inputs to `histfunc`.",
+        "For horizontal histograms, these values are used as inputs to `histfunc`.",
     ],
     y=[
         colref,
         "Values from this column or array_like are used to position marks along the y axis in cartesian coordinates.",
-        "For vertical `histogram`s, these values are used as inputs to `histfunc`.",
+        "For vertical histograms, these values are used as inputs to `histfunc`.",
     ],
     z=[
         colref,
@@ -383,5 +383,5 @@ def make_docstring(fn):
         )
         result += "    %s: %s\n" % (arg, d)
     result += "Returns:\n"
-    result += "    A `Figure` object."
+    result += "    A Figure object."
     return result
