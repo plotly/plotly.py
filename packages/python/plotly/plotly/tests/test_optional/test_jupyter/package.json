@@ -12,7 +12,7 @@
     "cheerio": "^0.20.0",
     "chrome-launch": "^1.1.4",
     "domready": "^1.0.8",
-    "ecstatic": "^2.1.0",
+    "ecstatic": "^2.2.2",
     "tap-parser": "^2.0.0",
     "tape": "^4.6.0",
     "xhr": "^2.2.2"
