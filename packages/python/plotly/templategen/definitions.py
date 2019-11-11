@@ -37,6 +37,7 @@ def ggplot2():
         linecolor="white",
         tickcolor=colors["gray20"],
         ticks="outside",
+        title=dict(standoff=15),
     )
 
     # semi-transparent black and no outline
@@ -91,6 +92,7 @@ def simple_white():
         linecolor=colors["gray14"],
         ticks="outside",
         showline=True,
+        title=dict(standoff=15),
     )
     # semi-transparent black and no outline
     shape_defaults = dict(fillcolor="black", line={"width": 0}, opacity=0.3)
@@ -121,13 +123,13 @@ def simple_white():
     template.layout.title.x = 0.05
 
     # Increase grid width for 3d plots
-    opts = dict(gridwidth=2, gridcolor=plotly_clrs["gray91"], zeroline=False)
+    opts = dict(gridwidth=2, gridcolor=colors["gray91"], zeroline=False)
     template.layout.scene.xaxis.update(opts)
     template.layout.scene.yaxis.update(opts)
     template.layout.scene.zaxis.update(opts)
 
     # Darken ternary
-    opts = dict(linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"])
+    opts = dict(linecolor=colors["gray14"], gridcolor=colors["gray91"])
     template.layout.ternary.aaxis.update(opts)
     template.layout.ternary.baxis.update(opts)
     template.layout.ternary.caxis.update(opts)
@@ -210,7 +212,13 @@ def seaborn():
     )
 
     # Common axis common properties
-    axis_common = dict(showgrid=True, gridcolor="white", linecolor="white", ticks="")
+    axis_common = dict(
+        showgrid=True,
+        gridcolor="white",
+        linecolor="white",
+        ticks="",
+        title=dict(standoff=15),
+    )
 
     # semi-transparent black and no outline
     annotation_clr = "rgb(67,103,167)"
@@ -351,7 +359,10 @@ def plotly():
     colorbar_common = dict(outlinewidth=0, ticks="")
 
     # Common axis common properties
-    axis_common = dict(gridcolor="white", linecolor="white", ticks="")
+    axis_common = dict(
+        gridcolor="white", linecolor="white", ticks="", 
+        title=dict(standoff=15),
+    )
 
     # Near black line color, no fill
     annotation_clr = plotly_clrs["Rhino Core"]
@@ -418,6 +429,7 @@ def plotly_white():
         gridcolor=plotly_clrs["Rhino Light 2"],
         linecolor=plotly_clrs["Rhino Light 2"],
         ticks="",
+        title=dict(standoff=15),
     )
 
     # Near black line color, no fill
@@ -491,7 +503,10 @@ def plotly_dark():
 
     # Common axis common properties
     grid_color = plotly_clrs["Rhino Dark"]
-    axis_common = dict(gridcolor=grid_color, linecolor=grid_color, ticks="")
+    axis_common = dict(
+        gridcolor=grid_color, linecolor=grid_color, ticks="", 
+        title=dict(standoff=15),
+    )
 
     # Near white line color, no fill
     annotation_clr = plotly_clrs["Rhino Light 4"]
