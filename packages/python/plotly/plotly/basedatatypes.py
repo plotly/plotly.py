@@ -252,14 +252,11 @@ class BaseFigure(object):
         # Dict from trace indexes to trace edit dicts. These trace edit dicts
         # are suitable as `data` elements of Plotly.animate, but not
         # the Plotly.update (See `_build_update_params_from_batch`)
-        #
-        # type: OrderedDict[int, OrderedDict[str, typ.Any]]
         self._batch_trace_edits = OrderedDict()
 
         # ### Batch layout edits ###
         # Dict from layout properties to new layout values. This dict is
         # directly suitable for use in Plotly.animate and Plotly.update
-        # type: collections.OrderedDict[str, typ.Any]
         self._batch_layout_edits = OrderedDict()
 
         # Animation property validators
@@ -1030,18 +1027,12 @@ class BaseFigure(object):
 
         for obj in self.layout[prop]:
             # Filter by row
-            if col is not None:
-                if col == "paper" and obj.xref != "paper":
-                    continue
-                elif col != "paper" and xref_to_col.get(obj.xref, None) != col:
-                    continue
+            if col is not None and xref_to_col.get(obj.xref, None) != col:
+                continue
 
             # Filter by col
-            if row is not None:
-                if row == "paper" and obj.yref != "paper":
-                    continue
-                elif row != "paper" and yref_to_row.get(obj.yref, None) != row:
-                    continue
+            if row is not None and yref_to_row.get(obj.yref, None) != row:
+                continue
 
             # Filter by secondary y
             if (
@@ -1104,11 +1095,6 @@ because subplot does not have a secondary y-axis"""
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             new_obj.update(xref=xref, yref=yref)
-
-        if new_obj.xref is None:
-            new_obj.xref = "paper"
-        if new_obj.yref is None:
-            new_obj.yref = "paper"
 
         self.layout[prop_plural] += (new_obj,)
 
@@ -2994,38 +2980,32 @@ class BasePlotlyType(object):
         # ---------------------
         # ### _validators ###
         # A dict from property names to property validators
-        # type: Dict[str, BaseValidator]
         self._validators = {}
 
         # ### _compound_props ###
         # A dict from compound property names to compound objects
-        # type: Dict[str, BasePlotlyType]
         self._compound_props = {}
 
         # ### _compound_array_props ###
         # A dict from compound array property names to tuples of compound
         # objects
-        # type: Dict[str, Tuple[BasePlotlyType]]
         self._compound_array_props = {}
 
         # ### _orphan_props ###
         # A dict of properties for use while object has no parent. When
         # object has a parent, it requests its properties dict from its
         # parent and doesn't use this.
-        # type: Dict
         self._orphan_props = {}
 
         # ### _parent ###
         # The parent of the object. May be another BasePlotlyType or it may
         # be a BaseFigure (as is the case for the Layout and Trace objects)
-        # type: Union[BasePlotlyType, BaseFigure]
         self._parent = None
 
         # ### _change_callbacks ###
         # A dict from tuples of child property path tuples to lists
         # of callbacks that should be executed whenever any of these
         # properties is modified
-        # type: Dict[Tuple[Tuple[Union[str, int]]], List[Callable]]
         self._change_callbacks = {}
 
     def _process_kwargs(self, **kwargs):
@@ -3842,7 +3822,6 @@ class BasePlotlyType(object):
         # Import value
         # ------------
         validator = self._validators.get(prop)
-        # type: BasePlotlyType
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
@@ -3917,7 +3896,6 @@ class BasePlotlyType(object):
         # Import value
         # ------------
         validator = self._validators.get(prop)
-        # type: Tuple[BasePlotlyType]
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
