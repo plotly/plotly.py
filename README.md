@@ -26,36 +26,30 @@
 
 ## Quickstart
 
-`pip install plotly "notebook>=5.3" "ipywidgets>=7.2"`
+`pip install plotly==4.2.1`
 
-Inside [Jupyter notebook](https://jupyter.org/install):
+Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 ```python
-import plotly.graph_objs as go
-fig = go.FigureWidget()
-# Display an empty figure
-fig
-```
-```python
-# Add a scatter chart
-fig.add_scatter(y=[2, 1, 4, 3])
-# Add a bar chart
-fig.add_bar(y=[1, 4, 3, 2])
-# Add a title
-fig.layout.title = 'Hello FigureWidget'
+import plotly.graph_objects as go
+fig = go.Figure()
+fig.add_trace(go.Scatter(y=[2, 1, 4, 3]))
+fig.add_trace(go.Bar(y=[1, 4, 3, 2]))
+fig.update_layout(title = 'Hello Figure')
+fig.show()
 ```
 
 See the [Python documentation](https://plot.ly/python/) for more examples.
 
-Read about what's new in [plotly.py v3](https://medium.com/@plotlygraphs/introducing-plotly-py-3-0-0-7bb1333f69c6)
+Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-is-here-offline-only-express-first-displayable-anywhere-fc444e5659ee)
 
 ## Overview
 [plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
-`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online on [plot.ly](https://plot.ly).
+`plotly.py` is [MIT Licensed](packages/python/chart-studio/LICENSE.txt). Plotly graphs can be viewed in Jupyter notebooks, standalone HTML files, or hosted online using [Chart Studio Cloud](https://chart-studio.plot.ly/feed/).
 
-[Contact us](https://plot.ly/products/consulting-and-oem/) for Plotly.js consulting, dashboard development, application integration, and feature additions. Sharing your graphs online or in dashboards? Consider a [plot.ly subscription](https://plot.ly/products/cloud).
+[Contact us](https://plot.ly/products/consulting-and-oem/) for consulting, dashboard development, application integration, and feature additions.
 
 <p align="center">
     <a href="https://plot.ly/python" target="_blank">
@@ -68,8 +62,8 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 - [Contributing](contributing.md)
 - [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Version 3 Migration Guide](migration-guide.md)
-- [New! Announcing Dash](https://medium.com/@plotlygraphs/introducing-dash-5ecf7191b503)
+- [Version 4 Migration Guide](https://plot.ly/python/next/v4-migration/)
+- [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
 - [Community](https://community.plot.ly/c/api/python)
 
 ***
@@ -114,7 +108,7 @@ or conda.
 conda install jupyterlab=1.0 "ipywidgets=7.5"
 ```
 
-Then run the following commands to install the required JupyterLab extensions:
+Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 ```
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
@@ -130,9 +124,6 @@ jupyter labextension install plotlywidget@1.2.0 --no-build
 
 # and jupyterlab renderer support
 jupyter labextension install jupyterlab-plotly@1.2.0 --no-build
-
-# JupyterLab chart editor support (optional)
-jupyter labextension install jupyterlab-chart-editor@1.2 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
@@ -196,9 +187,9 @@ conda install -c plotly chart-studio=1.0.0
 ```
 
 ## Migration
-If you're migrating from plotly.py version 3, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
+If you're migrating from plotly.py v3 to v4, please check out the [Version 4 migration guide](https://plot.ly/python/next/v4-migration/)
 
-If you're migrating from plotly.py version 2, please check out the [Version 3 migration guide](migration-guide.md)
+If you're migrating from plotly.py v2 to v3, please check out the [Version 3 migration guide](migration-guide.md)
 
 ## Copyright and Licenses
 Code and documentation copyright 2019 Plotly, Inc.

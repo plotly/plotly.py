@@ -19,6 +19,7 @@ from plotly.graph_objs import (
     Histogram,
     Histogram2d,
     Histogram2dContour,
+    Image,
     Indicator,
     Isosurface,
     Mesh3d,
@@ -74,7 +75,7 @@ class FigureWidget(BaseFigureWidget):
                              'contourcarpet', 'densitymapbox', 'funnel',
                              'funnelarea', 'heatmap', 'heatmapgl',
                              'histogram', 'histogram2d',
-                             'histogram2dcontour', 'indicator',
+                             'histogram2dcontour', 'image', 'indicator',
                              'isosurface', 'mesh3d', 'ohlc', 'parcats',
                              'parcoords', 'pie', 'pointcloud', 'sankey',
                              'scatter', 'scatter3d', 'scattercarpet',
@@ -1613,7 +1614,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -3417,6 +3418,7 @@ class FigureWidget(BaseFigureWidget):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hoverongaps=None,
         hovertemplate=None,
         hovertemplatesrc=None,
         hovertext=None,
@@ -3513,7 +3515,9 @@ class FigureWidget(BaseFigureWidget):
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
-            values) in the `z` data are filled in.
+            values) in the `z` data are filled in. It is defaulted
+            to true if `z` is a one dimensional array otherwise it
+            is defaulted to false.
         contours
             plotly.graph_objects.contour.Contours instance or dict
             with compatible properties
@@ -3543,6 +3547,10 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel
             plotly.graph_objects.contour.Hoverlabel instance or
             dict with compatible properties
+        hoverongaps
+            Determines whether or not gaps (i.e. {nan} or missing
+            values) in the `z` data have hover labels associated
+            with them.
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -3766,6 +3774,7 @@ class FigureWidget(BaseFigureWidget):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
@@ -5210,6 +5219,7 @@ class FigureWidget(BaseFigureWidget):
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
+        hoverongaps=None,
         hovertemplate=None,
         hovertemplatesrc=None,
         hovertext=None,
@@ -5310,7 +5320,9 @@ class FigureWidget(BaseFigureWidget):
             ot,Blackbody,Earth,Electric,Viridis,Cividis.
         connectgaps
             Determines whether or not gaps (i.e. {nan} or missing
-            values) in the `z` data are filled in.
+            values) in the `z` data are filled in. It is defaulted
+            to true if `z` is a one dimensional array and `zsmooth`
+            is not false; otherwise it is defaulted to false.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -5332,6 +5344,10 @@ class FigureWidget(BaseFigureWidget):
         hoverlabel
             plotly.graph_objects.heatmap.Hoverlabel instance or
             dict with compatible properties
+        hoverongaps
+            Determines whether or not gaps (i.e. {nan} or missing
+            values) in the `z` data have hover labels associated
+            with them.
         hovertemplate
             Template string used for rendering the information that
             appear on hover box. Note that this will override
@@ -5542,6 +5558,7 @@ class FigureWidget(BaseFigureWidget):
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
+            hoverongaps=hoverongaps,
             hovertemplate=hovertemplate,
             hovertemplatesrc=hovertemplatesrc,
             hovertext=hovertext,
@@ -7140,6 +7157,266 @@ class FigureWidget(BaseFigureWidget):
             zhoverformat=zhoverformat,
             zmax=zmax,
             zmid=zmid,
+            zmin=zmin,
+            zsrc=zsrc,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
+
+    def add_image(
+        self,
+        colormodel=None,
+        customdata=None,
+        customdatasrc=None,
+        dx=None,
+        dy=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        stream=None,
+        text=None,
+        textsrc=None,
+        uid=None,
+        uirevision=None,
+        visible=None,
+        x0=None,
+        xaxis=None,
+        y0=None,
+        yaxis=None,
+        z=None,
+        zmax=None,
+        zmin=None,
+        zsrc=None,
+        row=None,
+        col=None,
+        secondary_y=None,
+        **kwargs
+    ):
+        """
+        Add a new Image trace
+        
+        Display an image, i.e. data on a 2D regular raster. By default,
+        when an image is displayed in a subplot, its y axis will be
+        reversed (ie. `autorange: 'reversed'`), constrained to the
+        domain (ie. `constrain: 'domain'`) and it will have the same
+        scale as its x axis (ie. `scaleanchor: 'x,`) in order for
+        pixels to be rendered as squares.
+
+        Parameters
+        ----------
+        colormodel
+            Color model used to map the numerical color components
+            described in `z` into colors.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on plot.ly for  customdata .
+        dx
+            Set the pixel's horizontal size.
+        dy
+            Set the pixel's vertical size
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on plot.ly for  hoverinfo .
+        hoverlabel
+            plotly.graph_objects.image.Hoverlabel instance or dict
+            with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format for
+            details on the formatting syntax. Dates are formatted
+            using d3-time-format's syntax %{variable|d3-time-
+            format}, for example "Day: %{2019-01-01|%A}".
+            https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Time-Formatting.md#format for
+            details on the date formatting syntax. The variables
+            available in `hovertemplate` are the ones emitted as
+            event data described at this link
+            https://plot.ly/javascript/plotlyjs-events/#event-data.
+            Additionally, every attributes that can be specified
+            per-point (the ones that are `arrayOk: true`) are
+            available. variables `z`, `color` and `colormodel`.
+            Anything contained in tag `<extra>` is displayed in the
+            secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on plot.ly for  hovertemplate
+            .
+        hovertext
+            Same as `text`.
+        hovertextsrc
+            Sets the source reference on plot.ly for  hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on plot.ly for  ids .
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on plot.ly for  meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        stream
+            plotly.graph_objects.image.Stream instance or dict with
+            compatible properties
+        text
+            Sets the text elements associated with each z value.
+        textsrc
+            Sets the source reference on plot.ly for  text .
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        x0
+            Set the image's x position.
+        xaxis
+            Sets a reference between this trace's x coordinates and
+            a 2D cartesian x axis. If "x" (the default value), the
+            x coordinates refer to `layout.xaxis`. If "x2", the x
+            coordinates refer to `layout.xaxis2`, and so on.
+        y0
+            Set the image's y position.
+        yaxis
+            Sets a reference between this trace's y coordinates and
+            a 2D cartesian y axis. If "y" (the default value), the
+            y coordinates refer to `layout.yaxis`. If "y2", the y
+            coordinates refer to `layout.yaxis2`, and so on.
+        z
+            A 2-dimensional array in which each element is an array
+            of 3 or 4 numbers representing a color.
+        zmax
+            Array defining the higher bound for each color
+            component. Note that the default value will depend on
+            the colormodel. For the `rgb` colormodel, it is [255,
+            255, 255]. For the `rgba` colormodel, it is [255, 255,
+            255, 1]. For the `hsl` colormodel, it is [360, 100,
+            100]. For the `hsla` colormodel, it is [360, 100, 100,
+            1].
+        zmin
+            Array defining the lower bound for each color
+            component. Note that the default value will depend on
+            the colormodel. For the `rgb` colormodel, it is [0, 0,
+            0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For
+            the `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
+            colormodel, it is [0, 0, 0, 0].
+        zsrc
+            Sets the source reference on plot.ly for  z .
+        row : int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        col : int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`
+        secondary_y: boolean or None (default None)
+            If True, associate this trace with the secondary y-axis of the
+            subplot at the specified row and col. Only valid if all of the
+            following conditions are satisfied:
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
+                (which is the default) and secondary_y True.  These
+                properties are specified in the specs argument to
+                make_subplots. See the make_subplots docstring for more info.
+
+        Returns
+        -------
+        FigureWidget
+        """
+        new_trace = Image(
+            colormodel=colormodel,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            dx=dx,
+            dy=dy,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
+            ids=ids,
+            idssrc=idssrc,
+            meta=meta,
+            metasrc=metasrc,
+            name=name,
+            opacity=opacity,
+            stream=stream,
+            text=text,
+            textsrc=textsrc,
+            uid=uid,
+            uirevision=uirevision,
+            visible=visible,
+            x0=x0,
+            xaxis=xaxis,
+            y0=y0,
+            yaxis=yaxis,
+            z=z,
+            zmax=zmax,
             zmin=zmin,
             zsrc=zsrc,
             **kwargs
@@ -8746,6 +9023,7 @@ class FigureWidget(BaseFigureWidget):
 
     def add_pie(
         self,
+        automargin=None,
         customdata=None,
         customdatasrc=None,
         direction=None,
@@ -8808,6 +9086,9 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
+        automargin
+            Determines whether outside text labels can push the
+            margins.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -9042,6 +9323,7 @@ class FigureWidget(BaseFigureWidget):
         FigureWidget
         """
         new_trace = Pie(
+            automargin=automargin,
             customdata=customdata,
             customdatasrc=customdatasrc,
             direction=direction,
@@ -14865,7 +15147,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points
+            points and the whiskers extend to the range of the sample.
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -17305,7 +17587,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -17358,7 +17640,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="images", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -17494,7 +17776,7 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y
+            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y,
         )
 
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
@@ -17577,7 +17859,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             fn(obj)
 
@@ -17630,7 +17912,7 @@ class FigureWidget(BaseFigureWidget):
             Returns the Figure object that the method was called on
         """
         for obj in self._select_annotations_like(
-            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y
+            prop="shapes", selector=selector, row=row, col=col, secondary_y=secondary_y,
         ):
             obj.update(patch, **kwargs)
 
@@ -17835,5 +18117,5 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y
+            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y,
         )

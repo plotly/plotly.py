@@ -233,7 +233,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         result["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif v == "ols":
-                        fit_results = sm.OLS(y, sm.add_constant(x)).fit()
+                        fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
                         result["y"] = fit_results.predict()
                         hover_header = "<b>OLS trendline</b><br>"
                         hover_header += "%s = %f * %s + %f<br>" % (
@@ -375,16 +375,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(
-            showticklabels=False, showgrid=args["marginal_x"] == "histogram", row=nrows
-        )
-        fig.update_xaxes(showgrid=True, row=nrows)
+        fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
+        if args["template"].layout.yaxis.showgrid is None:
+            fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
+        if args["template"].layout.xaxis.showgrid is None:
+            fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(
-            showticklabels=False, showgrid=args["marginal_y"] == "histogram", col=ncols
-        )
-        fig.update_yaxes(showgrid=True, col=ncols)
+        fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
+        if args["template"].layout.xaxis.showgrid is None:
+            fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
+        if args["template"].layout.yaxis.showgrid is None:
+            fig.update_yaxes(showgrid=True, col=ncols)
 
     # Add axis titles to non-marginal subplots
     y_title = get_decorated_label(args, args["y"], "y")
@@ -687,55 +689,47 @@ def apply_default_cascade(args):
         else:
             args["template"] = "plotly"
 
-    # retrieve the actual template if we were given a name
     try:
-        template = pio.templates[args["template"]]
+        # retrieve the actual template if we were given a name
+        args["template"] = pio.templates[args["template"]]
     except Exception:
-        template = args["template"]
+        # otherwise try to build a real template
+        args["template"] = go.layout.Template(args["template"])
 
     # if colors not set explicitly or in px.defaults, defer to a template
     # if the template doesn't have one, we set some final fallback defaults
     if "color_continuous_scale" in args:
-        if args["color_continuous_scale"] is None:
-            try:
-                args["color_continuous_scale"] = [
-                    x[1] for x in template.layout.colorscale.sequential
-                ]
-            except (AttributeError, TypeError):
-                pass
+        if (
+            args["color_continuous_scale"] is None
+            and args["template"].layout.colorscale.sequential
+        ):
+            args["color_continuous_scale"] = [
+                x[1] for x in args["template"].layout.colorscale.sequential
+            ]
         if args["color_continuous_scale"] is None:
             args["color_continuous_scale"] = sequential.Viridis
 
     if "color_discrete_sequence" in args:
-        if args["color_discrete_sequence"] is None:
-            try:
-                args["color_discrete_sequence"] = template.layout.colorway
-            except (AttributeError, TypeError):
-                pass
+        if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
+            args["color_discrete_sequence"] = args["template"].layout.colorway
         if args["color_discrete_sequence"] is None:
             args["color_discrete_sequence"] = qualitative.D3
 
     # if symbol_sequence/line_dash_sequence not set explicitly or in px.defaults,
     # see if we can defer to template. If not, set reasonable defaults
     if "symbol_sequence" in args:
-        if args["symbol_sequence"] is None:
-            try:
-                args["symbol_sequence"] = [
-                    scatter.marker.symbol for scatter in template.data.scatter
-                ]
-            except (AttributeError, TypeError):
-                pass
+        if args["symbol_sequence"] is None and args["template"].data.scatter:
+            args["symbol_sequence"] = [
+                scatter.marker.symbol for scatter in args["template"].data.scatter
+            ]
         if not args["symbol_sequence"] or not any(args["symbol_sequence"]):
             args["symbol_sequence"] = ["circle", "diamond", "square", "x", "cross"]
 
     if "line_dash_sequence" in args:
-        if args["line_dash_sequence"] is None:
-            try:
-                args["line_dash_sequence"] = [
-                    scatter.line.dash for scatter in template.data.scatter
-                ]
-            except (AttributeError, TypeError):
-                pass
+        if args["line_dash_sequence"] is None and args["template"].data.scatter:
+            args["line_dash_sequence"] = [
+                scatter.line.dash for scatter in args["template"].data.scatter
+            ]
         if not args["line_dash_sequence"] or not any(args["line_dash_sequence"]):
             args["line_dash_sequence"] = [
                 "solid",
@@ -747,10 +741,10 @@ def apply_default_cascade(args):
             ]
 
     # If both marginals and faceting are specified, faceting wins
-    if args.get("facet_col", None) and args.get("marginal_y", None):
+    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
         args["marginal_y"] = None
 
-    if args.get("facet_row", None) and args.get("marginal_x", None):
+    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
         args["marginal_x"] = None
 
 
@@ -874,7 +868,7 @@ def build_dataframe(args, attrables, array_attrables):
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
-            ## ----------------- argument is a col name ----------------------
+            # ----------------- argument is a col name ----------------------
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
@@ -1042,6 +1036,13 @@ def infer_config(args, constructor, trace_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    if (
+        args.get("marginal_x", None) is not None
+        or args.get("marginal_y", None) is not None
+        or args.get("facet_row", None) is not None
+    ):
+        args["facet_col_wrap"] = 0
+
     # Compute applicable grouping attributes
     for k in group_attrables:
         if k in args:
@@ -1098,15 +1099,14 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
 
     orders, sorted_group_names = get_orderings(args, grouper, grouped)
 
-    has_marginal_x = bool(args.get("marginal_x", False))
-    has_marginal_y = bool(args.get("marginal_y", False))
-
     subplot_type = _subplot_type_for_trace_type(constructor().type)
 
     trace_names_by_frame = {}
     frames = OrderedDict()
     trendline_rows = []
     nrows = ncols = 1
+    col_labels = []
+    row_labels = []
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
         mapping_labels = OrderedDict()
@@ -1188,26 +1188,35 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 # Find row for trace, handling facet_row and marginal_x
                 if m.facet == "row":
                     row = m.val_map[val]
-                    trace._subplot_row_val = val
+                    if args["facet_row"] and len(row_labels) < row:
+                        row_labels.append(args["facet_row"] + "=" + str(val))
                 else:
-                    if has_marginal_x and trace_spec.marginal != "x":
+                    if (
+                        bool(args.get("marginal_x", False))
+                        and trace_spec.marginal != "x"
+                    ):
                         row = 2
                     else:
                         row = 1
 
-                nrows = max(nrows, row)
-                if row > 1:
-                    trace._subplot_row = row
-
+                facet_col_wrap = args.get("facet_col_wrap", 0)
                 # Find col for trace, handling facet_col and marginal_y
                 if m.facet == "col":
                     col = m.val_map[val]
-                    trace._subplot_col_val = val
+                    if args["facet_col"] and len(col_labels) < col:
+                        col_labels.append(args["facet_col"] + "=" + str(val))
+                    if facet_col_wrap:  # assumes no facet_row, no marginals
+                        row = 1 + ((col - 1) // facet_col_wrap)
+                        col = 1 + ((col - 1) % facet_col_wrap)
                 else:
                     if trace_spec.marginal == "y":
                         col = 2
                     else:
                         col = 1
+
+                nrows = max(nrows, row)
+                if row > 1:
+                    trace._subplot_row = row
 
                 ncols = max(ncols, col)
                 if col > 1:
@@ -1238,7 +1247,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     if show_colorbar:
         colorvar = "z" if constructor == go.Histogram2d else "color"
         range_color = args["range_color"] or [None, None]
-        d = len(args["color_continuous_scale"]) - 1
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
         layout_patch["coloraxis1"] = dict(
@@ -1250,17 +1258,21 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
             cmax=range_color[1],
             colorbar=dict(title=get_decorated_label(args, args[colorvar], colorvar)),
         )
-    for v in ["title", "height", "width", "template"]:
+    for v in ["title", "height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
     layout_patch["legend"] = {"tracegroupgap": 0}
-    if "title" not in layout_patch:
+    if "title" not in layout_patch and args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
-    if "size" in args and args["size"]:
+    if (
+        "size" in args
+        and args["size"]
+        and args["template"].layout.legend.itemsizing is None
+    ):
         layout_patch["legend"]["itemsizing"] = "constant"
 
     fig = init_figure(
-        args, subplot_type, frame_list, ncols, nrows, has_marginal_x, has_marginal_y
+        args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels
     )
 
     # Position traces in subplots
@@ -1281,6 +1293,8 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     # Add traces, layout and frames to figure
     fig.add_traces(frame_list[0]["data"] if len(frame_list) > 0 else [])
     fig.layout.update(layout_patch)
+    if "template" in args and args["template"] is not None:
+        fig.update_layout(template=args["template"], overwrite=True)
     fig.frames = frame_list if len(frames) > 1 else []
 
     fig._px_trendlines = pd.DataFrame(trendline_rows)
@@ -1290,30 +1304,18 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     return fig
 
 
-def init_figure(
-    args, subplot_type, frame_list, ncols, nrows, has_marginal_x, has_marginal_y
-):
+def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
     specs = [[{}] * ncols for _ in range(nrows)]
-    column_titles = [None] * ncols
-    row_titles = [None] * nrows
     for frame in frame_list:
         for trace in frame["data"]:
             row0 = trace._subplot_row - 1
             col0 = trace._subplot_col - 1
-
             if isinstance(trace, go.Splom):
                 # Splom not compatible with make_subplots, treat as domain
                 specs[row0][col0] = {"type": "domain"}
             else:
                 specs[row0][col0] = {"type": trace.type}
-            if args.get("facet_row", None) and hasattr(trace, "_subplot_row_val"):
-                row_titles[row0] = args["facet_row"] + "=" + str(trace._subplot_row_val)
-
-            if args.get("facet_col", None) and hasattr(trace, "_subplot_col_val"):
-                column_titles[col0] = (
-                    args["facet_col"] + "=" + str(trace._subplot_col_val)
-                )
 
     # Default row/column widths uniform
     column_widths = [1.0] * ncols
@@ -1321,7 +1323,7 @@ def init_figure(
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
-        if has_marginal_x:
+        if bool(args.get("marginal_x", False)):
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -1329,10 +1331,12 @@ def init_figure(
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
+        elif args.get("facet_col_wrap", 0):
+            vertical_spacing = 0.07
         else:
             vertical_spacing = 0.03
 
-        if has_marginal_y:
+        if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
                 main_size = 0.74
             else:
@@ -1351,6 +1355,15 @@ def init_figure(
         vertical_spacing = 0.1
         horizontal_spacing = 0.1
 
+    facet_col_wrap = args.get("facet_col_wrap", 0)
+    if facet_col_wrap:
+        subplot_labels = [None] * nrows * ncols
+        while len(col_labels) < nrows * ncols:
+            col_labels.append(None)
+        for i in range(nrows):
+            for j in range(ncols):
+                subplot_labels[i * ncols + j] = col_labels[(nrows - 1 - i) * ncols + j]
+
     # Create figure with subplots
     fig = make_subplots(
         rows=nrows,
@@ -1358,8 +1371,9 @@ def init_figure(
         specs=specs,
         shared_xaxes="all",
         shared_yaxes="all",
-        row_titles=list(reversed(row_titles)),
-        column_titles=column_titles,
+        row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
+        column_titles=[] if facet_col_wrap else col_labels,
+        subplot_titles=subplot_labels if facet_col_wrap else [],
         horizontal_spacing=horizontal_spacing,
         vertical_spacing=vertical_spacing,
         row_heights=row_heights,

@@ -89,20 +89,20 @@ def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False, env=
             if e.errno == errno.ENOENT:
                 continue
             if verbose:
-                print ("unable to run %s" % dispcmd)
-                print (e)
+                print("unable to run %s" % dispcmd)
+                print(e)
             return None, None
     else:
         if verbose:
-            print ("unable to find command, tried %s" % (commands,))
+            print("unable to find command, tried %s" % (commands,))
         return None, None
     stdout = p.communicate()[0].strip()
     if sys.version_info[0] >= 3:
         stdout = stdout.decode()
     if p.returncode != 0:
         if verbose:
-            print ("unable to run %s (error)" % dispcmd)
-            print ("stdout was %s" % stdout)
+            print("unable to run %s (error)" % dispcmd)
+            print("stdout was %s" % stdout)
         return None, p.returncode
     return stdout, p.returncode
 
@@ -131,7 +131,7 @@ def versions_from_parentdir(parentdir_prefix, root, verbose):
             root = os.path.dirname(root)  # up a level
 
     if verbose:
-        print (
+        print(
             "Tried directories %s but none started with prefix %s"
             % (str(rootdirs), parentdir_prefix)
         )
@@ -184,7 +184,7 @@ def git_versions_from_keywords(keywords, tag_prefix, verbose):
     refnames = keywords["refnames"].strip()
     if refnames.startswith("$Format"):
         if verbose:
-            print ("keywords are unexpanded, not using")
+            print("keywords are unexpanded, not using")
         raise NotThisMethod("unexpanded keywords, not a git-archive tarball")
     refs = set([r.strip() for r in refnames.strip("()").split(",")])
     # starting in git-1.8.3, tags are listed as "tag: foo-1.0" instead of
@@ -201,15 +201,15 @@ def git_versions_from_keywords(keywords, tag_prefix, verbose):
         # "stabilization", as well as "HEAD" and "master".
         tags = set([r for r in refs if re.search(r"\d", r)])
         if verbose:
-            print ("discarding '%s', no digits" % ",".join(refs - tags))
+            print("discarding '%s', no digits" % ",".join(refs - tags))
     if verbose:
-        print ("likely tags: %s" % ",".join(sorted(tags)))
+        print("likely tags: %s" % ",".join(sorted(tags)))
     for ref in sorted(tags):
         # sorting will prefer e.g. "2.0" over "2.0rc1"
         if ref.startswith(tag_prefix):
             r = ref[len(tag_prefix) :]
             if verbose:
-                print ("picking %s" % r)
+                print("picking %s" % r)
             return {
                 "version": r,
                 "full-revisionid": keywords["full"].strip(),
@@ -219,7 +219,7 @@ def git_versions_from_keywords(keywords, tag_prefix, verbose):
             }
     # no suitable tags, so version is "0+unknown", but full hex is still there
     if verbose:
-        print ("no suitable tags, using unknown + full revision id")
+        print("no suitable tags, using unknown + full revision id")
     return {
         "version": "0+unknown",
         "full-revisionid": keywords["full"].strip(),
@@ -244,7 +244,7 @@ def git_pieces_from_vcs(tag_prefix, root, verbose, run_command=run_command):
     out, rc = run_command(GITS, ["rev-parse", "--git-dir"], cwd=root, hide_stderr=True)
     if rc != 0:
         if verbose:
-            print ("Directory %s not under git control" % root)
+            print("Directory %s not under git control" % root)
         raise NotThisMethod("'git rev-parse --git-dir' returned error")
 
     # if there is a tag matching tag_prefix, this yields TAG-NUM-gHEX[-dirty]
@@ -301,7 +301,7 @@ def git_pieces_from_vcs(tag_prefix, root, verbose, run_command=run_command):
         if not full_tag.startswith(tag_prefix):
             if verbose:
                 fmt = "tag '%s' doesn't start with prefix '%s'"
-                print (fmt % (full_tag, tag_prefix))
+                print(fmt % (full_tag, tag_prefix))
             pieces["error"] = "tag '%s' doesn't start with prefix '%s'" % (
                 full_tag,
                 tag_prefix,
