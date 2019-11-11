@@ -210,6 +210,7 @@ Templates configuration
 
         Examples
         --------
+
         >>> pio.templates.merge_templates(
         ...     go.layout.Template(layout={'font': {'size': 20}}),
         ...     go.layout.Template(data={'scatter': [{'mode': 'markers'}]}),

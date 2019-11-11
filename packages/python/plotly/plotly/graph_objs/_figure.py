@@ -856,6 +856,7 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
+
         alignmentgroup
             Set several traces linked to the same position axis or
             matching axes to the same alignmentgroup. This controls
@@ -4815,9 +4816,10 @@ class Figure(BaseFigure):
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
             following conditions are satisfied:
-              * The figure was created using `plotly.subplots.make_subplots`.
-              * The row and col arguments are not None
-              * The subplot at the specified row and col has type xy
+
+             * The figure was created using `plotly.subplots.make_subplots`.
+             * The row and col arguments are not None
+             * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
                 make_subplots. See the make_subplots docstring for more info.
