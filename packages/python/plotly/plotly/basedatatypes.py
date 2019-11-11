@@ -1939,7 +1939,7 @@ Please use the add_trace method with the row and col parameters.
             if pio.templates.default is not None:
                 self._layout_obj.template = pio.templates.default
             else:
-                self._layout_obj.template = {}
+                self._layout_obj.template = None
 
     @property
     def layout(self):

@@ -154,7 +154,7 @@ class TemplateTest(TestCase):
     def test_template_default_override_empty(self):
         pio.templates.default = "test_template"
         fig = go.Figure(layout={"template": {}})
-        self.assertEqual(fig.layout.template, go.layout.Template())
+        self.assertEqual(fig.layout.template, go.layout.Template(data_scatter=[{}]))
 
     def test_delete_default_template(self):
         pio.templates.default = "test_template"

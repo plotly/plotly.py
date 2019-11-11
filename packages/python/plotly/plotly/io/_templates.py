@@ -79,7 +79,7 @@ class TemplatesConfig(object):
 
                 if template_name == "none":
                     # "none" is a special built-in named template that applied no defaults
-                    template = Template()
+                    template = Template(data_scatter=[{}])
                     self._templates[template_name] = template
                 else:
                     # Load template from package data

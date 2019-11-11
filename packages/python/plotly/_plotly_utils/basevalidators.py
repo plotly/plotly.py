@@ -2712,6 +2712,13 @@ class BaseTemplateValidator(CompoundValidator):
             # v is un-hashable
             pass
 
+        # Check for empty template
+        if v == {} or isinstance(v, self.data_class) and v.to_plotly_json() == {}:
+            # Replace empty template with {'data': {'scatter': [{}]}} so that we can
+            # tell the difference between an un-initialized template and a template
+            # explicitly set to empty.
+            return self.data_class(data_scatter=[{}])
+
         return super(BaseTemplateValidator, self).validate_coerce(
             v, skip_invalid=skip_invalid
         )
