@@ -797,3 +797,12 @@ def convert_colorscale_to_rgb(colorscale):
     for color in colorscale:
         color[1] = label_rgb(color[1])
     return colorscale
+
+
+def named_colorscales():
+    """
+    Returns lowercased names of built-in continuous colorscales.
+    """
+    from _plotly_utils.basevalidators import ColorscaleValidator
+
+    return [c for c in ColorscaleValidator("", "").named_colorscales]

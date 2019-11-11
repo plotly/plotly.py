@@ -7,8 +7,8 @@ mostly meant to be passed in as the `color_discrete_sequence` argument to variou
 from ._swatches import _swatches
 
 
-def swatches():
-    return _swatches(__name__, globals())
+def swatches(template=None):
+    return _swatches(__name__, globals(), template)
 
 
 swatches.__doc__ = _swatches.__doc__
