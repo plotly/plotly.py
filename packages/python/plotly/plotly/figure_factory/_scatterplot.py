@@ -892,161 +892,142 @@ def create_scatterplotmatrix(
         'colorscale' in 'marker'
 
     Example 1: Vanilla Scatterplot Matrix
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe
-    df = pd.DataFrame(np.random.randn(10, 2),
-                    columns=['Column 1', 'Column 2'])
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    # Create scatterplot matrix
-    fig = create_scatterplotmatrix(df)
+    >>> # Create dataframe
+    >>> df = pd.DataFrame(np.random.randn(10, 2),
+    ...                 columns=['Column 1', 'Column 2'])
 
-    # Plot
-    py.iplot(fig, filename='Vanilla Scatterplot Matrix')
-    ```
+    >>> # Create scatterplot matrix
+    >>> fig = create_scatterplotmatrix(df)
+    >>> fig.show()
+
 
     Example 2: Indexing a Column
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe with index
-    df = pd.DataFrame(np.random.randn(10, 2),
-                       columns=['A', 'B'])
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    # Add another column of strings to the dataframe
-    df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
-                             'grape', 'pear', 'pear', 'apple', 'pear'])
+    >>> # Create dataframe with index
+    >>> df = pd.DataFrame(np.random.randn(10, 2),
+    ...                    columns=['A', 'B'])
 
-    # Create scatterplot matrix
-    fig = create_scatterplotmatrix(df, index='Fruit', size=10)
+    >>> # Add another column of strings to the dataframe
+    >>> df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
+    ...                          'grape', 'pear', 'pear', 'apple', 'pear'])
 
-    # Plot
-    py.iplot(fig, filename = 'Scatterplot Matrix with Index')
-    ```
+    >>> # Create scatterplot matrix
+    >>> fig = create_scatterplotmatrix(df, index='Fruit', size=10)
+    >>> fig.show()
+
 
     Example 3: Styling the Diagonal Subplots
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe with index
-    df = pd.DataFrame(np.random.randn(10, 4),
-                       columns=['A', 'B', 'C', 'D'])
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    # Add another column of strings to the dataframe
-    df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
-                             'grape', 'pear', 'pear', 'apple', 'pear'])
+    >>> # Create dataframe with index
+    >>> df = pd.DataFrame(np.random.randn(10, 4),
+    ...                    columns=['A', 'B', 'C', 'D'])
 
-    # Create scatterplot matrix
-    fig = create_scatterplotmatrix(df, diag='box', index='Fruit', height=1000,
-                                   width=1000)
+    >>> # Add another column of strings to the dataframe
+    >>> df['Fruit'] = pd.Series(['apple', 'apple', 'grape', 'apple', 'apple',
+    ...                          'grape', 'pear', 'pear', 'apple', 'pear'])
 
-    # Plot
-    py.iplot(fig, filename = 'Scatterplot Matrix - Diagonal Styling')
-    ```
+    >>> # Create scatterplot matrix
+    >>> fig = create_scatterplotmatrix(df, diag='box', index='Fruit', height=1000,
+    ...                                width=1000)
+    >>> fig.show()
+
 
     Example 4: Use a Theme to Style the Subplots
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe with random data
-    df = pd.DataFrame(np.random.randn(100, 3),
-                       columns=['A', 'B', 'C'])
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    # Create scatterplot matrix using a built-in
-    # Plotly palette scale and indexing column 'A'
-    fig = create_scatterplotmatrix(df, diag='histogram', index='A',
-                                   colormap='Blues', height=800, width=800)
+    >>> # Create dataframe with random data
+    >>> df = pd.DataFrame(np.random.randn(100, 3),
+    ...                    columns=['A', 'B', 'C'])
 
-    # Plot
-    py.iplot(fig, filename = 'Scatterplot Matrix - Colormap Theme')
-    ```
+    >>> # Create scatterplot matrix using a built-in
+    >>> # Plotly palette scale and indexing column 'A'
+    >>> fig = create_scatterplotmatrix(df, diag='histogram', index='A',
+    ...                                colormap='Blues', height=800, width=800)
+    >>> fig.show()
+
 
     Example 5: Example 4 with Interval Factoring
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe with random data
-    df = pd.DataFrame(np.random.randn(100, 3),
-                       columns=['A', 'B', 'C'])
+    >>> import numpy as np
+    >>> import pandas as pd
 
-    # Create scatterplot matrix using a list of 2 rgb tuples
-    # and endpoints at -1, 0 and 1
-    fig = create_scatterplotmatrix(df, diag='histogram', index='A',
-                                   colormap=['rgb(140, 255, 50)',
-                                             'rgb(170, 60, 115)', '#6c4774',
-                                             (0.5, 0.1, 0.8)],
-                                   endpts=[-1, 0, 1], height=800, width=800)
+    >>> # Create dataframe with random data
+    >>> df = pd.DataFrame(np.random.randn(100, 3),
+    ...                    columns=['A', 'B', 'C'])
 
-    # Plot
-    py.iplot(fig, filename = 'Scatterplot Matrix - Intervals')
-    ```
+    >>> # Create scatterplot matrix using a list of 2 rgb tuples
+    >>> # and endpoints at -1, 0 and 1
+    >>> fig = create_scatterplotmatrix(df, diag='histogram', index='A',
+    ...                                colormap=['rgb(140, 255, 50)',
+    ...                                          'rgb(170, 60, 115)', '#6c4774',
+    ...                                          (0.5, 0.1, 0.8)],
+    ...                                endpts=[-1, 0, 1], height=800, width=800)
+    >>> fig.show()
+
 
     Example 6: Using the colormap as a Dictionary
-    ```
-    import plotly.plotly as py
-    from plotly.graph_objs import graph_objs
-    from plotly.figure_factory import create_scatterplotmatrix
 
-    import numpy as np
-    import pandas as pd
-    import random
+    >>> from plotly.graph_objs import graph_objs
+    >>> from plotly.figure_factory import create_scatterplotmatrix
 
-    # Create dataframe with random data
-    df = pd.DataFrame(np.random.randn(100, 3),
-                       columns=['Column A',
-                                'Column B',
-                                'Column C'])
+    >>> import numpy as np
+    >>> import pandas as pd
+    >>> import random
 
-    # Add new color column to dataframe
-    new_column = []
-    strange_colors = ['turquoise', 'limegreen', 'goldenrod']
+    >>> # Create dataframe with random data
+    >>> df = pd.DataFrame(np.random.randn(100, 3),
+    ...                    columns=['Column A',
+    ...                             'Column B',
+    ...                             'Column C'])
 
-    for j in range(100):
-        new_column.append(random.choice(strange_colors))
-    df['Colors'] = pd.Series(new_column, index=df.index)
+    >>> # Add new color column to dataframe
+    >>> new_column = []
+    >>> strange_colors = ['turquoise', 'limegreen', 'goldenrod']
 
-    # Create scatterplot matrix using a dictionary of hex color values
-    # which correspond to actual color names in 'Colors' column
-    fig = create_scatterplotmatrix(
-        df, diag='box', index='Colors',
-        colormap= dict(
-            turquoise = '#00F5FF',
-            limegreen = '#32CD32',
-            goldenrod = '#DAA520'
-        ),
-        colormap_type='cat',
-        height=800, width=800
-    )
+    >>> for j in range(100):
+    ...     new_column.append(random.choice(strange_colors))
+    >>> df['Colors'] = pd.Series(new_column, index=df.index)
 
-    # Plot
-    py.iplot(fig, filename = 'Scatterplot Matrix - colormap dictionary ')
-    ```
+    >>> # Create scatterplot matrix using a dictionary of hex color values
+    >>> # which correspond to actual color names in 'Colors' column
+    >>> fig = create_scatterplotmatrix(
+    ...     df, diag='box', index='Colors',
+    ...     colormap= dict(
+    ...         turquoise = '#00F5FF',
+    ...         limegreen = '#32CD32',
+    ...         goldenrod = '#DAA520'
+    ...     ),
+    ...     colormap_type='cat',
+    ...     height=800, width=800
+    ... )
+    >>> fig.show()
     """
     # TODO: protected until #282
     if dataframe is None:

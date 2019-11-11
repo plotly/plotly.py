@@ -32,84 +32,70 @@ def create_quiver(
     :rtype (dict): returns a representation of quiver figure.
 
     Example 1: Trivial Quiver
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_quiver
 
-    import math
+    >>> from plotly.figure_factory import create_quiver
+    >>> import math
 
-    # 1 Arrow from (0,0) to (1,1)
-    fig = create_quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
+    >>> # 1 Arrow from (0,0) to (1,1)
+    >>> fig = create_quiver(x=[0], y=[0], u=[1], v=[1], scale=1)
+    >>> fig.show()
 
-    py.plot(fig, filename='quiver')
-    ```
 
     Example 2: Quiver plot using meshgrid
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_quiver
 
-    import numpy as np
-    import math
+    >>> from plotly.figure_factory import create_quiver
 
-    # Add data
-    x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
-    u = np.cos(x)*y
-    v = np.sin(x)*y
+    >>> import numpy as np
+    >>> import math
 
-    #Create quiver
-    fig = create_quiver(x, y, u, v)
+    >>> # Add data
+    >>> x,y = np.meshgrid(np.arange(0, 2, .2), np.arange(0, 2, .2))
+    >>> u = np.cos(x)*y
+    >>> v = np.sin(x)*y
 
-    # Plot
-    py.plot(fig, filename='quiver')
-    ```
+    >>> #Create quiver
+    >>> fig = create_quiver(x, y, u, v)
+    >>> fig.show()
+
 
     Example 3: Styling the quiver plot
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_quiver
-    import numpy as np
-    import math
 
-    # Add data
-    x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
-                       np.arange(-math.pi, math.pi, .5))
-    u = np.cos(x)*y
-    v = np.sin(x)*y
+    >>> from plotly.figure_factory import create_quiver
+    >>> import numpy as np
+    >>> import math
 
-    # Create quiver
-    fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
-                        name='Wind Velocity', line=dict(width=1))
+    >>> # Add data
+    >>> x, y = np.meshgrid(np.arange(-np.pi, math.pi, .5),
+    ...                    np.arange(-math.pi, math.pi, .5))
+    >>> u = np.cos(x)*y
+    >>> v = np.sin(x)*y
 
-    # Add title to layout
-    fig['layout'].update(title='Quiver Plot')
+    >>> # Create quiver
+    >>> fig = create_quiver(x, y, u, v, scale=.2, arrow_scale=.3, angle=math.pi/6,
+    ...                     name='Wind Velocity', line=dict(width=1))
 
-    # Plot
-    py.plot(fig, filename='quiver')
-    ```
+    >>> # Add title to layout
+    >>> fig['layout'].update(title='Quiver Plot')
+    >>> fig.show()
+
 
     Example 4: Forcing a fix scale ratio to maintain the arrow length
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_quiver
 
-    import numpy as np
+    >>> from plotly.figure_factory import create_quiver
+    >>> import numpy as np
 
-    # Add data
-    x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
-    u = x
-    v = y
-    angle = np.arctan(v / u)
-    norm = 0.25
-    u = norm * np.cos(angle)
-    v = norm * np.sin(angle)
+    >>> # Add data
+    >>> x,y = np.meshgrid(np.arange(0.5, 3.5, .5), np.arange(0.5, 4.5, .5))
+    >>> u = x
+    >>> v = y
+    >>> angle = np.arctan(v / u)
+    >>> norm = 0.25
+    >>> u = norm * np.cos(angle)
+    >>> v = norm * np.sin(angle)
 
-    # Create quiver with a fix scale ratio
-    fig = create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
-
-    # Plot
-    py.plot(fig, filename='quiver')
-    ```
+    >>> # Create quiver with a fix scale ratio
+    >>> fig = create_quiver(x, y, u, v, scale = 1, scaleratio = 0.5)
+    >>> fig.show()
     """
     utils.validate_equal_length(x, y, u, v)
     utils.validate_positive_scalars(arrow_scale=arrow_scale, scale=scale)

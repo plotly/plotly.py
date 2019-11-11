@@ -60,62 +60,53 @@ def create_streamline(
     :rtype (dict): returns a representation of streamline figure.
 
     Example 1: Plot simple streamline and increase arrow size
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_streamline
 
-    import numpy as np
-    import math
+    >>> from plotly.figure_factory import create_streamline
+    >>> import numpy as np
+    >>> import math
 
-    # Add data
-    x = np.linspace(-3, 3, 100)
-    y = np.linspace(-3, 3, 100)
-    Y, X = np.meshgrid(x, y)
-    u = -1 - X**2 + Y
-    v = 1 + X - Y**2
-    u = u.T  # Transpose
-    v = v.T  # Transpose
+    >>> # Add data
+    >>> x = np.linspace(-3, 3, 100)
+    >>> y = np.linspace(-3, 3, 100)
+    >>> Y, X = np.meshgrid(x, y)
+    >>> u = -1 - X**2 + Y
+    >>> v = 1 + X - Y**2
+    >>> u = u.T  # Transpose
+    >>> v = v.T  # Transpose
 
-    # Create streamline
-    fig = create_streamline(x, y, u, v, arrow_scale=.1)
-
-    # Plot
-    py.plot(fig, filename='streamline')
-    ```
+    >>> # Create streamline
+    >>> fig = create_streamline(x, y, u, v, arrow_scale=.1)
+    >>> fig.show()
 
     Example 2: from nbviewer.ipython.org/github/barbagroup/AeroPython
-    ```
-    import plotly.plotly as py
-    from plotly.figure_factory import create_streamline
 
-    import numpy as np
-    import math
+    >>> from plotly.figure_factory import create_streamline
+    >>> import numpy as np
+    >>> import math
 
-    # Add data
-    N = 50
-    x_start, x_end = -2.0, 2.0
-    y_start, y_end = -1.0, 1.0
-    x = np.linspace(x_start, x_end, N)
-    y = np.linspace(y_start, y_end, N)
-    X, Y = np.meshgrid(x, y)
-    ss = 5.0
-    x_s, y_s = -1.0, 0.0
+    >>> # Add data
+    >>> N = 50
+    >>> x_start, x_end = -2.0, 2.0
+    >>> y_start, y_end = -1.0, 1.0
+    >>> x = np.linspace(x_start, x_end, N)
+    >>> y = np.linspace(y_start, y_end, N)
+    >>> X, Y = np.meshgrid(x, y)
+    >>> ss = 5.0
+    >>> x_s, y_s = -1.0, 0.0
 
-    # Compute the velocity field on the mesh grid
-    u_s = ss/(2*np.pi) * (X-x_s)/((X-x_s)**2 + (Y-y_s)**2)
-    v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
+    >>> # Compute the velocity field on the mesh grid
+    >>> u_s = ss/(2*np.pi) * (X-x_s)/((X-x_s)**2 + (Y-y_s)**2)
+    >>> v_s = ss/(2*np.pi) * (Y-y_s)/((X-x_s)**2 + (Y-y_s)**2)
 
-    # Create streamline
-    fig = create_streamline(x, y, u_s, v_s, density=2, name='streamline')
+    >>> # Create streamline
+    >>> fig = create_streamline(x, y, u_s, v_s, density=2, name='streamline')
 
-    # Add source point
-    point = Scatter(x=[x_s], y=[y_s], mode='markers',
-                    marker=Marker(size=14), name='source point')
+    >>> # Add source point
+    >>> point = Scatter(x=[x_s], y=[y_s], mode='markers',
+    ...                 marker=Marker(size=14), name='source point')
 
-    # Plot
-    fig['data'].append(point)
-    py.plot(fig, filename='streamline')
-    ```
+    >>> fig['data'].append(point)
+    >>> fig.show()
     """
     utils.validate_equal_length(x, y)
     utils.validate_equal_length(u, v)
