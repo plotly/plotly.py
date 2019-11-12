@@ -11,12 +11,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  - Improved propagation of empty templates ([#1892](https://github.com/plotly/plotly.py/pull/1892))
  - Update the `add_annotations`/`add_shapes`/`add_images` methods to no longer default to adding objects in paper coordinates. This allows plotly.js to determine the default reference frame based on context ([#1888](https://github.com/plotly/plotly.py/pull/1888))
  - Use the default template's background color for displaying color swatches ([#1872](https://github.com/plotly/plotly.py/pull/1872)). Special thanks to [@joelostblom](https://github.com/joelostblom) for this contribution!
+ - Improved docstrings ([#1835](https://github.com/plotly/plotly.py/pull/1835), [#1837](https://github.com/plotly/plotly.py/pull/1837))
  
 ### Added
  - Added image trace type ([plotly.js#4289](https://github.com/plotly/plotly.js/pull/4289), [plotly.js#4307](https://github.com/plotly/plotly.js/pull/4307), [plotly.js#4313](https://github.com/plotly/plotly.js/pull/4313), [plotly.js#4319](https://github.com/plotly/plotly.js/pull/4319))
  - Added matplotlib-style `plotly.express.imshow` convenience function to display images and heatmaps ([#1855](https://github.com/plotly/plotly.py/pull/1855), [#1885](https://github.com/plotly/plotly.py/pull/1885))
- - Added matplotlib-style `simple_white` template ([#1864](https://github.com/plotly/plotly.py/pull/1864))
+ - Added matplotlib-style `simple_white` template ([#1864](https://github.com/plotly/plotly.py/pull/1864)). Special thanks to [@joelostblom](https://github.com/joelostblom) for this contribution.
  - Added support for using an externally managed orca server for image export features ([#1850](https://github.com/plotly/plotly.py/pull/1850)). Special thanks to [@miriad](https://github.com/miriad) for this contribution.
+ - Added facet wrapping support to plotly express functions using the new `facet_col_wrap` argument ([#1838](https://github.com/plotly/plotly.py/pull/1838))
 
 ## [4.2.1] - 2019-10-18
 ### Fixed
