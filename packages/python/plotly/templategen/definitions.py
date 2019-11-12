@@ -70,7 +70,7 @@ def ggplot2():
     template.layout.scene.zaxis.gridwidth = 2
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     return template
 
@@ -149,7 +149,7 @@ def simple_white():
     template.layout.mapbox.style = "light"
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
     return template
 
 
@@ -255,7 +255,7 @@ def seaborn():
     template.layout.scene.zaxis.gridwidth = 2
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
     return template
 
 
@@ -365,8 +365,7 @@ def plotly():
 
     # Common axis common properties
     axis_common = dict(
-        gridcolor="white", linecolor="white", ticks="", 
-        title=dict(standoff=15),
+        gridcolor="white", linecolor="white", ticks="", title=dict(standoff=15),
     )
 
     # Near black line color, no fill
@@ -415,7 +414,7 @@ def plotly():
     template.layout.mapbox.style = "light"
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     # Set table header font color to white
     return template
@@ -495,7 +494,7 @@ def plotly_white():
     template.layout.mapbox.style = "light"
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     # Set table header font color to white
     return template
@@ -515,8 +514,7 @@ def plotly_dark():
     # Common axis common properties
     grid_color = plotly_clrs["Rhino Dark"]
     axis_common = dict(
-        gridcolor=grid_color, linecolor=grid_color, ticks="", 
-        title=dict(standoff=15),
+        gridcolor=grid_color, linecolor=grid_color, ticks="", title=dict(standoff=15),
     )
 
     # Near white line color, no fill
@@ -586,10 +584,10 @@ def plotly_dark():
     template.data.scattergl = [opts]
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     # Set table header font color to white
     return template
@@ -626,7 +624,7 @@ def presentation():
     template.data.table = [{"header": {"height": 36}, "cells": {"height": 30}}]
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     return template
 
@@ -645,7 +643,7 @@ def xgridoff():
     template.layout.yaxis.title.standoff = 15
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     return template
 
@@ -662,7 +660,7 @@ def ygridoff():
     template.layout.yaxis.showgrid = False
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     return template
 
@@ -682,7 +680,7 @@ def gridon():
     template.layout.yaxis.title.standoff = 15
 
     # Automargin for pie chart
-    template.data.pie = [{'automargin':True}]
+    template.data.pie = [{"automargin": True}]
 
     return template
 
