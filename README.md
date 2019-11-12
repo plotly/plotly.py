@@ -26,7 +26,7 @@
 
 ## Quickstart
 
-`pip install plotly==4.2.1`
+`pip install plotly==4.3.0`
 
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 ```python
@@ -105,7 +105,7 @@ pip install jupyterlab==1.2 "ipywidgets==7.5"
 or conda.
 
 ```
-conda install jupyterlab=1.0 "ipywidgets=7.5"
+conda install jupyterlab=1.2 "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
