@@ -37,6 +37,7 @@ def ggplot2():
         linecolor="white",
         tickcolor=colors["gray20"],
         ticks="outside",
+        title=dict(standoff=15),
     )
 
     # semi-transparent black and no outline
@@ -68,6 +69,9 @@ def ggplot2():
     template.layout.scene.yaxis.gridwidth = 2
     template.layout.scene.zaxis.gridwidth = 2
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     return template
 
 
@@ -91,6 +95,7 @@ def simple_white():
         linecolor=colors["gray14"],
         ticks="outside",
         showline=True,
+        title=dict(standoff=15),
     )
     # semi-transparent black and no outline
     shape_defaults = dict(fillcolor="black", line={"width": 0}, opacity=0.3)
@@ -121,13 +126,13 @@ def simple_white():
     template.layout.title.x = 0.05
 
     # Increase grid width for 3d plots
-    opts = dict(gridwidth=2, gridcolor=plotly_clrs["gray91"], zeroline=False)
+    opts = dict(gridwidth=2, gridcolor=colors["gray91"], zeroline=False)
     template.layout.scene.xaxis.update(opts)
     template.layout.scene.yaxis.update(opts)
     template.layout.scene.zaxis.update(opts)
 
     # Darken ternary
-    opts = dict(linecolor=plotly_clrs["gray14"], gridcolor=plotly_clrs["gray91"])
+    opts = dict(linecolor=colors["gray14"], gridcolor=colors["gray91"])
     template.layout.ternary.aaxis.update(opts)
     template.layout.ternary.baxis.update(opts)
     template.layout.ternary.caxis.update(opts)
@@ -143,7 +148,8 @@ def simple_white():
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
-    # Set table header font color to white
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
     return template
 
 
@@ -210,7 +216,13 @@ def seaborn():
     )
 
     # Common axis common properties
-    axis_common = dict(showgrid=True, gridcolor="white", linecolor="white", ticks="")
+    axis_common = dict(
+        showgrid=True,
+        gridcolor="white",
+        linecolor="white",
+        ticks="",
+        title=dict(standoff=15),
+    )
 
     # semi-transparent black and no outline
     annotation_clr = "rgb(67,103,167)"
@@ -242,7 +254,8 @@ def seaborn():
     template.layout.scene.yaxis.gridwidth = 2
     template.layout.scene.zaxis.gridwidth = 2
 
-    # Set table header font color to white
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
     return template
 
 
@@ -351,7 +364,9 @@ def plotly():
     colorbar_common = dict(outlinewidth=0, ticks="")
 
     # Common axis common properties
-    axis_common = dict(gridcolor="white", linecolor="white", ticks="")
+    axis_common = dict(
+        gridcolor="white", linecolor="white", ticks="", title=dict(standoff=15),
+    )
 
     # Near black line color, no fill
     annotation_clr = plotly_clrs["Rhino Core"]
@@ -398,6 +413,9 @@ def plotly():
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     # Set table header font color to white
     return template
 
@@ -418,6 +436,7 @@ def plotly_white():
         gridcolor=plotly_clrs["Rhino Light 2"],
         linecolor=plotly_clrs["Rhino Light 2"],
         ticks="",
+        title=dict(standoff=15),
     )
 
     # Near black line color, no fill
@@ -474,6 +493,9 @@ def plotly_white():
     # Mapbox light style
     template.layout.mapbox.style = "light"
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     # Set table header font color to white
     return template
 
@@ -491,7 +513,9 @@ def plotly_dark():
 
     # Common axis common properties
     grid_color = plotly_clrs["Rhino Dark"]
-    axis_common = dict(gridcolor=grid_color, linecolor=grid_color, ticks="")
+    axis_common = dict(
+        gridcolor=grid_color, linecolor=grid_color, ticks="", title=dict(standoff=15),
+    )
 
     # Near white line color, no fill
     annotation_clr = plotly_clrs["Rhino Light 4"]
@@ -559,6 +583,12 @@ def plotly_dark():
     template.data.scatter = [opts]
     template.data.scattergl = [opts]
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     # Set table header font color to white
     return template
 
@@ -574,6 +604,8 @@ def presentation():
 
     # Create blank template
     template = Template()
+    template.layout.xaxis.title.standoff = 15
+    template.layout.yaxis.title.standoff = 15
 
     # Increase global font size by 1.5x (12->18)
     template.layout.font.size = 18
@@ -591,6 +623,9 @@ def presentation():
     # Increase default height of table cells
     template.data.table = [{"header": {"height": 36}, "cells": {"height": 30}}]
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     return template
 
 
@@ -604,6 +639,11 @@ def xgridoff():
     # Create blank template
     template = Template()
     template.layout.xaxis.showgrid = False
+    template.layout.xaxis.title.standoff = 15
+    template.layout.yaxis.title.standoff = 15
+
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
 
     return template
 
@@ -619,6 +659,9 @@ def ygridoff():
     template = Template()
     template.layout.yaxis.showgrid = False
 
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
+
     return template
 
 
@@ -632,7 +675,12 @@ def gridon():
     # Create blank template
     template = Template()
     template.layout.xaxis.showgrid = True
+    template.layout.xaxis.title.standoff = 15
     template.layout.yaxis.showgrid = True
+    template.layout.yaxis.title.standoff = 15
+
+    # Automargin for pie chart
+    template.data.pie = [{"automargin": True}]
 
     return template
 

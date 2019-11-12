@@ -117,6 +117,8 @@ def initialize_template(
 
     # 3D
     axis_3d = dict(cartesian_axis)
+    if axis_3d.get("title"):
+        _ = axis_3d["title"].pop("standoff")
     if panel_background_clr:
         axis_3d["backgroundcolor"] = panel_background_clr
         axis_3d["showbackground"] = True
@@ -130,6 +132,8 @@ def initialize_template(
     template.layout.ternary.caxis = axis_common
 
     # Polar
+    if axis_common.get("title") or axis_common.get("title") == {}:
+        _ = axis_common.pop("title")
     template.layout.polar.angularaxis = axis_common
     template.layout.polar.radialaxis = axis_common
 
