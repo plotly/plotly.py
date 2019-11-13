@@ -343,9 +343,11 @@ fig.write_html(os.path.join(dir_name, "line_ternary.html"))
 
 import plotly.express as px
 import numpy as np
-img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]],
-                    [[0, 255, 0], [0, 0, 255], [255, 0, 0]]
-                   ], dtype=np.uint8)
+
+img_rgb = np.array(
+    [[[255, 0, 0], [0, 255, 0], [0, 0, 255]], [[0, 255, 0], [0, 0, 255], [255, 0, 0]]],
+    dtype=np.uint8,
+)
 fig = px.imshow(img_rgb)
 fig.write_html(os.path.join(dir_name, "imshow.html"))
 
