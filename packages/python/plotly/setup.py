@@ -37,7 +37,7 @@ def plotly_js_version():
 
 
 def readme():
-    with open(os.path.join(here, "README.md")) as f:
+    with open(os.path.join(project_root, "README.md")) as f:
         return f.read()
 
 
