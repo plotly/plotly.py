@@ -69,17 +69,17 @@ docs = dict(
     values=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set values associated to sectors."
+        "Values from this column or array_like are used to set values associated to sectors.",
     ],
     parents=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set values associated to sectors."
+        "Values from this column or array_like are used to set values associated to sectors.",
     ],
     ids=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set values associated to sectors."
+        "Values from this column or array_like are used to set values associated to sectors.",
     ],
     lat=[
         colref_type,
@@ -457,16 +457,22 @@ docs = dict(
     nbins=["int", "Positive integer.", "Sets the number of bins."],
     nbinsx=["int", "Positive integer.", "Sets the number of bins along the x axis."],
     nbinsy=["int", "Positive integer.", "Sets the number of bins along the y axis."],
-    branchvalues=["str", "'total' or 'remainder'", 
-            "Determines how the items in `values` are summed. When"
-            "set to 'total', items in `values` are taken to be value"
-            "of all its descendants. When set to 'remainder', items"
-            "in `values` corresponding to the root and the branches"
-            ":sectors are taken to be the extra part not part of the"
-            "sum of the values at their leaves."],
-    maxdepth=["int", "Positive integer", 
-            "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
-            "levels in the hierarchy."]
+    branchvalues=[
+        "str",
+        "'total' or 'remainder'",
+        "Determines how the items in `values` are summed. When"
+        "set to 'total', items in `values` are taken to be value"
+        "of all its descendants. When set to 'remainder', items"
+        "in `values` corresponding to the root and the branches"
+        ":sectors are taken to be the extra part not part of the"
+        "sum of the values at their leaves.",
+    ],
+    maxdepth=[
+        "int",
+        "Positive integer",
+        "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
+        "levels in the hierarchy.",
+    ],
 )
 
 

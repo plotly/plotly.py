@@ -323,7 +323,12 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if v:
                     result[k] = g[v]
                 mapping_labels[v_label] = "%%{%s}" % k
-    if trace_spec.constructor not in [go.Parcoords, go.Parcats, go.Sunburst, go.Treemap]:
+    if trace_spec.constructor not in [
+        go.Parcoords,
+        go.Parcats,
+        go.Sunburst,
+        go.Treemap,
+    ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)
     return result, fit_results
@@ -1013,7 +1018,7 @@ def infer_config(args, constructor, trace_patch):
 
         show_colorbar = bool("color" in attrs and args["color"])
     else:
-        show_colorbar=False
+        show_colorbar = False
 
     # Compute line_dash grouping attribute
     if "line_dash" in args:
