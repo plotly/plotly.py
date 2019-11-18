@@ -1130,14 +1130,11 @@ def pie(
     width=None,
     height=None,
     opacity=None,
-        ):
+):
     """
     In a pie plot, each row of `data_frame` is represented as a sector of a pie.
     """
-    return make_figure(
-        args=locals(),
-        constructor=go.Pie,
-    )
+    return make_figure(args=locals(), constructor=go.Pie,)
 
 
 pie.__doc__ = make_docstring(pie)
@@ -1159,19 +1156,18 @@ def sunburst(
     height=None,
     branchvalues=None,
     maxdepth=None,
-        ):
+):
     """
     In a pie plot, each row of `data_frame` is represented as a sector of a pie.
     """
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
-        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth)
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
     )
 
 
 sunburst.__doc__ = make_docstring(sunburst)
-
 
 
 def funnel(
@@ -1192,7 +1188,7 @@ def funnel(
     width=None,
     height=None,
     opacity=None,
-        ):
+):
     """
     In a funnel plot, each row of `data_frame` is represented as a rectangular sector of a funnel.
     """
@@ -1203,7 +1199,15 @@ def funnel(
     )
 
 
-funnel.__doc__ = make_docstring(funnel, override_dict=dict(textinfo=["str", "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace)."]))
+funnel.__doc__ = make_docstring(
+    funnel,
+    override_dict=dict(
+        textinfo=[
+            "str",
+            "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace).",
+        ]
+    ),
+)
 
 
 def funnel_area(
@@ -1219,14 +1223,19 @@ def funnel_area(
     template=None,
     width=None,
     height=None,
-        ):
+):
     """
     In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
     """
-    return make_figure(
-        args=locals(),
-        constructor=go.Funnelarea,
-    )
+    return make_figure(args=locals(), constructor=go.Funnelarea,)
 
 
-funnel_area.__doc__ = make_docstring(funnel_area, override_dict=dict(textinfo=["str", "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace)."]))
+funnel_area.__doc__ = make_docstring(
+    funnel_area,
+    override_dict=dict(
+        textinfo=[
+            "str",
+            "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace).",
+        ]
+    ),
+)

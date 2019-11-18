@@ -83,9 +83,7 @@ __all__ = [
     "choropleth",
     "pie",
     "sunburst",
-    "funnel"
-    "funnel_area"
-    "imshow",
+    "funnel" "funnel_area" "imshow",
     "data",
     "colors",
     "set_mapbox_access_token",
