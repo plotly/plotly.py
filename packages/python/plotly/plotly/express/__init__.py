@@ -39,6 +39,10 @@ from ._chart_types import (  # noqa: F401
     choropleth,
     density_contour,
     density_heatmap,
+    pie,
+    sunburst,
+    funnel,
+    funnel_area,
 )
 
 from ._imshow import imshow
@@ -77,6 +81,10 @@ __all__ = [
     "strip",
     "histogram",
     "choropleth",
+    "pie",
+    "sunburst",
+    "funnel"
+    "funnel_area"
     "imshow",
     "data",
     "colors",

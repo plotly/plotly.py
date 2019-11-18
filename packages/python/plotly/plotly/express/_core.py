@@ -305,11 +305,25 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
             elif k == "locations":
                 result[k] = g[v]
                 mapping_labels[v_label] = "%{location}"
+            elif k == "values":
+                result[k] = g[v]
+                mapping_labels["value"] = "%{value}"
+            elif k == "parents":
+                result[k] = g[v]
+                mapping_labels["parent"] = "%{parent}"
+            elif k == "ids":
+                result[k] = g[v]
+                mapping_labels["id"] = "%{id}"
+            elif k == "text":
+                if trace_spec.constructor in [go.Sunburst, go.Treemap]:
+                    result["labels"] = g[v]
+                else:
+                    result[k] = g[v]
             else:
                 if v:
                     result[k] = g[v]
                 mapping_labels[v_label] = "%%{%s}" % k
-    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
+    if trace_spec.constructor not in [go.Parcoords, go.Parcats, go.Sunburst, go.Treemap]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)
     return result, fit_results
@@ -956,6 +970,7 @@ def infer_config(args, constructor, trace_patch):
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
         + ["custom_data", "hover_name", "hover_data", "text"]
+        + ["values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
@@ -997,6 +1012,8 @@ def infer_config(args, constructor, trace_patch):
             grouped_attrs.append("marker.color")
 
         show_colorbar = bool("color" in attrs and args["color"])
+    else:
+        show_colorbar=False
 
     # Compute line_dash grouping attribute
     if "line_dash" in args:
@@ -1148,6 +1165,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcoords,
                 go.Choropleth,
                 go.Histogram2d,
+                go.Sunburst,
             ]:
                 trace.update(
                     legendgroup=trace_name,

@@ -1115,3 +1115,118 @@ def parallel_categories(
 
 
 parallel_categories.__doc__ = make_docstring(parallel_categories)
+
+
+def pie(
+    data_frame=None,
+    text=None,
+    values=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    opacity=None,
+        ):
+    """
+    In a pie plot, each row of `data_frame` is represented as a sector of a pie.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Pie,
+    )
+
+
+pie.__doc__ = make_docstring(pie)
+
+
+def sunburst(
+    data_frame=None,
+    text=None,
+    values=None,
+    parents=None,
+    ids=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    branchvalues=None,
+    maxdepth=None,
+        ):
+    """
+    In a pie plot, each row of `data_frame` is represented as a sector of a pie.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Sunburst,
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth)
+    )
+
+
+sunburst.__doc__ = make_docstring(sunburst)
+
+
+
+def funnel(
+    data_frame=None,
+    x=None,
+    y=None,
+    color=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    orientation=None,
+    textinfo=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    opacity=None,
+        ):
+    """
+    In a funnel plot, each row of `data_frame` is represented as a rectangular sector of a funnel.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Funnel,
+        trace_patch=dict(opacity=opacity, orientation=orientation, textinfo=textinfo),
+    )
+
+
+funnel.__doc__ = make_docstring(funnel, override_dict=dict(textinfo=["str", "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace)."]))
+
+
+def funnel_area(
+    data_frame=None,
+    values=None,
+    text=None,
+    textinfo=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+        ):
+    """
+    In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Funnelarea,
+    )
+
+
+funnel_area.__doc__ = make_docstring(funnel_area, override_dict=dict(textinfo=["str", "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace)."]))
