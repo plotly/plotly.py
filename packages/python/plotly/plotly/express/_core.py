@@ -307,20 +307,25 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 mapping_labels[v_label] = "%{location}"
             elif k == "values":
                 result[k] = g[v]
-                _label = "value" if v_label == 'values' else v_label
+                _label = "value" if v_label == "values" else v_label
                 mapping_labels[_label] = "%{value}"
             elif k == "parents":
                 result[k] = g[v]
-                _label = "parent" if v_label == 'parents' else v_label
+                _label = "parent" if v_label == "parents" else v_label
                 mapping_labels[_label] = "%{parent}"
             elif k == "ids":
                 result[k] = g[v]
-                _label = "id" if v_label == 'ids' else v_label
+                _label = "id" if v_label == "ids" else v_label
                 mapping_labels[_label] = "%{id}"
             elif k == "names":
-                if trace_spec.constructor in [go.Sunburst, go.Treemap, go.Pie, go.Funnelarea]:
+                if trace_spec.constructor in [
+                    go.Sunburst,
+                    go.Treemap,
+                    go.Pie,
+                    go.Funnelarea,
+                ]:
                     result["labels"] = g[v]
-                    _label = "label" if v_label == 'names' else v_label
+                    _label = "label" if v_label == "names" else v_label
                     mapping_labels[_label] = "%{label}"
                 else:
                     result[k] = g[v]
@@ -331,8 +336,6 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
     if trace_spec.constructor not in [
         go.Parcoords,
         go.Parcats,
-        go.Sunburst,
-        go.Treemap,
     ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)

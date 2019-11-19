@@ -1137,24 +1137,21 @@ def pie(
     In a pie plot, each row of `data_frame` is represented as a sector of a pie.
     """
     return make_figure(
-        args=locals(),
-        constructor=go.Pie,
-        trace_patch=dict(showlegend=True, hole=hole)
-                        )
+        args=locals(), constructor=go.Pie, trace_patch=dict(showlegend=True, hole=hole)
+    )
 
 
-pie.__doc__ = make_docstring(pie,
-        override_dict=dict(
-        textinfo=[
-            "str",
-            "Determines which trace information appear on the graph.",
-        ],
+pie.__doc__ = make_docstring(
+    pie,
+    override_dict=dict(
+        textinfo=["str", "Determines which trace information appear on the graph.",],
         hole=[
             "float",
             "Sets the fraction of the radius to cut out of the pie."
-            "Use this to make a donut chart."
-            ],
-    ),)
+            "Use this to make a donut chart.",
+        ],
+    ),
+)
 
 
 def sunburst(
