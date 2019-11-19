@@ -74,12 +74,12 @@ docs = dict(
     parents=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set values associated to sectors.",
+        "Values from this column or array_like are used as parents in sunburst and treemap charts.",
     ],
     ids=[
         colref_type,
         colref_desc,
-        "Values from this column or array_like are used to set values associated to sectors.",
+        "Values from this column or array_like are used to set ids of sectors",
     ],
     lat=[
         colref_type,
