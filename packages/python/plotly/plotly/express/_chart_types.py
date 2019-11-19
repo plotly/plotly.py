@@ -1119,8 +1119,9 @@ parallel_categories.__doc__ = make_docstring(parallel_categories)
 
 def pie(
     data_frame=None,
-    text=None,
+    names=None,
     values=None,
+    textinfo=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1130,19 +1131,35 @@ def pie(
     width=None,
     height=None,
     opacity=None,
+    hole=None,
 ):
     """
     In a pie plot, each row of `data_frame` is represented as a sector of a pie.
     """
-    return make_figure(args=locals(), constructor=go.Pie,)
+    return make_figure(
+        args=locals(),
+        constructor=go.Pie,
+        trace_patch=dict(showlegend=True, hole=hole)
+                        )
 
 
-pie.__doc__ = make_docstring(pie)
+pie.__doc__ = make_docstring(pie,
+        override_dict=dict(
+        textinfo=[
+            "str",
+            "Determines which trace information appear on the graph.",
+        ],
+        hole=[
+            "float",
+            "Sets the fraction of the radius to cut out of the pie."
+            "Use this to make a donut chart."
+            ],
+    ),)
 
 
 def sunburst(
     data_frame=None,
-    text=None,
+    names=None,
     values=None,
     parents=None,
     ids=None,
@@ -1158,7 +1175,8 @@ def sunburst(
     maxdepth=None,
 ):
     """
-    In a pie plot, each row of `data_frame` is represented as a sector of a pie.
+    A sunburst plot represents hierarchial data as sectors laid out over
+    several levels of concentric rings.
     """
     return make_figure(
         args=locals(),
@@ -1168,6 +1186,36 @@ def sunburst(
 
 
 sunburst.__doc__ = make_docstring(sunburst)
+
+
+def treemap(
+    data_frame=None,
+    names=None,
+    values=None,
+    parents=None,
+    ids=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    branchvalues=None,
+    maxdepth=None,
+):
+    """
+    A treemap plot represents hierarchial data as nested rectangular sectors. 
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Treemap,
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+    )
+
+
+treemap.__doc__ = make_docstring(treemap)
 
 
 def funnel(
@@ -1213,7 +1261,7 @@ funnel.__doc__ = make_docstring(
 def funnel_area(
     data_frame=None,
     values=None,
-    text=None,
+    names=None,
     textinfo=None,
     hover_name=None,
     hover_data=None,

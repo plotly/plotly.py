@@ -307,16 +307,21 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 mapping_labels[v_label] = "%{location}"
             elif k == "values":
                 result[k] = g[v]
-                mapping_labels["value"] = "%{value}"
+                _label = "value" if v_label == 'values' else v_label
+                mapping_labels[_label] = "%{value}"
             elif k == "parents":
                 result[k] = g[v]
-                mapping_labels["parent"] = "%{parent}"
+                _label = "parent" if v_label == 'parents' else v_label
+                mapping_labels[_label] = "%{parent}"
             elif k == "ids":
                 result[k] = g[v]
-                mapping_labels["id"] = "%{id}"
-            elif k == "text":
-                if trace_spec.constructor in [go.Sunburst, go.Treemap]:
+                _label = "id" if v_label == 'ids' else v_label
+                mapping_labels[_label] = "%{id}"
+            elif k == "names":
+                if trace_spec.constructor in [go.Sunburst, go.Treemap, go.Pie, go.Funnelarea]:
                     result["labels"] = g[v]
+                    _label = "label" if v_label == 'names' else v_label
+                    mapping_labels[_label] = "%{label}"
                 else:
                     result[k] = g[v]
             else:
@@ -975,7 +980,7 @@ def infer_config(args, constructor, trace_patch):
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
         + ["custom_data", "hover_name", "hover_data", "text"]
-        + ["values", "parents", "ids"]
+        + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
@@ -1171,6 +1176,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Choropleth,
                 go.Histogram2d,
                 go.Sunburst,
+                go.Treemap,
             ]:
                 trace.update(
                     legendgroup=trace_name,

@@ -183,6 +183,12 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like appear in the figure as text labels.",
     ],
+    names=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used as labels for sectors.",
+    ],
+
     locationmode=[
         "str",
         "One of 'ISO-3', 'USA-states', or 'country names'",
