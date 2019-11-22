@@ -94,7 +94,6 @@ def create_annotated_heatmap(
 
     >>> fig = ff.create_annotated_heatmap(z)
     >>> fig.show()
-    ```
     """
 
     # Avoiding mutables in the call signature

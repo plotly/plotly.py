@@ -496,7 +496,6 @@ def create_violin(
 
     >>> # create list of random values
     >>> data_list = np.random.randn(100)
-    >>> data_list.tolist()
 
     >>> # create violin fig
     >>> fig = create_violin(data_list, colors='#604d9e')

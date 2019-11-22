@@ -376,11 +376,11 @@ def to_templated(fig, skip=("title", "text")):
 
     >>> fig = go.Figure(layout={'title': 'Figure Title',
     ...                         'font': {'size': 20, 'family': 'Courier'}})
-    >>> fig
+    >>> fig # doctest: +NORMALIZE_WHITESPACE
     Figure({
         'data': [],
-        'layout': {'title': 'Figure Title',
-                   'font': {'family': 'Courier', 'size': 20}}
+        'layout': {'font': {'family': 'Courier', 'size': 20},
+                   'template': '...', 'title': {'text': 'Figure Title'}}
     })
 
     Convert to a figure with a template. Note how the 'font' properties have

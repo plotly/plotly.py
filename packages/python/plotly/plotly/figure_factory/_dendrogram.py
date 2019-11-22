@@ -58,7 +58,7 @@ def create_dendrogram(
     >>> X = np.random.rand(5,5)
     >>> names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
     >>> dendro = create_dendrogram(X, orientation='right', labels=names)
-    >>> dendro['layout'].update({'width':700, 'height':500})
+    >>> dendro.update_layout({'width':700, 'height':500}) # doctest: +SKIP
     >>> dendro.show()
 
     Example 3: Dendrogram with Pandas

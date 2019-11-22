@@ -456,7 +456,7 @@ def create_trisurf(
     >>> color_choices = ['rgb(0, 0, 0)', '#6c4774', '#d6c7dd']
 
     >>> for index in range(len(simplices)):
-    >>>     colors.append(random.choice(color_choices))
+    ...     colors.append(random.choice(color_choices))
 
     >>> fig = create_trisurf(
     ...     x, y, z, simplices,

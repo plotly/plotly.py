@@ -130,7 +130,7 @@ def create_distplot(
     ...     hist_data, group_labels, rug_text=rug_text_all, bin_size=.2)
 
     >>> # Add title
-    >>> fig['layout'].update(title='Dist Plot')
+    >>> fig.update_layout(title='Dist Plot') # doctest: +SKIP
     >>> fig.show()
 
 
@@ -159,7 +159,7 @@ def create_distplot(
     >>> import pandas as pd
 
     >>> df = pd.DataFrame({'2012': np.random.randn(200),
-    >>>                    '2013': np.random.randn(200)+1})
+    ...                    '2013': np.random.randn(200)+1})
     >>> fig = create_distplot([df[c] for c in df.columns], df.columns)
     >>> fig.show()
     """

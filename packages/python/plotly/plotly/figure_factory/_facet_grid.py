@@ -754,7 +754,8 @@ def create_facet_grid(
 
     >>> import plotly.figure_factory as ff
     >>> import pandas as pd
-    >>> mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+    >>> mtcars.cyl = mtcars.cyl.astype(str)
     >>> fig = ff.create_facet_grid(
     ...     mtcars,
     ...     x='mpg',
@@ -770,9 +771,10 @@ def create_facet_grid(
     >>> import plotly.figure_factory as ff
     >>> import pandas as pd
     >>> tips = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/tips.csv')
+    >>> tips.size = tips.size.astype(str)
 
     >>> fig = ff.create_facet_grid(
-    >>>     tips,
+    ...     tips,
     ...     x='total_bill',
     ...     y='tip',
     ...     facet_row='sex',
