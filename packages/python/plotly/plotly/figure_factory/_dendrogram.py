@@ -25,7 +25,9 @@ def create_dendrogram(
     color_threshold=None,
 ):
     """
-    BETA function that returns a dendrogram Plotly figure object.
+    Function that returns a dendrogram Plotly figure object.
+
+    See also https://dash.plot.ly/dash-bio/clustergram.
 
     :param (ndarray) X: Matrix of observations as array of arrays
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'

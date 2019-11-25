@@ -458,7 +458,7 @@ class BaseFigure(object):
         --------
         >>> import plotly.graph_objs as go
         >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
-        >>> fig.update(data=[{'y': [4, 5, 6]}]) #doctest: +ELLIPSIS
+        >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
         Figure(...)
         >>> fig.to_plotly_json() # doctest: +SKIP
             {'data': [{'type': 'scatter',
@@ -469,7 +469,7 @@ class BaseFigure(object):
         >>> fig = go.Figure(layout={'xaxis':
         ...                         {'color': 'green',
         ...                          'range': [0, 1]}})
-        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}}) #doctest: +ELLIPSIS
+        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}}) # doctest: +ELLIPSIS
         Figure(...)
         >>> fig.to_plotly_json() # doctest: +SKIP
             {'data': [],
@@ -1590,18 +1590,18 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Add two Scatter traces to a figure
 
         >>> fig = go.Figure()
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) #doctest: +ELLIPSIS
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
         Figure(...)
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) #doctest: +ELLIPSIS
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
         Figure(...)
 
 
         Add two Scatter traces to vertically stacked subplots
 
         >>> fig = subplots.make_subplots(rows=2)
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) #doctest: +ELLIPSIS
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
         Figure(...)
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) #doctest: +ELLIPSIS
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) # doctest: +ELLIPSIS
         Figure(...)
         """
         # Make sure we have both row and col or neither
@@ -1670,7 +1670,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         >>> fig = go.Figure()
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
-        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])]) #doctest: +ELLIPSIS
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])]) # doctest: +ELLIPSIS
         Figure(...)
 
         Add two Scatter traces to vertically stacked subplots
@@ -1678,7 +1678,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
-        ...                 rows=[1, 2], cols=[1, 1]) #doctest: +ELLIPSIS
+        ...                 rows=[1, 2], cols=[1, 1]) # doctest: +ELLIPSIS
         Figure(...)
         """
 
@@ -2166,7 +2166,7 @@ Invalid property path '{key_path_str}' for layout
         >>> key_path_strs = ['xaxis.rangeselector.font.color',
         ...                  'xaxis.rangeselector.bgcolor']
 
-        >>> BaseFigure._build_dispatch_plan(key_path_strs) #doctest: +SKIP
+        >>> BaseFigure._build_dispatch_plan(key_path_strs) # doctest: +SKIP
             {(): {'xaxis',
                   ('xaxis', 'rangeselector'),
                   ('xaxis', 'rangeselector', 'bgcolor'),

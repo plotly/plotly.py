@@ -62,7 +62,17 @@ def create_distplot(
     show_rug=True,
 ):
     """
-    BETA function that creates a distplot similar to seaborn.distplot
+    Function that creates a distplot similar to seaborn.distplot
+
+    **This function is deprecated**, use instead :mod:`plotly.express`
+    functions, for example
+
+    >>> import plotly.express as px
+    >>> tips = px.data.tips()
+    >>> fig = px.histogram(tips, x="total_bill", y="tip", color="sex", marginal="rug",
+    ...                    hover_data=tips.columns)
+    >>> fig.show()
+
 
     The distplot can be composed of all or any combination of the following
     3 components: (1) histogram, (2) curve: (a) kernel density estimation

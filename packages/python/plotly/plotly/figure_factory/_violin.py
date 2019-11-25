@@ -451,7 +451,8 @@ def create_violin(
     title="Violin and Rug Plot",
 ):
     """
-    Returns figure for a violin plot
+    **This function is deprecated**, use instead the plotly.graph_objects trace
+    :class:`plotly.graph_objects.Violin`.
 
     :param (list|array) data: accepts either a list of numerical values,
         a list of dictionaries all with identical keys and at least one

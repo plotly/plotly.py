@@ -198,7 +198,8 @@ def create_bullet(
     **layout_options
 ):
     """
-    Returns figure for bullet chart.
+    **This function is deprecated**, use instead the plotly.graph_objects trace
+    :class:`plotly.graph_objects.Indicator`.
 
     :param (pd.DataFrame | list | tuple) data: either a list/tuple of
         dictionaries or a pandas DataFrame.
