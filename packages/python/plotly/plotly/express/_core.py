@@ -291,6 +291,13 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
+                elif trace_spec.constructor in [go.Sunburst, go.Treemap]:
+                    colorable = "marker"
+                    if colorable not in result:
+                        result[colorable] = dict()
+                    result[colorable]["colors"] = g[v]
+                    result[colorable]["coloraxis"] = "coloraxis1"
+                    mapping_labels[v_label] = "%{color}"
                 else:
                     colorable = "marker"
                     if trace_spec.constructor in [go.Parcats, go.Parcoords]:

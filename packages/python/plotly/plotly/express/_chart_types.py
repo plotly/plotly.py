@@ -1121,6 +1121,10 @@ def pie(
     data_frame=None,
     names=None,
     values=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
     textinfo=None,
     hover_name=None,
     hover_data=None,
@@ -1160,6 +1164,10 @@ def sunburst(
     values=None,
     parents=None,
     ids=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1191,6 +1199,10 @@ def treemap(
     values=None,
     parents=None,
     ids=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1272,7 +1284,9 @@ def funnel_area(
     """
     In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
     """
-    return make_figure(args=locals(), constructor=go.Funnelarea,)
+    return make_figure(
+        args=locals(), constructor=go.Funnelarea, trace_patch=dict(showlegend=True)
+    )
 
 
 funnel_area.__doc__ = make_docstring(
