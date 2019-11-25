@@ -50,3 +50,31 @@ def test_pie_like_px():
     fig = px.funnel_area(values=y, names=x)
     trace = go.Funnelarea(values=y, labels=x)
     _compare_figures(trace, fig)
+
+
+def test_pie_like_colors():
+    labels = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
+    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
+    values = [10, 14, 12, 10, 2, 6, 6, 4, 4]
+    # Sunburst
+    fig = px.sunburst(
+        names=labels,
+        parents=parents,
+        values=values,
+        color=values,
+        color_continuous_scale="Viridis",
+        range_color=(5, 15),
+    )
+    assert fig.layout.coloraxis.cmin, fig.layout.coloraxis.cmax == (5, 15)
+    assert fig.layout.coloraxis.colorscale[0] == (0.0, "#440154")
+    # Treemap
+    fig = px.treemap(
+        names=labels,
+        parents=parents,
+        values=values,
+        color=values,
+        color_continuous_scale="Viridis",
+        range_color=(5, 15),
+    )
+    assert fig.layout.coloraxis.cmin, fig.layout.coloraxis.cmax == (5, 15)
+    assert fig.layout.coloraxis.colorscale[0] == (0.0, "#440154")
