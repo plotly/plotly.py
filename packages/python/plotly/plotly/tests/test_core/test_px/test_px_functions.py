@@ -95,3 +95,24 @@ def test_sunburst_treemap_colorscales():
             color_discrete_sequence=color_seq,
         )
         assert list(fig.layout[colorway]) == color_seq
+
+
+def test_pie_funnelarea_colorscale():
+    labels = ["A", "B", "C", "D"]
+    values = [3, 2, 1, 4]
+    for func, colorway in zip(
+        [px.sunburst, px.treemap], ["sunburstcolorway", "treemapcolorway"]
+    ):
+        # Discrete colorscale, no color arg passed
+        color_seq = px.colors.sequential.Reds
+        fig = func(names=labels, values=values, color_discrete_sequence=color_seq,)
+        assert list(fig.layout[colorway]) == color_seq
+        # Discrete colorscale, color arg passed
+        color_seq = px.colors.sequential.Reds
+        fig = func(
+            names=labels,
+            values=values,
+            color=labels,
+            color_discrete_sequence=color_seq,
+        )
+        assert np.all([col in color_seq for col in fig.data[0].marker.colors])

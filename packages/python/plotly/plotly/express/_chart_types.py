@@ -1141,6 +1141,8 @@ def pie(
     """
     if color_discrete_sequence is not None:
         layout_patch = {"piecolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
     return make_figure(
         args=locals(),
         constructor=go.Pie,
@@ -1191,6 +1193,8 @@ def sunburst(
     """
     if color_discrete_sequence is not None:
         layout_patch = {"sunburstcolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
@@ -1230,6 +1234,8 @@ def treemap(
     """
     if color_discrete_sequence is not None:
         layout_patch = {"treemapcolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
     return make_figure(
         args=locals(),
         constructor=go.Treemap,
@@ -1283,8 +1289,11 @@ funnel.__doc__ = make_docstring(
 
 def funnel_area(
     data_frame=None,
-    values=None,
     names=None,
+    values=None,
+    color=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
     textinfo=None,
     hover_name=None,
     hover_data=None,
@@ -1294,12 +1303,20 @@ def funnel_area(
     template=None,
     width=None,
     height=None,
+    opacity=None,
 ):
     """
     In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
     """
+    if color_discrete_sequence is not None:
+        layout_patch = {"funnelareacolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
     return make_figure(
-        args=locals(), constructor=go.Funnelarea, trace_patch=dict(showlegend=True)
+        args=locals(),
+        constructor=go.Funnelarea,
+        trace_patch=dict(showlegend=True),
+        layout_patch=layout_patch,
     )
 
 
