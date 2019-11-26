@@ -1139,8 +1139,13 @@ def pie(
     """
     In a pie plot, each row of `data_frame` is represented as a sector of a pie.
     """
+    if color_discrete_sequence is not None:
+        layout_patch = {"piecolorway": color_discrete_sequence}
     return make_figure(
-        args=locals(), constructor=go.Pie, trace_patch=dict(showlegend=True, hole=hole)
+        args=locals(),
+        constructor=go.Pie,
+        trace_patch=dict(showlegend=True, hole=hole),
+        layout_patch=layout_patch,
     )
 
 
@@ -1184,10 +1189,13 @@ def sunburst(
     A sunburst plot represents hierarchial data as sectors laid out over
     several levels of concentric rings.
     """
+    if color_discrete_sequence is not None:
+        layout_patch = {"sunburstcolorway": color_discrete_sequence}
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
         trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+        layout_patch=layout_patch,
     )
 
 
@@ -1220,10 +1228,13 @@ def treemap(
     """
     A treemap plot represents hierarchial data as nested rectangular sectors. 
     """
+    if color_discrete_sequence is not None:
+        layout_patch = {"treemapcolorway": color_discrete_sequence}
     return make_figure(
         args=locals(),
         constructor=go.Treemap,
         trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+        layout_patch=layout_patch,
     )
 
 
