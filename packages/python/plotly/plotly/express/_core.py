@@ -308,25 +308,16 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     colorable = "marker"
                     if colorable not in result:
                         result[colorable] = dict()
-                    print("ok")
+                    # Other if/else block
                     if args.get("color_is_continuous"):
-                        print(
-                            "continuous scale", args["color_continuous_scale"],
-                        )
                         result[colorable]["colors"] = g[v]
-                        result[colorable]["colorscale"] = args["color_continuous_scale"]
-                        # result[colorable]["coloraxis"] = "coloraxis1"
+                        result[colorable]["coloraxis"] = "coloraxis1"
                         mapping_labels[v_label] = "%{color}"
                     else:
-                        print(
-                            "discrete",
-                            args["color_discrete_sequence"],
-                            args.get("color_is_continuous"),
-                        )
                         result[colorable]["colors"] = make_color_mapping(
                             g[v], args["color_discrete_sequence"]
                         )
-                elif trace_spec.constructor == go.Pie:
+                elif trace_spec.constructor in [go.Pie, go.Funnelarea]:
                     colorable = "marker"
                     if colorable not in result:
                         result[colorable] = dict()
@@ -779,7 +770,6 @@ def apply_default_cascade(args):
     # if the template doesn't have one, we set some final fallback defaults
     if "color_continuous_scale" in args:
         if args["color_continuous_scale"] is not None:
-            print("True in cascade")
             args["color_is_continuous"] = True
         if (
             args["color_continuous_scale"] is None
@@ -793,7 +783,6 @@ def apply_default_cascade(args):
 
     if "color_discrete_sequence" in args:
         if args["color_discrete_sequence"] is not None:
-            print("False in cascade")
             args["color_is_continuous"] = False
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
@@ -1076,16 +1065,15 @@ def infer_config(args, constructor, trace_patch):
                 ):
                     attrs.append("color")
                     if not "color_is_continuous" in args:
-                        print("True in infer 2")
                         args["color_is_continuous"] = True
                 elif constructor in [go.Sunburst, go.Treemap]:
                     attrs.append("color")
                 else:
-                    if constructor not in [go.Pie]:
+                    if constructor not in [go.Pie, go.Funnelarea]:
                         grouped_attrs.append("marker.color")
         elif "line_group" in args or constructor == go.Histogram2dContour:
             grouped_attrs.append("line.color")
-        elif constructor not in [go.Pie, go.Sunburst, go.Treemap]:
+        elif constructor not in [go.Pie, go.Funnelarea]:
             grouped_attrs.append("marker.color")
         else:
             attrs.append("color")
@@ -1093,7 +1081,11 @@ def infer_config(args, constructor, trace_patch):
         show_colorbar = bool(
             "color" in attrs
             and args["color"]
-            and constructor not in [go.Pie, go.Sunburst, go.Treemap]
+            and constructor not in [go.Pie, go.Funnelarea]
+            and (
+                constructor not in [go.Treemap, go.Sunburst]
+                or args.get("color_is_continuous")
+            )
         )
     else:
         show_colorbar = False
