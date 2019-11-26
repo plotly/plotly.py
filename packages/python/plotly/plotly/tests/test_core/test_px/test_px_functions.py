@@ -1,6 +1,7 @@
 import plotly.express as px
 import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
+import numpy as np
 
 
 def _compare_figures(go_trace, px_fig):
@@ -52,29 +53,45 @@ def test_pie_like_px():
     _compare_figures(trace, fig)
 
 
-def test_pie_like_colors():
+def test_sunburst_treemap_colorscales():
     labels = ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"]
     parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
     values = [10, 14, 12, 10, 2, 6, 6, 4, 4]
-    # Sunburst
-    fig = px.sunburst(
-        names=labels,
-        parents=parents,
-        values=values,
-        color=values,
-        color_continuous_scale="Viridis",
-        range_color=(5, 15),
-    )
-    assert fig.layout.coloraxis.cmin, fig.layout.coloraxis.cmax == (5, 15)
-    assert fig.layout.coloraxis.colorscale[0] == (0.0, "#440154")
-    # Treemap
-    fig = px.treemap(
-        names=labels,
-        parents=parents,
-        values=values,
-        color=values,
-        color_continuous_scale="Viridis",
-        range_color=(5, 15),
-    )
-    assert fig.layout.coloraxis.cmin, fig.layout.coloraxis.cmax == (5, 15)
-    assert fig.layout.coloraxis.colorscale[0] == (0.0, "#440154")
+    for func, colorway in zip(
+        [px.sunburst, px.treemap], ["sunburstcolorway", "treemapcolorway"]
+    ):
+        # Continuous colorscale
+        fig = func(
+            names=labels,
+            parents=parents,
+            values=values,
+            color=values,
+            color_continuous_scale="Viridis",
+            range_color=(5, 15),
+        )
+        assert fig.layout.coloraxis.cmin, fig.layout.coloraxis.cmax == (5, 15)
+        # Discrete colorscale, color arg passed
+        color_seq = px.colors.sequential.Reds
+        fig = func(
+            names=labels,
+            parents=parents,
+            values=values,
+            color=labels,
+            color_discrete_sequence=color_seq,
+        )
+        assert np.all([col in color_seq for col in fig.data[0].marker.colors])
+        # Numerical color arg passed, fall back to continuous
+        fig = func(names=labels, parents=parents, values=values, color=values,)
+        assert [
+            el[0] == px.colors.sequential.Viridis
+            for i, el in enumerate(fig.layout.coloraxis.colorscale)
+        ]
+        # Discrete colorscale, no color arg passed
+        color_seq = px.colors.sequential.Reds
+        fig = func(
+            names=labels,
+            parents=parents,
+            values=values,
+            color_discrete_sequence=color_seq,
+        )
+        assert list(fig.layout[colorway]) == color_seq
