@@ -59,6 +59,19 @@ def get_trendline_results(fig):
     return fig._px_trendlines
 
 
+def make_color_mapping(cat_list, discrete_colorscale):
+    mapping = {}
+    colors = []
+    taken = 0
+    length = len(discrete_colorscale)
+    for cat in cat_list:
+        if mapping.get(cat) is None:
+            mapping[cat] = discrete_colorscale[taken % length]
+            taken += 1
+        colors.append(mapping[cat])
+    return colors
+
+
 Mapping = namedtuple(
     "Mapping",
     [
@@ -295,9 +308,31 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     colorable = "marker"
                     if colorable not in result:
                         result[colorable] = dict()
-                    result[colorable]["colors"] = g[v]
-                    result[colorable]["coloraxis"] = "coloraxis1"
-                    mapping_labels[v_label] = "%{color}"
+                    print("ok")
+                    if args.get("color_is_continuous"):
+                        print(
+                            "continuous scale", args["color_continuous_scale"],
+                        )
+                        result[colorable]["colors"] = g[v]
+                        result[colorable]["colorscale"] = args["color_continuous_scale"]
+                        # result[colorable]["coloraxis"] = "coloraxis1"
+                        mapping_labels[v_label] = "%{color}"
+                    else:
+                        print(
+                            "discrete",
+                            args["color_discrete_sequence"],
+                            args.get("color_is_continuous"),
+                        )
+                        result[colorable]["colors"] = make_color_mapping(
+                            g[v], args["color_discrete_sequence"]
+                        )
+                elif trace_spec.constructor == go.Pie:
+                    colorable = "marker"
+                    if colorable not in result:
+                        result[colorable] = dict()
+                    result[colorable]["colors"] = make_color_mapping(
+                        g[v], args["color_discrete_sequence"]
+                    )
                 else:
                     colorable = "marker"
                     if trace_spec.constructor in [go.Parcats, go.Parcoords]:
@@ -708,6 +743,16 @@ def one_group(x):
 
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
+    # If a discrete or a continuous colorscale is given then we do not set the other type
+    # This is used for Sunburst and Treemap which accept the two
+    # if ("color_discrete_sequence" in args and "color_continuous_scale" in args):
+    #    if args["color_discrete_sequence"] is None and args["color_continuous_scale"] is None:
+    #        for param in ["color_discrete_sequence", "color_continuous_scale"]:
+    #            args[param] = getattr(defaults, param)
+    # else:
+    #        if param in args and args[param] is None:
+    #            args[param] = getattr(defaults, param)
+
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
         + ["symbol_sequence", "line_dash_sequence", "template"]
@@ -733,6 +778,9 @@ def apply_default_cascade(args):
     # if colors not set explicitly or in px.defaults, defer to a template
     # if the template doesn't have one, we set some final fallback defaults
     if "color_continuous_scale" in args:
+        if args["color_continuous_scale"] is not None:
+            print("True in cascade")
+            args["color_is_continuous"] = True
         if (
             args["color_continuous_scale"] is None
             and args["template"].layout.colorscale.sequential
@@ -744,6 +792,9 @@ def apply_default_cascade(args):
             args["color_continuous_scale"] = sequential.Viridis
 
     if "color_discrete_sequence" in args:
+        if args["color_discrete_sequence"] is not None:
+            print("False in cascade")
+            args["color_is_continuous"] = False
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
         if args["color_discrete_sequence"] is None:
@@ -1024,14 +1075,26 @@ def infer_config(args, constructor, trace_patch):
                     and args["data_frame"][args["color"]].dtype.kind in "bifc"
                 ):
                     attrs.append("color")
+                    if not "color_is_continuous" in args:
+                        print("True in infer 2")
+                        args["color_is_continuous"] = True
+                elif constructor in [go.Sunburst, go.Treemap]:
+                    attrs.append("color")
                 else:
-                    grouped_attrs.append("marker.color")
+                    if constructor not in [go.Pie]:
+                        grouped_attrs.append("marker.color")
         elif "line_group" in args or constructor == go.Histogram2dContour:
             grouped_attrs.append("line.color")
-        else:
+        elif constructor not in [go.Pie, go.Sunburst, go.Treemap]:
             grouped_attrs.append("marker.color")
+        else:
+            attrs.append("color")
 
-        show_colorbar = bool("color" in attrs and args["color"])
+        show_colorbar = bool(
+            "color" in attrs
+            and args["color"]
+            and constructor not in [go.Pie, go.Sunburst, go.Treemap]
+        )
     else:
         show_colorbar = False
 
