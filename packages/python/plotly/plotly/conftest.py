@@ -19,6 +19,6 @@ def pytest_ignore_collect(path):
         "utils.py",
     ]
     if os.path.basename(
-        path
+        str(path)
     ) in ignored_paths or "plotly/plotly/plotly/__init__.py" in str(path):
         return True
