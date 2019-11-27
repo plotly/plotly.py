@@ -734,15 +734,6 @@ def one_group(x):
 
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
-    # If a discrete or a continuous colorscale is given then we do not set the other type
-    # This is used for Sunburst and Treemap which accept the two
-    # if ("color_discrete_sequence" in args and "color_continuous_scale" in args):
-    #    if args["color_discrete_sequence"] is None and args["color_continuous_scale"] is None:
-    #        for param in ["color_discrete_sequence", "color_continuous_scale"]:
-    #            args[param] = getattr(defaults, param)
-    # else:
-    #        if param in args and args[param] is None:
-    #            args[param] = getattr(defaults, param)
 
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
@@ -769,8 +760,6 @@ def apply_default_cascade(args):
     # if colors not set explicitly or in px.defaults, defer to a template
     # if the template doesn't have one, we set some final fallback defaults
     if "color_continuous_scale" in args:
-        if args["color_continuous_scale"] is not None:
-            args["color_is_continuous"] = True
         if (
             args["color_continuous_scale"] is None
             and args["template"].layout.colorscale.sequential
@@ -782,8 +771,6 @@ def apply_default_cascade(args):
             args["color_continuous_scale"] = sequential.Viridis
 
     if "color_discrete_sequence" in args:
-        if args["color_discrete_sequence"] is not None:
-            args["color_is_continuous"] = False
         if args["color_discrete_sequence"] is None and args["template"].layout.colorway:
             args["color_discrete_sequence"] = args["template"].layout.colorway
         if args["color_discrete_sequence"] is None:
@@ -1064,10 +1051,10 @@ def infer_config(args, constructor, trace_patch):
                     and args["data_frame"][args["color"]].dtype.kind in "bifc"
                 ):
                     attrs.append("color")
-                    if not "color_is_continuous" in args:
-                        args["color_is_continuous"] = True
+                    args["color_is_continuous"] = True
                 elif constructor in [go.Sunburst, go.Treemap]:
                     attrs.append("color")
+                    args["color_is_continuous"] = False
                 else:
                     if constructor not in [go.Pie, go.Funnelarea]:
                         grouped_attrs.append("marker.color")
