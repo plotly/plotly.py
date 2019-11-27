@@ -86,6 +86,20 @@ def test_sunburst_treemap_colorscales():
             el[0] == px.colors.sequential.Viridis
             for i, el in enumerate(fig.layout.coloraxis.colorscale)
         ]
+        # Numerical color arg passed, continuous colorscale
+        # even if color_discrete_sequence if passed
+        fig = func(
+            names=labels,
+            parents=parents,
+            values=values,
+            color=values,
+            color_discrete_sequence=color_seq,
+        )
+        assert [
+            el[0] == px.colors.sequential.Viridis
+            for i, el in enumerate(fig.layout.coloraxis.colorscale)
+        ]
+
         # Discrete colorscale, no color arg passed
         color_seq = px.colors.sequential.Reds
         fig = func(
@@ -116,3 +130,14 @@ def test_pie_funnelarea_colorscale():
             color_discrete_sequence=color_seq,
         )
         assert np.all([col in color_seq for col in fig.data[0].marker.colors])
+
+
+def test_funnel():
+    fig = px.funnel(x=[5, 4, 3], y=["A", "B", "C"])
+    assert fig.data[0].marker.color == "#636efa"
+    fig = px.funnel(
+        x=[5, 4, 3, 3, 2, 1],
+        y=["A", "B", "C", "A", "B", "C"],
+        color=["0", "0", "0", "1", "1", "1"],
+    )
+    assert len(fig.data) == 2
