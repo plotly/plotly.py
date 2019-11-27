@@ -133,8 +133,6 @@ def test_pie_funnelarea_colorscale():
 
 
 def test_funnel():
-    fig = px.funnel(x=[5, 4, 3], y=["A", "B", "C"])
-    assert fig.data[0].marker.color == "#636efa"
     fig = px.funnel(
         x=[5, 4, 3, 3, 2, 1],
         y=["A", "B", "C", "A", "B", "C"],
