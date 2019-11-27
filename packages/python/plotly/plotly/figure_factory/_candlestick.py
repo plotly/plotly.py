@@ -99,7 +99,7 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    **This function is deprecated**, use instead the plotly.graph_objects trace 
+    **deprecated**, use instead the plotly.graph_objects trace 
     :class:`plotly.graph_objects.Candlestick`
 
     :param (list) open: opening values

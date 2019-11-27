@@ -36,7 +36,7 @@ def create_table(
     **kwargs
 ):
     """
-    **This function is deprecated**, use instead the plotly.graph_objects trace 
+    **deprecated**, use instead the plotly.graph_objects trace 
     :class:`plotly.graph_objects.Table`
 
     :param (pandas.Dataframe | list[list]) text: data for table.

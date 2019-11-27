@@ -820,6 +820,7 @@ def create_gantt(
 ):
     """
     Returns figure for a gantt chart
+
     :param (array|list) df: input data for gantt chart. Must be either a
         a dataframe or a list. If dataframe, the columns must include
         'Task', 'Start' and 'Finish'. Other columns can be included and

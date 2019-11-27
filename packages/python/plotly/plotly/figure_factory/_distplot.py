@@ -62,9 +62,8 @@ def create_distplot(
     show_rug=True,
 ):
     """
-    Function that creates a distplot similar to seaborn.distplot
-
-    **This function is deprecated**, use instead :mod:`plotly.express`
+    Function that creates a distplot similar to seaborn.distplot;
+    **this function is deprecated**, use instead :mod:`plotly.express`
     functions, for example
 
     >>> import plotly.express as px

@@ -198,7 +198,7 @@ def create_bullet(
     **layout_options
 ):
     """
-    **This function is deprecated**, use instead the plotly.graph_objects trace
+    **deprecated**, use instead the plotly.graph_objects trace
     :class:`plotly.graph_objects.Indicator`.
 
     :param (pd.DataFrame | list | tuple) data: either a list/tuple of

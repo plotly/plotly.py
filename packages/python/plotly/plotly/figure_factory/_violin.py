@@ -451,7 +451,7 @@ def create_violin(
     title="Violin and Rug Plot",
 ):
     """
-    **This function is deprecated**, use instead the plotly.graph_objects trace
+    **deprecated**, use instead the plotly.graph_objects trace
     :class:`plotly.graph_objects.Violin`.
 
     :param (list|array) data: accepts either a list of numerical values,

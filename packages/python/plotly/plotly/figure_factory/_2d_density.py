@@ -32,7 +32,7 @@ def create_2d_density(
     width=600,
 ):
     """
-    **This function is deprecated**, use instead
+    **deprecated**, use instead
     :func:`plotly.express.density_heatmap`.
 
     :param (list|array) x: x-axis data for plot generation

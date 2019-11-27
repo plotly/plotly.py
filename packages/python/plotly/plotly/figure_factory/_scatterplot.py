@@ -854,7 +854,8 @@ def create_scatterplotmatrix(
     **kwargs
 ):
     """
-    Returns data for a scatterplot matrix. **This function is deprecated**,
+    Returns data for a scatterplot matrix;
+    **deprecated**,
     use instead the plotly.graph_objects trace
     :class:`plotly.graph_objects.Splom`.
 

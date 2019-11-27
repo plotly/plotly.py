@@ -673,7 +673,7 @@ def create_facet_grid(
     **kwargs
 ):
     """
-    Returns figure for facet grid. This function is deprecated, since
+    Returns figure for facet grid; **this function is deprecated**, since
     plotly.express functions should be used instead, for example
 
     >>> import plotly.express as px
