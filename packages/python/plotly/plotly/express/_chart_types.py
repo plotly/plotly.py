@@ -1124,7 +1124,6 @@ def pie(
     color=None,
     color_discrete_sequence=None,
     color_discrete_map={},
-    textinfo=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1146,7 +1145,7 @@ def pie(
     return make_figure(
         args=locals(),
         constructor=go.Pie,
-        trace_patch=dict(showlegend=True, hole=hole),
+        trace_patch=dict(showlegend=(names is not None), hole=hole),
         layout_patch=layout_patch,
     )
 
@@ -1154,7 +1153,6 @@ def pie(
 pie.__doc__ = make_docstring(
     pie,
     override_dict=dict(
-        textinfo=["str", "Determines which trace information appear on the graph.",],
         hole=[
             "float",
             "Sets the fraction of the radius to cut out of the pie."
@@ -1230,7 +1228,7 @@ def treemap(
     maxdepth=None,
 ):
     """
-    A treemap plot represents hierarchial data as nested rectangular sectors. 
+    A treemap plot represents hierarchial data as nested rectangular sectors.
     """
     if color_discrete_sequence is not None:
         layout_patch = {"treemapcolorway": color_discrete_sequence}
@@ -1259,22 +1257,14 @@ def funnel(
     hover_data=None,
     custom_data=None,
     text=None,
-    error_x=None,
-    error_x_minus=None,
-    error_y=None,
-    error_y_minus=None,
     animation_frame=None,
     animation_group=None,
     category_orders={},
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    color_continuous_scale=None,
-    range_color=None,
-    color_continuous_midpoint=None,
     opacity=None,
     orientation="h",
-    barmode="relative",
     log_x=False,
     log_y=False,
     range_x=None,
@@ -1294,15 +1284,7 @@ def funnel(
     )
 
 
-funnel.__doc__ = make_docstring(
-    funnel,
-    override_dict=dict(
-        textinfo=[
-            "str",
-            "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace).",
-        ]
-    ),
-)
+funnel.__doc__ = make_docstring(funnel)
 
 
 def funnel_area(
@@ -1312,7 +1294,6 @@ def funnel_area(
     color=None,
     color_discrete_sequence=None,
     color_discrete_map={},
-    textinfo=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1333,17 +1314,10 @@ def funnel_area(
     return make_figure(
         args=locals(),
         constructor=go.Funnelarea,
-        trace_patch=dict(showlegend=True),
+        trace_patch=dict(showlegend=(names is not None)),
         layout_patch=layout_patch,
     )
 
 
-funnel_area.__doc__ = make_docstring(
-    funnel_area,
-    override_dict=dict(
-        textinfo=[
-            "str",
-            "Determines which trace information appear on the graph. In the case of having multiple funnels, percentages & totals are computed separately (per trace).",
-        ]
-    ),
-)
+funnel_area.__doc__ = make_docstring(funnel_area)
+
