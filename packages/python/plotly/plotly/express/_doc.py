@@ -66,6 +66,21 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to position marks along the angular axis in polar coordinates.",
     ],
+    values=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to set values associated to sectors.",
+    ],
+    parents=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used as parents in sunburst and treemap charts.",
+    ],
+    ids=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to set ids of sectors",
+    ],
     lat=[
         colref_type,
         colref_desc,
@@ -167,6 +182,11 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like appear in the figure as text labels.",
+    ],
+    names=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used as labels for sectors.",
     ],
     locationmode=[
         "str",
@@ -442,21 +462,41 @@ docs = dict(
     nbins=["int", "Positive integer.", "Sets the number of bins."],
     nbinsx=["int", "Positive integer.", "Sets the number of bins along the x axis."],
     nbinsy=["int", "Positive integer.", "Sets the number of bins along the y axis."],
+    branchvalues=[
+        "str",
+        "'total' or 'remainder'",
+        "Determines how the items in `values` are summed. When"
+        "set to 'total', items in `values` are taken to be value"
+        "of all its descendants. When set to 'remainder', items"
+        "in `values` corresponding to the root and the branches"
+        ":sectors are taken to be the extra part not part of the"
+        "sum of the values at their leaves.",
+    ],
+    maxdepth=[
+        "int",
+        "Positive integer",
+        "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
+        "levels in the hierarchy.",
+    ],
 )
 
 
-def make_docstring(fn):
+def make_docstring(fn, override_dict={}):
     tw = TextWrapper(width=77, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
-        param_desc_list = docs[param][1:]
+        if override_dict.get(param):
+            param_doc = override_dict[param]
+        else:
+            param_doc = docs[param]
+        param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))
             if param in docs
             else "(documentation missing from map)"
         )
 
-        param_type = docs[param][0]
+        param_type = param_doc[0]
         result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"
     result += "    A `Figure` object."

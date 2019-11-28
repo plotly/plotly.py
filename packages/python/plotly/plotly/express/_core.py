@@ -291,6 +291,28 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
+                elif trace_spec.constructor in [
+                    go.Sunburst,
+                    go.Treemap,
+                    go.Pie,
+                    go.Funnelarea,
+                ]:
+                    if "marker" not in result:
+                        result["marker"] = dict()
+
+                    if args.get("color_is_continuous"):
+                        result["marker"]["colors"] = g[v]
+                        result["marker"]["coloraxis"] = "coloraxis1"
+                        mapping_labels[v_label] = "%{color}"
+                    else:
+                        result["marker"]["colors"] = []
+                        mapping = {}
+                        for cat in g[v]:
+                            if mapping.get(cat) is None:
+                                mapping[cat] = args["color_discrete_sequence"][
+                                    len(mapping) % len(args["color_discrete_sequence"])
+                                ]
+                            result["marker"]["colors"].append(mapping[cat])
                 else:
                     colorable = "marker"
                     if trace_spec.constructor in [go.Parcats, go.Parcoords]:
@@ -305,11 +327,38 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
             elif k == "locations":
                 result[k] = g[v]
                 mapping_labels[v_label] = "%{location}"
+            elif k == "values":
+                result[k] = g[v]
+                _label = "value" if v_label == "values" else v_label
+                mapping_labels[_label] = "%{value}"
+            elif k == "parents":
+                result[k] = g[v]
+                _label = "parent" if v_label == "parents" else v_label
+                mapping_labels[_label] = "%{parent}"
+            elif k == "ids":
+                result[k] = g[v]
+                _label = "id" if v_label == "ids" else v_label
+                mapping_labels[_label] = "%{id}"
+            elif k == "names":
+                if trace_spec.constructor in [
+                    go.Sunburst,
+                    go.Treemap,
+                    go.Pie,
+                    go.Funnelarea,
+                ]:
+                    result["labels"] = g[v]
+                    _label = "label" if v_label == "names" else v_label
+                    mapping_labels[_label] = "%{label}"
+                else:
+                    result[k] = g[v]
             else:
                 if v:
                     result[k] = g[v]
                 mapping_labels[v_label] = "%%{%s}" % k
-    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
+    if trace_spec.constructor not in [
+        go.Parcoords,
+        go.Parcats,
+    ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)
     return result, fit_results
@@ -674,6 +723,7 @@ def one_group(x):
 
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
+
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
         + ["symbol_sequence", "line_dash_sequence", "template"]
@@ -956,6 +1006,7 @@ def infer_config(args, constructor, trace_patch):
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
         + ["custom_data", "hover_name", "hover_data", "text"]
+        + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
@@ -989,14 +1040,34 @@ def infer_config(args, constructor, trace_patch):
                     and args["data_frame"][args["color"]].dtype.kind in "bifc"
                 ):
                     attrs.append("color")
+                    args["color_is_continuous"] = True
+                elif constructor in [go.Sunburst, go.Treemap]:
+                    attrs.append("color")
+                    args["color_is_continuous"] = False
                 else:
                     grouped_attrs.append("marker.color")
         elif "line_group" in args or constructor == go.Histogram2dContour:
             grouped_attrs.append("line.color")
+        elif constructor in [go.Pie, go.Funnelarea]:
+            attrs.append("color")
+            if args["color"]:
+                if args["hover_data"] is None:
+                    args["hover_data"] = []
+                args["hover_data"].append(args["color"])
         else:
             grouped_attrs.append("marker.color")
 
-        show_colorbar = bool("color" in attrs and args["color"])
+        show_colorbar = bool(
+            "color" in attrs
+            and args["color"]
+            and constructor not in [go.Pie, go.Funnelarea]
+            and (
+                constructor not in [go.Treemap, go.Sunburst]
+                or args.get("color_is_continuous")
+            )
+        )
+    else:
+        show_colorbar = False
 
     # Compute line_dash grouping attribute
     if "line_dash" in args:
@@ -1148,6 +1219,8 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcoords,
                 go.Choropleth,
                 go.Histogram2d,
+                go.Sunburst,
+                go.Treemap,
             ]:
                 trace.update(
                     legendgroup=trace_name,
