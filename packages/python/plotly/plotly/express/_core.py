@@ -59,19 +59,6 @@ def get_trendline_results(fig):
     return fig._px_trendlines
 
 
-def make_color_mapping(cat_list, discrete_colorscale):
-    mapping = {}
-    colors = []
-    taken = 0
-    length = len(discrete_colorscale)
-    for cat in cat_list:
-        if mapping.get(cat) is None:
-            mapping[cat] = discrete_colorscale[taken % length]
-            taken += 1
-        colors.append(mapping[cat])
-    return colors
-
-
 Mapping = namedtuple(
     "Mapping",
     [
@@ -304,26 +291,28 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
-                elif trace_spec.constructor in [go.Sunburst, go.Treemap]:
-                    colorable = "marker"
-                    if colorable not in result:
-                        result[colorable] = dict()
-                    # Other if/else block
+                elif trace_spec.constructor in [
+                    go.Sunburst,
+                    go.Treemap,
+                    go.Pie,
+                    go.Funnelarea,
+                ]:
+                    if "marker" not in result:
+                        result["marker"] = dict()
+
                     if args.get("color_is_continuous"):
-                        result[colorable]["colors"] = g[v]
-                        result[colorable]["coloraxis"] = "coloraxis1"
+                        result["marker"]["colors"] = g[v]
+                        result["marker"]["coloraxis"] = "coloraxis1"
                         mapping_labels[v_label] = "%{color}"
                     else:
-                        result[colorable]["colors"] = make_color_mapping(
-                            g[v], args["color_discrete_sequence"]
-                        )
-                elif trace_spec.constructor in [go.Pie, go.Funnelarea]:
-                    colorable = "marker"
-                    if colorable not in result:
-                        result[colorable] = dict()
-                    result[colorable]["colors"] = make_color_mapping(
-                        g[v], args["color_discrete_sequence"]
-                    )
+                        result["marker"]["colors"] = []
+                        mapping = {}
+                        for cat in g[v]:
+                            if mapping.get(cat) is None:
+                                mapping[cat] = args["color_discrete_sequence"][
+                                    len(mapping) % len(args["color_discrete_sequence"])
+                                ]
+                            result["marker"]["colors"].append(mapping[cat])
                 else:
                     colorable = "marker"
                     if trace_spec.constructor in [go.Parcats, go.Parcoords]:
@@ -1064,6 +1053,10 @@ def infer_config(args, constructor, trace_patch):
             grouped_attrs.append("marker.color")
         else:
             attrs.append("color")
+            if constructor in [go.Pie, go.Funnelarea]:
+                if args["hover_data"] is None:
+                    args["hover_data"] = []
+                args["hover_data"].append(args["color"])
 
         show_colorbar = bool(
             "color" in attrs
