@@ -325,7 +325,7 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests  packages/python/plotly/plotly 
+            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly 
             pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
             pytest packages/python/plotly/plotly/tests/test_orca
 
