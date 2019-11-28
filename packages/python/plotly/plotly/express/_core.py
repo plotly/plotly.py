@@ -1045,18 +1045,17 @@ def infer_config(args, constructor, trace_patch):
                     attrs.append("color")
                     args["color_is_continuous"] = False
                 else:
-                    if constructor not in [go.Pie, go.Funnelarea]:
-                        grouped_attrs.append("marker.color")
+                    grouped_attrs.append("marker.color")
         elif "line_group" in args or constructor == go.Histogram2dContour:
             grouped_attrs.append("line.color")
-        elif constructor not in [go.Pie, go.Funnelarea]:
-            grouped_attrs.append("marker.color")
-        else:
+        elif constructor in [go.Pie, go.Funnelarea]:
             attrs.append("color")
-            if constructor in [go.Pie, go.Funnelarea]:
+            if args["color"]:
                 if args["hover_data"] is None:
                     args["hover_data"] = []
                 args["hover_data"].append(args["color"])
+        else:
+            grouped_attrs.append("marker.color")
 
         show_colorbar = bool(
             "color" in attrs

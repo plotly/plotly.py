@@ -1320,4 +1320,3 @@ def funnel_area(
 
 
 funnel_area.__doc__ = make_docstring(funnel_area)
-
