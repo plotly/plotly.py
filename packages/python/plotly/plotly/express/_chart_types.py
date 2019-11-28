@@ -1115,3 +1115,208 @@ def parallel_categories(
 
 
 parallel_categories.__doc__ = make_docstring(parallel_categories)
+
+
+def pie(
+    data_frame=None,
+    names=None,
+    values=None,
+    color=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    opacity=None,
+    hole=None,
+):
+    """
+    In a pie plot, each row of `data_frame` is represented as a sector of a pie.
+    """
+    if color_discrete_sequence is not None:
+        layout_patch = {"piecolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
+    return make_figure(
+        args=locals(),
+        constructor=go.Pie,
+        trace_patch=dict(showlegend=(names is not None), hole=hole),
+        layout_patch=layout_patch,
+    )
+
+
+pie.__doc__ = make_docstring(
+    pie,
+    override_dict=dict(
+        hole=[
+            "float",
+            "Sets the fraction of the radius to cut out of the pie."
+            "Use this to make a donut chart.",
+        ],
+    ),
+)
+
+
+def sunburst(
+    data_frame=None,
+    names=None,
+    values=None,
+    parents=None,
+    ids=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    branchvalues=None,
+    maxdepth=None,
+):
+    """
+    A sunburst plot represents hierarchial data as sectors laid out over
+    several levels of concentric rings.
+    """
+    if color_discrete_sequence is not None:
+        layout_patch = {"sunburstcolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
+    return make_figure(
+        args=locals(),
+        constructor=go.Sunburst,
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+        layout_patch=layout_patch,
+    )
+
+
+sunburst.__doc__ = make_docstring(sunburst)
+
+
+def treemap(
+    data_frame=None,
+    names=None,
+    values=None,
+    parents=None,
+    ids=None,
+    color=None,
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    branchvalues=None,
+    maxdepth=None,
+):
+    """
+    A treemap plot represents hierarchial data as nested rectangular sectors.
+    """
+    if color_discrete_sequence is not None:
+        layout_patch = {"treemapcolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
+    return make_figure(
+        args=locals(),
+        constructor=go.Treemap,
+        trace_patch=dict(branchvalues=branchvalues, maxdepth=maxdepth),
+        layout_patch=layout_patch,
+    )
+
+
+treemap.__doc__ = make_docstring(treemap)
+
+
+def funnel(
+    data_frame=None,
+    x=None,
+    y=None,
+    color=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    text=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders={},
+    labels={},
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    opacity=None,
+    orientation="h",
+    log_x=False,
+    log_y=False,
+    range_x=None,
+    range_y=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a funnel plot, each row of `data_frame` is represented as a rectangular sector of a funnel.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Funnel,
+        trace_patch=dict(opacity=opacity, orientation=orientation),
+    )
+
+
+funnel.__doc__ = make_docstring(funnel)
+
+
+def funnel_area(
+    data_frame=None,
+    names=None,
+    values=None,
+    color=None,
+    color_discrete_sequence=None,
+    color_discrete_map={},
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    labels={},
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+    opacity=None,
+):
+    """
+    In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
+    """
+    if color_discrete_sequence is not None:
+        layout_patch = {"funnelareacolorway": color_discrete_sequence}
+    else:
+        layout_patch = {}
+    return make_figure(
+        args=locals(),
+        constructor=go.Funnelarea,
+        trace_patch=dict(showlegend=(names is not None)),
+        layout_patch=layout_patch,
+    )
+
+
+funnel_area.__doc__ = make_docstring(funnel_area)
