@@ -17,8 +17,9 @@ def pytest_ignore_collect(path):
         "presentation_objs.py",
         "session.py",
     ]
-    if (os.path.basename(
-        str(path)
-    ) in ignored_paths or "plotly/plotly/plotly/__init__.py" in str(path)
-    or "plotly/api/utils.py" in str(path)):
+    if (
+        os.path.basename(str(path)) in ignored_paths
+        or "plotly/plotly/plotly/__init__.py" in str(path)
+        or "plotly/api/utils.py" in str(path)
+    ):
         return True
