@@ -456,6 +456,10 @@ docs = dict(
     ],
     box=["boolean (default `False`)", "If `True`, boxes are drawn inside the violins."],
     notched=["boolean (default `False`)", "If `True`, boxes are drawn with notches."],
+    geojson=[
+        "GeoJSON-formatted dict",
+        "Must contain a Polygon feature collection, with IDs, which are references from `locations`.",
+    ],
     cumulative=[
         "boolean (default `False`)",
         "If `True`, histogram values are cumulative.",
