@@ -287,7 +287,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
-                if trace_spec.constructor == go.Choropleth:
+                if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
@@ -380,6 +380,7 @@ def configure_axes(args, constructor, fig, orders):
         go.Scatterpolargl: configure_polar_axes,
         go.Barpolar: configure_polar_axes,
         go.Scattermapbox: configure_mapbox,
+        go.Choroplethmapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -569,7 +570,9 @@ def configure_mapbox(args, fig, orders):
                 center=dict(
                     lat=args["data_frame"][args["lat"]].mean(),
                     lon=args["data_frame"][args["lon"]].mean(),
-                ),
+                )
+                if "lat" in args and "lon" in  args
+                else dict(),
                 zoom=args["zoom"],
             )
         )
@@ -1221,6 +1224,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcats,
                 go.Parcoords,
                 go.Choropleth,
+                go.Choroplethmapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,

@@ -44,6 +44,7 @@ from ._chart_types import (  # noqa: F401
     treemap,
     funnel,
     funnel_area,
+    choropleth_mapbox,
 )
 
 from ._imshow import imshow
@@ -82,6 +83,7 @@ __all__ = [
     "strip",
     "histogram",
     "choropleth",
+    "choropleth_mapbox",
     "pie",
     "sunburst",
     "treemap",
