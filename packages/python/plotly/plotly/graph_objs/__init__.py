@@ -95064,27 +95064,31 @@ class Layout(_BaseLayoutType):
         annotation or a logo image, for example. To omit one of these
         items on the plot, make an item with matching
         `templateitemname` and `visible: false`.
-    
+
         The 'template' property is an instance of Template
         that may be specified as:
           - An instance of plotly.graph_objs.layout.Template
           - A dict of string/value properties that will be passed
             to the Template constructor
-    
+
             Supported dict properties:
-                
+
                 data
                     plotly.graph_objects.layout.template.Data
                     instance or dict with compatible properties
                 layout
                     plotly.graph_objects.Layout instance or dict
                     with compatible properties
-    
+
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
+
                 >>> import plotly.io as pio
-                >>> list(pio.templates)
+                >>> list(pio.templates) # doctest: +ELLIPSIS
+                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', 'plotly_dark', ...]
+
+
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 

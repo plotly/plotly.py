@@ -149,9 +149,9 @@ def node_generator(node, path=()):
     Example:
 
         >>> for node, path in node_generator({'a': {'b': 5}}):
-        >>>     print node, path
+        ...     print(node, path)
         {'a': {'b': 5}} ()
-        {'b': 5} ('a', )
+        {'b': 5} ('a',)
 
     """
     if not isinstance(node, dict):
@@ -176,8 +176,8 @@ def get_by_path(obj, path):
 
         >>> figure = {'data': [{'x': [5]}]}
         >>> path = ('data', 0, 'x')
-        >>> get_by_path(figure, path)  # [5]
-
+        >>> get_by_path(figure, path)
+        [5]
     """
     for key in path:
         obj = obj[key]

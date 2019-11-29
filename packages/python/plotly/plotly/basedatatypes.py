@@ -458,8 +458,9 @@ class BaseFigure(object):
         --------
         >>> import plotly.graph_objs as go
         >>> fig = go.Figure(data=[{'y': [1, 2, 3]}])
-        >>> fig.update(data=[{'y': [4, 5, 6]}])
-        >>> fig.to_plotly_json()
+        >>> fig.update(data=[{'y': [4, 5, 6]}]) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
             {'data': [{'type': 'scatter',
                'uid': 'e86a7c7a-346a-11e8-8aa8-a0999b0c017b',
                'y': array([4, 5, 6], dtype=int32)}],
@@ -468,8 +469,9 @@ class BaseFigure(object):
         >>> fig = go.Figure(layout={'xaxis':
         ...                         {'color': 'green',
         ...                          'range': [0, 1]}})
-        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}})
-        >>> fig.to_plotly_json()
+        >>> fig.update({'layout': {'xaxis': {'color': 'pink'}}}) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.to_plotly_json() # doctest: +SKIP
             {'data': [],
              'layout': {'xaxis':
                         {'color': 'pink',
@@ -1128,6 +1130,8 @@ because subplot does not have a secondary y-axis"""
             example, the following command would be used to update the 'x'
             property of the first trace to the list [1, 2, 3]
 
+            >>> import plotly.graph_objects as go
+            >>> fig = go.Figure(go.Scatter(x=[2, 4, 6]))
             >>> fig.plotly_restyle({'x': [[1, 2, 3]]}, 0)
 
         trace_indexes : int or list of int
@@ -1586,15 +1590,19 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         Add two Scatter traces to a figure
 
         >>> fig = go.Figure()
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]))
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2])) # doctest: +ELLIPSIS
+        Figure(...)
 
 
         Add two Scatter traces to vertically stacked subplots
 
         >>> fig = subplots.make_subplots(rows=2)
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
-        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
+        Figure(...)
+        >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) # doctest: +ELLIPSIS
+        Figure(...)
         """
         # Make sure we have both row and col or neither
         if row is not None and col is None:
@@ -1662,14 +1670,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
 
         >>> fig = go.Figure()
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
-        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])])
+        ...                 go.Scatter(x=[1,2,3], y=[2,1,2])]) # doctest: +ELLIPSIS
+        Figure(...)
 
         Add two Scatter traces to vertically stacked subplots
 
         >>> fig = subplots.make_subplots(rows=2)
         >>> fig.add_traces([go.Scatter(x=[1,2,3], y=[2,1,2]),
         ...                 go.Scatter(x=[1,2,3], y=[2,1,2])],
-        ...                 rows=[1, 2], cols=[1, 1])
+        ...                 rows=[1, 2], cols=[1, 1]) # doctest: +ELLIPSIS
+        Figure(...)
         """
 
         # Validate traces
@@ -2152,11 +2162,12 @@ Invalid property path '{key_path_str}' for layout
 
         Examples
         --------
+
         >>> key_path_strs = ['xaxis.rangeselector.font.color',
         ...                  'xaxis.rangeselector.bgcolor']
 
-        >>> BaseFigure._build_dispatch_plan(key_path_strs)
-            {(): {('xaxis',),
+        >>> BaseFigure._build_dispatch_plan(key_path_strs) # doctest: +SKIP
+            {(): {'xaxis',
                   ('xaxis', 'rangeselector'),
                   ('xaxis', 'rangeselector', 'bgcolor'),
                   ('xaxis', 'rangeselector', 'font'),
@@ -2589,7 +2600,7 @@ Invalid property path '{key_path_str}' for layout
         2) Animate a change in the size and color of the trace's markers
         over 2 seconds using the elastic-in-out easing method
 
-        >>> with fig.batch_update(duration=2000, easing='elastic-in-out'):
+        >>> with fig.batch_animate(duration=2000, easing='elastic-in-out'):
         ...     fig.data[0].marker.color = 'green'
         ...     fig.data[0].marker.size = 20
         """
@@ -4088,6 +4099,8 @@ class BasePlotlyType(object):
         Register callback that prints out the range extents of the xaxis and
         yaxis whenever either either of them changes.
 
+        >>> import plotly.graph_objects as go
+        >>> fig = go.Figure(go.Scatter(x=[1, 2], y=[1, 0]))
         >>> fig.layout.on_change(
         ...   lambda obj, xrange, yrange: print("%s-%s" % (xrange, yrange)),
         ...   ('xaxis', 'range'), ('yaxis', 'range'))
@@ -4572,6 +4585,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
+        >>> import plotly.graph_objects as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4579,6 +4593,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         ...     inds = points.point_inds
         ...     # Do something
 
+        >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
         >>> trace.on_hover(hover_fn)
 
         Note: The creation of the `points` and `state` objects is optional,
@@ -4632,6 +4647,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
+        >>> import plotly.graph_objects as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4639,6 +4655,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         ...     inds = points.point_inds
         ...     # Do something
 
+        >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
         >>> trace.on_unhover(unhover_fn)
 
         Note: The creation of the `points` and `state` objects is optional,
@@ -4692,6 +4709,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
+        >>> import plotly.graph_objects as go
         >>> from plotly.callbacks import Points, InputDeviceState
         >>> points, state = Points(), InputDeviceState()
 
@@ -4699,6 +4717,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         ...     inds = points.point_inds
         ...     # Do something
 
+        >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
         >>> trace.on_click(click_fn)
 
         Note: The creation of the `points` and `state` objects is optional,
@@ -4751,6 +4770,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
+        >>> import plotly.graph_objects as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
@@ -4758,6 +4778,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         ...     inds = points.point_inds
         ...     # Do something
 
+        >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
         >>> trace.on_selection(selection_fn)
 
         Note: The creation of the `points` object is optional,
@@ -4817,6 +4838,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         Examples
         --------
 
+        >>> import plotly.graph_objects as go
         >>> from plotly.callbacks import Points
         >>> points = Points()
 
@@ -4824,6 +4846,7 @@ class BaseTraceType(BaseTraceHierarchyType):
         ...     inds = points.point_inds
         ...     # Do something
 
+        >>> trace = go.Scatter(x=[1, 2], y=[3, 0])
         >>> trace.on_deselect(deselect_fn)
 
         Note: The creation of the `points` object is optional,

@@ -25,7 +25,9 @@ def create_dendrogram(
     color_threshold=None,
 ):
     """
-    BETA function that returns a dendrogram Plotly figure object.
+    Function that returns a dendrogram Plotly figure object.
+
+    See also https://dash.plot.ly/dash-bio/clustergram.
 
     :param (ndarray) X: Matrix of observations as array of arrays
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'
@@ -58,7 +60,7 @@ def create_dendrogram(
     >>> X = np.random.rand(5,5)
     >>> names = ['Jack', 'Oxana', 'John', 'Chelsea', 'Mark']
     >>> dendro = create_dendrogram(X, orientation='right', labels=names)
-    >>> dendro['layout'].update({'width':700, 'height':500})
+    >>> dendro.update_layout({'width':700, 'height':500}) # doctest: +SKIP
     >>> dendro.show()
 
     Example 3: Dendrogram with Pandas

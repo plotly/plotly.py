@@ -62,6 +62,7 @@ def create_streamline(
     Example 1: Plot simple streamline and increase arrow size
 
     >>> from plotly.figure_factory import create_streamline
+    >>> import plotly.graph_objects as go
     >>> import numpy as np
     >>> import math
 
@@ -102,10 +103,10 @@ def create_streamline(
     >>> fig = create_streamline(x, y, u_s, v_s, density=2, name='streamline')
 
     >>> # Add source point
-    >>> point = Scatter(x=[x_s], y=[y_s], mode='markers',
-    ...                 marker=Marker(size=14), name='source point')
+    >>> point = go.Scatter(x=[x_s], y=[y_s], mode='markers',
+    ...                    marker_size=14, name='source point')
 
-    >>> fig['data'].append(point)
+    >>> fig.add_trace(point) # doctest: +SKIP
     >>> fig.show()
     """
     utils.validate_equal_length(x, y)

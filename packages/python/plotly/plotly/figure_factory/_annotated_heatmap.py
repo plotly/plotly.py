@@ -59,7 +59,7 @@ def create_annotated_heatmap(
     **kwargs
 ):
     """
-    BETA function that creates annotated heatmaps
+    Function that creates annotated heatmaps
 
     This function adds annotations to each cell of the heatmap.
 
@@ -94,7 +94,6 @@ def create_annotated_heatmap(
 
     >>> fig = ff.create_annotated_heatmap(z)
     >>> fig.show()
-    ```
     """
 
     # Avoiding mutables in the call signature

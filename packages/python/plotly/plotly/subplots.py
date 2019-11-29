@@ -235,15 +235,17 @@ def make_subplots(
 
     >>> # Stack two subplots vertically, and add a scatter trace to each
     >>> from plotly.subplots import make_subplots
-    ... import plotly.graph_objs as go
-    ... fig = make_subplots(rows=2)
+    >>> import plotly.graph_objects as go
+    >>> fig = make_subplots(rows=2)
 
     This is the format of your plot grid:
     [ (1,1) xaxis1,yaxis1 ]
     [ (2,1) xaxis2,yaxis2 ]
 
-    >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1)
-    ... fig.add_scatter(y=[1, 3, 2], row=2, col=1)
+    >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_scatter(y=[1, 3, 2], row=2, col=1) # doctest: +ELLIPSIS
+    Figure(...)
 
     or see Figure.append_trace
 
@@ -256,23 +258,28 @@ def make_subplots(
     [ (1,1) xaxis1,yaxis1 ]
     [ (2,1) xaxis2,yaxis2 ]
 
-    >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1)
-    ... fig.add_scatter(y=[1, 3, 2], row=2, col=1)
+    >>> fig.add_scatter(y=[2, 1, 3], row=1, col=1) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_scatter(y=[1, 3, 2], row=2, col=1) # doctest: +ELLIPSIS
+    Figure(...)
 
     Example 3:
 
     >>> # irregular subplot layout (more examples below under 'specs')
     >>> fig = make_subplots(rows=2, cols=2,
-                            specs=[[{}, {}],
-                                   [{'colspan': 2}, None]])
+    ...                     specs=[[{}, {}],
+    ...                     [{'colspan': 2}, None]])
 
     This is the format of your plot grid:
     [ (1,1) xaxis1,yaxis1 ]  [ (1,2) xaxis2,yaxis2 ]
     [ (2,1) xaxis3,yaxis3           -              ]
 
-    >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1)
-    ... fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=2)
-    ... fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1)
+    >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=1) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=1, col=2) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_trace(go.Scatter(x=[1,2,3], y=[2,1,2]), row=2, col=1) # doctest: +ELLIPSIS
+    Figure(...)
 
     Example 4:
 
@@ -285,8 +292,10 @@ def make_subplots(
     With insets:
     [ xaxis2,yaxis2 ] over [ (1,1) xaxis1,yaxis1 ]
 
-    >>> fig.add_scatter(x=[1,2,3], y=[2,1,1])
-    ... fig.add_scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2')
+    >>> fig.add_scatter(x=[1,2,3], y=[2,1,1]) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_scatter(x=[1,2,3], y=[2,1,2], xaxis='x2', yaxis='y2') # doctest: +ELLIPSIS
+    Figure(...)
 
     Example 5:
 
@@ -297,8 +306,10 @@ def make_subplots(
     [ (1,1) x1,y1 ]
     [ (2,1) x2,y2 ]
 
-    >>> fig.add_scatter(x=[1,2,3], y=[2,1,2], row=1, col=1)
-    >>> fig.add_bar(x=[1,2,3], y=[2,1,2], row=2, col=1)
+    >>> fig.add_scatter(x=[1,2,3], y=[2,1,2], row=1, col=1) # doctest: +ELLIPSIS
+    Figure(...)
+    >>> fig.add_bar(x=[1,2,3], y=[2,1,2], row=2, col=1) # doctest: +ELLIPSIS
+    Figure(...)
 
     Example 6:
 
@@ -316,7 +327,8 @@ def make_subplots(
     ...                        b=[0.2, 0.3, 0.1],
     ...                        c=[0.7, 0.5, 0.8])],
     ...     rows=[1, 1, 2, 2],
-    ...     cols=[1, 2, 1, 2])
+    ...     cols=[1, 2, 1, 2]) # doctest: +ELLIPSIS
+    Figure(...)
     """
 
     import plotly.graph_objs as go

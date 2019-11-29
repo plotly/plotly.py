@@ -584,33 +584,33 @@ def create_ternary_contour(
     >>> c = 1 - a - b
     >>> # Values to be displayed as contours
     >>> z = a * b * c
-    >>> fig = ff.create_ternarycontour(np.stack((a, b, c)), z)
+    >>> fig = ff.create_ternary_contour(np.stack((a, b, c)), z)
     >>> fig.show()
 
     It is also possible to give only two barycentric coordinates for each
     point, since the sum of the three coordinates is one:
 
-    >>> fig = ff.create_ternarycontour(np.stack((a, b)), z)
+    >>> fig = ff.create_ternary_contour(np.stack((a, b)), z)
 
 
     Example 2: ternary contour plot with line contours
 
-    >>> fig = ff.create_ternarycontour(np.stack((a, b, c)), z, coloring='lines')
+    >>> fig = ff.create_ternary_contour(np.stack((a, b, c)), z, coloring='lines')
 
     Example 3: customize number of contours
 
-    >>> fig = ff.create_ternarycontour(np.stack((a, b, c)), z, ncontours=8)
+    >>> fig = ff.create_ternary_contour(np.stack((a, b, c)), z, ncontours=8)
 
     Example 4: superimpose contour plot and original data as markers
 
-    >>> fig = ff.create_ternarycontour(np.stack((a, b, c)), z, coloring='lines',
-                                   showmarkers=True)
+    >>> fig = ff.create_ternary_contour(np.stack((a, b, c)), z, coloring='lines',
+    ...                                 showmarkers=True)
 
     Example 5: customize title and pole labels
 
-    >>> fig = ff.create_ternarycontour(np.stack((a, b, c)), z,
-    ...                               title='Ternary plot',
-    ...                               pole_labels=['clay', 'quartz', 'fledspar'])
+    >>> fig = ff.create_ternary_contour(np.stack((a, b, c)), z,
+    ...                                 title='Ternary plot',
+    ...                                 pole_labels=['clay', 'quartz', 'fledspar'])
     """
     if scipy_interp is None:
         raise ImportError(

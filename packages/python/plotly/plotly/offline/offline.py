@@ -81,10 +81,10 @@ def get_plotlyjs():
     ...        {div2}
     ...     </body>
     ... </html>
-    ...'''.format(plotlyjs=get_plotlyjs(), div1=div1, div2=div2)
+    ... '''.format(plotlyjs=get_plotlyjs(), div1=div1, div2=div2)
 
     >>> with open('multi_plot.html', 'w') as f:
-    ...      f.write(html)
+    ...      f.write(html) # doctest: +SKIP
     """
     path = os.path.join("package_data", "plotly.min.js")
     plotlyjs = pkgutil.get_data("plotly", path).decode("utf-8")

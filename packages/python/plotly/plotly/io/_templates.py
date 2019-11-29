@@ -375,37 +375,37 @@ def to_templated(fig, skip=("title", "text")):
     Construct a figure with large courier text
 
     >>> fig = go.Figure(layout={'title': 'Figure Title',
-    ...                         'font': {'size': 20, 'family': 'Courier'}})
-    >>> fig
+    ...                         'font': {'size': 20, 'family': 'Courier'},
+    ...                         'template':"none"})
+    >>> fig # doctest: +NORMALIZE_WHITESPACE
     Figure({
         'data': [],
-        'layout': {'title': 'Figure Title',
-                   'font': {'family': 'Courier', 'size': 20}}
+        'layout': {'font': {'family': 'Courier', 'size': 20},
+                   'template': '...', 'title': {'text': 'Figure Title'}}
     })
 
     Convert to a figure with a template. Note how the 'font' properties have
     been moved into the template property.
 
     >>> templated_fig = pio.to_templated(fig)
+    >>> templated_fig.layout.template
+    layout.Template({
+        'data': {}, 'layout': {'font': {'family': 'Courier', 'size': 20}}
+    })
     >>> templated_fig
     Figure({
-        'data': [],
-        'layout': {'title': 'Figure Title',
-                   'template': {'layout': {'font': {'family': 'Courier',
-                                                    'size': 20}}}}
+        'data': [], 'layout': {'template': '...', 'title': {'text': 'Figure Title'}}
     })
+
 
     Next create a new figure with this template
 
     >>> fig2 = go.Figure(layout={
     ...     'title': 'Figure 2 Title',
     ...     'template': templated_fig.layout.template})
-    >>> fig2
-    Figure({
-        'data': [],
-        'layout': {'title': 'Figure 2 Title',
-                   'template': {'layout': {'font': {'family': 'Courier',
-                                                    'size': 20}}}}
+    >>> fig2.layout.template
+    layout.Template({
+        'layout': {'font': {'family': 'Courier', 'size': 20}}
     })
 
     The default font in fig2 will now be size 20 Courier.
@@ -418,23 +418,16 @@ def to_templated(fig, skip=("title", "text")):
 
     >>> go.Figure(layout={
     ...     'title': 'Figure 3 Title',
-    ...     'template': 'large_courier'})
-    Figure({
-        'data': [],
-        'layout': {'title': 'Figure 3 Title',
-                   'template': {'layout': {'font': {'family': 'Courier',
-                                                    'size': 20}}}}
-    })
+    ...     'template': 'large_courier'}) # doctest: +ELLIPSIS
+    Figure(...)
 
     Finally, set this as the default template to be applied to all new figures
 
     >>> pio.templates.default = 'large_courier'
-    >>> go.Figure(layout={'title': 'Figure 4 Title'})
-    Figure({
-        'data': [],
-        'layout': {'title': 'Figure 4 Title',
-                   'template': {'layout': {'font': {'family': 'Courier',
-                                                    'size': 20}}}}
+    >>> fig = go.Figure(layout={'title': 'Figure 4 Title'})
+    >>> fig.layout.template
+    layout.Template({
+        'layout': {'font': {'family': 'Courier', 'size': 20}}
     })
 
     Returns

@@ -75,7 +75,7 @@ def create_quiver(
     ...                     name='Wind Velocity', line=dict(width=1))
 
     >>> # Add title to layout
-    >>> fig['layout'].update(title='Quiver Plot')
+    >>> fig.update_layout(title='Quiver Plot') # doctest: +SKIP
     >>> fig.show()
 
 
