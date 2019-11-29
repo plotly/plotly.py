@@ -95096,8 +95096,10 @@ class Layout(_BaseLayoutType):
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
+
                 >>> import plotly.io as pio
                 >>> list(pio.templates)
+
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 
