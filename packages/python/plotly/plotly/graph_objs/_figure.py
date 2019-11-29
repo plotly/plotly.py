@@ -857,7 +857,6 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-
         alignmentgroup
             Set several traces linked to the same position axis or
             matching axes to the same alignmentgroup. This controls
@@ -1615,7 +1614,7 @@ class Figure(BaseFigure):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -4825,10 +4824,9 @@ class Figure(BaseFigure):
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
             following conditions are satisfied:
-
-             * The figure was created using `plotly.subplots.make_subplots`.
-             * The row and col arguments are not None
-             * The subplot at the specified row and col has type xy
+              * The figure was created using `plotly.subplots.make_subplots`.
+              * The row and col arguments are not None
+              * The subplot at the specified row and col has type xy
                 (which is the default) and secondary_y True.  These
                 properties are specified in the specs argument to
                 make_subplots. See the make_subplots docstring for more info.
@@ -15149,7 +15147,7 @@ class Figure(BaseFigure):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
