@@ -95099,6 +95099,7 @@ class Layout(_BaseLayoutType):
 
                 >>> import plotly.io as pio
                 >>> list(pio.templates)
+                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', 'plotly_dark', 'presentation', 'xgridoff', 'ygridoff', 'gridon', 'none']
 
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
