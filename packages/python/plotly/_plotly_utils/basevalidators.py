@@ -1577,7 +1577,7 @@ class ColorscaleValidator(BaseValidator):
                 # Convert to color list
                 v = self.named_colorscales[v_lower]
                 v_valid = True
-            elif v_lower.endswith('_r') and v_lower[:-2] in self.named_colorscales:
+            elif v_lower.endswith("_r") and v_lower[:-2] in self.named_colorscales:
                 v = self.named_colorscales[v_lower[:-2]][::-1]
                 v_valid = True
             #

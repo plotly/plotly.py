@@ -104,6 +104,15 @@ class TestPropertyPresentation(TestCase):
         # Presented as tuple of tuples
         self.assertEqual(self.scatter.marker.colorscale, ((0, "red"), (1, "green")))
 
+        # Test colorscale and reversed version
+        self.scatter.marker.colorscale = "viridis"
+        colorscale = self.scatter.to_plotly_json()["marker"]["colorscale"]
+        colorscale = [col[1] for col in colorscale]
+        self.scatter.marker.colorscale = "viridis_r"
+        colorscale_r = self.scatter.to_plotly_json()["marker"]["colorscale"]
+        colorscale_r = [col[1] for col in colorscale_r]
+        self.assertEqual(colorscale[::-1], colorscale_r)
+
 
 class TestPropertyIterContains(TestCase):
     def setUp(self):
