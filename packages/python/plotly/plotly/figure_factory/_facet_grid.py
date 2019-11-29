@@ -673,7 +673,18 @@ def create_facet_grid(
     **kwargs
 ):
     """
-    Returns figure for facet grid.
+    Returns figure for facet grid; **this function is deprecated**, since
+    plotly.express functions should be used instead, for example
+
+    >>> import plotly.express as px
+    >>> tips = px.data.tips()
+    >>> fig = px.scatter(tips, 
+    ...     x='total_bill',
+    ...     y='tip',
+    ...     facet_row='sex',
+    ...     facet_col='smoker',
+    ...     color='size')
+
 
     :param (pd.DataFrame) df: the dataframe of columns for the facet grid.
     :param (str) x: the name of the dataframe column for the x axis data.
@@ -754,7 +765,8 @@ def create_facet_grid(
 
     >>> import plotly.figure_factory as ff
     >>> import pandas as pd
-    >>> mpg = pd.read_table('https://raw.githubusercontent.com/plotly/datasets/master/mpg_2017.txt')
+    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
+    >>> mtcars.cyl = mtcars.cyl.astype(str)
     >>> fig = ff.create_facet_grid(
     ...     mtcars,
     ...     x='mpg',
@@ -765,49 +777,7 @@ def create_facet_grid(
     ... )
     >>> fig.show()
 
-    Example 4: Sequential Coloring
 
-    >>> import plotly.figure_factory as ff
-    >>> import pandas as pd
-    >>> tips = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/tips.csv')
-
-    >>> fig = ff.create_facet_grid(
-    >>>     tips,
-    ...     x='total_bill',
-    ...     y='tip',
-    ...     facet_row='sex',
-    ...     facet_col='smoker',
-    ...     color_name='size',
-    ...     colormap='Viridis',
-    ... )
-    >>> fig.show()
-
-    Example 5: Custom labels
-
-    >>> import plotly.figure_factory as ff
-    >>> import pandas as pd
-    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
-    >>> fig = ff.create_facet_grid(
-    ...     mtcars,
-    ...     x='wt',
-    ...     y='mpg',
-    ...     facet_col='cyl',
-    ...     facet_col_labels={4: "$\\alpha$", 6: '$\\beta$', 8: '$\sqrt[y]{x}$'},
-    ... )
-    >>> fig.show()
-
-    Example 6: Other Trace Type
-
-    >>> import plotly.figure_factory as ff
-    >>> import pandas as pd
-    >>> mtcars = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/mtcars.csv')
-    >>> fig = ff.create_facet_grid(
-    ...     mtcars,
-    ...     x='wt',
-    ...     facet_col='cyl',
-    ...     trace_type='histogram',
-    ... )
-    >>> fig.show()
     """
     if not pd:
         raise ImportError("'pandas' must be installed for this figure_factory.")

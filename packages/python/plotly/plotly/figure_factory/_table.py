@@ -36,7 +36,10 @@ def create_table(
     **kwargs
 ):
     """
-    BETA function that creates data tables
+    Function that creates data tables.
+
+    See also the plotly.graph_objects trace
+    :class:`plotly.graph_objects.Table`
 
     :param (pandas.Dataframe | list[list]) text: data for table.
     :param (str|list[list]) colorscale: Colorscale for table where the
@@ -73,13 +76,11 @@ def create_table(
     Example 2: Table with Custom Coloring
 
     >>> from plotly.figure_factory import create_table
-
     >>> text = [['Country', 'Year', 'Population'],
     ...         ['US', 2000, 282200000],
     ...         ['Canada', 2000, 27790000],
     ...         ['US', 2010, 309000000],
     ...         ['Canada', 2010, 34000000]]
-
     >>> table = create_table(text,
     ...                      colorscale=[[0, '#000000'],
     ...                                  [.5, '#80beff'],
@@ -92,12 +93,11 @@ def create_table(
 
     >>> from plotly.figure_factory import create_table
     >>> import pandas as pd
-
     >>> df = pd.read_csv('http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt', sep='\t')
     >>> df_p = df[0:25]
-
     >>> table_simple = create_table(df_p)
     >>> table_simple.show()
+
     """
 
     # Avoiding mutables in the call signature

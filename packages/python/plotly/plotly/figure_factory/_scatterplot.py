@@ -854,7 +854,10 @@ def create_scatterplotmatrix(
     **kwargs
 ):
     """
-    Returns data for a scatterplot matrix.
+    Returns data for a scatterplot matrix;
+    **deprecated**,
+    use instead the plotly.graph_objects trace
+    :class:`plotly.graph_objects.Splom`.
 
     :param (array) df: array of the data with column headers
     :param (str) index: name of the index column in data array

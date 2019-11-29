@@ -99,7 +99,8 @@ def make_decreasing_candle(open, high, low, close, dates, **kwargs):
 
 def create_candlestick(open, high, low, close, dates=None, direction="both", **kwargs):
     """
-    BETA function that creates a candlestick chart
+    **deprecated**, use instead the plotly.graph_objects trace 
+    :class:`plotly.graph_objects.Candlestick`
 
     :param (list) open: opening values
     :param (list) high: high values
@@ -125,51 +126,32 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
 
     >>> from plotly.figure_factory import create_candlestick
     >>> from datetime import datetime
+    >>> import pandas as pd
 
-    >>> import pandas.io.data as web
-
-    >>> df = web.DataReader("aapl", 'yahoo', datetime(2007, 10, 1), datetime(2009, 4, 1))
-    >>> fig = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
+    >>> df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+    >>> fig = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
+    ...                          dates=df.index)
     >>> fig.show()
 
-    Example 2: Add text and annotations to the candlestick chart
-    
-    >>> fig = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index)
-    >>> # Update the fig - all options here: https://plot.ly/python/reference/#Layout
-    >>> fig['layout'].update({
-        'title': 'The Great Recession',
-        'yaxis': {'title': 'AAPL Stock'},
-        'shapes': [{
-            'x0': '2007-12-01', 'x1': '2007-12-01',
-            'y0': 0, 'y1': 1, 'xref': 'x', 'yref': 'paper',
-            'line': {'color': 'rgb(30,30,30)', 'width': 1}
-        }],
-        'annotations': [{
-            'x': '2007-12-01', 'y': 0.05, 'xref': 'x', 'yref': 'paper',
-            'showarrow': False, 'xanchor': 'left',
-            'text': 'Official start of the recession'
-        }]
-    })
-    >>> fig.show()
+    Example 2: Customize the candlestick colors
 
-    Example 3: Customize the candlestick colors
-    
     >>> from plotly.figure_factory import create_candlestick
     >>> from plotly.graph_objs import Line, Marker
     >>> from datetime import datetime
 
-    >>> import pandas.io.data as web
-
-    >>> df = web.DataReader("aapl", 'yahoo', datetime(2008, 1, 1), datetime(2009, 4, 1))
+    >>> import pandas as pd
+    >>> df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
     >>> # Make increasing candlesticks and customize their color and name
-    >>> fig_increasing = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+    >>> fig_increasing = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
+    ...     dates=df.index,
     ...     direction='increasing', name='AAPL',
     ...     marker=Marker(color='rgb(150, 200, 250)'),
     ...     line=Line(color='rgb(150, 200, 250)'))
 
     >>> # Make decreasing candlesticks and customize their color and name
-    >>> fig_decreasing = create_candlestick(df.Open, df.High, df.Low, df.Close, dates=df.index,
+    >>> fig_decreasing = create_candlestick(df['AAPL.Open'], df['AAPL.High'], df['AAPL.Low'], df['AAPL.Close'],
+    ...     dates=df.index,
     ...     direction='decreasing',
     ...     marker=Marker(color='rgb(128, 128, 128)'),
     ...     line=Line(color='rgb(128, 128, 128)'))
@@ -178,11 +160,11 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     >>> fig = fig_increasing
 
     >>> # Add decreasing data with .extend()
-    >>> fig['data'].extend(fig_decreasing['data'])
+    >>> fig.add_trace(fig_decreasing['data']) # doctest: +SKIP
     >>> fig.show()
 
-    Example 4: Candlestick chart with datetime objects
-    
+    Example 3: Candlestick chart with datetime objects
+ 
     >>> from plotly.figure_factory import create_candlestick
 
     >>> from datetime import datetime
@@ -202,7 +184,6 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
     >>> fig = create_candlestick(open_data, high_data,
     ...     low_data, close_data, dates=dates)
     >>> fig.show()
-
     """
     if dates is not None:
         utils.validate_equal_length(open, high, low, close, dates)

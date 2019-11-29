@@ -32,7 +32,8 @@ def create_2d_density(
     width=600,
 ):
     """
-    Returns figure for a 2D density plot
+    **deprecated**, use instead
+    :func:`plotly.express.density_heatmap`.
 
     :param (list|array) x: x-axis data for plot generation
     :param (list|array) y: y-axis data for plot generation
@@ -56,8 +57,7 @@ def create_2d_density(
 
     Example 1: Simple 2D Density Plot
 
-    >>> from plotly.figure_factory create_2d_density
-
+    >>> from plotly.figure_factory import create_2d_density
     >>> import numpy as np
 
     >>> # Make data points
@@ -66,14 +66,14 @@ def create_2d_density(
     >>> y = (t**6)+(0.3*np.random.randn(2000))
 
     >>> # Create a figure
-    >>> fig = create_2D_density(x, y)
+    >>> fig = create_2d_density(x, y)
 
     >>> # Plot the data
     >>> fig.show()
 
     Example 2: Using Parameters
 
-    >>> from plotly.figure_factory create_2d_density
+    >>> from plotly.figure_factory import create_2d_density
 
     >>> import numpy as np
 
@@ -87,7 +87,7 @@ def create_2d_density(
     ...              (1, 1, 0.2), (0.98,0.98,0.98)]
 
     >>> # Create a figure
-    >>> fig = create_2D_density(x, y, colorscale=colorscale,
+    >>> fig = create_2d_density(x, y, colorscale=colorscale,
     ...       hist_color='rgb(255, 237, 222)', point_size=3)
 
     >>> # Plot the data
