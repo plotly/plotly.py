@@ -954,7 +954,7 @@ def build_dataframe(args, attrables, array_attrables):
                         )
                     )
                 col_name = str(argument)
-                df_output[col_name] = df_input[argument]
+                df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)
@@ -989,7 +989,10 @@ def build_dataframe(args, attrables, array_attrables):
                         "length of previous arguments %s is %d"
                         % (field, len(argument), str(list(df_output.columns)), length)
                     )
-                df_output[str(col_name)] = argument
+                if hasattr(argument, "values"):
+                    df_output[str(col_name)] = argument.values
+                else:
+                    df_output[str(col_name)] = np.array(argument)
 
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
