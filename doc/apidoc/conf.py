@@ -15,6 +15,7 @@
 import os
 import sys
 import sphinx_bootstrap_theme
+
 # sys.path.insert(0, os.path.abspath("../packages/python/plotly"))
 
 
@@ -46,13 +47,12 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.napoleon",
-
 ]
 
 autosummary_generate = True
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 
 # The suffix(es) of source filenames.
@@ -90,16 +90,16 @@ default_role = "literal"
 html_theme = "bootstrap"
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
-html_logo='_static/logo.png'
+html_logo = "_static/logo.png"
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
-        'analytics_id':'UA-39373211-1', # not supported by this theme
-        'bootswatch_theme': "flatly",
-        'source_link_position': "no"
-        }
+    "analytics_id": "UA-39373211-1",  # not supported by this theme
+    "bootswatch_theme": "flatly",
+    "source_link_position": "no",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -204,5 +204,6 @@ intersphinx_mapping = {"https://docs.python.org/": None}
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
+
 def setup(app):
-    app.add_stylesheet("plotly-style.css") # also can be a full URL
+    app.add_stylesheet("plotly-style.css")  # also can be a full URL

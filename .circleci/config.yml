@@ -403,12 +403,6 @@ jobs:
 
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "doc/requirements.txt" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
 
       - run:
           name: install dependencies
@@ -417,21 +411,18 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             npm install electron@1.8.4 orca
+            cat requirements.txt
             pip install -r requirements.txt
             echo 'export PATH="/home/circleci/repo/node_modules/.bin:$PATH"' >> $BASH_ENV
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
             cd ..
 
-      - save_cache:
-          paths:
-            - ./doc/venv
-            - ./doc/node_modules
-          key: v1-dependencies-{{ checksum "doc/requirements.txt" }}
 
       - run:
           name: make html
           command: |
             cd doc
+            ls
             . venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
