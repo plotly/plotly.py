@@ -164,6 +164,11 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
+    radius=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to set the radius of influence of each point.",
+    ],
     hover_name=[
         colref_type,
         colref_desc,
