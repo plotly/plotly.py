@@ -2,8 +2,6 @@ import plotly.express as px
 import numpy as np
 import pandas as pd
 import pytest
-import plotly.graph_objects as go
-import plotly
 from plotly.express._core import build_dataframe
 from pandas.util.testing import assert_frame_equal
 
@@ -232,6 +230,24 @@ def test_build_df_with_index():
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
     out = build_dataframe(args, all_attrables, array_attrables)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
+
+
+def test_non_matching_index():
+    df = pd.DataFrame(dict(y=[1, 2, 3]), index=["a", "b", "c"])
+
+    expected = pd.DataFrame(dict(x=["a", "b", "c"], y=[1, 2, 3]))
+
+    args = dict(data_frame=df, x=df.index, y="y")
+    out = build_dataframe(args, all_attrables, array_attrables)
+    assert_frame_equal(expected, out["data_frame"])
+
+    args = dict(data_frame=None, x=df.index, y=df.y)
+    out = build_dataframe(args, all_attrables, array_attrables)
+    assert_frame_equal(expected, out["data_frame"])
+
+    args = dict(data_frame=None, x=["a", "b", "c"], y=df.y)
+    out = build_dataframe(args, all_attrables, array_attrables)
+    assert_frame_equal(expected, out["data_frame"])
 
 
 def test_splom_case():
