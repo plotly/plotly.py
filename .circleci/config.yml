@@ -385,6 +385,105 @@ jobs:
       - store_artifacts:
           path: packages/python/plotly/dist
 
+
+  build-doc:
+    resource_class: xlarge
+    docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      - image: circleci/python:3.6.8-node
+
+
+    working_directory: ~/repo
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "a1:22:8b:da:c9:9f:88:db:be:cb:1d:c5:12:de:70:4f"
+
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "doc/requirements.txt" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            cd doc
+            python3 -m venv venv
+            . venv/bin/activate
+            npm install electron@1.8.4 orca
+            pip install -r requirements.txt
+            echo 'export PATH="/home/circleci/repo/node_modules/.bin:$PATH"' >> $BASH_ENV
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
+
+      - save_cache:
+          paths:
+            - ./venv
+            - ./node_modules
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
+
+      - run:
+          name: make html
+          command: |
+            . venv/bin/activate
+            echo ${mapbox_token} > python/.mapbox_token
+            make -kj8 || make -kj8
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/check-or-enforce-order.py > check-or-enforce-order.py
+            python front-matter-ci.py build/html
+            python check-or-enforce-order.py build/html
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              cd build/html
+              git init
+              git config user.name nicolaskruchten
+              git config user.email nicolas@plot.ly
+              git add *
+              git commit -m build
+              git push --force git@github.com:plotly/plotly.py.git doc-prod:built
+              rm -rf .git
+              cd ../..
+            fi
+            tar -zcf build/html.tgz build/html
+            rm -rf build/html build/ipynb
+
+      - run:
+          name: make doc
+          command: |
+            . venv/bin/activate
+            cd apidoc
+            make html
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              cd _build/html
+              touch .nojekyll
+              git init
+              git config user.name nicolaskruchten
+              git config user.email nicolas@plot.ly
+              git add *
+              git add .nojekyll
+              git commit -m build
+              git push --force git@github.com:plotly/plotly.py-docs.git master:gh-pages
+              rm -rf .git
+              cd ../..
+            fi
+
+            cd ..
+
+
+      - store_artifacts:
+          path: build
+          destination: build
+     
+ 
+      - store_artifacts:
+          path: apidoc/_build/html
+          destination: apidoc
+
+
 workflows:
   version: 2
   code_formatting:
@@ -413,3 +512,4 @@ workflows:
       - python-2-7-orca
       - python-3-5-orca
       - python-3-7-orca
+      - build-doc
