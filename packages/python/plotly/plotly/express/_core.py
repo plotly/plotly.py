@@ -504,13 +504,11 @@ def configure_cartesian_axes(args, fig, orders):
 
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update(
-        layout=dict(
-            ternary=dict(
-                aaxis=dict(title=get_label(args, args["a"])),
-                baxis=dict(title=get_label(args, args["b"])),
-                caxis=dict(title=get_label(args, args["c"])),
-            )
+    fig.update_layout(
+        ternary=dict(
+            aaxis=dict(title=get_label(args, args["a"])),
+            baxis=dict(title=get_label(args, args["b"])),
+            caxis=dict(title=get_label(args, args["c"])),
         )
     )
 
@@ -564,30 +562,28 @@ def configure_3d_axes(args, fig, orders):
 
 
 def configure_mapbox(args, fig, orders):
-    fig.update(
-        layout=dict(
-            mapbox=dict(
-                accesstoken=MAPBOX_TOKEN,
-                center=dict(
-                    lat=args["data_frame"][args["lat"]].mean(),
-                    lon=args["data_frame"][args["lon"]].mean(),
-                )
-                if "lat" in args and "lon" in args
-                else dict(),
-                zoom=args["zoom"],
-            )
+    center = args["center"]
+    if not center and "lat" in args and "lon" in args:
+        center = dict(
+            lat=args["data_frame"][args["lat"]].mean(),
+            lon=args["data_frame"][args["lon"]].mean(),
+        )
+    fig.update_layout(
+        mapbox=dict(
+            accesstoken=MAPBOX_TOKEN,
+            center=center,
+            zoom=args["zoom"],
+            style=args["mapbox_style"],
         )
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update(
-        layout=dict(
-            geo=dict(
-                center=args["center"],
-                scope=args["scope"],
-                projection=dict(type=args["projection"]),
-            )
+    fig.update_layout(
+        geo=dict(
+            center=args["center"],
+            scope=args["scope"],
+            projection=dict(type=args["projection"]),
         )
     )
 
@@ -1013,7 +1009,7 @@ def infer_config(args, constructor, trace_patch):
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
         + ["custom_data", "hover_name", "hover_data", "text"]
-        + ["names", "values", "parents", "ids", "radius"]
+        + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]

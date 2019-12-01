@@ -164,11 +164,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
-    radius=[
-        colref_type,
-        colref_desc,
-        "Values from this column or array_like are used to set the radius of influence of each point.",
-    ],
+    radius=["int (default is 30)", "Sets the radius of influence of each point.",],
     hover_name=[
         colref_type,
         colref_desc,
@@ -449,6 +445,12 @@ docs = dict(
         "dict",
         "Dict keys are `'lat'` and `'lon'`",
         "Sets the center point of the map.",
+    ],
+    mapbox_style=[
+        "str (default `'basic'`, needs Mapbox API token)",
+        "Identifier of base map style, some of which require a Mapbox API token to be set using `plotly.express.set_mapbox_access_token()`.",
+        "Allowed values which do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
+        "Allowed values which do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
     ],
     points=[
         "str or boolean (default `'outliers'`)",
