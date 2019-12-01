@@ -381,6 +381,7 @@ def configure_axes(args, constructor, fig, orders):
         go.Barpolar: configure_polar_axes,
         go.Scattermapbox: configure_mapbox,
         go.Choroplethmapbox: configure_mapbox,
+        go.Densitymapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -571,7 +572,7 @@ def configure_mapbox(args, fig, orders):
                     lat=args["data_frame"][args["lat"]].mean(),
                     lon=args["data_frame"][args["lon"]].mean(),
                 )
-                if "lat" in args and "lon" in  args
+                if "lat" in args and "lon" in args
                 else dict(),
                 zoom=args["zoom"],
             )
@@ -1012,7 +1013,7 @@ def infer_config(args, constructor, trace_patch):
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
         + ["custom_data", "hover_name", "hover_data", "text"]
-        + ["names", "values", "parents", "ids"]
+        + ["names", "values", "parents", "ids", "radius"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
@@ -1086,7 +1087,7 @@ def infer_config(args, constructor, trace_patch):
     # Compute final trace patch
     trace_patch = trace_patch.copy()
 
-    if constructor == go.Histogram2d:
+    if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -1225,6 +1226,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcoords,
                 go.Choropleth,
                 go.Choroplethmapbox,
+                go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
@@ -1325,7 +1327,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
         )
     layout_patch = layout_patch.copy()
     if show_colorbar:
-        colorvar = "z" if constructor == go.Histogram2d else "color"
+        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
