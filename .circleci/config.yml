@@ -412,9 +412,13 @@ jobs:
             . venv/bin/activate
             npm install electron@1.8.4
             npm install orca
-            pwd
-            find . -name orca -print
             pip install -r requirements.txt
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              pip uninstall plotly
+              cd ../packages/python/plotly
+              python3 setup.py install
+              cd ../../../doc      
+            fi 
             echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
             cd ..
@@ -424,7 +428,6 @@ jobs:
           name: make html
           command: |
             cd doc
-            ls
             . venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
