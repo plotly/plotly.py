@@ -394,7 +394,7 @@ jobs:
       - image: circleci/python:3.6.8-node
 
 
-        # working_directory: ~/repo
+        working_directory: ~/repo
 
     steps:
       - add_ssh_keys:
@@ -413,7 +413,7 @@ jobs:
             npm install electron@1.8.4 orca
             cat requirements.txt
             pip install -r requirements.txt
-            echo 'export PATH="/home/circleci/repo/node_modules/.bin:$PATH"' >> $BASH_ENV
+            echo 'export PATH="/home/circleci/repo/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
             cd ..
 
