@@ -399,7 +399,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "a1:22:8b:da:c9:9f:88:db:be:cb:1d:c5:12:de:70:4f"
+            - "d9:b0:da:5c:3e:8c:b6:b6:d5:b6:35:70:ce:fe:f5:b1"
 
       - checkout
 
@@ -472,8 +472,8 @@ jobs:
               cd _build/html
               touch .nojekyll
               git init
-              git config user.name nicolaskruchten
-              git config user.email nicolas@plot.ly
+              git config user.name emmanuelle
+              git config user.email emma@plot.ly
               git add *
               git add .nojekyll
               git commit -m build
