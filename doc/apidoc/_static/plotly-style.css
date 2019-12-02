@@ -1,0 +1,38 @@
+.navbar-default {
+    background-color: #00004f;
+}
+.navbar {
+    min-height: 75px;
+}
+.navbar-brand {
+    font-family: "Open Sans", sans-serif;
+    padding: 10px 10px;
+}
+.body {
+    font-family: "Open Sans", sans-serif;
+}
+.navbar-brand img {
+    height: 30px;
+    margin-top: 4px;
+}
+
+.navbar .container {
+    padding-top: 8px;
+}
+
+a {
+    color: #2391fe !important;
+}
+
+code {
+    color: #2c3e50 !important;
+}
+
+.alert-info {
+    background: lightgrey;
+}
+
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+    background: lightgrey;
+}
