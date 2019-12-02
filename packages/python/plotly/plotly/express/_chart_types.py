@@ -1094,6 +1094,8 @@ def line_mapbox(
     color_discrete_sequence=None,
     color_discrete_map={},
     zoom=8,
+    center=None,
+    mapbox_style=None,
     title=None,
     template=None,
     width=None,

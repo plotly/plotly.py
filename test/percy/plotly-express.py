@@ -435,6 +435,45 @@ fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
 
 import plotly.express as px
 
+sample_geojson = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "the_polygon",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
+                ],
+            },
+        }
+    ],
+}
+fig = px.choropleth_mapbox(
+    geojson=sample_geojson,
+    locations=["the_polygon"],
+    color=[10],
+    mapbox_style="carto-positron",
+    zoom=6,
+)
+fig.write_html(os.path.join(dir_name, "choropleth_mapbox.html"), auto_play=False)
+
+import plotly.express as px
+
+carshare = px.data.carshare()
+fig = px.density_mapbox(
+    carshare,
+    lat="centroid_lat",
+    lon="centroid_lon",
+    z="peak_hour",
+    mapbox_style="carto-positron",
+)
+fig.write_html(os.path.join(dir_name, "density_mapbox.html"), auto_play=False)
+
+import plotly.express as px
+
+
 gapminder = px.data.gapminder()
 fig = px.scatter_geo(
     gapminder,
