@@ -287,7 +287,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
-                if trace_spec.constructor == go.Choropleth:
+                if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
@@ -380,6 +380,8 @@ def configure_axes(args, constructor, fig, orders):
         go.Scatterpolargl: configure_polar_axes,
         go.Barpolar: configure_polar_axes,
         go.Scattermapbox: configure_mapbox,
+        go.Choroplethmapbox: configure_mapbox,
+        go.Densitymapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -502,13 +504,11 @@ def configure_cartesian_axes(args, fig, orders):
 
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update(
-        layout=dict(
-            ternary=dict(
-                aaxis=dict(title=get_label(args, args["a"])),
-                baxis=dict(title=get_label(args, args["b"])),
-                caxis=dict(title=get_label(args, args["c"])),
-            )
+    fig.update_layout(
+        ternary=dict(
+            aaxis=dict(title=get_label(args, args["a"])),
+            baxis=dict(title=get_label(args, args["b"])),
+            caxis=dict(title=get_label(args, args["c"])),
         )
     )
 
@@ -562,28 +562,28 @@ def configure_3d_axes(args, fig, orders):
 
 
 def configure_mapbox(args, fig, orders):
-    fig.update(
-        layout=dict(
-            mapbox=dict(
-                accesstoken=MAPBOX_TOKEN,
-                center=dict(
-                    lat=args["data_frame"][args["lat"]].mean(),
-                    lon=args["data_frame"][args["lon"]].mean(),
-                ),
-                zoom=args["zoom"],
-            )
+    center = args["center"]
+    if not center and "lat" in args and "lon" in args:
+        center = dict(
+            lat=args["data_frame"][args["lat"]].mean(),
+            lon=args["data_frame"][args["lon"]].mean(),
+        )
+    fig.update_layout(
+        mapbox=dict(
+            accesstoken=MAPBOX_TOKEN,
+            center=center,
+            zoom=args["zoom"],
+            style=args["mapbox_style"],
         )
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update(
-        layout=dict(
-            geo=dict(
-                center=args["center"],
-                scope=args["scope"],
-                projection=dict(type=args["projection"]),
-            )
+    fig.update_layout(
+        geo=dict(
+            center=args["center"],
+            scope=args["scope"],
+            projection=dict(type=args["projection"]),
         )
     )
 
@@ -1083,7 +1083,7 @@ def infer_config(args, constructor, trace_patch):
     # Compute final trace patch
     trace_patch = trace_patch.copy()
 
-    if constructor == go.Histogram2d:
+    if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -1221,6 +1221,8 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcats,
                 go.Parcoords,
                 go.Choropleth,
+                go.Choroplethmapbox,
+                go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
@@ -1321,7 +1323,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
         )
     layout_patch = layout_patch.copy()
     if show_colorbar:
-        colorvar = "z" if constructor == go.Histogram2d else "color"
+        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
