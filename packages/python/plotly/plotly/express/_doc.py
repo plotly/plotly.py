@@ -483,7 +483,7 @@ docs = dict(
 
 
 def make_docstring(fn, override_dict={}):
-    tw = TextWrapper(width=77, initial_indent="    ", subsequent_indent="    ")
+    tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
         if override_dict.get(param):
