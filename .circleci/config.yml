@@ -431,8 +431,8 @@ jobs:
 
       - save_cache:
           paths:
-            - ./venv
-            - ./node_modules
+            - ./doc/venv
+            - ./doc/node_modules
           key: v1-dependencies-{{ checksum "doc/requirements.txt" }}
 
       - run:
