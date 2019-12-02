@@ -453,7 +453,7 @@ jobs:
               git config user.email nicolas@plot.ly
               git add *
               git commit -m build
-              git push --force git@github.com:plotly/plotly.py.git doc-prod:built
+              git push --force git@github.com:plotly/plotly.py.git master:built
               rm -rf .git
               cd ../..
             fi
@@ -489,10 +489,6 @@ jobs:
           path: doc/build
           destination: doc/build
      
- 
-      - store_artifacts:
-          path: doc/apidoc/_build/html
-          destination: doc/apidoc
 
 
 workflows:
