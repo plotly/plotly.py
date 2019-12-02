@@ -1029,7 +1029,11 @@ def choropleth_mapbox(
     return make_figure(
         args=locals(),
         constructor=go.Choroplethmapbox,
-        trace_patch=dict(geojson=geojson),
+        trace_patch=dict(
+            geojson=geojson
+            if not hasattr(geojson, "__geo_interface__")
+            else geojson.__geo_interface__
+        ),
     )
 
 
