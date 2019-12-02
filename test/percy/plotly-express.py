@@ -537,6 +537,6 @@ fig.write_html(os.path.join(dir_name, "sunburst.html"), auto_play=False)
 import plotly.express as px
 
 fig = px.funnel(
-    y=["first", "second", "first", "second"], x=[3,1,4,2], color=["A", "A", "B", "B"]
+    y=["first", "second", "first", "second"], x=[3, 1, 4, 2], color=["A", "A", "B", "B"]
 )
 fig.write_html(os.path.join(dir_name, "funnel.html"), auto_play=False)
