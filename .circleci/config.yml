@@ -420,7 +420,7 @@ jobs:
             npm install orca
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              pip uninstall plotly
+              pip uninstall -y plotly
               cd ../packages/python/plotly
               python3 setup.py install
               cd ../../../doc      
