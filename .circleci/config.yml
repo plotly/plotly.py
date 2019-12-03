@@ -453,7 +453,7 @@ jobs:
               git config user.email nicolas@plot.ly
               git add *
               git commit -m build
-              git push --force git@github.com:plotly/plotly.py.git master:built
+              git push --force git@github.com:plotly/plotly.py-docs.git master:built
               rm -rf .git
               cd ../..
             fi
