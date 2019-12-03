@@ -397,9 +397,9 @@ jobs:
         working_directory: ~/project
 
     steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a"
+      - add_ssh_keys:
+          fingerprints:
+            - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a"
 
       - checkout
 
