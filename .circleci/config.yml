@@ -399,7 +399,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "d9:b0:da:5c:3e:8c:b6:b6:d5:b6:35:70:ce:fe:f5:b1"
+            - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a"
 
       - checkout
 
@@ -453,7 +453,7 @@ jobs:
               git config user.email nicolas@plot.ly
               git add *
               git commit -m build
-              git push --force git@github.com:plotly/plotly.py.git master:built
+              git push --force git@github.com:plotly/plotly.py-docs.git master:built
               rm -rf .git
               cd ../..
             fi
