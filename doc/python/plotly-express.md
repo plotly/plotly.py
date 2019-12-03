@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: Plotly Express is a terse, consistent, high-level API for rapid data
       exploration and figure generation.
@@ -259,6 +259,18 @@ fig.show()
 import plotly.express as px
 election = px.data.election()
 fig = px.line_ternary(election, a="Joly", b="Coderre", c="Bergeron", color="winner", line_dash="winner")
+fig.show()
+```
+
+### Images
+
+```python
+import plotly.express as px
+import numpy as np
+img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]],
+                    [[0, 255, 0], [0, 0, 255], [255, 0, 0]]
+                   ], dtype=np.uint8)
+fig = px.imshow(img_rgb)
 fig.show()
 ```
 
