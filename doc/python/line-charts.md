@@ -161,6 +161,7 @@ fig.show()
 ```
 
 #### Connect Data Gaps
+[connectgaps](https://plot.ly/python/reference/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plot.ly/python/filled-area-on-mapbox/#multiple-filled-areas-with-a-scattermapbox-trace), we showed how to take benefit of this feature and illustrate multiple areas in mapbox.
 
 ```python
 import plotly.graph_objects as go
