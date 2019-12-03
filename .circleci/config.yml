@@ -399,7 +399,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "d9:b0:da:5c:3e:8c:b6:b6:d5:b6:35:70:ce:fe:f5:b1"
+            - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a"
 
       - checkout
 
