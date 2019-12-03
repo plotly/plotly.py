@@ -1267,7 +1267,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if m.facet == "row":
                     row = m.val_map[val]
                     if args["facet_row"] and len(row_labels) < row:
-                        row_labels.append(args["facet_row"] + "=" + str(val))
+                        row_labels.append(
+                            get_label(args, args["facet_row"]) + "=" + str(val)
+                        )
                 else:
                     if (
                         bool(args.get("marginal_x", False))
@@ -1282,7 +1284,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if m.facet == "col":
                     col = m.val_map[val]
                     if args["facet_col"] and len(col_labels) < col:
-                        col_labels.append(args["facet_col"] + "=" + str(val))
+                        col_labels.append(
+                            get_label(args, args["facet_col"]) + "=" + str(val)
+                        )
                     if facet_col_wrap:  # assumes no facet_row, no marginals
                         row = 1 + ((col - 1) // facet_col_wrap)
                         col = 1 + ((col - 1) % facet_col_wrap)
