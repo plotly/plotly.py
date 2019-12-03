@@ -487,6 +487,294 @@ fig.update_layout(
 
 fig.show()
 ```
+### Control Box Position in Different Subplots
+
+To control box plot positional range among several subplots, set the same axes to the same [alignmentgroup](https://plot.ly/python/reference/#box-alignmentgroup). In the following example we have two subplots sharing an x axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom, that all are aligned by setting the same `alignmentgroup`. 
+You also can line up bars of the same positional coordinate by setting [offsetgroup](https://plot.ly/python/reference/#box-offsetgroup).
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Box(
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.update_layout(
+    yaxis2 = {'domain': [.55,1]},
+    yaxis = {'domain': [0,.45]},
+    boxmode = 'group')
+
+fig.show()
+```
+Let's compare the impact of `offsetgroup` vs. `alignmentgroup`. 
+
+```python
+
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4], 
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 2,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "b",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y2'))
+
+fig.update_layout(
+    xaxis = {
+        'domain': [0, .35],
+        'anchor': 'y',
+        'title': "=alignment<br>≠offset"},
+    xaxis2 = {
+        'domain': [.42, .65],
+        'title': "≠alignment<br>=offset",
+        'anchor': 'y'
+    },
+    xaxis3 = {
+        'domain': [.72, 1],
+        'title': "=alignment<br>=offset",
+        'anchor': 'y'
+    },
+    yaxis2 = {
+        'domain': [.55,1],
+        'anchor': 'x'},
+    yaxis = {
+        'domain': [0,.45],
+        'anchor': 'x'})
+
+fig.show()
+```
+### Control Box Position in Different Subplots
+
+To control box plot positional range among several subplots, set the same axes to the same [alignmentgroup](https://plot.ly/python/reference/#box-alignmentgroup). In the following example we have two subplots sharing an x axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom, that all are aligned by setting the same `alignmentgroup`. 
+You also can line up bars of the same positional coordinate by setting [offsetgroup](https://plot.ly/python/reference/#box-offsetgroup).
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Box(
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.update_layout(
+    yaxis2 = {'domain': [.55,1]},
+    yaxis = {'domain': [0,.45]},
+    boxmode = 'group')
+
+fig.show()
+```
+
+### Offsetgroup vs. Alignmentgroup
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Box(
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 2,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x2',
+    yaxis = 'y3'))
+
+fig.add_trace(go.Box(
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    xaxis = 'x2',
+    yaxis = 'y3'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "b",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x2',
+    yaxis = 'y4'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x3',
+    yaxis = 'y5'))
+
+fig.add_trace(go.Box(
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    xaxis = 'x3',
+    yaxis = 'y5'))
+
+fig.add_trace(go.Box(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    y = [2,6,10,2,7,1,5],
+    x = [1,1,1,1,1,1,1], 
+    xaxis = 'x3',
+    yaxis = 'y6'))
+
+fig.update_layout(
+    boxmode = 'group',
+    xaxis = {
+        'domain': [0, .35],
+        'anchor': 'y2',
+        'title': "=alignment<br>≠offset"},
+    xaxis2 = {
+        'domain': [.42, .65],
+        'title': "≠alignment<br>=offset",
+        'anchor': 'y2'
+    },
+    xaxis3 = {
+        'domain': [.72, 1],
+        'title': "=alignment<br>=offset",
+        'anchor': 'y2'
+    },
+    yaxis = {
+        'domain': [.55,1],
+        'anchor': 'x'},
+    yaxis2 = {
+        'domain': [0,.45],
+        'anchor': 'x'},
+    yaxis3 = {'domain': [.55,1], 'anchor': 'x2'},
+    yaxis4 = {'domain': [0, .5], 'anchor': 'x2'},
+    yaxis5 = {'domain': [.55, 1], 'anchor': 'x3'},
+    yaxis6 = {'domain': [0, .5], 'anchor': 'x3'})
+
+
+fig.show()
+```
 
 #### Reference
 

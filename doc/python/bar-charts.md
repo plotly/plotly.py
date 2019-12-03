@@ -315,6 +315,158 @@ fig.update_layout(
 fig.show()
 ```
 
+### Control Bar Position in Different Subplots
+
+To control bars positional range among several subplots, set the same axes to the same [alignmentgroup](https://plot.ly/python/reference/#bar-alignmentgroup). In the following example we have two subplots sharing an x axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom, that all are aligned by setting the same `alignmentgroup`. 
+You also can line up bars of the same positional coordinate by setting [offsetgroup](https://plot.ly/python/reference/#bar-offsetgroup).
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4], 
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+
+fig.update_layout(
+    xaxis = {
+        'anchor': 'y'},
+    yaxis2 = {
+        'domain': [.55,1],
+        'anchor': 'x'},
+    yaxis = {
+        'domain': [0,.45],
+        'anchor': 'x'})
+
+fig.show()
+```
+
+### Offsetgroup vs. Alignmentgroup 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4], 
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 2,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x',
+    yaxis = 'y2'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y3'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "b",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y4'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x2',
+    yaxis = 'y3'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 0,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y5'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y6'))
+
+fig.add_trace(go.Bar(
+    alignmentgroup = "a",
+    offsetgroup = 1,
+    x = [1,2,3],
+    y = [2,3,4],
+    xaxis = 'x3',
+    yaxis = 'y5'))
+
+fig.update_layout(
+    xaxis = {
+        'domain': [0, .35],
+        'anchor': 'y',
+        'title': "=alignment<br>≠offset"},
+    xaxis2 = {
+        'domain': [.42, .65],
+        'title': "≠alignment<br>=offset",
+        'anchor': 'y'
+    },
+    xaxis3 = {
+        'domain': [.72, 1],
+        'title': "=alignment<br>=offset",
+        'anchor': 'y'
+    },
+    yaxis2 = {
+        'domain': [.55,1],
+        'anchor': 'x'},
+    yaxis = {
+        'domain': [0,.45],
+        'anchor': 'x'},
+    yaxis3 = {'domain': [.55,1], 'anchor': 'x2'},
+    yaxis4 = {'domain': [0, .5], 'anchor': 'x2'},
+    yaxis5 = {'domain': [.55, 1], 'anchor': 'x3'},
+    yaxis6 = {'domain': [0, .5], 'anchor': 'x3'})
+
+fig.show()
+```
+
 ### Bar Chart with Relative Barmode
 
 With "relative" barmode, the bars are stacked on top of one another, with negative values
