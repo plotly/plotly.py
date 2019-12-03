@@ -6,7 +6,7 @@ from plotly import exceptions, optional_imports
 import plotly.colors as clrs
 from plotly.figure_factory import utils
 from plotly.graph_objs import graph_objs
-from plotly.tools import make_subplots
+from plotly.subplots import make_subplots
 
 pd = optional_imports.get_module("pandas")
 
