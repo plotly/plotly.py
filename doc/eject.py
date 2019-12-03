@@ -23,5 +23,5 @@ for html_path in Path("../documentation/_posts/python").glob("**/*.html"):
                 print(metadata["permalink"], ipynb_path, "fail")
                 # pass
     else:
-        #  print("NO NB", html_path)
+        # print("NO NB", html_path)
         pass
