@@ -1,1 +1,1 @@
-The main plotly distribution package
+../../../README.md
