@@ -70,6 +70,33 @@ fig = go.Figure(go.Histogram2d(x=x, y=y, histnorm='probability',
     ))
 fig.show()
 ```
+### Sharing bin settings between 2D Histograms
+This example shows how to use [bingroup](https://plot.ly/python/reference/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis seperatly, set [ybins](https://plot.ly/python/reference/#histogram2dcontour-ybins) and `xbins`.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+fig = make_subplots(2,2)
+fig.add_trace(go.Histogram2d(
+    x = [ 1, 2, 2, 3, 4 ],
+    y = [ 1, 2, 2, 3, 4 ],
+    xbins = {'start':1, 'size':1}), 1,1)
+fig.add_trace(go.Histogram2d(
+    x = [ 4, 5, 5, 5, 6 ],
+    y = [ 4, 5, 5, 5, 6 ],
+    ybins = {'start': 3, 'size': 1}),1,2)
+fig.add_trace(go.Histogram2d(
+    x = [ 1, 2, 2, 3, 4 ],
+    y = [ 1, 2, 2, 3, 4 ],
+    bingroup = 1,
+    xbins = {'start':1, 'size':1}), 2,1)
+fig.add_trace(go.Histogram2d(
+    x = [ 4, 5, 5, 5, 6 ],
+    y = [ 4, 5, 5, 5, 6 ],
+    bingroup = 1,
+    ybins = {'start': 3, 'size': 1}),2,2)
+fig.show()
+```
 
 ### 2D Histogram Overlaid with a Scatter Chart ###
 
