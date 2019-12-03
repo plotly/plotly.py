@@ -31,7 +31,6 @@ jupyter:
     page_type: example_index
     permalink: python/pie-charts/
     thumbnail: thumbnail/pie-chart.jpg
-    redirect_from: /python/pie/
 ---
 
 ### Basic Pie Chart ###
@@ -77,6 +76,21 @@ values = [4500, 2500, 1053, 500]
 
 # Use `hole` to create a donut-like pie chart
 fig = go.Figure(data=[go.Pie(labels=labels, values=values, hole=.3)])
+fig.show()
+```
+
+### Pulling sectors out from the center
+
+For a "pulled-out" or "exploded" layout of the pie chart, use the `pull` argument. It can be a scalar for pulling all sectors or an array to pull only some of the sectors.
+
+```python
+import plotly.graph_objects as go
+
+labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+values = [4500, 2500, 1053, 500]
+
+# pull is given as a fraction of the pie radius
+fig = go.Figure(data=[go.Pie(labels=labels, values=values, pull=[0, 0, 0.2, 0])])
 fig.show()
 ```
 
