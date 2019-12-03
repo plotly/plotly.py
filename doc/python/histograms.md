@@ -350,6 +350,28 @@ fig1.show()
 fig2.show()
 ```
 
+### Share bins between histograms
+In this example both histograms have a compatible bin settings using [bingroup](https://plot.ly/python/reference/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plot.ly/python/2D-Histogram/) trace can share the same `bingroup`.
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+fig = go.Figure(go.Histogram(
+    x=np.random.randint(7, size=100),
+    bingroup=1))
+
+fig.add_trace(go.Histogram(
+    x=np.random.randint(7, size=20),
+    bingroup=1))
+
+fig.update_layout(
+    barmode="overlay",
+    bargap=0.1)
+
+fig.show()
+```
+
 ### Dash Example
 
 
