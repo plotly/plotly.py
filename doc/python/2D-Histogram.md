@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.5
   plotly:
     description: How to make 2D Histograms in Python with Plotly.
     display_as: statistical
@@ -76,24 +76,29 @@ This example shows how to use [bingroup](https://plot.ly/python/reference/#histo
 ```python
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+
 fig = make_subplots(2,2)
 fig.add_trace(go.Histogram2d(
     x = [ 1, 2, 2, 3, 4 ],
     y = [ 1, 2, 2, 3, 4 ],
+    coloraxis = "coloraxis",
     xbins = {'start':1, 'size':1}), 1,1)
 fig.add_trace(go.Histogram2d(
     x = [ 4, 5, 5, 5, 6 ],
     y = [ 4, 5, 5, 5, 6 ],
+    coloraxis = "coloraxis",
     ybins = {'start': 3, 'size': 1}),1,2)
 fig.add_trace(go.Histogram2d(
     x = [ 1, 2, 2, 3, 4 ],
     y = [ 1, 2, 2, 3, 4 ],
     bingroup = 1,
+    coloraxis = "coloraxis",
     xbins = {'start':1, 'size':1}), 2,1)
 fig.add_trace(go.Histogram2d(
     x = [ 4, 5, 5, 5, 6 ],
     y = [ 4, 5, 5, 5, 6 ],
     bingroup = 1,
+    coloraxis = "coloraxis",
     ybins = {'start': 3, 'size': 1}),2,2)
 fig.show()
 ```
@@ -166,4 +171,3 @@ fig.show()
 
 #### Reference
 See https://plot.ly/python/reference/#histogram2d for more information and chart attribute options!
-
