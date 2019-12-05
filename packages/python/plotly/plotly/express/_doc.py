@@ -303,6 +303,10 @@ docs = dict(
         "list of two numbers",
         "If provided, overrides auto-scaling on the radial axis in polar coordinates.",
     ],
+    range_theta=[
+        "list of two numbers",
+        "If provided, overrides auto-scaling on the angular axis in polar coordinates.",
+    ],
     title=["str", "The figure title."],
     template=[
         "or dict or plotly.graph_objects.layout.Template instance",

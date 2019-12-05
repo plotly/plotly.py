@@ -534,6 +534,9 @@ def configure_polar_axes(args, fig, orders):
     else:
         if args["range_r"]:
             radialaxis["range"] = args["range_r"]
+
+    if args["range_theta"]:
+        layout["polar"]["sector"] = args["range_theta"]
     fig.update(layout=layout)
 
 

@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.6.8
   plotly:
     description: How to make polar charts in Python with Plotly.
     display_as: scientific
@@ -74,6 +74,15 @@ fig.show()
 
 See also the [wind rose page](https://plot.ly/python/wind-rose-charts/) for more wind rose visualizations in polar coordinates.
 
+
+You can plot less than a whole circle with the `range_theta` argument, and also control the `start_angle` and `direction`:
+
+```python
+import plotly.express as px
+fig = px.scatter_polar(r=range(0,90,10), theta=range(0,90,10), 
+                       range_theta=[0,90], start_angle=0, direction="counterclockwise")
+fig.show()
+```
 
 ## Polar Scatter Plot with go.Scatterpolar
 
