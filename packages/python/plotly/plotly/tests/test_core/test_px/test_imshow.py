@@ -100,10 +100,9 @@ def test_zmax_floats():
 
 
 def test_zmin_zmax_range_color():
-    img = img_gray / 100.
+    img = img_gray / 100.0
     fig = px.imshow(img)
-    assert not (fig.layout.coloraxis.cmin or
-                fig.layout.coloraxis.cmax)
+    assert not (fig.layout.coloraxis.cmin or fig.layout.coloraxis.cmax)
     fig1 = px.imshow(img, zmin=0.2, zmax=0.8)
     fig2 = px.imshow(img, range_color=[0.2, 0.8])
     assert fig1 == fig2
@@ -113,5 +112,5 @@ def test_zmin_zmax_range_color():
     assert fig.layout.coloraxis.cmax == 0.8
     # It's possible to pass only zmin OR zmax
     fig = px.imshow(img, zmax=0.8)
-    assert fig.layout.coloraxis.cmin == 0.
+    assert fig.layout.coloraxis.cmin == 0.0
     assert fig.layout.coloraxis.cmax == 0.8
