@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.5
   plotly:
     description: How to make 2D Histograms in Python with Plotly.
     display_as: statistical
@@ -68,6 +68,38 @@ fig = go.Figure(go.Histogram2d(x=x, y=y, histnorm='probability',
         ybins=dict(start=-2.5, end=4, size=0.1),
         colorscale=[[0, 'rgb(12,51,131)'], [0.25, 'rgb(10,136,186)'], [0.5, 'rgb(242,211,56)'], [0.75, 'rgb(242,143,56)'], [1, 'rgb(217,30,30)']]
     ))
+fig.show()
+```
+### Sharing bin settings between 2D Histograms
+This example shows how to use [bingroup](https://plot.ly/python/reference/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis seperatly, set [ybins](https://plot.ly/python/reference/#histogram2dcontour-ybins) and `xbins`.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+fig = make_subplots(2,2)
+fig.add_trace(go.Histogram2d(
+    x = [ 1, 2, 2, 3, 4 ],
+    y = [ 1, 2, 2, 3, 4 ],
+    coloraxis = "coloraxis",
+    xbins = {'start':1, 'size':1}), 1,1)
+fig.add_trace(go.Histogram2d(
+    x = [ 4, 5, 5, 5, 6 ],
+    y = [ 4, 5, 5, 5, 6 ],
+    coloraxis = "coloraxis",
+    ybins = {'start': 3, 'size': 1}),1,2)
+fig.add_trace(go.Histogram2d(
+    x = [ 1, 2, 2, 3, 4 ],
+    y = [ 1, 2, 2, 3, 4 ],
+    bingroup = 1,
+    coloraxis = "coloraxis",
+    xbins = {'start':1, 'size':1}), 2,1)
+fig.add_trace(go.Histogram2d(
+    x = [ 4, 5, 5, 5, 6 ],
+    y = [ 4, 5, 5, 5, 6 ],
+    bingroup = 1,
+    coloraxis = "coloraxis",
+    ybins = {'start': 3, 'size': 1}),2,2)
 fig.show()
 ```
 
@@ -139,4 +171,3 @@ fig.show()
 
 #### Reference
 See https://plot.ly/python/reference/#histogram2d for more information and chart attribute options!
-
