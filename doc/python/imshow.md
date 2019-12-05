@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -94,6 +94,19 @@ import plotly.express as px
 import numpy as np
 img = np.arange(100).reshape((10, 10))
 fig = px.imshow(img, color_continuous_scale='gray')
+fig.show()
+```
+
+### Hiding the colorbar when displaying a single-channel image
+
+See [the tutorial on coloraxis](/python/colorscales/#share-color-axis) for more details on coloraxis.
+
+```python
+import plotly.express as px
+from skimage import data
+img = data.camera()
+fig = px.imshow(img, color_continuous_scale='gray')
+fig.update_layout(coloraxis_showscale=False)
 fig.show()
 ```
 
