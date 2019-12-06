@@ -96,6 +96,7 @@ fig.show()
 ```
 
 ### Style Sankey Diagram
+This example also uses [hovermode](https://plot.ly/python/reference/#layout-hovermode) to enable multiple tooltips. 
 
 ```python
 import plotly.graph_objects as go
@@ -123,6 +124,7 @@ fig = go.Figure(data=[go.Sankey(
   ))])
 
 fig.update_layout(
+    hovermode = 'x',
     title="Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>",
     font=dict(size = 10, color = 'white'),
     plot_bgcolor='black',

@@ -53,6 +53,30 @@ def test_custom_data_scatter():
     )
 
 
+def test_labels():
+    tips = px.data.tips()
+    fig = px.scatter(
+        tips,
+        x="total_bill",
+        y="tip",
+        facet_row="time",
+        facet_col="day",
+        color="size",
+        symbol="sex",
+        labels={c: c[::-1] for c in tips.columns},
+    )
+    assert "xes" in fig.data[0].hovertemplate
+    assert "llib_latot" in fig.data[0].hovertemplate
+    assert "ezis" in fig.data[0].hovertemplate
+    assert "yad" in fig.data[0].hovertemplate
+    assert "emit" in fig.data[0].hovertemplate
+    assert fig.data[0].name.startswith("xes")
+    assert fig.layout.xaxis.title.text == "llib_latot"
+    assert fig.layout.coloraxis.colorbar.title.text == "ezis"
+    assert fig.layout.annotations[0].text.startswith("yad")
+    assert fig.layout.annotations[4].text.startswith("emit")
+
+
 def test_px_templates():
     import plotly.io as pio
     import plotly.graph_objects as go
