@@ -20,7 +20,7 @@ def _swatches(module_names, module_contents, template=None):
     sequences = [
         (k, v)
         for k, v in module_contents.items()
-        if not (k.startswith("_") or k == "swatches")
+        if not (k.startswith("_") or k == "swatches" or k.endswith("_r"))
     ]
 
     return go.Figure(
@@ -33,7 +33,7 @@ def _swatches(module_names, module_contents, template=None):
                 marker=dict(color=colors),
                 hovertemplate="%{y}[%{customdata}] = %{marker.color}<extra></extra>",
             )
-            for name, colors in reversed(sequences)
+            for name, colors in (sequences)
         ],
         layout=dict(
             title="plotly.colors." + module_names.split(".")[-1],
