@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -198,6 +198,34 @@ fig.update_layout(
         'type':'log'},
     yaxis={'title':'Life Expectancy (years)'})
 
+fig.show()
+```
+
+### Adding other data to the hover with customdata and a hovertemplate
+
+`go` traces have a `customdata` argument in which you can add an array, which outer dimensions should have the same dimensions as the plotted data. You can then use `customdata` inside a `hovertemplate` to display the value of customdata.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import numpy as np
+np.random.seed(0)
+z1, z2, z3 = np.random.random((3, 7, 7))
+customdata = np.dstack((z2, z3))
+fig = make_subplots(1, 2, subplot_titles=['z1', 'z2'])
+fig.add_trace(go.Heatmap(
+    z=z1, 
+    customdata=np.dstack((z2, z3)),
+    hovertemplate='<b>z1:%{z:.3f}</b><br>z2:%{customdata[0]:.3f} <br>z3: %{customdata[1]:.3f} ',
+    coloraxis="coloraxis1", name=''),
+    1, 1)
+fig.add_trace(go.Heatmap(
+    z=z2, 
+    customdata=np.dstack((z1, z3)),
+    hovertemplate='z1:%{customdata[0]:.3f} <br><b>z2:%{z:.3f}</b><br>z3: %{customdata[1]:.3f} ',
+    coloraxis="coloraxis1", name=''),
+    1, 2)
+fig.update_layout(title_text='Hover to see the value of z1, z2 and z3 together')
 fig.show()
 ```
 
