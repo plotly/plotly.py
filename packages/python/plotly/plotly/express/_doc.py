@@ -398,9 +398,10 @@ docs = dict(
     ],
     barmode=[
         "str (default `'relative'`)",
-        "One of `'group'`, `'overlay'` or `'relative'`",
+        "One of `'group'`, `'overlay'`, `'relative'` or `'stack'`",
+        "In `'stack'` mode, bars are placed on top of each other.",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
-        "In `'overlay'` mode, bars are drawn on top of one another.",
+        "In `'overlay'` mode, bars are drawn over each other.",
         "In `'group'` mode, bars are placed beside each other.",
     ],
     boxmode=[
