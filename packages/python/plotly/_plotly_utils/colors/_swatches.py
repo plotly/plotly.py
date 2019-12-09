@@ -33,7 +33,7 @@ def _swatches(module_names, module_contents, template=None):
                 marker=dict(color=colors),
                 hovertemplate="%{y}[%{customdata}] = %{marker.color}<extra></extra>",
             )
-            for name, colors in (sequences)
+            for name, colors in reversed(sequences)
         ],
         layout=dict(
             title="plotly.colors." + module_names.split(".")[-1],
