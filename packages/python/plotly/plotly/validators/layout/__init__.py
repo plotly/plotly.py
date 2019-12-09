@@ -2122,7 +2122,8 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             bgcolor
-                Sets the legend background color.
+                Sets the legend background color. Defaults to
+                `layout.paper_bgcolor`.
             bordercolor
                 Sets the color of the border enclosing the
                 legend.
