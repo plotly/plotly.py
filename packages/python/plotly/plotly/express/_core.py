@@ -918,7 +918,7 @@ def build_dataframe(args, attrables, array_attrables):
                 raise TypeError(
                     "Argument '%s' is a pandas MultiIndex. "
                     "pandas MultiIndex is not supported by plotly express "
-                    "at the moment." % field
+                    "at the moment. You can pass a level name instead." % field
                 )
             # ----------------- argument is a col name ----------------------
             if isinstance(argument, (str, int)):
@@ -956,7 +956,7 @@ def build_dataframe(args, attrables, array_attrables):
                 col_name = str(argument)
                 if argument in df_input.columns:  # string or int
                     vals = df_input[argument]
-                else:  # string only at this stage
+                else:  # pick MultiIndex level with that name
                     vals = pd.Series(
                         df_input.index.get_level_values(level=argument),
                         index=df_input.index,
@@ -970,6 +970,10 @@ def build_dataframe(args, attrables, array_attrables):
                         % (field, len(vals), str(list(df_output.columns)), length)
                     )
                 df_output[col_name] = vals
+                # avoid df_output.groupby ambiguity errors
+                if argument in df_output.index.names:
+                    df_output.reset_index(level=argument, inplace=True, drop=True)
+
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)
