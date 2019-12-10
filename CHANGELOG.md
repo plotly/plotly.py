@@ -22,8 +22,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added 
 
- - Extended the plotly.express functional API with .. new functions: `px.pie`,
-   `px.sunburst`, `px.treemap`, `px.funnel`, and `px.funnelarea` ([#1909](https://github.com/plotly/plotly.py/pull/1909)) `px.density_mapbox` and
+ - Extended the plotly.express functional API with 7 new functions: `px.pie`,
+   `px.sunburst`, `px.treemap`, `px.funnel`, and `px.funnel_area` ([#1909](https://github.com/plotly/plotly.py/pull/1909)) `px.density_mapbox` and
    `px.choropleth_mapbox` [#1937](https://github.com/plotly/plotly.py/pull/1937). Also, all mapbox functions in plotly.express have new arguments `center` and `mapbox_style` [#1937](https://github.com/plotly/plotly.py/pull/1937).
  - plotly.express polar plots (`scatter_polar`, `line_polar`, `bar_polar`) now
    have a `range_theta` keyword argument for representing only an angular
