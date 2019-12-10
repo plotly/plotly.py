@@ -26,7 +26,7 @@
 
 ## Quickstart
 
-`pip install plotly==4.4.0`
+`pip install plotly==4.4.1`
 
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 ```python
