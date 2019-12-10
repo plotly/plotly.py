@@ -2870,7 +2870,8 @@ class Volume(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -5533,8 +5534,7 @@ class Violin(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the violins are shown
-        with no sample points and the whiskers extend to the range of the
-        sample.
+        with no sample points
     
         The 'points' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -6279,7 +6279,7 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -6611,7 +6611,7 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -10331,7 +10331,8 @@ class Surface(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -14321,7 +14322,8 @@ class Streamtube(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -46589,7 +46591,8 @@ class Mesh3d(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -49199,7 +49202,8 @@ class Isosurface(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -53650,7 +53654,8 @@ class Histogram2dContour(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -56286,7 +56291,8 @@ class Histogram2d(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -61006,7 +61012,8 @@ class Heatmapgl(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -62846,7 +62853,8 @@ class Heatmap(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -69238,7 +69246,8 @@ class Densitymapbox(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -71327,7 +71336,8 @@ class Contourcarpet(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -73294,7 +73304,8 @@ class Contour(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -75946,7 +75957,8 @@ class Cone(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -78056,7 +78068,8 @@ class Choroplethmapbox(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -79953,7 +79966,8 @@ class Choropleth(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -84723,8 +84737,7 @@ class Box(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the box(es) are shown
-        with no sample points and the whiskers extend to the range of the
-        sample.
+        with no sample points
     
         The 'boxpoints' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -85990,7 +86003,7 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -86296,7 +86309,7 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -88951,10 +88964,10 @@ class Bar(_BaseTraceType):
         this link https://plot.ly/javascript/plotlyjs-events/#event-
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        variables `value` and `label`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -89895,7 +89908,7 @@ class Bar(_BaseTraceType):
         reference/blob/master/Time-Formatting.md#format for details on
         the date formatting syntax. Every attributes that can be
         specified per-point (the ones that are `arrayOk: true`) are
-        available.
+        available. variables `value` and `label`.
     
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -90404,8 +90417,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90546,7 +90560,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -90767,8 +90782,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90909,7 +90925,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -93872,7 +93889,8 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 bgcolor
-                    Sets the legend background color.
+                    Sets the legend background color. Defaults to
+                    `layout.paper_bgcolor`.
                 bordercolor
                     Sets the color of the border enclosing the
                     legend.
@@ -95064,31 +95082,29 @@ class Layout(_BaseLayoutType):
         annotation or a logo image, for example. To omit one of these
         items on the plot, make an item with matching
         `templateitemname` and `visible: false`.
-
+    
         The 'template' property is an instance of Template
         that may be specified as:
           - An instance of plotly.graph_objs.layout.Template
           - A dict of string/value properties that will be passed
             to the Template constructor
-
+    
             Supported dict properties:
-
+                
                 data
                     plotly.graph_objects.layout.template.Data
                     instance or dict with compatible properties
                 layout
                     plotly.graph_objects.Layout instance or dict
                     with compatible properties
-
+    
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
-
                 >>> import plotly.io as pio
-                >>> list(pio.templates) # doctest: +ELLIPSIS
-                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', 'plotly_dark', ...]
-
-
+                >>> list(pio.templates)  # doctest: +ELLIPSIS
+                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
+    
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 

@@ -19,7 +19,7 @@ class PxDefaults(object):
     def __init__(self):
         self.template = None
         self.width = None
-        self.height = 600
+        self.height = None
         self.color_discrete_sequence = None
         self.color_continuous_scale = None
         self.symbol_sequence = None
@@ -534,6 +534,9 @@ def configure_polar_axes(args, fig, orders):
     else:
         if args["range_r"]:
             radialaxis["range"] = args["range_r"]
+
+    if args["range_theta"]:
+        layout["polar"]["sector"] = args["range_theta"]
     fig.update(layout=layout)
 
 

@@ -1384,11 +1384,10 @@ Install using conda:
 """
         )
 
-    # Validate orca executable
-    if status.state == "unvalidated":
-        validate_executable()
-
     if not config.server_url:
+        # Validate orca executable only if server_url is not provided
+        if status.state == "unvalidated":
+            validate_executable()
         # Acquire lock to make sure that we keep the properties of orca_state
         # consistent across threads
         with orca_lock:
