@@ -1,7 +1,6 @@
 import inspect
 from textwrap import TextWrapper
 
-
 # TODO contents of columns
 # TODO explain categorical
 # TODO handle color
@@ -164,7 +163,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
-    radius=["int (default is 30)", "Sets the radius of influence of each point.",],
+    radius=["int (default is 30)", "Sets the radius of influence of each point."],
     hover_name=[
         colref_type,
         colref_desc,
@@ -399,7 +398,8 @@ docs = dict(
     barmode=[
         "str (default `'relative'`)",
         "One of `'group'`, `'overlay'`, `'relative'` or `'stack'`",
-        "In `'stack'` mode, bars are placed on top of each other.",
+        "In `'stack'` mode, bars are placed on top of each other."
+        "Positive and negative values will cancel out, drawn in order of appearance in `data_frame`.",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
         "In `'overlay'` mode, bars are drawn over each other.",
         "In `'group'` mode, bars are placed beside each other.",
