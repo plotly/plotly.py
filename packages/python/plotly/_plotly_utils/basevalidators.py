@@ -1532,8 +1532,8 @@ class ColorscaleValidator(BaseValidator):
                 and len(c) == 2
                 and isinstance(c[0], str)
                 and isinstance(c[1], list)
-                and not c[0].endswith('_r')
-                and not c[0].startswith('_')
+                and not c[0].endswith("_r")
+                and not c[0].startswith("_")
             }
 
         return self._named_colorscales
