@@ -10,7 +10,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  for more information
  - The tutorials of the [plotly.py documentation](https://plot.ly/python/) are
    now in the main [plotly.py Github repository](https://github.com/plotly/plotly.py). Contributions in order to improve or extend the documentation are very welcome!
-
+ - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). Note that the `height` argument to each `plotly.express` function can be set to 600 to restore the legacy behavior. 
+ 
 ### Fixed
 
  - Fixed a plotly.express input bug when using data frame indices[#1934](https://github.com/plotly/plotly.py/pull/1934)
