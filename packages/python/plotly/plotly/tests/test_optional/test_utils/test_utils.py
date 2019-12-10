@@ -16,9 +16,12 @@ import pytz
 from nose.plugins.attrib import attr
 from pandas.util.testing import assert_series_equal
 import json as _json
+import os
+import base64
 
 from plotly import optional_imports, utils
 from plotly.graph_objs import Scatter, Scatter3d, Figure, Data
+from PIL import Image
 
 
 matplotlylib = optional_imports.get_module("plotly.matplotlylib")
@@ -273,6 +276,21 @@ class TestJSONEncoder(TestCase):
         a = [datetime.date(2014, 1, 1), datetime.date(2014, 1, 2)]
         j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
         assert j1 == '["2014-01-01", "2014-01-02"]'
+
+    def test_pil_image_encoding(self):
+        import _plotly_utils
+
+        img_path = os.path.join(
+            _plotly_utils.__path__[0], "tests", "resources", "1x1-black.png"
+        )
+
+        with open(img_path, "rb") as f:
+            hex_bytes = base64.b64encode(f.read()).decode("ascii")
+            expected_uri = "data:image/png;base64," + hex_bytes
+
+        img = Image.open(img_path)
+        j1 = _json.dumps({"source": img}, cls=utils.PlotlyJSONEncoder)
+        assert j1 == '{"source": "%s"}' % expected_uri
 
 
 if matplotlylib:
