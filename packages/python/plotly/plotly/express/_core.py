@@ -1,18 +1,19 @@
+import math
+from collections import OrderedDict, namedtuple
+
+import numpy as np
+import pandas as pd
+
 import plotly.graph_objs as go
 import plotly.io as pio
-from collections import namedtuple, OrderedDict
-
 from _plotly_utils.basevalidators import ColorscaleValidator
-from .colors import qualitative, sequential
-import math
-import pandas as pd
-import numpy as np
-
 from plotly.subplots import (
-    make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
+    make_subplots,
 )
+
+from .colors import qualitative, sequential
 
 
 class PxDefaults(object):
@@ -355,10 +356,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if v:
                     result[k] = g[v]
                 mapping_labels[v_label] = "%%{%s}" % k
-    if trace_spec.constructor not in [
-        go.Parcoords,
-        go.Parcats,
-    ]:
+    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)
     return result, fit_results
@@ -885,7 +883,8 @@ def build_dataframe(args, attrables, array_attrables):
     if "dimensions" in args and args["dimensions"] is None:
         if not df_provided:
             raise ValueError(
-                "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
+                "No data were provided. Please provide data either with the `data_frame`"
+                "or with the `dimensions` argument."
             )
         else:
             df_output[df_input.columns] = df_input[df_input.columns]

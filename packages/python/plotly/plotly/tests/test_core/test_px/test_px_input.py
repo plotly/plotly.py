@@ -1,9 +1,10 @@
-import plotly.express as px
 import numpy as np
 import pandas as pd
 import pytest
-from plotly.express._core import build_dataframe
 from pandas.util.testing import assert_frame_equal
+
+import plotly.express as px
+from plotly.express._core import build_dataframe
 
 attrables = (
     ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
