@@ -95105,7 +95105,7 @@ class Layout(_BaseLayoutType):
                 >>> list(pio.templates)  # doctest: +ELLIPSIS
                 ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
     
-        - A string containing multiple registered template names, joined on '+'
+          - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 
             templates
