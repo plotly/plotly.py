@@ -4,6 +4,7 @@ import sys
 import re
 
 from _plotly_utils.optional_imports import get_module
+from _plotly_utils.basevalidators import ImageUriValidator
 
 
 PY36_OR_LATER = sys.version_info.major == 3 and sys.version_info.minor >= 6
@@ -104,6 +105,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_date,
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal,
+            self.encode_as_pil,
         )
         for encoding_method in encoding_methods:
             try:
@@ -189,6 +191,15 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         """Attempt to encode decimal by converting it to float"""
         if isinstance(obj, decimal.Decimal):
             return float(obj)
+        else:
+            raise NotEncodable
+
+    @staticmethod
+    def encode_as_pil(obj):
+        """Attempt to convert PIL.Image.Image to base64 data uri"""
+        pil = get_module("PIL")
+        if isinstance(obj, pil.Image.Image):
+            return ImageUriValidator.pil_image_to_uri(obj)
         else:
             raise NotEncodable
 
