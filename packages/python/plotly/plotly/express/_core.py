@@ -922,9 +922,8 @@ def build_dataframe(args, attrables, array_attrables):
                     "at the moment." % field
                 )
             # ----------------- argument is a col name ----------------------
-            if isinstance(argument, str) or isinstance(
-                argument, int
-            ):  # just a column name given as str or int
+            if isinstance(argument, (str, int)):
+                # just a column name given as str or int
                 if not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -933,31 +932,45 @@ def build_dataframe(args, attrables, array_attrables):
                         "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in df_input.columns:
+                if argument not in df_input.columns and (
+                    isinstance(argument, int) or argument not in df_input.index.names
+                ):
                     err_msg = (
-                        "Value of '%s' is not the name of a column in 'data_frame'. "
-                        "Expected one of %s but received: %s"
-                        % (field, str(list(df_input.columns)), argument)
+                        "Value of '%s' is not the name of a column in 'data_frame' "
+                        "nor a string name of an index level."
+                        "Expected one of %s or %s but received: %s"
+                        % (
+                            field,
+                            str(list(df_input.columns)),
+                            str(list(df_input.index.names)),
+                            argument,
+                        )
                     )
                     if argument == "index":
                         err_msg += (
                             "\n To use the index, pass it in directly as `df.index`."
+                            "To use a multiindex level, pass its name as a string."
+                            "A column with the same name is preferred to index level."
                         )
                     raise ValueError(err_msg)
-                if length and len(df_input[argument]) != length:
+
+                col_name = str(argument)
+                if argument in df_input.columns:  # string or int
+                    vals = df_input[argument]
+                else:  # string only at this stage
+                    vals = pd.Series(
+                        df_input.index.get_level_values(level=argument),
+                        index=df_input.index,
+                    )
+
+                if length and len(vals) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
-                        "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of previous arguments %s is %d"
-                        % (
-                            field,
-                            len(df_input[argument]),
-                            str(list(df_output.columns)),
-                            length,
-                        )
+                        "The length of column (or index level) argument `df[%s]` is %d,"
+                        " whereas the length of previous arguments %s is %d"
+                        % (field, len(vals), str(list(df_output.columns)), length)
                     )
-                col_name = str(argument)
-                df_output[col_name] = df_input[argument].values
+                df_output[col_name] = vals
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)

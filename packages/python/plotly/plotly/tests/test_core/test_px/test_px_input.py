@@ -203,6 +203,17 @@ def test_multiindex_raise_error():
         )
 
 
+def test_build_df_multiindex_level():
+    tips = px.data.tips()
+    mi_tips = tips.set_index("sex", append=True)  # two-level index
+    args = dict(data_frame=mi_tips, x="sex", y="total_bill")
+    mi_out = build_dataframe(args, all_attrables, array_attrables)
+    args["data_frame"] = tips
+    out = build_dataframe(args, all_attrables, array_attrables)
+    assert "sex" in mi_out["data_frame"].columns
+    assert_frame_equal(mi_out["data_frame"].reset_index(drop=True), out["data_frame"])
+
+
 def test_build_df_from_lists():
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
