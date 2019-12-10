@@ -25,7 +25,6 @@ named_colorscales = {
     and len(c) == 2
     and isinstance(c[0], str)
     and isinstance(c[1], list)
-    and not c[0].endswith("_r")
     and not c[0].startswith("_")
 }
 
