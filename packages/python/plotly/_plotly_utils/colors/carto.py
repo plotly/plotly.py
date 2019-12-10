@@ -382,3 +382,10 @@ Vivid = [
     "rgb(237, 100, 90)",
     "rgb(165, 170, 153)",
 ]
+
+# Prefix variable names with _ so that they will not be added to the swatches
+_contents = dict(globals())
+for _k, _cols in _contents.items():
+    if _k.startswith("_") or _k == "swatches" or _k.endswith("_r"):
+        continue
+    globals()[_k + "_r"] = _cols[::-1]

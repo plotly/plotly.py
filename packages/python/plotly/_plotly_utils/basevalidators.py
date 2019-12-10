@@ -1532,6 +1532,8 @@ class ColorscaleValidator(BaseValidator):
                 and len(c) == 2
                 and isinstance(c[0], str)
                 and isinstance(c[1], list)
+                and not c[0].endswith("_r")
+                and not c[0].startswith("_")
             }
 
         return self._named_colorscales
@@ -1558,7 +1560,8 @@ class ColorscaleValidator(BaseValidator):
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
       - One of the following named colorscales:
-{colorscales_str}
+{colorscales_str}.
+        Appending '_r' to a named colorscale reverses it.
 """.format(
             plotly_name=self.plotly_name, colorscales_str=colorscales_str
         )
@@ -1575,12 +1578,15 @@ class ColorscaleValidator(BaseValidator):
             if v_lower in self.named_colorscales:
                 # Convert to color list
                 v = self.named_colorscales[v_lower]
-
+                v_valid = True
+            elif v_lower.endswith("_r") and v_lower[:-2] in self.named_colorscales:
+                v = self.named_colorscales[v_lower[:-2]][::-1]
+                v_valid = True
+            #
+            if v_valid:
                 # Convert to list of lists colorscale
                 d = len(v) - 1
                 v = [[(1.0 * i) / (1.0 * d), x] for i, x in enumerate(v)]
-
-                v_valid = True
 
         elif is_array(v) and len(v) > 0:
             # If firset element is a string, treat as colorsequence
