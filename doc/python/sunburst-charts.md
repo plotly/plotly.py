@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -33,13 +33,33 @@ jupyter:
     thumbnail: thumbnail/sunburst.gif
 ---
 
-### Basic Sunburst Plot ###
-Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` and in `parents`. The root starts from the center and children are added to the outer rings.
+Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` (`names` in `px.sunburst`) and in `parents`. The root starts from the center and children are added to the outer rings.
 
 Main arguments:
-1. `labels`: sets the labels of sunburst sectors.
+1. `labels` (`names` in `px.sunburst` since `labels` is reserved for overriding columns names): sets the labels of sunburst sectors.
 2. `parents`: sets the parent sectors of sunburst sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
 3. `values`: sets the values associated with sunburst sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
+
+### Basic Sunburst Plot with plotly.express
+
+
+```python
+import plotly.express as px
+data = dict(
+    character=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parent=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+    value=[10, 14, 12, 10, 2, 6, 6, 4, 4])
+
+fig =px.sunburst(
+    data,
+    names='character',
+    parents='parent',
+    values='value',
+)
+fig.show()
+```
+
+### Basic Sunburst Plot with go.Sunburst
 
 ```python
 import plotly.graph_objects as go
