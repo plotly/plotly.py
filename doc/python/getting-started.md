@@ -46,12 +46,12 @@ Thanks to deep integration with the [orca](https://github.com/plotly/orca) image
 plotly.py may be installed using pip...
 
 ```
-$ pip install plotly==4.4.0
+$ pip install plotly==4.4.1
 ```
 or conda.
 
 ```
-$ conda install -c plotly plotly=4.4.0
+$ conda install -c plotly plotly=4.4.1
 ```
 This package contains everything you need to write figures to standalone HTML files.
 
