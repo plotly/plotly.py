@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.1] - 2019-12-10
+
+### Fixed
+ - Fixed improper JSON encoding exception when the `pillow` module not installed [#1993](https://github.com/plotly/plotly.py/pull/1993)
+ 
 ## [4.4.0] - 2019-12-10
 
 ### Updated
