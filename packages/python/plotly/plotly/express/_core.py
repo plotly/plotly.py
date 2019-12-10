@@ -19,7 +19,7 @@ class PxDefaults(object):
     def __init__(self):
         self.template = None
         self.width = None
-        self.height = 600
+        self.height = None
         self.color_discrete_sequence = None
         self.color_continuous_scale = None
         self.symbol_sequence = None
