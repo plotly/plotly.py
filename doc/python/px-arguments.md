@@ -87,6 +87,17 @@ fig = px.scatter(iris, x='sepal_length', y='sepal_width', color='species', size=
 fig.show()
 ```
 
+If the `data_frame` has a MultiIndex with named levels, it is possible to pass the name of the level as well.
+In such case its values are extracted with `get_level_values()`.
+If a column and an index level have the same name, the column is preferred.
+
+```python
+iris = px.data.iris()
+mi_iris = iris.set_index('species', append=True, drop=False)
+# Use level name for color. This is the same chart as above.
+fig = px.scatter(mi_iris, x='sepal_length', y='sepal_width', color='species', size='petal_length')
+fig.show()
+```
 #### Using the index of a DataFrame
 
 In addition to columns, it is also possible to pass the index of a DataFrame as argument. In the example below the index is displayed in the hover data.
