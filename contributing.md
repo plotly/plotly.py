@@ -62,22 +62,6 @@ development version of `FigureWidget`,
 To make plotly plots show up in JupyterLab, you also need to [install the plotly jupyterlab extensions][plotly-jl].
 
 [plotly-jl]: https://plot.ly/python/getting-started/#jupyterlab-support-python-35
-
-### Setup Submodules
-
-This project uses git submodules. They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
-
-**DO THIS (run this command in your new `plotly.py` directory)**
-
-```bash
-python setup_submodules.py
-```
-
-That's going to initialize the submodules we use in this project, update them so that they're synced to the proper commit, and copy files to the appropriate locations in your local repo.
-
-Here's what you need to know: changes to any files inside the following directories **will get overwritten**. These are synced with the submodules, if you need to change functionality there, you will need to make a pull request in the appropriate sub project repository.
-- `packages/python/chart-studio/chart_studio/plotly/chunked_requests`
-- `packages/python/plotly/plotly/matplotlylib/mplexporter`
     
 ### Configure black code formatting
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
