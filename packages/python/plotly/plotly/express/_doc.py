@@ -164,6 +164,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
+    radius=["int (default is 30)", "Sets the radius of influence of each point.",],
     hover_name=[
         colref_type,
         colref_desc,
@@ -301,6 +302,10 @@ docs = dict(
     range_r=[
         "list of two numbers",
         "If provided, overrides auto-scaling on the radial axis in polar coordinates.",
+    ],
+    range_theta=[
+        "list of two numbers",
+        "If provided, overrides auto-scaling on the angular axis in polar coordinates.",
     ],
     title=["str", "The figure title."],
     template=[
@@ -445,6 +450,12 @@ docs = dict(
         "Dict keys are `'lat'` and `'lon'`",
         "Sets the center point of the map.",
     ],
+    mapbox_style=[
+        "str (default `'basic'`, needs Mapbox API token)",
+        "Identifier of base map style, some of which require a Mapbox API token to be set using `plotly.express.set_mapbox_access_token()`.",
+        "Allowed values which do not require a Mapbox API token are `'open-street-map'`, `'white-bg'`, `'carto-positron'`, `'carto-darkmatter'`, `'stamen-terrain'`, `'stamen-toner'`, `'stamen-watercolor'`.",
+        "Allowed values which do require a Mapbox API token are `'basic'`, `'streets'`, `'outdoors'`, `'light'`, `'dark'`, `'satellite'`, `'satellite-streets'`.",
+    ],
     points=[
         "str or boolean (default `'outliers'`)",
         "One of `'outliers'`, `'suspectedoutliers'`, `'all'`, or `False`.",
@@ -456,6 +467,10 @@ docs = dict(
     ],
     box=["boolean (default `False`)", "If `True`, boxes are drawn inside the violins."],
     notched=["boolean (default `False`)", "If `True`, boxes are drawn with notches."],
+    geojson=[
+        "GeoJSON-formatted dict",
+        "Must contain a Polygon feature collection, with IDs, which are references from `locations`.",
+    ],
     cumulative=[
         "boolean (default `False`)",
         "If `True`, histogram values are cumulative.",
@@ -483,7 +498,7 @@ docs = dict(
 
 
 def make_docstring(fn, override_dict={}):
-    tw = TextWrapper(width=77, initial_indent="    ", subsequent_indent="    ")
+    tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in inspect.getargspec(fn)[0]:
         if override_dict.get(param):

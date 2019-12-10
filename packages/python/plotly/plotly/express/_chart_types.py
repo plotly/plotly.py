@@ -49,8 +49,8 @@ def scatter(
     height=None,
 ):
     """
-    In a scatter plot, each row of `data_frame` is represented by a symbol mark
-    in 2D space.
+    In a scatter plot, each row of `data_frame` is represented by a symbol
+    mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
 
@@ -93,9 +93,9 @@ def density_contour(
     height=None,
 ):
     """
-    In a density contour plot, rows of `data_frame` are grouped together into
-    contour marks to visualize the 2D distribution of an aggregate function
-    `histfunc` (e.g. the count or sum) of the value `z`.
+    In a density contour plot, rows of `data_frame` are grouped together
+    into contour marks to visualize the 2D distribution of an aggregate
+    function `histfunc` (e.g. the count or sum) of the value `z`.
     """
     return make_figure(
         args=locals(),
@@ -150,8 +150,8 @@ def density_heatmap(
 ):
     """
     In a density heatmap, rows of `data_frame` are grouped together into
-    colored rectangular tiles to visualize the 2D distribution of an aggregate
-    function `histfunc` (e.g. the count or sum) of the value `z`.
+    colored rectangular tiles to visualize the 2D distribution of an
+    aggregate function `histfunc` (e.g. the count or sum) of the value `z`.
     """
     return make_figure(
         args=locals(),
@@ -208,8 +208,8 @@ def line(
     height=None,
 ):
     """
-    In a 2D line plot, each row of `data_frame` is represented as vertex of a
-    polyline mark in 2D space.
+    In a 2D line plot, each row of `data_frame` is represented as vertex of
+    a polyline mark in 2D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter)
 
@@ -249,9 +249,9 @@ def area(
     height=None,
 ):
     """
-    In a stacked area plot, each row of `data_frame` is represented as vertex
-    of a polyline mark in 2D space. The area between successive polylines is
-    filled.
+    In a stacked area plot, each row of `data_frame` is represented as
+    vertex of a polyline mark in 2D space. The area between successive
+    polylines is filled.
     """
     return make_figure(
         args=locals(),
@@ -353,8 +353,8 @@ def histogram(
 ):
     """
     In a histogram, rows of `data_frame` are grouped together into a
-    rectangular mark to visualize the 1D distribution of an aggregate function
-    `histfunc` (e.g. the count or sum) of the value `y` (or `x` if
+    rectangular mark to visualize the 1D distribution of an aggregate
+    function `histfunc` (e.g. the count or sum) of the value `y` (or `x` if
     `orientation` is `'h'`).
     """
     return make_figure(
@@ -407,8 +407,8 @@ def violin(
     height=None,
 ):
     """
-    In a violin plot, rows of `data_frame` are grouped together into a curved
-    mark to visualize their distribution.
+    In a violin plot, rows of `data_frame` are grouped together into a
+    curved mark to visualize their distribution.
     """
     return make_figure(
         args=locals(),
@@ -462,11 +462,10 @@ def box(
     In a box plot, rows of `data_frame` are grouped together into a
     box-and-whisker mark to visualize their distribution.
 
-    Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
-    second quartile (Q2) is marked by a line inside the box. By
-    default, the whiskers correspond to the box' edges +/- 1.5
-    times the interquartile range (IQR: Q3-Q1), see "points" for
-    other options.
+    Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The second
+    quartile (Q2) is marked by a line inside the box. By default, the
+    whiskers correspond to the box' edges +/- 1.5 times the interquartile
+    range (IQR: Q3-Q1), see "points" for other options.
     """
     return make_figure(
         args=locals(),
@@ -510,8 +509,8 @@ def strip(
     height=None,
 ):
     """
-    In a strip plot each row of `data_frame` is represented as a jittered mark
-    within categories.
+    In a strip plot each row of `data_frame` is represented as a jittered
+    mark within categories.
     """
     return make_figure(
         args=locals(),
@@ -576,8 +575,8 @@ def scatter_3d(
     height=None,
 ):
     """
-    In a 3D scatter plot, each row of `data_frame` is represented by a symbol
-    mark in 3D space.
+    In a 3D scatter plot, each row of `data_frame` is represented by a
+    symbol mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
 
@@ -623,8 +622,8 @@ def line_3d(
     height=None,
 ):
     """
-    In a 3D line plot, each row of `data_frame` is represented as vertex of a
-    polyline mark in 3D space.
+    In a 3D line plot, each row of `data_frame` is represented as vertex of
+    a polyline mark in 3D space.
     """
     return make_figure(args=locals(), constructor=go.Scatter3d)
 
@@ -699,8 +698,8 @@ def line_ternary(
     height=None,
 ):
     """
-    In a ternary line plot, each row of `data_frame` is represented as vertex
-    of a polyline mark in ternary coordinates.
+    In a ternary line plot, each row of `data_frame` is represented as
+    vertex of a polyline mark in ternary coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterternary)
 
@@ -735,6 +734,7 @@ def scatter_polar(
     start_angle=90,
     size_max=None,
     range_r=None,
+    range_theta=None,
     log_r=False,
     render_mode="auto",
     title=None,
@@ -777,6 +777,7 @@ def line_polar(
     line_shape=None,
     render_mode="auto",
     range_r=None,
+    range_theta=None,
     log_r=False,
     title=None,
     template=None,
@@ -784,8 +785,8 @@ def line_polar(
     height=None,
 ):
     """
-    In a polar line plot, each row of `data_frame` is represented as vertex of
-    a polyline mark in polar coordinates.
+    In a polar line plot, each row of `data_frame` is represented as vertex
+    of a polyline mark in polar coordinates.
     """
     return make_figure(args=locals(), constructor=go.Scatterpolar)
 
@@ -812,6 +813,7 @@ def bar_polar(
     direction="clockwise",
     start_angle=90,
     range_r=None,
+    range_theta=None,
     log_r=False,
     title=None,
     template=None,
@@ -842,7 +844,6 @@ def choropleth(
     hover_name=None,
     hover_data=None,
     custom_data=None,
-    size=None,
     animation_frame=None,
     animation_group=None,
     category_orders={},
@@ -850,7 +851,6 @@ def choropleth(
     color_continuous_scale=None,
     range_color=None,
     color_continuous_midpoint=None,
-    size_max=None,
     projection=None,
     scope=None,
     center=None,
@@ -860,8 +860,8 @@ def choropleth(
     height=None,
 ):
     """
-    In a choropleth map, each row of `data_frame` is represented by a colored
-    region mark on a map.
+    In a choropleth map, each row of `data_frame` is represented by a
+    colored region mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -905,8 +905,8 @@ def scatter_geo(
     height=None,
 ):
     """
-    In a geographic scatter plot, each row of `data_frame` is represented by a
-    symbol mark on a map.
+    In a geographic scatter plot, each row of `data_frame` is represented
+    by a symbol mark on a map.
     """
     return make_figure(
         args=locals(),
@@ -983,6 +983,8 @@ def scatter_mapbox(
     opacity=None,
     size_max=None,
     zoom=8,
+    center=None,
+    mapbox_style=None,
     title=None,
     template=None,
     width=None,
@@ -996,6 +998,85 @@ def scatter_mapbox(
 
 
 scatter_mapbox.__doc__ = make_docstring(scatter_mapbox)
+
+
+def choropleth_mapbox(
+    data_frame=None,
+    geojson=None,
+    locations=None,
+    color=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders={},
+    labels={},
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    opacity=None,
+    zoom=8,
+    center=None,
+    mapbox_style=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a Mapbox choropleth map, each row of `data_frame` is represented by a
+    colored region on a Mapbox map.
+    """
+    return make_figure(
+        args=locals(),
+        constructor=go.Choroplethmapbox,
+        trace_patch=dict(
+            geojson=geojson
+            if not hasattr(geojson, "__geo_interface__")
+            else geojson.__geo_interface__
+        ),
+    )
+
+
+choropleth_mapbox.__doc__ = make_docstring(choropleth_mapbox)
+
+
+def density_mapbox(
+    data_frame=None,
+    lat=None,
+    lon=None,
+    z=None,
+    hover_name=None,
+    hover_data=None,
+    custom_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders={},
+    labels={},
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
+    opacity=None,
+    zoom=8,
+    center=None,
+    mapbox_style=None,
+    radius=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a Mapbox density map, each row of `data_frame` contributes to the intensity of
+    the color of the region around the corresponding point on the map
+    """
+    return make_figure(
+        args=locals(), constructor=go.Densitymapbox, trace_patch=dict(radius=radius)
+    )
+
+
+density_mapbox.__doc__ = make_docstring(density_mapbox)
 
 
 def line_mapbox(
@@ -1015,14 +1096,16 @@ def line_mapbox(
     color_discrete_sequence=None,
     color_discrete_map={},
     zoom=8,
+    center=None,
+    mapbox_style=None,
     title=None,
     template=None,
     width=None,
     height=None,
 ):
     """
-    In a Mapbox line plot, each row of `data_frame` is represented as vertex of
-    a polyline mark on a Mapbox map.
+    In a Mapbox line plot, each row of `data_frame` is represented as
+    vertex of a polyline mark on a Mapbox map.
     """
     return make_figure(args=locals(), constructor=go.Scattermapbox)
 
@@ -1057,8 +1140,9 @@ def scatter_matrix(
 ):
     """
     In a scatter plot matrix (or SPLOM), each row of `data_frame` is
-    represented by a multiple symbol marks, one in each cell of a grid of 2D
-    scatter plots, which plot each pair of `dimensions` against each other.
+    represented by a multiple symbol marks, one in each cell of a grid of
+    2D scatter plots, which plot each pair of `dimensions` against each
+    other.
     """
     return make_figure(
         args=locals(), constructor=go.Splom, layout_patch=dict(dragmode="select")
@@ -1082,9 +1166,9 @@ def parallel_coordinates(
     height=None,
 ):
     """
-    In a parallel coordinates plot, each row of `data_frame` is represented by
-    a polyline mark which traverses a set of parallel axes, one for each of the
-    `dimensions`.
+    In a parallel coordinates plot, each row of `data_frame` is represented
+    by a polyline mark which traverses a set of parallel axes, one for each
+    of the `dimensions`.
     """
     return make_figure(args=locals(), constructor=go.Parcoords)
 
@@ -1106,10 +1190,10 @@ def parallel_categories(
     height=None,
 ):
     """
-    In a parallel categories (or parallel sets) plot, each row of `data_frame`
-    is grouped with other rows that share the same values of `dimensions` and
-    then plotted as a polyline mark through a set of parallel axes, one for
-    each of the `dimensions`.
+    In a parallel categories (or parallel sets) plot, each row of
+    `data_frame` is grouped with other rows that share the same values of
+    `dimensions` and then plotted as a polyline mark through a set of
+    parallel axes, one for each of the `dimensions`.
     """
     return make_figure(args=locals(), constructor=go.Parcats)
 
@@ -1136,7 +1220,8 @@ def pie(
     hole=None,
 ):
     """
-    In a pie plot, each row of `data_frame` is represented as a sector of a pie.
+    In a pie plot, each row of `data_frame` is represented as a sector of a
+    pie.
     """
     if color_discrete_sequence is not None:
         layout_patch = {"piecolorway": color_discrete_sequence}
@@ -1228,7 +1313,8 @@ def treemap(
     maxdepth=None,
 ):
     """
-    A treemap plot represents hierarchial data as nested rectangular sectors.
+    A treemap plot represents hierarchial data as nested rectangular
+    sectors.
     """
     if color_discrete_sequence is not None:
         layout_patch = {"treemapcolorway": color_discrete_sequence}
@@ -1275,7 +1361,8 @@ def funnel(
     height=None,
 ):
     """
-    In a funnel plot, each row of `data_frame` is represented as a rectangular sector of a funnel.
+    In a funnel plot, each row of `data_frame` is represented as a
+    rectangular sector of a funnel.
     """
     return make_figure(
         args=locals(),
@@ -1305,7 +1392,8 @@ def funnel_area(
     opacity=None,
 ):
     """
-    In a funnel area plot, each row of `data_frame` is represented as a trapezoidal sector of a funnel.
+    In a funnel area plot, each row of `data_frame` is represented as a
+    trapezoidal sector of a funnel.
     """
     if color_discrete_sequence is not None:
         layout_patch = {"funnelareacolorway": color_discrete_sequence}

@@ -341,6 +341,16 @@ fig = px.line_ternary(
 )
 fig.write_html(os.path.join(dir_name, "line_ternary.html"))
 
+import plotly.express as px
+import numpy as np
+
+img_rgb = np.array(
+    [[[255, 0, 0], [0, 255, 0], [0, 0, 255]], [[0, 255, 0], [0, 0, 255], [255, 0, 0]]],
+    dtype=np.uint8,
+)
+fig = px.imshow(img_rgb)
+fig.write_html(os.path.join(dir_name, "imshow.html"))
+
 # #### 3D Coordinates
 
 import plotly.express as px
@@ -435,6 +445,37 @@ fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
 
 import plotly.express as px
 
+sample_geojson = {
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "the_polygon",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0], [0.0, 0.0]]
+                ],
+            },
+        }
+    ],
+}
+fig = px.choropleth_mapbox(
+    geojson=sample_geojson, locations=["the_polygon"], color=[10], zoom=6,
+)
+fig.write_html(os.path.join(dir_name, "choropleth_mapbox.html"), auto_play=False)
+
+import plotly.express as px
+
+carshare = px.data.carshare()
+fig = px.density_mapbox(
+    carshare, lat="centroid_lat", lon="centroid_lon", z="peak_hour",
+)
+fig.write_html(os.path.join(dir_name, "density_mapbox.html"), auto_play=False)
+
+import plotly.express as px
+
+
 gapminder = px.data.gapminder()
 fig = px.scatter_geo(
     gapminder,
@@ -470,3 +511,42 @@ fig = px.choropleth(
     range_color=[20, 80],
 )
 fig.write_html(os.path.join(dir_name, "choropleth.html"), auto_play=False)
+
+import plotly.express as px
+
+tips = px.data.tips()
+fig = px.pie(tips, names="smoker", values="total_bill")
+fig.write_html(os.path.join(dir_name, "pie.html"), auto_play=False)
+
+import plotly.express as px
+
+tips = px.data.tips()
+fig = px.funnel_area(tips, names="smoker", values="total_bill")
+fig.write_html(os.path.join(dir_name, "funnel_area.html"), auto_play=False)
+
+import plotly.express as px
+
+fig = px.treemap(
+    names=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+    values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
+)
+fig.write_html(os.path.join(dir_name, "treemap.html"), auto_play=False)
+
+
+import plotly.express as px
+
+fig = px.sunburst(
+    names=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+    values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
+)
+fig.write_html(os.path.join(dir_name, "sunburst.html"), auto_play=False)
+
+
+import plotly.express as px
+
+fig = px.funnel(
+    y=["first", "second", "first", "second"], x=[3, 1, 4, 2], color=["A", "A", "B", "B"]
+)
+fig.write_html(os.path.join(dir_name, "funnel.html"), auto_play=False)

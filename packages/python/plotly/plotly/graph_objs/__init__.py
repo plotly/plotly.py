@@ -88964,10 +88964,10 @@ class Bar(_BaseTraceType):
         this link https://plot.ly/javascript/plotlyjs-events/#event-
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        variables `value` and `label`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -89908,7 +89908,7 @@ class Bar(_BaseTraceType):
         reference/blob/master/Time-Formatting.md#format for details on
         the date formatting syntax. Every attributes that can be
         specified per-point (the ones that are `arrayOk: true`) are
-        available.
+        available. variables `value` and `label`.
     
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -90417,8 +90417,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90559,7 +90560,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -90780,8 +90782,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90922,7 +90925,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -93885,7 +93889,8 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 bgcolor
-                    Sets the legend background color.
+                    Sets the legend background color. Defaults to
+                    `layout.paper_bgcolor`.
                 bordercolor
                     Sets the color of the border enclosing the
                     legend.
@@ -95096,12 +95101,11 @@ class Layout(_BaseLayoutType):
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
-
                 >>> import plotly.io as pio
-                >>> list(pio.templates)
-                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', 'plotly_dark', 'presentation', 'xgridoff', 'ygridoff', 'gridon', 'none']
-
-          - A string containing multiple registered template names, joined on '+'
+                >>> list(pio.templates)  # doctest: +ELLIPSIS
+                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
+    
+        - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 
             templates

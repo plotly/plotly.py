@@ -1,3 +1,0 @@
-[submodule "submodules/mplexporter"]
-	path = submodules/mplexporter
-	url = git://github.com/mpld3/mplexporter.git

@@ -287,7 +287,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
-                if trace_spec.constructor == go.Choropleth:
+                if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     result["z"] = g[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
@@ -380,6 +380,8 @@ def configure_axes(args, constructor, fig, orders):
         go.Scatterpolargl: configure_polar_axes,
         go.Barpolar: configure_polar_axes,
         go.Scattermapbox: configure_mapbox,
+        go.Choroplethmapbox: configure_mapbox,
+        go.Densitymapbox: configure_mapbox,
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
@@ -502,13 +504,11 @@ def configure_cartesian_axes(args, fig, orders):
 
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update(
-        layout=dict(
-            ternary=dict(
-                aaxis=dict(title=get_label(args, args["a"])),
-                baxis=dict(title=get_label(args, args["b"])),
-                caxis=dict(title=get_label(args, args["c"])),
-            )
+    fig.update_layout(
+        ternary=dict(
+            aaxis=dict(title=get_label(args, args["a"])),
+            baxis=dict(title=get_label(args, args["b"])),
+            caxis=dict(title=get_label(args, args["c"])),
         )
     )
 
@@ -534,6 +534,9 @@ def configure_polar_axes(args, fig, orders):
     else:
         if args["range_r"]:
             radialaxis["range"] = args["range_r"]
+
+    if args["range_theta"]:
+        layout["polar"]["sector"] = args["range_theta"]
     fig.update(layout=layout)
 
 
@@ -562,28 +565,28 @@ def configure_3d_axes(args, fig, orders):
 
 
 def configure_mapbox(args, fig, orders):
-    fig.update(
-        layout=dict(
-            mapbox=dict(
-                accesstoken=MAPBOX_TOKEN,
-                center=dict(
-                    lat=args["data_frame"][args["lat"]].mean(),
-                    lon=args["data_frame"][args["lon"]].mean(),
-                ),
-                zoom=args["zoom"],
-            )
+    center = args["center"]
+    if not center and "lat" in args and "lon" in args:
+        center = dict(
+            lat=args["data_frame"][args["lat"]].mean(),
+            lon=args["data_frame"][args["lon"]].mean(),
+        )
+    fig.update_layout(
+        mapbox=dict(
+            accesstoken=MAPBOX_TOKEN,
+            center=center,
+            zoom=args["zoom"],
+            style=args["mapbox_style"],
         )
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update(
-        layout=dict(
-            geo=dict(
-                center=args["center"],
-                scope=args["scope"],
-                projection=dict(type=args["projection"]),
-            )
+    fig.update_layout(
+        geo=dict(
+            center=args["center"],
+            scope=args["scope"],
+            projection=dict(type=args["projection"]),
         )
     )
 
@@ -954,7 +957,7 @@ def build_dataframe(args, attrables, array_attrables):
                         )
                     )
                 col_name = str(argument)
-                df_output[col_name] = df_input[argument]
+                df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)
@@ -989,7 +992,10 @@ def build_dataframe(args, attrables, array_attrables):
                         "length of previous arguments %s is %d"
                         % (field, len(argument), str(list(df_output.columns)), length)
                     )
-                df_output[str(col_name)] = argument
+                if hasattr(argument, "values"):
+                    df_output[str(col_name)] = argument.values
+                else:
+                    df_output[str(col_name)] = np.array(argument)
 
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
@@ -1080,7 +1086,7 @@ def infer_config(args, constructor, trace_patch):
     # Compute final trace patch
     trace_patch = trace_patch.copy()
 
-    if constructor == go.Histogram2d:
+    if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
         trace_patch["coloraxis"] = "coloraxis1"
 
@@ -1218,6 +1224,8 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 go.Parcats,
                 go.Parcoords,
                 go.Choropleth,
+                go.Choroplethmapbox,
+                go.Densitymapbox,
                 go.Histogram2d,
                 go.Sunburst,
                 go.Treemap,
@@ -1262,7 +1270,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if m.facet == "row":
                     row = m.val_map[val]
                     if args["facet_row"] and len(row_labels) < row:
-                        row_labels.append(args["facet_row"] + "=" + str(val))
+                        row_labels.append(
+                            get_label(args, args["facet_row"]) + "=" + str(val)
+                        )
                 else:
                     if (
                         bool(args.get("marginal_x", False))
@@ -1277,7 +1287,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if m.facet == "col":
                     col = m.val_map[val]
                     if args["facet_col"] and len(col_labels) < col:
-                        col_labels.append(args["facet_col"] + "=" + str(val))
+                        col_labels.append(
+                            get_label(args, args["facet_col"]) + "=" + str(val)
+                        )
                     if facet_col_wrap:  # assumes no facet_row, no marginals
                         row = 1 + ((col - 1) // facet_col_wrap)
                         col = 1 + ((col - 1) % facet_col_wrap)
@@ -1318,7 +1330,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
         )
     layout_patch = layout_patch.copy()
     if show_colorbar:
-        colorvar = "z" if constructor == go.Histogram2d else "color"
+        colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
         range_color = args["range_color"] or [None, None]
 
         colorscale_validator = ColorscaleValidator("colorscale", "make_figure")
