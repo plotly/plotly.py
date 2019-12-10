@@ -197,8 +197,8 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_pil(obj):
         """Attempt to convert PIL.Image.Image to base64 data uri"""
-        pil = get_module("PIL")
-        if isinstance(obj, pil.Image.Image):
+        image = get_module("PIL.Image")
+        if image is not None and isinstance(obj, image.Image):
             return ImageUriValidator.pil_image_to_uri(obj)
         else:
             raise NotEncodable

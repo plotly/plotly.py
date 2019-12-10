@@ -15,6 +15,10 @@ class TestJSONEncoder(TestCase):
         expected_result = '[1, null, null, null, "platypus"]'
         self.assertEqual(result, expected_result)
 
+    def test_invalid_encode_exception(self):
+        with self.assertRaises(TypeError):
+            _json.dumps({"a": {1}}, cls=PlotlyJSONEncoder)
+
 
 class TestGetByPath(TestCase):
     def test_get_by_path(self):
