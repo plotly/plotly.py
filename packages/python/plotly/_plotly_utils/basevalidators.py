@@ -1532,6 +1532,8 @@ class ColorscaleValidator(BaseValidator):
                 and len(c) == 2
                 and isinstance(c[0], str)
                 and isinstance(c[1], list)
+                and not c[0].endswith("_r")
+                and not c[0].startswith("_")
             }
 
         return self._named_colorscales
@@ -1558,7 +1560,8 @@ class ColorscaleValidator(BaseValidator):
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
       - One of the following named colorscales:
-{colorscales_str}
+{colorscales_str}.
+        Appending '_r' to a named colorscale reverses it.
 """.format(
             plotly_name=self.plotly_name, colorscales_str=colorscales_str
         )
@@ -1575,12 +1578,15 @@ class ColorscaleValidator(BaseValidator):
             if v_lower in self.named_colorscales:
                 # Convert to color list
                 v = self.named_colorscales[v_lower]
-
+                v_valid = True
+            elif v_lower.endswith("_r") and v_lower[:-2] in self.named_colorscales:
+                v = self.named_colorscales[v_lower[:-2]][::-1]
+                v_valid = True
+            #
+            if v_valid:
                 # Convert to list of lists colorscale
                 d = len(v) - 1
                 v = [[(1.0 * i) / (1.0 * d), x] for i, x in enumerate(v)]
-
-                v_valid = True
 
         elif is_array(v) and len(v) > 0:
             # If firset element is a string, treat as colorsequence
@@ -2341,18 +2347,23 @@ class ImageUriValidator(BaseValidator):
             pass
         elif self._PIL and isinstance(v, self._PIL.Image.Image):
             # Convert PIL image to png data uri string
-            in_mem_file = io.BytesIO()
-            v.save(in_mem_file, format="PNG")
-            in_mem_file.seek(0)
-            img_bytes = in_mem_file.read()
-            base64_encoded_result_bytes = base64.b64encode(img_bytes)
-            base64_encoded_result_str = base64_encoded_result_bytes.decode("ascii")
-            v = "data:image/png;base64,{base64_encoded_result_str}".format(
-                base64_encoded_result_str=base64_encoded_result_str
-            )
+            v = self.pil_image_to_uri(v)
         else:
             self.raise_invalid_val(v)
 
+        return v
+
+    @staticmethod
+    def pil_image_to_uri(v):
+        in_mem_file = io.BytesIO()
+        v.save(in_mem_file, format="PNG")
+        in_mem_file.seek(0)
+        img_bytes = in_mem_file.read()
+        base64_encoded_result_bytes = base64.b64encode(img_bytes)
+        base64_encoded_result_str = base64_encoded_result_bytes.decode("ascii")
+        v = "data:image/png;base64,{base64_encoded_result_str}".format(
+            base64_encoded_result_str=base64_encoded_result_str
+        )
         return v
 
 
@@ -2685,7 +2696,9 @@ class BaseTemplateValidator(CompoundValidator):
         are stored in the plotly.io.templates configuration object. The names
         of all registered templates can be retrieved with:
             >>> import plotly.io as pio
-            >>> list(pio.templates)
+            >>> list(pio.templates)  # doctest: +ELLIPSIS
+            ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
+
       - A string containing multiple registered template names, joined on '+'
         characters (e.g. 'template1+template2'). In this case the resulting
         template is computed by merging together the collection of registered 

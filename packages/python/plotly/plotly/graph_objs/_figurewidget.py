@@ -923,8 +923,9 @@ class FigureWidget(BaseFigureWidget):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -1065,7 +1066,8 @@ class FigureWidget(BaseFigureWidget):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -1614,7 +1616,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -15147,7 +15149,7 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link

@@ -2,6 +2,34 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.4.0] - 2019-12-10
+
+### Updated
+ - Updated Plotly.js to version 1.51.2. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/master/CHANGELOG.md#1512----2019-11-25)
+ for more information
+ - The tutorials of the [plotly.py documentation](https://plot.ly/python/) are
+   now in the main [plotly.py Github repository](https://github.com/plotly/plotly.py). Contributions in order to improve or extend the documentation are very welcome!
+ - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). Note that the `height` argument to each `plotly.express` function can be set to 600 to restore the legacy behavior. 
+ 
+### Fixed
+
+ - Fixed a plotly.express input bug when using data frame indices[#1934](https://github.com/plotly/plotly.py/pull/1934)
+ - Fixed how to display facet labels with plotly express [#1966](https://github.com/plotly/plotly.py/pull/1966)
+ - Fixed a bug to use correctly the `zmin/zmax` parameter in `px.imshow` for single-channel images [#1981](https://github.com/plotly/plotly.py/pull/1981)
+ - Clipped docstring width for better display in Jupyterlab [#1939](https://github.com/plotly/plotly.py/pull/1939). Thank you @joelostblom!
+ - Fixed a bug in the case of external orca server [#1915](https://github.com/plotly/plotly.py/pull/1915) thank you @dev-dsp!
+
+### Added 
+
+ - Extended the plotly.express functional API with .. new functions: `px.pie`,
+   `px.sunburst`, `px.treemap`, `px.funnel`, and `px.funnelarea` ([#1909](https://github.com/plotly/plotly.py/pull/1909)) `px.density_mapbox` and
+   `px.choropleth_mapbox` [#1937](https://github.com/plotly/plotly.py/pull/1937). Also, all mapbox functions in plotly.express have new arguments `center` and `mapbox_style` [#1937](https://github.com/plotly/plotly.py/pull/1937).
+ - plotly.express polar plots (`scatter_polar`, `line_polar`, `bar_polar`) now
+   have a `range_theta` keyword argument for representing only an angular
+section [#1969](https://github.com/plotly/plotly.py/pull/1969).
+ - Docstrings of plotly.py are now doctested [#1921](https://github.com/plotly/plotly.py/pull/1921).
+
 ## [4.3.0] - 2019-11-11
 
 ### Updated

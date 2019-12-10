@@ -15761,7 +15761,8 @@ class Legend(_BaseLayoutHierarchyType):
     @property
     def bgcolor(self):
         """
-        Sets the legend background color.
+        Sets the legend background color. Defaults to
+        `layout.paper_bgcolor`.
     
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -16233,7 +16234,8 @@ class Legend(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         bgcolor
-            Sets the legend background color.
+            Sets the legend background color. Defaults to
+            `layout.paper_bgcolor`.
         bordercolor
             Sets the color of the border enclosing the legend.
         borderwidth
@@ -16336,7 +16338,8 @@ class Legend(_BaseLayoutHierarchyType):
             dict of properties compatible with this constructor or
             an instance of plotly.graph_objs.layout.Legend
         bgcolor
-            Sets the legend background color.
+            Sets the legend background color. Defaults to
+            `layout.paper_bgcolor`.
         bordercolor
             Sets the color of the border enclosing the legend.
         borderwidth
@@ -19722,7 +19725,8 @@ class Colorscale(_BaseLayoutHierarchyType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -19766,7 +19770,8 @@ class Colorscale(_BaseLayoutHierarchyType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -19810,7 +19815,8 @@ class Colorscale(_BaseLayoutHierarchyType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -20321,7 +20327,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------

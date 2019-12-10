@@ -1,7 +1,7 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
-import numpy as np  # is it fine to depend on np here?
+import numpy as np
 
 _float_types = []
 
@@ -107,7 +107,8 @@ def imshow(
 
     range_color : list of two numbers
         If provided, overrides auto-scaling on the continuous color scale, including
-        overriding `color_continuous_midpoint`.
+        overriding `color_continuous_midpoint`. Also overrides zmin and zmax. Used only
+        for single-channel images.
 
     title : str
         The figure title.
@@ -147,14 +148,18 @@ def imshow(
 
     # For 2d data, use Heatmap trace
     if img.ndim == 2:
-        trace = go.Heatmap(z=img, zmin=zmin, zmax=zmax, coloraxis="coloraxis1")
+        trace = go.Heatmap(z=img, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
         layout = dict(
             xaxis=dict(scaleanchor="y", constrain="domain"),
             yaxis=dict(autorange=autorange, constrain="domain"),
         )
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
-        range_color = range_color or [None, None]
+        if zmin is not None and zmax is None:
+            zmax = img.max()
+        if zmax is not None and zmin is None:
+            zmin = img.min()
+        range_color = range_color or [zmin, zmax]
         layout["coloraxis1"] = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
