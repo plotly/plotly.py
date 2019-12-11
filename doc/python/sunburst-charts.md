@@ -42,6 +42,9 @@ Main arguments:
 
 ### Basic Sunburst Plot with plotly.express
 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
 ```python
 import plotly.express as px
@@ -60,6 +63,9 @@ fig.show()
 ```
 
 ### Basic Sunburst Plot with go.Sunburst
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
+
 
 ```python
 import plotly.graph_objects as go

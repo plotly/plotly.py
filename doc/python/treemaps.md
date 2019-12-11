@@ -38,6 +38,9 @@ jupyter:
 
 ### Basic Treemap with plotly.express
 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.treemap`, each row of the DataFrame is represented as a sector of the treemap.
 
 ```python
 import plotly.express as px
@@ -49,6 +52,9 @@ fig.show()
 ```
 
 ### Basic Treemap with go.Treemap
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Treemap` function from `plotly.graph_objects`.
+
 
 ```python
 import plotly.graph_objects as go

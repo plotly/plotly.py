@@ -40,7 +40,7 @@ If you're looking instead for a multilevel hierarchical pie-like chart, go to th
 
 ### Pie chart with plotly express
 
-`plotly.express` is a functional API for `plotly`. Its functions take as input pandas dataframe or objects that can be converted to dataframes such as arrays or dicts. For more details, see the [plotly.express tutorial](/plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
 In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
 
@@ -89,7 +89,10 @@ fig.show()
 
 ### Basic Pie Chart with go.Pie
 
-In the `go` trace `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
+
+
+In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).

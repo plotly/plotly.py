@@ -32,6 +32,11 @@ Funnel charts are often used to represent data in different stages of a business
 
 ### Basic Funnel Plot with plotly.express
 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
+
+
 ```python
 import plotly.express as px
 data = dict(
@@ -57,6 +62,8 @@ fig.show()
 ```
 
 ### Basic Funnel Chart with graph_objects trace go.Funnel
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnel` function from `plotly.graph_objects`.
 
 ```python
 from plotly import graph_objects as go
@@ -121,6 +128,9 @@ fig.show()
 
 ### Basic Area Funnel Plot with plotly.express
 
+With `px.funnel_area`, each row of the DataFrame is represented as a stage of
+the funnel.
+
 ```python
 import plotly.express as px
 fig = px.funnel_area(names=["The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"],
@@ -129,6 +139,8 @@ fig.show()
 ```
 
 ### Basic Area Funnel Plot with go.Funnelarea
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnelarea` function from `plotly.graph_objects`.
 
 ```python
 from plotly import graph_objects as go
