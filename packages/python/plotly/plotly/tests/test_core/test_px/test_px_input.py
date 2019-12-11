@@ -222,7 +222,9 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, all_attrables, array_attrables)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
+    assert_frame_equal(
+        df.sort_index(axis=1), out["data_frame"].sort_index(axis=1), check_dtype=False
+    )
     out.pop("data_frame")
     assert out == output
 
@@ -232,7 +234,9 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, all_attrables, array_attrables)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
+    assert_frame_equal(
+        df.sort_index(axis=1), out["data_frame"].sort_index(axis=1), check_dtype=False
+    )
     out.pop("data_frame")
     assert out == output
 
@@ -319,3 +323,7 @@ def test_size_column():
     df = px.data.tips()
     fig = px.scatter(df, x=df["size"], y=df.tip)
     assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}"
+
+
+if __name__ == "__main__":
+    test_build_df_from_lists()
