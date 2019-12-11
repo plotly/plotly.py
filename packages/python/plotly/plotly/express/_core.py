@@ -955,23 +955,18 @@ def build_dataframe(args, attrables, array_attrables):
 
                 col_name = str(argument)
                 if argument in df_input.columns:  # string or int
-                    vals = df_input[argument]
+                    series = df_input[argument]
                 else:  # pick MultiIndex level with that name
-                    vals = pd.Series(
-                        df_input.index.get_level_values(level=argument),
-                        index=df_output.index
-                        if len(df_output.index)
-                        else df_input.index,
-                    )
+                    series = df_input.index.get_level_values(level=argument)
 
-                if length and len(vals) != length:
+                if length and len(series) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column (or index level) argument `df[%s]` is %d,"
                         " whereas the length of previous arguments %s is %d"
-                        % (field, len(vals), str(list(df_output.columns)), length)
+                        % (field, len(series), str(list(df_output.columns)), length)
                     )
-                df_output[col_name] = vals
+                df_output[col_name] = series.values
                 # avoid df_output.groupby ambiguity errors
                 if argument in df_output.index.names:
                     df_output = df_output.reset_index(level=argument, drop=True)
