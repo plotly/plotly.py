@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,10 +20,9 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.3
   plotly:
-    description: How to make a Mapbox Density Heatmap in Python
-      with Plotly.
+    description: How to make a Mapbox Density Heatmap in Python with Plotly.
     display_as: maps
     language: python
     layout: base
@@ -42,14 +41,34 @@ To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public 
 
 
 
-#### Stamen Terrain base map: no token needed
+### Stamen Terrain base map (no token needed): density mapbox with `plotly.express`
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). 
+
+With `px.density_mapbox`, each row of the DataFrame is represented as a point smoothed with a given radius of influence.
+
+```python
+import pandas as pd
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
+
+import plotly.express as px
+fig = px.density_mapbox(df, lat='Latitude', lon='Longitude', z='Magnitude', radius=10,
+                        center=dict(lat=0, lon=180), zoom=0,
+                        mapbox_style="stamen-terrain")
+fig.show()
+```
+
+### Stamen Terrain base map (no token needed): density mapbox with `plotly.graph_objects`
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Densitymapbox` function from `plotly.graph_objects`.
 
 ```python
 import pandas as pd
 quakes = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
 
 import plotly.graph_objects as go
-fig = go.Figure(go.Densitymapbox(lat=quakes.Latitude, lon=quakes.Longitude, z=quakes.Magnitude, radius=10))
+fig = go.Figure(go.Densitymapbox(lat=quakes.Latitude, lon=quakes.Longitude, z=quakes.Magnitude, 
+                                 radius=10))
 fig.update_layout(mapbox_style="stamen-terrain", mapbox_center_lon=180)
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
@@ -40,7 +40,9 @@ jupyter:
 To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 
-Making choropleth maps with `go.Choroplethmapbox` requires two main types of input: GeoJSON-formatted geometry information *where each `feature` has an `id`* and a list of values indexed by feature id. The GeoJSON data is passed to the `geojson` attribute, and the data is passed into the `z` attribute, in the same order as the IDs are passed into the `location` attribute.
+### Introduction: main parameters for choropleth mapbox charts
+
+Making choropleth maps requires two main types of input: GeoJSON-formatted geometry information *where each `feature` has an `id`* and a list of values indexed by feature id. The GeoJSON data is passed to the `geojson` attribute, and the data is passed into the `z` (`color` for `px.choropleth_mapbox`) attribute, in the same order as the IDs are passed into the `location` attribute.
 
 
 #### GeoJSON with `feature.id`
@@ -67,7 +69,39 @@ df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-
 df.head()
 ```
 
-#### Carto base map: no token needed
+### Choropleth map using plotly.express and carto base map (no token needed)
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.choropleth_mapbox`, each row of the DataFrame is represented as a region of the choropleth.
+
+```python
+from urllib.request import urlopen
+import json
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties = json.load(response)
+
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv",
+                   dtype={"fips": str})
+
+import plotly.express as px
+
+fig = px.choropleth_mapbox(df, geojson=counties, locations='fips', color='unemp',
+                           color_continuous_scale="Viridis", 
+                           range_color=(0, 12),
+                           mapbox_style="carto-positron",
+                           zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
+                           opacity=0.5,
+                           labels={'unemp':'unemployment rate'}
+                          )
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Choropleth map using plotly.graph_objects and carto base map (no token needed)
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Choroplethmapbox` function from `plotly.graph_objects`.
 
 ```python
 from urllib.request import urlopen
