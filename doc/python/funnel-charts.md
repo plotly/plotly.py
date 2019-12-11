@@ -1,26 +1,27 @@
 ---
 jupyter:
   jupytext:
+    notebook_metadata_filter: plotly
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
     name: python3
   plotly:
+    description: How to make funnel-chart plots in Python with Plotly.
+    display_as: financial
+    language: python
+    layout: base
+    name: Funnel Chart
+    order: 4
+    page_type: example_index
     permalink: python/funnel-charts/
     redirect_from: python/funnel-chart/
-    description: How to make funnel-chart plots in Python with Plotly.
-    name: Funnel Chart
     thumbnail: thumbnail/funnel.jpg
-    language: python
-    display_as: financial
-    order: 4
-    layout: base
-    page_type: example_index
 ---
 
 
@@ -29,7 +30,40 @@ jupyter:
 Funnel charts are often used to represent data in different stages of a business process. It’s an important mechanism in Business Intelligence to identify potential problem areas of a process. For example, it’s used to observe the revenue or loss in a sales process for each stage, and displays values that are decreasing progressively. Each stage is illustrated as a percentage of the total of all values.
 
 
-### Basic Funnel Plot
+### Basic Funnel Plot with plotly.express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
+
+
+```python
+import plotly.express as px
+data = dict(
+    number=[39, 27.4, 20.6, 11, 2], 
+    stage=["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"])
+fig = px.funnel(data, x='number', y='stage')
+fig.show()
+```
+
+### Stacked Funnel Plot with plotly.express
+
+```python
+import plotly.express as px
+import pandas as pd
+stages = ["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"]
+df_mtl = pd.DataFrame(dict(number=[39, 27.4, 20.6, 11, 3], stage=stages))
+df_mtl['office'] = 'Montreal'
+df_toronto = pd.DataFrame(dict(number=[52, 36, 18, 14, 5], stage=stages))
+df_toronto['office'] = 'Toronto'
+df = pd.concat([df_mtl, df_toronto], axis=0)
+fig = px.funnel(df, x='number', y='stage', color='office')
+fig.show()
+```
+
+### Basic Funnel Chart with graph_objects trace go.Funnel
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnel` function from `plotly.graph_objects`.
 
 ```python
 from plotly import graph_objects as go
@@ -60,7 +94,7 @@ fig = go.Figure(go.Funnel(
 fig.show()
 ```
 
-### Stacked Funnel Plot
+### Stacked Funnel Plot with go.Funnel
 
 ```python
 from plotly import graph_objects as go
@@ -92,7 +126,21 @@ fig.add_trace(go.Funnel(
 fig.show()
 ```
 
-#### Basic Area Funnel Plot
+### Basic Area Funnel Plot with plotly.express
+
+With `px.funnel_area`, each row of the DataFrame is represented as a stage of
+the funnel.
+
+```python
+import plotly.express as px
+fig = px.funnel_area(names=["The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"],
+                    values=[5, 4, 3, 2, 1])
+fig.show()
+```
+
+### Basic Area Funnel Plot with go.Funnelarea
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnelarea` function from `plotly.graph_objects`.
 
 ```python
 from plotly import graph_objects as go
