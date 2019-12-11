@@ -39,7 +39,7 @@ jupyter:
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
 
 
-## Box Plot with Plotly Express
+## Box Plot with `plotly.express`
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
