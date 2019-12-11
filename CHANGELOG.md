@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
    have a `range_theta` keyword argument for representing only an angular
 section [#1969](https://github.com/plotly/plotly.py/pull/1969).
  - Docstrings of plotly.py are now doctested [#1921](https://github.com/plotly/plotly.py/pull/1921).
+ - Reversing a predefined colorscale by appending `_r` to its name [#1933](https://github.com/plotly/plotly.py/pull/1933)
 
 ## [4.3.0] - 2019-11-11
 
