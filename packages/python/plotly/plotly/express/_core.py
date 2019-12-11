@@ -959,7 +959,9 @@ def build_dataframe(args, attrables, array_attrables):
                 else:  # pick MultiIndex level with that name
                     vals = pd.Series(
                         df_input.index.get_level_values(level=argument),
-                        index=df_input.index,
+                        index=df_output.index
+                        if len(df_output.index)
+                        else df_input.index,
                     )
 
                 if length and len(vals) != length:
@@ -972,7 +974,8 @@ def build_dataframe(args, attrables, array_attrables):
                 df_output[col_name] = vals
                 # avoid df_output.groupby ambiguity errors
                 if argument in df_output.index.names:
-                    df_output.reset_index(level=argument, inplace=True, drop=True)
+                    df_output = df_output.reset_index(level=argument, drop=True)
+                    df_input = df_input.reset_index(level=argument, drop=True)
 
             # ----------------- argument is a column / array / list.... -------
             else:
