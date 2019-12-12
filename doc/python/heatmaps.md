@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.3
   plotly:
     description: How to make Heatmaps in Python with Plotly.
     display_as: scientific
@@ -34,7 +34,26 @@ jupyter:
     thumbnail: thumbnail/heatmap.jpg
 ---
 
-### Basic Heatmap
+### Heatmap with `plotly.express` and `px.imshow`
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly. With `px.imshow`, each value of the input array is represented as a heatmap pixel.
+
+`px.imshow` makes opiniated choices for representing heatmaps, such as using square pixels. To override this behaviour, you can use `fig.update_layout` or use the `go.Heatmap` trace from `plotly.graph_objects` as described below. 
+
+For more examples using `px.imshow`, see the [tutorial on displaying image data with plotly](/python/imshow).
+
+```python
+import plotly.express as px
+
+fig = px.imshow([[1, 20, 30],
+                 [20, 1, 60],
+                 [30, 60, 1]])
+fig.show()
+```
+
+### Basic Heatmap with `plotly.graph_objects`
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Heatmap` function from `plotly.graph_objects`.
 
 ```python
 import plotly.graph_objects as go

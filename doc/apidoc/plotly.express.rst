@@ -33,12 +33,19 @@ plotly's high-level API for rapid figure generation. ::
     box
     strip
     histogram
+    pie
+    treemap
+    sunburst
+    funnel
+    funnel_area
     scatter_matrix
     parallel_coordinates
     parallel_categories
     choropleth
+    choropleth_mapbox
     density_contour
     density_heatmap
+    density_mapbox
     imshow
 
 

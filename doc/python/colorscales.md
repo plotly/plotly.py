@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -59,6 +59,28 @@ iris = px.data.iris()
 fig = px.scatter(iris, x="sepal_width", y="sepal_length",
                  color="sepal_length", color_continuous_scale='Magma')
 
+fig.show()
+```
+
+### Reversing a predefined colorscale
+
+You can reverse a predefined colorscale by appending `_r` to its name, for colorscales given either as a string or a `plotly` object. 
+
+```python
+import plotly.express as px
+iris = px.data.iris()
+fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+                 color="sepal_length", color_continuous_scale='Magma_r')
+
+fig.show()
+```
+
+```python
+import plotly.express as px
+data = [[1, .3, .5, .9], 
+        [.3, .1, .4, 1],
+        [.2, .8, .9, .3]]
+fig = px.imshow(data, color_continuous_scale=px.colors.diverging.Tealrose_r)
 fig.show()
 ```
 

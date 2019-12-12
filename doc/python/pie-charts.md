@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -33,9 +33,66 @@ jupyter:
     thumbnail: thumbnail/pie-chart.jpg
 ---
 
-### Basic Pie Chart ###
+A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion. 
 
-A pie chart ``go.Pie`` object is a circular statistical chart, which is divided into sectors to illustrate numerical proportion. Data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
+If you're looking instead for a multilevel hierarchical pie-like chart, go to the
+[Sunburst tutorial](/python/sunburst-charts/).
+
+### Pie chart with plotly express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("year == 2007").query("continent == 'Europe'")
+df.loc[df['pop'] < 2.e6, 'country'] = 'Other countries' # Represent only large countries
+fig = px.pie(df, values='pop', names='country', title='Population of European continent')
+fig.show()
+```
+
+### Pie chart with repeated labels
+
+Lines of the dataframe with the same value for `names` are grouped together in the same sector.
+
+```python
+import plotly.express as px
+# This dataframe has 244 lines, but 4 distinct values for `day`
+df = px.data.tips()
+fig = px.pie(df, values='tip', names='day')
+fig.show()
+```
+
+### Setting the color of pie sectors with px.pie
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.pie(df, values='tip', names='day', color_discrete_sequence=px.colors.sequential.RdBu)
+fig.show()
+```
+
+### Customizing a pie chart created with px.pie
+
+In the example below, we first create a pie chart with `px,pie`, using some of its options such as `hover_data` (which columns should appear in the hover) or `labels` (renaming column names). For further tuning, we call `fig.update_traces` to set other parameters of the chart (you can also use `fig.update_layout` for changing the layout).
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("year == 2007").query("continent == 'Americas'")
+fig = px.pie(df, values='pop', names='country', 
+             title='Population of American continent',
+             hover_data=['lifeExp'], labels={'lifeExp':'life expectancy'})
+fig.update_traces(textposition='inside', textinfo='percent+label')
+fig.show()
+```
+
+### Basic Pie Chart with go.Pie
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
+
+
+In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).

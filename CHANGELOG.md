@@ -36,6 +36,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 section [#1969](https://github.com/plotly/plotly.py/pull/1969).
  - All continuous colorscales now accept a `_r` suffix that reverses their direction [#1933](https://github.com/plotly/plotly.py/pull/1933)
  - Docstrings of plotly.py are now doctested [#1921](https://github.com/plotly/plotly.py/pull/1921).
+ - Reversing a predefined colorscale by appending `_r` to its name [#1933](https://github.com/plotly/plotly.py/pull/1933)
 
 ## [4.3.0] - 2019-11-11
 
