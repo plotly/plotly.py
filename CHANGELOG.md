@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
  for more information
  - The tutorials of the [plotly.py documentation](https://plot.ly/python/) are
    now in the main [plotly.py Github repository](https://github.com/plotly/plotly.py). Contributions in order to improve or extend the documentation are very welcome!
- - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). Note that the `height` argument to each `plotly.express` function can be set to 600 to restore the legacy behavior. 
+ - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). To restore the old behavior, set `px.defaults.height=600` once per session, or set the `height` keyword arguement to any `px.function()` to 600.
  
 ### Fixed
 
@@ -29,10 +29,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
  - Extended the plotly.express functional API with 7 new functions: `px.pie`,
    `px.sunburst`, `px.treemap`, `px.funnel`, and `px.funnel_area` ([#1909](https://github.com/plotly/plotly.py/pull/1909)) `px.density_mapbox` and
-   `px.choropleth_mapbox` [#1937](https://github.com/plotly/plotly.py/pull/1937). Also, all mapbox functions in plotly.express have new arguments `center` and `mapbox_style` [#1937](https://github.com/plotly/plotly.py/pull/1937).
+   `px.choropleth_mapbox` [#1937](https://github.com/plotly/plotly.py/pull/1937). 
+ - plotly.express mapbox functions in plotly.express have new arguments `center` and `mapbox_style` [#1937](https://github.com/plotly/plotly.py/pull/1937).
  - plotly.express polar plots (`scatter_polar`, `line_polar`, `bar_polar`) now
    have a `range_theta` keyword argument for representing only an angular
 section [#1969](https://github.com/plotly/plotly.py/pull/1969).
+ - All continuous colorscales now accept a `_r` suffix that reverses their direction [#1933](https://github.com/plotly/plotly.py/pull/1933)
  - Docstrings of plotly.py are now doctested [#1921](https://github.com/plotly/plotly.py/pull/1921).
 
 ## [4.3.0] - 2019-11-11
