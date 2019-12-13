@@ -1,5 +1,6 @@
 from ._core import make_figure
 from ._doc import make_docstring
+from .preprocess import preprocess_sunburst_treemap
 import plotly.graph_objs as go
 
 
@@ -1252,6 +1253,7 @@ def sunburst(
     names=None,
     values=None,
     parents=None,
+    path=None,
     ids=None,
     color=None,
     color_continuous_scale=None,
@@ -1278,6 +1280,17 @@ def sunburst(
         layout_patch = {"sunburstcolorway": color_discrete_sequence}
     else:
         layout_patch = {}
+    if path is not None and (ids is not None or parents is not None):
+        raise ValueError(
+        "Either `path` should be provided, or `ids` and `parents`."
+        "These parameters are mutually exclusive and cannot be passed together."
+                )
+    if path is not None:
+        data_frame = preprocess_sunburst_treemap(data_frame, path, values)
+        path = None
+        ids = 'labels'
+        names = 'labels'
+        parents = 'parent'
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
@@ -1295,6 +1308,7 @@ def treemap(
     values=None,
     parents=None,
     ids=None,
+    path=None,
     color=None,
     color_continuous_scale=None,
     range_color=None,
@@ -1320,6 +1334,18 @@ def treemap(
         layout_patch = {"treemapcolorway": color_discrete_sequence}
     else:
         layout_patch = {}
+    if path is not None and (ids is not None or parents is not None):
+        raise ValueError(
+        "Either `path` should be provided, or `ids` and `parents`."
+        "These parameters are mutually exclusive and cannot be passed together."
+                )
+    if path is not None:
+        data_frame = preprocess_sunburst_treemap(data_frame, path, values)
+        path = None
+        ids = 'labels'
+        names = 'labels'
+        parents = 'parent'
+
     return make_figure(
         args=locals(),
         constructor=go.Treemap,
