@@ -890,6 +890,8 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    if 'path' in args and args['path'] is not None:
+        df_output[args['path']] = df_input[args['path']]
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -1007,6 +1009,57 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def process_dataframe_hierarchy(args):
+    """
+    Build dataframe for sunburst or treemap when the path argument is provided.
+    """
+    df = args['data_frame']
+    path = args['path']
+    # Other columns (for color, hover_data, custom_data etc.)
+    cols = list(set(df.columns).difference(path))
+    df_all_trees = pd.DataFrame(columns=['labels', 'parent', 'id'] + cols)
+    for col in cols:
+        df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
+    for i, level in enumerate(path):
+        df_tree = pd.DataFrame(columns=df_all_trees.columns)
+        dfg = df.groupby(path[i:]).sum(numerical_only=True)
+        dfg = dfg.reset_index()
+        df_tree['labels'] = dfg[level].copy().astype(str)
+        df_tree['parent'] = ''
+        df_tree['id'] = dfg[level].copy().astype(str)
+        if i < len(path) - 1:
+            j = i + 1
+            while j < len(path):
+                df_tree['parent'] += dfg[path[j]].copy().astype(str)
+                df_tree['id'] +=  dfg[path[j]].copy().astype(str)
+                j += 1
+        else:
+            df_tree['parent'] = 'total'
+
+        if i == 0 and cols:
+            df_tree[cols] = dfg[cols]
+        elif cols:
+            for col in cols:
+                df_tree[col] = np.nan
+        df_tree[args['values']] = dfg[args['values']]
+        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+    total_dict = {'labels': 'total', 'id': 'total', 'parent': '',
+                        args['values']:df[args['values']].sum(),
+                        }
+    for col in cols:
+        if not col == args['values']:
+            total_dict[col] = np.nan
+    total = pd.Series(total_dict)
+    df_all_trees = df_all_trees.append(total, ignore_index=True)
+    args['data_frame'] = df_all_trees
+    args['path'] = None
+    args['ids'] = 'id'
+    args['names'] = 'labels'
+    args['parents'] = 'parent'
+    return args
+
+
+
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
@@ -1017,7 +1070,7 @@ def infer_config(args, constructor, trace_patch):
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
         + ["lat", "lon", "locations", "animation_group"]
     )
-    array_attrables = ["dimensions", "custom_data", "hover_data"]
+    array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
     all_attrables = attrables + group_attrables + ["color"]
     group_attrs = ["symbol", "line_dash"]
@@ -1026,6 +1079,8 @@ def infer_config(args, constructor, trace_patch):
             all_attrables += [group_attr]
 
     args = build_dataframe(args, all_attrables, array_attrables)
+    if constructor in [go.Treemap, go.Sunburst] and args['path'] is not None:
+        args = process_dataframe_hierarchy(args)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
