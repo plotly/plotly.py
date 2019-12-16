@@ -1281,11 +1281,11 @@ def sunburst(
         layout_patch = {}
     if path is not None and (ids is not None or parents is not None):
         raise ValueError(
-        "Either `path` should be provided, or `ids` and `parents`."
-        "These parameters are mutually exclusive and cannot be passed together."
-                )
+            "Either `path` should be provided, or `ids` and `parents`."
+            "These parameters are mutually exclusive and cannot be passed together."
+        )
     if path is not None and branchvalues is None:
-        branchvalues='total'
+        branchvalues = "total"
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
@@ -1331,9 +1331,9 @@ def treemap(
         layout_patch = {}
     if path is not None and (ids is not None or parents is not None):
         raise ValueError(
-        "Either `path` should be provided, or `ids` and `parents`."
-        "These parameters are mutually exclusive and cannot be passed together."
-                )
+            "Either `path` should be provided, or `ids` and `parents`."
+            "These parameters are mutually exclusive and cannot be passed together."
+        )
 
     return make_figure(
         args=locals(),

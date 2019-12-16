@@ -82,10 +82,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to set ids of sectors",
     ],
-    path=[
-        colref_type,
-        colref_desc
-    ],
+    path=[colref_type, colref_desc],
     lat=[
         colref_type,
         colref_desc,
