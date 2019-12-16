@@ -2,6 +2,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
 import numpy as np
+import pandas as pd
 
 
 def _compare_figures(go_trace, px_fig):
@@ -110,6 +111,30 @@ def test_sunburst_treemap_colorscales():
         )
         assert list(fig.layout[colorway]) == color_seq
 
+
+def test_sunburst_treemap_with_path():
+    vendors = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    sectors = ['Tech', 'Tech', 'Finance', 'Finance', 'Tech', 'Tech', 'Finance', 'Finance']
+    regions = ['North', 'North', 'North', 'North', 'South', 'South', 'South', 'South']
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    df = pd.DataFrame(dict(vendors=vendors, sectors=sectors, regions=regions, values=values))
+    # No values
+    fig = px.sunburst(df, path=['vendors', 'sectors', 'regions'])
+    assert fig.data[0].branchvalues == 'total'
+    # Values passed
+    fig = px.sunburst(df, path=['vendors', 'sectors', 'regions'], values='values')
+    assert fig.data[0].branchvalues == 'total'
+    assert fig.data[0].values[-1] == np.sum(values)
+    # Values passed
+    fig = px.sunburst(df, path=['vendors', 'sectors', 'regions'],
+                      values='values')
+    assert fig.data[0].branchvalues == 'total'
+    assert fig.data[0].values[-1] == np.sum(values)
+    # Continuous colorscale
+    fig = px.sunburst(df, path=['vendors', 'sectors', 'regions'],
+                      values='values', color='values')
+    assert 'coloraxis' in fig.data[0].marker 
+    assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
 
 def test_pie_funnelarea_colorscale():
     labels = ["A", "B", "C", "D"]

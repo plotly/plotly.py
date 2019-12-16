@@ -890,6 +890,7 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    # This should be improved + tested - HACK
     if 'path' in args and args['path'] is not None:
         df_output[args['path']] = df_input[args['path']]
     # Loop over possible arguments
@@ -1018,6 +1019,7 @@ def process_dataframe_hierarchy(args):
     # Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
     df_all_trees = pd.DataFrame(columns=['labels', 'parent', 'id'] + cols)
+    # Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
         df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
     for i, level in enumerate(path):
@@ -1040,17 +1042,23 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         elif cols:
             for col in cols:
-                df_tree[col] = np.nan
-        df_tree[args['values']] = dfg[args['values']]
+                df_tree[col] = 'n/a'
+        if args['values']:
+            df_tree[args['values']] = dfg[args['values']]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+
+    # Root node
     total_dict = {'labels': 'total', 'id': 'total', 'parent': '',
-                        args['values']:df[args['values']].sum(),
                         }
     for col in cols:
         if not col == args['values']:
-            total_dict[col] = np.nan
+            total_dict[col] = 'n/a'
+        if col == args['values']:
+            total_dict[col] = df[col].sum()
     total = pd.Series(total_dict)
+
     df_all_trees = df_all_trees.append(total, ignore_index=True)
+    # Now modify arguments
     args['data_frame'] = df_all_trees
     args['path'] = None
     args['ids'] = 'id'

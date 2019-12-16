@@ -1,6 +1,5 @@
 from ._core import make_figure
 from ._doc import make_docstring
-from .preprocess import preprocess_sunburst_treemap
 import plotly.graph_objs as go
 
 
@@ -1285,16 +1284,8 @@ def sunburst(
         "Either `path` should be provided, or `ids` and `parents`."
         "These parameters are mutually exclusive and cannot be passed together."
                 )
-    """
-    if path is not None:
-        data_frame = preprocess_sunburst_treemap(data_frame, path, values,
-                                                 #color,
-                                                 other_columns=hover_data)
-        path = None
-        ids = 'id'
-        names = 'labels'
-        parents = 'parent'
-    """
+    if path is not None and branchvalues is None:
+        branchvalues='total'
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
@@ -1343,16 +1334,6 @@ def treemap(
         "Either `path` should be provided, or `ids` and `parents`."
         "These parameters are mutually exclusive and cannot be passed together."
                 )
-    """
-    if path is not None:
-        data_frame = preprocess_sunburst_treemap(data_frame, path, values,
-                                                 #color,
-                                                 other_columns=hover_data)
-        path = None
-        ids = 'id'
-        names = 'labels'
-        parents = 'parent'
-    """
 
     return make_figure(
         args=locals(),
