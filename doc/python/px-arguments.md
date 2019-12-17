@@ -124,7 +124,7 @@ import plotly.express as px
 import pandas as pd
 
 df = px.data.gapminder()
-gdp = gapminder['pop'] * gapminder['gdpPercap']
+gdp = df['pop'] * df['gdpPercap']
 fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'gdp'},
              hover_data=['country'],
              title='Evolution of world GDP')
@@ -191,7 +191,7 @@ import numpy as np
 import pandas as pd
 
 df = px.data.gapminder()
-gdp = np.log(df['pop'] * gapminder['gdpPercap'])  # NumPy array
+gdp = np.log(df['pop'] * df['gdpPercap'])  # NumPy array
 fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'log gdp'},
              hover_data=['country'],
              title='Evolution of world GDP')
