@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to set colorscales and heatmap colorscales in Python and Plotly.
+    description:
+      How to set colorscales and heatmap colorscales in Python and Plotly.
       Divergent, sequential, and qualitative colorscales.
     display_as: file_settings
     has_thumbnail: true
@@ -38,14 +39,15 @@ jupyter:
 ---
 
 ### Predefined colorscales in Plotly Express
+
 A collection of predefined sequential colorscales is provided in the `plotly.express.colors.sequential` module.
 
 Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis colorscale.
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length",
                  color="sepal_length", color_continuous_scale=px.colors.sequential.Viridis)
 
 fig.show()
@@ -55,8 +57,8 @@ It is also possible to specify colorscales by name. Here is an example that spec
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length",
                  color="sepal_length", color_continuous_scale='Magma')
 
 fig.show()
@@ -64,12 +66,12 @@ fig.show()
 
 ### Reversing a predefined colorscale
 
-You can reverse a predefined colorscale by appending `_r` to its name, for colorscales given either as a string or a `plotly` object. 
+You can reverse a predefined colorscale by appending `_r` to its name, for colorscales given either as a string or a `plotly` object.
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter(iris, x="sepal_width", y="sepal_length",
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length",
                  color="sepal_length", color_continuous_scale='Magma_r')
 
 fig.show()
@@ -77,7 +79,7 @@ fig.show()
 
 ```python
 import plotly.express as px
-data = [[1, .3, .5, .9], 
+data = [[1, .3, .5, .9],
         [.3, .1, .4, 1],
         [.2, .8, .9, .3]]
 fig = px.imshow(data, color_continuous_scale=px.colors.diverging.Tealrose_r)
@@ -219,7 +221,8 @@ fig.show()
 ```
 
 ### Setting the Midpoint of a Diverging Colorscale
-The following example uses [marker.cmid](https://plot.ly/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plot.ly/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`. 
+
+The following example uses [marker.cmid](https://plot.ly/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plot.ly/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
 
 ```python
 import plotly.graph_objects as go
@@ -241,7 +244,7 @@ import plotly.graph_objects as go
 a = list(range(-10,5))
 b = list(range(-5,10))
 c = list(range(-5,15))
-         
+
 fig = go.Figure(go.Heatmap(
     z=[a, b, c],
     colorscale='RdBu',
@@ -308,6 +311,7 @@ fig.show()
 ```
 
 ### Share Color Axis
+
 This example shows how traces can share colorbars. To share colorscale information in multiple subplots, you can use [coloraxis](https://plot.ly/javascript/reference/#scatter-marker-line-coloraxis).
 
 ```python
@@ -325,7 +329,6 @@ fig.update_layout(coloraxis = {'colorscale':'viridis'})
 
 fig.show()
 ```
-
 
 ### Logarithmic Colorscale
 
