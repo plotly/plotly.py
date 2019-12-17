@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.2.0
   kernelspec:
     display_name: Python 3
@@ -39,9 +39,9 @@ jupyter:
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-iris["e"] = iris["sepal_width"]/100
-fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species",
+df = px.data.iris()
+df["e"] = df["sepal_width"]/100
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  error_x="e", error_y="e")
 fig.show()
 ```
@@ -50,10 +50,10 @@ fig.show()
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-iris["e_plus"] = iris["sepal_width"]/100
-iris["e_minus"] = iris["sepal_width"]/40
-fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species",
+df = px.data.iris()
+df["e_plus"] = df["sepal_width"]/100
+df["e_minus"] = df["sepal_width"]/40
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  error_y="e_plus", error_y_minus="e_minus")
 fig.show()
 ```
@@ -201,4 +201,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scatter for more information and chart attribute options!

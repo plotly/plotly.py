@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -43,8 +43,8 @@ Below we show how to create geographical line plots using either Plotly Express 
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("year == 2007")
-fig = px.line_geo(gapminder, locations="iso_alpha",
+df = px.data.gapminder().query("year == 2007")
+fig = px.line_geo(df, locations="iso_alpha",
                   color="continent", # "continent" is one of the columns of gapminder
                   projection="orthographic")
 fig.show()
@@ -212,4 +212,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scattergeo for more information and chart attribute options!
