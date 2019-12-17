@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.7
   kernelspec:
     display_name: Python 3
@@ -37,8 +37,8 @@ jupyter:
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.scatter(tips, x="total_bill", y="tip", facet_col="sex",
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", facet_col="sex",
                  width=800, height=400)
 
 fig.update_layout(
@@ -49,7 +49,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adjusting Height, Width, & Margins ###
+### Adjusting Height, Width, & Margins
 
 ```python
 import plotly.graph_objects as go
@@ -79,7 +79,6 @@ fig.show()
 ```
 
 ### Automatically Adjust Margins
-
 
 Set [automargin](https://plot.ly/python/reference/#layout-xaxis-automargin) to `True` and Plotly will automatically increase the margin size to prevent ticklabels from being cut off or overlapping with axis titles.
 
@@ -113,4 +112,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#layout for more information and chart attribute options!
