@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.7
   kernelspec:
     display_name: Python 3
@@ -41,8 +41,8 @@ Here is an example of adding a marker border to a faceted scatter plot created u
 ```python
 import plotly.express as px
 
-iris = px.data.iris()
-fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species")
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
 
 fig.update_traces(marker=dict(size=12,
                               line=dict(width=2,
@@ -107,9 +107,7 @@ fig.show()
 
 Fully opaque, the default setting, is useful for non-overlapping markers. When many points overlap it can be hard to observe density.
 
-
 ### Opacity
-
 
 Setting opacity outside the marker will set the opacity of the trace. Thus, it will allow greater visbility of additional traces but like fully opaque it is hard to distinguish density.
 
@@ -190,7 +188,6 @@ fig.show()
 
 ### Marker Opacity
 
-
 To maximise visibility of density, it is recommended to set the opacity inside the marker `marker:{opacity:0.5}`. If mulitple traces exist with high density, consider using marker opacity in conjunction with trace opacity.
 
 ```python
@@ -249,7 +246,6 @@ fig.show()
 ```
 
 ### Color Opacity
-
 
 To maximise visibility of each point, set the color as an `rgba` string that includes an alpha value of 0.5.
 
@@ -310,4 +306,5 @@ fig.show()
 ```
 
 ### Reference
+
 See https://plot.ly/python/reference/ for more information and chart attribute options!

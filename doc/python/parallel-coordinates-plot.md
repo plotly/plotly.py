@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernel_info:
     name: python2
@@ -41,8 +41,8 @@ jupyter:
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.parallel_coordinates(iris, color="species_id", labels={"species_id": "Species",
+df = px.data.iris()
+fig = px.parallel_coordinates(df, color="species_id", labels={"species_id": "Species",
                 "sepal_width": "Sepal Width", "sepal_length": "Sepal Length",
                 "petal_width": "Petal Width", "petal_length": "Petal Length", },
                              color_continuous_scale=px.colors.diverging.Tealrose,
@@ -56,8 +56,8 @@ Select the columns to be represented with the `dimensions` parameter.
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.parallel_coordinates(iris, color="species_id",
+df = px.data.iris()
+fig = px.parallel_coordinates(df, color="species_id",
                               dimensions=['sepal_width', 'sepal_length', 'petal_width',
                                           'petal_length'],
                               color_continuous_scale=px.colors.diverging.Tealrose,
@@ -66,7 +66,6 @@ fig.show()
 ```
 
 ## Parallel Coordinates Chart with go.Parcoords
-
 
 ```python inputHidden=false outputHidden=false
 import plotly.graph_objects as go
@@ -95,9 +94,7 @@ fig.show()
 
 Parallel coordinates are richly interactive by default. Drag the lines along the axes to filter regions and drag the axis names across the plot to rearrange variables.
 
-
 ![IPython terminal](https://s3-us-west-1.amazonaws.com/plotly-tutorials/plotly-documentation/images/python_parcoords_ex1.gif)
-
 
 ### Basic Parallel Coordinates Plot
 
@@ -175,4 +172,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#parcoords for more information and chart attribute options!

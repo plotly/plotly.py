@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
@@ -39,9 +39,9 @@ Here is an example that creates a scatter plot with text labels using Plotly Exp
 ```python
 import plotly.express as px
 
-gapminder = px.data.gapminder().query("year==2007 and continent=='Americas'")
+df = px.data.gapminder().query("year==2007 and continent=='Americas'")
 
-fig = px.scatter(gapminder, x="gdpPercap", y="lifeExp", text="country", log_x=True, size_max=60)
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", text="country", log_x=True, size_max=60)
 
 fig.update_traces(textposition='top center')
 
@@ -503,8 +503,8 @@ fig.update_layout(
 fig.show()
 ```
 
-
 ### Customize Displayed Text with a Text Template
+
 To show an arbitrary text in your chart you can use [texttemplate](https://plot.ly/python/reference/#pie-texttemplate), which is a template string used for rendering the information, and will override [textinfo](https://plot.ly/python/reference/#treemap-textinfo).
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-fomrat's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format).
 `texttemplate` customizes the text that appears on your plot vs. [hovertemplate](https://plot.ly/python/reference/#pie-hovertemplate) that customizes the tooltip text.
@@ -541,7 +541,9 @@ fig = go.Figure(go.Scatterternary(
 
 fig.show()
 ```
+
 ### Set Date in Text Template
+
 The following example shows how to show date by setting [axis.type](https://plot.ly/python/reference/#layout-yaxis-type) in [funnel charts](https://plot.ly/python/funnel-charts/).
 As you can see [textinfo](https://plot.ly/python/reference/#funnel-textinfo) and [texttemplate](https://plot.ly/python/reference/#funnel-texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
 
@@ -572,4 +574,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#layout-annotations for more information and chart attribute options!

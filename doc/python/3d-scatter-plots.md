@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -41,8 +41,8 @@ Like the [2D scatter plot](https://plot.ly/python/line-and-scatter/) `px.scatter
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_3d(iris, x='sepal_length', y='sepal_width', z='petal_width',
+df = px.data.iris()
+fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
               color='species')
 fig.show()
 ```
@@ -51,8 +51,8 @@ A 4th dimension of the data can be represented thanks to the color of the marker
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_3d(iris, x='sepal_length', y='sepal_width', z='petal_width',
+df = px.data.iris()
+fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
                     color='petal_length', symbol='species')
 fig.show()
 ```
@@ -63,8 +63,8 @@ It is possible to customize the style of the figure through the parameters of `p
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_3d(iris, x='sepal_length', y='sepal_width', z='petal_width',
+df = px.data.iris()
+fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
               color='petal_length', size='petal_length', size_max=18,
               symbol='species', opacity=0.7)
 
@@ -122,7 +122,6 @@ fig.show()
 
 ### Dash App
 
-
 [Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-3dscatterplot) can easily be deployed to a PaaS.
 
 ```python
@@ -136,4 +135,5 @@ IFrame(src= "https://dash-simple-apps.plotly.host/dash-3dscatterplot/code", widt
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scatter3d for more information and chart attribute options!

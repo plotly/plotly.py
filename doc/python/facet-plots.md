@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -30,12 +30,11 @@ jupyter:
     order: 8
     page_type: u-guide
     permalink: python/facet-plots/
-    redirect_from: 
+    redirect_from:
       - python/trellis-plots/
       - python/facet-trellis/
     thumbnail: thumbnail/facet-trellis-thumbnail.jpg
 ---
-
 
 ### Facet and Trellis Plots
 
@@ -46,8 +45,8 @@ Facet plots, also known as trellis plots or small multiples, are figures made up
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.scatter(tips, x="total_bill", y="tip", color="smoker", facet_col="sex")
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="smoker", facet_col="sex")
 fig.show()
 ```
 
@@ -55,14 +54,14 @@ fig.show()
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.bar(tips, x="size", y="total_bill", color="sex", facet_row="smoker")
+df = px.data.tips()
+fig = px.bar(df, x="size", y="total_bill", color="sex", facet_row="smoker")
 fig.show()
 ```
 
 ### Wrapping Column Facets
 
-When the facet dimension has a large number of unique values, it is possible to wrap columns using the `facet_col_wrap` argument. 
+When the facet dimension has a large number of unique values, it is possible to wrap columns using the `facet_col_wrap` argument.
 
 ```python
 import plotly.express as px
@@ -76,15 +75,15 @@ fig.show()
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", color="sex", facet_row="time", facet_col="day",
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", color="sex", facet_row="time", facet_col="day",
        category_orders={"day": ["Thur", "Fri", "Sat", "Sun"], "time": ["Lunch", "Dinner"]})
 fig.show()
 ```
 
 ### Facets with independent axes
 
-By default, facet axes are linked together: zooming inside one of the facets will also zoom in the other facets. You can disable this behaviour when you use `facet_row` only, by disabling `matches` on the Y axes, or when using `facet_col` only, by disabling `matches` on the X axes. It is not recommended to use this approach when using `facet_row` and `facet_col` together, as in this case it becomes very hard to understand the labelling of axes and grid lines. 
+By default, facet axes are linked together: zooming inside one of the facets will also zoom in the other facets. You can disable this behaviour when you use `facet_row` only, by disabling `matches` on the Y axes, or when using `facet_col` only, by disabling `matches` on the X axes. It is not recommended to use this approach when using `facet_row` and `facet_col` together, as in this case it becomes very hard to understand the labelling of axes and grid lines.
 
 ```python
 import plotly.express as px

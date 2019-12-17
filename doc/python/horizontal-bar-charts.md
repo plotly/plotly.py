@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -35,19 +35,16 @@ jupyter:
 
 See more examples of bar charts (including vertical bar charts) and styling options [here](https://plot.ly/python/bar-charts/).
 
-
 ### Horizontal Bar Chart with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). For a horizontal bar char, use the `px.bar` function with `orientation='h'`.
 
-
 #### Basic Horizontal Bar Chart with Plotly Express
-
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.bar(tips, x="total_bill", y="day", orientation='h')
+df = px.data.tips()
+fig = px.bar(df, x="total_bill", y="day", orientation='h')
 fig.show()
 ```
 
@@ -57,8 +54,8 @@ In this example a column is used to color the bars, and we add the information f
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.bar(tips, x="total_bill", y="sex", color='day', orientation='h',
+df = px.data.tips()
+fig = px.bar(df, x="total_bill", y="sex", color='day', orientation='h',
              hover_data=["tip", "size"],
              height=400,
              title='Restaurant bills')
@@ -68,7 +65,6 @@ fig.show()
 ### Horizontal Bar Chart with go.Bar
 
 When data are not available as a tidy dataframe, you can use the more generic function `go.Bar` from `plotly.graph_objects`. All the options of `go.Bar` are documented in the reference https://plot.ly/python/reference/#bar
-
 
 #### Basic Horizontal Bar Chart
 
@@ -338,4 +334,5 @@ fig.show()
 ```
 
 ### Reference
+
 See more examples of bar charts and styling options [here](https://plot.ly/python/bar-charts/).<br> See https://plot.ly/python/reference/#bar for more information and chart attribute options!

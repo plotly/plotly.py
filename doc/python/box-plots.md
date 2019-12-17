@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,13 +31,12 @@ jupyter:
     page_type: example_index
     permalink: python/box-plots/
     thumbnail: thumbnail/box.jpg
-    redirect_from: 
+    redirect_from:
       - /python/box/
       - /python/basic_statistics/
 ---
 
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
-
 
 ## Box Plot with `plotly.express`
 
@@ -45,11 +44,10 @@ A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representa
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 
-
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, y="total_bill")
+df = px.data.tips()
+fig = px.box(df, y="total_bill")
 fig.show()
 ```
 
@@ -57,8 +55,8 @@ If a column name is given as `x` argument, a box plot is drawn for each value of
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill")
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill")
 fig.show()
 ```
 
@@ -68,8 +66,8 @@ With the `points` argument, display underlying data points with either all point
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill", points="all")
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill", points="all")
 fig.show()
 ```
 
@@ -79,8 +77,8 @@ For the interpretation of the notches, see https://en.wikipedia.org/wiki/Box_plo
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill", color="smoker",
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill", color="smoker",
              notched=True, # used notched shape
              title="Box plot of total bill",
              hover_data=["day"] # add day column to hover data
@@ -92,7 +90,7 @@ fig.show()
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plot.ly/python/reference/#box.
 
-### Basic Box Plot ###
+### Basic Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -109,7 +107,7 @@ fig.add_trace(go.Box(y=y1))
 fig.show()
 ```
 
-### Basic Horizontal Box Plot ###
+### Basic Horizontal Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -126,7 +124,7 @@ fig.add_trace(go.Box(x=x1))
 fig.show()
 ```
 
-### Box Plot That Displays the Underlying Data ###
+### Box Plot That Displays the Underlying Data
 
 ```python
 import plotly.graph_objects as go
@@ -140,7 +138,7 @@ fig = go.Figure(data=[go.Box(y=[0, 1, 1, 2, 3, 5, 8, 13, 21],
 fig.show()
 ```
 
-### Colored Box Plot ###
+### Colored Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -158,7 +156,7 @@ fig.add_trace(go.Box(y=y1, name = 'Sample B',
 fig.show()
 ```
 
-### Box Plot Styling Mean & Standard Deviation ###
+### Box Plot Styling Mean & Standard Deviation
 
 ```python
 import plotly.graph_objects as go
@@ -180,9 +178,9 @@ fig.add_trace(go.Box(
 fig.show()
 ```
 
-### Styling Outliers ###
+### Styling Outliers
 
-The example below shows how to use the `boxpoints` argument. If "outliers", only the sample points lying outside the whiskers are shown. If "suspectedoutliers", the outlier points are shown and points either less than 4Q1-3Q3 or greater than 4Q3-3Q1 are highlighted (using  `outliercolor`). If "all", all sample points are shown. If False, only the boxes are shown with no sample points.
+The example below shows how to use the `boxpoints` argument. If "outliers", only the sample points lying outside the whiskers are shown. If "suspectedoutliers", the outlier points are shown and points either less than 4Q1-3Q3 or greater than 4Q3-3Q1 are highlighted (using `outliercolor`). If "all", all sample points are shown. If False, only the boxes are shown with no sample points.
 
 ```python
 import plotly.graph_objects as go
@@ -236,7 +234,7 @@ fig.update_layout(title_text="Box Plot Styling Outliers")
 fig.show()
 ```
 
-### Grouped Box Plots ###
+### Grouped Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -272,7 +270,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Grouped Horizontal Box Plot ###
+### Grouped Horizontal Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -309,7 +307,7 @@ fig.update_traces(orientation='h') # horizontal box plots
 fig.show()
 ```
 
-### Rainbow Box Plots ###
+### Rainbow Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -340,8 +338,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Fully Styled Box Plots ###
-
+### Fully Styled Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -406,8 +403,6 @@ fig.show()
 
 ### Dash Example
 
-
-
 [Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-boxplot) can easily be deployed to a PaaS.
 
 ```python
@@ -421,4 +416,5 @@ IFrame(src= "https://dash-simple-apps.plotly.host/dash-boxplot/code", width="100
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#box for more information and chart attribute options!
