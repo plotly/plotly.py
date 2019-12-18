@@ -146,6 +146,32 @@ def test_sunburst_treemap_with_path():
     )
     assert "coloraxis" in fig.data[0].marker
     assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
+    # Values columns passed as object dtype
+    df['values'] = df['values'].astype(object)
+    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+
+
+def test_sunburst_treemap_with_path_non_rectangular():
+    vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        None,
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "North", "South", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+    df = pd.DataFrame(
+        dict(vendors=vendors, sectors=sectors, regions=regions, values=values)
+    )
+    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+    assert fig.data[0].values[-1] == np.sum(values)
 
 
 def test_pie_funnelarea_colorscale():
