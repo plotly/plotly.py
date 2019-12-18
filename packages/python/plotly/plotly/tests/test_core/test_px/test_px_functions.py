@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
 import numpy as np
 import pandas as pd
+import pytest
 
 
 def _compare_figures(go_trace, px_fig):
@@ -146,9 +147,11 @@ def test_sunburst_treemap_with_path():
     )
     assert "coloraxis" in fig.data[0].marker
     assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
-    # Values columns passed as object dtype
-    df['values'] = df['values'].astype(object)
-    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+    # Error when values cannot be converted to numerical data type
+    df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
+    msg = "Column `values` of `df` could not be converted to a numerical data type."
+    with pytest.raises(ValueError, match=msg):
+        fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
 
 
 def test_sunburst_treemap_with_path_non_rectangular():
@@ -165,7 +168,18 @@ def test_sunburst_treemap_with_path_non_rectangular():
         "Finance",
         "Finance",
     ]
-    regions = ["North", "North", "North", "North", "North", "South", "South", "South", "South", "South"]
+    regions = [
+        "North",
+        "North",
+        "North",
+        "North",
+        "North",
+        "South",
+        "South",
+        "South",
+        "South",
+        "South",
+    ]
     values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
     df = pd.DataFrame(
         dict(vendors=vendors, sectors=sectors, regions=regions, values=values)

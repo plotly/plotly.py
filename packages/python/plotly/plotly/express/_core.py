@@ -1016,6 +1016,14 @@ def process_dataframe_hierarchy(args):
     """
     df = args["data_frame"]
     path = args["path"]
+    if args["values"]:
+        try:
+            df["values"] = pd.to_numeric(df["values"])
+        except ValueError:
+            raise ValueError(
+                "Column `%s` of `df` could not be converted to a numerical data type."
+                % args["values"]
+            )
     # Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
@@ -1045,7 +1053,7 @@ def process_dataframe_hierarchy(args):
                 df_tree[col] = "n/a"
         if args["values"]:
             # EPS hack, to be removed
-            df_tree[args["values"]] = dfg[args["values"]] - 1.e-10
+            df_tree[args["values"]] = dfg[args["values"]] - 1.0e-10
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
     # Root node
