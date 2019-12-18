@@ -1018,7 +1018,7 @@ def process_dataframe_hierarchy(args):
     path = args["path"]
     if args["values"]:
         try:
-            df["values"] = pd.to_numeric(df["values"])
+            df[args["values"]] = pd.to_numeric(df[args["values"]])
         except ValueError:
             raise ValueError(
                 "Column `%s` of `df` could not be converted to a numerical data type."
