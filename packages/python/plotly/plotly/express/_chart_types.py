@@ -1334,7 +1334,8 @@ def treemap(
             "Either `path` should be provided, or `ids` and `parents`."
             "These parameters are mutually exclusive and cannot be passed together."
         )
-
+    if path is not None and branchvalues is None:
+        branchvalues = "total"
     return make_figure(
         args=locals(),
         constructor=go.Treemap,
