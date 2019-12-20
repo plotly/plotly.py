@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to set configuration options of plotly graphs in python. Examples
-      of both online and offline configurations.
+    description: How to set configuration options of plotly graphs in python.
     display_as: file_settings
     language: python
     layout: base
@@ -34,8 +33,8 @@ jupyter:
     thumbnail: thumbnail/modebar-icons.png
 ---
 
-#### Offline Configuration Options
-Now you can pass a `config` dictionary with all configurations options such as `scrollZoom`, `editable`, and `displayModeBar`. For the complete list of config options check out: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
+
+You can pass a `config` dictionary with all configurations options such as `scrollZoom`, `editable`, and `displayModeBar`. For the complete list of config options check out: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
 
 ##### Enable Scroll Zoom
 
