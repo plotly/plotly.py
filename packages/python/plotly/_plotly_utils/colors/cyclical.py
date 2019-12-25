@@ -42,7 +42,7 @@ IceFire = [
     "#ac2301",
     "#820000",
     "#4c0000",
-    "#040100",
+    "#000000",
 ]
 Edge = [
     "#313131",
@@ -87,7 +87,7 @@ HSV = [
     "#0010ff",
     "#9700ff",
     "#ff00bf",
-    "#ff0018",
+    "#ff0000",
 ]
 mrybm = [
     "#f884f7",
@@ -106,6 +106,7 @@ mrybm = [
     "#6b4ef9",
     "#956bfa",
     "#cd7dfe",
+    "#f884f7",
 ]
 mygbm = [
     "#ef55f1",
@@ -124,6 +125,7 @@ mygbm = [
     "#6324f5",
     "#9139fa",
     "#c543fa",
+    "#ef55f1",
 ]
 
 # Prefix variable names with _ so that they will not be added to the swatches
