@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -41,21 +41,20 @@ bar, go to the [Bar Chart tutorial](/python/bar-charts/).
 
 ## Histogram with Plotly Express
 
-
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill")
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill")
 fig.show()
 ```
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
+df = px.data.tips()
 # Here we use a column with categorical data
-fig = px.histogram(tips, x="day")
+fig = px.histogram(df, x="day")
 fig.show()
 ```
 
@@ -65,8 +64,8 @@ By default, the number of bins is chosen so that this number is comparable to th
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", nbins=20)
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", nbins=20)
 fig.show()
 ```
 
@@ -76,8 +75,8 @@ The default mode is to represent the count of samples in each bin. With the `his
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", histnorm='probability density')
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", histnorm='probability density')
 fig.show()
 ```
 
@@ -85,8 +84,8 @@ fig.show()
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill",
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill",
                    title='Histogram of bills',
                    labels={'total_bill':'total bill'}, # can specify one label per df column
                    opacity=0.8,
@@ -100,8 +99,8 @@ fig.show()
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", color="sex")
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", color="sex")
 fig.show()
 ```
 
@@ -111,8 +110,8 @@ For each bin of `x`, one can compute a function of data using `histfunc`. The ar
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", histfunc='avg')
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", histfunc='avg')
 fig.show()
 ```
 
@@ -122,9 +121,9 @@ With the `marginal` keyword, a subplot is drawn alongside the histogram, visuali
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", color="sex", marginal="rug", # can be `box`, `violin`
-                         hover_data=tips.columns)
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", color="sex", marginal="rug", # can be `box`, `violin`
+                         hover_data=df.columns)
 fig.show()
 ```
 
@@ -132,7 +131,7 @@ fig.show()
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Histogram` from `plotly.graph_objects`. All of the available histogram options are described in the histogram section of the reference page: https://plot.ly/python/reference#histogram.
 
-### Basic Histogram ###
+### Basic Histogram
 
 ```python
 import plotly.graph_objects as go
@@ -159,7 +158,7 @@ fig = go.Figure(data=[go.Histogram(x=x, histnorm='probability')])
 fig.show()
 ```
 
-### Horizontal Histogram ###
+### Horizontal Histogram
 
 ```python
 import plotly.graph_objects as go
@@ -173,7 +172,7 @@ fig = go.Figure(data=[go.Histogram(y=y)])
 fig.show()
 ```
 
-### Overlaid Histogram ###
+### Overlaid Histogram
 
 ```python
 import plotly.graph_objects as go
@@ -289,6 +288,7 @@ fig.show()
 ```
 
 ### Custom Binning
+
 For custom binning along x-axis, use the attribute [`nbinsx`](https://plot.ly/python/reference/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plot.ly/python/reference/#histogram-xbins) along with `autobinx = False`.
 
 ```python
@@ -341,16 +341,17 @@ If you want to display information about the individual items within each histog
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig1 = px.bar(tips, x='day', y='tip', height=300,
+df = px.data.tips()
+fig1 = px.bar(df, x='day', y='tip', height=300,
               title='Stacked Bar Chart - Hover on individual items')
-fig2 = px.histogram(tips, x='day', y='tip', histfunc='sum', height=300,
+fig2 = px.histogram(df, x='day', y='tip', histfunc='sum', height=300,
                     title='Histogram Chart')
 fig1.show()
 fig2.show()
 ```
 
 ### Share bins between histograms
+
 In this example both histograms have a compatible bin settings using [bingroup](https://plot.ly/python/reference/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plot.ly/python/2D-Histogram/) trace can share the same `bingroup`.
 
 ```python
@@ -374,7 +375,6 @@ fig.show()
 
 ### Dash Example
 
-
 [Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-histogramplot) can easily be deployed to a PaaS.
 
 ```python
@@ -390,4 +390,5 @@ IFrame(src= "https://dash-simple-apps.plotly.host/dash-histogramplot/code", widt
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#histogram for more information and chart attribute options!

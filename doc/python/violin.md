@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -47,8 +47,8 @@ See also the [list of other statistical charts](https://plot.ly/python/statistic
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.violin(tips, y="total_bill")
+df = px.data.tips()
+fig = px.violin(df, y="total_bill")
 fig.show()
 ```
 
@@ -57,8 +57,8 @@ fig.show()
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.violin(tips, y="total_bill", box=True, # draw box plot inside the violin
+df = px.data.tips()
+fig = px.violin(df, y="total_bill", box=True, # draw box plot inside the violin
                 points='all', # can be 'outliers', or False
                )
 fig.show()
@@ -69,20 +69,20 @@ fig.show()
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.violin(tips, y="tip", x="smoker", color="sex", box=True, points="all",
-          hover_data=tips.columns)
+df = px.data.tips()
+fig = px.violin(df, y="tip", x="smoker", color="sex", box=True, points="all",
+          hover_data=df.columns)
 fig.show()
 ```
 
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.violin(tips, y="tip", color="sex",
+df = px.data.tips()
+fig = px.violin(df, y="tip", color="sex",
                 violinmode='overlay', # draw violins on top of each other
                 # default violinmode is 'group' as in example above
-                hover_data=tips.columns)
+                hover_data=df.columns)
 fig.show()
 ```
 
@@ -259,4 +259,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#violin for more information and chart attribute options!

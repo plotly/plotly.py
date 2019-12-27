@@ -37,6 +37,11 @@ jupyter:
 
 In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](/python/imshow).
 
+A background image can be added to the layout of a figure with
+`fig.add_layout_image` or by setting the `images` parameter of `go.Layout`. The
+`source` attribute of a `go.layout.Image` can be the URL of an image, or a PIL
+Image object (`from PIL import Image; img = Image.open('filename.png')`).
+
 ```python
 import plotly.graph_objects as go
 

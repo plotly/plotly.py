@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.2.3
   kernelspec:
     display_name: Python 3
@@ -38,19 +38,18 @@ jupyter:
 ```python
 import plotly.express as px
 import plotly.express as px
-gapminder = px.data.gapminder().query("country=='Brazil'")
-fig = px.line_3d(gapminder, x="gdpPercap", y="pop", z="year")
+df = px.data.gapminder().query("country=='Brazil'")
+fig = px.line_3d(df, x="gdpPercap", y="pop", z="year")
 fig.show()
 ```
 
 ```python
 import plotly.express as px
 import plotly.express as px
-gapminder = px.data.gapminder().query("continent=='Europe'")
-fig = px.line_3d(gapminder, x="gdpPercap", y="pop", z="year", color='country')
+df = px.data.gapminder().query("continent=='Europe'")
+fig = px.line_3d(df, x="gdpPercap", y="pop", z="year", color='country')
 fig.show()
 ```
-
 
 #### 3D Line Plot of Brownian Motion
 
@@ -120,5 +119,5 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#scatter3d-marker-line for more information and chart attribute options!
 
+See https://plot.ly/python/reference/#scatter3d-marker-line for more information and chart attribute options!

@@ -29,7 +29,8 @@ jupyter:
     name: Annotated Heatmaps
     order: 8
     page_type: u-guide
-    permalink: python/annotated_heatmap/
+    permalink: python/annotated-heatmap/
+    redirect_from: python/annotated_heatmap/
     thumbnail: thumbnail/ann_heat.jpg
 ---
 
