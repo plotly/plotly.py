@@ -38,9 +38,11 @@ jupyter:
     v4upgrade: true
 ---
 
-### Predefined colorscales in Plotly Express
+### Built-In Colorscales
 
-A collection of predefined sequential colorscales is provided in the `plotly.express.colors.sequential` module.
+Plotly comes with a large number of [Built-in Continuous Colorscales](/python/builtin-colorscales/).
+
+### Using Built-In Colorscales in Plotly Express
 
 Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis colorscale.
 
