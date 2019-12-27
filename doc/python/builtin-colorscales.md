@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
-      jupytext_version: 1.3.0
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,9 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
-    description: A reference for the built-in named continuous (sequential, diverging and cylclical) colorscales in Plotly.
+    description: A reference for the built-in named continuous (sequential, diverging
+      and cylclical) colorscales in Plotly.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187
@@ -55,8 +56,10 @@ These strings are case-insensitive and you can append `_r` to them to reverse th
 
 ```python
 import plotly.express as px
+from textwrap import wrap
 
-print("".join('{:<12}'.format(c) for c in px.colors.named_colorscales()))
+named_colorscales = px.colors.named_colorscales()
+print("\n".join(wrap("".join('{:<12}'.format(c) for c in named_colorscales), 96)))
 ```
 
 ### Built-In Sequential Colorscales
