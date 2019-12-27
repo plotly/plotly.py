@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -36,7 +36,7 @@ jupyter:
 
 #### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 ### Basic example with Plotly Express
 
@@ -47,8 +47,8 @@ Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_
 ```python
 import plotly.express as px
 px.set_mapbox_access_token(open(".mapbox_token").read())
-carshare = px.data.carshare()
-fig = px.scatter_mapbox(carshare, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
+df = px.data.carshare()
+fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
                   color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10)
 fig.show()
 ```
@@ -198,6 +198,7 @@ fig.show()
 ### Set Marker Symbols
 
 You can define a symbol on your map by setting [symbol](https://plot.ly/python/reference/#scattermapbox-marker-symbol) attribute. This attribute only works on Mapbox-provided `style`s:
+
 - basic
 - streets
 - outdoors
@@ -227,4 +228,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scattermapbox for more information and options!

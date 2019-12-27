@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -41,25 +41,24 @@ For example, the `plotly.express` function `px.histogram` can add a subplot with
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", color="sex", marginal="rug",
-                   hover_data=tips.columns)
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", color="sex", marginal="rug",
+                   hover_data=df.columns)
 fig.show()
 ```
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", color="sex",
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", color="sex",
                    marginal="box", # or violin, rug
-                   hover_data=tips.columns)
+                   hover_data=df.columns)
 fig.show()
 ```
 
 ## Combined statistical representations with distplot figure factory
 
 The distplot figure factory displays a combination of statistical representations of numerical data, such as histogram, kernel density estimation or normal curve, and rug plot.
-
 
 #### Basic Distplot
 

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description: How to make scatterplot matrices or sploms natively in Python with
+    description:
+      How to make scatterplot matrices or sploms natively in Python with
       Plotly.
     display_as: statistical
     language: python
@@ -37,7 +38,7 @@ jupyter:
 
 ### Scatter matrix with Plotly Express
 
-A scatterplot matrix is a matrix associated to n numerical arrays (data variables),  $X_1,X_2,…,X_n$ , of the same length. The cell (i,j) of such a matrix displays the scatter plot of the variable  Xi  versus  Xj.
+A scatterplot matrix is a matrix associated to n numerical arrays (data variables), $X_1,X_2,…,X_n$ , of the same length. The cell (i,j) of such a matrix displays the scatter plot of the variable Xi versus Xj.
 
 Here we show the Plotly Express function `px.scatter_matrix` to plot the scatter matrix for the columns of the dataframe. By default, all columns are considered.
 
@@ -45,8 +46,8 @@ Here we show the Plotly Express function `px.scatter_matrix` to plot the scatter
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_matrix(iris)
+df = px.data.iris()
+fig = px.scatter_matrix(df)
 fig.show()
 ```
 
@@ -54,8 +55,8 @@ Specify the columns to be represented with the `dimensions` argument, and set co
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_matrix(iris,
+df = px.data.iris()
+fig = px.scatter_matrix(df,
     dimensions=["sepal_width", "sepal_length", "petal_width", "petal_length"],
     color="species")
 fig.show()
@@ -67,22 +68,23 @@ The scatter matrix plot can be configured thanks to the parameters of `px.scatte
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter_matrix(iris,
+df = px.data.iris()
+fig = px.scatter_matrix(df,
     dimensions=["sepal_width", "sepal_length", "petal_width", "petal_length"],
     color="species", symbol="species",
     title="Scatter matrix of iris data set",
-    labels={col:col.replace('_', ' ') for col in iris.columns}) # remove underscore
+    labels={col:col.replace('_', ' ') for col in df.columns}) # remove underscore
 fig.update_traces(diagonal_visible=False)
 fig.show()
 ```
 
 <!-- #region -->
+
 ### Scatter matrix (splom) with go.Splom
 
 If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Splom` function. All its parameters are documented in the reference page https://plot.ly/python/reference/#splom.
 
-The Plotly splom trace implementation for the scatterplot matrix does not require to set  $x=Xi$ , and  $y=Xj$, for each scatter plot. All arrays, $X_1,X_2,…,X_n$ , are passed once, through a list of dicts called dimensions, i.e. each array/variable represents a dimension.
+The Plotly splom trace implementation for the scatterplot matrix does not require to set $x=Xi$ , and $y=Xj$, for each scatter plot. All arrays, $X_1,X_2,…,X_n$ , are passed once, through a list of dicts called dimensions, i.e. each array/variable represents a dimension.
 
 A trace of type `splom` is defined as follows:
 
@@ -101,6 +103,7 @@ trace=go.Splom(dimensions=[dict(label='string-1',
 ```
 
 The label in each dimension is assigned to the axes titles of the corresponding matrix cell.
+
 <!-- #endregion -->
 
 #### Splom of the Iris data set

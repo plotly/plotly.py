@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description: Add linear Ordinary Least Squares (OLS) regression trendlines or non-linear
+    description:
+      Add linear Ordinary Least Squares (OLS) regression trendlines or non-linear
       Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots in Python.
     display_as: statistical
     language: python
@@ -40,12 +41,11 @@ jupyter:
 
 Plotly Express allows you to add [Ordinary Least](https://en.wikipedia.org/wiki/Ordinary_least_squares) Squares regression trendline to scatterplots with the `trendline` argument. In order to do so, you will need to install `statsmodels` and its dependencies. Hovering over the trendline will show the equation of the line and its R-squared value.
 
-
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.scatter(tips, x="total_bill", y="tip", trendline="ols")
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", trendline="ols")
 fig.show()
 ```
 
@@ -56,8 +56,8 @@ Plotly Express will fit a trendline per trace, and allows you to access the unde
 ```python
 import plotly.express as px
 
-tips = px.data.tips()
-fig = px.scatter(tips, x="total_bill", y="tip", facet_col="smoker", color="sex", trendline="ols")
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", facet_col="smoker", color="sex", trendline="ols")
 fig.show()
 
 results = px.get_trendline_results(fig)
@@ -73,7 +73,7 @@ Plotly Express also supports non-linear [LOWESS](https://en.wikipedia.org/wiki/L
 ```python
 import plotly.express as px
 
-gapminder = px.data.gapminder().query("year == 2007")
-fig = px.scatter(gapminder, x="gdpPercap", y="lifeExp", color="continent", trendline="lowess")
+df = px.data.gapminder().query("year == 2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent", trendline="lowess")
 fig.show()
 ```
