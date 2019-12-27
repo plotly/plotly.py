@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: "1.2"
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description:
       How to set colorscales and heatmap colorscales in Python and Plotly.
