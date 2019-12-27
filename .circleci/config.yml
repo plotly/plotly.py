@@ -464,10 +464,10 @@ jobs:
           name: trigger doc build
           command: |
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              git config user.name nicolaskruchten
-              git config user.email nicolas@plot.ly
               git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
               cd documentation
+              git config user.name nicolaskruchten
+              git config user.email nicolas@plot.ly
               git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push
               cd ..
