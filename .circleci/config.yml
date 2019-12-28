@@ -450,7 +450,7 @@ jobs:
               git config user.name plotlydocbot
               git config user.email accounts@plot.ly
               git add *
-              git commit -m build
+              git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.py-docs.git master:built
               rm -rf .git
               cd ../..
@@ -488,7 +488,7 @@ jobs:
               git config user.email accounts@plot.ly
               git add *
               git add .nojekyll
-              git commit -m build
+              git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.py-docs.git master:gh-pages
               rm -rf .git
               cd ../..
