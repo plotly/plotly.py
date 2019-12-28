@@ -397,7 +397,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a" #plotly.py-docs (built)
+            - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
 
@@ -447,8 +447,8 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
               cd build/html
               git init
-              git config user.name nicolaskruchten
-              git config user.email nicolas@plot.ly
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.py-docs.git master:built
@@ -458,6 +458,20 @@ jobs:
             tar -zcf build/html.tgz build/html
             rm -rf build/html build/ipynb
             cd ..
+
+      - run:
+          name: trigger doc build
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
+              cd documentation
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
+              git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
+              git push
+              cd ..
+              rm -rf documentation
+            fi
 
       - run:
           name: make doc
@@ -470,8 +484,8 @@ jobs:
               cd _build/html
               touch .nojekyll
               git init
-              git config user.name emmanuelle
-              git config user.email emma@plot.ly
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
               git add *
               git add .nojekyll
               git commit -m build
