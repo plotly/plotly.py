@@ -36,7 +36,7 @@ jupyter:
     v4upgrade: true
 ---
 
-### Using Built-In Colorscales
+### Using Built-In Continuous Colorscales
 
 Many Plotly Express functions accept a `color_continuous_scale` argument and many trace
 types have a `colorscale` attribute in their schema. Plotly comes with a large number of
@@ -49,6 +49,12 @@ The `plotly.colours` module is also available under `plotly.express.colors` so y
 
 When using continuous colorscales, you will often want to [configure various aspects of its range and colorbar](/python/colorscales/).
 
+
+### Categorical Color Sequences
+
+Plotly also comes with some built-in [categorical color sequences](/python/categorical-color/) which are *not intended* to be used with the `color_continuous_scale` argument as they are not designed for interpolation to occur between adjacent colors.
+
+
 ### Named Built-In Colorscales
 
 You can use any of the following names as string values to set `continuous_color_scale` or `colorscale` arguments.
@@ -60,6 +66,14 @@ from textwrap import wrap
 
 named_colorscales = px.colors.named_colorscales()
 print("\n".join(wrap("".join('{:<12}'.format(c) for c in named_colorscales), 96)))
+```
+
+Built-in color scales are stored as lists of CSS colors:
+
+```python
+import plotly.express as px
+
+print(px.colors.sequential.Plasma)
 ```
 
 ### Built-In Sequential Colorscales
