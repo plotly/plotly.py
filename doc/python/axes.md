@@ -548,7 +548,7 @@ fig.show()
 
 The axis auto-range calculation logic can be configured using the `rangemode` axis parameter.
 
-If `rangemode` is `"normal"` (the default), the range is computed based on the min and max values of the input data. If `"tozero"`, the the range will always include zero. If `"nonnegative"`, the range will not extend below zero, regardless of the input data.
+If `rangemode` is `"normal"` (the default), the range is computed based on the min and max values of the input data. If `"tozero"`, the range will always include zero. If `"nonnegative"`, the range will not extend below zero, regardless of the input data.
 
 Here is an example of configuring a faceted scatter plot created using Plotly Express to always include zero for both the x and y axes.
 
