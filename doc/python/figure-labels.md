@@ -22,12 +22,12 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to set the global font, title, legend-entries, and axis-titles
+    description: How to set the global font, title, and axis-titles
       in python.
     display_as: file_settings
     language: python
     layout: base
-    name: Setting the Font, Title, Legend Entries, and Axis Titles
+    name: Setting the Font, Title, and Axis Titles
     order: 12
     permalink: python/figure-labels/
     redirect_from: python/font/
