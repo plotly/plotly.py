@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Ternary Plots
-    order: 4
+    order: 19
     page_type: example_index
     permalink: python/ternary-plots/
     thumbnail: thumbnail/ternary.jpg

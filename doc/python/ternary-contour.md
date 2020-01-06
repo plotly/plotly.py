@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Ternary contours
-    order: 19
+    order: 4
     page_type: u-guide
     permalink: python/ternary-contour/
     thumbnail: thumbnail/ternary-contour.jpg
