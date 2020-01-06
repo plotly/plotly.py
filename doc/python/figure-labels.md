@@ -22,12 +22,12 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to set the global font, title, and axis-titles
+    description: How to set the global font, title, legend-entries, and axis-titles
       in python.
     display_as: file_settings
     language: python
     layout: base
-    name: Setting the Font, Title, and Axis Titles
+    name: Setting the Font, Title, Legend Entries, and Axis Titles
     order: 12
     permalink: python/figure-labels/
     redirect_from: python/font/
@@ -42,7 +42,7 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
     y=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    name="Name of Trace 1"
+    name="Name of Trace 1"       # this sets its legend entry
 ))
 
 
@@ -65,6 +65,8 @@ fig.update_layout(
 
 fig.show()
 ```
+
+The configuration of the legend is discussed in detail in the [Legends](/python/legend/) page.
 
 ### Align Plot Title
 The following example shows how to align the plot title in [layout.title](https://plot.ly/python/reference/#layout-title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.
