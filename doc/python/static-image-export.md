@@ -64,6 +64,19 @@ If you are unable to install conda or npm, you can install orca as a precompiled
 ```
 $ pip install psutil requests
 ```
+
+##### Externally Hosted Orca + pip
+If you already run an instance of [orca](https://github.com/plotly/orca) on your network, there's no need to install it.
+You can simply point to it in your Python code.
+
+```python
+import plotly
+# specify URL to Orca's endpoint
+plotly.io.orca.config.server_url = "http://localhost:9091"
+```
+
+Note that for this to work, you still need to first `requests` and `psutil`.
+
 <!-- #endregion -->
 
 ### Create a Figure
