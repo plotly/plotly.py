@@ -28,7 +28,7 @@ jupyter:
     layout: base
     name: Ternary contours
     order: 4
-    page_type: u-guide
+    page_type: example_index
     permalink: python/ternary-contour/
     thumbnail: thumbnail/ternary-contour.jpg
 ---

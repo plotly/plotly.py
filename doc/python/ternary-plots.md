@@ -28,7 +28,7 @@ jupyter:
     layout: base
     name: Ternary Plots
     order: 19
-    page_type: example_index
+    page_type: u-guide
     permalink: python/ternary-plots/
     thumbnail: thumbnail/ternary.jpg
 ---
