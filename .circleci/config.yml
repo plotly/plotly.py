@@ -124,10 +124,6 @@ jobs:
           name: Install tox
           command: "sudo pip install tox"
       - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
-      - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py27-optional"
           no_output_timeout: 20m
@@ -143,10 +139,6 @@ jobs:
       - run:
           name: Install tox
           command: "sudo pip install tox"
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py35-optional"
@@ -164,10 +156,6 @@ jobs:
           name: Install tox
           command: "sudo pip install tox"
       - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
-      - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py36-optional"
           no_output_timeout: 20m
@@ -183,10 +171,6 @@ jobs:
       - run:
           name: Install tox
           command: "sudo pip install tox"
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py37-optional"
