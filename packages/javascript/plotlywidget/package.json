@@ -35,7 +35,7 @@
     "typescript": "~3.1.1"
   },
   "dependencies": {
-    "plotly.js": "^1.51.2",
+    "plotly.js": "https://64237-45646037-gh.circle-artifacts.com/0/plotly.js.tgz",
     "@jupyter-widgets/base": "^2.0.0",
     "lodash": "^4.17.4"
   },

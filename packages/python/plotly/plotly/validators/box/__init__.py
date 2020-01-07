@@ -231,6 +231,34 @@ class VisibleValidator(_plotly_utils.basevalidators.EnumeratedValidator):
 import _plotly_utils.basevalidators
 
 
+class UpperfencesrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="upperfencesrc", parent_name="box", **kwargs):
+        super(UpperfencesrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class UpperfenceValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="upperfence", parent_name="box", **kwargs):
+        super(UpperfenceValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="unselected", parent_name="box", **kwargs):
         super(UnselectedValidator, self).__init__(
@@ -385,6 +413,105 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
 import _plotly_utils.basevalidators
 
 
+class SdsrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="sdsrc", parent_name="box", **kwargs):
+        super(SdsrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class SdValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="sd", parent_name="box", **kwargs):
+        super(SdValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class QuartilemethodValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+    def __init__(self, plotly_name="quartilemethod", parent_name="box", **kwargs):
+        super(QuartilemethodValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["linear", "exclusive", "inclusive"]),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class Q3SrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="q3src", parent_name="box", **kwargs):
+        super(Q3SrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class Q3Validator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="q3", parent_name="box", **kwargs):
+        super(Q3Validator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class Q1SrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="q1src", parent_name="box", **kwargs):
+        super(Q1SrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class Q1Validator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="q1", parent_name="box", **kwargs):
+        super(Q1Validator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class PointposValidator(_plotly_utils.basevalidators.NumberValidator):
     def __init__(self, plotly_name="pointpos", parent_name="box", **kwargs):
         super(PointposValidator, self).__init__(
@@ -462,13 +589,41 @@ class NotchwidthValidator(_plotly_utils.basevalidators.NumberValidator):
 import _plotly_utils.basevalidators
 
 
+class NotchspansrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="notchspansrc", parent_name="box", **kwargs):
+        super(NotchspansrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class NotchspanValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="notchspan", parent_name="box", **kwargs):
+        super(NotchspanValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class NotchedValidator(_plotly_utils.basevalidators.BooleanValidator):
     def __init__(self, plotly_name="notched", parent_name="box", **kwargs):
         super(NotchedValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -519,6 +674,62 @@ class MetaValidator(_plotly_utils.basevalidators.AnyValidator):
 import _plotly_utils.basevalidators
 
 
+class MediansrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="mediansrc", parent_name="box", **kwargs):
+        super(MediansrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MedianValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="median", parent_name="box", **kwargs):
+        super(MedianValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MeansrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="meansrc", parent_name="box", **kwargs):
+        super(MeansrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class MeanValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="mean", parent_name="box", **kwargs):
+        super(MeanValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="marker", parent_name="box", **kwargs):
         super(MarkerValidator, self).__init__(
@@ -552,6 +763,34 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 open" to a symbol name.
 """,
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class LowerfencesrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(self, plotly_name="lowerfencesrc", parent_name="box", **kwargs):
+        super(LowerfencesrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class LowerfenceValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="lowerfence", parent_name="box", **kwargs):
+        super(LowerfenceValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 
@@ -804,6 +1043,34 @@ class FillcolorValidator(_plotly_utils.basevalidators.ColorValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "style"),
             role=kwargs.pop("role", "style"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class DyValidator(_plotly_utils.basevalidators.NumberValidator):
+    def __init__(self, plotly_name="dy", parent_name="box", **kwargs):
+        super(DyValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class DxValidator(_plotly_utils.basevalidators.NumberValidator):
+    def __init__(self, plotly_name="dx", parent_name="box", **kwargs):
+        super(DxValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 

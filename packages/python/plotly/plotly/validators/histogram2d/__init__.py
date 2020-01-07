@@ -520,6 +520,20 @@ class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
 import _plotly_utils.basevalidators
 
 
+class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
+    def __init__(self, plotly_name="showlegend", parent_name="histogram2d", **kwargs):
+        super(ShowlegendValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class ReversescaleValidator(_plotly_utils.basevalidators.BooleanValidator):
     def __init__(self, plotly_name="reversescale", parent_name="histogram2d", **kwargs):
         super(ReversescaleValidator, self).__init__(
@@ -639,6 +653,20 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 .
 """,
             ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(self, plotly_name="legendgroup", parent_name="histogram2d", **kwargs):
+        super(LegendgroupValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
