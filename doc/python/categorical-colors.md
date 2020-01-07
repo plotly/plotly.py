@@ -31,7 +31,7 @@ jupyter:
     language: python
     layout: base
     name: Categorical Colors
-    order: 27
+    order: 28
     permalink: python/categorical-color/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true
@@ -57,7 +57,8 @@ For example, in the `tips` dataset, the `smoker` column contains strings:
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", color="smoker", title="String 'smoker' values mean categorical colors")
+fig = px.scatter(df, x="total_bill", y="tip", color="smoker",
+                 title="String 'smoker' values mean categorical colors")
 
 fig.show()
 ```
@@ -67,7 +68,8 @@ The `size` column, however, contains numbers:
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", color="size", title="Numeric 'size' values mean continous color")
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
+                 title="Numeric 'size' values mean continous color")
 
 fig.show()
 ```
@@ -78,7 +80,8 @@ Converting this column to strings is very straightforward, but note that the ord
 import plotly.express as px
 df = px.data.tips()
 df["size"] = df["size"].astype(str)
-fig = px.scatter(df, x="total_bill", y="tip", color="size", title="String 'size' values mean categorical colors")
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
+                 title="String 'size' values mean categorical colors")
 
 fig.show()
 ```
@@ -91,7 +94,8 @@ df = px.data.tips()
 df["size"] = df["size"].astype(str) #convert to string
 df["size"] = df["size"].astype(float) #convert back to numeric
 
-fig = px.scatter(df, x="total_bill", y="tip", color="size", title="Numeric 'size' values mean continous color")
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
+                 title="Numeric 'size' values mean continous color")
 
 fig.show()
 ```
@@ -128,7 +132,7 @@ fig = px.line(df, y="lifeExp", x="year", color="continent", line_group="country"
 fig.show()
 ```
 
-### Explicity Constructing a Color Sequence
+### Explicitly Constructing a Color Sequence
 
 The Plotly Express `color_discrete_sequence` argument accepts explicitly-constructed color sequences as well, as lists of CSS colors:
 
@@ -183,12 +187,7 @@ Plotly Express lets you specify an ordering over categorical variables with `cat
 import plotly.express as px
 df = px.data.gapminder().query("year == 2007")
 fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hover_name="country",
-             color_discrete_map={
-                "Europe": "red",
-                "Asia": "green",
-                "Americas": "blue",
-                "Oceania": "goldenrod",
-                "Africa": "magenta"},
+             color_discrete_sequence=["red", "green", "blue", "goldenrod", "magenta"],
              category_orders={"continent": ["Oceania", "Europe", "Asia", "Africa", "Americas"]},
              title="Explicit color sequence with explicit ordering"
             )
@@ -200,7 +199,12 @@ fig.show()
 import plotly.express as px
 df = px.data.gapminder().query("year == 2007")
 fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hover_name="country",
-             color_discrete_sequence=["red", "green", "blue", "goldenrod", "magenta"],
+             color_discrete_map={
+                "Europe": "red",
+                "Asia": "green",
+                "Americas": "blue",
+                "Oceania": "goldenrod",
+                "Africa": "magenta"},
              category_orders={"continent": ["Oceania", "Europe", "Asia", "Africa", "Americas"]},
              title="Explicit color mapping with explicit ordering"
             )
