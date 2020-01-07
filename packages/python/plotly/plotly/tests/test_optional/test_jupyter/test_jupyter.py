@@ -59,11 +59,6 @@ class Common(TestCase):
             self.fail("One or more javascript test failed")
 
 
-class PlotlyJupyterConnectedFalseTestCase(Common):
-    __test__ = True
-    name = "connected_false"
-
-
 class PlotlyJupyterConnectedTrueTestCase(Common):
     __test__ = True
     name = "connected_true"
