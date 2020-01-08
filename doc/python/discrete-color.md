@@ -22,35 +22,33 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to use and configure categorical (also known as qualitative or
-      discrete) color sequences.
+    description: How to use and configure discrete color sequences, also known as categorical or qualitative color scales.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187
     language: python
     layout: base
-    name: Categorical Colors
+    name: Discrete Colors
     order: 28
-    permalink: python/categorical-color/
+    permalink: python/discrete-color/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true
 ---
 
-### Categorical vs Continuous Color
+### Discrete vs Continuous Color
 
-In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or categorical data. This page is about using color to represent **categorical** data, but Plotly can also [represent continuous values with color](/python/colorscales/).
+In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or discrete data. This page is about using color to represent **categorical** data using discrete colors, but Plotly can also [represent continuous values with color](/python/colorscales/).
 
-### Categorical Color Concepts
+### Discrete Color Concepts
 
-This document explains the following categorical-color-related concepts:
+This document explains the following discrete-color-related concepts:
 
 - **color sequences** are lists of colors to be mapped onto discrete data values. No interpolation occurs when using color sequences, unlike with [continuous color scales](/python/colorscales/), and each color is used as-is. Color sequence defaults depend on the `layout.colorway` attribute of the active [template](/python/templates/), and can be explicitly specified using the `color_discrete_sequence` argument for many [Plotly Express](/python/plotly-express/) functions.
-- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](/python/legend/) under the `layout.legend` attribute. Legends are the categorical equivalent of [continous color bars](/python/colorscales/)
+- **legends** are visible representations of the mapping between colors and data values. Legend markers also change shape when used with various kinds of traces, such as symbols or lines for scatter-like traces. [Legends are configurable](/python/legend/) under the `layout.legend` attribute. Legends are the discrete equivalent of [continous color bars](/python/colorscales/)
 
-### Categorical Color with Plotly Express
+### Discrete Color with Plotly Express
 
-Most Plotly Express functions accept a `color` argument which automatically assigns data values to categorical colors **if the data is non-numeric**. If the data is numeric, the color will automatically be considered [continuous](/python/colorscales/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
+Most Plotly Express functions accept a `color` argument which automatically assigns data values to discrete colors **if the data is non-numeric**. If the data is numeric, the color will automatically be considered [continuous](/python/colorscales/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
 
 For example, in the `tips` dataset, the `smoker` column contains strings:
 
@@ -58,7 +56,7 @@ For example, in the `tips` dataset, the `smoker` column contains strings:
 import plotly.express as px
 df = px.data.tips()
 fig = px.scatter(df, x="total_bill", y="tip", color="smoker",
-                 title="String 'smoker' values mean categorical colors")
+                 title="String 'smoker' values mean discrete colors")
 
 fig.show()
 ```
@@ -74,14 +72,14 @@ fig = px.scatter(df, x="total_bill", y="tip", color="size",
 fig.show()
 ```
 
-Converting this column to strings is very straightforward, but note that the ordering in the legend is not sequential by default (see below for how to control categorical order):
+Converting this column to strings is very straightforward, but note that the ordering in the legend is not sequential by default (see below for how to control discrete order):
 
 ```python
 import plotly.express as px
 df = px.data.tips()
 df["size"] = df["size"].astype(str)
 fig = px.scatter(df, x="total_bill", y="tip", color="size",
-                 title="String 'size' values mean categorical colors")
+                 title="String 'size' values mean discrete colors")
 
 fig.show()
 ```
@@ -179,7 +177,7 @@ fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hov
 fig.show()
 ```
 
-### Controlling Categorical Order
+### Controlling Discrete Color Order
 
 Plotly Express lets you specify an ordering over categorical variables with `category_orders`, which will apply to colors and legends as well as symbols, [axes](/python/axes/) and [facets](/python/facet-plots/). This can be used with either `color_discrete_sequence` or `color_discrete_map`.
 
@@ -212,9 +210,9 @@ fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hov
 fig.show()
 ```
 
-### Using Sequential Scales as Categorical Sequences
+### Using Sequential Scales as Discrete Sequences
 
-In most cases, discrete/qualitative/categorical data values have no meaningful natural ordering, such as in the continents example used above. In some cases, however, there is a meaningful order, and in this case it can be helpful and appealing to use part of a continuous scale as a categorical sequence, as in the following [wind rose chart](/python/wind-rose-charts/):
+In most cases, discrete/qualitative/categorical data values have no meaningful natural ordering, such as in the continents example used above. In some cases, however, there is a meaningful order, and in this case it can be helpful and appealing to use part of a continuous scale as a discrete sequence, as in the following [wind rose chart](/python/wind-rose-charts/):
 
 ```python
 import plotly.express as px

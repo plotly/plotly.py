@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description: How to set, create and control continous color scales and color bars
+    description:
+      How to set, create and control continous color scales and color bars
       in scatter, bar, map and heatmap figures.
     display_as: file_settings
     has_thumbnail: true
@@ -37,31 +38,29 @@ jupyter:
     v4upgrade: true
 ---
 
-### Continuous vs Categorical Color
+### Continuous vs Discrete Color
 
-In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or categorical data. This page is about using color to represent **continuous** data, but Plotly can also [represent categorical values with color](/python/categorical-color/).
-
+In the same way as the X or Y position of a mark in cartesian coordinates can be used to represent continuous values (i.e. amounts or moments in time) or categories (i.e. labels), color can be used to represent continuous or categorical data. This page is about using color to represent **continuous** data, but Plotly can also [represent categorical values with color](/python/discrete-color/).
 
 ### Continuous Color Concepts
 
 This document explains the following four continuous-color-related concepts:
 
-- **color scales** represent a mapping between the range 0 to 1 and some color domain within which colors are to be interpolated (unlike [categorical color sequences](/python/categorical-color/) which are never interpolated). Color scale defaults depend on the `layout.colorscales` attributes of the active [template](/python/templates/), and can be explicitly specified using the `color_continuous_scale` argument for many [Plotly Express](/python/plotly-express/) functions or the `colorscale` argument in various `graph_objects` such as `layout.coloraxis` or `marker.colorscale` in `go.Scatter` traces or `colorscale` in `go.Heatmap` traces. For example `[(0,"blue"), (1,"red")]` is a simple color scale that interpolated between blue and red via purple, which can also be implicitly represented as `["blue", "red"]` and happens to be one of the [built-in color scales](/python/builtin-colorscales) and therefore referred to as `"bluered"` or `plotly.colors.sequential.Bluered`.
+- **color scales** represent a mapping between the range 0 to 1 and some color domain within which colors are to be interpolated (unlike [discrete color sequences](/python/discrete-color/) which are never interpolated). Color scale defaults depend on the `layout.colorscales` attributes of the active [template](/python/templates/), and can be explicitly specified using the `color_continuous_scale` argument for many [Plotly Express](/python/plotly-express/) functions or the `colorscale` argument in various `graph_objects` such as `layout.coloraxis` or `marker.colorscale` in `go.Scatter` traces or `colorscale` in `go.Heatmap` traces. For example `[(0,"blue"), (1,"red")]` is a simple color scale that interpolated between blue and red via purple, which can also be implicitly represented as `["blue", "red"]` and happens to be one of the [built-in color scales](/python/builtin-colorscales) and therefore referred to as `"bluered"` or `plotly.colors.sequential.Bluered`.
 - **color ranges** represent the minimum to maximum range of data to be mapped onto the 0 to 1 input range of the color scale. Color ranges default to the range of the input data and can be explicitly specified using either the `range_color` or `color_continous_midpoint` arguments for many Plotly Express functions, or `cmin`/`cmid`/`cmax` or `zmin`/`zmid`/`zmax` for various `graph_objects` such as `layout.coloraxis.cmin` or `marker.cmin` in `go.Scatter` traces or `cmin` in `go.Heatmap` traces. For example, if a color range of `[100, 200]` is used with the color scale above, then any mark with a color value of 100 or less will be blue, and 200 or more will be red. Marks with values in between will be various shades of purple.
 - **color bars** are legend-like visible representations of the color range and color scale with optional tick labels and tick marks. Color bars can be configured with attributes inside `layout.coloraxis.colorbar` or in places like `marker.colorbar` in `go.Scatter` traces or `colorbar` in `go.Heatmap` traces.
 - **color axes** connect color scales, color ranges and color bars to a trace's data. By default, any colorable attribute in a trace is attached to its own local color axis, but color axes may also be shared across attributes and traces by setting e.g. `marker.coloraxis` in `go.Scatter` traces or `coloraxis` in `go.Heatmap` traces. Local color axis attributes are configured within traces e.g. `marker.showscale` whereas shared color axis attributes are configured within the Layout e.g. `layout.coloraxis.showscale`.
 
-
 ### Continuous Color with Plotly Express
 
-Most Plotly Express functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/categorical-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
+Most Plotly Express functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/discrete-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
 
 For example, in the `tips` dataset, the `size` column contains numbers:
 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", color="size", 
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
                  title="Numeric 'size' values mean continous color")
 
 fig.show()
@@ -73,7 +72,7 @@ Converting this column to strings is very straightforward:
 import plotly.express as px
 df = px.data.tips()
 df["size"] = df["size"].astype(str)
-fig = px.scatter(df, x="total_bill", y="tip", color="size", 
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
                  title="String 'size' values mean discrete colors")
 
 fig.show()
@@ -86,7 +85,7 @@ import plotly.express as px
 df = px.data.tips()
 df["size"] = df["size"].astype(str)
 df["size"] = df["size"].astype(float)
-fig = px.scatter(df, x="total_bill", y="tip", color="size", 
+fig = px.scatter(df, x="total_bill", y="tip", color="size",
                  title="Numeric 'size' values mean continous color")
 
 fig.show()
@@ -94,9 +93,9 @@ fig.show()
 
 ### Color Scales in Plotly Express
 
-By default, Plotly Express will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in colorscales](/python/builtin-colorscales/), however, or define your own.
+By default, Plotly Express will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in color scales](/python/builtin-colorscales/), however, or define your own.
 
-Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis colorscale.
+Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis color scale.
 
 ```python
 import plotly.express as px
@@ -107,7 +106,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length",
 fig.show()
 ```
 
-It is also possible to specify colorscales by name. Here is an example that specifies the `Inferno` colorscale by name, as a string
+It is also possible to specify color scales by name. Here is an example that specifies the `Inferno` color scale by name, as a string
 
 ```python
 import plotly.express as px
@@ -118,9 +117,9 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length",
 fig.show()
 ```
 
-### Reversing a built-in colorscale
+### Reversing a built-in color scale
 
-You can reverse a [built-in colorscale](/python/builtin-colorscales/) by appending `_r` to its name, for colorscales given either as a string or a `plotly` object.
+You can reverse a [built-in color scale](/python/builtin-colorscales/) by appending `_r` to its name, for color scales given either as a string or a `plotly` object.
 
 ```python
 import plotly.express as px
@@ -140,9 +139,9 @@ fig = px.imshow(data, color_continuous_scale=px.colors.sequential.Cividis_r)
 fig.show()
 ```
 
-### Explicity Constructing a Colorscale
+### Explicity Constructing a Color scale
 
-The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed colorscales as well:
+The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well:
 
 ```python
 import plotly.express as px
@@ -166,7 +165,7 @@ fig.show()
 
 ### Constructing a Discrete or Discontinuous Color Scale
 
-You can create a discrete color scale, with discontinuous color, by setting the same reference point twice in a row. This is useful for example with chart types that don't support categorical colors, like [Parallel Coordinates plots](/python/parallel-coordinates-plot/). See below for how to customize tick text.
+You can create a discrete color scale, with discontinuous color, by setting the same reference point twice in a row. This is useful for example with chart types that don't support discrete colors, like [Parallel Coordinates plots](/python/parallel-coordinates-plot/). See below for how to customize tick text.
 
 ```python
 import plotly.express as px
@@ -190,11 +189,11 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="sepal_length", ra
 fig.show()
 ```
 
-### Setting the Midpoint of a Color Range for a Diverging Colorscale
+### Setting the Midpoint of a Color Range for a Diverging Color scale
 
-Diverging colorscales have a well-defined midpoint color, and are best-used when that midpoint is mapped to a meaningful data value. The `color_continuous_midpoint` argument to most Plotly Express functions is used for this. It cannot be used with `range_color` because setting it forces the color range to be centered on the midpoint while including the entire dataset. This means that for asymmetric data distributions, not all colors in the color scale will appear in the figure.
+Diverging color scales have a well-defined midpoint color, and are best-used when that midpoint is mapped to a meaningful data value. The `color_continuous_midpoint` argument to most Plotly Express functions is used for this. It cannot be used with `range_color` because setting it forces the color range to be centered on the midpoint while including the entire dataset. This means that for asymmetric data distributions, not all colors in the color scale will appear in the figure.
 
-For example, a diverging colorscale could be used to highlight points with a higher and lower value than the median in a choropleth map like this:
+For example, a diverging color scale could be used to highlight points with a higher and lower value than the median in a choropleth map like this:
 
 ```python
 import plotly.express as px
@@ -283,7 +282,7 @@ fig.update_layout(coloraxis_colorbar=dict(
 fig.show()
 ```
 
-### Custom Discretized Heatmap Colorscale with Graph Objects
+### Custom Discretized Heatmap Color scale with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -337,7 +336,7 @@ fig.add_trace(go.Heatmap(
 fig.show()
 ```
 
-### Colorscale for Scatter Plots with Graph Objects
+### Color scale for Scatter Plots with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -365,7 +364,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-### Colorscale for Contour Plot with Graph Objects
+### Color scale for Contour Plot with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -384,7 +383,7 @@ fig.add_trace(go.Contour(
 fig.show()
 ```
 
-### Custom Heatmap Colorscale with Graph Objects
+### Custom Heatmap Color scale with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -417,7 +416,7 @@ fig.add_trace(go.Heatmap(
 fig.show()
 ```
 
-### Setting the Midpoint of a Diverging Colorscale with Graph Objects
+### Setting the Midpoint of a Diverging Color scale with Graph Objects
 
 The following example uses the [marker.cmid](https://plot.ly/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plot.ly/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
 
@@ -450,7 +449,7 @@ fig = go.Figure(go.Heatmap(
 fig.show()
 ```
 
-### Custom Contour Plot Colorscale with Graph Objects
+### Custom Contour Plot Color scale with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -474,9 +473,9 @@ fig.add_trace(go.Contour(
 fig.show()
 ```
 
-### Custom Colorbar Title, Labels, and Ticks with Graph Objects
+### Custom Color bar Title, Labels, and Ticks with Graph Objects
 
-Like axes, you can customize the colorbar ticks, labels, and values with `ticks`, `ticktext`, and `tickvals`.
+Like axes, you can customize the color bar ticks, labels, and values with `ticks`, `ticktext`, and `tickvals`.
 
 ```python
 import plotly.graph_objects as go
@@ -527,7 +526,7 @@ fig.update_layout(coloraxis = {'colorscale':'viridis'})
 fig.show()
 ```
 
-### Logarithmic Colorscale with Graph Objects
+### Logarithmic Color scale with Graph Objects
 
 ```python
 import plotly.graph_objects as go
