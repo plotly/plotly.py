@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description: How to use and configure discrete color sequences, also known as categorical or qualitative color scales.
+    description: How to use and configure discrete color sequences, also known as
+      categorical or qualitative color scales.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187
@@ -218,7 +219,7 @@ In most cases, discrete/qualitative/categorical data values have no meaningful n
 import plotly.express as px
 df = px.data.wind()
 fig = px.bar_polar(df, r="frequency", theta="direction", color="strength",
-                   color_discrete_sequence= px.colors.sequential.Plasma[-2::-1],
+                   color_discrete_sequence= px.colors.sequential.Plasma_r,
                    title="Part of a continuous color scale used as a discrete sequence"
                   )
 fig.show()

@@ -57,7 +57,7 @@ import plotly.express as px
 df = px.data.wind()
 fig = px.scatter_polar(df, r="frequency", theta="direction",
                        color="strength", symbol="strength", size="frequency",
-                       color_discrete_sequence=px.colors.sequential.Plasma[-2::-1])
+                       color_discrete_sequence=px.colors.sequential.Plasma_r)
 fig.show()
 ```
 
@@ -67,7 +67,7 @@ For a line polar plot, use `px.line_polar`:
 import plotly.express as px
 df = px.data.wind()
 fig = px.line_polar(df, r="frequency", theta="direction", color="strength", line_close=True,
-                    color_discrete_sequence=px.colors.sequential.Plasma[-2::-1],
+                    color_discrete_sequence=px.colors.sequential.Plasma_r,
                     template="plotly_dark",)
 fig.show()
 ```
