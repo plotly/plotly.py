@@ -322,8 +322,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             expected_version = package_json["dependencies"]["plotly.js"]
             if expected_version[0] == "^":
                 expected_version = expected_version[1:]
-
-        self.assertEqual(expected_version, plotly.offline.get_plotlyjs_version())
+        if "circle-artifacts.com" not in expected_version:
+            self.assertEqual(expected_version, plotly.offline.get_plotlyjs_version())
 
     def test_include_mathjax_false_html(self):
         html = self._read_html(
