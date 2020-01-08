@@ -223,6 +223,20 @@ class ShowscaleValidator(_plotly_utils.basevalidators.BooleanValidator):
 import _plotly_utils.basevalidators
 
 
+class ShowlegendValidator(_plotly_utils.basevalidators.BooleanValidator):
+    def __init__(self, plotly_name="showlegend", parent_name="choropleth", **kwargs):
+        super(ShowlegendValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class SelectedpointsValidator(_plotly_utils.basevalidators.AnyValidator):
     def __init__(
         self, plotly_name="selectedpoints", parent_name="choropleth", **kwargs
@@ -378,7 +392,23 @@ class LocationmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["ISO-3", "USA-states", "country names"]),
+            values=kwargs.pop(
+                "values", ["ISO-3", "USA-states", "country names", "geojson-id"]
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class LegendgroupValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(self, plotly_name="legendgroup", parent_name="choropleth", **kwargs):
+        super(LegendgroupValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "style"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 
@@ -558,12 +588,40 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
 import _plotly_utils.basevalidators
 
 
+class GeojsonValidator(_plotly_utils.basevalidators.AnyValidator):
+    def __init__(self, plotly_name="geojson", parent_name="choropleth", **kwargs):
+        super(GeojsonValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class GeoValidator(_plotly_utils.basevalidators.SubplotidValidator):
     def __init__(self, plotly_name="geo", parent_name="choropleth", **kwargs):
         super(GeoValidator, self).__init__(
             plotly_name=plotly_name,
             parent_name=parent_name,
             dflt=kwargs.pop("dflt", "geo"),
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FeatureidkeyValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(self, plotly_name="featureidkey", parent_name="choropleth", **kwargs):
+        super(FeatureidkeyValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             **kwargs

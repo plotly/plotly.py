@@ -583,7 +583,9 @@ class LocationmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["ISO-3", "USA-states", "country names"]),
+            values=kwargs.pop(
+                "values", ["ISO-3", "USA-states", "country names", "geojson-id"]
+            ),
             **kwargs
         )
 
@@ -832,6 +834,20 @@ class HoverinfoValidator(_plotly_utils.basevalidators.FlaglistValidator):
 import _plotly_utils.basevalidators
 
 
+class GeojsonValidator(_plotly_utils.basevalidators.AnyValidator):
+    def __init__(self, plotly_name="geojson", parent_name="scattergeo", **kwargs):
+        super(GeojsonValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class GeoValidator(_plotly_utils.basevalidators.SubplotidValidator):
     def __init__(self, plotly_name="geo", parent_name="scattergeo", **kwargs):
         super(GeoValidator, self).__init__(
@@ -869,6 +885,20 @@ class FillValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "style"),
             values=kwargs.pop("values", ["none", "toself"]),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class FeatureidkeyValidator(_plotly_utils.basevalidators.StringValidator):
+    def __init__(self, plotly_name="featureidkey", parent_name="scattergeo", **kwargs):
+        super(FeatureidkeyValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "info"),
             **kwargs
         )
 

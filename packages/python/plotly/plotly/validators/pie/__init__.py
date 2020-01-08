@@ -560,6 +560,23 @@ class Label0Validator(_plotly_utils.basevalidators.NumberValidator):
 import _plotly_utils.basevalidators
 
 
+class InsidetextorientationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
+    def __init__(
+        self, plotly_name="insidetextorientation", parent_name="pie", **kwargs
+    ):
+        super(InsidetextorientationValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "plot"),
+            role=kwargs.pop("role", "info"),
+            values=kwargs.pop("values", ["horizontal", "radial", "tangential", "auto"]),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
     def __init__(self, plotly_name="insidetextfont", parent_name="pie", **kwargs):
         super(InsidetextfontValidator, self).__init__(
