@@ -1184,20 +1184,22 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     nrows = ncols = 1
     col_labels = []
     row_labels = []
+    trace_name_labels = []
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
         mapping_labels = OrderedDict()
-        trace_name_labels = OrderedDict()
         frame_name = ""
+        trace_name = []
         for col, val, m in zip(grouper, group_name, grouped_mappings):
             if col != one_group:
                 key = get_label(args, col)
                 mapping_labels[key] = str(val)
                 if m.show_in_trace_name:
-                    trace_name_labels[key] = str(val)
+                    trace_name_labels.append(key)
+                    trace_name.append(str(val))
                 if m.variable == "animation_frame":
                     frame_name = val
-        trace_name = ", ".join(trace_name_labels.values())
+        trace_name = ", ".join(trace_name)
         if frame_name not in trace_names_by_frame:
             trace_names_by_frame[frame_name] = set()
         trace_names = trace_names_by_frame[frame_name]
@@ -1346,7 +1348,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     for v in ["title", "height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
-    layout_patch["legend"] = dict(tracegroupgap=0, title=", ".join(trace_name_labels))
+    layout_patch["legend"] = dict(tracegroupgap=0)
+    if trace_name_labels:
+        layout_patch["legend"]["title"] = ", ".join(trace_name_labels)
     if "title" not in layout_patch and args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (
