@@ -1197,7 +1197,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                     trace_name_labels[key] = str(val)
                 if m.variable == "animation_frame":
                     frame_name = val
-        trace_name = ", ".join(k + "=" + v for k, v in trace_name_labels.items())
+        trace_name = ", ".join(trace_name_labels.values())
         if frame_name not in trace_names_by_frame:
             trace_names_by_frame[frame_name] = set()
         trace_names = trace_names_by_frame[frame_name]
@@ -1346,7 +1346,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     for v in ["title", "height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
-    layout_patch["legend"] = {"tracegroupgap": 0}
+    layout_patch["legend"] = dict(tracegroupgap=0, title=", ".join(trace_name_labels))
     if "title" not in layout_patch and args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (
