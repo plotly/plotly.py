@@ -144,6 +144,8 @@ def _get_jconfig(config=None):
         "globalTransforms",
         "locale",
         "locales",
+        "doubleClickDelay",
+        "notifyOnLogging",
     )
 
     if config and isinstance(config, dict):
