@@ -122,6 +122,25 @@ fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
 fig.show()
 ```
 
+#### Controlling text orientation inside pie sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With
+"auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential)
+
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+
+```python
+import plotly.graph_objects as go
+
+labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+values = [4500, 2500, 1053, 500]
+
+fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent',
+                             insidetextorientation='radial'
+                            )])
+fig.show()
+```
+
 ### Donut Chart
 
 

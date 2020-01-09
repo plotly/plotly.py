@@ -170,6 +170,37 @@ fig.update_layout(
 fig.show()
 ```
 
+#### Controlling text orientation inside sunburst sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With
+"auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential). Note that `plotly` may reduce the font size in order to fit the text with the requested orientation.
+
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
+
+fig = go.Figure()
+
+fig.add_trace(go.Sunburst(
+    ids=df2.ids,
+    labels=df2.labels,
+    parents=df2.parents,
+    domain=dict(column=1),
+    maxdepth=2,
+    insidetextorientation='horizontal'
+))
+
+fig.update_layout(
+    margin = dict(t=10, l=10, r=10, b=10)
+)
+
+fig.show()
+```
+
 ### Sunburst chart with a continuous colorscale
 
 The example below visualizes a breakdown of sales (corresponding to sector width) and call success rate (corresponding to sector color) by region, county and salesperson level. For example, when exploring the data you can see that although the East region is behaving poorly, the Tyler county is still above average -- however, its performance is reduced by the poor success rate of salesperson GT. 
