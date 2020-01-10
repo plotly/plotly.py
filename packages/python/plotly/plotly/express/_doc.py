@@ -471,6 +471,11 @@ docs = dict(
         "GeoJSON-formatted dict",
         "Must contain a Polygon feature collection, with IDs, which are references from `locations`.",
     ],
+    featureidkey=[
+        "str (default: `'id'`)",
+        "Path to field in GeoJSON feature object with which to match the values passed in to `locations`."
+        "The most common alternative to the default is of the form `'properties.<key>`.",
+    ],
     cumulative=[
         "boolean (default `False`)",
         "If `True`, histogram values are cumulative.",
