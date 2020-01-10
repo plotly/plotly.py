@@ -14,6 +14,10 @@ Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible t
 
 Check out our Support App: https://support.plot.ly/libraries/python or Community Forum: https://community.plot.ly/.
 
+## Want to improve the plotly documentation?
+
+Thank you! Instructions on how to contribute to the documentation are given [here](doc/contributing.md). Please also read the next section if you need to setup a development environment. 
+
 ## Setup a Development Environment
 
 ### Fork, Clone, Setup Your Version of the Plotly Python API
