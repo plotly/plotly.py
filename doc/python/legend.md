@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -138,6 +138,29 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
+#### Legend titles
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[1, 2, 3, 4, 5],
+    name="Increasing"
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[5, 4, 3, 2, 1],
+    name="Decreasing"
+))
+
+fig.update_layout(legend_title='<b> Trend </b>')
+fig.show()
+```
+
 #### Horizontal Legend
 
 ```python
@@ -200,7 +223,7 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.update_layout(
-    legend=go.layout.Legend(
+    legend=dict(
         x=0,
         y=1,
         traceorder="normal",
