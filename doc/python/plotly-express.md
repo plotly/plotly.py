@@ -53,6 +53,8 @@ print(px.data.iris.__doc__)
 px.data.iris().head()
 ```
 
+To see the full list of built-in datasets, click [here](https://github.com/plotly/plotly.py/blob/master/packages/python/plotly/plotly/data/__init__.py).
+
 #### Scatter and Line plots
 
 ```python
