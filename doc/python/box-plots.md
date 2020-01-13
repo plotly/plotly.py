@@ -73,7 +73,9 @@ fig.show()
 
 ### Choosing The Algorithm For Computing Quartiles
 
-By default, quartiles for box plots are computed using a linear algorithm method (see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) for more details). However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles. 
+By default, quartiles for box plots are computed using a linear algorithm method (see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details). 
+
+However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles. 
 
 The *exclusive* algorithm uses the median to divide the ordered dataset into two halves. If the sample is odd, it does not include the median in either half. Q1 is then the median of the lower half and Q3 is the median of the upper half.
 
@@ -181,7 +183,9 @@ fig = go.Figure(data=[go.Box(y=[0, 1, 1, 2, 3, 5, 8, 13, 21],
 fig.show()
 ```
 
-### Choosing The Algorithm For Computing Quartiles
+### Modifying The Algorithm For Computing Quartiles
+
+For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](#choosing-the-algorithm-for-computing-quartiles).
 
 ```python
 import plotly.graph_objects as go
