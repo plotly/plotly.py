@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description:
-      How to adjust axes properties in python. Includes examples of linear
+    description: How to adjust axes properties in python. Includes examples of linear
       and logarithmic axes, axes titles, styling and coloring axes and grid lines,
       and more.
     display_as: file_settings
@@ -48,14 +47,8 @@ Here is an example of setting `showgrid` to `False` in the graph object figure c
 ```python
 import plotly.graph_objects as go
 
-fig = go.Figure(
-    data=[go.Scatter(y=[1, 0])],
-    layout=go.Layout(
-        xaxis=dict(showgrid=False),
-        yaxis=dict(showgrid=False),
-    )
-)
-
+fig = go.Figure(go.Scatter(y=[1, 0]))
+fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
 fig.show()
 ```
 
@@ -66,14 +59,11 @@ The lines passing through zero can be disabled as well by setting the `zeroline`
 ```python
 import plotly.graph_objects as go
 
-fig = go.Figure(
-    data=[go.Scatter(y=[1, 0])],
-    layout=go.Layout(
-        xaxis=dict(showgrid=False, zeroline=False),
-        yaxis=dict(showgrid=False, zeroline=False),
-    )
+fig = go.Figure(go.Scatter(y=[1, 0]))
+fig.update_layout(
+    xaxis=dict(showgrid=False, zeroline=False),
+    yaxis=dict(showgrid=False, zeroline=False),
 )
-
 fig.show()
 ```
 
@@ -246,12 +236,12 @@ fig = go.Figure(go.Scatter(
     x = ["December", "January", "February"]))
 
 fig.update_layout(
-    xaxis = go.layout.XAxis(
+    xaxis = dict(
         tickangle = 90,
         title_text = "Month",
         title_font = {"size": 20},
         title_standoff = 25),
-    yaxis = go.layout.YAxis(
+    yaxis = dict(
         title_text = "Temperature",
         title_standoff = 25))
 
