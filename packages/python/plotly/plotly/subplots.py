@@ -811,7 +811,7 @@ The row_titles argument to make_subplots must be a list or tuple
     # Build resulting figure
     fig = go.Figure(layout=layout)
 
-    # Attach subpot grid info to the figure
+    # Attach subplot grid info to the figure
     fig.__dict__["_grid_ref"] = grid_ref
     fig.__dict__["_grid_str"] = grid_str
 
