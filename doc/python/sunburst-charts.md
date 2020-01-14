@@ -186,12 +186,12 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead
 fig = go.Figure()
 
 fig.add_trace(go.Sunburst(
-    ids=df2.ids,
-    labels=df2.labels,
-    parents=df2.parents,
+    ids=df.ids,
+    labels=df.labels,
+    parents=df.parents,
     domain=dict(column=1),
     maxdepth=2,
-    insidetextorientation='horizontal'
+    insidetextorientation='radial'
 ))
 
 fig.update_layout(
