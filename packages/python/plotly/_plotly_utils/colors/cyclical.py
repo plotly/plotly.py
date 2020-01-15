@@ -36,7 +36,7 @@ def swatches_cyclical(template=None):
 
     rows = 2
     cols = 4
-    scales = ["IceFire", "Twilight", "Edge", "Phase", "HSV", "mrybm", "mygbm"]
+    scales = ["Twilight", "IceFire", "Edge", "Phase", "HSV", "mrybm", "mygbm"]
     fig = make_subplots(
         rows=rows,
         cols=cols,

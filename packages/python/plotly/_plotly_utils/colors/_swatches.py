@@ -44,5 +44,6 @@ def _swatches(module_names, module_contents, template=None):
             xaxis=dict(range=[-0.02, 1.02], showticklabels=False, showgrid=False),
             height=max(600, 40 * len(sequences)),
             template=args["template"],
+            margin=dict(b=10),
         ),
     )
