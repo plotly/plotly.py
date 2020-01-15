@@ -564,6 +564,33 @@ fig.update_layout(
 fig.show()
 ```
 
+### Fixed Ratio Axes with Compressed domain
+
+If an axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), `constrain` determines how that happens: by increasing the "range" (default), or by decreasing the "domain".
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    x = [0,1,1,0,0,1,1,2,2,3,3,2,2,3],
+    y = [0,0,1,1,3,3,2,2,3,3,1,1,0,0]
+))
+fig.update_layout(
+    width = 800,
+    height = 500,
+    title = "fixed-ratio axes with compressed axes",
+    xaxis = dict(
+      range=[-1,4],  # sets the range of xaxis
+      constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
+    ),
+    yaxis = dict(
+      scaleanchor = "x",
+      scaleratio = 1,
+    ),
+)
+fig.show()
+```
+
 ##### Decreasing the domain spanned by an axis
 
 In the example below, the x and y axis are anchored together, and the range of the `xaxis` is set manually. By default, plotly extends the range of the axis (overriding the `range` parameter) to fit in the figure `domain`. You can restrict the `domain`  to force the axis to span only the set range, by setting `constrain='domain'` as below.
