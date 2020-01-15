@@ -874,7 +874,7 @@ def choropleth(
             locationmode=locationmode,
             featureidkey=featureidkey,
             geojson=geojson
-            if not hasattr(geojson, "__geo_interface__")
+            if not hasattr(geojson, "__geo_interface__")  # for geopandas
             else geojson.__geo_interface__,
         ),
     )
@@ -1047,7 +1047,7 @@ def choropleth_mapbox(
         trace_patch=dict(
             featureidkey=featureidkey,
             geojson=geojson
-            if not hasattr(geojson, "__geo_interface__")
+            if not hasattr(geojson, "__geo_interface__")  # for geopandas
             else geojson.__geo_interface__,
         ),
     )
