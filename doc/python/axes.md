@@ -64,10 +64,8 @@ import numpy as np
 
 x = np.arange(10)
 
-fig = px.scatter(x=x,
-                 y=x**3)
-fig.update_xaxes(type="log")
-fig.update_yaxes(type="log")
+fig = px.scatter(x=x, y=x**3,
+                log_x=True, log_y=True)
 
 fig.show()
 ```
@@ -626,6 +624,30 @@ df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
 fig.update_yaxes(range=[9, 3])
 
+fig.show()
+```
+
+### Axis range for log axis type
+
+If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout). 
+
+```python
+import plotly.express as px
+import numpy as np
+
+x = np.linspace(1, 200, 30)
+fig = px.scatter(x=x, y=x**3, log_x=True, log_y=True, range_x=[0.8, 250])
+fig.show()
+```
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+x = np.linspace(1, 200, 30)
+fig = go.Figure(go.Scatter(x=x, y=x**3))
+fig.update_xaxes(type="log", range=[np.log10(0.8), np.log10(250)])
+fig.update_yaxes(type="log")
 fig.show()
 ```
 
