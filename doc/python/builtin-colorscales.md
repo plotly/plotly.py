@@ -103,7 +103,7 @@ Here are all the built-in scales in the `plotly.colors.diverging` module:
 ```python
 import plotly.express as px
 
-fig = px.colors.diverging.swatches()
+fig = px.colors.diverging.swatches().update_layout(margin_b=10)
 fig.show()
 ```
 
@@ -118,6 +118,9 @@ Here are all the built-in scales in the `plotly.colors.cyclical` module:
 
 ```python
 import plotly.express as px
+
+fig = px.colors.cyclical.swatches_cyclical()
+fig.show()
 
 fig = px.colors.cyclical.swatches()
 fig.show()
