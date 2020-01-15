@@ -145,7 +145,6 @@ def _get_jconfig(config=None):
         "locale",
         "locales",
         "doubleClickDelay",
-        "notifyOnLogging",
     )
 
     if config and isinstance(config, dict):
