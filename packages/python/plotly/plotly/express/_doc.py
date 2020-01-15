@@ -247,7 +247,7 @@ docs = dict(
         "list of str",
         "Strings should define valid CSS-colors.",
         "When `color` is set and the values in the corresponding column are not numeric, values in that column are assigned colors by cycling through `color_discrete_sequence` in the order described in `category_orders`, unless the value of `color` is a key in `color_discrete_map`.",
-        "Various useful color sequences are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.qualitative`.",
+        "Various useful color sequences are available in the `plotly.express.colors` submodules, specifically `plotly.express.colors.qualitative`.",
     ],
     color_discrete_map=[
         "dict with str keys and str values (default `{}`)",
@@ -259,12 +259,12 @@ docs = dict(
         "list of str",
         "Strings should define valid CSS-colors",
         "This list is used to build a continuous color scale when the column denoted by `color` contains numeric data.",
-        "Various useful color scales are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.sequential`, `plotly_express.colors.diverging` and `plotly_express.colors.cyclical`.",
+        "Various useful color scales are available in the `plotly.express.colors` submodules, specifically `plotly.express.colors.sequential`, `plotly.express.colors.diverging` and `plotly.express.colors.cyclical`.",
     ],
     color_continuous_midpoint=[
         "number (default `None`)",
         "If set, computes the bounds of the continuous color scale to have the desired midpoint.",
-        "Setting this value is recommended when using `plotly_express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
+        "Setting this value is recommended when using `plotly.express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
     size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
     log_x=[
