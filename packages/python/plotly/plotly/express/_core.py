@@ -1250,8 +1250,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if val not in m.val_map:
                     m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
                 try:
-                    m.updater(trace, m.val_map[val])
+                    m.updater(trace, m.val_map[val])  # covers most cases
                 except ValueError:
+                    # this catches some odd cases like marginals
                     if (
                         trace_spec != trace_specs[0]
                         and trace_spec.constructor in [go.Violin, go.Box, go.Histogram]
@@ -1264,6 +1265,16 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                         and m.variable == "color"
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
+                    elif (
+                        trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]
+                        and m.variable == "color"
+                    ):
+                        trace.update(
+                            z=[1] * len(group),
+                            colorscale=[m.val_map[val]] * 2,
+                            showscale=False,
+                            showlegend=True,
+                        )
                     else:
                         raise
 
