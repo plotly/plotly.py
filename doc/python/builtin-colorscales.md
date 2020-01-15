@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      A reference for the built-in named continuous (sequential, diverging
+    description: A reference for the built-in named continuous (sequential, diverging
       and cylclical) color scales in Plotly.
     display_as: file_settings
     has_thumbnail: true
@@ -103,7 +102,7 @@ Here are all the built-in scales in the `plotly.colors.diverging` module:
 ```python
 import plotly.express as px
 
-fig = px.colors.diverging.swatches()
+fig = px.colors.diverging.swatches().update_layout(margin_b=10)
 fig.show()
 ```
 
@@ -119,6 +118,17 @@ Here are all the built-in scales in the `plotly.colors.cyclical` module:
 ```python
 import plotly.express as px
 
+fig = px.colors.cyclical.swatches_cyclical()
+fig.show()
+
 fig = px.colors.cyclical.swatches()
 fig.show()
+```
+
+```python
+
+```
+
+```python
+xx
 ```
