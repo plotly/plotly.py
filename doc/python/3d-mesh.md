@@ -103,6 +103,8 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+import numpy as np
+
 fig = go.Figure(data=[
     go.Mesh3d(
         # 8 vertices of a cube
