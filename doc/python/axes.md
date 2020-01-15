@@ -59,6 +59,20 @@ The `type` axis property can be set to `'log'` to arrange axis ticks in log-scal
 Here is an example of updating the x and y axes of a figure to be in log scale.
 
 ```python
+import plotly.express as px
+import numpy as np
+
+x = np.arange(10)
+
+fig = px.scatter(x=x,
+                 y=x**3)
+fig.update_xaxes(type="log")
+fig.update_yaxes(type="log")
+
+fig.show()
+```
+
+```python
 import plotly.graph_objects as go
 
 fig = go.Figure(data=[
@@ -169,7 +183,7 @@ fig.update_yaxes(ticks="inside", col=1)
 fig.show()
 ```
 
-##### Set number of tick marks
+##### Set number of tick marks (and grid lines)
 
 The approximate number of ticks displayed for an axis can be specified using the `nticks` axis property.
 
