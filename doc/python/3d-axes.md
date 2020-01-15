@@ -55,12 +55,13 @@ fig = go.Figure(data=[go.Mesh3d(x=(70*np.random.randn(N)),
                    color='rgba(244,22,100,0.6)'
                   )])
 
-fig.update_layout(scene = dict(
+fig.update_layout(
+    scene = dict(
         xaxis = dict(nticks=4, range=[-100,100],),
                      yaxis = dict(nticks=4, range=[-50,100],),
                      zaxis = dict(nticks=4, range=[-100,100],),),
-                     width=700,
-                     margin=dict(r=20, l=10, b=10, t=10))
+    width=700,
+    margin=dict(r=20, l=10, b=10, t=10))
 
 fig.show()
 ```
