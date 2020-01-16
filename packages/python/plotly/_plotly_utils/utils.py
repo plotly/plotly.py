@@ -7,7 +7,7 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
-PY36_OR_LATER = sys.version_info.major == 3 and sys.version_info.minor >= 6
+PY36_OR_LATER = sys.version_info >= (3, 6)
 
 
 class PlotlyJSONEncoder(_json.JSONEncoder):
