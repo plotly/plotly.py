@@ -1,8 +1,9 @@
 import inspect
 from textwrap import TextWrapper
+
 try:
     getfullargspec = inspect.getfullargspec
-except ImportError: # python 2
+except AttributeError:  # python 2
     getfullargspec = inspect.getargspec
 
 # TODO contents of columns
