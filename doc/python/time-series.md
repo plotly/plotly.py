@@ -127,20 +127,5 @@ fig.update_layout(title_text='Time Series with Rangeslider',
 fig.show()
 ```
 
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-timeseriesplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-timeseriesplot/", width="100%", height="750px", frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-timeseriesplot/code", width="100%", height=500, frameBorder="0")
-```
-
 #### Reference
 See https://plot.ly/python/reference/#layout-xaxis-rangeslider and<br> https://plot.ly/python/reference/#layout-xaxis-rangeselector for more information and chart attribute options!
