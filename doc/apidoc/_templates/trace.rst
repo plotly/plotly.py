@@ -20,6 +20,7 @@
 
 .. automodule:: plotly.graph_objects.{{ objname.lower() }}
    :members:
+   :undoc-members:
 
 
 .. raw:: html

@@ -3,7 +3,7 @@
 `plotly.graph_objects`: low-level interface to figures, traces and layout
 =========================================
 
-.. currentmodule:: plotly.graph_objects
+.. currentmodule:: plotly.graph_objs
 
 :mod:`plotly.graph_objects` contains the building blocks of plotly :class:`Figure`: traces
 (:class:`Scatter`, :class:`Bar`, ...) and :class:`Layout`
@@ -16,7 +16,6 @@ Figure
 
 .. autosummary::
    :toctree: generated/
-   :template: class_figure.rst
 
    Figure  
 
@@ -26,9 +25,9 @@ Layout
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Layout
+   layout
 
 
 
@@ -37,9 +36,9 @@ Simple charts
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Scatter
+   scatter
    Scattergl
    Bar
    Pie
@@ -53,7 +52,6 @@ Distributions
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Box
    Violin
@@ -66,7 +64,6 @@ Finance
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Ohlc
    Candlestick
@@ -80,7 +77,6 @@ Finance
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Scatter3d
    Surface
@@ -108,7 +104,6 @@ Specialized
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Scatterpolar
    Scatterpolargl
