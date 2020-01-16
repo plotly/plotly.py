@@ -227,7 +227,7 @@ def iso_to_plotly_time_string(iso_string):
 
 def template_doc(**names):
     def _decorator(func):
-        if sys.version[:3] != "3.2":
+        if not sys.version_info[:2] == (3, 2):
             if func.__doc__ is not None:
                 func.__doc__ = func.__doc__.format(**names)
         return func
