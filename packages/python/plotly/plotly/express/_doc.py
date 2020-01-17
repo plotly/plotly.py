@@ -1,6 +1,10 @@
 import inspect
 from textwrap import TextWrapper
 
+try:
+    getfullargspec = inspect.getfullargspec
+except AttributeError:  # python 2
+    getfullargspec = inspect.getargspec
 
 # TODO contents of columns
 # TODO explain categorical
@@ -505,7 +509,7 @@ docs = dict(
 def make_docstring(fn, override_dict={}):
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
-    for param in inspect.getargspec(fn)[0]:
+    for param in getfullargspec(fn)[0]:
         if override_dict.get(param):
             param_doc = override_dict[param]
         else:
