@@ -32,6 +32,19 @@ jupyter:
     permalink: python/2d-histogram-contour/
     thumbnail: thumbnail/hist2dcontour.png
 ---
+#### Contour Plot in Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+In `px.density_contour` rows of data frame are grouped together into contour marks to visualize the 2D distribution of an aggregate function histfunc of the value z. To have a filled contour plot in Plotly express set [contours_coloring](https://plot.ly/python/reference/#contour-contours-coloring) in `update_trace` method to `fill`.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.density_contour(df, x="sepal_width", y="sepal_length")
+fig.update_traces(contours_coloring='fill', colorscale='Cividis')
+fig.show()
+```
 
 #### Basic 2D Histogram Contour
 
