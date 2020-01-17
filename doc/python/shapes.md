@@ -33,6 +33,26 @@ jupyter:
     thumbnail: thumbnail/shape.jpg
 ---
 
+### Filled Area Chart
+
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plot.ly/python/reference/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plot.ly/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plot.ly/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plot.ly/python/reference/#scatter-fill) that connects the endpoints of the trace into a closed shape. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(x=[0,1,2], y=[0,2,0], fill="toself"))
+fig.show()
+```
+
+You can have more shapes either by adding [more traces](https://plot.ly/python/filled-area-plots/) or interrupting the series with `None`.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(x=[0,1,2,None,3,3,5,5], y=[0,2,0,None,0.5,1.5,1.5,0.5], fill="toself"))
+fig.show()
+```
+
 #### Vertical and Horizontal Lines Positioned Relative to the Axes
 
 ```python
@@ -679,26 +699,6 @@ fig.update_layout(
     ]
 )
 
-fig.show()
-```
-
-### Filled Area Chart
-
-So far we saw [layout.shapes](https://plot.ly/python/reference/#layout-shapes-items-shape-type) defines the shape type to be drawn, which can be rectangle, circle, line, or path (a custom SVG path). You also can set an area to be filled with a solid color by defining [Scatter.fill="toself"](https://plot.ly/python/reference/#scatter-fill) that connects the endpoints of the trace into a closed shape. 
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(go.Scatter(x=[0,1,2], y=[0,2,0], fill="toself"))
-fig.show()
-```
-
-You can have more shapes either by adding [more traces](https://plot.ly/python/filled-area-plots/) or interupting the series with `None`.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(go.Scatter(x=[0,1,2,None,3,3,5,5], y=[0,2,0,None,0.5,1.5,1.5,0.5], fill="toself"))
 fig.show()
 ```
 
