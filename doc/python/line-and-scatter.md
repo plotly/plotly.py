@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -38,7 +38,7 @@ jupyter:
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
-With ``px.scatter``, each data point is represented as a marker point, which location is given by the `x` and `y` columns.
+With `px.scatter`, each data point is represented as a marker point, which location is given by the `x` and `y` columns.
 
 ```python
 # x and y given as array_like objects
@@ -50,8 +50,8 @@ fig.show()
 ```python
 # x and y given as DataFrame columns
 import plotly.express as px
-iris = px.data.iris() # iris is a pandas DataFrame
-fig = px.scatter(iris, x="sepal_width", y="sepal_length")
+df = px.data.iris() # iris is a pandas DataFrame
+fig = px.scatter(df, x="sepal_width", y="sepal_length")
 fig.show()
 ```
 
@@ -61,8 +61,8 @@ Note that `color` and `size` data are added to hover information. You can add ot
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species",
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  size='petal_length', hover_data=['petal_width'])
 fig.show()
 ```
@@ -81,15 +81,14 @@ fig.show()
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("continent == 'Oceania'")
-fig = px.line(gapminder, x='year', y='lifeExp', color='country')
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='lifeExp', color='country')
 fig.show()
 ```
 
 ## Scatter and line plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plot.ly/python/reference/#scatter ).
-
+If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plot.ly/python/reference/#scatter).
 
 #### Simple Scatter Plot
 
@@ -275,21 +274,6 @@ fig = go.Figure(data=go.Scattergl(
 fig.show()
 ```
 
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-linescatterplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-linescatterplot/", width="100%",height="750px", frameBorder="0")
-
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-linescatterplot/code", width="100%",height=500, frameBorder="0")
-```
-
 ### Reference
+
 See https://plot.ly/python/reference/#scatter or https://plot.ly/python/reference/#scattergl for more information and chart attribute options!

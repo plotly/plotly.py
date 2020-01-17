@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -34,8 +34,8 @@ Below we show how to create Choropleth Maps using either Plotly Express' `px.cho
 ```python
 import plotly.express as px
 
-gapminder = px.data.gapminder().query("year==2007")
-fig = px.choropleth(gapminder, locations="iso_alpha",
+df = px.data.gapminder().query("year==2007")
+fig = px.choropleth(df, locations="iso_alpha",
                     color="lifeExp", # lifeExp is a column of gapminder
                     hover_name="country", # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Plasma)
@@ -239,6 +239,7 @@ fig.show()
 ```
 
 #### Full County Choropleths
+
 For the full county choropleth doc page checkout https://plot.ly/python/county-choropleth/
 
 ```python
@@ -274,20 +275,6 @@ fig.layout.template = None
 fig.show()
 ```
 
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-choroplethplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-choroplethplot/", width="100%", height="950px", frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-choroplethplot/code", width="100%", height=500, frameBorder="0")
-```
-
 #### Reference
+
 See https://plot.ly/python/reference/#choropleth for more information and chart attribute options!

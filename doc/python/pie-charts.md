@@ -122,6 +122,25 @@ fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
 fig.show()
 ```
 
+#### Controlling text orientation inside pie sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With
+"auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential)
+
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+
+```python
+import plotly.graph_objects as go
+
+labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+values = [4500, 2500, 1053, 500]
+
+fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent',
+                             insidetextorientation='radial'
+                            )])
+fig.show()
+```
+
 ### Donut Chart
 
 
@@ -255,21 +274,6 @@ fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
 fig.show()
 
-```
-
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-pieplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-pieplot", width="100%", height="650px" ,frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-pieplot/code", width="100%", height=500 ,frameBorder="0")
 ```
 
 #### Reference

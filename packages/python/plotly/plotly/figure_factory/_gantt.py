@@ -46,7 +46,7 @@ def validate_gantt(df):
         for index in range(num_of_rows):
             task_dict = {}
             for key in df:
-                task_dict[key] = df.ix[index][key]
+                task_dict[key] = df.iloc[index][key]
             chart.append(task_dict)
 
         return chart

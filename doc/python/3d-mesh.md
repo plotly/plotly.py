@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.3
   plotly:
     description: How to make 3D Mesh Plots
     display_as: 3d_charts
@@ -103,6 +103,8 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+import numpy as np
+
 fig = go.Figure(data=[
     go.Mesh3d(
         # 8 vertices of a cube
@@ -115,6 +117,39 @@ fig = go.Figure(data=[
                     [1, 'magenta']],
         # Intensity of each vertex, which will be interpolated and color-coded
         intensity = np.linspace(0, 1, 8, endpoint=True),
+        # i, j and k give the vertices of triangles
+        i = [7, 0, 0, 0, 4, 4, 6, 6, 4, 0, 3, 2],
+        j = [3, 4, 1, 2, 5, 6, 5, 2, 0, 1, 6, 3],
+        k = [0, 7, 2, 3, 6, 7, 1, 1, 5, 5, 7, 6],
+        name='y',
+        showscale=True
+    )
+])
+
+fig.show()
+```
+
+### Intensity values defined on vertices or cells
+
+The `intensitymode` attribute of `go.Mesh3d` can be set to `vertex` (default mode, in which case intensity values are interpolated between values defined on vertices), or to `cell` (value of the whole cell, no interpolation). Note that the `intensity` parameter should have the same length as the number of vertices or cells, depending on the `intensitymode`.  
+
+Whereas the previous example used the default `intensitymode='vertex'`, we plot here the same mesh with `intensitymode='cell'`.
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure(data=[
+    go.Mesh3d(
+        # 8 vertices of a cube
+        x=[0, 0, 1, 1, 0, 0, 1, 1],
+        y=[0, 1, 1, 0, 0, 1, 1, 0],
+        z=[0, 0, 0, 0, 1, 1, 1, 1],
+        colorbar_title='z',
+        colorscale=[[0, 'gold'],
+                    [0.5, 'mediumturquoise'],
+                    [1, 'magenta']],
+        # Intensity of each vertex, which will be interpolated and color-coded
+        intensity = np.linspace(0, 1, 12, endpoint=True),
+        intensitymode='cell',
         # i, j and k give the vertices of triangles
         i = [7, 0, 0, 0, 4, 4, 6, 6, 4, 0, 3, 2],
         j = [3, 4, 1, 2, 5, 6, 5, 2, 0, 1, 6, 3],
