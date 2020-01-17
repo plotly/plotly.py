@@ -287,5 +287,23 @@ fig.update_layout(
 fig.show()
 ```
 
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+
+fig = go.Figure(go.Treemap(
+        ids = df.ids,
+        labels = df.labels,
+        parents = df.parents))
+fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
+fig.show()
+```
+
 #### Reference
 See https://plot.ly/python/reference/#treemap for more information and chart attribute options!
