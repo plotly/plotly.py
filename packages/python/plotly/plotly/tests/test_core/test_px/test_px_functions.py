@@ -130,28 +130,27 @@ def test_sunburst_treemap_with_path():
     df = pd.DataFrame(
         dict(vendors=vendors, sectors=sectors, regions=regions, values=values)
     )
+    path = ["regions", "sectors", "vendors"]
     # No values
-    fig = px.sunburst(df, path=["vendors", "sectors", "regions"])
+    fig = px.sunburst(df, path=path)
     assert fig.data[0].branchvalues == "total"
     # Values passed
-    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+    fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
     # Values passed
-    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+    fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
     # Continuous colorscale
-    fig = px.sunburst(
-        df, path=["vendors", "sectors", "regions"], values="values", color="values"
-    )
+    fig = px.sunburst(df, path=path, values="values", color="values")
     assert "coloraxis" in fig.data[0].marker
     assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
     # Error when values cannot be converted to numerical data type
     df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
     msg = "Column `values` of `df` could not be converted to a numerical data type."
     with pytest.raises(ValueError, match=msg):
-        fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+        fig = px.sunburst(df, path=path, values="values")
 
 
 def test_sunburst_treemap_with_path_non_rectangular():
@@ -184,7 +183,8 @@ def test_sunburst_treemap_with_path_non_rectangular():
     df = pd.DataFrame(
         dict(vendors=vendors, sectors=sectors, regions=regions, values=values)
     )
-    fig = px.sunburst(df, path=["vendors", "sectors", "regions"], values="values")
+    path = ["regions", "sectors", "vendors"]
+    fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].values[-1] == np.sum(values)
 
 

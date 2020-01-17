@@ -1015,7 +1015,7 @@ def process_dataframe_hierarchy(args):
     Build dataframe for sunburst or treemap when the path argument is provided.
     """
     df = args["data_frame"]
-    path = args["path"]
+    path = args["path"][::-1]
     if args["values"]:
         try:
             df[args["values"]] = pd.to_numeric(df[args["values"]])

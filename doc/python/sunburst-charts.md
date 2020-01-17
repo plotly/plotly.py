@@ -69,7 +69,7 @@ Hierarchical data are often stored as a rectangular dataframe, with different co
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.sunburst(df, path=['sex', 'time', 'day'], values='total_bill')
+fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
 fig.show()
 ```
 
@@ -90,7 +90,7 @@ df = pd.DataFrame(
     dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
 )
 print(df)
-fig = px.sunburst(df, path=['vendors', 'sectors', 'regions'], values='sales')
+fig = px.sunburst(df, path=['regions', 'sectors', 'vendors'], values='sales')
 fig.show()
 ```
 
