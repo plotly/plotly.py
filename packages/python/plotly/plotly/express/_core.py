@@ -1051,9 +1051,6 @@ def process_dataframe_hierarchy(args):
         elif cols:
             for col in cols:
                 df_tree[col] = "n/a"
-        if args["values"]:
-            # EPS hack, to be removed
-            df_tree[args["values"]] = dfg[args["values"]] - 1.0e-10
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
     # Root node
