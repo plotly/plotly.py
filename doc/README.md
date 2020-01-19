@@ -1,4 +1,4 @@
-# plotly.py-docs
+# plotly.py docs
 
 Documentation repo for plotly.py v4
 
