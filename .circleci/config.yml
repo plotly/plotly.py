@@ -400,6 +400,7 @@ jobs:
             . venv/bin/activate
             npm install electron@1.8.4
             npm install orca
+            pip uninstall -y plotly
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
