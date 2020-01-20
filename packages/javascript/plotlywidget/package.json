@@ -22,8 +22,7 @@
     "style/*.*"
   ],
   "scripts": {
-    "build": "npm run build:src",
-    "build:src": "rimraf dist && tsc",
+    "build": "webpack",
     "clean": "rimraf dist/ && rimraf  ../../python/plotly/plotlywidget/static'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
