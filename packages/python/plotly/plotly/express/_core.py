@@ -890,9 +890,6 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
-    # This should be improved + tested - HACK
-    if "path" in args and args["path"] is not None:
-        df_output[args["path"]] = df_input[args["path"]]
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -1016,18 +1013,12 @@ def process_dataframe_hierarchy(args):
     """
     df = args["data_frame"]
     path = args["path"][::-1]
+
+    # ------------ Define aggregation functions --------------------------------
+    lambda_discrete = lambda x: x[0] if len(x) == 1 else ""
+    agg_f = {}
+    aggfunc_color = None
     if args["values"]:
-        # Define weighted mean lambda, using value column
-        lambda_wm = lambda x: np.average(x, weights=df.loc[x.index, args["values"]])
-        # Define aggregation function to be used on groupby objects
-        if args["color"]:
-            aggfunc_color = "sum" if args["color"] == args["values"] else lambda_wm
-            agg_f = {
-                args["values"]: pd.NamedAgg(column=args["values"], aggfunc="sum"),
-                args["color"]: pd.NamedAgg(column=args["color"], aggfunc=aggfunc_color),
-            }
-        else:
-            agg_f = {args["values"]: pd.NamedAgg(column=args["values"], aggfunc="sum")}
         try:
             df[args["values"]] = pd.to_numeric(df[args["values"]])
         except ValueError:
@@ -1035,6 +1026,11 @@ def process_dataframe_hierarchy(args):
                 "Column `%s` of `df` could not be converted to a numerical data type."
                 % args["values"]
             )
+
+        if args["color"]:
+            if args["color"] == args["values"]:
+                aggfunc_color = "sum"
+        count_colname = args["values"]
     else:
         if args["color"]:  # color passed but not value
             # we need a count column for the weighted mean of color
@@ -1042,17 +1038,27 @@ def process_dataframe_hierarchy(args):
             count_colname = "".join([str(el) for el in list(df.columns)])
             # we can modify df because it's a copy of the px argument
             df[count_colname] = 1
-            lambda_wm = lambda x: np.average(x, weights=df.loc[x.index, count_colname])
-            agg_f = {
-                args["color"]: pd.NamedAgg(column=args["color"], aggfunc=lambda_wm),
-                count_colname: pd.NamedAgg(column=count_colname, aggfunc="sum"),
-            }
-        else:
-            agg_f = {}
-    # Other columns (for color, hover_data, custom_data etc.)
+
+    if args["color"]:
+        if df[args["color"]].dtype.kind not in "bifc":
+            aggfunc_color = lambda_discrete
+        elif not aggfunc_color:
+            aggfunc_color = lambda x: np.average(
+                x, weights=df.loc[x.index, count_colname]
+            )
+        agg_f[args["color"]] = pd.NamedAgg(column=args["color"], aggfunc=aggfunc_color)
+    if args["color"] or args["values"]:
+        agg_f[count_colname] = pd.NamedAgg(column=count_colname, aggfunc="sum")
+
+    #  Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
+    for col in cols:  # for hover_data, custom_data etc.
+        if col not in agg_f:
+            agg_f[col] = pd.NamedAgg(column=col, aggfunc=lambda_discrete)
+    # ----------------------------------------------------------------------------
+
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
-    # Set column type here (useful for continuous vs discrete colorscale)
+    #  Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
         df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
     for i, level in enumerate(path):
@@ -1078,7 +1084,6 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
-    print(df_all_trees)
     # Now modify arguments
     args["data_frame"] = df_all_trees
     args["path"] = None
@@ -1096,7 +1101,7 @@ def infer_config(args, constructor, trace_patch):
         + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-        + ["lat", "lon", "locations", "animation_group"]
+        + ["lat", "lon", "locations", "animation_group", "path"]
     )
     array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]

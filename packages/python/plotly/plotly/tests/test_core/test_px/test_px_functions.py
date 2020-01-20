@@ -158,6 +158,52 @@ def test_sunburst_treemap_with_path():
     msg = "Column `values` of `df` could not be converted to a numerical data type."
     with pytest.raises(ValueError, match=msg):
         fig = px.sunburst(df, path=path, values="values")
+    #  path is a mixture of column names and array-like
+    path = [df.total, "regions", df.sectors, "vendors"]
+    fig = px.sunburst(df, path=path)
+    assert fig.data[0].branchvalues == "total"
+
+
+def test_sunburst_treemap_with_path_color():
+    vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    calls = [8, 2, 1, 3, 2, 2, 4, 1]
+    total = ["total",] * 8
+    df = pd.DataFrame(
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+            calls=calls,
+        )
+    )
+    path = ["total", "regions", "sectors", "vendors"]
+    fig = px.sunburst(df, path=path, values="values", color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
+    fig = px.sunburst(df, path=path, color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
+
+    # Hover info
+    df["hover"] = [el.lower() for el in vendors]
+    fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
+    custom = fig.data[0].customdata.ravel()
+    assert np.all(custom[:8] == df["hover"])
+    assert np.all(custom[8:] == "")
 
 
 def test_sunburst_treemap_with_path_non_rectangular():

@@ -86,7 +86,12 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to set ids of sectors",
     ],
-    path=[colref_type, colref_desc],
+    path=[
+        colref_list_type,
+        colref_list_desc,
+        "List of columns names or columns of a rectangular dataframe defining the hierarchy of sectors, from root to leaves.",
+        "An error is raised if path AND ids or parents is passed",
+    ],
     lat=[
         colref_type,
         colref_desc,
