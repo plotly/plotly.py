@@ -1007,6 +1007,14 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def _named_agg(colname, aggfunc, mode="old_pandas"):
+    if mode == "old_pandas":
+        return (colname, aggfunc)
+    else:
+        # switch to this mode when tuples become deprecated
+        return pd.NamedAgg(colname, aggfunc)
+
+
 def process_dataframe_hierarchy(args):
     """
     Build dataframe for sunburst or treemap when the path argument is provided.
@@ -1046,15 +1054,15 @@ def process_dataframe_hierarchy(args):
             aggfunc_color = lambda x: np.average(
                 x, weights=df.loc[x.index, count_colname]
             )
-        agg_f[args["color"]] = pd.NamedAgg(column=args["color"], aggfunc=aggfunc_color)
+        agg_f[args["color"]] = _named_agg(colname=args["color"], aggfunc=aggfunc_color)
     if args["color"] or args["values"]:
-        agg_f[count_colname] = pd.NamedAgg(column=count_colname, aggfunc="sum")
+        agg_f[count_colname] = _named_agg(colname=count_colname, aggfunc="sum")
 
     #  Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
-            agg_f[col] = pd.NamedAgg(column=col, aggfunc=lambda_discrete)
+            agg_f[col] = _named_agg(colname=col, aggfunc=lambda_discrete)
     # ----------------------------------------------------------------------------
 
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
