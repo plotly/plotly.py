@@ -138,7 +138,7 @@ class NPM(Command):
                 stderr=sys.stderr,
             )
             check_call(
-                [npmName, "run build"],
+                [npmName, "run", "build"],
                 cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
