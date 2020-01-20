@@ -181,7 +181,9 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 )
                 and (
                     trace_spec.constructor != go.Parcats
-                    or len(args["data_frame"][name].unique()) <= 20
+                    or (v is not None and name in v)
+                    or len(args["data_frame"][name].unique())
+                    <= args["dimensions_max_cardinality"]
                 )
             ]
             result["dimensions"] = [
