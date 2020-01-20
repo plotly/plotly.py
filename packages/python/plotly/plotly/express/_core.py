@@ -1017,6 +1017,17 @@ def process_dataframe_hierarchy(args):
     df = args["data_frame"]
     path = args["path"][::-1]
     if args["values"]:
+        # Define weighted mean lambda, using value column
+        lambda_wm = lambda x: np.average(x, weights=df.loc[x.index, args["values"]])
+        # Define aggregation function to be used on groupby objects
+        if args["color"]:
+            aggfunc_color = "sum" if args["color"] == args["values"] else lambda_wm
+            agg_f = {
+                args["values"]: pd.NamedAgg(column=args["values"], aggfunc="sum"),
+                args["color"]: pd.NamedAgg(column=args["color"], aggfunc=aggfunc_color),
+            }
+        else:
+            agg_f = {args["values"]: pd.NamedAgg(column=args["values"], aggfunc="sum")}
         try:
             df[args["values"]] = pd.to_numeric(df[args["values"]])
         except ValueError:
@@ -1024,6 +1035,20 @@ def process_dataframe_hierarchy(args):
                 "Column `%s` of `df` could not be converted to a numerical data type."
                 % args["values"]
             )
+    else:
+        if args["color"]:  # color passed but not value
+            # we need a count column for the weighted mean of color
+            # trick to be sure the col name is unused: take the sum of existing names
+            count_colname = "".join([str(el) for el in list(df.columns)])
+            # we can modify df because it's a copy of the px argument
+            df[count_colname] = 1
+            lambda_wm = lambda x: np.average(x, weights=df.loc[x.index, count_colname])
+            agg_f = {
+                args["color"]: pd.NamedAgg(column=args["color"], aggfunc=lambda_wm),
+                count_colname: pd.NamedAgg(column=count_colname, aggfunc="sum"),
+            }
+        else:
+            agg_f = {}
     # Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
@@ -1032,7 +1057,10 @@ def process_dataframe_hierarchy(args):
         df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
     for i, level in enumerate(path):
         df_tree = pd.DataFrame(columns=df_all_trees.columns)
-        dfg = df.groupby(path[i:]).sum(numerical_only=True)
+        if not agg_f:
+            dfg = df.groupby(path[i:]).sum(numerical_only=True)
+        else:
+            dfg = df.groupby(path[i:]).agg(**agg_f)
         dfg = dfg.reset_index()
         df_tree["labels"] = dfg[level].copy().astype(str)
         df_tree["parent"] = ""
@@ -1044,29 +1072,13 @@ def process_dataframe_hierarchy(args):
                 df_tree["id"] += dfg[path[j]].copy().astype(str)
                 j += 1
         else:
-            df_tree["parent"] = "total"
+            df_tree["parent"] = ""
 
-        if i == 0 and cols:
+        if cols:
             df_tree[cols] = dfg[cols]
-        elif cols:
-            for col in cols:
-                df_tree[col] = "n/a"
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
-    # Root node
-    total_dict = {
-        "labels": "total",
-        "id": "total",
-        "parent": "",
-    }
-    for col in cols:
-        if not col == args["values"]:
-            total_dict[col] = "n/a"
-        if col == args["values"]:
-            total_dict[col] = df[col].sum()
-    total = pd.Series(total_dict)
-
-    df_all_trees = df_all_trees.append(total, ignore_index=True)
+    print(df_all_trees)
     # Now modify arguments
     args["data_frame"] = df_all_trees
     args["path"] = None

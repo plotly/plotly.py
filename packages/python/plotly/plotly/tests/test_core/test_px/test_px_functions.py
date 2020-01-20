@@ -127,10 +127,17 @@ def test_sunburst_treemap_with_path():
     ]
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
+    total = ["total",] * 8
     df = pd.DataFrame(
-        dict(vendors=vendors, sectors=sectors, regions=regions, values=values)
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+        )
     )
-    path = ["regions", "sectors", "vendors"]
+    path = ["total", "regions", "sectors", "vendors"]
     # No values
     fig = px.sunburst(df, path=path)
     assert fig.data[0].branchvalues == "total"
@@ -180,10 +187,17 @@ def test_sunburst_treemap_with_path_non_rectangular():
         "South",
     ]
     values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+    total = ["total",] * 10
     df = pd.DataFrame(
-        dict(vendors=vendors, sectors=sectors, regions=regions, values=values)
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+        )
     )
-    path = ["regions", "sectors", "vendors"]
+    path = ["total", "regions", "sectors", "vendors"]
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].values[-1] == np.sum(values)
 
