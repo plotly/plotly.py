@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.6
   kernelspec:
     display_name: Python 3
@@ -29,10 +29,12 @@ jupyter:
     name: Legends
     order: 14
     permalink: python/legend/
+    redirect_from: python/horizontal-legend/
     thumbnail: thumbnail/legends.gif
 ---
 
 #### Show Legend
+
 By default the legend is displayed on Plotly charts with multiple traces.
 
 ```python
@@ -217,9 +219,11 @@ fig.update_layout(
 
 fig.show()
 ```
+
 ### Size of Legend Items
 
-In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.   
+In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
+
 ```python
 import plotly.graph_objects as go
 
@@ -243,6 +247,7 @@ fig.update_layout(legend= {'itemsizing': 'constant'})
 
 fig.show()
 ```
+
 #### Grouped Legend
 
 ```python
@@ -338,4 +343,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#layout-legend for more information!

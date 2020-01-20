@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -23,7 +23,7 @@ jupyter:
     version: 3.6.7
   plotly:
     description: Learn how to perform smoothing using various methods in Python.
-    display_as: signal-analysis
+    display_as: advanced_opt
     has_thumbnail: false
     language: python
     layout: base
@@ -34,8 +34,8 @@ jupyter:
     thumbnail: /images/static-image
 ---
 
-
 #### Imports
+
 The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://plot.ly/pandas/intro-to-pandas-tutorial/), [SciPy](https://www.scipy.org/) and [Plotly](https://plot.ly/python/getting-started/).
 
 ```python
@@ -49,6 +49,7 @@ from scipy import signal
 ```
 
 #### Savitzky-Golay Filter
+
 `Smoothing` is a technique that is used to eliminate noise from a dataset. There are many algorithms and methods to accomplish this but all have the same general purpose of 'roughing out the edges' or 'smoothing' some data.
 
 There is reason to smooth data if there is little to no small-scale structure in the data. The danger to this thinking is that one may skew the representation of the data enough to change its percieved meaning, so for the sake of scientific honesty it is an imperative to at the very minimum explain one's reason's for using a smoothing algorithm to their dataset.
