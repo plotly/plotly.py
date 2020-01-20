@@ -137,6 +137,12 @@ class NPM(Command):
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
+            check_call(
+                [npmName, "run build"],
+                cwd=node_root,
+                stdout=sys.stdout,
+                stderr=sys.stderr,
+            )
             os.utime(self.node_modules, None)
 
         for t in self.targets:
