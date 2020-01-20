@@ -73,6 +73,21 @@ fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
 fig.show()
 ```
 
+### Sunburst of a rectangular DataFrame with continuous color argument in px.sunburst
+
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values. 
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.sunburst(df, path=['continent', 'country'], values='pop', 
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu', 
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
 ### Rectangular data with missing values
 
 If the dataset is not fully rectangular, missing values should be supplied as `None`.
