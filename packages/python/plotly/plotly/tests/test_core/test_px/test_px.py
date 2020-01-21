@@ -232,4 +232,3 @@ def test_orthogonal_orderings():
     for days in permutations(df["day"].unique()):
         for times in permutations(df["time"].unique()):
             assert_orderings(days, days, times, times)
-
