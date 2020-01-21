@@ -1084,8 +1084,6 @@ def process_dataframe_hierarchy(args):
                 df_tree["parent"] += dfg[path[j]].copy().astype(str)
                 df_tree["id"] += dfg[path[j]].copy().astype(str)
                 j += 1
-        else:
-            df_tree["parent"] = ""
 
         if cols:
             df_tree[cols] = dfg[cols]
