@@ -1136,8 +1136,15 @@ def infer_config(args, constructor, trace_patch):
 def get_orderings(args, grouper, grouped):
     """
     `orders` is the user-supplied ordering (with the remaining data-frame-supplied
-    ordering appended if the column is used for grouping)
+    ordering appended if the column is used for grouping). It includes anything the user
+    gave, for any variable, including values not present in the dataset. It is used
+    downstream to set e.g. `categoryarray` for cartesian axes
+
     `group_names` is the set of groups, ordered by the order above
+
+    `group_values` is a subset of `orders` in both keys and values. It contains a key
+     for every grouped mapping and its values are the sorted *data* values for these
+     mappings.
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
     group_names = []
