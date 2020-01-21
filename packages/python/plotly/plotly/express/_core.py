@@ -1007,13 +1007,6 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
-def _discrete_agg(x):
-    if len(x) == 1:
-        return x.iloc[0]
-    else:
-        return ""
-
-
 def process_dataframe_hierarchy(args):
     """
     Build dataframe for sunburst or treemap when the path argument is provided.
@@ -1022,7 +1015,12 @@ def process_dataframe_hierarchy(args):
     path = args["path"][::-1]
 
     # ------------ Define aggregation functions --------------------------------
-    lambda_discrete = _discrete_agg
+    def aggfunc_discrete(x):
+        if len(x) == 1:
+            return x.iloc[0]
+        else:
+            return ""
+
     agg_f = {}
     aggfunc_color = None
     if args["values"]:
@@ -1048,11 +1046,13 @@ def process_dataframe_hierarchy(args):
 
     if args["color"]:
         if df[args["color"]].dtype.kind not in "bifc":
-            aggfunc_color = lambda_discrete
+            aggfunc_color = aggfunc_discrete
         elif not aggfunc_color:
-            aggfunc_color = lambda x: np.average(
-                x, weights=df.loc[x.index, count_colname]
-            )
+
+            def aggfunc_continuous(x):
+                return np.average(x, weights=df.loc[x.index, count_colname])
+
+            aggfunc_color = aggfunc_continuous
         agg_f[args["color"]] = aggfunc_color
     if args["color"] or args["values"]:
         agg_f[count_colname] = "sum"
@@ -1061,7 +1061,7 @@ def process_dataframe_hierarchy(args):
     cols = list(set(df.columns).difference(path))
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
-            agg_f[col] = lambda_discrete
+            agg_f[col] = aggfunc_discrete
     # ----------------------------------------------------------------------------
 
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
