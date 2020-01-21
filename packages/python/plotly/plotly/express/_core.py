@@ -1141,6 +1141,7 @@ def get_orderings(args, grouper, grouped):
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
     group_names = []
+    group_values = {}
     for group_name in grouped.groups:
         if len(grouper) == 1:
             group_name = (group_name,)
@@ -1154,6 +1155,7 @@ def get_orderings(args, grouper, grouped):
                     for val in uniques:
                         if val not in orders[col]:
                             orders[col].append(val)
+                group_values[col] = sorted(uniques, key=orders[col].index)
 
     for i, col in reversed(list(enumerate(grouper))):
         if col != one_group:
@@ -1162,7 +1164,7 @@ def get_orderings(args, grouper, grouped):
                 key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
             )
 
-    return orders, group_names
+    return orders, group_names, group_values
 
 
 def make_figure(args, constructor, trace_patch={}, layout_patch={}):
@@ -1174,7 +1176,24 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     grouped = args["data_frame"].groupby(grouper, sort=False)
 
-    orders, sorted_group_names = get_orderings(args, grouper, grouped)
+    orders, sorted_group_names, sorted_group_values = get_orderings(
+        args, grouper, grouped
+    )
+
+    col_labels = []
+    row_labels = []
+
+    for m in grouped_mappings:
+        if m.grouper:
+            if m.facet == "col":
+                prefix = get_label(args, args["facet_col"]) + "="
+                col_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
+            if m.facet == "row":
+                prefix = get_label(args, args["facet_row"]) + "="
+                row_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
+            for val in sorted_group_values[m.grouper]:
+                if val not in m.val_map:
+                    m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
 
     subplot_type = _subplot_type_for_trace_type(constructor().type)
 
@@ -1182,8 +1201,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     frames = OrderedDict()
     trendline_rows = []
     nrows = ncols = 1
-    col_labels = []
-    row_labels = []
     trace_name_labels = None
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
@@ -1281,10 +1298,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 # Find row for trace, handling facet_row and marginal_x
                 if m.facet == "row":
                     row = m.val_map[val]
-                    if args["facet_row"] and len(row_labels) < row:
-                        row_labels.append(
-                            get_label(args, args["facet_row"]) + "=" + str(val)
-                        )
                 else:
                     if (
                         bool(args.get("marginal_x", False))
@@ -1298,10 +1311,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 # Find col for trace, handling facet_col and marginal_y
                 if m.facet == "col":
                     col = m.val_map[val]
-                    if args["facet_col"] and len(col_labels) < col:
-                        col_labels.append(
-                            get_label(args, args["facet_col"]) + "=" + str(val)
-                        )
                     if facet_col_wrap:  # assumes no facet_row, no marginals
                         row = 1 + ((col - 1) // facet_col_wrap)
                         col = 1 + ((col - 1) % facet_col_wrap)
