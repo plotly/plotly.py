@@ -182,3 +182,43 @@ def test_px_templates():
     assert fig.layout.xaxis3.showgrid is None
     assert fig.layout.yaxis2.showgrid
     assert fig.layout.yaxis3.showgrid
+
+
+def test_orthogonal_orderings():
+    from itertools import permutations
+
+    df = px.data.tips()
+
+    symbol_sequence = ["circle", "diamond", "square", "cross"]
+    color_sequence = ["red", "blue"]
+
+    for days in permutations(df["day"].unique()):
+        for times in permutations(df["time"].unique()):
+            fig = px.scatter(
+                df,
+                x="total_bill",
+                y="tip",
+                facet_row="time",
+                facet_col="day",
+                color="time",
+                symbol="day",
+                symbol_sequence=symbol_sequence,
+                color_discrete_sequence=color_sequence,
+                category_orders=dict(day=days, time=times),
+            )
+
+            for col in range(len(days)):
+                for trace in fig.select_traces(col=col + 1):
+                    assert days[col] in trace.hovertemplate
+
+            for row in range(len(times)):
+                for trace in fig.select_traces(row=2 - row):
+                    assert times[row] in trace.hovertemplate
+
+            for trace in fig.data:
+                for i, day in enumerate(days):
+                    if day in trace.name:
+                        assert trace.marker.symbol == symbol_sequence[i]
+                for i, time in enumerate(times):
+                    if time in trace.name:
+                        assert trace.marker.color == color_sequence[i]
