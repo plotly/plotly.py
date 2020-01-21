@@ -1205,6 +1205,7 @@ def parallel_categories(
     template=None,
     width=None,
     height=None,
+    dimensions_max_cardinality=50,
 ):
     """
     In a parallel categories (or parallel sets) plot, each row of

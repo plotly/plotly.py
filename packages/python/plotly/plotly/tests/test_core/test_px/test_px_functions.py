@@ -139,3 +139,36 @@ def test_funnel():
         color=["0", "0", "0", "1", "1", "1"],
     )
     assert len(fig.data) == 2
+
+
+def test_parcats_dimensions_max():
+    df = px.data.tips()
+
+    # default behaviour
+    fig = px.parallel_categories(df)
+    assert [d.label for d in fig.data[0].dimensions] == [
+        "sex",
+        "smoker",
+        "day",
+        "time",
+        "size",
+    ]
+
+    # explicit subset of default
+    fig = px.parallel_categories(df, dimensions=["sex", "smoker", "day"])
+    assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day"]
+
+    # shrinking max
+    fig = px.parallel_categories(df, dimensions_max_cardinality=4)
+    assert [d.label for d in fig.data[0].dimensions] == [
+        "sex",
+        "smoker",
+        "day",
+        "time",
+    ]
+
+    # explicit superset of default, violating the max
+    fig = px.parallel_categories(
+        df, dimensions=["sex", "smoker", "day", "size"], dimensions_max_cardinality=4
+    )
+    assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
