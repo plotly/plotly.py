@@ -110,6 +110,7 @@ docs = dict(
         "int (default 50)",
         "When `dimensions` is `None` and `data_frame` is provided, "
         "columns with more than this number of unique values are excluded from the output.",
+        "Not used when `dimensions` is passed.",
     ],
     error_x=[
         colref_type,
