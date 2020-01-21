@@ -1007,6 +1007,13 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def _discrete_agg(x):
+    if len(x) == 1:
+        return x.iloc[0]
+    else:
+        return ""
+
+
 def process_dataframe_hierarchy(args):
     """
     Build dataframe for sunburst or treemap when the path argument is provided.
@@ -1015,7 +1022,7 @@ def process_dataframe_hierarchy(args):
     path = args["path"][::-1]
 
     # ------------ Define aggregation functions --------------------------------
-    lambda_discrete = lambda x: x[0] if len(x) == 1 else ""
+    lambda_discrete = _discrete_agg
     agg_f = {}
     aggfunc_color = None
     if args["values"]:
