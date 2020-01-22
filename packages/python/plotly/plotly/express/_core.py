@@ -1082,6 +1082,7 @@ def process_dataframe_hierarchy(args):
         else:
             dfg = df.groupby(path[i:]).agg(agg_f)
         dfg = dfg.reset_index()
+        # Path label massaging
         df_tree["labels"] = dfg[level].copy().astype(str)
         df_tree["parent"] = ""
         df_tree["id"] = dfg[level].copy().astype(str)
@@ -1089,7 +1090,9 @@ def process_dataframe_hierarchy(args):
             j = i + 1
             while j < len(path):
                 df_tree["parent"] += dfg[path[j]].copy().astype(str)
-                df_tree["id"] += dfg[path[j]].copy().astype(str)
+                if j < len(path) - 1:
+                    df_tree["parent"] += "/"
+                df_tree["id"] += "/" + dfg[path[j]].copy().astype(str)
                 j += 1
 
         if cols:
