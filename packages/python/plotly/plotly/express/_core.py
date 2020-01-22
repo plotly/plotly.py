@@ -1007,12 +1007,28 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def _check_dataframe_all_leaves(df):
+    df_sorted = df.sort_values(by=list(df.columns))
+    null_mask = df_sorted.isnull()
+    null_indices = null_mask.any(axis=1).to_numpy().nonzero()[0]
+    df_sorted[null_mask] = ""
+    row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
+    for i, row in enumerate(row_strings[:-1]):
+        if row_strings[i + 1] in row and (i + 1) in null_indices:
+            raise ValueError(
+                "Non-leaves rows are not permitted in the dataframe \n",
+                df_sorted.iloc[i + 1],
+                "is not a leaf.",
+            )
+
+
 def process_dataframe_hierarchy(args):
     """
     Build dataframe for sunburst or treemap when the path argument is provided.
     """
     df = args["data_frame"]
     path = args["path"][::-1]
+    _check_dataframe_all_leaves(df[path[::-1]])
 
     if args["color"] and args["color"] in path:
         series_to_copy = df[args["color"]]

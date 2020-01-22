@@ -249,6 +249,10 @@ def test_sunburst_treemap_with_path_non_rectangular():
         )
     )
     path = ["total", "regions", "sectors", "vendors"]
+    msg = "Non-leaves rows are not permitted in the dataframe"
+    with pytest.raises(ValueError, match=msg):
+        fig = px.sunburst(df, path=path, values="values")
+    df.loc[df["vendors"].isnull(), "sectors"] = "Other"
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].values[-1] == np.sum(values)
 

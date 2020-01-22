@@ -85,8 +85,8 @@ If the dataset is not fully rectangular, missing values should be supplied as `N
 import plotly.express as px
 import pandas as pd
 vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
-sectors = ["Tech", "Tech", "Finance", "Finance", None,
-           "Tech", "Tech", "Finance", "Finance", "Finance"]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
 regions = ["North", "North", "North", "North", "North",
            "South", "South", "South", "South", "South"]
 sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
@@ -97,9 +97,6 @@ print(df)
 fig = px.treemap(df, path=['regions', 'sectors', 'vendors'], values='sales')
 fig.show()
 ```
-
-
-
 ### Basic Treemap with go.Treemap
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Treemap` function from `plotly.graph_objects`.

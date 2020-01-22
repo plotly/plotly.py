@@ -69,7 +69,7 @@ Hierarchical data are often stored as a rectangular dataframe, with different co
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
+fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill', color='tip')
 fig.show()
 ```
 
@@ -90,14 +90,14 @@ fig.show()
 
 ### Rectangular data with missing values
 
-If the dataset is not fully rectangular, missing values should be supplied as `None`.
+If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
 
 ```python
 import plotly.express as px
 import pandas as pd
 vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
-sectors = ["Tech", "Tech", "Finance", "Finance", None,
-           "Tech", "Tech", "Finance", "Finance", "Finance"]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
 regions = ["North", "North", "North", "North", "North",
            "South", "South", "South", "South", "South"]
 sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
