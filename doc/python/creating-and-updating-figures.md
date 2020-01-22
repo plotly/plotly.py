@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -272,7 +272,7 @@ Graph object figures support an `update_layout` method that may be used to updat
 import plotly.graph_objects as go
 
 fig = go.Figure(data=go.Bar(x=[1, 2, 3], y=[1, 3, 2]))
-fig.update_layout(title_text="A Bar Chart", title_font_size=30)
+fig.update_layout(title=go.layout.Title(text="A Bar Chart", font=dict(size=30)))
 fig.show()
 ```
 
@@ -283,7 +283,7 @@ fig.update_layout(title_text="A Bar Chart",title_font_size=30)
 fig.update_layout(title_text="A Bar Chart", title_font=dict(size=30))
 fig.update_layout(title=dict(text="A Bar Chart"), font=dict(size=30))
 fig.update_layout({"title": {"text": "A Bar Chart", "font": {"size": 30}}})
-fig.update_layout(title=dict(text="A Bar Chart", font=dict(size=30)))
+fig.update_layout(title=go.layout.Title(text="A Bar Chart", font=dict(size=30)))
 ```
 
 #### The update traces method
