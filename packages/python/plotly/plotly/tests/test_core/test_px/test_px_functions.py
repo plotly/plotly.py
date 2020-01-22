@@ -164,6 +164,14 @@ def test_sunburst_treemap_with_path():
     assert fig.data[0].branchvalues == "total"
 
 
+def test_sunburst_treemap_with_path_and_hover():
+    df = px.data.tips()
+    fig = px.sunburst(
+        df, path=["sex", "day", "time", "smoker"], color="smoker", hover_data=["smoker"]
+    )
+    assert "smoker" in fig.data[0].hovertemplate
+
+
 def test_sunburst_treemap_with_path_color():
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
     sectors = [
