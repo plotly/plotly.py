@@ -47,7 +47,7 @@ This page documents Geo outline-based maps, and the [Mapbox Layers documentation
 
 ### Physical Base Maps
 
-Plotly Geo maps have a built-in base map layer composed of "physical" and "cultural" data from the [Natural Earth Dataset](https://www.naturalearthdata.com/downloads/). Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the [default `plotly` template](/python/templates/), a map frame, and physical features such as a coastal outline and filled land areas are shown, at a coarse 1:110,000,000 resolution:
+Plotly Geo maps have a built-in base map layer composed of "physical" and "cultural" (i.e. administrative border) data from the [Natural Earth Dataset](https://www.naturalearthdata.com/downloads/). Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the [default `plotly` template](/python/templates/), a map frame and physical features such as a coastal outline and filled land areas are shown, at a small-scale 1:110m resolution:
 
 ```python
 import plotly.graph_objects as go
@@ -57,7 +57,7 @@ fig.update_layout(height=300, margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-Here is a map with all physical features enabled and styled, at a finer 1:50,000,000 resolution:
+Here is a map with all physical features enabled and styled, at a larger-scale 1:50m resolution:
 
 ```python
 import plotly.graph_objects as go
@@ -78,7 +78,7 @@ fig.show()
 ### Disabling Base Maps
 
 
-In certain cases, such as large scale choropleth maps the default physical map is distracting. In this case the `layout.geo.visible` attribute can be set to `False` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
+In certain cases, such as large scale [choropleth maps](/python/choropleth-maps/), the default physical map can be distracting. In this case the `layout.geo.visible` attribute can be set to `False` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
 
 ```python
 import plotly.graph_objects as go
@@ -97,15 +97,15 @@ fig.show()
 
 ### Cultural Base Maps
 
-In addition to physical maps, a "cultural" base map is included which is composed of country borders and selected sub-country borders such as states. 
+In addition to physical base map features, a "cultural" base map is included which is composed of country borders and selected sub-country borders such as states. 
 
-**Note** cultural features are by definition subject to debate and conflict. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
+**Note and disclaimer:** cultural features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
 
 > Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
 
 **To create a map with your own cultural features** please refer to our [choropleth documentation](/python/choropleth-maps/).
 
-Here is a map with only cultural features enabled and styled, at a 1:50m resolution, which includes only country boundaries. See below for country sub-unit cultural vectors:
+Here is a map with only cultural features enabled and styled, at a 1:50m resolution, which includes only country boundaries. See below for country sub-unit cultural base map features:
 
 ```python
 import plotly.graph_objects as go
@@ -146,6 +146,8 @@ fig.show()
 
 Map projections can be rotated using the `layout.geo.projection.rotation` attribute, and maps can be translated using the `layout.geo.center` attributed, as well as truncated to a certain longitude and latitude range using the `layout.geo.lataxis.range` and `layout.geo.lonaxis.range`.
 
+The map below uses all of these attributes to demonstrate the types of effect this can yield:
+
 ```python
 import plotly.graph_objects as go
 
@@ -161,7 +163,7 @@ fig.show()
 
 ### Automatic Zooming or Bounds Fitting
 
-The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted.
+The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](/python/choropleth-maps/) documentation for more information.
 
 ```python
 import plotly.express as px
@@ -174,7 +176,7 @@ fig.show()
 
 ### Named Map Scopes and Country Sub-Units
 
-In addition, the named "scope" of a map defines a sub-set of the earth's surface to draw. Each scope has a default projection, and certain scopes contain country sub-unit cultural layers certain resolutions, such as `scope="north america"` at `resolution=50` which contains US state and Canadian province boundaries.
+In addition, the named "scope" of a map defines a sub-set of the earth's surface to draw. Each scope has a *default projection type, center and roll, as well as bounds*, and certain scopes contain country sub-unit cultural layers certain resolutions, such as `scope="north america"` at `resolution=50` which contains US state and Canadian province boundaries.
 
 The available scopes are: `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`.
 

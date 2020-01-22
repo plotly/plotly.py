@@ -84,7 +84,7 @@ df.head()
 
 ### Choropleth map using GeoJSON
 
-**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](/python/map-configuration/) for more information on scopes.
 
 ```python
 from urllib.request import urlopen
@@ -126,7 +126,7 @@ print(geojson["features"][0]["properties"])
 
 To use them together, we set `locations` to `district` and `featureidkey` to `"properties.district"`. The `color` is set to the number of votes by the candidate named Bergeron.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds. 
 
 ```python
 import plotly.express as px
@@ -147,7 +147,7 @@ fig.show()
 
 In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
 
-**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for more information on projections and bounds. 
 
 ```python
 import plotly.express as px
@@ -164,11 +164,20 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-### Using Built-in Geometries
+<!-- #region -->
+### Using Built-in Country and State Geometries
 
-Plotly comes with two built-in geometries which do not require an external GeoJSON file: countries as defined in the Natural Earth dataset (see the "Cultural Base Map" section of the [Geo map configuration documentation](/python/map-configuration/) for an explanation and disclaimer) and US states. 
+Plotly comes with two built-in geometries which do not require an external GeoJSON file: 
+1. USA States
+2. Countries as defined in the Natural Earth dataset.
 
-To use the countries dataset, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+
+**Note and disclaimer:** cultural (as opposed to physical) features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
+
+> Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
+
+To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+<!-- #endregion -->
 
 ```python
 import plotly.express as px
@@ -181,7 +190,7 @@ fig = px.choropleth(df, locations="iso_alpha",
 fig.show()
 ```
 
-To use the USA states dataset, set `locationmode='USA-states'` and provide `locations` as two-letter state abbreviations:
+To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as two-letter state abbreviations:
 
 ```python
 import plotly.express as px
@@ -386,9 +395,9 @@ HDX</a>',
 fig.show()
 ```
 
-#### Full County Choropleths
+#### County Choropleth Figure Factory
 
-For the full county choropleth doc page checkout https://plot.ly/python/county-choropleth/
+Plotly also includes a [legacy "figure factory" for creating US county-level choropleth maps](python/county-choropleth/).
 
 ```python
 import plotly.figure_factory as ff
