@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -30,10 +30,10 @@ jupyter:
     order: 2
     page_type: example_index
     permalink: python/box-plots/
-    thumbnail: thumbnail/box.jpg
     redirect_from:
-      - /python/box/
-      - /python/basic_statistics/
+    - /python/box/
+    - /python/basic_statistics/
+    thumbnail: thumbnail/box.jpg
 ---
 
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
@@ -106,12 +106,12 @@ df = pd.DataFrame(dict(
 )).melt(var_name="quartilemethod") 
 
 
-fig = px.box(df, y="value",
-             facet_col="quartilemethod", boxmode="overlay", color="quartilemethod")
+fig = px.box(df, y="value", facet_col="quartilemethod", color="quartilemethod",
+             boxmode="overlay", points='all')
 
-fig.update_traces(quartilemethod="linear", col=1)
-fig.update_traces(quartilemethod="inclusive", col=2)
-fig.update_traces(quartilemethod="exclusive", col=3)
+fig.update_traces(quartilemethod="linear", jitter=0, col=1)
+fig.update_traces(quartilemethod="inclusive", jitter=0, col=2)
+fig.update_traces(quartilemethod="exclusive", jitter=0, col=3)
 
 fig.show()
 ```
@@ -196,6 +196,7 @@ fig = go.Figure()
 fig.add_trace(go.Box(y=data, quartilemethod="linear", name="Linear Quartile Mode"))
 fig.add_trace(go.Box(y=data, quartilemethod="inclusive", name="Inclusive Quartile Mode"))
 fig.add_trace(go.Box(y=data, quartilemethod="exclusive", name="Exclusive Quartile Mode"))
+fig.update_traces(boxpoints='all', jitter=0)
 fig.show()
 ```
 
