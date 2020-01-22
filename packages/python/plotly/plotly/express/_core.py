@@ -1051,6 +1051,7 @@ def process_dataframe_hierarchy(args):
         # we can modify df because it's a copy of the px argument
         df[count_colname] = 1
         args["values"] = count_colname
+    agg_f[count_colname] = "sum"
 
     if args["color"]:
         if df[args["color"]].dtype.kind not in "bifc":
@@ -1062,8 +1063,6 @@ def process_dataframe_hierarchy(args):
 
             aggfunc_color = aggfunc_continuous
         agg_f[args["color"]] = aggfunc_color
-    if args["color"] or args["values"]:
-        agg_f[count_colname] = "sum"
 
     #  Other columns (for color, hover_data, custom_data etc.)
     cols = list(set(df.columns).difference(path))
