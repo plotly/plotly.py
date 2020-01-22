@@ -1086,12 +1086,11 @@ def process_dataframe_hierarchy(args):
         if i < len(path) - 1:
             j = i + 1
             while j < len(path):
-                df_tree["parent"] += dfg[path[j]].copy().astype(str)
-                if j < len(path) - 1:
-                    df_tree["parent"] += "/"
-                df_tree["id"] += "/" + dfg[path[j]].copy().astype(str)
+                df_tree["parent"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                df_tree["id"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["id"]
                 j += 1
 
+        df_tree["parent"] = df_tree["parent"].str.rstrip('/')
         if cols:
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
