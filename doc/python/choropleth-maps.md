@@ -5,12 +5,22 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
     name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.6.8
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
@@ -23,13 +33,142 @@ jupyter:
     thumbnail: thumbnail/choropleth.jpg
 ---
 
-A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a heatmap using geographical boundaries. It is used to represent spatial variations of a quantity. See also the [index of other geographical charts](/python/maps/).
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps** using our Mapbox trace types](/python/mapbox-county-choropleth).
 
-Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` or the lower-level `go.Choropleth`.
+Below we show how to create Choropleth Maps using either Plotly Express' `px.choropleth` function or the lower-level `go.Choropleth` graph object.
+
+#### Base Map Configuration
+
+Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+
+### Introduction: main parameters for choropleth outline maps
+
+Making choropleth maps requires two main types of input:
+
+1. Geometry information:
+   1. This can either be a supplied GeoJSON file where each feature has either an `id` field or some identifying value in `properties`; or
+   2. one of the built-in geometries within `plotly`: US states and world countries (see below)
+2. A list of values indexed by feature identifier.
+
+The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth_mapbox` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
+
+**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
 ### Choropleth Map with plotly.express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+#### GeoJSON with `feature.id`
+
+Here we load a GeoJSON file containing the geometry information for US counties, where `feature.id` is a [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
+
+```python
+from urllib.request import urlopen
+import json
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties = json.load(response)
+
+counties["features"][0]
+```
+
+#### Data indexed by `id`
+
+Here we load unemployment data by county, also indexed by [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
+
+```python
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv",
+                   dtype={"fips": str})
+df.head()
+```
+
+### Choropleth map using GeoJSON
+
+**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+
+```python
+from urllib.request import urlopen
+import json
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties = json.load(response)
+
+import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv",
+                   dtype={"fips": str})
+
+import plotly.express as px
+
+fig = px.choropleth(df, geojson=counties, locations='fips', color='unemp',
+                           color_continuous_scale="Viridis",
+                           range_color=(0, 12),
+                           scope="usa",
+                           labels={'unemp':'unemployment rate'}
+                          )
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Indexing by GeoJSON Properties
+
+If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `locations`.
+
+In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
+
+```python
+import plotly.express as px
+
+df = px.data.election()
+geojson = px.data.election_geojson()
+
+print(df["district"][2])
+print(geojson["features"][0]["properties"])
+```
+
+To use them together, we set `locations` to `district` and `featureidkey` to `"properties.district"`. The `color` is set to the number of votes by the candidate named Bergeron.
+
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+
+```python
+import plotly.express as px
+
+df = px.data.election()
+geojson = px.data.election_geojson()
+
+fig = px.choropleth(df, geojson=geojson, color="Bergeron",
+                    locations="district", featureidkey="properties.district",
+                    projection="mercator"
+                   )
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Discrete Colors
+
+In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
+
+**Note** In this example we set `layout.geo.visible` to `False` to hide the base map and frame, and we set `layout.geo.fitbounds` to `'locations'` to automatically zoom the map to show just the area of interest. See the [Geo map configuration documentation](/python/map-configuration/) for an explanation.
+
+```python
+import plotly.express as px
+
+df = px.data.election()
+geojson = px.data.election_geojson()
+
+fig = px.choropleth(df, geojson=geojson, color="winner",
+                    locations="district", featureidkey="properties.district",
+                    projection="mercator", hover_data=["Bergeron", "Coderre", "Joly"]
+                   )
+fig.update_geos(fitbounds="locations", visible=False)
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Using Built-in Geometries
+
+Plotly comes with two built-in geometries which do not require an external GeoJSON file: countries as defined in the Natural Earth dataset (see the "Cultural Base Map" section of the [Geo map configuration documentation](/python/map-configuration/) for an explanation and disclaimer) and US states. 
+
+To use the countries dataset, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
 ```python
 import plotly.express as px
@@ -39,6 +178,15 @@ fig = px.choropleth(df, locations="iso_alpha",
                     color="lifeExp", # lifeExp is a column of gapminder
                     hover_name="country", # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Plasma)
+fig.show()
+```
+
+To use the USA states dataset, set `locationmode='USA-states'` and provide `locations` as two-letter state abbreviations:
+
+```python
+import plotly.express as px
+
+fig = px.choropleth(locations=["CA", "TX", "NY"], locationmode="USA-states", color=[1,2,3], scope="usa")
 fig.show()
 ```
 

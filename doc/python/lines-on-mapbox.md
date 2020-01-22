@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -33,9 +33,9 @@ jupyter:
     thumbnail: thumbnail/line_mapbox.jpg
 ---
 
-### Mapbox Access Token
+### Mapbox Access Token and Base Map Configuration
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 To draw a line on your map, you either can use [`px.line_mapbox()`](https://www.plotly.express/plotly_express/#plotly_express.line_mapbox) in Plotly Express, or [`Scattermapbox`](https://plot.ly/python/reference/#scattermapbox) traces. Below we show you how to draw a line on Mapbox using Plotly Express.
 
@@ -89,4 +89,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scattermapbox for more information about mapbox and their attribute options.
