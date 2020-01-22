@@ -80,13 +80,7 @@ builders["ggplot2"] = ggplot2
 
 def simple_white():
     # Set colorbar_common
-    colorbar_common = dict(
-        outlinewidth=10,
-        tickcolor=colors["gray14"],
-        ticks="outside",
-        tickwidth=2,
-        ticklen=8,
-    )
+    colorbar_common = dict(outlinewidth=1, tickcolor=colors["gray14"], ticks="outside")
 
     # Common axis common properties
     axis_common = dict(
