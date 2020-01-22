@@ -1009,6 +1009,147 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def _check_dataframe_all_leaves(df):
+    df_sorted = df.sort_values(by=list(df.columns))
+    null_mask = df_sorted.isnull()
+    null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
+    for null_row_index in null_indices:
+        row = null_mask.iloc[null_row_index]
+        indices = np.nonzero(row.values)[0]
+        if not row[indices[0] :].all():
+            raise ValueError(
+                "None entries cannot have not-None children",
+                df_sorted.iloc[null_row_index],
+            )
+    df_sorted[null_mask] = ""
+    row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
+    for i, row in enumerate(row_strings[:-1]):
+        if row_strings[i + 1] in row and (i + 1) in null_indices:
+            raise ValueError(
+                "Non-leaves rows are not permitted in the dataframe \n",
+                df_sorted.iloc[i + 1],
+                "is not a leaf.",
+            )
+
+
+def process_dataframe_hierarchy(args):
+    """
+    Build dataframe for sunburst or treemap when the path argument is provided.
+    """
+    df = args["data_frame"]
+    path = args["path"][::-1]
+    _check_dataframe_all_leaves(df[path[::-1]])
+    discrete_color = False
+
+    if args["color"] and args["color"] in path:
+        series_to_copy = df[args["color"]]
+        args["color"] = str(args["color"]) + "additional_col_for_px"
+        df[args["color"]] = series_to_copy
+    if args["hover_data"]:
+        for col_name in args["hover_data"]:
+            if col_name == args["color"]:
+                series_to_copy = df[col_name]
+                new_col_name = str(args["color"]) + "additional_col_for_hover"
+                df[new_col_name] = series_to_copy
+                args["color"] = new_col_name
+            elif col_name in path:
+                series_to_copy = df[col_name]
+                new_col_name = col_name + "additional_col_for_hover"
+                path = [new_col_name if x == col_name else x for x in path]
+                df[new_col_name] = series_to_copy
+    # ------------ Define aggregation functions --------------------------------
+    def aggfunc_discrete(x):
+        uniques = x.unique()
+        if len(uniques) == 1:
+            return uniques[0]
+        else:
+            return "(?)"
+
+    agg_f = {}
+    aggfunc_color = None
+    if args["values"]:
+        try:
+            df[args["values"]] = pd.to_numeric(df[args["values"]])
+        except ValueError:
+            raise ValueError(
+                "Column `%s` of `df` could not be converted to a numerical data type."
+                % args["values"]
+            )
+
+        if args["color"]:
+            if args["color"] == args["values"]:
+                aggfunc_color = "sum"
+        count_colname = args["values"]
+    else:
+        # we need a count column for the first groupby and the weighted mean of color
+        # trick to be sure the col name is unused: take the sum of existing names
+        count_colname = (
+            "count"
+            if "count" not in df.columns
+            else "".join([str(el) for el in list(df.columns)])
+        )
+        # we can modify df because it's a copy of the px argument
+        df[count_colname] = 1
+        args["values"] = count_colname
+    agg_f[count_colname] = "sum"
+
+    if args["color"]:
+        if df[args["color"]].dtype.kind not in "bifc":
+            aggfunc_color = aggfunc_discrete
+            discrete_color = True
+        elif not aggfunc_color:
+
+            def aggfunc_continuous(x):
+                return np.average(x, weights=df.loc[x.index, count_colname])
+
+            aggfunc_color = aggfunc_continuous
+        agg_f[args["color"]] = aggfunc_color
+
+    #  Other columns (for color, hover_data, custom_data etc.)
+    cols = list(set(df.columns).difference(path))
+    for col in cols:  # for hover_data, custom_data etc.
+        if col not in agg_f:
+            agg_f[col] = aggfunc_discrete
+    # ----------------------------------------------------------------------------
+
+    df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
+    #  Set column type here (useful for continuous vs discrete colorscale)
+    for col in cols:
+        df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
+    for i, level in enumerate(path):
+        df_tree = pd.DataFrame(columns=df_all_trees.columns)
+        dfg = df.groupby(path[i:]).agg(agg_f)
+        dfg = dfg.reset_index()
+        # Path label massaging
+        df_tree["labels"] = dfg[level].copy().astype(str)
+        df_tree["parent"] = ""
+        df_tree["id"] = dfg[level].copy().astype(str)
+        if i < len(path) - 1:
+            j = i + 1
+            while j < len(path):
+                df_tree["parent"] = (
+                    dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                )
+                df_tree["id"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["id"]
+                j += 1
+
+        df_tree["parent"] = df_tree["parent"].str.rstrip("/")
+        if cols:
+            df_tree[cols] = dfg[cols]
+        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+
+    if args["color"] and discrete_color:
+        df_all_trees = df_all_trees.sort_values(by=args["color"])
+
+    # Now modify arguments
+    args["data_frame"] = df_all_trees
+    args["path"] = None
+    args["ids"] = "id"
+    args["names"] = "labels"
+    args["parents"] = "parent"
+    return args
+
+
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
@@ -1017,9 +1158,9 @@ def infer_config(args, constructor, trace_patch):
         + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-        + ["lat", "lon", "locations", "animation_group"]
+        + ["lat", "lon", "locations", "animation_group", "path"]
     )
-    array_attrables = ["dimensions", "custom_data", "hover_data"]
+    array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
     all_attrables = attrables + group_attrables + ["color"]
     group_attrs = ["symbol", "line_dash"]
@@ -1028,6 +1169,8 @@ def infer_config(args, constructor, trace_patch):
             all_attrables += [group_attr]
 
     args = build_dataframe(args, all_attrables, array_attrables)
+    if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
+        args = process_dataframe_hierarchy(args)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []

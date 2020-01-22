@@ -62,6 +62,53 @@ fig =px.sunburst(
 fig.show()
 ```
 
+### Sunburst of a rectangular DataFrame with plotly.express
+
+Hierarchical data are often stored as a rectangular dataframe, with different columns corresponding to different levels of the hierarchy. `px.sunburst` can take a `path` parameter corresponding to a list of columns. Note that `id` and `parent` should not be provided if `path` is given.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with continuous color argument in px.sunburst
+
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values. 
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.sunburst(df, path=['continent', 'country'], values='pop', 
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu', 
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
+### Rectangular data with missing values
+
+If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
+
+```python
+import plotly.express as px
+import pandas as pd
+vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
+regions = ["North", "North", "North", "North", "North",
+           "South", "South", "South", "South", "South"]
+sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+df = pd.DataFrame(
+    dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
+)
+print(df)
+fig = px.sunburst(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig.show()
+```
+
 ### Basic Sunburst Plot with go.Sunburst
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
