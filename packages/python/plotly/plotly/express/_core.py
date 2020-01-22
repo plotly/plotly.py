@@ -1041,12 +1041,16 @@ def process_dataframe_hierarchy(args):
                 aggfunc_color = "sum"
         count_colname = args["values"]
     else:
-        if args["color"]:  # color passed but not value
-            # we need a count column for the weighted mean of color
-            # trick to be sure the col name is unused: take the sum of existing names
-            count_colname = "".join([str(el) for el in list(df.columns)])
-            # we can modify df because it's a copy of the px argument
-            df[count_colname] = 1
+        # we need a count column for the first groupby and the weighted mean of color
+        # trick to be sure the col name is unused: take the sum of existing names
+        count_colname = (
+            "count"
+            if "count" not in df.columns
+            else "".join([str(el) for el in list(df.columns)])
+        )
+        # we can modify df because it's a copy of the px argument
+        df[count_colname] = 1
+        args["values"] = count_colname
 
     if args["color"]:
         if df[args["color"]].dtype.kind not in "bifc":
