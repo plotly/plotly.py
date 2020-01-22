@@ -99,7 +99,7 @@ class GetFigureTest(PlotlyTestCase):
 
 
 class TestBytesVStrings(PlotlyTestCase):
-    @skipIf(not six.PY3, "Decoding and missing escapes only seen in PY3")
+    @skipIf(six.PY2, "Decoding and missing escapes only seen in PY3")
     def test_proper_escaping(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"

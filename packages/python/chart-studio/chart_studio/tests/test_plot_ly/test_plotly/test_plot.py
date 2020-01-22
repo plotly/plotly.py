@@ -25,7 +25,7 @@ from chart_studio.files import CONFIG_FILE
 
 
 # import from mock
-if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+if sys.version_info >= (3, 3):
     from unittest.mock import patch
 else:
     from mock import patch

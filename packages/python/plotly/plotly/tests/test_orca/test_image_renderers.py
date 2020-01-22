@@ -10,7 +10,7 @@ import plotly.graph_objs as go
 
 from plotly.offline.offline import _get_jconfig
 
-if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+if sys.version_info >= (3, 3):
     import unittest.mock as mock
 else:
     import mock

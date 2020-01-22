@@ -36,10 +36,10 @@ class GetRequestsTest(PlotlyTestCase):
         hd["plotly-apikey"] = api_key
         resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
         response = requests.get(server + resource, headers=hd)
-        if six.PY3:
-            content = _json.loads(response.content.decode("unicode_escape"))
-        else:
+        if six.PY2:
             content = _json.loads(response.content)
+        else:
+            content = _json.loads(response.content.decode("unicode_escape"))
         error_message = (
             "Aw, snap! We don't have an account for {0}. Want to "
             "try again? Sign in is not case sensitive.".format(username)
@@ -58,10 +58,10 @@ class GetRequestsTest(PlotlyTestCase):
         hd["plotly-apikey"] = api_key
         resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
         response = requests.get(server + resource, headers=hd)
-        if six.PY3:
-            content = _json.loads(response.content.decode("unicode_escape"))
-        else:
+        if six.PY2:
             content = _json.loads(response.content)
+        else:
+            content = _json.loads(response.content.decode("unicode_escape"))
         error_message = (
             "Aw, snap! It looks like this file does " "not exist. Want to try again?"
         )
@@ -96,10 +96,10 @@ class GetRequestsTest(PlotlyTestCase):
         hd["plotly-apikey"] = api_key
         resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
         response = requests.get(server + resource, headers=hd)
-        if six.PY3:
-            content = _json.loads(response.content.decode("unicode_escape"))
-        else:
+        if six.PY2:
             content = _json.loads(response.content)
+        else:
+            content = _json.loads(response.content.decode("unicode_escape"))
         self.assertEqual(response.status_code, 403)
 
     # Private File that is shared
@@ -115,10 +115,10 @@ class GetRequestsTest(PlotlyTestCase):
             hd = copy.copy(default_headers)
             del hd[header]
             response = requests.get(server + resource, headers=hd)
-            if six.PY3:
-                content = _json.loads(response.content.decode("unicode_escape"))
-            else:
+            if six.PY2:
                 content = _json.loads(response.content)
+            else:
+                content = _json.loads(response.content.decode("unicode_escape"))
             self.assertEqual(response.status_code, 422)
 
     @attr("slow")
@@ -132,10 +132,10 @@ class GetRequestsTest(PlotlyTestCase):
         hd["plotly-apikey"] = api_key
         resource = "/apigetfile/{0}/{1}/".format(file_owner, file_id)
         response = requests.get(server + resource, headers=hd)
-        if six.PY3:
-            content = _json.loads(response.content.decode("unicode_escape"))
-        else:
+        if six.PY2:
             content = _json.loads(response.content)
+        else:
+            content = _json.loads(response.content.decode("unicode_escape"))
         self.assertEqual(response.status_code, 200)
         # content = _json.loads(res.content)
         # response_payload = content['payload']

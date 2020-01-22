@@ -161,7 +161,7 @@ class CodegenCommand(Command):
         pass
 
     def run(self):
-        if sys.version_info.major != 3 or sys.version_info.minor < 6:
+        if sys.version_info < (3, 6):
             raise ImportError("Code generation must be executed with Python >= 3.6")
 
         from codegen import perform_codegen
