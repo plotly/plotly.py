@@ -1011,6 +1011,14 @@ def _check_dataframe_all_leaves(df):
     df_sorted = df.sort_values(by=list(df.columns))
     null_mask = df_sorted.isnull()
     null_indices = null_mask.any(axis=1).to_numpy().nonzero()[0]
+    for null_row_index in null_indices:
+        row = null_mask.iloc[null_row_index]
+        indices = row.to_numpy().nonzero()[0]
+        if not row[indices[0] :].all():
+            raise ValueError(
+                "None entries cannot have not-None children",
+                df_sorted.iloc[null_row_index],
+            )
     df_sorted[null_mask] = ""
     row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
     for i, row in enumerate(row_strings[:-1]):
