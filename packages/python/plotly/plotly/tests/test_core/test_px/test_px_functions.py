@@ -205,6 +205,11 @@ def test_sunburst_treemap_with_path_color():
     assert np.all(custom[:8] == df["hover"])
     assert np.all(custom[8:] == "")
 
+    # Discrete color
+    fig = px.sunburst(df, path=path, color="vendors")
+    assert len(np.unique(fig.data[0].marker.colors[:8])) == 8
+    assert len(np.unique(fig.data[0].marker.colors[8:])) == 1
+
 
 def test_sunburst_treemap_with_path_non_rectangular():
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]

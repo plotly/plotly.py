@@ -1014,6 +1014,10 @@ def process_dataframe_hierarchy(args):
     df = args["data_frame"]
     path = args["path"][::-1]
 
+    if args["color"] and args["color"] in path:
+        series_to_copy = df[args["color"]]
+        args["color"] = str(args["color"]) + "additional_col_for_px"
+        df[args["color"]] = series_to_copy
     # ------------ Define aggregation functions --------------------------------
     def aggfunc_discrete(x):
         if len(x) == 1:
