@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -87,6 +87,43 @@ fig.add_trace(go.Scatter(
     textposition="bottom center"
 ))
 
+fig.show()
+```
+
+### Controlling text fontsize with uniformtext
+
+For the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+fig = px.bar(df, y='pop', x='country', text='pop')
+fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+fig.show()
+```
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia' and year == 2007")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside')
+fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
+fig.show()
+```
+
+### Controlling text fontsize with textfont
+
+The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia' and year == 2007")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside', textfont_size=14)
 fig.show()
 ```
 
