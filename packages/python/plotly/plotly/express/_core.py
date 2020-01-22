@@ -1077,10 +1077,7 @@ def process_dataframe_hierarchy(args):
         df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
     for i, level in enumerate(path):
         df_tree = pd.DataFrame(columns=df_all_trees.columns)
-        if not agg_f:
-            dfg = df.groupby(path[i:]).sum(numerical_only=True)
-        else:
-            dfg = df.groupby(path[i:]).agg(agg_f)
+        dfg = df.groupby(path[i:]).agg(agg_f)
         dfg = dfg.reset_index()
         # Path label massaging
         df_tree["labels"] = dfg[level].copy().astype(str)
