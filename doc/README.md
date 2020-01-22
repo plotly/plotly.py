@@ -2,7 +2,7 @@
 
 ## Introduction: structure and required packages
 
-The `doc` directory contains the source files of the documentation of plotly.py. 
+The `doc` directory contains the source files of the documentation of plotly.py.
 It is composed of two parts:
 
 - inside the [`python/` directory](python), tutorials corresponding to https://plot.ly/python/
@@ -10,7 +10,7 @@ It is composed of two parts:
   the API reference documentation (hosted on https://plot.ly/python-api-reference/)
 
 Python packages required to build the doc are listed in
-[`requirements.txt`](requirements.txt) in the `doc` directory. 
+[`requirements.txt`](requirements.txt) in the `doc` directory.
 
 ## Tutorials (`python` directory)
 
@@ -21,15 +21,15 @@ For small edits (e.g., correcting typos) to an existing tutorial, you can simply
 page on Github" link at the top right of the page (e.g. clicking on this link
 on https://plot.ly/python/bar-charts/ will take you to
 https://github.com/plotly/plotly.py/edit/doc-prod/doc/python/bar-charts.md,
-where you can edit the page on Github). 
+where you can edit the page on Github).
 
 For more important edits where you need to run the notebook to check the output,
 clone the repository and setup an environment as described in the [main
 contributing notes](../contributing.md). If you're writing documentation at the
 same time as you are developing a feature, make sure to install with editable
-install (`pip install -e`, as described in [main 
+install (`pip install -e`, as described in [main
 contributing notes](../contributing.md)), so that you only need to restart
-the Jupyter kernel when you have changed the source code of the feature. 
+the Jupyter kernel when you have changed the source code of the feature.
 
 ### Branches
 
@@ -48,7 +48,7 @@ released, or which has just been included but not yet released.
 ### Guidelines
 
 We try to write short, standalone and (almost) self-explaining examples. Most
-examples should focus on a single feature. 
+examples should focus on a single feature.
 
 Checklist
 
@@ -81,17 +81,15 @@ in order to generate the documentation of the API. Sphinx uses the [reST markup
 language](https://www.sphinx-doc.org/en/2.0/usage/restructuredtext/basics.html).
 
 Run `make html` inside `apidoc` to build the API doc in the `_build/html`
-directory. 
+directory.
 
 Lists of objects to be documented are found in files corresponding to
 submodules, such as [`plotly.express.rst`](plotly.express.rst). When a new
 object is added to the exposed API, it needs to be added to the corresponding
-file to appear in the API doc.  
+file to appear in the API doc.
 
 Other files
 
 - `css` files are found in `_static`
 - Template files are found in `_templates`. `.rst` templates describe how the
-  autodoc of the different objects should look like.  
-
-
+  autodoc of the different objects should look like.
