@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to adjust axes properties in python. Includes examples of linear
+    description:
+      How to adjust axes properties in python. Includes examples of linear
       and logarithmic axes, axes titles, styling and coloring axes and grid lines,
       and more.
     display_as: file_settings
@@ -34,23 +35,24 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of Cartesian axes, namely [`go.layout.XAxis`](/python/reference/#layout-xaxis) and [`go.layout.YAxis`](python/reference/#layout-xaxis). Other kinds of axes are described in other tutorials:
+This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely [`go.layout.XAxis`](/python/reference/#layout-xaxis) and [`go.layout.YAxis`](python/reference/#layout-xaxis). Other kinds of axes are described in other tutorials:
+
 - [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/#layout-scene)
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/#layout-polar)
 - [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/#layout-ternary)
-- For Geo axes, see [this choropleth example](/python/choropleth-maps/#world-choropleth-map). The axis object is [`go.layout.Geo`](/python/reference/#layout-geo)
-- For Mapbox axes, see the different mapbox tutorials in the [Maps page](/python/maps/). The axis object is [`go.layout.Mapbox`](/python/reference/#layout-mapbox)
-- Color axes are described in the [color scales tutorial](/python/colorscales/).
+- [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/#layout-geo)
+- [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/#layout-mapbox)
+- [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/#layout-coloraxis).
 
 **See also** the tutorials on [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
 
-The different types of Cartesian axes are 
+The different types of Cartesian axes are
+
 - 'linear'
 - 'log' (see the [example below](#logarithmic-axes))
 - 'date' (see the [tutorial on timeseries](/python/time-series/))
 - 'category' (see for example [Bar Charts](/python/bar-charts/))
-- 'multicategory' (see the [example below](#subcategory-(multicategory)-axes) ))
-
+- 'multicategory' (see the [example below](<#subcategory-(multicategory)-axes>))
 
 #### Logarithmic Axes
 
@@ -92,7 +94,7 @@ fig.show()
 
 ### Forcing an axis to be categorical
 
-If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, with the exception of string of numbers, in which case the axis is linear. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`. 
+If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, with the exception of string of numbers, in which case the axis is linear. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
 
 ```python
 import plotly.express as px
@@ -150,16 +152,15 @@ fig.update_layout(title_text="Multi-category axis",)
 fig.show()
 ```
 
-
 #### Toggling Axes Lines, Ticks, Labels, and Autorange
 
-The different groups of Cartesian axes properties are 
+The different groups of Cartesian axes properties are
+
 - tick values (locations of tick marks) and tick labels. Tick labels are placed at tick values.
 - lines: grid lines (passing through tick values), axis lines, zero lines
 - title of the axis
 - range of the axis
 - domain of the axis
-
 
 #### Tick Placement, Color, and Style
 
@@ -168,7 +169,6 @@ The different groups of Cartesian axes properties are
 Axis tick marks are disabled by default for the default `plotly` theme, but they can easily be turned on by setting the `ticks` axis property to `"inside"` (to place ticks inside plotting area) or `"outside"` (to place ticks outside the plotting area).
 
 Here is an example of turning on inside x-axis and y-axis ticks in a faceted figure created using Plotly Express. Note how the `col` argument to `update_yaxes` is used to only turn on the y-axis ticks for the left-most subplot.
-
 
 ```python
 import plotly.express as px
@@ -265,7 +265,6 @@ fig.update_yaxes(showticklabels=False)
 fig.show()
 ```
 
-
 ##### Set axis label rotation and font
 
 The orientation of the axis tick mark labels is configured using the `tickangle` axis property. The value of `tickangle` is the angle of rotation, in the clockwise direction, of the labels from vertical in units of degrees. The font family, size, and color for the tick labels are stored under the `tickfont` axis property.
@@ -323,7 +322,6 @@ fig.update_layout(title_text="Apple Stock Price")
 
 fig.show()
 ```
-
 
 ### Axis lines: grid and zerolines
 
@@ -534,7 +532,6 @@ fig.update_yaxes(range=[3, 9])
 fig.show()
 ```
 
-
 ### Fixed Ratio Axes
 
 The `scaleanchor` and `scaleratio` axis properties can be used to force a fixed ratio of pixels per unit between two axes.
@@ -593,7 +590,7 @@ fig.show()
 
 ##### Decreasing the domain spanned by an axis
 
-In the example below, the x and y axis are anchored together, and the range of the `xaxis` is set manually. By default, plotly extends the range of the axis (overriding the `range` parameter) to fit in the figure `domain`. You can restrict the `domain`  to force the axis to span only the set range, by setting `constrain='domain'` as below.
+In the example below, the x and y axis are anchored together, and the range of the `xaxis` is set manually. By default, plotly extends the range of the axis (overriding the `range` parameter) to fit in the figure `domain`. You can restrict the `domain` to force the axis to span only the set range, by setting `constrain='domain'` as below.
 
 ```python
 import plotly.graph_objects as go
@@ -687,7 +684,7 @@ fig.show()
 
 ### Axis range for log axis type
 
-If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout). 
+If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.update_xaxes` or `fig.update_layout`. However, with `plotly.express` functions you pass directly the values of the range bounds (`plotly.express` then computes the appropriate values to pass to the figure layout).
 
 ```python
 import plotly.express as px

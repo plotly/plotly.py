@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description: How to create colormaped representations of USA counties by FIPS
       values in Python.
@@ -33,6 +33,12 @@ jupyter:
     permalink: python/county-choropleth/
     thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg
 ---
+
+### Deprecation warning
+
+
+This page describes a legacy "figure factory" method for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
+
 
 #### Required Packages
 `geopandas`, `pyshp` and `shapely` must be installed for this figure factory.
@@ -47,10 +53,10 @@ Run the following commands to install the correct versions of the following modu
 
 If you are using Windows, follow this post to properly install geopandas and dependencies: http://geoffboeing.com/2014/09/using-geopandas-windows/. If you are using Anaconda, do not use PIP to install the packages above. Instead use conda to install them:
 
-```
+<!-- #raw -->
 conda install plotly
 conda install geopandas
-```
+<!-- #endraw -->
 
 #### FIPS and Values
 Every US state and county has an assined ID regulated by the US Federal Government under the term FIPS (Federal Information Processing Standards) codes. There are state codes and county codes: the 2016 state and county FIPS codes can be found at the [US Census Website](https://www.census.gov/geographies/reference-files/2016/demo/popest/2016-fips.html).

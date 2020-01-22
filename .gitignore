@@ -44,3 +44,4 @@ plotly/tests/test_orca/images/*/tmp
 temp-plot.html
 .vscode
 doc/python/.ipynb_checkpoints
+doc/python/.mapbox_token

@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/scatter-mapbox.jpg
 ---
 
-#### Mapbox Access Token
+#### Mapbox Access Token and Base Map Configuration
 
 To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
