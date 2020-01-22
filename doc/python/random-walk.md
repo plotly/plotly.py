@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -23,7 +23,7 @@ jupyter:
     version: 3.6.7
   plotly:
     description: Learn how to use Python to make a Random Walk
-    display_as: statistics
+    display_as: advanced_opt
     has_thumbnail: false
     language: python
     layout: base
@@ -36,9 +36,7 @@ jupyter:
 
 A [random walk](https://en.wikipedia.org/wiki/Random_walk) can be thought of as a random process in which a token or a marker is randomly moved around some space, that is, a space with a metric used to compute distance. It is more commonly conceptualized in one dimension ($\mathbb{Z}$), two dimensions ($\mathbb{Z}^2$) or three dimensions ($\mathbb{Z}^3$) in Cartesian space, where $\mathbb{Z}$ represents the set of integers. In the visualizations below, we will be using [scatter plots](https://plot.ly/python/line-and-scatter/) as well as a colorscale to denote the time sequence of the walk.
 
-
 #### Random Walk in 1D
-
 
 The jitter in the data points along the x and y axes are meant to illuminate where the points are being drawn and what the tendancy of the random walk is.
 
@@ -137,6 +135,7 @@ fig.show()
 ```
 
 #### Advanced Tip
+
 We can formally think of a 1D random walk as a point jumping along the integer number line. Let $Z_i$ be a random variable that takes on the values +1 and -1. Let this random variable represent the steps we take in the random walk in 1D (where +1 means right and -1 means left). Also, as with the above visualizations, let us assume that the probability of moving left and right is just $\frac{1}{2}$. Then, consider the sum
 
 $$
@@ -164,4 +163,3 @@ $$
 $$
 
 Therefore, we expect our random walk to hover around $0$ regardless of how many steps we take in our walk.
-
