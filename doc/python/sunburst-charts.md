@@ -201,6 +201,24 @@ fig.update_layout(
 fig.show()
 ```
 
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+
+fig = go.Figure(go.Sunburst(
+        ids = df.ids,
+        labels = df.labels,
+        parents = df.parents))
+fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
+fig.show()
+```
+
 ### Sunburst chart with a continuous colorscale
 
 The example below visualizes a breakdown of sales (corresponding to sector width) and call success rate (corresponding to sector color) by region, county and salesperson level. For example, when exploring the data you can see that although the East region is behaving poorly, the Tyler county is still above average -- however, its performance is reduced by the poor success rate of salesperson GT. 

@@ -122,6 +122,20 @@ fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
 fig.show()
 ```
 
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow. In the example below we also force the text to be inside with `textposition`, otherwise text labels which do not fit are displayed outside of pie sectors.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia'")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside')
+fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
+fig.show()
+```
+
 #### Controlling text orientation inside pie sectors
 
 The `insidetextorientation` attribute controls the orientation of text inside sectors. With
