@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -37,13 +37,12 @@ jupyter:
 
 Plotly supports two different kinds of maps:
 
-1. **Mapbox maps** are tile-based maps. If your figure is created with a `px.scatter_mapbox`, `px.line_mapbox`, `px.choropleth_mapbox` or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermapbox`, `go.Choroplethmapbox` or `go.Densitymapbox`, the `layout.mapbox` object in your figure contains configuration information for the map itself.
+1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with a `px.scatter_mapbox`, `px.line_mapbox`, `px.choropleth_mapbox` or `px.density_mapbox` function or otherwise contains one or more traces of type `go.Scattermapbox`, `go.Choroplethmapbox` or `go.Densitymapbox`, the `layout.mapbox` object in your figure contains configuration information for the map itself.
 2. **Geo maps** are outline-based maps. If your figure is created with a `px.scatter_geo`, `px.line_geo` or `px.choropleth` function or otherwise contains one or more traces of type `go.Scattergeo` or `go.Choropleth`, the `layout.geo` object in your figure contains configuration information for the map itself.
 
 This page documents Geo outline-based maps, and the [Mapbox Layers documentation](/python/mapbox-layers/) describes how to configure Mapbox tile-based maps.
 
 **Note:** Plotly Express cannot create empty figures, so the examples below mostly create an "empty" map using `fig = go.Figure(go.Scattergeo())`. That said, every configuration option here is equally applicable to non-empty maps created with the Plotly Express `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions.
-
 
 ### Physical Base Maps
 
@@ -77,7 +76,6 @@ fig.show()
 
 ### Disabling Base Maps
 
-
 In certain cases, such as large scale [choropleth maps](/python/choropleth-maps/), the default physical map can be distracting. In this case the `layout.geo.visible` attribute can be set to `False` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
 
 ```python
@@ -97,7 +95,7 @@ fig.show()
 
 ### Cultural Base Maps
 
-In addition to physical base map features, a "cultural" base map is included which is composed of country borders and selected sub-country borders such as states. 
+In addition to physical base map features, a "cultural" base map is included which is composed of country borders and selected sub-country borders such as states.
 
 **Note and disclaimer:** cultural features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
 
@@ -121,10 +119,9 @@ fig.show()
 
 ### Map Projections
 
-Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space. 
+Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space.
 
 The available projections are `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'` and `'sinusoidal'`.
-
 
 ```python
 import plotly.graph_objects as go
@@ -176,7 +173,7 @@ fig.show()
 
 ### Named Map Scopes and Country Sub-Units
 
-In addition, the named "scope" of a map defines a sub-set of the earth's surface to draw. Each scope has a *default projection type, center and roll, as well as bounds*, and certain scopes contain country sub-unit cultural layers certain resolutions, such as `scope="north america"` at `resolution=50` which contains US state and Canadian province boundaries.
+In addition, the named "scope" of a map defines a sub-set of the earth's surface to draw. Each scope has a _default projection type, center and roll, as well as bounds_, and certain scopes contain country sub-unit cultural layers certain resolutions, such as `scope="north america"` at `resolution=50` which contains US state and Canadian province boundaries.
 
 The available scopes are: `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`.
 
