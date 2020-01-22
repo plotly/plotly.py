@@ -1010,10 +1010,10 @@ def build_dataframe(args, attrables, array_attrables):
 def _check_dataframe_all_leaves(df):
     df_sorted = df.sort_values(by=list(df.columns))
     null_mask = df_sorted.isnull()
-    null_indices = null_mask.any(axis=1).to_numpy().nonzero()[0]
+    null_indices = np.nonzero(null_mask.any(axis=1))[0]
     for null_row_index in null_indices:
         row = null_mask.iloc[null_row_index]
-        indices = row.to_numpy().nonzero()[0]
+        indices = np.nonzero(row)[0]
         if not row[indices[0] :].all():
             raise ValueError(
                 "None entries cannot have not-None children",
