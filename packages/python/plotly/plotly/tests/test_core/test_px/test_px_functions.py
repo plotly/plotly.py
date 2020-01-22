@@ -207,8 +207,7 @@ def test_sunburst_treemap_with_path_color():
 
     # Discrete color
     fig = px.sunburst(df, path=path, color="vendors")
-    assert len(np.unique(fig.data[0].marker.colors[:8])) == 8
-    assert len(np.unique(fig.data[0].marker.colors[8:])) == 1
+    assert len(np.unique(fig.data[0].marker.colors)) == 9
 
 
 def test_sunburst_treemap_with_path_non_rectangular():

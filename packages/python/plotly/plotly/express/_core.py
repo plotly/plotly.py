@@ -1037,6 +1037,7 @@ def process_dataframe_hierarchy(args):
     df = args["data_frame"]
     path = args["path"][::-1]
     _check_dataframe_all_leaves(df[path[::-1]])
+    discrete_color = False
 
     if args["color"] and args["color"] in path:
         series_to_copy = df[args["color"]]
@@ -1081,6 +1082,7 @@ def process_dataframe_hierarchy(args):
     if args["color"]:
         if df[args["color"]].dtype.kind not in "bifc":
             aggfunc_color = aggfunc_discrete
+            discrete_color = True
         elif not aggfunc_color:
 
             def aggfunc_continuous(x):
@@ -1122,7 +1124,7 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
-    if args["color"]:
+    if args["color"] and discrete_color:
         df_all_trees = df_all_trees.sort_values(by=args["color"])
 
     # Now modify arguments
