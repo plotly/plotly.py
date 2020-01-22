@@ -4458,11 +4458,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         Custom __dir__ that handles dynamic subplot properties
         """
         # Include any active subplot values
-        if six.PY3:
-            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
-                self._subplotid_props
-            )
-        else:
+        if six.PY2:
 
             def get_attrs(obj):
                 import types
@@ -4493,6 +4489,11 @@ class BaseLayoutType(BaseLayoutHierarchyType):
                 return list(attrs)
 
             return dir2(self) + sorted(self._subplotid_props)
+        else:
+
+            return list(super(BaseLayoutHierarchyType, self).__dir__()) + sorted(
+                self._subplotid_props
+            )
 
 
 class BaseTraceHierarchyType(BasePlotlyType):

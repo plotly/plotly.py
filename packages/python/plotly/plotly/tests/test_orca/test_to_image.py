@@ -7,7 +7,7 @@ import pytest
 import sys
 import pandas as pd
 
-if sys.version_info.major == 3 and sys.version_info.minor >= 3:
+if sys.version_info >= (3, 3):
     from unittest.mock import MagicMock
 else:
     from mock import MagicMock
