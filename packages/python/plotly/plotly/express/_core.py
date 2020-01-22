@@ -1020,10 +1020,11 @@ def process_dataframe_hierarchy(args):
         df[args["color"]] = series_to_copy
     # ------------ Define aggregation functions --------------------------------
     def aggfunc_discrete(x):
-        if len(x) == 1:
-            return x.iloc[0]
+        uniques = x.unique()
+        if len(uniques) == 1:
+            return uniques[0]
         else:
-            return ""
+            return "(?)"
 
     agg_f = {}
     aggfunc_color = None
@@ -1086,11 +1087,13 @@ def process_dataframe_hierarchy(args):
         if i < len(path) - 1:
             j = i + 1
             while j < len(path):
-                df_tree["parent"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                df_tree["parent"] = (
+                    dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                )
                 df_tree["id"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["id"]
                 j += 1
 
-        df_tree["parent"] = df_tree["parent"].str.rstrip('/')
+        df_tree["parent"] = df_tree["parent"].str.rstrip("/")
         if cols:
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)

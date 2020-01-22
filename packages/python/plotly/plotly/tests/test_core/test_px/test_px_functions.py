@@ -203,7 +203,7 @@ def test_sunburst_treemap_with_path_color():
     fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
     custom = fig.data[0].customdata.ravel()
     assert np.all(custom[:8] == df["hover"])
-    assert np.all(custom[8:] == "")
+    assert np.all(custom[8:] == "(?)")
 
     # Discrete color
     fig = px.sunburst(df, path=path, color="vendors")
