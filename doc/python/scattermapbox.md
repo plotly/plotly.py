@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to make scatter plots on Mapbox maps in Python.
     display_as: maps
@@ -58,31 +58,21 @@ fig.show()
 import plotly.graph_objects as go
 
 mapbox_access_token = open(".mapbox_token").read()
-
 fig = go.Figure(go.Scattermapbox(
         lat=['45.5017'],
         lon=['-73.5673'],
         mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=14
-        ),
-        text=['Montreal'],
-    ))
+        marker=dict(size=14),
+        text=['Montreal']))
 
 fig.update_layout(
     hovermode='closest',
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
-        center=go.layout.mapbox.Center(
-            lat=45,
-            lon=-73
-        ),
+        center=dict(lat=45, lon=-73),
         pitch=0,
-        zoom=5
-    )
-)
-
+        zoom=5))
 fig.show()
 ```
 
@@ -94,41 +84,32 @@ import plotly.graph_objects as go
 mapbox_access_token = open(".mapbox_token").read()
 
 fig = go.Figure(go.Scattermapbox(
-        lat=['38.91427','38.91538','38.91458',
+    lat=['38.91427','38.91538','38.91458',
              '38.92239','38.93222','38.90842',
              '38.91931','38.93260','38.91368',
              '38.88516','38.921894','38.93206',
              '38.91275'],
-        lon=['-77.02827','-77.02013','-77.03155',
+    lon=['-77.02827','-77.02013','-77.03155',
              '-77.04227','-77.02854','-77.02419',
              '-77.02518','-77.03304','-77.04509',
              '-76.99656','-77.042438','-77.02821',
              '-77.01239'],
-        mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=9
-        ),
-        text=["The coffee bar","Bistro Bohem","Black Cat",
-             "Snap","Columbia Heights Coffee","Azi's Cafe",
-             "Blind Dog Cafe","Le Caprice","Filter",
-             "Peregrine","Tryst","The Coupe",
-             "Big Bear Cafe"],
-    ))
+    mode='markers',
+    marker=dict(size=9),
+    text=["The coffee bar","Bistro Bohem","Black Cat",
+          "Snap","Columbia Heights Coffee","Azi's Cafe",
+          "Blind Dog Cafe","Le Caprice","Filter",
+          "Peregrine","Tryst","The Coupe", "Big Bear Cafe"]))
 
 fig.update_layout(
     autosize=True,
     hovermode='closest',
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
-        center=go.layout.mapbox.Center(
-            lat=38.92,
-            lon=-77.07
-        ),
+        center=dict(lat=38.92, lon=-77.07),
         pitch=0,
-        zoom=10
-    ),
-)
+        zoom=10))
 
 fig.show()
 ```
@@ -147,49 +128,33 @@ site_lon = df.lon
 locations_name = df.text
 
 fig = go.Figure()
-
 fig.add_trace(go.Scattermapbox(
         lat=site_lat,
         lon=site_lon,
         mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=17,
-            color='rgb(255, 0, 0)',
-            opacity=0.7
-        ),
+        marker=dict(size=17, color='rgb(255, 0, 0)', opacity=0.7),
         text=locations_name,
-        hoverinfo='text'
-    ))
+        hoverinfo='text'))
 
 fig.add_trace(go.Scattermapbox(
         lat=site_lat,
         lon=site_lon,
         mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=8,
-            color='rgb(242, 177, 172)',
-            opacity=0.7
-        ),
-        hoverinfo='none'
-    ))
+        marker=dict(size=8, color='rgb(242, 177, 172)', opacity=0.7),
+        hoverinfo='none'))
 
 fig.update_layout(
     title='Nuclear Waste Sites on Campus',
     autosize=True,
     hovermode='closest',
     showlegend=False,
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
-        center=go.layout.mapbox.Center(
-            lat=38,
-            lon=-94
-        ),
+        center=dict(lat=38, lon=-94),
         pitch=0,
         zoom=3,
-        style='light'
-    ),
-)
+        style='light'))
 
 fig.show()
 ```
@@ -212,16 +177,14 @@ import plotly.graph_objects as go
 token = open(".mapbox_token").read() # you need your own token
 
 fig = go.Figure(go.Scattermapbox(
-    mode = "markers+text+lines",
-    lon = [-75, -80, -50], lat = [45, 20, -20],
-    marker = {'size': 20, 'symbol': ["bus", "harbor", "airport"]},
-    text = ["Bus", "Harbor", "airport"],textposition = "bottom right"))
+    mode="markers+text+lines",
+    lon=[-75, -80, -50], lat=[45, 20, -20],
+    marker={'size': 20, 'symbol': ["bus", "harbor", "airport"]},
+    text=["Bus", "Harbor", "airport"],textposition = "bottom right"))
 
 fig.update_layout(
-    mapbox = {
-        'accesstoken': token,
-        'style': "outdoors", 'zoom': 0.7},
-    showlegend = False)
+    mapbox={'accesstoken': token, 'style': "outdoors", 'zoom': 0.7},
+    showlegend=False)
 
 fig.show()
 ```

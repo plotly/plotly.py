@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -38,14 +38,12 @@ jupyter:
 ```python
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
 import pandas as pd
 
 # read in volcano database data
 df = pd.read_csv(
     "https://raw.githubusercontent.com/plotly/datasets/master/volcano_db.csv",
-    encoding="iso-8859-1",
-)
+    encoding="iso-8859-1")
 
 # frequency of Country
 freq = df
@@ -70,20 +68,15 @@ fig.add_trace(
                   hoverinfo="text",
                   showlegend=False,
                   marker=dict(color="crimson", size=4, opacity=0.8)),
-    row=1, col=1
-)
+    row=1, col=1)
 
 # Add locations bar chart
 fig.add_trace(
     go.Bar(x=freq["x"][0:10],y=freq["Country"][0:10], marker=dict(color="crimson"), showlegend=False),
-    row=1, col=2
-)
+    row=1, col=2)
 
 # Add 3d surface of volcano
-fig.add_trace(
-    go.Surface(z=df_v.values.tolist(), showscale=False),
-    row=2, col=2
-)
+fig.add_trace(go.Surface(z=df_v.values.tolist(), showscale=False), row=2, col=2)
 
 # Update geo subplot properties
 fig.update_geos(
@@ -91,8 +84,7 @@ fig.update_geos(
     landcolor="white",
     oceancolor="MidnightBlue",
     showocean=True,
-    lakecolor="LightBlue"
-)
+    lakecolor="LightBlue")
 
 # Rotate x-axis labels
 fig.update_xaxes(tickangle=45)
@@ -101,17 +93,13 @@ fig.update_xaxes(tickangle=45)
 fig.update_layout(
     template="plotly_dark",
     margin=dict(r=10, t=25, b=40, l=60),
-    annotations=[
-        go.layout.Annotation(
-            text="Source: NOAA",
-            showarrow=False,
-            xref="paper",
-            yref="paper",
-            x=0,
-            y=0)
-    ]
-)
-
+    annotations=[dict(
+        text="Source: NOAA",
+        showarrow=False,
+        xref="paper",
+        yref="paper",
+        x=0,
+        y=0)])
 fig.show()
 ```
 

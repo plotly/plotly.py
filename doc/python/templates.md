@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -23,14 +23,14 @@ jupyter:
     version: 3.7.3
   plotly:
     description: Theming and templates with plotly with Python
-    language: python
     display_as: file_settings
-    name: Theming and templates
-    page_type: u-guide
+    language: python
     layout: base
+    name: Theming and templates
+    order: 7
+    page_type: u-guide
     permalink: python/templates/
     thumbnail: thumbnail/theming-and-templates.png
-    order: 7
 ---
 
 ### Theming and templates
@@ -180,8 +180,7 @@ symbol_template = go.layout.Template()
 symbol_template.data.scatter = [
     go.Scatter(marker=dict(symbol="diamond", size=10)),
     go.Scatter(marker=dict(symbol="square", size=10)),
-    go.Scatter(marker=dict(symbol="circle", size=10)),
-]
+    go.Scatter(marker=dict(symbol="circle", size=10))]
 
 fig = go.Figure()
 fig.update_layout(template=symbol_template)
@@ -196,7 +195,7 @@ Note that because we built the template with a list of 3 scatter trace graph obj
 
 #### Theming object tuple properties
 
-Some properties in the figure hierarchy are specified as tuples of objects. For example, the text annotations for a graph object figure are stored as a tuple of `go.layout.Annotation` objects in the `annotations` property of the figure's layout.
+Some properties in the figure hierarchy are specified as tuples of objects. For example, the text annotations for a graph object figure can be stored as a tuple of `go.layout.Annotation` objects in the `annotations` property of the figure's layout.
 
 To use a template to configure the default properties of all of the elements in an object tuple property (e.g. `layout.annotations`), use the `*defaults` property in the template that corresponds to the tuple property (e.g. `layout.template.layout.annotationdefaults`). The `*defaults` template property should be set to a single graph object that matches the type of the elements of the corresponding tuple. The properties of this `*defaults` object in the template will be applied to all elements of the object tuple in the figure that the template is applied to.
 
@@ -206,16 +205,14 @@ Here is an example that creates a template that specifies the default annotation
 import plotly.graph_objects as go
 
 annotation_template = go.layout.Template()
-annotation_template.layout.annotationdefaults = go.layout.Annotation(font=dict(color="crimson"))
+annotation_template.layout.annotationdefaults = dict(font=dict(color="crimson"))
 
 fig = go.Figure()
 fig.update_layout(
      template=annotation_template,
      annotations=[
          go.layout.Annotation(text="Look Here", x=1, y=1),
-         go.layout.Annotation(text="Look There", x=2, y=2)
-     ]
- )
+         dict(text="Look There", x=2, y=2)])
 fig.show()
 ```
 
@@ -232,7 +229,7 @@ import plotly.graph_objects as go
 
 draft_template = go.layout.Template()
 draft_template.layout.annotations = [
-    go.layout.Annotation(
+    dict(
         name="draft watermark",
         text="DRAFT",
         textangle=-30,
@@ -242,9 +239,7 @@ draft_template.layout.annotations = [
         yref="paper",
         x=0.5,
         y=0.5,
-        showarrow=False,
-    )
-]
+        showarrow=False)]
 
 fig=go.Figure()
 fig.update_layout(template=draft_template)
@@ -262,7 +257,7 @@ import plotly.graph_objects as go
 
 draft_template = go.layout.Template()
 draft_template.layout.annotations = [
-    go.layout.Annotation(
+    dict(
         name="draft watermark",
         text="DRAFT",
         textangle=-30,
@@ -272,20 +267,12 @@ draft_template.layout.annotations = [
         yref="paper",
         x=0.5,
         y=0.5,
-        showarrow=False,
-    )
-]
+        showarrow=False)]
 
 fig = go.Figure()
 fig.update_layout(
     template=draft_template,
-    annotations=[
-        go.layout.Annotation(
-            templateitemname="draft watermark",
-            text="CONFIDENTIAL",
-        )
-    ]
-)
+    annotations=[dict(templateitemname="draft watermark", text="CONFIDENTIAL")])
 fig.show()
 ```
 
@@ -301,7 +288,7 @@ import plotly.io as pio
 
 pio.templates["draft"] = go.layout.Template(
     layout_annotations=[
-        go.layout.Annotation(
+        dict(
             name="draft watermark",
             text="DRAFT",
             textangle=-30,
@@ -311,10 +298,7 @@ pio.templates["draft"] = go.layout.Template(
             yref="paper",
             x=0.5,
             y=0.5,
-            showarrow=False,
-        )
-    ]
-)
+            showarrow=False)])
 
 fig = go.Figure()
 fig.update_layout(template="draft")
@@ -331,7 +315,7 @@ import plotly.io as pio
 
 pio.templates["draft"] = go.layout.Template(
     layout_annotations=[
-        go.layout.Annotation(
+        dict(
             name="draft watermark",
             text="DRAFT",
             textangle=-30,
@@ -341,12 +325,9 @@ pio.templates["draft"] = go.layout.Template(
             yref="paper",
             x=0.5,
             y=0.5,
-            showarrow=False,
-        )
-    ]
-)
-pio.templates.default = "draft"
+            showarrow=False)])
 
+pio.templates.default = "draft"
 fig = go.Figure()
 fig.show()
 ```
@@ -364,23 +345,19 @@ import plotly.graph_objects as go
 import plotly.io as pio
 
 pio.templates["draft"] = go.layout.Template(
-    layout_annotations=[
-        go.layout.Annotation(
-            name="draft watermark",
-            text="DRAFT",
-            textangle=-30,
-            opacity=0.1,
-            font=dict(color="black", size=100),
-            xref="paper",
-            yref="paper",
-            x=0.5,
-            y=0.5,
-            showarrow=False,
-        )
-    ]
-)
-pio.templates.default = "plotly+draft"
+    layout_annotations=[dict(
+        name="draft watermark",
+        text="DRAFT",
+        textangle=-30,
+        opacity=0.1,
+        font=dict(color="black", size=100),
+        xref="paper",
+        yref="paper",
+        x=0.5,
+        y=0.5,
+        showarrow=False)])
 
+pio.templates.default = "plotly+draft"
 fig = go.Figure()
 fig.show()
 ```
@@ -392,8 +369,7 @@ import plotly.io as pio
 import plotly.express as px
 
 pio.templates["draft"] = go.layout.Template(
-    layout_annotations=[
-        go.layout.Annotation(
+    layout_annotations=[dict(
             name="draft watermark",
             text="DRAFT",
             textangle=-30,
@@ -403,10 +379,8 @@ pio.templates["draft"] = go.layout.Template(
             yref="paper",
             x=0.5,
             y=0.5,
-            showarrow=False,
-        )
-    ]
-)
+            showarrow=False)])
+
 pio.templates.default = "plotly+draft"
 
 df = px.data.gapminder()
@@ -435,7 +409,7 @@ import plotly.io as pio
 
 pio.templates["draft"] = go.layout.Template(
     layout_annotations=[
-        go.layout.Annotation(
+        dict(
             name="draft watermark",
             text="DRAFT",
             textangle=-30,
@@ -445,10 +419,7 @@ pio.templates["draft"] = go.layout.Template(
             yref="paper",
             x=0.5,
             y=0.5,
-            showarrow=False,
-        )
-    ]
-)
+            showarrow=False)])
 ```
 
 ---

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -340,10 +340,10 @@ This template string can include `variables` in %{variable} format, `numbers` in
 import plotly.graph_objects as go
 
 fig = go.Figure(go.Pie(
-    values = [40000000, 20000000, 30000000, 10000000],
-    labels = ["Wages", "Operating expenses", "Cost of sales", "Insurance"],
-    texttemplate = "%{label}: %{value:$,s} <br>(%{percent})",
-    textposition = "inside"))
+    values=[40000000, 20000000, 30000000, 10000000],
+    labels=["Wages", "Operating expenses", "Cost of sales", "Insurance"],
+    texttemplate="%{label}: %{value:$,s} <br>(%{percent})",
+    textposition="inside"))
 
 fig.show()
 ```
@@ -356,15 +356,14 @@ The following example uses [textfont](https://plot.ly/python/reference/#scattert
 import plotly.graph_objects as go
 
 fig = go.Figure(go.Scatterternary(
-    a = [3, 2, 5],
-    b = [2, 5, 2],
-    c = [5, 2, 2],
-    mode = "markers+text",
-    text = ["A", "B", "C"],
-    texttemplate = "%{text}<br>(%{a:.2f}, %{b:.2f}, %{c:.2f})",
-    textposition = "bottom center",
-    textfont = {'family': "Times", 'size': [18, 21, 20], 'color': ["IndianRed", "MediumPurple", "DarkOrange"]}
-))
+    a=[3, 2, 5],
+    b=[2, 5, 2],
+    c=[5, 2, 2],
+    mode="markers+text",
+    text=["A", "B", "C"],
+    texttemplate="%{text}<br>(%{a:.2f}, %{b:.2f}, %{c:.2f})",
+    textposition="bottom center",
+    textfont={'family': "Times", 'size': [18, 21, 20], 'color': ["IndianRed", "MediumPurple", "DarkOrange"]}))
 
 fig.show()
 ```
@@ -380,23 +379,22 @@ from plotly import graph_objects as go
 fig = go.Figure()
 
 fig.add_trace(go.Funnel(
-    name = 'Montreal',
-    orientation = "h",
-    y = ["2018-01-01", "2018-07-01", "2019-01-01", "2020-01-01"],
-    x = [100, 60, 40, 20],
-    textposition = "inside",
-    texttemplate = "%{y| %a. %_d %b %Y}"))
+    name='Montreal',
+    orientation="h",
+    y=["2018-01-01", "2018-07-01", "2019-01-01", "2020-01-01"],
+    x=[100, 60, 40, 20],
+    textposition="inside",
+    texttemplate="%{y| %a. %_d %b %Y}"))
 
 fig.add_trace(go.Funnel(
-    name = 'Vancouver',
-    orientation = "h",
-    y = ["2018-01-01", "2018-07-01", "2019-01-01", "2020-01-01"],
-    x = [90, 70, 50, 10],
-    textposition = "inside",
-    textinfo = "label"))
+    name='Vancouver',
+    orientation="h",
+    y=["2018-01-01", "2018-07-01", "2019-01-01", "2020-01-01"],
+    x=[90, 70, 50, 10],
+    textposition="inside",
+    textinfo="label"))
 
-fig.update_layout(yaxis = {'type': 'date'})
-
+fig.update_layout(yaxis={'type': 'date'})
 fig.show()
 ```
 

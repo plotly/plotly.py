@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to format axes ticks in Python with Plotly.
     display_as: file_settings
@@ -42,17 +42,12 @@ import plotly.graph_objects as go
 
 fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
-))
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
 
-fig.update_layout(
-    xaxis = dict(
-        tickmode = 'linear',
-        tick0 = 0.5,
-        dtick = 0.75
-    )
-)
-
+fig.update_layout(xaxis = dict(
+    tickmode = 'linear',
+    tick0 = 0.5,
+    dtick = 0.75))
 fig.show()
 ```
 
@@ -66,16 +61,12 @@ import plotly.graph_objects as go
 
 go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
-))
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
 
-fig.update_layout(
-    xaxis = dict(
-        tickmode = 'array',
-        tickvals = [1, 3, 5, 7, 9, 11],
-        ticktext = ['One', 'Three', 'Five', 'Seven', 'Nine', 'Eleven']
-    )
-)
+fig.update_layout(xaxis = dict(
+    tickmode = 'array',
+    tickvals = [1, 3, 5, 7, 9, 11],
+    ticktext = ['One', 'Three', 'Five', 'Seven', 'Nine', 'Eleven']))
 
 fig.show()
 ```
@@ -90,11 +81,9 @@ import plotly.graph_objects as go
 
 go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
-))
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
 
 fig.update_layout(yaxis_tickformat = '%')
-
 fig.show()
 ```
 
@@ -105,20 +94,14 @@ For more date/time formatting types, see: https://github.com/d3/d3-time-format/b
 
 ```python
 import plotly.graph_objects as go
-
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
-fig = go.Figure(go.Scatter(
-    x = df['Date'],
-    y = df['AAPL.High'],
-))
-
+fig = go.Figure(go.Scatter(x = df['Date'], y = df['AAPL.High']))
 fig.update_layout(
     title = 'Time Series with Custom Date-Time Format',
-    xaxis_tickformat = '%d %B (%a)<br>%Y'
-)
+    xaxis_tickformat = '%d %B (%a)<br>%Y')
 
 fig.show()
 ```
@@ -130,16 +113,9 @@ import plotly.graph_objects as go
 
 fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [68000, 52000, 60000, 20000, 95000, 40000, 60000, 79000, 74000, 42000, 20000, 90000]
-))
+    y = [68000, 52000, 60000, 20000, 95000, 40000, 60000, 79000, 74000, 42000, 20000, 90000]))
 
-fig.update_layout(
-    yaxis = dict(
-        showexponent = 'all',
-        exponentformat = 'e'
-    )
-)
-
+fig.update_layout(yaxis = dict(showexponent = 'all', exponentformat = 'e'))
 fig.show()
 ```
 
@@ -147,16 +123,11 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
-fig = go.Figure(go.Scatter(
-    x = df['Date'],
-    y = df['mavg']
-))
-
+fig = go.Figure(go.Scatter(x = df['Date'], y = df['mavg']))
 fig.update_layout(
     xaxis_tickformatstops = [
         dict(dtickrange=[None, 1000], value="%H:%M:%S.%L ms"),
@@ -166,9 +137,7 @@ fig.update_layout(
         dict(dtickrange=[86400000, 604800000], value="%e. %b d"),
         dict(dtickrange=[604800000, "M1"], value="%e. %b w"),
         dict(dtickrange=["M1", "M12"], value="%b '%y M"),
-        dict(dtickrange=["M12", None], value="%Y Y")
-    ]
-)
+        dict(dtickrange=["M12", None], value="%Y Y")])
 
 fig.show()
 ```
@@ -178,17 +147,12 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-fig = go.Figure(go.Bar(
-    x = ["apples", "oranges", "pears"],
-    y = [1, 2, 3]
-))
-
+fig = go.Figure(go.Bar(x = ["apples", "oranges", "pears"], y = [1, 2, 3]))
 fig.update_xaxes(
     showgrid=True,
     ticks="outside",
     tickson="boundaries",
-    ticklen=20
-)
+    ticklen=20)
 
 fig.show()
 ```

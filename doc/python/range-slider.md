@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.2
+    version: 3.7.3
   plotly:
     description: Now you can implement range sliders and selectors in your Plotly
       graphs purely with python!
@@ -48,18 +48,14 @@ df.columns = [col.replace("AAPL.", "") for col in df.columns]
 
 # Create figure
 fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(x=list(df.Date), y=list(df.High)))
+fig.add_trace(go.Scatter(x=list(df.Date), y=list(df.High)))
 
 # Set title
-fig.update_layout(
-    title_text="Time series with range slider and selectors"
-)
+fig.update_layout(title_text="Time series with range slider and selectors")
 
 # Add range slider
 fig.update_layout(
-    xaxis=go.layout.XAxis(
+    xaxis=dict(
         rangeselector=dict(
             buttons=list([
                 dict(count=1,
@@ -78,15 +74,9 @@ fig.update_layout(
                      label="1y",
                      step="year",
                      stepmode="backward"),
-                dict(step="all")
-            ])
-        ),
-        rangeslider=dict(
-            visible=True
-        ),
-        type="date"
-    )
-)
+                dict(step="all")])),
+        rangeslider=dict(visible=True),
+        type="date"))
 
 fig.show()
 ```
@@ -111,31 +101,26 @@ fig.add_trace(go.Scatter(
     name="var0",
     text=["8", "3", "2", "10", "5", "5", "6", "8", "3", "3", "7", "5", "10", "10", "9",
           "14"],
-    yaxis="y",
-))
+    yaxis="y"))
 
 fig.add_trace(go.Scatter(
     x=["2015-04-13", "2015-05-13", "2015-06-08", "2015-08-05", "2016-02-25"],
     y=["53.0", "69.0", "89.0", "41.0", "41.0"],
     name="var1",
     text=["53.0", "69.0", "89.0", "41.0", "41.0"],
-    yaxis="y2",
-))
+    yaxis="y2"))
 
 fig.add_trace(go.Scatter(
     x=["2013-01-29", "2013-02-26", "2013-04-19", "2013-07-02", "2013-08-27",
        "2013-10-22",
        "2014-01-20", "2014-04-09", "2014-05-05", "2014-07-01", "2014-09-30",
-       "2015-02-09",
-       "2015-04-13", "2015-06-08", "2016-02-25"],
+       "2015-02-09", "2015-04-13", "2015-06-08", "2016-02-25"],
     y=["9.6", "4.6", "2.7", "8.3", "18", "7.3", "3", "7.5", "1.0", "0.5", "2.8", "9.2",
        "13", "5.8", "6.9"],
     name="var2",
     text=["9.6", "4.6", "2.7", "8.3", "18", "7.3", "3", "7.5", "1.0", "0.5", "2.8",
-          "9.2",
-          "13", "5.8", "6.9"],
-    yaxis="y3",
-))
+          "9.2", "13", "5.8", "6.9"],
+    yaxis="y3"))
 
 fig.add_trace(go.Scatter(
     x=["2013-01-29", "2013-02-26", "2013-04-19", "2013-07-02", "2013-08-27",
@@ -147,10 +132,8 @@ fig.add_trace(go.Scatter(
        "7.2", "7.2", "8.0"],
     name="var3",
     text=["6.9", "7.5", "7.3", "7.3", "6.9", "7.1", "8", "7.8", "7.4", "7.9", "7.9",
-          "7.6",
-          "7.2", "7.2", "8.0"],
-    yaxis="y4",
-))
+          "7.6", "7.2", "7.2", "8.0"],
+    yaxis="y4"))
 
 fig.add_trace(go.Scatter(
     x=["2013-02-26", "2013-07-02", "2013-09-26", "2013-10-22", "2013-12-04",
@@ -159,8 +142,7 @@ fig.add_trace(go.Scatter(
     y=["290", "1078", "263", "407", "660", "740", "33", "374", "95", "734", "3000"],
     name="var4",
     text=["290", "1078", "263", "407", "660", "740", "33", "374", "95", "734", "3000"],
-    yaxis="y5",
-))
+    yaxis="y5"))
 
 # style all the traces
 fig.update_traces(
@@ -168,13 +150,12 @@ fig.update_traces(
     line={"width": 0.5},
     marker={"size": 8},
     mode="lines+markers",
-    showlegend=False
-)
+    showlegend=False)
 
 # Add annotations
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x="2013-06-01",
             y=0,
             arrowcolor="rgba(63, 81, 181, 0.2)",
@@ -184,9 +165,8 @@ fig.update_layout(
             text="state1",
             xref="x",
             yanchor="bottom",
-            yref="y"
-        ),
-        go.layout.Annotation(
+            yref="y"),
+        dict(
             x="2014-09-13",
             y=0,
             arrowcolor="rgba(76, 175, 80, 0.1)",
@@ -196,15 +176,12 @@ fig.update_layout(
             text="state2",
             xref="x",
             yanchor="bottom",
-            yref="y"
-        )
-    ],
-)
+            yref="y")])
 
 # Add shapes
 fig.update_layout(
     shapes=[
-        go.layout.Shape(
+        dict(
             fillcolor="rgba(63, 81, 181, 0.2)",
             line={"width": 0},
             type="rect",
@@ -213,9 +190,8 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=0.95,
-            yref="paper"
-        ),
-        go.layout.Shape(
+            yref="paper"),
+        dict(
             fillcolor="rgba(76, 175, 80, 0.1)",
             line={"width": 0},
             type="rect",
@@ -224,23 +200,18 @@ fig.update_layout(
             xref="x",
             y0=0,
             y1=0.95,
-            yref="paper"
-        )
-    ]
-)
+            yref="paper")])
 
 # Update axes
 fig.update_layout(
-    xaxis=go.layout.XAxis(
+    xaxis=dict(
         autorange=True,
         range=["2012-10-31 18:36:37.3129", "2016-05-10 05:23:22.6871"],
         rangeslider=dict(
             autorange=True,
-            range=["2012-10-31 18:36:37.3129", "2016-05-10 05:23:22.6871"]
-        ),
-        type="date"
-    ),
-    yaxis=go.layout.YAxis(
+            range=["2012-10-31 18:36:37.3129", "2016-05-10 05:23:22.6871"]),
+        type="date"),
+    yaxis=dict(
         anchor="x",
         autorange=True,
         domain=[0, 0.2],
@@ -254,9 +225,8 @@ fig.update_layout(
         ticks="",
         titlefont={"color": "#673ab7"},
         type="linear",
-        zeroline=False
-    ),
-    yaxis2=go.layout.YAxis(
+        zeroline=False),
+    yaxis2=dict(
         anchor="x",
         autorange=True,
         domain=[0.2, 0.4],
@@ -270,9 +240,8 @@ fig.update_layout(
         ticks="",
         titlefont={"color": "#E91E63"},
         type="linear",
-        zeroline=False
-    ),
-    yaxis3=go.layout.YAxis(
+        zeroline=False),
+    yaxis3=dict(
         anchor="x",
         autorange=True,
         domain=[0.4, 0.6],
@@ -287,9 +256,8 @@ fig.update_layout(
         title="mg/L",
         titlefont={"color": "#795548"},
         type="linear",
-        zeroline=False
-    ),
-    yaxis4=go.layout.YAxis(
+        zeroline=False),
+    yaxis4=dict(
         anchor="x",
         autorange=True,
         domain=[0.6, 0.8],
@@ -304,9 +272,8 @@ fig.update_layout(
         title="mmol/L",
         titlefont={"color": "#607d8b"},
         type="linear",
-        zeroline=False
-    ),
-    yaxis5=go.layout.YAxis(
+        zeroline=False),
+    yaxis5=dict(
         anchor="x",
         autorange=True,
         domain=[0.8, 1],
@@ -321,9 +288,7 @@ fig.update_layout(
         title="mg/Kg",
         titlefont={"color": "#2196F3"},
         type="linear",
-        zeroline=False
-    )
-)
+        zeroline=False))
 
 # Update layout
 fig.update_layout(
@@ -332,11 +297,7 @@ fig.update_layout(
     legend=dict(traceorder="reversed"),
     height=600,
     template="plotly_white",
-    margin=dict(
-        t=100,
-        b=100
-    ),
-)
+    margin=dict(t=100, b=100))
 
 fig.show()
 ```
