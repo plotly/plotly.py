@@ -1122,6 +1122,9 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
+    if args["color"]:
+        df_all_trees = df_all_trees.sort_values(by=args["color"])
+
     # Now modify arguments
     args["data_frame"] = df_all_trees
     args["path"] = None
