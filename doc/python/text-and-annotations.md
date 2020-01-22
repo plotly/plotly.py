@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
@@ -40,16 +40,9 @@ Here is an example that creates a scatter plot with text labels using Plotly Exp
 import plotly.express as px
 
 df = px.data.gapminder().query("year==2007 and continent=='Americas'")
-
 fig = px.scatter(df, x="gdpPercap", y="lifeExp", text="country", log_x=True, size_max=60)
-
 fig.update_traces(textposition='top center')
-
-fig.update_layout(
-    height=800,
-    title_text='GDP and Life Expectancy (Americas, 2007)'
-)
-
+fig.update_layout(height=800, title_text='GDP and Life Expectancy (Americas, 2007)')
 fig.show()
 ```
 
@@ -59,15 +52,13 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
 fig.add_trace(go.Scatter(
     x=[0, 1, 2],
     y=[1, 1, 1],
     mode="lines+markers+text",
     name="Lines, Markers and Text",
     text=["Text A", "Text B", "Text C"],
-    textposition="top center"
-))
+    textposition="top center"))
 
 fig.add_trace(go.Scatter(
     x=[0, 1, 2],
@@ -75,8 +66,7 @@ fig.add_trace(go.Scatter(
     mode="markers+text",
     name="Markers and Text",
     text=["Text D", "Text E", "Text F"],
-    textposition="bottom center"
-))
+    textposition="bottom center"))
 
 fig.add_trace(go.Scatter(
     x=[0, 1, 2],
@@ -84,8 +74,7 @@ fig.add_trace(go.Scatter(
     mode="lines+text",
     name="Lines and Text",
     text=["Text G", "Text H", "Text I"],
-    textposition="bottom center"
-))
+    textposition="bottom center"))
 
 fig.show()
 ```
@@ -96,16 +85,8 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2],
-    y=[1, 3, 2],
-    mode="markers",
-    hovertext=["Text A", "Text B", "Text C"]
-))
-
+fig.add_trace(go.Scatter(x=[0, 1, 2], y=[1, 3, 2], mode="markers", hovertext=["Text A", "Text B", "Text C"]))
 fig.update_layout(title_text="Hover over the points to see the text")
-
 fig.show()
 ```
 
@@ -117,34 +98,13 @@ Annotations can be added to a figure using `fig.update_layout(annotations=[...])
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 1, 3, 2, 4, 3, 4, 6, 5]
-))
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
-))
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 1, 3, 2, 4, 3, 4, 6, 5]))
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 4, 5, 1, 2, 2, 3, 4, 2]))
 
 fig.update_layout(
-    showlegend=False,
+    showlegend=False, 
     annotations=[
-        go.layout.Annotation(
-            x=2,
-            y=5,
-            xref="x",
-            yref="y",
-            text="dict Text",
-            showarrow=True,
-            arrowhead=7,
-            ax=0,
-            ay=-40
-        )
-    ]
-)
-
+        dict(x=2, y=5, xref="x", yref="y", text="dict Text", showarrow=True, arrowhead=7, ax=0, ay=-40)])
 fig.show()
 ```
 
@@ -154,41 +114,13 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 1, 3, 2, 4, 3, 4, 6, 5]))
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 4, 5, 1, 2, 2, 3, 4, 2]))
+fig.add_annotation(dict(x=2, y=5, text="dict Text"))
+fig.add_annotation(dict(x=4, y=4, text="dict Text 2"))
 
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 1, 3, 2, 4, 3, 4, 6, 5]
-))
-
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
-))
-
-fig.add_annotation(
-    go.layout.Annotation(
-            x=2,
-            y=5,
-            text="dict Text")
-)
-fig.add_annotation(
-    go.layout.Annotation(
-            x=4,
-            y=4,
-            text="dict Text 2")
-)
-fig.update_annotations(dict(
-            xref="x",
-            yref="y",
-            showarrow=True,
-            arrowhead=7,
-            ax=0,
-            ay=-40
-))
-
+fig.update_annotations(dict(xref="x", yref="y",showarrow=True, arrowhead=7, ax=0, ay=-40))
 fig.update_layout(showlegend=False)
-
 fig.show()
 ```
 
@@ -198,91 +130,49 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
 fig.add_trace(go.Scatter3d(
     x=["2017-01-01", "2017-02-10", "2017-03-20"],
     y=["A", "B", "C"],
     z=[1, 1000, 100000],
-    name="z",
-))
+    name="z"))
 
 fig.update_layout(
-    scene=go.layout.Scene(
-        aspectratio=dict(
-            x=1,
-            y=1,
-            z=1
-        ),
-        camera=dict(
-            center=dict(
-                x=0,
-                y=0,
-                z=0
-            ),
-            eye=dict(
-                x=1.96903462608,
-                y=-1.09022831971,
-                z=0.405345349304
-            ),
-            up=dict(
-                x=0,
-                y=0,
-                z=1
-            )
-        ),
+    scene=dict(
+        aspectratio=dict(x=1, y=1,z=1),
+        camera=dict(center=dict(x=0, y=0, z=0),
+                    eye=dict(x=1.96903462608, y=-1.09022831971, z=0.405345349304),
+                    up=dict(x=0, y=0, z=1)),
         dragmode="turntable",
-        xaxis=dict(
-            title_text="",
-            type="date"
-        ),
-        yaxis=dict(
-            title_text="",
-            type="category"
-        ),
-        zaxis=dict(
-            title_text="",
-            type="log"
-        ),
-        annotations=[dict(
-            showarrow=False,
-            x="2017-01-01",
-            y="A",
-            z=0,
-            text="Point 1",
-            xanchor="left",
-            xshift=10,
-            opacity=0.7
-        ), dict(
-            x="2017-02-10",
-            y="B",
-            z=4,
-            text="Point 2",
-            textangle=0,
-            ax=0,
-            ay=-75,
-            font=dict(
-                color="black",
-                size=12
-            ),
-            arrowcolor="black",
-            arrowsize=3,
-            arrowwidth=1,
-            arrowhead=1
-        ), dict(
-            x="2017-03-20",
-            y="C",
-            z=5,
-            ax=50,
-            ay=0,
-            text="Point 3",
-            arrowhead=1,
-            xanchor="left",
-            yanchor="bottom"
-        )]
-    ),
+        xaxis=dict(title_text="", type="date"),
+        yaxis=dict(title_text="", type="category"),
+        zaxis=dict(title_text="", type="log"),
+        annotations=[
+            dict(
+                showarrow=False, 
+                x="2017-01-01", y="A", z=0,
+                text="Point 1",
+                xanchor="left",
+                xshift=10,
+                opacity=0.7),
+            dict(
+                x="2017-02-10", y="B", z=4,
+                text="Point 2",
+                textangle=0,
+                ax=0, ay=-75,
+                font=dict(color="black", size=12),
+                arrowcolor="black",
+                arrowsize=3,
+                arrowwidth=1,
+                arrowhead=1),
+            dict(
+                x="2017-03-20", y="C", z=5,
+                ax=50, ay=0,
+                text="Point 3",
+                arrowhead=1,
+                xanchor="left",
+                yanchor="bottom")]),
     xaxis=dict(title_text="x"),
-    yaxis=dict(title_text="y")
-)
+    yaxis=dict(title_text="y"))
 
 fig.show()
 ```
@@ -293,7 +183,6 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
 fig.add_trace(go.Scatter(
     x=[0, 1, 2],
     y=[1, 1, 1],
@@ -301,12 +190,7 @@ fig.add_trace(go.Scatter(
     name="Lines, Markers and Text",
     text=["Text A", "Text B", "Text C"],
     textposition="top right",
-    textfont=dict(
-        family="sans serif",
-        size=18,
-        color="crimson"
-    )
-))
+    textfont=dict(family="sans serif", size=18, color="crimson")))
 
 fig.add_trace(go.Scatter(
     x=[0, 1, 2],
@@ -315,15 +199,9 @@ fig.add_trace(go.Scatter(
     name="Lines and Text",
     text=["Text G", "Text H", "Text I"],
     textposition="bottom center",
-    textfont=dict(
-        family="sans serif",
-        size=18,
-        color="LightSeaGreen"
-    )
-))
+    textfont=dict(family="sans serif", size=18, color="LightSeaGreen")))
 
 fig.update_layout(showlegend=False)
-
 fig.show()
 ```
 
@@ -333,30 +211,12 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 1, 3, 2, 4, 3, 4, 6, 5]
-))
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
-))
-
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 1, 3, 2, 4, 3, 4, 6, 5]))
+fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 4, 5, 1, 2, 2, 3, 4, 2]))
 fig.add_annotation(
-    go.layout.Annotation(
-        x=2,
-        y=5,
-        xref="x",
-        yref="y",
-        text="max=5",
-        showarrow=True,
-        font=dict(
-            family="Courier New, monospace",
-            size=16,
-            color="#ffffff"
-            ),
+    dict(
+        x=2, y=5, xref="x", yref="y", text="max=5", showarrow=True,
+        font=dict(family="Courier New, monospace", size=16, color="#ffffff"),
         align="center",
         arrowhead=2,
         arrowsize=1,
@@ -368,9 +228,7 @@ fig.add_annotation(
         borderwidth=2,
         borderpad=4,
         bgcolor="#ff7f0e",
-        opacity=0.8
-        )
-)
+        opacity=0.8))
 
 fig.update_layout(showlegend=False)
 fig.show()
@@ -382,14 +240,7 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, ],
-    y=[10, 30, 15],
-    name="first trace",
-    hoverinfo="none"
-))
-
+fig.add_trace(go.Scatter(x=[1, 2, 3, ], y=[10, 30, 15], name="first trace", hoverinfo="none"))
 fig.show()
 ```
 
@@ -402,21 +253,16 @@ fig = go.Figure()
 
 fig.add_trace(go.Scattergeo(
     lat=[45.5, 43.4, 49.13, 51.1, 53.34, 45.24, 44.64, 48.25, 49.89, 50.45],
-    lon=[-73.57, -79.24, -123.06, -114.1, -113.28, -75.43, -63.57, -123.21, -97.13,
-         -104.6],
+    lon=[-73.57, -79.24, -123.06, -114.1, -113.28, -75.43, -63.57, -123.21, -97.13, -104.6],
     marker={
         "color": ["MidnightBlue", "IndianRed", "MediumPurple", "Orange", "Crimson",
                   "LightSeaGreen", "RoyalBlue", "LightSalmon", "DarkOrange", "MediumSlateBlue"],
-        "line": {
-            "width": 1
-        },
-        "size": 10
-    },
+        "line": {"width": 1},
+        "size": 10},
     mode="markers+text",
     name="",
     text=["Montreal", "Toronto", "Vancouver", "Calgary", "Edmonton", "Ottawa",
-          "Halifax",
-          "Victoria", "Winnepeg", "Regina"],
+          "Halifax", "Victoria", "Winnepeg", "Regina"],
     textfont={
         "color": ["MidnightBlue", "IndianRed", "MediumPurple", "Gold", "Crimson",
                   "LightSeaGreen",
@@ -428,22 +274,17 @@ fig.add_trace(go.Scattergeo(
                    "Open Sans, sans-serif",
                    "PT Sans Narrow, sans-serif", "Raleway, sans-serif",
                    "Times New Roman, Times, serif"],
-        "size": [22, 21, 20, 19, 18, 17, 16, 15, 14, 13]
-    },
+        "size": [22, 21, 20, 19, 18, 17, 16, 15, 14, 13]},
     textposition=["top center", "middle left", "top center", "bottom center",
-                  "top right",
-                  "middle left", "bottom right", "bottom left", "top right",
-                  "top right"]
-))
+                  "top right", "middle left", "bottom right", "bottom left", "top right",
+                  "top right"]))
 
 fig.update_layout(
     title_text="Canadian cities",
-    geo=go.layout.Geo(
+    geo=dict(
         lataxis=dict(range=[40, 70]),
         lonaxis=dict(range=[-130, -55]),
-        scope="north america"
-    )
-)
+        scope="north america"))
 
 fig.show()
 ```
@@ -454,51 +295,37 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3],
-    y=[1, 2, 3],
-    name="y",
-))
-
+fig.add_trace(go.Scatter(x=[1, 2, 3], y=[1, 2, 3], name="y"))
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=0.5,
             y=-0.15,
             showarrow=False,
             text="Custom x-axis title",
             xref="paper",
-            yref="paper"
-        ),
-        go.layout.Annotation(
+            yref="paper"),
+        dict(
             x=-0.07,
             y=0.5,
             showarrow=False,
             text="Custom y-axis title",
             textangle=-90,
             xref="paper",
-            yref="paper"
-        )
-    ],
+            yref="paper")],
     autosize=True,
-    margin=dict(
-        b=100
-    ),
+    margin=dict(b=100),
     title_text="Plot Title",
     xaxis=dict(
         autorange=False,
         range=[-0.05674507980728292, -0.0527310420933204],
-        type="linear"
-    ),
+        type="linear"),
     yaxis=dict(
         autorange=False,
         range=[1.2876210047544652, 1.2977732997811402],
-        type="linear"
-    ),
+        type="linear"),
     height=550,
-    width=1137
-)
+    width=1137)
 
 fig.show()
 ```

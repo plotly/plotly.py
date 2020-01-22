@@ -5,12 +5,22 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.6
+      format_version: '1.1'
+      jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
     language: python
     name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.7.3
   plotly:
     description: An introduction to creating animations with Plotly in Python.
     display_as: animations
@@ -31,6 +41,7 @@ Here is an example of an animated scatter plot creating using Plotly Express. No
 
 ```python
 import plotly.express as px
+
 df = px.data.gapminder()
 px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_group="country",
            size="pop", color="continent", hover_name="country",
@@ -45,10 +56,9 @@ Note that you should always fix the `y_range` to ensure that your data remains v
 import plotly.express as px
 
 df = px.data.gapminder()
-
 fig = px.bar(df, x="continent", y="pop", color="continent",
   animation_frame="year", animation_group="country", range_y=[0,4000000000])
-fig.show()
+fig.show() 
 ```
 
 #### Animated figures with Graph Objects

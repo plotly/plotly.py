@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.1'
+      jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -27,14 +27,14 @@ jupyter:
     language: python
     layout: base
     name: Creating and Updating Figures
+    order: 2
     page_type: example_index
     permalink: python/creating-and-updating-figures/
     redirect_from:
-      - python/user-guide/
-      - python/user-g/
+    - python/user-guide/
+    - python/user-g/
     thumbnail: thumbnail/creating-and-updating-figures.png
     v4upgrade: true
-    order: 2
 ---
 
 ### Representing Figures
@@ -79,12 +79,11 @@ Graph objects are stored in a hierarchy of modules under the `plotly.graph_objec
 
 ```python
 import plotly.graph_objects as go
+
 fig = go.Figure(
     data=[go.Bar(x=[1, 2, 3], y=[1, 3, 2])],
     layout=go.Layout(
-        title=go.layout.Title(text="A Bar Chart")
-    )
-)
+        title=dict(text="A Bar Chart")))
 fig.show()
 ```
 
@@ -271,31 +270,20 @@ Graph object figures support an `update_layout` method that may be used to updat
 
 ```python
 import plotly.graph_objects as go
+
 fig = go.Figure(data=go.Bar(x=[1, 2, 3], y=[1, 3, 2]))
-fig.update_layout(title_text="A Bar Chart",
-                  title_font_size=30)
+fig.update_layout(title_text="A Bar Chart", title_font_size=30)
 fig.show()
 ```
 
 Note that the following `update_layout` operations are equivalent:
 
 ```python
-fig.update_layout(title_text="A Bar Chart",
-                  title_font_size=30)
-
-fig.update_layout(title_text="A Bar Chart",
-                  title_font=dict(size=30))
-
-
-fig.update_layout(title=dict(text="A Bar Chart"),
-                             font=dict(size=30))
-
-fig.update_layout({"title": {"text": "A Bar Chart",
-                             "font": {"size": 30}}})
-
-fig.update_layout(
-    title=go.layout.Title(text="A Bar Chart",
-                          font=go.layout.title.Font(size=30)));
+fig.update_layout(title_text="A Bar Chart",title_font_size=30)
+fig.update_layout(title_text="A Bar Chart", title_font=dict(size=30))
+fig.update_layout(title=dict(text="A Bar Chart"), font=dict(size=30))
+fig.update_layout({"title": {"text": "A Bar Chart", "font": {"size": 30}}})
+fig.update_layout(title=dict(text="A Bar Chart", font=dict(size=30)))
 ```
 
 #### The update traces method
@@ -457,12 +445,9 @@ In the example below, the red color of markers is overwritten when updating `mar
 
 ```python
 import plotly.graph_objects as go
-fig = go.Figure(go.Bar(x=[1, 2, 3], y=[6, 4, 9],
-                       marker_color="red")) # will be overwritten below
-fig.update_traces(
-    overwrite=True,
-    marker={"opacity": 0.4}
-                 )
+
+fig = go.Figure(go.Bar(x=[1, 2, 3], y=[6, 4, 9], marker_color="red")) # will be overwritten below
+fig.update_traces(overwrite=True, marker={"opacity": 0.4})
 fig.show()
 ```
 
@@ -477,12 +462,10 @@ Here is an example of using `for_each_trace` to replace the equal-sign with a co
 ```python
 import pandas as pd
 import plotly.express as px
+
 df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
-
-fig.for_each_trace(
-    lambda trace: trace.update(name=trace.name.replace("=", ": ")),
-)
+fig.for_each_trace(lambda trace: trace.update(name=trace.name.replace("=", ": ")))
 
 fig.show()
 ```

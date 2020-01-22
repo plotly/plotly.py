@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.1'
-      jupytext_version: 1.1.1
+      jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -38,9 +38,9 @@ jupyter:
 In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](/python/imshow).
 
 A background image can be added to the layout of a figure with
-`fig.add_layout_image` or by setting the `images` parameter of `go.Layout`. The
-`source` attribute of a `go.layout.Image` can be the URL of an image, or a PIL
-Image object (`from PIL import Image; img = Image.open('filename.png')`).
+`fig.add_layout_image`. The
+`source` attribute can be the URL of an image, or a PIL
+Image object (`from PIL import Image; img = Image.open('path-to-your-file/filename.png')`).
 
 ```python
 import plotly.graph_objects as go
@@ -49,28 +49,20 @@ import plotly.graph_objects as go
 fig = go.Figure()
 
 # Add trace
-fig.add_trace(
-    go.Scatter(x=[0, 0.5, 1, 2, 2.2], y=[1.23, 2.5, 0.42, 3, 1])
-)
+fig.add_trace(go.Scatter(x=[0, 0.5, 1, 2, 2.2], y=[1.23, 2.5, 0.42, 3, 1]))
 
 # Add images
 fig.add_layout_image(
-        go.layout.Image(
-            source="https://images.plot.ly/language-icons/api-home/python-logo.png",
-            xref="x",
-            yref="y",
-            x=0,
-            y=3,
-            sizex=2,
-            sizey=2,
-            sizing="stretch",
-            opacity=0.5,
-            layer="below")
-)
+    source="https://images.plot.ly/language-icons/api-home/python-logo.png",
+    xref="x", yref="y",
+    x=0, y=3, 
+    sizex=2, sizey=2,
+    sizing="stretch",
+    opacity=0.5,
+    layer="below")
 
 # Set templates
 fig.update_layout(template="plotly_white")
-
 fig.show()
 ```
 
@@ -81,7 +73,6 @@ See more examples of [adding logos to charts](https://plot.ly/python/logos/)!
 import plotly.graph_objects as go
 
 fig = go.Figure()
-
 fig.add_trace(
     go.Bar(
         x=["-35.3", "-15.9", "-15.8", "-15.6", "-11.1",
@@ -108,14 +99,9 @@ fig.add_trace(
            "Nurses", "Legal support workers",
            "Computer programmers and system admin.", "Police officers and firefighters",
            "Chief executives", "Doctors, dentists and surgeons"],
-        marker=go.bar.Marker(
-            color="rgb(253, 240, 54)",
-            line=dict(color="rgb(0, 0, 0)",
-                      width=2)
-        ),
-        orientation="h",
-    )
-)
+        marker=go.bar.Marker(color="rgb(253, 240, 54)",
+            line=dict(color="rgb(0, 0, 0)", width=2)),
+        orientation="h"))
 
 # Add image
 fig.add_layout_image(
@@ -124,9 +110,7 @@ fig.add_layout_image(
         xref="paper", yref="paper",
         x=1, y=1.05,
         sizex=0.2, sizey=0.2,
-        xanchor="right", yanchor="bottom"
-    )
-)
+        xanchor="right", yanchor="bottom"))
 
 # update layout properties
 fig.update_layout(
@@ -139,8 +123,7 @@ fig.update_layout(
     hovermode="x",
     margin=dict(r=20, l=300, b=75, t=125),
     title=("Moving Up, Moving Down<br>" +
-           "<i>Percentile change in income between childhood and adulthood</i>"),
-)
+           "<i>Percentile change in income between childhood and adulthood</i>"))
 
 fig.show()
 ```
@@ -178,41 +161,30 @@ for (x, y), n in zip(simulated_absorptions, names):
 
 # Add images
 fig.add_layout_image(
-    go.layout.Image(
         source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/benzene.png",
-        x=0.75,
-        y=0.65,
-    ))
-fig.add_layout_image(go.layout.Image(
+        x=0.75, y=0.65)
+fig.add_layout_image(
         source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/naphthalene.png",
-        x=0.9,
-        y=0.3,
-        )
-)
+        x=0.9, y=0.3)
+
 fig.update_layout_images(dict(
-        xref="paper",
-        yref="paper",
-        sizex=0.3,
-        sizey=0.3,
-        xanchor="right",
-        yanchor="bottom"
-))
+        xref="paper", yref="paper",
+        sizex=0.3, sizey=0.3,
+        xanchor="right", yanchor="bottom"))
 
 # Add annotations
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
-            x=93.0 / 300,
+        dict(
+            x=93.0 / 300, 
             y=0.07 / 0.1,
-            xref="paper",
+            xref="paper", 
             yref="paper",
             showarrow=True,
             arrowhead=0,
             opacity=0.5,
-            ax=250,
-            ay=-40,
-        ),
-        go.layout.Annotation(
+            ax=250, ay=-40),
+        dict(
             x=156.0 / 300,
             y=0.04 / 0.1,
             xref="paper",
@@ -221,10 +193,7 @@ fig.update_layout(
             arrowhead=0,
             opacity=0.5,
             ax=140,
-            ay=-10,
-        )
-    ]
-)
+            ay=-10)])
 
 # Configure axes
 fig.update_xaxes(title_text="Wavelength")
@@ -235,8 +204,7 @@ fig.update_layout(
     title_text="Absorption Frequencies of Benzene and Naphthalene",
     height=500,
     width=900,
-    template="plotly_white"
-)
+    template="plotly_white")
 
 fig.show()
 ```
@@ -261,44 +229,32 @@ fig.add_trace(
         x=[0, img_width * scale_factor],
         y=[0, img_height * scale_factor],
         mode="markers",
-        marker_opacity=0
-    )
-)
+        marker_opacity=0))
 
 # Configure axes
-fig.update_xaxes(
-    visible=False,
-    range=[0, img_width * scale_factor]
-)
-
-fig.update_yaxes(
-    visible=False,
-    range=[0, img_height * scale_factor],
+fig.update_xaxes(visible=False, range=[0, img_width * scale_factor])
+fig.update_yaxes(visible=False, range=[0, img_height * scale_factor],
     # the scaleanchor attribute ensures that the aspect ratio stays constant
-    scaleanchor="x"
-)
+    scaleanchor="x")
 
 # Add image
 fig.add_layout_image(
-    go.layout.Image(
         x=0,
         sizex=img_width * scale_factor,
         y=img_height * scale_factor,
         sizey=img_height * scale_factor,
-        xref="x",
+        xref="x", 
         yref="y",
         opacity=1.0,
         layer="below",
         sizing="stretch",
         source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg")
-)
 
 # Configure other layout
 fig.update_layout(
     width=img_width * scale_factor,
     height=img_height * scale_factor,
-    margin={"l": 0, "r": 0, "t": 0, "b": 0},
-)
+    margin={"l": 0, "r": 0, "t": 0, "b": 0})
 
 # Disable the autosize on double click because it adds unwanted margins around the image
 # More detail: https://plot.ly/python/configuration-options/

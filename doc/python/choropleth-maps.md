@@ -5,12 +5,22 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.1'
+      jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
     language: python
     name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.7.3
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
@@ -48,9 +58,9 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+import pandas as pd
 
 # Load data frame and tidy it.
-import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
 
 fig = go.Figure(data=go.Choropleth(
@@ -58,13 +68,11 @@ fig = go.Figure(data=go.Choropleth(
     z = df['total exports'].astype(float), # Data to be color-coded
     locationmode = 'USA-states', # set of locations match entries in `locations`
     colorscale = 'Reds',
-    colorbar_title = "Millions USD",
-))
+    colorbar_title = "Millions USD"))
 
 fig.update_layout(
     title_text = '2011 US Agriculture Exports by State',
-    geo_scope='usa', # limite map scope to USA
-)
+    geo_scope='usa') # limite map scope to USA
 
 fig.show()
 ```
@@ -73,8 +81,8 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
 
 for col in df.columns:
@@ -93,17 +101,13 @@ fig = go.Figure(data=go.Choropleth(
     autocolorscale=False,
     text=df['text'], # hover text
     marker_line_color='white', # line markers between states
-    colorbar_title="Millions USD"
-))
+    colorbar_title="Millions USD"))
 
 fig.update_layout(
     title_text='2011 US Agriculture Exports by State<br>(Hover for breakdown)',
-    geo = dict(
-        scope='usa',
-        projection=go.layout.geo.Projection(type = 'albers usa'),
-        showlakes=True, # lakes
-        lakecolor='rgb(255, 255, 255)'),
-)
+    geo=dict(scope='usa', projection=dict(type = 'albers usa'),
+               showlakes=True, # lakes
+               lakecolor='rgb(255, 255, 255)'))
 
 fig.show()
 ```
@@ -126,16 +130,14 @@ fig = go.Figure(data=go.Choropleth(
     marker_line_color='darkgray',
     marker_line_width=0.5,
     colorbar_tickprefix = '$',
-    colorbar_title = 'GDP<br>Billions US$',
-))
+    colorbar_title = 'GDP<br>Billions US$'))
 
 fig.update_layout(
     title_text='2014 Global GDP',
     geo=dict(
         showframe=False,
         showcoastlines=False,
-        projection_type='equirectangular'
-    ),
+        projection_type='equirectangular'),
     annotations = [dict(
         x=0.55,
         y=0.1,
@@ -143,9 +145,7 @@ fig.update_layout(
         yref='paper',
         text='Source: <a href="https://www.cia.gov/library/publications/the-world-factbook/fields/2195.html">\
             CIA World Factbook</a>',
-        showarrow = False
-    )]
-)
+        showarrow = False)])
 
 fig.show()
 ```
@@ -154,8 +154,8 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
-
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_ebola.csv')
 df.head()
 
@@ -244,7 +244,6 @@ For the full county choropleth doc page checkout https://plot.ly/python/county-c
 
 ```python
 import plotly.figure_factory as ff
-
 import numpy as np
 import pandas as pd
 
@@ -255,12 +254,11 @@ df_sample['FIPS'] = df_sample['State FIPS Code'] + df_sample['County FIPS Code']
 
 colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef", "#b3d2e9", "#9ecae1",
     "#85bcdb", "#6baed6", "#57a0ce", "#4292c6", "#3082be", "#2171b5", "#1361a9",
-    "#08519c", "#0b4083", "#08306b"
-]
+    "#08519c", "#0b4083", "#08306b"]
+
 endpts = list(np.linspace(1, 12, len(colorscale) - 1))
 fips = df_sample['FIPS'].tolist()
 values = df_sample['Unemployment Rate (%)'].tolist()
-
 
 fig = ff.create_choropleth(
     fips=fips, values=values, scope=['usa'],
@@ -269,8 +267,8 @@ fig = ff.create_choropleth(
     show_hover=True,
     asp = 2.9,
     title_text = 'USA by Unemployment %',
-    legend_title = '% unemployed'
-)
+    legend_title = '% unemployed')
+
 fig.layout.template = None
 fig.show()
 ```

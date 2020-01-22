@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.1'
+      jupytext_version: 1.2.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -73,14 +73,8 @@ fig.add_trace(go.Scattergeo(
     hoverinfo = 'text',
     text = df_airports['airport'],
     mode = 'markers',
-    marker = dict(
-        size = 2,
-        color = 'rgb(255, 0, 0)',
-        line = dict(
-            width = 3,
-            color = 'rgba(68, 68, 68, 0)'
-        )
-    )))
+    marker = dict(size = 2, color = 'rgb(255, 0, 0)', 
+                  line = dict(width = 3, color = 'rgba(68, 68, 68, 0)'))))
 
 flight_paths = []
 for i in range(len(df_flight_paths)):
@@ -91,21 +85,17 @@ for i in range(len(df_flight_paths)):
             lat = [df_flight_paths['start_lat'][i], df_flight_paths['end_lat'][i]],
             mode = 'lines',
             line = dict(width = 1,color = 'red'),
-            opacity = float(df_flight_paths['cnt'][i]) / float(df_flight_paths['cnt'].max()),
-        )
-    )
+            opacity = float(df_flight_paths['cnt'][i]) / float(df_flight_paths['cnt'].max())))
 
 fig.update_layout(
     title_text = 'Feb. 2011 American Airline flight paths<br>(Hover for airport names)',
     showlegend = False,
-    geo = go.layout.Geo(
+    geo = dict(
         scope = 'north america',
         projection_type = 'azimuthal equal area',
         showland = True,
         landcolor = 'rgb(243, 243, 243)',
-        countrycolor = 'rgb(204, 204, 204)',
-    ),
-)
+        countrycolor = 'rgb(204, 204, 204)'))
 
 fig.show()
 ```
