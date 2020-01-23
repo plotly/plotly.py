@@ -52,7 +52,7 @@ To migrate version 3 "online" functionality, first install the `chart-studio` pa
 $ pip install chart-studio
 ```
 
-of conda.
+or conda.
 
 ```
 $ conda install -c plotly chart-studio
