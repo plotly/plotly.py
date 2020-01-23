@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -66,11 +66,14 @@ fig.show()
 
 If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
 
+**Note**: for best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
+
 ```python
 import plotly.express as px
 import numpy as np
 df = px.data.gapminder().query("year == 2007")
-fig = px.treemap(df, path=['continent', 'country'], values='pop',
+df["world"] = "world" # in order to have a single root node
+fig = px.treemap(df, path=['world', 'continent', 'country'], values='pop',
                   color='lifeExp', hover_data=['iso_alpha'],
                   color_continuous_scale='RdBu',
                   color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
@@ -84,7 +87,8 @@ When the argument of `color` corresponds to non-numerical data, discrete colors 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+df["all"] = "all" # in order to have a single root node
+fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='day')
 fig.show()
 ```
 
@@ -93,7 +97,8 @@ In the example below the color of Saturday and Sunday sectors is the same as Din
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.treemap(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+df["all"] = "all" # in order to have a single root node
+fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='time')
 fig.show()
 ```
 
@@ -113,8 +118,9 @@ sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
 df = pd.DataFrame(
     dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
 )
+df["all"] = "all" # in order to have a single root node
 print(df)
-fig = px.treemap(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig = px.treemap(df, path=['all', 'regions', 'sectors', 'vendors'], values='sales')
 fig.show()
 ```
 ### Basic Treemap with go.Treemap
