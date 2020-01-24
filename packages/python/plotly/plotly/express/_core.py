@@ -19,7 +19,7 @@ class PxDefaults(object):
     def __init__(self):
         self.template = None
         self.width = None
-        self.height = 600
+        self.height = None
         self.color_discrete_sequence = None
         self.color_continuous_scale = None
         self.symbol_sequence = None
@@ -36,8 +36,8 @@ MAPBOX_TOKEN = None
 def set_mapbox_access_token(token):
     """
     Arguments:
-        token: A Mapbox token to be used in `plotly_express.scatter_mapbox` and \
-        `plotly_express.line_mapbox` figures. See \
+        token: A Mapbox token to be used in `plotly.express.scatter_mapbox` and \
+        `plotly.express.line_mapbox` figures. See \
         https://docs.mapbox.com/help/how-mapbox-works/access-tokens/ for more details
     """
     global MAPBOX_TOKEN
@@ -50,7 +50,7 @@ def get_trendline_results(fig):
     the `trendline` argument set to `"ols"`).
 
     Arguments:
-        fig: the output of a `plotly_express` charting call
+        fig: the output of a `plotly.express` charting call
     Returns:
         A `pandas.DataFrame` with a column "px_fit_results" containing the `statsmodels`
         results objects, along with columns identifying the subset of the data the
@@ -181,7 +181,9 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 )
                 and (
                     trace_spec.constructor != go.Parcats
-                    or len(args["data_frame"][name].unique()) <= 20
+                    or (v is not None and name in v)
+                    or len(args["data_frame"][name].unique())
+                    <= args["dimensions_max_cardinality"]
                 )
             ]
             result["dimensions"] = [
@@ -236,7 +238,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
                         result["y"] = fit_results.predict()
                         hover_header = "<b>OLS trendline</b><br>"
-                        hover_header += "%s = %f * %s + %f<br>" % (
+                        hover_header += "%s = %g * %s + %g<br>" % (
                             args["y"],
                             fit_results.params[1],
                             args["x"],
@@ -534,6 +536,9 @@ def configure_polar_axes(args, fig, orders):
     else:
         if args["range_r"]:
             radialaxis["range"] = args["range_r"]
+
+    if args["range_theta"]:
+        layout["polar"]["sector"] = args["range_theta"]
     fig.update(layout=layout)
 
 
@@ -1004,6 +1009,147 @@ def build_dataframe(args, attrables, array_attrables):
     return args
 
 
+def _check_dataframe_all_leaves(df):
+    df_sorted = df.sort_values(by=list(df.columns))
+    null_mask = df_sorted.isnull()
+    null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
+    for null_row_index in null_indices:
+        row = null_mask.iloc[null_row_index]
+        indices = np.nonzero(row.values)[0]
+        if not row[indices[0] :].all():
+            raise ValueError(
+                "None entries cannot have not-None children",
+                df_sorted.iloc[null_row_index],
+            )
+    df_sorted[null_mask] = ""
+    row_strings = list(df_sorted.apply(lambda x: "".join(x), axis=1))
+    for i, row in enumerate(row_strings[:-1]):
+        if row_strings[i + 1] in row and (i + 1) in null_indices:
+            raise ValueError(
+                "Non-leaves rows are not permitted in the dataframe \n",
+                df_sorted.iloc[i + 1],
+                "is not a leaf.",
+            )
+
+
+def process_dataframe_hierarchy(args):
+    """
+    Build dataframe for sunburst or treemap when the path argument is provided.
+    """
+    df = args["data_frame"]
+    path = args["path"][::-1]
+    _check_dataframe_all_leaves(df[path[::-1]])
+    discrete_color = False
+
+    if args["color"] and args["color"] in path:
+        series_to_copy = df[args["color"]]
+        args["color"] = str(args["color"]) + "additional_col_for_px"
+        df[args["color"]] = series_to_copy
+    if args["hover_data"]:
+        for col_name in args["hover_data"]:
+            if col_name == args["color"]:
+                series_to_copy = df[col_name]
+                new_col_name = str(args["color"]) + "additional_col_for_hover"
+                df[new_col_name] = series_to_copy
+                args["color"] = new_col_name
+            elif col_name in path:
+                series_to_copy = df[col_name]
+                new_col_name = col_name + "additional_col_for_hover"
+                path = [new_col_name if x == col_name else x for x in path]
+                df[new_col_name] = series_to_copy
+    # ------------ Define aggregation functions --------------------------------
+    def aggfunc_discrete(x):
+        uniques = x.unique()
+        if len(uniques) == 1:
+            return uniques[0]
+        else:
+            return "(?)"
+
+    agg_f = {}
+    aggfunc_color = None
+    if args["values"]:
+        try:
+            df[args["values"]] = pd.to_numeric(df[args["values"]])
+        except ValueError:
+            raise ValueError(
+                "Column `%s` of `df` could not be converted to a numerical data type."
+                % args["values"]
+            )
+
+        if args["color"]:
+            if args["color"] == args["values"]:
+                aggfunc_color = "sum"
+        count_colname = args["values"]
+    else:
+        # we need a count column for the first groupby and the weighted mean of color
+        # trick to be sure the col name is unused: take the sum of existing names
+        count_colname = (
+            "count"
+            if "count" not in df.columns
+            else "".join([str(el) for el in list(df.columns)])
+        )
+        # we can modify df because it's a copy of the px argument
+        df[count_colname] = 1
+        args["values"] = count_colname
+    agg_f[count_colname] = "sum"
+
+    if args["color"]:
+        if df[args["color"]].dtype.kind not in "bifc":
+            aggfunc_color = aggfunc_discrete
+            discrete_color = True
+        elif not aggfunc_color:
+
+            def aggfunc_continuous(x):
+                return np.average(x, weights=df.loc[x.index, count_colname])
+
+            aggfunc_color = aggfunc_continuous
+        agg_f[args["color"]] = aggfunc_color
+
+    #  Other columns (for color, hover_data, custom_data etc.)
+    cols = list(set(df.columns).difference(path))
+    for col in cols:  # for hover_data, custom_data etc.
+        if col not in agg_f:
+            agg_f[col] = aggfunc_discrete
+    # ----------------------------------------------------------------------------
+
+    df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
+    #  Set column type here (useful for continuous vs discrete colorscale)
+    for col in cols:
+        df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
+    for i, level in enumerate(path):
+        df_tree = pd.DataFrame(columns=df_all_trees.columns)
+        dfg = df.groupby(path[i:]).agg(agg_f)
+        dfg = dfg.reset_index()
+        # Path label massaging
+        df_tree["labels"] = dfg[level].copy().astype(str)
+        df_tree["parent"] = ""
+        df_tree["id"] = dfg[level].copy().astype(str)
+        if i < len(path) - 1:
+            j = i + 1
+            while j < len(path):
+                df_tree["parent"] = (
+                    dfg[path[j]].copy().astype(str) + "/" + df_tree["parent"]
+                )
+                df_tree["id"] = dfg[path[j]].copy().astype(str) + "/" + df_tree["id"]
+                j += 1
+
+        df_tree["parent"] = df_tree["parent"].str.rstrip("/")
+        if cols:
+            df_tree[cols] = dfg[cols]
+        df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
+
+    if args["color"] and discrete_color:
+        df_all_trees = df_all_trees.sort_values(by=args["color"])
+
+    # Now modify arguments
+    args["data_frame"] = df_all_trees
+    args["path"] = None
+    args["ids"] = "id"
+    args["names"] = "labels"
+    args["parents"] = "parent"
+    return args
+
+
 def infer_config(args, constructor, trace_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
@@ -1012,9 +1158,9 @@ def infer_config(args, constructor, trace_patch):
         + ["names", "values", "parents", "ids"]
         + ["error_x", "error_x_minus"]
         + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-        + ["lat", "lon", "locations", "animation_group"]
+        + ["lat", "lon", "locations", "animation_group", "path"]
     )
-    array_attrables = ["dimensions", "custom_data", "hover_data"]
+    array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
     group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
     all_attrables = attrables + group_attrables + ["color"]
     group_attrs = ["symbol", "line_dash"]
@@ -1023,6 +1169,8 @@ def infer_config(args, constructor, trace_patch):
             all_attrables += [group_attr]
 
     args = build_dataframe(args, all_attrables, array_attrables)
+    if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
+        args = process_dataframe_hierarchy(args)
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
@@ -1133,11 +1281,19 @@ def infer_config(args, constructor, trace_patch):
 def get_orderings(args, grouper, grouped):
     """
     `orders` is the user-supplied ordering (with the remaining data-frame-supplied
-    ordering appended if the column is used for grouping)
+    ordering appended if the column is used for grouping). It includes anything the user
+    gave, for any variable, including values not present in the dataset. It is used
+    downstream to set e.g. `categoryarray` for cartesian axes
+
     `group_names` is the set of groups, ordered by the order above
+
+    `group_values` is a subset of `orders` in both keys and values. It contains a key
+     for every grouped mapping and its values are the sorted *data* values for these
+     mappings.
     """
     orders = {} if "category_orders" not in args else args["category_orders"].copy()
     group_names = []
+    group_values = {}
     for group_name in grouped.groups:
         if len(grouper) == 1:
             group_name = (group_name,)
@@ -1151,6 +1307,7 @@ def get_orderings(args, grouper, grouped):
                     for val in uniques:
                         if val not in orders[col]:
                             orders[col].append(val)
+                group_values[col] = sorted(uniques, key=orders[col].index)
 
     for i, col in reversed(list(enumerate(grouper))):
         if col != one_group:
@@ -1159,7 +1316,7 @@ def get_orderings(args, grouper, grouped):
                 key=lambda g: orders[col].index(g[i]) if g[i] in orders[col] else -1,
             )
 
-    return orders, group_names
+    return orders, group_names, group_values
 
 
 def make_figure(args, constructor, trace_patch={}, layout_patch={}):
@@ -1171,7 +1328,24 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     grouped = args["data_frame"].groupby(grouper, sort=False)
 
-    orders, sorted_group_names = get_orderings(args, grouper, grouped)
+    orders, sorted_group_names, sorted_group_values = get_orderings(
+        args, grouper, grouped
+    )
+
+    col_labels = []
+    row_labels = []
+
+    for m in grouped_mappings:
+        if m.grouper:
+            if m.facet == "col":
+                prefix = get_label(args, args["facet_col"]) + "="
+                col_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
+            if m.facet == "row":
+                prefix = get_label(args, args["facet_row"]) + "="
+                row_labels = [prefix + str(s) for s in sorted_group_values[m.grouper]]
+            for val in sorted_group_values[m.grouper]:
+                if val not in m.val_map:
+                    m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
 
     subplot_type = _subplot_type_for_trace_type(constructor().type)
 
@@ -1179,8 +1353,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     frames = OrderedDict()
     trendline_rows = []
     nrows = ncols = 1
-    col_labels = []
-    row_labels = []
+    trace_name_labels = None
     for group_name in sorted_group_names:
         group = grouped.get_group(group_name if len(group_name) > 1 else group_name[0])
         mapping_labels = OrderedDict()
@@ -1194,7 +1367,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                     trace_name_labels[key] = str(val)
                 if m.variable == "animation_frame":
                     frame_name = val
-        trace_name = ", ".join(k + "=" + v for k, v in trace_name_labels.items())
+        trace_name = ", ".join(trace_name_labels.values())
         if frame_name not in trace_names_by_frame:
             trace_names_by_frame[frame_name] = set()
         trace_names = trace_names_by_frame[frame_name]
@@ -1246,8 +1419,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 if val not in m.val_map:
                     m.val_map[val] = m.sequence[len(m.val_map) % len(m.sequence)]
                 try:
-                    m.updater(trace, m.val_map[val])
+                    m.updater(trace, m.val_map[val])  # covers most cases
                 except ValueError:
+                    # this catches some odd cases like marginals
                     if (
                         trace_spec != trace_specs[0]
                         and trace_spec.constructor in [go.Violin, go.Box, go.Histogram]
@@ -1260,16 +1434,22 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                         and m.variable == "color"
                     ):
                         trace.update(marker=dict(color=m.val_map[val]))
+                    elif (
+                        trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]
+                        and m.variable == "color"
+                    ):
+                        trace.update(
+                            z=[1] * len(group),
+                            colorscale=[m.val_map[val]] * 2,
+                            showscale=False,
+                            showlegend=True,
+                        )
                     else:
                         raise
 
                 # Find row for trace, handling facet_row and marginal_x
                 if m.facet == "row":
                     row = m.val_map[val]
-                    if args["facet_row"] and len(row_labels) < row:
-                        row_labels.append(
-                            get_label(args, args["facet_row"]) + "=" + str(val)
-                        )
                 else:
                     if (
                         bool(args.get("marginal_x", False))
@@ -1283,10 +1463,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 # Find col for trace, handling facet_col and marginal_y
                 if m.facet == "col":
                     col = m.val_map[val]
-                    if args["facet_col"] and len(col_labels) < col:
-                        col_labels.append(
-                            get_label(args, args["facet_col"]) + "=" + str(val)
-                        )
                     if facet_col_wrap:  # assumes no facet_row, no marginals
                         row = 1 + ((col - 1) // facet_col_wrap)
                         col = 1 + ((col - 1) % facet_col_wrap)
@@ -1343,7 +1519,9 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     for v in ["title", "height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
-    layout_patch["legend"] = {"tracegroupgap": 0}
+    layout_patch["legend"] = dict(tracegroupgap=0)
+    if trace_name_labels:
+        layout_patch["legend"]["title"] = ", ".join(trace_name_labels)
     if "title" not in layout_patch and args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (

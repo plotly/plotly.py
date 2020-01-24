@@ -1187,6 +1187,10 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         Construct a new Outsidetextfont object
         
         Sets the font used for `textinfo` lying outside the sector.
+        This option refers to the root of the hierarchy presented on
+        top left corner of a treemap graph. Please note that if a
+        hierarchy has multiple root nodes, this option won't have any
+        effect and `insidetextfont` would be used.
 
         Parameters
         ----------
@@ -1729,7 +1733,8 @@ class Marker(_BaseTraceHierarchyType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------

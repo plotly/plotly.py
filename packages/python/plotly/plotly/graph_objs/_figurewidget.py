@@ -512,6 +512,9 @@ class FigureWidget(BaseFigureWidget):
                         `yaxis.uirevision=*quantity*` and the y axis
                         range will reset but the x axis range will
                         retain any user-driven zoom.
+                    uniformtext
+                        plotly.graph_objects.layout.Uniformtext
+                        instance or dict with compatible properties
                     updatemenus
                         A tuple of
                         plotly.graph_objects.layout.Updatemenu
@@ -923,8 +926,9 @@ class FigureWidget(BaseFigureWidget):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -1065,7 +1069,8 @@ class FigureWidget(BaseFigureWidget):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -1531,6 +1536,8 @@ class FigureWidget(BaseFigureWidget):
         boxpoints=None,
         customdata=None,
         customdatasrc=None,
+        dx=None,
+        dy=None,
         fillcolor=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -1545,16 +1552,31 @@ class FigureWidget(BaseFigureWidget):
         jitter=None,
         legendgroup=None,
         line=None,
+        lowerfence=None,
+        lowerfencesrc=None,
         marker=None,
+        mean=None,
+        meansrc=None,
+        median=None,
+        mediansrc=None,
         meta=None,
         metasrc=None,
         name=None,
         notched=None,
+        notchspan=None,
+        notchspansrc=None,
         notchwidth=None,
         offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
+        q1=None,
+        q1src=None,
+        q3=None,
+        q3src=None,
+        quartilemethod=None,
+        sd=None,
+        sdsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
@@ -1564,6 +1586,8 @@ class FigureWidget(BaseFigureWidget):
         uid=None,
         uirevision=None,
         unselected=None,
+        upperfence=None,
+        upperfencesrc=None,
         visible=None,
         whiskerwidth=None,
         width=None,
@@ -1585,16 +1609,30 @@ class FigureWidget(BaseFigureWidget):
         """
         Add a new Box trace
         
-        In vertical (horizontal) box plots, statistics are computed
-        using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        box per distinct x (y) value is drawn If no `x` (`y`) list is
-        provided, a single box is drawn. That box position is then
-        positioned with with `name` or with `x0` (`y0`) if provided.
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
-        second quartile (Q2) is marked by a line inside the box. By
-        default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR: Q3-Q1), see "boxpoints" for
-        other options.
+        second quartile (Q2, i.e. the median) is marked by a line
+        inside the box. The fences grow outward from the boxes' edges,
+        by default they span +/- 1.5 times the interquartile range
+        (IQR: Q3-Q1), The sample mean and standard deviation as well as
+        notches and the sample, outlier and suspected outliers points
+        can be optionally added to the box plot. The values and
+        positions corresponding to each boxes can be input using two
+        signatures. The first signature expects users to supply the
+        sample values in the `y` data array for vertical boxes (`x` for
+        horizontal boxes). By supplying an `x` (`y`) array, one box per
+        distinct `x` (`y`) value is drawn If no `x` (`y`) list is
+        provided, a single box is drawn. In this case, the box is
+        positioned with the trace `name` or with `x0` (`y0`) if
+        provided. The second signature expects users to supply the
+        boxes corresponding Q1, median and Q3 statistics in the `q1`,
+        `median` and `q3` data arrays respectively. Other box features
+        relying on statistics namely `lowerfence`, `upperfence`,
+        `notchspan` can be set directly by the users. To have plotly
+        compute them or to show sample points besides the boxes, users
+        can set the `y` data array for vertical boxes (`x` for
+        horizontal boxes) to a 2D array with the outer length
+        corresponding to the number of boxes in the traces and the
+        inner length corresponding the sample size.
 
         Parameters
         ----------
@@ -1607,6 +1645,8 @@ class FigureWidget(BaseFigureWidget):
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
             box(es). If "sd" the standard deviation is also drawn.
+            Defaults to True when `mean` is set. Defaults to "sd"
+            when `sd` is set Otherwise defaults to False.
         boxpoints
             If "outliers", only the sample points lying outside the
             whiskers are shown If "suspectedoutliers", the outlier
@@ -1614,7 +1654,10 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set. Defaults to "all" under the q1/median/q3
+            signature. Otherwise defaults to "outliers".
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1622,6 +1665,12 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dx
+            Sets the x coordinate step for multi-box traces set
+            using q1/median/q3.
+        dy
+            Sets the y coordinate step for multi-box traces set
+            using q1/median/q3.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -1687,9 +1736,31 @@ class FigureWidget(BaseFigureWidget):
         line
             plotly.graph_objects.box.Line instance or dict with
             compatible properties
+        lowerfence
+            Sets the lower fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `lowerfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point below 1.5 times the IQR.
+        lowerfencesrc
+            Sets the source reference on plot.ly for  lowerfence .
         marker
             plotly.graph_objects.box.Marker instance or dict with
             compatible properties
+        mean
+            Sets the mean values. There should be as many items as
+            the number of boxes desired. This attribute has effect
+            only under the q1/median/q3 signature. If `mean` is not
+            provided but a sample (in `y` or `x`) is set, we
+            compute the mean for each box using the sample values.
+        meansrc
+            Sets the source reference on plot.ly for  mean .
+        median
+            Sets the median values. There should be as many items
+            as the number of boxes desired.
+        mediansrc
+            Sets the source reference on plot.ly for  median .
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -1712,7 +1783,24 @@ class FigureWidget(BaseFigureWidget):
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
         notched
-            Determines whether or not notches should be drawn.
+            Determines whether or not notches are drawn. Notches
+            displays a confidence interval around the median. We
+            compute the confidence interval as median +/- 1.57 *
+            IQR / sqrt(N), where IQR is the interquartile range and
+            N is the sample size. If two boxes' notches do not
+            overlap there is 95% confidence their medians differ.
+            See https://sites.google.com/site/davidsstatistics/home
+            /notched-box-plots for more info. Defaults to False
+            unless `notchwidth` or `notchspan` is set.
+        notchspan
+            Sets the notch span from the boxes' `median` values.
+            There should be as many items as the number of boxes
+            desired. This attribute has effect only under the
+            q1/median/q3 signature. If `notchspan` is not provided
+            but a sample (in `y` or `x`) is set, we compute it as
+            1.57 * IQR / sqrt(N), where N is the sample size.
+        notchspansrc
+            Sets the source reference on plot.ly for  notchspan .
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -1733,6 +1821,40 @@ class FigureWidget(BaseFigureWidget):
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
+        q1
+            Sets the Quartile 1 values. There should be as many
+            items as the number of boxes desired.
+        q1src
+            Sets the source reference on plot.ly for  q1 .
+        q3
+            Sets the Quartile 3 values. There should be as many
+            items as the number of boxes desired.
+        q3src
+            Sets the source reference on plot.ly for  q3 .
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on http://www.amstat.org/publication
+            s/jse/v14n3/langford.html). The "exclusive" method uses
+            the median to divide the ordered dataset into two
+            halves if the sample is odd, it does not include the
+            median in either half - Q1 is then the median of the
+            lower half and Q3 the median of the upper half. The
+            "inclusive" method also uses the median to divide the
+            ordered dataset into two halves but if the sample is
+            odd, it includes the median in both halves - Q1 is then
+            the median of the lower half and Q3 the median of the
+            upper half.
+        sd
+            Sets the standard deviation values. There should be as
+            many items as the number of boxes desired. This
+            attribute has effect only under the q1/median/q3
+            signature. If `sd` is not provided but a sample (in `y`
+            or `x`) is set, we compute the standard deviation for
+            each box using the sample values.
+        sdsrc
+            Sets the source reference on plot.ly for  sd .
         selected
             plotly.graph_objects.box.Selected instance or dict with
             compatible properties
@@ -1783,6 +1905,15 @@ class FigureWidget(BaseFigureWidget):
         unselected
             plotly.graph_objects.box.Unselected instance or dict
             with compatible properties
+        upperfence
+            Sets the upper fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `upperfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point above 1.5 times the IQR.
+        upperfencesrc
+            Sets the source reference on plot.ly for  upperfence .
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -1801,8 +1932,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -1816,8 +1948,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -1856,6 +1989,8 @@ class FigureWidget(BaseFigureWidget):
             boxpoints=boxpoints,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            dx=dx,
+            dy=dy,
             fillcolor=fillcolor,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
@@ -1870,16 +2005,31 @@ class FigureWidget(BaseFigureWidget):
             jitter=jitter,
             legendgroup=legendgroup,
             line=line,
+            lowerfence=lowerfence,
+            lowerfencesrc=lowerfencesrc,
             marker=marker,
+            mean=mean,
+            meansrc=meansrc,
+            median=median,
+            mediansrc=mediansrc,
             meta=meta,
             metasrc=metasrc,
             name=name,
             notched=notched,
+            notchspan=notchspan,
+            notchspansrc=notchspansrc,
             notchwidth=notchwidth,
             offsetgroup=offsetgroup,
             opacity=opacity,
             orientation=orientation,
             pointpos=pointpos,
+            q1=q1,
+            q1src=q1src,
+            q3=q3,
+            q3src=q3src,
+            quartilemethod=quartilemethod,
+            sd=sd,
+            sdsrc=sdsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
@@ -1889,6 +2039,8 @@ class FigureWidget(BaseFigureWidget):
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
+            upperfence=upperfence,
+            upperfencesrc=upperfencesrc,
             visible=visible,
             whiskerwidth=whiskerwidth,
             width=width,
@@ -2423,7 +2575,9 @@ class FigureWidget(BaseFigureWidget):
         colorscale=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         geo=None,
+        geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -2433,6 +2587,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -2443,6 +2598,7 @@ class FigureWidget(BaseFigureWidget):
         reversescale=None,
         selected=None,
         selectedpoints=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -2506,12 +2662,24 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         geo
             Sets a reference between this trace's geospatial
             coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -2558,9 +2726,17 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -2601,6 +2777,9 @@ class FigureWidget(BaseFigureWidget):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -2683,7 +2862,9 @@ class FigureWidget(BaseFigureWidget):
             colorscale=colorscale,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            featureidkey=featureidkey,
             geo=geo,
+            geojson=geojson,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
@@ -2693,6 +2874,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             locationmode=locationmode,
             locations=locations,
             locationssrc=locationssrc,
@@ -2703,6 +2885,7 @@ class FigureWidget(BaseFigureWidget):
             reversescale=reversescale,
             selected=selected,
             selectedpoints=selectedpoints,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             text=text,
@@ -2730,6 +2913,7 @@ class FigureWidget(BaseFigureWidget):
         colorscale=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -2740,6 +2924,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -2749,6 +2934,7 @@ class FigureWidget(BaseFigureWidget):
         reversescale=None,
         selected=None,
         selectedpoints=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         subplot=None,
@@ -2819,12 +3005,16 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array.
+            Support nested property, for example "properties.name".
         geojson
-            Sets the GeoJSON data associated with this trace. Can
-            be set as a valid GeoJSON object or as URL string Note
-            that we only accept GeoJSON of type "FeatureCollection"
-            and "Feature" with geometries of type "Polygon" and
-            "MultiPolygon".
+            Sets the GeoJSON data associated with this trace. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -2872,6 +3062,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -2912,6 +3106,9 @@ class FigureWidget(BaseFigureWidget):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -3000,6 +3197,7 @@ class FigureWidget(BaseFigureWidget):
             colorscale=colorscale,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            featureidkey=featureidkey,
             geojson=geojson,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
@@ -3010,6 +3208,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             locations=locations,
             locationssrc=locationssrc,
             marker=marker,
@@ -3019,6 +3218,7 @@ class FigureWidget(BaseFigureWidget):
             reversescale=reversescale,
             selected=selected,
             selectedpoints=selectedpoints,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             subplot=subplot,
@@ -3060,6 +3260,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -3068,6 +3269,7 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         sizemode=None,
         sizeref=None,
@@ -3208,6 +3410,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.cone.Lighting instance or dict
             with compatible properties
@@ -3250,6 +3456,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -3368,6 +3577,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -3376,6 +3586,7 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             sizemode=sizemode,
             sizeref=sizeref,
@@ -4188,6 +4399,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legendgroup=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -4197,6 +4409,7 @@ class FigureWidget(BaseFigureWidget):
         radius=None,
         radiussrc=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         subplot=None,
@@ -4321,6 +4534,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on plot.ly for  lat .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -4355,6 +4572,9 @@ class FigureWidget(BaseFigureWidget):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -4459,6 +4679,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             lat=lat,
             latsrc=latsrc,
+            legendgroup=legendgroup,
             lon=lon,
             lonsrc=lonsrc,
             meta=meta,
@@ -4468,6 +4689,7 @@ class FigureWidget(BaseFigureWidget):
             radius=radius,
             radiussrc=radiussrc,
             reversescale=reversescale,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             subplot=subplot,
@@ -5226,11 +5448,13 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         meta=None,
         metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -5384,6 +5608,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -5408,6 +5636,9 @@ class FigureWidget(BaseFigureWidget):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -5565,11 +5796,13 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             meta=meta,
             metasrc=metasrc,
             name=name,
             opacity=opacity,
             reversescale=reversescale,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             text=text,
@@ -6317,6 +6550,7 @@ class FigureWidget(BaseFigureWidget):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -6325,6 +6559,7 @@ class FigureWidget(BaseFigureWidget):
         nbinsy=None,
         opacity=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         uid=None,
@@ -6490,6 +6725,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         marker
             plotly.graph_objects.histogram2d.Marker instance or
             dict with compatible properties
@@ -6529,6 +6768,9 @@ class FigureWidget(BaseFigureWidget):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -6679,6 +6921,7 @@ class FigureWidget(BaseFigureWidget):
             hovertemplatesrc=hovertemplatesrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             marker=marker,
             meta=meta,
             metasrc=metasrc,
@@ -6687,6 +6930,7 @@ class FigureWidget(BaseFigureWidget):
             nbinsy=nbinsy,
             opacity=opacity,
             reversescale=reversescale,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             uid=uid,
@@ -7611,6 +7855,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -7619,6 +7864,7 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         slices=None,
         spaceframe=None,
@@ -7767,6 +8013,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.isosurface.Lighting instance or
             dict with compatible properties
@@ -7809,6 +8059,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -7912,6 +8165,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -7920,6 +8174,7 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             slices=slices,
             spaceframe=spaceframe,
@@ -7972,12 +8227,14 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         intensity=None,
+        intensitymode=None,
         intensitysrc=None,
         isrc=None,
         j=None,
         jsrc=None,
         k=None,
         ksrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -7986,6 +8243,7 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -8167,8 +8425,11 @@ class FigureWidget(BaseFigureWidget):
         idssrc
             Sets the source reference on plot.ly for  ids .
         intensity
-            Sets the vertex intensity values, used for plotting
-            fields on meshes
+            Sets the intensity values for vertices or cells as
+            defined by `intensitymode`. It can be used for plotting
+            fields on meshes.
+        intensitymode
+            Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on plot.ly for  intensity .
         isrc
@@ -8195,6 +8456,10 @@ class FigureWidget(BaseFigureWidget):
             is the third vertex of a triangle.
         ksrc
             Sets the source reference on plot.ly for  k .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.mesh3d.Lighting instance or dict
             with compatible properties
@@ -8237,6 +8502,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -8351,12 +8619,14 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             intensity=intensity,
+            intensitymode=intensitymode,
             intensitysrc=intensitysrc,
             isrc=isrc,
             j=j,
             jsrc=jsrc,
             k=k,
             ksrc=ksrc,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -8365,6 +8635,7 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             text=text,
@@ -9040,6 +9311,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         insidetextfont=None,
+        insidetextorientation=None,
         label0=None,
         labels=None,
         labelssrc=None,
@@ -9162,6 +9434,13 @@ class FigureWidget(BaseFigureWidget):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -9340,6 +9619,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             insidetextfont=insidetextfont,
+            insidetextorientation=insidetextorientation,
             label0=label0,
             labels=labels,
             labelssrc=labelssrc,
@@ -11003,9 +11283,11 @@ class FigureWidget(BaseFigureWidget):
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         fill=None,
         fillcolor=None,
         geo=None,
+        geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -11069,6 +11351,11 @@ class FigureWidget(BaseFigureWidget):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". "toself" connects the
@@ -11084,6 +11371,14 @@ class FigureWidget(BaseFigureWidget):
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used
+            when `locations` is set. It can be set as a valid
+            GeoJSON object or as a URL string. Note that we only
+            accept GeoJSONs of type "FeatureCollection" or
+            "Feature" with geometries of type "Polygon" or
+            "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -11148,7 +11443,11 @@ class FigureWidget(BaseFigureWidget):
             with compatible properties
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location
@@ -11291,9 +11590,11 @@ class FigureWidget(BaseFigureWidget):
             connectgaps=connectgaps,
             customdata=customdata,
             customdatasrc=customdatasrc,
+            featureidkey=featureidkey,
             fill=fill,
             fillcolor=fillcolor,
             geo=geo,
+            geojson=geojson,
             hoverinfo=hoverinfo,
             hoverinfosrc=hoverinfosrc,
             hoverlabel=hoverlabel,
@@ -13458,6 +13759,7 @@ class FigureWidget(BaseFigureWidget):
         hovertext=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -13467,6 +13769,7 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         sizeref=None,
         starts=None,
@@ -13606,6 +13909,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.streamtube.Lighting instance or
             dict with compatible properties
@@ -13651,6 +13958,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -13752,6 +14062,7 @@ class FigureWidget(BaseFigureWidget):
             hovertext=hovertext,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             maxdisplayed=maxdisplayed,
@@ -13761,6 +14072,7 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             sizeref=sizeref,
             starts=starts,
@@ -13802,6 +14114,7 @@ class FigureWidget(BaseFigureWidget):
         ids=None,
         idssrc=None,
         insidetextfont=None,
+        insidetextorientation=None,
         labels=None,
         labelssrc=None,
         leaf=None,
@@ -13916,6 +14229,13 @@ class FigureWidget(BaseFigureWidget):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -13958,7 +14278,11 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented at the center of a sunburst graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -14066,6 +14390,7 @@ class FigureWidget(BaseFigureWidget):
             ids=ids,
             idssrc=idssrc,
             insidetextfont=insidetextfont,
+            insidetextorientation=insidetextorientation,
             labels=labels,
             labelssrc=labelssrc,
             leaf=leaf,
@@ -14119,6 +14444,7 @@ class FigureWidget(BaseFigureWidget):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -14127,6 +14453,7 @@ class FigureWidget(BaseFigureWidget):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         surfacecolor=None,
@@ -14275,6 +14602,10 @@ class FigureWidget(BaseFigureWidget):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.surface.Lighting instance or dict
             with compatible properties
@@ -14317,6 +14648,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -14417,6 +14751,7 @@ class FigureWidget(BaseFigureWidget):
             hovertextsrc=hovertextsrc,
             ids=ids,
             idssrc=idssrc,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -14425,6 +14760,7 @@ class FigureWidget(BaseFigureWidget):
             opacity=opacity,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             stream=stream,
             surfacecolor=surfacecolor,
@@ -14790,7 +15126,11 @@ class FigureWidget(BaseFigureWidget):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented on top left corner of a treemap graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -15147,7 +15487,9 @@ class FigureWidget(BaseFigureWidget):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points. Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set, otherwise defaults to "outliers".
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -15244,8 +15586,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -15257,8 +15600,9 @@ class FigureWidget(BaseFigureWidget):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -15373,6 +15717,7 @@ class FigureWidget(BaseFigureWidget):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -15382,6 +15727,7 @@ class FigureWidget(BaseFigureWidget):
         opacityscale=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         slices=None,
         spaceframe=None,
@@ -15530,6 +15876,10 @@ class FigureWidget(BaseFigureWidget):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.volume.Lighting instance or dict
             with compatible properties
@@ -15583,6 +15933,9 @@ class FigureWidget(BaseFigureWidget):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -15686,6 +16039,7 @@ class FigureWidget(BaseFigureWidget):
             idssrc=idssrc,
             isomax=isomax,
             isomin=isomin,
+            legendgroup=legendgroup,
             lighting=lighting,
             lightposition=lightposition,
             meta=meta,
@@ -15695,6 +16049,7 @@ class FigureWidget(BaseFigureWidget):
             opacityscale=opacityscale,
             reversescale=reversescale,
             scene=scene,
+            showlegend=showlegend,
             showscale=showscale,
             slices=slices,
             spaceframe=spaceframe,

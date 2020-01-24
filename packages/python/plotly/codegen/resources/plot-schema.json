@@ -2614,7 +2614,7 @@
                     "role": "info",
                     "dflt": "",
                     "editType": "plot",
-                    "description": "Template string used for rendering the information text that appear on points. Note that this will override `textinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. Every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. ",
+                    "description": "Template string used for rendering the information text that appear on points. Note that this will override `textinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. Every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`.",
                     "arrayOk": true
                 },
                 "hovertext": {
@@ -2630,7 +2630,7 @@
                     "role": "info",
                     "dflt": "",
                     "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `value` and `label`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
                 },
                 "textposition": {
@@ -4098,7 +4098,7 @@
         },
         "box": {
             "meta": {
-                "description": "In vertical (horizontal) box plots, statistics are computed using `y` (`x`) values. By supplying an `x` (`y`) array, one box per distinct x (y) value is drawn If no `x` (`y`) {array} is provided, a single box is drawn. That box position is then positioned with with `name` or with `x0` (`y0`) if provided. Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The second quartile (Q2) is marked by a line inside the box. By default, the whiskers correspond to the box' edges +/- 1.5 times the interquartile range (IQR: Q3-Q1), see *boxpoints* for other options."
+                "description": "Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The second quartile (Q2, i.e. the median) is marked by a line inside the box. The fences grow outward from the boxes' edges, by default they span +/- 1.5 times the interquartile range (IQR: Q3-Q1), The sample mean and standard deviation as well as notches and the sample, outlier and suspected outliers points can be optionally added to the box plot. The values and positions corresponding to each boxes can be input using two signatures. The first signature expects users to supply the sample values in the `y` data array for vertical boxes (`x` for horizontal boxes). By supplying an `x` (`y`) array, one box per distinct `x` (`y`) value is drawn If no `x` (`y`) {array} is provided, a single box is drawn. In this case, the box is positioned with the trace `name` or with `x0` (`y0`) if provided. The second signature expects users to supply the boxes corresponding Q1, median and Q3 statistics in the `q1`, `median` and `q3` data arrays respectively. Other box features relying on statistics namely `lowerfence`, `upperfence`, `notchspan` can be set directly by the users. To have plotly compute them or to show sample points besides the boxes, users can set the `y` data array for vertical boxes (`x` for horizontal boxes) to a 2D array with the outer length corresponding to the number of boxes in the traces and the inner length corresponding the sample size."
             },
             "categories": [
                 "cartesian",
@@ -4362,13 +4362,25 @@
                     "valType": "any",
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
-                    "description": "Sets the x coordinate of the box. See overview for more info."
+                    "description": "Sets the x coordinate for single-box traces or the starting coordinate for multi-box traces set using q1/median/q3. See overview for more info."
                 },
                 "y0": {
                     "valType": "any",
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
-                    "description": "Sets the y coordinate of the box. See overview for more info."
+                    "description": "Sets the y coordinate for single-box traces or the starting coordinate for multi-box traces set using q1/median/q3. See overview for more info."
+                },
+                "dx": {
+                    "valType": "number",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the x coordinate step for multi-box traces set using q1/median/q3."
+                },
+                "dy": {
+                    "valType": "number",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the y coordinate step for multi-box traces set using q1/median/q3."
                 },
                 "name": {
                     "valType": "string",
@@ -4376,44 +4388,41 @@
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the trace name. The trace name appear as the legend item and on hover. For box traces, the name will also be used for the position coordinate, if `x` and `x0` (`y` and `y0` if horizontal) are missing and the position axis is categorical"
                 },
-                "text": {
-                    "valType": "string",
-                    "role": "info",
-                    "dflt": "",
-                    "arrayOk": true,
+                "q1": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the Quartile 1 values. There should be as many items as the number of boxes desired."
+                },
+                "median": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the median values. There should be as many items as the number of boxes desired."
+                },
+                "q3": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc+clearAxisTypes",
+                    "description": "Sets the Quartile 3 values. There should be as many items as the number of boxes desired."
+                },
+                "lowerfence": {
+                    "valType": "data_array",
+                    "role": "data",
                     "editType": "calc",
-                    "description": "Sets the text elements associated with each sample value. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
+                    "description": "Sets the lower fence values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `lowerfence` is not provided but a sample (in `y` or `x`) is set, we compute the lower as the last sample point below 1.5 times the IQR."
                 },
-                "hovertext": {
-                    "valType": "string",
-                    "role": "info",
-                    "dflt": "",
-                    "arrayOk": true,
-                    "editType": "style",
-                    "description": "Same as `text`."
-                },
-                "hovertemplate": {
-                    "valType": "string",
-                    "role": "info",
-                    "dflt": "",
-                    "editType": "none",
-                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
-                    "arrayOk": true
-                },
-                "whiskerwidth": {
-                    "valType": "number",
-                    "min": 0,
-                    "max": 1,
-                    "dflt": 0.5,
-                    "role": "style",
+                "upperfence": {
+                    "valType": "data_array",
+                    "role": "data",
                     "editType": "calc",
-                    "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es)."
+                    "description": "Sets the upper fence values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `upperfence` is not provided but a sample (in `y` or `x`) is set, we compute the lower as the last sample point above 1.5 times the IQR."
                 },
                 "notched": {
                     "valType": "boolean",
-                    "role": "style",
+                    "role": "info",
                     "editType": "calc",
-                    "description": "Determines whether or not notches should be drawn."
+                    "description": "Determines whether or not notches are drawn. Notches displays a confidence interval around the median. We compute the confidence interval as median +/- 1.57 * IQR / sqrt(N), where IQR is the interquartile range and N is the sample size. If two boxes' notches do not overlap there is 95% confidence their medians differ. See https://sites.google.com/site/davidsstatistics/home/notched-box-plots for more info. Defaults to *false* unless `notchwidth` or `notchspan` is set."
                 },
                 "notchwidth": {
                     "valType": "number",
@@ -4424,6 +4433,12 @@
                     "editType": "calc",
                     "description": "Sets the width of the notches relative to the box' width. For example, with 0, the notches are as wide as the box(es)."
                 },
+                "notchspan": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc",
+                    "description": "Sets the notch span from the boxes' `median` values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `notchspan` is not provided but a sample (in `y` or `x`) is set, we compute it as 1.57 * IQR / sqrt(N), where N is the sample size."
+                },
                 "boxpoints": {
                     "valType": "enumerated",
                     "values": [
@@ -4432,22 +4447,9 @@
                         "suspectedoutliers",
                         false
                     ],
-                    "dflt": "outliers",
                     "role": "style",
                     "editType": "calc",
-                    "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the box(es) are shown with no sample points"
-                },
-                "boxmean": {
-                    "valType": "enumerated",
-                    "values": [
-                        true,
-                        "sd",
-                        false
-                    ],
-                    "dflt": false,
-                    "role": "style",
-                    "editType": "calc",
-                    "description": "If *true*, the mean of the box(es)' underlying distribution is drawn as a dashed line inside the box(es). If *sd* the standard deviation is also drawn."
+                    "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the box(es) are shown with no sample points Defaults to *suspectedoutliers* when `marker.outliercolor` or `marker.line.outliercolor` is set. Defaults to *all* under the q1/median/q3 signature. Otherwise defaults to *outliers*."
                 },
                 "jitter": {
                     "valType": "number",
@@ -4465,6 +4467,29 @@
                     "editType": "calc",
                     "description": "Sets the position of the sample points in relation to the box(es). If *0*, the sample points are places over the center of the box(es). Positive (negative) values correspond to positions to the right (left) for vertical boxes and above (below) for horizontal boxes"
                 },
+                "boxmean": {
+                    "valType": "enumerated",
+                    "values": [
+                        true,
+                        "sd",
+                        false
+                    ],
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "If *true*, the mean of the box(es)' underlying distribution is drawn as a dashed line inside the box(es). If *sd* the standard deviation is also drawn. Defaults to *true* when `mean` is set. Defaults to *sd* when `sd` is set Otherwise defaults to *false*."
+                },
+                "mean": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc",
+                    "description": "Sets the mean values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `mean` is not provided but a sample (in `y` or `x`) is set, we compute the mean for each box using the sample values."
+                },
+                "sd": {
+                    "valType": "data_array",
+                    "role": "data",
+                    "editType": "calc",
+                    "description": "Sets the standard deviation values. There should be as many items as the number of boxes desired. This attribute has effect only under the q1/median/q3 signature. If `sd` is not provided but a sample (in `y` or `x`) is set, we compute the standard deviation for each box using the sample values."
+                },
                 "orientation": {
                     "valType": "enumerated",
                     "values": [
@@ -4474,6 +4499,18 @@
                     "role": "style",
                     "editType": "calc+clearAxisTypes",
                     "description": "Sets the orientation of the box(es). If *v* (*h*), the distribution is visualized along the vertical (horizontal)."
+                },
+                "quartilemethod": {
+                    "valType": "enumerated",
+                    "values": [
+                        "linear",
+                        "exclusive",
+                        "inclusive"
+                    ],
+                    "dflt": "linear",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets the method used to compute the sample's Q1 and Q3 quartiles. The *linear* method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://www.amstat.org/publications/jse/v14n3/langford.html). The *exclusive* method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The *inclusive* method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half."
                 },
                 "width": {
                     "valType": "number",
@@ -4873,6 +4910,15 @@
                     "editType": "style",
                     "description": "Sets the fill color. Defaults to a half-transparent variant of the line color, marker color, or marker line color, whichever is available."
                 },
+                "whiskerwidth": {
+                    "valType": "number",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 0.5,
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Sets the width of the whiskers relative to the box' width. For example, with 1, the whiskers are as wide as the box(es)."
+                },
                 "offsetgroup": {
                     "valType": "string",
                     "role": "info",
@@ -4944,6 +4990,30 @@
                     },
                     "editType": "style",
                     "role": "object"
+                },
+                "text": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "calc",
+                    "description": "Sets the text elements associated with each sample value. If a single string, the same string appears over all the data points. If an array of string, the items are mapped in order to the this trace's (x,y) coordinates. To be seen, trace `hoverinfo` must contain a *text* flag."
+                },
+                "hovertext": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "arrayOk": true,
+                    "editType": "style",
+                    "description": "Same as `text`."
+                },
+                "hovertemplate": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "none",
+                    "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
+                    "arrayOk": true
                 },
                 "hoveron": {
                     "valType": "flaglist",
@@ -5056,6 +5126,54 @@
                     "description": "Sets the source reference on plot.ly for  x .",
                     "editType": "none"
                 },
+                "q1src": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  q1 .",
+                    "editType": "none"
+                },
+                "mediansrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  median .",
+                    "editType": "none"
+                },
+                "q3src": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  q3 .",
+                    "editType": "none"
+                },
+                "lowerfencesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  lowerfence .",
+                    "editType": "none"
+                },
+                "upperfencesrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  upperfence .",
+                    "editType": "none"
+                },
+                "notchspansrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  notchspan .",
+                    "editType": "none"
+                },
+                "meansrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  mean .",
+                    "editType": "none"
+                },
+                "sdsrc": {
+                    "valType": "string",
+                    "role": "info",
+                    "description": "Sets the source reference on plot.ly for  sd .",
+                    "editType": "none"
+                },
                 "textsrc": {
                     "valType": "string",
                     "role": "info",
@@ -5114,7 +5232,8 @@
             "categories": [
                 "cartesian",
                 "svg",
-                "2dMap"
+                "2dMap",
+                "showLegend"
             ],
             "animatable": false,
             "type": "heatmap",
@@ -5131,6 +5250,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "opacity": {
                     "valType": "number",
@@ -5496,6 +5622,13 @@
                     "editType": "none",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -7832,7 +7965,8 @@
                 "cartesian",
                 "svg",
                 "2dMap",
-                "histogram"
+                "histogram",
+                "showLegend"
             ],
             "animatable": false,
             "type": "histogram2d",
@@ -7849,6 +7983,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "opacity": {
                     "valType": "number",
@@ -8255,6 +8396,13 @@
                     "editType": "none",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `z` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -13512,13 +13660,13 @@
                     "valType": "any",
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
-                    "description": "Sets the x coordinate of the box. See overview for more info."
+                    "description": "Sets the x coordinate for single-box traces or the starting coordinate for multi-box traces set using q1/median/q3. See overview for more info."
                 },
                 "y0": {
                     "valType": "any",
                     "role": "info",
                     "editType": "calc+clearAxisTypes",
-                    "description": "Sets the y coordinate of the box. See overview for more info."
+                    "description": "Sets the y coordinate for single-box traces or the starting coordinate for multi-box traces set using q1/median/q3. See overview for more info."
                 },
                 "name": {
                     "valType": "string",
@@ -13621,10 +13769,9 @@
                         "suspectedoutliers",
                         false
                     ],
-                    "dflt": "outliers",
                     "role": "style",
                     "editType": "calc",
-                    "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the violins are shown with no sample points"
+                    "description": "If *outliers*, only the sample points lying outside the whiskers are shown If *suspectedoutliers*, the outlier points are shown and points either less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted (see `outliercolor`) If *all*, all sample points are shown If *false*, only the violins are shown with no sample points. Defaults to *suspectedoutliers* when `marker.outliercolor` or `marker.line.outliercolor` is set, otherwise defaults to *outliers*."
                 },
                 "jitter": {
                     "valType": "number",
@@ -17463,6 +17610,19 @@
                         "editType": "none"
                     }
                 },
+                "insidetextorientation": {
+                    "valType": "enumerated",
+                    "role": "info",
+                    "values": [
+                        "horizontal",
+                        "radial",
+                        "tangential",
+                        "auto"
+                    ],
+                    "dflt": "auto",
+                    "editType": "plot",
+                    "description": "Determines the orientation of text inside slices. With *auto* the texts may automatically be rotated to fit with the maximum size inside the slice. Using *horizontal* option forces text to be horizontal. Using *radial* option forces text to be radial. Using *tangential* option forces text to be tangential."
+                },
                 "insidetextfont": {
                     "family": {
                         "valType": "string",
@@ -18906,6 +19066,19 @@
                         "editType": "none"
                     }
                 },
+                "insidetextorientation": {
+                    "valType": "enumerated",
+                    "role": "info",
+                    "values": [
+                        "horizontal",
+                        "radial",
+                        "tangential",
+                        "auto"
+                    ],
+                    "dflt": "auto",
+                    "editType": "plot",
+                    "description": "Determines the orientation of text inside slices. With *auto* the texts may automatically be rotated to fit with the maximum size inside the slice. Using *horizontal* option forces text to be horizontal. Using *radial* option forces text to be radial. Using *tangential* option forces text to be tangential."
+                },
                 "insidetextfont": {
                     "family": {
                         "valType": "string",
@@ -18975,7 +19148,7 @@
                         "arrayOk": true
                     },
                     "editType": "plot",
-                    "description": "Sets the font used for `textinfo` lying outside the sector.",
+                    "description": "Sets the font used for `textinfo` lying outside the sector. This option refers to the root of the hierarchy presented at the center of a sunburst graph. Please note that if a hierarchy has multiple root nodes, this option won't have any effect and `insidetextfont` would be used.",
                     "role": "object",
                     "familysrc": {
                         "valType": "string",
@@ -20391,7 +20564,7 @@
                         "arrayOk": true
                     },
                     "editType": "plot",
-                    "description": "Sets the font used for `textinfo` lying outside the sector.",
+                    "description": "Sets the font used for `textinfo` lying outside the sector. This option refers to the root of the hierarchy presented on top left corner of a treemap graph. Please note that if a hierarchy has multiple root nodes, this option won't have any effect and `insidetextfont` would be used.",
                     "role": "object",
                     "familysrc": {
                         "valType": "string",
@@ -23660,7 +23833,7 @@
             "categories": [
                 "gl3d",
                 "2dMap",
-                "noOpacity"
+                "showLegend"
             ],
             "animatable": false,
             "type": "surface",
@@ -23677,6 +23850,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -24916,6 +25096,13 @@
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "calc",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
+                },
                 "xcalendar": {
                     "valType": "enumerated",
                     "values": [
@@ -25071,7 +25258,8 @@
                 "description": "Draws isosurfaces between iso-min and iso-max values with coordinates given by four 1-dimensional arrays containing the `value`, `x`, `y` and `z` of every vertex of a uniform or non-uniform 3-D grid. Horizontal or vertical slices, caps as well as spaceframe between iso-min and iso-max values could also be drawn using this trace."
             },
             "categories": [
-                "gl3d"
+                "gl3d",
+                "showLegend"
             ],
             "animatable": false,
             "type": "isosurface",
@@ -25088,6 +25276,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -25549,6 +25744,13 @@
                     "editType": "calc",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "calc",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "cauto": {
                     "valType": "boolean",
@@ -26361,7 +26563,8 @@
                 "description": "Draws volume trace between iso-min and iso-max values with coordinates given by four 1-dimensional arrays containing the `value`, `x`, `y` and `z` of every vertex of a uniform or non-uniform 3-D grid. Horizontal or vertical slices, caps as well as spaceframe between iso-min and iso-max values could also be drawn using this trace."
             },
             "categories": [
-                "gl3d"
+                "gl3d",
+                "showLegend"
             ],
             "animatable": false,
             "type": "volume",
@@ -26378,6 +26581,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -27577,6 +27787,13 @@
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "calc",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
+                },
                 "scene": {
                     "valType": "subplotid",
                     "role": "info",
@@ -27657,7 +27874,8 @@
                 "description": "Draws sets of triangles with coordinates given by three 1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`, `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-shape algorithm or (4) the Convex-hull algorithm"
             },
             "categories": [
-                "gl3d"
+                "gl3d",
+                "showLegend"
             ],
             "animatable": false,
             "type": "mesh3d",
@@ -27674,6 +27892,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -27924,8 +28149,19 @@
                 "intensity": {
                     "valType": "data_array",
                     "editType": "calc",
-                    "description": "Sets the vertex intensity values, used for plotting fields on meshes",
+                    "description": "Sets the intensity values for vertices or cells as defined by `intensitymode`. It can be used for plotting fields on meshes.",
                     "role": "data"
+                },
+                "intensitymode": {
+                    "valType": "enumerated",
+                    "values": [
+                        "vertex",
+                        "cell"
+                    ],
+                    "dflt": "vertex",
+                    "editType": "calc",
+                    "role": "info",
+                    "description": "Determines the source of `intensity` values."
                 },
                 "color": {
                     "valType": "color",
@@ -28676,6 +28912,13 @@
                     "editType": "calc",
                     "description": "Determines which trace information appear on hover. If `none` or `skip` are set, no information is displayed upon hovering. But, if `none` is set, click and hover events are still fired."
                 },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
+                },
                 "xcalendar": {
                     "valType": "enumerated",
                     "values": [
@@ -28861,7 +29104,8 @@
                 "description": "Use cone traces to visualize vector fields.  Specify a vector field using 6 1D arrays, 3 position arrays `x`, `y` and `z` and 3 vector component arrays `u`, `v`, `w`. The cones are drawn exactly at the positions given by `x`, `y` and `z`."
             },
             "categories": [
-                "gl3d"
+                "gl3d",
+                "showLegend"
             ],
             "animatable": false,
             "type": "cone",
@@ -28878,6 +29122,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -29136,6 +29387,13 @@
                     "editType": "calc",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `norm` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "cauto": {
                     "valType": "boolean",
@@ -29930,7 +30188,8 @@
                 "description": "Use a streamtube trace to visualize flow in a vector field.  Specify a vector field using 6 1D arrays of equal length, 3 position arrays `x`, `y` and `z` and 3 vector component arrays `u`, `v`, and `w`.  By default, the tubes' starting positions will be cut from the vector field's x-z plane at its minimum y value. To specify your own starting position, use attributes `starts.x`, `starts.y` and `starts.z`. The color is encoded by the norm of (u, v, w), and the local radius by the divergence of (u, v, w)."
             },
             "categories": [
-                "gl3d"
+                "gl3d",
+                "showLegend"
             ],
             "animatable": false,
             "type": "streamtube",
@@ -29947,6 +30206,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -30228,6 +30494,13 @@
                     "editType": "calc",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variables `tubex`, `tubey`, `tubez`, `tubeu`, `tubev`, `tubew`, `norm` and `divergence`. Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "cauto": {
                     "valType": "boolean",
@@ -31262,12 +31535,26 @@
                     "values": [
                         "ISO-3",
                         "USA-states",
-                        "country names"
+                        "country names",
+                        "geojson-id"
                     ],
                     "role": "info",
                     "dflt": "ISO-3",
-                    "description": "Determines the set of locations used to match entries in `locations` to regions on the map.",
+                    "description": "Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
                     "editType": "calc"
+                },
+                "geojson": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets optional GeoJSON data associated with this trace. If not given, the features on the base map are used when `locations` is set. It can be set as a valid GeoJSON object or as a URL string. Note that we only accept GeoJSONs of type *FeatureCollection* or *Feature* with geometries of type *Polygon* or *MultiPolygon*."
+                },
+                "featureidkey": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "dflt": "id",
+                    "description": "Sets the key in GeoJSON features which is used as id to match the items included in the `locations` array. Only has an effect when `geojson` is set. Support nested property, for example *properties.name*."
                 },
                 "mode": {
                     "valType": "flaglist",
@@ -32702,7 +32989,8 @@
             },
             "categories": [
                 "geo",
-                "noOpacity"
+                "noOpacity",
+                "showLegend"
             ],
             "animatable": false,
             "type": "choropleth",
@@ -32719,6 +33007,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -32914,11 +33209,12 @@
                     "values": [
                         "ISO-3",
                         "USA-states",
-                        "country names"
+                        "country names",
+                        "geojson-id"
                     ],
                     "role": "info",
                     "dflt": "ISO-3",
-                    "description": "Determines the set of locations used to match entries in `locations` to regions on the map.",
+                    "description": "Determines the set of locations used to match entries in `locations` to regions on the map. Values *ISO-3*, *USA-states*, *country names* correspond to features on the base map and value *geojson-id* corresponds to features from a custom GeoJSON linked to the `geojson` attribute.",
                     "editType": "calc"
                 },
                 "z": {
@@ -32926,6 +33222,19 @@
                     "editType": "calc",
                     "description": "Sets the color values.",
                     "role": "data"
+                },
+                "geojson": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Sets optional GeoJSON data associated with this trace. If not given, the features on the base map are used. It can be set as a valid GeoJSON object or as a URL string. Note that we only accept GeoJSONs of type *FeatureCollection* or *Feature* with geometries of type *Polygon* or *MultiPolygon*."
+                },
+                "featureidkey": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "dflt": "id",
+                    "description": "Sets the key in GeoJSON features which is used as id to match the items included in the `locations` array. Only has an effect when `geojson` is set. Support nested property, for example *properties.name*."
                 },
                 "text": {
                     "valType": "string",
@@ -33054,6 +33363,13 @@
                     "editType": "none",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -41790,7 +42106,8 @@
             "categories": [
                 "mapbox",
                 "gl",
-                "noOpacity"
+                "noOpacity",
+                "showLegend"
             ],
             "animatable": false,
             "type": "choroplethmapbox",
@@ -41807,6 +42124,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "name": {
                     "valType": "string",
@@ -42007,7 +42331,14 @@
                     "valType": "any",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Sets the GeoJSON data associated with this trace. Can be set as a valid GeoJSON object or as URL string Note that we only accept GeoJSON of type *FeatureCollection* and *Feature* with geometries of type *Polygon* and *MultiPolygon*."
+                    "description": "Sets the GeoJSON data associated with this trace. It can be set as a valid GeoJSON object or as a URL string. Note that we only accept GeoJSONs of type *FeatureCollection* or *Feature* with geometries of type *Polygon* or *MultiPolygon*."
+                },
+                "featureidkey": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "dflt": "id",
+                    "description": "Sets the key in GeoJSON features which is used as id to match the items included in the `locations` array. Support nested property, for example *properties.name*."
                 },
                 "below": {
                     "valType": "string",
@@ -42142,6 +42473,13 @@
                     "editType": "none",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available. variable `properties` Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -42783,7 +43121,8 @@
             },
             "categories": [
                 "mapbox",
-                "gl"
+                "gl",
+                "showLegend"
             ],
             "animatable": false,
             "type": "densitymapbox",
@@ -42800,6 +43139,13 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not this trace is visible. If *legendonly*, the trace is not drawn, but can appear as a legend item (provided that the legend itself is visible)."
+                },
+                "legendgroup": {
+                    "valType": "string",
+                    "role": "info",
+                    "dflt": "",
+                    "editType": "style",
+                    "description": "Sets the legend group for this trace. Traces part of the same legend group hide/show at the same time when toggling legend items."
                 },
                 "opacity": {
                     "valType": "number",
@@ -43063,6 +43409,13 @@
                     "editType": "none",
                     "description": "Template string used for rendering the information that appear on hover box. Note that this will override `hoverinfo`. Variables are inserted using %{variable}, for example \"y: %{y}\". Numbers are formatted using d3-format's syntax %{variable:d3-format}, for example \"Price: %{y:$.2f}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format for details on the formatting syntax. Dates are formatted using d3-time-format's syntax %{variable|d3-time-format}, for example \"Day: %{2019-01-01|%A}\". https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format for details on the date formatting syntax. The variables available in `hovertemplate` are the ones emitted as event data described at this link https://plot.ly/javascript/plotlyjs-events/#event-data. Additionally, every attributes that can be specified per-point (the ones that are `arrayOk: true`) are available.  Anything contained in tag `<extra>` is displayed in the secondary box, for example \"<extra>{fullData.name}</extra>\". To hide the secondary box completely, use an empty tag `<extra></extra>`.",
                     "arrayOk": true
+                },
+                "showlegend": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": false,
+                    "editType": "style",
+                    "description": "Determines whether or not an item corresponding to this trace is shown in the legend."
                 },
                 "zauto": {
                     "valType": "boolean",
@@ -56868,6 +57221,30 @@
                 "editType": "layoutstyle",
                 "role": "object"
             },
+            "uniformtext": {
+                "mode": {
+                    "valType": "enumerated",
+                    "values": [
+                        false,
+                        "hide",
+                        "show"
+                    ],
+                    "dflt": false,
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Determines how the font size for various text elements are uniformed between each trace type. If the computed text sizes were smaller than the minimum size defined by `uniformtext.minsize` using *hide* option hides the text; and using *show* option shows the text without further downscaling. Please note that if the size defined by `minsize` is greater than the font size defined by trace, then the `minsize` is used."
+                },
+                "minsize": {
+                    "valType": "number",
+                    "min": 0,
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Sets the minimum text size between traces of the same type."
+                },
+                "editType": "plot",
+                "role": "object"
+            },
             "autosize": {
                 "valType": "boolean",
                 "role": "info",
@@ -63290,6 +63667,18 @@
                     "editType": "plot",
                     "role": "object"
                 },
+                "fitbounds": {
+                    "valType": "enumerated",
+                    "values": [
+                        false,
+                        "locations",
+                        "geojson"
+                    ],
+                    "dflt": false,
+                    "role": "info",
+                    "editType": "plot",
+                    "description": "Determines if this subplot's view settings are auto-computed to fit trace data. On scoped maps, setting `fitbounds` leads to `center.lon` and `center.lat` getting auto-filled. On maps with a non-clipped projection, setting `fitbounds` leads to `center.lon`, `center.lat`, and `projection.rotation.lon` getting auto-filled. On maps with a clipped projection, setting `fitbounds` leads to `center.lon`, `center.lat`, `projection.rotation.lon`, `projection.rotation.lat`, `lonaxis.range` and `lonaxis.range` getting auto-filled. If *locations*, only the trace's visible locations are considered in the `fitbounds` computations. If *geojson*, the entire trace input `geojson` (if provided) is considered in the `fitbounds` computations, Defaults to *false*."
+                },
                 "resolution": {
                     "valType": "enumerated",
                     "values": [
@@ -63413,6 +63802,13 @@
                     },
                     "editType": "plot",
                     "role": "object"
+                },
+                "visible": {
+                    "valType": "boolean",
+                    "role": "info",
+                    "dflt": true,
+                    "description": "Sets the default visibility of the base layers.",
+                    "editType": "plot"
                 },
                 "showcoastlines": {
                     "valType": "boolean",
@@ -65439,7 +65835,7 @@
                     "valType": "color",
                     "role": "style",
                     "editType": "legend",
-                    "description": "Sets the legend background color."
+                    "description": "Sets the legend background color. Defaults to `layout.paper_bgcolor`."
                 },
                 "bordercolor": {
                     "valType": "color",
@@ -65605,6 +66001,52 @@
                     "role": "style",
                     "editType": "legend",
                     "description": "Sets the vertical alignment of the symbols with respect to their associated text."
+                },
+                "title": {
+                    "text": {
+                        "valType": "string",
+                        "dflt": "",
+                        "role": "info",
+                        "editType": "legend",
+                        "description": "Sets the title of the legend."
+                    },
+                    "font": {
+                        "family": {
+                            "valType": "string",
+                            "role": "style",
+                            "noBlank": true,
+                            "strict": true,
+                            "editType": "legend",
+                            "description": "HTML font family - the typeface that will be applied by the web browser. The web browser will only be able to apply a font if it is available on the system which it operates. Provide multiple font families, separated by commas, to indicate the preference in which to apply fonts if they aren't available on the system. The plotly service (at https://plot.ly or on-premise) generates images on a server, where only a select number of fonts are installed and supported. These include *Arial*, *Balto*, *Courier New*, *Droid Sans*,, *Droid Serif*, *Droid Sans Mono*, *Gravitas One*, *Old Standard TT*, *Open Sans*, *Overpass*, *PT Sans Narrow*, *Raleway*, *Times New Roman*."
+                        },
+                        "size": {
+                            "valType": "number",
+                            "role": "style",
+                            "min": 1,
+                            "editType": "legend"
+                        },
+                        "color": {
+                            "valType": "color",
+                            "role": "style",
+                            "editType": "legend"
+                        },
+                        "editType": "legend",
+                        "description": "Sets this legend's title font.",
+                        "role": "object"
+                    },
+                    "side": {
+                        "valType": "enumerated",
+                        "values": [
+                            "top",
+                            "left",
+                            "top left"
+                        ],
+                        "role": "style",
+                        "editType": "legend",
+                        "description": "Determines the location of legend's title with respect to the legend items. Defaulted to *top* with `orientation` is *h*. Defaulted to *left* with `orientation` is *v*. The *top left* options could be used to expand legend area in both x and y sides."
+                    },
+                    "editType": "legend",
+                    "role": "object"
                 },
                 "editType": "legend",
                 "role": "object"
@@ -68408,9 +68850,18 @@
             "description": "Mapbox access token (required to plot mapbox trace types) If using an Mapbox Atlas server, set this option to '' so that plotly.js won't attempt to authenticate to the public Mapbox server."
         },
         "logging": {
-            "valType": "boolean",
+            "valType": "integer",
+            "min": 0,
+            "max": 2,
             "dflt": 1,
             "description": "Turn all console logging on or off (errors will be thrown) This should ONLY be set via Plotly.setPlotConfig Available levels: 0: no logs 1: warnings and errors, but not informational messages 2: verbose logs"
+        },
+        "notifyOnLogging": {
+            "valType": "integer",
+            "min": 0,
+            "max": 2,
+            "dflt": 0,
+            "description": "Set on-graph logging (notifier) level This should ONLY be set via Plotly.setPlotConfig Available levels: 0: no on-graph logs 1: warnings and errors, but not informational messages 2: verbose logs"
         },
         "queueLength": {
             "valType": "integer",

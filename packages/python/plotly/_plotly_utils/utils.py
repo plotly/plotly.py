@@ -4,9 +4,10 @@ import sys
 import re
 
 from _plotly_utils.optional_imports import get_module
+from _plotly_utils.basevalidators import ImageUriValidator
 
 
-PY36_OR_LATER = sys.version_info.major == 3 and sys.version_info.minor >= 6
+PY36_OR_LATER = sys.version_info >= (3, 6)
 
 
 class PlotlyJSONEncoder(_json.JSONEncoder):
@@ -104,6 +105,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
             self.encode_as_date,
             self.encode_as_list,  # because some values have `tolist` do last.
             self.encode_as_decimal,
+            self.encode_as_pil,
         )
         for encoding_method in encoding_methods:
             try:
@@ -192,6 +194,15 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         else:
             raise NotEncodable
 
+    @staticmethod
+    def encode_as_pil(obj):
+        """Attempt to convert PIL.Image.Image to base64 data uri"""
+        image = get_module("PIL.Image")
+        if image is not None and isinstance(obj, image.Image):
+            return ImageUriValidator.pil_image_to_uri(obj)
+        else:
+            raise NotEncodable
+
 
 class NotEncodable(Exception):
     pass
@@ -216,7 +227,7 @@ def iso_to_plotly_time_string(iso_string):
 
 def template_doc(**names):
     def _decorator(func):
-        if sys.version[:3] != "3.2":
+        if not sys.version_info[:2] == (3, 2):
             if func.__doc__ is not None:
                 func.__doc__ = func.__doc__.format(**names)
         return func

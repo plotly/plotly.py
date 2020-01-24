@@ -734,6 +734,7 @@ def scatter_polar(
     start_angle=90,
     size_max=None,
     range_r=None,
+    range_theta=None,
     log_r=False,
     render_mode="auto",
     title=None,
@@ -776,6 +777,7 @@ def line_polar(
     line_shape=None,
     render_mode="auto",
     range_r=None,
+    range_theta=None,
     log_r=False,
     title=None,
     template=None,
@@ -806,11 +808,15 @@ def bar_polar(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
+    color_continuous_scale=None,
+    range_color=None,
+    color_continuous_midpoint=None,
     barnorm=None,
     barmode="relative",
     direction="clockwise",
     start_angle=90,
     range_r=None,
+    range_theta=None,
     log_r=False,
     title=None,
     template=None,
@@ -837,6 +843,8 @@ def choropleth(
     lon=None,
     locations=None,
     locationmode=None,
+    geojson=None,
+    featureidkey=None,
     color=None,
     hover_name=None,
     hover_data=None,
@@ -845,6 +853,8 @@ def choropleth(
     animation_group=None,
     category_orders={},
     labels={},
+    color_discrete_sequence=None,
+    color_discrete_map={},
     color_continuous_scale=None,
     range_color=None,
     color_continuous_midpoint=None,
@@ -863,7 +873,13 @@ def choropleth(
     return make_figure(
         args=locals(),
         constructor=go.Choropleth,
-        trace_patch=dict(locationmode=locationmode),
+        trace_patch=dict(
+            locationmode=locationmode,
+            featureidkey=featureidkey,
+            geojson=geojson
+            if not hasattr(geojson, "__geo_interface__")  # for geopandas
+            else geojson.__geo_interface__,
+        ),
     )
 
 
@@ -1000,6 +1016,7 @@ scatter_mapbox.__doc__ = make_docstring(scatter_mapbox)
 def choropleth_mapbox(
     data_frame=None,
     geojson=None,
+    featureidkey=None,
     locations=None,
     color=None,
     hover_name=None,
@@ -1009,6 +1026,8 @@ def choropleth_mapbox(
     animation_group=None,
     category_orders={},
     labels={},
+    color_discrete_sequence=None,
+    color_discrete_map={},
     color_continuous_scale=None,
     range_color=None,
     color_continuous_midpoint=None,
@@ -1029,9 +1048,10 @@ def choropleth_mapbox(
         args=locals(),
         constructor=go.Choroplethmapbox,
         trace_patch=dict(
+            featureidkey=featureidkey,
             geojson=geojson
-            if not hasattr(geojson, "__geo_interface__")
-            else geojson.__geo_interface__
+            if not hasattr(geojson, "__geo_interface__")  # for geopandas
+            else geojson.__geo_interface__,
         ),
     )
 
@@ -1185,6 +1205,7 @@ def parallel_categories(
     template=None,
     width=None,
     height=None,
+    dimensions_max_cardinality=50,
 ):
     """
     In a parallel categories (or parallel sets) plot, each row of
@@ -1249,6 +1270,7 @@ def sunburst(
     names=None,
     values=None,
     parents=None,
+    path=None,
     ids=None,
     color=None,
     color_continuous_scale=None,
@@ -1275,6 +1297,13 @@ def sunburst(
         layout_patch = {"sunburstcolorway": color_discrete_sequence}
     else:
         layout_patch = {}
+    if path is not None and (ids is not None or parents is not None):
+        raise ValueError(
+            "Either `path` should be provided, or `ids` and `parents`."
+            "These parameters are mutually exclusive and cannot be passed together."
+        )
+    if path is not None and branchvalues is None:
+        branchvalues = "total"
     return make_figure(
         args=locals(),
         constructor=go.Sunburst,
@@ -1292,6 +1321,7 @@ def treemap(
     values=None,
     parents=None,
     ids=None,
+    path=None,
     color=None,
     color_continuous_scale=None,
     range_color=None,
@@ -1317,6 +1347,13 @@ def treemap(
         layout_patch = {"treemapcolorway": color_discrete_sequence}
     else:
         layout_patch = {}
+    if path is not None and (ids is not None or parents is not None):
+        raise ValueError(
+            "Either `path` should be provided, or `ids` and `parents`."
+            "These parameters are mutually exclusive and cannot be passed together."
+        )
+    if path is not None and branchvalues is None:
+        branchvalues = "total"
     return make_figure(
         args=locals(),
         constructor=go.Treemap,

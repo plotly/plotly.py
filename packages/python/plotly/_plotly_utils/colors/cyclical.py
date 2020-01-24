@@ -13,6 +13,57 @@ def swatches(template=None):
 
 swatches.__doc__ = _swatches.__doc__
 
+
+def swatches_cyclical(template=None):
+    """
+    Parameters
+    ----------
+    template : str or dict or plotly.graph_objects.layout.Template instance
+        The figure template name or definition.
+
+    Returns
+    -------
+    fig : graph_objects.Figure containing the displayed image
+        A `Figure` object. This figure demonstrates the color scales and
+        sequences in this module, as polar bar charts.
+    """
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
+    from plotly.express._core import apply_default_cascade
+
+    args = dict(template=template)
+    apply_default_cascade(args)
+
+    rows = 2
+    cols = 4
+    scales = ["Twilight", "IceFire", "Edge", "Phase", "HSV", "mrybm", "mygbm"]
+    fig = make_subplots(
+        rows=rows,
+        cols=cols,
+        subplot_titles=scales,
+        specs=[[{"type": "polar"}] * cols] * rows,
+    )
+
+    for i, scale in enumerate(scales):
+        fig.add_trace(
+            go.Barpolar(
+                r=[1] * int(360 / 5),
+                theta=list(range(0, 360, 5)),
+                marker_color=list(range(0, 360, 5)),
+                marker_cmin=0,
+                marker_cmax=360,
+                marker_colorscale=scale,
+                name=scale,
+            ),
+            row=int(i / cols) + 1,
+            col=i % cols + 1,
+        )
+    fig.update_traces(width=5.2, marker_line_width=0, base=0.5, showlegend=False)
+    fig.update_polars(angularaxis_visible=False, radialaxis_visible=False)
+    fig.update_layout(title="plotly.colors.cyclical", template=args["template"])
+    return fig
+
+
 Twilight = [
     "#e2d9e2",
     "#9ebbc9",
@@ -42,7 +93,7 @@ IceFire = [
     "#ac2301",
     "#820000",
     "#4c0000",
-    "#040100",
+    "#000000",
 ]
 Edge = [
     "#313131",
@@ -87,7 +138,7 @@ HSV = [
     "#0010ff",
     "#9700ff",
     "#ff00bf",
-    "#ff0018",
+    "#ff0000",
 ]
 mrybm = [
     "#f884f7",
@@ -106,6 +157,7 @@ mrybm = [
     "#6b4ef9",
     "#956bfa",
     "#cd7dfe",
+    "#f884f7",
 ]
 mygbm = [
     "#ef55f1",
@@ -124,4 +176,12 @@ mygbm = [
     "#6324f5",
     "#9139fa",
     "#c543fa",
+    "#ef55f1",
 ]
+
+# Prefix variable names with _ so that they will not be added to the swatches
+_contents = dict(globals())
+for _k, _cols in _contents.items():
+    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
+        continue
+    globals()[_k + "_r"] = _cols[::-1]

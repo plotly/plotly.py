@@ -43,3 +43,5 @@ plotly/tests/test_orca/images/*/tmp
 /plotly-package/plotly/tests/test_core/test_offline/plotly.min.js
 temp-plot.html
 .vscode
+doc/python/.ipynb_checkpoints
+doc/python/.mapbox_token

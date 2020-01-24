@@ -2,6 +2,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from numpy.testing import assert_array_equal
 import numpy as np
+import pandas as pd
+import pytest
 
 
 def _compare_figures(go_trace, px_fig):
@@ -111,6 +113,157 @@ def test_sunburst_treemap_colorscales():
         assert list(fig.layout[colorway]) == color_seq
 
 
+def test_sunburst_treemap_with_path():
+    vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    total = ["total",] * 8
+    df = pd.DataFrame(
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+        )
+    )
+    path = ["total", "regions", "sectors", "vendors"]
+    # No values
+    fig = px.sunburst(df, path=path)
+    assert fig.data[0].branchvalues == "total"
+    # Values passed
+    fig = px.sunburst(df, path=path, values="values")
+    assert fig.data[0].branchvalues == "total"
+    assert fig.data[0].values[-1] == np.sum(values)
+    # Values passed
+    fig = px.sunburst(df, path=path, values="values")
+    assert fig.data[0].branchvalues == "total"
+    assert fig.data[0].values[-1] == np.sum(values)
+    # Continuous colorscale
+    fig = px.sunburst(df, path=path, values="values", color="values")
+    assert "coloraxis" in fig.data[0].marker
+    assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
+    # Error when values cannot be converted to numerical data type
+    df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
+    msg = "Column `values` of `df` could not be converted to a numerical data type."
+    with pytest.raises(ValueError, match=msg):
+        fig = px.sunburst(df, path=path, values="values")
+    #  path is a mixture of column names and array-like
+    path = [df.total, "regions", df.sectors, "vendors"]
+    fig = px.sunburst(df, path=path)
+    assert fig.data[0].branchvalues == "total"
+
+
+def test_sunburst_treemap_with_path_and_hover():
+    df = px.data.tips()
+    fig = px.sunburst(
+        df, path=["sex", "day", "time", "smoker"], color="smoker", hover_data=["smoker"]
+    )
+    assert "smoker" in fig.data[0].hovertemplate
+
+
+def test_sunburst_treemap_with_path_color():
+    vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    calls = [8, 2, 1, 3, 2, 2, 4, 1]
+    total = ["total",] * 8
+    df = pd.DataFrame(
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+            calls=calls,
+        )
+    )
+    path = ["total", "regions", "sectors", "vendors"]
+    fig = px.sunburst(df, path=path, values="values", color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
+    fig = px.sunburst(df, path=path, color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
+
+    # Hover info
+    df["hover"] = [el.lower() for el in vendors]
+    fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
+    custom = fig.data[0].customdata.ravel()
+    assert np.all(custom[:8] == df["hover"])
+    assert np.all(custom[8:] == "(?)")
+
+    # Discrete color
+    fig = px.sunburst(df, path=path, color="vendors")
+    assert len(np.unique(fig.data[0].marker.colors)) == 9
+
+
+def test_sunburst_treemap_with_path_non_rectangular():
+    vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        None,
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Finance",
+    ]
+    regions = [
+        "North",
+        "North",
+        "North",
+        "North",
+        "North",
+        "South",
+        "South",
+        "South",
+        "South",
+        "South",
+    ]
+    values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+    total = ["total",] * 10
+    df = pd.DataFrame(
+        dict(
+            vendors=vendors,
+            sectors=sectors,
+            regions=regions,
+            values=values,
+            total=total,
+        )
+    )
+    path = ["total", "regions", "sectors", "vendors"]
+    msg = "Non-leaves rows are not permitted in the dataframe"
+    with pytest.raises(ValueError, match=msg):
+        fig = px.sunburst(df, path=path, values="values")
+    df.loc[df["vendors"].isnull(), "sectors"] = "Other"
+    fig = px.sunburst(df, path=path, values="values")
+    assert fig.data[0].values[-1] == np.sum(values)
+
+
 def test_pie_funnelarea_colorscale():
     labels = ["A", "B", "C", "D"]
     values = [3, 2, 1, 4]
@@ -139,3 +292,36 @@ def test_funnel():
         color=["0", "0", "0", "1", "1", "1"],
     )
     assert len(fig.data) == 2
+
+
+def test_parcats_dimensions_max():
+    df = px.data.tips()
+
+    # default behaviour
+    fig = px.parallel_categories(df)
+    assert [d.label for d in fig.data[0].dimensions] == [
+        "sex",
+        "smoker",
+        "day",
+        "time",
+        "size",
+    ]
+
+    # explicit subset of default
+    fig = px.parallel_categories(df, dimensions=["sex", "smoker", "day"])
+    assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day"]
+
+    # shrinking max
+    fig = px.parallel_categories(df, dimensions_max_cardinality=4)
+    assert [d.label for d in fig.data[0].dimensions] == [
+        "sex",
+        "smoker",
+        "day",
+        "time",
+    ]
+
+    # explicit superset of default, violating the max
+    fig = px.parallel_categories(
+        df, dimensions=["sex", "smoker", "day", "size"], dimensions_max_cardinality=4
+    )
+    assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]

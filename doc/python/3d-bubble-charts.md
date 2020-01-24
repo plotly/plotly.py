@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.2.3
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to make 3D Bubble Charts in Python with Plotly. Three examples
+    description:
+      How to make 3D Bubble Charts in Python with Plotly. Three examples
       of 3D Bubble Charts.
     display_as: 3d_charts
     language: python
@@ -39,14 +40,12 @@ jupyter:
 ```python
 import plotly.express as px
 import numpy as np
-gapminder = px.data.gapminder()
-#gapminder.columns
-fig = px.scatter_3d(gapminder, x='year', y='continent', z='pop', size='gdpPercap', color='lifeExp',
+df = px.data.gapminder()
+fig = px.scatter_3d(df, x='year', y='continent', z='pop', size='gdpPercap', color='lifeExp',
                     hover_data=['country'])
 fig.update_layout(scene_zaxis_type="log")
 fig.show()
 ```
-
 
 #### Simple Bubble Chart
 
@@ -85,6 +84,7 @@ fig.show()
 ```
 
 #### Bubble Chart Sized by a Variable
+
 Plot planets' distance from sun, density, and gravity with bubble size based on planet size
 
 ```python
@@ -125,6 +125,7 @@ fig.show()
 ```
 
 #### Edit the Colorbar
+
 Plot planets' distance from sun, density, and gravity with bubble size based on planet size
 
 ```python
@@ -165,5 +166,5 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#scatter3d and https://plot.ly/python/reference/#scatter-marker-sizeref <br>for more information and chart attribute options!
 
+See https://plot.ly/python/reference/#scatter3d and https://plot.ly/python/reference/#scatter-marker-sizeref <br>for more information and chart attribute options!

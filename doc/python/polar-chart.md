@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.6.8
   plotly:
     description: How to make polar charts in Python with Plotly.
     display_as: scientific
@@ -39,14 +39,14 @@ A polar chart represents data along radial and angular axes. With Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
- For other types of arguments, see the section below using `go.Scatterpolar`.
+For other types of arguments, see the section below using `go.Scatterpolar`.
 
 The radial and angular coordinates are given with the `r` and `theta` arguments of `px.scatter_polar`. In the example below the `theta` data are categorical, but numerical data are possible too and the most common case.
 
 ```python
 import plotly.express as px
-wind = px.data.wind()
-fig = px.scatter_polar(wind, r="frequency", theta="direction")
+df = px.data.wind()
+fig = px.scatter_polar(df, r="frequency", theta="direction")
 fig.show()
 ```
 
@@ -54,10 +54,10 @@ The "strength" column corresponds to strength categories of the wind, and there 
 
 ```python
 import plotly.express as px
-wind = px.data.wind()
-fig = px.scatter_polar(wind, r="frequency", theta="direction",
+df = px.data.wind()
+fig = px.scatter_polar(df, r="frequency", theta="direction",
                        color="strength", symbol="strength", size="frequency",
-                       color_discrete_sequence=px.colors.sequential.Plasma[-2::-1])
+                       color_discrete_sequence=px.colors.sequential.Plasma_r)
 fig.show()
 ```
 
@@ -65,15 +65,23 @@ For a line polar plot, use `px.line_polar`:
 
 ```python
 import plotly.express as px
-wind = px.data.wind()
-fig = px.line_polar(wind, r="frequency", theta="direction", color="strength", line_close=True,
-                    color_discrete_sequence=px.colors.sequential.Plasma[-2::-1],
+df = px.data.wind()
+fig = px.line_polar(df, r="frequency", theta="direction", color="strength", line_close=True,
+                    color_discrete_sequence=px.colors.sequential.Plasma_r,
                     template="plotly_dark",)
 fig.show()
 ```
 
 See also the [wind rose page](https://plot.ly/python/wind-rose-charts/) for more wind rose visualizations in polar coordinates.
 
+You can plot less than a whole circle with the `range_theta` argument, and also control the `start_angle` and `direction`:
+
+```python
+import plotly.express as px
+fig = px.scatter_polar(r=range(0,90,10), theta=range(0,90,10),
+                       range_theta=[0,90], start_angle=0, direction="counterclockwise")
+fig.show()
+```
 
 ## Polar Scatter Plot with go.Scatterpolar
 
@@ -429,4 +437,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scatterpolar for more information and chart attribute options!

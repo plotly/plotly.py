@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -30,26 +30,24 @@ jupyter:
     order: 2
     page_type: example_index
     permalink: python/box-plots/
+    redirect_from:
+    - /python/box/
+    - /python/basic_statistics/
     thumbnail: thumbnail/box.jpg
-    redirect_from: 
-      - /python/box/
-      - /python/basic_statistics/
 ---
 
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
 
-
-## Box Plot with Plotly Express
+## Box Plot with `plotly.express`
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 
-
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, y="total_bill")
+df = px.data.tips()
+fig = px.box(df, y="total_bill")
 fig.show()
 ```
 
@@ -57,8 +55,8 @@ If a column name is given as `x` argument, a box plot is drawn for each value of
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill")
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill")
 fig.show()
 ```
 
@@ -68,8 +66,53 @@ With the `points` argument, display underlying data points with either all point
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill", points="all")
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill", points="all")
+fig.show()
+```
+
+### Choosing The Algorithm For Computing Quartiles
+
+By default, quartiles for box plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details). 
+
+However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles. 
+
+The *exclusive* algorithm uses the median to divide the ordered dataset into two halves. If the sample is odd, it does not include the median in either half. Q1 is then the median of the lower half and Q3 is the median of the upper half.
+
+The *inclusive* algorithm also uses the median to divide the ordered dataset into two halves, but if the sample is odd, it includes the median in both halves. Q1 is then the median of the lower half and Q3 the median of the upper half.
+
+```python
+import plotly.express as px
+
+df = px.data.tips()
+
+fig = px.box(df, x="day", y="total_bill", color="smoker")
+fig.update_traces(quartilemethod="exclusive") # or "inclusive", or "linear" by default
+fig.show()
+```
+
+#### Difference Between Quartile Algorithms
+It can sometimes be difficult to see the difference between the linear, inclusive, and exclusive algorithms for computing quartiles. In the following example, the same dataset is visualized using each of the three different quartile computation algorithms. 
+
+```python
+import plotly.express as px
+import pandas as pd
+
+data = [1,2,3,4,5,6,7,8,9]
+df = pd.DataFrame(dict(
+    linear=data,
+    inclusive=data,
+    exclusive=data
+)).melt(var_name="quartilemethod") 
+
+
+fig = px.box(df, y="value", facet_col="quartilemethod", color="quartilemethod",
+             boxmode="overlay", points='all')
+
+fig.update_traces(quartilemethod="linear", jitter=0, col=1)
+fig.update_traces(quartilemethod="inclusive", jitter=0, col=2)
+fig.update_traces(quartilemethod="exclusive", jitter=0, col=3)
+
 fig.show()
 ```
 
@@ -79,8 +122,8 @@ For the interpretation of the notches, see https://en.wikipedia.org/wiki/Box_plo
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.box(tips, x="time", y="total_bill", color="smoker",
+df = px.data.tips()
+fig = px.box(df, x="time", y="total_bill", color="smoker",
              notched=True, # used notched shape
              title="Box plot of total bill",
              hover_data=["day"] # add day column to hover data
@@ -92,7 +135,7 @@ fig.show()
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plot.ly/python/reference/#box.
 
-### Basic Box Plot ###
+### Basic Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -109,7 +152,7 @@ fig.add_trace(go.Box(y=y1))
 fig.show()
 ```
 
-### Basic Horizontal Box Plot ###
+### Basic Horizontal Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -126,7 +169,7 @@ fig.add_trace(go.Box(x=x1))
 fig.show()
 ```
 
-### Box Plot That Displays the Underlying Data ###
+### Box Plot That Displays The Underlying Data
 
 ```python
 import plotly.graph_objects as go
@@ -140,7 +183,49 @@ fig = go.Figure(data=[go.Box(y=[0, 1, 1, 2, 3, 5, 8, 13, 21],
 fig.show()
 ```
 
-### Colored Box Plot ###
+### Modifying The Algorithm For Computing Quartiles
+
+For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](#choosing-the-algorithm-for-computing-quartiles).
+
+```python
+import plotly.graph_objects as go
+
+data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+fig = go.Figure()
+fig.add_trace(go.Box(y=data, quartilemethod="linear", name="Linear Quartile Mode"))
+fig.add_trace(go.Box(y=data, quartilemethod="inclusive", name="Inclusive Quartile Mode"))
+fig.add_trace(go.Box(y=data, quartilemethod="exclusive", name="Exclusive Quartile Mode"))
+fig.update_traces(boxpoints='all', jitter=0)
+fig.show()
+```
+
+### Box Plot With Precomputed Quartiles
+
+You can specify precomputed quartile attributes rather than using a built-in quartile computation algorithm.
+
+This could be useful if you have already pre-computed those values or if you need to use a different algorithm than the ones provided. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Box(y=[
+        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ],
+        [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+      ], name="Precompiled Quartiles"))
+
+fig.update_traces(q1=[ 1, 2, 3 ], median=[ 4, 5, 6 ], 
+                  q3=[ 7, 8, 9 ], lowerfence=[-1, 0, 1], 
+                  upperfence=[5, 6, 7], mean=[ 2.2, 2.8, 3.2 ], 
+                  sd=[ 0.2, 0.4, 0.6 ], notchspan=[ 0.2, 0.4, 0.6 ] )
+
+fig.show()
+```
+
+### Colored Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -158,7 +243,7 @@ fig.add_trace(go.Box(y=y1, name = 'Sample B',
 fig.show()
 ```
 
-### Box Plot Styling Mean & Standard Deviation ###
+### Box Plot Styling Mean & Standard Deviation
 
 ```python
 import plotly.graph_objects as go
@@ -180,9 +265,9 @@ fig.add_trace(go.Box(
 fig.show()
 ```
 
-### Styling Outliers ###
+### Styling Outliers
 
-The example below shows how to use the `boxpoints` argument. If "outliers", only the sample points lying outside the whiskers are shown. If "suspectedoutliers", the outlier points are shown and points either less than 4Q1-3Q3 or greater than 4Q3-3Q1 are highlighted (using  `outliercolor`). If "all", all sample points are shown. If False, only the boxes are shown with no sample points.
+The example below shows how to use the `boxpoints` argument. If "outliers", only the sample points lying outside the whiskers are shown. If "suspectedoutliers", the outlier points are shown and points either less than 4Q1-3Q3 or greater than 4Q3-3Q1 are highlighted (using `outliercolor`). If "all", all sample points are shown. If False, only the boxes are shown with no sample points.
 
 ```python
 import plotly.graph_objects as go
@@ -236,7 +321,7 @@ fig.update_layout(title_text="Box Plot Styling Outliers")
 fig.show()
 ```
 
-### Grouped Box Plots ###
+### Grouped Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -272,7 +357,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Grouped Horizontal Box Plot ###
+### Grouped Horizontal Box Plot
 
 ```python
 import plotly.graph_objects as go
@@ -309,7 +394,7 @@ fig.update_traces(orientation='h') # horizontal box plots
 fig.show()
 ```
 
-### Rainbow Box Plots ###
+### Rainbow Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -340,8 +425,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Fully Styled Box Plots ###
-
+### Fully Styled Box Plots
 
 ```python
 import plotly.graph_objects as go
@@ -404,21 +488,6 @@ fig.update_layout(
 fig.show()
 ```
 
-### Dash Example
-
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-boxplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-boxplot/", width="100%", height="650px", frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-boxplot/code", width="100%", height=500, frameBorder="0")
-```
-
 #### Reference
+
 See https://plot.ly/python/reference/#box for more information and chart attribute options!

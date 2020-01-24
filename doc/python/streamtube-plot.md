@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.3
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -110,9 +110,9 @@ from plotly.subplots import make_subplots
 import numpy as np
 
 x, y, z = np.mgrid[0:10, 0:10, 0:10]
-x = x.T.flatten()
-y = y.T.flatten()
-z = z.T.flatten()
+x = x.flatten()
+y = y.flatten()
+z = z.flatten()
 
 u = np.zeros_like(x)
 v = np.zeros_like(y)

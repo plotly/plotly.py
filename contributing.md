@@ -14,6 +14,10 @@ Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible t
 
 Check out our Support App: https://support.plot.ly/libraries/python or Community Forum: https://community.plot.ly/.
 
+## Want to improve the plotly documentation?
+
+Thank you! Instructions on how to contribute to the documentation are given [here](doc/contributing.md). Please also read the next section if you need to setup a development environment. 
+
 ## Setup a Development Environment
 
 ### Fork, Clone, Setup Your Version of the Plotly Python API
@@ -24,45 +28,44 @@ First, you'll need to *get* our project. This is the appropriate *clone* command
 
 ```bash
 git clone https://github.com/your_github_username/plotly.py.git
+cd plotly.py
 ```
 
 ### Create a virtual environment for plotly development
-TODO: Use virtualenv or conda, activate it
 
-http://docs.python-guide.org/en/latest/dev/virtualenvs/
+You can use either [conda][conda-env] or [virtualenv][virtualenv] to create a virtual environment for plotly development, e.g.
+
+```bash
+conda create -n plotly-dev python
+conda activate plotly-dev
+```
+
+[conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
+[virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
 ### Install requirements
-    $ pip install -r requirements.txt
-    $ pip install -r optional-requirements.txt
+
+    $ pip install -r packages/python/plotly/requirements.txt
+    $ pip install -r packages/python/plotly/optional-requirements.txt
 
 ### Editable install of plotly packages
+
     $ pip install -e packages/python/plotly/
     $ pip install -e packages/python/chart-studio/
     $ pip install -e packages/python/plotly-geo/
 
 ### ipywidgets development install
+
 Run the following commands in your virtual environment to use the
 development version of `FigureWidget`, 
 
     $ jupyter nbextension enable --py widgetsnbextension
     $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
     $ jupyter nbextension enable --py --sys-prefix plotlywidget
-    
-### Setup Submodules
 
-This project uses git submodules. They're both helpful and, at times, difficult to work with. The good news is you probably don't need to think about them! Just run the following shell command to make sure that your local repo is wired properly:
+To make plotly plots show up in JupyterLab, you also need to [install the plotly jupyterlab extensions][plotly-jl].
 
-**DO THIS (run this command in your new `plotly.py` directory)**
-
-```bash
-python update_submodules.py
-```
-
-That's going to initialize the submodules we use in this project, update them so that they're synced to the proper commit, and copy files to the appropriate locations in your local repo.
-
-Here's what you need to know: changes to any files inside the following directories **will get overwritten**. These are synced with the submodules, if you need to change functionality there, you will need to make a pull request in the appropriate sub project repository.
-- `packages/python/chart-studio/chart_studio/plotly/chunked_requests`
-- `packages/python/plotly/plotly/matplotlylib/mplexporter`
+[plotly-jl]: https://plot.ly/python/getting-started/#jupyterlab-support-python-35
     
 ### Configure black code formatting
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
@@ -520,4 +523,6 @@ From `packages/python/plotly-geo`, build the conda packge
 Then upload to the plotly anaconda channel as described above
 
 ## Contributing to the Figure Factories
-If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation](https://github.com/plotly/plotly.py/blob/master/plotly/figure_factory/README.md) to learn how.
+If you are interested in contributing to the ever-growing Plotly figure factory library in Python, check out the [documentation][ff-home] to learn how.
+
+[ff-home]: packages/python/plotly/plotly/figure_factory/README.md

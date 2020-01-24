@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -33,13 +33,106 @@ jupyter:
     thumbnail: thumbnail/sunburst.gif
 ---
 
-### Basic Sunburst Plot ###
-Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` and in `parents`. The root starts from the center and children are added to the outer rings.
+Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` (`names` in `px.sunburst`) and in `parents`. The root starts from the center and children are added to the outer rings.
 
 Main arguments:
-1. `labels`: sets the labels of sunburst sectors.
+1. `labels` (`names` in `px.sunburst` since `labels` is reserved for overriding columns names): sets the labels of sunburst sectors.
 2. `parents`: sets the parent sectors of sunburst sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
 3. `values`: sets the values associated with sunburst sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
+
+### Basic Sunburst Plot with plotly.express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
+
+```python
+import plotly.express as px
+data = dict(
+    character=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parent=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+    value=[10, 14, 12, 10, 2, 6, 6, 4, 4])
+
+fig =px.sunburst(
+    data,
+    names='character',
+    parents='parent',
+    values='value',
+)
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with plotly.express
+
+Hierarchical data are often stored as a rectangular dataframe, with different columns corresponding to different levels of the hierarchy. `px.sunburst` can take a `path` parameter corresponding to a list of columns. Note that `id` and `parent` should not be provided if `path` is given.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with continuous color argument in px.sunburst
+
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values. 
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.sunburst(df, path=['continent', 'country'], values='pop', 
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu', 
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with discrete color argument in px.sunburst
+
+When the argument of `color` corresponds to non-numerical data, discrete colors are used. If a sector has the same value of the `color` column for all its children, then the corresponding color is used, otherwise the first color of the discrete color sequence is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+fig.show()
+```
+
+In the example below the color of `Saturday` and `Sunday` sectors is the same as `Dinner` because there are only Dinner entries for Saturday and Sunday. However, for Female -> Friday there are both lunches and dinners, hence the "mixed" color (blue here) is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
+### Rectangular data with missing values
+
+If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
+
+```python
+import plotly.express as px
+import pandas as pd
+vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
+regions = ["North", "North", "North", "North", "North",
+           "South", "South", "South", "South", "South"]
+sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+df = pd.DataFrame(
+    dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
+)
+print(df)
+fig = px.sunburst(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig.show()
+```
+
+### Basic Sunburst Plot with go.Sunburst
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
+
 
 ```python
 import plotly.graph_objects as go
@@ -141,6 +234,55 @@ fig.update_layout(
     margin = dict(t=0, l=0, r=0, b=0)
 )
 
+fig.show()
+```
+
+#### Controlling text orientation inside sunburst sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With
+"auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential). Note that `plotly` may reduce the font size in order to fit the text with the requested orientation.
+
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
+
+fig = go.Figure()
+
+fig.add_trace(go.Sunburst(
+    ids=df.ids,
+    labels=df.labels,
+    parents=df.parents,
+    domain=dict(column=1),
+    maxdepth=2,
+    insidetextorientation='radial'
+))
+
+fig.update_layout(
+    margin = dict(t=10, l=10, r=10, b=10)
+)
+
+fig.show()
+```
+
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+
+fig = go.Figure(go.Sunburst(
+        ids = df.ids,
+        labels = df.labels,
+        parents = df.parents))
+fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
 fig.show()
 ```
 

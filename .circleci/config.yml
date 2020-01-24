@@ -9,10 +9,10 @@ jobs:
       - checkout
       - run:
           name: Install black
-          command: 'sudo pip install black'
+          command: "sudo pip install black"
       - run:
           name: Check formatting with black
-          command: 'black --check .'
+          command: "black --check ."
 
   # Core
   python-2.7-core:
@@ -25,10 +25,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py27-core'
+          command: "cd packages/python/plotly; tox -e py27-core"
           no_output_timeout: 20m
 
   python-3.5-core:
@@ -41,10 +41,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py35-core'
+          command: "cd packages/python/plotly; tox -e py35-core"
           no_output_timeout: 20m
 
   python-3.6-core:
@@ -57,10 +57,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py36-core'
+          command: "cd packages/python/plotly; tox -e py36-core"
           no_output_timeout: 20m
 
   python-3.7-core:
@@ -73,10 +73,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py37-core'
+          command: "cd packages/python/plotly; tox -e py37-core"
           no_output_timeout: 20m
 
   python-3.7-percy:
@@ -122,14 +122,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py27-optional'
+          command: "cd packages/python/plotly; tox -e py27-optional"
           no_output_timeout: 20m
 
   python-3.5-optional:
@@ -142,14 +138,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py35-optional'
+          command: "cd packages/python/plotly; tox -e py35-optional"
           no_output_timeout: 20m
 
   python-3.6-optional:
@@ -162,14 +154,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py36-optional'
+          command: "cd packages/python/plotly; tox -e py36-optional"
           no_output_timeout: 20m
 
   python-3.7-optional:
@@ -182,14 +170,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
-      - run:
-          name: Install npm dependencies
-          command: cd packages/python/plotly/plotly/tests/test_optional/test_jupyter && npm install
-          no_output_timeout: 20m
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/plotly; tox -e py37-optional'
+          command: "cd packages/python/plotly; tox -e py37-optional"
           no_output_timeout: 20m
 
   # Plot.ly
@@ -203,10 +187,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/chart-studio; tox -e py27-plot_ly'
+          command: "cd packages/python/chart-studio; tox -e py27-plot_ly"
           no_output_timeout: 20m
 
   python-3.5-plot_ly:
@@ -219,10 +203,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/chart-studio; tox -e py35-plot_ly'
+          command: "cd packages/python/chart-studio; tox -e py35-plot_ly"
           no_output_timeout: 20m
 
   python-3.7-plot_ly:
@@ -235,10 +219,10 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install tox'
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
-          command: 'cd packages/python/chart-studio; tox -e py37-plot_ly'
+          command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
           no_output_timeout: 20m
 
   python-2-7-orca:
@@ -269,7 +253,7 @@ jobs:
             pytest packages/python/plotly/plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/linux/failed
+          path: plotly/tests/test_orca/images/linux/failed
 
   python-3-5-orca:
     docker:
@@ -299,7 +283,7 @@ jobs:
             pytest packages/python/plotly/plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/linux/failed
+          path: plotly/tests/test_orca/images/linux/failed
 
   python-3-7-orca:
     docker:
@@ -325,12 +309,12 @@ jobs:
           command: |
             . /home/circleci/miniconda/etc/profile.d/conda.sh
             conda activate circle_optional
-            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly 
+            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly
             pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
             pytest packages/python/plotly/plotly/tests/test_orca
 
       - store_artifacts:
-            path: plotly/tests/test_orca/images/linux/failed
+          path: plotly/tests/test_orca/images/linux/failed
 
   plotlyjs_dev_build:
     docker:
@@ -343,13 +327,13 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: 'sudo pip install retrying tox black inflect'
+          command: "sudo pip install retrying tox black inflect"
       - run:
           name: Update jupyterlab-plotly version
-          command: 'cd packages/python/plotly; python setup.py updateplotlywidgetversion'
+          command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
       - run:
           name: Update plotly.js to dev
-          command: 'cd packages/python/plotly; python setup.py updateplotlyjsdev'
+          command: "cd packages/python/plotly; python setup.py updateplotlyjsdev"
       - run:
           name: Test with tox
           command: |
@@ -385,7 +369,6 @@ jobs:
       - store_artifacts:
           path: packages/python/plotly/dist
 
-
   build-doc:
     resource_class: xlarge
     docker:
@@ -393,13 +376,12 @@ jobs:
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.8-node
 
-
         working_directory: ~/project
 
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "3e:4b:19:1c:c2:d1:92:dd:bf:f8:c9:d6:a6:78:69:2a"
+            - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
 
       - checkout
 
@@ -418,13 +400,14 @@ jobs:
             . venv/bin/activate
             npm install electron@1.8.4
             npm install orca
+            pip uninstall -y plotly
             pip install -r requirements.txt
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
               cd ../packages/python/plotly
               python3 setup.py install
-              cd ../../../doc      
-            fi 
+              cd ../../../doc
+            fi
             echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
             sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
             cd ..
@@ -449,10 +432,10 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
               cd build/html
               git init
-              git config user.name nicolaskruchten
-              git config user.email nicolas@plot.ly
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
               git add *
-              git commit -m build
+              git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.py-docs.git master:built
               rm -rf .git
               cd ../..
@@ -460,6 +443,20 @@ jobs:
             tar -zcf build/html.tgz build/html
             rm -rf build/html build/ipynb
             cd ..
+
+      - run:
+          name: trigger doc build
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
+              cd documentation
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
+              git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
+              git push
+              cd ..
+              rm -rf documentation
+            fi
 
       - run:
           name: make doc
@@ -472,11 +469,11 @@ jobs:
               cd _build/html
               touch .nojekyll
               git init
-              git config user.name emmanuelle
-              git config user.email emma@plot.ly
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
               git add *
               git add .nojekyll
-              git commit -m build
+              git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.py-docs.git master:gh-pages
               rm -rf .git
               cd ../..
@@ -484,12 +481,9 @@ jobs:
 
             cd ../..
 
-
       - store_artifacts:
           path: doc/build
           destination: doc/build
-     
-
 
 workflows:
   version: 2

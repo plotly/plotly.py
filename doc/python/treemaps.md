@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -33,9 +33,100 @@ jupyter:
     thumbnail: thumbnail/treemap.png
 ---
 
-### Basic Treemap
 
-[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Same as [Sunburst](https://plot.ly/python/sunburst-charts/) the hierarchy is defined by [labels](https://plot.ly/python/reference/#treemap-labels) and [parents](https://plot.ly/python/reference/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
+[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Same as [Sunburst](https://plot.ly/python/sunburst-charts/) the hierarchy is defined by [labels](https://plot.ly/python/reference/#treemap-labels) (`names` for `px.treemap`) and [parents](https://plot.ly/python/reference/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
+
+### Basic Treemap with plotly.express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+
+With `px.treemap`, each row of the DataFrame is represented as a sector of the treemap.
+
+```python
+import plotly.express as px
+fig = px.treemap(
+    names = ["Eve","Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parents = ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"]
+)
+fig.show()
+```
+
+### Treemap of a rectangular DataFrame with plotly.express
+
+Hierarchical data are often stored as a rectangular dataframe, with different columns corresponding to different levels of the hierarchy. `px.treemap` can take a `path` parameter corresponding to a list of columns. Note that `id` and `parent` should not be provided if `path` is given.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.treemap(df, path=['day', 'time', 'sex'], values='total_bill')
+fig.show()
+```
+
+### Treemap of a rectangular DataFrame with continuous color argument in px.treemap
+
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
+
+**Note**: for best results, ensure that the first `path` element is a single root node. In the examples below we are creating a dummy column containing identical values for each row to achieve this.
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+df["world"] = "world" # in order to have a single root node
+fig = px.treemap(df, path=['world', 'continent', 'country'], values='pop',
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu',
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
+### Treemap of a rectangular DataFrame with discrete color argument in px.treemap
+
+When the argument of `color` corresponds to non-numerical data, discrete colors are used. If a sector has the same value of the `color` column for all its children, then the corresponding color is used, otherwise the first color of the discrete color sequence is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+df["all"] = "all" # in order to have a single root node
+fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='day')
+fig.show()
+```
+
+In the example below the color of Saturday and Sunday sectors is the same as Dinner because there are only Dinner entries for Saturday and Sunday. However, for Female -> Friday there are both lunches and dinners, hence the "mixed" color (blue here) is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+df["all"] = "all" # in order to have a single root node
+fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
+### Rectangular data with missing values
+
+If the dataset is not fully rectangular, missing values should be supplied as `None`.
+
+```python
+import plotly.express as px
+import pandas as pd
+vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
+regions = ["North", "North", "North", "North", "North",
+           "South", "South", "South", "South", "South"]
+sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+df = pd.DataFrame(
+    dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
+)
+df["all"] = "all" # in order to have a single root node
+print(df)
+fig = px.treemap(df, path=['all', 'regions', 'sectors', 'vendors'], values='sales')
+fig.show()
+```
+### Basic Treemap with go.Treemap
+
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Treemap` function from `plotly.graph_objects`.
+
 
 ```python
 import plotly.graph_objects as go
@@ -265,6 +356,24 @@ fig.update_layout(
     margin = {'t':0, 'l':0, 'r':0, 'b':0}
 )
 
+fig.show()
+```
+
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+
+fig = go.Figure(go.Treemap(
+        ids = df.ids,
+        labels = df.labels,
+        parents = df.parents))
+fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
 fig.show()
 ```
 

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -33,9 +33,11 @@ jupyter:
     thumbnail: thumbnail/flight-paths.jpg
 ---
 
-For other geographical and map charts see [the maps index page](/python/maps/).
+Below we show how to create geographical line plots using either Plotly Express with `px.line_geo` function or the lower-level `go.Scattergeo` object.
 
-Below we show how to create geographical line plots using either Plotly Express with `px.line_geo` or the lower-level `go.Scattergeo`.
+#### Base Map Configuration
+
+Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
 
 ## Lines on Maps with Plotly Express
 
@@ -43,8 +45,8 @@ Below we show how to create geographical line plots using either Plotly Express 
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("year == 2007")
-fig = px.line_geo(gapminder, locations="iso_alpha",
+df = px.data.gapminder().query("year == 2007")
+fig = px.line_geo(df, locations="iso_alpha",
                   color="continent", # "continent" is one of the columns of gapminder
                   projection="orthographic")
 fig.show()
@@ -212,4 +214,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scattergeo for more information and chart attribute options!

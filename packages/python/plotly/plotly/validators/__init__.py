@@ -423,6 +423,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `yaxis.uirevision=*quantity*` and the y axis
                 range will reset but the x axis range will
                 retain any user-driven zoom.
+            uniformtext
+                plotly.graph_objects.layout.Uniformtext
+                instance or dict with compatible properties
             updatemenus
                 A tuple of
                 plotly.graph_objects.layout.Updatemenu
@@ -950,6 +953,10 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the maximum boundary for iso-surface plot.
             isomin
                 Sets the minimum boundary for iso-surface plot.
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.volume.Lighting instance
                 or dict with compatible properties
@@ -1010,6 +1017,9 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -1261,7 +1271,10 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 greater than 4*Q3-3*Q1 are highlighted (see
                 `outliercolor`) If "all", all sample points are
                 shown If False, only the violins are shown with
-                no sample points
+                no sample points. Defaults to
+                "suspectedoutliers" when `marker.outliercolor`
+                or `marker.line.outliercolor` is set, otherwise
+                defaults to "outliers".
             scalegroup
                 If there are multiple violins that should be
                 sized according to to some metric (see
@@ -1370,8 +1383,10 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the x sample data or coordinates. See
                 overview for more info.
             x0
-                Sets the x coordinate of the box. See overview
-                for more info.
+                Sets the x coordinate for single-box traces or
+                the starting coordinate for multi-box traces
+                set using q1/median/q3. See overview for more
+                info.
             xaxis
                 Sets a reference between this trace's x
                 coordinates and a 2D cartesian x axis. If "x"
@@ -1384,8 +1399,10 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y sample data or coordinates. See
                 overview for more info.
             y0
-                Sets the y coordinate of the box. See overview
-                for more info.
+                Sets the y coordinate for single-box traces or
+                the starting coordinate for multi-box traces
+                set using q1/median/q3. See overview for more
+                info.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -1543,7 +1560,11 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the trace.
             outsidetextfont
                 Sets the font used for `textinfo` lying outside
-                the sector.
+                the sector. This option refers to the root of
+                the hierarchy presented on top left corner of a
+                treemap graph. Please note that if a hierarchy
+                has multiple root nodes, this option won't have
+                any effect and `insidetextfont` would be used.
             parents
                 Sets the parent sectors for each of the
                 sectors. Empty string items '' are understood
@@ -1916,6 +1937,10 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.surface.Lighting instance
                 or dict with compatible properties
@@ -1963,6 +1988,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -2142,6 +2170,14 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
+            insidetextorientation
+                Determines the orientation of text inside
+                slices. With "auto" the texts may automatically
+                be rotated to fit with the maximum size inside
+                the slice. Using "horizontal" option forces
+                text to be horizontal. Using "radial" option
+                forces text to be radial. Using "tangential"
+                option forces text to be tangential.
             labels
                 Sets the labels of each of the sectors.
             labelssrc
@@ -2187,7 +2223,11 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the opacity of the trace.
             outsidetextfont
                 Sets the font used for `textinfo` lying outside
-                the sector.
+                the sector. This option refers to the root of
+                the hierarchy presented at the center of a
+                sunburst graph. Please note that if a hierarchy
+                has multiple root nodes, this option won't have
+                any effect and `insidetextfont` would be used.
             parents
                 Sets the parent sectors for each of the
                 sectors. Empty string items '' are understood
@@ -2415,6 +2455,10 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.streamtube.Lighting
                 instance or dict with compatible properties
@@ -2465,6 +2509,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -4211,6 +4258,12 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            featureidkey
+                Sets the key in GeoJSON features which is used
+                as id to match the items included in the
+                `locations` array. Only has an effect when
+                `geojson` is set. Support nested property, for
+                example "properties.name".
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not "none". "toself"
@@ -4229,6 +4282,14 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates refer to `layout.geo`. If "geo2",
                 the geospatial coordinates refer to
                 `layout.geo2`, and so on.
+            geojson
+                Sets optional GeoJSON data associated with this
+                trace. If not given, the features on the base
+                map are used when `locations` is set. It can be
+                set as a valid GeoJSON object or as a URL
+                string. Note that we only accept GeoJSONs of
+                type "FeatureCollection" or "Feature" with
+                geometries of type "Polygon" or "MultiPolygon".
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -4306,6 +4367,11 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             locationmode
                 Determines the set of locations used to match
                 entries in `locations` to regions on the map.
+                Values "ISO-3", "USA-states", *country names*
+                correspond to features on the base map and
+                value "geojson-id" corresponds to features from
+                a custom GeoJSON linked to the `geojson`
+                attribute.
             locations
                 Sets the coordinates via location IDs or names.
                 Coordinates correspond to the centroid of each
@@ -5791,6 +5857,14 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
+            insidetextorientation
+                Determines the orientation of text inside
+                slices. With "auto" the texts may automatically
+                be rotated to fit with the maximum size inside
+                the slice. Using "horizontal" option forces
+                text to be horizontal. Using "radial" option
+                forces text to be radial. Using "tangential"
+                option forces text to be tangential.
             label0
                 Alternate to `labels`. Builds a numeric set of
                 labels. Use with `dlabel` where `label0` is the
@@ -6610,8 +6684,11 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on plot.ly for  ids .
             intensity
-                Sets the vertex intensity values, used for
-                plotting fields on meshes
+                Sets the intensity values for vertices or cells
+                as defined by `intensitymode`. It can be used
+                for plotting fields on meshes.
+            intensitymode
+                Determines the source of `intensity` values.
             intensitysrc
                 Sets the source reference on plot.ly for
                 intensity .
@@ -6642,6 +6719,10 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 space, which is the third vertex of a triangle.
             ksrc
                 Sets the source reference on plot.ly for  k .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.mesh3d.Lighting instance
                 or dict with compatible properties
@@ -6689,6 +6770,9 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -6924,6 +7008,10 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the maximum boundary for iso-surface plot.
             isomin
                 Sets the minimum boundary for iso-surface plot.
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.isosurface.Lighting
                 instance or dict with compatible properties
@@ -6971,6 +7059,9 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -7846,6 +7937,10 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             marker
                 plotly.graph_objects.histogram2d.Marker
                 instance or dict with compatible properties
@@ -7888,6 +7983,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `zmin` will correspond to the last color in the
                 array and `zmax` will correspond to the first
                 color.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -8660,6 +8758,10 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -8687,6 +8789,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `zmin` will correspond to the last color in the
                 array and `zmax` will correspond to the first
                 color.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -9501,6 +9606,10 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 North).
             latsrc
                 Sets the source reference on plot.ly for  lat .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lon
                 Sets the longitude coordinates (in degrees
                 East).
@@ -9541,6 +9650,9 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `zmin` will correspond to the last color in the
                 array and `zmax` will correspond to the first
                 color.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -10323,6 +10435,10 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             lighting
                 plotly.graph_objects.cone.Lighting instance or
                 dict with compatible properties
@@ -10370,6 +10486,9 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 refer to `layout.scene`. If "scene2", the
                 (x,y,z) coordinates refer to `layout.scene2`,
                 and so on.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -10531,12 +10650,17 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            featureidkey
+                Sets the key in GeoJSON features which is used
+                as id to match the items included in the
+                `locations` array. Support nested property, for
+                example "properties.name".
             geojson
                 Sets the GeoJSON data associated with this
-                trace. Can be set as a valid GeoJSON object or
-                as URL string Note that we only accept GeoJSON
-                of type "FeatureCollection" and "Feature" with
-                geometries of type "Polygon" and
+                trace. It can be set as a valid GeoJSON object
+                or as a URL string. Note that we only accept
+                GeoJSONs of type "FeatureCollection" or
+                "Feature" with geometries of type "Polygon" or
                 "MultiPolygon".
             hoverinfo
                 Determines which trace information appear on
@@ -10593,6 +10717,10 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             locations
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.
@@ -10639,6 +10767,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 other non-array values means no selection all
                 where the `selected` and `unselected` styles
                 have no effect.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -10776,6 +10907,12 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            featureidkey
+                Sets the key in GeoJSON features which is used
+                as id to match the items included in the
+                `locations` array. Only has an effect when
+                `geojson` is set. Support nested property, for
+                example "properties.name".
             geo
                 Sets a reference between this trace's
                 geospatial coordinates and a geographic map. If
@@ -10783,6 +10920,14 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates refer to `layout.geo`. If "geo2",
                 the geospatial coordinates refer to
                 `layout.geo2`, and so on.
+            geojson
+                Sets optional GeoJSON data associated with this
+                trace. If not given, the features on the base
+                map are used. It can be set as a valid GeoJSON
+                object or as a URL string. Note that we only
+                accept GeoJSONs of type "FeatureCollection" or
+                "Feature" with geometries of type "Polygon" or
+                "MultiPolygon".
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -10838,9 +10983,18 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 numbers or any other type.
             idssrc
                 Sets the source reference on plot.ly for  ids .
+            legendgroup
+                Sets the legend group for this trace. Traces
+                part of the same legend group hide/show at the
+                same time when toggling legend items.
             locationmode
                 Determines the set of locations used to match
                 entries in `locations` to regions on the map.
+                Values "ISO-3", "USA-states", *country names*
+                correspond to features on the base map and
+                value "geojson-id" corresponds to features from
+                a custom GeoJSON linked to the `geojson`
+                attribute.
             locations
                 Sets the coordinates via location IDs or names.
                 See `locationmode` for more info.
@@ -10887,6 +11041,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 other non-array values means no selection all
                 where the `selected` and `unselected` styles
                 have no effect.
+            showlegend
+                Determines whether or not an item corresponding
+                to this trace is shown in the legend.
             showscale
                 Determines whether or not a colorbar is
                 displayed for this trace.
@@ -11330,7 +11487,9 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 If True, the mean of the box(es)' underlying
                 distribution is drawn as a dashed line inside
                 the box(es). If "sd" the standard deviation is
-                also drawn.
+                also drawn. Defaults to True when `mean` is
+                set. Defaults to "sd" when `sd` is set
+                Otherwise defaults to False.
             boxpoints
                 If "outliers", only the sample points lying
                 outside the whiskers are shown If
@@ -11339,7 +11498,11 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 greater than 4*Q3-3*Q1 are highlighted (see
                 `outliercolor`) If "all", all sample points are
                 shown If False, only the box(es) are shown with
-                no sample points
+                no sample points Defaults to
+                "suspectedoutliers" when `marker.outliercolor`
+                or `marker.line.outliercolor` is set. Defaults
+                to "all" under the q1/median/q3 signature.
+                Otherwise defaults to "outliers".
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -11349,6 +11512,12 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             customdatasrc
                 Sets the source reference on plot.ly for
                 customdata .
+            dx
+                Sets the x coordinate step for multi-box traces
+                set using q1/median/q3.
+            dy
+                Sets the y coordinate step for multi-box traces
+                set using q1/median/q3.
             fillcolor
                 Sets the fill color. Defaults to a half-
                 transparent variant of the line color, marker
@@ -11425,9 +11594,37 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             line
                 plotly.graph_objects.box.Line instance or dict
                 with compatible properties
+            lowerfence
+                Sets the lower fence values. There should be as
+                many items as the number of boxes desired. This
+                attribute has effect only under the
+                q1/median/q3 signature. If `lowerfence` is not
+                provided but a sample (in `y` or `x`) is set,
+                we compute the lower as the last sample point
+                below 1.5 times the IQR.
+            lowerfencesrc
+                Sets the source reference on plot.ly for
+                lowerfence .
             marker
                 plotly.graph_objects.box.Marker instance or
                 dict with compatible properties
+            mean
+                Sets the mean values. There should be as many
+                items as the number of boxes desired. This
+                attribute has effect only under the
+                q1/median/q3 signature. If `mean` is not
+                provided but a sample (in `y` or `x`) is set,
+                we compute the mean for each box using the
+                sample values.
+            meansrc
+                Sets the source reference on plot.ly for  mean
+                .
+            median
+                Sets the median values. There should be as many
+                items as the number of boxes desired.
+            mediansrc
+                Sets the source reference on plot.ly for
+                median .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11453,8 +11650,28 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 horizontal) are missing and the position axis
                 is categorical
             notched
-                Determines whether or not notches should be
-                drawn.
+                Determines whether or not notches are drawn.
+                Notches displays a confidence interval around
+                the median. We compute the confidence interval
+                as median +/- 1.57 * IQR / sqrt(N), where IQR
+                is the interquartile range and N is the sample
+                size. If two boxes' notches do not overlap
+                there is 95% confidence their medians differ.
+                See https://sites.google.com/site/davidsstatist
+                ics/home/notched-box-plots for more info.
+                Defaults to False unless `notchwidth` or
+                `notchspan` is set.
+            notchspan
+                Sets the notch span from the boxes' `median`
+                values. There should be as many items as the
+                number of boxes desired. This attribute has
+                effect only under the q1/median/q3 signature.
+                If `notchspan` is not provided but a sample (in
+                `y` or `x`) is set, we compute it as 1.57 * IQR
+                / sqrt(N), where N is the sample size.
+            notchspansrc
+                Sets the source reference on plot.ly for
+                notchspan .
             notchwidth
                 Sets the width of the notches relative to the
                 box' width. For example, with 0, the notches
@@ -11477,6 +11694,43 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 box(es). Positive (negative) values correspond
                 to positions to the right (left) for vertical
                 boxes and above (below) for horizontal boxes
+            q1
+                Sets the Quartile 1 values. There should be as
+                many items as the number of boxes desired.
+            q1src
+                Sets the source reference on plot.ly for  q1 .
+            q3
+                Sets the Quartile 3 values. There should be as
+                many items as the number of boxes desired.
+            q3src
+                Sets the source reference on plot.ly for  q3 .
+            quartilemethod
+                Sets the method used to compute the sample's Q1
+                and Q3 quartiles. The "linear" method uses the
+                25th percentile for Q1 and 75th percentile for
+                Q3 as computed using method #10 (listed on http
+                ://www.amstat.org/publications/jse/v14n3/langfo
+                rd.html). The "exclusive" method uses the
+                median to divide the ordered dataset into two
+                halves if the sample is odd, it does not
+                include the median in either half - Q1 is then
+                the median of the lower half and Q3 the median
+                of the upper half. The "inclusive" method also
+                uses the median to divide the ordered dataset
+                into two halves but if the sample is odd, it
+                includes the median in both halves - Q1 is then
+                the median of the lower half and Q3 the median
+                of the upper half.
+            sd
+                Sets the standard deviation values. There
+                should be as many items as the number of boxes
+                desired. This attribute has effect only under
+                the q1/median/q3 signature. If `sd` is not
+                provided but a sample (in `y` or `x`) is set,
+                we compute the standard deviation for each box
+                using the sample values.
+            sdsrc
+                Sets the source reference on plot.ly for  sd .
             selected
                 plotly.graph_objects.box.Selected instance or
                 dict with compatible properties
@@ -11535,6 +11789,17 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             unselected
                 plotly.graph_objects.box.Unselected instance or
                 dict with compatible properties
+            upperfence
+                Sets the upper fence values. There should be as
+                many items as the number of boxes desired. This
+                attribute has effect only under the
+                q1/median/q3 signature. If `upperfence` is not
+                provided but a sample (in `y` or `x`) is set,
+                we compute the lower as the last sample point
+                above 1.5 times the IQR.
+            upperfencesrc
+                Sets the source reference on plot.ly for
+                upperfence .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -11553,8 +11818,10 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the x sample data or coordinates. See
                 overview for more info.
             x0
-                Sets the x coordinate of the box. See overview
-                for more info.
+                Sets the x coordinate for single-box traces or
+                the starting coordinate for multi-box traces
+                set using q1/median/q3. See overview for more
+                info.
             xaxis
                 Sets a reference between this trace's x
                 coordinates and a 2D cartesian x axis. If "x"
@@ -11570,8 +11837,10 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y sample data or coordinates. See
                 overview for more info.
             y0
-                Sets the y coordinate of the box. See overview
-                for more info.
+                Sets the y coordinate for single-box traces or
+                the starting coordinate for multi-box traces
+                set using q1/median/q3. See overview for more
+                info.
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -11905,8 +12174,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
-                Anything contained in tag `<extra>` is
-                displayed in the secondary box, for example
+                variables `value` and `label`. Anything
+                contained in tag `<extra>` is displayed in the
+                secondary box, for example
                 "<extra>{fullData.name}</extra>". To hide the
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
@@ -12069,7 +12339,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax.
                 Every attributes that can be specified per-
                 point (the ones that are `arrayOk: true`) are
-                available.
+                available. variables `value` and `label`.
             texttemplatesrc
                 Sets the source reference on plot.ly for
                 texttemplate .

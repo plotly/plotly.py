@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -33,6 +33,7 @@ jupyter:
 ---
 
 #### Hover text with Plotly Express
+
 Many Plotly Express functions support configurable hover text. The `hover_data` argument accepts a list of column names to be added to the hover tooltip. The `hover_name` property controls which column is displayed in bold as the tooltip title.
 
 Here is an example that creates a scatter plot using Plotly Express with custom hover data and a custom hover name.
@@ -40,9 +41,9 @@ Here is an example that creates a scatter plot using Plotly Express with custom 
 ```python
 import plotly.express as px
 
-gapminder_2007 = px.data.gapminder().query("year==2007")
+df_2007 = px.data.gapminder().query("year==2007")
 
-fig = px.scatter(gapminder_2007, x="gdpPercap", y="lifeExp", log_x=True,
+fig = px.scatter(df_2007, x="gdpPercap", y="lifeExp", log_x=True,
                  hover_name="country", hover_data=["continent"])
 
 fig.show()
@@ -105,7 +106,7 @@ fig.show()
 To customize the tooltip on your graph you can use [hovertemplate](https://plot.ly/python/reference/#pie-hovertemplate), which is a template string used for rendering the information that appear on hoverbox.
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format).
 Hovertemplate customize the tooltip text vs. [texttemplate](https://plot.ly/python/reference/#pie-texttemplate) which customizes the text that appears on your chart. <br>
-Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plot.ly/python/reference/#layout-hoverlabel-align). 
+Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plot.ly/python/reference/#layout-hoverlabel-align).
 
 ```python
 import plotly.graph_objects as go
@@ -127,7 +128,7 @@ fig.add_trace(go.Scatter(
     showlegend = False))
 
 fig.update_layout(
-    hoverlabel_align = 'right', 
+    hoverlabel_align = 'right',
     title = "Set hover text with hovertemplate")
 
 fig.show()
@@ -148,6 +149,7 @@ fig.show()
 ```
 
 ### Advanced Hover Template
+
 The following example shows how to format hover template. [Here](https://plot.ly/python/v3/hover-text-and-formatting/#dash-example) is an example to see how to format hovertemplate in Dash.
 
 ```python
@@ -214,13 +216,13 @@ z1, z2, z3 = np.random.random((3, 7, 7))
 customdata = np.dstack((z2, z3))
 fig = make_subplots(1, 2, subplot_titles=['z1', 'z2'])
 fig.add_trace(go.Heatmap(
-    z=z1, 
+    z=z1,
     customdata=np.dstack((z2, z3)),
     hovertemplate='<b>z1:%{z:.3f}</b><br>z2:%{customdata[0]:.3f} <br>z3: %{customdata[1]:.3f} ',
     coloraxis="coloraxis1", name=''),
     1, 1)
 fig.add_trace(go.Heatmap(
-    z=z2, 
+    z=z2,
     customdata=np.dstack((z1, z3)),
     hovertemplate='z1:%{customdata[0]:.3f} <br><b>z2:%{z:.3f}</b><br>z3: %{customdata[1]:.3f} ',
     coloraxis="coloraxis1", name=''),
@@ -230,6 +232,7 @@ fig.show()
 ```
 
 ### Set Hover Template in Mapbox
+
 ```python
 import plotly.graph_objects as go
 
@@ -256,4 +259,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/ for more information and chart attribute options!

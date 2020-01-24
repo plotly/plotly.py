@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description: How to make scatter plots on maps in Python. Scatter plots on maps
+    description:
+      How to make scatter plots on maps in Python. Scatter plots on maps
       highlight geographic areas and can be colored by value.
     display_as: maps
     language: python
@@ -34,6 +35,10 @@ jupyter:
     thumbnail: thumbnail/scatter-plot-on-maps.jpg
 ---
 
+#### Base Map Configuration
+
+Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+
 ### Geographical Scatter Plot with px.scatter_geo
 
 Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_geo` for a geographical scatter plot. The `size` argument is used to set the size of markers from a given column of the DataFrame.
@@ -42,8 +47,8 @@ Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("year == 2007")
-fig = px.scatter_geo(gapminder, locations="iso_alpha",
+df = px.data.gapminder().query("year == 2007")
+fig = px.scatter_geo(df, locations="iso_alpha",
                      size="pop", # size of markers, "pop" is one of the columns of gapminder
                      )
 fig.show()
@@ -53,8 +58,8 @@ fig.show()
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("year == 2007")
-fig = px.scatter_geo(gapminder, locations="iso_alpha",
+df = px.data.gapminder().query("year == 2007")
+fig = px.scatter_geo(df, locations="iso_alpha",
                      color="continent", # which column to use to set the color of markers
                      hover_name="country", # column added to hover information
                      size="pop", # size of markers
@@ -209,4 +214,5 @@ fig.show()
 ```
 
 #### Reference
-See  https://plot.ly/python/reference/#scattergeo and https://plot.ly/python/reference/#layout-geo for more information and chart attribute options!
+
+See https://plot.ly/python/reference/#scattergeo and https://plot.ly/python/reference/#layout-geo for more information and chart attribute options!

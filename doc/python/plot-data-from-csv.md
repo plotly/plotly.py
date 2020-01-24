@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.2.0
   kernelspec:
     display_name: Python 3
@@ -23,7 +23,7 @@ jupyter:
     version: 3.6.8
   plotly:
     description: How to create charts from csv files with Plotly and Python
-    display_as: databases
+    display_as: advanced_opt
     has_thumbnail: false
     language: python
     layout: base
@@ -33,7 +33,6 @@ jupyter:
     permalink: python/plot-data-from-csv/
     thumbnail: thumbnail/csv.jpg
 ---
-
 
 CSV or comma-delimited-values is a very popular format for storing structured data. In this tutorial, we will see how to plot beautiful graphs using csv data, and Pandas. We will learn how to import csv data from an external source (a url), and plot it using Plotly and pandas.
 
@@ -57,7 +56,6 @@ fig = px.line(df, x = 'AAPL_x', y = 'AAPL_y', title='Apple Share Prices over tim
 fig.show()
 ```
 
-
 ### Plot from CSV with `graph_objects`
 
 ```python
@@ -76,6 +74,6 @@ fig.update_layout(title='Apple Share Prices over time (2014)',
 fig.show()
 ```
 
-
 #### Reference
+
 See https://plot.ly/python/getting-started for more information about Plotly's Python API!

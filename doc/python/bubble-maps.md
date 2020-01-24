@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -33,14 +33,18 @@ jupyter:
     thumbnail: thumbnail/bubble-map.jpg
 ---
 
+#### Base Map Configuration
+
+Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+
 ### Bubble map with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). With ``px.scatter_geo``, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder().query("year==2007")
-fig = px.scatter_geo(gapminder, locations="iso_alpha", color="continent",
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
                      hover_name="country", size="pop",
                      projection="natural earth")
 fig.show()
@@ -50,8 +54,8 @@ fig.show()
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder()
-fig = px.scatter_geo(gapminder, locations="iso_alpha", color="continent",
+df = px.data.gapminder()
+fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
                      hover_name="country", size="pop",
                      animation_frame="year",
                      projection="natural earth")
@@ -203,4 +207,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#choropleth and https://plot.ly/python/reference/#scattergeo for more information and chart attribute options!

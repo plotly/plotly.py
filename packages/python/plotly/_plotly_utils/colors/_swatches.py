@@ -20,7 +20,7 @@ def _swatches(module_names, module_contents, template=None):
     sequences = [
         (k, v)
         for k, v in module_contents.items()
-        if not (k.startswith("_") or k == "swatches")
+        if not (k.startswith("_") or k.startswith("swatches") or k.endswith("_r"))
     ]
 
     return go.Figure(
@@ -44,5 +44,6 @@ def _swatches(module_names, module_contents, template=None):
             xaxis=dict(range=[-0.02, 1.02], showticklabels=False, showgrid=False),
             height=max(600, 40 * len(sequences)),
             template=args["template"],
+            margin=dict(b=10),
         ),
     )

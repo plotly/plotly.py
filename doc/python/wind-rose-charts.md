@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description: How to graph wind rose charts in python. Wind Rose charts display
+    description:
+      How to graph wind rose charts in python. Wind Rose charts display
       wind speed and direction of a given location.
     display_as: scientific
     language: python
@@ -42,10 +43,10 @@ A [wind rose chart](https://en.wikipedia.org/wiki/Wind_rose) (also known as a po
 
 ```python
 import plotly.express as px
-wind = px.data.wind()
-fig = px.bar_polar(wind, r="frequency", theta="direction",
+df = px.data.wind()
+fig = px.bar_polar(df, r="frequency", theta="direction",
                    color="strength", template="plotly_dark",
-                   color_discrete_sequence= px.colors.sequential.Plasma[-2::-1])
+                   color_discrete_sequence= px.colors.sequential.Plasma_r)
 fig.show()
 ```
 

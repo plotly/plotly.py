@@ -2870,7 +2870,8 @@ class Volume(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -3268,6 +3269,29 @@ class Volume(_BaseTraceType):
     def isomin(self, val):
         self["isomin"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lighting
     # --------
     @property
@@ -3517,6 +3541,27 @@ class Volume(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -4103,6 +4148,10 @@ class Volume(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.volume.Lighting instance or dict
             with compatible properties
@@ -4156,6 +4205,9 @@ class Volume(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -4250,6 +4302,7 @@ class Volume(_BaseTraceType):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -4259,6 +4312,7 @@ class Volume(_BaseTraceType):
         opacityscale=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         slices=None,
         spaceframe=None,
@@ -4408,6 +4462,10 @@ class Volume(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.volume.Lighting instance or dict
             with compatible properties
@@ -4461,6 +4519,9 @@ class Volume(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -4583,6 +4644,7 @@ an instance of plotly.graph_objs.Volume"""
         self._validators["idssrc"] = v_volume.IdssrcValidator()
         self._validators["isomax"] = v_volume.IsomaxValidator()
         self._validators["isomin"] = v_volume.IsominValidator()
+        self._validators["legendgroup"] = v_volume.LegendgroupValidator()
         self._validators["lighting"] = v_volume.LightingValidator()
         self._validators["lightposition"] = v_volume.LightpositionValidator()
         self._validators["meta"] = v_volume.MetaValidator()
@@ -4592,6 +4654,7 @@ an instance of plotly.graph_objs.Volume"""
         self._validators["opacityscale"] = v_volume.OpacityscaleValidator()
         self._validators["reversescale"] = v_volume.ReversescaleValidator()
         self._validators["scene"] = v_volume.SceneValidator()
+        self._validators["showlegend"] = v_volume.ShowlegendValidator()
         self._validators["showscale"] = v_volume.ShowscaleValidator()
         self._validators["slices"] = v_volume.SlicesValidator()
         self._validators["spaceframe"] = v_volume.SpaceframeValidator()
@@ -4663,6 +4726,8 @@ an instance of plotly.graph_objs.Volume"""
         self["isomax"] = isomax if isomax is not None else _v
         _v = arg.pop("isomin", None)
         self["isomin"] = isomin if isomin is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -4681,6 +4746,8 @@ an instance of plotly.graph_objs.Volume"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("slices", None)
@@ -5533,8 +5600,9 @@ class Violin(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the violins are shown
-        with no sample points and the whiskers extend to the range of the
-        sample.
+        with no sample points. Defaults to "suspectedoutliers" when
+        `marker.outliercolor` or `marker.line.outliercolor` is set,
+        otherwise defaults to "outliers".
     
         The 'points' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -5980,7 +6048,9 @@ class Violin(_BaseTraceType):
     @property
     def x0(self):
         """
-        Sets the x coordinate of the box. See overview for more info.
+        Sets the x coordinate for single-box traces or the starting
+        coordinate for multi-box traces set using q1/median/q3. See
+        overview for more info.
     
         The 'x0' property accepts values of any type
 
@@ -6065,7 +6135,9 @@ class Violin(_BaseTraceType):
     @property
     def y0(self):
         """
-        Sets the y coordinate of the box. See overview for more info.
+        Sets the y coordinate for single-box traces or the starting
+        coordinate for multi-box traces set using q1/median/q3. See
+        overview for more info.
     
         The 'y0' property accepts values of any type
 
@@ -6279,7 +6351,9 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points. Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set, otherwise defaults to "outliers".
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -6376,8 +6450,9 @@ class Violin(_BaseTraceType):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -6389,8 +6464,9 @@ class Violin(_BaseTraceType):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -6611,7 +6687,9 @@ class Violin(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the violins are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points. Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set, otherwise defaults to "outliers".
         scalegroup
             If there are multiple violins that should be sized
             according to to some metric (see `scalemode`), link
@@ -6708,8 +6786,9 @@ class Violin(_BaseTraceType):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -6721,8 +6800,9 @@ class Violin(_BaseTraceType):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -7696,6 +7776,10 @@ class Treemap(_BaseTraceType):
     def outsidetextfont(self):
         """
         Sets the font used for `textinfo` lying outside the sector.
+        This option refers to the root of the hierarchy presented on
+        top left corner of a treemap graph. Please note that if a
+        hierarchy has multiple root nodes, this option won't have any
+        effect and `insidetextfont` would be used.
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
@@ -8365,7 +8449,11 @@ class Treemap(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented on top left corner of a treemap graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -8629,7 +8717,11 @@ class Treemap(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented on top left corner of a treemap graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -10331,7 +10423,8 @@ class Surface(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -10712,6 +10805,29 @@ class Surface(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lighting
     # --------
     @property
@@ -10928,6 +11044,27 @@ class Surface(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -11466,6 +11603,10 @@ class Surface(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.surface.Lighting instance or dict
             with compatible properties
@@ -11508,6 +11649,9 @@ class Surface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -11599,6 +11743,7 @@ class Surface(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -11607,6 +11752,7 @@ class Surface(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         surfacecolor=None,
@@ -11756,6 +11902,10 @@ class Surface(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.surface.Lighting instance or dict
             with compatible properties
@@ -11798,6 +11948,9 @@ class Surface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -11917,6 +12070,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators["hovertextsrc"] = v_surface.HovertextsrcValidator()
         self._validators["ids"] = v_surface.IdsValidator()
         self._validators["idssrc"] = v_surface.IdssrcValidator()
+        self._validators["legendgroup"] = v_surface.LegendgroupValidator()
         self._validators["lighting"] = v_surface.LightingValidator()
         self._validators["lightposition"] = v_surface.LightpositionValidator()
         self._validators["meta"] = v_surface.MetaValidator()
@@ -11925,6 +12079,7 @@ an instance of plotly.graph_objs.Surface"""
         self._validators["opacity"] = v_surface.OpacityValidator()
         self._validators["reversescale"] = v_surface.ReversescaleValidator()
         self._validators["scene"] = v_surface.SceneValidator()
+        self._validators["showlegend"] = v_surface.ShowlegendValidator()
         self._validators["showscale"] = v_surface.ShowscaleValidator()
         self._validators["stream"] = v_surface.StreamValidator()
         self._validators["surfacecolor"] = v_surface.SurfacecolorValidator()
@@ -11992,6 +12147,8 @@ an instance of plotly.graph_objs.Surface"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -12008,6 +12165,8 @@ an instance of plotly.graph_objs.Surface"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -12510,6 +12669,31 @@ class Sunburst(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
+    # insidetextorientation
+    # ---------------------
+    @property
+    def insidetextorientation(self):
+        """
+        Determines the orientation of text inside slices. With "auto"
+        the texts may automatically be rotated to fit with the maximum
+        size inside the slice. Using "horizontal" option forces text to
+        be horizontal. Using "radial" option forces text to be radial.
+        Using "tangential" option forces text to be tangential.
+    
+        The 'insidetextorientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['horizontal', 'radial', 'tangential', 'auto']
+
+        Returns
+        -------
+        Any
+        """
+        return self["insidetextorientation"]
+
+    @insidetextorientation.setter
+    def insidetextorientation(self, val):
+        self["insidetextorientation"] = val
+
     # labels
     # ------
     @property
@@ -12827,6 +13011,10 @@ class Sunburst(_BaseTraceType):
     def outsidetextfont(self):
         """
         Sets the font used for `textinfo` lying outside the sector.
+        This option refers to the root of the hierarchy presented at
+        the center of a sunburst graph. Please note that if a hierarchy
+        has multiple root nodes, this option won't have any effect and
+        `insidetextfont` would be used.
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
@@ -13345,6 +13533,13 @@ class Sunburst(_BaseTraceType):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -13387,7 +13582,11 @@ class Sunburst(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented at the center of a sunburst graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -13486,6 +13685,7 @@ class Sunburst(_BaseTraceType):
         ids=None,
         idssrc=None,
         insidetextfont=None,
+        insidetextorientation=None,
         labels=None,
         labelssrc=None,
         leaf=None,
@@ -13601,6 +13801,13 @@ class Sunburst(_BaseTraceType):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -13643,7 +13850,11 @@ class Sunburst(_BaseTraceType):
             Sets the opacity of the trace.
         outsidetextfont
             Sets the font used for `textinfo` lying outside the
-            sector.
+            sector. This option refers to the root of the hierarchy
+            presented at the center of a sunburst graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
         parents
             Sets the parent sectors for each of the sectors. Empty
             string items '' are understood to reference the root
@@ -13770,6 +13981,9 @@ an instance of plotly.graph_objs.Sunburst"""
         self._validators["ids"] = v_sunburst.IdsValidator()
         self._validators["idssrc"] = v_sunburst.IdssrcValidator()
         self._validators["insidetextfont"] = v_sunburst.InsidetextfontValidator()
+        self._validators[
+            "insidetextorientation"
+        ] = v_sunburst.InsidetextorientationValidator()
         self._validators["labels"] = v_sunburst.LabelsValidator()
         self._validators["labelssrc"] = v_sunburst.LabelssrcValidator()
         self._validators["leaf"] = v_sunburst.LeafValidator()
@@ -13830,6 +14044,10 @@ an instance of plotly.graph_objs.Sunburst"""
         self["idssrc"] = idssrc if idssrc is not None else _v
         _v = arg.pop("insidetextfont", None)
         self["insidetextfont"] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop("insidetextorientation", None)
+        self["insidetextorientation"] = (
+            insidetextorientation if insidetextorientation is not None else _v
+        )
         _v = arg.pop("labels", None)
         self["labels"] = labels if labels is not None else _v
         _v = arg.pop("labelssrc", None)
@@ -14321,7 +14539,8 @@ class Streamtube(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -14606,6 +14825,29 @@ class Streamtube(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lighting
     # --------
     @property
@@ -14849,6 +15091,27 @@ class Streamtube(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -15424,6 +15687,10 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.streamtube.Lighting instance or
             dict with compatible properties
@@ -15469,6 +15736,9 @@ class Streamtube(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -15561,6 +15831,7 @@ class Streamtube(_BaseTraceType):
         hovertext=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         maxdisplayed=None,
@@ -15570,6 +15841,7 @@ class Streamtube(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         sizeref=None,
         starts=None,
@@ -15710,6 +15982,10 @@ class Streamtube(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.streamtube.Lighting instance or
             dict with compatible properties
@@ -15755,6 +16031,9 @@ class Streamtube(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -15875,6 +16154,7 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators["hovertext"] = v_streamtube.HovertextValidator()
         self._validators["ids"] = v_streamtube.IdsValidator()
         self._validators["idssrc"] = v_streamtube.IdssrcValidator()
+        self._validators["legendgroup"] = v_streamtube.LegendgroupValidator()
         self._validators["lighting"] = v_streamtube.LightingValidator()
         self._validators["lightposition"] = v_streamtube.LightpositionValidator()
         self._validators["maxdisplayed"] = v_streamtube.MaxdisplayedValidator()
@@ -15884,6 +16164,7 @@ an instance of plotly.graph_objs.Streamtube"""
         self._validators["opacity"] = v_streamtube.OpacityValidator()
         self._validators["reversescale"] = v_streamtube.ReversescaleValidator()
         self._validators["scene"] = v_streamtube.SceneValidator()
+        self._validators["showlegend"] = v_streamtube.ShowlegendValidator()
         self._validators["showscale"] = v_streamtube.ShowscaleValidator()
         self._validators["sizeref"] = v_streamtube.SizerefValidator()
         self._validators["starts"] = v_streamtube.StartsValidator()
@@ -15945,6 +16226,8 @@ an instance of plotly.graph_objs.Streamtube"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -15963,6 +16246,8 @@ an instance of plotly.graph_objs.Streamtube"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("sizeref", None)
@@ -28492,6 +28777,30 @@ class Scattergeo(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
+    # featureidkey
+    # ------------
+    @property
+    def featureidkey(self):
+        """
+        Sets the key in GeoJSON features which is used as id to match
+        the items included in the `locations` array. Only has an effect
+        when `geojson` is set. Support nested property, for example
+        "properties.name".
+    
+        The 'featureidkey' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["featureidkey"]
+
+    @featureidkey.setter
+    def featureidkey(self, val):
+        self["featureidkey"] = val
+
     # fill
     # ----
     @property
@@ -28600,6 +28909,30 @@ class Scattergeo(_BaseTraceType):
     @geo.setter
     def geo(self, val):
         self["geo"] = val
+
+    # geojson
+    # -------
+    @property
+    def geojson(self):
+        """
+        Sets optional GeoJSON data associated with this trace. If not
+        given, the features on the base map are used when `locations`
+        is set. It can be set as a valid GeoJSON object or as a URL
+        string. Note that we only accept GeoJSONs of type
+        "FeatureCollection" or "Feature" with geometries of type
+        "Polygon" or "MultiPolygon".
+    
+        The 'geojson' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["geojson"]
+
+    @geojson.setter
+    def geojson(self, val):
+        self["geojson"] = val
 
     # hoverinfo
     # ---------
@@ -28958,11 +29291,14 @@ class Scattergeo(_BaseTraceType):
     def locationmode(self):
         """
         Determines the set of locations used to match entries in
-        `locations` to regions on the map.
+        `locations` to regions on the map. Values "ISO-3", "USA-
+        states", *country names* correspond to features on the base map
+        and value "geojson-id" corresponds to features from a custom
+        GeoJSON linked to the `geojson` attribute.
     
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['ISO-3', 'USA-states', 'country names']
+                ['ISO-3', 'USA-states', 'country names', 'geojson-id']
 
         Returns
         -------
@@ -29770,6 +30106,11 @@ class Scattergeo(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". "toself" connects the
@@ -29785,6 +30126,14 @@ class Scattergeo(_BaseTraceType):
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used
+            when `locations` is set. It can be set as a valid
+            GeoJSON object or as a URL string. Note that we only
+            accept GeoJSONs of type "FeatureCollection" or
+            "Feature" with geometries of type "Polygon" or
+            "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -29849,7 +30198,11 @@ class Scattergeo(_BaseTraceType):
             with compatible properties
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location
@@ -29983,9 +30336,11 @@ class Scattergeo(_BaseTraceType):
         connectgaps=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         fill=None,
         fillcolor=None,
         geo=None,
+        geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -30050,6 +30405,11 @@ class Scattergeo(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         fill
             Sets the area to fill with a solid color. Use with
             `fillcolor` if not "none". "toself" connects the
@@ -30065,6 +30425,14 @@ class Scattergeo(_BaseTraceType):
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used
+            when `locations` is set. It can be set as a valid
+            GeoJSON object or as a URL string. Note that we only
+            accept GeoJSONs of type "FeatureCollection" or
+            "Feature" with geometries of type "Polygon" or
+            "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -30129,7 +30497,11 @@ class Scattergeo(_BaseTraceType):
             with compatible properties
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names.
             Coordinates correspond to the centroid of each location
@@ -30291,9 +30663,11 @@ an instance of plotly.graph_objs.Scattergeo"""
         self._validators["connectgaps"] = v_scattergeo.ConnectgapsValidator()
         self._validators["customdata"] = v_scattergeo.CustomdataValidator()
         self._validators["customdatasrc"] = v_scattergeo.CustomdatasrcValidator()
+        self._validators["featureidkey"] = v_scattergeo.FeatureidkeyValidator()
         self._validators["fill"] = v_scattergeo.FillValidator()
         self._validators["fillcolor"] = v_scattergeo.FillcolorValidator()
         self._validators["geo"] = v_scattergeo.GeoValidator()
+        self._validators["geojson"] = v_scattergeo.GeojsonValidator()
         self._validators["hoverinfo"] = v_scattergeo.HoverinfoValidator()
         self._validators["hoverinfosrc"] = v_scattergeo.HoverinfosrcValidator()
         self._validators["hoverlabel"] = v_scattergeo.HoverlabelValidator()
@@ -30342,12 +30716,16 @@ an instance of plotly.graph_objs.Scattergeo"""
         self["customdata"] = customdata if customdata is not None else _v
         _v = arg.pop("customdatasrc", None)
         self["customdatasrc"] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop("featureidkey", None)
+        self["featureidkey"] = featureidkey if featureidkey is not None else _v
         _v = arg.pop("fill", None)
         self["fill"] = fill if fill is not None else _v
         _v = arg.pop("fillcolor", None)
         self["fillcolor"] = fillcolor if fillcolor is not None else _v
         _v = arg.pop("geo", None)
         self["geo"] = geo if geo is not None else _v
+        _v = arg.pop("geojson", None)
+        self["geojson"] = geojson if geojson is not None else _v
         _v = arg.pop("hoverinfo", None)
         self["hoverinfo"] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop("hoverinfosrc", None)
@@ -40674,6 +41052,31 @@ class Pie(_BaseTraceType):
     def insidetextfont(self, val):
         self["insidetextfont"] = val
 
+    # insidetextorientation
+    # ---------------------
+    @property
+    def insidetextorientation(self):
+        """
+        Determines the orientation of text inside slices. With "auto"
+        the texts may automatically be rotated to fit with the maximum
+        size inside the slice. Using "horizontal" option forces text to
+        be horizontal. Using "radial" option forces text to be radial.
+        Using "tangential" option forces text to be tangential.
+    
+        The 'insidetextorientation' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['horizontal', 'radial', 'tangential', 'auto']
+
+        Returns
+        -------
+        Any
+        """
+        return self["insidetextorientation"]
+
+    @insidetextorientation.setter
+    def insidetextorientation(self, val):
+        self["insidetextorientation"] = val
+
     # label0
     # ------
     @property
@@ -41656,6 +42059,13 @@ class Pie(_BaseTraceType):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -41830,6 +42240,7 @@ class Pie(_BaseTraceType):
         ids=None,
         idssrc=None,
         insidetextfont=None,
+        insidetextorientation=None,
         label0=None,
         labels=None,
         labelssrc=None,
@@ -41953,6 +42364,13 @@ class Pie(_BaseTraceType):
         insidetextfont
             Sets the font used for `textinfo` lying inside the
             sector.
+        insidetextorientation
+            Determines the orientation of text inside slices. With
+            "auto" the texts may automatically be rotated to fit
+            with the maximum size inside the slice. Using
+            "horizontal" option forces text to be horizontal. Using
+            "radial" option forces text to be radial. Using
+            "tangential" option forces text to be tangential.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -42150,6 +42568,9 @@ an instance of plotly.graph_objs.Pie"""
         self._validators["ids"] = v_pie.IdsValidator()
         self._validators["idssrc"] = v_pie.IdssrcValidator()
         self._validators["insidetextfont"] = v_pie.InsidetextfontValidator()
+        self._validators[
+            "insidetextorientation"
+        ] = v_pie.InsidetextorientationValidator()
         self._validators["label0"] = v_pie.Label0Validator()
         self._validators["labels"] = v_pie.LabelsValidator()
         self._validators["labelssrc"] = v_pie.LabelssrcValidator()
@@ -42220,6 +42641,10 @@ an instance of plotly.graph_objs.Pie"""
         self["idssrc"] = idssrc if idssrc is not None else _v
         _v = arg.pop("insidetextfont", None)
         self["insidetextfont"] = insidetextfont if insidetextfont is not None else _v
+        _v = arg.pop("insidetextorientation", None)
+        self["insidetextorientation"] = (
+            insidetextorientation if insidetextorientation is not None else _v
+        )
         _v = arg.pop("label0", None)
         self["label0"] = label0 if label0 is not None else _v
         _v = arg.pop("labels", None)
@@ -46589,7 +47014,8 @@ class Mesh3d(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -47043,8 +47469,8 @@ class Mesh3d(_BaseTraceType):
     @property
     def intensity(self):
         """
-        Sets the vertex intensity values, used for plotting fields on
-        meshes
+        Sets the intensity values for vertices or cells as defined by
+        `intensitymode`. It can be used for plotting fields on meshes.
     
         The 'intensity' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
@@ -47058,6 +47484,27 @@ class Mesh3d(_BaseTraceType):
     @intensity.setter
     def intensity(self, val):
         self["intensity"] = val
+
+    # intensitymode
+    # -------------
+    @property
+    def intensitymode(self):
+        """
+        Determines the source of `intensity` values.
+    
+        The 'intensitymode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['vertex', 'cell']
+
+        Returns
+        -------
+        Any
+        """
+        return self["intensitymode"]
+
+    @intensitymode.setter
+    def intensitymode(self, val):
+        self["intensitymode"] = val
 
     # intensitysrc
     # ------------
@@ -47190,6 +47637,29 @@ class Mesh3d(_BaseTraceType):
     @ksrc.setter
     def ksrc(self, val):
         self["ksrc"] = val
+
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
 
     # lighting
     # --------
@@ -47413,6 +47883,27 @@ class Mesh3d(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -47997,8 +48488,11 @@ class Mesh3d(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         intensity
-            Sets the vertex intensity values, used for plotting
-            fields on meshes
+            Sets the intensity values for vertices or cells as
+            defined by `intensitymode`. It can be used for plotting
+            fields on meshes.
+        intensitymode
+            Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on plot.ly for  intensity .
         isrc
@@ -48025,6 +48519,10 @@ class Mesh3d(_BaseTraceType):
             is the third vertex of a triangle.
         ksrc
             Sets the source reference on plot.ly for  k .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.mesh3d.Lighting instance or dict
             with compatible properties
@@ -48067,6 +48565,9 @@ class Mesh3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -48172,12 +48673,14 @@ class Mesh3d(_BaseTraceType):
         ids=None,
         idssrc=None,
         intensity=None,
+        intensitymode=None,
         intensitysrc=None,
         isrc=None,
         j=None,
         jsrc=None,
         k=None,
         ksrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -48186,6 +48689,7 @@ class Mesh3d(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -48368,8 +48872,11 @@ class Mesh3d(_BaseTraceType):
         idssrc
             Sets the source reference on plot.ly for  ids .
         intensity
-            Sets the vertex intensity values, used for plotting
-            fields on meshes
+            Sets the intensity values for vertices or cells as
+            defined by `intensitymode`. It can be used for plotting
+            fields on meshes.
+        intensitymode
+            Determines the source of `intensity` values.
         intensitysrc
             Sets the source reference on plot.ly for  intensity .
         isrc
@@ -48396,6 +48903,10 @@ class Mesh3d(_BaseTraceType):
             is the third vertex of a triangle.
         ksrc
             Sets the source reference on plot.ly for  k .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.mesh3d.Lighting instance or dict
             with compatible properties
@@ -48438,6 +48949,9 @@ class Mesh3d(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -48571,12 +49085,14 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators["ids"] = v_mesh3d.IdsValidator()
         self._validators["idssrc"] = v_mesh3d.IdssrcValidator()
         self._validators["intensity"] = v_mesh3d.IntensityValidator()
+        self._validators["intensitymode"] = v_mesh3d.IntensitymodeValidator()
         self._validators["intensitysrc"] = v_mesh3d.IntensitysrcValidator()
         self._validators["isrc"] = v_mesh3d.IsrcValidator()
         self._validators["j"] = v_mesh3d.JValidator()
         self._validators["jsrc"] = v_mesh3d.JsrcValidator()
         self._validators["k"] = v_mesh3d.KValidator()
         self._validators["ksrc"] = v_mesh3d.KsrcValidator()
+        self._validators["legendgroup"] = v_mesh3d.LegendgroupValidator()
         self._validators["lighting"] = v_mesh3d.LightingValidator()
         self._validators["lightposition"] = v_mesh3d.LightpositionValidator()
         self._validators["meta"] = v_mesh3d.MetaValidator()
@@ -48585,6 +49101,7 @@ an instance of plotly.graph_objs.Mesh3d"""
         self._validators["opacity"] = v_mesh3d.OpacityValidator()
         self._validators["reversescale"] = v_mesh3d.ReversescaleValidator()
         self._validators["scene"] = v_mesh3d.SceneValidator()
+        self._validators["showlegend"] = v_mesh3d.ShowlegendValidator()
         self._validators["showscale"] = v_mesh3d.ShowscaleValidator()
         self._validators["stream"] = v_mesh3d.StreamValidator()
         self._validators["text"] = v_mesh3d.TextValidator()
@@ -48664,6 +49181,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self["idssrc"] = idssrc if idssrc is not None else _v
         _v = arg.pop("intensity", None)
         self["intensity"] = intensity if intensity is not None else _v
+        _v = arg.pop("intensitymode", None)
+        self["intensitymode"] = intensitymode if intensitymode is not None else _v
         _v = arg.pop("intensitysrc", None)
         self["intensitysrc"] = intensitysrc if intensitysrc is not None else _v
         _v = arg.pop("isrc", None)
@@ -48676,6 +49195,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self["k"] = k if k is not None else _v
         _v = arg.pop("ksrc", None)
         self["ksrc"] = ksrc if ksrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -48692,6 +49213,8 @@ an instance of plotly.graph_objs.Mesh3d"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -49199,7 +49722,8 @@ class Isosurface(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -49597,6 +50121,29 @@ class Isosurface(_BaseTraceType):
     def isomin(self, val):
         self["isomin"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lighting
     # --------
     @property
@@ -49819,6 +50366,27 @@ class Isosurface(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -50407,6 +50975,10 @@ class Isosurface(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.isosurface.Lighting instance or
             dict with compatible properties
@@ -50449,6 +51021,9 @@ class Isosurface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -50543,6 +51118,7 @@ class Isosurface(_BaseTraceType):
         idssrc=None,
         isomax=None,
         isomin=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -50551,6 +51127,7 @@ class Isosurface(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         slices=None,
         spaceframe=None,
@@ -50700,6 +51277,10 @@ class Isosurface(_BaseTraceType):
             Sets the maximum boundary for iso-surface plot.
         isomin
             Sets the minimum boundary for iso-surface plot.
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.isosurface.Lighting instance or
             dict with compatible properties
@@ -50742,6 +51323,9 @@ class Isosurface(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -50864,6 +51448,7 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators["idssrc"] = v_isosurface.IdssrcValidator()
         self._validators["isomax"] = v_isosurface.IsomaxValidator()
         self._validators["isomin"] = v_isosurface.IsominValidator()
+        self._validators["legendgroup"] = v_isosurface.LegendgroupValidator()
         self._validators["lighting"] = v_isosurface.LightingValidator()
         self._validators["lightposition"] = v_isosurface.LightpositionValidator()
         self._validators["meta"] = v_isosurface.MetaValidator()
@@ -50872,6 +51457,7 @@ an instance of plotly.graph_objs.Isosurface"""
         self._validators["opacity"] = v_isosurface.OpacityValidator()
         self._validators["reversescale"] = v_isosurface.ReversescaleValidator()
         self._validators["scene"] = v_isosurface.SceneValidator()
+        self._validators["showlegend"] = v_isosurface.ShowlegendValidator()
         self._validators["showscale"] = v_isosurface.ShowscaleValidator()
         self._validators["slices"] = v_isosurface.SlicesValidator()
         self._validators["spaceframe"] = v_isosurface.SpaceframeValidator()
@@ -50943,6 +51529,8 @@ an instance of plotly.graph_objs.Isosurface"""
         self["isomax"] = isomax if isomax is not None else _v
         _v = arg.pop("isomin", None)
         self["isomin"] = isomin if isomin is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -50959,6 +51547,8 @@ an instance of plotly.graph_objs.Isosurface"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("slices", None)
@@ -53650,7 +54240,8 @@ class Histogram2dContour(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -56286,7 +56877,8 @@ class Histogram2d(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -56609,6 +57201,29 @@ class Histogram2d(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # marker
     # ------
     @property
@@ -56797,6 +57412,27 @@ class Histogram2d(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self["reversescale"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -57624,6 +58260,10 @@ class Histogram2d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         marker
             plotly.graph_objects.histogram2d.Marker instance or
             dict with compatible properties
@@ -57663,6 +58303,9 @@ class Histogram2d(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -57794,6 +58437,7 @@ class Histogram2d(_BaseTraceType):
         hovertemplatesrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         marker=None,
         meta=None,
         metasrc=None,
@@ -57802,6 +58446,7 @@ class Histogram2d(_BaseTraceType):
         nbinsy=None,
         opacity=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         uid=None,
@@ -57967,6 +58612,10 @@ class Histogram2d(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         marker
             plotly.graph_objects.histogram2d.Marker instance or
             dict with compatible properties
@@ -58006,6 +58655,9 @@ class Histogram2d(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -58165,6 +58817,7 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators["hovertemplatesrc"] = v_histogram2d.HovertemplatesrcValidator()
         self._validators["ids"] = v_histogram2d.IdsValidator()
         self._validators["idssrc"] = v_histogram2d.IdssrcValidator()
+        self._validators["legendgroup"] = v_histogram2d.LegendgroupValidator()
         self._validators["marker"] = v_histogram2d.MarkerValidator()
         self._validators["meta"] = v_histogram2d.MetaValidator()
         self._validators["metasrc"] = v_histogram2d.MetasrcValidator()
@@ -58173,6 +58826,7 @@ an instance of plotly.graph_objs.Histogram2d"""
         self._validators["nbinsy"] = v_histogram2d.NbinsyValidator()
         self._validators["opacity"] = v_histogram2d.OpacityValidator()
         self._validators["reversescale"] = v_histogram2d.ReversescaleValidator()
+        self._validators["showlegend"] = v_histogram2d.ShowlegendValidator()
         self._validators["showscale"] = v_histogram2d.ShowscaleValidator()
         self._validators["stream"] = v_histogram2d.StreamValidator()
         self._validators["uid"] = v_histogram2d.UidValidator()
@@ -58241,6 +58895,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("marker", None)
         self["marker"] = marker if marker is not None else _v
         _v = arg.pop("meta", None)
@@ -58257,6 +58913,8 @@ an instance of plotly.graph_objs.Histogram2d"""
         self["opacity"] = opacity if opacity is not None else _v
         _v = arg.pop("reversescale", None)
         self["reversescale"] = reversescale if reversescale is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -61006,7 +61664,8 @@ class Heatmapgl(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -62846,7 +63505,8 @@ class Heatmap(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -63233,6 +63893,29 @@ class Heatmap(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # meta
     # ----
     @property
@@ -63344,6 +64027,27 @@ class Heatmap(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self["reversescale"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -64129,6 +64833,10 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -64153,6 +64861,9 @@ class Heatmap(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -64291,11 +65002,13 @@ class Heatmap(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         meta=None,
         metasrc=None,
         name=None,
         opacity=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -64449,6 +65162,10 @@ class Heatmap(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -64473,6 +65190,9 @@ class Heatmap(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -64639,11 +65359,13 @@ an instance of plotly.graph_objs.Heatmap"""
         self._validators["hovertextsrc"] = v_heatmap.HovertextsrcValidator()
         self._validators["ids"] = v_heatmap.IdsValidator()
         self._validators["idssrc"] = v_heatmap.IdssrcValidator()
+        self._validators["legendgroup"] = v_heatmap.LegendgroupValidator()
         self._validators["meta"] = v_heatmap.MetaValidator()
         self._validators["metasrc"] = v_heatmap.MetasrcValidator()
         self._validators["name"] = v_heatmap.NameValidator()
         self._validators["opacity"] = v_heatmap.OpacityValidator()
         self._validators["reversescale"] = v_heatmap.ReversescaleValidator()
+        self._validators["showlegend"] = v_heatmap.ShowlegendValidator()
         self._validators["showscale"] = v_heatmap.ShowscaleValidator()
         self._validators["stream"] = v_heatmap.StreamValidator()
         self._validators["text"] = v_heatmap.TextValidator()
@@ -64717,6 +65439,8 @@ an instance of plotly.graph_objs.Heatmap"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("meta", None)
         self["meta"] = meta if meta is not None else _v
         _v = arg.pop("metasrc", None)
@@ -64727,6 +65451,8 @@ an instance of plotly.graph_objs.Heatmap"""
         self["opacity"] = opacity if opacity is not None else _v
         _v = arg.pop("reversescale", None)
         self["reversescale"] = reversescale if reversescale is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -69238,7 +69964,8 @@ class Densitymapbox(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -69587,6 +70314,29 @@ class Densitymapbox(_BaseTraceType):
     def latsrc(self, val):
         self["latsrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lon
     # ---
     @property
@@ -69781,6 +70531,27 @@ class Densitymapbox(_BaseTraceType):
     @reversescale.setter
     def reversescale(self, val):
         self["reversescale"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -70228,6 +70999,10 @@ class Densitymapbox(_BaseTraceType):
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on plot.ly for  lat .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -70262,6 +71037,9 @@ class Densitymapbox(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -70357,6 +71135,7 @@ class Densitymapbox(_BaseTraceType):
         idssrc=None,
         lat=None,
         latsrc=None,
+        legendgroup=None,
         lon=None,
         lonsrc=None,
         meta=None,
@@ -70366,6 +71145,7 @@ class Densitymapbox(_BaseTraceType):
         radius=None,
         radiussrc=None,
         reversescale=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         subplot=None,
@@ -70491,6 +71271,10 @@ class Densitymapbox(_BaseTraceType):
             Sets the latitude coordinates (in degrees North).
         latsrc
             Sets the source reference on plot.ly for  lat .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lon
             Sets the longitude coordinates (in degrees East).
         lonsrc
@@ -70525,6 +71309,9 @@ class Densitymapbox(_BaseTraceType):
             Reverses the color mapping if true. If true, `zmin`
             will correspond to the last color in the array and
             `zmax` will correspond to the first color.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -70650,6 +71437,7 @@ an instance of plotly.graph_objs.Densitymapbox"""
         self._validators["idssrc"] = v_densitymapbox.IdssrcValidator()
         self._validators["lat"] = v_densitymapbox.LatValidator()
         self._validators["latsrc"] = v_densitymapbox.LatsrcValidator()
+        self._validators["legendgroup"] = v_densitymapbox.LegendgroupValidator()
         self._validators["lon"] = v_densitymapbox.LonValidator()
         self._validators["lonsrc"] = v_densitymapbox.LonsrcValidator()
         self._validators["meta"] = v_densitymapbox.MetaValidator()
@@ -70659,6 +71447,7 @@ an instance of plotly.graph_objs.Densitymapbox"""
         self._validators["radius"] = v_densitymapbox.RadiusValidator()
         self._validators["radiussrc"] = v_densitymapbox.RadiussrcValidator()
         self._validators["reversescale"] = v_densitymapbox.ReversescaleValidator()
+        self._validators["showlegend"] = v_densitymapbox.ShowlegendValidator()
         self._validators["showscale"] = v_densitymapbox.ShowscaleValidator()
         self._validators["stream"] = v_densitymapbox.StreamValidator()
         self._validators["subplot"] = v_densitymapbox.SubplotValidator()
@@ -70714,6 +71503,8 @@ an instance of plotly.graph_objs.Densitymapbox"""
         self["lat"] = lat if lat is not None else _v
         _v = arg.pop("latsrc", None)
         self["latsrc"] = latsrc if latsrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lon", None)
         self["lon"] = lon if lon is not None else _v
         _v = arg.pop("lonsrc", None)
@@ -70732,6 +71523,8 @@ an instance of plotly.graph_objs.Densitymapbox"""
         self["radiussrc"] = radiussrc if radiussrc is not None else _v
         _v = arg.pop("reversescale", None)
         self["reversescale"] = reversescale if reversescale is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -71327,7 +72120,8 @@ class Contourcarpet(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -73294,7 +74088,8 @@ class Contour(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -75946,7 +76741,8 @@ class Cone(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -76251,6 +77047,29 @@ class Cone(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # lighting
     # --------
     @property
@@ -76473,6 +77292,27 @@ class Cone(_BaseTraceType):
     @scene.setter
     def scene(self, val):
         self["scene"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -77068,6 +77908,10 @@ class Cone(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.cone.Lighting instance or dict
             with compatible properties
@@ -77110,6 +77954,9 @@ class Cone(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -77219,6 +78066,7 @@ class Cone(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         lighting=None,
         lightposition=None,
         meta=None,
@@ -77227,6 +78075,7 @@ class Cone(_BaseTraceType):
         opacity=None,
         reversescale=None,
         scene=None,
+        showlegend=None,
         showscale=None,
         sizemode=None,
         sizeref=None,
@@ -77368,6 +78217,10 @@ class Cone(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         lighting
             plotly.graph_objects.cone.Lighting instance or dict
             with compatible properties
@@ -77410,6 +78263,9 @@ class Cone(_BaseTraceType):
             the (x,y,z) coordinates refer to `layout.scene`. If
             "scene2", the (x,y,z) coordinates refer to
             `layout.scene2`, and so on.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -77547,6 +78403,7 @@ an instance of plotly.graph_objs.Cone"""
         self._validators["hovertextsrc"] = v_cone.HovertextsrcValidator()
         self._validators["ids"] = v_cone.IdsValidator()
         self._validators["idssrc"] = v_cone.IdssrcValidator()
+        self._validators["legendgroup"] = v_cone.LegendgroupValidator()
         self._validators["lighting"] = v_cone.LightingValidator()
         self._validators["lightposition"] = v_cone.LightpositionValidator()
         self._validators["meta"] = v_cone.MetaValidator()
@@ -77555,6 +78412,7 @@ an instance of plotly.graph_objs.Cone"""
         self._validators["opacity"] = v_cone.OpacityValidator()
         self._validators["reversescale"] = v_cone.ReversescaleValidator()
         self._validators["scene"] = v_cone.SceneValidator()
+        self._validators["showlegend"] = v_cone.ShowlegendValidator()
         self._validators["showscale"] = v_cone.ShowscaleValidator()
         self._validators["sizemode"] = v_cone.SizemodeValidator()
         self._validators["sizeref"] = v_cone.SizerefValidator()
@@ -77621,6 +78479,8 @@ an instance of plotly.graph_objs.Cone"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("lighting", None)
         self["lighting"] = lighting if lighting is not None else _v
         _v = arg.pop("lightposition", None)
@@ -77637,6 +78497,8 @@ an instance of plotly.graph_objs.Cone"""
         self["reversescale"] = reversescale if reversescale is not None else _v
         _v = arg.pop("scene", None)
         self["scene"] = scene if scene is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("sizemode", None)
@@ -78056,7 +78918,8 @@ class Choroplethmapbox(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -78111,15 +78974,38 @@ class Choroplethmapbox(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
+    # featureidkey
+    # ------------
+    @property
+    def featureidkey(self):
+        """
+        Sets the key in GeoJSON features which is used as id to match
+        the items included in the `locations` array. Support nested
+        property, for example "properties.name".
+    
+        The 'featureidkey' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["featureidkey"]
+
+    @featureidkey.setter
+    def featureidkey(self, val):
+        self["featureidkey"] = val
+
     # geojson
     # -------
     @property
     def geojson(self):
         """
-        Sets the GeoJSON data associated with this trace. Can be set as
-        a valid GeoJSON object or as URL string Note that we only
-        accept GeoJSON of type "FeatureCollection" and "Feature" with
-        geometries of type "Polygon" and "MultiPolygon".
+        Sets the GeoJSON data associated with this trace. It can be set
+        as a valid GeoJSON object or as a URL string. Note that we only
+        accept GeoJSONs of type "FeatureCollection" or "Feature" with
+        geometries of type "Polygon" or "MultiPolygon".
     
         The 'geojson' property accepts values of any type
 
@@ -78383,6 +79269,29 @@ class Choroplethmapbox(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # locations
     # ---------
     @property
@@ -78599,6 +79508,27 @@ class Choroplethmapbox(_BaseTraceType):
     @selectedpoints.setter
     def selectedpoints(self, val):
         self["selectedpoints"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -79013,12 +79943,16 @@ class Choroplethmapbox(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array.
+            Support nested property, for example "properties.name".
         geojson
-            Sets the GeoJSON data associated with this trace. Can
-            be set as a valid GeoJSON object or as URL string Note
-            that we only accept GeoJSON of type "FeatureCollection"
-            and "Feature" with geometries of type "Polygon" and
-            "MultiPolygon".
+            Sets the GeoJSON data associated with this trace. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -79066,6 +80000,10 @@ class Choroplethmapbox(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -79106,6 +80044,9 @@ class Choroplethmapbox(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -79185,6 +80126,7 @@ class Choroplethmapbox(_BaseTraceType):
         colorscale=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -79195,6 +80137,7 @@ class Choroplethmapbox(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         locations=None,
         locationssrc=None,
         marker=None,
@@ -79204,6 +80147,7 @@ class Choroplethmapbox(_BaseTraceType):
         reversescale=None,
         selected=None,
         selectedpoints=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         subplot=None,
@@ -79275,12 +80219,16 @@ class Choroplethmapbox(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array.
+            Support nested property, for example "properties.name".
         geojson
-            Sets the GeoJSON data associated with this trace. Can
-            be set as a valid GeoJSON object or as URL string Note
-            that we only accept GeoJSON of type "FeatureCollection"
-            and "Feature" with geometries of type "Polygon" and
-            "MultiPolygon".
+            Sets the GeoJSON data associated with this trace. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -79328,6 +80276,10 @@ class Choroplethmapbox(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locations
             Sets which features found in "geojson" to plot using
             their feature `id` field.
@@ -79368,6 +80320,9 @@ class Choroplethmapbox(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -79477,6 +80432,7 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self._validators["colorscale"] = v_choroplethmapbox.ColorscaleValidator()
         self._validators["customdata"] = v_choroplethmapbox.CustomdataValidator()
         self._validators["customdatasrc"] = v_choroplethmapbox.CustomdatasrcValidator()
+        self._validators["featureidkey"] = v_choroplethmapbox.FeatureidkeyValidator()
         self._validators["geojson"] = v_choroplethmapbox.GeojsonValidator()
         self._validators["hoverinfo"] = v_choroplethmapbox.HoverinfoValidator()
         self._validators["hoverinfosrc"] = v_choroplethmapbox.HoverinfosrcValidator()
@@ -79489,6 +80445,7 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self._validators["hovertextsrc"] = v_choroplethmapbox.HovertextsrcValidator()
         self._validators["ids"] = v_choroplethmapbox.IdsValidator()
         self._validators["idssrc"] = v_choroplethmapbox.IdssrcValidator()
+        self._validators["legendgroup"] = v_choroplethmapbox.LegendgroupValidator()
         self._validators["locations"] = v_choroplethmapbox.LocationsValidator()
         self._validators["locationssrc"] = v_choroplethmapbox.LocationssrcValidator()
         self._validators["marker"] = v_choroplethmapbox.MarkerValidator()
@@ -79500,6 +80457,7 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self._validators[
             "selectedpoints"
         ] = v_choroplethmapbox.SelectedpointsValidator()
+        self._validators["showlegend"] = v_choroplethmapbox.ShowlegendValidator()
         self._validators["showscale"] = v_choroplethmapbox.ShowscaleValidator()
         self._validators["stream"] = v_choroplethmapbox.StreamValidator()
         self._validators["subplot"] = v_choroplethmapbox.SubplotValidator()
@@ -79532,6 +80490,8 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self["customdata"] = customdata if customdata is not None else _v
         _v = arg.pop("customdatasrc", None)
         self["customdatasrc"] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop("featureidkey", None)
+        self["featureidkey"] = featureidkey if featureidkey is not None else _v
         _v = arg.pop("geojson", None)
         self["geojson"] = geojson if geojson is not None else _v
         _v = arg.pop("hoverinfo", None)
@@ -79554,6 +80514,8 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("locations", None)
         self["locations"] = locations if locations is not None else _v
         _v = arg.pop("locationssrc", None)
@@ -79572,6 +80534,8 @@ an instance of plotly.graph_objs.Choroplethmapbox"""
         self["selected"] = selected if selected is not None else _v
         _v = arg.pop("selectedpoints", None)
         self["selectedpoints"] = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -79953,7 +80917,8 @@ class Choropleth(_BaseTraceType):
                  'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
                  'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
                  'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd']
+                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+            Appending '_r' to a named colorscale reverses it.
 
         Returns
         -------
@@ -80008,6 +80973,30 @@ class Choropleth(_BaseTraceType):
     def customdatasrc(self, val):
         self["customdatasrc"] = val
 
+    # featureidkey
+    # ------------
+    @property
+    def featureidkey(self):
+        """
+        Sets the key in GeoJSON features which is used as id to match
+        the items included in the `locations` array. Only has an effect
+        when `geojson` is set. Support nested property, for example
+        "properties.name".
+    
+        The 'featureidkey' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["featureidkey"]
+
+    @featureidkey.setter
+    def featureidkey(self, val):
+        self["featureidkey"] = val
+
     # geo
     # ---
     @property
@@ -80032,6 +81021,29 @@ class Choropleth(_BaseTraceType):
     @geo.setter
     def geo(self, val):
         self["geo"] = val
+
+    # geojson
+    # -------
+    @property
+    def geojson(self):
+        """
+        Sets optional GeoJSON data associated with this trace. If not
+        given, the features on the base map are used. It can be set as
+        a valid GeoJSON object or as a URL string. Note that we only
+        accept GeoJSONs of type "FeatureCollection" or "Feature" with
+        geometries of type "Polygon" or "MultiPolygon".
+    
+        The 'geojson' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["geojson"]
+
+    @geojson.setter
+    def geojson(self, val):
+        self["geojson"] = val
 
     # hoverinfo
     # ---------
@@ -80283,17 +81295,43 @@ class Choropleth(_BaseTraceType):
     def idssrc(self, val):
         self["idssrc"] = val
 
+    # legendgroup
+    # -----------
+    @property
+    def legendgroup(self):
+        """
+        Sets the legend group for this trace. Traces part of the same
+        legend group hide/show at the same time when toggling legend
+        items.
+    
+        The 'legendgroup' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["legendgroup"]
+
+    @legendgroup.setter
+    def legendgroup(self, val):
+        self["legendgroup"] = val
+
     # locationmode
     # ------------
     @property
     def locationmode(self):
         """
         Determines the set of locations used to match entries in
-        `locations` to regions on the map.
+        `locations` to regions on the map. Values "ISO-3", "USA-
+        states", *country names* correspond to features on the base map
+        and value "geojson-id" corresponds to features from a custom
+        GeoJSON linked to the `geojson` attribute.
     
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['ISO-3', 'USA-states', 'country names']
+                ['ISO-3', 'USA-states', 'country names', 'geojson-id']
 
         Returns
         -------
@@ -80520,6 +81558,27 @@ class Choropleth(_BaseTraceType):
     @selectedpoints.setter
     def selectedpoints(self, val):
         self["selectedpoints"] = val
+
+    # showlegend
+    # ----------
+    @property
+    def showlegend(self):
+        """
+        Determines whether or not an item corresponding to this trace
+        is shown in the legend.
+    
+        The 'showlegend' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["showlegend"]
+
+    @showlegend.setter
+    def showlegend(self, val):
+        self["showlegend"] = val
 
     # showscale
     # ---------
@@ -80902,12 +81961,24 @@ class Choropleth(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         geo
             Sets a reference between this trace's geospatial
             coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -80954,9 +82025,17 @@ class Choropleth(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -80997,6 +82076,9 @@ class Choropleth(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -81070,7 +82152,9 @@ class Choropleth(_BaseTraceType):
         colorscale=None,
         customdata=None,
         customdatasrc=None,
+        featureidkey=None,
         geo=None,
+        geojson=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -81080,6 +82164,7 @@ class Choropleth(_BaseTraceType):
         hovertextsrc=None,
         ids=None,
         idssrc=None,
+        legendgroup=None,
         locationmode=None,
         locations=None,
         locationssrc=None,
@@ -81090,6 +82175,7 @@ class Choropleth(_BaseTraceType):
         reversescale=None,
         selected=None,
         selectedpoints=None,
+        showlegend=None,
         showscale=None,
         stream=None,
         text=None,
@@ -81154,12 +82240,24 @@ class Choropleth(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        featureidkey
+            Sets the key in GeoJSON features which is used as id to
+            match the items included in the `locations` array. Only
+            has an effect when `geojson` is set. Support nested
+            property, for example "properties.name".
         geo
             Sets a reference between this trace's geospatial
             coordinates and a geographic map. If "geo" (the default
             value), the geospatial coordinates refer to
             `layout.geo`. If "geo2", the geospatial coordinates
             refer to `layout.geo2`, and so on.
+        geojson
+            Sets optional GeoJSON data associated with this trace.
+            If not given, the features on the base map are used. It
+            can be set as a valid GeoJSON object or as a URL
+            string. Note that we only accept GeoJSONs of type
+            "FeatureCollection" or "Feature" with geometries of
+            type "Polygon" or "MultiPolygon".
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -81206,9 +82304,17 @@ class Choropleth(_BaseTraceType):
             array of strings, not numbers or any other type.
         idssrc
             Sets the source reference on plot.ly for  ids .
+        legendgroup
+            Sets the legend group for this trace. Traces part of
+            the same legend group hide/show at the same time when
+            toggling legend items.
         locationmode
             Determines the set of locations used to match entries
-            in `locations` to regions on the map.
+            in `locations` to regions on the map. Values "ISO-3",
+            "USA-states", *country names* correspond to features on
+            the base map and value "geojson-id" corresponds to
+            features from a custom GeoJSON linked to the `geojson`
+            attribute.
         locations
             Sets the coordinates via location IDs or names. See
             `locationmode` for more info.
@@ -81249,6 +82355,9 @@ class Choropleth(_BaseTraceType):
             the `unselected` are turned on for all points, whereas,
             any other non-array values means no selection all where
             the `selected` and `unselected` styles have no effect.
+        showlegend
+            Determines whether or not an item corresponding to this
+            trace is shown in the legend.
         showscale
             Determines whether or not a colorbar is displayed for
             this trace.
@@ -81350,7 +82459,9 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators["colorscale"] = v_choropleth.ColorscaleValidator()
         self._validators["customdata"] = v_choropleth.CustomdataValidator()
         self._validators["customdatasrc"] = v_choropleth.CustomdatasrcValidator()
+        self._validators["featureidkey"] = v_choropleth.FeatureidkeyValidator()
         self._validators["geo"] = v_choropleth.GeoValidator()
+        self._validators["geojson"] = v_choropleth.GeojsonValidator()
         self._validators["hoverinfo"] = v_choropleth.HoverinfoValidator()
         self._validators["hoverinfosrc"] = v_choropleth.HoverinfosrcValidator()
         self._validators["hoverlabel"] = v_choropleth.HoverlabelValidator()
@@ -81360,6 +82471,7 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators["hovertextsrc"] = v_choropleth.HovertextsrcValidator()
         self._validators["ids"] = v_choropleth.IdsValidator()
         self._validators["idssrc"] = v_choropleth.IdssrcValidator()
+        self._validators["legendgroup"] = v_choropleth.LegendgroupValidator()
         self._validators["locationmode"] = v_choropleth.LocationmodeValidator()
         self._validators["locations"] = v_choropleth.LocationsValidator()
         self._validators["locationssrc"] = v_choropleth.LocationssrcValidator()
@@ -81370,6 +82482,7 @@ an instance of plotly.graph_objs.Choropleth"""
         self._validators["reversescale"] = v_choropleth.ReversescaleValidator()
         self._validators["selected"] = v_choropleth.SelectedValidator()
         self._validators["selectedpoints"] = v_choropleth.SelectedpointsValidator()
+        self._validators["showlegend"] = v_choropleth.ShowlegendValidator()
         self._validators["showscale"] = v_choropleth.ShowscaleValidator()
         self._validators["stream"] = v_choropleth.StreamValidator()
         self._validators["text"] = v_choropleth.TextValidator()
@@ -81399,8 +82512,12 @@ an instance of plotly.graph_objs.Choropleth"""
         self["customdata"] = customdata if customdata is not None else _v
         _v = arg.pop("customdatasrc", None)
         self["customdatasrc"] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop("featureidkey", None)
+        self["featureidkey"] = featureidkey if featureidkey is not None else _v
         _v = arg.pop("geo", None)
         self["geo"] = geo if geo is not None else _v
+        _v = arg.pop("geojson", None)
+        self["geojson"] = geojson if geojson is not None else _v
         _v = arg.pop("hoverinfo", None)
         self["hoverinfo"] = hoverinfo if hoverinfo is not None else _v
         _v = arg.pop("hoverinfosrc", None)
@@ -81421,6 +82538,8 @@ an instance of plotly.graph_objs.Choropleth"""
         self["ids"] = ids if ids is not None else _v
         _v = arg.pop("idssrc", None)
         self["idssrc"] = idssrc if idssrc is not None else _v
+        _v = arg.pop("legendgroup", None)
+        self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("locationmode", None)
         self["locationmode"] = locationmode if locationmode is not None else _v
         _v = arg.pop("locations", None)
@@ -81441,6 +82560,8 @@ an instance of plotly.graph_objs.Choropleth"""
         self["selected"] = selected if selected is not None else _v
         _v = arg.pop("selectedpoints", None)
         self["selectedpoints"] = selectedpoints if selectedpoints is not None else _v
+        _v = arg.pop("showlegend", None)
+        self["showlegend"] = showlegend if showlegend is not None else _v
         _v = arg.pop("showscale", None)
         self["showscale"] = showscale if showscale is not None else _v
         _v = arg.pop("stream", None)
@@ -84697,7 +85818,8 @@ class Box(_BaseTraceType):
         """
         If True, the mean of the box(es)' underlying distribution is
         drawn as a dashed line inside the box(es). If "sd" the standard
-        deviation is also drawn.
+        deviation is also drawn. Defaults to True when `mean` is set.
+        Defaults to "sd" when `sd` is set Otherwise defaults to False.
     
         The 'boxmean' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -84723,8 +85845,10 @@ class Box(_BaseTraceType):
         are shown and points either less than 4*Q1-3*Q3 or greater than
         4*Q3-3*Q1 are highlighted (see `outliercolor`) If "all", all
         sample points are shown If False, only the box(es) are shown
-        with no sample points and the whiskers extend to the range of the
-        sample.
+        with no sample points Defaults to "suspectedoutliers" when
+        `marker.outliercolor` or `marker.line.outliercolor` is set.
+        Defaults to "all" under the q1/median/q3 signature. Otherwise
+        defaults to "outliers".
     
         The 'boxpoints' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -84782,6 +85906,48 @@ class Box(_BaseTraceType):
     @customdatasrc.setter
     def customdatasrc(self, val):
         self["customdatasrc"] = val
+
+    # dx
+    # --
+    @property
+    def dx(self):
+        """
+        Sets the x coordinate step for multi-box traces set using
+        q1/median/q3.
+    
+        The 'dx' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["dx"]
+
+    @dx.setter
+    def dx(self, val):
+        self["dx"] = val
+
+    # dy
+    # --
+    @property
+    def dy(self):
+        """
+        Sets the y coordinate step for multi-box traces set using
+        q1/median/q3.
+    
+        The 'dy' property is a number and may be specified as:
+          - An int or float
+
+        Returns
+        -------
+        int|float
+        """
+        return self["dy"]
+
+    @dy.setter
+    def dy(self, val):
+        self["dy"] = val
 
     # fillcolor
     # ---------
@@ -85192,6 +86358,50 @@ class Box(_BaseTraceType):
     def line(self, val):
         self["line"] = val
 
+    # lowerfence
+    # ----------
+    @property
+    def lowerfence(self):
+        """
+        Sets the lower fence values. There should be as many items as
+        the number of boxes desired. This attribute has effect only
+        under the q1/median/q3 signature. If `lowerfence` is not
+        provided but a sample (in `y` or `x`) is set, we compute the
+        lower as the last sample point below 1.5 times the IQR.
+    
+        The 'lowerfence' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["lowerfence"]
+
+    @lowerfence.setter
+    def lowerfence(self, val):
+        self["lowerfence"] = val
+
+    # lowerfencesrc
+    # -------------
+    @property
+    def lowerfencesrc(self):
+        """
+        Sets the source reference on plot.ly for  lowerfence .
+    
+        The 'lowerfencesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["lowerfencesrc"]
+
+    @lowerfencesrc.setter
+    def lowerfencesrc(self, val):
+        self["lowerfencesrc"] = val
+
     # marker
     # ------
     @property
@@ -85237,6 +86447,91 @@ class Box(_BaseTraceType):
     @marker.setter
     def marker(self, val):
         self["marker"] = val
+
+    # mean
+    # ----
+    @property
+    def mean(self):
+        """
+        Sets the mean values. There should be as many items as the
+        number of boxes desired. This attribute has effect only under
+        the q1/median/q3 signature. If `mean` is not provided but a
+        sample (in `y` or `x`) is set, we compute the mean for each box
+        using the sample values.
+    
+        The 'mean' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["mean"]
+
+    @mean.setter
+    def mean(self, val):
+        self["mean"] = val
+
+    # meansrc
+    # -------
+    @property
+    def meansrc(self):
+        """
+        Sets the source reference on plot.ly for  mean .
+    
+        The 'meansrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["meansrc"]
+
+    @meansrc.setter
+    def meansrc(self, val):
+        self["meansrc"] = val
+
+    # median
+    # ------
+    @property
+    def median(self):
+        """
+        Sets the median values. There should be as many items as the
+        number of boxes desired.
+    
+        The 'median' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["median"]
+
+    @median.setter
+    def median(self, val):
+        self["median"] = val
+
+    # mediansrc
+    # ---------
+    @property
+    def mediansrc(self):
+        """
+        Sets the source reference on plot.ly for  median .
+    
+        The 'mediansrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["mediansrc"]
+
+    @mediansrc.setter
+    def mediansrc(self, val):
+        self["mediansrc"] = val
 
     # meta
     # ----
@@ -85315,7 +86610,15 @@ class Box(_BaseTraceType):
     @property
     def notched(self):
         """
-        Determines whether or not notches should be drawn.
+        Determines whether or not notches are drawn. Notches displays a
+        confidence interval around the median. We compute the
+        confidence interval as median +/- 1.57 * IQR / sqrt(N), where
+        IQR is the interquartile range and N is the sample size. If two
+        boxes' notches do not overlap there is 95% confidence their
+        medians differ. See
+        https://sites.google.com/site/davidsstatistics/home/notched-
+        box-plots for more info. Defaults to False unless `notchwidth`
+        or `notchspan` is set.
     
         The 'notched' property must be specified as a bool
         (either True, or False)
@@ -85329,6 +86632,51 @@ class Box(_BaseTraceType):
     @notched.setter
     def notched(self, val):
         self["notched"] = val
+
+    # notchspan
+    # ---------
+    @property
+    def notchspan(self):
+        """
+        Sets the notch span from the boxes' `median` values. There
+        should be as many items as the number of boxes desired. This
+        attribute has effect only under the q1/median/q3 signature. If
+        `notchspan` is not provided but a sample (in `y` or `x`) is
+        set, we compute it as 1.57 * IQR / sqrt(N), where N is the
+        sample size.
+    
+        The 'notchspan' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["notchspan"]
+
+    @notchspan.setter
+    def notchspan(self, val):
+        self["notchspan"] = val
+
+    # notchspansrc
+    # ------------
+    @property
+    def notchspansrc(self):
+        """
+        Sets the source reference on plot.ly for  notchspan .
+    
+        The 'notchspansrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["notchspansrc"]
+
+    @notchspansrc.setter
+    def notchspansrc(self, val):
+        self["notchspansrc"] = val
 
     # notchwidth
     # ----------
@@ -85439,6 +86787,164 @@ class Box(_BaseTraceType):
     @pointpos.setter
     def pointpos(self, val):
         self["pointpos"] = val
+
+    # q1
+    # --
+    @property
+    def q1(self):
+        """
+        Sets the Quartile 1 values. There should be as many items as
+        the number of boxes desired.
+    
+        The 'q1' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["q1"]
+
+    @q1.setter
+    def q1(self, val):
+        self["q1"] = val
+
+    # q1src
+    # -----
+    @property
+    def q1src(self):
+        """
+        Sets the source reference on plot.ly for  q1 .
+    
+        The 'q1src' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["q1src"]
+
+    @q1src.setter
+    def q1src(self, val):
+        self["q1src"] = val
+
+    # q3
+    # --
+    @property
+    def q3(self):
+        """
+        Sets the Quartile 3 values. There should be as many items as
+        the number of boxes desired.
+    
+        The 'q3' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["q3"]
+
+    @q3.setter
+    def q3(self, val):
+        self["q3"] = val
+
+    # q3src
+    # -----
+    @property
+    def q3src(self):
+        """
+        Sets the source reference on plot.ly for  q3 .
+    
+        The 'q3src' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["q3src"]
+
+    @q3src.setter
+    def q3src(self, val):
+        self["q3src"] = val
+
+    # quartilemethod
+    # --------------
+    @property
+    def quartilemethod(self):
+        """
+        Sets the method used to compute the sample's Q1 and Q3
+        quartiles. The "linear" method uses the 25th percentile for Q1
+        and 75th percentile for Q3 as computed using method #10 (listed
+        on http://www.amstat.org/publications/jse/v14n3/langford.html).
+        The "exclusive" method uses the median to divide the ordered
+        dataset into two halves if the sample is odd, it does not
+        include the median in either half - Q1 is then the median of
+        the lower half and Q3 the median of the upper half. The
+        "inclusive" method also uses the median to divide the ordered
+        dataset into two halves but if the sample is odd, it includes
+        the median in both halves - Q1 is then the median of the lower
+        half and Q3 the median of the upper half.
+    
+        The 'quartilemethod' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['linear', 'exclusive', 'inclusive']
+
+        Returns
+        -------
+        Any
+        """
+        return self["quartilemethod"]
+
+    @quartilemethod.setter
+    def quartilemethod(self, val):
+        self["quartilemethod"] = val
+
+    # sd
+    # --
+    @property
+    def sd(self):
+        """
+        Sets the standard deviation values. There should be as many
+        items as the number of boxes desired. This attribute has effect
+        only under the q1/median/q3 signature. If `sd` is not provided
+        but a sample (in `y` or `x`) is set, we compute the standard
+        deviation for each box using the sample values.
+    
+        The 'sd' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["sd"]
+
+    @sd.setter
+    def sd(self, val):
+        self["sd"] = val
+
+    # sdsrc
+    # -----
+    @property
+    def sdsrc(self):
+        """
+        Sets the source reference on plot.ly for  sd .
+    
+        The 'sdsrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["sdsrc"]
+
+    @sdsrc.setter
+    def sdsrc(self, val):
+        self["sdsrc"] = val
 
     # selected
     # --------
@@ -85673,6 +87179,50 @@ class Box(_BaseTraceType):
     def unselected(self, val):
         self["unselected"] = val
 
+    # upperfence
+    # ----------
+    @property
+    def upperfence(self):
+        """
+        Sets the upper fence values. There should be as many items as
+        the number of boxes desired. This attribute has effect only
+        under the q1/median/q3 signature. If `upperfence` is not
+        provided but a sample (in `y` or `x`) is set, we compute the
+        lower as the last sample point above 1.5 times the IQR.
+    
+        The 'upperfence' property is an array that may be specified as a tuple,
+        list, numpy array, or pandas Series
+
+        Returns
+        -------
+        numpy.ndarray
+        """
+        return self["upperfence"]
+
+    @upperfence.setter
+    def upperfence(self, val):
+        self["upperfence"] = val
+
+    # upperfencesrc
+    # -------------
+    @property
+    def upperfencesrc(self):
+        """
+        Sets the source reference on plot.ly for  upperfence .
+    
+        The 'upperfencesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["upperfencesrc"]
+
+    @upperfencesrc.setter
+    def upperfencesrc(self, val):
+        self["upperfencesrc"] = val
+
     # visible
     # -------
     @property
@@ -85765,7 +87315,9 @@ class Box(_BaseTraceType):
     @property
     def x0(self):
         """
-        Sets the x coordinate of the box. See overview for more info.
+        Sets the x coordinate for single-box traces or the starting
+        coordinate for multi-box traces set using q1/median/q3. See
+        overview for more info.
     
         The 'x0' property accepts values of any type
 
@@ -85874,7 +87426,9 @@ class Box(_BaseTraceType):
     @property
     def y0(self):
         """
-        Sets the y coordinate of the box. See overview for more info.
+        Sets the y coordinate for single-box traces or the starting
+        coordinate for multi-box traces set using q1/median/q3. See
+        overview for more info.
     
         The 'y0' property accepts values of any type
 
@@ -85983,6 +87537,8 @@ class Box(_BaseTraceType):
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
             box(es). If "sd" the standard deviation is also drawn.
+            Defaults to True when `mean` is set. Defaults to "sd"
+            when `sd` is set Otherwise defaults to False.
         boxpoints
             If "outliers", only the sample points lying outside the
             whiskers are shown If "suspectedoutliers", the outlier
@@ -85990,7 +87546,10 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set. Defaults to "all" under the q1/median/q3
+            signature. Otherwise defaults to "outliers".
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -85998,6 +87557,12 @@ class Box(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dx
+            Sets the x coordinate step for multi-box traces set
+            using q1/median/q3.
+        dy
+            Sets the y coordinate step for multi-box traces set
+            using q1/median/q3.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -86063,9 +87628,31 @@ class Box(_BaseTraceType):
         line
             plotly.graph_objects.box.Line instance or dict with
             compatible properties
+        lowerfence
+            Sets the lower fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `lowerfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point below 1.5 times the IQR.
+        lowerfencesrc
+            Sets the source reference on plot.ly for  lowerfence .
         marker
             plotly.graph_objects.box.Marker instance or dict with
             compatible properties
+        mean
+            Sets the mean values. There should be as many items as
+            the number of boxes desired. This attribute has effect
+            only under the q1/median/q3 signature. If `mean` is not
+            provided but a sample (in `y` or `x`) is set, we
+            compute the mean for each box using the sample values.
+        meansrc
+            Sets the source reference on plot.ly for  mean .
+        median
+            Sets the median values. There should be as many items
+            as the number of boxes desired.
+        mediansrc
+            Sets the source reference on plot.ly for  median .
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -86088,7 +87675,24 @@ class Box(_BaseTraceType):
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
         notched
-            Determines whether or not notches should be drawn.
+            Determines whether or not notches are drawn. Notches
+            displays a confidence interval around the median. We
+            compute the confidence interval as median +/- 1.57 *
+            IQR / sqrt(N), where IQR is the interquartile range and
+            N is the sample size. If two boxes' notches do not
+            overlap there is 95% confidence their medians differ.
+            See https://sites.google.com/site/davidsstatistics/home
+            /notched-box-plots for more info. Defaults to False
+            unless `notchwidth` or `notchspan` is set.
+        notchspan
+            Sets the notch span from the boxes' `median` values.
+            There should be as many items as the number of boxes
+            desired. This attribute has effect only under the
+            q1/median/q3 signature. If `notchspan` is not provided
+            but a sample (in `y` or `x`) is set, we compute it as
+            1.57 * IQR / sqrt(N), where N is the sample size.
+        notchspansrc
+            Sets the source reference on plot.ly for  notchspan .
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -86109,6 +87713,40 @@ class Box(_BaseTraceType):
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
+        q1
+            Sets the Quartile 1 values. There should be as many
+            items as the number of boxes desired.
+        q1src
+            Sets the source reference on plot.ly for  q1 .
+        q3
+            Sets the Quartile 3 values. There should be as many
+            items as the number of boxes desired.
+        q3src
+            Sets the source reference on plot.ly for  q3 .
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on http://www.amstat.org/publication
+            s/jse/v14n3/langford.html). The "exclusive" method uses
+            the median to divide the ordered dataset into two
+            halves if the sample is odd, it does not include the
+            median in either half - Q1 is then the median of the
+            lower half and Q3 the median of the upper half. The
+            "inclusive" method also uses the median to divide the
+            ordered dataset into two halves but if the sample is
+            odd, it includes the median in both halves - Q1 is then
+            the median of the lower half and Q3 the median of the
+            upper half.
+        sd
+            Sets the standard deviation values. There should be as
+            many items as the number of boxes desired. This
+            attribute has effect only under the q1/median/q3
+            signature. If `sd` is not provided but a sample (in `y`
+            or `x`) is set, we compute the standard deviation for
+            each box using the sample values.
+        sdsrc
+            Sets the source reference on plot.ly for  sd .
         selected
             plotly.graph_objects.box.Selected instance or dict with
             compatible properties
@@ -86159,6 +87797,15 @@ class Box(_BaseTraceType):
         unselected
             plotly.graph_objects.box.Unselected instance or dict
             with compatible properties
+        upperfence
+            Sets the upper fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `upperfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point above 1.5 times the IQR.
+        upperfencesrc
+            Sets the source reference on plot.ly for  upperfence .
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -86177,8 +87824,9 @@ class Box(_BaseTraceType):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -86192,8 +87840,9 @@ class Box(_BaseTraceType):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -86213,6 +87862,8 @@ class Box(_BaseTraceType):
         boxpoints=None,
         customdata=None,
         customdatasrc=None,
+        dx=None,
+        dy=None,
         fillcolor=None,
         hoverinfo=None,
         hoverinfosrc=None,
@@ -86227,16 +87878,31 @@ class Box(_BaseTraceType):
         jitter=None,
         legendgroup=None,
         line=None,
+        lowerfence=None,
+        lowerfencesrc=None,
         marker=None,
+        mean=None,
+        meansrc=None,
+        median=None,
+        mediansrc=None,
         meta=None,
         metasrc=None,
         name=None,
         notched=None,
+        notchspan=None,
+        notchspansrc=None,
         notchwidth=None,
         offsetgroup=None,
         opacity=None,
         orientation=None,
         pointpos=None,
+        q1=None,
+        q1src=None,
+        q3=None,
+        q3src=None,
+        quartilemethod=None,
+        sd=None,
+        sdsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
@@ -86246,6 +87912,8 @@ class Box(_BaseTraceType):
         uid=None,
         uirevision=None,
         unselected=None,
+        upperfence=None,
+        upperfencesrc=None,
         visible=None,
         whiskerwidth=None,
         width=None,
@@ -86264,16 +87932,30 @@ class Box(_BaseTraceType):
         """
         Construct a new Box object
         
-        In vertical (horizontal) box plots, statistics are computed
-        using `y` (`x`) values. By supplying an `x` (`y`) array, one
-        box per distinct x (y) value is drawn If no `x` (`y`) list is
-        provided, a single box is drawn. That box position is then
-        positioned with with `name` or with `x0` (`y0`) if provided.
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
-        second quartile (Q2) is marked by a line inside the box. By
-        default, the whiskers correspond to the box' edges +/- 1.5
-        times the interquartile range (IQR: Q3-Q1), see "boxpoints" for
-        other options.
+        second quartile (Q2, i.e. the median) is marked by a line
+        inside the box. The fences grow outward from the boxes' edges,
+        by default they span +/- 1.5 times the interquartile range
+        (IQR: Q3-Q1), The sample mean and standard deviation as well as
+        notches and the sample, outlier and suspected outliers points
+        can be optionally added to the box plot. The values and
+        positions corresponding to each boxes can be input using two
+        signatures. The first signature expects users to supply the
+        sample values in the `y` data array for vertical boxes (`x` for
+        horizontal boxes). By supplying an `x` (`y`) array, one box per
+        distinct `x` (`y`) value is drawn If no `x` (`y`) list is
+        provided, a single box is drawn. In this case, the box is
+        positioned with the trace `name` or with `x0` (`y0`) if
+        provided. The second signature expects users to supply the
+        boxes corresponding Q1, median and Q3 statistics in the `q1`,
+        `median` and `q3` data arrays respectively. Other box features
+        relying on statistics namely `lowerfence`, `upperfence`,
+        `notchspan` can be set directly by the users. To have plotly
+        compute them or to show sample points besides the boxes, users
+        can set the `y` data array for vertical boxes (`x` for
+        horizontal boxes) to a 2D array with the outer length
+        corresponding to the number of boxes in the traces and the
+        inner length corresponding the sample size.
 
         Parameters
         ----------
@@ -86289,6 +87971,8 @@ class Box(_BaseTraceType):
             If True, the mean of the box(es)' underlying
             distribution is drawn as a dashed line inside the
             box(es). If "sd" the standard deviation is also drawn.
+            Defaults to True when `mean` is set. Defaults to "sd"
+            when `sd` is set Otherwise defaults to False.
         boxpoints
             If "outliers", only the sample points lying outside the
             whiskers are shown If "suspectedoutliers", the outlier
@@ -86296,7 +87980,10 @@ class Box(_BaseTraceType):
             or greater than 4*Q3-3*Q1 are highlighted (see
             `outliercolor`) If "all", all sample points are shown
             If False, only the box(es) are shown with no sample
-            points and the whiskers extend to the range of the sample.
+            points Defaults to "suspectedoutliers" when
+            `marker.outliercolor` or `marker.line.outliercolor` is
+            set. Defaults to "all" under the q1/median/q3
+            signature. Otherwise defaults to "outliers".
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -86304,6 +87991,12 @@ class Box(_BaseTraceType):
             the markers DOM elements
         customdatasrc
             Sets the source reference on plot.ly for  customdata .
+        dx
+            Sets the x coordinate step for multi-box traces set
+            using q1/median/q3.
+        dy
+            Sets the y coordinate step for multi-box traces set
+            using q1/median/q3.
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
@@ -86369,9 +88062,31 @@ class Box(_BaseTraceType):
         line
             plotly.graph_objects.box.Line instance or dict with
             compatible properties
+        lowerfence
+            Sets the lower fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `lowerfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point below 1.5 times the IQR.
+        lowerfencesrc
+            Sets the source reference on plot.ly for  lowerfence .
         marker
             plotly.graph_objects.box.Marker instance or dict with
             compatible properties
+        mean
+            Sets the mean values. There should be as many items as
+            the number of boxes desired. This attribute has effect
+            only under the q1/median/q3 signature. If `mean` is not
+            provided but a sample (in `y` or `x`) is set, we
+            compute the mean for each box using the sample values.
+        meansrc
+            Sets the source reference on plot.ly for  mean .
+        median
+            Sets the median values. There should be as many items
+            as the number of boxes desired.
+        mediansrc
+            Sets the source reference on plot.ly for  median .
         meta
             Assigns extra meta information associated with this
             trace that can be used in various text attributes.
@@ -86394,7 +88109,24 @@ class Box(_BaseTraceType):
             `x0` (`y` and `y0` if horizontal) are missing and the
             position axis is categorical
         notched
-            Determines whether or not notches should be drawn.
+            Determines whether or not notches are drawn. Notches
+            displays a confidence interval around the median. We
+            compute the confidence interval as median +/- 1.57 *
+            IQR / sqrt(N), where IQR is the interquartile range and
+            N is the sample size. If two boxes' notches do not
+            overlap there is 95% confidence their medians differ.
+            See https://sites.google.com/site/davidsstatistics/home
+            /notched-box-plots for more info. Defaults to False
+            unless `notchwidth` or `notchspan` is set.
+        notchspan
+            Sets the notch span from the boxes' `median` values.
+            There should be as many items as the number of boxes
+            desired. This attribute has effect only under the
+            q1/median/q3 signature. If `notchspan` is not provided
+            but a sample (in `y` or `x`) is set, we compute it as
+            1.57 * IQR / sqrt(N), where N is the sample size.
+        notchspansrc
+            Sets the source reference on plot.ly for  notchspan .
         notchwidth
             Sets the width of the notches relative to the box'
             width. For example, with 0, the notches are as wide as
@@ -86415,6 +88147,40 @@ class Box(_BaseTraceType):
             the center of the box(es). Positive (negative) values
             correspond to positions to the right (left) for
             vertical boxes and above (below) for horizontal boxes
+        q1
+            Sets the Quartile 1 values. There should be as many
+            items as the number of boxes desired.
+        q1src
+            Sets the source reference on plot.ly for  q1 .
+        q3
+            Sets the Quartile 3 values. There should be as many
+            items as the number of boxes desired.
+        q3src
+            Sets the source reference on plot.ly for  q3 .
+        quartilemethod
+            Sets the method used to compute the sample's Q1 and Q3
+            quartiles. The "linear" method uses the 25th percentile
+            for Q1 and 75th percentile for Q3 as computed using
+            method #10 (listed on http://www.amstat.org/publication
+            s/jse/v14n3/langford.html). The "exclusive" method uses
+            the median to divide the ordered dataset into two
+            halves if the sample is odd, it does not include the
+            median in either half - Q1 is then the median of the
+            lower half and Q3 the median of the upper half. The
+            "inclusive" method also uses the median to divide the
+            ordered dataset into two halves but if the sample is
+            odd, it includes the median in both halves - Q1 is then
+            the median of the lower half and Q3 the median of the
+            upper half.
+        sd
+            Sets the standard deviation values. There should be as
+            many items as the number of boxes desired. This
+            attribute has effect only under the q1/median/q3
+            signature. If `sd` is not provided but a sample (in `y`
+            or `x`) is set, we compute the standard deviation for
+            each box using the sample values.
+        sdsrc
+            Sets the source reference on plot.ly for  sd .
         selected
             plotly.graph_objects.box.Selected instance or dict with
             compatible properties
@@ -86465,6 +88231,15 @@ class Box(_BaseTraceType):
         unselected
             plotly.graph_objects.box.Unselected instance or dict
             with compatible properties
+        upperfence
+            Sets the upper fence values. There should be as many
+            items as the number of boxes desired. This attribute
+            has effect only under the q1/median/q3 signature. If
+            `upperfence` is not provided but a sample (in `y` or
+            `x`) is set, we compute the lower as the last sample
+            point above 1.5 times the IQR.
+        upperfencesrc
+            Sets the source reference on plot.ly for  upperfence .
         visible
             Determines whether or not this trace is visible. If
             "legendonly", the trace is not drawn, but can appear as
@@ -86483,8 +88258,9 @@ class Box(_BaseTraceType):
             Sets the x sample data or coordinates. See overview for
             more info.
         x0
-            Sets the x coordinate of the box. See overview for more
-            info.
+            Sets the x coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         xaxis
             Sets a reference between this trace's x coordinates and
             a 2D cartesian x axis. If "x" (the default value), the
@@ -86498,8 +88274,9 @@ class Box(_BaseTraceType):
             Sets the y sample data or coordinates. See overview for
             more info.
         y0
-            Sets the y coordinate of the box. See overview for more
-            info.
+            Sets the y coordinate for single-box traces or the
+            starting coordinate for multi-box traces set using
+            q1/median/q3. See overview for more info.
         yaxis
             Sets a reference between this trace's y coordinates and
             a 2D cartesian y axis. If "y" (the default value), the
@@ -86547,6 +88324,8 @@ an instance of plotly.graph_objs.Box"""
         self._validators["boxpoints"] = v_box.BoxpointsValidator()
         self._validators["customdata"] = v_box.CustomdataValidator()
         self._validators["customdatasrc"] = v_box.CustomdatasrcValidator()
+        self._validators["dx"] = v_box.DxValidator()
+        self._validators["dy"] = v_box.DyValidator()
         self._validators["fillcolor"] = v_box.FillcolorValidator()
         self._validators["hoverinfo"] = v_box.HoverinfoValidator()
         self._validators["hoverinfosrc"] = v_box.HoverinfosrcValidator()
@@ -86561,16 +88340,31 @@ an instance of plotly.graph_objs.Box"""
         self._validators["jitter"] = v_box.JitterValidator()
         self._validators["legendgroup"] = v_box.LegendgroupValidator()
         self._validators["line"] = v_box.LineValidator()
+        self._validators["lowerfence"] = v_box.LowerfenceValidator()
+        self._validators["lowerfencesrc"] = v_box.LowerfencesrcValidator()
         self._validators["marker"] = v_box.MarkerValidator()
+        self._validators["mean"] = v_box.MeanValidator()
+        self._validators["meansrc"] = v_box.MeansrcValidator()
+        self._validators["median"] = v_box.MedianValidator()
+        self._validators["mediansrc"] = v_box.MediansrcValidator()
         self._validators["meta"] = v_box.MetaValidator()
         self._validators["metasrc"] = v_box.MetasrcValidator()
         self._validators["name"] = v_box.NameValidator()
         self._validators["notched"] = v_box.NotchedValidator()
+        self._validators["notchspan"] = v_box.NotchspanValidator()
+        self._validators["notchspansrc"] = v_box.NotchspansrcValidator()
         self._validators["notchwidth"] = v_box.NotchwidthValidator()
         self._validators["offsetgroup"] = v_box.OffsetgroupValidator()
         self._validators["opacity"] = v_box.OpacityValidator()
         self._validators["orientation"] = v_box.OrientationValidator()
         self._validators["pointpos"] = v_box.PointposValidator()
+        self._validators["q1"] = v_box.Q1Validator()
+        self._validators["q1src"] = v_box.Q1SrcValidator()
+        self._validators["q3"] = v_box.Q3Validator()
+        self._validators["q3src"] = v_box.Q3SrcValidator()
+        self._validators["quartilemethod"] = v_box.QuartilemethodValidator()
+        self._validators["sd"] = v_box.SdValidator()
+        self._validators["sdsrc"] = v_box.SdsrcValidator()
         self._validators["selected"] = v_box.SelectedValidator()
         self._validators["selectedpoints"] = v_box.SelectedpointsValidator()
         self._validators["showlegend"] = v_box.ShowlegendValidator()
@@ -86580,6 +88374,8 @@ an instance of plotly.graph_objs.Box"""
         self._validators["uid"] = v_box.UidValidator()
         self._validators["uirevision"] = v_box.UirevisionValidator()
         self._validators["unselected"] = v_box.UnselectedValidator()
+        self._validators["upperfence"] = v_box.UpperfenceValidator()
+        self._validators["upperfencesrc"] = v_box.UpperfencesrcValidator()
         self._validators["visible"] = v_box.VisibleValidator()
         self._validators["whiskerwidth"] = v_box.WhiskerwidthValidator()
         self._validators["width"] = v_box.WidthValidator()
@@ -86606,6 +88402,10 @@ an instance of plotly.graph_objs.Box"""
         self["customdata"] = customdata if customdata is not None else _v
         _v = arg.pop("customdatasrc", None)
         self["customdatasrc"] = customdatasrc if customdatasrc is not None else _v
+        _v = arg.pop("dx", None)
+        self["dx"] = dx if dx is not None else _v
+        _v = arg.pop("dy", None)
+        self["dy"] = dy if dy is not None else _v
         _v = arg.pop("fillcolor", None)
         self["fillcolor"] = fillcolor if fillcolor is not None else _v
         _v = arg.pop("hoverinfo", None)
@@ -86636,8 +88436,20 @@ an instance of plotly.graph_objs.Box"""
         self["legendgroup"] = legendgroup if legendgroup is not None else _v
         _v = arg.pop("line", None)
         self["line"] = line if line is not None else _v
+        _v = arg.pop("lowerfence", None)
+        self["lowerfence"] = lowerfence if lowerfence is not None else _v
+        _v = arg.pop("lowerfencesrc", None)
+        self["lowerfencesrc"] = lowerfencesrc if lowerfencesrc is not None else _v
         _v = arg.pop("marker", None)
         self["marker"] = marker if marker is not None else _v
+        _v = arg.pop("mean", None)
+        self["mean"] = mean if mean is not None else _v
+        _v = arg.pop("meansrc", None)
+        self["meansrc"] = meansrc if meansrc is not None else _v
+        _v = arg.pop("median", None)
+        self["median"] = median if median is not None else _v
+        _v = arg.pop("mediansrc", None)
+        self["mediansrc"] = mediansrc if mediansrc is not None else _v
         _v = arg.pop("meta", None)
         self["meta"] = meta if meta is not None else _v
         _v = arg.pop("metasrc", None)
@@ -86646,6 +88458,10 @@ an instance of plotly.graph_objs.Box"""
         self["name"] = name if name is not None else _v
         _v = arg.pop("notched", None)
         self["notched"] = notched if notched is not None else _v
+        _v = arg.pop("notchspan", None)
+        self["notchspan"] = notchspan if notchspan is not None else _v
+        _v = arg.pop("notchspansrc", None)
+        self["notchspansrc"] = notchspansrc if notchspansrc is not None else _v
         _v = arg.pop("notchwidth", None)
         self["notchwidth"] = notchwidth if notchwidth is not None else _v
         _v = arg.pop("offsetgroup", None)
@@ -86656,6 +88472,20 @@ an instance of plotly.graph_objs.Box"""
         self["orientation"] = orientation if orientation is not None else _v
         _v = arg.pop("pointpos", None)
         self["pointpos"] = pointpos if pointpos is not None else _v
+        _v = arg.pop("q1", None)
+        self["q1"] = q1 if q1 is not None else _v
+        _v = arg.pop("q1src", None)
+        self["q1src"] = q1src if q1src is not None else _v
+        _v = arg.pop("q3", None)
+        self["q3"] = q3 if q3 is not None else _v
+        _v = arg.pop("q3src", None)
+        self["q3src"] = q3src if q3src is not None else _v
+        _v = arg.pop("quartilemethod", None)
+        self["quartilemethod"] = quartilemethod if quartilemethod is not None else _v
+        _v = arg.pop("sd", None)
+        self["sd"] = sd if sd is not None else _v
+        _v = arg.pop("sdsrc", None)
+        self["sdsrc"] = sdsrc if sdsrc is not None else _v
         _v = arg.pop("selected", None)
         self["selected"] = selected if selected is not None else _v
         _v = arg.pop("selectedpoints", None)
@@ -86674,6 +88504,10 @@ an instance of plotly.graph_objs.Box"""
         self["uirevision"] = uirevision if uirevision is not None else _v
         _v = arg.pop("unselected", None)
         self["unselected"] = unselected if unselected is not None else _v
+        _v = arg.pop("upperfence", None)
+        self["upperfence"] = upperfence if upperfence is not None else _v
+        _v = arg.pop("upperfencesrc", None)
+        self["upperfencesrc"] = upperfencesrc if upperfencesrc is not None else _v
         _v = arg.pop("visible", None)
         self["visible"] = visible if visible is not None else _v
         _v = arg.pop("whiskerwidth", None)
@@ -88951,10 +90785,10 @@ class Bar(_BaseTraceType):
         this link https://plot.ly/javascript/plotlyjs-events/#event-
         data. Additionally, every attributes that can be specified per-
         point (the ones that are `arrayOk: true`) are available.
-        Anything contained in tag `<extra>` is displayed in the
-        secondary box, for example "<extra>{fullData.name}</extra>". To
-        hide the secondary box completely, use an empty tag
-        `<extra></extra>`.
+        variables `value` and `label`. Anything contained in tag
+        `<extra>` is displayed in the secondary box, for example
+        "<extra>{fullData.name}</extra>". To hide the secondary box
+        completely, use an empty tag `<extra></extra>`.
     
         The 'hovertemplate' property is a string and must be specified as:
           - A string
@@ -89895,7 +91729,7 @@ class Bar(_BaseTraceType):
         reference/blob/master/Time-Formatting.md#format for details on
         the date formatting syntax. Every attributes that can be
         specified per-point (the ones that are `arrayOk: true`) are
-        available.
+        available. variables `value` and `label`.
     
         The 'texttemplate' property is a string and must be specified as:
           - A string
@@ -90404,8 +92238,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90546,7 +92381,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -90767,8 +92603,9 @@ class Bar(_BaseTraceType):
             https://plot.ly/javascript/plotlyjs-events/#event-data.
             Additionally, every attributes that can be specified
             per-point (the ones that are `arrayOk: true`) are
-            available.  Anything contained in tag `<extra>` is
-            displayed in the secondary box, for example
+            available. variables `value` and `label`. Anything
+            contained in tag `<extra>` is displayed in the
+            secondary box, for example
             "<extra>{fullData.name}</extra>". To hide the secondary
             box completely, use an empty tag `<extra></extra>`.
         hovertemplatesrc
@@ -90909,7 +92746,8 @@ class Bar(_BaseTraceType):
             reference/blob/master/Time-Formatting.md#format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
-            `arrayOk: true`) are available.
+            `arrayOk: true`) are available. variables `value` and
+            `label`.
         texttemplatesrc
             Sets the source reference on plot.ly for  texttemplate
             .
@@ -93370,6 +95208,25 @@ class Layout(_BaseLayoutType):
                 domain
                     plotly.graph_objects.layout.geo.Domain instance
                     or dict with compatible properties
+                fitbounds
+                    Determines if this subplot's view settings are
+                    auto-computed to fit trace data. On scoped
+                    maps, setting `fitbounds` leads to `center.lon`
+                    and `center.lat` getting auto-filled. On maps
+                    with a non-clipped projection, setting
+                    `fitbounds` leads to `center.lon`,
+                    `center.lat`, and `projection.rotation.lon`
+                    getting auto-filled. On maps with a clipped
+                    projection, setting `fitbounds` leads to
+                    `center.lon`, `center.lat`,
+                    `projection.rotation.lon`,
+                    `projection.rotation.lat`, `lonaxis.range` and
+                    `lonaxis.range` getting auto-filled. If
+                    "locations", only the trace's visible locations
+                    are considered in the `fitbounds` computations.
+                    If "geojson", the entire trace input `geojson`
+                    (if provided) is considered in the `fitbounds`
+                    computations, Defaults to False.
                 framecolor
                     Sets the color the frame.
                 framewidth
@@ -93429,6 +95286,8 @@ class Layout(_BaseLayoutType):
                     Controls persistence of user-driven changes in
                     the view (projection and center). Defaults to
                     `layout.uirevision`.
+                visible
+                    Sets the default visibility of the base layers.
 
         Returns
         -------
@@ -93872,7 +95731,8 @@ class Layout(_BaseLayoutType):
             Supported dict properties:
                 
                 bgcolor
-                    Sets the legend background color.
+                    Sets the legend background color. Defaults to
+                    `layout.paper_bgcolor`.
                 bordercolor
                     Sets the color of the border enclosing the
                     legend.
@@ -93902,6 +95762,9 @@ class Layout(_BaseLayoutType):
                     size on the graph.
                 orientation
                     Sets the orientation of the legend.
+                title
+                    plotly.graph_objects.layout.legend.Title
+                    instance or dict with compatible properties
                 tracegroupgap
                     Sets the amount of vertical space (in px)
                     between legend groups.
@@ -95064,31 +96927,29 @@ class Layout(_BaseLayoutType):
         annotation or a logo image, for example. To omit one of these
         items on the plot, make an item with matching
         `templateitemname` and `visible: false`.
-
+    
         The 'template' property is an instance of Template
         that may be specified as:
           - An instance of plotly.graph_objs.layout.Template
           - A dict of string/value properties that will be passed
             to the Template constructor
-
+    
             Supported dict properties:
-
+                
                 data
                     plotly.graph_objects.layout.template.Data
                     instance or dict with compatible properties
                 layout
                     plotly.graph_objects.Layout instance or dict
                     with compatible properties
-
+    
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
-
                 >>> import plotly.io as pio
-                >>> list(pio.templates) # doctest: +ELLIPSIS
-                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', 'plotly_dark', ...]
-
-
+                >>> list(pio.templates)  # doctest: +ELLIPSIS
+                ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
+    
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
             template is computed by merging together the collection of registered 
@@ -95366,6 +97227,44 @@ class Layout(_BaseLayoutType):
     @uirevision.setter
     def uirevision(self, val):
         self["uirevision"] = val
+
+    # uniformtext
+    # -----------
+    @property
+    def uniformtext(self):
+        """
+        The 'uniformtext' property is an instance of Uniformtext
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.Uniformtext
+          - A dict of string/value properties that will be passed
+            to the Uniformtext constructor
+    
+            Supported dict properties:
+                
+                minsize
+                    Sets the minimum text size between traces of
+                    the same type.
+                mode
+                    Determines how the font size for various text
+                    elements are uniformed between each trace type.
+                    If the computed text sizes were smaller than
+                    the minimum size defined by
+                    `uniformtext.minsize` using "hide" option hides
+                    the text; and using "show" option shows the
+                    text without further downscaling. Please note
+                    that if the size defined by `minsize` is
+                    greater than the font size defined by trace,
+                    then the `minsize` is used.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Uniformtext
+        """
+        return self["uniformtext"]
+
+    @uniformtext.setter
+    def uniformtext(self, val):
+        self["uniformtext"] = val
 
     # updatemenus
     # -----------
@@ -96910,6 +98809,9 @@ class Layout(_BaseLayoutType):
             changed, you can update `yaxis.uirevision=*quantity*`
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
+        uniformtext
+            plotly.graph_objects.layout.Uniformtext instance or
+            dict with compatible properties
         updatemenus
             A tuple of plotly.graph_objects.layout.Updatemenu
             instances or dicts with compatible properties
@@ -97032,6 +98934,7 @@ class Layout(_BaseLayoutType):
         transition=None,
         treemapcolorway=None,
         uirevision=None,
+        uniformtext=None,
         updatemenus=None,
         updatemenudefaults=None,
         violingap=None,
@@ -97420,6 +99323,9 @@ class Layout(_BaseLayoutType):
             changed, you can update `yaxis.uirevision=*quantity*`
             and the y axis range will reset but the x axis range
             will retain any user-driven zoom.
+        uniformtext
+            plotly.graph_objects.layout.Uniformtext instance or
+            dict with compatible properties
         updatemenus
             A tuple of plotly.graph_objects.layout.Updatemenu
             instances or dicts with compatible properties
@@ -97573,6 +99479,7 @@ an instance of plotly.graph_objs.Layout"""
         self._validators["transition"] = v_layout.TransitionValidator()
         self._validators["treemapcolorway"] = v_layout.TreemapcolorwayValidator()
         self._validators["uirevision"] = v_layout.UirevisionValidator()
+        self._validators["uniformtext"] = v_layout.UniformtextValidator()
         self._validators["updatemenus"] = v_layout.UpdatemenusValidator()
         self._validators["updatemenudefaults"] = v_layout.UpdatemenuValidator()
         self._validators["violingap"] = v_layout.ViolingapValidator()
@@ -97745,6 +99652,8 @@ an instance of plotly.graph_objs.Layout"""
         self["treemapcolorway"] = treemapcolorway if treemapcolorway is not None else _v
         _v = arg.pop("uirevision", None)
         self["uirevision"] = uirevision if uirevision is not None else _v
+        _v = arg.pop("uniformtext", None)
+        self["uniformtext"] = uniformtext if uniformtext is not None else _v
         _v = arg.pop("updatemenus", None)
         self["updatemenus"] = updatemenus if updatemenus is not None else _v
         _v = arg.pop("updatemenudefaults", None)

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -34,7 +34,6 @@ jupyter:
 ---
 
 ### Bar chart with Plotly Express
-
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
 
@@ -70,15 +69,15 @@ When several rows share the same value of `x` (here Female or Male), the rectang
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.bar(tips, x="sex", y="total_bill", color='time')
+df = px.data.tips()
+fig = px.bar(df, x="sex", y="total_bill", color='time')
 fig.show()
 ```
 
 ```python
 # Change the default stacking
 import plotly.express as px
-fig = px.bar(tips, x="sex", y="total_bill", color='smoker', barmode='group',
+fig = px.bar(df, x="sex", y="total_bill", color='smoker', barmode='group',
              height=400)
 fig.show()
 ```
@@ -89,15 +88,14 @@ Use the keyword arguments `facet_row` (resp. `facet_col`) to create facetted sub
 
 ```python
 import plotly.express as px
-fig = px.bar(tips, x="sex", y="total_bill", color="smoker", barmode="group",
+fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
              facet_row="time", facet_col="day",
              category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
                               "time": ["Lunch", "Dinner"]})
 fig.show()
 ```
 
-To learn more, see the *link to px.bar reference page*.
-
+To learn more, see the _link to px.bar reference page_.
 
 #### Basic Bar Chart with plotly.graph_objects
 
@@ -179,6 +177,20 @@ fig = go.Figure(data=[go.Bar(
 fig.show()
 ```
 
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow. In the example below we also force the text to be outside of bars with `textposition`.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+fig = px.bar(df, y='pop', x='country', text='pop')
+fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+fig.show()
+```
+
 ### Rotated Bar Chart Labels
 
 ```python
@@ -238,7 +250,6 @@ fig.show()
 ```
 
 ### Customizing Individual Bar Base
-
 
 ```python
 import plotly.graph_objects as go
@@ -373,22 +384,6 @@ fig.show()
 
 See examples of horizontal bar charts [here](https://plot.ly/python/horizontal-bar-charts/).
 
-
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-barplot) is also show below and can easily be deployed to a PaaS (platform as a service).
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-barplot/", width="100%", height="650px", frameBorder="0")
-
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-barplot/code", width="80%", height=500, frameBorder="0")
-```
-
 ### Reference
+
 See https://plot.ly/python/reference/#bar for more information and chart attribute options!

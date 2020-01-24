@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -42,9 +42,9 @@ We first show a bubble chart example using Plotly Express. [Plotly Express](/pyt
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder()
+df = px.data.gapminder()
 
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp",
+fig = px.scatter(df.query("year==2007"), x="gdpPercap", y="lifeExp",
 	         size="pop", color="continent",
                  hover_name="country", log_x=True, size_max=60)
 fig.show()
@@ -88,6 +88,7 @@ fig.show()
 ```
 
 ### Scaling the Size of Bubble Charts
+
 To scale the bubble size, use the attribute `sizeref`. We recommend using the following formula to calculate a `sizeref` value:<br>
 `sizeref = 2. * max(array of size values) / (desired maximum marker size ** 2)`<br>
 Note that setting 'sizeref' to a value greater than 1, decreases the rendered marker sizes, while setting 'sizeref' to less than 1, increases the rendered marker sizes. See https://plot.ly/python/reference/#scatter-marker-sizeref for more information.
@@ -220,4 +221,5 @@ fig.show()
 ```
 
 ### Reference
+
 See https://plot.ly/python/reference/#scatter for more information and chart attribute options!

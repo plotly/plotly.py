@@ -1093,6 +1093,38 @@ class UpdatemenusValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
 import _plotly_utils.basevalidators
 
 
+class UniformtextValidator(_plotly_utils.basevalidators.CompoundValidator):
+    def __init__(self, plotly_name="uniformtext", parent_name="layout", **kwargs):
+        super(UniformtextValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            data_class_str=kwargs.pop("data_class_str", "Uniformtext"),
+            data_docs=kwargs.pop(
+                "data_docs",
+                """
+            minsize
+                Sets the minimum text size between traces of
+                the same type.
+            mode
+                Determines how the font size for various text
+                elements are uniformed between each trace type.
+                If the computed text sizes were smaller than
+                the minimum size defined by
+                `uniformtext.minsize` using "hide" option hides
+                the text; and using "show" option shows the
+                text without further downscaling. Please note
+                that if the size defined by `minsize` is
+                greater than the font size defined by trace,
+                then the `minsize` is used.
+""",
+            ),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
 class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
     def __init__(self, plotly_name="uirevision", parent_name="layout", **kwargs):
         super(UirevisionValidator, self).__init__(
@@ -2122,7 +2154,8 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             bgcolor
-                Sets the legend background color.
+                Sets the legend background color. Defaults to
+                `layout.paper_bgcolor`.
             bordercolor
                 Sets the color of the border enclosing the
                 legend.
@@ -2152,6 +2185,9 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 size on the graph.
             orientation
                 Sets the orientation of the legend.
+            title
+                plotly.graph_objects.layout.legend.Title
+                instance or dict with compatible properties
             tracegroupgap
                 Sets the amount of vertical space (in px)
                 between legend groups.
@@ -2576,6 +2612,25 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             domain
                 plotly.graph_objects.layout.geo.Domain instance
                 or dict with compatible properties
+            fitbounds
+                Determines if this subplot's view settings are
+                auto-computed to fit trace data. On scoped
+                maps, setting `fitbounds` leads to `center.lon`
+                and `center.lat` getting auto-filled. On maps
+                with a non-clipped projection, setting
+                `fitbounds` leads to `center.lon`,
+                `center.lat`, and `projection.rotation.lon`
+                getting auto-filled. On maps with a clipped
+                projection, setting `fitbounds` leads to
+                `center.lon`, `center.lat`,
+                `projection.rotation.lon`,
+                `projection.rotation.lat`, `lonaxis.range` and
+                `lonaxis.range` getting auto-filled. If
+                "locations", only the trace's visible locations
+                are considered in the `fitbounds` computations.
+                If "geojson", the entire trace input `geojson`
+                (if provided) is considered in the `fitbounds`
+                computations, Defaults to False.
             framecolor
                 Sets the color the frame.
             framewidth
@@ -2635,6 +2690,8 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Controls persistence of user-driven changes in
                 the view (projection and center). Defaults to
                 `layout.uirevision`.
+            visible
+                Sets the default visibility of the base layers.
 """,
             ),
             **kwargs

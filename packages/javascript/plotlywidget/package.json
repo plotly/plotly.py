@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -22,10 +22,8 @@
     "style/*.*"
   ],
   "scripts": {
-    "build": "npm run build:src",
-    "build:src": "rimraf dist && tsc",
+    "build": "webpack",
     "clean": "rimraf dist/ && rimraf  ../../python/plotly/plotlywidget/static'",
-    "prepublish": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -35,7 +33,7 @@
     "typescript": "~3.1.1"
   },
   "dependencies": {
-    "plotly.js": "^1.51.1",
+    "plotly.js": "^1.52.1",
     "@jupyter-widgets/base": "^2.0.0",
     "lodash": "^4.17.4"
   },

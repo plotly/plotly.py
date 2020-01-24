@@ -3,7 +3,6 @@ var _ = require("lodash");
 
 window.PlotlyConfig = {MathJaxConfig: 'local'};
 var Plotly = require("plotly.js/dist/plotly.min");
-var PlotlyIndex = require("plotly.js/src/lib/index");
 var semver_range = "^" + require("../package.json").version;
 
 // Model
@@ -700,7 +699,7 @@ var FigureView = widgets.DOMWidgetView.extend({
 
         // Set view UID
         // ------------
-        this.viewID = PlotlyIndex.randstr();
+        this.viewID = randstr();
 
         // Initialize Plotly.js figure
         // ---------------------------
@@ -1084,7 +1083,7 @@ var FigureView = widgets.DOMWidgetView.extend({
     handle_plotly_selected: function (data) {
         this._send_points_callback_message(data, "plotly_selected");
     },
-    
+
     /**
      * Handle plotly_deselect events emitted by the Plotly.js library
      * @param data
@@ -1094,7 +1093,7 @@ var FigureView = widgets.DOMWidgetView.extend({
             points : []
         }
         this._send_points_callback_message(data, "plotly_deselect");
-    },    
+    },
 
     /**
      * Build and send a points callback message to the Python side
@@ -1810,6 +1809,43 @@ function createDeltaObject(fullObj, removeObj) {
         }
     }
     return res
+}
+
+function randstr(existing, bits, base, _recursion) {
+    if(!base) base = 16;
+    if(bits === undefined) bits = 24;
+    if(bits <= 0) return '0';
+
+    var digits = Math.log(Math.pow(2, bits)) / Math.log(base);
+    var res = '';
+    var i, b, x;
+
+    for(i = 2; digits === Infinity; i *= 2) {
+        digits = Math.log(Math.pow(2, bits / i)) / Math.log(base) * i;
+    }
+
+    var rem = digits - Math.floor(digits);
+
+    for(i = 0; i < Math.floor(digits); i++) {
+        x = Math.floor(Math.random() * base).toString(base);
+        res = x + res;
+    }
+
+    if(rem) {
+        b = Math.pow(base, rem);
+        x = Math.floor(Math.random() * b).toString(base);
+        res = x + res;
+    }
+
+    var parsed = parseInt(res, base);
+    if((existing && existing[res]) ||
+        (parsed !== Infinity && parsed >= Math.pow(2, bits))) {
+        if(_recursion > 10) {
+            lib.warn('randstr failed uniqueness');
+            return res;
+        }
+        return randstr(existing, bits, base, (_recursion || 0) + 1);
+    } else return res;
 }
 
 module.exports = {

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: "1.2"
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -29,10 +29,12 @@ jupyter:
     name: Legends
     order: 14
     permalink: python/legend/
+    redirect_from: python/horizontal-legend/
     thumbnail: thumbnail/legends.gif
 ---
 
 #### Show Legend
+
 By default the legend is displayed on Plotly charts with multiple traces.
 
 ```python
@@ -138,6 +140,29 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
+#### Legend titles
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[1, 2, 3, 4, 5],
+    name="Increasing"
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[5, 4, 3, 2, 1],
+    name="Decreasing"
+))
+
+fig.update_layout(legend_title='<b> Trend </b>')
+fig.show()
+```
+
 #### Horizontal Legend
 
 ```python
@@ -200,7 +225,7 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.update_layout(
-    legend=go.layout.Legend(
+    legend=dict(
         x=0,
         y=1,
         traceorder="normal",
@@ -217,9 +242,11 @@ fig.update_layout(
 
 fig.show()
 ```
+
 ### Size of Legend Items
 
-In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.   
+In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
+
 ```python
 import plotly.graph_objects as go
 
@@ -243,6 +270,7 @@ fig.update_layout(legend= {'itemsizing': 'constant'})
 
 fig.show()
 ```
+
 #### Grouped Legend
 
 ```python
@@ -337,5 +365,50 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
+### Legend items for continuous fields (2D and 3D)
+
+Traces corresponding to 2D fields (e.g. `go.Heatmap`, `go.Histogram2d`) or 3D fields (e.g. `go.Isosurface`, `go.Volume`, `go.Cone`) can also appear in the legend. They come with legend icons corresponding to each trace type, which are colored using the same colorscale as the trace.
+
+The example below explores a vector field using several traces. Note that you can click on legend items to hide or to select (with a double click) a specific trace. This will make the exploration of your data easier!
+
+```python
+import numpy as np
+import plotly.graph_objects as go
+
+# Define vector and scalar fields
+x, y, z = np.mgrid[0:1:8j, 0:1:8j, 0:1:8j]
+u =    np.sin(np.pi*x) * np.cos(np.pi*z)
+v = -2*np.sin(np.pi*y) * np.cos(2*np.pi*z)
+w = np.cos(np.pi*x)*np.sin(np.pi*z) + np.cos(np.pi*y)*np.sin(2*np.pi*z)
+magnitude = np.sqrt(u**2 + v**2 + w**2)
+mask1 = np.logical_and(y>=.4, y<=.6)
+mask2 = y>.6
+
+fig = go.Figure(go.Isosurface(
+                      x=x.ravel(), y=y.ravel(), z=z.ravel(),
+                      value=magnitude.ravel(),
+                      isomin=1.9, isomax=1.9,
+                      colorscale="BuGn",
+                      name='isosurface'))
+
+
+fig.add_trace(go.Cone(x=x[mask1], y=y[mask1], z=z[mask1],
+                      u=u[mask1], v=v[mask1], w=w[mask1],
+                      colorscale="Blues",
+                      name='cones'
+))
+fig.add_trace(go.Streamtube(
+                      x=x[mask2], y=y[mask2], z=z[mask2],
+                      u=u[mask2], v=v[mask2], w=w[mask2],
+                      colorscale="Reds",
+                      name='streamtubes'
+))
+# Update all traces together
+fig.update_traces(showlegend=True, showscale=False)
+fig.update_layout(width=600, title_text='Exporation of a vector field using several traces')
+fig.show()
+```
+
 #### Reference
+
 See https://plot.ly/python/reference/#layout-legend for more information!
