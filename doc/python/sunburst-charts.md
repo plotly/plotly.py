@@ -88,6 +88,26 @@ fig = px.sunburst(df, path=['continent', 'country'], values='pop',
 fig.show()
 ```
 
+### Sunburst of a rectangular DataFrame with discrete color argument in px.sunburst
+
+When the argument of `color` corresponds to non-numerical data, discrete colors are used. If a sector has the same value of the `color` column for all its children, then the corresponding color is used, otherwise the first color of the discrete color sequence is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+fig.show()
+```
+
+In the example below the color of `Saturday` and `Sunday` sectors is the same as `Dinner` because there are only Dinner entries for Saturday and Sunday. However, for Female -> Friday there are both lunches and dinners, hence the "mixed" color (blue here) is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
 ### Rectangular data with missing values
 
 If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
