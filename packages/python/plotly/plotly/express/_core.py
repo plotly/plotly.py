@@ -177,7 +177,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if ((not v) or (name in v))
                 and (
                     trace_spec.constructor != go.Parcoords
-                    or args["data_frame"][name].dtype.kind in "bifc"
+                    or args["data_frame"][name].dtype.kind in "ifc"
                 )
                 and (
                     trace_spec.constructor != go.Parcats
@@ -1094,7 +1094,7 @@ def process_dataframe_hierarchy(args):
     agg_f[count_colname] = "sum"
 
     if args["color"]:
-        if df[args["color"]].dtype.kind not in "bifc":
+        if df[args["color"]].dtype.kind not in "ifc":
             aggfunc_color = aggfunc_discrete
             discrete_color = True
         elif not aggfunc_color:
