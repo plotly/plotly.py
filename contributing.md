@@ -253,7 +253,9 @@ Note that the conda installation instructions must include
 "-c plotly/lable/test" rather than "-c plotly" in order to install the
 release candidate version.
 
-Commit Changelog and README updates.
+Update the `doc/python/getting-started.md` file with the same version numbers.
+
+Commit Changelog, README and getting-started updates.
 
 ### Bump to release candidate version
  1) Manually update the plotlywidget version to `A.B.C-rc.1` in the files
