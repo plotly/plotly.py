@@ -1188,7 +1188,7 @@ def infer_config(args, constructor, trace_patch):
             else:
                 if (
                     args["color"]
-                    and args["data_frame"][args["color"]].dtype.kind in "bifc"
+                    and args["data_frame"][args["color"]].dtype.kind in "ifc"
                 ):
                     attrs.append("color")
                     args["color_is_continuous"] = True
