@@ -420,7 +420,7 @@ docs = dict(
         "str (default `'relative'`)",
         "One of `'group'`, `'overlay'`, `'relative'` or `'stack'`",
         "In `'stack'` mode, bars are placed on top of each other."
-        "Positive and negative values will cancel out, drawn in order of appearance in `data_frame`.",
+        "Positive and negative values will cancel out, drawn in order of appearance of categories in `data_frame`.",
         "In `'relative'` mode, bars are stacked above zero for positive values and below zero for negative values.",
         "In `'overlay'` mode, bars are drawn over each other.",
         "In `'group'` mode, bars are placed beside each other.",
