@@ -1043,8 +1043,9 @@ def process_dataframe_hierarchy(args):
 
     if args["color"] and args["color"] in path:
         series_to_copy = df[args["color"]]
-        args["color"] = str(args["color"]) + "additional_col_for_px"
-        df[args["color"]] = series_to_copy
+        new_col_name = args["color"] + "additional_col_for_color"
+        path = [new_col_name if x == args["color"] else x for x in path]
+        df[new_col_name] = series_to_copy
     if args["hover_data"]:
         for col_name in args["hover_data"]:
             if col_name == args["color"]:
@@ -1147,6 +1148,11 @@ def process_dataframe_hierarchy(args):
     args["ids"] = "id"
     args["names"] = "labels"
     args["parents"] = "parent"
+    if args["color"]:
+        if not args["hover_data"]:
+            args["hover_data"] = [args["color"]]
+        else:
+            args["hover_data"].append(args["color"])
     return args
 
 
