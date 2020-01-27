@@ -1012,6 +1012,7 @@ def build_dataframe(args, attrables, array_attrables):
 def _check_dataframe_all_leaves(df):
     df_sorted = df.sort_values(by=list(df.columns))
     null_mask = df_sorted.isnull()
+    df_sorted = df_sorted.astype(str)
     null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
     for null_row_index in null_indices:
         row = null_mask.iloc[null_row_index]

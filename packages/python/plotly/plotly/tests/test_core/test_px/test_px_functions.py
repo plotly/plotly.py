@@ -218,6 +218,13 @@ def test_sunburst_treemap_with_path_color():
     fig = px.sunburst(df, path=path, color="vendors")
     assert len(np.unique(fig.data[0].marker.colors)) == 9
 
+    # Numerical column in path
+    df["regions"] = df["regions"].map({"North": 1, "South": 2})
+    path = ["total", "regions", "sectors", "vendors"]
+    fig = px.sunburst(df, path=path, values="values", color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
+
 
 def test_sunburst_treemap_with_path_non_rectangular():
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
