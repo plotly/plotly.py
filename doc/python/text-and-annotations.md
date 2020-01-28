@@ -85,7 +85,8 @@ fig.show()
 import plotly.graph_objects as go
 
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=[0, 1, 2], y=[1, 3, 2], mode="markers", hovertext=["Text A", "Text B", "Text C"]))
+fig.add_trace(go.Scatter(x=[0, 1, 2], y=[1, 3, 2], mode="markers", 
+                         hovertext=["Text A", "Text B", "Text C"]))
 fig.update_layout(title_text="Hover over the points to see the text")
 fig.show()
 ```
@@ -98,13 +99,18 @@ Annotations can be added to a figure using `fig.update_layout(annotations=[...])
 import plotly.graph_objects as go
 
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 1, 3, 2, 4, 3, 4, 6, 5]))
-fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 4, 5, 1, 2, 2, 3, 4, 2]))
-
-fig.update_layout(
-    showlegend=False, 
-    annotations=[
-        dict(x=2, y=5, xref="x", yref="y", text="dict Text", showarrow=True, arrowhead=7, ax=0, ay=-40)])
+fig.add_trace(go.Scatter(
+    x=[0, 1, 2, 3, 4, 5, 6, 7, 8], 
+    y=[0, 1, 3, 2, 4, 3, 4, 6, 5]
+))
+fig.add_trace(go.Scatter(
+    x=[0, 1, 2, 3, 4, 5, 6, 7, 8], 
+    y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
+))
+fig.update_layout(showlegend=False)
+fig.add_annotation(
+    x=2, y=5, xref="x", yref="y", text="dict Text", 
+    showarrow=True, arrowhead=7, ax=0, ay=-40)
 fig.show()
 ```
 
@@ -137,7 +143,11 @@ fig.add_trace(go.Scatter3d(
     name="z"))
 
 fig.update_layout(
-    scene=dict(
+    xaxis=dict(title_text="x"),
+    yaxis=dict(title_text="y"))
+
+fig.update_scenes(
+    dict(
         aspectratio=dict(x=1, y=1,z=1),
         camera=dict(center=dict(x=0, y=0, z=0),
                     eye=dict(x=1.96903462608, y=-1.09022831971, z=0.405345349304),
@@ -170,10 +180,9 @@ fig.update_layout(
                 text="Point 3",
                 arrowhead=1,
                 xanchor="left",
-                yanchor="bottom")]),
-    xaxis=dict(title_text="x"),
-    yaxis=dict(title_text="y"))
-
+                yanchor="bottom")]
+    )
+)
 fig.show()
 ```
 
@@ -214,7 +223,6 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 1, 3, 2, 4, 3, 4, 6, 5]))
 fig.add_trace(go.Scatter(x=[0, 1, 2, 3, 4, 5, 6, 7, 8], y=[0, 4, 5, 1, 2, 2, 3, 4, 2]))
 fig.add_annotation(
-    dict(
         x=2, y=5, xref="x", yref="y", text="max=5", showarrow=True,
         font=dict(family="Courier New, monospace", size=16, color="#ffffff"),
         align="center",
@@ -228,7 +236,7 @@ fig.add_annotation(
         borderwidth=2,
         borderpad=4,
         bgcolor="#ff7f0e",
-        opacity=0.8))
+        opacity=0.8)
 
 fig.update_layout(showlegend=False)
 fig.show()

@@ -42,12 +42,15 @@ import plotly.graph_objects as go
 
 fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
-
-fig.update_layout(xaxis = dict(
-    tickmode = 'linear',
-    tick0 = 0.5,
-    dtick = 0.75))
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
+))
+fig.update_layout(
+    xaxis = dict(
+        tickmode = 'linear',
+        tick0 = 0.5,
+        dtick = 0.75
+    )
+)
 fig.show()
 ```
 
@@ -59,15 +62,17 @@ If `"array"`, the placement of the ticks is set via `tickvals` and the tick text
 ```python
 import plotly.graph_objects as go
 
-go.Figure(go.Scatter(
+fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
-
-fig.update_layout(xaxis = dict(
-    tickmode = 'array',
-    tickvals = [1, 3, 5, 7, 9, 11],
-    ticktext = ['One', 'Three', 'Five', 'Seven', 'Nine', 'Eleven']))
-
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
+))
+fig.update_layout(
+    xaxis = dict(
+        tickmode = 'array',
+        tickvals = [1, 3, 5, 7, 9, 11],
+        ticktext = ['One', 'Three', 'Five', 'Seven', 'Nine', 'Eleven']
+    )
+)
 fig.show()
 ```
 
@@ -79,10 +84,10 @@ For more formatting types, see: https://github.com/d3/d3-format/blob/master/READ
 ```python
 import plotly.graph_objects as go
 
-go.Figure(go.Scatter(
+fig = go.Figure(go.Scatter(
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]))
-
+    y = [28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9]
+))
 fig.update_layout(yaxis_tickformat = '%')
 fig.show()
 ```
