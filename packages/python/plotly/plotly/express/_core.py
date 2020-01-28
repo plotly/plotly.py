@@ -169,7 +169,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     custom_data_len = 0
     for attr_name in trace_spec.attrs:
         attr_value = args[attr_name]
-        v_label = get_decorated_label(args, attr_value, attr_name)
+        attr_label = get_decorated_label(args, attr_value, attr_name)
         if attr_name == "dimensions":
             dims = [
                 (name, column)
@@ -210,7 +210,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 result["marker"]["size"] = trace_data[attr_value]
                 result["marker"]["sizemode"] = "area"
                 result["marker"]["sizeref"] = sizeref
-                mapping_labels[v_label] = "%{marker.size}"
+                mapping_labels[attr_label] = "%{marker.size}"
             elif attr_name == "marginal_x":
                 if trace_spec.constructor == go.Histogram:
                     mapping_labels["count"] = "%{y}"
@@ -294,13 +294,15 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                 )
                             else:
                                 result["customdata"] = trace_data[col].values[:, None]
-                        v_label_col = get_decorated_label(args, col, None)
-                        mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
+                        attr_label_col = get_decorated_label(args, col, None)
+                        mapping_labels[attr_label_col] = "%%{customdata[%d]}" % (
+                            position
+                        )
             elif attr_name == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     result["z"] = trace_data[attr_value]
                     result["coloraxis"] = "coloraxis1"
-                    mapping_labels[v_label] = "%{z}"
+                    mapping_labels[attr_label] = "%{z}"
                 elif trace_spec.constructor in [
                     go.Sunburst,
                     go.Treemap,
@@ -313,7 +315,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if args.get("color_is_continuous"):
                         result["marker"]["colors"] = trace_data[attr_value]
                         result["marker"]["coloraxis"] = "coloraxis1"
-                        mapping_labels[v_label] = "%{color}"
+                        mapping_labels[attr_label] = "%{color}"
                     else:
                         result["marker"]["colors"] = []
                         mapping = {}
@@ -331,23 +333,23 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         result[colorable] = dict()
                     result[colorable]["color"] = trace_data[attr_value]
                     result[colorable]["coloraxis"] = "coloraxis1"
-                    mapping_labels[v_label] = "%%{%s.color}" % colorable
+                    mapping_labels[attr_label] = "%%{%s.color}" % colorable
             elif attr_name == "animation_group":
                 result["ids"] = trace_data[attr_value]
             elif attr_name == "locations":
                 result[attr_name] = trace_data[attr_value]
-                mapping_labels[v_label] = "%{location}"
+                mapping_labels[attr_label] = "%{location}"
             elif attr_name == "values":
                 result[attr_name] = trace_data[attr_value]
-                _label = "value" if v_label == "values" else v_label
+                _label = "value" if attr_label == "values" else attr_label
                 mapping_labels[_label] = "%{value}"
             elif attr_name == "parents":
                 result[attr_name] = trace_data[attr_value]
-                _label = "parent" if v_label == "parents" else v_label
+                _label = "parent" if attr_label == "parents" else attr_label
                 mapping_labels[_label] = "%{parent}"
             elif attr_name == "ids":
                 result[attr_name] = trace_data[attr_value]
-                _label = "id" if v_label == "ids" else v_label
+                _label = "id" if attr_label == "ids" else attr_label
                 mapping_labels[_label] = "%{id}"
             elif attr_name == "names":
                 if trace_spec.constructor in [
@@ -357,14 +359,14 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Funnelarea,
                 ]:
                     result["labels"] = trace_data[attr_value]
-                    _label = "label" if v_label == "names" else v_label
+                    _label = "label" if attr_label == "names" else attr_label
                     mapping_labels[_label] = "%{label}"
                 else:
                     result[attr_name] = trace_data[attr_value]
             else:
                 if attr_value:
                     result[attr_name] = trace_data[attr_value]
-                mapping_labels[v_label] = "%%{%s}" % attr_name
+                mapping_labels[attr_label] = "%%{%s}" % attr_name
     if trace_spec.constructor not in [
         go.Parcoords,
         go.Parcats,
