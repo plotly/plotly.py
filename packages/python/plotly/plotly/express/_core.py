@@ -168,20 +168,20 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     hover_header = ""
     custom_data_len = 0
     for attr_name in trace_spec.attrs:
-        v = args[attr_name]
-        v_label = get_decorated_label(args, v, attr_name)
+        attr_value = args[attr_name]
+        v_label = get_decorated_label(args, attr_value, attr_name)
         if attr_name == "dimensions":
             dims = [
                 (name, column)
                 for (name, column) in trace_data.iteritems()
-                if ((not v) or (name in v))
+                if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
                     or args["data_frame"][name].dtype.kind in "bifc"
                 )
                 and (
                     trace_spec.constructor != go.Parcats
-                    or (v is not None and name in v)
+                    or (attr_value is not None and name in attr_value)
                     or len(args["data_frame"][name].unique())
                     <= args["dimensions_max_cardinality"]
                 )
@@ -197,7 +197,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 mapping_labels["%{yaxis.title.text}"] = "%{y}"
 
         elif (
-            v is not None
+            attr_value is not None
             or (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"])
             or (
                 trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
@@ -207,7 +207,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             if attr_name == "size":
                 if "marker" not in result:
                     result["marker"] = dict()
-                result["marker"]["size"] = trace_data[v]
+                result["marker"]["size"] = trace_data[attr_value]
                 result["marker"]["sizemode"] = "area"
                 result["marker"]["sizeref"] = sizeref
                 mapping_labels[v_label] = "%{marker.size}"
@@ -219,7 +219,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
                 if (
-                    v in ["ols", "lowess"]
+                    attr_value in ["ols", "lowess"]
                     and args["x"]
                     and args["y"]
                     and len(trace_data) > 1
@@ -235,11 +235,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
 
-                    if v == "lowess":
+                    if attr_value == "lowess":
                         trendline = sm.nonparametric.lowess(y, x)
                         result["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
-                    elif v == "ols":
+                    elif attr_value == "ols":
                         fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
                         result["y"] = fit_results.predict()
                         hover_header = "<b>OLS trendline</b><br>"
@@ -260,17 +260,17 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 arr = "arrayminus" if attr_name.endswith("minus") else "array"
                 if error_xy not in result:
                     result[error_xy] = {}
-                result[error_xy][arr] = trace_data[v]
+                result[error_xy][arr] = trace_data[attr_value]
             elif attr_name == "custom_data":
-                result["customdata"] = trace_data[v].values
-                custom_data_len = len(v)  # number of custom data columns
+                result["customdata"] = trace_data[attr_value].values
+                custom_data_len = len(attr_value)  # number of custom data columns
             elif attr_name == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    result["hovertext"] = trace_data[v]
+                    result["hovertext"] = trace_data[attr_value]
                     if hover_header == "":
                         hover_header = "<b>%{hovertext}</b><br><br>"
             elif attr_name == "hover_data":
@@ -279,7 +279,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    for col in v:
+                    for col in attr_value:
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -298,7 +298,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif attr_name == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
-                    result["z"] = trace_data[v]
+                    result["z"] = trace_data[attr_value]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
                 elif trace_spec.constructor in [
@@ -311,13 +311,13 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         result["marker"] = dict()
 
                     if args.get("color_is_continuous"):
-                        result["marker"]["colors"] = trace_data[v]
+                        result["marker"]["colors"] = trace_data[attr_value]
                         result["marker"]["coloraxis"] = "coloraxis1"
                         mapping_labels[v_label] = "%{color}"
                     else:
                         result["marker"]["colors"] = []
                         mapping = {}
-                        for cat in trace_data[v]:
+                        for cat in trace_data[attr_value]:
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
@@ -329,24 +329,24 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         colorable = "line"
                     if colorable not in result:
                         result[colorable] = dict()
-                    result[colorable]["color"] = trace_data[v]
+                    result[colorable]["color"] = trace_data[attr_value]
                     result[colorable]["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%%{%s.color}" % colorable
             elif attr_name == "animation_group":
-                result["ids"] = trace_data[v]
+                result["ids"] = trace_data[attr_value]
             elif attr_name == "locations":
-                result[attr_name] = trace_data[v]
+                result[attr_name] = trace_data[attr_value]
                 mapping_labels[v_label] = "%{location}"
             elif attr_name == "values":
-                result[attr_name] = trace_data[v]
+                result[attr_name] = trace_data[attr_value]
                 _label = "value" if v_label == "values" else v_label
                 mapping_labels[_label] = "%{value}"
             elif attr_name == "parents":
-                result[attr_name] = trace_data[v]
+                result[attr_name] = trace_data[attr_value]
                 _label = "parent" if v_label == "parents" else v_label
                 mapping_labels[_label] = "%{parent}"
             elif attr_name == "ids":
-                result[attr_name] = trace_data[v]
+                result[attr_name] = trace_data[attr_value]
                 _label = "id" if v_label == "ids" else v_label
                 mapping_labels[_label] = "%{id}"
             elif attr_name == "names":
@@ -356,14 +356,14 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Pie,
                     go.Funnelarea,
                 ]:
-                    result["labels"] = trace_data[v]
+                    result["labels"] = trace_data[attr_value]
                     _label = "label" if v_label == "names" else v_label
                     mapping_labels[_label] = "%{label}"
                 else:
-                    result[attr_name] = trace_data[v]
+                    result[attr_name] = trace_data[attr_value]
             else:
-                if v:
-                    result[attr_name] = trace_data[v]
+                if attr_value:
+                    result[attr_name] = trace_data[attr_value]
                 mapping_labels[v_label] = "%%{%s}" % attr_name
     if trace_spec.constructor not in [
         go.Parcoords,
