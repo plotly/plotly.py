@@ -137,7 +137,7 @@ def make_mapping(args, variable):
     )
 
 
-def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
+def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     """Populates a dict with arguments to update trace
 
     Parameters
@@ -147,7 +147,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
     trace_spec : NamedTuple
         which kind of trace to be used (has constructor, marginal etc.
         attributes)
-    g : pandas DataFrame
+    trace_data : pandas DataFrame
         data
     mapping_labels : dict
         to be used for hovertemplate
@@ -162,7 +162,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
         fit information to be used for trendlines
     """
     if "line_close" in args and args["line_close"]:
-        g = g.append(g.iloc[0])
+        trace_data = trace_data.append(trace_data.iloc[0])
     result = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
@@ -173,7 +173,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
         if k == "dimensions":
             dims = [
                 (name, column)
-                for (name, column) in g.iteritems()
+                for (name, column) in trace_data.iteritems()
                 if ((not v) or (name in v))
                 and (
                     trace_spec.constructor != go.Parcoords
@@ -207,7 +207,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
             if k == "size":
                 if "marker" not in result:
                     result["marker"] = dict()
-                result["marker"]["size"] = g[v]
+                result["marker"]["size"] = trace_data[v]
                 result["marker"]["sizemode"] = "area"
                 result["marker"]["sizeref"] = sizeref
                 mapping_labels[v_label] = "%{marker.size}"
@@ -218,13 +218,18 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if trace_spec.constructor == go.Histogram:
                     mapping_labels["count"] = "%{x}"
             elif k == "trendline":
-                if v in ["ols", "lowess"] and args["x"] and args["y"] and len(g) > 1:
+                if (
+                    v in ["ols", "lowess"]
+                    and args["x"]
+                    and args["y"]
+                    and len(trace_data) > 1
+                ):
                     import statsmodels.api as sm
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
-                    g2 = g.sort_values(by=args["x"])
-                    y = g2[args["y"]]
-                    x = g2[args["x"]]
+                    sorted_trace_data = trace_data.sort_values(by=args["x"])
+                    y = sorted_trace_data[args["y"]]
+                    x = sorted_trace_data[args["x"]]
                     result["x"] = x
 
                     if x.dtype.type == np.datetime64:
@@ -255,9 +260,9 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 arr = "arrayminus" if k.endswith("minus") else "array"
                 if error_xy not in result:
                     result[error_xy] = {}
-                result[error_xy][arr] = g[v]
+                result[error_xy][arr] = trace_data[v]
             elif k == "custom_data":
-                result["customdata"] = g[v].values
+                result["customdata"] = trace_data[v].values
                 custom_data_len = len(v)  # number of custom data columns
             elif k == "hover_name":
                 if trace_spec.constructor not in [
@@ -265,7 +270,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
-                    result["hovertext"] = g[v]
+                    result["hovertext"] = trace_data[v]
                     if hover_header == "":
                         hover_header = "<b>%{hovertext}</b><br><br>"
             elif k == "hover_data":
@@ -282,15 +287,18 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                             custom_data_len += 1
                             if "customdata" in result:
                                 result["customdata"] = np.hstack(
-                                    (result["customdata"], g[col].values[:, None])
+                                    (
+                                        result["customdata"],
+                                        trace_data[col].values[:, None],
+                                    )
                                 )
                             else:
-                                result["customdata"] = g[col].values[:, None]
+                                result["customdata"] = trace_data[col].values[:, None]
                         v_label_col = get_decorated_label(args, col, None)
                         mapping_labels[v_label_col] = "%%{customdata[%d]}" % (position)
             elif k == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
-                    result["z"] = g[v]
+                    result["z"] = trace_data[v]
                     result["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%{z}"
                 elif trace_spec.constructor in [
@@ -303,13 +311,13 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         result["marker"] = dict()
 
                     if args.get("color_is_continuous"):
-                        result["marker"]["colors"] = g[v]
+                        result["marker"]["colors"] = trace_data[v]
                         result["marker"]["coloraxis"] = "coloraxis1"
                         mapping_labels[v_label] = "%{color}"
                     else:
                         result["marker"]["colors"] = []
                         mapping = {}
-                        for cat in g[v]:
+                        for cat in trace_data[v]:
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
                                     len(mapping) % len(args["color_discrete_sequence"])
@@ -321,24 +329,24 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                         colorable = "line"
                     if colorable not in result:
                         result[colorable] = dict()
-                    result[colorable]["color"] = g[v]
+                    result[colorable]["color"] = trace_data[v]
                     result[colorable]["coloraxis"] = "coloraxis1"
                     mapping_labels[v_label] = "%%{%s.color}" % colorable
             elif k == "animation_group":
-                result["ids"] = g[v]
+                result["ids"] = trace_data[v]
             elif k == "locations":
-                result[k] = g[v]
+                result[k] = trace_data[v]
                 mapping_labels[v_label] = "%{location}"
             elif k == "values":
-                result[k] = g[v]
+                result[k] = trace_data[v]
                 _label = "value" if v_label == "values" else v_label
                 mapping_labels[_label] = "%{value}"
             elif k == "parents":
-                result[k] = g[v]
+                result[k] = trace_data[v]
                 _label = "parent" if v_label == "parents" else v_label
                 mapping_labels[_label] = "%{parent}"
             elif k == "ids":
-                result[k] = g[v]
+                result[k] = trace_data[v]
                 _label = "id" if v_label == "ids" else v_label
                 mapping_labels[_label] = "%{id}"
             elif k == "names":
@@ -348,14 +356,14 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                     go.Pie,
                     go.Funnelarea,
                 ]:
-                    result["labels"] = g[v]
+                    result["labels"] = trace_data[v]
                     _label = "label" if v_label == "names" else v_label
                     mapping_labels[_label] = "%{label}"
                 else:
-                    result[k] = g[v]
+                    result[k] = trace_data[v]
             else:
                 if v:
-                    result[k] = g[v]
+                    result[k] = trace_data[v]
                 mapping_labels[v_label] = "%%{%s}" % k
     if trace_spec.constructor not in [
         go.Parcoords,
