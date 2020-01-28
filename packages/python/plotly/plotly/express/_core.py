@@ -1015,8 +1015,8 @@ def _check_dataframe_all_leaves(df):
     null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
     for null_row_index in null_indices:
         row = null_mask.iloc[null_row_index]
-        indices = np.nonzero(row.values)[0]
-        if not row[indices[0] :].all():
+        i = np.nonzero(row.values)[0][0]
+        if not row[i:].all():
             raise ValueError(
                 "None entries cannot have not-None children",
                 df_sorted.iloc[null_row_index],
@@ -1058,6 +1058,7 @@ def process_dataframe_hierarchy(args):
                 path = [new_col_name if x == col_name else x for x in path]
                 df[new_col_name] = series_to_copy
     # ------------ Define aggregation functions --------------------------------
+
     def aggfunc_discrete(x):
         uniques = x.unique()
         if len(uniques) == 1:
