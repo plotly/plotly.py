@@ -28,7 +28,7 @@ jupyter:
     layout: base
     name: 3D Subplots
     order: 4
-    page_type: u-guide
+    page_type: example_index
     permalink: python/3d-subplots/
     thumbnail: thumbnail/3d-subplots.jpg
 ---
