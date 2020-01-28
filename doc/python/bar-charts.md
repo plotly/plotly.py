@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -317,8 +317,7 @@ fig.show()
 
 ### Control Bar Position in Different Subplots
 
-To control bars positional range among several subplots, set the same axes to the same [alignmentgroup](https://plot.ly/python/reference/#bar-alignmentgroup). In the following example we have two subplots sharing an x axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom, that all are aligned by setting the same `alignmentgroup`. 
-You also can line up bars of the same positional coordinate by setting [offsetgroup](https://plot.ly/python/reference/#bar-offsetgroup).
+To control the positional range of bars among several subplots, place traces in the same [alignmentgroup](https://plot.ly/python/reference/#bar-alignmentgroup). In the following example we have two subplots sharing an x-axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom. These traces all are aligned by setting the same `alignmentgroup`. Bar position can also be coordinated by placing traces in the same [offsetgroup](https://plot.ly/python/reference/#bar-offsetgroup).
 
 ```python
 import plotly.graph_objects as go
