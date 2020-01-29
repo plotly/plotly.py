@@ -28,7 +28,7 @@ jupyter:
     layout: base
     name: Figure Factory Subplots
     order: 4
-    page_type: u-guide
+    page_type: example_index
     permalink: python/figure-factory-subplots/
     thumbnail: thumbnail/ff-subplots.jpg
 ---
