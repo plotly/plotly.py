@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -23,7 +23,7 @@ jupyter:
     version: 3.6.7
   plotly:
     description: Learn how to find peaks and valleys on datasets in Python
-    display_as: peak-analysis
+    display_as: advanced_opt
     has_thumbnail: false
     language: python
     layout: base
@@ -35,6 +35,7 @@ jupyter:
 ---
 
 #### Imports
+
 The tutorial below imports [Pandas](https://plot.ly/pandas/intro-to-pandas-tutorial/), and [SciPy](https://www.scipy.org/).
 
 ```python
@@ -43,6 +44,7 @@ from scipy.signal import find_peaks
 ```
 
 #### Import Data
+
 To start detecting peaks, we will import some data on milk production by month:
 
 ```python
@@ -97,6 +99,7 @@ fig.show()
 ```
 
 #### Only Highest Peaks
+
 We can attempt to set our threshold so that we identify as many of the _highest peaks_ that we can.
 
 ```python

@@ -1,4 +1,4 @@
-declare module 'plotly.js/dist/plotly' {
+declare module 'plotly.js/dist/plotly.min' {
   export * from 'plotly.js';
   export type Frame = { [key: string]: any };
   export function addFrames(root: Plotly.Root, frames: Frame[]): Promise<void>;

@@ -86,6 +86,12 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to set ids of sectors",
     ],
+    path=[
+        colref_list_type,
+        colref_list_desc,
+        "List of columns names or columns of a rectangular dataframe defining the hierarchy of sectors, from root to leaves.",
+        "An error is raised if path AND ids or parents is passed",
+    ],
     lat=[
         colref_type,
         colref_desc,
@@ -105,6 +111,12 @@ docs = dict(
         colref_list_type,
         colref_list_desc,
         "Values from these columns are used for multidimensional visualization.",
+    ],
+    dimensions_max_cardinality=[
+        "int (default 50)",
+        "When `dimensions` is `None` and `data_frame` is provided, "
+        "columns with more than this number of unique values are excluded from the output.",
+        "Not used when `dimensions` is passed.",
     ],
     error_x=[
         colref_type,

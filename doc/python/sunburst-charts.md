@@ -62,6 +62,73 @@ fig =px.sunburst(
 fig.show()
 ```
 
+### Sunburst of a rectangular DataFrame with plotly.express
+
+Hierarchical data are often stored as a rectangular dataframe, with different columns corresponding to different levels of the hierarchy. `px.sunburst` can take a `path` parameter corresponding to a list of columns. Note that `id` and `parent` should not be provided if `path` is given.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['day', 'time', 'sex'], values='total_bill')
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with continuous color argument in px.sunburst
+
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values. 
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.sunburst(df, path=['continent', 'country'], values='pop', 
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu', 
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
+### Sunburst of a rectangular DataFrame with discrete color argument in px.sunburst
+
+When the argument of `color` corresponds to non-numerical data, discrete colors are used. If a sector has the same value of the `color` column for all its children, then the corresponding color is used, otherwise the first color of the discrete color sequence is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+fig.show()
+```
+
+In the example below the color of `Saturday` and `Sunday` sectors is the same as `Dinner` because there are only Dinner entries for Saturday and Sunday. However, for Female -> Friday there are both lunches and dinners, hence the "mixed" color (blue here) is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
+### Rectangular data with missing values
+
+If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
+
+```python
+import plotly.express as px
+import pandas as pd
+vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
+regions = ["North", "North", "North", "North", "North",
+           "South", "South", "South", "South", "South"]
+sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+df = pd.DataFrame(
+    dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
+)
+print(df)
+fig = px.sunburst(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig.show()
+```
+
 ### Basic Sunburst Plot with go.Sunburst
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
@@ -198,6 +265,24 @@ fig.update_layout(
     margin = dict(t=10, l=10, r=10, b=10)
 )
 
+fig.show()
+```
+
+### Controlling text fontsize with uniformtext
+
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
+
+fig = go.Figure(go.Sunburst(
+        ids = df.ids,
+        labels = df.labels,
+        parents = df.parents))
+fig.update_layout(uniformtext=dict(minsize=10, mode='hide'))
 fig.show()
 ```
 
