@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
-      jupytext_version: 1.3.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to make Mapbox maps in Python with various base layers, with
+    description: How to make Mapbox maps in Python with various base layers, with
       or without needing a Mapbox Access token.
     display_as: maps
     language: python
@@ -35,7 +34,6 @@ jupyter:
     thumbnail: thumbnail/mapbox-layers.png
 ---
 
-<!-- #region -->
 
 ### Mapbox Maps vs Geo Maps
 
@@ -53,6 +51,18 @@ Mapbox tile maps are composed of various layers, of three different types:
 1. `layout.mapbox.style` defines is the lowest layers, also known as your "base map"
 2. The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).
 3. `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).
+
+In order to add attribution information to charts, please use the [sourceattribution](https://plot.ly/python/reference/#layout-mapbox-layers-items-layer-sourceattribution), which allows you to display both mapbox [wordmark and text attribution](https://docs.mapbox.com/help/how-mapbox-works/attribution/) on maps, as shown is the example below:
+
+```python
+import plotly.express as px
+
+px.set_mapbox_access_token(open(".mapbox_token").read())
+df = px.data.carshare()
+fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon", 
+                        color="peak_hour", size="car_hours", zoom=10)
+fig.show()
+```
 
 #### Mapbox Access Tokens and When You Need Them
 
@@ -73,8 +83,6 @@ The accepted values for `layout.mapbox.style` are one of:
 #### OpenStreetMap tiles: no token needed
 
 Here is a simple map rendered with OpenStreetMaps tiles, without needing a Mapbox Access Token:
-
-<!-- #endregion -->
 
 ```python
 import pandas as pd
