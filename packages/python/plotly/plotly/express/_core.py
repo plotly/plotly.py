@@ -1,18 +1,19 @@
+import math
+from collections import OrderedDict, namedtuple
+
+import numpy as np
+import pandas as pd
+
 import plotly.graph_objs as go
 import plotly.io as pio
-from collections import namedtuple, OrderedDict
-
 from _plotly_utils.basevalidators import ColorscaleValidator
-from .colors import qualitative, sequential
-import math
-import pandas as pd
-import numpy as np
-
 from plotly.subplots import (
-    make_subplots,
     _set_trace_grid_reference,
     _subplot_type_for_trace_type,
+    make_subplots,
 )
+
+from .colors import qualitative, sequential
 
 
 class PxDefaults(object):
@@ -357,10 +358,7 @@ def make_trace_kwargs(args, trace_spec, g, mapping_labels, sizeref):
                 if v:
                     result[k] = g[v]
                 mapping_labels[v_label] = "%%{%s}" % k
-    if trace_spec.constructor not in [
-        go.Parcoords,
-        go.Parcats,
-    ]:
+    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         result["hovertemplate"] = hover_header + "<br>".join(hover_lines)
     return result, fit_results
@@ -887,7 +885,8 @@ def build_dataframe(args, attrables, array_attrables):
     if "dimensions" in args and args["dimensions"] is None:
         if not df_provided:
             raise ValueError(
-                "No data were provided. Please provide data either with the `data_frame` or with the `dimensions` argument."
+                "No data were provided. Please provide data either with the `data_frame`"
+                "or with the `dimensions` argument."
             )
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
@@ -921,12 +920,11 @@ def build_dataframe(args, attrables, array_attrables):
                 raise TypeError(
                     "Argument '%s' is a pandas MultiIndex. "
                     "pandas MultiIndex is not supported by plotly express "
-                    "at the moment." % field
+                    "at the moment. You can pass a level name instead." % field
                 )
             # ----------------- argument is a col name ----------------------
-            if isinstance(argument, str) or isinstance(
-                argument, int
-            ):  # just a column name given as str or int
+            if isinstance(argument, (str, int)):
+                # just a column name given as str or int
                 if not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -935,31 +933,47 @@ def build_dataframe(args, attrables, array_attrables):
                         "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in df_input.columns:
+                if argument not in df_input.columns and (
+                    isinstance(argument, int) or argument not in df_input.index.names
+                ):
                     err_msg = (
-                        "Value of '%s' is not the name of a column in 'data_frame'. "
-                        "Expected one of %s but received: %s"
-                        % (field, str(list(df_input.columns)), argument)
+                        "Value of '%s' is not the name of a column in 'data_frame' "
+                        "nor a string name of an index level."
+                        "Expected one of %s or %s but received: %s"
+                        % (
+                            field,
+                            str(list(df_input.columns)),
+                            str(list(df_input.index.names)),
+                            argument,
+                        )
                     )
                     if argument == "index":
                         err_msg += (
                             "\n To use the index, pass it in directly as `df.index`."
+                            "To use a multiindex level, pass its name as a string."
+                            "A column with the same name is preferred to index level."
                         )
                     raise ValueError(err_msg)
-                if length and len(df_input[argument]) != length:
+
+                col_name = str(argument)
+                if argument in df_input.columns:  # string or int
+                    series = df_input[argument]
+                else:  # pick MultiIndex level with that name
+                    series = df_input.index.get_level_values(level=argument)
+
+                if length and len(series) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
-                        "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of previous arguments %s is %d"
-                        % (
-                            field,
-                            len(df_input[argument]),
-                            str(list(df_output.columns)),
-                            length,
-                        )
+                        "The length of column (or index level) argument `df[%s]` is %d,"
+                        " whereas the length of previous arguments %s is %d"
+                        % (field, len(series), str(list(df_output.columns)), length)
                     )
-                col_name = str(argument)
-                df_output[col_name] = df_input[argument].values
+                df_output[col_name] = series.values
+                # avoid df_output.groupby ambiguity errors
+                if argument in df_output.index.names:
+                    df_output = df_output.reset_index(level=argument, drop=True)
+                    df_input = df_input.reset_index(level=argument, drop=True)
+
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)

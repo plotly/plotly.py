@@ -1,9 +1,10 @@
-import plotly.express as px
 import numpy as np
 import pandas as pd
 import pytest
-from plotly.express._core import build_dataframe
 from pandas.util.testing import assert_frame_equal
+
+import plotly.express as px
+from plotly.express._core import build_dataframe
 
 attrables = (
     ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
@@ -203,6 +204,17 @@ def test_multiindex_raise_error():
         )
 
 
+def test_build_df_multiindex_level():
+    tips = px.data.tips()
+    mi_tips = tips.set_index("sex", append=True)  # two-level index
+    args = dict(data_frame=mi_tips, x="sex", y="total_bill")
+    mi_out = build_dataframe(args, all_attrables, array_attrables)
+    args["data_frame"] = tips
+    out = build_dataframe(args, all_attrables, array_attrables)
+    assert "sex" in mi_out["data_frame"].columns
+    assert_frame_equal(mi_out["data_frame"].reset_index(drop=True), out["data_frame"])
+
+
 def test_build_df_from_lists():
     # Just lists
     args = dict(x=[1, 2, 3], y=[2, 3, 4], color=[1, 3, 9])
@@ -210,7 +222,9 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, all_attrables, array_attrables)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
+    assert_frame_equal(
+        df.sort_index(axis=1), out["data_frame"].sort_index(axis=1), check_dtype=False
+    )
     out.pop("data_frame")
     assert out == output
 
@@ -220,7 +234,9 @@ def test_build_df_from_lists():
     df = pd.DataFrame(args)
     args["data_frame"] = None
     out = build_dataframe(args, all_attrables, array_attrables)
-    assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
+    assert_frame_equal(
+        df.sort_index(axis=1), out["data_frame"].sort_index(axis=1), check_dtype=False
+    )
     out.pop("data_frame")
     assert out == output
 
@@ -307,3 +323,7 @@ def test_size_column():
     df = px.data.tips()
     fig = px.scatter(df, x=df["size"], y=df.tip)
     assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}"
+
+
+if __name__ == "__main__":
+    test_build_df_from_lists()
