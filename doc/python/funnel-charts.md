@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -24,23 +24,20 @@ jupyter:
     thumbnail: thumbnail/funnel.jpg
 ---
 
-
 ### Introduction
 
 Funnel charts are often used to represent data in different stages of a business process. It’s an important mechanism in Business Intelligence to identify potential problem areas of a process. For example, it’s used to observe the revenue or loss in a sales process for each stage, and displays values that are decreasing progressively. Each stage is illustrated as a percentage of the total of all values.
 
-
 ### Basic Funnel Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
-
 
 ```python
 import plotly.express as px
 data = dict(
-    number=[39, 27.4, 20.6, 11, 2], 
+    number=[39, 27.4, 20.6, 11, 2],
     stage=["Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"])
 fig = px.funnel(data, x='number', y='stage')
 fig.show()
@@ -76,6 +73,7 @@ fig.show()
 ```
 
 ### Setting Marker Size and Color
+
 This example uses [textposition](https://plot.ly/python/reference/#scatter-textposition) and [textinfo](https://plot.ly/python/reference/#funnel-textinfo) to determine information apears on the graph, and shows how to customize the bars.
 
 ```python
@@ -167,7 +165,6 @@ fig.show()
 
 #### Multiple Area Funnels
 
-
 ```python
 from plotly import graph_objects as go
 
@@ -204,4 +201,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#funnel and https://plot.ly/python/reference/#funnelarea for more information and chart attribute options!
