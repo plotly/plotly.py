@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: "1.2"
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,26 +20,27 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
-    description: How to use datashader to rasterize large datasets, and visualize
+    description:
+      How to use datashader to rasterize large datasets, and visualize
       the generated raster data with plotly.
     display_as: scientific
     language: python
     layout: base
-    name: Using datashader with plotly
+    name: Plotly and Datashader
     order: 21
     page_type: u-guide
     permalink: python/datashader/
-    thumbnail: thumbnail/datashader.jpg
+    thumbnail: thumbnail/heatmap_colorscale.jpg
 ---
 
-[datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc. 
+[datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc.
 
 ### Passing datashader rasters as a mabox image layer
 
 We visualize here the spatial distribution of taxi rides in New York City. A higher density
-is observed on major avenues. For more details about mapbox charts, see [the mapbox layers tutorial](/python/mapbox-layers). No mapbox token is needed here. 
+is observed on major avenues. For more details about mapbox charts, see [the mapbox layers tutorial](/python/mapbox-layers). No mapbox token is needed here.
 
 ```python
 import pandas as pd
@@ -88,7 +89,7 @@ import pandas as pd
 import numpy as np
 import datashader as ds
 df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2015_flights.parquet')
-fig = go.Figure(go.Scattergl(x=df['SCHEDULED_DEPARTURE'][::200], 
+fig = go.Figure(go.Scattergl(x=df['SCHEDULED_DEPARTURE'][::200],
                              y=df['DEPARTURE_DELAY'][::200],
                              mode='markers')
 )
@@ -113,12 +114,16 @@ agg = np.array(agg.values, dtype=np.float)
 agg[agg<1] = np.nan
 
 fig = go.Figure(go.Heatmap(
-    z=np.log10(agg), x=x, y=y, 
+    z=np.log10(agg), x=x, y=y,
     hoverongaps=False,
     hovertemplate='Scheduled departure: %{x:.1f}h <br>Depature delay: %{y} <br>Log10(Count): %{z}',
     colorbar=dict(title='Count (Log)', tickprefix='1.e')))
 fig.update_xaxes(title_text='Scheduled departure')
 fig.update_yaxes(title_text='Departure delay')
 fig.show()
+
+```
+
+```python
 
 ```
