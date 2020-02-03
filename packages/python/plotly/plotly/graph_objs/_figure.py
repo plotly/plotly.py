@@ -370,7 +370,7 @@ class Figure(BaseFigure):
                         polar by the given angle in legacy polar
                         charts.
                     paper_bgcolor
-                        Sets the color of paper where the graph is
+                        Sets the background color of the paper where the graph is
                         drawn.
                     piecolorway
                         Sets the default pie slice colors. Defaults to
@@ -379,7 +379,7 @@ class Figure(BaseFigure):
                         extended with lighter and darker colors, see
                         `extendpiecolors`.
                     plot_bgcolor
-                        Sets the color of plotting area in-between x
+                        Sets the background color of the plotting area in-between x
                         and y axes.
                     polar
                         plotly.graph_objects.layout.Polar instance or

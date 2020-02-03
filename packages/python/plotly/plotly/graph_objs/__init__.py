@@ -96070,7 +96070,7 @@ class Layout(_BaseLayoutType):
     @property
     def paper_bgcolor(self):
         """
-        Sets the color of paper where the graph is drawn.
+        Sets the background color of the paper where the graph is drawn.
     
         The 'paper_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -96153,7 +96153,7 @@ class Layout(_BaseLayoutType):
     @property
     def plot_bgcolor(self):
         """
-        Sets the color of plotting area in-between x and y axes.
+        Sets the background color of the plotting area in-between x and y axes.
     
         The 'plot_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -98684,14 +98684,14 @@ class Layout(_BaseLayoutType):
             "polar" subplots. Rotates the entire polar by the given
             angle in legacy polar charts.
         paper_bgcolor
-            Sets the color of paper where the graph is drawn.
+            Sets the background color of the paper where the graph is drawn.
         piecolorway
             Sets the default pie slice colors. Defaults to the main
             `colorway` used for trace colors. If you specify a new
             list here it can still be extended with lighter and
             darker colors, see `extendpiecolors`.
         plot_bgcolor
-            Sets the color of plotting area in-between x and y
+            Sets the background color of the plotting area in-between x and y
             axes.
         polar
             plotly.graph_objects.layout.Polar instance or dict with
@@ -99198,14 +99198,14 @@ class Layout(_BaseLayoutType):
             "polar" subplots. Rotates the entire polar by the given
             angle in legacy polar charts.
         paper_bgcolor
-            Sets the color of paper where the graph is drawn.
+            Sets the background color of the paper where the graph is drawn.
         piecolorway
             Sets the default pie slice colors. Defaults to the main
             `colorway` used for trace colors. If you specify a new
             list here it can still be extended with lighter and
             darker colors, see `extendpiecolors`.
         plot_bgcolor
-            Sets the color of plotting area in-between x and y
+            Sets the background color of the plotting area in-between x and y
             axes.
         polar
             plotly.graph_objects.layout.Polar instance or dict with
