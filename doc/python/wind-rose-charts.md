@@ -39,7 +39,7 @@ jupyter:
 
 A [wind rose chart](https://en.wikipedia.org/wiki/Wind_rose) (also known as a polar bar chart) is a graphical tool used to visualize how wind speed and direction are typically distributed at a given location. You can use the `px.bar_polar` function from Plotly Express as below, otherwise use `go.Barpolar` as explained in the next section.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
