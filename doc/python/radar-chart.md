@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -33,13 +33,13 @@ jupyter:
     thumbnail: thumbnail/radar.gif
 ---
 
-A [Radar Chart](https://en.wikipedia.org/wiki/Radar_chart) (also known as a spider plot or star plot) displays multivariate data in the form of a two-dimensional chart of quantitative variables represented on axes originating from the center. The relative position and angle of the axes is typically uninformative.  It is equivalent to a [parallel coordinates plot](/python/parallel-coordinates-plot/) with the axes arranged radially.
+A [Radar Chart](https://en.wikipedia.org/wiki/Radar_chart) (also known as a spider plot or star plot) displays multivariate data in the form of a two-dimensional chart of quantitative variables represented on axes originating from the center. The relative position and angle of the axes is typically uninformative. It is equivalent to a [parallel coordinates plot](/python/parallel-coordinates-plot/) with the axes arranged radially.
 
 For a Radar Chart, use a [polar chart](/python/polar-chart/) with categorical angular variables, with `px.line_polar` for data available as a tidy pandas DataFrame, or with `go.Scatterpolar` in the general case. See more examples of [polar charts here](/python/polar-chart/).
 
 #### Radar Chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 Use `line_close=True` for closed lines.
 
@@ -69,7 +69,6 @@ fig.show()
 ```
 
 ### Basic Radar Chart with go.Scatterpolar
-
 
 ```python
 import plotly.graph_objects as go
@@ -129,4 +128,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scatterpolar for more information and chart attribute options!
