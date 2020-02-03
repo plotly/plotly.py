@@ -42,8 +42,8 @@ jupyter:
 More specifically, here are the 4 ways you can style and customize figures made with Plotly Express:
 
 1. Control common parameters like width & height, titles, labeling and colors using built-in Plotly Express function arguments
-2. Updating the figure attributes using update methods or by directly setting attributes
-3. Using Plotly's theming/templating mechanism via the `template` argument to every Plotly Express function
+2. Updating the figure attributes using [update methods or by directly setting attributes](/python/creating-and-updating-figures/)
+3. Using Plotly's [theming/templating mechanism](/python/templates/) via the `template` argument to every Plotly Express function
 4. Setting default values for common parameters using `px.defaults`
 
 ### Built-in Plotly Express Styling Arguments
@@ -90,7 +90,7 @@ fig.show()
 
 ### Updating or Modifying Figures made with Plotly Express
 
-If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use the `update_*` and `add_*` methods on the `graph_objects.Figure` object returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](/python/axes/), control [legends](/python/legend/) and [colorbars](/python/colorscales/), add [shapes](/python/shapes/) and [annotations](/python/text-and-annotations/) etc.
+If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use [the `update_*` and `add_*` methods](/python/creating-and-updating-figures/) on the `graph_objects.Figure` object returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](/python/axes/), control [legends](/python/legend/) and [colorbars](/python/colorscales/), add [shapes](/python/shapes/) and [annotations](/python/text-and-annotations/) etc.
 
 Here is the same figure as above, with some additional customizations to the axes and legend via `.update_yaxes()`, and `.update_layout()`, as well as some annotations added via `.add_shape()` and `.add_annotation()`.
 
