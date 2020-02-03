@@ -32,7 +32,7 @@ jupyter:
     order: 21
     page_type: u-guide
     permalink: python/datashader/
-    thumbnail: thumbnail/heatmap_colorscale.jpg
+    thumbnail: thumbnail/datashader.jpg
 ---
 
 [datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc.
