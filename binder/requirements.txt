@@ -12,3 +12,4 @@ psutil
 requests
 networkx
 scikit-image
+datashader
