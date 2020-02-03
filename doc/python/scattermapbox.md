@@ -41,7 +41,7 @@ To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public 
 
 Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_mapbox` for a scatter plot on a tile map.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px

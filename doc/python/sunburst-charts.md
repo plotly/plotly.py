@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -36,13 +36,14 @@ jupyter:
 Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` (`names` in `px.sunburst`) and in `parents`. The root starts from the center and children are added to the outer rings.
 
 Main arguments:
+
 1. `labels` (`names` in `px.sunburst` since `labels` is reserved for overriding columns names): sets the labels of sunburst sectors.
 2. `parents`: sets the parent sectors of sunburst sectors. An empty string `''` is used for the root node in the hierarchy. In this example, the root is "Eve".
 3. `values`: sets the values associated with sunburst sectors, determining their width (See the `branchvalues` section below for different modes for setting the width).
 
 ### Basic Sunburst Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
@@ -75,15 +76,15 @@ fig.show()
 
 ### Sunburst of a rectangular DataFrame with continuous color argument in px.sunburst
 
-If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values. 
+If a `color` argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
 
 ```python
 import plotly.express as px
 import numpy as np
 df = px.data.gapminder().query("year == 2007")
-fig = px.sunburst(df, path=['continent', 'country'], values='pop', 
+fig = px.sunburst(df, path=['continent', 'country'], values='pop',
                   color='lifeExp', hover_data=['iso_alpha'],
-                  color_continuous_scale='RdBu', 
+                  color_continuous_scale='RdBu',
                   color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
 fig.show()
 ```
@@ -132,7 +133,6 @@ fig.show()
 ### Basic Sunburst Plot with go.Sunburst
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
-
 
 ```python
 import plotly.graph_objects as go
@@ -242,7 +242,7 @@ fig.show()
 The `insidetextorientation` attribute controls the orientation of text inside sectors. With
 "auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential). Note that `plotly` may reduce the font size in order to fit the text with the requested orientation.
 
-For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation.
 
 ```python
 import plotly.graph_objects as go
@@ -288,7 +288,7 @@ fig.show()
 
 ### Sunburst chart with a continuous colorscale
 
-The example below visualizes a breakdown of sales (corresponding to sector width) and call success rate (corresponding to sector color) by region, county and salesperson level. For example, when exploring the data you can see that although the East region is behaving poorly, the Tyler county is still above average -- however, its performance is reduced by the poor success rate of salesperson GT. 
+The example below visualizes a breakdown of sales (corresponding to sector width) and call success rate (corresponding to sector color) by region, county and salesperson level. For example, when exploring the data you can see that although the East region is behaving poorly, the Tyler county is still above average -- however, its performance is reduced by the poor success rate of salesperson GT.
 
 In the right subplot which has a `maxdepth` of two levels, click on a sector to see its breakdown to lower levels.
 
@@ -308,7 +308,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     """
     Build a hierarchy of levels for Sunburst or Treemap charts.
 
-    Levels are given starting from the bottom to the top of the hierarchy, 
+    Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
     """
     df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
@@ -324,7 +324,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
         df_tree['value'] = dfg[value_column]
         df_tree['color'] = dfg[color_columns[0]] / dfg[color_columns[1]]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
-    total = pd.Series(dict(id='total', parent='', 
+    total = pd.Series(dict(id='total', parent='',
                               value=df[value_column].sum(),
                               color=df[color_columns[0]].sum() / df[color_columns[1]].sum()))
     df_all_trees = df_all_trees.append(total, ignore_index=True)
@@ -335,7 +335,7 @@ df_all_trees = build_hierarchical_dataframe(df, levels, value_column, color_colu
 average_score = df['sales'].sum() / df['calls'].sum()
 
 fig = make_subplots(1, 2, specs=[[{"type": "domain"}, {"type": "domain"}]],)
-    
+
 fig.add_trace(go.Sunburst(
     labels=df_all_trees['id'],
     parents=df_all_trees['parent'],
@@ -367,4 +367,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#sunburst for more information and chart attribute options!
