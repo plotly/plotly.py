@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -635,6 +635,34 @@ fig.update_layout(
     plot_bgcolor="white"
 )
 
+fig.show()
+```
+
+#### Adding Shapes to Subplots
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# Create Subplots
+fig = make_subplots(rows=2, cols=2, start_cell='bottom-left')
+
+fig.add_trace(go.Scatter(x=[2, 6], y=[1,1]), row=1, col=1)
+fig.add_trace(go.Bar(x=[1,2,3], y=[4,5,6]), row=1, col=2)
+fig.add_trace(go.Scatter(x=[10,20], y=[40,50]), row=2, col=1)
+fig.add_trace(go.Bar(x=[11,13,15], y=[8,11,20]), row=2, col=2)
+
+# Add shapes
+fig.update_layout(
+    shapes=[
+        dict(type="line", xref="x1", yref="y1",
+            x0=3, y0=0.5, x1=5, y1=0.8),
+        dict(type="rect", xref="x2", yref='y2',
+             x0=4, y0=2, x1=5, y1=6),
+        dict(type="rect", xref="x3", yref="y3",
+             x0=10, y0=20, x1=15, y1=30),
+        dict(type="circle", xref="x4", yref="y4",
+             x0=5, y0=12, x1=10, y1=18)])
 fig.show()
 ```
 
