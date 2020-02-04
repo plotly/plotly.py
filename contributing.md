@@ -213,7 +213,7 @@ This is the release process for releasing `plotly.py` version `X.Y.Z` with
 `plotlywidget` version `A.B.C`.
 
 Note: The `plotlywidget` instructions must be followed if any change
-has been made in the `js/` directory source code, OR if the version of
+has been made in the `packages/javascript` directory source code, OR if the version of
 plotly.js has been updated.  If neither of these is the case, there's no need
 to increment the `plotlywidget` version or to publish a new version to npm.
 
@@ -253,7 +253,9 @@ Note that the conda installation instructions must include
 "-c plotly/lable/test" rather than "-c plotly" in order to install the
 release candidate version.
 
-Commit Changelog and README updates.
+Update the `doc/python/getting-started.md` file with the same version numbers.
+
+Commit Changelog, README and getting-started updates.
 
 ### Bump to release candidate version
  1) Manually update the plotlywidget version to `A.B.C-rc.1` in the files
@@ -297,16 +299,18 @@ And, you'll need the credentials file `~/.pypirc`. Request access from
 (plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 
-### Publish release candidate of `plotlywidget` to NPM
+### Publish release candidate of `plotlywidget` and `jupyterlab-plotly` to NPM
 Now, publish the release candidate of the `plotlywidget` NPM package.
 
 ```bash
-cd ./js
+cd ./packages/javascript/plotlywidget
 npm publish --access public --tag next
 ```
 
 The `--tag next` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version wtih the `next` tag.
+
+Do the same in the `jupyterlab-plotly` directory.
 
 ### Publish release candidate to plotly anaconda channel
 To publish package to the plotly anaconda channel you'll need to have the
@@ -361,7 +365,9 @@ release candidate suffix from the following version strings:
 
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
- - `js/package.json`
+ - `packages/javascript/plotlywidget/package.json`
+   + Update `"version"` to `A.B.C`
+ - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `A.B.C`
    
 Commit and push to the release branch.
@@ -430,6 +436,19 @@ Enter the vX.Y.Z tag
 Make "Release title" the same string as the tag.
 
 Copy changelog section for this version as the "Describe this release"
+
+### Upgrade doc requirements and API doc
+
+Files to be updated:
+- `doc/apidoc/conf.py` with new version number
+- `doc/requirements.txt`
+- `binder/requirements.txt`
+
+### Synchronize master and doc-prod branches
+
+doc-prod should already have been merged on a regular basis into master, but
+start doing it first. Then merge master into doc-prod to deploy the doc related
+to features in the release.
 
 ### Post announcement
 Post a simple announcement to the Plotly Python forum, with links to the
