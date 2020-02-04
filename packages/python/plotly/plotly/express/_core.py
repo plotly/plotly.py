@@ -1024,6 +1024,7 @@ def build_dataframe(args, attrables, array_attrables):
 def _check_dataframe_all_leaves(df):
     df_sorted = df.sort_values(by=list(df.columns))
     null_mask = df_sorted.isnull()
+    df_sorted = df_sorted.astype(str)
     null_indices = np.nonzero(null_mask.any(axis=1).values)[0]
     for null_row_index in null_indices:
         row = null_mask.iloc[null_row_index]
@@ -1055,8 +1056,9 @@ def process_dataframe_hierarchy(args):
 
     if args["color"] and args["color"] in path:
         series_to_copy = df[args["color"]]
-        args["color"] = str(args["color"]) + "additional_col_for_px"
-        df[args["color"]] = series_to_copy
+        new_col_name = args["color"] + "additional_col_for_color"
+        path = [new_col_name if x == args["color"] else x for x in path]
+        df[new_col_name] = series_to_copy
     if args["hover_data"]:
         for col_name in args["hover_data"]:
             if col_name == args["color"]:
@@ -1160,6 +1162,11 @@ def process_dataframe_hierarchy(args):
     args["ids"] = "id"
     args["names"] = "labels"
     args["parents"] = "parent"
+    if args["color"]:
+        if not args["hover_data"]:
+            args["hover_data"] = [args["color"]]
+        else:
+            args["hover_data"].append(args["color"])
     return args
 
 
