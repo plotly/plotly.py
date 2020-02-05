@@ -639,7 +639,7 @@ fig.show()
 ```
 
 #### Adding Shapes to Subplots
-
+Here we use the different axes (`x1`, `x2`) created by `make_subplots` as reference in order to draw shapes in figure subplots.
 ```python
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
