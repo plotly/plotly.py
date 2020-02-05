@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -314,7 +314,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
-        dfg = df.groupby(levels[i:]).sum(numerical_only=True)
+        dfg = df.groupby(levels[i:]).sum()
         dfg = dfg.reset_index()
         df_tree['id'] = dfg[level].copy()
         if i < len(levels) - 1:
