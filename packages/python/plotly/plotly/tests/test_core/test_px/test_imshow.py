@@ -1,6 +1,7 @@
 import plotly.express as px
 import numpy as np
 import pytest
+import xarray as xr
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
 img_gray = np.arange(100).reshape((10, 10))
@@ -58,8 +59,9 @@ def test_colorscale():
 
 def test_wrong_dimensions():
     imgs = [1, np.ones((5,) * 3), np.ones((5,) * 4)]
+    msg = "px.imshow only accepts 2D single-channel, RGB or RGBA images."
     for img in imgs:
-        with pytest.raises(ValueError) as err_msg:
+        with pytest.raises(ValueError, match=msg):
             fig = px.imshow(img)
 
 
@@ -114,3 +116,12 @@ def test_zmin_zmax_range_color():
     fig = px.imshow(img, zmax=0.8)
     assert fig.layout.coloraxis.cmin == 0.0
     assert fig.layout.coloraxis.cmax == 0.8
+
+
+def test_imshow_xarray():
+    img = np.random.random((20, 30))
+    da = xr.DataArray(img, dims=["dim_rows", "dim_cols"])
+    fig = px.imshow(da)
+    assert fig.layout.xaxis.title.text == "dim_cols"
+    assert fig.layout.yaxis.title.text == "dim_rows"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))

@@ -2,8 +2,10 @@ import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
 import numpy as np
+
 try:
     import xarray
+
     xarray_imported = True
 except ImportError:
     xarray_imported = False
@@ -148,13 +150,15 @@ def imshow(
     img_is_xarray = False
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
-            y_label, x_label = img.dims
+            y_label, x_label = img.dims[0], img.dims[1]
             x = img.coords[x_label]
             y = img.coords[y_label]
-            x_range = (img.coords[x_label][0], img.coords[x_label][-1]) 
+            x_range = (img.coords[x_label][0], img.coords[x_label][-1])
             y_range = (img.coords[y_label][0], img.coords[y_label][-1])
             img_is_xarray = True
+
     img = np.asanyarray(img)
+
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
         img = 255 * img.astype(np.uint8)
@@ -206,7 +210,8 @@ def imshow(
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
     if img_is_xarray:
-        fig.update_traces(x=x, y=y)
+        if img.ndim <= 2:
+            fig.update_traces(x=x, y=y)
         fig.update_xaxes(title_text=x_label)
         fig.update_yaxes(title_text=y_label)
     fig.update_layout(template=args["template"], overwrite=True)
