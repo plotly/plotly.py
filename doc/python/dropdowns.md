@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.3
   plotly:
     description: How to add dropdowns to update Plotly chart attributes in Python.
     display_as: controls
@@ -80,7 +80,7 @@ fig.update_scenes(
 # Add dropdown
 fig.update_layout(
     updatemenus=[
-        go.layout.Updatemenu(
+        dict(
             buttons=list([
                 dict(
                     args=["type", "surface"],
@@ -107,8 +107,8 @@ fig.update_layout(
 # Add annotation
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(text="Trace type:", showarrow=False,
-                             x=0, y=1.085, yref="paper", align="left")
+        dict(text="Trace type:", showarrow=False,
+        x=0, y=1.085, yref="paper", align="left")
     ]
 )
 
@@ -151,7 +151,7 @@ fig.update_scenes(
 button_layer_1_height = 1.08
 fig.update_layout(
     updatemenus=[
-        go.layout.Updatemenu(
+        dict(
             buttons=list([
                 dict(
                     args=["colorscale", "Viridis"],
@@ -182,7 +182,7 @@ fig.update_layout(
             y=button_layer_1_height,
             yanchor="top"
         ),
-        go.layout.Updatemenu(
+        dict(
             buttons=list([
                 dict(
                     args=["reversescale", False],
@@ -203,7 +203,7 @@ fig.update_layout(
             y=button_layer_1_height,
             yanchor="top"
         ),
-        go.layout.Updatemenu(
+        dict(
             buttons=list([
                 dict(
                     args=[{"contours.showlines": False, "type": "contour"}],
@@ -229,11 +229,11 @@ fig.update_layout(
 
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(text="colorscale", x=0, xref="paper", y=1.06, yref="paper",
+        dict(text="colorscale", x=0, xref="paper", y=1.06, yref="paper",
                              align="left", showarrow=False),
-        go.layout.Annotation(text="Reverse<br>Colorscale", x=0.25, xref="paper", y=1.07,
+        dict(text="Reverse<br>Colorscale", x=0.25, xref="paper", y=1.07,
                              yref="paper", showarrow=False),
-        go.layout.Annotation(text="Lines", x=0.54, xref="paper", y=1.06, yref="paper",
+        dict(text="Lines", x=0.54, xref="paper", y=1.06, yref="paper",
                              showarrow=False)
     ])
 
@@ -293,17 +293,17 @@ fig.add_trace(
 )
 
 # Add buttons that add shapes
-cluster0 = [go.layout.Shape(type="circle",
+cluster0 = [dict(type="circle",
                             xref="x", yref="y",
                             x0=min(x0), y0=min(y0),
                             x1=max(x0), y1=max(y0),
                             line=dict(color="DarkOrange"))]
-cluster1 = [go.layout.Shape(type="circle",
+cluster1 = [dict(type="circle",
                             xref="x", yref="y",
                             x0=min(x1), y0=min(y1),
                             x1=max(x1), y1=max(y1),
                             line=dict(color="Crimson"))]
-cluster2 = [go.layout.Shape(type="circle",
+cluster2 = [dict(type="circle",
                             xref="x", yref="y",
                             x0=min(x2), y0=min(y2),
                             x1=max(x2), y1=max(y2),
@@ -311,7 +311,7 @@ cluster2 = [go.layout.Shape(type="circle",
 
 fig.update_layout(
     updatemenus=[
-        go.layout.Updatemenu(buttons=list([
+        dict(buttons=list([
             dict(label="None",
                  method="relayout",
                  args=["shapes", []]),
@@ -411,7 +411,7 @@ low_annotations = [dict(x="2015-05-01",
 
 fig.update_layout(
     updatemenus=[
-        go.layout.Updatemenu(
+        dict(
             active=0,
             buttons=list([
                 dict(label="None",
