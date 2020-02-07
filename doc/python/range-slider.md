@@ -59,7 +59,7 @@ fig.update_layout(
 
 # Add range slider
 fig.update_layout(
-    xaxis=go.layout.XAxis(
+    xaxis=dict(
         rangeselector=dict(
             buttons=list([
                 dict(count=1,
@@ -174,7 +174,7 @@ fig.update_traces(
 # Add annotations
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x="2013-06-01",
             y=0,
             arrowcolor="rgba(63, 81, 181, 0.2)",
@@ -186,7 +186,7 @@ fig.update_layout(
             yanchor="bottom",
             yref="y"
         ),
-        go.layout.Annotation(
+        dict(
             x="2014-09-13",
             y=0,
             arrowcolor="rgba(76, 175, 80, 0.1)",
@@ -204,7 +204,7 @@ fig.update_layout(
 # Add shapes
 fig.update_layout(
     shapes=[
-        go.layout.Shape(
+        dict(
             fillcolor="rgba(63, 81, 181, 0.2)",
             line={"width": 0},
             type="rect",
@@ -215,7 +215,7 @@ fig.update_layout(
             y1=0.95,
             yref="paper"
         ),
-        go.layout.Shape(
+        dict(
             fillcolor="rgba(76, 175, 80, 0.1)",
             line={"width": 0},
             type="rect",
@@ -231,7 +231,7 @@ fig.update_layout(
 
 # Update axes
 fig.update_layout(
-    xaxis=go.layout.XAxis(
+    xaxis=dict(
         autorange=True,
         range=["2012-10-31 18:36:37.3129", "2016-05-10 05:23:22.6871"],
         rangeslider=dict(
@@ -240,7 +240,7 @@ fig.update_layout(
         ),
         type="date"
     ),
-    yaxis=go.layout.YAxis(
+    yaxis=dict(
         anchor="x",
         autorange=True,
         domain=[0, 0.2],
@@ -256,7 +256,7 @@ fig.update_layout(
         type="linear",
         zeroline=False
     ),
-    yaxis2=go.layout.YAxis(
+    yaxis2=dict(
         anchor="x",
         autorange=True,
         domain=[0.2, 0.4],
@@ -272,7 +272,7 @@ fig.update_layout(
         type="linear",
         zeroline=False
     ),
-    yaxis3=go.layout.YAxis(
+    yaxis3=dict(
         anchor="x",
         autorange=True,
         domain=[0.4, 0.6],
@@ -289,7 +289,7 @@ fig.update_layout(
         type="linear",
         zeroline=False
     ),
-    yaxis4=go.layout.YAxis(
+    yaxis4=dict(
         anchor="x",
         autorange=True,
         domain=[0.6, 0.8],
@@ -306,7 +306,7 @@ fig.update_layout(
         type="linear",
         zeroline=False
     ),
-    yaxis5=go.layout.YAxis(
+    yaxis5=dict(
         anchor="x",
         autorange=True,
         domain=[0.8, 1],
