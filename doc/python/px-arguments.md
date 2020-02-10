@@ -51,6 +51,7 @@ import pandas as pd
 print("This is the same data in 'long' format, ready for Plotly Express:")
 wide_df = pd.DataFrame(dict(Month=["Jan", "Feb", "Mar"], London=[1,2,3], Paris=[3,1,2]))
 tidy_df = wide_df.melt(id_vars="Month")
+tidy_df
 ```
 
 ```python

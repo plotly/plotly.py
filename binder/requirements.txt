@@ -12,3 +12,5 @@ psutil
 requests
 networkx
 scikit-image
+datashader
+pyarrow

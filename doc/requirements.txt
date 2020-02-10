@@ -22,3 +22,5 @@ sphinx_bootstrap_theme
 recommonmark
 pathlib
 python-frontmatter
+datashader
+pyarrow

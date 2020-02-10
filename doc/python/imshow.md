@@ -198,6 +198,13 @@ fig.update_layout(height=400)
 fig.show()
 ```
 
+### imshow and datashader
+
+Arrays of rasterized values build by datashader can be visualized using
+imshow. See the [plotly and datashader tutorial](/python/datashader/) for 
+examples on how to use plotly and datashader.
+
+
 #### Reference
 See https://plot.ly/python/reference/#image for more information and chart attribute options!
 

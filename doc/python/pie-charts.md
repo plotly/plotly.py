@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -33,14 +33,14 @@ jupyter:
     thumbnail: thumbnail/pie-chart.jpg
 ---
 
-A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion. 
+A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).
 
 ### Pie chart with plotly express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
 
@@ -80,7 +80,7 @@ In the example below, we first create a pie chart with `px,pie`, using some of i
 ```python
 import plotly.express as px
 df = px.data.gapminder().query("year == 2007").query("continent == 'Americas'")
-fig = px.pie(df, values='pop', names='country', 
+fig = px.pie(df, values='pop', names='country',
              title='Population of American continent',
              hover_data=['lifeExp'], labels={'lifeExp':'life expectancy'})
 fig.update_traces(textposition='inside', textinfo='percent+label')
@@ -91,8 +91,7 @@ fig.show()
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
 
-
-In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
+In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).
@@ -141,7 +140,7 @@ fig.show()
 The `insidetextorientation` attribute controls the orientation of text inside sectors. With
 "auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential)
 
-For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation. 
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation.
 
 ```python
 import plotly.graph_objects as go
@@ -156,7 +155,6 @@ fig.show()
 ```
 
 ### Donut Chart
-
 
 ```python
 import plotly.graph_objects as go
@@ -210,7 +208,6 @@ fig.update_layout(
                  dict(text='CO2', x=0.82, y=0.5, font_size=20, showarrow=False)])
 fig.show()
 ```
-
 
 ```python
 import plotly.graph_objects as go
@@ -291,4 +288,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#pie for more information and chart attribute options!
