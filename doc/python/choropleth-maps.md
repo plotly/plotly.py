@@ -56,7 +56,7 @@ The GeoJSON data is passed to the `geojson` argument, and the data is passed int
 
 ### Choropleth Map with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 #### GeoJSON with `feature.id`
 

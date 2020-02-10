@@ -209,13 +209,21 @@ def test_sunburst_treemap_with_path_color():
     # Hover info
     df["hover"] = [el.lower() for el in vendors]
     fig = px.sunburst(df, path=path, color="calls", hover_data=["hover"])
-    custom = fig.data[0].customdata.ravel()
-    assert np.all(custom[:8] == df["hover"])
-    assert np.all(custom[8:] == "(?)")
+    custom = fig.data[0].customdata
+    assert np.all(custom[:8, 0] == df["hover"])
+    assert np.all(custom[8:, 0] == "(?)")
+    assert np.all(custom[:8, 1] == df["calls"])
 
     # Discrete color
     fig = px.sunburst(df, path=path, color="vendors")
     assert len(np.unique(fig.data[0].marker.colors)) == 9
+
+    # Numerical column in path
+    df["regions"] = df["regions"].map({"North": 1, "South": 2})
+    path = ["total", "regions", "sectors", "vendors"]
+    fig = px.sunburst(df, path=path, values="values", color="calls")
+    colors = fig.data[0].marker.colors
+    assert np.all(np.array(colors[:8]) == np.array(calls))
 
 
 def test_sunburst_treemap_with_path_non_rectangular():
