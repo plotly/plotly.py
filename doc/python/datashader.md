@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
-      jupytext_version: 1.3.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,10 +20,9 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
-    description:
-      How to use datashader to rasterize large datasets, and visualize
+    description: How to use datashader to rasterize large datasets, and visualize
       the generated raster data with plotly.
     display_as: scientific
     language: python
@@ -98,7 +97,7 @@ fig.show()
 ```
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 import pandas as pd
 import numpy as np
 import datashader as ds
@@ -106,24 +105,10 @@ df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2
 
 cvs = ds.Canvas(plot_width=100, plot_height=100)
 agg = cvs.points(df, 'SCHEDULED_DEPARTURE', 'DEPARTURE_DELAY')
-x = np.array(agg.coords['SCHEDULED_DEPARTURE'])
-y = np.array(agg.coords['DEPARTURE_DELAY'])
-
-# Assign nan to zero values so that the corresponding pixels are transparent
-agg = np.array(agg.values, dtype=np.float)
-agg[agg<1] = np.nan
-
-fig = go.Figure(go.Heatmap(
-    z=np.log10(agg), x=x, y=y,
-    hoverongaps=False,
-    hovertemplate='Scheduled departure: %{x:.1f}h <br>Depature delay: %{y} <br>Log10(Count): %{z}',
-    colorbar=dict(title='Count (Log)', tickprefix='1.e')))
-fig.update_xaxes(title_text='Scheduled departure')
-fig.update_yaxes(title_text='Departure delay')
+agg.values = np.log10(agg.values)
+agg.attrs['long_name'] = 'Log10(count)'
+fig = px.imshow(agg, origin='lower')
+fig.update_traces(hoverongaps=False)
+fig.update_layout(coloraxis_colorbar=dict(title='Count (Log)', tickprefix='1.e'))
 fig.show()
-
-```
-
-```python
-
 ```

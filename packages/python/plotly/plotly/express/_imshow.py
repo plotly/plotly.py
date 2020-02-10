@@ -75,7 +75,7 @@ def imshow(
     template=None,
     width=None,
     height=None,
-    aspect=None
+    aspect=None,
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -83,7 +83,7 @@ def imshow(
     Parameters
     ----------
 
-    img: array-like image
+    img: array-like image, or xarray
         The image data. Supported array shapes are
 
         - (M, N): an image with scalar data. The data is visualized
@@ -153,6 +153,9 @@ def imshow(
 
     In order to update and customize the returned figure, use
     `go.Figure.update_traces` or `go.Figure.update_layout`.
+
+    If an xarray is passed, dimensions names and coordinates are used for
+    axes labels and ticks.
     """
     args = locals()
     apply_default_cascade(args)
@@ -168,11 +171,12 @@ def imshow(
             y = img.coords[y_label]
             img_is_xarray = True
             if aspect is None:
-                aspect = 'auto'
+                aspect = "auto"
+            z_name = img.attrs["long_name"] if "long_name" in img.attrs else "z"
 
     if not img_is_xarray:
         if aspect is None:
-            aspect = 'equal'
+            aspect = "equal"
 
     img = np.asanyarray(img)
 
@@ -185,7 +189,7 @@ def imshow(
         trace = go.Heatmap(z=img, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
         layout = dict(yaxis=dict(autorange=autorange))
-        if aspect == 'equal':
+        if aspect == "equal":
             layout["xaxis"] = dict(scaleanchor="y", constrain="domain")
             layout["yaxis"]["constrain"] = "domain"
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
@@ -228,7 +232,15 @@ def imshow(
     fig.update_layout(layout_patch)
     if img_is_xarray:
         if img.ndim <= 2:
-            fig.update_traces(x=x, y=y)
+            hovertemplate = (
+                x_label
+                + ": %{x} <br>"
+                + y_label
+                + ": %{y} <br>"
+                + z_name
+                + " : %{z}<extra></extra>"
+            )
+            fig.update_traces(x=x, y=y, hovertemplate=hovertemplate)
         fig.update_xaxes(title_text=x_label)
         fig.update_yaxes(title_text=y_label)
     fig.update_layout(template=args["template"], overwrite=True)
