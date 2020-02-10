@@ -186,6 +186,10 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
+#### Using a mapbox image layer to display a datashader raster image
+
+See the example in the [plotly and datashader tutorial](/python/datashader).
+
 #### Reference
 
 See https://plot.ly/python/reference/#layout-mapbox for more information and options!

@@ -30,7 +30,7 @@ jupyter:
     order: 4
     page_type: example_index
     permalink: python/ternary-plots/
-    thumbnail: thumbnail/ternary.jpg
+    thumbnail: thumbnail/v4-migration.png
 ---
 
 ### Basic Ternary Plot with Markers

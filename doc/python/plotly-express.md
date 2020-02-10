@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description: Plotly Express is a terse, consistent, high-level API for rapid data
+    description:
+      Plotly Express is a terse, consistent, high-level API for rapid data
       exploration and figure generation.
     display_as: file_settings
     language: python
@@ -36,11 +37,11 @@ jupyter:
 
 ### Plotly Express
 
-Plotly Express is a terse, consistent, high-level wrapper around `plotly.graph_objects` for rapid data exploration and figure generation.
+Plotly Express is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
 
-**Note**: Plotly Express was previously its own separately-installed `plotly_express` package but is now part of `plotly`!
+> **Note**: Plotly Express was previously its own separately-installed `plotly_express` package but is now part of `plotly` and importable via `import plotly.express as px`.
 
-This notebook demonstrates various `plotly.express` features. [Reference documentation](https://plotly.github.io/plotly_express/plotly_express/) is also available, as well as a [tutorial on input argument types](/python/px-arguments).
+This notebook demonstrates various `plotly.express` features. [Reference documentation](https://plot.ly/python-api-reference/plotly.express.html) is also available, as well as a [tutorial on input argument types](/python/px-arguments) and one on how to [style figures made with Plotly Express](/python/styling-plotly-express/).
 
 You can also read our original [Medium announcement article](https://medium.com/@plotlygraphs/introducing-plotly-express-808df010143d) for more information on this library.
 
@@ -53,6 +54,8 @@ px.data.iris().head()
 ```
 
 #### Scatter and Line plots
+
+Refer to the main [scatter and line plot page](/python/line-and-scatter/) for full documentation.
 
 ```python
 import plotly.express as px
@@ -171,6 +174,8 @@ fig.show()
 ```
 
 #### Visualize Distributions
+
+Refer to the main [statistical graphs page](/python/statistical-charts/) for full documentation.
 
 ```python
 import plotly.express as px
@@ -356,34 +361,4 @@ import plotly.express as px
 df = px.data.gapminder()
 fig = px.choropleth(df, locations="iso_alpha", color="lifeExp", hover_name="country", animation_frame="year", range_color=[20,80])
 fig.show()
-```
-
-#### Built-in Color Scales and Sequences (and a way to see them!)
-
-```python
-px.colors.qualitative.swatches()
-```
-
-```python
-px.colors.sequential.swatches()
-```
-
-```python
-px.colors.diverging.swatches()
-```
-
-```python
-px.colors.cyclical.swatches()
-```
-
-```python
-px.colors.colorbrewer.swatches()
-```
-
-```python
-px.colors.cmocean.swatches()
-```
-
-```python
-px.colors.carto.swatches()
 ```
