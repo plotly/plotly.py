@@ -75,6 +75,7 @@ def imshow(
     template=None,
     width=None,
     height=None,
+    aspect=None
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -129,6 +130,14 @@ def imshow(
     height: number
         The figure height in pixels, defaults to 600.
 
+    aspect: 'equal', 'auto', or None
+      - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
+      - 'auto': The axes is kept fixed and the aspect ratio of pixels is
+        adjusted so that the data fit in the axes. In general, this will
+        result in non-square pixels.
+      - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
+        (which have typically heterogeneous coordinates)
+
     Returns
     -------
     fig : graph_objects.Figure containing the displayed image
@@ -151,11 +160,19 @@ def imshow(
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
             y_label, x_label = img.dims[0], img.dims[1]
+            # np.datetime64 is not handled correctly by go.Heatmap
+            for ax in [x_label, y_label]:
+                if np.issubdtype(img.coords[ax].dtype, np.datetime64):
+                    img.coords[ax] = img.coords[ax].astype(str)
             x = img.coords[x_label]
             y = img.coords[y_label]
-            x_range = (img.coords[x_label][0], img.coords[x_label][-1])
-            y_range = (img.coords[y_label][0], img.coords[y_label][-1])
             img_is_xarray = True
+            if aspect is None:
+                aspect = 'auto'
+
+    if not img_is_xarray:
+        if aspect is None:
+            aspect = 'equal'
 
     img = np.asanyarray(img)
 
@@ -167,10 +184,10 @@ def imshow(
     if img.ndim == 2:
         trace = go.Heatmap(z=img, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
-        layout = dict(
-            xaxis=dict(scaleanchor="y", constrain="domain"),
-            yaxis=dict(autorange=autorange, constrain="domain"),
-        )
+        layout = dict(yaxis=dict(autorange=autorange))
+        if aspect == 'equal':
+            layout["xaxis"] = dict(scaleanchor="y", constrain="domain")
+            layout["yaxis"]["constrain"] = "domain"
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
         if zmin is not None and zmax is None:
             zmax = img.max()
