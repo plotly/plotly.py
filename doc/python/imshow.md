@@ -120,6 +120,7 @@ import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 # We remove 273.5 to display Celsius degrees instead of Kelvin degrees
 airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(lon=20) - 273.5
+airtemps.attrs['long_name'] = 'Temperature' # used for hover
 fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower')
 fig.show()
 ```
@@ -132,6 +133,7 @@ For xarrays, by default `px.imshow` does not constrain pixels to be square, sinc
 import plotly.express as px
 import xarray as xr
 airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(time=500) - 273.5
+airtemps.attrs['long_name'] = 'Temperature' # used for hover
 fig = px.imshow(airtemps, color_continuous_scale='RdBu_r', aspect='equal')
 fig.show()
 ```
