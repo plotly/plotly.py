@@ -36,7 +36,7 @@ jupyter:
 
 ## Scatter plot with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.scatter`, each data point is represented as a marker point, which location is given by the `x` and `y` columns.
 

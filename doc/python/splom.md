@@ -42,7 +42,7 @@ A scatterplot matrix is a matrix associated to n numerical arrays (data variable
 
 Here we show the Plotly Express function `px.scatter_matrix` to plot the scatter matrix for the columns of the dataframe. By default, all columns are considered.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px

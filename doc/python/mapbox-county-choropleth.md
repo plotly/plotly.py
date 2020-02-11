@@ -80,7 +80,7 @@ df.head()
 
 ### Choropleth map using plotly.express and carto base map (no token needed)
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.choropleth_mapbox`, each row of the DataFrame is represented as a region of the choropleth.
 

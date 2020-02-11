@@ -37,7 +37,7 @@ jupyter:
 
 ### Line Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
 
 For more examples of line plots, see the [line and scatter notebook](https://plot.ly/python/line-and-scatter/).
 
