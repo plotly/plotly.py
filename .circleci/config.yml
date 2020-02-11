@@ -425,8 +425,8 @@ jobs:
             . venv/bin/activate
             echo ${mapbox_token} > python/.mapbox_token
             make -kj8 || make -kj8
-            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
-            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/check-or-enforce-order.py > check-or-enforce-order.py
+            curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
+            curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
             python front-matter-ci.py build/html
             python check-or-enforce-order.py build/html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
@@ -448,14 +448,14 @@ jobs:
           name: trigger doc build
           command: |
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
-              git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
-              cd documentation
+              git clone --depth=1 https://github.com/plotly/graphing-library-docs.git
+              cd graphing-library-docs
               git config user.name plotlydocbot
               git config user.email accounts@plot.ly
               git commit --allow-empty -m "deploying https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
               git push
               cd ..
-              rm -rf documentation
+              rm -rf graphing-library-docs
             fi
 
       - run:
