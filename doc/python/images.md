@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -55,7 +55,7 @@ fig.add_trace(
 
 # Add images
 fig.add_layout_image(
-        go.layout.Image(
+        dict(
             source="https://images.plot.ly/language-icons/api-home/python-logo.png",
             xref="x",
             yref="y",
@@ -178,12 +178,12 @@ for (x, y), n in zip(simulated_absorptions, names):
 
 # Add images
 fig.add_layout_image(
-    go.layout.Image(
+    dict(
         source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/benzene.png",
         x=0.75,
         y=0.65,
     ))
-fig.add_layout_image(go.layout.Image(
+fig.add_layout_image(dict(
         source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/naphthalene.png",
         x=0.9,
         y=0.3,
@@ -201,7 +201,7 @@ fig.update_layout_images(dict(
 # Add annotations
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=93.0 / 300,
             y=0.07 / 0.1,
             xref="paper",
@@ -212,7 +212,7 @@ fig.update_layout(
             ax=250,
             ay=-40,
         ),
-        go.layout.Annotation(
+        dict(
             x=156.0 / 300,
             y=0.04 / 0.1,
             xref="paper",
@@ -280,7 +280,7 @@ fig.update_yaxes(
 
 # Add image
 fig.add_layout_image(
-    go.layout.Image(
+    dict(
         x=0,
         sizex=img_width * scale_factor,
         y=img_height * scale_factor,
