@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.0
+      format_version: "1.2"
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to use datashader to rasterize large datasets, and visualize
+    description:
+      How to use datashader to rasterize large datasets, and visualize
       the generated raster data with plotly.
     display_as: scientific
     language: python
