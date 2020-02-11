@@ -16,8 +16,17 @@ from plotly.subplots import (
 
 
 class PxDefaults(object):
-    __slots__ = ['template', 'width', 'height', 'color_discrete_sequence', 'color_continuous_scale', 'symbol_sequence', 'line_dash_sequence', 'size_max']
-    
+    __slots__ = [
+        "template",
+        "width",
+        "height",
+        "color_discrete_sequence",
+        "color_continuous_scale",
+        "symbol_sequence",
+        "line_dash_sequence",
+        "size_max",
+    ]
+
     def __init__(self):
         self.template = None
         self.width = None
@@ -27,7 +36,8 @@ class PxDefaults(object):
         self.symbol_sequence = None
         self.line_dash_sequence = None
         self.size_max = 20
-        
+
+
 defaults = PxDefaults()
 del PxDefaults
 
@@ -741,7 +751,6 @@ def one_group(x):
 
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
-   
 
     for param in (
         ["color_discrete_sequence", "color_continuous_scale"]
