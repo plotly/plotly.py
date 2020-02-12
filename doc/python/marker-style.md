@@ -309,7 +309,7 @@ fig.show()
 
 The `marker_symbol` attribute allows you to customize the symbol used to represent markers. 
 
-In the following figure, hover over a symbol to see its name. Set the `marker_symbol` attribute equal to that name to change the marker symbol in your figure to use it.
+In the following figure, hover over a symbol to see its name. Set the `marker_symbol` attribute equal to that name to change the marker symbol in your figure.
 
 ```python
 import plotly.graph_objects as go
