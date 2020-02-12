@@ -3,7 +3,6 @@ import numpy as np
 import pytest
 
 
-
 def test_scatter():
     iris = px.data.iris()
     fig = px.scatter(iris, x="sepal_width", y="sepal_length")
@@ -239,4 +238,3 @@ def check_permissive_defaults():
     msg = "AttributeError: 'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
         px.defaults.should_not_work = "test"
-    
