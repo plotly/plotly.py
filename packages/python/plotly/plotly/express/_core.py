@@ -16,6 +16,17 @@ from plotly.subplots import (
 
 
 class PxDefaults(object):
+    __slots__ = [
+        "template",
+        "width",
+        "height",
+        "color_discrete_sequence",
+        "color_continuous_scale",
+        "symbol_sequence",
+        "line_dash_sequence",
+        "size_max",
+    ]
+
     def __init__(self):
         self.template = None
         self.width = None
