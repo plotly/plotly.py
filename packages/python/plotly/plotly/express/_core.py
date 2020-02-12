@@ -929,9 +929,9 @@ def build_dataframe(args, attrables, array_attrables):
             if argument is None:
                 continue
             # Ensure the field of "custom_data" is always list
-            if argument == "custom_data":
-                if not isinstance(field, list):
-                    field = [field]
+            if field == "custom_data":
+                if not isinstance(argument, list):
+                    argument = [argument]
             # Case of multiindex
             if isinstance(argument, pd.MultiIndex):
                 raise TypeError(
