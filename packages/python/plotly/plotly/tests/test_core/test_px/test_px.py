@@ -235,7 +235,7 @@ def test_orthogonal_orderings():
             assert_orderings(days, days, times, times)
 
 
-def check_permissive_defaults():
-    msg = "AttributeError: 'PxDefaults' object has no attribute 'should_not_work'"
+def test_permissive_defaults():
+    msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
         px.defaults.should_not_work = "test"
