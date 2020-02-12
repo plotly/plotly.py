@@ -234,6 +234,7 @@ def test_orthogonal_orderings():
         for times in permutations(df["time"].unique()):
             assert_orderings(days, days, times, times)
 
+
 def check_permissive_defaults():
     msg = "AttributeError: 'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
