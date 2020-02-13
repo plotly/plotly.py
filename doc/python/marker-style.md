@@ -307,13 +307,35 @@ fig.show()
 
 ### Custom Marker Symbols
 
-The `marker_symbol` attribute allows you to customize the symbol used to represent markers. 
+The `marker_symbol` attribute allows you to choose from a wide array of symbols to represent markers in your figures.
 
-In the following figure, hover over a symbol to see its name. Set the `marker_symbol` attribute equal to that name to change the marker symbol in your figure.
+The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`. 
+
+Each basic symbol is also represented by a number. Adding 100 to that number is equivalent to appending the suffix "-open" to a symbol name. Adding 200 is equivalent to appending "-dot" to a symbol name. Adding 300 is equivalent to appending "-open-dot" or "dot-open" to a symbol name.
+
+In the following figures, hover over a symbol to see its name or number. Set the `marker_symbol` attribute equal to that name or number to change the marker symbol in your figure.
+
+#### Basic Symbols
 
 ```python
 import plotly.graph_objects as go
+fig = go.Figure()
+fig.update_layout(title="Basic Symbols")
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
 
+for index in range(27):
+    fig.add_trace(go.Scatter(x=[(index % 30)], y=[index // 30], 
+                             marker_symbol=index, marker_color='black', 
+                             marker_size=10, showlegend=False, hovertext=index))
+
+fig.show()    
+```
+
+#### Custom Symbols
+
+```python
+import plotly.graph_objects as go
 symbols = [0, 'circle', 100, 'circle-open', 200, 'circle-dot', 300,
             'circle-open-dot', 1, 'square', 101, 'square-open', 201,
             'square-dot', 301, 'square-open-dot', 2, 'diamond', 102,
@@ -376,36 +398,18 @@ symbols = [0, 'circle', 100, 'circle-open', 200, 'circle-dot', 300,
             'line-ne', 143, 'line-ne-open', 44, 'line-nw', 144,
             'line-nw-open']
 
-
-
 fig = go.Figure()
-fig.update_layout(
-    title="Custom Marker Symbols",
-)
+fig.update_layout(title="Custom Marker Symbols")
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
 
-x_axis_offset = 0;
-for index, symbol in enumerate(symbols): 
-    if index >= 0 and index <= 60:
-        fig.add_trace(go.Scatter(x=[index + x_axis_offset], y=[1], 
-                                 marker_symbol=symbol, marker_color='black', marker_size=10, showlegend=False, hovertext=symbols[index]))
-    
-    if index >= 61 and index <= 120:
-        fig.add_trace(go.Scatter(x=[(index-244) + x_axis_offset], y=[1.2], 
-                                 marker_symbol=symbol, marker_color='black', marker_size=10, hoverinfo="text", showlegend=False, hovertext=symbols[index]))
-    if index >= 121 and index <= 180:
-        fig.add_trace(go.Scatter(x=[(index-484) + x_axis_offset], y=[1.4], 
-                                 marker_symbol=symbol, marker_color='black', marker_size=10, hoverinfo="text", showlegend=False, hovertext=symbols[index]))
-    
-    if index >= 181 and index <= 240:
-        fig.add_trace(go.Scatter(x=[(index-724) + x_axis_offset], y=[1.6], 
-                                 marker_symbol=symbol, marker_color='black', marker_size=10, showlegend=False, hovertext=symbols[index]))
-    if index >= 241 and index <= 300:
-        fig.add_trace(go.Scatter(x=[(index-964) + x_axis_offset], y=[1.8], 
-                                 marker_symbol=symbol, marker_color='black', marker_size=10, showlegend=False, hovertext=symbols[index]))
-    
-    x_axis_offset += 3
+for index, symbol in enumerate(symbols[::2]): 
+    fig.add_trace(go.Scatter(x=[(index % 30)], y=[index // 30], 
+                                 marker_symbol=symbol, marker_color='black', 
+                                 marker_size=10, showlegend=False, hovertext=symbols[2*index + 1],
+                                 name=''))
+
    
-
 fig.show()
 ```
 
