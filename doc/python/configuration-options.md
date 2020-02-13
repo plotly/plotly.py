@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.3.2
+      format_version: '1.1'
+      jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -105,9 +105,9 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Display the `Edit Chart` Link
+##### Display The `Edit Chart` Hyperlink
 
-Set `showLink` to `True` in order to make your figure editable on [Chart Studio](https://plot.ly/online-chart-maker). 
+Set `showLink` to `True` in order to display a hyperlink which allows users to edit the figure using [Chart Studio](https://plot.ly/online-chart-maker). 
 
 ```python
 import plotly.graph_objects as go
@@ -124,7 +124,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-### Display The `Edit In Chart Studio` Modebar Button
+If you would prefer to use an icon in the modebar as a hyperlink, set `showEditInChartStudio` to `True`. 
 
 ```python
 import plotly.graph_objects as go
@@ -312,6 +312,7 @@ fig.show(config=config)
 
 The same configuration dictionary that you pass to the `config` parameter of the `show()` method can also be passed to the `config` parameter of a `dcc.Graph` component.
 
+
 ```python
 import dash
 import dash_core_components as dcc
@@ -352,6 +353,7 @@ app.layout = html.Div(children=[
 # if __name__ == '__main__':
     # app.run_server(debug=True)
 ```
+
 
 #### Reference
 
