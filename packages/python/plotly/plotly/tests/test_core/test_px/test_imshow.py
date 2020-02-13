@@ -122,6 +122,7 @@ def test_imshow_xarray():
     img = np.random.random((20, 30))
     da = xr.DataArray(img, dims=["dim_rows", "dim_cols"])
     fig = px.imshow(da)
+    # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_cols"
     assert fig.layout.yaxis.title.text == "dim_rows"
     assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
