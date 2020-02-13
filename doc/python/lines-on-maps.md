@@ -41,7 +41,7 @@ Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` func
 
 ## Lines on Maps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -100,7 +100,7 @@ for i in range(len(df_flight_paths)):
 fig.update_layout(
     title_text = 'Feb. 2011 American Airline flight paths<br>(Hover for airport names)',
     showlegend = False,
-    geo = go.layout.Geo(
+    geo = dict(
         scope = 'north america',
         projection_type = 'azimuthal equal area',
         showland = True,
