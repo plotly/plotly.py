@@ -4,7 +4,6 @@ for rapid data exploration and figure generation. Learn more at https://plotly.e
 """
 from __future__ import absolute_import
 from plotly import optional_imports
-from ._imshow import imshow
 
 pd = optional_imports.get_module("pandas")
 if pd is None:
@@ -13,6 +12,7 @@ if pd is None:
 Plotly express requires pandas to be installed."""
     )
 
+from ._imshow import imshow
 from ._chart_types import (  # noqa: F401
     scatter,
     scatter_3d,
