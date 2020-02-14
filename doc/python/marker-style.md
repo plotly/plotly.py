@@ -325,7 +325,7 @@ fig.update_xaxes(showticklabels=False)
 fig.update_yaxes(showticklabels=False)
 
 for index in range(27):
-    fig.add_trace(go.Scatter(x=[(index % 6)], y=[index // 6], 
+    fig.add_trace(go.Scatter(x=[(index % 6)], y=[index // 6],  name="",
                              marker_symbol=index, marker_color='black', 
                              marker_size=10, showlegend=False,
                              text=index, hovertemplate=f'<b>Symbol Number: {index}</b>'))
