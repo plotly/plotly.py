@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,10 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.0
   plotly:
-    description: How to make subplots in python. Examples of stacked, custom-sized,
-      gridded, and annotated subplts.
+    description: How to make subplots in with Plotly's Python graphing library. Examples
+      of stacked, custom-sized, gridded, and annotated subplots.
     display_as: file_settings
     language: python
     layout: base
@@ -37,9 +37,11 @@ jupyter:
 
 #### Simple Subplot
 
-Figures with subplots are created using the `make_subplots` function from the `plotly.subplots` module.
+Figures with subplots are created using the `make_subplots()` function from the `plotly.subplots` module. 
 
-Here is an example of creating a figure with two scatter traces in side-by-side subplots.
+This function accepts two integer parameters (`rows` and `cols`), which specifiy how the subplots should be laid out.
+
+Here is an example of creating a figure that includes two `scatter` traces which are side-by-side since there are 2 columns and 1 row in the subplot layout.
 
 ```python
 from plotly.subplots import make_subplots
@@ -57,13 +59,13 @@ fig.add_trace(
     row=1, col=2
 )
 
-fig.update_layout(height=600, width=800, title_text="Subplots")
+fig.update_layout(height=600, width=800, title_text="Side By Side Subplots")
 fig.show()
 ```
 
 #### Stacked Subplots
 
-Here is an example of creating a figure with two vertically stacked subplots.
+Here is an example of creating a figure with subplots that are stacked on top of each other since there are 3 rows and 1 column in the subplot layout.
 
 ```python
 from plotly.subplots import make_subplots
@@ -87,13 +89,13 @@ fig.append_trace(go.Scatter(
 ), row=3, col=1)
 
 
-fig.update_layout(height=600, width=600, title_text="Stacked subplots")
+fig.update_layout(height=600, width=600, title_text="Stacked Subplots")
 fig.show()
 ```
 
 #### Multiple Subplots
 
-Here is an example of creating a 2 x 2 subplot grid and populating each subplot with a single scatter trace.
+Here is an example of creating a 2 x 2 subplot grid and populating each subplot with a single `scatter` trace.
 
 ```python
 import plotly.graph_objects as go
@@ -147,7 +149,7 @@ fig.update_layout(height=500, width=700,
 fig.show()
 ```
 
-#### Simple Subplot with Annotations
+#### Subplots with Annotations
 
 ```python
 from plotly.subplots import make_subplots
@@ -177,15 +179,15 @@ fig.add_trace(
     row=1, col=2
 )
 
-fig.update_layout(height=600, width=800, title_text="Annotations and subplots")
+fig.update_layout(height=600, width=800, title_text="Subplots with Annotations")
 
 fig.show()
 ```
 
-#### Side by Side Subplot
-The `column_widths` argument to `make_subplots` can be used to customize the relative widths of the columns in a subplot grid. It should be set to a list of numbers with a length that matches the `cols` argument.  These number will be normalized, so that they sum to 1, and used to compute the relative widths of the subplot grid columns. The `row_heights` argument serves the same purpose for controlling the relative heights of rows in the subplot grid.
+#### Customize Subplot Column Widths and Row Heights
+The `column_widths` argument to `make_subplots()` can be used to customize the relative widths of the columns in a subplot grid. It should be set to a list of numbers with a length that matches the `cols` argument.  These number will be normalized, so that they sum to 1, and used to compute the relative widths of the subplot grid columns. The `row_heights` argument serves the same purpose for controlling the relative heights of rows in the subplot grid.
 
-Here is an example of creating a figure with two scatter traces in side-by-side subplots, where the left subplot is wider that the right.
+Here is an example of creating a figure with two scatter traces in side-by-side subplots. The left subplot is set to be wider than the right one.
 
 ```python
 import plotly.graph_objects as go
@@ -203,9 +205,9 @@ fig.show()
 ```
 
 #### Customizing Subplot Axes
-After a figure with subplots is created using the `make_subplots` function, its axis properties (title, font, range, grid style, etc.) can be customized using the `update_xaxes` and `update_yaxes` graph object figure methods.  By default, these methods apply to all of the x axes or y axes in the figure. The `row` and `col` arguments can be used to control which axes are targeted by the update.
+After a figure with subplots is created using the `make_subplots()` function, its axis properties (title, font, range, grid style, etc.) can be customized using the `update_xaxes` and `update_yaxes` graph object figure methods.  By default, these methods apply to all of the `x` axes or `y` axes in the figure. The `row` and `col` arguments can be used to control which axes are targeted by the update.
 
-Here is an example that creates a figure with a 2 x 2 subplot grid, populates each subplot with a scatter trace, and then updates the x and y axis titles for each subplot individually.
+Here is an example that creates a figure with a 2 x 2 subplot grid, populates each subplot with a scatter trace, and then updates the `x` and `y` axis titles for each subplot individually.
 
 ```python
 from plotly.subplots import make_subplots
@@ -241,17 +243,17 @@ fig.show()
 ```
 
 #### Subplots with Shared X-Axes
-The `shared_xaxes` argument to `make_subplots` can be used to link the x axes of subplots in the resulting figure. The `vertical_spacing` argument is used to control the vertical spacing between rows in the subplot grid.
+The `shared_xaxes` argument to `make_subplots()` can be used to link the x axes of subplots in the resulting figure. The `vertical_spacing` argument is used to control the vertical spacing between rows in the subplot grid.
 
-Here is an example that creates a figure with 3 vertically stacked subplots with linked x axes. A small vertical spacing value is used to reduce the spacing between subplot rows.
+Here is an example that creates a figure with 3 vertically stacked subplots with linked `x` axes. A small vertical spacing value is used to reduce the spacing between subplot rows.
 
 ```python
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
-fig = make_subplots(
-    rows=3, cols=1, shared_xaxes=True, vertical_spacing=0.02
-)
+fig = make_subplots(rows=3, cols=1, 
+                    shared_xaxes=True, 
+                    vertical_spacing=0.02)
 
 fig.add_trace(go.Scatter(x=[0, 1, 2], y=[10, 11, 12]),
               row=3, col=1)
@@ -268,9 +270,9 @@ fig.show()
 ```
 
 #### Subplots with Shared Y-Axes
-The `shared_yaxes` argument to `make_subplots` can be used to link the y axes of subplots in the resulting figure.
+The `shared_yaxes` argument to `make_subplots()` can be used to link the `y` axes of subplots in the resulting figure.
 
-Here is an example that creates a figure with a 2 x 2 subplot grid, where the yaxes of each row are linked.
+Here is an example that creates a figure with a 2 x 2 subplot grid, where the `y` axes of each row are linked.
 
 
 ```python
@@ -319,7 +321,7 @@ fig.show()
 ```
 
 #### Custom Sized Subplot with Subplot Titles
-The `specs` argument to `make_subplots` is used to configure per-subplot options.  `specs` must be a 2-dimension list with dimensions that match those provided as the `rows` and `cols` arguments. The elements of `specs` may either be `None`, indicating no subplot should be initialized starting with this grid cell, or a dictionary containing subplot options.  The `colspan` subplot option specifies the number of grid columns that the subplot starting in the given cell should occupy.  If unspecified, `colspan` defaults to 1.
+The `specs` argument to `make_subplots()` is used to configure per-subplot options.  `specs` must be a 2-dimension list with dimensions that match those provided as the `rows` and `cols` arguments. The elements of `specs` may either be `None`, indicating no subplot should be initialized starting with this grid cell, or a dictionary containing subplot options.  The `colspan` subplot option specifies the number of grid columns that the subplot starting in the given cell should occupy.  If unspecified, `colspan` defaults to 1.
 
 Here is an example that creates a 2 by 2 subplot grid containing 3 subplots.  The subplot `specs` element for position (2, 1) has a `colspan` value of 2, causing it to span the full figure width. The subplot `specs` element for position (2, 2) is `None` because no subplot begins at this location in the grid.
 
@@ -346,7 +348,7 @@ fig.show()
 ```
 
 #### Multiple Custom Sized Subplots
-If the `print_grid` argument to `make_subplots` is set to `True`, then an text representation of the subplot grid will be printed.
+If the `print_grid` argument to `make_subplots()` is set to `True`, then a text representation of the subplot grid will be printed.
 
 Here is an example that uses the `rowspan` and `colspan` subplot options to create a custom subplot layout with subplots of mixed sizes. The `print_grid` argument is set to `True` so that the subplot grid is printed to the screen.
 
@@ -363,8 +365,7 @@ fig = make_subplots(
            [{}, {}]],
     print_grid=True)
 
-fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(1,1)"),
-              row=1, col=1)
+fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(1,1)"), row=1, col=1)
 fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(1,2)"), row=1, col=2)
 fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(2,1)"), row=2, col=1)
 fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(3,1)"), row=3, col=1)
@@ -376,7 +377,7 @@ fig.show()
 ```
 
 #### Subplots Types
-By default, the `make_subplots` function assumes that the traces that will be added to all subplots are 2-dimensional cartesian traces (e.g. `scatter`, `bar`, `histogram`, `violin`, etc.).  Traces with other subplot types (e.g. `scatterpolar`, `scattergeo`, `parcoords`, etc.) are supporteed by specifying the `type` subplot option in the `specs` argument to `make_subplots`.
+By default, the `make_subplots()` function assumes that the traces that will be added to all subplots are 2-dimensional cartesian traces (e.g. `scatter`, `bar`, `histogram`, `violin`, etc.).  Traces with other subplot types (e.g. `scatterpolar`, `scattergeo`, `parcoords`, etc.) are supporteed by specifying the `type` subplot option in the `specs` argument to `make_subplots`.
 
 Here are the possible values for the `type` option:
 
@@ -409,7 +410,8 @@ fig.add_trace(go.Barpolar(theta=[0, 45, 90], r=[2, 3, 1]),
 fig.add_trace(go.Pie(values=[2, 3, 1]),
               row=2, col=1)
 
-fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], z=[0.5, 1, 2], mode="lines"),
+fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], 
+                           z=[0.5, 1, 2], mode="lines"),
               row=2, col=2)
 
 fig.update_layout(height=700, showlegend=False)
@@ -440,7 +442,8 @@ fig.add_trace(go.Barpolar(theta=[0, 45, 90], r=[2, 3, 1]),
 fig.add_trace(go.Pie(values=[2, 3, 1]),
               row=2, col=1)
 
-fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], z=[0.5, 1, 2], mode="lines"),
+fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], 
+                           z=[0.5, 1, 2], mode="lines"),
               row=2, col=2)
 
 fig.update_layout(height=700, showlegend=False)
