@@ -384,7 +384,7 @@ fig.add_trace(go.Scatter(
     fillcolor='rgba(231,107,243,0.2)',
     line_color='rgba(255,255,255,0)',
     showlegend=False,
-    name='Fair',
+    name='Ideal',
 ))
 fig.add_trace(go.Scatter(
     x=x, y=y1,
