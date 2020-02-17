@@ -17450,7 +17450,7 @@ class Figure(BaseFigure):
         return self
 
     def update_annotations(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all annotations that satisfy the
@@ -17949,7 +17949,7 @@ class Figure(BaseFigure):
         return self
 
     def update_layout_images(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all images that satisfy the
@@ -18221,7 +18221,7 @@ class Figure(BaseFigure):
         return self
 
     def update_shapes(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all shapes that satisfy the
