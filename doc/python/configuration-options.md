@@ -87,7 +87,7 @@ fig.show(config=config)
 
 When users hover over a figure generated with `plotly.py`, a modebar appears in the top-right of the figure. This presents users with several options for interacting with the figure.
 
-By default, the modebar is only visible while the user is hovering over the chart. If you would like the modebar to never be visible, then set the displayModeBar attribute in the config of your figure to false.
+By default, the modebar is only visible while the user is hovering over the chart. If you would like the modebar to never be visible, then set the `displayModeBar` attribute in the config of your figure to false.
 
 ```python
 import plotly.graph_objects as go
