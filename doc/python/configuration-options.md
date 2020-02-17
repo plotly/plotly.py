@@ -22,7 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.0
   plotly:
-    description: How to set the configuration options of figures using Plotly Python graphing library.
+    description: How to set the configuration options of figures using the Plotly
+      Python graphing library.
     display_as: file_settings
     language: python
     layout: base
@@ -157,14 +158,20 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Making A Responsive Chart
+##### Turn Off Responsiveness
+
+By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](https://plot.ly/python/renderers/) environments. 
+
+Try resizing your browser window to see this behavior in effect on this page.
+
+If you would like to disable this default behavior and force your figures to always have the same height and width regardless of the window size, set the value of the `responsive` key to `False` in your figure's configuration dictionary.
 
 ```python
 import plotly.graph_objects as go
 
 fig = go.Figure()
 
-config = {'responsive': True}
+config = {'responsive': False}
 
 fig.add_trace(
     go.Scatter(

@@ -24,3 +24,5 @@ pathlib
 python-frontmatter
 datashader
 pyarrow
+dash_core_components
+dash_html_components
