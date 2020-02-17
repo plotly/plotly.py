@@ -270,7 +270,7 @@ Prior to version 4, when plotly.py was passed a `datetime` that included a timez
 
 <!-- #region -->
 ### Headless image export on Linux with Xvfb.
-In version 4, the static image export logic attempts to automatically detect whether to call the orca image export utility using Xvfb.  Xvfb is needed for orca to work in a Linux environment if an X11 display server is not available. By default, Xvfb us used if plotly.py is running on Linux if no X11 display server is detected and `Xvfb` is available on the system `PATH`.
+In version 4, the static image export logic attempts to automatically detect whether to call the orca image export utility using Xvfb.  Xvfb is needed for orca to work in a Linux environment if an X11 display server is not available. By default, Xvfb is used if plotly.py is running on Linux if no X11 display server is detected and `Xvfb` is available on the system `PATH`.
 
 This new behavior can be disabled by setting the `use_xvfb` orca configuration option to `False` as follows:
 
@@ -292,4 +292,3 @@ The legacy online-only `GraphWidget` class has been removed.  Please use the `pl
 
 #### Import from `graph_objects` instead of `graph_objs`
 The legacy `plotly.graph_objs` package has been aliased as `plotly.graph_objects` because the latter is much easier to communicate verbally. The `plotly.graph_objs` package is still available for backward compatibility.
-
