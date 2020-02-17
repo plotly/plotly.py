@@ -319,16 +319,20 @@ In the following figures, hover over a symbol to see its name or number. Set the
 
 ```python
 import plotly.graph_objects as go
+
 fig = go.Figure()
+
 fig.update_layout(title="Basic Symbols")
+
 fig.update_xaxes(showticklabels=False)
 fig.update_yaxes(showticklabels=False)
 
 for index in range(27):
     fig.add_trace(go.Scatter(x=[(index % 6)], y=[index // 6],  name="",
                              marker_symbol=index, marker_color='black', 
-                             marker_size=10, showlegend=False,
-                             text=index, hovertemplate=f'<b>Symbol Number: {index}</b>'))
+                             marker_size=10, showlegend=False, mode="markers+text",
+                             textposition="middle right", text=f'<b>{index}</b>',
+                             hovertemplate=f'<b>Symbol Number: {index}</b>'))
 
 fig.show()    
 ```
@@ -337,6 +341,7 @@ fig.show()
 
 ```python
 import plotly.graph_objects as go
+
 symbols = [0, 'circle', 100, 'circle-open', 200, 'circle-dot', 300,
             'circle-open-dot', 1, 'square', 101, 'square-open', 201,
             'square-dot', 301, 'square-open-dot', 2, 'diamond', 102,
@@ -400,19 +405,21 @@ symbols = [0, 'circle', 100, 'circle-open', 200, 'circle-dot', 300,
             'line-nw-open']
 
 fig = go.Figure()
-fig.update_layout(title="Custom Marker Symbols")
+
+fig.update_layout(title="Custom Marker Symbols", height=800)
+
 fig.update_xaxes(showticklabels=False)
 fig.update_yaxes(showticklabels=False)
 
 for index, symbol in enumerate(symbols[::2]): 
-    fig.add_trace(go.Scatter(x=[(index % 30)], y=[index // 30], 
-                                 marker_symbol=symbol, marker_color='black', 
-                                 marker_size=10, showlegend=False, 
-                                 hovertext=symbols[2*index + 1], name='',
-                                 hovertemplate=f'<b>{symbols[2*index + 1]}</b>'
+    fig.add_trace(go.Scatter(x=[(index % 16)], y=[(index // 16)], 
+                                 marker_symbol=symbol, marker_color=index,
+                                 marker_size=20, showlegend=False, mode="markers+text",
+                                 name='',
+                                 hovertemplate=f'<b>Symbol Name: {symbols[2*index + 1]}</b><br><b>Symbol Number: {symbols[2*index]}</b>',
+                                 textfont_size=8
                                 ))
-
-   
+  
 fig.show()
 ```
 
