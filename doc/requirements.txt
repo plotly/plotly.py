@@ -24,4 +24,4 @@ pathlib
 python-frontmatter
 datashader
 pyarrow
-cufflinks==0.17.3
+dash_core_components

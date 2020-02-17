@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,19 +20,20 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.0
   plotly:
     description: Displaying Figures using Plotly's Python graphing library
     display_as: file_settings
     language: python
-    name: Displaying Figures
-    page_type: example_index
     layout: base
+    name: Displaying Figures
+    order: 1
+    page_type: example_index
     permalink: python/renderers/
     redirect_from: python/offline/
     thumbnail: thumbnail/displaying-figures.png
-    order: 1
 ---
+
 # Displaying Figures 
 
 Plotly's Python graphing library, `plotly.py`, gives you a wide range of options for how and where to display your figures. 
