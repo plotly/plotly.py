@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.0
   plotly:
-    description: How to set the configuration options of figures using Ploty's Python graphing library.
+    description: How to set the configuration options of figures using Plotly Python graphing library.
     display_as: file_settings
     language: python
     layout: base
