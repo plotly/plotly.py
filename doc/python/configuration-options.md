@@ -36,7 +36,7 @@ jupyter:
 
 # Configuration Options 
 
-The `show()` method that you use to display your figures also accepts a `config` parameter.
+The `.show()` method that you use to display your figures also accepts a `config` parameter.
 
 You can set the configuration options for your figure by passing a dictionary to this parameter which contains the options you want to set. 
 
