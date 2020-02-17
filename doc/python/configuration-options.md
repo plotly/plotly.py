@@ -258,7 +258,7 @@ fig.show(config=config)
 
 ##### Remove Modebar Buttons
 
-To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the modeBarButtonsToRemove attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
+To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
 
 -'2D': `zoom2d`, `pan2d`, `select2d`, `lasso2d`, `zoomIn2d`, `zoomOut2d`, `autoScale2d`, `resetScale2d`
 -'3D': `zoom3d`, `pan3d`, `rbitRotation`, `tableRotation`, `handleDrag3d`, resetCameraDefault3d, resetCameraLastSave3d, `hoverClosest3d`
