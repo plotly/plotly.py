@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -106,6 +106,18 @@ In the example below the color of `Saturday` and `Sunday` sectors is the same as
 import plotly.express as px
 df = px.data.tips()
 fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
+                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
 fig.show()
 ```
 

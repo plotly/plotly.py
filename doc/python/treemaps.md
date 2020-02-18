@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
-      jupytext_version: 1.3.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to make Treemap Charts with Plotly
     display_as: basic
@@ -98,6 +98,18 @@ import plotly.express as px
 df = px.data.tips()
 df["all"] = "all" # in order to have a single root node
 fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
+
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.treemap(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
+                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
 fig.show()
 ```
 
