@@ -14,4 +14,4 @@ networkx
 scikit-image
 datashader
 pyarrow
-dash_core_components
+cufflinks==0.17.3

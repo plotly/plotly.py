@@ -40,15 +40,15 @@ Plotly's Python graphing library, `plotly.py`, gives you a wide range of options
 
 In general, there are three different approaches you can take in order to display figures:
 
- 1. Using the `renderers` framework in the context of a script or notebook
+ 1. Using the renderers framework in the context of a script or notebook
  2. Using [Dash](https://dash.plot.ly) in a web app context
  3. Using a `FigureWidget` in an `ipywidgets` context
 
 Each of these approaches is discussed below.
 
-### Displaying Figures Using The `renderers` Framework
+### Displaying Figures Using The renderers Framework
 
-The `renderers` framework is a flexible approach for displaying `plotly.py` figures in a variety of contexts.  To display a figure using the `renderers` framework, you call the `show()` method on a graph object figure, or pass the figure to the `plotly.io.show` function. With either approach, `plotly.py` will display the figure using the current default renderer(s).
+The renderers framework is a flexible approach for displaying `plotly.py` figures in a variety of contexts.  To display a figure using the renderers framework, you call the `.show()` method on a graph object figure, or pass the figure to the `plotly.io.show` function. With either approach, `plotly.py` will display the figure using the current default renderer(s).
 
 ```python
 import plotly.graph_objects as go
@@ -59,7 +59,7 @@ fig = go.Figure(
 fig.show()
 ```
 
-In most situations, you can omit the call to `show()` and allow the figure to display itself.
+In most situations, you can omit the call to `.show()` and allow the figure to display itself.
 
 ```python
 import plotly.graph_objects as go
@@ -115,17 +115,17 @@ fig.show(renderer="svg")
 In this section, we will describe the built-in renderers so that you can choose the one(s) that best suit your needs.
 
 ##### Interactive Renderers
-Interactive renderers display figures using the Plotly.js JavaScript library and are fully interactive, supporting pan, zoom, hover tooltips, etc.
+Interactive renderers display figures using the plotly.js JavaScript library and are fully interactive, supporting pan, zoom, hover tooltips, etc.
 
 ###### `notebook`
-This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab).  The full `plotly.js` JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an Internet connection.
+This renderer is intended for use in the classic [Jupyter Notebook](https://jupyter.org/install.html) (not JupyterLab).  The full plotly.js JavaScript library bundle is added to the notebook the first time a figure is rendered, so this renderer will work without an Internet connection.
 
 This renderer is a good choice for notebooks that will be exported to HTML files (Either using [nbconvert](https://nbconvert.readthedocs.io/en/latest/) or the "Download as HTML" menu action) because the exported HTML files will work without an Internet connection.
 
-> Note: Adding the `plotly.js` bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
+> Note: Adding the plotly.js bundle to the notebook adds a few megabytes to the notebook size. If you can count on always having an Internet connection, you may want to consider using the `notebook_connected` renderer if notebook size is a constraint.
 
 ###### `notebook_connected`
-This renderer is the same as `notebook` renderer, except the `plotly.js` JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.
+This renderer is the same as `notebook` renderer, except the plotly.js JavaScript library bundle is loaded from an online CDN location.  This saves a few megabytes in notebook size, but an Internet connection is required in order to display figures that are rendered this way.
 
 This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active Internet connection to access nbviewer in the first place.
 
@@ -146,7 +146,7 @@ This renderer will open a figure in a browser tab using the default web browser.
 These renderers are the same as the `browser` renderer, but they force the use of a particular browser.
 
 ###### `iframe` and `iframe_connected`
-These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the `plotly.js` JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load `plotly.js`.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an Internet connection while the `iframe` renderer can operate offline.
+These renderers write figures out as standalone HTML files and then display [`iframe`](https://www.w3schools.com/html/html_iframe.asp) elements that reference these HTML files. The `iframe` renderer will include the plotly.js JavaScript bundle in each HTML file that is written, while the `iframe_connected` renderer includes only a reference to an online CDN location from which to load plotly.js.  Consequently, the `iframe_connected` renderer outputs files that are smaller than the `iframe` renderer, but it requires an Internet connection while the `iframe` renderer can operate offline.
 
 This renderer may be useful when working with notebooks than contain lots of large figures.  When using the `notebook` or `notebook_connected` renderer, all of the data for all of the figures in a notebook are stored inline in the notebook itself. If this would result in a prohibitively large notebook size, an `iframe` or `iframe_connected` renderer could be used instead. With the `iframe` renderers, the figure data are stored in the individual HTML files rather than in the notebook itself, resulting in a smaller notebook size.
 
@@ -175,16 +175,16 @@ fig = go.Figure(
 fig.show(renderer="png")
 ```
 
-###### `pdf`
-This renderer displays figures as static `.pdf` files. This is especially useful for notebooks that will be exported to `.pdf` files using the `LaTeX` export capabilities of `nbconvert`.
+###### PDF
+This renderer displays figures as static PDF files. This is especially useful for notebooks that will be exported to PDF files using the LaTeX export capabilities of [`nbconvert`](https://nbconvert.readthedocs.io/en/latest/).
 
 ##### Other Miscellaneous Renderers
 
-###### `json`
+###### JSON
 In editors that support it (JupyterLab, nteract, and the Visual Studio Code notebook interface), this renderer displays the JSON representation of a figure in a collapsible interactive tree structure.  This can be very useful for examining the structure of complex figures.
 
 ##### Multiple Renderers
-You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to `.pdf` using `nbconvert`.
+You can specify that multiple renderers should be used by joining their names on `"+"` characters.  This is useful when writing code that needs to support multiple contexts.  For example, if a notebook specifies a default renderer string of  `"notebook+plotly_mimetype+pdf"`then this notebook would be able to run in the classic Jupyter Notebook, in JupyterLab, and it would support being exported to PDF using `nbconvert`.
 
 #### Customizing Built-In Renderers
 Most built-in renderers have configuration options to customize their behavior.  To view a description of a renderer, including its configuration options, access the renderer object using dictionary-style key lookup on the `plotly.io.renderers` configuration object and then display it.  Here is an example of accessing and displaying the `png` renderer.
@@ -228,13 +228,15 @@ fig.show(renderer="png", width=800, height=300)
 ```
 
 ### Displaying Figures Using Dash
+
 [Dash](https://dash.plot.ly) is a Python framework for building web applications, and it provides built-in support for displaying figures created with Plotly's graphing libraries. See the [Dash User Guide](https://dash.plot.ly/) for more information.
 
-It is important to note that Dash does not use the renderers framework discussed above, so you should not use the `show()` figure method or the `plotly.io.show` function inside Dash applications.
+It is important to note that Dash does not use the renderers framework discussed above, so you should not try to use the `.show()` figure method or the `plotly.io.show` function to render figures inside Dash applications.
 
-Instead, pass your figure as the `figure` parameter to the `dcc.Graph` component. 
+Instead, pass your figure as the `figure` parameter to the [`dcc.Graph`](https://dash.plot.ly/dash-core-components/graph) component, which is part of the [Dash Core Components](https://dash.plot.ly/dash-core-components) library. The code below demonstrates how to do this. 
 
-```python
+
+```python .noeval
 import dash_core_components as dcc
 import plotly.graph_objs as go
 
@@ -245,6 +247,7 @@ dcc.Graph(
         figure=fig
     )
 ```
+
 
 ## Displaying Figures Using `ipywidgets`
 Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (just like `plotly.graph_objects.Figure`), so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an `ipywidgets` object, which means that you can display it alongside other `ipywidgets` to build user interfaces right in the notebook.  

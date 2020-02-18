@@ -39,11 +39,11 @@ jupyter:
 
 ### Representing Figures
 
-The goal of the `plotly.py` package is to provide a pleasant Python interface for creating figure specifications which are displayed by the [`plotly.js`](https://plot.ly/javascript) JavaScript graphing library. 
+The goal of the plotly.py package is to provide a pleasant Python interface for creating figure specifications which are displayed by the [plotly.js](https://plot.ly/javascript) JavaScript graphing library. 
 
-In the context of the `plotly.js` library, a figure is specified by a declarative [JSON](https://www.json.org/json-en.html) data structure. 
+In the context of the plotly.js library, a figure is specified by a declarative [JSON](https://www.json.org/json-en.html) data structure. 
 
-Therefore, you should always keep in mind as you are creating and updating figures using the `plotly.py` package that its ultimate goal is to help users produce Python [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) that can be automatically [serialized](https://en.wikipedia.org/wiki/Serialization) into the JSON data structure that the `plotly.js` graphing library understands.
+Therefore, you should always keep in mind as you are creating and updating figures using the plotly.py package that its ultimate goal is to help users produce Python [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) that can be automatically [serialized](https://en.wikipedia.org/wiki/Serialization) into the JSON data structure that the plotly.js graphing library understands.
 
 #### Figures As Dictionaries
 
@@ -612,7 +612,7 @@ There are also `for_each_xaxis()` and `for_each_yaxis()` methods that are analog
 
 ### Other Update Methods
 
-Figures created with the `plotly.graph_objects` module also support:
+Figures created with the plotly.py graphing library also support:
     - the `update_layout_images()` method in order to [update background layout images](/python/images/), 
     - `update_annotations()` in order to [update annotations](/python/text-and-annotations/#multiple-annotations), 
     - and `update-shapes()` in order to [update shapes](/python/shapes/).
