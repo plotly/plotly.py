@@ -111,6 +111,33 @@ fig.update_layout(
 
 fig.show()
 ```
+### High performance US Flight Paths Map
+If you can relinquish having individual styles for the flight paths (e.g. opacity), you can put multiple paths into one trace, which makes the map render much faster. 
+
+Use ```None``` between path coordinates to create a break in the otherwise connected paths. 
+
+```python 
+# ... omitted code: look at the previous "US Flight Paths Map" example
+lons = []
+lats = []
+for i in range(len(df_flight_paths)):
+    # None interrupts lines and makes it possible to draw multiple disconnected lines.
+    lons += [df_flight_paths['start_lon'][i], df_flight_paths['end_lon'][i], None] 
+    lats += [df_flight_paths['start_lat'][i], df_flight_paths['end_lat'][i], None]
+
+fig.add_trace(
+    go.Scattergeo(
+        locationmode = 'USA-states',
+        lon = lons,
+        lat = lats,
+        mode = 'lines',
+        line = dict(width = 1,color = 'red'),
+        opacity = 0.5 
+    )
+)
+# ... omitted code: look at the previous "US Flight Paths Map" example
+```
+
 
 ### London to NYC Great Circle
 
