@@ -312,8 +312,8 @@ fig.show(config=config)
 
 The same configuration dictionary that you pass to the `config` parameter of the `show()` method can also be passed to the `config` parameter of a `dcc.Graph` component.
 
-
-```python
+<!-- #raw -->
+<pre><code>
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -352,10 +352,9 @@ app.layout = html.Div(children=[
 
 # if __name__ == '__main__':
     # app.run_server(debug=True)
-```
-
+</code></pre>
+<!-- #raw -->
 
 #### Reference
-
 
 See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6
