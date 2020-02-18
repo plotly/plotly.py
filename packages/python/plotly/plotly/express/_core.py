@@ -331,7 +331,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         mapping_labels[attr_label] = "%{color}"
                     else:
                         trace_patch["marker"]["colors"] = []
-                        mapping = {}
+                        if args["color_discrete_map"] is not None:
+                            mapping = args["color_discrete_map"].copy()
+                        else:
+                            mapping = {}
                         for cat in trace_data[attr_value]:
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][
