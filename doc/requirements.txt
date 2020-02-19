@@ -1,4 +1,4 @@
-plotly==4.5.0
+plotly==4.5.1
 jupytext==1.1.1
 jupyter
 notebook
