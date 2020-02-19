@@ -220,6 +220,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         )
 
     def test_annotation_attributes(self):
+        import plotly
+        print(plotly.__version__)
+        self.fig.add_annotation(dict(x=1, y=1))
+        print(self.fig)
         self.fig.update_annotations(text="hi")
 
     def test_update_shapes(self):
