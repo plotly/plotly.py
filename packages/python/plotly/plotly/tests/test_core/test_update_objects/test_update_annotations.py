@@ -220,6 +220,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         )
 
     def test_annotation_attributes(self):
+        self.fig.add_annotation(test="this text", yref="paper")
         self.fig.update_annotations(text="hi")
 
     def test_update_shapes(self):
@@ -241,6 +242,8 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update("shapes", [4], patch=dict(opacity=0), secondary_y=True)
 
     def test_shape_attributes(self):
+
+        self.fig.add_shape(fillcolor='blue', opacity=0.3)
         self.fig.update_shapes(fillcolor="red")
 
     def test_update_images(self):
@@ -262,4 +265,5 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update("images", [4], patch=dict(opacity=0), secondary_y=True)
 
     def test_image_attributes(self):
+        self.fig.add_layout_image(name='my name', x=1, y=2)
         self.fig.update_layout_images(opacity=0.1)
