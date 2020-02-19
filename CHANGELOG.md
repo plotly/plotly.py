@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.1] - 2020-02-19
+
+### Updated
+ - Updated Plotly.js to version 1.52.2. See the
+ [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2)
+ for more information on bug fixes.
+
+### Fixed
+
+ - `update_annotations`, `update_shapes` and `update_layout_images` now no longer require the `patch` argument, as per the docstring [#2167](https://github.com/plotly/plotly.py/issues/2167)
+ - `px.defaults` no longer accepts arbitrary keys [#2168](https://github.com/plotly/plotly.py/issues/2168)
+ - better error message when `pandas` is not installed [#2125](https://github.com/plotly/plotly.py/issues/2125)
+ - support columns of numerical type in `path` argument of `px.sunburst`/`px.treemap` and add values of `color` column in hoverlabel for `px.sunburst`/`px.treemap` [#2133](https://github.com/plotly/plotly.py/pull/2133)
+
+
+
 ## [4.5.0] - 2020-01-22
 
 ### Updated
