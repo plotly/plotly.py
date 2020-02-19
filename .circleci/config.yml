@@ -339,6 +339,7 @@ jobs:
           command: |
             cd packages/python/plotly
             locale
+            cat plotly/tests/test_core/test_update_objects/test_update_annotations.py
             tox -e py37-core -- -k 'not nodev'
           no_output_timeout: 20m
       - run:
