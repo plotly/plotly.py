@@ -102,7 +102,7 @@ fig.update_layout(
     template="plotly_dark",
     margin=dict(r=10, t=25, b=40, l=60),
     annotations=[
-        go.layout.Annotation(
+        dict(
             text="Source: NOAA",
             showarrow=False,
             xref="paper",
