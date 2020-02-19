@@ -219,6 +219,10 @@ class TestSelectForEachUpdateAnnotations(TestCase):
             "annotations", [4], patch=dict(showarrow=False), secondary_y=True
         )
 
+    def test_annotation_attributes(self):
+        self.fig.add_annotation(text="this text", yref="paper")
+        self.fig.update_annotations(text="hi")
+
     def test_update_shapes(self):
         (
             self.fig.add_shape(opacity=0.1, fillcolor="red")
@@ -237,6 +241,11 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update("shapes", [2, 5], patch=dict(opacity=0), col=1)
         self.assert_update("shapes", [4], patch=dict(opacity=0), secondary_y=True)
 
+    def test_shape_attributes(self):
+
+        self.fig.add_shape(fillcolor="blue", opacity=0.3)
+        self.fig.update_shapes(fillcolor="red")
+
     def test_update_images(self):
         (
             self.fig.add_layout_image(opacity=0.1, source="red")
@@ -254,3 +263,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         self.assert_update("images", [2, 3, 4], patch=dict(opacity=0), row=1)
         self.assert_update("images", [2, 5], patch=dict(opacity=0), col=1)
         self.assert_update("images", [4], patch=dict(opacity=0), secondary_y=True)
+
+    def test_image_attributes(self):
+        self.fig.add_layout_image(name="my name", x=1, y=2)
+        self.fig.update_layout_images(opacity=0.1)
