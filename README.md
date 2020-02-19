@@ -75,7 +75,7 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip...
 
 ```
-pip install plotly==4.5.0
+pip install plotly==4.5.1
 ```
 
 or conda.
