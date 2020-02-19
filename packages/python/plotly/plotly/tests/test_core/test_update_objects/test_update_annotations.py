@@ -220,7 +220,7 @@ class TestSelectForEachUpdateAnnotations(TestCase):
         )
 
     def test_annotation_attributes(self):
-        self.fig.add_annotation(test="this text", yref="paper")
+        self.fig.add_annotation(text="this text", yref="paper")
         self.fig.update_annotations(text="hi")
 
     def test_update_shapes(self):
