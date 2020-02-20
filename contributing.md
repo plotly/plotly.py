@@ -306,6 +306,10 @@ And, you'll need the credentials file `~/.pypirc`. Request access from
 (plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 
+Note: this will intentionally fail if your current git tree is dirty, because we want the tag
+to reflect what is being released, and the version number comes from the tag and the dirty-state.
+
+
 ### Publish release candidate of `plotlywidget` and `jupyterlab-plotly` to NPM
 Now, publish the release candidate of the `plotlywidget` NPM package.
 
@@ -412,6 +416,9 @@ Publish the final version to PyPI
 (plotly_dev) $ rm dist/*dirty*
 (plotly_dev) $ twine upload dist/plotly-X.Y.Z*
 ```
+
+Note: this will intentionally fail if your current git tree is dirty, because we want the tag
+to reflect what is being released, and the version number comes from the tag and the dirty-state.
 
 After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
 ```bash
