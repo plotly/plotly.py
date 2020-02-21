@@ -107,13 +107,17 @@ class TemplateTest(TestCase):
 
     def test_invalid_defaults_property_name_constructor(self):
         with pytest.raises(ValueError):
-            go.Figure(layout={"template": {"layout": {"imagedefaults": {"bogus": 500}}}})
+            go.Figure(
+                layout={"template": {"layout": {"imagedefaults": {"bogus": 500}}}}
+            )
 
     def test_invalid_defaults_property_value_constructor(self):
         with pytest.raises(ValueError):
             go.Figure(
                 layout={
-                "template": {"layout": {"imagedefaults": {"sizex": "str not number"}}}
+                    "template": {
+                        "layout": {"imagedefaults": {"sizex": "str not number"}}
+                    }
                 }
             )
 
