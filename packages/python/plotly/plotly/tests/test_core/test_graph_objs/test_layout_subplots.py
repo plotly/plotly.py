@@ -1,6 +1,7 @@
 from unittest import TestCase
+import pytest
+
 import plotly.graph_objs as go
-from nose.tools import raises
 import plotly.io as pio
 
 
@@ -33,13 +34,13 @@ class TestLayoutSubplots(TestCase):
         self.assertIs(self.layout.mapbox, self.layout.mapbox1)
         self.assertIs(self.layout.polar, self.layout.polar1)
 
-    @raises(AttributeError)
     def test_initial_access_subplot2(self):
-        self.layout.xaxis2
+        with pytest.raises(AttributeError):
+            self.layout.xaxis2
 
-    @raises(KeyError)
     def test_initial_access_subplot2(self):
-        self.layout["xaxis2"]
+        with pytest.raises(KeyError):
+            self.layout["xaxis2"]
 
     def test_assign_subplots(self):
         self.assertIsNone(self.layout.xaxis.title.text)

@@ -6,14 +6,12 @@ import os
 import itertools
 import warnings
 
-from nose.plugins.attrib import attr
 
 import _plotly_utils.exceptions
 from chart_studio.plotly import plotly as py
 from chart_studio.tests.utils import PlotlyTestCase
 
 
-@attr("slow")
 class TestImage(PlotlyTestCase):
     def setUp(self):
         super(TestImage, self).setUp()
