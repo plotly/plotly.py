@@ -19,6 +19,7 @@ matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 if matplotlylib:
     import matplotlib.pyplot as plt
 
+
 @pytest.mark.matplotlib
 class PlotMPLTest(TestCase):
     def setUp(self):
