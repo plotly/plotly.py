@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 from unittest import TestCase
 
-from nose.tools import raises
+import pytest
 
 import chart_studio.tools as tls
 from _plotly_utils.exceptions import PlotlyError
@@ -13,10 +13,10 @@ def test_get_valid_embed():
     tls.get_embed(url)
 
 
-@raises(PlotlyError)
 def test_get_invalid_embed():
     url = "https://plot.ly/~PlotBot/a/"
-    tls.get_embed(url)
+    with pytest.raises(PlotlyError):
+        tls.get_embed(url)
 
 
 class TestGetEmbed(TestCase):

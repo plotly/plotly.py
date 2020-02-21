@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from nose.plugins.attrib import attr
+import pytest
 
 from plotly import optional_imports
 from plotly.tests.test_optional.optional_utils import run_fig
@@ -11,8 +11,7 @@ matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 if matplotlylib:
     import matplotlib.pyplot as plt
 
-
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_line_data():
     fig, ax = plt.subplots()
     ax.plot(D["x1"], D["y1"])
@@ -31,7 +30,7 @@ def test_line_data():
         )
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_lines_data():
     fig, ax = plt.subplots()
     ax.plot(D["x1"], D["y1"])
@@ -63,7 +62,7 @@ def test_lines_data():
         )
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_bar_data():
     fig, ax = plt.subplots()
     ax.bar(D["x1"], D["y1"])
@@ -74,7 +73,7 @@ def test_bar_data():
         )
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_bars_data():
     fig, ax = plt.subplots()
     ax.bar(D["x1"], D["y1"], color="r")

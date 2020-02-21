@@ -3,9 +3,9 @@ from __future__ import absolute_import
 import datetime
 import random
 from unittest import TestCase
+import pytest
 
 import pandas as pd
-from nose.plugins.attrib import attr
 
 import plotly.tools as tls
 from plotly import optional_imports
@@ -17,7 +17,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 class TestDateTimes(TestCase):
     def test_normal_mpl_dates(self):
         datetime_format = "%Y-%m-%d %H:%M:%S"
