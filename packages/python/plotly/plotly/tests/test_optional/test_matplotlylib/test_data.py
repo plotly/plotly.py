@@ -11,6 +11,7 @@ matplotlylib = optional_imports.get_module("plotly.matplotlylib")
 if matplotlylib:
     import matplotlib.pyplot as plt
 
+
 @pytest.mark.matplotlib
 def test_line_data():
     fig, ax = plt.subplots()

@@ -2,6 +2,7 @@ from unittest import TestCase
 import plotly.graph_objs as go
 import pytest
 
+
 class TestNoFrames(TestCase):
     if "FigureWidget" in go.__dict__.keys():
 
