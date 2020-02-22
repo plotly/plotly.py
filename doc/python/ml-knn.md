@@ -1,6 +1,43 @@
-## K-Nearest Neighbors (kNN)
+---
+jupyter:
+  jupytext:
+    notebook_metadata_filter: all
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.1.1
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.6.10
+  plotly:
+    description: How to visualize k-Nearest Neighbors (kNN) created using scikit-learn
+      in Python with Plotly.
+    display_as: basic
+    language: python
+    layout: base
+    name: k-Nearest Neighbors
+    order: 1
+    page_type: example_index
+    permalink: python/knn/
+    redirect_from: python/machine-learning-tutorials/
+    thumbnail: thumbnail/line-and-scatter.jpg
+---
 
-How to visualize the K-Nearest Neighbors (kNN) algorithm using scikit-learn.
+## K-Nearest Neighbors (kNN) Classification
+
+How to visualize K-Nearest Neighbors (kNN) classification using scikit-learn.
 
 
 ### Binary Probability Estimates with `go.Contour`
