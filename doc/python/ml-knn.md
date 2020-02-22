@@ -7,10 +7,13 @@ How to visualize the K-Nearest Neighbors (kNN) algorithm using scikit-learn.
 
 ```python
 import numpy as np
-from sklearn.datasets import make_moons
-from sklearn.neighbors import KNeighborsClassifier
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.datasets import make_moons
+from sklearn.neighbors import KNeighborsClassifier
+
+mesh_size = .02
+margin = 1
 
 X, y = make_moons(noise=0.3, random_state=0)
 
@@ -22,12 +25,12 @@ yrange = np.arange(y_min, y_max, mesh_size)
 xx, yy = np.meshgrid(xrange, yrange)
 
 # Create classifier, run predictions on grid
-clf = neighbors.KNeighborsClassifier(15, weights='uniform')
+clf = KNeighborsClassifier(15, weights='uniform')
 clf.fit(X, y)
 Z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
 Z = Z.reshape(xx.shape)
 
-fig = px.scatter(X, x=0, y=1, color=y.astype(str))
+fig = px.scatter(X, x=0, y=1, color=y.astype(str), labels={'0':'', '1':''})
 fig.add_trace(
     go.Contour(
         x=xrange, 
@@ -38,15 +41,16 @@ fig.add_trace(
         opacity=0.4
     )
 )
+fig.show()
 ```
 
 ### Multi-class classification with `px.data` and `go.Heatmap`
 
 ```python
 import numpy as np
-from sklearn.neighbors import KNeighborsClassifier
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.neighbors import KNeighborsClassifier
 
 mesh_size = .02
 margin = 1
@@ -67,6 +71,8 @@ clf = KNeighborsClassifier(15, weights='distance')
 clf.fit(X, y)
 Z = clf.predict(np.c_[ll.ravel(), ww.ravel()])
 Z = Z.reshape(ll.shape)
+proba = clf.predict_proba(np.c_[ll.ravel(), ww.ravel()])
+proba = proba.reshape(ll.shape + (3,))
 
 fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species')
 fig.update_traces(marker_size=10, marker_line_width=1)
@@ -77,17 +83,27 @@ fig.add_trace(
         z=Z, 
         showscale=False,
         colorscale=[[0.0, 'blue'], [0.5, 'red'], [1.0, 'green']],
-        opacity=0.25
+        opacity=0.25,
+        customdata=proba,
+        hovertemplate=(
+            'sepal length: %{x} <br>'
+            'sepal width: %{y} <br>'
+            'p(setosa): %{customdata[0]:.3f}<br>'
+            'p(versicolor): %{customdata[1]:.3f}<br>'
+            'p(virginica): %{customdata[2]:.3f}<extra></extra>'
+        )
     )
 )
+fig.show()
 ```
 
 ### Visualizing kNN Regression
 
 ```python
-from sklearn.neighbors import KNeighborsRegressor
+import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+from sklearn.neighbors import KNeighborsRegressor
 
 df = px.data.tips()
 X = df.total_bill.values.reshape(-1, 1)
@@ -104,6 +120,7 @@ y_uni = knn_uni.predict(x_range.reshape(-1, 1))
 fig = px.scatter(df, x='total_bill', y='tip', color='sex', opacity=0.65)
 fig.add_traces(go.Scatter(x=x_range, y=y_uni, name='Weights: Uniform'))
 fig.add_traces(go.Scatter(x=x_range, y=y_dist, name='Weights: Distance'))
+fig.show()
 ```
 
 ### Reference
