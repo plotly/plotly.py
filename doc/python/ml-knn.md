@@ -1,6 +1,7 @@
 ---
 jupyter:
   jupytext:
+    formats: ipynb,md
     notebook_metadata_filter: all
     text_representation:
       extension: .md
@@ -20,14 +21,14 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.10
+    version: 3.7.6
   plotly:
     description: How to visualize k-Nearest Neighbors (kNN) created using scikit-learn
       in Python with Plotly.
     display_as: basic
     language: python
     layout: base
-    name: k-Nearest Neighbors
+    name: K-Nearest Neighbors (kNN) Classification
     order: 1
     page_type: example_index
     permalink: python/knn/
@@ -35,12 +36,49 @@ jupyter:
     thumbnail: thumbnail/line-and-scatter.jpg
 ---
 
-## K-Nearest Neighbors (kNN) Classification
+## Basic Binary Classification with `plotly.express`
 
-How to visualize K-Nearest Neighbors (kNN) classification using scikit-learn.
+```python
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.datasets import make_moons
+from sklearn.neighbors import KNeighborsClassifier
 
+X, y = make_moons(noise=0.3, random_state=0)
+X_test, _ = make_moons(noise=0.3, random_state=1)
 
-### Binary Probability Estimates with `go.Contour`
+clf = KNeighborsClassifier(15)
+clf.fit(X, y.astype(str))  # Fit on training set
+y_pred = clf.predict(X_test)  # Predict on new data
+
+fig = px.scatter(x=X_test[:, 0], y=X_test[:, 1], color=y_pred, labels={'color': 'predicted'})
+fig.update_traces(marker_size=10)
+fig.show()
+```
+
+## Visualize Binary Prediction Scores
+
+```python
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.datasets import make_classification
+from sklearn.neighbors import KNeighborsClassifier
+
+X, y = make_classification(n_features=2, n_redundant=0, random_state=0)
+X_test, _ = make_classification(n_features=2, n_redundant=0, random_state=1)
+
+clf = KNeighborsClassifier(15)
+clf.fit(X, y)  # Fit on training set
+y_score = clf.predict_proba(X_test)[:, 1]  # Predict on new data
+
+fig = px.scatter(x=X_test[:, 0], y=X_test[:, 1], color=y_score, labels={'color': 'score'})
+fig.update_traces(marker_size=10)
+fig.show()
+```
+
+## Probability Estimates with `go.Contour`
 
 ```python
 import numpy as np
@@ -68,6 +106,7 @@ Z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
 Z = Z.reshape(xx.shape)
 
 fig = px.scatter(X, x=0, y=1, color=y.astype(str), labels={'0':'', '1':''})
+fig.update_traces(marker_size=10, marker_line_width=1)
 fig.add_trace(
     go.Contour(
         x=xrange, 
@@ -75,13 +114,14 @@ fig.add_trace(
         z=Z, 
         showscale=False,
         colorscale=['Blue', 'Red'],
-        opacity=0.4
+        opacity=0.4,
+        name='Confidence'
     )
 )
 fig.show()
 ```
 
-### Multi-class classification with `px.data` and `go.Heatmap`
+## Multi-class prediction confidence with `go.Heatmap`
 
 ```python
 import numpy as np
@@ -92,6 +132,7 @@ from sklearn.neighbors import KNeighborsClassifier
 mesh_size = .02
 margin = 1
 
+# We will use the iris data, which is included in px
 df = px.data.iris()
 X = df[['sepal_length', 'sepal_width']]
 y = df.species_id
@@ -134,29 +175,66 @@ fig.add_trace(
 fig.show()
 ```
 
-### Visualizing kNN Regression
+## 3D Classification with `px.scatter_3d`
 
 ```python
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
 
-df = px.data.tips()
-X = df.total_bill.values.reshape(-1, 1)
+df = px.data.iris()
+features = ["sepal_width", "sepal_length", "petal_width"]
 
-knn_dist = KNeighborsRegressor(10, weights='distance')
-knn_uni = KNeighborsRegressor(10, weights='uniform')
-knn_dist.fit(X, df.tip)
-knn_uni.fit(X, df.tip)
+X = df[features]
+y = df.species
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-x_range = np.linspace(X.min(), X.max(), 100)
-y_dist = knn_dist.predict(x_range.reshape(-1, 1))
-y_uni = knn_uni.predict(x_range.reshape(-1, 1))
+# Create classifier, run predictions on grid
+clf = KNeighborsClassifier(15, weights='distance')
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+y_score = clf.predict_proba(X_test)
+y_score = np.around(y_score.max(axis=1), 4)
 
-fig = px.scatter(df, x='total_bill', y='tip', color='sex', opacity=0.65)
-fig.add_traces(go.Scatter(x=x_range, y=y_uni, name='Weights: Uniform'))
-fig.add_traces(go.Scatter(x=x_range, y=y_dist, name='Weights: Distance'))
+fig = px.scatter_3d(
+    X_test, 
+    x='sepal_length', 
+    y='sepal_width', 
+    z='petal_width', 
+    symbol=y_pred,
+    color=y_score,
+    labels={'symbol': 'prediction', 'color': 'score'}
+)
+fig.update_layout(legend=dict(x=0, y=0))
+fig.show()
+```
+
+## High Dimension Visualization with `px.scatter_matrix`
+
+If you need to visualize classifications that go beyond 3D, you can use the [scatter plot matrix](https://plot.ly/python/splom/).
+
+```python
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+
+df = px.data.iris()
+features = ["sepal_width", "sepal_length", "petal_width", "petal_length"]
+
+X = df[features]
+y = df.species
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+
+# Create classifier, run predictions on grid
+clf = KNeighborsClassifier(15, weights='distance')
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+fig = px.scatter_matrix(X_test, dimensions=features, color=y_pred, labels={'color': 'prediction'})
 fig.show()
 ```
 
@@ -166,8 +244,10 @@ Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 * https://plot.ly/python/plotly-express/
 * https://plot.ly/python/heatmaps/
 * https://plot.ly/python/contour-plots/
+* https://plot.ly/python/3d-scatter-plots/
+* https://plot.ly/python/splom/
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
-* https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html
 * https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
 * https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html
+* https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html
