@@ -94,7 +94,7 @@ module.exports = g;
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"plotlywidget","version":"1.5.1","description":"The plotly JupyterLab extension","author":"The plotly.py team","license":"MIT","main":"src/index.js","repository":{"type":"git","url":"https://github.com/plotly/plotly.py"},"keywords":["jupyter","widgets","ipython","ipywidgets","plotly"],"files":["src/**/*.js","dist/*.js","style/*.*"],"scripts":{"build":"webpack","clean":"rimraf dist/ && rimraf  ../../python/plotly/plotlywidget/static'","test":"echo \"Error: no test specified\" && exit 1"},"devDependencies":{"webpack":"^3.10.0","rimraf":"^2.6.1","ify-loader":"^1.1.0","typescript":"~3.1.1"},"dependencies":{"plotly.js":"^1.52.2","@jupyter-widgets/base":"^2.0.0","lodash":"^4.17.4"},"jupyterlab":{"extension":"src/jupyterlab-plugin.js"}}
+module.exports = {"name":"plotlywidget","version":"1.5.2","description":"The plotly JupyterLab extension","author":"The plotly.py team","license":"MIT","main":"src/index.js","repository":{"type":"git","url":"https://github.com/plotly/plotly.py"},"keywords":["jupyter","widgets","ipython","ipywidgets","plotly"],"files":["src/**/*.js","dist/*.js","style/*.*"],"scripts":{"build":"webpack","clean":"rimraf dist/ && rimraf  ../../python/plotly/plotlywidget/static'","test":"echo \"Error: no test specified\" && exit 1"},"devDependencies":{"webpack":"^3.10.0","rimraf":"^2.6.1","ify-loader":"^1.1.0","typescript":"~3.1.1"},"dependencies":{"plotly.js":"^1.52.2","@jupyter-widgets/base":"^2.0.0","lodash":"^4.17.4"},"jupyterlab":{"extension":"src/jupyterlab-plugin.js"}}
 
 /***/ }),
 /* 2 */

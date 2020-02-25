@@ -2,12 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.2] - 2020-02-24
+
+### Fixed
+
+ - Fix build errors in JupyterLab extension by pinning version of `@types/plotly.js` (#2223)(https://github.com/plotly/plotly.py/issues/2223)
+
 ## [4.5.1] - 2020-02-19
 
 ### Updated
- - Updated Plotly.js to version 1.52.2. See the
- [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2)
- for more information on bug fixes.
+ - Updated Plotly.js to version 1.52.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2) for more information on bug fixes.
 
 ### Fixed
 
@@ -21,9 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.5.0] - 2020-01-22
 
 ### Updated
- - Updated Plotly.js to version 1.52.1. See the
- [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.52.0/CHANGELOG.md#1520----2020-01-08)
- for more information on numerous new attribute and bug fixes.
+ - Updated Plotly.js to version 1.52.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.52.0/CHANGELOG.md#1520----2020-01-08) for more information on numerous new attribute and bug fixes.
  - Plotly Express uses the new `legend.title` attribute and so now has shorter trace `name`s [#2051](https://github.com/plotly/plotly.py/pull/2051)
  - The heuristic used by `px.parallel_categories` to determine which columns of the data frame to draw has been changed and made more configurable with the `dimensions_max_cardinality` argument [#2102](https://github.com/plotly/plotly.py/pull/2102)
  - The `simple_white` colorbar styling has been streamlined [#2110](https://github.com/plotly/plotly.py/pull/2110)

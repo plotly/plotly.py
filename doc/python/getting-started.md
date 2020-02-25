@@ -49,13 +49,13 @@ Thanks to deep integration with the [orca](https://github.com/plotly/orca) image
 plotly.py may be installed using pip...
 
 ```
-$ pip install plotly==4.5.1
+$ pip install plotly==4.5.2
 ```
 
 or conda.
 
 ```
-$ conda install -c plotly plotly=4.5.1
+$ conda install -c plotly plotly=4.5.2
 ```
 
 This package contains everything you need to write figures to standalone HTML files.
@@ -144,10 +144,10 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build
 
 # jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.5.1 --no-build
+jupyter labextension install jupyterlab-plotly@1.5.2 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@1.5.1 --no-build
+jupyter labextension install plotlywidget@1.5.2 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
