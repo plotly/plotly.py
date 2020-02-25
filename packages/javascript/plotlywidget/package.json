@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",

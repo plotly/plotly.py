@@ -265,10 +265,10 @@ specified below.
    + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C-rc.1`
-   + Run `npm install && npm build`
+   + Run `npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `A.B.C-rc.1`
-   + Run `npm install && npm build`
+   + Run `npm install && npm run build`
 
  2) Commit the changes
 
@@ -315,7 +315,7 @@ Now, publish the release candidate of the `plotlywidget` NPM package.
 
 ```bash
 cd ./packages/javascript/plotlywidget
-npm build && npm publish --access public --tag next
+npm run build && npm publish --access public --tag next
 ```
 
 The `--tag next` part ensures that users won't install this version unless
@@ -379,10 +379,10 @@ release candidate suffix from the following version strings:
    + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C`
-   + Run `npm install && npm build`
+   + Run `npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `A.B.C`
-   + Run `npm install && npm build`
+   + Run `npm install && npm run build`
 
 Commit and push to the release branch.
 
@@ -434,9 +434,9 @@ Finally, publish the final version of the widget library to npm with:
 
 ```bash
 cd packages/javascript/jupyterlab-plotly
-npm build && npm publish --access public
+npm run build && npm publish --access public
 cd packages/javascript/plotlywidget
-npm build && npm publish --access public
+npm run build && npm publish --access public
 ```
 
 ### Publishing to the plotly conda channel
