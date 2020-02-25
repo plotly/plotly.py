@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
- - Fix build errors in JupyterLab extension by pinning version of `@types/plotly.js` (#2223)(https://github.com/plotly/plotly.py/issues/2223)
+ - Fix build errors in JupyterLab extension by pinning version of `@types/plotly.js` [#2223](https://github.com/plotly/plotly.py/issues/2223)
 
 ## [4.5.1] - 2020-02-19
 
