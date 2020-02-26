@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,13 +20,12 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to make scatter plots on Mapbox maps in Python.
     display_as: maps
     language: python
     layout: base
-    mapbox_access_token: pk.eyJ1IjoicHJpeWF0aGFyc2FuIiwiYSI6ImNqbGRyMGQ5YTBhcmkzcXF6YWZldnVvZXoifQ.sN7gyyHTIq1BSfHQRBZdHA
     name: Scatter Plots on Mapbox
     order: 10
     page_type: u-guide
@@ -34,21 +33,21 @@ jupyter:
     thumbnail: thumbnail/scatter-mapbox.jpg
 ---
 
-#### Mapbox Access Token
+#### Mapbox Access Token and Base Map Configuration
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 ### Basic example with Plotly Express
 
 Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_mapbox` for a scatter plot on a tile map.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
 px.set_mapbox_access_token(open(".mapbox_token").read())
-carshare = px.data.carshare()
-fig = px.scatter_mapbox(carshare, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
+df = px.data.carshare()
+fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
                   color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10)
 fig.show()
 ```
@@ -72,7 +71,7 @@ fig = go.Figure(go.Scattermapbox(
 
 fig.update_layout(
     hovermode='closest',
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
         center=go.layout.mapbox.Center(
@@ -119,10 +118,10 @@ fig = go.Figure(go.Scattermapbox(
 fig.update_layout(
     autosize=True,
     hovermode='closest',
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
-        center=go.layout.mapbox.Center(
+        center=dict(
             lat=38.92,
             lon=-77.07
         ),
@@ -179,10 +178,10 @@ fig.update_layout(
     autosize=True,
     hovermode='closest',
     showlegend=False,
-    mapbox=go.layout.Mapbox(
+    mapbox=dict(
         accesstoken=mapbox_access_token,
         bearing=0,
-        center=go.layout.mapbox.Center(
+        center=dict(
             lat=38,
             lon=-94
         ),
@@ -198,6 +197,7 @@ fig.show()
 ### Set Marker Symbols
 
 You can define a symbol on your map by setting [symbol](https://plot.ly/python/reference/#scattermapbox-marker-symbol) attribute. This attribute only works on Mapbox-provided `style`s:
+
 - basic
 - streets
 - outdoors
@@ -227,4 +227,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scattermapbox for more information and options!

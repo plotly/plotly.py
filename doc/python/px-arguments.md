@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -51,6 +51,7 @@ import pandas as pd
 print("This is the same data in 'long' format, ready for Plotly Express:")
 wide_df = pd.DataFrame(dict(Month=["Jan", "Feb", "Mar"], London=[1,2,3], Paris=[3,1,2]))
 tidy_df = wide_df.melt(id_vars="Month")
+tidy_df
 ```
 
 ```python
@@ -72,18 +73,19 @@ fig.show()
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
+df = px.data.iris()
 # Use directly Columns as argument. You can use tab completion for this!
-fig = px.scatter(iris, x=iris.sepal_length, y=iris.sepal_width, color=iris.species, size=iris.petal_length)
+fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, color=df.species, size=df.petal_length)
 fig.show()
 ```
+
 #### Passing name strings as arguments
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
+df = px.data.iris()
 # Use column names instead. This is the same chart as above.
-fig = px.scatter(iris, x='sepal_length', y='sepal_width', color='species', size='petal_length')
+fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', size='petal_length')
 fig.show()
 ```
 
@@ -93,15 +95,15 @@ In addition to columns, it is also possible to pass the index of a DataFrame as 
 
 ```python
 import plotly.express as px
-iris = px.data.iris()
-fig = px.scatter(iris, x=iris.sepal_length, y=iris.sepal_width, size=iris.petal_length,
-                 hover_data=[iris.index])
+df = px.data.iris()
+fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, size=df.petal_length,
+                 hover_data=[df.index])
 fig.show()
 ```
 
 ### Columns not in the data_frame argument
 
-In the addition to columns from the `data_frame` argument, one may also pass columns from a different DataFrame, *as long as all columns have the same length*. It is also possible to pass columns without passing the `data_frame` argument.
+In the addition to columns from the `data_frame` argument, one may also pass columns from a different DataFrame, _as long as all columns have the same length_. It is also possible to pass columns without passing the `data_frame` argument.
 
 However, column names are used only if they correspond to columns in the `data_frame` argument, in other cases, the name of the keyword argument is used. As explained below, the `labels` argument can be used to set names.
 
@@ -122,9 +124,9 @@ The `labels` argument can be used to override the names used for axis titles, le
 import plotly.express as px
 import pandas as pd
 
-gapminder = px.data.gapminder()
-gdp = gapminder['pop'] * gapminder['gdpPercap']
-fig = px.bar(gapminder, x='year', y=gdp, color='continent', labels={'y':'gdp'},
+df = px.data.gapminder()
+gdp = df['pop'] * df['gdpPercap']
+fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'gdp'},
              hover_data=['country'],
              title='Evolution of world GDP')
 fig.show()
@@ -189,9 +191,9 @@ import plotly.express as px
 import numpy as np
 import pandas as pd
 
-gapminder = px.data.gapminder()
-gdp = np.log(gapminder['pop'] * gapminder['gdpPercap'])  # NumPy array
-fig = px.bar(gapminder, x='year', y=gdp, color='continent', labels={'y':'log gdp'},
+df = px.data.gapminder()
+gdp = np.log(df['pop'] * df['gdpPercap'])  # NumPy array
+fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'log gdp'},
              hover_data=['country'],
              title='Evolution of world GDP')
 fig.show()

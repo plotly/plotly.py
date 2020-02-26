@@ -7,7 +7,7 @@ import { Message } from '@phosphor/messaging';
 
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 
-import Plotly from 'plotly.js/dist/plotly';
+import Plotly from 'plotly.js/dist/plotly.min';
 
 import '../style/index.css';
 

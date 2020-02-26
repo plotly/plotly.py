@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -37,29 +37,28 @@ jupyter:
 
 Several representations of statistical distributions are available in plotly, such as [histograms](https://plot.ly/python/histograms/), [violin plots](https://plot.ly/python/violin/), [box plots](https://plot.ly/python/box-plots/) (see [the complete list here](https://plot.ly/python/statistical-charts/)). It is also possible to combine several representations in the same plot.
 
-For example, the `plotly.express` function `px.histogram` can add a subplot with a different statistical representation than the histogram, given by the parameter `marginal`. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+For example, the `plotly.express` function `px.histogram` can add a subplot with a different statistical representation than the histogram, given by the parameter `marginal`. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", color="sex", marginal="rug",
-                   hover_data=tips.columns)
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", color="sex", marginal="rug",
+                   hover_data=df.columns)
 fig.show()
 ```
 
 ```python
 import plotly.express as px
-tips = px.data.tips()
-fig = px.histogram(tips, x="total_bill", y="tip", color="sex",
+df = px.data.tips()
+fig = px.histogram(df, x="total_bill", y="tip", color="sex",
                    marginal="box", # or violin, rug
-                   hover_data=tips.columns)
+                   hover_data=df.columns)
 fig.show()
 ```
 
 ## Combined statistical representations with distplot figure factory
 
 The distplot figure factory displays a combination of statistical representations of numerical data, such as histogram, kernel density estimation or normal curve, and rug plot.
-
 
 #### Basic Distplot
 

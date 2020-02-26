@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.6
   kernelspec:
     display_name: Python 3
@@ -24,28 +24,29 @@ jupyter:
 ---
 
 #### Animated figures with Plotly Express
+
 Several Plotly Express functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
 Here is an example of an animated scatter plot creating using Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder()
-px.scatter(gapminder, x="gdpPercap", y="lifeExp", animation_frame="year", animation_group="country",
+df = px.data.gapminder()
+px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_group="country",
            size="pop", color="continent", hover_name="country",
            log_x=True, size_max=55, range_x=[100,100000], range_y=[25,90])
 ```
 
 #### Animated Bar Charts with Plotly Express
 
- Note that you should always fix the `y_range` to ensure that your data remains visible throughout the animation.
+Note that you should always fix the `y_range` to ensure that your data remains visible throughout the animation.
 
 ```python
 import plotly.express as px
 
-gapminder = px.data.gapminder()
+df = px.data.gapminder()
 
-fig = px.bar(gapminder, x="continent", y="pop", color="continent",
+fig = px.bar(df, x="continent", y="pop", color="continent",
   animation_frame="year", animation_group="country", range_y=[0,4000000000])
 fig.show()
 ```
@@ -54,32 +55,36 @@ fig.show()
 
 The remainder of this section describes the low-level API for constructing animated figures manually.
 
-
 #### Frames
+
 Along with `data` and `layout`, `frames` can be added as a key in a figure object. The `frames` key points to a list of figures, each of which will be cycled through when animation is triggered.
 
 <!-- #region -->
+
 #### Adding Control Buttons to Animations
+
 You can add play and pause buttons to control your animated charts by adding an `updatemenus` array to the `layout` of your `figure`. More information on style and placement of the buttons is available in Plotly's [`updatemenus` reference](https://plot.ly/python/reference/#layout-updatemenus).
 <br>
 The buttons are defined as follows:
+
 ```
 "updatemenus": [{"type": "buttons",
                  "buttons": [{"label": "Your Label",
                               "method": "animate",
                               "args": [See Below]}]}]
 ```
+
 <!-- #endregion -->
 
 #### Defining Button Arguments
+
 - `None`: Setting `"args"` to undefined (i.e. `"args": [None]`) will create a simple play button that will animate all frames.
 - string: Animate all frames with group `"<some string>"`. This is a way of scoping the animations in case you would prefer to animate without explicitly enumerating all frames.
 - `["frame1", "frame2", ...]`: Animate a sequence of named frames.
 - `[{data: [], layout: {}, traces: []}, {...}]`: Nearly identical to animating named frames; though this variant lets you inline data instead of adding it as named frames. This can be useful for interaction where it's undesirable to add and manage named frames for ephemeral changes.
 - `[null]`: A simple way to create a pause button (requires `mode: "immediate"`). This argument dumps the currently queued frames (`mode: "immediate"`), and then animates an empty sequence of frames (`[null]`).
 - <b>Please Note:</b> We <b>do not</b> recommend using: `[ ]`. This syntax may cause confusion because it looks indistinguishable from a "pause button", but nested properties have logic that treats empty arrays as entirely removable, so it will function as a play button.<br><br>
-Refer to the examples below to see the buttons in action!
-
+  Refer to the examples below to see the buttons in action!
 
 #### Simple Play Button
 
@@ -224,6 +229,7 @@ fig.show()
 ```
 
 #### Using a Slider and Buttons
+
 The following example uses the well known [Gapminder dataset](https://www.gapminder.org/tag/gdp-per-capita/) to exemplify animation capabilities. This bubble chart animation shows the change in 'GDP per Capita' against the 'Life Expectancy' of several countries from the year 1952 to 2007, colored by their respective continent and sized by population.
 
 This is also an example of building up the structure of a figure as a Python dictionary, and then constructing a graph object figure from that dictionary.
@@ -378,9 +384,10 @@ fig.show()
 ```
 
 #### Important Notes
+
 - Defining `redraw`: Setting `redraw: false` is an optimization for scatter plots so that animate just makes changes without redrawing the whole plot. For other plot types, such as contour plots, every frame <b>must</b> be a total plot redraw, i.e. `redraw: true`.
 
-
 #### Reference
+
 For additional information and attributes for creating bubble charts in Plotly see: https://plot.ly/python/bubble-charts/.
 For more documentation on creating animations with Plotly, see https://plot.ly/python/#animations.

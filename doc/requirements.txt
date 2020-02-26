@@ -1,4 +1,4 @@
-plotly==4.4.1
+plotly==4.5.1
 jupytext==1.1.1
 jupyter
 notebook
@@ -22,3 +22,5 @@ sphinx_bootstrap_theme
 recommonmark
 pathlib
 python-frontmatter
+datashader
+pyarrow

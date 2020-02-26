@@ -1,6 +1,10 @@
 import inspect
 from textwrap import TextWrapper
 
+try:
+    getfullargspec = inspect.getfullargspec
+except AttributeError:  # python 2
+    getfullargspec = inspect.getargspec
 
 # TODO contents of columns
 # TODO explain categorical
@@ -82,6 +86,12 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to set ids of sectors",
     ],
+    path=[
+        colref_list_type,
+        colref_list_desc,
+        "List of columns names or columns of a rectangular dataframe defining the hierarchy of sectors, from root to leaves.",
+        "An error is raised if path AND ids or parents is passed",
+    ],
     lat=[
         colref_type,
         colref_desc,
@@ -101,6 +111,12 @@ docs = dict(
         colref_list_type,
         colref_list_desc,
         "Values from these columns are used for multidimensional visualization.",
+    ],
+    dimensions_max_cardinality=[
+        "int (default 50)",
+        "When `dimensions` is `None` and `data_frame` is provided, "
+        "columns with more than this number of unique values are excluded from the output.",
+        "Not used when `dimensions` is passed.",
     ],
     error_x=[
         colref_type,
@@ -247,7 +263,7 @@ docs = dict(
         "list of str",
         "Strings should define valid CSS-colors.",
         "When `color` is set and the values in the corresponding column are not numeric, values in that column are assigned colors by cycling through `color_discrete_sequence` in the order described in `category_orders`, unless the value of `color` is a key in `color_discrete_map`.",
-        "Various useful color sequences are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.qualitative`.",
+        "Various useful color sequences are available in the `plotly.express.colors` submodules, specifically `plotly.express.colors.qualitative`.",
     ],
     color_discrete_map=[
         "dict with str keys and str values (default `{}`)",
@@ -259,12 +275,12 @@ docs = dict(
         "list of str",
         "Strings should define valid CSS-colors",
         "This list is used to build a continuous color scale when the column denoted by `color` contains numeric data.",
-        "Various useful color scales are available in the `plotly_express.colors` submodules, specifically `plotly_express.colors.sequential`, `plotly_express.colors.diverging` and `plotly_express.colors.cyclical`.",
+        "Various useful color scales are available in the `plotly.express.colors` submodules, specifically `plotly.express.colors.sequential`, `plotly.express.colors.diverging` and `plotly.express.colors.cyclical`.",
     ],
     color_continuous_midpoint=[
         "number (default `None`)",
         "If set, computes the bounds of the continuous color scale to have the desired midpoint.",
-        "Setting this value is recommended when using `plotly_express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
+        "Setting this value is recommended when using `plotly.express.colors.diverging` color scales as the inputs to `color_continuous_scale`.",
     ],
     size_max=["int (default `20`)", "Set the maximum mark size when using `size`."],
     log_x=[
@@ -471,6 +487,11 @@ docs = dict(
         "GeoJSON-formatted dict",
         "Must contain a Polygon feature collection, with IDs, which are references from `locations`.",
     ],
+    featureidkey=[
+        "str (default: `'id'`)",
+        "Path to field in GeoJSON feature object with which to match the values passed in to `locations`."
+        "The most common alternative to the default is of the form `'properties.<key>`.",
+    ],
     cumulative=[
         "boolean (default `False`)",
         "If `True`, histogram values are cumulative.",
@@ -500,7 +521,7 @@ docs = dict(
 def make_docstring(fn, override_dict={}):
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
-    for param in inspect.getargspec(fn)[0]:
+    for param in getfullargspec(fn)[0]:
         if override_dict.get(param):
             param_doc = override_dict[param]
         else:

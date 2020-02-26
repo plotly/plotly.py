@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -38,13 +38,13 @@ jupyter:
 
 A [bubble chart](https://en.wikipedia.org/wiki/Bubble_chart) is a scatter plot in which a third dimension of the data is shown through the size of markers. For other types of scatter plot, see the [line and scatter page](https://plot.ly/python/line-and-scatter/).
 
-We first show a bubble chart example using Plotly Express. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). The size of markers is set from the dataframe column given as the `size` parameter.
+We first show a bubble chart example using Plotly Express. [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The size of markers is set from the dataframe column given as the `size` parameter.
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder()
+df = px.data.gapminder()
 
-fig = px.scatter(gapminder.query("year==2007"), x="gdpPercap", y="lifeExp",
+fig = px.scatter(df.query("year==2007"), x="gdpPercap", y="lifeExp",
 	         size="pop", color="continent",
                  hover_name="country", log_x=True, size_max=60)
 fig.show()
@@ -88,6 +88,7 @@ fig.show()
 ```
 
 ### Scaling the Size of Bubble Charts
+
 To scale the bubble size, use the attribute `sizeref`. We recommend using the following formula to calculate a `sizeref` value:<br>
 `sizeref = 2. * max(array of size values) / (desired maximum marker size ** 2)`<br>
 Note that setting 'sizeref' to a value greater than 1, decreases the rendered marker sizes, while setting 'sizeref' to less than 1, increases the rendered marker sizes. See https://plot.ly/python/reference/#scatter-marker-sizeref for more information.
@@ -220,4 +221,5 @@ fig.show()
 ```
 
 ### Reference
+
 See https://plot.ly/python/reference/#scatter for more information and chart attribute options!

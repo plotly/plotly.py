@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
+      format_version: "1.1"
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -35,17 +35,16 @@ jupyter:
 
 This example shows how to fill the area enclosed by traces.
 
-
 ## Filled area plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 `px.area` creates a stacked area plot. Each filled area corresponds to one value of the column given by the `line_group` parameter.
 
 ```python
 import plotly.express as px
-gapminder = px.data.gapminder()
-fig = px.area(gapminder, x="year", y="pop", color="continent",
+df = px.data.gapminder()
+fig = px.area(df, x="year", y="pop", color="continent",
 	      line_group="country")
 fig.show()
 ```
@@ -210,6 +209,7 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#scatter-line
 and https://plot.ly/python/reference/#scatter-fill
 for more information and attribute options!

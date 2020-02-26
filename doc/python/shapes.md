@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -33,6 +33,26 @@ jupyter:
     thumbnail: thumbnail/shape.jpg
 ---
 
+### Filled Area Chart
+
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plot.ly/python/reference/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plot.ly/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plot.ly/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plot.ly/python/reference/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape. 
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(x=[0,1,2,0], y=[0,2,0,0], fill="toself"))
+fig.show()
+```
+
+You can have more shapes either by adding [more traces](https://plot.ly/python/filled-area-plots/) or interrupting the series with `None`.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure(go.Scatter(x=[0,1,2,0,None,3,3,5,5,3], y=[0,2,0,0,None,0.5,1.5,1.5,0.5,0.5], fill="toself"))
+fig.show()
+```
+
 #### Vertical and Horizontal Lines Positioned Relative to the Axes
 
 ```python
@@ -57,7 +77,7 @@ fig.update_yaxes(range=[0, 2.5])
 # Add shapes
 fig.add_shape(
         # Line Vertical
-        go.layout.Shape(
+        dict(
             type="line",
             x0=1,
             y0=0,
@@ -70,7 +90,6 @@ fig.add_shape(
 ))
 fig.add_shape(
         # Line Horizontal
-        go.layout.Shape(
             type="line",
             x0=2,
             y0=2,
@@ -81,10 +100,9 @@ fig.add_shape(
                 width=4,
                 dash="dashdot",
             ),
-    ))
+    )
 fig.add_shape(
         # Line Diagonal
-        go.layout.Shape(
             type="line",
             x0=4,
             y0=0,
@@ -95,7 +113,7 @@ fig.add_shape(
                 width=4,
                 dash="dot",
             )
-))
+)
 fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
@@ -123,7 +141,6 @@ fig.update_yaxes(range=[0, 2])
 # Add shapes
 fig.add_shape(
         # Line reference to the axes
-        go.layout.Shape(
             type="line",
             xref="x",
             yref="y",
@@ -135,10 +152,8 @@ fig.add_shape(
                 color="LightSeaGreen",
                 width=3,
             ),
-        ))
+        )
 fig.add_shape(
-        # Line reference to the plot
-        go.layout.Shape(
             type="line",
             xref="paper",
             yref="paper",
@@ -150,8 +165,7 @@ fig.add_shape(
                 color="DarkOrange",
                 width=3,
             ),
-        ),
-)
+        )
 
 fig.show()
 ```
@@ -182,29 +196,26 @@ fig.update_layout(
 
 # Add tangent line shapes
 fig.add_shape(
-        go.layout.Shape(
             type="line",
             x0=1,
             y0=2.30756,
             x1=1.75,
             y1=2.30756,
-        ))
+        )
 fig.add_shape(
-        go.layout.Shape(
             type="line",
             x0=2.5,
             y0=3.80796,
             x1=3.05,
             y1=3.80796,
-        ))
+        )
 fig.add_shape(
-        go.layout.Shape(
             type="line",
             x0=1.90,
             y0=-1.1827,
             x1=2.50,
             y1=-1.1827,
-        ))
+        )
 fig.update_shapes(dict(
     xref="x",
     yref="y",
@@ -237,7 +248,6 @@ fig.update_yaxes(range=[0, 3.5])
 # Add shapes
 fig.add_shape(
         # unfilled Rectangle
-        go.layout.Shape(
             type="rect",
             x0=1,
             y0=1,
@@ -246,10 +256,9 @@ fig.add_shape(
             line=dict(
                 color="RoyalBlue",
             ),
-        ))
+        )
 fig.add_shape(
         # filled Rectangle
-        go.layout.Shape(
             type="rect",
             x0=3,
             y0=1,
@@ -260,7 +269,7 @@ fig.add_shape(
                 width=2,
             ),
             fillcolor="LightSkyBlue",
-        ))
+        )
 fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
@@ -288,7 +297,6 @@ fig.update_yaxes(range=[0, 4])
 # Add shapes
 fig.add_shape(
         # Rectangle reference to the axes
-        go.layout.Shape(
             type="rect",
             xref="x",
             yref="y",
@@ -301,10 +309,9 @@ fig.add_shape(
                 width=3,
             ),
             fillcolor="LightSkyBlue",
-        ))
+        )
 fig.add_shape(
         # Rectangle reference to the plot
-        go.layout.Shape(
             type="rect",
             xref="paper",
             yref="paper",
@@ -317,7 +324,7 @@ fig.add_shape(
                 width=3,
             ),
             fillcolor="PaleTurquoise",
-        ))
+        )
 
 fig.show()
 ```
@@ -347,7 +354,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     shapes=[
         # 1st highlight during Feb 4 - Feb 6
-        go.layout.Shape(
+        dict(
             type="rect",
             # x-reference is assigned to the x-values
             xref="x",
@@ -363,7 +370,7 @@ fig.update_layout(
             line_width=0,
         ),
         # 2nd highlight during Feb 20 - Feb 23
-        go.layout.Shape(
+        dict(
             type="rect",
             xref="x",
             yref="paper",
@@ -406,7 +413,7 @@ fig.update_yaxes(range=[0, 4.5])
 fig.update_layout(
     shapes=[
         # unfilled circle
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -417,7 +424,7 @@ fig.update_layout(
             line_color="LightSeaGreen",
         ),
         # filled circle
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -486,7 +493,7 @@ fig.add_trace(go.Scatter(
 # Add shapes
 fig.update_layout(
     shapes=[
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -498,7 +505,7 @@ fig.update_layout(
             fillcolor="blue",
             line_color="blue",
         ),
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -510,7 +517,7 @@ fig.update_layout(
             fillcolor="orange",
             line_color="orange",
         ),
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -522,7 +529,7 @@ fig.update_layout(
             fillcolor="green",
             line_color="green",
         ),
-        go.layout.Shape(
+        dict(
             type="circle",
             xref="x",
             yref="y",
@@ -578,7 +585,6 @@ fig.update_yaxes(
 
 # Add circles
 fig.add_shape(
-        go.layout.Shape(
             type="circle",
             fillcolor="blue",
             x0=0,
@@ -586,9 +592,8 @@ fig.add_shape(
             x1=2,
             y1=2,
             line_color="blue"
-        ))
+        )
 fig.add_shape(
-        go.layout.Shape(
             type="circle",
             fillcolor="gray",
             x0=1.5,
@@ -596,7 +601,7 @@ fig.add_shape(
             x1=3.5,
             y1=2,
             line_color="gray"
-        ))
+        )
 fig.update_shapes(dict(
     opacity=0.3,
     xref="x",
@@ -615,6 +620,35 @@ fig.update_layout(
     plot_bgcolor="white"
 )
 
+fig.show()
+```
+
+#### Adding Shapes to Subplots
+Here we use the different axes (`x1`, `x2`) created by `make_subplots` as reference in order to draw shapes in figure subplots.
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+
+# Create Subplots
+fig = make_subplots(rows=2, cols=2)
+
+fig.add_trace(go.Scatter(x=[2, 6], y=[1,1]), row=1, col=1)
+fig.add_trace(go.Bar(x=[1,2,3], y=[4,5,6]), row=1, col=2)
+fig.add_trace(go.Scatter(x=[10,20], y=[40,50]), row=2, col=1)
+fig.add_trace(go.Bar(x=[11,13,15], y=[8,11,20]), row=2, col=2)
+
+# Add shapes
+fig.update_layout(
+    shapes=[
+        dict(type="line", xref="x1", yref="y1",
+            x0=3, y0=0.5, x1=5, y1=0.8, line_width=3),
+        dict(type="rect", xref="x2", yref='y2',
+             x0=4, y0=2, x1=5, y1=6),
+        dict(type="rect", xref="x3", yref="y3",
+             x0=10, y0=20, x1=15, y1=30),
+        dict(type="circle", xref="x4", yref="y4",
+             x0=5, y0=12, x1=10, y1=18)])
 fig.show()
 ```
 
@@ -651,26 +685,26 @@ fig.update_yaxes(
 fig.update_layout(
     shapes=[
         # Quadratic Bezier Curves
-        go.layout.Shape(
+        dict(
             type="path",
             path="M 4,4 Q 6,0 8,4",
             line_color="RoyalBlue",
         ),
         # Cubic Bezier Curves
-        go.layout.Shape(
+        dict(
             type="path",
             path="M 1,4 C 2,8 6,4 8,8",
             line_color="MediumPurple",
         ),
         # filled Triangle
-        go.layout.Shape(
+        dict(
             type="path",
             path=" M 1 1 L 1 3 L 4 1 Z",
             fillcolor="LightPink",
             line_color="Crimson",
         ),
         # filled Polygon
-        go.layout.Shape(
+        dict(
             type="path",
             path=" M 3,7 L2,8 L2,9 L3,10, L4,10 L5,9 L5,8 L4,7 Z",
             fillcolor="PaleTurquoise",

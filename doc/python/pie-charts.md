@@ -33,14 +33,14 @@ jupyter:
     thumbnail: thumbnail/pie-chart.jpg
 ---
 
-A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion. 
+A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).
 
 ### Pie chart with plotly express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
 
@@ -73,6 +73,21 @@ fig = px.pie(df, values='tip', names='day', color_discrete_sequence=px.colors.se
 fig.show()
 ```
 
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.pie(df, values='tip', names='day', color='day',
+             color_discrete_map={'Thur':'lightcyan', 
+                                 'Fri':'cyan', 
+                                 'Sat':'royalblue', 
+                                 'Sun':'darkblue'})
+fig.show()
+```
+
 ### Customizing a pie chart created with px.pie
 
 In the example below, we first create a pie chart with `px,pie`, using some of its options such as `hover_data` (which columns should appear in the hover) or `labels` (renaming column names). For further tuning, we call `fig.update_traces` to set other parameters of the chart (you can also use `fig.update_layout` for changing the layout).
@@ -80,7 +95,7 @@ In the example below, we first create a pie chart with `px,pie`, using some of i
 ```python
 import plotly.express as px
 df = px.data.gapminder().query("year == 2007").query("continent == 'Americas'")
-fig = px.pie(df, values='pop', names='country', 
+fig = px.pie(df, values='pop', names='country',
              title='Population of American continent',
              hover_data=['lifeExp'], labels={'lifeExp':'life expectancy'})
 fig.update_traces(textposition='inside', textinfo='percent+label')
@@ -91,8 +106,7 @@ fig.show()
 
 If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
 
-
-In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`. 
+In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`.
 
 If you're looking instead for a multilevel hierarchical pie-like chart, go to the
 [Sunburst tutorial](/python/sunburst-charts/).
@@ -122,8 +136,40 @@ fig.update_traces(hoverinfo='label+percent', textinfo='value', textfont_size=20,
 fig.show()
 ```
 
-### Donut Chart
+### Controlling text fontsize with uniformtext
 
+If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow. In the example below we also force the text to be inside with `textposition`, otherwise text labels which do not fit are displayed outside of pie sectors.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia'")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside')
+fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
+fig.show()
+```
+
+#### Controlling text orientation inside pie sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With
+"auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential)
+
+For a figure `fig` created with plotly express, use `fig.update_traces(insidetextorientation='...')` to change the text orientation.
+
+```python
+import plotly.graph_objects as go
+
+labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+values = [4500, 2500, 1053, 500]
+
+fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent',
+                             insidetextorientation='radial'
+                            )])
+fig.show()
+```
+
+### Donut Chart
 
 ```python
 import plotly.graph_objects as go
@@ -177,7 +223,6 @@ fig.update_layout(
                  dict(text='CO2', x=0.82, y=0.5, font_size=20, showarrow=False)])
 fig.show()
 ```
-
 
 ```python
 import plotly.graph_objects as go
@@ -257,20 +302,6 @@ fig.show()
 
 ```
 
-### Dash Example
-
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-pieplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-pieplot", width="100%", height="650px" ,frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-pieplot/code", width="100%", height=500 ,frameBorder="0")
-```
-
 #### Reference
+
 See https://plot.ly/python/reference/#pie for more information and chart attribute options!

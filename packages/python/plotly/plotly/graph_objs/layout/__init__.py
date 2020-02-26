@@ -7399,6 +7399,158 @@ from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchy
 import copy as _copy
 
 
+class Uniformtext(_BaseLayoutHierarchyType):
+
+    # minsize
+    # -------
+    @property
+    def minsize(self):
+        """
+        Sets the minimum text size between traces of the same type.
+    
+        The 'minsize' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minsize"]
+
+    @minsize.setter
+    def minsize(self, val):
+        self["minsize"] = val
+
+    # mode
+    # ----
+    @property
+    def mode(self):
+        """
+        Determines how the font size for various text elements are
+        uniformed between each trace type. If the computed text sizes
+        were smaller than the minimum size defined by
+        `uniformtext.minsize` using "hide" option hides the text; and
+        using "show" option shows the text without further downscaling.
+        Please note that if the size defined by `minsize` is greater
+        than the font size defined by trace, then the `minsize` is
+        used.
+    
+        The 'mode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [False, 'hide', 'show']
+
+        Returns
+        -------
+        Any
+        """
+        return self["mode"]
+
+    @mode.setter
+    def mode(self, val):
+        self["mode"] = val
+
+    # property parent name
+    # --------------------
+    @property
+    def _parent_path_str(self):
+        return "layout"
+
+    # Self properties description
+    # ---------------------------
+    @property
+    def _prop_descriptions(self):
+        return """\
+        minsize
+            Sets the minimum text size between traces of the same
+            type.
+        mode
+            Determines how the font size for various text elements
+            are uniformed between each trace type. If the computed
+            text sizes were smaller than the minimum size defined
+            by `uniformtext.minsize` using "hide" option hides the
+            text; and using "show" option shows the text without
+            further downscaling. Please note that if the size
+            defined by `minsize` is greater than the font size
+            defined by trace, then the `minsize` is used.
+        """
+
+    def __init__(self, arg=None, minsize=None, mode=None, **kwargs):
+        """
+        Construct a new Uniformtext object
+        
+        Parameters
+        ----------
+        arg
+            dict of properties compatible with this constructor or
+            an instance of plotly.graph_objs.layout.Uniformtext
+        minsize
+            Sets the minimum text size between traces of the same
+            type.
+        mode
+            Determines how the font size for various text elements
+            are uniformed between each trace type. If the computed
+            text sizes were smaller than the minimum size defined
+            by `uniformtext.minsize` using "hide" option hides the
+            text; and using "show" option shows the text without
+            further downscaling. Please note that if the size
+            defined by `minsize` is greater than the font size
+            defined by trace, then the `minsize` is used.
+
+        Returns
+        -------
+        Uniformtext
+        """
+        super(Uniformtext, self).__init__("uniformtext")
+
+        # Validate arg
+        # ------------
+        if arg is None:
+            arg = {}
+        elif isinstance(arg, self.__class__):
+            arg = arg.to_plotly_json()
+        elif isinstance(arg, dict):
+            arg = _copy.copy(arg)
+        else:
+            raise ValueError(
+                """\
+The first argument to the plotly.graph_objs.layout.Uniformtext 
+constructor must be a dict or 
+an instance of plotly.graph_objs.layout.Uniformtext"""
+            )
+
+        # Handle skip_invalid
+        # -------------------
+        self._skip_invalid = kwargs.pop("skip_invalid", False)
+
+        # Import validators
+        # -----------------
+        from plotly.validators.layout import uniformtext as v_uniformtext
+
+        # Initialize validators
+        # ---------------------
+        self._validators["minsize"] = v_uniformtext.MinsizeValidator()
+        self._validators["mode"] = v_uniformtext.ModeValidator()
+
+        # Populate data dict with properties
+        # ----------------------------------
+        _v = arg.pop("minsize", None)
+        self["minsize"] = minsize if minsize is not None else _v
+        _v = arg.pop("mode", None)
+        self["mode"] = mode if mode is not None else _v
+
+        # Process unknown kwargs
+        # ----------------------
+        self._process_kwargs(**dict(arg, **kwargs))
+
+        # Reset skip_invalid
+        # ------------------
+        self._skip_invalid = False
+
+
+from plotly.basedatatypes import BaseLayoutHierarchyType as _BaseLayoutHierarchyType
+import copy as _copy
+
+
 class Transition(_BaseLayoutHierarchyType):
 
     # duration
@@ -11400,10 +11552,9 @@ class Scene(_BaseLayoutHierarchyType):
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
-                    spans more two or more lines (i.e. `text`
-                    contains one or more <br> HTML tags) or if an
-                    explicit width is set to override the text
-                    width.
+                    spans two or more lines (i.e. `text` contains
+                    one or more <br> HTML tags) or if an explicit
+                    width is set to override the text width.
                 arrowcolor
                     Sets the color of the annotation arrow.
                 arrowhead
@@ -16032,6 +16183,41 @@ class Legend(_BaseLayoutHierarchyType):
     def orientation(self, val):
         self["orientation"] = val
 
+    # title
+    # -----
+    @property
+    def title(self):
+        """
+        The 'title' property is an instance of Title
+        that may be specified as:
+          - An instance of plotly.graph_objs.layout.legend.Title
+          - A dict of string/value properties that will be passed
+            to the Title constructor
+    
+            Supported dict properties:
+                
+                font
+                    Sets this legend's title font.
+                side
+                    Determines the location of legend's title with
+                    respect to the legend items. Defaulted to "top"
+                    with `orientation` is "h". Defaulted to "left"
+                    with `orientation` is "v". The *top left*
+                    options could be used to expand legend area in
+                    both x and y sides.
+                text
+                    Sets the title of the legend.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.legend.Title
+        """
+        return self["title"]
+
+    @title.setter
+    def title(self, val):
+        self["title"] = val
+
     # tracegroupgap
     # -------------
     @property
@@ -16261,6 +16447,9 @@ class Legend(_BaseLayoutHierarchyType):
             independent of the symbol size on the graph.
         orientation
             Sets the orientation of the legend.
+        title
+            plotly.graph_objects.layout.legend.Title instance or
+            dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -16319,6 +16508,7 @@ class Legend(_BaseLayoutHierarchyType):
         itemdoubleclick=None,
         itemsizing=None,
         orientation=None,
+        title=None,
         tracegroupgap=None,
         traceorder=None,
         uirevision=None,
@@ -16365,6 +16555,9 @@ class Legend(_BaseLayoutHierarchyType):
             independent of the symbol size on the graph.
         orientation
             Sets the orientation of the legend.
+        title
+            plotly.graph_objects.layout.legend.Title instance or
+            dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between
             legend groups.
@@ -16451,6 +16644,7 @@ an instance of plotly.graph_objs.layout.Legend"""
         self._validators["itemdoubleclick"] = v_legend.ItemdoubleclickValidator()
         self._validators["itemsizing"] = v_legend.ItemsizingValidator()
         self._validators["orientation"] = v_legend.OrientationValidator()
+        self._validators["title"] = v_legend.TitleValidator()
         self._validators["tracegroupgap"] = v_legend.TracegroupgapValidator()
         self._validators["traceorder"] = v_legend.TraceorderValidator()
         self._validators["uirevision"] = v_legend.UirevisionValidator()
@@ -16478,6 +16672,8 @@ an instance of plotly.graph_objs.layout.Legend"""
         self["itemsizing"] = itemsizing if itemsizing is not None else _v
         _v = arg.pop("orientation", None)
         self["orientation"] = orientation if orientation is not None else _v
+        _v = arg.pop("title", None)
+        self["title"] = title if title is not None else _v
         _v = arg.pop("tracegroupgap", None)
         self["tracegroupgap"] = tracegroupgap if tracegroupgap is not None else _v
         _v = arg.pop("traceorder", None)
@@ -18368,6 +18564,39 @@ class Geo(_BaseLayoutHierarchyType):
     def domain(self, val):
         self["domain"] = val
 
+    # fitbounds
+    # ---------
+    @property
+    def fitbounds(self):
+        """
+        Determines if this subplot's view settings are auto-computed to
+        fit trace data. On scoped maps, setting `fitbounds` leads to
+        `center.lon` and `center.lat` getting auto-filled. On maps with
+        a non-clipped projection, setting `fitbounds` leads to
+        `center.lon`, `center.lat`, and `projection.rotation.lon`
+        getting auto-filled. On maps with a clipped projection, setting
+        `fitbounds` leads to `center.lon`, `center.lat`,
+        `projection.rotation.lon`, `projection.rotation.lat`,
+        `lonaxis.range` and `lonaxis.range` getting auto-filled. If
+        "locations", only the trace's visible locations are considered
+        in the `fitbounds` computations. If "geojson", the entire trace
+        input `geojson` (if provided) is considered in the `fitbounds`
+        computations, Defaults to False.
+    
+        The 'fitbounds' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                [False, 'locations', 'geojson']
+
+        Returns
+        -------
+        Any
+        """
+        return self["fitbounds"]
+
+    @fitbounds.setter
+    def fitbounds(self, val):
+        self["fitbounds"] = val
+
     # framecolor
     # ----------
     @property
@@ -19126,6 +19355,26 @@ class Geo(_BaseLayoutHierarchyType):
     def uirevision(self, val):
         self["uirevision"] = val
 
+    # visible
+    # -------
+    @property
+    def visible(self):
+        """
+        Sets the default visibility of the base layers.
+    
+        The 'visible' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["visible"]
+
+    @visible.setter
+    def visible(self, val):
+        self["visible"] = val
+
     # property parent name
     # --------------------
     @property
@@ -19153,6 +19402,22 @@ class Geo(_BaseLayoutHierarchyType):
         domain
             plotly.graph_objects.layout.geo.Domain instance or dict
             with compatible properties
+        fitbounds
+            Determines if this subplot's view settings are auto-
+            computed to fit trace data. On scoped maps, setting
+            `fitbounds` leads to `center.lon` and `center.lat`
+            getting auto-filled. On maps with a non-clipped
+            projection, setting `fitbounds` leads to `center.lon`,
+            `center.lat`, and `projection.rotation.lon` getting
+            auto-filled. On maps with a clipped projection, setting
+            `fitbounds` leads to `center.lon`, `center.lat`,
+            `projection.rotation.lon`, `projection.rotation.lat`,
+            `lonaxis.range` and `lonaxis.range` getting auto-
+            filled. If "locations", only the trace's visible
+            locations are considered in the `fitbounds`
+            computations. If "geojson", the entire trace input
+            `geojson` (if provided) is considered in the
+            `fitbounds` computations, Defaults to False.
         framecolor
             Sets the color the frame.
         framewidth
@@ -19208,6 +19473,8 @@ class Geo(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in the view
             (projection and center). Defaults to
             `layout.uirevision`.
+        visible
+            Sets the default visibility of the base layers.
         """
 
     def __init__(
@@ -19220,6 +19487,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrycolor=None,
         countrywidth=None,
         domain=None,
+        fitbounds=None,
         framecolor=None,
         framewidth=None,
         lakecolor=None,
@@ -19243,6 +19511,7 @@ class Geo(_BaseLayoutHierarchyType):
         subunitcolor=None,
         subunitwidth=None,
         uirevision=None,
+        visible=None,
         **kwargs
     ):
         """
@@ -19269,6 +19538,22 @@ class Geo(_BaseLayoutHierarchyType):
         domain
             plotly.graph_objects.layout.geo.Domain instance or dict
             with compatible properties
+        fitbounds
+            Determines if this subplot's view settings are auto-
+            computed to fit trace data. On scoped maps, setting
+            `fitbounds` leads to `center.lon` and `center.lat`
+            getting auto-filled. On maps with a non-clipped
+            projection, setting `fitbounds` leads to `center.lon`,
+            `center.lat`, and `projection.rotation.lon` getting
+            auto-filled. On maps with a clipped projection, setting
+            `fitbounds` leads to `center.lon`, `center.lat`,
+            `projection.rotation.lon`, `projection.rotation.lat`,
+            `lonaxis.range` and `lonaxis.range` getting auto-
+            filled. If "locations", only the trace's visible
+            locations are considered in the `fitbounds`
+            computations. If "geojson", the entire trace input
+            `geojson` (if provided) is considered in the
+            `fitbounds` computations, Defaults to False.
         framecolor
             Sets the color the frame.
         framewidth
@@ -19324,6 +19609,8 @@ class Geo(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in the view
             (projection and center). Defaults to
             `layout.uirevision`.
+        visible
+            Sets the default visibility of the base layers.
 
         Returns
         -------
@@ -19364,6 +19651,7 @@ an instance of plotly.graph_objs.layout.Geo"""
         self._validators["countrycolor"] = v_geo.CountrycolorValidator()
         self._validators["countrywidth"] = v_geo.CountrywidthValidator()
         self._validators["domain"] = v_geo.DomainValidator()
+        self._validators["fitbounds"] = v_geo.FitboundsValidator()
         self._validators["framecolor"] = v_geo.FramecolorValidator()
         self._validators["framewidth"] = v_geo.FramewidthValidator()
         self._validators["lakecolor"] = v_geo.LakecolorValidator()
@@ -19387,6 +19675,7 @@ an instance of plotly.graph_objs.layout.Geo"""
         self._validators["subunitcolor"] = v_geo.SubunitcolorValidator()
         self._validators["subunitwidth"] = v_geo.SubunitwidthValidator()
         self._validators["uirevision"] = v_geo.UirevisionValidator()
+        self._validators["visible"] = v_geo.VisibleValidator()
 
         # Populate data dict with properties
         # ----------------------------------
@@ -19404,6 +19693,8 @@ an instance of plotly.graph_objs.layout.Geo"""
         self["countrywidth"] = countrywidth if countrywidth is not None else _v
         _v = arg.pop("domain", None)
         self["domain"] = domain if domain is not None else _v
+        _v = arg.pop("fitbounds", None)
+        self["fitbounds"] = fitbounds if fitbounds is not None else _v
         _v = arg.pop("framecolor", None)
         self["framecolor"] = framecolor if framecolor is not None else _v
         _v = arg.pop("framewidth", None)
@@ -19450,6 +19741,8 @@ an instance of plotly.graph_objs.layout.Geo"""
         self["subunitwidth"] = subunitwidth if subunitwidth is not None else _v
         _v = arg.pop("uirevision", None)
         self["uirevision"] = uirevision if uirevision is not None else _v
+        _v = arg.pop("visible", None)
+        self["visible"] = visible if visible is not None else _v
 
         # Process unknown kwargs
         # ----------------------
@@ -20599,9 +20892,9 @@ class Annotation(_BaseLayoutHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -21762,10 +22055,10 @@ class Annotation(_BaseLayoutHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         arrowcolor
             Sets the color of the annotation arrow.
         arrowhead
@@ -22048,10 +22341,10 @@ class Annotation(_BaseLayoutHierarchyType):
             an instance of plotly.graph_objs.layout.Annotation
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         arrowcolor
             Sets the color of the annotation arrow.
         arrowhead
@@ -22939,6 +23232,7 @@ __all__ = [
     "Ternary",
     "Title",
     "Transition",
+    "Uniformtext",
     "Updatemenu",
     "Updatemenu",
     "XAxis",

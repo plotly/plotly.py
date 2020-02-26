@@ -33,6 +33,10 @@ jupyter:
     thumbnail: thumbnail/webgl.jpg
 ---
 
+Here we show that it is possible to represent millions of points with WebGL.
+For larger datasets, or for a clearer visualization of the density of points,
+it is also possible to use [datashader](/python/datashader/).
+
 #### Compare WebGL and SVG
 Checkout [this notebook](https://plot.ly/python/compare-webgl-svg) to compare WebGL and SVG scatter plots with 75,000 random data points
 

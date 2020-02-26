@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.2.1
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -39,9 +39,9 @@ Here is an example that creates a scatter plot with text labels using Plotly Exp
 ```python
 import plotly.express as px
 
-gapminder = px.data.gapminder().query("year==2007 and continent=='Americas'")
+df = px.data.gapminder().query("year==2007 and continent=='Americas'")
 
-fig = px.scatter(gapminder, x="gdpPercap", y="lifeExp", text="country", log_x=True, size_max=60)
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", text="country", log_x=True, size_max=60)
 
 fig.update_traces(textposition='top center')
 
@@ -90,6 +90,43 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
+### Controlling text fontsize with uniformtext
+
+For the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Europe' and year == 2007 and pop > 2.e6")
+fig = px.bar(df, y='pop', x='country', text='pop')
+fig.update_traces(texttemplate='%{text:.2s}', textposition='outside')
+fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
+fig.show()
+```
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia' and year == 2007")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside')
+fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
+fig.show()
+```
+
+### Controlling text fontsize with textfont
+
+The `textfont_size` parameter of the the [pie](/python/pie-charts), [bar](/python/bar-charts), [sunburst](/python/sunburst-charts) and [treemap](/python/treemap-charts) traces can be used to set the **maximum font size** used in the chart. Note that the `textfont` parameter sets the `insidetextfont` and `outsidetextfont` parameter, which can also be set independently.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Asia' and year == 2007")
+fig = px.pie(df, values='pop', names='country')
+fig.update_traces(textposition='inside', textfont_size=14)
+fig.show()
+```
+
 ### Adding Hover Text to Data in Line and Scatter Plots
 
 ```python
@@ -131,7 +168,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     showlegend=False,
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=2,
             y=5,
             xref="x",
@@ -167,17 +204,13 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.add_annotation(
-    go.layout.Annotation(
             x=2,
             y=5,
             text="dict Text")
-)
 fig.add_annotation(
-    go.layout.Annotation(
             x=4,
             y=4,
             text="dict Text 2")
-)
 fig.update_annotations(dict(
             xref="x",
             yref="y",
@@ -207,7 +240,9 @@ fig.add_trace(go.Scatter3d(
 ))
 
 fig.update_layout(
-    scene=go.layout.Scene(
+    xaxis=dict(title_text="x"),
+    yaxis=dict(title_text="y"),
+    scene=dict(
         aspectratio=dict(
             x=1,
             y=1,
@@ -280,8 +315,6 @@ fig.update_layout(
             yanchor="bottom"
         )]
     ),
-    xaxis=dict(title_text="x"),
-    yaxis=dict(title_text="y")
 )
 
 fig.show()
@@ -345,7 +378,6 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.add_annotation(
-    go.layout.Annotation(
         x=2,
         y=5,
         xref="x",
@@ -370,7 +402,6 @@ fig.add_annotation(
         bgcolor="#ff7f0e",
         opacity=0.8
         )
-)
 
 fig.update_layout(showlegend=False)
 fig.show()
@@ -438,7 +469,7 @@ fig.add_trace(go.Scattergeo(
 
 fig.update_layout(
     title_text="Canadian cities",
-    geo=go.layout.Geo(
+    geo=dict(
         lataxis=dict(range=[40, 70]),
         lonaxis=dict(range=[-130, -55]),
         scope="north america"
@@ -463,7 +494,7 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=0.5,
             y=-0.15,
             showarrow=False,
@@ -471,7 +502,7 @@ fig.update_layout(
             xref="paper",
             yref="paper"
         ),
-        go.layout.Annotation(
+        dict(
             x=-0.07,
             y=0.5,
             showarrow=False,
@@ -503,8 +534,8 @@ fig.update_layout(
 fig.show()
 ```
 
-
 ### Customize Displayed Text with a Text Template
+
 To show an arbitrary text in your chart you can use [texttemplate](https://plot.ly/python/reference/#pie-texttemplate), which is a template string used for rendering the information, and will override [textinfo](https://plot.ly/python/reference/#treemap-textinfo).
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-fomrat's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format).
 `texttemplate` customizes the text that appears on your plot vs. [hovertemplate](https://plot.ly/python/reference/#pie-hovertemplate) that customizes the tooltip text.
@@ -541,7 +572,9 @@ fig = go.Figure(go.Scatterternary(
 
 fig.show()
 ```
+
 ### Set Date in Text Template
+
 The following example shows how to show date by setting [axis.type](https://plot.ly/python/reference/#layout-yaxis-type) in [funnel charts](https://plot.ly/python/funnel-charts/).
 As you can see [textinfo](https://plot.ly/python/reference/#funnel-textinfo) and [texttemplate](https://plot.ly/python/reference/#funnel-texttemplate) have the same functionality when you want to determine 'just' the trace information on the graph.
 
@@ -572,4 +605,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#layout-annotations for more information and chart attribute options!
