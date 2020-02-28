@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     notebook_metadata_filter: all
     text_representation:
       extension: .md
@@ -23,17 +22,16 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.6
   plotly:
-    description: How to visualize k-Nearest Neighbors (kNN) created using scikit-learn
-      in Python with Plotly.
-    display_as: basic
+    description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
+      with Plotly
+    display_as: ai_ml
     language: python
     layout: base
-    name: K-Nearest Neighbors (kNN) Classification
+    name: kNN Classification
     order: 1
     page_type: example_index
-    permalink: python/knn/
-    redirect_from: python/machine-learning-tutorials/
-    thumbnail: thumbnail/line-and-scatter.jpg
+    permalink: python/knn-classification/
+    thumbnail: thumbnail/knn-classification.png
 ---
 
 ## Basic Binary Classification with `plotly.express`
@@ -152,7 +150,7 @@ Z = Z.reshape(ll.shape)
 proba = clf.predict_proba(np.c_[ll.ravel(), ww.ravel()])
 proba = proba.reshape(ll.shape + (3,))
 
-fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species')
+fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', width=1000, height=1000)
 fig.update_traces(marker_size=10, marker_line_width=1)
 fig.add_trace(
     go.Heatmap(
