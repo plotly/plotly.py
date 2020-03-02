@@ -213,7 +213,7 @@ fig.show()
 ## Prediction Error Plots
 
 
-### Simple Prediction Error
+### Simple actual vs predicted plot
 
 ```python
 import plotly.express as px
@@ -221,8 +221,8 @@ import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
 
 df = px.data.iris()
-X = df.loc[train_idx, ['sepal_width', 'sepal_length']]
-y = df.loc[train_idx, 'petal_width']
+X = df[['sepal_width', 'sepal_length']]
+y = df['petal_width']
 
 # Condition the model on sepal width and length, predict the petal width
 model = LinearRegression()
@@ -238,7 +238,7 @@ fig.add_shape(
 fig.show()
 ```
 
-### Augmented Prediction Error analysis using `plotly.express`
+### Augmented prediction error analysis using `plotly.express`
 
 ```python
 import plotly.express as px
@@ -276,7 +276,7 @@ fig.add_shape(
 fig.show()
 ```
 
-## Residual Plots
+## Residual plots
 
 Just like prediction error plots, it's easy to visualize your prediction residuals in just a few lines of codes using `plotly.express` built-in capabilities.
 
@@ -312,28 +312,34 @@ fig = px.scatter(
 fig.show()
 ```
 
-## Grid Search Visualization using `px` facets
+## Grid search visualization using `px.density_heatmap` and `px.box`
+
+In this example, we show how to visualize the results of a grid search on a `DecisionTreeRegressor`. The first plot shows how to visualize the score of each model parameter on individual splits (grouped using facets). The second plot aggregates the results of all splits such that each box represents a single model.
 
 ```python
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.model_selection import GridSearchCV
 from sklearn.tree import DecisionTreeRegressor
 
-N_FOLD = 5
+N_FOLD = 6
 
+# Load and shuffle dataframe
 df = px.data.iris()
-X = df.loc[train_idx, ['sepal_width', 'sepal_length']]
-y = df.loc[train_idx, 'petal_width']
+df = df.sample(frac=1, random_state=0)
 
+X = df[['sepal_width', 'sepal_length']]
+y = df['petal_width']
+
+# Define and fit the grid
 model = DecisionTreeRegressor()
 param_grid = {
     'criterion': ['mse', 'friedman_mse', 'mae'], 
     'max_depth': range(2, 5)
 }
 grid = GridSearchCV(model, param_grid, cv=N_FOLD)
-
 grid.fit(X, y)
 grid_df = pd.DataFrame(grid.cv_results_)
 
@@ -344,32 +350,42 @@ melted = (
     .rename(columns=lambda col: col.replace('param_', ''))
     .melt(
         value_vars=[f'split{i}_test_score' for i in range(N_FOLD)],
-        id_vars=['rank_test_score', 'mean_test_score', 
-                 'mean_fit_time', 'criterion', 'max_depth']
+        id_vars=['mean_test_score', 'mean_fit_time', 'criterion', 'max_depth'],
+        var_name="cv_split",
+        value_name="r_squared"
     )
 )
 
-# Convert R-Squared measure to %
-melted[['value', 'mean_test_score']] *= 100
-
 # Format the variable names for simplicity
-melted['variable'] = (
-    melted['variable']
+melted['cv_split'] = (
+    melted['cv_split']
     .str.replace('_test_score', '')
     .str.replace('split', '')
 )
 
-px.bar(
-    melted, x='variable', y='value', 
-    color='mean_test_score', 
-    facet_row='max_depth', 
-    facet_col='criterion',
-    title='Test Scores of Grid Search',
-    hover_data=['mean_fit_time', 'rank_test_score'],
-    labels={'variable': 'cv_split', 
-            'value': 'r_squared', 
-            'mean_test_score': "mean_r_squared"}
+# Single function call to plot each figure
+fig_hmap = px.density_heatmap(
+    melted, x="max_depth", y='criterion', 
+    histfunc="sum", z="r_squared",
+    title='Grid search results on individual fold',
+    hover_data=['mean_fit_time'],
+    facet_col="cv_split", facet_col_wrap=3,
+    labels={'mean_test_score': "mean_r_squared"}
 )
+
+fig_box = px.box(
+    melted, x='max_depth', y='r_squared', 
+    title='Grid search results ',
+    hover_data=['mean_fit_time'],
+    points='all',
+    color="criterion",
+    hover_name='cv_split',
+    labels={'mean_test_score': "mean_r_squared"}
+)
+
+# Display
+fig_hmap.show()
+fig_box.show()
 ```
 
 ### Reference
