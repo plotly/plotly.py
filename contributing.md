@@ -1,6 +1,6 @@
 # Contributing
 
-The bottom line. Follow your Nose, or our Nose. Write-run-love tests :fist:.
+Thank you for contributing to plotly.py! 
 
 ## Code of Conduct
 
@@ -128,34 +128,34 @@ classes based on the new schema.
 We take advantage of two tools to run tests:
 
 * [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
-* [`nose`](https://nose.readthedocs.org/en/latest/), which is is an extension of Python's unittest
+* [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
 
-### Running Tests with `nose`
+### Running Tests with `pytest`
 
 Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
 
-After you've done that, go ahead and follow (y)our Nose!
+After you've done that, go ahead and run the test suite!
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/
+pytest  packages/python/plotly/plotly/tests/
 ```
 
 Or for more *verbose* output:
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/ -v
+pytest -v  packages/python/plotly/plotly/tests/
 ```
 
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/test_core/
+pytest  packages/python/plotly/plotly/tests/test_core/
 ```
 
 ... or even more granular by running something like:
 
 ```bash
-nosetests plotly/tests/test_plotly/test_plot.py
+pytest plotly/tests/test_plotly/test_plot.py
 ```
 
 ### Running tests with `tox`
@@ -187,16 +187,16 @@ Where `TOXENV` is the environment list you want to use when invoking `tox` from 
 * `tox` will automatically manage a virtual env for each environment you want to test in.
 * You only have to run `tox` and know that the module is working in both `Python 2` and `Python 3`.
 
-Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our `nose attr` configuration. To run only tests that are *not* tagged with `slow`, you could use the following command:
+Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `packages/python/plotly/pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
 
 ```bash
-tox -- -a '!slow'
+tox -- -a '!nodev'
 ```
 
-Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `nose attr` tags, you comma-separate the tags like so:
+Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `pytest` marker tags, you comma-separate the tags like so:
 
 ```bash
-tox -- -a '!slow','!matplotlib'
+tox -- -a '!nodev','!matplotlib'
 ```
 
 ### Writing Tests
