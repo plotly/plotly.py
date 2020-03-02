@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.6
   plotly:
-    description: Visualize regression in scikit-learn with Plotly
+    description: Visualize regression in scikit-learn with Plotly.
     display_as: ai_ml
     language: python
     layout: base
@@ -30,7 +30,7 @@ jupyter:
     order: 2
     page_type: example_index
     permalink: python/ml-regression/
-    thumbnail: thumbnail/knn-classification.png
+    thumbnail: thumbnail/ml-regression.png
 ---
 
 ## Basic linear regression plots
