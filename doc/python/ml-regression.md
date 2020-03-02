@@ -78,6 +78,8 @@ fig.show()
 
 ## Model generalization on unseen data
 
+Easily color your plot based on a predefined data split.
+
 ```python
 import numpy as np
 import plotly.express as px
@@ -106,6 +108,8 @@ fig.show()
 
 ## Comparing different kNN models parameters
 
+Compare the performance of two different models on the same dataset. This can be easily combined with discrete color legends from `px`.
+
 ```python
 import numpy as np
 import plotly.express as px
@@ -114,14 +118,16 @@ from sklearn.neighbors import KNeighborsRegressor
 
 df = px.data.tips()
 X = df.total_bill.values.reshape(-1, 1)
-
-knn_dist = KNeighborsRegressor(10, weights='distance')
-knn_uni = KNeighborsRegressor(10, weights='uniform')
-knn_dist.fit(X, df.tip)
-knn_uni.fit(X, df.tip)
-
 x_range = np.linspace(X.min(), X.max(), 100)
+
+# Model #1
+knn_dist = KNeighborsRegressor(10, weights='distance')
+knn_dist.fit(X, df.tip)
 y_dist = knn_dist.predict(x_range.reshape(-1, 1))
+
+# Model #2
+knn_uni = KNeighborsRegressor(10, weights='uniform')
+knn_uni.fit(X, df.tip)
 y_uni = knn_uni.predict(x_range.reshape(-1, 1))
 
 fig = px.scatter(df, x='total_bill', y='tip', color='sex', opacity=0.65)
@@ -131,6 +137,8 @@ fig.show()
 ```
 
 ## 3D regression surface with `px.scatter_3d` and `go.Surface`
+
+Visualize the decision plane of your model whenever you have more than one variable in your `X`.
 
 ```python
 import numpy as np
@@ -229,7 +237,7 @@ model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
 
-fig = px.scatter(x=y, y=y_pred, labels={'x': 'y true', 'y': 'y pred'})
+fig = px.scatter(x=y_pred, y=y, labels={'x': 'prediction', 'y': 'actual'})
 fig.add_shape(
     type="line", line=dict(dash='dash'),
     x0=y.min(), y0=y.min(), 
@@ -238,7 +246,9 @@ fig.add_shape(
 fig.show()
 ```
 
-### Augmented prediction error analysis using `plotly.express`
+### Enhanced prediction error analysis using `plotly.express`
+
+Add marginal histograms to quickly diagnoses any prediction bias your model might have. The built-in `OLS` functionality let you visualize how well your model generalizes by comparing it with the theoretical optimal fit (black dotted line).
 
 ```python
 import plotly.express as px
@@ -254,6 +264,7 @@ df['split'] = 'train'
 df.loc[test_idx, 'split'] = 'test'
 
 X = df[['sepal_width', 'sepal_length']]
+y = df['petal_width']
 X_train = df.loc[train_idx, ['sepal_width', 'sepal_length']]
 y_train = df.loc[train_idx, 'petal_width']
 
@@ -263,7 +274,7 @@ model.fit(X_train, y_train)
 df['prediction'] = model.predict(X)
 
 fig = px.scatter(
-    df, x='petal_width', y='prediction',
+    df, x='prediction', y='petal_width',
     marginal_x='histogram', marginal_y='histogram',
     color='split', trendline='ols'
 )
