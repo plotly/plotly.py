@@ -35,10 +35,12 @@ jupyter:
     thumbnail: thumbnail/static-image-export.png
 ---
 
-<!-- #region -->
-### Static Image Export
-It's possible to programmatically export figures as high quality static images while fully offline.
+### Interactive vs Static Export
 
+Plotly figures are interactive when viewed in a web browser: you can hover over data points, pan and zoom axes, and show and hide traces by clicking or double-clicking on the legend. You can export figures either to static image file formats like PNG, JEPG, SVG or PDF or you can [export them to HTML files which can be opened in a browser and remain interactive](/python/interactive-html-export/). This page explains how to do the former.
+
+
+<!-- #region -->
 #### Install Dependencies
 Static image generation requires the [orca](https://github.com/plotly/orca) commandline utility and the [psutil](https://github.com/giampaolo/psutil) and [requests](https://2.python-requests.org/en/master/) Python libraries. There are 3 general approach to installing these dependencies.
 
