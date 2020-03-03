@@ -51,7 +51,7 @@ def test_image_get_returns_valid_image_test(
 def test_image_save_as_saves_valid_image(
     setup_image, image_format, width, height, scale
 ):
-    data = setup_image()
+    data = setup_image
     f, filename = tempfile.mkstemp(".{}".format(image_format))
     py.image.save_as(
         data, filename, format=image_format, width=width, height=height, scale=scale,
