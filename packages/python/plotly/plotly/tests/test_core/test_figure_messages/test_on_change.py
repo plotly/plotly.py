@@ -1,6 +1,6 @@
 import sys
 from unittest import TestCase
-from nose.tools import raises
+import pytest
 
 import plotly.graph_objs as go
 
@@ -24,26 +24,26 @@ class TestOnChangeCallbacks(TestCase):
 
     # on_change validation
     # --------------------
-    @raises(ValueError)
     def test_raise_if_no_figure(self):
         scatt = go.Scatter()
         fn = MagicMock()
-        scatt.on_change(fn, "x")
+        with pytest.raises(ValueError):
+            scatt.on_change(fn, "x")
 
-    @raises(ValueError)
     def test_raise_on_frame_hierarchy(self):
         fn = MagicMock()
-        self.figure.frames[0].layout.xaxis.on_change(fn, "range")
+        with pytest.raises(ValueError):
+            self.figure.frames[0].layout.xaxis.on_change(fn, "range")
 
-    @raises(ValueError)
     def test_validate_property_path_nested(self):
         fn = MagicMock()
-        self.figure.layout.xaxis.on_change(fn, "bogus")
+        with pytest.raises(ValueError):
+            self.figure.layout.xaxis.on_change(fn, "bogus")
 
-    @raises(ValueError)
     def test_validate_property_path_nested(self):
         fn = MagicMock()
-        self.figure.layout.on_change(fn, "xaxis.titlefont.bogus")
+        with pytest.raises(ValueError):
+            self.figure.layout.on_change(fn, "xaxis.titlefont.bogus")
 
     # Python triggered changes
     # ------------------------

@@ -2,7 +2,7 @@ from __future__ import absolute_import
 
 import copy
 from unittest import TestCase
-from nose.tools import raises
+import pytest
 
 import plotly.io as pio
 import plotly.graph_objs as go
@@ -105,27 +105,31 @@ class TemplateTest(TestCase):
             },
         )
 
-    @raises(ValueError)
     def test_invalid_defaults_property_name_constructor(self):
-        go.Figure(layout={"template": {"layout": {"imagedefaults": {"bogus": 500}}}})
+        with pytest.raises(ValueError):
+            go.Figure(
+                layout={"template": {"layout": {"imagedefaults": {"bogus": 500}}}}
+            )
 
-    @raises(ValueError)
     def test_invalid_defaults_property_value_constructor(self):
-        go.Figure(
-            layout={
-                "template": {"layout": {"imagedefaults": {"sizex": "str not number"}}}
-            }
-        )
+        with pytest.raises(ValueError):
+            go.Figure(
+                layout={
+                    "template": {
+                        "layout": {"imagedefaults": {"sizex": "str not number"}}
+                    }
+                }
+            )
 
-    @raises(ValueError)
     def test_invalid_defaults_property_name_constructor(self):
-        go.Figure(layout={"template": {"layout": {"xaxis": {"bogus": 500}}}})
+        with pytest.raises(ValueError):
+            go.Figure(layout={"template": {"layout": {"xaxis": {"bogus": 500}}}})
 
-    @raises(ValueError)
     def test_invalid_defaults_property_value_constructor(self):
-        go.Figure(
-            layout={"template": {"layout": {"xaxis": {"range": "str not tuple"}}}}
-        )
+        with pytest.raises(ValueError):
+            go.Figure(
+                layout={"template": {"layout": {"xaxis": {"range": "str not tuple"}}}}
+            )
 
     # plotly.io.template tests
     # ------------------------

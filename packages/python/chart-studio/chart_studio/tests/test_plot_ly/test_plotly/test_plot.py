@@ -13,7 +13,6 @@ import sys
 import json as _json
 import warnings
 
-from nose.plugins.attrib import attr
 
 import chart_studio.tools as tls
 import plotly.tools
@@ -37,7 +36,6 @@ class TestPlot(PlotlyTestCase):
         py.sign_in("PlotlyImageTest", "786r5mecv0")
         self.simple_figure = {"data": [{"x": [1, 2, 3], "y": [2, 1, 2]}]}
 
-    @attr("slow")
     def test_plot_valid(self):
         fig = {
             "data": [{"x": (1, 2, 3), "y": (2, 1, 2)}],
@@ -155,7 +153,6 @@ class TestPlot(PlotlyTestCase):
         }
         self.assertEqual(plot_option_logic, expected_plot_option_logic)
 
-    @attr("slow")
     def test_plot_url_given_sharing_key(self):
 
         # Give share_key is requested, the retun url should contain
@@ -175,7 +172,6 @@ class TestPlot(PlotlyTestCase):
 
         self.assertTrue("share_key=" in plot_url)
 
-    @attr("slow")
     def test_plot_url_response_given_sharing_key(self):
 
         # Given share_key is requested, get request of the url should
@@ -196,7 +192,6 @@ class TestPlot(PlotlyTestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    @attr("slow")
     def test_private_plot_response_with_and_without_share_key(self):
 
         # The json file of the private plot should be 404 and once

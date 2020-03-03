@@ -1,6 +1,5 @@
 from __future__ import absolute_import
-
-from nose.tools import raises
+import pytest
 
 from plotly.graph_objs import (
     Data,
@@ -19,31 +18,31 @@ import plotly.tools as tls
 import copy
 
 
-@raises(Exception)
 def test_print_grid_before_make_subplots():
     fig = Figure()
-    fig.print_grid()
+    with pytest.raises(Exception):
+        fig.print_grid()
 
 
-@raises(Exception)
 def test_append_trace_before_make_subplots():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
     fig = Figure()
-    fig.append_trace(trace, 2, 2)
+    with pytest.raises(Exception):
+        fig.append_trace(trace, 2, 2)
 
 
-@raises(Exception)
 def test_append_trace_row_out_of_range():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
     fig = tls.make_subplots(rows=2, cols=3)
-    fig.append_trace(trace, 10, 2)
+    with pytest.raises(Exception):
+        fig.append_trace(trace, 10, 2)
 
 
-@raises(Exception)
 def test_append_trace_col_out_of_range():
     trace = Scatter(x=[1, 2, 3], y=[2, 3, 4])
     fig = tls.make_subplots(rows=2, cols=3)
-    fig.append_trace(trace, 2, 0)
+    with pytest.raises(Exception):
+        fig.append_trace(trace, 2, 0)
 
 
 def test_append_scatter():

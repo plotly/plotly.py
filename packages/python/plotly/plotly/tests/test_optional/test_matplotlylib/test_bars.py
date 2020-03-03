@@ -1,6 +1,5 @@
 from __future__ import absolute_import
-
-from nose.plugins.attrib import attr
+import pytest
 
 from plotly import optional_imports
 from plotly.tests.utils import compare_dict, strip_dict_params
@@ -13,7 +12,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_vertical_bar():
     fig, ax = plt.subplots()
     ax.bar(left=D["left"], height=D["height"])
@@ -33,7 +32,7 @@ def test_vertical_bar():
     assert equivalent, msg
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_horizontal_bar():
     fig, ax = plt.subplots()
     ax.barh(bottom=D["bottom"], width=D["width"])
@@ -53,7 +52,7 @@ def test_horizontal_bar():
     assert equivalent, msg
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_h_and_v_bars():
     fig, ax = plt.subplots()
     ax.bar(
