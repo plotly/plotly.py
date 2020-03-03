@@ -741,9 +741,11 @@ fig.update_yaxes(domain=(0.25, 0.75))
 fig.show()
 ```
 
-### Zooming subplots to the same range
+#### Synchronizing axes in subplots with `matches`
 
-Using `facet_col` from `plotly.express` let zoom each facet to the same range impliciltly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter, to zoom all the subplots accordingly. Zoom in one trace below, to see the other subplots zoomed to the same x-axis range:
+Using `facet_col` from `plotly.express` let [zoom](https://help.plot.ly/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plot.ly/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+
+Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
 
 ```python
 import plotly.graph_objects as go
@@ -754,10 +756,8 @@ N = 20
 x = np.linspace(0, 1, N)
 
 fig = make_subplots(1, 3)
-
 for i in range(1, 4):
     fig.add_trace(go.Scatter(x=x, y=np.random.random(N)), 1, i)
-
 fig.update_xaxes(matches='x')
 fig.show()
 ```
