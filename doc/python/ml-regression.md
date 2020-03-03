@@ -323,6 +323,58 @@ fig = px.scatter(
 fig.show()
 ```
 
+## Regularization visualization
+
+
+### Plot alphas for individual folds
+
+```python
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.linear_model import LassoCV
+
+# Load and preprocess the data
+df = px.data.gapminder()
+X = df.drop(columns=['lifeExp', 'iso_num'])
+X = pd.get_dummies(X, columns=['country', 'continent', 'iso_alpha'])
+y = df['lifeExp']
+
+# Train model to predict life expectancy
+model = LassoCV(cv=N_FOLD, normalize=True)
+model.fit(X, y)
+mean_alphas = model.mse_path_.mean(axis=-1)
+
+fig = go.Figure([
+    go.Scatter(
+        x=model.alphas_, y=model.mse_path_[:, i], 
+        name=f"Fold: {i+1}", opacity=.5, line=dict(dash='dash'),
+        hovertemplate="alpha: %{x} <br>MSE: %{y}"
+    )
+    for i in range(N_FOLD)
+])
+fig.add_traces(go.Scatter(
+    x=model.alphas_, y=mean_alphas, 
+    name='Mean', line=dict(color='black', width=3),
+    hovertemplate="alpha: %{x} <br>MSE: %{y}",
+))
+
+fig.add_shape(
+    type="line", line=dict(dash='dash'),
+    x0=model.alpha_, y0=0,
+    x1=model.alpha_, y1=1,
+    yref='paper'
+)
+
+fig.update_layout(
+    xaxis_title='alpha', 
+    xaxis_type="log", 
+    yaxis_title="Mean Square Error (MSE)"
+)
+fig.show()
+```
+
 ## Grid search visualization using `px.density_heatmap` and `px.box`
 
 In this example, we show how to visualize the results of a grid search on a `DecisionTreeRegressor`. The first plot shows how to visualize the score of each model parameter on individual splits (grouped using facets). The second plot aggregates the results of all splits such that each box represents a single model.
@@ -401,8 +453,22 @@ fig_box.show()
 
 ### Reference
 
-Learn more about `px` here:
-* https://plot.ly/python/plotly-express/
+Learn more about the `px` figures used in this tutorial:
+* Plotly Express: https://plot.ly/python/plotly-express/
+* Vertical Lines: https://plot.ly/python/shapes/
+* Heatmaps: https://plot.ly/python/heatmaps/
+* Box Plots: https://plot.ly/python/box-plots/
+* 3D Scatter: https://plot.ly/python/3d-scatter-plots/
+* Surface Plots: https://plot.ly/python/3d-surface-plots/
 
-This tutorial was inspired by amazing examples from the official scikit-learn docs:
-* https://scikit-learn.org/stable/auto_examples/neighbors/plot_regression.html
+Learn more about the Machine Learning models used in this tutorial:
+* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+* https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html
+* https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
+* https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html
+* https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+
+Other tutorials that inspired this notebook:
+* https://seaborn.pydata.org/examples/residplot.html
+* https://scikit-learn.org/stable/auto_examples/linear_model/plot_lasso_model_selection.html
+* http://www.scikit-yb.org/zh/latest/api/regressor/peplot.html
