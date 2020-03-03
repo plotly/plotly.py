@@ -158,6 +158,12 @@ pytest  packages/python/plotly/plotly/tests/test_core/
 pytest plotly/tests/test_plotly/test_plot.py
 ```
 
+or for a specfic test function
+
+```bash
+pytest plotly/tests/test_plotly/test_plot.py::test_function
+```
+
 ### Running tests with `tox`
 
 Running tests with tox is much more powerful, but requires a bit more setup.
