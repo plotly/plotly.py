@@ -69,6 +69,32 @@ fig = px.histogram(df, x="total_bill", nbins=20)
 fig.show()
 ```
 
+#### Accessing the y-axis values
+
+JavaScript calculates the y-axis (count) values on the fly in the browser, so it's not accessible in the `fig`. You can manually calculate it using `pandas.cut` or `np.digitize`.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = px.data.tips()
+
+# create the bins; use the `range` to get the same bin size as in the histogram in the previous section.
+df["total_bill_bins"] = pd.cut(df.total_bill, bins=range(0, 60, 5), right=False)
+
+# calculate counts
+df_counts = df.pivot_table(index="total_bill_bins", values="size", aggfunc='count').reset_index()
+df_counts.rename(columns={"size": "count"}, inplace=True)
+
+# sort, then convert to string
+df_counts = df_counts.sort_values(by="total_bill_bins")
+df_counts["total_bill_bins"] = df_counts["total_bill_bins"].astype(str)
+
+# display calculated counts on the bar chart
+fig = px.bar(df_counts, x="total_bill_bins", y="count")
+fig.show()
+```
+
 #### Type of normalization
 
 The default mode is to represent the count of samples in each bin. With the `histnorm` argument, it is also possible to represent the percentage or fraction of samples in each bin (`histnorm='percent'` or `probability`), or a density histogram (the sum of bars is equal to 100, `density`), or a probability density histogram (sum equal to 1, `probability density`).
