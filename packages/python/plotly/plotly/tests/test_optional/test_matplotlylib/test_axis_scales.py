@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from nose.plugins.attrib import attr
+import pytest
 
 from plotly import optional_imports
 from plotly.tests.utils import compare_dict, strip_dict_params
@@ -13,7 +13,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_even_linear_scale():
     fig, ax = plt.subplots()
     x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

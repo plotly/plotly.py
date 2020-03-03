@@ -8,14 +8,12 @@ A module intended for use with Nose.
 import random
 import string
 
-from nose.plugins.attrib import attr
 
 from chart_studio import plotly as py
 from chart_studio.exceptions import PlotlyRequestError
 from chart_studio.tests.utils import PlotlyTestCase
 
 
-@attr("slow")
 class FolderAPITestCase(PlotlyTestCase):
     def setUp(self):
         super(FolderAPITestCase, self).setUp()

@@ -11,7 +11,6 @@ import random
 import string
 from unittest import skip
 
-from nose.plugins.attrib import attr
 
 from chart_studio import plotly as py
 from chart_studio.exceptions import InputError, PlotlyRequestError
@@ -54,11 +53,9 @@ class GridTest(PlotlyTestCase):
         return g
 
     # Nominal usage
-    @attr("slow")
     def test_grid_upload(self):
         self.upload_and_return_grid()
 
-    @attr("slow")
     def test_grid_upload_in_new_folder(self):
         g = self.get_grid()
         path = "new folder: {0}/grid in folder {1}".format(
@@ -66,7 +63,6 @@ class GridTest(PlotlyTestCase):
         )
         py.grid_ops.upload(g, path, auto_open=False)
 
-    @attr("slow")
     def test_grid_upload_in_existing_folder(self):
         g = self.get_grid()
         folder = random_filename()
@@ -75,19 +71,16 @@ class GridTest(PlotlyTestCase):
         path = "existing folder: {0}/grid in folder {1}".format(folder, filename)
         py.grid_ops.upload(g, path, auto_open=False)
 
-    @attr("slow")
     def test_column_append(self):
         g = self.upload_and_return_grid()
         new_col = Column([1, 5, 3], "new col")
         py.grid_ops.append_columns([new_col], grid=g)
 
-    @attr("slow")
     def test_row_append(self):
         g = self.upload_and_return_grid()
         new_rows = [[1, 2], [10, 20]]
         py.grid_ops.append_rows(new_rows, grid=g)
 
-    @attr("slow")
     def test_plot_from_grid(self):
         g = self.upload_and_return_grid()
         url = py.plot(
@@ -97,7 +90,6 @@ class GridTest(PlotlyTestCase):
         )
         return url, g
 
-    @attr("slow")
     def test_get_figure_from_references(self):
         url, g = self.test_plot_from_grid()
         fig = py.get_figure(url)
@@ -143,7 +135,6 @@ class GridTest(PlotlyTestCase):
             py.grid_ops.append_rows(rows, grid=g)
 
     # Input Errors
-    @attr("slow")
     def test_unequal_length_rows(self):
         g = self.upload_and_return_grid()
         rows = [[1, 2], ["to", "many", "cells"]]
@@ -158,7 +149,6 @@ class GridTest(PlotlyTestCase):
             Grid([c1, c2])
 
     # Test delete
-    @attr("slow")
     def test_delete_grid(self):
         g = self.get_grid()
         fn = random_filename()
