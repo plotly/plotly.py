@@ -121,7 +121,7 @@ fig.show()
 
 ### Zooming subplots to the same range
 
-Using `facet_col` from `plotly.express` let zoom each facet to the same range impliciltly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to zoom all the subplots accordingly. Zoom in one trace below, to see the other subplots zoomed to the same x-axis range:
+Using `facet_col` from `plotly.express` let zoom each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to zoom all the subplots accordingly. Zoom in one trace below, to see the other subplots zoomed to the same x-axis range:
 
 ```python
 import plotly.graph_objects as go
