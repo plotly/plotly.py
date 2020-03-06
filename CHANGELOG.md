@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.3] - 2020-03-05
+
+### Updated
+
+- Removed development dependency on `nose` testing framework [#2217](https://github.com/plotly/plotly.py/pull/2217)
+
+### Fixed
+
+ - JupyterLab extension now compatible with JupyterLab 2.0 [#2245](https://github.com/plotly/plotly.py/pull/2245) with thanks to [@consideRatio](https://github.com/consideRatio) for the contribution!
+
 ## [4.5.2] - 2020-02-24
 
 ### Fixed
@@ -11,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.5.1] - 2020-02-19
 
 ### Updated
+
  - Updated Plotly.js to version 1.52.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2) for more information on bug fixes.
 
 ### Fixed
