@@ -452,7 +452,7 @@ environment variable: {env_renderer}""".format(
         )
 
     default_renderer = env_renderer
-elif ipython and ipython.get_ipython() and not (ipython.get_ipython().__class__.__name__ == 'TerminalInteractiveShell'):
+elif ipython and ipython.get_ipython():
     # Try to detect environment so that we can enable a useful
     # default renderer
     if not default_renderer:
@@ -496,6 +496,12 @@ elif ipython and ipython.get_ipython() and not (ipython.get_ipython().__class__.
         except ValueError:
             # orca not found
             pass
+
+    # Check if we're running in ipython terminal
+    if not default_renderer and (
+        ipython.get_ipython().__class__.__name__ == "TerminalInteractiveShell"
+    ):
+        default_renderer = "browser"
 
     # Fallback to renderer combination that will work automatically
     # in the classic notebook (offline), jupyterlab, nteract, vscode, and
