@@ -452,7 +452,7 @@ environment variable: {env_renderer}""".format(
         )
 
     default_renderer = env_renderer
-elif ipython and ipython.get_ipython():
+elif ipython and ipython.get_ipython() and not (ipython.get_ipython().__class__.__name__ == 'TerminalInteractiveShell'):
     # Try to detect environment so that we can enable a useful
     # default renderer
     if not default_renderer:
