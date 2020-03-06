@@ -39,7 +39,7 @@ jupyter:
 ### Ordinary Least Square (OLS) with `plotly.express`
 
 
-This example shows how to use `plotly.express` to train a simply Ordinary Least Square (OLS) that can predict the tips servers will receive based on the value of the total bill.
+This example shows how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS) for predicting the tips servers will receive based on the value of the total bill.
 
 ```python
 import plotly.express as px
@@ -108,7 +108,7 @@ fig.show()
 
 ## Comparing different kNN models parameters
 
-Compare the performance of two different models on the same dataset. This can be easily combined with discrete color legends from `px`.
+Compare the performance of two different models on the same dataset. This can be easily combined with discrete color legends from `px`, such as coloring by the assigned `sex`.
 
 ```python
 import numpy as np
@@ -133,46 +133,6 @@ y_uni = knn_uni.predict(x_range.reshape(-1, 1))
 fig = px.scatter(df, x='total_bill', y='tip', color='sex', opacity=0.65)
 fig.add_traces(go.Scatter(x=x_range, y=y_uni, name='Weights: Uniform'))
 fig.add_traces(go.Scatter(x=x_range, y=y_dist, name='Weights: Distance'))
-fig.show()
-```
-
-## 3D regression surface with `px.scatter_3d` and `go.Surface`
-
-Visualize the decision plane of your model whenever you have more than one variable in your `X`.
-
-```python
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.neighbors import KNeighborsRegressor
-
-mesh_size = .02
-margin = 0
-
-df = px.data.iris()
-
-X = df[['sepal_width', 'sepal_length']]
-y = df['petal_width']
-
-# Condition the model on sepal width and length, predict the petal width
-knn = KNeighborsRegressor(10, weights='distance')
-knn.fit(X, y)
-
-# Create a mesh grid on which we will run our model
-x_min, x_max = X.sepal_width.min() - margin, X.sepal_width.max() + margin
-y_min, y_max = X.sepal_length.min() - margin, X.sepal_length.max() + margin
-xrange = np.arange(x_min, x_max, mesh_size)
-yrange = np.arange(y_min, y_max, mesh_size)
-xx, yy = np.meshgrid(xrange, yrange)
-
-# Run kNN
-pred = knn.predict(np.c_[xx.ravel(), yy.ravel()])
-pred = pred.reshape(xx.shape)
-
-# Generate the plot
-fig = px.scatter_3d(df, x='sepal_width', y='sepal_length', z='petal_width')
-fig.update_traces(marker=dict(size=5))
-fig.add_traces(go.Surface(x=xrange, y=yrange, z=pred, name='pred_surface'))
 fig.show()
 ```
 
@@ -218,10 +178,83 @@ for n_features in [1, 2, 3, 4]:
 fig.show()
 ```
 
+## 3D regression surface with `px.scatter_3d` and `go.Surface`
+
+Visualize the decision plane of your model whenever you have more than one variable in your input data.
+
+```python
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.neighbors import KNeighborsRegressor
+
+mesh_size = .02
+margin = 0
+
+df = px.data.iris()
+
+X = df[['sepal_width', 'sepal_length']]
+y = df['petal_width']
+
+# Condition the model on sepal width and length, predict the petal width
+knn = KNeighborsRegressor(10, weights='distance')
+knn.fit(X, y)
+
+# Create a mesh grid on which we will run our model
+x_min, x_max = X.sepal_width.min() - margin, X.sepal_width.max() + margin
+y_min, y_max = X.sepal_length.min() - margin, X.sepal_length.max() + margin
+xrange = np.arange(x_min, x_max, mesh_size)
+yrange = np.arange(y_min, y_max, mesh_size)
+xx, yy = np.meshgrid(xrange, yrange)
+
+# Run kNN
+pred = knn.predict(np.c_[xx.ravel(), yy.ravel()])
+pred = pred.reshape(xx.shape)
+
+# Generate the plot
+fig = px.scatter_3d(df, x='sepal_width', y='sepal_length', z='petal_width')
+fig.update_traces(marker=dict(size=5))
+fig.add_traces(go.Surface(x=xrange, y=yrange, z=pred, name='pred_surface'))
+fig.show()
+```
+
+## Visualizing coefficients for multiple linear regression (MLR)
+
+When you are fitting a linear regression, you want to often know what feature matters the most in your regression's output.
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.linear_model import LinearRegression
+
+df = px.data.iris()
+
+X = df.drop(columns=['petal_width', 'species_id'])
+X = pd.get_dummies(X, columns=['species'], prefix_sep='=')
+y = df['petal_width']
+
+model = LinearRegression()
+model.fit(X, y)
+
+colors = ['Positive' if c > 0 else 'Negative' for c in model.coef_]
+
+fig = px.bar(
+    x=X.columns, y=model.coef_, color=colors,
+    color_discrete_sequence=['red', 'blue'],
+    labels=dict(x='Feature', y='Linear coefficient'),
+    title='Weight of each feature for predicting petal width'
+)
+fig.show()
+```
+
 ## Prediction Error Plots
+
+When you are working with very high-dimensional data, it is inconvenient to plot every dimension with your output `y`. Instead, you can use methods such as prediction error plots, which let you visualize how well your model does compared to the ground truth.
 
 
 ### Simple actual vs predicted plot
+
+This example shows you the simplest way to compare the predicted output vs. the actual output. A good model will have most of the scatter dots near the diagonal black line.
 
 ```python
 import plotly.express as px
@@ -323,10 +356,10 @@ fig = px.scatter(
 fig.show()
 ```
 
-## Regularization visualization
+## Visualize regularization across different cross-validation folds
 
 
-### Plot alphas for individual folds
+In this example, we show how to plot the results of various $\alpha$ penalization values from the results of cross-validation using scikit-learn's `LassoCV`. This is useful to see how much the error of the optimal alpha actually varies across CV folds.
 
 ```python
 import pandas as pd
@@ -334,6 +367,8 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LassoCV
+
+N_FOLD = 6
 
 # Load and preprocess the data
 df = px.data.gapminder()
