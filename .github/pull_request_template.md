@@ -1,4 +1,3 @@
-Doc upgrade checklist:
 <!--
 Please uncomment this block and take a look at this checklist if your PR is making substantial changes to documentation/impacts files in the `doc` directory. Check all that apply to your PR, and leave the rest unchecked to discuss with your reviewer! Not all boxes must be checked for every PR :)
 
