@@ -69,29 +69,20 @@ fig = px.histogram(df, x="total_bill", nbins=20)
 fig.show()
 ```
 
-#### Accessing the y-axis values
+#### Accessing the counts (y-axis) values
 
-JavaScript calculates the y-axis (count) values on the fly in the browser, so it's not accessible in the `fig`. You can manually calculate it using `pandas.cut` or `np.digitize`.
+JavaScript calculates the y-axis (count) values on the fly in the browser, so it's not accessible in the `fig`. You can manually calculate it using `np.histogram`.
 
 ```python
 import plotly.express as px
-import pandas as pd
+import numpy as np
 
 df = px.data.tips()
+# create the bins
+counts, bins = np.histogram(df.total_bill, bins=range(0, 60, 5))
+bins = 0.5 * (bins[:-1] + bins[1:])
 
-# create the bins; use the `range` to get the same bin size as in the histogram in the previous section.
-df["total_bill_bins"] = pd.cut(df.total_bill, bins=range(0, 60, 5), right=False)
-
-# calculate counts
-df_counts = df.pivot_table(index="total_bill_bins", values="size", aggfunc='count').reset_index()
-df_counts.rename(columns={"size": "count"}, inplace=True)
-
-# sort, then convert to string
-df_counts = df_counts.sort_values(by="total_bill_bins")
-df_counts["total_bill_bins"] = df_counts["total_bill_bins"].astype(str)
-
-# display calculated counts on the bar chart
-fig = px.bar(df_counts, x="total_bill_bins", y="count")
+fig = px.bar(x=bins, y=counts, labels={'x':'total_bill', 'y':'count'})
 fig.show()
 ```
 
