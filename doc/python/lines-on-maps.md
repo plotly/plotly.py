@@ -33,13 +33,15 @@ jupyter:
     thumbnail: thumbnail/flight-paths.jpg
 ---
 
-For other geographical and map charts see [the maps index page](/python/maps/).
+Below we show how to create geographical line plots using either Plotly Express with `px.line_geo` function or the lower-level `go.Scattergeo` object.
 
-Below we show how to create geographical line plots using either Plotly Express with `px.line_geo` or the lower-level `go.Scattergeo`.
+#### Base Map Configuration
+
+Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
 
 ## Lines on Maps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -98,7 +100,7 @@ for i in range(len(df_flight_paths)):
 fig.update_layout(
     title_text = 'Feb. 2011 American Airline flight paths<br>(Hover for airport names)',
     showlegend = False,
-    geo = go.layout.Geo(
+    geo = dict(
         scope = 'north america',
         projection_type = 'azimuthal equal area',
         showland = True,

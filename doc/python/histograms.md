@@ -41,7 +41,7 @@ bar, go to the [Bar Chart tutorial](/python/bar-charts/).
 
 ## Histogram with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -371,22 +371,6 @@ fig.update_layout(
     bargap=0.1)
 
 fig.show()
-```
-
-### Dash Example
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-histogramplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-histogramplot/", width="100%", height="650px", frameBorder="0")
-
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-histogramplot/code", width="100%", height=500, frameBorder="0")
-
 ```
 
 #### Reference

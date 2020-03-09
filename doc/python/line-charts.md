@@ -37,7 +37,7 @@ jupyter:
 
 ### Line Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
 
 For more examples of line plots, see the [line and scatter notebook](https://plot.ly/python/line-and-scatter/).
 
@@ -384,7 +384,7 @@ fig.add_trace(go.Scatter(
     fillcolor='rgba(231,107,243,0.2)',
     line_color='rgba(255,255,255,0)',
     showlegend=False,
-    name='Fair',
+    name='Ideal',
 ))
 fig.add_trace(go.Scatter(
     x=x, y=y1,
@@ -404,22 +404,6 @@ fig.add_trace(go.Scatter(
 
 fig.update_traces(mode='lines')
 fig.show()
-```
-
-### Dash Example
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-lineplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-lineplot/", width="100%", height="650px", frameBorder="0")
-
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-lineplot/code", width="100%", height=500, frameBorder="0")
-
 ```
 
 #### Reference

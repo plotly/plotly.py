@@ -296,6 +296,28 @@ fig.update_layout(height=600, width=600,
 fig.show()
 ```
 
+### Subplots with Shared Colorscale
+
+To share colorscale information in multiple subplots, you can use [coloraxis](https://plot.ly/javascript/reference/#scatter-marker-line-coloraxis).
+
+```python
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+fig = make_subplots(rows=1, cols=2, shared_yaxes=True)
+
+fig.add_trace(go.Bar(x=[1, 2, 3], y=[4, 5, 6],
+                    marker=dict(color=[4, 5, 6], coloraxis="coloraxis")),
+              1, 1)
+
+fig.add_trace(go.Bar(x=[1, 2, 3], y=[2, 3, 5],
+                    marker=dict(color=[2, 3, 5], coloraxis="coloraxis")),
+              1, 2)
+
+fig.update_layout(coloraxis=dict(colorscale='Bluered_r'), showlegend=False)
+fig.show()
+```
+
 #### Custom Sized Subplot with Subplot Titles
 The `specs` argument to `make_subplots` is used to configure per-subplot options.  `specs` must be a 2-dimension list with dimensions that match those provided as the `rows` and `cols` arguments. The elements of `specs` may either be `None`, indicating no subplot should be initialized starting with this grid cell, or a dictionary containing subplot options.  The `colspan` subplot option specifies the number of grid columns that the subplot starting in the given cell should occupy.  If unspecified, `colspan` defaults to 1.
 

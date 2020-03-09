@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description: How to make parallel categories diagrams in Python with Plotly.
     display_as: statistical
@@ -35,15 +35,17 @@ jupyter:
 
 #### Parallel Categories Diagram
 
-The parallel categories diagram is a visualization of multi-dimensional categorical data sets. Each variable in the data set is represented by a column of rectangles, where each rectangle corresponds to a discrete value taken on by that variable. The relative heights of the rectangles reflect the relative frequency of occurrence of the corresponding value.
+The parallel categories diagram (also known as parallel sets or alluvial diagram) is a visualization of multi-dimensional categorical data sets. Each variable in the data set is represented by a column of rectangles, where each rectangle corresponds to a discrete value taken on by that variable. The relative heights of the rectangles reflect the relative frequency of occurrence of the corresponding value.
 
 Combinations of category rectangles across dimensions are connected by ribbons, where the height of the ribbon corresponds to the relative frequency of occurrence of the combination of categories in the data set.
 
-For other representations of multivariate data, also see [parallel coordinates](/python/parallel-coordinates-plot/), [radar charts](/python/radar-chart/) and [scatterplot matrix (SPLOM)](/python/splom/).
+For other representations of multivariate data, also see [parallel coordinates](/python/parallel-coordinates-plot/), [radar charts](/python/radar-chart/) and [scatterplot matrix (SPLOM)](/python/splom/). A visually-similar but more generic type of visualization is the [sankey diagrams](/python/sankey-diagram/).
 
 #### Basic Parallel Category Diagram with plotly.express
 
 This example visualizes the resturant bills of a sample of 244 people. Hovering over a category rectangle (sex, smoker, etc) displays a tooltip with the number of people with that single trait. Hovering over a ribbon in the diagram displays a tooltip with the number of people with a particular combination of the five traits connected by the ribbon.
+
+By default, `px.parallel_categories` will display any column in the `data_frame` that has a cardinality (or number of unique values) of less than 50. This can be overridden either by passing in a specific list of columns to `dimensions` or by setting `dimensions_max_cardinality` to something other than 50. 
 
 ```python
 import plotly.express as px
@@ -68,7 +70,7 @@ fig = px.parallel_categories(df, dimensions=['sex', 'smoker', 'day'],
 fig.show()
 ```
 
-#### Basic Parallel Categories Diagram
+### Basic Parallel Categories Diagram with `graph_objects`
 
 This example illustartes the hair color, eye color, and sex of a sample of 8 people. The dimension labels can be dragged horizontally to reorder the dimensions and the category rectangles can be dragged vertically to reorder the categories within a dimension.
 

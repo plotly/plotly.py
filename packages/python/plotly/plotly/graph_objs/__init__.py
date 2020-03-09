@@ -9025,10 +9025,9 @@ class Table(_BaseTraceType):
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
-                    spans more two or more lines (i.e. `text`
-                    contains one or more <br> HTML tags) or if an
-                    explicit width is set to override the text
-                    width.
+                    spans two or more lines (i.e. `text` contains
+                    one or more <br> HTML tags) or if an explicit
+                    width is set to override the text width.
                 alignsrc
                     Sets the source reference on plot.ly for  align
                     .
@@ -9263,10 +9262,9 @@ class Table(_BaseTraceType):
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
-                    spans more two or more lines (i.e. `text`
-                    contains one or more <br> HTML tags) or if an
-                    explicit width is set to override the text
-                    width.
+                    spans two or more lines (i.e. `text` contains
+                    one or more <br> HTML tags) or if an explicit
+                    width is set to override the text width.
                 alignsrc
                     Sets the source reference on plot.ly for  align
                     .
@@ -12689,11 +12687,14 @@ class Sunburst(_BaseTraceType):
     @property
     def insidetextorientation(self):
         """
-        Determines the orientation of text inside slices. With "auto"
-        the texts may automatically be rotated to fit with the maximum
-        size inside the slice. Using "horizontal" option forces text to
-        be horizontal. Using "radial" option forces text to be radial.
-        Using "tangential" option forces text to be tangential.
+        Controls the orientation of the text inside chart sectors. When
+        set to "auto", text may be oriented in any direction in order
+        to be as big as possible in the middle of a sector. The
+        "horizontal" option orients text to be parallel with the bottom
+        of the chart, and may make text smaller in order to achieve
+        that goal. The "radial" option orients text along the radius of
+        the sector. The "tangential" option orients text perpendicular
+        to the radius of the sector.
     
         The 'insidetextorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -13551,12 +13552,15 @@ class Sunburst(_BaseTraceType):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -13819,12 +13823,15 @@ class Sunburst(_BaseTraceType):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -41126,11 +41133,14 @@ class Pie(_BaseTraceType):
     @property
     def insidetextorientation(self):
         """
-        Determines the orientation of text inside slices. With "auto"
-        the texts may automatically be rotated to fit with the maximum
-        size inside the slice. Using "horizontal" option forces text to
-        be horizontal. Using "radial" option forces text to be radial.
-        Using "tangential" option forces text to be tangential.
+        Controls the orientation of the text inside chart sectors. When
+        set to "auto", text may be oriented in any direction in order
+        to be as big as possible in the middle of a sector. The
+        "horizontal" option orients text to be parallel with the bottom
+        of the chart, and may make text smaller in order to achieve
+        that goal. The "radial" option orients text along the radius of
+        the sector. The "tangential" option orients text perpendicular
+        to the radius of the sector.
     
         The 'insidetextorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -42129,12 +42139,15 @@ class Pie(_BaseTraceType):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -42434,12 +42447,15 @@ class Pie(_BaseTraceType):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -94286,10 +94302,9 @@ class Layout(_BaseLayoutType):
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
-                    spans more two or more lines (i.e. `text`
-                    contains one or more <br> HTML tags) or if an
-                    explicit width is set to override the text
-                    width.
+                    spans two or more lines (i.e. `text` contains
+                    one or more <br> HTML tags) or if an explicit
+                    width is set to override the text width.
                 arrowcolor
                     Sets the color of the annotation arrow.
                 arrowhead
@@ -96206,7 +96221,8 @@ class Layout(_BaseLayoutType):
     @property
     def paper_bgcolor(self):
         """
-        Sets the color of paper where the graph is drawn.
+        Sets the background color of the paper where the graph is
+        drawn.
     
         The 'paper_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -96289,7 +96305,8 @@ class Layout(_BaseLayoutType):
     @property
     def plot_bgcolor(self):
         """
-        Sets the color of plotting area in-between x and y axes.
+        Sets the background color of the plotting area in-between x and
+        y axes.
     
         The 'plot_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -98841,15 +98858,16 @@ class Layout(_BaseLayoutType):
             "polar" subplots. Rotates the entire polar by the given
             angle in legacy polar charts.
         paper_bgcolor
-            Sets the color of paper where the graph is drawn.
+            Sets the background color of the paper where the graph
+            is drawn.
         piecolorway
             Sets the default pie slice colors. Defaults to the main
             `colorway` used for trace colors. If you specify a new
             list here it can still be extended with lighter and
             darker colors, see `extendpiecolors`.
         plot_bgcolor
-            Sets the color of plotting area in-between x and y
-            axes.
+            Sets the background color of the plotting area in-
+            between x and y axes.
         polar
             :py:class:`plotly.graph_objects.layout.Polar` instance
             or dict with compatible properties
@@ -99360,15 +99378,16 @@ class Layout(_BaseLayoutType):
             "polar" subplots. Rotates the entire polar by the given
             angle in legacy polar charts.
         paper_bgcolor
-            Sets the color of paper where the graph is drawn.
+            Sets the background color of the paper where the graph
+            is drawn.
         piecolorway
             Sets the default pie slice colors. Defaults to the main
             `colorway` used for trace colors. If you specify a new
             list here it can still be extended with lighter and
             darker colors, see `extendpiecolors`.
         plot_bgcolor
-            Sets the color of plotting area in-between x and y
-            axes.
+            Sets the background color of the plotting area in-
+            between x and y axes.
         polar
             :py:class:`plotly.graph_objects.layout.Polar` instance
             or dict with compatible properties

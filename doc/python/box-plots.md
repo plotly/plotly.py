@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: "1.2"
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -30,17 +30,17 @@ jupyter:
     order: 2
     page_type: example_index
     permalink: python/box-plots/
-    thumbnail: thumbnail/box.jpg
     redirect_from:
       - /python/box/
       - /python/basic_statistics/
+    thumbnail: thumbnail/box.jpg
 ---
 
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
 
 ## Box Plot with `plotly.express`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 
@@ -73,13 +73,13 @@ fig.show()
 
 ### Choosing The Algorithm For Computing Quartiles
 
-By default, quartiles for box plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details). 
+By default, quartiles for box plots are computed using the `linear` method (for more about linear interpolation, see #10 listed on [http://www.amstat.org/publications/jse/v14n3/langford.html](http://www.amstat.org/publications/jse/v14n3/langford.html) and [https://en.wikipedia.org/wiki/Quartile](https://en.wikipedia.org/wiki/Quartile) for more details).
 
-However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles. 
+However, you can also choose to use an `exclusive` or an `inclusive` algorithm to compute quartiles.
 
-The *exclusive* algorithm uses the median to divide the ordered dataset into two halves. If the sample is odd, it does not include the median in either half. Q1 is then the median of the lower half and Q3 is the median of the upper half.
+The _exclusive_ algorithm uses the median to divide the ordered dataset into two halves. If the sample is odd, it does not include the median in either half. Q1 is then the median of the lower half and Q3 is the median of the upper half.
 
-The *inclusive* algorithm also uses the median to divide the ordered dataset into two halves, but if the sample is odd, it includes the median in both halves. Q1 is then the median of the lower half and Q3 the median of the upper half.
+The _inclusive_ algorithm also uses the median to divide the ordered dataset into two halves, but if the sample is odd, it includes the median in both halves. Q1 is then the median of the lower half and Q3 the median of the upper half.
 
 ```python
 import plotly.express as px
@@ -92,7 +92,8 @@ fig.show()
 ```
 
 #### Difference Between Quartile Algorithms
-It can sometimes be difficult to see the difference between the linear, inclusive, and exclusive algorithms for computing quartiles. In the following example, the same dataset is visualized using each of the three different quartile computation algorithms. 
+
+It can sometimes be difficult to see the difference between the linear, inclusive, and exclusive algorithms for computing quartiles. In the following example, the same dataset is visualized using each of the three different quartile computation algorithms.
 
 ```python
 import plotly.express as px
@@ -103,15 +104,15 @@ df = pd.DataFrame(dict(
     linear=data,
     inclusive=data,
     exclusive=data
-)).melt(var_name="quartilemethod") 
+)).melt(var_name="quartilemethod")
 
 
-fig = px.box(df, y="value",
-             facet_col="quartilemethod", boxmode="overlay", color="quartilemethod")
+fig = px.box(df, y="value", facet_col="quartilemethod", color="quartilemethod",
+             boxmode="overlay", points='all')
 
-fig.update_traces(quartilemethod="linear", col=1)
-fig.update_traces(quartilemethod="inclusive", col=2)
-fig.update_traces(quartilemethod="exclusive", col=3)
+fig.update_traces(quartilemethod="linear", jitter=0, col=1)
+fig.update_traces(quartilemethod="inclusive", jitter=0, col=2)
+fig.update_traces(quartilemethod="exclusive", jitter=0, col=3)
 
 fig.show()
 ```
@@ -196,6 +197,7 @@ fig = go.Figure()
 fig.add_trace(go.Box(y=data, quartilemethod="linear", name="Linear Quartile Mode"))
 fig.add_trace(go.Box(y=data, quartilemethod="inclusive", name="Inclusive Quartile Mode"))
 fig.add_trace(go.Box(y=data, quartilemethod="exclusive", name="Exclusive Quartile Mode"))
+fig.update_traces(boxpoints='all', jitter=0)
 fig.show()
 ```
 
@@ -203,7 +205,7 @@ fig.show()
 
 You can specify precomputed quartile attributes rather than using a built-in quartile computation algorithm.
 
-This could be useful if you have already pre-computed those values or if you need to use a different algorithm than the ones provided. 
+This could be useful if you have already pre-computed those values or if you need to use a different algorithm than the ones provided.
 
 ```python
 import plotly.graph_objects as go
@@ -216,9 +218,9 @@ fig.add_trace(go.Box(y=[
         [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
       ], name="Precompiled Quartiles"))
 
-fig.update_traces(q1=[ 1, 2, 3 ], median=[ 4, 5, 6 ], 
-                  q3=[ 7, 8, 9 ], lowerfence=[-1, 0, 1], 
-                  upperfence=[5, 6, 7], mean=[ 2.2, 2.8, 3.2 ], 
+fig.update_traces(q1=[ 1, 2, 3 ], median=[ 4, 5, 6 ],
+                  q3=[ 7, 8, 9 ], lowerfence=[-1, 0, 1],
+                  upperfence=[5, 6, 7], mean=[ 2.2, 2.8, 3.2 ],
                   sd=[ 0.2, 0.4, 0.6 ], notchspan=[ 0.2, 0.4, 0.6 ] )
 
 fig.show()
@@ -485,20 +487,6 @@ fig.update_layout(
 )
 
 fig.show()
-```
-
-### Dash Example
-
-[Dash](https://plot.ly/products/dash/) is an Open Source Python library which can help you convert plotly figures into a reactive, web-based application. Below is a simple example of a dashboard created using Dash. Its [source code](https://github.com/plotly/simple-example-chart-apps/tree/master/dash-boxplot) can easily be deployed to a PaaS.
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-boxplot/", width="100%", height="650px", frameBorder="0")
-```
-
-```python
-from IPython.display import IFrame
-IFrame(src= "https://dash-simple-apps.plotly.host/dash-boxplot/code", width="100%", height=500, frameBorder="0")
 ```
 
 #### Reference

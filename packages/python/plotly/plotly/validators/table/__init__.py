@@ -238,10 +238,9 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
-                spans more two or more lines (i.e. `text`
-                contains one or more <br> HTML tags) or if an
-                explicit width is set to override the text
-                width.
+                spans two or more lines (i.e. `text` contains
+                one or more <br> HTML tags) or if an explicit
+                width is set to override the text width.
             alignsrc
                 Sets the source reference on plot.ly for  align
                 .
@@ -421,10 +420,9 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
-                spans more two or more lines (i.e. `text`
-                contains one or more <br> HTML tags) or if an
-                explicit width is set to override the text
-                width.
+                spans two or more lines (i.e. `text` contains
+                one or more <br> HTML tags) or if an explicit
+                width is set to override the text width.
             alignsrc
                 Sets the source reference on plot.ly for  align
                 .

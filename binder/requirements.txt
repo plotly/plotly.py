@@ -1,5 +1,5 @@
 jupytext
-plotly==4.4.1
+plotly==4.5.1
 jupyter
 notebook
 pandas==0.23.0
@@ -12,3 +12,5 @@ psutil
 requests
 networkx
 scikit-image
+datashader
+pyarrow

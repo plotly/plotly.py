@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
+      format_version: "1.2"
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -33,17 +33,13 @@ jupyter:
     thumbnail: thumbnail/mapbox-density.png
 ---
 
-
 #### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
-
-
-
+To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/python/mapbox-layers/) documentation for more information.
 
 ### Stamen Terrain base map (no token needed): density mapbox with `plotly.express`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.density_mapbox`, each row of the DataFrame is represented as a point smoothed with a given radius of influence.
 
@@ -67,7 +63,7 @@ import pandas as pd
 quakes = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
 
 import plotly.graph_objects as go
-fig = go.Figure(go.Densitymapbox(lat=quakes.Latitude, lon=quakes.Longitude, z=quakes.Magnitude, 
+fig = go.Figure(go.Densitymapbox(lat=quakes.Latitude, lon=quakes.Longitude, z=quakes.Magnitude,
                                  radius=10))
 fig.update_layout(mapbox_style="stamen-terrain", mapbox_center_lon=180)
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
@@ -75,4 +71,5 @@ fig.show()
 ```
 
 #### Reference
+
 See https://plot.ly/python/reference/#densitymapbox for more information about mapbox and their attribute options.

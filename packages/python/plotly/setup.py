@@ -137,6 +137,12 @@ class NPM(Command):
                 stdout=sys.stdout,
                 stderr=sys.stderr,
             )
+            check_call(
+                [npmName, "run", "build"],
+                cwd=node_root,
+                stdout=sys.stdout,
+                stderr=sys.stderr,
+            )
             os.utime(self.node_modules, None)
 
         for t in self.targets:
@@ -161,7 +167,7 @@ class CodegenCommand(Command):
         pass
 
     def run(self):
-        if sys.version_info.major != 3 or sys.version_info.minor < 6:
+        if sys.version_info < (3, 6):
             raise ImportError("Code generation must be executed with Python >= 3.6")
 
         from codegen import perform_codegen

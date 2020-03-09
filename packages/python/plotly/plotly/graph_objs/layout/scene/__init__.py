@@ -7976,9 +7976,9 @@ class Annotation(_BaseLayoutHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -8960,10 +8960,10 @@ class Annotation(_BaseLayoutHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         arrowcolor
             Sets the color of the annotation arrow.
         arrowhead
@@ -9170,10 +9170,10 @@ class Annotation(_BaseLayoutHierarchyType):
             :py:class:`plotly.graph_objs.layout.scene.Annotation`
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         arrowcolor
             Sets the color of the annotation arrow.
         arrowhead

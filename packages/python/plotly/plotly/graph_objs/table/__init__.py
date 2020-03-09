@@ -629,9 +629,9 @@ class Header(_BaseTraceHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -989,10 +989,10 @@ class Header(_BaseTraceHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
@@ -1061,10 +1061,10 @@ class Header(_BaseTraceHierarchyType):
             :py:class:`plotly.graph_objs.table.Header`
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
@@ -1408,9 +1408,9 @@ class Cells(_BaseTraceHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1768,10 +1768,10 @@ class Cells(_BaseTraceHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
@@ -1840,10 +1840,10 @@ class Cells(_BaseTraceHierarchyType):
             :py:class:`plotly.graph_objs.table.Cells`
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
