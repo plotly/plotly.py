@@ -941,7 +941,7 @@ class PlotlyNode:
                         f"{subtype_node.name_datatype_class}"
                     )
                 subtype_description = (
-                        f"A tuple of :py:class:`{class_name}` instances or "
+                    f"A tuple of :py:class:`{class_name}` instances or "
                     "dicts with compatible properties"
                 )
             elif subtype_node.is_compound:
@@ -957,9 +957,7 @@ class PlotlyNode:
                         f"{subtype_node.name_datatype_class}"
                     )
 
-                subtype_description = (
-                        f":py:class:`{class_name}` instance or dict with compatible properties"
-                )
+                subtype_description = f":py:class:`{class_name}` instance or dict with compatible properties"
             else:
                 subtype_description = ""
 
