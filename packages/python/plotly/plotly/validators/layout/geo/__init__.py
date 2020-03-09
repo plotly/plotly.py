@@ -257,9 +257,9 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 parallels (tangent, secant) where the cone
                 intersects the sphere.
             rotation
-                plotly.graph_objects.layout.geo.projection.Rota
-                tion instance or dict with compatible
-                properties
+                :py:class:`plotly.graph_objects.layout.geo.proj
+                ection.Rotation` instance or dict with
+                compatible properties
             scale
                 Zooms in or out on the map view. A scale of 1
                 corresponds to the largest zoom level that fits

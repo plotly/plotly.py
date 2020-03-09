@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.contour.Stream
+            an instance of
+            :py:class:`plotly.graph_objs.contour.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.contour.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.contour.Stream"""
+an instance of :py:class:`plotly.graph_objs.contour.Stream`"""
             )
 
         # Handle skip_invalid
@@ -312,7 +313,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.contour.Line
+            an instance of
+            :py:class:`plotly.graph_objs.contour.Line`
         color
             Sets the color of the contour level. Has no effect if
             `contours.coloring` is set to "lines".
@@ -348,7 +350,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.contour.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.contour.Line"""
+an instance of :py:class:`plotly.graph_objs.contour.Line`"""
             )
 
         # Handle skip_invalid
@@ -760,7 +762,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.contour.Hoverlabel
+            an instance of
+            :py:class:`plotly.graph_objs.contour.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -809,7 +812,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.contour.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.contour.Hoverlabel"""
+an instance of :py:class:`plotly.graph_objs.contour.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1237,7 +1240,8 @@ class Contours(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.contour.Contours
+            an instance of
+            :py:class:`plotly.graph_objs.contour.Contours`
         coloring
             Determines the coloring method showing the contour
             values. If "fill", coloring is done evenly between each
@@ -1313,7 +1317,7 @@ class Contours(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.contour.Contours 
 constructor must be a dict or 
-an instance of plotly.graph_objs.contour.Contours"""
+an instance of :py:class:`plotly.graph_objs.contour.Contours`"""
             )
 
         # Handle skip_invalid
@@ -2723,9 +2727,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.contour.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.contour.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.contou
             r.colorbar.tickformatstopdefaults), sets the default
@@ -2765,8 +2769,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.contour.colorbar.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.contour.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use contour.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2860,7 +2864,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.contour.ColorBar
+            an instance of
+            :py:class:`plotly.graph_objs.contour.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2973,9 +2978,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.contour.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.contour.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.contou
             r.colorbar.tickformatstopdefaults), sets the default
@@ -3015,8 +3020,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.contour.colorbar.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.contour.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use contour.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3068,7 +3073,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.contour.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.contour.ColorBar"""
+an instance of :py:class:`plotly.graph_objs.contour.ColorBar`"""
             )
 
         # Handle skip_invalid

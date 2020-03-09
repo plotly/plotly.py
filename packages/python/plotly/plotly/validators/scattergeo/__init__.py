@@ -26,12 +26,13 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattergeo.unselected.Mark
-                er instance or dict with compatible properties
-            textfont
-                plotly.graph_objects.scattergeo.unselected.Text
-                font instance or dict with compatible
+                :py:class:`plotly.graph_objects.scattergeo.unse
+                lected.Marker` instance or dict with compatible
                 properties
+            textfont
+                :py:class:`plotly.graph_objects.scattergeo.unse
+                lected.Textfont` instance or dict with
+                compatible properties
 """,
             ),
             **kwargs
@@ -288,11 +289,13 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattergeo.selected.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.sele
+                cted.Marker` instance or dict with compatible
+                properties
             textfont
-                plotly.graph_objects.scattergeo.selected.Textfo
-                nt instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.sele
+                cted.Textfont` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -440,8 +443,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.scattergeo.marker.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.mark
+                er.ColorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.color`is set to a numerical array. The
@@ -462,11 +466,13 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             gradient
-                plotly.graph_objects.scattergeo.marker.Gradient
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.mark
+                er.Gradient` instance or dict with compatible
+                properties
             line
-                plotly.graph_objects.scattergeo.marker.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.mark
+                er.Line` instance or dict with compatible
+                properties
             opacity
                 Sets the marker opacity.
             opacitysrc

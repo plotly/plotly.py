@@ -49,8 +49,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.splom.unselected.Marker instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.unselected.Marker
+            ` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -61,10 +61,11 @@ class Unselected(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Unselected
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Unselected`
         marker
-            plotly.graph_objects.splom.unselected.Marker instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.unselected.Marker
+            ` instance or dict with compatible properties
 
         Returns
         -------
@@ -85,7 +86,7 @@ class Unselected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Unselected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Unselected"""
+an instance of :py:class:`plotly.graph_objs.splom.Unselected`"""
             )
 
         # Handle skip_invalid
@@ -193,7 +194,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Stream
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -223,7 +225,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Stream"""
+an instance of :py:class:`plotly.graph_objs.splom.Stream`"""
             )
 
         # Handle skip_invalid
@@ -303,8 +305,8 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.splom.selected.Marker instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.selected.Marker`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -315,10 +317,11 @@ class Selected(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Selected
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Selected`
         marker
-            plotly.graph_objects.splom.selected.Marker instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.selected.Marker`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -339,7 +342,7 @@ class Selected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Selected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Selected"""
+an instance of :py:class:`plotly.graph_objs.splom.Selected`"""
             )
 
         # Handle skip_invalid
@@ -726,9 +729,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.splom.marker.co
-                    lorbar.Tickformatstop instances or dicts with
-                    compatible properties
+                    A tuple of :py:class:`plotly.graph_objects.splo
+                    m.marker.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.splom.marker.colorbar.tickformatstopdefaults)
@@ -775,8 +778,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.splom.marker.colorbar.Titl
-                    e instance or dict with compatible properties
+                    :py:class:`plotly.graph_objects.splom.marker.co
+                    lorbar.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     splom.marker.colorbar.title.font instead. Sets
@@ -1364,8 +1368,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.splom.marker.ColorBar instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1383,8 +1387,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.splom.marker.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.splom.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the marker opacity.
         opacitysrc
@@ -1460,7 +1464,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Marker
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1508,8 +1513,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.splom.marker.ColorBar instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1527,8 +1532,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.splom.marker.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.splom.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the marker opacity.
         opacitysrc
@@ -1588,7 +1593,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Marker"""
+an instance of :py:class:`plotly.graph_objs.splom.Marker`"""
             )
 
         # Handle skip_invalid
@@ -2054,7 +2059,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Hoverlabel
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2103,7 +2109,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Hoverlabel"""
+an instance of :py:class:`plotly.graph_objs.splom.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2346,8 +2352,8 @@ class Dimension(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            plotly.graph_objects.splom.dimension.Axis instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.dimension.Axis`
+            instance or dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -2399,10 +2405,11 @@ class Dimension(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Dimension
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Dimension`
         axis
-            plotly.graph_objects.splom.dimension.Axis instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.splom.dimension.Axis`
+            instance or dict with compatible properties
         label
             Sets the label corresponding to this splom dimension.
         name
@@ -2453,7 +2460,7 @@ class Dimension(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Dimension 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Dimension"""
+an instance of :py:class:`plotly.graph_objs.splom.Dimension`"""
             )
 
         # Handle skip_invalid
@@ -2553,7 +2560,8 @@ class Diagonal(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.Diagonal
+            an instance of
+            :py:class:`plotly.graph_objs.splom.Diagonal`
         visible
             Determines whether or not subplots on the diagonal are
             displayed.
@@ -2577,7 +2585,7 @@ class Diagonal(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.Diagonal 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.Diagonal"""
+an instance of :py:class:`plotly.graph_objs.splom.Diagonal`"""
             )
 
         # Handle skip_invalid

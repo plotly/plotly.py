@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.ohlc.Stream
+            an instance of
+            :py:class:`plotly.graph_objs.ohlc.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.ohlc.Stream"""
+an instance of :py:class:`plotly.graph_objs.ohlc.Stream`"""
             )
 
         # Handle skip_invalid
@@ -227,7 +228,7 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.ohlc.Line
+            an instance of :py:class:`plotly.graph_objs.ohlc.Line`
         dash
             Sets the dash style of lines. Set to a dash type string
             ("solid", "dot", "dash", "longdash", "dashdot", or
@@ -259,7 +260,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.ohlc.Line"""
+an instance of :py:class:`plotly.graph_objs.ohlc.Line`"""
             )
 
         # Handle skip_invalid
@@ -342,8 +343,8 @@ class Increasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objects.ohlc.increasing.Line instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.ohlc.increasing.Line`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, line=None, **kwargs):
@@ -354,10 +355,11 @@ class Increasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.ohlc.Increasing
+            an instance of
+            :py:class:`plotly.graph_objs.ohlc.Increasing`
         line
-            plotly.graph_objects.ohlc.increasing.Line instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.ohlc.increasing.Line`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -378,7 +380,7 @@ class Increasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.Increasing 
 constructor must be a dict or 
-an instance of plotly.graph_objs.ohlc.Increasing"""
+an instance of :py:class:`plotly.graph_objs.ohlc.Increasing`"""
             )
 
         # Handle skip_invalid
@@ -806,7 +808,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.ohlc.Hoverlabel
+            an instance of
+            :py:class:`plotly.graph_objs.ohlc.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -858,7 +861,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.ohlc.Hoverlabel"""
+an instance of :py:class:`plotly.graph_objs.ohlc.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -965,8 +968,8 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objects.ohlc.decreasing.Line instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.ohlc.decreasing.Line`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, line=None, **kwargs):
@@ -977,10 +980,11 @@ class Decreasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.ohlc.Decreasing
+            an instance of
+            :py:class:`plotly.graph_objs.ohlc.Decreasing`
         line
-            plotly.graph_objects.ohlc.decreasing.Line instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.ohlc.decreasing.Line`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1001,7 +1005,7 @@ class Decreasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.Decreasing 
 constructor must be a dict or 
-an instance of plotly.graph_objs.ohlc.Decreasing"""
+an instance of :py:class:`plotly.graph_objs.ohlc.Decreasing`"""
             )
 
         # Handle skip_invalid

@@ -1350,9 +1350,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.coloraxis.colorb
-            ar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.color
+            axis.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1392,8 +1392,8 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.layout.coloraxis.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.layout.coloraxis.colorb
+            ar.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             layout.coloraxis.colorbar.title.font instead. Sets this
@@ -1489,7 +1489,7 @@ class ColorBar(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.coloraxis.ColorBar
+            :py:class:`plotly.graph_objs.layout.coloraxis.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -1602,9 +1602,9 @@ class ColorBar(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.coloraxis.colorb
-            ar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.color
+            axis.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.colo
             raxis.colorbar.tickformatstopdefaults), sets the
@@ -1644,8 +1644,8 @@ class ColorBar(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.layout.coloraxis.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.layout.coloraxis.colorb
+            ar.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             layout.coloraxis.colorbar.title.font instead. Sets this
@@ -1698,7 +1698,7 @@ class ColorBar(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.coloraxis.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.coloraxis.ColorBar"""
+an instance of :py:class:`plotly.graph_objs.layout.coloraxis.ColorBar`"""
             )
 
         # Handle skip_invalid

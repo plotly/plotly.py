@@ -131,8 +131,8 @@ class Title(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.histogram2dcontour.colorbar.Title
+            an instance of :py:class:`plotly.graph_objs.histogram2d
+            contour.colorbar.Title`
         font
             Sets this color bar's title font. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -167,7 +167,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.colorbar.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.colorbar.Title"""
+an instance of :py:class:`plotly.graph_objs.histogram2dcontour.colorbar.Title`"""
             )
 
         # Handle skip_invalid
@@ -391,8 +391,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram2dcontour.col
-            orbar.Tickformatstop
+            an instance of :py:class:`plotly.graph_objs.histogram2d
+            contour.colorbar.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -443,7 +443,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.colorbar.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.colorbar.Tickformatstop"""
+an instance of :py:class:`plotly.graph_objs.histogram2dcontour.colorbar.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -643,8 +643,8 @@ class Tickfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.histogram2dcontour.colorbar.Tickfont
+            an instance of :py:class:`plotly.graph_objs.histogram2d
+            contour.colorbar.Tickfont`
         color
 
         family
@@ -683,7 +683,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.colorbar.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.colorbar.Tickfont"""
+an instance of :py:class:`plotly.graph_objs.histogram2dcontour.colorbar.Tickfont`"""
             )
 
         # Handle skip_invalid

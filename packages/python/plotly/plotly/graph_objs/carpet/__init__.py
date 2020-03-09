@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.carpet.Stream
+            an instance of
+            :py:class:`plotly.graph_objs.carpet.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.Stream"""
+an instance of :py:class:`plotly.graph_objs.carpet.Stream`"""
             )
 
         # Handle skip_invalid
@@ -292,7 +293,8 @@ class Font(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.carpet.Font
+            an instance of
+            :py:class:`plotly.graph_objs.carpet.Font`
         color
 
         family
@@ -331,7 +333,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.Font"""
+an instance of :py:class:`plotly.graph_objs.carpet.Font`"""
             )
 
         # Handle skip_invalid
@@ -2067,9 +2069,9 @@ class Baxis(_BaseTraceHierarchyType):
             example, *2016-10-13 09:15:23.456* with tickformat
             "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.carpet.baxis.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.carpet.baxis
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .baxis.tickformatstopdefaults), sets the default
@@ -2094,8 +2096,8 @@ class Baxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objects.carpet.baxis.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.carpet.baxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use carpet.baxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -2185,7 +2187,8 @@ class Baxis(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.carpet.Baxis
+            an instance of
+            :py:class:`plotly.graph_objs.carpet.Baxis`
         arraydtick
             The stride between grid lines along the axis
         arraytick0
@@ -2336,9 +2339,9 @@ class Baxis(_BaseTraceHierarchyType):
             example, *2016-10-13 09:15:23.456* with tickformat
             "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.carpet.baxis.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.carpet.baxis
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .baxis.tickformatstopdefaults), sets the default
@@ -2363,8 +2366,8 @@ class Baxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objects.carpet.baxis.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.carpet.baxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use carpet.baxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -2400,7 +2403,7 @@ class Baxis(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.Baxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.Baxis"""
+an instance of :py:class:`plotly.graph_objs.carpet.Baxis`"""
             )
 
         # Handle skip_invalid
@@ -4300,9 +4303,9 @@ class Aaxis(_BaseTraceHierarchyType):
             example, *2016-10-13 09:15:23.456* with tickformat
             "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.carpet.aaxis.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.carpet.aaxis
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .aaxis.tickformatstopdefaults), sets the default
@@ -4327,8 +4330,8 @@ class Aaxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objects.carpet.aaxis.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.carpet.aaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use carpet.aaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -4418,7 +4421,8 @@ class Aaxis(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.carpet.Aaxis
+            an instance of
+            :py:class:`plotly.graph_objs.carpet.Aaxis`
         arraydtick
             The stride between grid lines along the axis
         arraytick0
@@ -4569,9 +4573,9 @@ class Aaxis(_BaseTraceHierarchyType):
             example, *2016-10-13 09:15:23.456* with tickformat
             "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.carpet.aaxis.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :py:class:`plotly.graph_objects.carpet.aaxis
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.carpet
             .aaxis.tickformatstopdefaults), sets the default
@@ -4596,8 +4600,8 @@ class Aaxis(_BaseTraceHierarchyType):
         tickvalssrc
             Sets the source reference on plot.ly for  tickvals .
         title
-            plotly.graph_objects.carpet.aaxis.Title instance or
-            dict with compatible properties
+            :py:class:`plotly.graph_objects.carpet.aaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use carpet.aaxis.title.font instead.
             Sets this axis' title font. Note that the title's font
@@ -4633,7 +4637,7 @@ class Aaxis(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.Aaxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.Aaxis"""
+an instance of :py:class:`plotly.graph_objs.carpet.Aaxis`"""
             )
 
         # Handle skip_invalid

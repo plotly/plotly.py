@@ -25,9 +25,9 @@ Layout
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Layout
-   layout
 
 
 
@@ -36,9 +36,9 @@ Simple charts
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Scatter
-   scatter
    Scattergl
    Bar
    Pie
@@ -52,6 +52,7 @@ Distributions
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Box
    Violin
@@ -64,6 +65,7 @@ Finance
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Ohlc
    Candlestick
@@ -77,6 +79,7 @@ Finance
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Scatter3d
    Surface
@@ -104,6 +107,7 @@ Specialized
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Scatterpolar
    Scatterpolargl

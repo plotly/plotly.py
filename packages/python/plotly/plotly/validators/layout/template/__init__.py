@@ -29,147 +29,189 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             area
-                A tuple of plotly.graph_objects.Area instances
+                A tuple of
+                :py:class:`plotly.graph_objects.Area` instances
                 or dicts with compatible properties
             barpolar
-                A tuple of plotly.graph_objects.Barpolar
+                A tuple of
+                :py:class:`plotly.graph_objects.Barpolar`
                 instances or dicts with compatible properties
             bar
-                A tuple of plotly.graph_objects.Bar instances
-                or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.Bar`
+                instances or dicts with compatible properties
             box
-                A tuple of plotly.graph_objects.Box instances
-                or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.Box`
+                instances or dicts with compatible properties
             candlestick
-                A tuple of plotly.graph_objects.Candlestick
+                A tuple of
+                :py:class:`plotly.graph_objects.Candlestick`
                 instances or dicts with compatible properties
             carpet
-                A tuple of plotly.graph_objects.Carpet
+                A tuple of
+                :py:class:`plotly.graph_objects.Carpet`
                 instances or dicts with compatible properties
             choroplethmapbox
-                A tuple of
-                plotly.graph_objects.Choroplethmapbox instances
-                or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.Chor
+                oplethmapbox` instances or dicts with
+                compatible properties
             choropleth
-                A tuple of plotly.graph_objects.Choropleth
+                A tuple of
+                :py:class:`plotly.graph_objects.Choropleth`
                 instances or dicts with compatible properties
             cone
-                A tuple of plotly.graph_objects.Cone instances
+                A tuple of
+                :py:class:`plotly.graph_objects.Cone` instances
                 or dicts with compatible properties
             contourcarpet
-                A tuple of plotly.graph_objects.Contourcarpet
+                A tuple of
+                :py:class:`plotly.graph_objects.Contourcarpet`
                 instances or dicts with compatible properties
             contour
-                A tuple of plotly.graph_objects.Contour
+                A tuple of
+                :py:class:`plotly.graph_objects.Contour`
                 instances or dicts with compatible properties
             densitymapbox
-                A tuple of plotly.graph_objects.Densitymapbox
+                A tuple of
+                :py:class:`plotly.graph_objects.Densitymapbox`
                 instances or dicts with compatible properties
             funnelarea
-                A tuple of plotly.graph_objects.Funnelarea
+                A tuple of
+                :py:class:`plotly.graph_objects.Funnelarea`
                 instances or dicts with compatible properties
             funnel
-                A tuple of plotly.graph_objects.Funnel
+                A tuple of
+                :py:class:`plotly.graph_objects.Funnel`
                 instances or dicts with compatible properties
             heatmapgl
-                A tuple of plotly.graph_objects.Heatmapgl
+                A tuple of
+                :py:class:`plotly.graph_objects.Heatmapgl`
                 instances or dicts with compatible properties
             heatmap
-                A tuple of plotly.graph_objects.Heatmap
+                A tuple of
+                :py:class:`plotly.graph_objects.Heatmap`
                 instances or dicts with compatible properties
             histogram2dcontour
-                A tuple of
-                plotly.graph_objects.Histogram2dContour
-                instances or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.Hist
+                ogram2dContour` instances or dicts with
+                compatible properties
             histogram2d
-                A tuple of plotly.graph_objects.Histogram2d
+                A tuple of
+                :py:class:`plotly.graph_objects.Histogram2d`
                 instances or dicts with compatible properties
             histogram
-                A tuple of plotly.graph_objects.Histogram
+                A tuple of
+                :py:class:`plotly.graph_objects.Histogram`
                 instances or dicts with compatible properties
             image
-                A tuple of plotly.graph_objects.Image instances
-                or dicts with compatible properties
+                A tuple of
+                :py:class:`plotly.graph_objects.Image`
+                instances or dicts with compatible properties
             indicator
-                A tuple of plotly.graph_objects.Indicator
+                A tuple of
+                :py:class:`plotly.graph_objects.Indicator`
                 instances or dicts with compatible properties
             isosurface
-                A tuple of plotly.graph_objects.Isosurface
+                A tuple of
+                :py:class:`plotly.graph_objects.Isosurface`
                 instances or dicts with compatible properties
             mesh3d
-                A tuple of plotly.graph_objects.Mesh3d
+                A tuple of
+                :py:class:`plotly.graph_objects.Mesh3d`
                 instances or dicts with compatible properties
             ohlc
-                A tuple of plotly.graph_objects.Ohlc instances
+                A tuple of
+                :py:class:`plotly.graph_objects.Ohlc` instances
                 or dicts with compatible properties
             parcats
-                A tuple of plotly.graph_objects.Parcats
+                A tuple of
+                :py:class:`plotly.graph_objects.Parcats`
                 instances or dicts with compatible properties
             parcoords
-                A tuple of plotly.graph_objects.Parcoords
+                A tuple of
+                :py:class:`plotly.graph_objects.Parcoords`
                 instances or dicts with compatible properties
             pie
-                A tuple of plotly.graph_objects.Pie instances
-                or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.Pie`
+                instances or dicts with compatible properties
             pointcloud
-                A tuple of plotly.graph_objects.Pointcloud
+                A tuple of
+                :py:class:`plotly.graph_objects.Pointcloud`
                 instances or dicts with compatible properties
             sankey
-                A tuple of plotly.graph_objects.Sankey
+                A tuple of
+                :py:class:`plotly.graph_objects.Sankey`
                 instances or dicts with compatible properties
             scatter3d
-                A tuple of plotly.graph_objects.Scatter3d
+                A tuple of
+                :py:class:`plotly.graph_objects.Scatter3d`
                 instances or dicts with compatible properties
             scattercarpet
-                A tuple of plotly.graph_objects.Scattercarpet
+                A tuple of
+                :py:class:`plotly.graph_objects.Scattercarpet`
                 instances or dicts with compatible properties
             scattergeo
-                A tuple of plotly.graph_objects.Scattergeo
+                A tuple of
+                :py:class:`plotly.graph_objects.Scattergeo`
                 instances or dicts with compatible properties
             scattergl
-                A tuple of plotly.graph_objects.Scattergl
+                A tuple of
+                :py:class:`plotly.graph_objects.Scattergl`
                 instances or dicts with compatible properties
             scattermapbox
-                A tuple of plotly.graph_objects.Scattermapbox
+                A tuple of
+                :py:class:`plotly.graph_objects.Scattermapbox`
                 instances or dicts with compatible properties
             scatterpolargl
-                A tuple of plotly.graph_objects.Scatterpolargl
+                A tuple of
+                :py:class:`plotly.graph_objects.Scatterpolargl`
                 instances or dicts with compatible properties
             scatterpolar
-                A tuple of plotly.graph_objects.Scatterpolar
+                A tuple of
+                :py:class:`plotly.graph_objects.Scatterpolar`
                 instances or dicts with compatible properties
             scatter
-                A tuple of plotly.graph_objects.Scatter
+                A tuple of
+                :py:class:`plotly.graph_objects.Scatter`
                 instances or dicts with compatible properties
             scatterternary
-                A tuple of plotly.graph_objects.Scatterternary
+                A tuple of
+                :py:class:`plotly.graph_objects.Scatterternary`
                 instances or dicts with compatible properties
             splom
-                A tuple of plotly.graph_objects.Splom instances
-                or dicts with compatible properties
+                A tuple of
+                :py:class:`plotly.graph_objects.Splom`
+                instances or dicts with compatible properties
             streamtube
-                A tuple of plotly.graph_objects.Streamtube
+                A tuple of
+                :py:class:`plotly.graph_objects.Streamtube`
                 instances or dicts with compatible properties
             sunburst
-                A tuple of plotly.graph_objects.Sunburst
+                A tuple of
+                :py:class:`plotly.graph_objects.Sunburst`
                 instances or dicts with compatible properties
             surface
-                A tuple of plotly.graph_objects.Surface
+                A tuple of
+                :py:class:`plotly.graph_objects.Surface`
                 instances or dicts with compatible properties
             table
-                A tuple of plotly.graph_objects.Table instances
-                or dicts with compatible properties
+                A tuple of
+                :py:class:`plotly.graph_objects.Table`
+                instances or dicts with compatible properties
             treemap
-                A tuple of plotly.graph_objects.Treemap
+                A tuple of
+                :py:class:`plotly.graph_objects.Treemap`
                 instances or dicts with compatible properties
             violin
-                A tuple of plotly.graph_objects.Violin
+                A tuple of
+                :py:class:`plotly.graph_objects.Violin`
                 instances or dicts with compatible properties
             volume
-                A tuple of plotly.graph_objects.Volume
+                A tuple of
+                :py:class:`plotly.graph_objects.Volume`
                 instances or dicts with compatible properties
             waterfall
-                A tuple of plotly.graph_objects.Waterfall
+                A tuple of
+                :py:class:`plotly.graph_objects.Waterfall`
                 instances or dicts with compatible properties
 """,
             ),

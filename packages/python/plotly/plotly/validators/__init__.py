@@ -11,12 +11,13 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             angularaxis
-                plotly.graph_objects.layout.AngularAxis
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.AngularA
+                xis` instance or dict with compatible
+                properties
             annotations
-                A tuple of
-                plotly.graph_objects.layout.Annotation
-                instances or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.layo
+                ut.Annotation` instances or dicts with
+                compatible properties
             annotationdefaults
                 When used in a template (as
                 layout.template.layout.annotationdefaults),
@@ -94,11 +95,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 missing, `plotly_click` and `plotly_selected`
                 events are not fired.
             coloraxis
-                plotly.graph_objects.layout.Coloraxis instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Coloraxi
+                s` instance or dict with compatible properties
             colorscale
-                plotly.graph_objects.layout.Colorscale instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Colorsca
+                le` instance or dict with compatible properties
             colorway
                 Sets the default trace colors.
             datarevision
@@ -196,11 +197,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 over one another, you might need to an
                 "opacity" to see multiple bars.
             geo
-                plotly.graph_objects.layout.Geo instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Geo`
+                instance or dict with compatible properties
             grid
-                plotly.graph_objects.layout.Grid instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Grid`
+                instance or dict with compatible properties
             height
                 Sets the plot's height (in px).
             hiddenlabels
@@ -229,8 +230,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 objects will not supersede hover on point-like
                 objects in case of conflict.
             hoverlabel
-                plotly.graph_objects.layout.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Hoverlab
+                el` instance or dict with compatible properties
             hovermode
                 Determines the mode of hover interactions. If
                 `clickmode` includes the "select" flag,
@@ -241,7 +242,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 cartesian coordinates. For anything else the
                 default value is "closest".
             images
-                A tuple of plotly.graph_objects.layout.Image
+                A tuple of
+                :py:class:`plotly.graph_objects.layout.Image`
                 instances or dicts with compatible properties
             imagedefaults
                 When used in a template (as
@@ -249,14 +251,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default property values to use for elements of
                 layout.images
             legend
-                plotly.graph_objects.layout.Legend instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Legend`
+                instance or dict with compatible properties
             mapbox
-                plotly.graph_objects.layout.Mapbox instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Mapbox`
+                instance or dict with compatible properties
             margin
-                plotly.graph_objects.layout.Margin instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Margin`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information that can be used
                 in various `text` attributes. Attributes such
@@ -273,8 +275,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  meta
                 .
             modebar
-                plotly.graph_objects.layout.Modebar instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Modebar`
+                instance or dict with compatible properties
             orientation
                 Legacy polar charts are deprecated! Please
                 switch to "polar" subplots. Rotates the entire
@@ -293,14 +295,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of plotting area in-between x
                 and y axes.
             polar
-                plotly.graph_objects.layout.Polar instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Polar`
+                instance or dict with compatible properties
             radialaxis
-                plotly.graph_objects.layout.RadialAxis instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.RadialAx
+                is` instance or dict with compatible properties
             scene
-                plotly.graph_objects.layout.Scene instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Scene`
+                instance or dict with compatible properties
             selectdirection
                 When "dragmode" is set to "select", this limits
                 the selection of the drag to horizontal,
@@ -317,7 +319,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dflt is ".," but other locales may alter this
                 default.
             shapes
-                A tuple of plotly.graph_objects.layout.Shape
+                A tuple of
+                :py:class:`plotly.graph_objects.layout.Shape`
                 instances or dicts with compatible properties
             shapedefaults
                 When used in a template (as
@@ -332,7 +335,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace is shown in the legend. c) One trace is
                 explicitly given with `showlegend: true`.
             sliders
-                A tuple of plotly.graph_objects.layout.Slider
+                A tuple of
+                :py:class:`plotly.graph_objects.layout.Slider`
                 instances or dicts with compatible properties
             sliderdefaults
                 When used in a template (as
@@ -381,11 +385,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plot, make an item with matching
                 `templateitemname` and `visible: false`.
             ternary
-                plotly.graph_objects.layout.Ternary instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Ternary`
+                instance or dict with compatible properties
             title
-                plotly.graph_objects.layout.Title instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Title`
+                instance or dict with compatible properties
             titlefont
                 Deprecated: Please use layout.title.font
                 instead. Sets the title font. Note that the
@@ -424,12 +428,13 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 range will reset but the x axis range will
                 retain any user-driven zoom.
             uniformtext
-                plotly.graph_objects.layout.Uniformtext
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.Uniformt
+                ext` instance or dict with compatible
+                properties
             updatemenus
-                A tuple of
-                plotly.graph_objects.layout.Updatemenu
-                instances or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.layo
+                ut.Updatemenu` instances or dicts with
+                compatible properties
             updatemenudefaults
                 When used in a template (as
                 layout.template.layout.updatemenudefaults),
@@ -469,11 +474,11 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the plot's width (in px).
             xaxis
-                plotly.graph_objects.layout.XAxis instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.XAxis`
+                instance or dict with compatible properties
             yaxis
-                plotly.graph_objects.layout.YAxis instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.layout.YAxis`
+                instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -508,8 +513,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set `xaxis.layer` and `yaxis.layer` to *below
                 traces*.
             connector
-                plotly.graph_objects.waterfall.Connector
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Conne
+                ctor` instance or dict with compatible
+                properties
             constraintext
                 Constrain the size of text inside or outside a
                 bar to be no larger than the bar itself.
@@ -523,8 +529,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             decreasing
-                plotly.graph_objects.waterfall.Decreasing
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Decre
+                asing` instance or dict with compatible
+                properties
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -541,8 +548,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.waterfall.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Hover
+                label` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -593,8 +601,9 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on plot.ly for  ids .
             increasing
-                plotly.graph_objects.waterfall.Increasing
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Incre
+                asing` instance or dict with compatible
+                properties
             insidetextanchor
                 Determines if texts are kept at center or
                 start/end points in `textposition` "inside"
@@ -671,8 +680,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.waterfall.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Strea
+                m` instance or dict with compatible properties
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -737,8 +746,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 texttemplate .
             totals
-                plotly.graph_objects.waterfall.Totals instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.waterfall.Total
+                s` instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -830,8 +839,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             caps
-                plotly.graph_objects.volume.Caps instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Caps`
+                instance or dict with compatible properties
             cauto
                 Determines whether or not the color domain is
                 computed with respect to the input data (here
@@ -862,8 +871,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.volume.ColorBar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.ColorBar
+                ` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -879,8 +888,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
                 ,Electric,Viridis,Cividis.
             contour
-                plotly.graph_objects.volume.Contour instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Contour`
+                instance or dict with compatible properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -904,8 +913,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.volume.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Hoverlab
+                el` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -958,11 +967,12 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.volume.Lighting instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Lighting
+                ` instance or dict with compatible properties
             lightposition
-                plotly.graph_objects.volume.Lightposition
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Lightpos
+                ition` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -1024,17 +1034,17 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             slices
-                plotly.graph_objects.volume.Slices instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Slices`
+                instance or dict with compatible properties
             spaceframe
-                plotly.graph_objects.volume.Spaceframe instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Spacefra
+                me` instance or dict with compatible properties
             stream
-                plotly.graph_objects.volume.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Stream`
+                instance or dict with compatible properties
             surface
-                plotly.graph_objects.volume.Surface instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.volume.Surface`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with the
                 vertices. If trace `hoverinfo` contains a
@@ -1123,8 +1133,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 density estimate. By default, the bandwidth is
                 determined by Silverman's rule of thumb.
             box
-                plotly.graph_objects.violin.Box instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Box`
+                instance or dict with compatible properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -1149,8 +1159,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.violin.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Hoverlab
+                el` instance or dict with compatible properties
             hoveron
                 Do the hover effects highlight individual
                 violins or sample points or the kernel density
@@ -1209,14 +1219,14 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.violin.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Line`
+                instance or dict with compatible properties
             marker
-                plotly.graph_objects.violin.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Marker`
+                instance or dict with compatible properties
             meanline
-                plotly.graph_objects.violin.Meanline instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Meanline
+                ` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -1291,8 +1301,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 violins are scaled by the number of sample
                 points makingup each violin.
             selected
-                plotly.graph_objects.violin.Selected instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Selected
+                ` instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -1327,8 +1337,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 settings, use mode "manual" and fill in the
                 `span` attribute.
             stream
-                plotly.graph_objects.violin.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with each
                 sample value. If a single string, the same
@@ -1367,8 +1377,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.violin.Unselected instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.violin.Unselect
+                ed` instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -1451,8 +1461,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             domain
-                plotly.graph_objects.treemap.Domain instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Domain`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -1463,8 +1473,9 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.treemap.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Hoverla
+                bel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -1530,8 +1541,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 if `ids` is filled in, otherwise plotly
                 attempts to find a matching item in `labels`.
             marker
-                plotly.graph_objects.treemap.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Marker`
+                instance or dict with compatible properties
             maxdepth
                 Sets the number of rendered sectors from any
                 given `level`. Set `maxdepth` to "-1" to render
@@ -1577,11 +1588,11 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 parents .
             pathbar
-                plotly.graph_objects.treemap.Pathbar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Pathbar
+                ` instance or dict with compatible properties
             stream
-                plotly.graph_objects.treemap.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Stream`
+                instance or dict with compatible properties
             text
                 Sets text elements associated with each sector.
                 If trace `textinfo` contains a "text" flag,
@@ -1625,8 +1636,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 texttemplate .
             tiling
-                plotly.graph_objects.treemap.Tiling instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.treemap.Tiling`
+                instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -1684,8 +1695,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             cells
-                plotly.graph_objects.table.Cells instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.table.Cells`
+                instance or dict with compatible properties
             columnorder
                 Specifies the rendered order of the data
                 columns; for example, a value `2` at position
@@ -1712,11 +1723,11 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             domain
-                plotly.graph_objects.table.Domain instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.table.Domain`
+                instance or dict with compatible properties
             header
-                plotly.graph_objects.table.Header instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.table.Header`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -1727,8 +1738,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.table.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.table.Hoverlabe
+                l` instance or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -1757,8 +1768,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
             stream
-                plotly.graph_objects.table.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.table.Stream`
+                instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -1846,8 +1857,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.surface.ColorBar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.ColorBa
+                r` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -1866,8 +1877,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the `z` data are filled in.
             contours
-                plotly.graph_objects.surface.Contours instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.Contour
+                s` instance or dict with compatible properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -1892,8 +1903,9 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.surface.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.Hoverla
+                bel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -1942,11 +1954,12 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.surface.Lighting instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.Lightin
+                g` instance or dict with compatible properties
             lightposition
-                plotly.graph_objects.surface.Lightposition
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.Lightpo
+                sition` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -1995,8 +2008,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.surface.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.surface.Stream`
+                instance or dict with compatible properties
             surfacecolor
                 Sets the surface color values, used for setting
                 a color scale independent of `z`.
@@ -2103,8 +2116,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             domain
-                plotly.graph_objects.sunburst.Domain instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.sunburst.Domain
+                ` instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -2115,8 +2128,9 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.sunburst.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.sunburst.Hoverl
+                abel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -2184,8 +2198,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 labels .
             leaf
-                plotly.graph_objects.sunburst.Leaf instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.sunburst.Leaf`
+                instance or dict with compatible properties
             level
                 Sets the level from which this trace hierarchy
                 is rendered. Set `level` to `''` to start from
@@ -2193,8 +2207,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 if `ids` is filled in, otherwise plotly
                 attempts to find a matching item in `labels`.
             marker
-                plotly.graph_objects.sunburst.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.sunburst.Marker
+                ` instance or dict with compatible properties
             maxdepth
                 Sets the number of rendered sectors from any
                 given `level`. Set `maxdepth` to "-1" to render
@@ -2240,8 +2254,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 parents .
             stream
-                plotly.graph_objects.sunburst.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.sunburst.Stream
+                ` instance or dict with compatible properties
             text
                 Sets text elements associated with each sector.
                 If trace `textinfo` contains a "text" flag,
@@ -2376,8 +2390,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.streamtube.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Colo
+                rBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -2411,8 +2426,9 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.streamtube.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Hove
+                rlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -2460,11 +2476,13 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.streamtube.Lighting
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Ligh
+                ting` instance or dict with compatible
+                properties
             lightposition
-                plotly.graph_objects.streamtube.Lightposition
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Ligh
+                tposition` instance or dict with compatible
+                properties
             maxdisplayed
                 The maximum number of displayed segments in a
                 streamtube.
@@ -2521,11 +2539,11 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tubes from touching at adjacent starting
                 positions.
             starts
-                plotly.graph_objects.streamtube.Starts instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Star
+                ts` instance or dict with compatible properties
             stream
-                plotly.graph_objects.streamtube.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.streamtube.Stre
+                am` instance or dict with compatible properties
             text
                 Sets a text element associated with this trace.
                 If trace `hoverinfo` contains a "text" flag,
@@ -2615,11 +2633,12 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             diagonal
-                plotly.graph_objects.splom.Diagonal instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Diagonal`
+                instance or dict with compatible properties
             dimensions
-                A tuple of plotly.graph_objects.splom.Dimension
-                instances or dicts with compatible properties
+                A tuple of :py:class:`plotly.graph_objects.splo
+                m.Dimension` instances or dicts with compatible
+                properties
             dimensiondefaults
                 When used in a template (as
                 layout.template.data.splom.dimensiondefaults),
@@ -2635,8 +2654,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.splom.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Hoverlabe
+                l` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -2685,8 +2704,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.splom.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -2710,8 +2729,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.splom.Selected instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Selected`
+                instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -2731,8 +2750,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not subplots on the upper
                 half from the diagonal are displayed.
             stream
-                plotly.graph_objects.splom.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Stream`
+                instance or dict with compatible properties
             text
                 Sets text elements associated with each (x,y)
                 pair to appear on hover. If a single string,
@@ -2770,8 +2789,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.splom.Unselected instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.splom.Unselecte
+                d` instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -2886,8 +2905,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scatterternary.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Hoverlabel` instance or dict with compatible
+                properties
             hoveron
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
@@ -2948,11 +2968,13 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scatterternary.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Line` instance or dict with compatible
+                properties
             marker
-                plotly.graph_objects.scatterternary.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Marker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -2984,8 +3006,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.scatterternary.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Selected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -2999,8 +3022,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scatterternary.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Stream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a ternary subplot. If "ternary"
@@ -3084,8 +3108,9 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scatterternary.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterternary.
+                Unselected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -3169,8 +3194,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scatterpolargl.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Hoverlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -3224,11 +3250,13 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scatterpolargl.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Line` instance or dict with compatible
+                properties
             marker
-                plotly.graph_objects.scatterpolargl.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Marker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -3268,8 +3296,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
-                plotly.graph_objects.scatterpolargl.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Selected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -3283,8 +3312,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scatterpolargl.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Stream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a polar subplot. If "polar"
@@ -3374,8 +3404,9 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scatterpolargl.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolargl.
+                Unselected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -3451,8 +3482,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scatterpolar.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.Ho
+                verlabel` instance or dict with compatible
+                properties
             hoveron
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
@@ -3513,11 +3545,12 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scatterpolar.Line instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.Li
+                ne` instance or dict with compatible properties
             marker
-                plotly.graph_objects.scatterpolar.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.Ma
+                rker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -3557,8 +3590,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
-                plotly.graph_objects.scatterpolar.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.Se
+                lected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -3572,8 +3606,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scatterpolar.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.St
+                ream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a polar subplot. If "polar"
@@ -3663,8 +3698,9 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scatterpolar.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatterpolar.Un
+                selected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -3729,8 +3765,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scattermapbox.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.H
+                overlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -3790,16 +3827,18 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scattermapbox.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.L
+                ine` instance or dict with compatible
+                properties
             lon
                 Sets the longitude coordinates (in degrees
                 East).
             lonsrc
                 Sets the source reference on plot.ly for  lon .
             marker
-                plotly.graph_objects.scattermapbox.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.M
+                arker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -3829,8 +3868,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.scattermapbox.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.S
+                elected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -3844,8 +3884,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scattermapbox.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.S
+                tream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a mapbox subplot. If "mapbox"
@@ -3922,8 +3963,9 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scattermapbox.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattermapbox.U
+                nselected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -3967,11 +4009,11 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y coordinate step. See `y0` for more
                 info.
             error_x
-                plotly.graph_objects.scattergl.ErrorX instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Error
+                X` instance or dict with compatible properties
             error_y
-                plotly.graph_objects.scattergl.ErrorY instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Error
+                Y` instance or dict with compatible properties
             fill
                 Sets the area to fill with a solid color.
                 Defaults to "none" unless this trace is
@@ -4013,8 +4055,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scattergl.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Hover
+                label` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -4068,11 +4111,11 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scattergl.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Line`
+                instance or dict with compatible properties
             marker
-                plotly.graph_objects.scattergl.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Marke
+                r` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -4099,8 +4142,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.scattergl.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Selec
+                ted` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -4114,8 +4158,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scattergl.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Strea
+                m` instance or dict with compatible properties
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -4186,8 +4230,9 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scattergl.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergl.Unsel
+                ected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -4300,8 +4345,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scattergeo.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Hove
+                rlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -4362,8 +4408,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scattergeo.Line instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Line
+                ` instance or dict with compatible properties
             locationmode
                 Determines the set of locations used to match
                 entries in `locations` to regions on the map.
@@ -4386,8 +4432,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             lonsrc
                 Sets the source reference on plot.ly for  lon .
             marker
-                plotly.graph_objects.scattergeo.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Mark
+                er` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -4419,8 +4465,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.scattergeo.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Sele
+                cted` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -4434,8 +4481,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scattergeo.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Stre
+                am` instance or dict with compatible properties
             text
                 Sets text elements associated with each
                 (lon,lat) pair or item in `locations`. If a
@@ -4508,8 +4555,9 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scattergeo.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattergeo.Unse
+                lected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -4585,8 +4633,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scattercarpet.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.H
+                overlabel` instance or dict with compatible
+                properties
             hoveron
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
@@ -4647,11 +4696,13 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scattercarpet.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.L
+                ine` instance or dict with compatible
+                properties
             marker
-                plotly.graph_objects.scattercarpet.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.M
+                arker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -4683,8 +4734,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             selected
-                plotly.graph_objects.scattercarpet.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.S
+                elected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -4698,8 +4750,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scattercarpet.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.S
+                tream` instance or dict with compatible
+                properties
             text
                 Sets text elements associated with each (a,b)
                 point. If a single string, the same string
@@ -4770,8 +4823,9 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scattercarpet.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scattercarpet.U
+                nselected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -4821,14 +4875,14 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             error_x
-                plotly.graph_objects.scatter3d.ErrorX instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Error
+                X` instance or dict with compatible properties
             error_y
-                plotly.graph_objects.scatter3d.ErrorY instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Error
+                Y` instance or dict with compatible properties
             error_z
-                plotly.graph_objects.scatter3d.ErrorZ instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Error
+                Z` instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -4839,8 +4893,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scatter3d.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Hover
+                label` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -4894,11 +4949,11 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scatter3d.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Line`
+                instance or dict with compatible properties
             marker
-                plotly.graph_objects.scatter3d.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Marke
+                r` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -4930,8 +4985,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             projection
-                plotly.graph_objects.scatter3d.Projection
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Proje
+                ction` instance or dict with compatible
+                properties
             scene
                 Sets a reference between this trace's 3D
                 coordinate system and a 3D scene. If "scene"
@@ -4943,8 +4999,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.scatter3d.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Strea
+                m` instance or dict with compatible properties
             surfaceaxis
                 If "-1", the scatter points are not fill with a
                 surface If 0, 1, 2, the scatter points are
@@ -4962,8 +5018,9 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textfont
-                plotly.graph_objects.scatter3d.Textfont
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter3d.Textf
+                ont` instance or dict with compatible
+                properties
             textposition
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
@@ -5092,11 +5149,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y coordinate step. See `y0` for more
                 info.
             error_x
-                plotly.graph_objects.scatter.ErrorX instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.ErrorX`
+                instance or dict with compatible properties
             error_y
-                plotly.graph_objects.scatter.ErrorY instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.ErrorY`
+                instance or dict with compatible properties
             fill
                 Sets the area to fill with a solid color.
                 Defaults to "none" unless this trace is
@@ -5152,8 +5209,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.scatter.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Hoverla
+                bel` instance or dict with compatible
+                properties
             hoveron
                 Do the hover effects highlight individual
                 points (markers or line points) or do they
@@ -5214,11 +5272,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.scatter.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Line`
+                instance or dict with compatible properties
             marker
-                plotly.graph_objects.scatter.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -5266,8 +5324,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
-                plotly.graph_objects.scatter.Selected instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Selecte
+                d` instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -5310,8 +5368,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 consecutive, the later ones will be pushed down
                 in the drawing order.
             stream
-                plotly.graph_objects.scatter.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Stream`
+                instance or dict with compatible properties
             t
                 t coordinates in scatter traces are
                 deprecated!Please switch to the "scatterpolar"
@@ -5389,8 +5447,9 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.scatter.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.scatter.Unselec
+                ted` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -5468,8 +5527,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             domain
-                plotly.graph_objects.sankey.Domain instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.sankey.Domain`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -5479,8 +5538,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 by `node.hoverinfo` and `node.hoverinfo` for
                 nodes and links respectively.
             hoverlabel
-                plotly.graph_objects.sankey.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.sankey.Hoverlab
+                el` instance or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -5524,8 +5583,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 where the `selected` and `unselected` styles
                 have no effect.
             stream
-                plotly.graph_objects.sankey.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.sankey.Stream`
+                instance or dict with compatible properties
             textfont
                 Sets the font for node labels
             uid
@@ -5606,8 +5665,9 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.pointcloud.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.pointcloud.Hove
+                rlabel` instance or dict with compatible
+                properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -5634,8 +5694,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.pointcloud.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.pointcloud.Mark
+                er` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -5662,8 +5722,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.pointcloud.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.pointcloud.Stre
+                am` instance or dict with compatible properties
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -5788,8 +5848,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the label step. See `label0` for more
                 info.
             domain
-                plotly.graph_objects.pie.Domain instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.pie.Domain`
+                instance or dict with compatible properties
             hole
                 Sets the fraction of the radius to cut out of
                 the pie. Use this to make a donut chart.
@@ -5803,8 +5863,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.pie.Hoverlabel instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.pie.Hoverlabel`
+                instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -5884,8 +5944,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.pie.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.pie.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -5935,8 +5995,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not the sectors are
                 reordered from largest to smallest.
             stream
-                plotly.graph_objects.pie.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.pie.Stream`
+                instance or dict with compatible properties
             text
                 Sets text elements associated with each sector.
                 If trace `textinfo` contains a "text" flag,
@@ -5982,8 +6042,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 texttemplate .
             title
-                plotly.graph_objects.pie.Title instance or dict
-                with compatible properties
+                :py:class:`plotly.graph_objects.pie.Title`
+                instance or dict with compatible properties
             titlefont
                 Deprecated: Please use pie.title.font instead.
                 Sets the font used for `title`. Note that the
@@ -6069,8 +6129,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default property values to use for elements of
                 parcoords.dimensions
             domain
-                plotly.graph_objects.parcoords.Domain instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.parcoords.Domai
+                n` instance or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -6095,8 +6155,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 positioned better inside margins when
                 `labelposition` is set to "bottom".
             line
-                plotly.graph_objects.parcoords.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.parcoords.Line`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -6120,8 +6180,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
             rangefont
                 Sets the font for the `dimension` range values.
             stream
-                plotly.graph_objects.parcoords.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.parcoords.Strea
+                m` instance or dict with compatible properties
             tickfont
                 Sets the font for the `dimension` tick values.
             uid
@@ -6200,8 +6260,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 property values to use for elements of
                 parcats.dimensions
             domain
-                plotly.graph_objects.parcats.Domain instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.parcats.Domain`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -6248,8 +6308,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
             labelfont
                 Sets the font for the `dimension` labels.
             line
-                plotly.graph_objects.parcats.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.parcats.Line`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -6276,8 +6336,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 left to right. If `backward`, sort paths based
                 on dimensions categories from right to left.
             stream
-                plotly.graph_objects.parcats.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.parcats.Stream`
+                instance or dict with compatible properties
             tickfont
                 Sets the font for the `category` labels.
             uid
@@ -6344,8 +6404,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             decreasing
-                plotly.graph_objects.ohlc.Decreasing instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.Decreasing
+                ` instance or dict with compatible properties
             high
                 Sets the high values.
             highsrc
@@ -6361,8 +6421,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.ohlc.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.Hoverlabel
+                ` instance or dict with compatible properties
             hovertext
                 Same as `text`.
             hovertextsrc
@@ -6376,15 +6436,15 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on plot.ly for  ids .
             increasing
-                plotly.graph_objects.ohlc.Increasing instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.Increasing
+                ` instance or dict with compatible properties
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.ohlc.Line instance or dict
-                with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.Line`
+                instance or dict with compatible properties
             low
                 Sets the low values.
             lowsrc
@@ -6429,8 +6489,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.ohlc.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.Stream`
+                instance or dict with compatible properties
             text
                 Sets hover text elements associated with each
                 sample point. If a single string, the same
@@ -6574,8 +6634,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.mesh3d.ColorBar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.ColorBar
+                ` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -6591,8 +6651,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
                 ,Electric,Viridis,Cividis.
             contour
-                plotly.graph_objects.mesh3d.Contour instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.Contour`
+                instance or dict with compatible properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -6628,8 +6688,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.mesh3d.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.Hoverlab
+                el` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -6724,11 +6784,12 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.mesh3d.Lighting instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.Lighting
+                ` instance or dict with compatible properties
             lightposition
-                plotly.graph_objects.mesh3d.Lightposition
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.Lightpos
+                ition` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -6777,8 +6838,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.mesh3d.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.mesh3d.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with the
                 vertices. If trace `hoverinfo` contains a
@@ -6885,8 +6946,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 according to whether numbers in the `color`
                 array are all positive, all negative or mixed.
             caps
-                plotly.graph_objects.isosurface.Caps instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Caps
+                ` instance or dict with compatible properties
             cauto
                 Determines whether or not the color domain is
                 computed with respect to the input data (here
@@ -6917,8 +6978,9 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.isosurface.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Colo
+                rBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -6934,8 +6996,9 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
                 ,Electric,Viridis,Cividis.
             contour
-                plotly.graph_objects.isosurface.Contour
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Cont
+                our` instance or dict with compatible
+                properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -6959,8 +7022,9 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.isosurface.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Hove
+                rlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -7013,11 +7077,13 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.isosurface.Lighting
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Ligh
+                ting` instance or dict with compatible
+                properties
             lightposition
-                plotly.graph_objects.isosurface.Lightposition
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Ligh
+                tposition` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -7066,17 +7132,19 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             slices
-                plotly.graph_objects.isosurface.Slices instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Slic
+                es` instance or dict with compatible properties
             spaceframe
-                plotly.graph_objects.isosurface.Spaceframe
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Spac
+                eframe` instance or dict with compatible
+                properties
             stream
-                plotly.graph_objects.isosurface.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Stre
+                am` instance or dict with compatible properties
             surface
-                plotly.graph_objects.isosurface.Surface
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.isosurface.Surf
+                ace` instance or dict with compatible
+                properties
             text
                 Sets the text elements associated with the
                 vertices. If trace `hoverinfo` contains a
@@ -7169,11 +7237,11 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             delta
-                plotly.graph_objects.indicator.Delta instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.indicator.Delta
+                ` instance or dict with compatible properties
             domain
-                plotly.graph_objects.indicator.Domain instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.indicator.Domai
+                n` instance or dict with compatible properties
             gauge
                 The gauge of the Indicator plot.
             ids
@@ -7210,14 +7278,14 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
             number
-                plotly.graph_objects.indicator.Number instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.indicator.Numbe
+                r` instance or dict with compatible properties
             stream
-                plotly.graph_objects.indicator.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.indicator.Strea
+                m` instance or dict with compatible properties
             title
-                plotly.graph_objects.indicator.Title instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.indicator.Title
+                ` instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -7295,8 +7363,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.image.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.image.Hoverlabe
+                l` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -7364,8 +7432,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             stream
-                plotly.graph_objects.image.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.image.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with each z
                 value.
@@ -7501,8 +7569,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.histogram2dcontour.ColorBa
-                r instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.ColorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -7518,8 +7587,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
                 ,Electric,Viridis,Cividis.
             contours
-                plotly.graph_objects.histogram2dcontour.Contour
-                s instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.Contours` instance or dict with compatible
+                properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -7566,8 +7636,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.histogram2dcontour.Hoverla
-                bel instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.Hoverlabel` instance or dict with
+                compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -7611,11 +7682,13 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.histogram2dcontour.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.Line` instance or dict with compatible
+                properties
             marker
-                plotly.graph_objects.histogram2dcontour.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.Marker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -7669,8 +7742,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.histogram2dcontour.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.Stream` instance or dict with compatible
+                properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -7720,8 +7794,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 value can be used to set (1D) histogram
                 `bingroup`
             xbins
-                plotly.graph_objects.histogram2dcontour.XBins
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.XBins` instance or dict with compatible
+                properties
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
@@ -7745,8 +7820,9 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 value can be used to set (1D) histogram
                 `bingroup`
             ybins
-                plotly.graph_objects.histogram2dcontour.YBins
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2dcont
+                our.YBins` instance or dict with compatible
+                properties
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
@@ -7835,8 +7911,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.histogram2d.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.Col
+                orBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -7897,8 +7974,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.histogram2d.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.Hov
+                erlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -7942,8 +8020,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.histogram2d.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.Mar
+                ker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -7990,8 +8069,9 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.histogram2d.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.Str
+                eam` instance or dict with compatible
+                properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -8041,8 +8121,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value can be used to set (1D) histogram
                 `bingroup`
             xbins
-                plotly.graph_objects.histogram2d.XBins instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.XBi
+                ns` instance or dict with compatible properties
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
@@ -8069,8 +8149,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 value can be used to set (1D) histogram
                 `bingroup`
             ybins
-                plotly.graph_objects.histogram2d.YBins instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram2d.YBi
+                ns` instance or dict with compatible properties
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
@@ -8160,8 +8240,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 settings. Note that histogram and histogram2d*
                 trace can share the same `bingroup`
             cumulative
-                plotly.graph_objects.histogram.Cumulative
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Cumul
+                ative` instance or dict with compatible
+                properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -8172,11 +8253,11 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             error_x
-                plotly.graph_objects.histogram.ErrorX instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Error
+                X` instance or dict with compatible properties
             error_y
-                plotly.graph_objects.histogram.ErrorY instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Error
+                Y` instance or dict with compatible properties
             histfunc
                 Specifies the binning function used for this
                 histogram trace. If "count", the histogram
@@ -8214,8 +8295,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.histogram.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Hover
+                label` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -8264,8 +8346,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.histogram.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Marke
+                r` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -8310,8 +8392,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ("h"), the value of the each bar spans along
                 the vertical (horizontal).
             selected
-                plotly.graph_objects.histogram.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Selec
+                ted` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -8325,8 +8408,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.histogram.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Strea
+                m` instance or dict with compatible properties
             text
                 Sets hover text elements associated with each
                 bar. If a single string, the same string
@@ -8363,8 +8446,9 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.histogram.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.Unsel
+                ected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -8380,8 +8464,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xbins
-                plotly.graph_objects.histogram.XBins instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.XBins
+                ` instance or dict with compatible properties
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
@@ -8397,8 +8481,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ybins
-                plotly.graph_objects.histogram.YBins instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.histogram.YBins
+                ` instance or dict with compatible properties
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
@@ -8440,8 +8524,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.heatmapgl.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmapgl.Color
+                Bar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -8481,8 +8566,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.heatmapgl.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmapgl.Hover
+                label` instance or dict with compatible
+                properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -8521,8 +8607,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.heatmapgl.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmapgl.Strea
+                m` instance or dict with compatible properties
             text
                 Sets the text elements associated with each z
                 value.
@@ -8662,8 +8748,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.heatmap.ColorBar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmap.ColorBa
+                r` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -8709,8 +8795,9 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.heatmap.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmap.Hoverla
+                bel` instance or dict with compatible
+                properties
             hoverongaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the `z` data have hover
@@ -8796,8 +8883,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.heatmap.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.heatmap.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with each z
                 value.
@@ -8958,8 +9045,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the label step. See `label0` for more
                 info.
             domain
-                plotly.graph_objects.funnelarea.Domain instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnelarea.Doma
+                in` instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -8970,8 +9057,9 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.funnelarea.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnelarea.Hove
+                rlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -9043,8 +9131,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.funnelarea.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnelarea.Mark
+                er` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -9076,8 +9164,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.funnelarea.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnelarea.Stre
+                am` instance or dict with compatible properties
             text
                 Sets text elements associated with each sector.
                 If trace `textinfo` contains a "text" flag,
@@ -9123,8 +9211,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 texttemplate .
             title
-                plotly.graph_objects.funnelarea.Title instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnelarea.Titl
+                e` instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -9193,8 +9281,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set `xaxis.layer` and `yaxis.layer` to *below
                 traces*.
             connector
-                plotly.graph_objects.funnel.Connector instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnel.Connecto
+                r` instance or dict with compatible properties
             constraintext
                 Constrain the size of text inside or outside a
                 bar to be no larger than the bar itself.
@@ -9223,8 +9311,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.funnel.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.funnel.Hoverlab
+                el` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -9286,8 +9374,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.funnel.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.funnel.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -9345,8 +9433,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.funnel.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.funnel.Stream`
+                instance or dict with compatible properties
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -9515,8 +9603,9 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.densitymapbox.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.densitymapbox.C
+                olorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -9550,8 +9639,9 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.densitymapbox.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.densitymapbox.H
+                overlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -9657,8 +9747,9 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.densitymapbox.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.densitymapbox.S
+                tream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a mapbox subplot. If "mapbox"
@@ -9807,8 +9898,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.contourcarpet.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.contourcarpet.C
+                olorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -9824,8 +9916,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
                 ,Electric,Viridis,Cividis.
             contours
-                plotly.graph_objects.contourcarpet.Contours
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.contourcarpet.C
+                ontours` instance or dict with compatible
+                properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -9863,8 +9956,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.contourcarpet.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.contourcarpet.L
+                ine` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -9906,8 +10000,9 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.contourcarpet.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.contourcarpet.S
+                tream` instance or dict with compatible
+                properties
             text
                 Sets the text elements associated with each z
                 value.
@@ -10025,8 +10120,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.contour.ColorBar instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.contour.ColorBa
+                r` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -10048,8 +10143,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dimensional array otherwise it is defaulted to
                 false.
             contours
-                plotly.graph_objects.contour.Contours instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.contour.Contour
+                s` instance or dict with compatible properties
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -10080,8 +10175,9 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.contour.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.contour.Hoverla
+                bel` instance or dict with compatible
+                properties
             hoverongaps
                 Determines whether or not gaps (i.e. {nan} or
                 missing values) in the `z` data have hover
@@ -10134,8 +10230,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.contour.Line instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.contour.Line`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -10177,8 +10273,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.contour.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.contour.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with each z
                 value.
@@ -10355,8 +10451,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.cone.ColorBar instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.cone.ColorBar`
+                instance or dict with compatible properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -10390,8 +10486,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.cone.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.cone.Hoverlabel
+                ` instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -10440,11 +10536,12 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             lighting
-                plotly.graph_objects.cone.Lighting instance or
-                dict with compatible properties
-            lightposition
-                plotly.graph_objects.cone.Lightposition
+                :py:class:`plotly.graph_objects.cone.Lighting`
                 instance or dict with compatible properties
+            lightposition
+                :py:class:`plotly.graph_objects.cone.Lightposit
+                ion` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -10514,8 +10611,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default value is half the sample's maximum
                 vector norm.
             stream
-                plotly.graph_objects.cone.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.cone.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with the
                 cones. If trace `hoverinfo` contains a "text"
@@ -10625,8 +10722,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.choroplethmapbox.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.ColorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -10672,8 +10770,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.choroplethmapbox.Hoverlabe
-                l instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.Hoverlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -10728,8 +10827,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 locations .
             marker
-                plotly.graph_objects.choroplethmapbox.Marker
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.Marker` instance or dict with compatible
+                properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -10756,8 +10856,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array and `zmax` will correspond to the first
                 color.
             selected
-                plotly.graph_objects.choroplethmapbox.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.Selected` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -10774,8 +10875,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.choroplethmapbox.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.Stream` instance or dict with compatible
+                properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a mapbox subplot. If "mapbox"
@@ -10815,8 +10917,9 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.choroplethmapbox.Unselecte
-                d instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choroplethmapbo
+                x.Unselected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -10882,8 +10985,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.choropleth.ColorBar
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Colo
+                rBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -10938,8 +11042,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.choropleth.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Hove
+                rlabel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -11002,8 +11107,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 locations .
             marker
-                plotly.graph_objects.choropleth.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Mark
+                er` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11030,8 +11135,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array and `zmax` will correspond to the first
                 color.
             selected
-                plotly.graph_objects.choropleth.Selected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Sele
+                cted` instance or dict with compatible
+                properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -11048,8 +11154,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not a colorbar is
                 displayed for this trace.
             stream
-                plotly.graph_objects.choropleth.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Stre
+                am` instance or dict with compatible properties
             text
                 Sets the text elements associated with each
                 location.
@@ -11083,8 +11189,9 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.choropleth.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.choropleth.Unse
+                lected` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -11140,8 +11247,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `da` where `a0` is the
                 starting coordinate and `da` the step.
             aaxis
-                plotly.graph_objects.carpet.Aaxis instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.carpet.Aaxis`
+                instance or dict with compatible properties
             asrc
                 Sets the source reference on plot.ly for  a .
             b
@@ -11152,8 +11259,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `db` where `b0` is the
                 starting coordinate and `db` the step.
             baxis
-                plotly.graph_objects.carpet.Baxis instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.carpet.Baxis`
+                instance or dict with compatible properties
             bsrc
                 Sets the source reference on plot.ly for  b .
             carpet
@@ -11218,8 +11325,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             stream
-                plotly.graph_objects.carpet.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.carpet.Stream`
+                instance or dict with compatible properties
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -11308,8 +11415,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 customdata .
             decreasing
-                plotly.graph_objects.candlestick.Decreasing
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.candlestick.Dec
+                reasing` instance or dict with compatible
+                properties
             high
                 Sets the high values.
             highsrc
@@ -11325,8 +11433,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.candlestick.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.candlestick.Hov
+                erlabel` instance or dict with compatible
+                properties
             hovertext
                 Same as `text`.
             hovertextsrc
@@ -11340,15 +11449,16 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             idssrc
                 Sets the source reference on plot.ly for  ids .
             increasing
-                plotly.graph_objects.candlestick.Increasing
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.candlestick.Inc
+                reasing` instance or dict with compatible
+                properties
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.candlestick.Line instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.candlestick.Lin
+                e` instance or dict with compatible properties
             low
                 Sets the low values.
             lowsrc
@@ -11393,8 +11503,9 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.candlestick.Stream
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.candlestick.Str
+                eam` instance or dict with compatible
+                properties
             text
                 Sets hover text elements associated with each
                 sample point. If a single string, the same
@@ -11533,8 +11644,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.box.Hoverlabel instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.box.Hoverlabel`
+                instance or dict with compatible properties
             hoveron
                 Do the hover effects highlight individual boxes
                 or sample points or both?
@@ -11592,8 +11703,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             line
-                plotly.graph_objects.box.Line instance or dict
-                with compatible properties
+                :py:class:`plotly.graph_objects.box.Line`
+                instance or dict with compatible properties
             lowerfence
                 Sets the lower fence values. There should be as
                 many items as the number of boxes desired. This
@@ -11606,8 +11717,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 lowerfence .
             marker
-                plotly.graph_objects.box.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.box.Marker`
+                instance or dict with compatible properties
             mean
                 Sets the mean values. There should be as many
                 items as the number of boxes desired. This
@@ -11732,8 +11843,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             sdsrc
                 Sets the source reference on plot.ly for  sd .
             selected
-                plotly.graph_objects.box.Selected instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.box.Selected`
+                instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -11747,8 +11858,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.box.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.box.Stream`
+                instance or dict with compatible properties
             text
                 Sets the text elements associated with each
                 sample value. If a single string, the same
@@ -11787,8 +11898,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.box.Unselected instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.box.Unselected`
+                instance or dict with compatible properties
             upperfence
                 Sets the upper fence values. There should be as
                 many items as the number of boxes desired. This
@@ -11903,8 +12014,9 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.barpolar.Hoverlabel
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.barpolar.Hoverl
+                abel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -11953,8 +12065,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.barpolar.Marker instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.barpolar.Marker
+                ` instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11992,8 +12104,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
-                plotly.graph_objects.barpolar.Selected instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.barpolar.Select
+                ed` instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -12007,8 +12119,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.barpolar.Stream instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.barpolar.Stream
+                ` instance or dict with compatible properties
             subplot
                 Sets a reference between this trace's data
                 coordinates and a polar subplot. If "polar"
@@ -12064,8 +12176,9 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.barpolar.Unselected
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.barpolar.Unsele
+                cted` instance or dict with compatible
+                properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -12134,11 +12247,11 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the y coordinate step. See `y0` for more
                 info.
             error_x
-                plotly.graph_objects.bar.ErrorX instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.ErrorX`
+                instance or dict with compatible properties
             error_y
-                plotly.graph_objects.bar.ErrorY instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.ErrorY`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -12149,8 +12262,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.bar.Hoverlabel instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.Hoverlabel`
+                instance or dict with compatible properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -12212,8 +12325,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.bar.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -12264,8 +12377,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             rsrc
                 Sets the source reference on plot.ly for  r .
             selected
-                plotly.graph_objects.bar.Selected instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.Selected`
+                instance or dict with compatible properties
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -12279,8 +12392,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.bar.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.Stream`
+                instance or dict with compatible properties
             t
                 t coordinates in scatter traces are
                 deprecated!Please switch to the "scatterpolar"
@@ -12372,8 +12485,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             unselected
-                plotly.graph_objects.bar.Unselected instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.bar.Unselected`
+                instance or dict with compatible properties
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -12455,8 +12568,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 hoverinfo .
             hoverlabel
-                plotly.graph_objects.area.Hoverlabel instance
-                or dict with compatible properties
+                :py:class:`plotly.graph_objects.area.Hoverlabel
+                ` instance or dict with compatible properties
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
@@ -12469,8 +12582,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 part of the same legend group hide/show at the
                 same time when toggling legend items.
             marker
-                plotly.graph_objects.area.Marker instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.area.Marker`
+                instance or dict with compatible properties
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -12503,8 +12616,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
             stream
-                plotly.graph_objects.area.Stream instance or
-                dict with compatible properties
+                :py:class:`plotly.graph_objects.area.Stream`
+                instance or dict with compatible properties
             t
                 Area traces are deprecated! Please switch to
                 the "barpolar" trace type. Sets the angular

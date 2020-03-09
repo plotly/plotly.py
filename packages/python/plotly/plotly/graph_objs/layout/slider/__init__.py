@@ -79,7 +79,7 @@ class Transition(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.slider.Transition
+            :py:class:`plotly.graph_objs.layout.slider.Transition`
         duration
             Sets the duration of the slider transition
         easing
@@ -104,7 +104,7 @@ class Transition(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Transition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.slider.Transition"""
+an instance of :py:class:`plotly.graph_objs.layout.slider.Transition`"""
             )
 
         # Handle skip_invalid
@@ -416,7 +416,8 @@ class Step(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.slider.Step
+            an instance of
+            :py:class:`plotly.graph_objs.layout.slider.Step`
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on slide.
@@ -483,7 +484,7 @@ class Step(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Step 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.slider.Step"""
+an instance of :py:class:`plotly.graph_objs.layout.slider.Step`"""
             )
 
         # Handle skip_invalid
@@ -659,7 +660,8 @@ class Pad(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.slider.Pad
+            an instance of
+            :py:class:`plotly.graph_objs.layout.slider.Pad`
         b
             The amount of padding (in px) along the bottom of the
             component.
@@ -692,7 +694,7 @@ class Pad(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Pad 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.slider.Pad"""
+an instance of :py:class:`plotly.graph_objs.layout.slider.Pad`"""
             )
 
         # Handle skip_invalid
@@ -883,7 +885,8 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.slider.Font
+            an instance of
+            :py:class:`plotly.graph_objs.layout.slider.Font`
         color
 
         family
@@ -922,7 +925,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.slider.Font"""
+an instance of :py:class:`plotly.graph_objs.layout.slider.Font`"""
             )
 
         # Handle skip_invalid
@@ -1162,8 +1165,8 @@ class Currentvalue(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.slider.Currentvalue
+            an instance of :py:class:`plotly.graph_objs.layout.slid
+            er.Currentvalue`
         font
             Sets the font of the current value label text.
         offset
@@ -1200,7 +1203,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.slider.Currentvalue 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.slider.Currentvalue"""
+an instance of :py:class:`plotly.graph_objs.layout.slider.Currentvalue`"""
             )
 
         # Handle skip_invalid

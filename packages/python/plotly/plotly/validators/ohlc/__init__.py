@@ -407,8 +407,9 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objects.ohlc.increasing.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.increasing
+                .Line` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -600,8 +601,9 @@ class DecreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objects.ohlc.decreasing.Line
-                instance or dict with compatible properties
+                :py:class:`plotly.graph_objects.ohlc.decreasing
+                .Line` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs

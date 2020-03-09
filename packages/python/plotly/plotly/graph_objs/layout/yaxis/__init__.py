@@ -140,7 +140,8 @@ class Title(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.yaxis.Title
+            an instance of
+            :py:class:`plotly.graph_objs.layout.yaxis.Title`
         font
             Sets this axis' title font. Note that the title's font
             used to be customized by the now deprecated `titlefont`
@@ -180,7 +181,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.yaxis.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.yaxis.Title"""
+an instance of :py:class:`plotly.graph_objs.layout.yaxis.Title`"""
             )
 
         # Handle skip_invalid
@@ -404,8 +405,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.yaxis.Tickformatstop
+            an instance of :py:class:`plotly.graph_objs.layout.yaxi
+            s.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -456,7 +457,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.yaxis.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.yaxis.Tickformatstop"""
+an instance of :py:class:`plotly.graph_objs.layout.yaxis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -654,7 +655,8 @@ class Tickfont(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.yaxis.Tickfont
+            an instance of
+            :py:class:`plotly.graph_objs.layout.yaxis.Tickfont`
         color
 
         family
@@ -693,7 +695,7 @@ class Tickfont(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.yaxis.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.yaxis.Tickfont"""
+an instance of :py:class:`plotly.graph_objs.layout.yaxis.Tickfont`"""
             )
 
         # Handle skip_invalid

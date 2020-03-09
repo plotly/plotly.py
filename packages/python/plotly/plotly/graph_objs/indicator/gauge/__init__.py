@@ -85,8 +85,8 @@ class Threshold(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objects.indicator.gauge.threshold.Line
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.thresho
+            ld.Line` instance or dict with compatible properties
         thickness
             Sets the thickness of the threshold line as a fraction
             of the thickness of the gauge.
@@ -103,10 +103,10 @@ class Threshold(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.indicator.gauge.Threshold
+            :py:class:`plotly.graph_objs.indicator.gauge.Threshold`
         line
-            plotly.graph_objects.indicator.gauge.threshold.Line
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.thresho
+            ld.Line` instance or dict with compatible properties
         thickness
             Sets the thickness of the threshold line as a fraction
             of the thickness of the gauge.
@@ -132,7 +132,7 @@ class Threshold(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.Threshold 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.Threshold"""
+an instance of :py:class:`plotly.graph_objs.indicator.gauge.Threshold`"""
             )
 
         # Handle skip_invalid
@@ -377,8 +377,8 @@ class Step(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.step.Line instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.step.Li
+            ne` instance or dict with compatible properties
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -423,12 +423,13 @@ class Step(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.indicator.gauge.Step
+            an instance of
+            :py:class:`plotly.graph_objs.indicator.gauge.Step`
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.step.Line instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.step.Li
+            ne` instance or dict with compatible properties
         name
             When used in a template, named items are created in the
             output figure in addition to any items the figure
@@ -473,7 +474,7 @@ class Step(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.Step 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.Step"""
+an instance of :py:class:`plotly.graph_objs.indicator.gauge.Step`"""
             )
 
         # Handle skip_invalid
@@ -649,8 +650,8 @@ class Bar(_BaseTraceHierarchyType):
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.bar.Line instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.bar.Lin
+            e` instance or dict with compatible properties
         thickness
             Sets the thickness of the bar as a fraction of the
             total thickness of the gauge.
@@ -666,12 +667,13 @@ class Bar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.indicator.gauge.Bar
+            an instance of
+            :py:class:`plotly.graph_objs.indicator.gauge.Bar`
         color
             Sets the background color of the arc.
         line
-            plotly.graph_objects.indicator.gauge.bar.Line instance
-            or dict with compatible properties
+            :py:class:`plotly.graph_objects.indicator.gauge.bar.Lin
+            e` instance or dict with compatible properties
         thickness
             Sets the thickness of the bar as a fraction of the
             total thickness of the gauge.
@@ -695,7 +697,7 @@ class Bar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.Bar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.Bar"""
+an instance of :py:class:`plotly.graph_objs.indicator.gauge.Bar`"""
             )
 
         # Handle skip_invalid
@@ -1560,9 +1562,9 @@ class Axis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.indicator.gauge.axis.Ti
-            ckformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.indicator.ga
+            uge.axis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.indica
             tor.gauge.axis.tickformatstopdefaults), sets the
@@ -1646,7 +1648,8 @@ class Axis(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.indicator.gauge.Axis
+            an instance of
+            :py:class:`plotly.graph_objs.indicator.gauge.Axis`
         dtick
             Sets the step in-between ticks on this axis. Use with
             `tick0`. Must be a positive number, or special strings
@@ -1733,9 +1736,9 @@ class Axis(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.indicator.gauge.axis.Ti
-            ckformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.indicator.ga
+            uge.axis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.indica
             tor.gauge.axis.tickformatstopdefaults), sets the
@@ -1798,7 +1801,7 @@ class Axis(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.Axis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.Axis"""
+an instance of :py:class:`plotly.graph_objs.indicator.gauge.Axis`"""
             )
 
         # Handle skip_invalid

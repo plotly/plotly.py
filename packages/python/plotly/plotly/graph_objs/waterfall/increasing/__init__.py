@@ -105,8 +105,8 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objects.waterfall.increasing.marker.Line
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.waterfall.increasing.ma
+            rker.Line` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, color=None, line=None, **kwargs):
@@ -117,13 +117,13 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.waterfall.increasing.Marker
+            an instance of :py:class:`plotly.graph_objs.waterfall.i
+            ncreasing.Marker`
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objects.waterfall.increasing.marker.Line
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.waterfall.increasing.ma
+            rker.Line` instance or dict with compatible properties
 
         Returns
         -------
@@ -144,7 +144,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.increasing.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.increasing.Marker"""
+an instance of :py:class:`plotly.graph_objs.waterfall.increasing.Marker`"""
             )
 
         # Handle skip_invalid

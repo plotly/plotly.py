@@ -408,7 +408,7 @@ jobs:
               cd ../../../doc
             fi
             echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
             cd ..
 
       - save_cache:
@@ -470,6 +470,7 @@ jobs:
               git init
               git config user.name plotlydocbot
               git config user.email accounts@plot.ly
+              git add *
               git add *
               git add .nojekyll
               git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"

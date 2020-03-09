@@ -131,7 +131,8 @@ class Title(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.heatmap.colorbar.Title
+            an instance of
+            :py:class:`plotly.graph_objs.heatmap.colorbar.Title`
         font
             Sets this color bar's title font. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -166,7 +167,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.heatmap.colorbar.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.heatmap.colorbar.Title"""
+an instance of :py:class:`plotly.graph_objs.heatmap.colorbar.Title`"""
             )
 
         # Handle skip_invalid
@@ -390,8 +391,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.heatmap.colorbar.Tickformatstop
+            an instance of :py:class:`plotly.graph_objs.heatmap.col
+            orbar.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -442,7 +443,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.heatmap.colorbar.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.heatmap.colorbar.Tickformatstop"""
+an instance of :py:class:`plotly.graph_objs.heatmap.colorbar.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -643,7 +644,7 @@ class Tickfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.heatmap.colorbar.Tickfont
+            :py:class:`plotly.graph_objs.heatmap.colorbar.Tickfont`
         color
 
         family
@@ -682,7 +683,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.heatmap.colorbar.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.heatmap.colorbar.Tickfont"""
+an instance of :py:class:`plotly.graph_objs.heatmap.colorbar.Tickfont`"""
             )
 
         # Handle skip_invalid

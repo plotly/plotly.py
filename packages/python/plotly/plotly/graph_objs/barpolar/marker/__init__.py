@@ -471,7 +471,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.barpolar.marker.Line
+            an instance of
+            :py:class:`plotly.graph_objs.barpolar.marker.Line`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -569,7 +570,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.barpolar.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.barpolar.marker.Line"""
+an instance of :py:class:`plotly.graph_objs.barpolar.marker.Line`"""
             )
 
         # Handle skip_invalid
@@ -1983,9 +1984,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.barpolar.marker.colorba
-            r.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.barpolar.mar
+            ker.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.barpol
             ar.marker.colorbar.tickformatstopdefaults), sets the
@@ -2025,8 +2026,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.barpolar.marker.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.barpolar.marker.colorba
+            r.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             barpolar.marker.colorbar.title.font instead. Sets this
@@ -2121,7 +2122,7 @@ class ColorBar(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.barpolar.marker.ColorBar
+            :py:class:`plotly.graph_objs.barpolar.marker.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2234,9 +2235,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.barpolar.marker.colorba
-            r.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.barpolar.mar
+            ker.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.barpol
             ar.marker.colorbar.tickformatstopdefaults), sets the
@@ -2276,8 +2277,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.barpolar.marker.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.barpolar.marker.colorba
+            r.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             barpolar.marker.colorbar.title.font instead. Sets this
@@ -2329,7 +2330,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.barpolar.marker.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.barpolar.marker.ColorBar"""
+an instance of :py:class:`plotly.graph_objs.barpolar.marker.ColorBar`"""
             )
 
         # Handle skip_invalid

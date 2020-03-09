@@ -1576,9 +1576,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.polar.radialaxis
-            .Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.polar
+            .radialaxis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.pola
             r.radialaxis.tickformatstopdefaults), sets the default
@@ -1618,8 +1618,8 @@ class RadialAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.layout.polar.radialaxis.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.layout.polar.radialaxis
+            .Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             layout.polar.radialaxis.title.font instead. Sets this
@@ -1703,7 +1703,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.polar.RadialAxis
+            :py:class:`plotly.graph_objs.layout.polar.RadialAxis`
         angle
             Sets the angle (in degrees) from which the radial axis
             is drawn. Note that by default, radial axis line on the
@@ -1887,9 +1887,9 @@ class RadialAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.polar.radialaxis
-            .Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.polar
+            .radialaxis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.pola
             r.radialaxis.tickformatstopdefaults), sets the default
@@ -1929,8 +1929,8 @@ class RadialAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.layout.polar.radialaxis.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.layout.polar.radialaxis
+            .Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             layout.polar.radialaxis.title.font instead. Sets this
@@ -1969,7 +1969,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.RadialAxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.RadialAxis"""
+an instance of :py:class:`plotly.graph_objs.layout.polar.RadialAxis`"""
             )
 
         # Handle skip_invalid
@@ -2285,7 +2285,8 @@ class Domain(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.polar.Domain
+            an instance of
+            :py:class:`plotly.graph_objs.layout.polar.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this polar subplot .
@@ -2318,7 +2319,7 @@ class Domain(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.Domain"""
+an instance of :py:class:`plotly.graph_objs.layout.polar.Domain`"""
             )
 
         # Handle skip_invalid
@@ -3770,9 +3771,9 @@ class AngularAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.polar.angularaxi
-            s.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.polar
+            .angularaxis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.pola
             r.angularaxis.tickformatstopdefaults), sets the default
@@ -3882,7 +3883,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.polar.AngularAxis
+            :py:class:`plotly.graph_objs.layout.polar.AngularAxis`
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
@@ -4046,9 +4047,9 @@ class AngularAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.layout.polar.angularaxi
-            s.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.layout.polar
+            .angularaxis.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.pola
             r.angularaxis.tickformatstopdefaults), sets the default
@@ -4119,7 +4120,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.AngularAxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.AngularAxis"""
+an instance of :py:class:`plotly.graph_objs.layout.polar.AngularAxis`"""
             )
 
         # Handle skip_invalid

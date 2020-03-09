@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Stream
+            an instance of
+            :py:class:`plotly.graph_objs.table.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Stream"""
+an instance of :py:class:`plotly.graph_objs.table.Stream`"""
             )
 
         # Handle skip_invalid
@@ -513,7 +514,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Hoverlabel
+            an instance of
+            :py:class:`plotly.graph_objs.table.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -562,7 +564,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Hoverlabel"""
+an instance of :py:class:`plotly.graph_objs.table.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -994,11 +996,11 @@ class Header(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.header.Fill instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.header.Font instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1009,8 +1011,8 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.header.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1055,7 +1057,8 @@ class Header(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Header
+            an instance of
+            :py:class:`plotly.graph_objs.table.Header`
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans more two or
@@ -1065,11 +1068,11 @@ class Header(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.header.Fill instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.header.Font instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1080,8 +1083,8 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.header.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.header.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1118,7 +1121,7 @@ class Header(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Header 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Header"""
+an instance of :py:class:`plotly.graph_objs.table.Header`"""
             )
 
         # Handle skip_invalid
@@ -1321,7 +1324,8 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Domain
+            an instance of
+            :py:class:`plotly.graph_objs.table.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this table trace .
@@ -1354,7 +1358,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Domain"""
+an instance of :py:class:`plotly.graph_objs.table.Domain`"""
             )
 
         # Handle skip_invalid
@@ -1771,11 +1775,11 @@ class Cells(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.cells.Fill instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.cells.Font instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1786,8 +1790,8 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.cells.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1832,7 +1836,8 @@ class Cells(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Cells
+            an instance of
+            :py:class:`plotly.graph_objs.table.Cells`
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans more two or
@@ -1842,11 +1847,11 @@ class Cells(_BaseTraceHierarchyType):
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.cells.Fill instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.cells.Font instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1857,8 +1862,8 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.cells.Line instance or dict
-            with compatible properties
+            :py:class:`plotly.graph_objects.table.cells.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1895,7 +1900,7 @@ class Cells(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Cells 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Cells"""
+an instance of :py:class:`plotly.graph_objs.table.Cells`"""
             )
 
         # Handle skip_invalid

@@ -20,3 +20,5 @@ help:
 %: Makefile
 	sphinx-apidoc -o generated ../../packages/python/plotly/plotly ../../packages/python/plotly/plotly/validators ../../packages/python/plotly/plotly/tests ../../packages/python/plotly/plotly/matplotlylib/ ../../packages/python/plotly/plotly/offline ../../packages/python/plotly/plotly/api
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	rename 's/graph_objs/graph_objects/' _build/html/*.html _build/html/generated/*.html
+	sed -i 's/graph_objs/graph_objects/g' _build/html/*.html _build/html/generated/*.html

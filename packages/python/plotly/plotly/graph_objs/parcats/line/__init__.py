@@ -1350,9 +1350,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.parcats.line.colorbar.T
-            ickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.parcats.line
+            .colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.parcat
             s.line.colorbar.tickformatstopdefaults), sets the
@@ -1392,8 +1392,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.parcats.line.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.parcats.line.colorbar.T
+            itle` instance or dict with compatible properties
         titlefont
             Deprecated: Please use parcats.line.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -1487,7 +1487,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcats.line.ColorBar
+            an instance of
+            :py:class:`plotly.graph_objs.parcats.line.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -1600,9 +1601,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.parcats.line.colorbar.T
-            ickformatstop instances or dicts with compatible
-            properties
+            A tuple of :py:class:`plotly.graph_objects.parcats.line
+            .colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.parcat
             s.line.colorbar.tickformatstopdefaults), sets the
@@ -1642,8 +1643,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.parcats.line.colorbar.Title
-            instance or dict with compatible properties
+            :py:class:`plotly.graph_objects.parcats.line.colorbar.T
+            itle` instance or dict with compatible properties
         titlefont
             Deprecated: Please use parcats.line.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -1695,7 +1696,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.line.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcats.line.ColorBar"""
+an instance of :py:class:`plotly.graph_objs.parcats.line.ColorBar`"""
             )
 
         # Handle skip_invalid

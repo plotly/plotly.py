@@ -88,8 +88,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.scatter.unselected.Textfont
+            an instance of :py:class:`plotly.graph_objs.scatter.uns
+            elected.Textfont`
         color
             Sets the text font color of unselected points, applied
             only when a selection exists.
@@ -113,7 +113,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatter.unselected.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatter.unselected.Textfont"""
+an instance of :py:class:`plotly.graph_objs.scatter.unselected.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -281,7 +281,7 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.scatter.unselected.Marker
+            :py:class:`plotly.graph_objs.scatter.unselected.Marker`
         color
             Sets the marker color of unselected points, applied
             only when a selection exists.
@@ -311,7 +311,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatter.unselected.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatter.unselected.Marker"""
+an instance of :py:class:`plotly.graph_objs.scatter.unselected.Marker`"""
             )
 
         # Handle skip_invalid
