@@ -593,7 +593,7 @@ class Line(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.line.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.parcats.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     

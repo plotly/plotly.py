@@ -70,7 +70,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.increasing.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.waterfall.increasing.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     

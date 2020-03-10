@@ -93,7 +93,7 @@ class FigureWidget(BaseFigureWidget):
         layout
             The 'layout' property is an instance of Layout
             that may be specified as:
-              - An instance of plotly.graph_objs.Layout
+              - An instance of :py:func:`plotly.graph_objs.Layout`
               - A dict of string/value properties that will be passed
                 to the Layout constructor
         

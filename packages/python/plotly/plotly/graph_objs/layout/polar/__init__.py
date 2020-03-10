@@ -870,7 +870,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.radialaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.radialaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1003,7 +1003,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.radialaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.radialaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1241,7 +1241,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.radialaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.radialaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1280,7 +1280,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.radialaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.radialaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3167,7 +3167,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.angularaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.angularaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -3300,7 +3300,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.angularaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     

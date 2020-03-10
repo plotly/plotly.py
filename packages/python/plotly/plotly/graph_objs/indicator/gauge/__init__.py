@@ -11,7 +11,7 @@ class Threshold(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.threshold.Line
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.threshold.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -239,7 +239,7 @@ class Step(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.step.Line
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.step.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -592,7 +592,7 @@ class Bar(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.bar.Line
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.bar.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1078,7 +1078,7 @@ class Axis(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.axis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.axis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1212,7 +1212,7 @@ class Axis(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.axis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.axis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     

@@ -77,7 +77,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'connector' property is an instance of Connector
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Connector
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Connector`
           - A dict of string/value properties that will be passed
             to the Connector constructor
     
@@ -174,7 +174,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Decreasing
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
     
@@ -288,7 +288,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -496,7 +496,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Increasing
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
     
@@ -548,7 +548,7 @@ class Waterfall(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -848,7 +848,7 @@ class Waterfall(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -946,7 +946,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Stream
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -1033,7 +1033,7 @@ class Waterfall(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Textfont
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -1234,7 +1234,7 @@ class Waterfall(_BaseTraceType):
         """
         The 'totals' property is an instance of Totals
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.Totals
+          - An instance of :py:func:`plotly.graph_objs.waterfall.Totals`
           - A dict of string/value properties that will be passed
             to the Totals constructor
     
@@ -2461,7 +2461,7 @@ class Volume(_BaseTraceType):
         """
         The 'caps' property is an instance of Caps
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Caps
+          - An instance of :py:func:`plotly.graph_objs.volume.Caps`
           - A dict of string/value properties that will be passed
             to the Caps constructor
     
@@ -2608,7 +2608,7 @@ class Volume(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.volume.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -2895,7 +2895,7 @@ class Volume(_BaseTraceType):
         """
         The 'contour' property is an instance of Contour
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Contour
+          - An instance of :py:func:`plotly.graph_objs.volume.Contour`
           - A dict of string/value properties that will be passed
             to the Contour constructor
     
@@ -3037,7 +3037,7 @@ class Volume(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.volume.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -3304,7 +3304,7 @@ class Volume(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Lighting
+          - An instance of :py:func:`plotly.graph_objs.volume.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -3352,7 +3352,7 @@ class Volume(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.volume.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -3596,7 +3596,7 @@ class Volume(_BaseTraceType):
         """
         The 'slices' property is an instance of Slices
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Slices
+          - An instance of :py:func:`plotly.graph_objs.volume.Slices`
           - A dict of string/value properties that will be passed
             to the Slices constructor
     
@@ -3629,7 +3629,7 @@ class Volume(_BaseTraceType):
         """
         The 'spaceframe' property is an instance of Spaceframe
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Spaceframe
+          - An instance of :py:func:`plotly.graph_objs.volume.Spaceframe`
           - A dict of string/value properties that will be passed
             to the Spaceframe constructor
     
@@ -3664,7 +3664,7 @@ class Volume(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Stream
+          - An instance of :py:func:`plotly.graph_objs.volume.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -3697,7 +3697,7 @@ class Volume(_BaseTraceType):
         """
         The 'surface' property is an instance of Surface
         that may be specified as:
-          - An instance of plotly.graph_objs.volume.Surface
+          - An instance of :py:func:`plotly.graph_objs.volume.Surface`
           - A dict of string/value properties that will be passed
             to the Surface constructor
     
@@ -4867,7 +4867,7 @@ class Violin(_BaseTraceType):
         """
         The 'box' property is an instance of Box
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Box
+          - An instance of :py:func:`plotly.graph_objs.violin.Box`
           - A dict of string/value properties that will be passed
             to the Box constructor
     
@@ -5053,7 +5053,7 @@ class Violin(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.violin.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -5328,7 +5328,7 @@ class Violin(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Line
+          - An instance of :py:func:`plotly.graph_objs.violin.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -5357,7 +5357,7 @@ class Violin(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Marker
+          - An instance of :py:func:`plotly.graph_objs.violin.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -5404,7 +5404,7 @@ class Violin(_BaseTraceType):
         """
         The 'meanline' property is an instance of Meanline
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Meanline
+          - An instance of :py:func:`plotly.graph_objs.violin.Meanline`
           - A dict of string/value properties that will be passed
             to the Meanline constructor
     
@@ -5681,7 +5681,7 @@ class Violin(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Selected
+          - An instance of :py:func:`plotly.graph_objs.violin.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -5830,7 +5830,7 @@ class Violin(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Stream
+          - An instance of :py:func:`plotly.graph_objs.violin.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -5964,7 +5964,7 @@ class Violin(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.violin.Unselected
+          - An instance of :py:func:`plotly.graph_objs.violin.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -7141,7 +7141,7 @@ class Treemap(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Domain
+          - An instance of :py:func:`plotly.graph_objs.treemap.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -7224,7 +7224,7 @@ class Treemap(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.treemap.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -7435,7 +7435,7 @@ class Treemap(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.treemap.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -7550,7 +7550,7 @@ class Treemap(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Marker
+          - An instance of :py:func:`plotly.graph_objs.treemap.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -7794,7 +7794,7 @@ class Treemap(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.treemap.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -7892,7 +7892,7 @@ class Treemap(_BaseTraceType):
         """
         The 'pathbar' property is an instance of Pathbar
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Pathbar
+          - An instance of :py:func:`plotly.graph_objs.treemap.Pathbar`
           - A dict of string/value properties that will be passed
             to the Pathbar constructor
     
@@ -7932,7 +7932,7 @@ class Treemap(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Stream
+          - An instance of :py:func:`plotly.graph_objs.treemap.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -7991,7 +7991,7 @@ class Treemap(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Textfont
+          - An instance of :py:func:`plotly.graph_objs.treemap.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -8167,7 +8167,7 @@ class Treemap(_BaseTraceType):
         """
         The 'tiling' property is an instance of Tiling
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.Tiling
+          - An instance of :py:func:`plotly.graph_objs.treemap.Tiling`
           - A dict of string/value properties that will be passed
             to the Tiling constructor
     
@@ -9016,7 +9016,7 @@ class Table(_BaseTraceType):
         """
         The 'cells' property is an instance of Cells
         that may be specified as:
-          - An instance of plotly.graph_objs.table.Cells
+          - An instance of :py:func:`plotly.graph_objs.table.Cells`
           - A dict of string/value properties that will be passed
             to the Cells constructor
     
@@ -9217,7 +9217,7 @@ class Table(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.table.Domain
+          - An instance of :py:func:`plotly.graph_objs.table.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -9253,7 +9253,7 @@ class Table(_BaseTraceType):
         """
         The 'header' property is an instance of Header
         that may be specified as:
-          - An instance of plotly.graph_objs.table.Header
+          - An instance of :py:func:`plotly.graph_objs.table.Header`
           - A dict of string/value properties that will be passed
             to the Header constructor
     
@@ -9372,7 +9372,7 @@ class Table(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.table.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.table.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -9543,7 +9543,7 @@ class Table(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.table.Stream
+          - An instance of :py:func:`plotly.graph_objs.table.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -10166,7 +10166,7 @@ class Surface(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.surface.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -10474,7 +10474,7 @@ class Surface(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.Contours
+          - An instance of :py:func:`plotly.graph_objs.surface.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
     
@@ -10621,7 +10621,7 @@ class Surface(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.surface.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -10848,7 +10848,7 @@ class Surface(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.Lighting
+          - An instance of :py:func:`plotly.graph_objs.surface.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -10890,7 +10890,7 @@ class Surface(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.surface.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -11107,7 +11107,7 @@ class Surface(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.Stream
+          - An instance of :py:func:`plotly.graph_objs.surface.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -12342,7 +12342,7 @@ class Sunburst(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Domain
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -12425,7 +12425,7 @@ class Sunburst(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -12636,7 +12636,7 @@ class Sunburst(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -12757,7 +12757,7 @@ class Sunburst(_BaseTraceType):
         """
         The 'leaf' property is an instance of Leaf
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Leaf
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Leaf`
           - A dict of string/value properties that will be passed
             to the Leaf constructor
     
@@ -12807,7 +12807,7 @@ class Sunburst(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Marker
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -13036,7 +13036,7 @@ class Sunburst(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -13134,7 +13134,7 @@ class Sunburst(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Stream
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -13193,7 +13193,7 @@ class Sunburst(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.Textfont
+          - An instance of :py:func:`plotly.graph_objs.sunburst.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -14297,7 +14297,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.streamtube.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -14673,7 +14673,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.streamtube.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -14880,7 +14880,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.Lighting
+          - An instance of :py:func:`plotly.graph_objs.streamtube.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -14928,7 +14928,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.streamtube.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -15188,7 +15188,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'starts' property is an instance of Starts
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.Starts
+          - An instance of :py:func:`plotly.graph_objs.streamtube.Starts`
           - A dict of string/value properties that will be passed
             to the Starts constructor
     
@@ -15227,7 +15227,7 @@ class Streamtube(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.Stream
+          - An instance of :py:func:`plotly.graph_objs.streamtube.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -16389,7 +16389,7 @@ class Splom(_BaseTraceType):
         """
         The 'diagonal' property is an instance of Diagonal
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Diagonal
+          - An instance of :py:func:`plotly.graph_objs.splom.Diagonal`
           - A dict of string/value properties that will be passed
             to the Diagonal constructor
     
@@ -16482,7 +16482,7 @@ class Splom(_BaseTraceType):
     
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Dimension
+          - An instance of :py:func:`plotly.graph_objs.splom.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
     
@@ -16551,7 +16551,7 @@ class Splom(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.splom.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -16778,7 +16778,7 @@ class Splom(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Marker
+          - An instance of :py:func:`plotly.graph_objs.splom.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -17015,7 +17015,7 @@ class Splom(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Selected
+          - An instance of :py:func:`plotly.graph_objs.splom.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -17130,7 +17130,7 @@ class Splom(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Stream
+          - An instance of :py:func:`plotly.graph_objs.splom.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -17263,7 +17263,7 @@ class Splom(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.Unselected
+          - An instance of :py:func:`plotly.graph_objs.splom.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -18302,7 +18302,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -18558,7 +18558,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Line
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -18601,7 +18601,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Marker
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -18874,7 +18874,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Selected
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -18951,7 +18951,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Stream
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -19062,7 +19062,7 @@ class Scatterternary(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -19290,7 +19290,7 @@ class Scatterternary(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterternary.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scatterternary.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -20383,7 +20383,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -20614,7 +20614,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Line
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -20647,7 +20647,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Marker
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -20974,7 +20974,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Selected
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -21051,7 +21051,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Stream
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -21138,7 +21138,7 @@ class Scatterpolargl(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -21449,7 +21449,7 @@ class Scatterpolargl(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolargl.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scatterpolargl.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -22545,7 +22545,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -22801,7 +22801,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Line
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -22844,7 +22844,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Marker
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -23178,7 +23178,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Selected
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -23255,7 +23255,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Stream
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -23342,7 +23342,7 @@ class Scatterpolar(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -23653,7 +23653,7 @@ class Scatterpolar(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -24708,7 +24708,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -24979,7 +24979,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Line
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -25047,7 +25047,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -25305,7 +25305,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Selected
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -25378,7 +25378,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Stream
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -25467,7 +25467,7 @@ class Scattermapbox(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -25664,7 +25664,7 @@ class Scattermapbox(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -26504,7 +26504,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.ErrorX
+          - An instance of :py:func:`plotly.graph_objs.scattergl.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
     
@@ -26585,7 +26585,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.ErrorY
+          - An instance of :py:func:`plotly.graph_objs.scattergl.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
     
@@ -26811,7 +26811,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -27042,7 +27042,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Line
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -27075,7 +27075,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -27336,7 +27336,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Selected
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -27413,7 +27413,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Stream
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -27475,7 +27475,7 @@ class Scattergl(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -27703,7 +27703,7 @@ class Scattergl(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergl.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scattergl.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -29036,7 +29036,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -29308,7 +29308,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Line
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -29448,7 +29448,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -29718,7 +29718,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Selected
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -29795,7 +29795,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Stream
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -29858,7 +29858,7 @@ class Scattergeo(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -30086,7 +30086,7 @@ class Scattergeo(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattergeo.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scattergeo.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -31197,7 +31197,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -31453,7 +31453,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Line
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -31496,7 +31496,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -31769,7 +31769,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Selected
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -31846,7 +31846,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Stream
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -31908,7 +31908,7 @@ class Scattercarpet(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -32136,7 +32136,7 @@ class Scattercarpet(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scattercarpet.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -33035,7 +33035,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.ErrorX
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
     
@@ -33116,7 +33116,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.ErrorY
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
     
@@ -33197,7 +33197,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'error_z' property is an instance of ErrorZ
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.ErrorZ
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.ErrorZ`
           - A dict of string/value properties that will be passed
             to the ErrorZ constructor
     
@@ -33322,7 +33322,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -33553,7 +33553,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Line
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -33667,7 +33667,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Marker
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -33930,7 +33930,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Projection
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
     
@@ -34012,7 +34012,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Stream
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -34154,7 +34154,7 @@ class Scatter3d(_BaseTraceType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -35438,7 +35438,7 @@ class Scatter(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.ErrorX
+          - An instance of :py:func:`plotly.graph_objs.scatter.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
     
@@ -35519,7 +35519,7 @@ class Scatter(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.ErrorY
+          - An instance of :py:func:`plotly.graph_objs.scatter.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
     
@@ -35774,7 +35774,7 @@ class Scatter(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.scatter.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -36030,7 +36030,7 @@ class Scatter(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Line
+          - An instance of :py:func:`plotly.graph_objs.scatter.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -36079,7 +36079,7 @@ class Scatter(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Marker
+          - An instance of :py:func:`plotly.graph_objs.scatter.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -36420,7 +36420,7 @@ class Scatter(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Selected
+          - An instance of :py:func:`plotly.graph_objs.scatter.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -36557,7 +36557,7 @@ class Scatter(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Stream
+          - An instance of :py:func:`plotly.graph_objs.scatter.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -36641,7 +36641,7 @@ class Scatter(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Textfont
+          - An instance of :py:func:`plotly.graph_objs.scatter.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -36889,7 +36889,7 @@ class Scatter(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter.Unselected
+          - An instance of :py:func:`plotly.graph_objs.scatter.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -38209,7 +38209,7 @@ class Sankey(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Domain
+          - An instance of :py:func:`plotly.graph_objs.sankey.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -38272,7 +38272,7 @@ class Sankey(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.sankey.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -38375,7 +38375,7 @@ class Sankey(_BaseTraceType):
     
         The 'link' property is an instance of Link
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Link
+          - An instance of :py:func:`plotly.graph_objs.sankey.Link`
           - A dict of string/value properties that will be passed
             to the Link constructor
     
@@ -38557,7 +38557,7 @@ class Sankey(_BaseTraceType):
     
         The 'node' property is an instance of Node
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Node
+          - An instance of :py:func:`plotly.graph_objs.sankey.Node`
           - A dict of string/value properties that will be passed
             to the Node constructor
     
@@ -38703,7 +38703,7 @@ class Sankey(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Stream
+          - An instance of :py:func:`plotly.graph_objs.sankey.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -38738,7 +38738,7 @@ class Sankey(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.Textfont
+          - An instance of :py:func:`plotly.graph_objs.sankey.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -39393,7 +39393,7 @@ class Pointcloud(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.pointcloud.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -39563,7 +39563,7 @@ class Pointcloud(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.Marker
+          - An instance of :py:func:`plotly.graph_objs.pointcloud.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -39729,7 +39729,7 @@ class Pointcloud(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.Stream
+          - An instance of :py:func:`plotly.graph_objs.pointcloud.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -40768,7 +40768,7 @@ class Pie(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Domain
+          - An instance of :py:func:`plotly.graph_objs.pie.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -40871,7 +40871,7 @@ class Pie(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.pie.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -41082,7 +41082,7 @@ class Pie(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.pie.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -41252,7 +41252,7 @@ class Pie(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Marker
+          - An instance of :py:func:`plotly.graph_objs.pie.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -41378,7 +41378,7 @@ class Pie(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.pie.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -41561,7 +41561,7 @@ class Pie(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Stream
+          - An instance of :py:func:`plotly.graph_objs.pie.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -41620,7 +41620,7 @@ class Pie(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Textfont
+          - An instance of :py:func:`plotly.graph_objs.pie.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -41814,7 +41814,7 @@ class Pie(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.Title
+          - An instance of :py:func:`plotly.graph_objs.pie.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -41856,7 +41856,7 @@ class Pie(_BaseTraceType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.title.Font
+          - An instance of :py:func:`plotly.graph_objs.pie.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -42985,7 +42985,7 @@ class Parcoords(_BaseTraceType):
     
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Dimension
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
     
@@ -43008,7 +43008,7 @@ class Parcoords(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Domain
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -43114,7 +43114,7 @@ class Parcoords(_BaseTraceType):
     
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Labelfont
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
     
@@ -43181,7 +43181,7 @@ class Parcoords(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Line
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -43363,7 +43363,7 @@ class Parcoords(_BaseTraceType):
     
         The 'rangefont' property is an instance of Rangefont
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Rangefont
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Rangefont`
           - A dict of string/value properties that will be passed
             to the Rangefont constructor
     
@@ -43406,7 +43406,7 @@ class Parcoords(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Stream
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -43441,7 +43441,7 @@ class Parcoords(_BaseTraceType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.parcoords.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -44097,7 +44097,7 @@ class Parcats(_BaseTraceType):
     
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Dimension
+          - An instance of :py:func:`plotly.graph_objs.parcats.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
     
@@ -44120,7 +44120,7 @@ class Parcats(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Domain
+          - An instance of :py:func:`plotly.graph_objs.parcats.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -44250,7 +44250,7 @@ class Parcats(_BaseTraceType):
     
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Labelfont
+          - An instance of :py:func:`plotly.graph_objs.parcats.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
     
@@ -44293,7 +44293,7 @@ class Parcats(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Line
+          - An instance of :py:func:`plotly.graph_objs.parcats.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -44529,7 +44529,7 @@ class Parcats(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Stream
+          - An instance of :py:func:`plotly.graph_objs.parcats.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -44564,7 +44564,7 @@ class Parcats(_BaseTraceType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.parcats.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.parcats.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -45199,7 +45199,7 @@ class Ohlc(_BaseTraceType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.Decreasing
+          - An instance of :py:func:`plotly.graph_objs.ohlc.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
     
@@ -45313,7 +45313,7 @@ class Ohlc(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.ohlc.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -45459,7 +45459,7 @@ class Ohlc(_BaseTraceType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.Increasing
+          - An instance of :py:func:`plotly.graph_objs.ohlc.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
     
@@ -45510,7 +45510,7 @@ class Ohlc(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.Line
+          - An instance of :py:func:`plotly.graph_objs.ohlc.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -45762,7 +45762,7 @@ class Ohlc(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.Stream
+          - An instance of :py:func:`plotly.graph_objs.ohlc.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -46837,7 +46837,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -47124,7 +47124,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'contour' property is an instance of Contour
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.Contour
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.Contour`
           - A dict of string/value properties that will be passed
             to the Contour constructor
     
@@ -47331,7 +47331,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -47758,7 +47758,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.Lighting
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -47806,7 +47806,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -48023,7 +48023,7 @@ class Mesh3d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.Stream
+          - An instance of :py:func:`plotly.graph_objs.mesh3d.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -49399,7 +49399,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'caps' property is an instance of Caps
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Caps
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Caps`
           - A dict of string/value properties that will be passed
             to the Caps constructor
     
@@ -49546,7 +49546,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.isosurface.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -49833,7 +49833,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'contour' property is an instance of Contour
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Contour
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Contour`
           - A dict of string/value properties that will be passed
             to the Contour constructor
     
@@ -49975,7 +49975,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -50242,7 +50242,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Lighting
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -50290,7 +50290,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -50507,7 +50507,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'slices' property is an instance of Slices
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Slices
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Slices`
           - A dict of string/value properties that will be passed
             to the Slices constructor
     
@@ -50543,7 +50543,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'spaceframe' property is an instance of Spaceframe
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Spaceframe
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Spaceframe`
           - A dict of string/value properties that will be passed
             to the Spaceframe constructor
     
@@ -50580,7 +50580,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Stream
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -50613,7 +50613,7 @@ class Isosurface(_BaseTraceType):
         """
         The 'surface' property is an instance of Surface
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.Surface
+          - An instance of :py:func:`plotly.graph_objs.isosurface.Surface`
           - A dict of string/value properties that will be passed
             to the Surface constructor
     
@@ -51778,7 +51778,7 @@ class Indicator(_BaseTraceType):
         """
         The 'delta' property is an instance of Delta
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Delta
+          - An instance of :py:func:`plotly.graph_objs.indicator.Delta`
           - A dict of string/value properties that will be passed
             to the Delta constructor
     
@@ -51826,7 +51826,7 @@ class Indicator(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Domain
+          - An instance of :py:func:`plotly.graph_objs.indicator.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -51865,7 +51865,7 @@ class Indicator(_BaseTraceType):
     
         The 'gauge' property is an instance of Gauge
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Gauge
+          - An instance of :py:func:`plotly.graph_objs.indicator.Gauge`
           - A dict of string/value properties that will be passed
             to the Gauge constructor
     
@@ -52055,7 +52055,7 @@ class Indicator(_BaseTraceType):
         """
         The 'number' property is an instance of Number
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Number
+          - An instance of :py:func:`plotly.graph_objs.indicator.Number`
           - A dict of string/value properties that will be passed
             to the Number constructor
     
@@ -52091,7 +52091,7 @@ class Indicator(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Stream
+          - An instance of :py:func:`plotly.graph_objs.indicator.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -52124,7 +52124,7 @@ class Indicator(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.Title
+          - An instance of :py:func:`plotly.graph_objs.indicator.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -52758,7 +52758,7 @@ class Image(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.image.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.image.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -53050,7 +53050,7 @@ class Image(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.image.Stream
+          - An instance of :py:func:`plotly.graph_objs.image.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -54070,7 +54070,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -54358,7 +54358,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.Contours
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
     
@@ -54594,7 +54594,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -54779,7 +54779,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.Line
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -54817,7 +54817,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.Marker
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -55072,7 +55072,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.Stream
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -55253,7 +55253,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.XBins
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.XBins`
           - A dict of string/value properties that will be passed
             to the XBins constructor
     
@@ -55425,7 +55425,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.YBins
+          - An instance of :py:func:`plotly.graph_objs.histogram2dcontour.YBins`
           - A dict of string/value properties that will be passed
             to the YBins constructor
     
@@ -56709,7 +56709,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -57146,7 +57146,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -57331,7 +57331,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.Marker
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -57562,7 +57562,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.Stream
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -57743,7 +57743,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.XBins
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.XBins`
           - A dict of string/value properties that will be passed
             to the XBins constructor
     
@@ -57935,7 +57935,7 @@ class Histogram2d(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2d.YBins
+          - An instance of :py:func:`plotly.graph_objs.histogram2d.YBins`
           - A dict of string/value properties that will be passed
             to the YBins constructor
     
@@ -59199,7 +59199,7 @@ class Histogram(_BaseTraceType):
         """
         The 'cumulative' property is an instance of Cumulative
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Cumulative
+          - An instance of :py:func:`plotly.graph_objs.histogram.Cumulative`
           - A dict of string/value properties that will be passed
             to the Cumulative constructor
     
@@ -59292,7 +59292,7 @@ class Histogram(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.ErrorX
+          - An instance of :py:func:`plotly.graph_objs.histogram.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
     
@@ -59373,7 +59373,7 @@ class Histogram(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.ErrorY
+          - An instance of :py:func:`plotly.graph_objs.histogram.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
     
@@ -59558,7 +59558,7 @@ class Histogram(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.histogram.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -59785,7 +59785,7 @@ class Histogram(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Marker
+          - An instance of :py:func:`plotly.graph_objs.histogram.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -60088,7 +60088,7 @@ class Histogram(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Selected
+          - An instance of :py:func:`plotly.graph_objs.histogram.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -60165,7 +60165,7 @@ class Histogram(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Stream
+          - An instance of :py:func:`plotly.graph_objs.histogram.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -60298,7 +60298,7 @@ class Histogram(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.Unselected
+          - An instance of :py:func:`plotly.graph_objs.histogram.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -60398,7 +60398,7 @@ class Histogram(_BaseTraceType):
         """
         The 'xbins' property is an instance of XBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.XBins
+          - An instance of :py:func:`plotly.graph_objs.histogram.XBins`
           - A dict of string/value properties that will be passed
             to the XBins constructor
     
@@ -60555,7 +60555,7 @@ class Histogram(_BaseTraceType):
         """
         The 'ybins' property is an instance of YBins
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.YBins
+          - An instance of :py:func:`plotly.graph_objs.histogram.YBins`
           - A dict of string/value properties that will be passed
             to the YBins constructor
     
@@ -61505,7 +61505,7 @@ class Heatmapgl(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmapgl.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.heatmapgl.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -61921,7 +61921,7 @@ class Heatmapgl(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmapgl.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.heatmapgl.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -62155,7 +62155,7 @@ class Heatmapgl(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmapgl.Stream
+          - An instance of :py:func:`plotly.graph_objs.heatmapgl.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -63347,7 +63347,7 @@ class Heatmap(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmap.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.heatmap.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -63786,7 +63786,7 @@ class Heatmap(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmap.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.heatmap.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -64186,7 +64186,7 @@ class Heatmap(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.heatmap.Stream
+          - An instance of :py:func:`plotly.graph_objs.heatmap.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -65758,7 +65758,7 @@ class Funnelarea(_BaseTraceType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Domain
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -65842,7 +65842,7 @@ class Funnelarea(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -66053,7 +66053,7 @@ class Funnelarea(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -66195,7 +66195,7 @@ class Funnelarea(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Marker
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -66364,7 +66364,7 @@ class Funnelarea(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Stream
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -66423,7 +66423,7 @@ class Funnelarea(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Textfont
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -66617,7 +66617,7 @@ class Funnelarea(_BaseTraceType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.Title
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -67476,7 +67476,7 @@ class Funnel(_BaseTraceType):
         """
         The 'connector' property is an instance of Connector
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Connector
+          - An instance of :py:func:`plotly.graph_objs.funnel.Connector`
           - A dict of string/value properties that will be passed
             to the Connector constructor
     
@@ -67660,7 +67660,7 @@ class Funnel(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.funnel.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -67893,7 +67893,7 @@ class Funnel(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.funnel.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -67969,7 +67969,7 @@ class Funnel(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Marker
+          - An instance of :py:func:`plotly.graph_objs.funnel.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -68252,7 +68252,7 @@ class Funnel(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.funnel.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -68350,7 +68350,7 @@ class Funnel(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Stream
+          - An instance of :py:func:`plotly.graph_objs.funnel.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -68437,7 +68437,7 @@ class Funnel(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.Textfont
+          - An instance of :py:func:`plotly.graph_objs.funnel.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -69810,7 +69810,7 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.densitymapbox.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -70187,7 +70187,7 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.densitymapbox.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -70695,7 +70695,7 @@ class Densitymapbox(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.Stream
+          - An instance of :py:func:`plotly.graph_objs.densitymapbox.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -71968,7 +71968,7 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.contourcarpet.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.contourcarpet.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -72256,7 +72256,7 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of plotly.graph_objs.contourcarpet.Contours
+          - An instance of :py:func:`plotly.graph_objs.contourcarpet.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
     
@@ -72592,7 +72592,7 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.contourcarpet.Line
+          - An instance of :py:func:`plotly.graph_objs.contourcarpet.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -72811,7 +72811,7 @@ class Contourcarpet(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.contourcarpet.Stream
+          - An instance of :py:func:`plotly.graph_objs.contourcarpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -73939,7 +73939,7 @@ class Contour(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.contour.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.contour.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -74248,7 +74248,7 @@ class Contour(_BaseTraceType):
         """
         The 'contours' property is an instance of Contours
         that may be specified as:
-          - An instance of plotly.graph_objs.contour.Contours
+          - An instance of :py:func:`plotly.graph_objs.contour.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
     
@@ -74527,7 +74527,7 @@ class Contour(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.contour.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.contour.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -74773,7 +74773,7 @@ class Contour(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.contour.Line
+          - An instance of :py:func:`plotly.graph_objs.contour.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -74992,7 +74992,7 @@ class Contour(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.contour.Stream
+          - An instance of :py:func:`plotly.graph_objs.contour.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -76595,7 +76595,7 @@ class Cone(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.cone.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -76969,7 +76969,7 @@ class Cone(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.cone.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -77196,7 +77196,7 @@ class Cone(_BaseTraceType):
         """
         The 'lighting' property is an instance of Lighting
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.Lighting
+          - An instance of :py:func:`plotly.graph_objs.cone.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
     
@@ -77244,7 +77244,7 @@ class Cone(_BaseTraceType):
         """
         The 'lightposition' property is an instance of Lightposition
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.Lightposition
+          - An instance of :py:func:`plotly.graph_objs.cone.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
     
@@ -77514,7 +77514,7 @@ class Cone(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.Stream
+          - An instance of :py:func:`plotly.graph_objs.cone.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -78769,7 +78769,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -79191,7 +79191,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -79459,7 +79459,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.Marker
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -79584,7 +79584,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.Selected
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -79678,7 +79678,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.Stream
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -79833,7 +79833,7 @@ class Choroplethmapbox(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.choroplethmapbox.Unselected
+          - An instance of :py:func:`plotly.graph_objs.choroplethmapbox.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -80772,7 +80772,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.choropleth.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -81220,7 +81220,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.choropleth.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -81513,7 +81513,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.Marker
+          - An instance of :py:func:`plotly.graph_objs.choropleth.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -81638,7 +81638,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.Selected
+          - An instance of :py:func:`plotly.graph_objs.choropleth.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -81732,7 +81732,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.Stream
+          - An instance of :py:func:`plotly.graph_objs.choropleth.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -81862,7 +81862,7 @@ class Choropleth(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.Unselected
+          - An instance of :py:func:`plotly.graph_objs.choropleth.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -82790,7 +82790,7 @@ class Carpet(_BaseTraceType):
         """
         The 'aaxis' property is an instance of Aaxis
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.Aaxis
+          - An instance of :py:func:`plotly.graph_objs.carpet.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
     
@@ -83088,7 +83088,7 @@ class Carpet(_BaseTraceType):
         """
         The 'baxis' property is an instance of Baxis
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.Baxis
+          - An instance of :py:func:`plotly.graph_objs.carpet.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
     
@@ -83535,7 +83535,7 @@ class Carpet(_BaseTraceType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.Font
+          - An instance of :py:func:`plotly.graph_objs.carpet.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -83710,7 +83710,7 @@ class Carpet(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.Stream
+          - An instance of :py:func:`plotly.graph_objs.carpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -84519,7 +84519,7 @@ class Candlestick(_BaseTraceType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of plotly.graph_objs.candlestick.Decreasing
+          - An instance of :py:func:`plotly.graph_objs.candlestick.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
     
@@ -84638,7 +84638,7 @@ class Candlestick(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.candlestick.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.candlestick.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -84784,7 +84784,7 @@ class Candlestick(_BaseTraceType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of plotly.graph_objs.candlestick.Increasing
+          - An instance of :py:func:`plotly.graph_objs.candlestick.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
     
@@ -84840,7 +84840,7 @@ class Candlestick(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.candlestick.Line
+          - An instance of :py:func:`plotly.graph_objs.candlestick.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -85085,7 +85085,7 @@ class Candlestick(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.candlestick.Stream
+          - An instance of :py:func:`plotly.graph_objs.candlestick.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -86193,7 +86193,7 @@ class Box(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.box.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -86466,7 +86466,7 @@ class Box(_BaseTraceType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Line
+          - An instance of :py:func:`plotly.graph_objs.box.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -86539,7 +86539,7 @@ class Box(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Marker
+          - An instance of :py:func:`plotly.graph_objs.box.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -87083,7 +87083,7 @@ class Box(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Selected
+          - An instance of :py:func:`plotly.graph_objs.box.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -87156,7 +87156,7 @@ class Box(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Stream
+          - An instance of :py:func:`plotly.graph_objs.box.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -87290,7 +87290,7 @@ class Box(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.box.Unselected
+          - An instance of :py:func:`plotly.graph_objs.box.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -88871,7 +88871,7 @@ class Barpolar(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.barpolar.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.barpolar.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -89098,7 +89098,7 @@ class Barpolar(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.barpolar.Marker
+          - An instance of :py:func:`plotly.graph_objs.barpolar.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -89411,7 +89411,7 @@ class Barpolar(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.barpolar.Selected
+          - An instance of :py:func:`plotly.graph_objs.barpolar.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -89488,7 +89488,7 @@ class Barpolar(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.barpolar.Stream
+          - An instance of :py:func:`plotly.graph_objs.barpolar.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -89729,7 +89729,7 @@ class Barpolar(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.barpolar.Unselected
+          - An instance of :py:func:`plotly.graph_objs.barpolar.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -90644,7 +90644,7 @@ class Bar(_BaseTraceType):
         """
         The 'error_x' property is an instance of ErrorX
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.ErrorX
+          - An instance of :py:func:`plotly.graph_objs.bar.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
     
@@ -90725,7 +90725,7 @@ class Bar(_BaseTraceType):
         """
         The 'error_y' property is an instance of ErrorY
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.ErrorY
+          - An instance of :py:func:`plotly.graph_objs.bar.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
     
@@ -90850,7 +90850,7 @@ class Bar(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.bar.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -91082,7 +91082,7 @@ class Bar(_BaseTraceType):
     
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Insidetextfont
+          - An instance of :py:func:`plotly.graph_objs.bar.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
     
@@ -91158,7 +91158,7 @@ class Bar(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Marker
+          - An instance of :py:func:`plotly.graph_objs.bar.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -91457,7 +91457,7 @@ class Bar(_BaseTraceType):
     
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Outsidetextfont
+          - An instance of :py:func:`plotly.graph_objs.bar.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
     
@@ -91552,7 +91552,7 @@ class Bar(_BaseTraceType):
         """
         The 'selected' property is an instance of Selected
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Selected
+          - An instance of :py:func:`plotly.graph_objs.bar.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
     
@@ -91629,7 +91629,7 @@ class Bar(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Stream
+          - An instance of :py:func:`plotly.graph_objs.bar.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -91738,7 +91738,7 @@ class Bar(_BaseTraceType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Textfont
+          - An instance of :py:func:`plotly.graph_objs.bar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -91989,7 +91989,7 @@ class Bar(_BaseTraceType):
         """
         The 'unselected' property is an instance of Unselected
         that may be specified as:
-          - An instance of plotly.graph_objs.bar.Unselected
+          - An instance of :py:func:`plotly.graph_objs.bar.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
     
@@ -93317,7 +93317,7 @@ class Area(_BaseTraceType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.area.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.area.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -93441,7 +93441,7 @@ class Area(_BaseTraceType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.area.Marker
+          - An instance of :py:func:`plotly.graph_objs.area.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -93654,7 +93654,7 @@ class Area(_BaseTraceType):
         """
         The 'stream' property is an instance of Stream
         that may be specified as:
-          - An instance of plotly.graph_objs.area.Stream
+          - An instance of :py:func:`plotly.graph_objs.area.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
     
@@ -94228,7 +94228,7 @@ class Layout(_BaseLayoutType):
         """
         The 'angularaxis' property is an instance of AngularAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.AngularAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.AngularAxis`
           - A dict of string/value properties that will be passed
             to the AngularAxis constructor
     
@@ -94582,7 +94582,7 @@ class Layout(_BaseLayoutType):
     
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Annotation
+          - An instance of :py:func:`plotly.graph_objs.layout.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
     
@@ -94853,7 +94853,7 @@ class Layout(_BaseLayoutType):
         """
         The 'coloraxis' property is an instance of Coloraxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Coloraxis
+          - An instance of :py:func:`plotly.graph_objs.layout.Coloraxis`
           - A dict of string/value properties that will be passed
             to the Coloraxis constructor
     
@@ -94934,7 +94934,7 @@ class Layout(_BaseLayoutType):
         """
         The 'colorscale' property is an instance of Colorscale
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Colorscale
+          - An instance of :py:func:`plotly.graph_objs.layout.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
     
@@ -95194,7 +95194,7 @@ class Layout(_BaseLayoutType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -95329,7 +95329,7 @@ class Layout(_BaseLayoutType):
         """
         The 'geo' property is an instance of Geo
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Geo
+          - An instance of :py:func:`plotly.graph_objs.layout.Geo`
           - A dict of string/value properties that will be passed
             to the Geo constructor
     
@@ -95453,7 +95453,7 @@ class Layout(_BaseLayoutType):
         """
         The 'grid' property is an instance of Grid
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Grid
+          - An instance of :py:func:`plotly.graph_objs.layout.Grid`
           - A dict of string/value properties that will be passed
             to the Grid constructor
     
@@ -95670,7 +95670,7 @@ class Layout(_BaseLayoutType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.layout.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -95849,7 +95849,7 @@ class Layout(_BaseLayoutType):
     
         The 'imagedefaults' property is an instance of Image
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Image
+          - An instance of :py:func:`plotly.graph_objs.layout.Image`
           - A dict of string/value properties that will be passed
             to the Image constructor
     
@@ -95872,7 +95872,7 @@ class Layout(_BaseLayoutType):
         """
         The 'legend' property is an instance of Legend
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Legend
+          - An instance of :py:func:`plotly.graph_objs.layout.Legend`
           - A dict of string/value properties that will be passed
             to the Legend constructor
     
@@ -95982,7 +95982,7 @@ class Layout(_BaseLayoutType):
         """
         The 'mapbox' property is an instance of Mapbox
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Mapbox
+          - An instance of :py:func:`plotly.graph_objs.layout.Mapbox`
           - A dict of string/value properties that will be passed
             to the Mapbox constructor
     
@@ -96074,7 +96074,7 @@ class Layout(_BaseLayoutType):
         """
         The 'margin' property is an instance of Margin
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Margin
+          - An instance of :py:func:`plotly.graph_objs.layout.Margin`
           - A dict of string/value properties that will be passed
             to the Margin constructor
     
@@ -96160,7 +96160,7 @@ class Layout(_BaseLayoutType):
         """
         The 'modebar' property is an instance of Modebar
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Modebar
+          - An instance of :py:func:`plotly.graph_objs.layout.Modebar`
           - A dict of string/value properties that will be passed
             to the Modebar constructor
     
@@ -96367,7 +96367,7 @@ class Layout(_BaseLayoutType):
         """
         The 'polar' property is an instance of Polar
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Polar
+          - An instance of :py:func:`plotly.graph_objs.layout.Polar`
           - A dict of string/value properties that will be passed
             to the Polar constructor
     
@@ -96440,7 +96440,7 @@ class Layout(_BaseLayoutType):
         """
         The 'radialaxis' property is an instance of RadialAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.RadialAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.RadialAxis`
           - A dict of string/value properties that will be passed
             to the RadialAxis constructor
     
@@ -96510,7 +96510,7 @@ class Layout(_BaseLayoutType):
         """
         The 'scene' property is an instance of Scene
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Scene
+          - An instance of :py:func:`plotly.graph_objs.layout.Scene`
           - A dict of string/value properties that will be passed
             to the Scene constructor
     
@@ -96832,7 +96832,7 @@ class Layout(_BaseLayoutType):
     
         The 'shapedefaults' property is an instance of Shape
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Shape
+          - An instance of :py:func:`plotly.graph_objs.layout.Shape`
           - A dict of string/value properties that will be passed
             to the Shape constructor
     
@@ -97001,7 +97001,7 @@ class Layout(_BaseLayoutType):
     
         The 'sliderdefaults' property is an instance of Slider
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Slider
+          - An instance of :py:func:`plotly.graph_objs.layout.Slider`
           - A dict of string/value properties that will be passed
             to the Slider constructor
     
@@ -97093,7 +97093,7 @@ class Layout(_BaseLayoutType):
     
         The 'template' property is an instance of Template
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Template
+          - An instance of :py:func:`plotly.graph_objs.layout.Template`
           - A dict of string/value properties that will be passed
             to the Template constructor
     
@@ -97136,7 +97136,7 @@ class Layout(_BaseLayoutType):
         """
         The 'ternary' property is an instance of Ternary
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Ternary
+          - An instance of :py:func:`plotly.graph_objs.layout.Ternary`
           - A dict of string/value properties that will be passed
             to the Ternary constructor
     
@@ -97186,7 +97186,7 @@ class Layout(_BaseLayoutType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -97266,7 +97266,7 @@ class Layout(_BaseLayoutType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -97311,7 +97311,7 @@ class Layout(_BaseLayoutType):
     
         The 'transition' property is an instance of Transition
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Transition
+          - An instance of :py:func:`plotly.graph_objs.layout.Transition`
           - A dict of string/value properties that will be passed
             to the Transition constructor
     
@@ -97403,7 +97403,7 @@ class Layout(_BaseLayoutType):
         """
         The 'uniformtext' property is an instance of Uniformtext
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Uniformtext
+          - An instance of :py:func:`plotly.graph_objs.layout.Uniformtext`
           - A dict of string/value properties that will be passed
             to the Uniformtext constructor
     
@@ -97548,7 +97548,7 @@ class Layout(_BaseLayoutType):
     
         The 'updatemenudefaults' property is an instance of Updatemenu
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.Updatemenu
+          - An instance of :py:func:`plotly.graph_objs.layout.Updatemenu`
           - A dict of string/value properties that will be passed
             to the Updatemenu constructor
     
@@ -97728,7 +97728,7 @@ class Layout(_BaseLayoutType):
         """
         The 'xaxis' property is an instance of XAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.XAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
     
@@ -98173,7 +98173,7 @@ class Layout(_BaseLayoutType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.YAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
     

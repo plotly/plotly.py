@@ -25,10 +25,9 @@ Layout
 
 .. autosummary::
    :toctree: generated/
-   :template: trace.rst
 
    Layout
-
+   layout
 
 
 Simple charts

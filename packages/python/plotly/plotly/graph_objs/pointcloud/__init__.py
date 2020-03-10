@@ -176,7 +176,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'border' property is an instance of Border
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.marker.Border
+          - An instance of :py:func:`plotly.graph_objs.pointcloud.marker.Border`
           - A dict of string/value properties that will be passed
             to the Border constructor
     
@@ -700,7 +700,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.pointcloud.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

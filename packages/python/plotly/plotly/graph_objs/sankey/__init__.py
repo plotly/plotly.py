@@ -514,7 +514,7 @@ class Node(_BaseTraceHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.node.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.sankey.node.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -674,7 +674,7 @@ class Node(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.node.Line
+          - An instance of :py:func:`plotly.graph_objs.sankey.node.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1244,7 +1244,7 @@ class Link(_BaseTraceHierarchyType):
     
         The 'colorscaledefaults' property is an instance of Colorscale
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.link.Colorscale
+          - An instance of :py:func:`plotly.graph_objs.sankey.link.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
     
@@ -1311,7 +1311,7 @@ class Link(_BaseTraceHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.link.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.sankey.link.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -1471,7 +1471,7 @@ class Link(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.link.Line
+          - An instance of :py:func:`plotly.graph_objs.sankey.link.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -2132,7 +2132,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.sankey.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

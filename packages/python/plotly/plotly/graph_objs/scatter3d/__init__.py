@@ -444,7 +444,7 @@ class Projection(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.projection.X
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.projection.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -476,7 +476,7 @@ class Projection(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.projection.Y
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.projection.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -508,7 +508,7 @@ class Projection(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.projection.Z
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.projection.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     
@@ -855,7 +855,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1164,7 +1164,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -2078,7 +2078,7 @@ class Line(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.line.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -2973,7 +2973,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.scatter3d.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

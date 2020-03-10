@@ -534,7 +534,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.X
+          - An instance of :py:func:`plotly.graph_objs.isosurface.slices.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -576,7 +576,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.Y
+          - An instance of :py:func:`plotly.graph_objs.isosurface.slices.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -618,7 +618,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.Z
+          - An instance of :py:func:`plotly.graph_objs.isosurface.slices.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     
@@ -1439,7 +1439,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.isosurface.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2519,7 +2519,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.isosurface.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2652,7 +2652,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.isosurface.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2890,7 +2890,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Title
+          - An instance of :py:func:`plotly.graph_objs.isosurface.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2933,7 +2933,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.title.Font
+          - An instance of :py:func:`plotly.graph_objs.isosurface.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3764,7 +3764,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.X
+          - An instance of :py:func:`plotly.graph_objs.isosurface.caps.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -3801,7 +3801,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.Y
+          - An instance of :py:func:`plotly.graph_objs.isosurface.caps.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -3838,7 +3838,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.Z
+          - An instance of :py:func:`plotly.graph_objs.isosurface.caps.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     

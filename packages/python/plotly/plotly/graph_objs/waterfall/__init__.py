@@ -11,7 +11,7 @@ class Totals(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.totals.Marker
+          - An instance of :py:func:`plotly.graph_objs.waterfall.totals.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -1234,7 +1234,7 @@ class Increasing(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.increasing.Marker
+          - An instance of :py:func:`plotly.graph_objs.waterfall.increasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -1554,7 +1554,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.waterfall.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1825,7 +1825,7 @@ class Decreasing(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.decreasing.Marker
+          - An instance of :py:func:`plotly.graph_objs.waterfall.decreasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -1939,7 +1939,7 @@ class Connector(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.connector.Line
+          - An instance of :py:func:`plotly.graph_objs.waterfall.connector.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     

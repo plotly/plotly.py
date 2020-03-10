@@ -497,7 +497,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.unselected.Marker
+          - An instance of :py:func:`plotly.graph_objs.histogram.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -527,7 +527,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.unselected.Textfont
+          - An instance of :py:func:`plotly.graph_objs.histogram.unselected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -789,7 +789,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.selected.Marker
+          - An instance of :py:func:`plotly.graph_objs.histogram.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -817,7 +817,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.selected.Textfont
+          - An instance of :py:func:`plotly.graph_objs.histogram.selected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -1149,7 +1149,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.marker.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.histogram.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1458,7 +1458,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.histogram.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -2165,7 +2165,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :func:`plotly.graph_objs.histogram.hoverlabel.Font`
+          - An instance of :py:func:`plotly.graph_objs.histogram.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

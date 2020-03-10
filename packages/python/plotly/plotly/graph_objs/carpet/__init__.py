@@ -1483,7 +1483,7 @@ class Baxis(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.baxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.carpet.baxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1616,7 +1616,7 @@ class Baxis(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.baxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.carpet.baxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1783,7 +1783,7 @@ class Baxis(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.baxis.Title
+          - An instance of :py:func:`plotly.graph_objs.carpet.baxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1826,7 +1826,7 @@ class Baxis(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.baxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.carpet.baxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3717,7 +3717,7 @@ class Aaxis(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.aaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.carpet.aaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -3850,7 +3850,7 @@ class Aaxis(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.aaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.carpet.aaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -4017,7 +4017,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.aaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.carpet.aaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -4060,7 +4060,7 @@ class Aaxis(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.carpet.aaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.carpet.aaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

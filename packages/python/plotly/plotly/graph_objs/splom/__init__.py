@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.unselected.Marker
+          - An instance of :py:func:`plotly.graph_objs.splom.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -270,7 +270,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.selected.Marker
+          - An instance of :py:func:`plotly.graph_objs.splom.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -597,7 +597,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.splom.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -906,7 +906,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.splom.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1904,7 +1904,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.splom.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2175,7 +2175,7 @@ class Dimension(_BaseTraceHierarchyType):
         """
         The 'axis' property is an instance of Axis
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.dimension.Axis
+          - An instance of :py:func:`plotly.graph_objs.splom.dimension.Axis`
           - A dict of string/value properties that will be passed
             to the Axis constructor
     

@@ -975,7 +975,7 @@ class Currentvalue(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.currentvalue.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.currentvalue.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

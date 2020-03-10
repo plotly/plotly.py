@@ -14,7 +14,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -976,7 +976,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.rangeslider.YAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
     
@@ -1457,7 +1457,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.rangeselector.Button
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeselector.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
     
@@ -1482,7 +1482,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.rangeselector.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeselector.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

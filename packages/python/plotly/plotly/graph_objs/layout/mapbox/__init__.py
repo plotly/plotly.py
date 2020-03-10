@@ -34,7 +34,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'circle' property is an instance of Circle
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Circle
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.layer.Circle`
           - A dict of string/value properties that will be passed
             to the Circle constructor
     
@@ -149,7 +149,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Fill
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.layer.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -177,7 +177,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Line
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.layer.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -399,7 +399,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'symbol' property is an instance of Symbol
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Symbol
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.layer.Symbol`
           - A dict of string/value properties that will be passed
             to the Symbol constructor
     

@@ -191,7 +191,7 @@ class Z(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.z.Project
+          - An instance of :py:func:`plotly.graph_objs.surface.contours.z.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     
@@ -697,7 +697,7 @@ class Y(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.y.Project
+          - An instance of :py:func:`plotly.graph_objs.surface.contours.y.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     
@@ -1203,7 +1203,7 @@ class X(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.x.Project
+          - An instance of :py:func:`plotly.graph_objs.surface.contours.x.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     

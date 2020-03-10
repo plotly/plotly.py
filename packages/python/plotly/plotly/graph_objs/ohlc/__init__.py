@@ -305,7 +305,7 @@ class Increasing(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.increasing.Line
+          - An instance of :py:func:`plotly.graph_objs.ohlc.increasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -628,7 +628,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.ohlc.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -930,7 +930,7 @@ class Decreasing(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.ohlc.decreasing.Line
+          - An instance of :py:func:`plotly.graph_objs.ohlc.decreasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     

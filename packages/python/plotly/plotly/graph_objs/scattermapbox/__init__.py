@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.unselected.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -500,7 +500,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.selected.Marker
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -827,7 +827,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.marker.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -2117,7 +2117,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.scattermapbox.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.scattermapbox.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

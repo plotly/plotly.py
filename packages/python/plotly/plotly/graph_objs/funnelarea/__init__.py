@@ -14,7 +14,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.title.Font
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -731,7 +731,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1397,7 +1397,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.funnelarea.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

@@ -752,7 +752,7 @@ class Pathbar(_BaseTraceHierarchyType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.pathbar.Textfont
+          - An instance of :py:func:`plotly.graph_objs.treemap.pathbar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -1448,7 +1448,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.treemap.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1806,7 +1806,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.treemap.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1842,7 +1842,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.Pad
+          - An instance of :py:func:`plotly.graph_objs.treemap.marker.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -2761,7 +2761,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.treemap.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

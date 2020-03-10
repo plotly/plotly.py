@@ -1491,7 +1491,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.marker.colorbar.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.marker.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1625,7 +1625,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.marker.colorbar.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.marker.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1863,7 +1863,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.marker.colorbar.Title
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1907,7 +1907,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.scatterpolar.marker.colorbar.title.Font
+          - An instance of :py:func:`plotly.graph_objs.scatterpolar.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

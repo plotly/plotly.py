@@ -37,7 +37,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
         The 'rotation' property is an instance of Rotation
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.projection.Rotation
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.projection.Rotation`
           - A dict of string/value properties that will be passed
             to the Rotation constructor
     

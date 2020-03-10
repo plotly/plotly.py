@@ -359,7 +359,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.table.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -675,7 +675,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Fill
+          - An instance of :py:func:`plotly.graph_objs.table.header.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -706,7 +706,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Font
+          - An instance of :py:func:`plotly.graph_objs.table.header.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -822,7 +822,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Line
+          - An instance of :py:func:`plotly.graph_objs.table.header.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1454,7 +1454,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Fill
+          - An instance of :py:func:`plotly.graph_objs.table.cells.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -1485,7 +1485,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Font
+          - An instance of :py:func:`plotly.graph_objs.table.cells.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1601,7 +1601,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Line
+          - An instance of :py:func:`plotly.graph_objs.table.cells.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     

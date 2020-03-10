@@ -1042,7 +1042,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.zaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1176,7 +1176,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.zaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1414,7 +1414,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.zaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1452,7 +1452,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.zaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3494,7 +3494,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.yaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -3628,7 +3628,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.yaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -3866,7 +3866,7 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.yaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -3904,7 +3904,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.yaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -5946,7 +5946,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.xaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -6080,7 +6080,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.xaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -6318,7 +6318,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.xaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -6356,7 +6356,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.xaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -7578,7 +7578,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.camera.Center
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -7611,7 +7611,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'eye' property is an instance of Eye
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.camera.Eye
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Eye`
           - A dict of string/value properties that will be passed
             to the Eye constructor
     
@@ -7640,7 +7640,7 @@ class Camera(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.camera.Projection
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
     
@@ -7673,7 +7673,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'up' property is an instance of Up
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.camera.Up
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Up`
           - A dict of string/value properties that will be passed
             to the Up constructor
     
@@ -8375,7 +8375,7 @@ class Annotation(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.annotation.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.annotation.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -8439,7 +8439,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.annotation.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     

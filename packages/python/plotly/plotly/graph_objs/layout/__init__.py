@@ -1427,7 +1427,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.yaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1561,7 +1561,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.yaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1824,7 +1824,7 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.yaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1874,7 +1874,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.yaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -4075,7 +4075,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeselector' property is an instance of Rangeselector
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Rangeselector
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Rangeselector`
           - A dict of string/value properties that will be passed
             to the Rangeselector constructor
     
@@ -4144,7 +4144,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeslider' property is an instance of Rangeslider
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Rangeslider
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Rangeslider`
           - A dict of string/value properties that will be passed
             to the Rangeslider constructor
     
@@ -4744,7 +4744,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -4878,7 +4878,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -5141,7 +5141,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -5191,7 +5191,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.xaxis.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -6780,7 +6780,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.updatemenu.Button
+          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
     
@@ -6829,7 +6829,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.updatemenu.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -6901,7 +6901,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.updatemenu.Pad
+          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -7744,7 +7744,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.title.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -7794,7 +7794,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.title.Pad
+          - An instance of :py:func:`plotly.graph_objs.layout.title.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -8204,7 +8204,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'aaxis' property is an instance of Aaxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.Aaxis
+          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
     
@@ -8434,7 +8434,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'baxis' property is an instance of Baxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.Baxis
+          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
     
@@ -8723,7 +8723,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'caxis' property is an instance of Caxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.Caxis
+          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Caxis`
           - A dict of string/value properties that will be passed
             to the Caxis constructor
     
@@ -8953,7 +8953,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -9181,7 +9181,7 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'data' property is an instance of Data
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.template.Data
+          - An instance of :py:func:`plotly.graph_objs.layout.template.Data`
           - A dict of string/value properties that will be passed
             to the Data constructor
     
@@ -9390,7 +9390,7 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'layout' property is an instance of Layout
         that may be specified as:
-          - An instance of plotly.graph_objs.Layout
+          - An instance of :py:func:`plotly.graph_objs.Layout`
           - A dict of string/value properties that will be passed
             to the Layout constructor
     
@@ -9744,7 +9744,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'currentvalue' property is an instance of Currentvalue
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.Currentvalue
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.Currentvalue`
           - A dict of string/value properties that will be passed
             to the Currentvalue constructor
     
@@ -9787,7 +9787,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -9923,7 +9923,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.Pad
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -10038,7 +10038,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.Step
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
     
@@ -10188,7 +10188,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'transition' property is an instance of Transition
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.slider.Transition
+          - An instance of :py:func:`plotly.graph_objs.layout.slider.Transition`
           - A dict of string/value properties that will be passed
             to the Transition constructor
     
@@ -10748,7 +10748,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.shape.Line
+          - An instance of :py:func:`plotly.graph_objs.layout.shape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -11805,7 +11805,7 @@ class Scene(_BaseLayoutHierarchyType):
     
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.Annotation
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
     
@@ -11858,7 +11858,7 @@ class Scene(_BaseLayoutHierarchyType):
     
         The 'aspectratio' property is an instance of Aspectratio
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.Aspectratio
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.Aspectratio`
           - A dict of string/value properties that will be passed
             to the Aspectratio constructor
     
@@ -11944,7 +11944,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'camera' property is an instance of Camera
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.Camera
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.Camera`
           - A dict of string/value properties that will be passed
             to the Camera constructor
     
@@ -11988,7 +11988,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -12087,7 +12087,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'xaxis' property is an instance of XAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.XAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
     
@@ -12400,7 +12400,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.YAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
     
@@ -12713,7 +12713,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'zaxis' property is an instance of ZAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.ZAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.scene.ZAxis`
           - A dict of string/value properties that will be passed
             to the ZAxis constructor
     
@@ -13750,7 +13750,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'angularaxis' property is an instance of AngularAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.AngularAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.AngularAxis`
           - A dict of string/value properties that will be passed
             to the AngularAxis constructor
     
@@ -14128,7 +14128,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -14212,7 +14212,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'radialaxis' property is an instance of RadialAxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.polar.RadialAxis
+          - An instance of :py:func:`plotly.graph_objs.layout.polar.RadialAxis`
           - A dict of string/value properties that will be passed
             to the RadialAxis constructor
     
@@ -15419,7 +15419,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.Center
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -15449,7 +15449,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -15625,7 +15625,7 @@ class Mapbox(_BaseLayoutHierarchyType):
     
         The 'layerdefaults' property is an instance of Layer
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.Layer
+          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Layer`
           - A dict of string/value properties that will be passed
             to the Layer constructor
     
@@ -16130,7 +16130,7 @@ class Legend(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.legend.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.legend.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -16265,7 +16265,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.legend.Title
+          - An instance of :py:func:`plotly.graph_objs.layout.legend.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -17561,7 +17561,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -17793,7 +17793,7 @@ class Grid(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.grid.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.grid.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -18407,7 +18407,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.Center
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -18600,7 +18600,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.Domain
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -18880,7 +18880,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lataxis' property is an instance of Lataxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.Lataxis
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.Lataxis`
           - A dict of string/value properties that will be passed
             to the Lataxis constructor
     
@@ -18920,7 +18920,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lonaxis' property is an instance of Lonaxis
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.Lonaxis
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.Lonaxis`
           - A dict of string/value properties that will be passed
             to the Lonaxis constructor
     
@@ -19019,7 +19019,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.Projection
+          - An instance of :py:func:`plotly.graph_objs.layout.geo.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
     
@@ -20433,7 +20433,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.coloraxis.ColorBar
+          - An instance of :py:func:`plotly.graph_objs.layout.coloraxis.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -21465,7 +21465,7 @@ class Annotation(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.annotation.Font
+          - An instance of :py:func:`plotly.graph_objs.layout.annotation.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -21529,7 +21529,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.annotation.Hoverlabel
+          - An instance of :py:func:`plotly.graph_objs.layout.annotation.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     

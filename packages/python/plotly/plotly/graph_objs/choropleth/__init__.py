@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.unselected.Marker
+          - An instance of :py:func:`plotly.graph_objs.choropleth.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -264,7 +264,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.selected.Marker
+          - An instance of :py:func:`plotly.graph_objs.choropleth.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -374,7 +374,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.marker.Line
+          - An instance of :py:func:`plotly.graph_objs.choropleth.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -759,7 +759,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.hoverlabel.Font
+          - An instance of :py:func:`plotly.graph_objs.choropleth.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1644,7 +1644,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.colorbar.Tickfont
+          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1777,7 +1777,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.colorbar.Tickformatstop
+          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2015,7 +2015,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.colorbar.Title
+          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2058,7 +2058,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.colorbar.title.Font
+          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     

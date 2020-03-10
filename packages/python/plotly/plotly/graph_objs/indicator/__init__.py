@@ -36,7 +36,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.title.Font
+          - An instance of :py:func:`plotly.graph_objs.indicator.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -344,7 +344,7 @@ class Number(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.number.Font
+          - An instance of :py:func:`plotly.graph_objs.indicator.number.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -564,7 +564,7 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'axis' property is an instance of Axis
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.Axis
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Axis`
           - A dict of string/value properties that will be passed
             to the Axis constructor
     
@@ -740,7 +740,7 @@ class Gauge(_BaseTraceHierarchyType):
     
         The 'bar' property is an instance of Bar
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.Bar
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Bar`
           - A dict of string/value properties that will be passed
             to the Bar constructor
     
@@ -993,7 +993,7 @@ class Gauge(_BaseTraceHierarchyType):
     
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.Step
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
     
@@ -1016,7 +1016,7 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'threshold' property is an instance of Threshold
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.gauge.Threshold
+          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Threshold`
           - A dict of string/value properties that will be passed
             to the Threshold constructor
     
@@ -1425,7 +1425,7 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.delta.Decreasing
+          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
     
@@ -1455,7 +1455,7 @@ class Delta(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.delta.Font
+          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1498,7 +1498,7 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of plotly.graph_objs.indicator.delta.Increasing
+          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
     
