@@ -8,7 +8,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "preserveWatchOutput": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "target": "es2015",
     "lib": ["dom", "es2015"],
