@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "plotly.js": "^1.52.2",
-    "@jupyter-widgets/base": "^2.0.0",
+    "@jupyter-widgets/base": "^2.0.0 || ^3.0.0",
     "lodash": "^4.17.4"
   },
   "jupyterlab": {
