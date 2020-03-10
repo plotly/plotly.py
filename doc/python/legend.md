@@ -243,7 +243,30 @@ fig.update_layout(
 fig.show()
 ```
 
-### Size of Legend Items
+#### Hide the Trace Implicitly
+
+`Graph_objects` traces have a `visible` attribute. If set to `legendonly`, the trace is hidden from the graph implicitly. Click on the name in the legend to display the hidden trace.
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[1, 2, 3, 4, 5],
+))
+
+fig.add_trace(go.Scatter(
+    x=[1, 2, 3, 4, 5],
+    y=[5, 4, 3, 2, 1],
+    visible='legendonly'
+))
+
+fig.show()
+```
+
+#### Size of Legend Items
 
 In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
 

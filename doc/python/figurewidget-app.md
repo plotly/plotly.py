@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/figurewidget-app/
     thumbnail: thumbnail/multi-widget.jpg
+    redirect_from: /python/slider-widget/
 ---
 
 #### NYC Flights Database

@@ -162,5 +162,10 @@ fig.update_layout(
 fig.show()
 ```
 
+### Heatmap and datashader
+
+Arrays of rasterized values build by datashader can be visualized using
+plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
+
 #### Reference
 See https://plot.ly/python/reference/#heatmap for more information and chart attribute options!

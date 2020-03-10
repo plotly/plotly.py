@@ -39,7 +39,7 @@ Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` func
 
 ### Bubble map with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.scatter_geo`, each line of the dataframe is represented as a marker point. The column set as the `size` argument gives the size of markers.
 
 ```python
 import plotly.express as px

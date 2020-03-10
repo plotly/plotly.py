@@ -1,6 +1,6 @@
 # Contributing
 
-The bottom line. Follow your Nose, or our Nose. Write-run-love tests :fist:.
+Thank you for contributing to plotly.py! 
 
 ## Code of Conduct
 
@@ -16,7 +16,7 @@ Check out our Support App: https://support.plot.ly/libraries/python or Community
 
 ## Want to improve the plotly documentation?
 
-Thank you! Instructions on how to contribute to the documentation are given [here](doc/contributing.md). Please also read the next section if you need to setup a development environment. 
+Thank you! Instructions on how to contribute to the documentation are given [here](doc/contributing.md). Please also read the next section if you need to setup a development environment.
 
 ## Setup a Development Environment
 
@@ -57,7 +57,7 @@ conda activate plotly-dev
 ### ipywidgets development install
 
 Run the following commands in your virtual environment to use the
-development version of `FigureWidget`, 
+development version of `FigureWidget`,
 
     $ jupyter nbextension enable --py widgetsnbextension
     $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
@@ -66,7 +66,7 @@ development version of `FigureWidget`,
 To make plotly plots show up in JupyterLab, you also need to [install the plotly jupyterlab extensions][plotly-jl].
 
 [plotly-jl]: https://plot.ly/python/getting-started/#jupyterlab-support-python-35
-    
+
 ### Configure black code formatting
 This repo uses the [Black](https://black.readthedocs.io/en/stable/) code formatter,
 and the [pre-commit](https://pre-commit.com/) library to manage a git commit hook to
@@ -79,7 +79,7 @@ environment.
 
 ```bash
 (plotly_dev) $ pre-commit install
-``` 
+```
 
 Now, whenever you perform a commit, the Black formatter will run.  If the formatter
 makes no changes, then the commit will proceed.  But if the formatter does make changes,
@@ -110,7 +110,7 @@ Once you've made your changes (and hopefully written some tests...), make that p
 
 
 ## Update to a new version of Plotly.js
-First update the version of the `plotly.js` dependency in `js/package.json`.
+First update the version of the `plotly.js` dependency in `packages/javascript/plotlywidget/package.json`.
 
 Then run the `updateplotlyjs` command with:
 
@@ -118,8 +118,8 @@ Then run the `updateplotlyjs` command with:
 $ python setup.py updateplotlyjs
 ```
 
-This will download new versions of `plot-schema.json` and `plotly.min.js` from 
-the `plotly/plotly.js` GitHub repository (and place them in 
+This will download new versions of `plot-schema.json` and `plotly.min.js` from
+the `plotly/plotly.js` GitHub repository (and place them in
 `plotly/package_data`). It will then regenerate all of the `graph_objs`
 classes based on the new schema.
 
@@ -128,34 +128,40 @@ classes based on the new schema.
 We take advantage of two tools to run tests:
 
 * [`tox`](https://tox.readthedocs.io/en/latest/), which is both a virtualenv management and test tool.
-* [`nose`](https://nose.readthedocs.org/en/latest/), which is is an extension of Python's unittest
+* [`pytest`](https://docs.pytest.org/en/latest/), a powerful framework for unit testing.
 
-### Running Tests with `nose`
+### Running Tests with `pytest`
 
 Since our tests cover *all* the functionality, to prevent tons of errors from showing up and having to parse through a messy output, you'll need to install `optional-requirements.txt` as explained above.
 
-After you've done that, go ahead and follow (y)our Nose!
+After you've done that, go ahead and run the test suite!
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/
+pytest  packages/python/plotly/plotly/tests/
 ```
 
 Or for more *verbose* output:
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/ -v
+pytest -v  packages/python/plotly/plotly/tests/
 ```
 
 Either of those will run *every* test we've written for the Python API. You can get more granular by running something like:
 
 ```bash
-nosetests -w  packages/python/plotly/plotly/tests/test_core/
+pytest  packages/python/plotly/plotly/tests/test_core/
 ```
 
 ... or even more granular by running something like:
 
 ```bash
-nosetests plotly/tests/test_plotly/test_plot.py
+pytest plotly/tests/test_plotly/test_plot.py
+```
+
+or for a specfic test function
+
+```bash
+pytest plotly/tests/test_plotly/test_plot.py::test_function
 ```
 
 ### Running tests with `tox`
@@ -187,16 +193,16 @@ Where `TOXENV` is the environment list you want to use when invoking `tox` from 
 * `tox` will automatically manage a virtual env for each environment you want to test in.
 * You only have to run `tox` and know that the module is working in both `Python 2` and `Python 3`.
 
-Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our `nose attr` configuration. To run only tests that are *not* tagged with `slow`, you could use the following command:
+Finally, `tox` allows you to pass in additional command line arguments that are formatted in (by us) in the `tox.ini` file, see `{posargs}`. This is setup to help with our configuration of [pytest markers](http://doc.pytest.org/en/latest/example/markers.html), which are set up in `packages/python/plotly/pytest.ini`. To run only tests that are *not* tagged with `nodev`, you could use the following command:
 
 ```bash
-tox -- -a '!slow'
+tox -- -a '!nodev'
 ```
 
-Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `nose attr` tags, you comma-separate the tags like so:
+Note that anything after `--` is substituted in for `{posargs}` in the tox.ini. For completeness, because it's reasonably confusing, if you want to force a match for *multiple* `pytest` marker tags, you comma-separate the tags like so:
 
 ```bash
-tox -- -a '!slow','!matplotlib'
+tox -- -a '!nodev','!matplotlib'
 ```
 
 ### Writing Tests
@@ -205,15 +211,15 @@ You're *strongly* encouraged to write tests that check your added functionality.
 
 When you write a new test anywhere under the `tests` directory, if your PR gets accepted, that test will run in a virtual machine to ensure that future changes don't break your contributions!
 
-Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`. 
+Test accounts include: `PythonTest`, `PlotlyImageTest`, and  `PlotlyStageTest`.
 
 ## Release process - plotly package
 
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
-`plotlywidget` version `A.B.C`.
+`plotlywidget`/`jupyterlab-plotly` version `A.B.C`.
 
 Note: The `plotlywidget` instructions must be followed if any change
-has been made in the `js/` directory source code, OR if the version of
+has been made in the `packages/javascript` directory source code, OR if the version of
 plotly.js has been updated.  If neither of these is the case, there's no need
 to increment the `plotlywidget` version or to publish a new version to npm.
 
@@ -235,7 +241,7 @@ noteable changes as sub-bullets (new trace types in particular), and provide
 a link to the plotly.js CHANGELOG.
 
 As the first entry in the changelog, include a `JupyterLab Versions` section.
-Here, document the versions of `plotlywidget`, 
+Here, document the versions of `plotlywidget`,
 `@jupyter-widgets/jupyterlab-manager`, `jupyterlab`, and
 `@jupyterlab/plotly-extension` that are known to be compatible with this
 version of `plotly.py`.
@@ -253,7 +259,9 @@ Note that the conda installation instructions must include
 "-c plotly/lable/test" rather than "-c plotly" in order to install the
 release candidate version.
 
-Commit Changelog and README updates.
+Update the `doc/python/getting-started.md` file with the same version numbers.
+
+Commit Changelog, README and getting-started updates.
 
 ### Bump to release candidate version
  1) Manually update the plotlywidget version to `A.B.C-rc.1` in the files
@@ -263,17 +271,21 @@ specified below.
    + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C-rc.1`
-   
+   + Run `npm install && npm run build`
+ - `packages/javascript/jupyterlab-plotly/package.json`
+   + Update `"version"` to `A.B.C-rc.1`
+   + Run `npm install && npm run build`
+
  2) Commit the changes
- 
+
  3) Tag this commit on the release branch as `vX.Y.Zrc1` and `widget-vA.B.C-rc.1`
-   
+
 In both cases `rc` is the semantic versioning code for Release Candidate.
-   
+
 The number 1 means that this is the first release candidate, this number can
 be incremented if we need to publish multiple release candidates.
 Note that the `npm` suffix is `-rc.1` and the PyPI suffix is `rc1`.
- 
+
 Publishing `plotly.py` and `plotlywidget` as release candidates
 allows us to go through the publication process, and test that the
 installed packages work properly before general users will get them by
@@ -291,22 +303,31 @@ And, you'll need the credentials file `~/.pypirc`. Request access from
 @jonmmease and @chriddyp. Then, from inside the repository:
 
 ```bash
+(plotly_dev) $ cd packages/python/plotly
 (plotly_dev) $ git checkout release_X.Y.Z
 (plotly_dev) $ git stash
+(plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
+(plotly_dev) $ rm dist/*dirty*
 (plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 
-### Publish release candidate of `plotlywidget` to NPM
+Note: this will intentionally fail if your current git tree is dirty, because we want the tag
+to reflect what is being released, and the version number comes from the tag and the dirty-state.
+
+
+### Publish release candidate of `plotlywidget` and `jupyterlab-plotly` to NPM
 Now, publish the release candidate of the `plotlywidget` NPM package.
 
 ```bash
-cd ./js
-npm publish --access public --tag next
+cd ./packages/javascript/plotlywidget
+npm run build && npm publish --access public --tag next
 ```
 
 The `--tag next` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version wtih the `next` tag.
+
+Do the same in the `jupyterlab-plotly` directory.
 
 ### Publish release candidate to plotly anaconda channel
 To publish package to the plotly anaconda channel you'll need to have the
@@ -314,21 +335,22 @@ anaconda or miniconda distribution installed, and you'll need to have the
 `anaconda-client` package installed.
 
 ```bash
+(plotly_dev) $ conda config --set anaconda_upload no
 (plotly_dev) $ conda build recipe/
 ```
 
 Next run `anaconda login` and enter the credentials for the plotly anaconda
 channel.
-          
+
 Then upload artifacts to the anaconda channel using the test label. Using the test
 label will ensure that people will only download the release candidate version
 if they explicitly request it.
 
 ```
-$ anaconda upload --label test /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2 
+$ anaconda upload --label test /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 ```
 
-Then logout with `anaconda logout` 
+Then logout with `anaconda logout`
 
 ### Manually test the release candidate
 Create a fresh virtual environment (or conda environment) and install
@@ -340,7 +362,7 @@ https://github.com/jonmmease/plotly_ipywidget_notebooks using the classic
 notebook and JupyterLab. Make sure `FigureWidget` objects are displayed as
 plotly figures, and make sure the in-place updates and callbacks work.
 
-If appropriate, ask users who have submitted bug reports or feature 
+If appropriate, ask users who have submitted bug reports or feature
 requests that are resolved in this version to try out the release candidate.
 
 If problems are found in the release candidate, fix them on the release
@@ -352,7 +374,7 @@ Update CHANGELOG with release date and update README with final versions.
 
 In the conda installation instructions, be sure to change the
 "-c plotly/label/test" argument to "-c plotly"
- 
+
 Commit updates.
 
 ### Finalize versions
@@ -361,9 +383,13 @@ release candidate suffix from the following version strings:
 
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
- - `js/package.json`
+ - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C`
-   
+   + Run `npm install && npm run build`
+ - `packages/javascript/jupyterlab-plotly/package.json`
+   + Update `"version"` to `A.B.C`
+   + Run `npm install && npm run build`
+
 Commit and push to the release branch.
 
 ### Merge release into master
@@ -371,7 +397,7 @@ Make sure the integration tests are passing on the release branch, then merge
 it into master on GitHub.
 
 Make sure tests also pass on master, then update your local master,
-tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`) and `widget-vA.B.C` 
+tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`) and `widget-vA.B.C`
 
 push the tag.
 
@@ -391,9 +417,14 @@ Publish the final version to PyPI
 
 ```bash
 (plotly_dev) $ cd packages/python/plotly
+(plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
+(plotly_dev) $ rm dist/*dirty*
 (plotly_dev) $ twine upload dist/plotly-X.Y.Z*
 ```
+
+Note: this will intentionally fail if your current git tree is dirty, because we want the tag
+to reflect what is being released, and the version number comes from the tag and the dirty-state.
 
 After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
 ```bash
@@ -408,8 +439,10 @@ And ask one of your friends to do it too. Our tests should catch any issues, but
 Finally, publish the final version of the widget library to npm with:
 
 ```bash
-cd ./js
-npm publish --access public
+cd packages/javascript/jupyterlab-plotly
+npm run build && npm publish --access public
+cd packages/javascript/plotlywidget
+npm run build && npm publish --access public
 ```
 
 ### Publishing to the plotly conda channel
@@ -417,9 +450,9 @@ Follow the anaconda upload instructions as described for the release candidate
 above, except:
 
  - Do not include the `--label test` argument when uploading
- 
+
 ```
-$ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2 
+$ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 ```
 
 ### Add GitHub Release entry
@@ -430,6 +463,19 @@ Enter the vX.Y.Z tag
 Make "Release title" the same string as the tag.
 
 Copy changelog section for this version as the "Describe this release"
+
+### Upgrade doc requirements and API doc
+
+Files to be updated:
+- `doc/apidoc/conf.py` with new version number
+- `doc/requirements.txt`
+- `binder/requirements.txt`
+
+### Synchronize master and doc-prod branches
+
+doc-prod should already have been merged on a regular basis into master, but
+start doing it first. Then merge master into doc-prod to deploy the doc related
+to features in the release.
 
 ### Post announcement
 Post a simple announcement to the Plotly Python forum, with links to the
@@ -480,7 +526,7 @@ From `packages/python/plotly-geo`, build the conda packge
 Then upload to the plotly anaconda channel as described above
 
 ## Release process - chart-studio package
-The `chart-studio` package contains the utilities for interacting with 
+The `chart-studio` package contains the utilities for interacting with
 Chart Studio (both Cloud or On-Prem).
 
 ### Update version
