@@ -173,10 +173,10 @@ def create_ohlc(open, high, low, close, dates=None, direction="both", **kwargs):
         utils.validate_equal_length(open, high, low, close)
     validate_ohlc(open, high, low, close, direction, **kwargs)
 
-    if direction is "increasing":
+    if direction == "increasing":
         ohlc_incr = make_increasing_ohlc(open, high, low, close, dates, **kwargs)
         data = [ohlc_incr]
-    elif direction is "decreasing":
+    elif direction == "decreasing":
         ohlc_decr = make_decreasing_ohlc(open, high, low, close, dates, **kwargs)
         data = [ohlc_decr]
     else:
