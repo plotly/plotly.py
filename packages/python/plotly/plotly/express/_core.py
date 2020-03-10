@@ -1168,7 +1168,12 @@ def process_dataframe_hierarchy(args):
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
     if args["color"] and discrete_color:
-        df_all_trees = df_all_trees.sort_values(by=args["color"])
+        if "sort_color_if_discrete_color" not in df_all_trees.columns:
+            df_all_trees["sort_color_if_discrete_color"] = df[args["color"]].astype(str)
+            sort_col = "sort_color_if_discrete_color"
+        else:
+            sort_col = args["color"]
+        df_all_trees = df_all_trees.sort_values(by=sort_col)
 
     # Now modify arguments
     args["data_frame"] = df_all_trees
