@@ -100182,8 +100182,9 @@ try:
 
     if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
         from ._figurewidget import FigureWidget
+
+        __all__.append("FigureWidget")
     del LooseVersion
     del ipywidgets
-    __all__.append("FigureWidget")
 except ImportError:
     pass
