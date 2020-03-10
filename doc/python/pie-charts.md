@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -70,6 +70,21 @@ fig.show()
 import plotly.express as px
 df = px.data.tips()
 fig = px.pie(df, values='tip', names='day', color_discrete_sequence=px.colors.sequential.RdBu)
+fig.show()
+```
+
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.pie(df, values='tip', names='day', color='day',
+             color_discrete_map={'Thur':'lightcyan', 
+                                 'Fri':'cyan', 
+                                 'Sat':'royalblue', 
+                                 'Sun':'darkblue'})
 fig.show()
 ```
 

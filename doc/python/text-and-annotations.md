@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -168,7 +168,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     showlegend=False,
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=2,
             y=5,
             xref="x",
@@ -204,17 +204,13 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.add_annotation(
-    go.layout.Annotation(
             x=2,
             y=5,
             text="dict Text")
-)
 fig.add_annotation(
-    go.layout.Annotation(
             x=4,
             y=4,
             text="dict Text 2")
-)
 fig.update_annotations(dict(
             xref="x",
             yref="y",
@@ -244,7 +240,9 @@ fig.add_trace(go.Scatter3d(
 ))
 
 fig.update_layout(
-    scene=go.layout.Scene(
+    xaxis=dict(title_text="x"),
+    yaxis=dict(title_text="y"),
+    scene=dict(
         aspectratio=dict(
             x=1,
             y=1,
@@ -317,8 +315,6 @@ fig.update_layout(
             yanchor="bottom"
         )]
     ),
-    xaxis=dict(title_text="x"),
-    yaxis=dict(title_text="y")
 )
 
 fig.show()
@@ -382,7 +378,6 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.add_annotation(
-    go.layout.Annotation(
         x=2,
         y=5,
         xref="x",
@@ -407,7 +402,6 @@ fig.add_annotation(
         bgcolor="#ff7f0e",
         opacity=0.8
         )
-)
 
 fig.update_layout(showlegend=False)
 fig.show()
@@ -475,7 +469,7 @@ fig.add_trace(go.Scattergeo(
 
 fig.update_layout(
     title_text="Canadian cities",
-    geo=go.layout.Geo(
+    geo=dict(
         lataxis=dict(range=[40, 70]),
         lonaxis=dict(range=[-130, -55]),
         scope="north america"
@@ -500,7 +494,7 @@ fig.add_trace(go.Scatter(
 
 fig.update_layout(
     annotations=[
-        go.layout.Annotation(
+        dict(
             x=0.5,
             y=-0.15,
             showarrow=False,
@@ -508,7 +502,7 @@ fig.update_layout(
             xref="paper",
             yref="paper"
         ),
-        go.layout.Annotation(
+        dict(
             x=-0.07,
             y=0.5,
             showarrow=False,
