@@ -195,7 +195,7 @@ In addition to the `executable` property, the `plotly.io.orca.config` object can
 
  - **`server_url`**: The URL to an externally running instance of Orca. When this is set, plotly.py will not launch an orca server process and instead use the one provided.
  - **`port`**: The specific port to use to communicate with the orca server, or `None` if the port will be chosen automatically.
- - **`timeout`**: The number of seconds of inactivity required before the orca server is shut down. For example, if timeout is set to 20, then the orca server will shutdown once is has not been used for at least 20 seconds. If timeout is set to `None` (the defualt), then the server will not be automatically shut down due to inactivity.
+ - **`timeout`**: The number of seconds of inactivity required before the orca server is shut down. For example, if timeout is set to 20, then the orca server will shutdown once is has not been used for at least 20 seconds. If timeout is set to `None` (the default), then the server will not be automatically shut down due to inactivity.
  - **`default_width`**: The default pixel width to use on image export.
  - **`default_height`**: The default pixel height to use on image export.
  - **`default_scale`**: The default image scale facor applied on image export.

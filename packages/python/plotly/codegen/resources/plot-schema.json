@@ -17621,7 +17621,7 @@
                     ],
                     "dflt": "auto",
                     "editType": "plot",
-                    "description": "Determines the orientation of text inside slices. With *auto* the texts may automatically be rotated to fit with the maximum size inside the slice. Using *horizontal* option forces text to be horizontal. Using *radial* option forces text to be radial. Using *tangential* option forces text to be tangential."
+                    "description": "Controls the orientation of the text inside chart sectors. When set to *auto*, text may be oriented in any direction in order to be as big as possible in the middle of a sector. The *horizontal* option orients text to be parallel with the bottom of the chart, and may make text smaller in order to achieve that goal. The *radial* option orients text along the radius of the sector. The *tangential* option orients text perpendicular to the radius of the sector."
                 },
                 "insidetextfont": {
                     "family": {
@@ -19077,7 +19077,7 @@
                     ],
                     "dflt": "auto",
                     "editType": "plot",
-                    "description": "Determines the orientation of text inside slices. With *auto* the texts may automatically be rotated to fit with the maximum size inside the slice. Using *horizontal* option forces text to be horizontal. Using *radial* option forces text to be radial. Using *tangential* option forces text to be tangential."
+                    "description": "Controls the orientation of the text inside chart sectors. When set to *auto*, text may be oriented in any direction in order to be as big as possible in the middle of a sector. The *horizontal* option orients text to be parallel with the bottom of the chart, and may make text smaller in order to achieve that goal. The *radial* option orients text along the radius of the sector. The *tangential* option orients text perpendicular to the radius of the sector."
                 },
                 "insidetextfont": {
                     "family": {
@@ -46206,7 +46206,7 @@
                         "dflt": "center",
                         "role": "style",
                         "editType": "calc",
-                        "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width.",
+                        "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width.",
                         "arrayOk": true
                     },
                     "line": {
@@ -46383,7 +46383,7 @@
                         "dflt": "center",
                         "role": "style",
                         "editType": "calc",
-                        "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width.",
+                        "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width.",
                         "arrayOk": true
                     },
                     "line": {
@@ -57324,14 +57324,14 @@
                 "role": "style",
                 "dflt": "#fff",
                 "editType": "plot",
-                "description": "Sets the color of paper where the graph is drawn."
+                "description": "Sets the background color of the paper where the graph is drawn."
             },
             "plot_bgcolor": {
                 "valType": "color",
                 "role": "style",
                 "dflt": "#fff",
                 "editType": "layoutstyle",
-                "description": "Sets the color of plotting area in-between x and y axes."
+                "description": "Sets the background color of the plotting area in-between x and y axes."
             },
             "separators": {
                 "valType": "string",
@@ -63397,7 +63397,7 @@
                                 "dflt": "center",
                                 "role": "style",
                                 "editType": "calc",
-                                "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width."
+                                "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width."
                             },
                             "valign": {
                                 "valType": "enumerated",
@@ -66133,7 +66133,7 @@
                             "dflt": "center",
                             "role": "style",
                             "editType": "arraydraw",
-                            "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans more two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width."
+                            "description": "Sets the horizontal alignment of the `text` within the box. Has an effect only if `text` spans two or more lines (i.e. `text` contains one or more <br> HTML tags) or if an explicit width is set to override the text width."
                         },
                         "valign": {
                             "valType": "enumerated",

@@ -1,6 +1,6 @@
 from unittest import TestCase
 import plotly.graph_objs as go
-from nose.tools import raises
+import pytest
 
 
 class TestPropertyValidation(TestCase):
@@ -9,43 +9,43 @@ class TestPropertyValidation(TestCase):
         self.scatter = go.Scatter()
         self.scatter.name = "Scatter 1"
 
-    @raises(ValueError)
     def test_validators_work_attr(self):
         """
         Note: all of the individual validators are tested in
         `_plotly_utils/tests/validators`. Here we're just making sure that
         datatypes make use of validators
         """
-        self.scatter.name = [1, 2, 3]
+        with pytest.raises(ValueError):
+            self.scatter.name = [1, 2, 3]
 
-    @raises(ValueError)
     def test_validators_work_item(self):
         """
         Note: all of the individual validators are tested in
         `_plotly_utils/tests/validators`. Here we're just making sure that
         datatypes make use of validators
         """
-        self.scatter["name"] = [1, 2, 3]
+        with pytest.raises(ValueError):
+            self.scatter["name"] = [1, 2, 3]
 
-    @raises(ValueError)
     def test_invalid_attr_assignment(self):
-        self.scatter.bogus = 87
+        with pytest.raises(ValueError):
+            self.scatter.bogus = 87
 
-    @raises(ValueError)
     def test_invalid_item_assignment(self):
-        self.scatter["bogus"] = 87
+        with pytest.raises(ValueError):
+            self.scatter["bogus"] = 87
 
-    @raises(ValueError)
     def test_invalid_dot_assignment(self):
-        self.scatter["marker.bogus"] = 87
+        with pytest.raises(ValueError):
+            self.scatter["marker.bogus"] = 87
 
-    @raises(ValueError)
     def test_invalid_tuple_assignment(self):
-        self.scatter[("marker", "bogus")] = 87
+        with pytest.raises(ValueError):
+            self.scatter[("marker", "bogus")] = 87
 
-    @raises(ValueError)
     def test_invalid_constructor_kwarg(self):
-        go.Scatter(bogus=87)
+        with pytest.raises(ValueError):
+            go.Scatter(bogus=87)
 
 
 class TestPropertyPresentation(TestCase):

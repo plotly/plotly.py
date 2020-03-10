@@ -1,5 +1,6 @@
 import plotly.express as px
 import numpy as np
+import pytest
 
 
 def test_scatter():
@@ -232,3 +233,9 @@ def test_orthogonal_orderings():
     for days in permutations(df["day"].unique()):
         for times in permutations(df["time"].unique()):
             assert_orderings(days, days, times, times)
+
+
+def test_permissive_defaults():
+    msg = "'PxDefaults' object has no attribute 'should_not_work'"
+    with pytest.raises(AttributeError, match=msg):
+        px.defaults.should_not_work = "test"

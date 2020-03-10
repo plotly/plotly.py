@@ -16,6 +16,17 @@ from plotly.subplots import (
 
 
 class PxDefaults(object):
+    __slots__ = [
+        "template",
+        "width",
+        "height",
+        "color_discrete_sequence",
+        "color_continuous_scale",
+        "symbol_sequence",
+        "line_dash_sequence",
+        "size_max",
+    ]
+
     def __init__(self):
         self.template = None
         self.width = None
@@ -320,7 +331,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         mapping_labels[attr_label] = "%{color}"
                     else:
                         trace_patch["marker"]["colors"] = []
-                        mapping = {}
+                        if args["color_discrete_map"] is not None:
+                            mapping = args["color_discrete_map"].copy()
+                        else:
+                            mapping = {}
                         for cat in trace_data[attr_value]:
                             if mapping.get(cat) is None:
                                 mapping[cat] = args["color_discrete_sequence"][

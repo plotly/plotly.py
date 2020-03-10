@@ -1,11 +1,5 @@
-pythonic plotly API for use in Jupyter
+JupyterLab Extension for Plotly.py
 
-Package Install
----------------
+See https://plot.ly/python/getting-started/ for details.
 
-**Prerequisites**
-- [node](http://nodejs.org/)
-
-```bash
-npm install --save plotlywidget
-```
+Install with `jupyter labextension install jupyterlab-plotly`

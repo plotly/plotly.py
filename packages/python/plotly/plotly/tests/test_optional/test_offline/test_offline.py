@@ -4,11 +4,10 @@ test__offline
 """
 from __future__ import absolute_import
 import re
-from nose.tools import raises
-from nose.plugins.attrib import attr
 import json as _json
 
 from unittest import TestCase
+import pytest
 
 import plotly
 from plotly import optional_imports
@@ -39,7 +38,7 @@ class PlotlyOfflineTestCase(TestCase):
 
     if matplotlylib:
 
-        @attr("matplotlib")
+        @pytest.mark.matplotlib
         def test_iplot_mpl_works(self):
             # Generate matplotlib plot for tests
             fig = plt.figure()
@@ -64,7 +63,7 @@ class PlotlyOfflineMPLTestCase(TestCase):
 
     if matplotlylib:
 
-        @attr("matplotlib")
+        @pytest.mark.matplotlib
         def test_default_mpl_plot_generates_expected_html(self):
             # Generate matplotlib plot for tests
             fig = plt.figure()

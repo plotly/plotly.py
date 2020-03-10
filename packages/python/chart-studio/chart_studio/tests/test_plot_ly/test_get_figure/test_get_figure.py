@@ -10,7 +10,6 @@ from __future__ import absolute_import
 from unittest import skipIf
 
 import six
-from nose.plugins.attrib import attr
 
 import _plotly_utils.exceptions
 from chart_studio import exceptions
@@ -38,7 +37,6 @@ def is_trivial(obj):
 
 
 class GetFigureTest(PlotlyTestCase):
-    @attr("slow")
     def test_get_figure(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
@@ -46,7 +44,6 @@ class GetFigureTest(PlotlyTestCase):
         py.sign_in(un, ak)
         py.get_figure("PlotlyImageTest", str(file_id))
 
-    @attr("slow")
     def test_get_figure_with_url(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
@@ -62,7 +59,6 @@ class GetFigureTest(PlotlyTestCase):
         with self.assertRaises(exceptions.PlotlyError):
             py.get_figure(url)
 
-    @attr("slow")
     def test_get_figure_invalid_2(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
@@ -80,7 +76,6 @@ class GetFigureTest(PlotlyTestCase):
         with self.assertRaises(ValueError):
             py.get_figure(url)
 
-    @attr("slow")
     def test_get_figure_does_not_exist(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
@@ -89,7 +84,6 @@ class GetFigureTest(PlotlyTestCase):
         with self.assertRaises(_plotly_utils.exceptions.PlotlyError):
             py.get_figure(url)
 
-    @attr("slow")
     def test_get_figure_raw(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"

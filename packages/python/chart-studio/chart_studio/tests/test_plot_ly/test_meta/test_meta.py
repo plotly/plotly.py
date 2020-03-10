@@ -10,7 +10,6 @@ from __future__ import absolute_import
 import random
 import string
 
-from nose.plugins.attrib import attr
 from unittest import skip
 
 from chart_studio import plotly as py
@@ -33,7 +32,6 @@ class MetaTest(PlotlyTestCase):
         unique_filename = "Valid Grid with Meta " + "".join(random_chars)
         return unique_filename
 
-    @attr("slow")
     def test_upload_meta(self):
         unique_filename = self.random_filename()
         grid_url = py.grid_ops.upload(self._grid, unique_filename, auto_open=False)
@@ -41,7 +39,6 @@ class MetaTest(PlotlyTestCase):
         # Add some Metadata to that grid
         py.meta_ops.upload(self._meta, grid_url=grid_url)
 
-    @attr("slow")
     def test_upload_meta_with_grid(self):
         c1 = Column([1, 2, 3, 4], "first column")
         Grid([c1])

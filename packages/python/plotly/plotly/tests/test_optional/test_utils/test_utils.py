@@ -9,11 +9,11 @@ import math
 import decimal
 from datetime import datetime as dt
 from unittest import TestCase
+import pytest
 
 import numpy as np
 import pandas as pd
 import pytz
-from nose.plugins.attrib import attr
 from pandas.util.testing import assert_series_equal
 import json as _json
 import os
@@ -295,7 +295,7 @@ class TestJSONEncoder(TestCase):
 
 if matplotlylib:
 
-    @attr("matplotlib")
+    @pytest.mark.matplotlib
     def test_masked_constants_example():
         # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
         data = {
