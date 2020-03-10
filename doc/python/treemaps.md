@@ -101,6 +101,18 @@ fig = px.treemap(df, path=['all', 'sex', 'day', 'time'], values='total_bill', co
 fig.show()
 ```
 
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.treemap(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
+                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig.show()
+```
+
 ### Rectangular data with missing values
 
 If the dataset is not fully rectangular, missing values should be supplied as `None`.

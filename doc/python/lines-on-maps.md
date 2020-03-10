@@ -100,7 +100,7 @@ for i in range(len(df_flight_paths)):
 fig.update_layout(
     title_text = 'Feb. 2011 American Airline flight paths<br>(Hover for airport names)',
     showlegend = False,
-    geo = go.layout.Geo(
+    geo = dict(
         scope = 'north america',
         projection_type = 'azimuthal equal area',
         showland = True,

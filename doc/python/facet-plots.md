@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.0
   plotly:
     description: How to make Facet and Trellis Plots in Python with Plotly.
     display_as: statistical
@@ -31,8 +31,8 @@ jupyter:
     page_type: u-guide
     permalink: python/facet-plots/
     redirect_from:
-      - python/trellis-plots/
-      - python/facet-trellis/
+    - python/trellis-plots/
+    - python/facet-trellis/
     thumbnail: thumbnail/facet-trellis-thumbnail.jpg
 ---
 
@@ -81,7 +81,7 @@ fig = px.histogram(df, x="total_bill", y="tip", color="sex", facet_row="time", f
 fig.show()
 ```
 
-### Facets with independent axes
+### Facets With Independent Axes
 
 By default, facet axes are linked together: zooming inside one of the facets will also zoom in the other facets. You can disable this behaviour when you use `facet_row` only, by disabling `matches` on the Y axes, or when using `facet_col` only, by disabling `matches` on the X axes. It is not recommended to use this approach when using `facet_row` and `facet_col` together, as in this case it becomes very hard to understand the labelling of axes and grid lines.
 
@@ -101,6 +101,41 @@ fig.update_xaxes(matches=None)
 fig.show()
 ```
 
+### Customize Subplot Figure Titles
+
+Since subplot figure titles are [annotations](https://plot.ly/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
+
+In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`. 
+
+```python
+import plotly.express as px
+
+fig = px.scatter(px.data.tips(), x="total_bill", y="tip", facet_col="smoker")
+fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+fig.show()
+```
+
 ```python
 
+```
+
+### Synchronizing axes in subplots with `matches`
+
+Using `facet_col` from `plotly.express` let [zoom](https://help.plot.ly/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plot.ly/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+
+Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
+
+```python
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import numpy as np
+
+N = 20
+x = np.linspace(0, 1, N)
+
+fig = make_subplots(1, 3)
+for i in range(1, 4):
+    fig.add_trace(go.Scatter(x=x, y=np.random.random(N)), 1, i)
+fig.update_xaxes(matches='x')
+fig.show()
 ```
