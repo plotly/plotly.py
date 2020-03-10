@@ -7,8 +7,6 @@ import { Message } from '@lumino/messaging';
 
 import { IRenderMime } from '@jupyterlab/rendermime-interfaces';
 
-import Plotly from 'plotly.js/dist/plotly.min';
-
 import '../style/index.css';
 
 /**
@@ -27,11 +25,11 @@ const CSS_ICON_CLASS = 'jp-MaterialIcon jp-PlotlyIcon';
  */
 export const MIME_TYPE = 'application/vnd.plotly.v1+json';
 
-interface IPlotlySpec {
-  data: Plotly.Data;
-  layout: Plotly.Layout;
-  frames?: Plotly.Frame[];
+interface PlotlyHTMLElement extends HTMLElement {
+  on(event: 'plotly_webglcontextlost', callback: () => void): void;
 }
+
+type Frame = { [key: string]: any };
 
 export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   /**
@@ -48,8 +46,11 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     this.node.appendChild(this._img_el);
 
     // Install image hover callback
-    this._img_el.addEventListener('mouseenter', event => {
-      this.createGraph(this._model);
+    import(/* webpackChunkName: 'plotly'*/ 'plotly.js/dist/plotly').then(Plotly => {
+
+      this._img_el.addEventListener('mouseenter', event => {
+        this.createGraph(this._model, Plotly);
+      })
     })
   }
 
@@ -74,7 +75,9 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
       return Promise.resolve();
     } else {
       // Create a new graph
-      return this.createGraph(model);
+      return import(/* webpackChunkName: 'plotly'*/ 'plotly.js/dist/plotly').then(Plotly => {
+        this.createGraph(model, Plotly);
+      })
     }
   }
 
@@ -122,10 +125,11 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     }
   }
 
-  private createGraph(model: IRenderMime.IMimeModel) {
+  private createGraph(model: IRenderMime.IMimeModel, Plotly: any) {
     const { data, layout, frames, config } = model.data[this._mimeType] as
       | any
-      | IPlotlySpec;
+      | { data: Plotly.Data; layout: Plotly.Layout; frames?: Frame[]; }
+      | { data: Plotly.Data; layout: Plotly.Layout; frames?: Plotly.Frame[]; }
 
     return Plotly.react(this.node, data, layout, config).then(plot => {
       this.showGraph();
@@ -153,7 +157,7 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
       }
 
       // Handle webgl context lost events
-      (<Plotly.PlotlyHTMLElement>(this.node)).on('plotly_webglcontextlost', () => {
+      (<PlotlyHTMLElement>(this.node)).on('plotly_webglcontextlost', () => {
             const png_data = <string>model.data['image/png'];
             if(png_data !== undefined && png_data !== null) {
               // We have PNG data, use it
@@ -183,9 +187,11 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
    */
   protected onUpdateRequest(msg: Message): void {
     if (this.isVisible && this.hasGraphElement()) {
-      Plotly.redraw(this.node).then(() => {
-        Plotly.Plots.resize(this.node);
-      });
+      import(/* webpackChunkName: 'plotly'*/ 'plotly.js/dist/plotly').then(Plotly => {
+        Plotly.redraw(this.node).then(() => {
+          Plotly.Plots.resize(this.node);
+        });
+      })
     }
   }
 
