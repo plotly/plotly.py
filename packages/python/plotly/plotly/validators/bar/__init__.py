@@ -244,12 +244,12 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.bar.unselected.
-                Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.bar.unselected.Mar
+                ker` instance or dict with compatible
                 properties
             textfont
-                :py:class:`plotly.graph_objects.bar.unselected.
-                Textfont` instance or dict with compatible
+                :class:`plotly.graph_objects.bar.unselected.Tex
+                tfont` instance or dict with compatible
                 properties
 """,
             ),
@@ -531,12 +531,11 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.bar.selected.Ma
-                rker` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.bar.selected.Marke
+                r` instance or dict with compatible properties
             textfont
-                :py:class:`plotly.graph_objects.bar.selected.Te
-                xtfont` instance or dict with compatible
+                :class:`plotly.graph_objects.bar.selected.Textf
+                ont` instance or dict with compatible
                 properties
 """,
             ),
@@ -802,9 +801,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                :py:class:`plotly.graph_objects.bar.marker.Colo
-                rBar` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.bar.marker.ColorBa
+                r` instance or dict with compatible properties
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.color`is set to a numerical array. The
@@ -825,8 +823,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                :py:class:`plotly.graph_objects.bar.marker.Line
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.bar.marker.Line`
+                instance or dict with compatible properties
             opacity
                 Sets the opacity of the bars.
             opacitysrc

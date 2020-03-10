@@ -152,7 +152,7 @@ class Tickfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.parcats.Tickfont`
+            :class:`plotly.graph_objs.parcats.Tickfont`
         color
 
         family
@@ -191,7 +191,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Tickfont 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Tickfont`"""
+an instance of :class:`plotly.graph_objs.parcats.Tickfont`"""
             )
 
         # Handle skip_invalid
@@ -306,7 +306,7 @@ class Stream(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.parcats.Stream`
+            :class:`plotly.graph_objs.parcats.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -336,7 +336,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Stream`"""
+an instance of :class:`plotly.graph_objs.parcats.Stream`"""
             )
 
         # Handle skip_invalid
@@ -593,7 +593,7 @@ class Line(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.parcats.line.ColorBar`
+          - An instance of :class:`plotly.graph_objs.parcats.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -725,8 +725,8 @@ class Line(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.parc
-                    ats.line.colorbar.Tickformatstop` instances or
+                    A tuple of :class:`plotly.graph_objects.parcats
+                    .line.colorbar.Tickformatstop` instances or
                     dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
@@ -774,8 +774,8 @@ class Line(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.parcats.line.co
-                    lorbar.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.parcats.line.color
+                    bar.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -1061,7 +1061,7 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :py:class:`plotly.graph_objects.parcats.line.ColorBar`
+            :class:`plotly.graph_objects.parcats.line.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1145,8 +1145,7 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.parcats.Line`
+            an instance of :class:`plotly.graph_objs.parcats.Line`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1194,7 +1193,7 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            :py:class:`plotly.graph_objects.parcats.line.ColorBar`
+            :class:`plotly.graph_objects.parcats.line.ColorBar`
             instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
@@ -1270,7 +1269,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Line`"""
+an instance of :class:`plotly.graph_objs.parcats.Line`"""
             )
 
         # Handle skip_invalid
@@ -1492,7 +1491,7 @@ class Labelfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.parcats.Labelfont`
+            :class:`plotly.graph_objs.parcats.Labelfont`
         color
 
         family
@@ -1531,7 +1530,7 @@ class Labelfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Labelfont 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Labelfont`"""
+an instance of :class:`plotly.graph_objs.parcats.Labelfont`"""
             )
 
         # Handle skip_invalid
@@ -1702,7 +1701,7 @@ class Domain(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.parcats.Domain`
+            :class:`plotly.graph_objs.parcats.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this parcats trace .
@@ -1735,7 +1734,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Domain 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Domain`"""
+an instance of :class:`plotly.graph_objs.parcats.Domain`"""
             )
 
         # Handle skip_invalid
@@ -2082,7 +2081,7 @@ class Dimension(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.parcats.Dimension`
+            :class:`plotly.graph_objs.parcats.Dimension`
         categoryarray
             Sets the order in which categories in this dimension
             appear. Only has an effect if `categoryorder` is set to
@@ -2145,7 +2144,7 @@ class Dimension(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcats.Dimension 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.parcats.Dimension`"""
+an instance of :class:`plotly.graph_objs.parcats.Dimension`"""
             )
 
         # Handle skip_invalid

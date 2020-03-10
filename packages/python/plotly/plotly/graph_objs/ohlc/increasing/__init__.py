@@ -140,7 +140,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.ohlc.increasing.Line`
+            :class:`plotly.graph_objs.ohlc.increasing.Line`
         color
             Sets the line color.
         dash
@@ -170,7 +170,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.ohlc.increasing.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.ohlc.increasing.Line`"""
+an instance of :class:`plotly.graph_objs.ohlc.increasing.Line`"""
             )
 
         # Handle skip_invalid

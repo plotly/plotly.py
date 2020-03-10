@@ -36,7 +36,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.title.Font`
+          - An instance of :class:`plotly.graph_objs.indicator.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -123,7 +123,7 @@ class Title(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Title`
+            :class:`plotly.graph_objs.indicator.Title`
         align
             Sets the horizontal alignment of the title. It defaults
             to `center` except for bullet charts for which it
@@ -152,7 +152,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Title 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Title`"""
+an instance of :class:`plotly.graph_objs.indicator.Title`"""
             )
 
         # Handle skip_invalid
@@ -267,7 +267,7 @@ class Stream(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Stream`
+            :class:`plotly.graph_objs.indicator.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -297,7 +297,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Stream`"""
+an instance of :class:`plotly.graph_objs.indicator.Stream`"""
             )
 
         # Handle skip_invalid
@@ -344,7 +344,7 @@ class Number(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.number.Font`
+          - An instance of :class:`plotly.graph_objs.indicator.number.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -481,7 +481,7 @@ class Number(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Number`
+            :class:`plotly.graph_objs.indicator.Number`
         font
             Set the font used to display main number
         prefix
@@ -513,7 +513,7 @@ class Number(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Number 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Number`"""
+an instance of :class:`plotly.graph_objs.indicator.Number`"""
             )
 
         # Handle skip_invalid
@@ -564,7 +564,7 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'axis' property is an instance of Axis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Axis`
+          - An instance of :class:`plotly.graph_objs.indicator.gauge.Axis`
           - A dict of string/value properties that will be passed
             to the Axis constructor
     
@@ -667,8 +667,8 @@ class Gauge(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.indi
-                    cator.gauge.axis.Tickformatstop` instances or
+                    A tuple of :class:`plotly.graph_objects.indicat
+                    or.gauge.axis.Tickformatstop` instances or
                     dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
@@ -740,7 +740,7 @@ class Gauge(_BaseTraceHierarchyType):
     
         The 'bar' property is an instance of Bar
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Bar`
+          - An instance of :class:`plotly.graph_objs.indicator.gauge.Bar`
           - A dict of string/value properties that will be passed
             to the Bar constructor
     
@@ -749,8 +749,8 @@ class Gauge(_BaseTraceHierarchyType):
                 color
                     Sets the background color of the arc.
                 line
-                    :py:class:`plotly.graph_objects.indicator.gauge
-                    .bar.Line` instance or dict with compatible
+                    :class:`plotly.graph_objects.indicator.gauge.ba
+                    r.Line` instance or dict with compatible
                     properties
                 thickness
                     Sets the thickness of the bar as a fraction of
@@ -941,8 +941,8 @@ class Gauge(_BaseTraceHierarchyType):
                 color
                     Sets the background color of the arc.
                 line
-                    :py:class:`plotly.graph_objects.indicator.gauge
-                    .step.Line` instance or dict with compatible
+                    :class:`plotly.graph_objects.indicator.gauge.st
+                    ep.Line` instance or dict with compatible
                     properties
                 name
                     When used in a template, named items are
@@ -993,7 +993,7 @@ class Gauge(_BaseTraceHierarchyType):
     
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Step`
+          - An instance of :class:`plotly.graph_objs.indicator.gauge.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
     
@@ -1016,16 +1016,16 @@ class Gauge(_BaseTraceHierarchyType):
         """
         The 'threshold' property is an instance of Threshold
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.gauge.Threshold`
+          - An instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`
           - A dict of string/value properties that will be passed
             to the Threshold constructor
     
             Supported dict properties:
                 
                 line
-                    :py:class:`plotly.graph_objects.indicator.gauge
-                    .threshold.Line` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.indicator.gauge.th
+                    reshold.Line` instance or dict with compatible
+                    properties
                 thickness
                     Sets the thickness of the threshold line as a
                     fraction of the thickness of the gauge.
@@ -1054,7 +1054,7 @@ class Gauge(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         axis
-            :py:class:`plotly.graph_objects.indicator.gauge.Axis`
+            :class:`plotly.graph_objects.indicator.gauge.Axis`
             instance or dict with compatible properties
         bar
             Set the appearance of the gauge's value
@@ -1069,7 +1069,7 @@ class Gauge(_BaseTraceHierarchyType):
             Set the shape of the gauge
         steps
             A tuple of
-            :py:class:`plotly.graph_objects.indicator.gauge.Step`
+            :class:`plotly.graph_objects.indicator.gauge.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -1077,8 +1077,8 @@ class Gauge(_BaseTraceHierarchyType):
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
-            :py:class:`plotly.graph_objects.indicator.gauge.Thresho
-            ld` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.gauge.Threshold`
+            instance or dict with compatible properties
         """
 
     def __init__(
@@ -1105,9 +1105,9 @@ class Gauge(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Gauge`
+            :class:`plotly.graph_objs.indicator.Gauge`
         axis
-            :py:class:`plotly.graph_objects.indicator.gauge.Axis`
+            :class:`plotly.graph_objects.indicator.gauge.Axis`
             instance or dict with compatible properties
         bar
             Set the appearance of the gauge's value
@@ -1122,7 +1122,7 @@ class Gauge(_BaseTraceHierarchyType):
             Set the shape of the gauge
         steps
             A tuple of
-            :py:class:`plotly.graph_objects.indicator.gauge.Step`
+            :class:`plotly.graph_objects.indicator.gauge.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -1130,8 +1130,8 @@ class Gauge(_BaseTraceHierarchyType):
             sets the default property values to use for elements of
             indicator.gauge.steps
         threshold
-            :py:class:`plotly.graph_objects.indicator.gauge.Thresho
-            ld` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.gauge.Threshold`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1152,7 +1152,7 @@ class Gauge(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Gauge 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Gauge`"""
+an instance of :class:`plotly.graph_objs.indicator.Gauge`"""
             )
 
         # Handle skip_invalid
@@ -1341,7 +1341,7 @@ class Domain(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Domain`
+            :class:`plotly.graph_objs.indicator.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this indicator trace .
@@ -1374,7 +1374,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Domain 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Domain`"""
+an instance of :class:`plotly.graph_objs.indicator.Domain`"""
             )
 
         # Handle skip_invalid
@@ -1425,7 +1425,7 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'decreasing' property is an instance of Decreasing
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Decreasing`
+          - An instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`
           - A dict of string/value properties that will be passed
             to the Decreasing constructor
     
@@ -1455,7 +1455,7 @@ class Delta(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Font`
+          - An instance of :class:`plotly.graph_objs.indicator.delta.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1498,7 +1498,7 @@ class Delta(_BaseTraceHierarchyType):
         """
         The 'increasing' property is an instance of Increasing
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.indicator.delta.Increasing`
+          - An instance of :class:`plotly.graph_objs.indicator.delta.Increasing`
           - A dict of string/value properties that will be passed
             to the Increasing constructor
     
@@ -1617,13 +1617,13 @@ class Delta(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         decreasing
-            :py:class:`plotly.graph_objects.indicator.delta.Decreas
-            ing` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.delta.Decreasing
+            ` instance or dict with compatible properties
         font
             Set the font used to display the delta
         increasing
-            :py:class:`plotly.graph_objects.indicator.delta.Increas
-            ing` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.delta.Increasing
+            ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.
         reference
@@ -1658,15 +1658,15 @@ class Delta(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.Delta`
+            :class:`plotly.graph_objs.indicator.Delta`
         decreasing
-            :py:class:`plotly.graph_objects.indicator.delta.Decreas
-            ing` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.delta.Decreasing
+            ` instance or dict with compatible properties
         font
             Set the font used to display the delta
         increasing
-            :py:class:`plotly.graph_objects.indicator.delta.Increas
-            ing` instance or dict with compatible properties
+            :class:`plotly.graph_objects.indicator.delta.Increasing
+            ` instance or dict with compatible properties
         position
             Sets the position of delta with respect to the number.
         reference
@@ -1699,7 +1699,7 @@ class Delta(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.Delta 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.Delta`"""
+an instance of :class:`plotly.graph_objs.indicator.Delta`"""
             )
 
         # Handle skip_invalid

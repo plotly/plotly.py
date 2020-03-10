@@ -152,7 +152,7 @@ class Textfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.sankey.Textfont`
+            :class:`plotly.graph_objs.sankey.Textfont`
         color
 
         family
@@ -191,7 +191,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Textfont 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Textfont`"""
+an instance of :class:`plotly.graph_objs.sankey.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -305,8 +305,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.sankey.Stream`
+            an instance of :class:`plotly.graph_objs.sankey.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -336,7 +335,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Stream`"""
+an instance of :class:`plotly.graph_objs.sankey.Stream`"""
             )
 
         # Handle skip_invalid
@@ -514,7 +513,7 @@ class Node(_BaseTraceHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.node.Hoverlabel`
+          - An instance of :class:`plotly.graph_objs.sankey.node.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -674,7 +673,7 @@ class Node(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.node.Line`
+          - An instance of :class:`plotly.graph_objs.sankey.node.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -853,7 +852,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :py:class:`plotly.graph_objects.sankey.node.Hoverlabel`
+            :class:`plotly.graph_objects.sankey.node.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -887,8 +886,8 @@ class Node(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            :py:class:`plotly.graph_objects.sankey.node.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sankey.node.Line` instance
+            or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
         thickness
@@ -933,8 +932,7 @@ class Node(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.sankey.Node`
+            an instance of :class:`plotly.graph_objs.sankey.Node`
         color
             Sets the `node` color. It can be a single value, or an
             array for specifying color for each `node`. If
@@ -954,7 +952,7 @@ class Node(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :py:class:`plotly.graph_objects.sankey.node.Hoverlabel`
+            :class:`plotly.graph_objects.sankey.node.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -988,8 +986,8 @@ class Node(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            :py:class:`plotly.graph_objects.sankey.node.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sankey.node.Line` instance
+            or dict with compatible properties
         pad
             Sets the padding (in px) between the `nodes`.
         thickness
@@ -1022,7 +1020,7 @@ class Node(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Node 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Node`"""
+an instance of :class:`plotly.graph_objs.sankey.Node`"""
             )
 
         # Handle skip_invalid
@@ -1244,7 +1242,7 @@ class Link(_BaseTraceHierarchyType):
     
         The 'colorscaledefaults' property is an instance of Colorscale
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.link.Colorscale`
+          - An instance of :class:`plotly.graph_objs.sankey.link.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
     
@@ -1311,7 +1309,7 @@ class Link(_BaseTraceHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.link.Hoverlabel`
+          - An instance of :class:`plotly.graph_objs.sankey.link.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -1471,7 +1469,7 @@ class Link(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.link.Line`
+          - An instance of :class:`plotly.graph_objs.sankey.link.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1640,7 +1638,7 @@ class Link(_BaseTraceHierarchyType):
             grey link will be used.
         colorscales
             A tuple of
-            :py:class:`plotly.graph_objects.sankey.link.Colorscale`
+            :class:`plotly.graph_objects.sankey.link.Colorscale`
             instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
@@ -1655,7 +1653,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :py:class:`plotly.graph_objects.sankey.link.Hoverlabel`
+            :class:`plotly.graph_objects.sankey.link.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1689,8 +1687,8 @@ class Link(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            :py:class:`plotly.graph_objects.sankey.link.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sankey.link.Line` instance
+            or dict with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that
             represents the source node.
@@ -1738,8 +1736,7 @@ class Link(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.sankey.Link`
+            an instance of :class:`plotly.graph_objs.sankey.Link`
         color
             Sets the `link` color. It can be a single value, or an
             array for specifying color for each `link`. If
@@ -1747,7 +1744,7 @@ class Link(_BaseTraceHierarchyType):
             grey link will be used.
         colorscales
             A tuple of
-            :py:class:`plotly.graph_objects.sankey.link.Colorscale`
+            :class:`plotly.graph_objects.sankey.link.Colorscale`
             instances or dicts with compatible properties
         colorscaledefaults
             When used in a template (as
@@ -1762,7 +1759,7 @@ class Link(_BaseTraceHierarchyType):
             displayed upon hovering. But, if `none` is set, click
             and hover events are still fired.
         hoverlabel
-            :py:class:`plotly.graph_objects.sankey.link.Hoverlabel`
+            :class:`plotly.graph_objects.sankey.link.Hoverlabel`
             instance or dict with compatible properties
         hovertemplate
             Template string used for rendering the information that
@@ -1796,8 +1793,8 @@ class Link(_BaseTraceHierarchyType):
         labelsrc
             Sets the source reference on plot.ly for  label .
         line
-            :py:class:`plotly.graph_objects.sankey.link.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sankey.link.Line` instance
+            or dict with compatible properties
         source
             An integer number `[0..nodes.length - 1]` that
             represents the source node.
@@ -1832,7 +1829,7 @@ class Link(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Link 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Link`"""
+an instance of :class:`plotly.graph_objs.sankey.Link`"""
             )
 
         # Handle skip_invalid
@@ -2132,7 +2129,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.sankey.hoverlabel.Font`
+          - An instance of :class:`plotly.graph_objs.sankey.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2288,7 +2285,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.sankey.Hoverlabel`
+            :class:`plotly.graph_objs.sankey.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2337,7 +2334,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Hoverlabel 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Hoverlabel`"""
+an instance of :class:`plotly.graph_objs.sankey.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2525,8 +2522,7 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.sankey.Domain`
+            an instance of :class:`plotly.graph_objs.sankey.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this sankey trace .
@@ -2559,7 +2555,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.Domain 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.sankey.Domain`"""
+an instance of :class:`plotly.graph_objs.sankey.Domain`"""
             )
 
         # Handle skip_invalid

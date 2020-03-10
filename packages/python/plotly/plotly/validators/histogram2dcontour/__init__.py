@@ -1171,9 +1171,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.hist
-                ogram2dcontour.colorbar.Tickformatstop`
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.histogr
+                am2dcontour.colorbar.Tickformatstop` instances
+                or dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.histogram2dcontour.colorbar.tickformatstopdef
@@ -1220,8 +1220,8 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.histogram2dcont
-                our.colorbar.Title` instance or dict with
+                :class:`plotly.graph_objects.histogram2dcontour
+                .colorbar.Title` instance or dict with
                 compatible properties
             titlefont
                 Deprecated: Please use

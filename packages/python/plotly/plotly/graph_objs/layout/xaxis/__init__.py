@@ -14,7 +14,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -141,7 +141,7 @@ class Title(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.xaxis.Title`
+            :class:`plotly.graph_objs.layout.xaxis.Title`
         font
             Sets this axis' title font. Note that the title's font
             used to be customized by the now deprecated `titlefont`
@@ -181,7 +181,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Title 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.xaxis.Title`"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.Title`"""
             )
 
         # Handle skip_invalid
@@ -405,8 +405,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.layout.xaxi
-            s.Tickformatstop`
+            an instance of
+            :class:`plotly.graph_objs.layout.xaxis.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -457,7 +457,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Tickformatstop 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.xaxis.Tickformatstop`"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -656,7 +656,7 @@ class Tickfont(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.xaxis.Tickfont`
+            :class:`plotly.graph_objs.layout.xaxis.Tickfont`
         color
 
         family
@@ -695,7 +695,7 @@ class Tickfont(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Tickfont 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.xaxis.Tickfont`"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.Tickfont`"""
             )
 
         # Handle skip_invalid
@@ -976,7 +976,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeslider.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
     
@@ -1043,8 +1043,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            :py:class:`plotly.graph_objects.layout.xaxis.rangeslide
-            r.YAxis` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.rangeslider.Y
+            Axis` instance or dict with compatible properties
         """
 
     def __init__(
@@ -1068,7 +1068,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.xaxis.Rangeslider`
+            :class:`plotly.graph_objs.layout.xaxis.Rangeslider`
         autorange
             Determines whether or not the range slider range is
             computed in relation to the input data. If `range` is
@@ -1097,8 +1097,8 @@ class Rangeslider(_BaseLayoutHierarchyType):
             visible. If visible, perpendicular axes will be set to
             `fixedrange`
         yaxis
-            :py:class:`plotly.graph_objects.layout.xaxis.rangeslide
-            r.YAxis` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.rangeslider.Y
+            Axis` instance or dict with compatible properties
 
         Returns
         -------
@@ -1119,7 +1119,7 @@ class Rangeslider(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeslider 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`"""
             )
 
         # Handle skip_invalid
@@ -1457,7 +1457,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeselector.Button`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
     
@@ -1482,7 +1482,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.rangeselector.Font`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1705,8 +1705,8 @@ class Rangeselector(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.layout.xaxi
-            s.Rangeselector`
+            an instance of
+            :class:`plotly.graph_objs.layout.xaxis.Rangeselector`
         activecolor
             Sets the background color of the active range selector
             button.
@@ -1767,7 +1767,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.Rangeselector 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
             )
 
         # Handle skip_invalid

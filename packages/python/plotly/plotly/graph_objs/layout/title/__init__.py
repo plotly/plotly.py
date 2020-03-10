@@ -128,7 +128,7 @@ class Pad(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.title.Pad`
+            :class:`plotly.graph_objs.layout.title.Pad`
         b
             The amount of padding (in px) along the bottom of the
             component.
@@ -161,7 +161,7 @@ class Pad(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.title.Pad 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.title.Pad`"""
+an instance of :class:`plotly.graph_objs.layout.title.Pad`"""
             )
 
         # Handle skip_invalid
@@ -354,7 +354,7 @@ class Font(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.title.Font`
+            :class:`plotly.graph_objs.layout.title.Font`
         color
 
         family
@@ -393,7 +393,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.title.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.title.Font`"""
+an instance of :class:`plotly.graph_objs.layout.title.Font`"""
             )
 
         # Handle skip_invalid

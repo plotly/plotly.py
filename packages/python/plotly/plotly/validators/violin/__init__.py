@@ -155,8 +155,8 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.violin.unselect
-                ed.Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.violin.unselected.
+                Marker` instance or dict with compatible
                 properties
 """,
             ),
@@ -340,8 +340,8 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.violin.selected
-                .Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.violin.selected.Ma
+                rker` instance or dict with compatible
                 properties
 """,
             ),
@@ -547,9 +547,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and min values of the array or relative to
                 `marker.cmin` and `marker.cmax` if set.
             line
-                :py:class:`plotly.graph_objects.violin.marker.L
-                ine` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.violin.marker.Line
+                ` instance or dict with compatible properties
             opacity
                 Sets the marker opacity.
             outliercolor
@@ -865,8 +864,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
             fillcolor
                 Sets the inner box plot fill color.
             line
-                :py:class:`plotly.graph_objects.violin.box.Line
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.violin.box.Line`
+                instance or dict with compatible properties
             visible
                 Determines if an miniature box plot is drawn
                 inside the violins.

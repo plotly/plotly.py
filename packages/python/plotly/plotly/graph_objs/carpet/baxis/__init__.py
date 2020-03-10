@@ -14,7 +14,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.carpet.baxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.carpet.baxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -131,7 +131,7 @@ class Title(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.carpet.baxis.Title`
+            :class:`plotly.graph_objs.carpet.baxis.Title`
         font
             Sets this axis' title font. Note that the title's font
             used to be set by the now deprecated `titlefont`
@@ -166,7 +166,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.baxis.Title 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.carpet.baxis.Title`"""
+an instance of :class:`plotly.graph_objs.carpet.baxis.Title`"""
             )
 
         # Handle skip_invalid
@@ -390,8 +390,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.carpet.baxi
-            s.Tickformatstop`
+            an instance of
+            :class:`plotly.graph_objs.carpet.baxis.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -442,7 +442,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.baxis.Tickformatstop 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.carpet.baxis.Tickformatstop`"""
+an instance of :class:`plotly.graph_objs.carpet.baxis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -641,7 +641,7 @@ class Tickfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.carpet.baxis.Tickfont`
+            :class:`plotly.graph_objs.carpet.baxis.Tickfont`
         color
 
         family
@@ -680,7 +680,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.baxis.Tickfont 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.carpet.baxis.Tickfont`"""
+an instance of :class:`plotly.graph_objs.carpet.baxis.Tickfont`"""
             )
 
         # Handle skip_invalid

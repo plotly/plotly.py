@@ -109,8 +109,8 @@ class Increasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.indicator.d
-            elta.Increasing`
+            an instance of
+            :class:`plotly.graph_objs.indicator.delta.Increasing`
         color
             Sets the color for increasing value.
         symbol
@@ -135,7 +135,7 @@ class Increasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.delta.Increasing 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.delta.Increasing`"""
+an instance of :class:`plotly.graph_objs.indicator.delta.Increasing`"""
             )
 
         # Handle skip_invalid
@@ -321,7 +321,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.delta.Font`
+            :class:`plotly.graph_objs.indicator.delta.Font`
         color
 
         family
@@ -360,7 +360,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.delta.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.delta.Font`"""
+an instance of :class:`plotly.graph_objs.indicator.delta.Font`"""
             )
 
         # Handle skip_invalid
@@ -506,8 +506,8 @@ class Decreasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.indicator.d
-            elta.Decreasing`
+            an instance of
+            :class:`plotly.graph_objs.indicator.delta.Decreasing`
         color
             Sets the color for increasing value.
         symbol
@@ -532,7 +532,7 @@ class Decreasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.delta.Decreasing 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.delta.Decreasing`"""
+an instance of :class:`plotly.graph_objs.indicator.delta.Decreasing`"""
             )
 
         # Handle skip_invalid

@@ -216,8 +216,8 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.layo
-                ut.ternary.caxis.Tickformatstop` instances or
+                A tuple of :class:`plotly.graph_objects.layout.
+                ternary.caxis.Tickformatstop` instances or
                 dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
@@ -264,8 +264,8 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.layout.ternary.
-                caxis.Title` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.ternary.cax
+                is.Title` instance or dict with compatible
                 properties
             titlefont
                 Deprecated: Please use
@@ -454,8 +454,8 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.layo
-                ut.ternary.baxis.Tickformatstop` instances or
+                A tuple of :class:`plotly.graph_objects.layout.
+                ternary.baxis.Tickformatstop` instances or
                 dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
@@ -502,8 +502,8 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.layout.ternary.
-                baxis.Title` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.ternary.bax
+                is.Title` instance or dict with compatible
                 properties
             titlefont
                 Deprecated: Please use
@@ -678,8 +678,8 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.layo
-                ut.ternary.aaxis.Tickformatstop` instances or
+                A tuple of :class:`plotly.graph_objects.layout.
+                ternary.aaxis.Tickformatstop` instances or
                 dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
@@ -726,8 +726,8 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.layout.ternary.
-                aaxis.Title` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.ternary.aax
+                is.Title` instance or dict with compatible
                 properties
             titlefont
                 Deprecated: Please use

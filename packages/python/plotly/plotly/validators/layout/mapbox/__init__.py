@@ -111,8 +111,8 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 set to '', the layer will be inserted above
                 every existing layer.
             circle
-                :py:class:`plotly.graph_objects.layout.mapbox.l
-                ayer.Circle` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.mapbox.laye
+                r.Circle` instance or dict with compatible
                 properties
             color
                 Sets the primary layer color. If `type` is
@@ -131,12 +131,12 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 right, bottom left. Only has an effect for
                 "image" `sourcetype`.
             fill
-                :py:class:`plotly.graph_objects.layout.mapbox.l
-                ayer.Fill` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.mapbox.laye
+                r.Fill` instance or dict with compatible
                 properties
             line
-                :py:class:`plotly.graph_objects.layout.mapbox.l
-                ayer.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.mapbox.laye
+                r.Line` instance or dict with compatible
                 properties
             maxzoom
                 Sets the maximum zoom level
@@ -188,8 +188,8 @@ class LayersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the source type for this layer, that is
                 the type of the layer data.
             symbol
-                :py:class:`plotly.graph_objects.layout.mapbox.l
-                ayer.Symbol` instance or dict with compatible
+                :class:`plotly.graph_objects.layout.mapbox.laye
+                r.Symbol` instance or dict with compatible
                 properties
             templateitemname
                 Used to refer to a named item in this array in

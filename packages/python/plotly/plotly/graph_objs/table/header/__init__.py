@@ -153,7 +153,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.header.Line`
+            :class:`plotly.graph_objs.table.header.Line`
         color
 
         colorsrc
@@ -182,7 +182,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.header.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.header.Line`"""
+an instance of :class:`plotly.graph_objs.table.header.Line`"""
             )
 
         # Handle skip_invalid
@@ -451,7 +451,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.header.Font`
+            :class:`plotly.graph_objs.table.header.Font`
         color
 
         colorsrc
@@ -496,7 +496,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.header.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.header.Font`"""
+an instance of :class:`plotly.graph_objs.table.header.Font`"""
             )
 
         # Handle skip_invalid
@@ -654,7 +654,7 @@ class Fill(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.header.Fill`
+            :class:`plotly.graph_objs.table.header.Fill`
         color
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
@@ -680,7 +680,7 @@ class Fill(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.header.Fill 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.header.Fill`"""
+an instance of :class:`plotly.graph_objs.table.header.Fill`"""
             )
 
         # Handle skip_invalid

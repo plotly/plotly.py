@@ -153,7 +153,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.cells.Line`
+            :class:`plotly.graph_objs.table.cells.Line`
         color
 
         colorsrc
@@ -182,7 +182,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.cells.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.cells.Line`"""
+an instance of :class:`plotly.graph_objs.table.cells.Line`"""
             )
 
         # Handle skip_invalid
@@ -451,7 +451,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.cells.Font`
+            :class:`plotly.graph_objs.table.cells.Font`
         color
 
         colorsrc
@@ -496,7 +496,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.cells.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.cells.Font`"""
+an instance of :class:`plotly.graph_objs.table.cells.Font`"""
             )
 
         # Handle skip_invalid
@@ -654,7 +654,7 @@ class Fill(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.table.cells.Fill`
+            :class:`plotly.graph_objs.table.cells.Fill`
         color
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
@@ -680,7 +680,7 @@ class Fill(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.cells.Fill 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.table.cells.Fill`"""
+an instance of :class:`plotly.graph_objs.table.cells.Fill`"""
             )
 
         # Handle skip_invalid

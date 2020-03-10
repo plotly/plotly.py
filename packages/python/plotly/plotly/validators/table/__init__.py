@@ -245,11 +245,11 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  align
                 .
             fill
-                :py:class:`plotly.graph_objects.table.header.Fi
-                ll` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Fill`
+                instance or dict with compatible properties
             font
-                :py:class:`plotly.graph_objects.table.header.Fo
-                nt` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Font`
+                instance or dict with compatible properties
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
@@ -262,8 +262,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             height
                 The height of cells.
             line
-                :py:class:`plotly.graph_objects.table.header.Li
-                ne` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Line`
+                instance or dict with compatible properties
             prefix
                 Prefix for cell values.
             prefixsrc
@@ -427,11 +427,11 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  align
                 .
             fill
-                :py:class:`plotly.graph_objects.table.cells.Fil
-                l` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Fill`
+                instance or dict with compatible properties
             font
-                :py:class:`plotly.graph_objects.table.cells.Fon
-                t` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Font`
+                instance or dict with compatible properties
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
@@ -444,8 +444,8 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             height
                 The height of cells.
             line
-                :py:class:`plotly.graph_objects.table.cells.Lin
-                e` instance or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Line`
+                instance or dict with compatible properties
             prefix
                 Prefix for cell values.
             prefixsrc

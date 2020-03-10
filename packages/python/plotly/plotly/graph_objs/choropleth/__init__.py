@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.unselected.Marker`
+          - An instance of :class:`plotly.graph_objs.choropleth.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -43,8 +43,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :py:class:`plotly.graph_objects.choropleth.unselected.M
-            arker` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.unselected.Mark
+            er` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -56,10 +56,10 @@ class Unselected(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.Unselected`
+            :class:`plotly.graph_objs.choropleth.Unselected`
         marker
-            :py:class:`plotly.graph_objects.choropleth.unselected.M
-            arker` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.unselected.Mark
+            er` instance or dict with compatible properties
 
         Returns
         -------
@@ -80,7 +80,7 @@ class Unselected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.Unselected 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.Unselected`"""
+an instance of :class:`plotly.graph_objs.choropleth.Unselected`"""
             )
 
         # Handle skip_invalid
@@ -189,7 +189,7 @@ class Stream(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.Stream`
+            :class:`plotly.graph_objs.choropleth.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -219,7 +219,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.Stream`"""
+an instance of :class:`plotly.graph_objs.choropleth.Stream`"""
             )
 
         # Handle skip_invalid
@@ -264,7 +264,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.selected.Marker`
+          - An instance of :class:`plotly.graph_objs.choropleth.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -295,8 +295,8 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :py:class:`plotly.graph_objects.choropleth.selected.Mar
-            ker` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.selected.Marker
+            ` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -308,10 +308,10 @@ class Selected(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.Selected`
+            :class:`plotly.graph_objs.choropleth.Selected`
         marker
-            :py:class:`plotly.graph_objects.choropleth.selected.Mar
-            ker` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.selected.Marker
+            ` instance or dict with compatible properties
 
         Returns
         -------
@@ -332,7 +332,7 @@ class Selected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.Selected 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.Selected`"""
+an instance of :class:`plotly.graph_objs.choropleth.Selected`"""
             )
 
         # Handle skip_invalid
@@ -374,7 +374,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.marker.Line`
+          - An instance of :class:`plotly.graph_objs.choropleth.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -460,7 +460,7 @@ class Marker(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            :py:class:`plotly.graph_objects.choropleth.marker.Line`
+            :class:`plotly.graph_objects.choropleth.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.
@@ -477,9 +477,9 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.Marker`
+            :class:`plotly.graph_objs.choropleth.Marker`
         line
-            :py:class:`plotly.graph_objects.choropleth.marker.Line`
+            :class:`plotly.graph_objects.choropleth.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the opacity of the locations.
@@ -505,7 +505,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.Marker 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.Marker`"""
+an instance of :class:`plotly.graph_objs.choropleth.Marker`"""
             )
 
         # Handle skip_invalid
@@ -759,7 +759,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.hoverlabel.Font`
+          - An instance of :class:`plotly.graph_objs.choropleth.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -915,7 +915,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.Hoverlabel`
+            :class:`plotly.graph_objs.choropleth.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -964,7 +964,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.Hoverlabel 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.Hoverlabel`"""
+an instance of :class:`plotly.graph_objs.choropleth.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1644,7 +1644,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Tickfont`
+          - An instance of :class:`plotly.graph_objs.choropleth.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1777,7 +1777,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.choropleth.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2015,7 +2015,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.Title`
+          - An instance of :class:`plotly.graph_objs.choropleth.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2058,7 +2058,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.choropleth.colorbar.title.Font`
+          - An instance of :class:`plotly.graph_objs.choropleth.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2367,9 +2367,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.choropleth.c
-            olorbar.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.choropleth.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.chorop
             leth.colorbar.tickformatstopdefaults), sets the default
@@ -2409,8 +2409,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.choropleth.colorbar.Tit
-            le` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use choropleth.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2505,7 +2505,7 @@ class ColorBar(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.choropleth.ColorBar`
+            :class:`plotly.graph_objs.choropleth.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2618,9 +2618,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.choropleth.c
-            olorbar.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.choropleth.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.chorop
             leth.colorbar.tickformatstopdefaults), sets the default
@@ -2660,8 +2660,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.choropleth.colorbar.Tit
-            le` instance or dict with compatible properties
+            :class:`plotly.graph_objects.choropleth.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use choropleth.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2713,7 +2713,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.ColorBar 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.choropleth.ColorBar`"""
+an instance of :class:`plotly.graph_objs.choropleth.ColorBar`"""
             )
 
         # Handle skip_invalid

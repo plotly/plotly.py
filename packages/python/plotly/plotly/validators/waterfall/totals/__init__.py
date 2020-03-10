@@ -14,8 +14,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the marker color of all intermediate sums
                 and total values.
             line
-                :py:class:`plotly.graph_objects.waterfall.total
-                s.marker.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.waterfall.totals.m
+                arker.Line` instance or dict with compatible
                 properties
 """,
             ),

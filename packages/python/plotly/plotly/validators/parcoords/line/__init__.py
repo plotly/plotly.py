@@ -197,9 +197,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.parc
-                oords.line.colorbar.Tickformatstop` instances
-                or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.parcoor
+                ds.line.colorbar.Tickformatstop` instances or
+                dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.parcoords.line.colorbar.tickformatstopdefault
@@ -246,9 +246,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.parcoords.line.
-                colorbar.Title` instance or dict with
-                compatible properties
+                :class:`plotly.graph_objects.parcoords.line.col
+                orbar.Title` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 parcoords.line.colorbar.title.font instead.

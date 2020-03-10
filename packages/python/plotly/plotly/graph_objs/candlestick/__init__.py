@@ -78,7 +78,7 @@ class Stream(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.candlestick.Stream`
+            :class:`plotly.graph_objs.candlestick.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -108,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.candlestick.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.candlestick.Stream`"""
+an instance of :class:`plotly.graph_objs.candlestick.Stream`"""
             )
 
         # Handle skip_invalid
@@ -195,7 +195,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.candlestick.Line`
+            :class:`plotly.graph_objs.candlestick.Line`
         width
             Sets the width (in px) of line bounding the box(es).
             Note that this style setting can also be set per
@@ -221,7 +221,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.candlestick.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.candlestick.Line`"""
+an instance of :class:`plotly.graph_objs.candlestick.Line`"""
             )
 
         # Handle skip_invalid
@@ -324,7 +324,7 @@ class Increasing(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.candlestick.increasing.Line`
+          - An instance of :class:`plotly.graph_objs.candlestick.increasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -362,8 +362,8 @@ class Increasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :py:class:`plotly.graph_objects.candlestick.increasing.
-            Line` instance or dict with compatible properties
+            :class:`plotly.graph_objects.candlestick.increasing.Lin
+            e` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -375,14 +375,14 @@ class Increasing(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.candlestick.Increasing`
+            :class:`plotly.graph_objs.candlestick.Increasing`
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :py:class:`plotly.graph_objects.candlestick.increasing.
-            Line` instance or dict with compatible properties
+            :class:`plotly.graph_objects.candlestick.increasing.Lin
+            e` instance or dict with compatible properties
 
         Returns
         -------
@@ -403,7 +403,7 @@ class Increasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.candlestick.Increasing 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.candlestick.Increasing`"""
+an instance of :class:`plotly.graph_objs.candlestick.Increasing`"""
             )
 
         # Handle skip_invalid
@@ -654,7 +654,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.candlestick.hoverlabel.Font`
+          - An instance of :class:`plotly.graph_objs.candlestick.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -835,7 +835,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.candlestick.Hoverlabel`
+            :class:`plotly.graph_objs.candlestick.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -887,7 +887,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.candlestick.Hoverlabel 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.candlestick.Hoverlabel`"""
+an instance of :class:`plotly.graph_objs.candlestick.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1017,7 +1017,7 @@ class Decreasing(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.candlestick.decreasing.Line`
+          - An instance of :class:`plotly.graph_objs.candlestick.decreasing.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1055,8 +1055,8 @@ class Decreasing(_BaseTraceHierarchyType):
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :py:class:`plotly.graph_objects.candlestick.decreasing.
-            Line` instance or dict with compatible properties
+            :class:`plotly.graph_objects.candlestick.decreasing.Lin
+            e` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, fillcolor=None, line=None, **kwargs):
@@ -1068,14 +1068,14 @@ class Decreasing(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.candlestick.Decreasing`
+            :class:`plotly.graph_objs.candlestick.Decreasing`
         fillcolor
             Sets the fill color. Defaults to a half-transparent
             variant of the line color, marker color, or marker line
             color, whichever is available.
         line
-            :py:class:`plotly.graph_objects.candlestick.decreasing.
-            Line` instance or dict with compatible properties
+            :class:`plotly.graph_objects.candlestick.decreasing.Lin
+            e` instance or dict with compatible properties
 
         Returns
         -------
@@ -1096,7 +1096,7 @@ class Decreasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.candlestick.Decreasing 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.candlestick.Decreasing`"""
+an instance of :class:`plotly.graph_objs.candlestick.Decreasing`"""
             )
 
         # Handle skip_invalid

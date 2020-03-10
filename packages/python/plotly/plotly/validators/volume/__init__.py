@@ -295,14 +295,14 @@ class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                :py:class:`plotly.graph_objects.volume.slices.X
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.volume.slices.X`
+                instance or dict with compatible properties
             y
-                :py:class:`plotly.graph_objects.volume.slices.Y
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.volume.slices.Y`
+                instance or dict with compatible properties
             z
-                :py:class:`plotly.graph_objects.volume.slices.Z
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.volume.slices.Z`
+                instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -940,8 +940,8 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.volu
-                me.colorbar.Tickformatstop` instances or dicts
+                A tuple of :class:`plotly.graph_objects.volume.
+                colorbar.Tickformatstop` instances or dicts
                 with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
@@ -988,8 +988,8 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.volume.colorbar
-                .Title` instance or dict with compatible
+                :class:`plotly.graph_objects.volume.colorbar.Ti
+                tle` instance or dict with compatible
                 properties
             titlefont
                 Deprecated: Please use
@@ -1120,13 +1120,13 @@ class CapsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                :py:class:`plotly.graph_objects.volume.caps.X`
+                :class:`plotly.graph_objects.volume.caps.X`
                 instance or dict with compatible properties
             y
-                :py:class:`plotly.graph_objects.volume.caps.Y`
+                :class:`plotly.graph_objects.volume.caps.Y`
                 instance or dict with compatible properties
             z
-                :py:class:`plotly.graph_objects.volume.caps.Z`
+                :class:`plotly.graph_objects.volume.caps.Z`
                 instance or dict with compatible properties
 """,
             ),

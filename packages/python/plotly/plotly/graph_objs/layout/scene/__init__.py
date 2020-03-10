@@ -1042,7 +1042,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Tickfont`
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1176,7 +1176,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1414,7 +1414,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.Title`
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1452,7 +1452,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.zaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1837,9 +1837,9 @@ class ZAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .zaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.za
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.zaxis.tickformatstopdefaults), sets the default
@@ -1879,8 +1879,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.zaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.zaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.zaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -1974,7 +1974,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.ZAxis`
+            :class:`plotly.graph_objs.layout.scene.ZAxis`
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
@@ -2167,9 +2167,9 @@ class ZAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .zaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.za
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.zaxis.tickformatstopdefaults), sets the default
@@ -2209,8 +2209,8 @@ class ZAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.zaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.zaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.zaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -2252,7 +2252,7 @@ class ZAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.ZAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.ZAxis`"""
+an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
             )
 
         # Handle skip_invalid
@@ -3494,7 +3494,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Tickfont`
+          - An instance of :class:`plotly.graph_objs.layout.scene.yaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -3628,7 +3628,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.layout.scene.yaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -3866,7 +3866,7 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.Title`
+          - An instance of :class:`plotly.graph_objs.layout.scene.yaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -3904,7 +3904,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.yaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.scene.yaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -4289,9 +4289,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .yaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.ya
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.yaxis.tickformatstopdefaults), sets the default
@@ -4331,8 +4331,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.yaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.yaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.yaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -4426,7 +4426,7 @@ class YAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.YAxis`
+            :class:`plotly.graph_objs.layout.scene.YAxis`
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
@@ -4619,9 +4619,9 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .yaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.ya
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.yaxis.tickformatstopdefaults), sets the default
@@ -4661,8 +4661,8 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.yaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.yaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.yaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -4704,7 +4704,7 @@ class YAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.YAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.YAxis`"""
+an instance of :class:`plotly.graph_objs.layout.scene.YAxis`"""
             )
 
         # Handle skip_invalid
@@ -5946,7 +5946,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Tickfont`
+          - An instance of :class:`plotly.graph_objs.layout.scene.xaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -6080,7 +6080,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.layout.scene.xaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -6318,7 +6318,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.Title`
+          - An instance of :class:`plotly.graph_objs.layout.scene.xaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -6356,7 +6356,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.xaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.scene.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -6741,9 +6741,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .xaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.xa
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.xaxis.tickformatstopdefaults), sets the default
@@ -6783,8 +6783,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.xaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.xaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.xaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -6878,7 +6878,7 @@ class XAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.XAxis`
+            :class:`plotly.graph_objs.layout.scene.XAxis`
         autorange
             Determines whether or not the range of this axis is
             computed in relation to the input data. See `rangemode`
@@ -7071,9 +7071,9 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .xaxis.Tickformatstop` instances or dicts with
-            compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.xa
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.layout.scen
             e.xaxis.tickformatstopdefaults), sets the default
@@ -7113,8 +7113,8 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.scene.xaxis.Titl
-            e` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.xaxis.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.scene.xaxis.title.font
             instead. Sets this axis' title font. Note that the
@@ -7156,7 +7156,7 @@ class XAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.XAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.XAxis`"""
+an instance of :class:`plotly.graph_objs.layout.scene.XAxis`"""
             )
 
         # Handle skip_invalid
@@ -7490,7 +7490,7 @@ class Domain(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.Domain`
+            :class:`plotly.graph_objs.layout.scene.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this scene subplot .
@@ -7523,7 +7523,7 @@ class Domain(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.Domain 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.Domain`"""
+an instance of :class:`plotly.graph_objs.layout.scene.Domain`"""
             )
 
         # Handle skip_invalid
@@ -7578,7 +7578,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Center`
+          - An instance of :class:`plotly.graph_objs.layout.scene.camera.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -7611,7 +7611,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'eye' property is an instance of Eye
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Eye`
+          - An instance of :class:`plotly.graph_objs.layout.scene.camera.Eye`
           - A dict of string/value properties that will be passed
             to the Eye constructor
     
@@ -7640,7 +7640,7 @@ class Camera(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Projection`
+          - An instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
     
@@ -7673,7 +7673,7 @@ class Camera(_BaseLayoutHierarchyType):
     
         The 'up' property is an instance of Up
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.camera.Up`
+          - An instance of :class:`plotly.graph_objs.layout.scene.camera.Up`
           - A dict of string/value properties that will be passed
             to the Up constructor
     
@@ -7716,8 +7716,8 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            :py:class:`plotly.graph_objects.layout.scene.camera.Pro
-            jection` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.camera.Projec
+            tion` instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
             This vector determines the up direction of this scene
@@ -7736,7 +7736,7 @@ class Camera(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.Camera`
+            :class:`plotly.graph_objs.layout.scene.Camera`
         center
             Sets the (x,y,z) components of the 'center' camera
             vector This vector determines the translation (x,y,z)
@@ -7747,8 +7747,8 @@ class Camera(_BaseLayoutHierarchyType):
             This vector determines the view point about the origin
             of this scene.
         projection
-            :py:class:`plotly.graph_objects.layout.scene.camera.Pro
-            jection` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.scene.camera.Projec
+            tion` instance or dict with compatible properties
         up
             Sets the (x,y,z) components of the 'up' camera vector.
             This vector determines the up direction of this scene
@@ -7774,7 +7774,7 @@ class Camera(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.Camera 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.Camera`"""
+an instance of :class:`plotly.graph_objs.layout.scene.Camera`"""
             )
 
         # Handle skip_invalid
@@ -7902,7 +7902,7 @@ class Aspectratio(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.Aspectratio`
+            :class:`plotly.graph_objs.layout.scene.Aspectratio`
         x
 
         y
@@ -7929,7 +7929,7 @@ class Aspectratio(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.Aspectratio 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.Aspectratio`"""
+an instance of :class:`plotly.graph_objs.layout.scene.Aspectratio`"""
             )
 
         # Handle skip_invalid
@@ -8375,7 +8375,7 @@ class Annotation(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.annotation.Font`
+          - An instance of :class:`plotly.graph_objs.layout.scene.annotation.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -8439,7 +8439,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`
+          - An instance of :class:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -9008,9 +9008,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :py:class:`plotly.graph_objects.layout.scene.annotation
-            .Hoverlabel` instance or dict with compatible
-            properties
+            :class:`plotly.graph_objects.layout.scene.annotation.Ho
+            verlabel` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
@@ -9167,7 +9166,7 @@ class Annotation(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.Annotation`
+            :class:`plotly.graph_objs.layout.scene.Annotation`
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans two or more
@@ -9218,9 +9217,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :py:class:`plotly.graph_objects.layout.scene.annotation
-            .Hoverlabel` instance or dict with compatible
-            properties
+            :class:`plotly.graph_objects.layout.scene.annotation.Ho
+            verlabel` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
@@ -9345,7 +9343,7 @@ class Annotation(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.Annotation 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.Annotation`"""
+an instance of :class:`plotly.graph_objs.layout.scene.Annotation`"""
             )
 
         # Handle skip_invalid

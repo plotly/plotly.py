@@ -477,16 +477,16 @@ class ProjectionValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                :py:class:`plotly.graph_objects.scatter3d.proje
-                ction.X` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.projecti
+                on.X` instance or dict with compatible
                 properties
             y
-                :py:class:`plotly.graph_objects.scatter3d.proje
-                ction.Y` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.projecti
+                on.Y` instance or dict with compatible
                 properties
             z
-                :py:class:`plotly.graph_objects.scatter3d.proje
-                ction.Z` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.projecti
+                on.Z` instance or dict with compatible
                 properties
 """,
             ),
@@ -635,8 +635,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                :py:class:`plotly.graph_objects.scatter3d.marke
-                r.ColorBar` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.marker.C
+                olorBar` instance or dict with compatible
                 properties
             colorscale
                 Sets the colorscale. Has an effect only if in
@@ -658,8 +658,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                :py:class:`plotly.graph_objects.scatter3d.marke
-                r.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.marker.L
+                ine` instance or dict with compatible
                 properties
             opacity
                 Sets the marker opacity. Note that the marker
@@ -774,8 +774,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                :py:class:`plotly.graph_objects.scatter3d.line.
-                ColorBar` instance or dict with compatible
+                :class:`plotly.graph_objects.scatter3d.line.Col
+                orBar` instance or dict with compatible
                 properties
             colorscale
                 Sets the colorscale. Has an effect only if in

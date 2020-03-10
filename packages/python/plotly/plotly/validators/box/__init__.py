@@ -269,8 +269,8 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.box.unselected.
-                Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.box.unselected.Mar
+                ker` instance or dict with compatible
                 properties
 """,
             ),
@@ -403,9 +403,8 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.box.selected.Ma
-                rker` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.box.selected.Marke
+                r` instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -748,8 +747,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 and min values of the array or relative to
                 `marker.cmin` and `marker.cmax` if set.
             line
-                :py:class:`plotly.graph_objects.box.marker.Line
-                ` instance or dict with compatible properties
+                :class:`plotly.graph_objects.box.marker.Line`
+                instance or dict with compatible properties
             opacity
                 Sets the marker opacity.
             outliercolor

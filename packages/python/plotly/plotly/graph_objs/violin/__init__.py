@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.violin.unselected.Marker`
+          - An instance of :class:`plotly.graph_objs.violin.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -49,8 +49,8 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :py:class:`plotly.graph_objects.violin.unselected.Marke
-            r` instance or dict with compatible properties
+            :class:`plotly.graph_objects.violin.unselected.Marker`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -62,10 +62,10 @@ class Unselected(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.violin.Unselected`
+            :class:`plotly.graph_objs.violin.Unselected`
         marker
-            :py:class:`plotly.graph_objects.violin.unselected.Marke
-            r` instance or dict with compatible properties
+            :class:`plotly.graph_objects.violin.unselected.Marker`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -86,7 +86,7 @@ class Unselected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Unselected 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Unselected`"""
+an instance of :class:`plotly.graph_objs.violin.Unselected`"""
             )
 
         # Handle skip_invalid
@@ -194,8 +194,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.violin.Stream`
+            an instance of :class:`plotly.graph_objs.violin.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -225,7 +224,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Stream 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Stream`"""
+an instance of :class:`plotly.graph_objs.violin.Stream`"""
             )
 
         # Handle skip_invalid
@@ -270,7 +269,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.violin.selected.Marker`
+          - An instance of :class:`plotly.graph_objs.violin.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -305,7 +304,7 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            :py:class:`plotly.graph_objects.violin.selected.Marker`
+            :class:`plotly.graph_objects.violin.selected.Marker`
             instance or dict with compatible properties
         """
 
@@ -318,9 +317,9 @@ class Selected(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.violin.Selected`
+            :class:`plotly.graph_objs.violin.Selected`
         marker
-            :py:class:`plotly.graph_objects.violin.selected.Marker`
+            :class:`plotly.graph_objects.violin.selected.Marker`
             instance or dict with compatible properties
 
         Returns
@@ -342,7 +341,7 @@ class Selected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Selected 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Selected`"""
+an instance of :class:`plotly.graph_objs.violin.Selected`"""
             )
 
         # Handle skip_invalid
@@ -511,7 +510,7 @@ class Meanline(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.violin.Meanline`
+            :class:`plotly.graph_objs.violin.Meanline`
         color
             Sets the mean line color.
         visible
@@ -542,7 +541,7 @@ class Meanline(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Meanline 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Meanline`"""
+an instance of :class:`plotly.graph_objs.violin.Meanline`"""
             )
 
         # Handle skip_invalid
@@ -652,7 +651,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.violin.marker.Line`
+          - An instance of :class:`plotly.graph_objs.violin.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -886,7 +885,7 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            :py:class:`plotly.graph_objects.violin.marker.Line`
+            :class:`plotly.graph_objects.violin.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.
@@ -920,8 +919,7 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.violin.Marker`
+            an instance of :class:`plotly.graph_objs.violin.Marker`
         color
             Sets themarkercolor. It accepts either a specific color
             or an array of numbers that are mapped to the
@@ -929,7 +927,7 @@ class Marker(_BaseTraceHierarchyType):
             array or relative to `marker.cmin` and `marker.cmax` if
             set.
         line
-            :py:class:`plotly.graph_objects.violin.marker.Line`
+            :class:`plotly.graph_objects.violin.marker.Line`
             instance or dict with compatible properties
         opacity
             Sets the marker opacity.
@@ -963,7 +961,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Marker 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Marker`"""
+an instance of :class:`plotly.graph_objs.violin.Marker`"""
             )
 
         # Handle skip_invalid
@@ -1117,8 +1115,7 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.violin.Line`
+            an instance of :class:`plotly.graph_objs.violin.Line`
         color
             Sets the color of line bounding the violin(s).
         width
@@ -1143,7 +1140,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Line 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Line`"""
+an instance of :class:`plotly.graph_objs.violin.Line`"""
             )
 
         # Handle skip_invalid
@@ -1394,7 +1391,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.violin.hoverlabel.Font`
+          - An instance of :class:`plotly.graph_objs.violin.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1550,7 +1547,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.violin.Hoverlabel`
+            :class:`plotly.graph_objs.violin.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1599,7 +1596,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Hoverlabel 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Hoverlabel`"""
+an instance of :class:`plotly.graph_objs.violin.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1724,7 +1721,7 @@ class Box(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.violin.box.Line`
+          - An instance of :class:`plotly.graph_objs.violin.box.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1802,8 +1799,8 @@ class Box(_BaseTraceHierarchyType):
         fillcolor
             Sets the inner box plot fill color.
         line
-            :py:class:`plotly.graph_objects.violin.box.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.violin.box.Line` instance
+            or dict with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the
             violins.
@@ -1823,12 +1820,12 @@ class Box(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.violin.Box`
+            an instance of :class:`plotly.graph_objs.violin.Box`
         fillcolor
             Sets the inner box plot fill color.
         line
-            :py:class:`plotly.graph_objects.violin.box.Line`
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.violin.box.Line` instance
+            or dict with compatible properties
         visible
             Determines if an miniature box plot is drawn inside the
             violins.
@@ -1856,7 +1853,7 @@ class Box(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.Box 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.violin.Box`"""
+an instance of :class:`plotly.graph_objs.violin.Box`"""
             )
 
         # Handle skip_invalid

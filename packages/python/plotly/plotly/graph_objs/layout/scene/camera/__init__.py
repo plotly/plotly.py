@@ -91,7 +91,7 @@ class Up(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.camera.Up`
+            :class:`plotly.graph_objs.layout.scene.camera.Up`
         x
 
         y
@@ -118,7 +118,7 @@ class Up(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.camera.Up 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.camera.Up`"""
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Up`"""
             )
 
         # Handle skip_invalid
@@ -206,8 +206,8 @@ class Projection(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.layout.scen
-            e.camera.Projection`
+            an instance of :class:`plotly.graph_objs.layout.scene.c
+            amera.Projection`
         type
             Sets the projection type. The projection type could be
             either "perspective" or "orthographic". The default is
@@ -232,7 +232,7 @@ class Projection(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.camera.Projection 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.camera.Projection`"""
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Projection`"""
             )
 
         # Handle skip_invalid
@@ -353,7 +353,7 @@ class Eye(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.scene.camera.Eye`
+            :class:`plotly.graph_objs.layout.scene.camera.Eye`
         x
 
         y
@@ -380,7 +380,7 @@ class Eye(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.camera.Eye 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.camera.Eye`"""
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Eye`"""
             )
 
         # Handle skip_invalid
@@ -506,8 +506,8 @@ class Center(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.layout.scen
-            e.camera.Center`
+            an instance of
+            :class:`plotly.graph_objs.layout.scene.camera.Center`
         x
 
         y
@@ -534,7 +534,7 @@ class Center(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.camera.Center 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.scene.camera.Center`"""
+an instance of :class:`plotly.graph_objs.layout.scene.camera.Center`"""
             )
 
         # Handle skip_invalid

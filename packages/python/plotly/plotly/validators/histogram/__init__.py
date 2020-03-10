@@ -306,13 +306,13 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.histogram.unsel
-                ected.Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.histogram.unselect
+                ed.Marker` instance or dict with compatible
                 properties
             textfont
-                :py:class:`plotly.graph_objects.histogram.unsel
-                ected.Textfont` instance or dict with
-                compatible properties
+                :class:`plotly.graph_objects.histogram.unselect
+                ed.Textfont` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -444,12 +444,12 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.histogram.selec
-                ted.Marker` instance or dict with compatible
+                :class:`plotly.graph_objects.histogram.selected
+                .Marker` instance or dict with compatible
                 properties
             textfont
-                :py:class:`plotly.graph_objects.histogram.selec
-                ted.Textfont` instance or dict with compatible
+                :class:`plotly.graph_objects.histogram.selected
+                .Textfont` instance or dict with compatible
                 properties
 """,
             ),
@@ -641,8 +641,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                :py:class:`plotly.graph_objects.histogram.marke
-                r.ColorBar` instance or dict with compatible
+                :class:`plotly.graph_objects.histogram.marker.C
+                olorBar` instance or dict with compatible
                 properties
             colorscale
                 Sets the colorscale. Has an effect only if in
@@ -664,8 +664,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                :py:class:`plotly.graph_objects.histogram.marke
-                r.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.histogram.marker.L
+                ine` instance or dict with compatible
                 properties
             opacity
                 Sets the opacity of the bars.

@@ -116,8 +116,8 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.choroplethmapbo
-                x.unselected.Marker` instance or dict with
+                :class:`plotly.graph_objects.choroplethmapbox.u
+                nselected.Marker` instance or dict with
                 compatible properties
 """,
             ),
@@ -289,8 +289,8 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                :py:class:`plotly.graph_objects.choroplethmapbo
-                x.selected.Marker` instance or dict with
+                :class:`plotly.graph_objects.choroplethmapbox.s
+                elected.Marker` instance or dict with
                 compatible properties
 """,
             ),
@@ -370,8 +370,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                :py:class:`plotly.graph_objects.choroplethmapbo
-                x.marker.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.choroplethmapbox.m
+                arker.Line` instance or dict with compatible
                 properties
             opacity
                 Sets the opacity of the locations.
@@ -835,9 +835,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.chor
-                oplethmapbox.colorbar.Tickformatstop` instances
-                or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.choropl
+                ethmapbox.colorbar.Tickformatstop` instances or
+                dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.choroplethmapbox.colorbar.tickformatstopdefau
@@ -884,9 +884,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                :py:class:`plotly.graph_objects.choroplethmapbo
-                x.colorbar.Title` instance or dict with
-                compatible properties
+                :class:`plotly.graph_objects.choroplethmapbox.c
+                olorbar.Title` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 choroplethmapbox.colorbar.title.font instead.

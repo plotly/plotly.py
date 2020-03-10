@@ -1427,7 +1427,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Tickfont`
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1561,7 +1561,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1824,7 +1824,7 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.Title`
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1874,7 +1874,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.yaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2383,8 +2383,8 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.yaxis
-            .Tickformatstop` instances or dicts with compatible
+            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
+            ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
             When used in a template (as
@@ -2432,7 +2432,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.yaxis.Title`
+            :class:`plotly.graph_objects.layout.yaxis.Title`
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.yaxis.title.font instead.
@@ -2547,8 +2547,7 @@ class YAxis(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.YAxis`
+            an instance of :class:`plotly.graph_objs.layout.YAxis`
         anchor
             If set to an opposite-letter axis id (e.g. `x2`, `y`),
             this axis is bound to the corresponding opposite-letter
@@ -2843,8 +2842,8 @@ class YAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.yaxis
-            .Tickformatstop` instances or dicts with compatible
+            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
+            ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
             When used in a template (as
@@ -2892,7 +2891,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.yaxis.Title`
+            :class:`plotly.graph_objects.layout.yaxis.Title`
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.yaxis.title.font instead.
@@ -2939,7 +2938,7 @@ class YAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.YAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.YAxis`"""
+an instance of :class:`plotly.graph_objs.layout.YAxis`"""
             )
 
         # Handle skip_invalid
@@ -4075,7 +4074,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeselector' property is an instance of Rangeselector
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Rangeselector`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`
           - A dict of string/value properties that will be passed
             to the Rangeselector constructor
     
@@ -4144,7 +4143,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'rangeslider' property is an instance of Rangeslider
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Rangeslider`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangeslider`
           - A dict of string/value properties that will be passed
             to the Rangeslider constructor
     
@@ -4181,9 +4180,9 @@ class XAxis(_BaseLayoutHierarchyType):
                     be visible. If visible, perpendicular axes will
                     be set to `fixedrange`
                 yaxis
-                    :py:class:`plotly.graph_objects.layout.xaxis.ra
-                    ngeslider.YAxis` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.layout.xaxis.range
+                    slider.YAxis` instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -4744,7 +4743,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Tickfont`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -4878,7 +4877,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Tickformatstop`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -5141,7 +5140,7 @@ class XAxis(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.Title`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -5191,7 +5190,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.xaxis.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -5586,11 +5585,11 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            :py:class:`plotly.graph_objects.layout.xaxis.Rangeselec
-            tor` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.Rangeselector
+            ` instance or dict with compatible properties
         rangeslider
-            :py:class:`plotly.graph_objects.layout.xaxis.Rangeslide
-            r` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
+            instance or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the
@@ -5706,8 +5705,8 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.xaxis
-            .Tickformatstop` instances or dicts with compatible
+            A tuple of :class:`plotly.graph_objects.layout.xaxis.Ti
+            ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
             When used in a template (as
@@ -5755,7 +5754,7 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.xaxis.Title`
+            :class:`plotly.graph_objects.layout.xaxis.Title`
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.xaxis.title.font instead.
@@ -5872,8 +5871,7 @@ class XAxis(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.XAxis`
+            an instance of :class:`plotly.graph_objs.layout.XAxis`
         anchor
             If set to an opposite-letter axis id (e.g. `x2`, `y`),
             this axis is bound to the corresponding opposite-letter
@@ -6054,11 +6052,11 @@ class XAxis(_BaseLayoutHierarchyType):
             "nonnegative", the range is non-negative, regardless of
             the input data. Applies only to linear axes.
         rangeselector
-            :py:class:`plotly.graph_objects.layout.xaxis.Rangeselec
-            tor` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.Rangeselector
+            ` instance or dict with compatible properties
         rangeslider
-            :py:class:`plotly.graph_objects.layout.xaxis.Rangeslide
-            r` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.xaxis.Rangeslider`
+            instance or dict with compatible properties
         scaleanchor
             If set to another axis id (e.g. `x2`, `y`), the range
             of this axis changes together with the range of the
@@ -6174,8 +6172,8 @@ class XAxis(_BaseLayoutHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of :py:class:`plotly.graph_objects.layout.xaxis
-            .Tickformatstop` instances or dicts with compatible
+            A tuple of :class:`plotly.graph_objects.layout.xaxis.Ti
+            ckformatstop` instances or dicts with compatible
             properties
         tickformatstopdefaults
             When used in a template (as
@@ -6223,7 +6221,7 @@ class XAxis(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            :py:class:`plotly.graph_objects.layout.xaxis.Title`
+            :class:`plotly.graph_objects.layout.xaxis.Title`
             instance or dict with compatible properties
         titlefont
             Deprecated: Please use layout.xaxis.title.font instead.
@@ -6270,7 +6268,7 @@ class XAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.XAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.XAxis`"""
+an instance of :class:`plotly.graph_objs.layout.XAxis`"""
             )
 
         # Handle skip_invalid
@@ -6780,7 +6778,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'buttondefaults' property is an instance of Button
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Button`
+          - An instance of :class:`plotly.graph_objs.layout.updatemenu.Button`
           - A dict of string/value properties that will be passed
             to the Button constructor
     
@@ -6829,7 +6827,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Font`
+          - An instance of :class:`plotly.graph_objs.layout.updatemenu.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -6901,7 +6899,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.updatemenu.Pad`
+          - An instance of :class:`plotly.graph_objs.layout.updatemenu.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -7131,9 +7129,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             update menu.
         buttons
-            A tuple of :py:class:`plotly.graph_objects.layout.updat
-            emenu.Button` instances or dicts with compatible
-            properties
+            A tuple of
+            :class:`plotly.graph_objects.layout.updatemenu.Button`
+            instances or dicts with compatible properties
         buttondefaults
             When used in a template (as
             layout.template.layout.updatemenu.buttondefaults), sets
@@ -7224,7 +7222,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Updatemenu`
+            :class:`plotly.graph_objs.layout.Updatemenu`
         active
             Determines which button (by index starting from 0) is
             considered active.
@@ -7236,9 +7234,9 @@ class Updatemenu(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             update menu.
         buttons
-            A tuple of :py:class:`plotly.graph_objects.layout.updat
-            emenu.Button` instances or dicts with compatible
-            properties
+            A tuple of
+            :class:`plotly.graph_objects.layout.updatemenu.Button`
+            instances or dicts with compatible properties
         buttondefaults
             When used in a template (as
             layout.template.layout.updatemenu.buttondefaults), sets
@@ -7316,7 +7314,7 @@ class Updatemenu(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Updatemenu 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Updatemenu`"""
+an instance of :class:`plotly.graph_objs.layout.Updatemenu`"""
             )
 
         # Handle skip_invalid
@@ -7486,7 +7484,7 @@ class Uniformtext(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Uniformtext`
+            :class:`plotly.graph_objs.layout.Uniformtext`
         minsize
             Sets the minimum text size between traces of the same
             type.
@@ -7519,7 +7517,7 @@ class Uniformtext(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Uniformtext 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Uniformtext`"""
+an instance of :class:`plotly.graph_objs.layout.Uniformtext`"""
             )
 
         # Handle skip_invalid
@@ -7663,7 +7661,7 @@ class Transition(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Transition`
+            :class:`plotly.graph_objs.layout.Transition`
         duration
             The duration of the transition, in milliseconds. If
             equal to zero, updates are synchronous.
@@ -7693,7 +7691,7 @@ class Transition(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Transition 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Transition`"""
+an instance of :class:`plotly.graph_objs.layout.Transition`"""
             )
 
         # Handle skip_invalid
@@ -7744,7 +7742,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.title.Font`
+          - An instance of :class:`plotly.graph_objs.layout.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -7794,7 +7792,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.title.Pad`
+          - An instance of :class:`plotly.graph_objs.layout.title.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -8069,8 +8067,7 @@ class Title(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Title`
+            an instance of :class:`plotly.graph_objs.layout.Title`
         font
             Sets the title font. Note that the title's font used to
             be customized by the now deprecated `titlefont`
@@ -8138,7 +8135,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Title 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Title`"""
+an instance of :class:`plotly.graph_objs.layout.Title`"""
             )
 
         # Handle skip_invalid
@@ -8204,7 +8201,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'aaxis' property is an instance of Aaxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Aaxis`
+          - An instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
     
@@ -8354,8 +8351,8 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.ternary.aaxis.Tickformatstop` instances or
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    ternary.aaxis.Tickformatstop` instances or
                     dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
@@ -8402,8 +8399,8 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.ternary.
-                    aaxis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.ternary.aax
+                    is.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -8434,7 +8431,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'baxis' property is an instance of Baxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Baxis`
+          - An instance of :class:`plotly.graph_objs.layout.ternary.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
     
@@ -8584,8 +8581,8 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.ternary.baxis.Tickformatstop` instances or
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    ternary.baxis.Tickformatstop` instances or
                     dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
@@ -8632,8 +8629,8 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.ternary.
-                    baxis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.ternary.bax
+                    is.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -8723,7 +8720,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'caxis' property is an instance of Caxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Caxis`
+          - An instance of :class:`plotly.graph_objs.layout.ternary.Caxis`
           - A dict of string/value properties that will be passed
             to the Caxis constructor
     
@@ -8873,8 +8870,8 @@ class Ternary(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.ternary.caxis.Tickformatstop` instances or
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    ternary.caxis.Tickformatstop` instances or
                     dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
@@ -8921,8 +8918,8 @@ class Ternary(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.ternary.
-                    caxis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.ternary.cax
+                    is.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -8953,7 +8950,7 @@ class Ternary(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.ternary.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.ternary.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -9037,18 +9034,18 @@ class Ternary(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         aaxis
-            :py:class:`plotly.graph_objects.layout.ternary.Aaxis`
+            :class:`plotly.graph_objects.layout.ternary.Aaxis`
             instance or dict with compatible properties
         baxis
-            :py:class:`plotly.graph_objects.layout.ternary.Baxis`
+            :class:`plotly.graph_objects.layout.ternary.Baxis`
             instance or dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            :py:class:`plotly.graph_objects.layout.ternary.Caxis`
+            :class:`plotly.graph_objects.layout.ternary.Caxis`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.ternary.Domain`
+            :class:`plotly.graph_objects.layout.ternary.Domain`
             instance or dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum
@@ -9079,20 +9076,20 @@ class Ternary(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Ternary`
+            :class:`plotly.graph_objs.layout.Ternary`
         aaxis
-            :py:class:`plotly.graph_objects.layout.ternary.Aaxis`
+            :class:`plotly.graph_objects.layout.ternary.Aaxis`
             instance or dict with compatible properties
         baxis
-            :py:class:`plotly.graph_objects.layout.ternary.Baxis`
+            :class:`plotly.graph_objects.layout.ternary.Baxis`
             instance or dict with compatible properties
         bgcolor
             Set the background color of the subplot
         caxis
-            :py:class:`plotly.graph_objects.layout.ternary.Caxis`
+            :class:`plotly.graph_objects.layout.ternary.Caxis`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.ternary.Domain`
+            :class:`plotly.graph_objects.layout.ternary.Domain`
             instance or dict with compatible properties
         sum
             The number each triplet should sum to, and the maximum
@@ -9121,7 +9118,7 @@ class Ternary(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Ternary 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Ternary`"""
+an instance of :class:`plotly.graph_objs.layout.Ternary`"""
             )
 
         # Handle skip_invalid
@@ -9181,196 +9178,184 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'data' property is an instance of Data
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.template.Data`
+          - An instance of :class:`plotly.graph_objs.layout.template.Data`
           - A dict of string/value properties that will be passed
             to the Data constructor
     
             Supported dict properties:
                 
                 area
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Area` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.Area`
+                    instances or dicts with compatible properties
                 barpolar
                     A tuple of
-                    :py:class:`plotly.graph_objects.Barpolar`
+                    :class:`plotly.graph_objects.Barpolar`
                     instances or dicts with compatible properties
                 bar
-                    A tuple of :py:class:`plotly.graph_objects.Bar`
+                    A tuple of :class:`plotly.graph_objects.Bar`
                     instances or dicts with compatible properties
                 box
-                    A tuple of :py:class:`plotly.graph_objects.Box`
+                    A tuple of :class:`plotly.graph_objects.Box`
                     instances or dicts with compatible properties
                 candlestick
                     A tuple of
-                    :py:class:`plotly.graph_objects.Candlestick`
+                    :class:`plotly.graph_objects.Candlestick`
                     instances or dicts with compatible properties
                 carpet
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Carpet`
+                    A tuple of :class:`plotly.graph_objects.Carpet`
                     instances or dicts with compatible properties
                 choroplethmapbox
-                    A tuple of :py:class:`plotly.graph_objects.Chor
-                    oplethmapbox` instances or dicts with
-                    compatible properties
+                    A tuple of
+                    :class:`plotly.graph_objects.Choroplethmapbox`
+                    instances or dicts with compatible properties
                 choropleth
                     A tuple of
-                    :py:class:`plotly.graph_objects.Choropleth`
+                    :class:`plotly.graph_objects.Choropleth`
                     instances or dicts with compatible properties
                 cone
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Cone` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.Cone`
+                    instances or dicts with compatible properties
                 contourcarpet
                     A tuple of
-                    :py:class:`plotly.graph_objects.Contourcarpet`
+                    :class:`plotly.graph_objects.Contourcarpet`
                     instances or dicts with compatible properties
                 contour
                     A tuple of
-                    :py:class:`plotly.graph_objects.Contour`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Contour` instances
+                    or dicts with compatible properties
                 densitymapbox
                     A tuple of
-                    :py:class:`plotly.graph_objects.Densitymapbox`
+                    :class:`plotly.graph_objects.Densitymapbox`
                     instances or dicts with compatible properties
                 funnelarea
                     A tuple of
-                    :py:class:`plotly.graph_objects.Funnelarea`
+                    :class:`plotly.graph_objects.Funnelarea`
                     instances or dicts with compatible properties
                 funnel
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Funnel`
+                    A tuple of :class:`plotly.graph_objects.Funnel`
                     instances or dicts with compatible properties
                 heatmapgl
                     A tuple of
-                    :py:class:`plotly.graph_objects.Heatmapgl`
+                    :class:`plotly.graph_objects.Heatmapgl`
                     instances or dicts with compatible properties
                 heatmap
                     A tuple of
-                    :py:class:`plotly.graph_objects.Heatmap`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Heatmap` instances
+                    or dicts with compatible properties
                 histogram2dcontour
-                    A tuple of :py:class:`plotly.graph_objects.Hist
-                    ogram2dContour` instances or dicts with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.Histogr
+                    am2dContour` instances or dicts with compatible
+                    properties
                 histogram2d
                     A tuple of
-                    :py:class:`plotly.graph_objects.Histogram2d`
+                    :class:`plotly.graph_objects.Histogram2d`
                     instances or dicts with compatible properties
                 histogram
                     A tuple of
-                    :py:class:`plotly.graph_objects.Histogram`
+                    :class:`plotly.graph_objects.Histogram`
                     instances or dicts with compatible properties
                 image
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Image`
+                    A tuple of :class:`plotly.graph_objects.Image`
                     instances or dicts with compatible properties
                 indicator
                     A tuple of
-                    :py:class:`plotly.graph_objects.Indicator`
+                    :class:`plotly.graph_objects.Indicator`
                     instances or dicts with compatible properties
                 isosurface
                     A tuple of
-                    :py:class:`plotly.graph_objects.Isosurface`
+                    :class:`plotly.graph_objects.Isosurface`
                     instances or dicts with compatible properties
                 mesh3d
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Mesh3d`
+                    A tuple of :class:`plotly.graph_objects.Mesh3d`
                     instances or dicts with compatible properties
                 ohlc
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Ohlc` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.Ohlc`
+                    instances or dicts with compatible properties
                 parcats
                     A tuple of
-                    :py:class:`plotly.graph_objects.Parcats`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Parcats` instances
+                    or dicts with compatible properties
                 parcoords
                     A tuple of
-                    :py:class:`plotly.graph_objects.Parcoords`
+                    :class:`plotly.graph_objects.Parcoords`
                     instances or dicts with compatible properties
                 pie
-                    A tuple of :py:class:`plotly.graph_objects.Pie`
+                    A tuple of :class:`plotly.graph_objects.Pie`
                     instances or dicts with compatible properties
                 pointcloud
                     A tuple of
-                    :py:class:`plotly.graph_objects.Pointcloud`
+                    :class:`plotly.graph_objects.Pointcloud`
                     instances or dicts with compatible properties
                 sankey
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Sankey`
+                    A tuple of :class:`plotly.graph_objects.Sankey`
                     instances or dicts with compatible properties
                 scatter3d
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scatter3d`
+                    :class:`plotly.graph_objects.Scatter3d`
                     instances or dicts with compatible properties
                 scattercarpet
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scattercarpet`
+                    :class:`plotly.graph_objects.Scattercarpet`
                     instances or dicts with compatible properties
                 scattergeo
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scattergeo`
+                    :class:`plotly.graph_objects.Scattergeo`
                     instances or dicts with compatible properties
                 scattergl
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scattergl`
+                    :class:`plotly.graph_objects.Scattergl`
                     instances or dicts with compatible properties
                 scattermapbox
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scattermapbox`
+                    :class:`plotly.graph_objects.Scattermapbox`
                     instances or dicts with compatible properties
                 scatterpolargl
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scatterpolargl`
+                    :class:`plotly.graph_objects.Scatterpolargl`
                     instances or dicts with compatible properties
                 scatterpolar
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scatterpolar`
+                    :class:`plotly.graph_objects.Scatterpolar`
                     instances or dicts with compatible properties
                 scatter
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scatter`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Scatter` instances
+                    or dicts with compatible properties
                 scatterternary
                     A tuple of
-                    :py:class:`plotly.graph_objects.Scatterternary`
+                    :class:`plotly.graph_objects.Scatterternary`
                     instances or dicts with compatible properties
                 splom
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Splom`
+                    A tuple of :class:`plotly.graph_objects.Splom`
                     instances or dicts with compatible properties
                 streamtube
                     A tuple of
-                    :py:class:`plotly.graph_objects.Streamtube`
+                    :class:`plotly.graph_objects.Streamtube`
                     instances or dicts with compatible properties
                 sunburst
                     A tuple of
-                    :py:class:`plotly.graph_objects.Sunburst`
+                    :class:`plotly.graph_objects.Sunburst`
                     instances or dicts with compatible properties
                 surface
                     A tuple of
-                    :py:class:`plotly.graph_objects.Surface`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Surface` instances
+                    or dicts with compatible properties
                 table
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Table`
+                    A tuple of :class:`plotly.graph_objects.Table`
                     instances or dicts with compatible properties
                 treemap
                     A tuple of
-                    :py:class:`plotly.graph_objects.Treemap`
-                    instances or dicts with compatible properties
+                    :class:`plotly.graph_objects.Treemap` instances
+                    or dicts with compatible properties
                 violin
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Violin`
+                    A tuple of :class:`plotly.graph_objects.Violin`
                     instances or dicts with compatible properties
                 volume
-                    A tuple of
-                    :py:class:`plotly.graph_objects.Volume`
+                    A tuple of :class:`plotly.graph_objects.Volume`
                     instances or dicts with compatible properties
                 waterfall
                     A tuple of
-                    :py:class:`plotly.graph_objects.Waterfall`
+                    :class:`plotly.graph_objects.Waterfall`
                     instances or dicts with compatible properties
 
         Returns
@@ -9390,7 +9375,7 @@ class Template(_BaseLayoutHierarchyType):
         """
         The 'layout' property is an instance of Layout
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.Layout`
+          - An instance of :class:`plotly.graph_objs.Layout`
           - A dict of string/value properties that will be passed
             to the Layout constructor
     
@@ -9418,11 +9403,11 @@ class Template(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         data
-            :py:class:`plotly.graph_objects.layout.template.Data`
+            :class:`plotly.graph_objects.layout.template.Data`
             instance or dict with compatible properties
         layout
-            :py:class:`plotly.graph_objects.Layout` instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.Layout` instance or dict
+            with compatible properties
         """
 
     def __init__(self, arg=None, data=None, layout=None, **kwargs):
@@ -9454,13 +9439,13 @@ class Template(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Template`
+            :class:`plotly.graph_objs.layout.Template`
         data
-            :py:class:`plotly.graph_objects.layout.template.Data`
+            :class:`plotly.graph_objects.layout.template.Data`
             instance or dict with compatible properties
         layout
-            :py:class:`plotly.graph_objects.Layout` instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.Layout` instance or dict
+            with compatible properties
 
         Returns
         -------
@@ -9481,7 +9466,7 @@ class Template(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Template 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Template`"""
+an instance of :class:`plotly.graph_objs.layout.Template`"""
             )
 
         # Handle skip_invalid
@@ -9744,7 +9729,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'currentvalue' property is an instance of Currentvalue
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.slider.Currentvalue`
+          - An instance of :class:`plotly.graph_objs.layout.slider.Currentvalue`
           - A dict of string/value properties that will be passed
             to the Currentvalue constructor
     
@@ -9787,7 +9772,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.slider.Font`
+          - An instance of :class:`plotly.graph_objs.layout.slider.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -9923,7 +9908,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.slider.Pad`
+          - An instance of :class:`plotly.graph_objs.layout.slider.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -10038,7 +10023,7 @@ class Slider(_BaseLayoutHierarchyType):
     
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.slider.Step`
+          - An instance of :class:`plotly.graph_objs.layout.slider.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
     
@@ -10188,7 +10173,7 @@ class Slider(_BaseLayoutHierarchyType):
         """
         The 'transition' property is an instance of Transition
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.slider.Transition`
+          - An instance of :class:`plotly.graph_objs.layout.slider.Transition`
           - A dict of string/value properties that will be passed
             to the Transition constructor
     
@@ -10341,8 +10326,8 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            :py:class:`plotly.graph_objects.layout.slider.Currentva
-            lue` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.slider.Currentvalue
+            ` instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
         len
@@ -10369,7 +10354,7 @@ class Slider(_BaseLayoutHierarchyType):
             side.
         steps
             A tuple of
-            :py:class:`plotly.graph_objects.layout.slider.Step`
+            :class:`plotly.graph_objects.layout.slider.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -10393,8 +10378,8 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            :py:class:`plotly.graph_objects.layout.slider.Transitio
-            n` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.slider.Transition`
+            instance or dict with compatible properties
         visible
             Determines whether or not the slider is visible.
         x
@@ -10449,8 +10434,7 @@ class Slider(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Slider`
+            an instance of :class:`plotly.graph_objs.layout.Slider`
         active
             Determines which button (by index starting from 0) is
             considered active.
@@ -10465,8 +10449,8 @@ class Slider(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             slider.
         currentvalue
-            :py:class:`plotly.graph_objects.layout.slider.Currentva
-            lue` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.slider.Currentvalue
+            ` instance or dict with compatible properties
         font
             Sets the font of the slider step labels.
         len
@@ -10493,7 +10477,7 @@ class Slider(_BaseLayoutHierarchyType):
             side.
         steps
             A tuple of
-            :py:class:`plotly.graph_objects.layout.slider.Step`
+            :class:`plotly.graph_objects.layout.slider.Step`
             instances or dicts with compatible properties
         stepdefaults
             When used in a template (as
@@ -10517,8 +10501,8 @@ class Slider(_BaseLayoutHierarchyType):
         tickwidth
             Sets the tick width (in px).
         transition
-            :py:class:`plotly.graph_objects.layout.slider.Transitio
-            n` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.slider.Transition`
+            instance or dict with compatible properties
         visible
             Determines whether or not the slider is visible.
         x
@@ -10555,7 +10539,7 @@ class Slider(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Slider 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Slider`"""
+an instance of :class:`plotly.graph_objs.layout.Slider`"""
             )
 
         # Handle skip_invalid
@@ -10748,7 +10732,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.shape.Line`
+          - An instance of :class:`plotly.graph_objs.layout.shape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -11193,7 +11177,7 @@ class Shape(_BaseLayoutHierarchyType):
             Specifies whether shapes are drawn below or above
             traces.
         line
-            :py:class:`plotly.graph_objects.layout.shape.Line`
+            :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -11350,15 +11334,14 @@ class Shape(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Shape`
+            an instance of :class:`plotly.graph_objs.layout.Shape`
         fillcolor
             Sets the color filling the shape's interior.
         layer
             Specifies whether shapes are drawn below or above
             traces.
         line
-            :py:class:`plotly.graph_objects.layout.shape.Line`
+            :class:`plotly.graph_objects.layout.shape.Line`
             instance or dict with compatible properties
         name
             When used in a template, named items are created in the
@@ -11502,7 +11485,7 @@ class Shape(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Shape 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Shape`"""
+an instance of :class:`plotly.graph_objs.layout.Shape`"""
             )
 
         # Handle skip_invalid
@@ -11659,8 +11642,8 @@ class Scene(_BaseLayoutHierarchyType):
                     (default) lets the text set the box height.
                     Taller text will be clipped.
                 hoverlabel
-                    :py:class:`plotly.graph_objects.layout.scene.an
-                    notation.Hoverlabel` instance or dict with
+                    :class:`plotly.graph_objects.layout.scene.annot
+                    ation.Hoverlabel` instance or dict with
                     compatible properties
                 hovertext
                     Sets text to appear when hovering over this
@@ -11805,7 +11788,7 @@ class Scene(_BaseLayoutHierarchyType):
     
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.Annotation`
+          - An instance of :class:`plotly.graph_objs.layout.scene.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
     
@@ -11858,7 +11841,7 @@ class Scene(_BaseLayoutHierarchyType):
     
         The 'aspectratio' property is an instance of Aspectratio
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.Aspectratio`
+          - An instance of :class:`plotly.graph_objs.layout.scene.Aspectratio`
           - A dict of string/value properties that will be passed
             to the Aspectratio constructor
     
@@ -11944,7 +11927,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'camera' property is an instance of Camera
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.Camera`
+          - An instance of :class:`plotly.graph_objs.layout.scene.Camera`
           - A dict of string/value properties that will be passed
             to the Camera constructor
     
@@ -11961,9 +11944,9 @@ class Scene(_BaseLayoutHierarchyType):
                     vector. This vector determines the view point
                     about the origin of this scene.
                 projection
-                    :py:class:`plotly.graph_objects.layout.scene.ca
-                    mera.Projection` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.layout.scene.camer
+                    a.Projection` instance or dict with compatible
+                    properties
                 up
                     Sets the (x,y,z) components of the 'up' camera
                     vector. This vector determines the up direction
@@ -11988,7 +11971,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.scene.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -12087,7 +12070,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'xaxis' property is an instance of XAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.XAxis`
+          - An instance of :class:`plotly.graph_objs.layout.scene.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
     
@@ -12307,9 +12290,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.scene.xaxis.Tickformatstop` instances or
-                    dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    scene.xaxis.Tickformatstop` instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.xaxis.tickformatstopdefaults), sets
@@ -12355,8 +12338,8 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.scene.xa
-                    xis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.scene.xaxis
+                    .Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -12400,7 +12383,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'yaxis' property is an instance of YAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.YAxis`
+          - An instance of :class:`plotly.graph_objs.layout.scene.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
     
@@ -12620,9 +12603,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.scene.yaxis.Tickformatstop` instances or
-                    dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    scene.yaxis.Tickformatstop` instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.yaxis.tickformatstopdefaults), sets
@@ -12668,8 +12651,8 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.scene.ya
-                    xis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.scene.yaxis
+                    .Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -12713,7 +12696,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         The 'zaxis' property is an instance of ZAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.scene.ZAxis`
+          - An instance of :class:`plotly.graph_objs.layout.scene.ZAxis`
           - A dict of string/value properties that will be passed
             to the ZAxis constructor
     
@@ -12933,9 +12916,9 @@ class Scene(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.scene.zaxis.Tickformatstop` instances or
-                    dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    scene.zaxis.Tickformatstop` instances or dicts
+                    with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.scene.zaxis.tickformatstopdefaults), sets
@@ -12981,8 +12964,8 @@ class Scene(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.scene.za
-                    xis.Title` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.scene.zaxis
+                    .Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -13031,9 +13014,9 @@ class Scene(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         annotations
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .Annotation` instances or dicts with compatible
-            properties
+            A tuple of
+            :class:`plotly.graph_objects.layout.scene.Annotation`
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.scene.annotationdefaults), sets
@@ -13055,10 +13038,10 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            :py:class:`plotly.graph_objects.layout.scene.Camera`
+            :class:`plotly.graph_objects.layout.scene.Camera`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.scene.Domain`
+            :class:`plotly.graph_objects.layout.scene.Domain`
             instance or dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
@@ -13070,13 +13053,13 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            :py:class:`plotly.graph_objects.layout.scene.XAxis`
+            :class:`plotly.graph_objects.layout.scene.XAxis`
             instance or dict with compatible properties
         yaxis
-            :py:class:`plotly.graph_objects.layout.scene.YAxis`
+            :class:`plotly.graph_objects.layout.scene.YAxis`
             instance or dict with compatible properties
         zaxis
-            :py:class:`plotly.graph_objects.layout.scene.ZAxis`
+            :class:`plotly.graph_objects.layout.scene.ZAxis`
             instance or dict with compatible properties
         """
 
@@ -13105,12 +13088,11 @@ class Scene(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Scene`
+            an instance of :class:`plotly.graph_objs.layout.Scene`
         annotations
-            A tuple of :py:class:`plotly.graph_objects.layout.scene
-            .Annotation` instances or dicts with compatible
-            properties
+            A tuple of
+            :class:`plotly.graph_objects.layout.scene.Annotation`
+            instances or dicts with compatible properties
         annotationdefaults
             When used in a template (as
             layout.template.layout.scene.annotationdefaults), sets
@@ -13132,10 +13114,10 @@ class Scene(_BaseLayoutHierarchyType):
         bgcolor
 
         camera
-            :py:class:`plotly.graph_objects.layout.scene.Camera`
+            :class:`plotly.graph_objects.layout.scene.Camera`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.scene.Domain`
+            :class:`plotly.graph_objects.layout.scene.Domain`
             instance or dict with compatible properties
         dragmode
             Determines the mode of drag interactions for this
@@ -13147,13 +13129,13 @@ class Scene(_BaseLayoutHierarchyType):
             Controls persistence of user-driven changes in camera
             attributes. Defaults to `layout.uirevision`.
         xaxis
-            :py:class:`plotly.graph_objects.layout.scene.XAxis`
+            :class:`plotly.graph_objects.layout.scene.XAxis`
             instance or dict with compatible properties
         yaxis
-            :py:class:`plotly.graph_objects.layout.scene.YAxis`
+            :class:`plotly.graph_objects.layout.scene.YAxis`
             instance or dict with compatible properties
         zaxis
-            :py:class:`plotly.graph_objects.layout.scene.ZAxis`
+            :class:`plotly.graph_objects.layout.scene.ZAxis`
             instance or dict with compatible properties
 
         Returns
@@ -13175,7 +13157,7 @@ class Scene(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Scene 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Scene`"""
+an instance of :class:`plotly.graph_objs.layout.Scene`"""
             )
 
         # Handle skip_invalid
@@ -13615,7 +13597,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.RadialAxis`
+            :class:`plotly.graph_objs.layout.RadialAxis`
         domain
             Polar chart subplots are not supported yet. This key
             has currently no effect.
@@ -13678,7 +13660,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.RadialAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.RadialAxis`"""
+an instance of :class:`plotly.graph_objs.layout.RadialAxis`"""
             )
 
         # Handle skip_invalid
@@ -13750,7 +13732,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'angularaxis' property is an instance of AngularAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.polar.AngularAxis`
+          - An instance of :class:`plotly.graph_objs.layout.polar.AngularAxis`
           - A dict of string/value properties that will be passed
             to the AngularAxis constructor
     
@@ -13941,9 +13923,9 @@ class Polar(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.polar.angularaxis.Tickformatstop` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    polar.angularaxis.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.polar.angularaxis.tickformatstopdefaults),
@@ -14128,7 +14110,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.polar.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.polar.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -14212,7 +14194,7 @@ class Polar(_BaseLayoutHierarchyType):
         """
         The 'radialaxis' property is an instance of RadialAxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.polar.RadialAxis`
+          - An instance of :class:`plotly.graph_objs.layout.polar.RadialAxis`
           - A dict of string/value properties that will be passed
             to the RadialAxis constructor
     
@@ -14424,9 +14406,9 @@ class Polar(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.polar.radialaxis.Tickformatstop` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    polar.radialaxis.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.polar.radialaxis.tickformatstopdefaults),
@@ -14473,9 +14455,9 @@ class Polar(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.polar.ra
-                    dialaxis.Title` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.layout.polar.radia
+                    laxis.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     layout.polar.radialaxis.title.font instead.
@@ -14569,8 +14551,8 @@ class Polar(_BaseLayoutHierarchyType):
     def _prop_descriptions(self):
         return """\
         angularaxis
-            :py:class:`plotly.graph_objects.layout.polar.AngularAxi
-            s` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.polar.AngularAxis`
+            instance or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
             coordinates. Values are unitless, they represent
@@ -14585,7 +14567,7 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :py:class:`plotly.graph_objects.layout.polar.Domain`
+            :class:`plotly.graph_objects.layout.polar.Domain`
             instance or dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
@@ -14599,8 +14581,8 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            :py:class:`plotly.graph_objects.layout.polar.RadialAxis
-            ` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.polar.RadialAxis`
+            instance or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles
             (in degrees). Sector are assumed to be spanned in the
@@ -14634,11 +14616,10 @@ class Polar(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Polar`
+            an instance of :class:`plotly.graph_objs.layout.Polar`
         angularaxis
-            :py:class:`plotly.graph_objects.layout.polar.AngularAxi
-            s` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.polar.AngularAxis`
+            instance or dict with compatible properties
         bargap
             Sets the gap between bars of adjacent location
             coordinates. Values are unitless, they represent
@@ -14653,7 +14634,7 @@ class Polar(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the subplot
         domain
-            :py:class:`plotly.graph_objects.layout.polar.Domain`
+            :class:`plotly.graph_objects.layout.polar.Domain`
             instance or dict with compatible properties
         gridshape
             Determines if the radial axis grid lines and angular
@@ -14667,8 +14648,8 @@ class Polar(_BaseLayoutHierarchyType):
             Sets the fraction of the radius to cut out of the polar
             subplot.
         radialaxis
-            :py:class:`plotly.graph_objects.layout.polar.RadialAxis
-            ` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.polar.RadialAxis`
+            instance or dict with compatible properties
         sector
             Sets angular span of this polar subplot with two angles
             (in degrees). Sector are assumed to be spanned in the
@@ -14698,7 +14679,7 @@ class Polar(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Polar 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Polar`"""
+an instance of :class:`plotly.graph_objs.layout.Polar`"""
             )
 
         # Handle skip_invalid
@@ -15026,7 +15007,7 @@ class Modebar(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Modebar`
+            :class:`plotly.graph_objs.layout.Modebar`
         activecolor
             Sets the color of the active or hovered on icons in the
             modebar.
@@ -15061,7 +15042,7 @@ class Modebar(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Modebar 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Modebar`"""
+an instance of :class:`plotly.graph_objs.layout.Modebar`"""
             )
 
         # Handle skip_invalid
@@ -15278,8 +15259,7 @@ class Margin(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Margin`
+            an instance of :class:`plotly.graph_objs.layout.Margin`
         autoexpand
             Turns on/off margin expansion computations. Legends,
             colorbars, updatemenus, sliders, axis rangeselector and
@@ -15316,7 +15296,7 @@ class Margin(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Margin 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Margin`"""
+an instance of :class:`plotly.graph_objs.layout.Margin`"""
             )
 
         # Handle skip_invalid
@@ -15419,7 +15399,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Center`
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -15449,7 +15429,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -15498,8 +15478,8 @@ class Mapbox(_BaseLayoutHierarchyType):
                     set to '', the layer will be inserted above
                     every existing layer.
                 circle
-                    :py:class:`plotly.graph_objects.layout.mapbox.l
-                    ayer.Circle` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.mapbox.laye
+                    r.Circle` instance or dict with compatible
                     properties
                 color
                     Sets the primary layer color. If `type` is
@@ -15518,12 +15498,12 @@ class Mapbox(_BaseLayoutHierarchyType):
                     right, bottom left. Only has an effect for
                     "image" `sourcetype`.
                 fill
-                    :py:class:`plotly.graph_objects.layout.mapbox.l
-                    ayer.Fill` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.mapbox.laye
+                    r.Fill` instance or dict with compatible
                     properties
                 line
-                    :py:class:`plotly.graph_objects.layout.mapbox.l
-                    ayer.Line` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.mapbox.laye
+                    r.Line` instance or dict with compatible
                     properties
                 maxzoom
                     Sets the maximum zoom level
@@ -15575,8 +15555,8 @@ class Mapbox(_BaseLayoutHierarchyType):
                     Sets the source type for this layer, that is
                     the type of the layer data.
                 symbol
-                    :py:class:`plotly.graph_objects.layout.mapbox.l
-                    ayer.Symbol` instance or dict with compatible
+                    :class:`plotly.graph_objects.layout.mapbox.laye
+                    r.Symbol` instance or dict with compatible
                     properties
                 templateitemname
                     Used to refer to a named item in this array in
@@ -15625,7 +15605,7 @@ class Mapbox(_BaseLayoutHierarchyType):
     
         The 'layerdefaults' property is an instance of Layer
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.mapbox.Layer`
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.Layer`
           - A dict of string/value properties that will be passed
             to the Layer constructor
     
@@ -15764,14 +15744,14 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         center
-            :py:class:`plotly.graph_objects.layout.mapbox.Center`
+            :class:`plotly.graph_objects.layout.mapbox.Center`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.mapbox.Domain`
+            :class:`plotly.graph_objects.layout.mapbox.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :py:class:`plotly.graph_objects.layout.mapbox.Layer`
+            :class:`plotly.graph_objects.layout.mapbox.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
@@ -15837,8 +15817,7 @@ class Mapbox(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Mapbox`
+            an instance of :class:`plotly.graph_objs.layout.Mapbox`
         accesstoken
             Sets the mapbox access token to be used for this mapbox
             map. Alternatively, the mapbox access token can be set
@@ -15851,14 +15830,14 @@ class Mapbox(_BaseLayoutHierarchyType):
             Sets the bearing angle of the map in degrees counter-
             clockwise from North (mapbox.bearing).
         center
-            :py:class:`plotly.graph_objects.layout.mapbox.Center`
+            :class:`plotly.graph_objects.layout.mapbox.Center`
             instance or dict with compatible properties
         domain
-            :py:class:`plotly.graph_objects.layout.mapbox.Domain`
+            :class:`plotly.graph_objects.layout.mapbox.Domain`
             instance or dict with compatible properties
         layers
             A tuple of
-            :py:class:`plotly.graph_objects.layout.mapbox.Layer`
+            :class:`plotly.graph_objects.layout.mapbox.Layer`
             instances or dicts with compatible properties
         layerdefaults
             When used in a template (as
@@ -15920,7 +15899,7 @@ class Mapbox(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Mapbox 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Mapbox`"""
+an instance of :class:`plotly.graph_objs.layout.Mapbox`"""
             )
 
         # Handle skip_invalid
@@ -16130,7 +16109,7 @@ class Legend(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.legend.Font`
+          - An instance of :class:`plotly.graph_objs.layout.legend.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -16265,7 +16244,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.legend.Title`
+          - An instance of :class:`plotly.graph_objs.layout.legend.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -16523,7 +16502,7 @@ class Legend(_BaseLayoutHierarchyType):
         orientation
             Sets the orientation of the legend.
         title
-            :py:class:`plotly.graph_objects.layout.legend.Title`
+            :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between
@@ -16601,8 +16580,7 @@ class Legend(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Legend`
+            an instance of :class:`plotly.graph_objs.layout.Legend`
         bgcolor
             Sets the legend background color. Defaults to
             `layout.paper_bgcolor`.
@@ -16632,7 +16610,7 @@ class Legend(_BaseLayoutHierarchyType):
         orientation
             Sets the orientation of the legend.
         title
-            :py:class:`plotly.graph_objects.layout.legend.Title`
+            :class:`plotly.graph_objects.layout.legend.Title`
             instance or dict with compatible properties
         tracegroupgap
             Sets the amount of vertical space (in px) between
@@ -16699,7 +16677,7 @@ class Legend(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Legend 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Legend`"""
+an instance of :class:`plotly.graph_objs.layout.Legend`"""
             )
 
         # Handle skip_invalid
@@ -17240,8 +17218,7 @@ class Image(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Image`
+            an instance of :class:`plotly.graph_objs.layout.Image`
         layer
             Specifies whether images are drawn below or above
             traces. When `xref` and `yref` are both set to `paper`,
@@ -17331,7 +17308,7 @@ class Image(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Image 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Image`"""
+an instance of :class:`plotly.graph_objs.layout.Image`"""
             )
 
         # Handle skip_invalid
@@ -17561,7 +17538,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.hoverlabel.Font`
+          - An instance of :class:`plotly.graph_objs.layout.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -17673,7 +17650,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Hoverlabel`
+            :class:`plotly.graph_objs.layout.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -17713,7 +17690,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Hoverlabel 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Hoverlabel`"""
+an instance of :class:`plotly.graph_objs.layout.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -17793,7 +17770,7 @@ class Grid(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.grid.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.grid.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -18093,7 +18070,7 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            :py:class:`plotly.graph_objects.layout.grid.Domain`
+            :class:`plotly.graph_objects.layout.grid.Domain`
             instance or dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
@@ -18181,8 +18158,7 @@ class Grid(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Grid`
+            an instance of :class:`plotly.graph_objs.layout.Grid`
         columns
             The number of columns in the grid. If you provide a 2D
             `subplots` array, the length of its longest row is used
@@ -18191,7 +18167,7 @@ class Grid(_BaseLayoutHierarchyType):
             to have a different length, if you want to leave a row
             at the end for non-cartesian subplots.
         domain
-            :py:class:`plotly.graph_objects.layout.grid.Domain`
+            :class:`plotly.graph_objects.layout.grid.Domain`
             instance or dict with compatible properties
         pattern
             If no `subplots`, `xaxes`, or `yaxes` are given but we
@@ -18273,7 +18249,7 @@ class Grid(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Grid 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Grid`"""
+an instance of :class:`plotly.graph_objs.layout.Grid`"""
             )
 
         # Handle skip_invalid
@@ -18407,7 +18383,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'center' property is an instance of Center
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.geo.Center`
+          - An instance of :class:`plotly.graph_objs.layout.geo.Center`
           - A dict of string/value properties that will be passed
             to the Center constructor
     
@@ -18600,7 +18576,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'domain' property is an instance of Domain
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.geo.Domain`
+          - An instance of :class:`plotly.graph_objs.layout.geo.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
     
@@ -18880,7 +18856,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lataxis' property is an instance of Lataxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.geo.Lataxis`
+          - An instance of :class:`plotly.graph_objs.layout.geo.Lataxis`
           - A dict of string/value properties that will be passed
             to the Lataxis constructor
     
@@ -18920,7 +18896,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'lonaxis' property is an instance of Lonaxis
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.geo.Lonaxis`
+          - An instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`
           - A dict of string/value properties that will be passed
             to the Lonaxis constructor
     
@@ -19019,7 +18995,7 @@ class Geo(_BaseLayoutHierarchyType):
         """
         The 'projection' property is an instance of Projection
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.geo.Projection`
+          - An instance of :class:`plotly.graph_objs.layout.geo.Projection`
           - A dict of string/value properties that will be passed
             to the Projection constructor
     
@@ -19030,9 +19006,9 @@ class Geo(_BaseLayoutHierarchyType):
                     parallels (tangent, secant) where the cone
                     intersects the sphere.
                 rotation
-                    :py:class:`plotly.graph_objects.layout.geo.proj
-                    ection.Rotation` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.layout.geo.project
+                    ion.Rotation` instance or dict with compatible
+                    properties
                 scale
                     Zooms in or out on the map view. A scale of 1
                     corresponds to the largest zoom level that fits
@@ -19468,7 +19444,7 @@ class Geo(_BaseLayoutHierarchyType):
         bgcolor
             Set the background color of the map
         center
-            :py:class:`plotly.graph_objects.layout.geo.Center`
+            :class:`plotly.graph_objects.layout.geo.Center`
             instance or dict with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -19479,7 +19455,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            :py:class:`plotly.graph_objects.layout.geo.Domain`
+            :class:`plotly.graph_objects.layout.geo.Domain`
             instance or dict with compatible properties
         fitbounds
             Determines if this subplot's view settings are auto-
@@ -19506,15 +19482,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            :py:class:`plotly.graph_objects.layout.geo.Lataxis`
+            :class:`plotly.graph_objects.layout.geo.Lataxis`
             instance or dict with compatible properties
         lonaxis
-            :py:class:`plotly.graph_objects.layout.geo.Lonaxis`
+            :class:`plotly.graph_objects.layout.geo.Lonaxis`
             instance or dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            :py:class:`plotly.graph_objects.layout.geo.Projection`
+            :class:`plotly.graph_objects.layout.geo.Projection`
             instance or dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have
@@ -19600,11 +19576,11 @@ class Geo(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of :py:class:`plotly.graph_objs.layout.Geo`
+            an instance of :class:`plotly.graph_objs.layout.Geo`
         bgcolor
             Set the background color of the map
         center
-            :py:class:`plotly.graph_objects.layout.geo.Center`
+            :class:`plotly.graph_objects.layout.geo.Center`
             instance or dict with compatible properties
         coastlinecolor
             Sets the coastline color.
@@ -19615,7 +19591,7 @@ class Geo(_BaseLayoutHierarchyType):
         countrywidth
             Sets line width (in px) of the country boundaries.
         domain
-            :py:class:`plotly.graph_objects.layout.geo.Domain`
+            :class:`plotly.graph_objects.layout.geo.Domain`
             instance or dict with compatible properties
         fitbounds
             Determines if this subplot's view settings are auto-
@@ -19642,15 +19618,15 @@ class Geo(_BaseLayoutHierarchyType):
         landcolor
             Sets the land mass color.
         lataxis
-            :py:class:`plotly.graph_objects.layout.geo.Lataxis`
+            :class:`plotly.graph_objects.layout.geo.Lataxis`
             instance or dict with compatible properties
         lonaxis
-            :py:class:`plotly.graph_objects.layout.geo.Lonaxis`
+            :class:`plotly.graph_objects.layout.geo.Lonaxis`
             instance or dict with compatible properties
         oceancolor
             Sets the ocean color
         projection
-            :py:class:`plotly.graph_objects.layout.geo.Projection`
+            :class:`plotly.graph_objects.layout.geo.Projection`
             instance or dict with compatible properties
         resolution
             Sets the resolution of the base layers. The values have
@@ -19710,7 +19686,7 @@ class Geo(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Geo 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Geo`"""
+an instance of :class:`plotly.graph_objs.layout.Geo`"""
             )
 
         # Handle skip_invalid
@@ -19986,8 +19962,7 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            :py:class:`plotly.graph_objs.layout.Font`
+            an instance of :class:`plotly.graph_objs.layout.Font`
         color
 
         family
@@ -20026,7 +20001,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Font`"""
+an instance of :class:`plotly.graph_objs.layout.Font`"""
             )
 
         # Handle skip_invalid
@@ -20237,7 +20212,7 @@ class Colorscale(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Colorscale`
+            :class:`plotly.graph_objs.layout.Colorscale`
         diverging
             Sets the default diverging colorscale. Note that
             `autocolorscale` must be true for this attribute to
@@ -20270,7 +20245,7 @@ class Colorscale(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Colorscale 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Colorscale`"""
+an instance of :class:`plotly.graph_objs.layout.Colorscale`"""
             )
 
         # Handle skip_invalid
@@ -20433,7 +20408,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.coloraxis.ColorBar`
+          - An instance of :class:`plotly.graph_objs.layout.coloraxis.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -20565,9 +20540,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of :py:class:`plotly.graph_objects.layo
-                    ut.coloraxis.colorbar.Tickformatstop` instances
-                    or dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.layout.
+                    coloraxis.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.lay
                     out.coloraxis.colorbar.tickformatstopdefaults),
@@ -20614,9 +20589,9 @@ class Coloraxis(_BaseLayoutHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    :py:class:`plotly.graph_objects.layout.coloraxi
-                    s.colorbar.Title` instance or dict with
-                    compatible properties
+                    :class:`plotly.graph_objects.layout.coloraxis.c
+                    olorbar.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     layout.coloraxis.colorbar.title.font instead.
@@ -20795,8 +20770,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            :py:class:`plotly.graph_objects.layout.coloraxis.ColorB
-            ar` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.coloraxis.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -20840,7 +20815,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Coloraxis`
+            :class:`plotly.graph_objs.layout.Coloraxis`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -20868,8 +20843,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
             have the same units as corresponding trace color
             array(s) and if set, `cmax` must be set as well.
         colorbar
-            :py:class:`plotly.graph_objects.layout.coloraxis.ColorB
-            ar` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.coloraxis.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. The colorscale must be an array
             containing arrays mapping a normalized value to an rgb,
@@ -20909,7 +20884,7 @@ class Coloraxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Coloraxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Coloraxis`"""
+an instance of :class:`plotly.graph_objs.layout.Coloraxis`"""
             )
 
         # Handle skip_invalid
@@ -21465,7 +21440,7 @@ class Annotation(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.annotation.Font`
+          - An instance of :class:`plotly.graph_objs.layout.annotation.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -21529,7 +21504,7 @@ class Annotation(_BaseLayoutHierarchyType):
         """
         The 'hoverlabel' property is an instance of Hoverlabel
         that may be specified as:
-          - An instance of :py:func:`plotly.graph_objs.layout.annotation.Hoverlabel`
+          - An instance of :class:`plotly.graph_objs.layout.annotation.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
     
@@ -22223,8 +22198,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :py:class:`plotly.graph_objects.layout.annotation.Hover
-            label` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.annotation.Hoverlab
+            el` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
@@ -22421,7 +22396,7 @@ class Annotation(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.Annotation`
+            :class:`plotly.graph_objs.layout.Annotation`
         align
             Sets the horizontal alignment of the `text` within the
             box. Has an effect only if `text` spans two or more
@@ -22510,8 +22485,8 @@ class Annotation(_BaseLayoutHierarchyType):
             (default) lets the text set the box height. Taller text
             will be clipped.
         hoverlabel
-            :py:class:`plotly.graph_objects.layout.annotation.Hover
-            label` instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.annotation.Hoverlab
+            el` instance or dict with compatible properties
         hovertext
             Sets text to appear when hovering over this annotation.
             If omitted or blank, no hover label will appear.
@@ -22670,7 +22645,7 @@ class Annotation(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.Annotation 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.Annotation`"""
+an instance of :class:`plotly.graph_objs.layout.Annotation`"""
             )
 
         # Handle skip_invalid
@@ -23174,7 +23149,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.layout.AngularAxis`
+            :class:`plotly.graph_objs.layout.AngularAxis`
         domain
             Polar chart subplots are not supported yet. This key
             has currently no effect.
@@ -23233,7 +23208,7 @@ class AngularAxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.AngularAxis 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.layout.AngularAxis`"""
+an instance of :class:`plotly.graph_objs.layout.AngularAxis`"""
             )
 
         # Handle skip_invalid

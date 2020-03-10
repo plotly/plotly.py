@@ -152,7 +152,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            :py:class:`plotly.graph_objs.indicator.number.Font`
+            :class:`plotly.graph_objs.indicator.number.Font`
         color
 
         family
@@ -191,7 +191,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.number.Font 
 constructor must be a dict or 
-an instance of :py:class:`plotly.graph_objs.indicator.number.Font`"""
+an instance of :class:`plotly.graph_objs.indicator.number.Font`"""
             )
 
         # Handle skip_invalid

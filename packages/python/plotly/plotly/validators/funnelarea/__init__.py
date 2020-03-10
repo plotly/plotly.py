@@ -389,8 +389,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 colors .
             line
-                :py:class:`plotly.graph_objects.funnelarea.mark
-                er.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.funnelarea.marker.
+                Line` instance or dict with compatible
                 properties
 """,
             ),

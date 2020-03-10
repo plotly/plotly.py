@@ -618,8 +618,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                :py:class:`plotly.graph_objects.funnel.marker.C
-                olorBar` instance or dict with compatible
+                :class:`plotly.graph_objects.funnel.marker.Colo
+                rBar` instance or dict with compatible
                 properties
             colorscale
                 Sets the colorscale. Has an effect only if in
@@ -641,9 +641,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                :py:class:`plotly.graph_objects.funnel.marker.L
-                ine` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.funnel.marker.Line
+                ` instance or dict with compatible properties
             opacity
                 Sets the opacity of the bars.
             opacitysrc
@@ -1009,8 +1008,8 @@ class ConnectorValidator(_plotly_utils.basevalidators.CompoundValidator):
             fillcolor
                 Sets the fill color.
             line
-                :py:class:`plotly.graph_objects.funnel.connecto
-                r.Line` instance or dict with compatible
+                :class:`plotly.graph_objects.funnel.connector.L
+                ine` instance or dict with compatible
                 properties
             visible
                 Determines if connector regions and lines are

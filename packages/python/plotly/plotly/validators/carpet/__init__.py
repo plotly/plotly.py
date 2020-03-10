@@ -567,9 +567,9 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"
                 would display "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.carp
-                et.baxis.Tickformatstop` instances or dicts
-                with compatible properties
+                A tuple of :class:`plotly.graph_objects.carpet.
+                baxis.Tickformatstop` instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.carpet.baxis.tickformatstopdefaults), sets
@@ -597,9 +597,8 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 tickvals .
             title
-                :py:class:`plotly.graph_objects.carpet.baxis.Ti
-                tle` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.carpet.baxis.Title
+                ` instance or dict with compatible properties
             titlefont
                 Deprecated: Please use carpet.baxis.title.font
                 instead. Sets this axis' title font. Note that
@@ -839,9 +838,9 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"
                 would display "09~15~23.46"
             tickformatstops
-                A tuple of :py:class:`plotly.graph_objects.carp
-                et.aaxis.Tickformatstop` instances or dicts
-                with compatible properties
+                A tuple of :class:`plotly.graph_objects.carpet.
+                aaxis.Tickformatstop` instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.carpet.aaxis.tickformatstopdefaults), sets
@@ -869,9 +868,8 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 tickvals .
             title
-                :py:class:`plotly.graph_objects.carpet.aaxis.Ti
-                tle` instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.carpet.aaxis.Title
+                ` instance or dict with compatible properties
             titlefont
                 Deprecated: Please use carpet.aaxis.title.font
                 instead. Sets this axis' title font. Note that
