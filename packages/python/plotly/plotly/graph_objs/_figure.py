@@ -370,8 +370,8 @@ class Figure(BaseFigure):
                         polar by the given angle in legacy polar
                         charts.
                     paper_bgcolor
-                        Sets the color of paper where the graph is
-                        drawn.
+                        Sets the background color of the paper where
+                        the graph is drawn.
                     piecolorway
                         Sets the default pie slice colors. Defaults to
                         the main `colorway` used for trace colors. If
@@ -379,8 +379,8 @@ class Figure(BaseFigure):
                         extended with lighter and darker colors, see
                         `extendpiecolors`.
                     plot_bgcolor
-                        Sets the color of plotting area in-between x
-                        and y axes.
+                        Sets the background color of the plotting area
+                        in-between x and y axes.
                     polar
                         plotly.graph_objects.layout.Polar instance or
                         dict with compatible properties
@@ -9435,12 +9435,15 @@ class Figure(BaseFigure):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         label0
             Alternate to `labels`. Builds a numeric set of labels.
             Use with `dlabel` where `label0` is the starting label
@@ -14230,12 +14233,15 @@ class Figure(BaseFigure):
             Sets the font used for `textinfo` lying inside the
             sector.
         insidetextorientation
-            Determines the orientation of text inside slices. With
-            "auto" the texts may automatically be rotated to fit
-            with the maximum size inside the slice. Using
-            "horizontal" option forces text to be horizontal. Using
-            "radial" option forces text to be radial. Using
-            "tangential" option forces text to be tangential.
+            Controls the orientation of the text inside chart
+            sectors. When set to "auto", text may be oriented in
+            any direction in order to be as big as possible in the
+            middle of a sector. The "horizontal" option orients
+            text to be parallel with the bottom of the chart, and
+            may make text smaller in order to achieve that goal.
+            The "radial" option orients text along the radius of
+            the sector. The "tangential" option orients text
+            perpendicular to the radius of the sector.
         labels
             Sets the labels of each of the sectors.
         labelssrc
@@ -17450,7 +17456,7 @@ class Figure(BaseFigure):
         return self
 
     def update_annotations(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all annotations that satisfy the
@@ -17567,10 +17573,10 @@ class Figure(BaseFigure):
             properties
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         arrowcolor
             Sets the color of the annotation arrow.
         arrowhead
@@ -17949,7 +17955,7 @@ class Figure(BaseFigure):
         return self
 
     def update_layout_images(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all images that satisfy the
@@ -18221,7 +18227,7 @@ class Figure(BaseFigure):
         return self
 
     def update_shapes(
-        self, patch, selector=None, row=None, col=None, secondary_y=None, **kwargs
+        self, patch=None, selector=None, row=None, col=None, secondary_y=None, **kwargs
     ):
         """
         Perform a property update operation on all shapes that satisfy the

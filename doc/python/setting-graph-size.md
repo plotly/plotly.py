@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.7
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.5
+    version: 3.7.3
   plotly:
     description: How to manipulate the graph size in Python with Plotly.
     display_as: file_settings
@@ -65,7 +65,7 @@ fig.update_layout(
     autosize=False,
     width=500,
     height=500,
-    margin=go.layout.Margin(
+    margin=dict(
         l=50,
         r=50,
         b=100,
@@ -97,7 +97,7 @@ fig.update_layout(
     autosize=False,
     width=500,
     height=500,
-    yaxis=go.layout.YAxis(
+    yaxis=dict(
         title_text="Y-axis Title",
         ticktext=["Very long label", "long label", "3", "label"],
         tickvals=[1, 2, 3, 4],

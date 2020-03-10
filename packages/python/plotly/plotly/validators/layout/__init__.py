@@ -3249,10 +3249,9 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
-                spans more two or more lines (i.e. `text`
-                contains one or more <br> HTML tags) or if an
-                explicit width is set to override the text
-                width.
+                spans two or more lines (i.e. `text` contains
+                one or more <br> HTML tags) or if an explicit
+                width is set to override the text width.
             arrowcolor
                 Sets the color of the annotation arrow.
             arrowhead
