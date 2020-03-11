@@ -1167,13 +1167,13 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
+    # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
-        if "sort_color_if_discrete_color" not in df_all_trees.columns:
-            df_all_trees["sort_color_if_discrete_color"] = df[args["color"]].astype(str)
-            sort_col = "sort_color_if_discrete_color"
-        else:
-            sort_col = args["color"]
-        df_all_trees = df_all_trees.sort_values(by=sort_col)
+        sort_col_name = "sort_color_if_discrete_color"
+        while sort_col_name in df_all_trees.columns:
+            sort_col_name += "0"
+        df_all_trees[sort_col_name] = df[args["color"]].astype(str)
+        df_all_trees = df_all_trees.sort_values(by=sort_col_name)
 
     # Now modify arguments
     args["data_frame"] = df_all_trees
