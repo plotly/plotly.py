@@ -550,3 +550,39 @@ fig = px.funnel(
     y=["first", "second", "first", "second"], x=[3, 1, 4, 2], color=["A", "A", "B", "B"]
 )
 fig.write_html(os.path.join(dir_name, "funnel.html"), auto_play=False)
+
+import plotly.express as px
+
+fig = px.scatter(x=[1, 2, 1, 2], y=[4, 3, 2, 4], color=[True, True, False, False])
+fig.write_html(os.path.join(dir_name, "scatter_bool_color.html"), auto_play=False)
+
+
+import plotly.express as px
+
+fig = px.pie(values=[1, 2, 3, 4], color=[True, False, True, False])
+fig.write_html(os.path.join(dir_name, "pie_bool_color.html"), auto_play=False)
+
+import plotly.express as px
+import numpy as np
+
+df = px.data.gapminder().query("year == 2007")
+np.random.seed(0)
+df["color"] = np.random.choice([True, False], len(df))
+fig = px.choropleth(df, locations="iso_alpha", color="color")
+fig.write_html(os.path.join(dir_name, "choropleth_bool_color.html"), auto_play=False)
+
+import plotly.express as px
+
+df = px.data.iris()
+df["is_setosa"] = df["species"] == "setosa"
+fig = px.density_contour(df, x="sepal_width", y="sepal_length", color="is_setosa")
+fig.write_html(
+    os.path.join(dir_name, "density_contour_bool_color.html"), auto_play=False
+)
+
+import plotly.express as px
+
+fig = px.sunburst(
+    path=[["yes", "no", "no"], ["yes", "no", "a"]], color=[True, False, True]
+)
+fig.write_html(os.path.join(dir_name, "sunburst_bool_color.html"), auto_play=False)
