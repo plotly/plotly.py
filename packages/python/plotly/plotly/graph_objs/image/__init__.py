@@ -77,7 +77,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.image.Stream
+            an instance of :class:`plotly.graph_objs.image.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +107,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.image.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.image.Stream"""
+an instance of :class:`plotly.graph_objs.image.Stream`"""
             )
 
         # Handle skip_invalid
@@ -358,7 +358,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.image.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.image.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -513,7 +513,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.image.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.image.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -562,7 +563,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.image.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.image.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.image.Hoverlabel`"""
             )
 
         # Handle skip_invalid

@@ -13,8 +13,8 @@ class ThresholdValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objects.indicator.gauge.threshold.
-                Line instance or dict with compatible
+                :class:`plotly.graph_objects.indicator.gauge.th
+                reshold.Line` instance or dict with compatible
                 properties
             thickness
                 Sets the thickness of the threshold line as a
@@ -62,8 +62,9 @@ class StepsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             color
                 Sets the background color of the arc.
             line
-                plotly.graph_objects.indicator.gauge.step.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.gauge.st
+                ep.Line` instance or dict with compatible
+                properties
             name
                 When used in a template, named items are
                 created in the output figure in addition to any
@@ -173,8 +174,9 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the background color of the arc.
             line
-                plotly.graph_objects.indicator.gauge.bar.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.gauge.ba
+                r.Line` instance or dict with compatible
+                properties
             thickness
                 Sets the thickness of the bar as a fraction of
                 the total thickness of the gauge.
@@ -293,9 +295,9 @@ class AxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.indicator.gauge
-                .axis.Tickformatstop instances or dicts with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.indicat
+                or.gauge.axis.Tickformatstop` instances or
+                dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.indicator.gauge.axis.tickformatstopdefaults),

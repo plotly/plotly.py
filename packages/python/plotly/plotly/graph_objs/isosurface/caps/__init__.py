@@ -83,7 +83,8 @@ class Z(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.caps.Z
+            an instance of
+            :class:`plotly.graph_objs.isosurface.caps.Z`
         fill
             Sets the fill ratio of the `caps`. The default fill
             value of the `caps` is 1 meaning that they are entirely
@@ -116,7 +117,7 @@ class Z(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.caps.Z 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.caps.Z"""
+an instance of :class:`plotly.graph_objs.isosurface.caps.Z`"""
             )
 
         # Handle skip_invalid
@@ -233,7 +234,8 @@ class Y(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.caps.Y
+            an instance of
+            :class:`plotly.graph_objs.isosurface.caps.Y`
         fill
             Sets the fill ratio of the `caps`. The default fill
             value of the `caps` is 1 meaning that they are entirely
@@ -266,7 +268,7 @@ class Y(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.caps.Y 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.caps.Y"""
+an instance of :class:`plotly.graph_objs.isosurface.caps.Y`"""
             )
 
         # Handle skip_invalid
@@ -383,7 +385,8 @@ class X(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.caps.X
+            an instance of
+            :class:`plotly.graph_objs.isosurface.caps.X`
         fill
             Sets the fill ratio of the `caps`. The default fill
             value of the `caps` is 1 meaning that they are entirely
@@ -416,7 +419,7 @@ class X(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.caps.X 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.caps.X"""
+an instance of :class:`plotly.graph_objs.isosurface.caps.X`"""
             )
 
         # Handle skip_invalid

@@ -108,8 +108,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.indicator.gauge.threshold.Line
+            an instance of :class:`plotly.graph_objs.indicator.gaug
+            e.threshold.Line`
         color
             Sets the color of the threshold line.
         width
@@ -134,7 +134,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.threshold.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.threshold.Line"""
+an instance of :class:`plotly.graph_objs.indicator.gauge.threshold.Line`"""
             )
 
         # Handle skip_invalid

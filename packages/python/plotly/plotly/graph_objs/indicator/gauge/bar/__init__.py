@@ -110,7 +110,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.indicator.gauge.bar.Line
+            :class:`plotly.graph_objs.indicator.gauge.bar.Line`
         color
             Sets the color of the line enclosing each sector.
         width
@@ -136,7 +136,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.bar.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.bar.Line"""
+an instance of :class:`plotly.graph_objs.indicator.gauge.bar.Line`"""
             )
 
         # Handle skip_invalid

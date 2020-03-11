@@ -72,8 +72,9 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.splom.unselected.Marker
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.splom.unselected.M
+                arker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -233,8 +234,9 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.splom.selected.Marker
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.splom.selected.Mar
+                ker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -366,8 +368,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.splom.marker.ColorBar
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.splom.marker.Color
+                Bar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.color`is set to a numerical array. The
@@ -388,8 +391,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                plotly.graph_objects.splom.marker.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.splom.marker.Line`
+                instance or dict with compatible properties
             opacity
                 Sets the marker opacity.
             opacitysrc
@@ -655,8 +658,8 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 "data_docs",
                 """
             axis
-                plotly.graph_objects.splom.dimension.Axis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.splom.dimension.Ax
+                is` instance or dict with compatible properties
             label
                 Sets the label corresponding to this splom
                 dimension.

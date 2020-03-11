@@ -139,7 +139,8 @@ class Line(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.shape.Line
+            an instance of
+            :class:`plotly.graph_objs.layout.shape.Line`
         color
             Sets the line color.
         dash
@@ -169,7 +170,7 @@ class Line(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.shape.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.shape.Line"""
+an instance of :class:`plotly.graph_objs.layout.shape.Line`"""
             )
 
         # Handle skip_invalid

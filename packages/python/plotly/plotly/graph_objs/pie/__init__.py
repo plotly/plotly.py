@@ -14,7 +14,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.title.Font
+          - An instance of :class:`plotly.graph_objs.pie.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -143,7 +143,7 @@ class Title(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Title
+            an instance of :class:`plotly.graph_objs.pie.Title`
         font
             Sets the font used for `title`. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -178,7 +178,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Title"""
+an instance of :class:`plotly.graph_objs.pie.Title`"""
             )
 
         # Handle skip_invalid
@@ -445,7 +445,7 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Textfont
+            an instance of :class:`plotly.graph_objs.pie.Textfont`
         color
 
         colorsrc
@@ -490,7 +490,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Textfont"""
+an instance of :class:`plotly.graph_objs.pie.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -613,7 +613,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Stream
+            an instance of :class:`plotly.graph_objs.pie.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -643,7 +643,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Stream"""
+an instance of :class:`plotly.graph_objs.pie.Stream`"""
             )
 
         # Handle skip_invalid
@@ -907,7 +907,8 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Outsidetextfont
+            an instance of
+            :class:`plotly.graph_objs.pie.Outsidetextfont`
         color
 
         colorsrc
@@ -952,7 +953,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Outsidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Outsidetextfont"""
+an instance of :class:`plotly.graph_objs.pie.Outsidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1050,7 +1051,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.marker.Line
+          - An instance of :class:`plotly.graph_objs.pie.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1097,8 +1098,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.pie.marker.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.pie.marker.Line` instance
+            or dict with compatible properties
         """
 
     def __init__(self, arg=None, colors=None, colorssrc=None, line=None, **kwargs):
@@ -1109,7 +1110,7 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Marker
+            an instance of :class:`plotly.graph_objs.pie.Marker`
         colors
             Sets the color of each sector. If not specified, the
             default trace color set is used to pick the sector
@@ -1117,8 +1118,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.pie.marker.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.pie.marker.Line` instance
+            or dict with compatible properties
 
         Returns
         -------
@@ -1139,7 +1140,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Marker"""
+an instance of :class:`plotly.graph_objs.pie.Marker`"""
             )
 
         # Handle skip_invalid
@@ -1406,7 +1407,8 @@ class Insidetextfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Insidetextfont
+            an instance of
+            :class:`plotly.graph_objs.pie.Insidetextfont`
         color
 
         colorsrc
@@ -1451,7 +1453,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.pie.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1714,7 +1716,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.pie.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.pie.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1869,7 +1871,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.pie.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1918,7 +1921,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.pie.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2105,7 +2108,7 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.Domain
+            an instance of :class:`plotly.graph_objs.pie.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this pie trace .
@@ -2138,7 +2141,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.Domain"""
+an instance of :class:`plotly.graph_objs.pie.Domain`"""
             )
 
         # Handle skip_invalid

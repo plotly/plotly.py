@@ -26,8 +26,8 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattermapbox.unselected.M
-                arker instance or dict with compatible
+                :class:`plotly.graph_objects.scattermapbox.unse
+                lected.Marker` instance or dict with compatible
                 properties
 """,
             ),
@@ -279,8 +279,9 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattermapbox.selected.Mar
-                ker instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattermapbox.sele
+                cted.Marker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -428,8 +429,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.scattermapbox.marker.Color
-                Bar instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattermapbox.mark
+                er.ColorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.color`is set to a numerical array. The

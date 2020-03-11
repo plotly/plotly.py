@@ -536,5 +536,5 @@ def make_docstring(fn, override_dict={}):
         param_type = param_doc[0]
         result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"
-    result += "    A `Figure` object."
+    result += "    plotly.graph_objects.Figure"
     return result

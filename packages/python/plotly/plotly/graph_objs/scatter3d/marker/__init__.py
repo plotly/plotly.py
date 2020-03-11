@@ -447,7 +447,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scatter3d.marker.Line
+            an instance of
+            :class:`plotly.graph_objs.scatter3d.marker.Line`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -543,7 +544,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatter3d.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatter3d.marker.Line"""
+an instance of :class:`plotly.graph_objs.scatter3d.marker.Line`"""
             )
 
         # Handle skip_invalid
@@ -1229,7 +1230,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.scatter3d.marker.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1363,7 +1364,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.scatter3d.marker.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1601,7 +1602,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.scatter3d.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1645,7 +1646,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.scatter3d.marker.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.scatter3d.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1954,9 +1955,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.scatter3d.marker.colorb
-            ar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.scatter3d.marke
+            r.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.scatte
             r3d.marker.colorbar.tickformatstopdefaults), sets the
@@ -1996,8 +1997,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.scatter3d.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scatter3d.marker.colorbar.
+            Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             scatter3d.marker.colorbar.title.font instead. Sets this
@@ -2093,7 +2094,7 @@ class ColorBar(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.scatter3d.marker.ColorBar
+            :class:`plotly.graph_objs.scatter3d.marker.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2206,9 +2207,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.scatter3d.marker.colorb
-            ar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.scatter3d.marke
+            r.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.scatte
             r3d.marker.colorbar.tickformatstopdefaults), sets the
@@ -2248,8 +2249,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.scatter3d.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scatter3d.marker.colorbar.
+            Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             scatter3d.marker.colorbar.title.font instead. Sets this
@@ -2302,7 +2303,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatter3d.marker.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatter3d.marker.ColorBar"""
+an instance of :class:`plotly.graph_objs.scatter3d.marker.ColorBar`"""
             )
 
         # Handle skip_invalid

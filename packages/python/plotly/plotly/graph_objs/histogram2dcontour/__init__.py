@@ -133,7 +133,7 @@ class YBins(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.YBins
+            :class:`plotly.graph_objs.histogram2dcontour.YBins`
         end
             Sets the end value for the y axis bins. The last bin
             may not end exactly at this value, we increment the bin
@@ -183,7 +183,7 @@ class YBins(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.YBins 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.YBins"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.YBins`"""
             )
 
         # Handle skip_invalid
@@ -353,7 +353,7 @@ class XBins(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.XBins
+            :class:`plotly.graph_objs.histogram2dcontour.XBins`
         end
             Sets the end value for the x axis bins. The last bin
             may not end exactly at this value, we increment the bin
@@ -403,7 +403,7 @@ class XBins(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.XBins 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.XBins"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.XBins`"""
             )
 
         # Handle skip_invalid
@@ -518,7 +518,7 @@ class Stream(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.Stream
+            :class:`plotly.graph_objs.histogram2dcontour.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -548,7 +548,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.Stream"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Stream`"""
             )
 
         # Handle skip_invalid
@@ -652,7 +652,7 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.Marker
+            :class:`plotly.graph_objs.histogram2dcontour.Marker`
         color
             Sets the aggregation data.
         colorsrc
@@ -677,7 +677,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.Marker"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Marker`"""
             )
 
         # Handle skip_invalid
@@ -879,7 +879,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.Line
+            :class:`plotly.graph_objs.histogram2dcontour.Line`
         color
             Sets the color of the contour level. Has no effect if
             `contours.coloring` is set to "lines".
@@ -913,7 +913,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.Line"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Line`"""
             )
 
         # Handle skip_invalid
@@ -1170,7 +1170,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1325,8 +1325,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.histogram2dcontour.Hoverlabel
+            an instance of :class:`plotly.graph_objs.histogram2dcon
+            tour.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1375,7 +1375,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1491,7 +1491,7 @@ class Contours(_BaseTraceHierarchyType):
     
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.contours.Labelfont
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.contours.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
     
@@ -1804,7 +1804,7 @@ class Contours(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.Contours
+            :class:`plotly.graph_objs.histogram2dcontour.Contours`
         coloring
             Determines the coloring method showing the contour
             values. If "fill", coloring is done evenly between each
@@ -1880,7 +1880,7 @@ class Contours(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.Contours 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.Contours"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.Contours`"""
             )
 
         # Handle skip_invalid
@@ -2566,7 +2566,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2700,7 +2700,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2938,7 +2938,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2982,7 +2982,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram2dcontour.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.histogram2dcontour.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3291,9 +3291,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.histogram2dcontour.colo
-            rbar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.histogram2dcont
+            our.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2dcontour.colorbar.tickformatstopdefaults), sets the
@@ -3333,8 +3333,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.histogram2dcontour.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram2dcontour.colorba
+            r.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             histogram2dcontour.colorbar.title.font instead. Sets
@@ -3431,7 +3431,7 @@ class ColorBar(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.histogram2dcontour.ColorBar
+            :class:`plotly.graph_objs.histogram2dcontour.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -3544,9 +3544,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.histogram2dcontour.colo
-            rbar.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.histogram2dcont
+            our.colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.histog
             ram2dcontour.colorbar.tickformatstopdefaults), sets the
@@ -3586,8 +3586,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.histogram2dcontour.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram2dcontour.colorba
+            r.Title` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             histogram2dcontour.colorbar.title.font instead. Sets
@@ -3641,7 +3641,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.ColorBar"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.ColorBar`"""
             )
 
         # Handle skip_invalid

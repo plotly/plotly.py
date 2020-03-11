@@ -197,8 +197,9 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverlabel
-                plotly.graph_objects.sankey.node.Hoverlabel
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.sankey.node.Hoverl
+                abel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -237,8 +238,8 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  label
                 .
             line
-                plotly.graph_objects.sankey.node.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.sankey.node.Line`
+                instance or dict with compatible properties
             pad
                 Sets the padding (in px) between the `nodes`.
             thickness
@@ -319,9 +320,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 by default, a translucent grey link will be
                 used.
             colorscales
-                A tuple of
-                plotly.graph_objects.sankey.link.Colorscale
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.sankey.
+                link.Colorscale` instances or dicts with
+                compatible properties
             colorscaledefaults
                 When used in a template (as layout.template.dat
                 a.sankey.link.colorscaledefaults), sets the
@@ -337,8 +338,9 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverlabel
-                plotly.graph_objects.sankey.link.Hoverlabel
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.sankey.link.Hoverl
+                abel` instance or dict with compatible
+                properties
             hovertemplate
                 Template string used for rendering the
                 information that appear on hover box. Note that
@@ -377,8 +379,8 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  label
                 .
             line
-                plotly.graph_objects.sankey.link.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.sankey.link.Line`
+                instance or dict with compatible properties
             source
                 An integer number `[0..nodes.length - 1]` that
                 represents the source node.

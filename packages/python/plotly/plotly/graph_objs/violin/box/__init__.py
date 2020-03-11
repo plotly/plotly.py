@@ -108,7 +108,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.violin.box.Line
+            an instance of
+            :class:`plotly.graph_objs.violin.box.Line`
         color
             Sets the inner box plot bounding line color.
         width
@@ -133,7 +134,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.violin.box.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.violin.box.Line"""
+an instance of :class:`plotly.graph_objs.violin.box.Line`"""
             )
 
         # Handle skip_invalid

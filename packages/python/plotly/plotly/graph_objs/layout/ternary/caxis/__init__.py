@@ -14,7 +14,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.ternary.caxis.title.Font
+          - An instance of :class:`plotly.graph_objs.layout.ternary.caxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -104,7 +104,7 @@ class Title(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.ternary.caxis.Title
+            :class:`plotly.graph_objs.layout.ternary.caxis.Title`
         font
             Sets this axis' title font. Note that the title's font
             used to be customized by the now deprecated `titlefont`
@@ -134,7 +134,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.ternary.caxis.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.ternary.caxis.Title"""
+an instance of :class:`plotly.graph_objs.layout.ternary.caxis.Title`"""
             )
 
         # Handle skip_invalid
@@ -355,8 +355,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.ternary.caxis.Tickformatstop
+            an instance of :class:`plotly.graph_objs.layout.ternary
+            .caxis.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -407,7 +407,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.ternary.caxis.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.ternary.caxis.Tickformatstop"""
+an instance of :class:`plotly.graph_objs.layout.ternary.caxis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -607,8 +607,8 @@ class Tickfont(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.ternary.caxis.Tickfont
+            an instance of :class:`plotly.graph_objs.layout.ternary
+            .caxis.Tickfont`
         color
 
         family
@@ -647,7 +647,7 @@ class Tickfont(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.ternary.caxis.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.ternary.caxis.Tickfont"""
+an instance of :class:`plotly.graph_objs.layout.ternary.caxis.Tickfont`"""
             )
 
         # Handle skip_invalid

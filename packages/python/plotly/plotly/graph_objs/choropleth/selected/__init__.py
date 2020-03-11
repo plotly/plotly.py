@@ -48,7 +48,7 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.choropleth.selected.Marker
+            :class:`plotly.graph_objs.choropleth.selected.Marker`
         opacity
             Sets the marker opacity of selected points.
 
@@ -71,7 +71,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.selected.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.choropleth.selected.Marker"""
+an instance of :class:`plotly.graph_objs.choropleth.selected.Marker`"""
             )
 
         # Handle skip_invalid

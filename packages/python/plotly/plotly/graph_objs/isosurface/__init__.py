@@ -145,7 +145,8 @@ class Surface(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Surface
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Surface`
         count
             Sets the number of iso-surfaces between minimum and
             maximum iso-values. By default this value is 2 meaning
@@ -189,7 +190,7 @@ class Surface(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Surface 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Surface"""
+an instance of :class:`plotly.graph_objs.isosurface.Surface`"""
             )
 
         # Handle skip_invalid
@@ -306,7 +307,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Stream
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -336,7 +338,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Stream"""
+an instance of :class:`plotly.graph_objs.isosurface.Stream`"""
             )
 
         # Handle skip_invalid
@@ -453,7 +455,8 @@ class Spaceframe(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Spaceframe
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Spaceframe`
         fill
             Sets the fill ratio of the `spaceframe` elements. The
             default fill value is 0.15 meaning that only 15% of the
@@ -486,7 +489,7 @@ class Spaceframe(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Spaceframe 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Spaceframe"""
+an instance of :class:`plotly.graph_objs.isosurface.Spaceframe`"""
             )
 
         # Handle skip_invalid
@@ -531,7 +534,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.X
+          - An instance of :class:`plotly.graph_objs.isosurface.slices.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -573,7 +576,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.Y
+          - An instance of :class:`plotly.graph_objs.isosurface.slices.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -615,7 +618,7 @@ class Slices(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.slices.Z
+          - An instance of :class:`plotly.graph_objs.isosurface.slices.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     
@@ -662,14 +665,14 @@ class Slices(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objects.isosurface.slices.X instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.isosurface.slices.Y instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.isosurface.slices.Z instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.Z`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -680,16 +683,17 @@ class Slices(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Slices
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Slices`
         x
-            plotly.graph_objects.isosurface.slices.X instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.isosurface.slices.Y instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.isosurface.slices.Z instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.slices.Z`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -710,7 +714,7 @@ class Slices(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Slices 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Slices"""
+an instance of :class:`plotly.graph_objs.isosurface.Slices`"""
             )
 
         # Handle skip_invalid
@@ -842,7 +846,7 @@ class Lightposition(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.isosurface.Lightposition
+            :class:`plotly.graph_objs.isosurface.Lightposition`
         x
             Numeric vector, representing the X coordinate for each
             vertex.
@@ -872,7 +876,7 @@ class Lightposition(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Lightposition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Lightposition"""
+an instance of :class:`plotly.graph_objs.isosurface.Lightposition`"""
             )
 
         # Handle skip_invalid
@@ -1116,7 +1120,8 @@ class Lighting(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Lighting
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Lighting`
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -1160,7 +1165,7 @@ class Lighting(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Lighting 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Lighting"""
+an instance of :class:`plotly.graph_objs.isosurface.Lighting`"""
             )
 
         # Handle skip_invalid
@@ -1434,7 +1439,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.isosurface.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1589,7 +1594,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1638,7 +1644,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.isosurface.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1823,7 +1829,8 @@ class Contour(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Contour
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Contour`
         color
             Sets the color of the contour lines.
         show
@@ -1850,7 +1857,7 @@ class Contour(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Contour 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Contour"""
+an instance of :class:`plotly.graph_objs.isosurface.Contour`"""
             )
 
         # Handle skip_invalid
@@ -2512,7 +2519,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.isosurface.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2645,7 +2652,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.isosurface.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2883,7 +2890,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.isosurface.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2926,7 +2933,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.isosurface.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -3235,9 +3242,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.isosurface.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.isosurface.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.isosur
             face.colorbar.tickformatstopdefaults), sets the default
@@ -3277,8 +3284,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.isosurface.colorbar.Title instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use isosurface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3372,7 +3379,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.isosurface.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -3485,9 +3493,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.isosurface.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.isosurface.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.isosur
             face.colorbar.tickformatstopdefaults), sets the default
@@ -3527,8 +3535,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.isosurface.colorbar.Title instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.isosurface.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use isosurface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3580,7 +3588,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.ColorBar"""
+an instance of :class:`plotly.graph_objs.isosurface.ColorBar`"""
             )
 
         # Handle skip_invalid
@@ -3756,7 +3764,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.X
+          - An instance of :class:`plotly.graph_objs.isosurface.caps.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -3793,7 +3801,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.Y
+          - An instance of :class:`plotly.graph_objs.isosurface.caps.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -3830,7 +3838,7 @@ class Caps(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.isosurface.caps.Z
+          - An instance of :class:`plotly.graph_objs.isosurface.caps.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     
@@ -3872,14 +3880,14 @@ class Caps(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objects.isosurface.caps.X instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.isosurface.caps.Y instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.isosurface.caps.Z instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.Z`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -3890,16 +3898,17 @@ class Caps(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.Caps
+            an instance of
+            :class:`plotly.graph_objs.isosurface.Caps`
         x
-            plotly.graph_objects.isosurface.caps.X instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.isosurface.caps.Y instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.isosurface.caps.Z instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.isosurface.caps.Z`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -3920,7 +3929,7 @@ class Caps(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.Caps 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.Caps"""
+an instance of :class:`plotly.graph_objs.isosurface.Caps`"""
             )
 
         # Handle skip_invalid

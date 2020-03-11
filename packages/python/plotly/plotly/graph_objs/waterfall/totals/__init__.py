@@ -71,7 +71,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.totals.marker.Line
+          - An instance of :class:`plotly.graph_objs.waterfall.totals.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -109,8 +109,8 @@ class Marker(_BaseTraceHierarchyType):
             Sets the marker color of all intermediate sums and
             total values.
         line
-            plotly.graph_objects.waterfall.totals.marker.Line
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.totals.marker.Li
+            ne` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, color=None, line=None, **kwargs):
@@ -122,13 +122,13 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.waterfall.totals.Marker
+            :class:`plotly.graph_objs.waterfall.totals.Marker`
         color
             Sets the marker color of all intermediate sums and
             total values.
         line
-            plotly.graph_objects.waterfall.totals.marker.Line
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.totals.marker.Li
+            ne` instance or dict with compatible properties
 
         Returns
         -------
@@ -149,7 +149,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.totals.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.totals.Marker"""
+an instance of :class:`plotly.graph_objs.waterfall.totals.Marker`"""
             )
 
         # Handle skip_invalid

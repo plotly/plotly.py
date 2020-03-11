@@ -140,7 +140,7 @@ class Line(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.waterfall.connector.Line
+            :class:`plotly.graph_objs.waterfall.connector.Line`
         color
             Sets the line color.
         dash
@@ -170,7 +170,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.connector.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.connector.Line"""
+an instance of :class:`plotly.graph_objs.waterfall.connector.Line`"""
             )
 
         # Handle skip_invalid

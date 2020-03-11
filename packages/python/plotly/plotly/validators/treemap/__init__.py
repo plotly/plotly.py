@@ -540,8 +540,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.treemap.marker.ColorBar
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.treemap.marker.Col
+                orBar` instance or dict with compatible
+                properties
             colors
                 Sets the color of each sector of this trace. If
                 not specified, the default trace color set is
@@ -577,11 +578,11 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 colors while the leaves are faded towards the
                 background color.
             line
-                plotly.graph_objects.treemap.marker.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.treemap.marker.Lin
+                e` instance or dict with compatible properties
             pad
-                plotly.graph_objects.treemap.marker.Pad
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.treemap.marker.Pad
+                ` instance or dict with compatible properties
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if colorsis set to a numerical

@@ -86,8 +86,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.scatterpolargl.selected.Textfont
+            an instance of :class:`plotly.graph_objs.scatterpolargl
+            .selected.Textfont`
         color
             Sets the text font color of selected points.
 
@@ -110,7 +110,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatterpolargl.selected.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatterpolargl.selected.Textfont"""
+an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -271,8 +271,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.scatterpolargl.selected.Marker
+            an instance of :class:`plotly.graph_objs.scatterpolargl
+            .selected.Marker`
         color
             Sets the marker color of selected points.
         opacity
@@ -299,7 +299,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scatterpolargl.selected.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scatterpolargl.selected.Marker"""
+an instance of :class:`plotly.graph_objs.scatterpolargl.selected.Marker`"""
             )
 
         # Handle skip_invalid

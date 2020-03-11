@@ -231,7 +231,7 @@ class Textfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.treemap.pathbar.Textfont
+            :class:`plotly.graph_objs.treemap.pathbar.Textfont`
         color
 
         colorsrc
@@ -276,7 +276,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.pathbar.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.pathbar.Textfont"""
+an instance of :class:`plotly.graph_objs.treemap.pathbar.Textfont`"""
             )
 
         # Handle skip_invalid

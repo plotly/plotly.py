@@ -37,7 +37,7 @@ class Projection(_BaseLayoutHierarchyType):
         """
         The 'rotation' property is an instance of Rotation
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.geo.projection.Rotation
+          - An instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`
           - A dict of string/value properties that will be passed
             to the Rotation constructor
     
@@ -127,8 +127,8 @@ class Projection(_BaseLayoutHierarchyType):
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            plotly.graph_objects.layout.geo.projection.Rotation
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.geo.projection.Rota
+            tion` instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1
             corresponds to the largest zoom level that fits the
@@ -147,13 +147,14 @@ class Projection(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.geo.Projection
+            an instance of
+            :class:`plotly.graph_objs.layout.geo.Projection`
         parallels
             For conic projection types only. Sets the parallels
             (tangent, secant) where the cone intersects the sphere.
         rotation
-            plotly.graph_objects.layout.geo.projection.Rotation
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.geo.projection.Rota
+            tion` instance or dict with compatible properties
         scale
             Zooms in or out on the map view. A scale of 1
             corresponds to the largest zoom level that fits the
@@ -180,7 +181,7 @@ class Projection(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Projection 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.Projection"""
+an instance of :class:`plotly.graph_objs.layout.geo.Projection`"""
             )
 
         # Handle skip_invalid
@@ -433,7 +434,8 @@ class Lonaxis(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.geo.Lonaxis
+            an instance of
+            :class:`plotly.graph_objs.layout.geo.Lonaxis`
         dtick
             Sets the graticule's longitude/latitude tick step.
         gridcolor
@@ -467,7 +469,7 @@ class Lonaxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Lonaxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.Lonaxis"""
+an instance of :class:`plotly.graph_objs.layout.geo.Lonaxis`"""
             )
 
         # Handle skip_invalid
@@ -726,7 +728,8 @@ class Lataxis(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.geo.Lataxis
+            an instance of
+            :class:`plotly.graph_objs.layout.geo.Lataxis`
         dtick
             Sets the graticule's longitude/latitude tick step.
         gridcolor
@@ -760,7 +763,7 @@ class Lataxis(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Lataxis 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.Lataxis"""
+an instance of :class:`plotly.graph_objs.layout.geo.Lataxis`"""
             )
 
         # Handle skip_invalid
@@ -961,7 +964,8 @@ class Domain(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.geo.Domain
+            an instance of
+            :class:`plotly.graph_objs.layout.geo.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this geo subplot . Note that geo
@@ -1006,7 +1010,7 @@ class Domain(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.Domain"""
+an instance of :class:`plotly.graph_objs.layout.geo.Domain`"""
             )
 
         # Handle skip_invalid
@@ -1125,7 +1129,8 @@ class Center(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.geo.Center
+            an instance of
+            :class:`plotly.graph_objs.layout.geo.Center`
         lat
             Sets the latitude of the map's center. For all
             projection types, the map's latitude center lies at the
@@ -1155,7 +1160,7 @@ class Center(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.Center 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.Center"""
+an instance of :class:`plotly.graph_objs.layout.geo.Center`"""
             )
 
         # Handle skip_invalid

@@ -157,7 +157,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sankey.node.Line
+            an instance of
+            :class:`plotly.graph_objs.sankey.node.Line`
         color
             Sets the color of the `line` around each `node`.
         colorsrc
@@ -187,7 +188,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.node.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sankey.node.Line"""
+an instance of :class:`plotly.graph_objs.sankey.node.Line`"""
             )
 
         # Handle skip_invalid
@@ -444,7 +445,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.sankey.node.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.sankey.node.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -599,7 +600,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sankey.node.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.sankey.node.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -648,7 +650,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sankey.node.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sankey.node.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.sankey.node.Hoverlabel`"""
             )
 
         # Handle skip_invalid

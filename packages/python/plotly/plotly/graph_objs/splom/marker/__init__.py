@@ -471,7 +471,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.marker.Line
+            an instance of
+            :class:`plotly.graph_objs.splom.marker.Line`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -569,7 +570,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.marker.Line"""
+an instance of :class:`plotly.graph_objs.splom.marker.Line`"""
             )
 
         # Handle skip_invalid
@@ -1258,7 +1259,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.splom.marker.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1392,7 +1393,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.splom.marker.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1630,7 +1631,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.splom.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1674,7 +1675,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.splom.marker.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.splom.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1983,9 +1984,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.splom.marker.colorbar.T
-            ickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.splom.marker.co
+            lorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.splom.
             marker.colorbar.tickformatstopdefaults), sets the
@@ -2025,8 +2026,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.splom.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.splom.marker.colorbar.Titl
+            e` instance or dict with compatible properties
         titlefont
             Deprecated: Please use splom.marker.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2120,7 +2121,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.splom.marker.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.splom.marker.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2233,9 +2235,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.splom.marker.colorbar.T
-            ickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.splom.marker.co
+            lorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.splom.
             marker.colorbar.tickformatstopdefaults), sets the
@@ -2275,8 +2277,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.splom.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.splom.marker.colorbar.Titl
+            e` instance or dict with compatible properties
         titlefont
             Deprecated: Please use splom.marker.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2328,7 +2330,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.marker.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.marker.ColorBar"""
+an instance of :class:`plotly.graph_objs.splom.marker.ColorBar`"""
             )
 
         # Handle skip_invalid

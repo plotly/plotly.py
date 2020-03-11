@@ -153,7 +153,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.carpet.baxis.title.Font
+            :class:`plotly.graph_objs.carpet.baxis.title.Font`
         color
 
         family
@@ -192,7 +192,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.carpet.baxis.title.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.carpet.baxis.title.Font"""
+an instance of :class:`plotly.graph_objs.carpet.baxis.title.Font`"""
             )
 
         # Handle skip_invalid

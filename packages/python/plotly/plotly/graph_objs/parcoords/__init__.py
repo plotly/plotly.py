@@ -151,7 +151,8 @@ class Tickfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Tickfont
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Tickfont`
         color
 
         family
@@ -190,7 +191,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Tickfont"""
+an instance of :class:`plotly.graph_objs.parcoords.Tickfont`"""
             )
 
         # Handle skip_invalid
@@ -304,7 +305,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Stream
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -334,7 +336,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Stream"""
+an instance of :class:`plotly.graph_objs.parcoords.Stream`"""
             )
 
         # Handle skip_invalid
@@ -519,7 +521,8 @@ class Rangefont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Rangefont
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Rangefont`
         color
 
         family
@@ -558,7 +561,7 @@ class Rangefont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Rangefont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Rangefont"""
+an instance of :class:`plotly.graph_objs.parcoords.Rangefont`"""
             )
 
         # Handle skip_invalid
@@ -818,7 +821,7 @@ class Line(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.parcoords.line.ColorBar
+          - An instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -950,9 +953,9 @@ class Line(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.parcoords.line.
-                    colorbar.Tickformatstop instances or dicts with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.parcoor
+                    ds.line.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.parcoords.line.colorbar.tickformatstopdefault
@@ -999,8 +1002,9 @@ class Line(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.parcoords.line.colorbar.Ti
-                    tle instance or dict with compatible properties
+                    :class:`plotly.graph_objects.parcoords.line.col
+                    orbar.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     parcoords.line.colorbar.title.font instead.
@@ -1222,8 +1226,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.parcoords.line.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.parcoords.line.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale
@@ -1276,7 +1280,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Line
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Line`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1324,8 +1329,8 @@ class Line(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.parcoords.line.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.parcoords.line.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `line.color`is set to a numerical array. The colorscale
@@ -1372,7 +1377,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Line"""
+an instance of :class:`plotly.graph_objs.parcoords.Line`"""
             )
 
         # Handle skip_invalid
@@ -1587,7 +1592,8 @@ class Labelfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Labelfont
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Labelfont`
         color
 
         family
@@ -1626,7 +1632,7 @@ class Labelfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Labelfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Labelfont"""
+an instance of :class:`plotly.graph_objs.parcoords.Labelfont`"""
             )
 
         # Handle skip_invalid
@@ -1796,7 +1802,8 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Domain
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this parcoords trace .
@@ -1829,7 +1836,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Domain"""
+an instance of :class:`plotly.graph_objs.parcoords.Domain`"""
             )
 
         # Handle skip_invalid
@@ -2314,7 +2321,8 @@ class Dimension(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.parcoords.Dimension
+            an instance of
+            :class:`plotly.graph_objs.parcoords.Dimension`
         constraintrange
             The domain range to which the filter on the dimension
             is constrained. Must be an array of `[fromValue,
@@ -2403,7 +2411,7 @@ class Dimension(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.parcoords.Dimension 
 constructor must be a dict or 
-an instance of plotly.graph_objs.parcoords.Dimension"""
+an instance of :class:`plotly.graph_objs.parcoords.Dimension`"""
             )
 
         # Handle skip_invalid

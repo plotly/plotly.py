@@ -765,8 +765,8 @@ class RangesliderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be visible. If visible, perpendicular axes will
                 be set to `fixedrange`
             yaxis
-                plotly.graph_objects.layout.xaxis.rangeslider.Y
-                Axis instance or dict with compatible
+                :class:`plotly.graph_objects.layout.xaxis.range
+                slider.YAxis` instance or dict with compatible
                 properties
 """,
             ),

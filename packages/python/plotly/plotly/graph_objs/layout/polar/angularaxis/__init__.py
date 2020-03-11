@@ -187,8 +187,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.polar.angularax
-            is.Tickformatstop
+            an instance of :class:`plotly.graph_objs.layout.polar.a
+            ngularaxis.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -239,7 +239,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.angularaxis.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.angularaxis.Tickformatstop"""
+an instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -439,8 +439,8 @@ class Tickfont(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.polar.angularaxis.Tickfont
+            an instance of :class:`plotly.graph_objs.layout.polar.a
+            ngularaxis.Tickfont`
         color
 
         family
@@ -479,7 +479,7 @@ class Tickfont(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.angularaxis.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.angularaxis.Tickfont"""
+an instance of :class:`plotly.graph_objs.layout.polar.angularaxis.Tickfont`"""
             )
 
         # Handle skip_invalid

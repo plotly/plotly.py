@@ -105,7 +105,7 @@ class Symbol(_BaseLayoutHierarchyType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.symbol.Textfont
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -221,7 +221,7 @@ class Symbol(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.mapbox.layer.Symbol
+            :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`
         icon
             Sets the symbol icon image (mapbox.layer.layout.icon-
             image). Full list: https://www.mapbox.com/maki-icons/
@@ -266,7 +266,7 @@ class Symbol(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Symbol 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.layer.Symbol"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`"""
             )
 
         # Handle skip_invalid
@@ -409,7 +409,7 @@ class Line(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.mapbox.layer.Line
+            :class:`plotly.graph_objs.layout.mapbox.layer.Line`
         dash
             Sets the length of dashes and gaps
             (mapbox.layer.paint.line-dasharray). Has an effect only
@@ -439,7 +439,7 @@ class Line(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.layer.Line"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Line`"""
             )
 
         # Handle skip_invalid
@@ -566,7 +566,7 @@ class Fill(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.mapbox.layer.Fill
+            :class:`plotly.graph_objs.layout.mapbox.layer.Fill`
         outlinecolor
             Sets the fill outline color (mapbox.layer.paint.fill-
             outline-color). Has an effect only when `type` is set
@@ -591,7 +591,7 @@ class Fill(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Fill 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.layer.Fill"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`"""
             )
 
         # Handle skip_invalid
@@ -673,7 +673,7 @@ class Circle(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.mapbox.layer.Circle
+            :class:`plotly.graph_objs.layout.mapbox.layer.Circle`
         radius
             Sets the circle radius (mapbox.layer.paint.circle-
             radius). Has an effect only when `type` is set to
@@ -698,7 +698,7 @@ class Circle(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.layer.Circle 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.layer.Circle"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`"""
             )
 
         # Handle skip_invalid

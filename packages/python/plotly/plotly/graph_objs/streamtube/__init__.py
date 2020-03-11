@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.streamtube.Stream
+            an instance of
+            :class:`plotly.graph_objs.streamtube.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.Stream"""
+an instance of :class:`plotly.graph_objs.streamtube.Stream`"""
             )
 
         # Handle skip_invalid
@@ -314,7 +315,8 @@ class Starts(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.streamtube.Starts
+            an instance of
+            :class:`plotly.graph_objs.streamtube.Starts`
         x
             Sets the x components of the starting position of the
             streamtubes
@@ -350,7 +352,7 @@ class Starts(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.Starts 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.Starts"""
+an instance of :class:`plotly.graph_objs.streamtube.Starts`"""
             )
 
         # Handle skip_invalid
@@ -491,7 +493,7 @@ class Lightposition(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.streamtube.Lightposition
+            :class:`plotly.graph_objs.streamtube.Lightposition`
         x
             Numeric vector, representing the X coordinate for each
             vertex.
@@ -521,7 +523,7 @@ class Lightposition(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.Lightposition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.Lightposition"""
+an instance of :class:`plotly.graph_objs.streamtube.Lightposition`"""
             )
 
         # Handle skip_invalid
@@ -765,7 +767,8 @@ class Lighting(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.streamtube.Lighting
+            an instance of
+            :class:`plotly.graph_objs.streamtube.Lighting`
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -809,7 +812,7 @@ class Lighting(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.Lighting 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.Lighting"""
+an instance of :class:`plotly.graph_objs.streamtube.Lighting`"""
             )
 
         # Handle skip_invalid
@@ -1083,7 +1086,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.streamtube.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1238,7 +1241,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.streamtube.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.streamtube.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1287,7 +1291,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.streamtube.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1967,7 +1971,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.streamtube.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2100,7 +2104,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.streamtube.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2338,7 +2342,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.streamtube.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2381,7 +2385,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.streamtube.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.streamtube.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2690,9 +2694,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.streamtube.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.streamtube.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.stream
             tube.colorbar.tickformatstopdefaults), sets the default
@@ -2732,8 +2736,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.streamtube.colorbar.Title instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.streamtube.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use streamtube.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2827,7 +2831,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.streamtube.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.streamtube.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2940,9 +2945,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.streamtube.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.streamtube.colo
+            rbar.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.stream
             tube.colorbar.tickformatstopdefaults), sets the default
@@ -2982,8 +2987,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.streamtube.colorbar.Title instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.streamtube.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use streamtube.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -3035,7 +3040,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.streamtube.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.streamtube.ColorBar"""
+an instance of :class:`plotly.graph_objs.streamtube.ColorBar`"""
             )
 
         # Handle skip_invalid

@@ -11,7 +11,7 @@ class Totals(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.totals.Marker
+          - An instance of :class:`plotly.graph_objs.waterfall.totals.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -21,8 +21,9 @@ class Totals(_BaseTraceHierarchyType):
                     Sets the marker color of all intermediate sums
                     and total values.
                 line
-                    plotly.graph_objects.waterfall.totals.marker.Li
-                    ne instance or dict with compatible properties
+                    :class:`plotly.graph_objects.waterfall.totals.m
+                    arker.Line` instance or dict with compatible
+                    properties
 
         Returns
         -------
@@ -46,8 +47,8 @@ class Totals(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.waterfall.totals.Marker instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.totals.Marker`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -58,10 +59,11 @@ class Totals(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Totals
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Totals`
         marker
-            plotly.graph_objects.waterfall.totals.Marker instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.totals.Marker`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -82,7 +84,7 @@ class Totals(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Totals 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Totals"""
+an instance of :class:`plotly.graph_objs.waterfall.Totals`"""
             )
 
         # Handle skip_invalid
@@ -343,7 +345,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Textfont
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Textfont`
         color
 
         colorsrc
@@ -388,7 +391,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Textfont"""
+an instance of :class:`plotly.graph_objs.waterfall.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -511,7 +514,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Stream
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -541,7 +545,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Stream"""
+an instance of :class:`plotly.graph_objs.waterfall.Stream`"""
             )
 
         # Handle skip_invalid
@@ -806,7 +810,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.waterfall.Outsidetextfont
+            :class:`plotly.graph_objs.waterfall.Outsidetextfont`
         color
 
         colorsrc
@@ -851,7 +855,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Outsidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Outsidetextfont"""
+an instance of :class:`plotly.graph_objs.waterfall.Outsidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1128,7 +1132,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.waterfall.Insidetextfont
+            :class:`plotly.graph_objs.waterfall.Insidetextfont`
         color
 
         colorsrc
@@ -1173,7 +1177,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.waterfall.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1230,7 +1234,7 @@ class Increasing(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.increasing.Marker
+          - An instance of :class:`plotly.graph_objs.waterfall.increasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -1239,9 +1243,9 @@ class Increasing(_BaseTraceHierarchyType):
                 color
                     Sets the marker color of all increasing values.
                 line
-                    plotly.graph_objects.waterfall.increasing.marke
-                    r.Line instance or dict with compatible
-                    properties
+                    :class:`plotly.graph_objects.waterfall.increasi
+                    ng.marker.Line` instance or dict with
+                    compatible properties
 
         Returns
         -------
@@ -1265,8 +1269,8 @@ class Increasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.waterfall.increasing.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.increasing.Marke
+            r` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -1277,10 +1281,11 @@ class Increasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Increasing
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Increasing`
         marker
-            plotly.graph_objects.waterfall.increasing.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.increasing.Marke
+            r` instance or dict with compatible properties
 
         Returns
         -------
@@ -1301,7 +1306,7 @@ class Increasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Increasing 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Increasing"""
+an instance of :class:`plotly.graph_objs.waterfall.Increasing`"""
             )
 
         # Handle skip_invalid
@@ -1549,7 +1554,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.waterfall.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1704,7 +1709,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1753,7 +1759,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.waterfall.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1819,7 +1825,7 @@ class Decreasing(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.decreasing.Marker
+          - An instance of :class:`plotly.graph_objs.waterfall.decreasing.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -1828,9 +1834,9 @@ class Decreasing(_BaseTraceHierarchyType):
                 color
                     Sets the marker color of all decreasing values.
                 line
-                    plotly.graph_objects.waterfall.decreasing.marke
-                    r.Line instance or dict with compatible
-                    properties
+                    :class:`plotly.graph_objects.waterfall.decreasi
+                    ng.marker.Line` instance or dict with
+                    compatible properties
 
         Returns
         -------
@@ -1854,8 +1860,8 @@ class Decreasing(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.waterfall.decreasing.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.decreasing.Marke
+            r` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, **kwargs):
@@ -1866,10 +1872,11 @@ class Decreasing(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Decreasing
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Decreasing`
         marker
-            plotly.graph_objects.waterfall.decreasing.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.decreasing.Marke
+            r` instance or dict with compatible properties
 
         Returns
         -------
@@ -1890,7 +1897,7 @@ class Decreasing(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Decreasing 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Decreasing"""
+an instance of :class:`plotly.graph_objs.waterfall.Decreasing`"""
             )
 
         # Handle skip_invalid
@@ -1932,7 +1939,7 @@ class Connector(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.connector.Line
+          - An instance of :class:`plotly.graph_objs.waterfall.connector.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -2011,8 +2018,8 @@ class Connector(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         line
-            plotly.graph_objects.waterfall.connector.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.connector.Line`
+            instance or dict with compatible properties
         mode
             Sets the shape of connector lines.
         visible
@@ -2027,10 +2034,11 @@ class Connector(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.waterfall.Connector
+            an instance of
+            :class:`plotly.graph_objs.waterfall.Connector`
         line
-            plotly.graph_objects.waterfall.connector.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.connector.Line`
+            instance or dict with compatible properties
         mode
             Sets the shape of connector lines.
         visible
@@ -2055,7 +2063,7 @@ class Connector(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.Connector 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.Connector"""
+an instance of :class:`plotly.graph_objs.waterfall.Connector`"""
             )
 
         # Handle skip_invalid

@@ -87,7 +87,8 @@ class Domain(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.grid.Domain
+            an instance of
+            :class:`plotly.graph_objs.layout.grid.Domain`
         x
             Sets the horizontal domain of this grid subplot (in
             plot fraction). The first and last cells end exactly at
@@ -116,7 +117,7 @@ class Domain(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.grid.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.grid.Domain"""
+an instance of :class:`plotly.graph_objs.layout.grid.Domain`"""
             )
 
         # Handle skip_invalid

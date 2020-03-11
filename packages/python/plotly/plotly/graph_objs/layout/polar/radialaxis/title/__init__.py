@@ -152,8 +152,8 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.polar.radialaxis.title.Font
+            an instance of :class:`plotly.graph_objs.layout.polar.r
+            adialaxis.title.Font`
         color
 
         family
@@ -192,7 +192,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.polar.radialaxis.title.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.polar.radialaxis.title.Font"""
+an instance of :class:`plotly.graph_objs.layout.polar.radialaxis.title.Font`"""
             )
 
         # Handle skip_invalid

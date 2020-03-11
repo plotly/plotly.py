@@ -137,7 +137,7 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.splom.unselected.Marker
+            :class:`plotly.graph_objs.splom.unselected.Marker`
         color
             Sets the marker color of unselected points, applied
             only when a selection exists.
@@ -167,7 +167,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.splom.unselected.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.splom.unselected.Marker"""
+an instance of :class:`plotly.graph_objs.splom.unselected.Marker`"""
             )
 
         # Handle skip_invalid

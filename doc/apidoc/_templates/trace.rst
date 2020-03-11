@@ -10,7 +10,6 @@
    .. automethod:: __init__
    {% endblock %}
 
-
 :mod:`{{module}}`.{{objname.lower()}}
 {{ underline }}================================
 
@@ -20,6 +19,7 @@
 
 .. automodule:: plotly.graph_objects.{{ objname.lower() }}
    :members:
+   :undoc-members:
 
 
 .. raw:: html

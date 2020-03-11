@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.densitymapbox.Stream
+            an instance of
+            :class:`plotly.graph_objs.densitymapbox.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.densitymapbox.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.densitymapbox.Stream"""
+an instance of :class:`plotly.graph_objs.densitymapbox.Stream`"""
             )
 
         # Handle skip_invalid
@@ -358,7 +359,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.densitymapbox.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -514,7 +515,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.densitymapbox.Hoverlabel
+            :class:`plotly.graph_objs.densitymapbox.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -563,7 +564,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.densitymapbox.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.densitymapbox.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.densitymapbox.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1243,7 +1244,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.densitymapbox.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1377,7 +1378,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.densitymapbox.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1615,7 +1616,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.densitymapbox.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1659,7 +1660,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.densitymapbox.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.densitymapbox.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1968,9 +1969,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.densitymapbox.colorbar.
-            Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.densitymapbox.c
+            olorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.densit
             ymapbox.colorbar.tickformatstopdefaults), sets the
@@ -2010,8 +2011,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.densitymapbox.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.densitymapbox.colorbar.Tit
+            le` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             densitymapbox.colorbar.title.font instead. Sets this
@@ -2105,7 +2106,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.densitymapbox.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.densitymapbox.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2218,9 +2220,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.densitymapbox.colorbar.
-            Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.densitymapbox.c
+            olorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.densit
             ymapbox.colorbar.tickformatstopdefaults), sets the
@@ -2260,8 +2262,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.densitymapbox.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.densitymapbox.colorbar.Tit
+            le` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             densitymapbox.colorbar.title.font instead. Sets this
@@ -2313,7 +2315,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.densitymapbox.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.densitymapbox.ColorBar"""
+an instance of :class:`plotly.graph_objs.densitymapbox.ColorBar`"""
             )
 
         # Handle skip_invalid

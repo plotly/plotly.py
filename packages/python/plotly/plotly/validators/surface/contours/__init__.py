@@ -25,8 +25,9 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objects.surface.contours.z.Project
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.surface.contours.z
+                .Project` instance or dict with compatible
+                properties
             show
                 Determines whether or not contour lines about
                 the z dimension are drawn.
@@ -75,8 +76,9 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objects.surface.contours.y.Project
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.surface.contours.y
+                .Project` instance or dict with compatible
+                properties
             show
                 Determines whether or not contour lines about
                 the y dimension are drawn.
@@ -125,8 +127,9 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width of the highlighted contour
                 lines.
             project
-                plotly.graph_objects.surface.contours.x.Project
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.surface.contours.x
+                .Project` instance or dict with compatible
+                properties
             show
                 Determines whether or not contour lines about
                 the x dimension are drawn.

@@ -1073,9 +1073,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.mesh3d.colorbar
-                .Tickformatstop instances or dicts with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.mesh3d.
+                colorbar.Tickformatstop` instances or dicts
+                with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.mesh3d.colorbar.tickformatstopdefaults), sets
@@ -1121,8 +1121,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.mesh3d.colorbar.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.mesh3d.colorbar.Ti
+                tle` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 mesh3d.colorbar.title.font instead. Sets this

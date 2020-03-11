@@ -14,7 +14,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.title.Font
+          - An instance of :class:`plotly.graph_objs.funnelarea.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -142,7 +142,8 @@ class Title(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Title
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Title`
         font
             Sets the font used for `title`. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -177,7 +178,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Title"""
+an instance of :class:`plotly.graph_objs.funnelarea.Title`"""
             )
 
         # Handle skip_invalid
@@ -444,7 +445,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Textfont
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Textfont`
         color
 
         colorsrc
@@ -489,7 +491,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Textfont"""
+an instance of :class:`plotly.graph_objs.funnelarea.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -612,7 +614,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Stream
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -642,7 +645,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Stream"""
+an instance of :class:`plotly.graph_objs.funnelarea.Stream`"""
             )
 
         # Handle skip_invalid
@@ -728,7 +731,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.marker.Line
+          - An instance of :class:`plotly.graph_objs.funnelarea.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -775,8 +778,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.funnelarea.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnelarea.marker.Line`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, colors=None, colorssrc=None, line=None, **kwargs):
@@ -787,7 +790,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Marker
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Marker`
         colors
             Sets the color of each sector. If not specified, the
             default trace color set is used to pick the sector
@@ -795,8 +799,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.funnelarea.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnelarea.marker.Line`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -817,7 +821,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Marker"""
+an instance of :class:`plotly.graph_objs.funnelarea.Marker`"""
             )
 
         # Handle skip_invalid
@@ -1085,7 +1089,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.funnelarea.Insidetextfont
+            :class:`plotly.graph_objs.funnelarea.Insidetextfont`
         color
 
         colorsrc
@@ -1130,7 +1134,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.funnelarea.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1393,7 +1397,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.funnelarea.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.funnelarea.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1548,7 +1552,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1597,7 +1602,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.funnelarea.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1785,7 +1790,8 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnelarea.Domain
+            an instance of
+            :class:`plotly.graph_objs.funnelarea.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this funnelarea trace .
@@ -1818,7 +1824,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnelarea.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnelarea.Domain"""
+an instance of :class:`plotly.graph_objs.funnelarea.Domain`"""
             )
 
         # Handle skip_invalid

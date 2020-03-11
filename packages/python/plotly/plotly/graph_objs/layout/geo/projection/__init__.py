@@ -95,8 +95,8 @@ class Rotation(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.geo.projection.Rotation
+            an instance of :class:`plotly.graph_objs.layout.geo.pro
+            jection.Rotation`
         lat
             Rotates the map along meridians (in degrees North).
         lon
@@ -125,7 +125,7 @@ class Rotation(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.geo.projection.Rotation 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.geo.projection.Rotation"""
+an instance of :class:`plotly.graph_objs.layout.geo.projection.Rotation`"""
             )
 
         # Handle skip_invalid

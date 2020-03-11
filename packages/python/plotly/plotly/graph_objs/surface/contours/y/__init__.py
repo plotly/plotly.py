@@ -113,7 +113,7 @@ class Project(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.surface.contours.y.Project
+            :class:`plotly.graph_objs.surface.contours.y.Project`
         x
             Determines whether or not these contour lines are
             projected on the x plane. If `highlight` is set to True
@@ -152,7 +152,7 @@ class Project(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.contours.y.Project 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.contours.y.Project"""
+an instance of :class:`plotly.graph_objs.surface.contours.y.Project`"""
             )
 
         # Handle skip_invalid

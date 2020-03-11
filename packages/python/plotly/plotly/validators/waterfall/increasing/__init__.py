@@ -15,9 +15,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
                 Sets the marker color of all increasing values.
             line
-                plotly.graph_objects.waterfall.increasing.marke
-                r.Line instance or dict with compatible
-                properties
+                :class:`plotly.graph_objects.waterfall.increasi
+                ng.marker.Line` instance or dict with
+                compatible properties
 """,
             ),
             **kwargs

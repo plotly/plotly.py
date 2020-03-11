@@ -230,7 +230,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Textfont
+            an instance of
+            :class:`plotly.graph_objs.sunburst.Textfont`
         color
 
         colorsrc
@@ -275,7 +276,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Textfont"""
+an instance of :class:`plotly.graph_objs.sunburst.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -398,7 +399,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Stream
+            an instance of
+            :class:`plotly.graph_objs.sunburst.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -428,7 +430,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Stream"""
+an instance of :class:`plotly.graph_objs.sunburst.Stream`"""
             )
 
         # Handle skip_invalid
@@ -697,7 +699,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.sunburst.Outsidetextfont
+            :class:`plotly.graph_objs.sunburst.Outsidetextfont`
         color
 
         colorsrc
@@ -742,7 +744,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Outsidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Outsidetextfont"""
+an instance of :class:`plotly.graph_objs.sunburst.Outsidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -944,7 +946,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.ColorBar
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1076,9 +1078,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.sunburst.marker
-                    .colorbar.Tickformatstop instances or dicts
-                    with compatible properties
+                    A tuple of :class:`plotly.graph_objects.sunburs
+                    t.marker.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.sunburst.marker.colorbar.tickformatstopdefaul
@@ -1125,8 +1127,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.sunburst.marker.colorbar.T
-                    itle instance or dict with compatible
+                    :class:`plotly.graph_objects.sunburst.marker.co
+                    lorbar.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -1274,7 +1276,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.Line
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1398,8 +1400,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.sunburst.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.ColorBar`
+            instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
             specified, the default trace color set is used to pick
@@ -1421,8 +1423,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.sunburst.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.Line`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colorsis set to a numerical array. If true,
@@ -1460,7 +1462,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Marker
+            an instance of
+            :class:`plotly.graph_objs.sunburst.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1501,8 +1504,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.sunburst.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.ColorBar`
+            instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
             specified, the default trace color set is used to pick
@@ -1524,8 +1527,8 @@ class Marker(_BaseTraceHierarchyType):
         colorssrc
             Sets the source reference on plot.ly for  colors .
         line
-            plotly.graph_objects.sunburst.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.Line`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colorsis set to a numerical array. If true,
@@ -1556,7 +1559,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Marker"""
+an instance of :class:`plotly.graph_objs.sunburst.Marker`"""
             )
 
         # Handle skip_invalid
@@ -1672,7 +1675,7 @@ class Leaf(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Leaf
+            an instance of :class:`plotly.graph_objs.sunburst.Leaf`
         opacity
             Sets the opacity of the leaves. With colorscale it is
             defaulted to 1; otherwise it is defaulted to 0.7
@@ -1696,7 +1699,7 @@ class Leaf(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Leaf 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Leaf"""
+an instance of :class:`plotly.graph_objs.sunburst.Leaf`"""
             )
 
         # Handle skip_invalid
@@ -1958,7 +1961,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.sunburst.Insidetextfont
+            :class:`plotly.graph_objs.sunburst.Insidetextfont`
         color
 
         colorsrc
@@ -2003,7 +2006,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.sunburst.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -2266,7 +2269,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.sunburst.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2421,7 +2424,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.sunburst.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2470,7 +2474,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.sunburst.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2658,7 +2662,8 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.Domain
+            an instance of
+            :class:`plotly.graph_objs.sunburst.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this sunburst trace .
@@ -2691,7 +2696,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.Domain"""
+an instance of :class:`plotly.graph_objs.sunburst.Domain`"""
             )
 
         # Handle skip_invalid

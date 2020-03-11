@@ -151,8 +151,8 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.xaxis.rangeselector.Font
+            an instance of :class:`plotly.graph_objs.layout.xaxis.r
+            angeselector.Font`
         color
 
         family
@@ -191,7 +191,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.xaxis.rangeselector.Font"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Font`"""
             )
 
         # Handle skip_invalid
@@ -476,8 +476,8 @@ class Button(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.xaxis.rangeselector.Button
+            an instance of :class:`plotly.graph_objs.layout.xaxis.r
+            angeselector.Button`
         count
             Sets the number of steps to take to update the range.
             Use with `step` to specify the update interval.
@@ -538,7 +538,7 @@ class Button(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.xaxis.rangeselector.Button 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.xaxis.rangeselector.Button"""
+an instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`"""
             )
 
         # Handle skip_invalid
