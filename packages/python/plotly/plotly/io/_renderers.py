@@ -497,6 +497,12 @@ elif ipython and ipython.get_ipython():
             # orca not found
             pass
 
+    # Check if we're running in ipython terminal
+    if not default_renderer and (
+        ipython.get_ipython().__class__.__name__ == "TerminalInteractiveShell"
+    ):
+        default_renderer = "browser"
+
     # Fallback to renderer combination that will work automatically
     # in the classic notebook (offline), jupyterlab, nteract, vscode, and
     # nbconvert HTML export.
