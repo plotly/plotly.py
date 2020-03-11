@@ -10,7 +10,7 @@
    .. automethod:: __init__
    {% endblock %}
 
-
+:mod:`{{module}}`.{{objname.lower()}}
 {{ underline }}================================
 
 .. autosummary::
