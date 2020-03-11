@@ -11,6 +11,17 @@
    {% endblock %}
 
 
+{{ underline }}================================
+
+.. autosummary::
+   
+   plotly.graph_objects.{{ objname.lower() }}
+
+.. automodule:: plotly.graph_objects.{{ objname.lower() }}
+   :members:
+   :undoc-members:
+
+
 .. raw:: html
 
     <div class="clearer"></div>
