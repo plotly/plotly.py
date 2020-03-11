@@ -191,12 +191,12 @@ def create_candlestick(open, high, low, close, dates=None, direction="both", **k
         utils.validate_equal_length(open, high, low, close)
     validate_ohlc(open, high, low, close, direction, **kwargs)
 
-    if direction is "increasing":
+    if direction == "increasing":
         candle_incr_data = make_increasing_candle(
             open, high, low, close, dates, **kwargs
         )
         data = candle_incr_data
-    elif direction is "decreasing":
+    elif direction == "decreasing":
         candle_decr_data = make_decreasing_candle(
             open, high, low, close, dates, **kwargs
         )
