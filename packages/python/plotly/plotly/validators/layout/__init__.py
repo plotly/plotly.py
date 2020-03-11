@@ -337,9 +337,9 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.layout.yaxis.Ti
-                ckformatstop instances or dicts with compatible
-                properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                yaxis.Tickformatstop` instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.yaxis.tickformatstopdefaults), sets the
@@ -392,8 +392,8 @@ class YAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.layout.yaxis.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.yaxis.Title
+                ` instance or dict with compatible properties
             titlefont
                 Deprecated: Please use layout.yaxis.title.font
                 instead. Sets this axis' title font. Note that
@@ -642,11 +642,13 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 negative, regardless of the input data. Applies
                 only to linear axes.
             rangeselector
-                plotly.graph_objects.layout.xaxis.Rangeselector
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.xaxis.Range
+                selector` instance or dict with compatible
+                properties
             rangeslider
-                plotly.graph_objects.layout.xaxis.Rangeslider
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.xaxis.Range
+                slider` instance or dict with compatible
+                properties
             scaleanchor
                 If set to another axis id (e.g. `x2`, `y`), the
                 range of this axis changes together with the
@@ -773,9 +775,9 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.layout.xaxis.Ti
-                ckformatstop instances or dicts with compatible
-                properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                xaxis.Tickformatstop` instances or dicts with
+                compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.xaxis.tickformatstopdefaults), sets the
@@ -828,8 +830,8 @@ class XAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.layout.xaxis.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.xaxis.Title
+                ` instance or dict with compatible properties
             titlefont
                 Deprecated: Please use layout.xaxis.title.font
                 instead. Sets this axis' title font. Note that
@@ -1018,9 +1020,9 @@ class UpdatemenusValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the width (in px) of the border enclosing
                 the update menu.
             buttons
-                A tuple of
-                plotly.graph_objects.layout.updatemenu.Button
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                updatemenu.Button` instances or dicts with
+                compatible properties
             buttondefaults
                 When used in a template (as layout.template.lay
                 out.updatemenu.buttondefaults), sets the
@@ -1261,19 +1263,20 @@ class TernaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             aaxis
-                plotly.graph_objects.layout.ternary.Aaxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.ternary.Aax
+                is` instance or dict with compatible properties
             baxis
-                plotly.graph_objects.layout.ternary.Baxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.ternary.Bax
+                is` instance or dict with compatible properties
             bgcolor
                 Set the background color of the subplot
             caxis
-                plotly.graph_objects.layout.ternary.Caxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.ternary.Cax
+                is` instance or dict with compatible properties
             domain
-                plotly.graph_objects.layout.ternary.Domain
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.ternary.Dom
+                ain` instance or dict with compatible
+                properties
             sum
                 The number each triplet should sum to, and the
                 maximum range of each axis
@@ -1301,11 +1304,11 @@ class TemplateValidator(_plotly_utils.basevalidators.BaseTemplateValidator):
                 "data_docs",
                 """
             data
-                plotly.graph_objects.layout.template.Data
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.template.Da
+                ta` instance or dict with compatible properties
             layout
-                plotly.graph_objects.Layout instance or dict
-                with compatible properties
+                :class:`plotly.graph_objects.Layout` instance
+                or dict with compatible properties
 """,
             ),
             **kwargs
@@ -1386,8 +1389,9 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the width (in px) of the border enclosing
                 the slider.
             currentvalue
-                plotly.graph_objects.layout.slider.Currentvalue
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.slider.Curr
+                entvalue` instance or dict with compatible
+                properties
             font
                 Sets the font of the slider step labels.
             len
@@ -1416,9 +1420,9 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Set the padding of the slider component along
                 each side.
             steps
-                A tuple of
-                plotly.graph_objects.layout.slider.Step
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                slider.Step` instances or dicts with compatible
+                properties
             stepdefaults
                 When used in a template (as
                 layout.template.layout.slider.stepdefaults),
@@ -1443,8 +1447,9 @@ class SlidersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             tickwidth
                 Sets the tick width (in px).
             transition
-                plotly.graph_objects.layout.slider.Transition
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.slider.Tran
+                sition` instance or dict with compatible
+                properties
             visible
                 Determines whether or not the slider is
                 visible.
@@ -1519,8 +1524,8 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Specifies whether shapes are drawn below or
                 above traces.
             line
-                plotly.graph_objects.layout.shape.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.layout.shape.Line`
+                instance or dict with compatible properties
             name
                 When used in a template, named items are
                 created in the output figure in addition to any
@@ -1721,9 +1726,9 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             annotations
-                A tuple of
-                plotly.graph_objects.layout.scene.Annotation
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                scene.Annotation` instances or dicts with
+                compatible properties
             annotationdefaults
                 When used in a template (as layout.template.lay
                 out.scene.annotationdefaults), sets the default
@@ -1747,11 +1752,11 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
             bgcolor
 
             camera
-                plotly.graph_objects.layout.scene.Camera
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.scene.Camer
+                a` instance or dict with compatible properties
             domain
-                plotly.graph_objects.layout.scene.Domain
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.scene.Domai
+                n` instance or dict with compatible properties
             dragmode
                 Determines the mode of drag interactions for
                 this scene.
@@ -1763,14 +1768,14 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
                 camera attributes. Defaults to
                 `layout.uirevision`.
             xaxis
-                plotly.graph_objects.layout.scene.XAxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.scene.XAxis
+                ` instance or dict with compatible properties
             yaxis
-                plotly.graph_objects.layout.scene.YAxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.scene.YAxis
+                ` instance or dict with compatible properties
             zaxis
-                plotly.graph_objects.layout.scene.ZAxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.scene.ZAxis
+                ` instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -1854,8 +1859,9 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             angularaxis
-                plotly.graph_objects.layout.polar.AngularAxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.polar.Angul
+                arAxis` instance or dict with compatible
+                properties
             bargap
                 Sets the gap between bars of adjacent location
                 coordinates. Values are unitless, they
@@ -1871,8 +1877,8 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
             bgcolor
                 Set the background color of the subplot
             domain
-                plotly.graph_objects.layout.polar.Domain
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.polar.Domai
+                n` instance or dict with compatible properties
             gridshape
                 Determines if the radial axis grid lines and
                 angular axis line are drawn as "circular"
@@ -1886,8 +1892,9 @@ class PolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the fraction of the radius to cut out of
                 the polar subplot.
             radialaxis
-                plotly.graph_objects.layout.polar.RadialAxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.polar.Radia
+                lAxis` instance or dict with compatible
+                properties
             sector
                 Sets angular span of this polar subplot with
                 two angles (in degrees). Sector are assumed to
@@ -2082,15 +2089,15 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the bearing angle of the map in degrees
                 counter-clockwise from North (mapbox.bearing).
             center
-                plotly.graph_objects.layout.mapbox.Center
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.mapbox.Cent
+                er` instance or dict with compatible properties
             domain
-                plotly.graph_objects.layout.mapbox.Domain
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.mapbox.Doma
+                in` instance or dict with compatible properties
             layers
-                A tuple of
-                plotly.graph_objects.layout.mapbox.Layer
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                mapbox.Layer` instances or dicts with
+                compatible properties
             layerdefaults
                 When used in a template (as
                 layout.template.layout.mapbox.layerdefaults),
@@ -2186,8 +2193,8 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
             orientation
                 Sets the orientation of the legend.
             title
-                plotly.graph_objects.layout.legend.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.legend.Titl
+                e` instance or dict with compatible properties
             tracegroupgap
                 Sets the amount of vertical space (in px)
                 between legend groups.
@@ -2507,8 +2514,8 @@ class GridValidator(_plotly_utils.basevalidators.CompoundValidator):
                 different length, if you want to leave a row at
                 the end for non-cartesian subplots.
             domain
-                plotly.graph_objects.layout.grid.Domain
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.grid.Domain
+                ` instance or dict with compatible properties
             pattern
                 If no `subplots`, `xaxes`, or `yaxes` are given
                 but we do have `rows` and `columns`, we can
@@ -2598,8 +2605,8 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             bgcolor
                 Set the background color of the map
             center
-                plotly.graph_objects.layout.geo.Center instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.layout.geo.Center`
+                instance or dict with compatible properties
             coastlinecolor
                 Sets the coastline color.
             coastlinewidth
@@ -2610,8 +2617,8 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets line width (in px) of the country
                 boundaries.
             domain
-                plotly.graph_objects.layout.geo.Domain instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.layout.geo.Domain`
+                instance or dict with compatible properties
             fitbounds
                 Determines if this subplot's view settings are
                 auto-computed to fit trace data. On scoped
@@ -2640,16 +2647,17 @@ class GeoValidator(_plotly_utils.basevalidators.CompoundValidator):
             landcolor
                 Sets the land mass color.
             lataxis
-                plotly.graph_objects.layout.geo.Lataxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.geo.Lataxis
+                ` instance or dict with compatible properties
             lonaxis
-                plotly.graph_objects.layout.geo.Lonaxis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.geo.Lonaxis
+                ` instance or dict with compatible properties
             oceancolor
                 Sets the ocean color
             projection
-                plotly.graph_objects.layout.geo.Projection
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.geo.Project
+                ion` instance or dict with compatible
+                properties
             resolution
                 Sets the resolution of the base layers. The
                 values have units of km/mm e.g. 110 corresponds
@@ -3010,8 +3018,9 @@ class ColoraxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace color array(s) and if set, `cmax` must be
                 set as well.
             colorbar
-                plotly.graph_objects.layout.coloraxis.ColorBar
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.coloraxis.C
+                olorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. The colorscale must be an
                 array containing arrays mapping a normalized
@@ -3344,8 +3353,9 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 (default) lets the text set the box height.
                 Taller text will be clipped.
             hoverlabel
-                plotly.graph_objects.layout.annotation.Hoverlab
-                el instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.annotation.
+                Hoverlabel` instance or dict with compatible
+                properties
             hovertext
                 Sets text to appear when hovering over this
                 annotation. If omitted or blank, no hover label

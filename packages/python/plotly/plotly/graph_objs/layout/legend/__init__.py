@@ -13,7 +13,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.legend.title.Font
+          - An instance of :class:`plotly.graph_objs.layout.legend.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -126,7 +126,8 @@ class Title(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.legend.Title
+            an instance of
+            :class:`plotly.graph_objs.layout.legend.Title`
         font
             Sets this legend's title font.
         side
@@ -157,7 +158,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.legend.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.legend.Title"""
+an instance of :class:`plotly.graph_objs.layout.legend.Title`"""
             )
 
         # Handle skip_invalid
@@ -345,7 +346,8 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.legend.Font
+            an instance of
+            :class:`plotly.graph_objs.layout.legend.Font`
         color
 
         family
@@ -384,7 +386,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.legend.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.legend.Font"""
+an instance of :class:`plotly.graph_objs.layout.legend.Font`"""
             )
 
         # Handle skip_invalid

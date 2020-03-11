@@ -251,9 +251,9 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.layout.polar.ra
-                dialaxis.Tickformatstop instances or dicts with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                polar.radialaxis.Tickformatstop` instances or
+                dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.polar.radialaxis.tickformatstopdefaults),
@@ -300,8 +300,9 @@ class RadialAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.layout.polar.radialaxis.Ti
-                tle instance or dict with compatible properties
+                :class:`plotly.graph_objects.layout.polar.radia
+                laxis.Title` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 layout.polar.radialaxis.title.font instead.
@@ -633,9 +634,9 @@ class AngularAxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.layout.polar.an
-                gularaxis.Tickformatstop instances or dicts
-                with compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                polar.angularaxis.Tickformatstop` instances or
+                dicts with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.lay
                 out.polar.angularaxis.tickformatstopdefaults),

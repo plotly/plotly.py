@@ -134,7 +134,8 @@ class Z(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.slices.Z
+            an instance of
+            :class:`plotly.graph_objs.isosurface.slices.Z`
         fill
             Sets the fill ratio of the `slices`. The default fill
             value of the `slices` is 1 meaning that they are
@@ -170,7 +171,7 @@ class Z(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.slices.Z 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.slices.Z"""
+an instance of :class:`plotly.graph_objs.isosurface.slices.Z`"""
             )
 
         # Handle skip_invalid
@@ -344,7 +345,8 @@ class Y(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.slices.Y
+            an instance of
+            :class:`plotly.graph_objs.isosurface.slices.Y`
         fill
             Sets the fill ratio of the `slices`. The default fill
             value of the `slices` is 1 meaning that they are
@@ -380,7 +382,7 @@ class Y(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.slices.Y 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.slices.Y"""
+an instance of :class:`plotly.graph_objs.isosurface.slices.Y`"""
             )
 
         # Handle skip_invalid
@@ -554,7 +556,8 @@ class X(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.isosurface.slices.X
+            an instance of
+            :class:`plotly.graph_objs.isosurface.slices.X`
         fill
             Sets the fill ratio of the `slices`. The default fill
             value of the `slices` is 1 meaning that they are
@@ -590,7 +593,7 @@ class X(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.slices.X 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.slices.X"""
+an instance of :class:`plotly.graph_objs.isosurface.slices.X`"""
             )
 
         # Handle skip_invalid

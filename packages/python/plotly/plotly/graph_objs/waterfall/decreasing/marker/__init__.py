@@ -108,8 +108,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.waterfall.decreasing.marker.Line
+            an instance of :class:`plotly.graph_objs.waterfall.decr
+            easing.marker.Line`
         color
             Sets the line color of all decreasing values.
         width
@@ -134,7 +134,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.decreasing.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.decreasing.marker.Line"""
+an instance of :class:`plotly.graph_objs.waterfall.decreasing.marker.Line`"""
             )
 
         # Handle skip_invalid

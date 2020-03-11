@@ -145,7 +145,8 @@ class Tiling(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Tiling
+            an instance of
+            :class:`plotly.graph_objs.treemap.Tiling`
         flip
             Determines if the positions obtained from solver are
             flipped on each axis.
@@ -188,7 +189,7 @@ class Tiling(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Tiling 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Tiling"""
+an instance of :class:`plotly.graph_objs.treemap.Tiling`"""
             )
 
         # Handle skip_invalid
@@ -458,7 +459,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Textfont
+            an instance of
+            :class:`plotly.graph_objs.treemap.Textfont`
         color
 
         colorsrc
@@ -503,7 +505,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Textfont"""
+an instance of :class:`plotly.graph_objs.treemap.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -626,7 +628,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Stream
+            an instance of
+            :class:`plotly.graph_objs.treemap.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -656,7 +659,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Stream"""
+an instance of :class:`plotly.graph_objs.treemap.Stream`"""
             )
 
         # Handle skip_invalid
@@ -749,7 +752,7 @@ class Pathbar(_BaseTraceHierarchyType):
     
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.pathbar.Textfont
+          - An instance of :class:`plotly.graph_objs.treemap.pathbar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -883,7 +886,8 @@ class Pathbar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Pathbar
+            an instance of
+            :class:`plotly.graph_objs.treemap.Pathbar`
         edgeshape
             Determines which shape is used for edges between
             `barpath` labels.
@@ -919,7 +923,7 @@ class Pathbar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Pathbar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Pathbar"""
+an instance of :class:`plotly.graph_objs.treemap.Pathbar`"""
             )
 
         # Handle skip_invalid
@@ -1197,7 +1201,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.treemap.Outsidetextfont
+            :class:`plotly.graph_objs.treemap.Outsidetextfont`
         color
 
         colorsrc
@@ -1242,7 +1246,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Outsidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Outsidetextfont"""
+an instance of :class:`plotly.graph_objs.treemap.Outsidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1444,7 +1448,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.ColorBar
+          - An instance of :class:`plotly.graph_objs.treemap.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1576,9 +1580,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.treemap.marker.
-                    colorbar.Tickformatstop instances or dicts with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.treemap
+                    .marker.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.treemap.marker.colorbar.tickformatstopdefault
@@ -1625,8 +1629,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.treemap.marker.colorbar.Ti
-                    tle instance or dict with compatible properties
+                    :class:`plotly.graph_objects.treemap.marker.col
+                    orbar.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     treemap.marker.colorbar.title.font instead.
@@ -1801,7 +1806,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.Line
+          - An instance of :class:`plotly.graph_objs.treemap.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1837,7 +1842,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'pad' property is an instance of Pad
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.marker.Pad
+          - An instance of :class:`plotly.graph_objs.treemap.marker.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
     
@@ -1957,8 +1962,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.treemap.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.ColorBar`
+            instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
             specified, the default trace color set is used to pick
@@ -1990,11 +1995,11 @@ class Marker(_BaseTraceHierarchyType):
             while the leaves are faded towards the background
             color.
         line
-            plotly.graph_objects.treemap.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.Line`
+            instance or dict with compatible properties
         pad
-            plotly.graph_objects.treemap.marker.Pad instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.Pad`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colorsis set to a numerical array. If true,
@@ -2034,7 +2039,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Marker
+            an instance of
+            :class:`plotly.graph_objs.treemap.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -2075,8 +2081,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.treemap.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.ColorBar`
+            instance or dict with compatible properties
         colors
             Sets the color of each sector of this trace. If not
             specified, the default trace color set is used to pick
@@ -2108,11 +2114,11 @@ class Marker(_BaseTraceHierarchyType):
             while the leaves are faded towards the background
             color.
         line
-            plotly.graph_objects.treemap.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.Line`
+            instance or dict with compatible properties
         pad
-            plotly.graph_objects.treemap.marker.Pad instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.treemap.marker.Pad`
+            instance or dict with compatible properties
         reversescale
             Reverses the color mapping if true. Has an effect only
             if colorsis set to a numerical array. If true,
@@ -2143,7 +2149,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Marker"""
+an instance of :class:`plotly.graph_objs.treemap.Marker`"""
             )
 
         # Handle skip_invalid
@@ -2446,7 +2452,8 @@ class Insidetextfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Insidetextfont
+            an instance of
+            :class:`plotly.graph_objs.treemap.Insidetextfont`
         color
 
         colorsrc
@@ -2491,7 +2498,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.treemap.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -2754,7 +2761,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.treemap.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.treemap.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2909,7 +2916,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.treemap.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2958,7 +2966,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.treemap.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -3146,7 +3154,8 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.treemap.Domain
+            an instance of
+            :class:`plotly.graph_objs.treemap.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this treemap trace .
@@ -3179,7 +3188,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.treemap.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.treemap.Domain"""
+an instance of :class:`plotly.graph_objs.treemap.Domain`"""
             )
 
         # Handle skip_invalid

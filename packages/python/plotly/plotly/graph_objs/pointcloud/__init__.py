@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pointcloud.Stream
+            an instance of
+            :class:`plotly.graph_objs.pointcloud.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pointcloud.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pointcloud.Stream"""
+an instance of :class:`plotly.graph_objs.pointcloud.Stream`"""
             )
 
         # Handle skip_invalid
@@ -175,7 +176,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'border' property is an instance of Border
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.marker.Border
+          - An instance of :class:`plotly.graph_objs.pointcloud.marker.Border`
           - A dict of string/value properties that will be passed
             to the Border constructor
     
@@ -344,8 +345,8 @@ class Marker(_BaseTraceHierarchyType):
             value less then `1`. Setting `blend` to `true` reduces
             zoom/pan speed if used with large numbers of points.
         border
-            plotly.graph_objects.pointcloud.marker.Border instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.pointcloud.marker.Border`
+            instance or dict with compatible properties
         color
             Sets the marker fill color. It accepts a specific
             color.If the color is not fully opaque and there are
@@ -386,15 +387,16 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pointcloud.Marker
+            an instance of
+            :class:`plotly.graph_objs.pointcloud.Marker`
         blend
             Determines if colors are blended together for a
             translucency effect in case `opacity` is specified as a
             value less then `1`. Setting `blend` to `true` reduces
             zoom/pan speed if used with large numbers of points.
         border
-            plotly.graph_objects.pointcloud.marker.Border instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.pointcloud.marker.Border`
+            instance or dict with compatible properties
         color
             Sets the marker fill color. It accepts a specific
             color.If the color is not fully opaque and there are
@@ -435,7 +437,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pointcloud.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pointcloud.Marker"""
+an instance of :class:`plotly.graph_objs.pointcloud.Marker`"""
             )
 
         # Handle skip_invalid
@@ -698,7 +700,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.pointcloud.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.pointcloud.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -853,7 +855,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pointcloud.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.pointcloud.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -902,7 +905,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pointcloud.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pointcloud.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.pointcloud.Hoverlabel`"""
             )
 
         # Handle skip_invalid

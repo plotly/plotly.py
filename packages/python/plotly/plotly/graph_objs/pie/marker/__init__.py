@@ -157,7 +157,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.pie.marker.Line
+            an instance of
+            :class:`plotly.graph_objs.pie.marker.Line`
         color
             Sets the color of the line enclosing each sector.
         colorsrc
@@ -187,7 +188,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.pie.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.pie.marker.Line"""
+an instance of :class:`plotly.graph_objs.pie.marker.Line`"""
             )
 
         # Handle skip_invalid

@@ -94,7 +94,7 @@ class {fig_classname}({base_classname}):\n"""
     def __init__(self, data=None, layout=None,
                  frames=None, skip_invalid=False, **kwargs):
         \"\"\"
-        Create a new {fig_classname} instance
+        Create a new :class:{fig_classname} instance
         
         Parameters
         ----------

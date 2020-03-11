@@ -191,7 +191,7 @@ class Z(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.z.Project
+          - An instance of :class:`plotly.graph_objs.surface.contours.z.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     
@@ -353,8 +353,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.z.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.z.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -394,7 +394,8 @@ class Z(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.contours.Z
+            an instance of
+            :class:`plotly.graph_objs.surface.contours.Z`
         color
             Sets the color of the contour lines.
         end
@@ -408,8 +409,8 @@ class Z(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.z.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.z.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the z
             dimension are drawn.
@@ -444,7 +445,7 @@ class Z(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.contours.Z 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.contours.Z"""
+an instance of :class:`plotly.graph_objs.surface.contours.Z`"""
             )
 
         # Handle skip_invalid
@@ -696,7 +697,7 @@ class Y(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.y.Project
+          - An instance of :class:`plotly.graph_objs.surface.contours.y.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     
@@ -858,8 +859,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.y.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.y.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -899,7 +900,8 @@ class Y(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.contours.Y
+            an instance of
+            :class:`plotly.graph_objs.surface.contours.Y`
         color
             Sets the color of the contour lines.
         end
@@ -913,8 +915,8 @@ class Y(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.y.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.y.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the y
             dimension are drawn.
@@ -949,7 +951,7 @@ class Y(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.contours.Y 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.contours.Y"""
+an instance of :class:`plotly.graph_objs.surface.contours.Y`"""
             )
 
         # Handle skip_invalid
@@ -1201,7 +1203,7 @@ class X(_BaseTraceHierarchyType):
         """
         The 'project' property is an instance of Project
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.x.Project
+          - An instance of :class:`plotly.graph_objs.surface.contours.x.Project`
           - A dict of string/value properties that will be passed
             to the Project constructor
     
@@ -1363,8 +1365,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.x.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.x.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
@@ -1404,7 +1406,8 @@ class X(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.contours.X
+            an instance of
+            :class:`plotly.graph_objs.surface.contours.X`
         color
             Sets the color of the contour lines.
         end
@@ -1418,8 +1421,8 @@ class X(_BaseTraceHierarchyType):
         highlightwidth
             Sets the width of the highlighted contour lines.
         project
-            plotly.graph_objects.surface.contours.x.Project
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.x.Project
+            ` instance or dict with compatible properties
         show
             Determines whether or not contour lines about the x
             dimension are drawn.
@@ -1454,7 +1457,7 @@ class X(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.contours.X 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.contours.X"""
+an instance of :class:`plotly.graph_objs.surface.contours.X`"""
             )
 
         # Handle skip_invalid

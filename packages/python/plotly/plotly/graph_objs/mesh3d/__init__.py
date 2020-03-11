@@ -77,7 +77,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.Stream
+            an instance of :class:`plotly.graph_objs.mesh3d.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +107,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.Stream"""
+an instance of :class:`plotly.graph_objs.mesh3d.Stream`"""
             )
 
         # Handle skip_invalid
@@ -235,7 +235,8 @@ class Lightposition(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.Lightposition
+            an instance of
+            :class:`plotly.graph_objs.mesh3d.Lightposition`
         x
             Numeric vector, representing the X coordinate for each
             vertex.
@@ -265,7 +266,7 @@ class Lightposition(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Lightposition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.Lightposition"""
+an instance of :class:`plotly.graph_objs.mesh3d.Lightposition`"""
             )
 
         # Handle skip_invalid
@@ -509,7 +510,8 @@ class Lighting(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.Lighting
+            an instance of
+            :class:`plotly.graph_objs.mesh3d.Lighting`
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -553,7 +555,7 @@ class Lighting(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Lighting 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.Lighting"""
+an instance of :class:`plotly.graph_objs.mesh3d.Lighting`"""
             )
 
         # Handle skip_invalid
@@ -827,7 +829,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.mesh3d.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -982,7 +984,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.mesh3d.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1031,7 +1034,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.mesh3d.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1216,7 +1219,8 @@ class Contour(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.Contour
+            an instance of
+            :class:`plotly.graph_objs.mesh3d.Contour`
         color
             Sets the color of the contour lines.
         show
@@ -1243,7 +1247,7 @@ class Contour(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.Contour 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.Contour"""
+an instance of :class:`plotly.graph_objs.mesh3d.Contour`"""
             )
 
         # Handle skip_invalid
@@ -1905,7 +1909,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.mesh3d.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2039,7 +2043,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.mesh3d.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2277,7 +2281,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.mesh3d.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2320,7 +2324,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.mesh3d.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.mesh3d.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2629,9 +2633,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.mesh3d.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.mesh3d.colorbar
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.mesh3d
             .colorbar.tickformatstopdefaults), sets the default
@@ -2671,8 +2675,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.mesh3d.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.mesh3d.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use mesh3d.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2766,7 +2770,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.mesh3d.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.mesh3d.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2879,9 +2884,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.mesh3d.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.mesh3d.colorbar
+            .Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.mesh3d
             .colorbar.tickformatstopdefaults), sets the default
@@ -2921,8 +2926,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.mesh3d.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.mesh3d.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use mesh3d.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2974,7 +2979,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.mesh3d.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.mesh3d.ColorBar"""
+an instance of :class:`plotly.graph_objs.mesh3d.ColorBar`"""
             )
 
         # Handle skip_invalid
