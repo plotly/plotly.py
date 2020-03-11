@@ -16,6 +16,7 @@ Figure
 
 .. autosummary::
    :toctree: generated/
+   :template: class_figure.rst
 
    Figure  
 
@@ -25,9 +26,9 @@ Layout
 
 .. autosummary::
    :toctree: generated/
+   :template: trace.rst
 
    Layout
-   layout
 
 
 Simple charts
