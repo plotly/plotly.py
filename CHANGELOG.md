@@ -2,6 +2,23 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.4] - 2020-03-11
+
+### Updated
+
+- The documentation of the API https://plot.ly/python-api-reference/ now
+  documents the full API [#2243](https://github.com/plotly/plotly.py/pull/2243)
+- New documentation examples for facets [#2235](https://github.com/plotly/plotly.py/pull/2235), legend [#2227](https://github.com/plotly/plotly.py/pull/2227), subplots [#2226](https://github.com/plotly/plotly.py/pull/2226), axes [#2234](https://github.com/plotly/plotly.py/pull/2234) and histograms [#2242](https://github.com/plotly/plotly.py/pull/2242). 
+  Thanks to [@SylwiaOliwia2](https://github.com/@SylwiaOliwia2) for all these great
+  examples!
+
+### Fixed
+
+- Jupyterlab extension now compatible with both Jupyterlab 1.2 and 2.0 [#2261](https://github.com/plotly/plotly.py/pull/2261) with thanks to [@consideRatio](https://github.com/consideRatio) for the contribution!
+- Fixed a bug when using boolean values for the color argument of px functions [#2127](https://github.com/plotly/plotly.py/pull/2127)
+- Corrected import bug which was occuring with old versions of ipywidgets [#2265](https://github.com/plotly/plotly.py/pull/2265)
+- Fixed python 3.8 syntax warning [#2262](https://github.com/plotly/plotly.py/pull/2262), with thanks to [@sgn](https://github.com/sgn) for the contribution!
+
 ## [4.5.3] - 2020-03-05
 
 ### Updated
