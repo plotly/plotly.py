@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for contributing to plotly.py! 
+Thank you for contributing to plotly.py!
 
 ## Code of Conduct
 
@@ -271,10 +271,12 @@ specified below.
    + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C-rc.1`
-   + Run `npm install && npm run build`
+   + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `A.B.C-rc.1`
-   + Run `npm install && npm run build`
+   + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
 
  2) Commit the changes
 
@@ -375,7 +377,9 @@ Update CHANGELOG with release date and update README with final versions.
 In the conda installation instructions, be sure to change the
 "-c plotly/label/test" argument to "-c plotly"
 
-Commit updates.
+Update the doc/python/getting-started.md file with the same version numbers.
+
+Commit Changelog, README and getting-started updates.
 
 ### Finalize versions
 When no problems are identified in the release candidate, remove the
@@ -385,12 +389,15 @@ release candidate suffix from the following version strings:
    + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `A.B.C`
-   + Run `npm install && npm run build`
+   + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
    + Update `"version"` to `A.B.C`
-   + Run `npm install && npm run build`
-
-Commit and push to the release branch.
+   + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
+ - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
+ - Ensure that the diff in `package-lock.json` seems sane
+ - Commit and push to the release branch.
 
 ### Merge release into master
 Make sure the integration tests are passing on the release branch, then merge
