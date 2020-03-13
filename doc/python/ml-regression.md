@@ -47,7 +47,7 @@ import plotly.express as px
 df = px.data.tips()
 fig = px.scatter(
     df, x='total_bill', y='tip', opacity=0.65,
-    trendline='ols', trendline_color_override='red'
+    trendline='ols', trendline_color_override='darkblue'
 )
 fig.show()
 ```
@@ -223,6 +223,7 @@ fig.show()
 When you are fitting a linear regression, you want to often know what feature matters the most in your regression's output.
 
 ```python
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LinearRegression
@@ -356,14 +357,14 @@ fig = px.scatter(
 fig.show()
 ```
 
-## Visualize regularization across different cross-validation folds
+## Visualize regularization across cross-validation folds
 
 
 In this example, we show how to plot the results of various $\alpha$ penalization values from the results of cross-validation using scikit-learn's `LassoCV`. This is useful to see how much the error of the optimal alpha actually varies across CV folds.
 
 ```python
-import pandas as pd
 import numpy as np
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from sklearn.linear_model import LassoCV
