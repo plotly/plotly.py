@@ -34,7 +34,20 @@ jupyter:
     thumbnail: thumbnail/knn-classification.png
 ---
 
-## Basic Binary Classification with `plotly.express`
+## Basic binary classification with kNN
+
+
+### Display training and test splits
+
+```python
+
+```
+
+### Visualize predictions on test split
+
+```python
+
+```
 
 ```python
 import numpy as np
@@ -113,7 +126,7 @@ fig.add_trace(
         showscale=False,
         colorscale=['Blue', 'Red'],
         opacity=0.4,
-        name='Confidence'
+        name='Score'
     )
 )
 fig.show()
@@ -150,7 +163,7 @@ Z = Z.reshape(ll.shape)
 proba = clf.predict_proba(np.c_[ll.ravel(), ww.ravel()])
 proba = proba.reshape(ll.shape + (3,))
 
-fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species', width=1000, height=1000)
+fig = px.scatter(df, x='sepal_length', y='sepal_width', color='species')
 fig.update_traces(marker_size=10, marker_line_width=1)
 fig.add_trace(
     go.Heatmap(
@@ -173,77 +186,12 @@ fig.add_trace(
 fig.show()
 ```
 
-## 3D Classification with `px.scatter_3d`
-
-```python
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-
-df = px.data.iris()
-features = ["sepal_width", "sepal_length", "petal_width"]
-
-X = df[features]
-y = df.species
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-
-# Create classifier, run predictions on grid
-clf = KNeighborsClassifier(15, weights='distance')
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-y_score = clf.predict_proba(X_test)
-y_score = np.around(y_score.max(axis=1), 4)
-
-fig = px.scatter_3d(
-    X_test, 
-    x='sepal_length', 
-    y='sepal_width', 
-    z='petal_width', 
-    symbol=y_pred,
-    color=y_score,
-    labels={'symbol': 'prediction', 'color': 'score'}
-)
-fig.update_layout(legend=dict(x=0, y=0))
-fig.show()
-```
-
-## High Dimension Visualization with `px.scatter_matrix`
-
-If you need to visualize classifications that go beyond 3D, you can use the [scatter plot matrix](https://plot.ly/python/splom/).
-
-```python
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
-
-df = px.data.iris()
-features = ["sepal_width", "sepal_length", "petal_width", "petal_length"]
-
-X = df[features]
-y = df.species
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
-
-# Create classifier, run predictions on grid
-clf = KNeighborsClassifier(15, weights='distance')
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
-
-fig = px.scatter_matrix(X_test, dimensions=features, color=y_pred, labels={'color': 'prediction'})
-fig.show()
-```
-
 ### Reference
 
 Learn more about `px`, `go.Contour`, and `go.Heatmap` here:
 * https://plot.ly/python/plotly-express/
 * https://plot.ly/python/heatmaps/
 * https://plot.ly/python/contour-plots/
-* https://plot.ly/python/3d-scatter-plots/
-* https://plot.ly/python/splom/
 
 This tutorial was inspired by amazing examples from the official scikit-learn docs:
 * https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html
