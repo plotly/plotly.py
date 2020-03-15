@@ -4,7 +4,7 @@ Thank you for contributing to plotly.py!
 
 ## Code of Conduct
 
-Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the general idea is to be nice. 
+Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the general idea is to be nice.
 
 ## Have a Bug Report?
 
