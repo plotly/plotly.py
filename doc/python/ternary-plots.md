@@ -33,7 +33,35 @@ jupyter:
     thumbnail: thumbnail/v4-migration.png
 ---
 
-### Basic Ternary Plot with Markers
+## Ternary Plots
+
+A ternary plot depicts the ratios of three variables as positions in an equilateral triangle.
+
+## Ternary scatter plot with Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+Here we use `px.scatter_ternary` to visualize thre three-way split between the three major candidates in a municipal election.
+
+```python
+import plotly.express as px
+df = px.data.election()
+fig = px.scatter_ternary(df, a="Joly", b="Coderre", c="Bergeron")
+fig.show()
+```
+
+We can scale and color the markers to produce a ternary bubble chart.
+
+```python
+import plotly.express as px
+df = px.data.election()
+fig = px.scatter_ternary(df, a="Joly", b="Coderre", c="Bergeron", hover_name="district", 
+    color="winner", size="total", size_max=15,
+    color_discrete_map = {"Joly": "blue", "Bergeron": "green", "Coderre":"red"} )
+fig.show()
+```
+
+### Ternary scatter plot with Plotly Graph Objects
 
 ```python
 import plotly.graph_objects as go
