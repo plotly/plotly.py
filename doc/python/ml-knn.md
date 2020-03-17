@@ -23,7 +23,7 @@ jupyter:
     version: 3.7.6
   plotly:
     description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
-      with Plotly
+      in Python with Plotly.
     display_as: ai_ml
     language: python
     layout: base
