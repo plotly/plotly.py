@@ -1,10 +1,13 @@
 # Contributing
 
-Thank you for contributing to plotly.py!
+Thank you for contributing to plotly.py! We are actively looking for
+diverse contributors. 
 
 ## Code of Conduct
 
 Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the general idea is to be nice.
+
+## How to start contributing? 
 
 ## Have a Bug Report?
 
