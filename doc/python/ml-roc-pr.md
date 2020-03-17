@@ -23,7 +23,7 @@ jupyter:
     version: 3.7.6
   plotly:
     description: Interpret the results of your classification using Receiver Operating
-      Characteristics (ROC) and Precision-Recall (PR) Curves using Plotly on Python.
+      Characteristics (ROC) and Precision-Recall (PR) Curves in Python with Plotly.
     display_as: ai_ml
     language: python
     layout: base
