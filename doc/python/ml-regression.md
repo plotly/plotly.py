@@ -39,7 +39,7 @@ jupyter:
 ### Ordinary Least Square (OLS) with `plotly.express`
 
 
-This example shows how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS) for predicting the tips servers will receive based on the value of the total bill.
+This example shows how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS) for predicting the tips waiters will receive based on the value of the total bill.
 
 ```python
 import plotly.express as px
@@ -88,7 +88,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 df = px.data.tips()
-X = df.total_bill.values.reshape(-1, 1)
+X = df.total_bill[:, None]
 X_train, X_test, y_train, y_test = train_test_split(X, df.tip, random_state=0)
 
 model = LinearRegression()
@@ -162,8 +162,8 @@ X = df.total_bill.values.reshape(-1, 1)
 x_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
 
 fig = px.scatter(df, x='total_bill', y='tip', opacity=0.65)
-for n_features in [1, 2, 3, 4]:
-    poly = PolynomialFeatures(n_features)
+for degree in [1, 2, 3, 4]:
+    poly = PolynomialFeatures(degree)
     poly.fit(X)
     X_poly = poly.transform(X)
     x_range_poly = poly.transform(x_range)
@@ -180,13 +180,13 @@ fig.show()
 
 ## 3D regression surface with `px.scatter_3d` and `go.Surface`
 
-Visualize the decision plane of your model whenever you have more than one variable in your input data.
+Visualize the decision plane of your model whenever you have more than one variable in your input data. Here, we will use [`sklearn.svm.SVR`](https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html), which is a Support Vector Machine (SVM) model specifically designed for regression.
 
 ```python
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.svm import SVR
 
 mesh_size = .02
 margin = 0
@@ -197,8 +197,8 @@ X = df[['sepal_width', 'sepal_length']]
 y = df['petal_width']
 
 # Condition the model on sepal width and length, predict the petal width
-knn = KNeighborsRegressor(10, weights='distance')
-knn.fit(X, y)
+model = SVR(C=1.)
+model.fit(X, y)
 
 # Create a mesh grid on which we will run our model
 x_min, x_max = X.sepal_width.min() - margin, X.sepal_width.max() + margin
@@ -207,8 +207,8 @@ xrange = np.arange(x_min, x_max, mesh_size)
 yrange = np.arange(y_min, y_max, mesh_size)
 xx, yy = np.meshgrid(xrange, yrange)
 
-# Run kNN
-pred = knn.predict(np.c_[xx.ravel(), yy.ravel()])
+# Run model
+pred = model.predict(np.c_[xx.ravel(), yy.ravel()])
 pred = pred.reshape(xx.shape)
 
 # Generate the plot
@@ -271,7 +271,7 @@ model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
 
-fig = px.scatter(x=y_pred, y=y, labels={'x': 'prediction', 'y': 'actual'})
+fig = px.scatter(x=y, y=y_pred, labels={'x': 'ground truth', 'y': 'prediction'})
 fig.add_shape(
     type="line", line=dict(dash='dash'),
     x0=y.min(), y0=y.min(), 
@@ -308,10 +308,11 @@ model.fit(X_train, y_train)
 df['prediction'] = model.predict(X)
 
 fig = px.scatter(
-    df, x='prediction', y='petal_width',
+    df, x='petal_width', y='prediction',
     marginal_x='histogram', marginal_y='histogram',
     color='split', trendline='ols'
 )
+fig.update_traces(histnorm='probability', selector={'type':'histogram'})
 fig.add_shape(
     type="line", line=dict(dash='dash'),
     x0=y.min(), y0=y.min(), 

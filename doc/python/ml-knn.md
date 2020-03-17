@@ -105,7 +105,7 @@ fig = px.scatter(
     X_test, x=0, y=1, 
     color=y_score, color_continuous_scale='RdBu',
     symbol=y_test, symbol_map={'0': 'square-dot', '1': 'circle-dot'},
-    labels={'symbol': 'Label', 'color': 'Score'}
+    labels={'symbol': 'label', 'color': 'score of <br>first class'}
 )
 fig.update_traces(marker_size=12, marker_line_width=1.5)
 fig.update_layout(legend_orientation='h')
