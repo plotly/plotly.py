@@ -23,7 +23,7 @@ jupyter:
     version: 3.7.6
   plotly:
     description: Visualize Principle Component Analysis (PCA) of your high-dimensional
-      data with Plotly on Python.
+      data in Python with Plotly.
     display_as: ai_ml
     language: python
     layout: base
