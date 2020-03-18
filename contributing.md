@@ -8,7 +8,7 @@ Check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, but the ge
 
 ## Have a Bug Report?
 
-Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible that your issue was already addressed. If it wasn't, open it. We also accept PRs; take a look at the steps below for instructions on how to do this.
+Open an issue! Go to https://github.com/plotly/plotly.py/issues. It's possible that your issue was already addressed. If it wasn't, open it. We also accept PRs; take a look at the steps below for instructions on how to do this. 
 
 ## Have Questions about Plotly?
 
