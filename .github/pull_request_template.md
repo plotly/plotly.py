@@ -1,5 +1,10 @@
 <!--
-Please uncomment this block and take a look at this checklist if your PR is making substantial changes to documentation/impacts files in the `doc` directory. Check all that apply to your PR, and leave the rest unchecked to discuss with your reviewer! Not all boxes must be checked for every PR :)
+Please uncomment this block and take a look at this checklist if your PR is making substantial changes to **documentation**/impacts files in the `doc` directory. Check all that apply to your PR, and leave the rest unchecked to discuss with your reviewer! Not all boxes must be checked for every PR :)
+
+If your PR modifies code of the `plotly` package, we have a different checklist
+below :-).
+
+### Documentation PR
 
 - [ ] I've [seen the `doc/README.md` file](https://github.com/plotly/plotly.py/blob/master/doc/README.md)
 - [ ] This change runs in the current version of Plotly on PyPI and targets the `doc-prod` branch OR it targets the `master` branch
@@ -19,5 +24,11 @@ Please uncomment this block and take a look at this checklist if your PR is maki
 - [ ] `fig.show()` is at the end of each new/modified example
 - [ ] `plotly.plot()` and `plotly.iplot()` are not used in any new/modified example
 - [ ] Hex codes for colors are not used in any new/modified example in favour of [these nice ones](https://github.com/plotly/plotly.py/issues/2192)
+
+## Code PR
+
+- [ ] I have read through the [contributing notes](https://github.com/plotly/plotly.py/blob/master/contributing.md) and understand the structure of the package. In particular, if my PR modifies code of `plotly.graph_objects`, my modifications concern the `codegen` files and not generated files.
+- [ ] I have added tests (if submitting a new feature or correcting a bug) or
+  modified existing tests.
 
 -->
