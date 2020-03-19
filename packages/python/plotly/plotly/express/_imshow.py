@@ -68,7 +68,7 @@ def imshow(
     zmin=None,
     zmax=None,
     origin=None,
-    labels=None,
+    labels={},
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -103,6 +103,14 @@ def imshow(
     origin : str, 'upper' or 'lower' (default 'upper')
         position of the [0, 0] pixel of the image array, in the upper left or lower left
         corner. The convention 'upper' is typically used for matrices and images.
+
+    labels : dict with str keys and str values (default `{}`)
+        Overrides names used in the figure for axis titles (keys ``x`` and ``y``),
+        colorbar title (key ``colorbar``) and hover (key ``color``). The values
+        should correspond to the desired label to be displayed. If ``img`` is an
+        xarray, dimension names are used for axis titles, and long name for the
+        colorbar title (unless overridden in ``labels``). Possible keys are:
+        x, y, color and colorbar.
 
     color_continuous_scale : str or list of str
         colormap used to map scalar data to colors (for a 2D image). This parameter is
@@ -161,6 +169,7 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     img_is_xarray = False
+    colorbar_title = ''
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
             y_label, x_label = img.dims[0], img.dims[1]
@@ -173,8 +182,18 @@ def imshow(
             img_is_xarray = True
             if aspect is None:
                 aspect = "auto"
-            z_name = img.attrs["long_name"] if "long_name" in img.attrs else "z"
-     #TODO if ...
+            z_name = img.attrs["long_name"] if "long_name" in img.attrs else ""
+            colorbar_title = z_name
+
+    if labels is not None:
+        if 'x' in labels:
+            y_label = labels['x']
+        if 'y' in labels:
+            y_label = labels['y']
+        if 'color' in labels:
+            z_name = labels['color']
+        if 'colorbar' in labels:
+            colorbar_title = labels['colorbar']
 
     if not img_is_xarray:
         if aspect is None:
@@ -207,6 +226,7 @@ def imshow(
             cmid=color_continuous_midpoint,
             cmin=range_color[0],
             cmax=range_color[1],
+            colorbar=dict(title=colorbar_title)
         )
 
     # For 2D+RGB data, use Image trace

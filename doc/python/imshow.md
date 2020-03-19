@@ -112,16 +112,15 @@ fig.show()
 
 ### Display an xarray image with px.imshow
 
-[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for ticks. (If you don't want this behavior, just pass `img.values` which is a NumPy array if `img` is an xarray).
+[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for axis titles. If you don't want this behavior, you can pass `img.values` which is a NumPy array if `img` is an xarray. Alternatively, you can override axis titles hover labels and colorbar title using the `labels` attribute, as below.
 
 ```python
 import plotly.express as px
 import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
-# We remove 273.5 to display Celsius degrees instead of Kelvin degrees
 airtemps = xr.tutorial.open_dataset('air_temperature').air.sel(lon=250.0)
-#airtemps.attrs['long_name'] = 'Temperature' # used for hover
-fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower')
+fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower',
+                labels={'colorbar':airtemps.attrs['var_desc']})
 fig.show()
 ```
 
@@ -132,9 +131,10 @@ For xarrays, by default `px.imshow` does not constrain pixels to be square, sinc
 ```python
 import plotly.express as px
 import xarray as xr
-airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(time=500) - 273.5
-airtemps.attrs['long_name'] = 'Temperature' # used for hover
-fig = px.imshow(airtemps, color_continuous_scale='RdBu_r', aspect='equal')
+airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(time=500)
+colorbar_title = airtemps.attrs['var_desc'] + '<br> (%s)'%airtemps.attrs['units']
+fig = px.imshow(airtemps, color_continuous_scale='RdBu_r', aspect='equal',
+                labels={'colorbar':colorbar_title})
 fig.show()
 ```
 
