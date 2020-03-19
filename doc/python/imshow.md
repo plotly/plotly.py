@@ -119,8 +119,8 @@ import plotly.express as px
 import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 # We remove 273.5 to display Celsius degrees instead of Kelvin degrees
-airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(lon=20) - 273.5
-airtemps.attrs['long_name'] = 'Temperature' # used for hover
+airtemps = xr.tutorial.open_dataset('air_temperature').air.sel(lon=250.0)
+#airtemps.attrs['long_name'] = 'Temperature' # used for hover
 fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower')
 fig.show()
 ```
