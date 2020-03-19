@@ -169,7 +169,7 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     img_is_xarray = False
-    colorbar_title = ''
+    colorbar_title = ""
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
             y_label, x_label = img.dims[0], img.dims[1]
@@ -186,14 +186,14 @@ def imshow(
             colorbar_title = z_name
 
     if labels is not None:
-        if 'x' in labels:
-            y_label = labels['x']
-        if 'y' in labels:
-            y_label = labels['y']
-        if 'color' in labels:
-            z_name = labels['color']
-        if 'colorbar' in labels:
-            colorbar_title = labels['colorbar']
+        if "x" in labels:
+            y_label = labels["x"]
+        if "y" in labels:
+            y_label = labels["y"]
+        if "color" in labels:
+            z_name = labels["color"]
+        if "colorbar" in labels:
+            colorbar_title = labels["colorbar"]
 
     if not img_is_xarray:
         if aspect is None:
@@ -226,7 +226,7 @@ def imshow(
             cmid=color_continuous_midpoint,
             cmin=range_color[0],
             cmax=range_color[1],
-            colorbar=dict(title=colorbar_title)
+            colorbar=dict(title=colorbar_title),
         )
 
     # For 2D+RGB data, use Image trace
