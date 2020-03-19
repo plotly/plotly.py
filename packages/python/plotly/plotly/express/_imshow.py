@@ -68,6 +68,7 @@ def imshow(
     zmin=None,
     zmax=None,
     origin=None,
+    labels=None,
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -173,6 +174,7 @@ def imshow(
             if aspect is None:
                 aspect = "auto"
             z_name = img.attrs["long_name"] if "long_name" in img.attrs else "z"
+     #TODO if ...
 
     if not img_is_xarray:
         if aspect is None:
