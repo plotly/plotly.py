@@ -182,7 +182,7 @@ def imshow(
             img_is_xarray = True
             if aspect is None:
                 aspect = "auto"
-            z_name = img.attrs["long_name"] if "long_name" in img.attrs else ""
+            z_name = xarray.plot.utils.label_from_attrs(img).replace("\n", "<br>")
             colorbar_title = z_name
 
     if labels is not None:

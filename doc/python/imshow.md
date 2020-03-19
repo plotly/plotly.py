@@ -112,7 +112,7 @@ fig.show()
 
 ### Display an xarray image with px.imshow
 
-[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for axis titles. If you don't want this behavior, you can pass `img.values` which is a NumPy array if `img` is an xarray. Alternatively, you can override axis titles hover labels and colorbar title using the `labels` attribute, as below.
+[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for axis titles. If you don't want this behavior, you can pass `img.values` which is a NumPy array if `img` is an xarray. Alternatively, you can override axis titles hover labels and colorbar title using the `labels` attribute, as in the next example.
 
 ```python
 import plotly.express as px
@@ -120,7 +120,8 @@ import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 airtemps = xr.tutorial.open_dataset('air_temperature').air.sel(lon=250.0)
 fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower',
-                labels={'colorbar':airtemps.attrs['var_desc']})
+                #labels={'colorbar':airtemps.attrs['var_desc']}
+               )
 fig.show()
 ```
 
