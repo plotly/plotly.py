@@ -30,5 +30,7 @@ below :-).
 - [ ] I have read through the [contributing notes](https://github.com/plotly/plotly.py/blob/master/contributing.md) and understand the structure of the package. In particular, if my PR modifies code of `plotly.graph_objects`, my modifications concern the `codegen` files and not generated files.
 - [ ] I have added tests (if submitting a new feature or correcting a bug) or
   modified existing tests.
+- [ ] For a new feature, I have added documentation examples in an existing or
+  new tutorial notebook (please see the doc checklist as well).
 
 -->
