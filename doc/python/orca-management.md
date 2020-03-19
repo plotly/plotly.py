@@ -164,7 +164,7 @@ Searched for executable 'orca' on the following path:
 
 If you haven't installed orca yet, you can do so using conda as follows:
 
-    $ conda install -c plotly plotly-orca
+    $ conda install -c plotly plotly-orca==1.2.1
 
 Alternatively, see other installation methods in the orca project README at
 https://github.com/plotly/orca.

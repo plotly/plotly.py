@@ -19,5 +19,5 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
 requests nbformat six retrying psutil pandas decorator pytest mock nose poppler xarray scikit-image ipython jupyter ipykernel ipywidgets
 
     # Install orca into environment
-    $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca
+    $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca==1.2.1
 fi

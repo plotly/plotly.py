@@ -199,7 +199,7 @@ installation of the plotly [orca](https://github.com/plotly/orca) command line u
 These dependencies can all be installed using conda:
 
 ```
-$ conda install -c plotly plotly-orca psutil requests
+$ conda install -c plotly plotly-orca==1.2.1 psutil requests
 ```
 
 Or, `psutil` and `requests` can be installed using pip...
