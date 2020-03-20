@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
-      jupytext_version: 1.3.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description:
-      How to use datashader to rasterize large datasets, and visualize
+    description: How to use datashader to rasterize large datasets, and visualize
       the generated raster data with plotly.
     display_as: scientific
     language: python
@@ -107,9 +106,12 @@ df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2
 cvs = ds.Canvas(plot_width=100, plot_height=100)
 agg = cvs.points(df, 'SCHEDULED_DEPARTURE', 'DEPARTURE_DELAY')
 agg.values = np.log10(agg.values)
-agg.attrs['long_name'] = 'Log10(count)'
-fig = px.imshow(agg, origin='lower')
+fig = px.imshow(agg, origin='lower', labels={'color':'Log10(count)'})
 fig.update_traces(hoverongaps=False)
-fig.update_layout(coloraxis_colorbar=dict(title='Count (Log)', tickprefix='1.e'))
+fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))
 fig.show()
+```
+
+```python
+
 ```
