@@ -164,6 +164,7 @@ def test_external_server_url():
     # Build external orca command
     orca_path = which("orca")
     cmd_list = [orca_path] + [
+        "--no-sandbox",
         "serve",
         "-p",
         str(port),

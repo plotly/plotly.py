@@ -1142,7 +1142,9 @@ this message for details on what went wrong.
     # ### Run with Popen so we get access to stdout and stderr
     with orca_env():
         p = subprocess.Popen(
-            executable_list + ["--help"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            executable_list + ["--no-sandbox", "--help"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
 
         help_result, help_error = p.communicate()
@@ -1212,7 +1214,7 @@ The error encountered is that unexpected output was returned by the command
     # ### Run with Popen so we get access to stdout and stderr
     with orca_env():
         p = subprocess.Popen(
-            executable_list + ["--version"],
+            executable_list + ["--no-sandbox", "--version"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
         )
@@ -1406,6 +1408,7 @@ Install using conda:
 
                 # Build orca command list
                 cmd_list = status._props["executable_list"] + [
+                    "--no-sandbox",
                     "serve",
                     "-p",
                     str(orca_state["port"]),
