@@ -70,7 +70,7 @@ import plotly.graph_objects as go
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[0, 2, 3, 5], fill='tozeroy',
-                    mode='none' # override default markers+lines
+                    mode='none' # override default markers+lines
                     ))
 fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[3, 5, 1, 7], fill='tonexty',
                     mode= 'none'))
@@ -92,7 +92,7 @@ fig.add_trace(go.Scatter(x=[1, 2, 3, 4], y=[3, 4, 8, 3],
 fig.add_trace(go.Scatter(
     x=[1, 2, 3, 4],
     y=[1, 6, 2, 6],
-    fill='tonexty', # fill area between trace0 and trace1
+    fill='tonexty', # fill area between trace0 and trace1
     mode='lines', line_color='indigo'))
 
 fig.show()

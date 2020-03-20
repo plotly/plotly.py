@@ -244,7 +244,7 @@ fig.add_trace(go.Histogram(
     x=x0,
     histnorm='percent',
     name='control', # name used in legend and hover labels
-    xbins=dict( # bins used for histogram
+    xbins=dict( # bins used for histogram
         start=-4.0,
         end=3.0,
         size=0.5
@@ -266,10 +266,10 @@ fig.add_trace(go.Histogram(
 ))
 
 fig.update_layout(
-    title_text='Sampled Results', # title of plot
+    title_text='Sampled Results', # title of plot
     xaxis_title_text='Value', # xaxis label
     yaxis_title_text='Count', # yaxis label
-    bargap=0.2, # gap between bars of adjacent location coordinates
+    bargap=0.2, # gap between bars of adjacent location coordinates
     bargroupgap=0.1 # gap between bars of the same location coordinates
 )
 
@@ -338,7 +338,7 @@ trace5 = go.Histogram(x=x,
                       xbins=dict(
                       start='1969-11-15',
                       end='1972-03-31',
-                      size= 'M2'), # 2 months
+                      size= 'M2'), # 2 months
                       autobinx = False
                       )
 

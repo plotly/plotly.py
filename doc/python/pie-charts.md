@@ -81,9 +81,9 @@ For more information about discrete colors, see the [dedicated page](/python/dis
 import plotly.express as px
 df = px.data.tips()
 fig = px.pie(df, values='tip', names='day', color='day',
-             color_discrete_map={'Thur':'lightcyan', 
-                                 'Fri':'cyan', 
-                                 'Sat':'royalblue', 
+             color_discrete_map={'Thur':'lightcyan',
+                                 'Fri':'cyan',
+                                 'Sat':'royalblue',
                                  'Sun':'darkblue'})
 fig.show()
 ```
@@ -213,7 +213,7 @@ fig.add_trace(go.Pie(labels=labels, values=[16, 15, 12, 6, 5, 4, 42], name="GHG 
 fig.add_trace(go.Pie(labels=labels, values=[27, 11, 25, 8, 1, 3, 25], name="CO2 Emissions"),
               1, 2)
 
-# Use `hole` to create a donut-like pie chart
+# Use `hole` to create a donut-like pie chart
 fig.update_traces(hole=.4, hoverinfo="label+percent+name")
 
 fig.update_layout(

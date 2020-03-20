@@ -280,7 +280,7 @@ fig.add_trace(go.Box(
     name="All Points",
     jitter=0.3,
     pointpos=-1.8,
-    boxpoints='all', # represent all points
+    boxpoints='all', # represent all points
     marker_color='rgb(7,40,89)',
     line_color='rgb(7,40,89)'
 ))
@@ -353,7 +353,7 @@ fig.add_trace(go.Box(
 
 fig.update_layout(
     yaxis_title='normalized moisture',
-    boxmode='group' # group together boxes of the different traces for each value of x
+    boxmode='group' # group together boxes of the different traces for each value of x
 )
 fig.show()
 ```

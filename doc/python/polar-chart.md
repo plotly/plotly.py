@@ -257,7 +257,7 @@ fig.update_traces(mode = "lines+markers",
 # The sector is [0, 360] by default, we update it for the first plot only
 fig.update_layout(
     showlegend = False,
-    polar = dict(# setting parameters for the second plot would be polar2=dict(...)
+    polar = dict(# setting parameters for the second plot would be polar2=dict(...)
       sector = [150,210],
     ))
 

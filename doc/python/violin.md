@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/violin.jpg
 ---
 
-## Violin Plot with Plotly Express
+## Violin Plot with Plotly Express
 
 A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](https://plot.ly/python/box-plots/), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
 
@@ -233,7 +233,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Ridgeline plot
+#### Ridgeline plot
 
 A ridgeline plot ([previously known as Joy Plot](https://serialmentor.com/blog/2017/9/15/goodbye-joyplots)) shows the distribution of a numerical value for several groups. They can be used for visualizing changes in distributions over time or space.
 

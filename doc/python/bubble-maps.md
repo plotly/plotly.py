@@ -50,7 +50,7 @@ fig = px.scatter_geo(df, locations="iso_alpha", color="continent",
 fig.show()
 ```
 
-### Bubble Map with animation
+### Bubble Map with animation
 
 ```python
 import plotly.express as px
