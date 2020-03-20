@@ -168,6 +168,7 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     img_is_xarray = False
+    z_name = ""
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
             y_label, x_label = img.dims[0], img.dims[1]
