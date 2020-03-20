@@ -168,7 +168,9 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     img_is_xarray = False
-    z_name = ""
+    x_label = "x"
+    y_label = "y"
+    z_label = ""
     if xarray_imported:
         if isinstance(img, xarray.DataArray):
             y_label, x_label = img.dims[0], img.dims[1]
@@ -181,15 +183,15 @@ def imshow(
             img_is_xarray = True
             if aspect is None:
                 aspect = "auto"
-            z_name = xarray.plot.utils.label_from_attrs(img).replace("\n", "<br>")
+            z_label = xarray.plot.utils.label_from_attrs(img).replace("\n", "<br>")
 
     if labels is not None:
         if "x" in labels:
-            y_label = labels["x"]
+            x_label = labels["x"]
         if "y" in labels:
             y_label = labels["y"]
         if "color" in labels:
-            z_name = labels["color"]
+            z_label = labels["color"]
 
     if not img_is_xarray:
         if aspect is None:
@@ -222,7 +224,7 @@ def imshow(
             cmid=color_continuous_midpoint,
             cmin=range_color[0],
             cmax=range_color[1],
-            colorbar=dict(title=z_name),
+            colorbar=dict(title=z_label),
         )
 
     # For 2D+RGB data, use Image trace
@@ -248,18 +250,19 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
+    if img.ndim <= 2:
+        hovertemplate = (
+            x_label
+            + ": %{x} <br>"
+            + y_label
+            + ": %{y} <br>"
+            + z_label
+            + " : %{z}<extra></extra>"
+        )
+        fig.update_traces(hovertemplate=hovertemplate)
     if img_is_xarray:
-        if img.ndim <= 2:
-            hovertemplate = (
-                x_label
-                + ": %{x} <br>"
-                + y_label
-                + ": %{y} <br>"
-                + z_name
-                + " : %{z}<extra></extra>"
-            )
-            fig.update_traces(x=x, y=y, hovertemplate=hovertemplate)
-        fig.update_xaxes(title_text=x_label)
-        fig.update_yaxes(title_text=y_label)
+        fig.update_traces(x=x, y=y)
+    fig.update_xaxes(title_text=x_label)
+    fig.update_yaxes(title_text=y_label)
     fig.update_layout(template=args["template"], overwrite=True)
     return fig
