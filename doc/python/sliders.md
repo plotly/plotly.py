@@ -33,8 +33,8 @@ jupyter:
     thumbnail: thumbnail/slider2017.gif
 ---
 
-#### Simple Slider Control
-Sliders can now be used in Plotly to change the data displayed or style of a plot!
+### Simple Slider Control
+Sliders can be used in Plotly to change the data displayed or style of a plot. 
 
 ```python
 import plotly.graph_objects as go
@@ -60,10 +60,11 @@ fig.data[10].visible = True
 steps = []
 for i in range(len(fig.data)):
     step = dict(
-        method="restyle",
-        args=["visible", [False] * len(fig.data)],
+        method="update",
+        args=[{"visible": [False] * len(fig.data)},
+              {"title": "Slider switched to step: " + str(i)}],  # layout attribute
     )
-    step["args"][1][i] = True  # Toggle i'th trace to "visible"
+    step["args"][0]["visible"][i] = True  # Toggle i'th trace to "visible"
     steps.append(step)
 
 sliders = [dict(
@@ -77,6 +78,28 @@ fig.update_layout(
     sliders=sliders
 )
 
+fig.show()
+```
+
+#### Methods
+The method determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](https://plot.ly/python/reference/#layout-updatemenus-items-updatemenu-buttons-items-button-method) methods to add the slider:
+- `"restyle"`: modify **data** attributes
+- `"relayout"`: modify **layout** attributes
+- `"update"`: modify **data and layout** attributes
+- `"animate"`: start or pause an animation
+
+### Sliders in Plotly Express
+Plotly Express provide sliders, but with implicit animation. The animation can be ommited by removing `updatemenus` in the `layout`:
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder()
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animation_group="country",
+           size="pop", color="continent", hover_name="country",
+           log_x=True, size_max=55, range_x=[100,100000], range_y=[25,90])
+
+fig["layout"].pop("updatemenus") # optional, drop animation buttons
 fig.show()
 ```
 
