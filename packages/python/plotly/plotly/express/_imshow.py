@@ -185,7 +185,7 @@ def imshow(
 
     if labels is not None:
         if "x" in labels:
-            y_label = labels["x"]
+            x_label = labels["x"]
         if "y" in labels:
             y_label = labels["y"]
         if "color" in labels:
