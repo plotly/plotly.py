@@ -43,7 +43,7 @@ Install the Python library `networkx` with `pip install networkx`.
 
 
 
-### Create random graph
+### Create random graph
 
 ```python
 import plotly.graph_objects as go

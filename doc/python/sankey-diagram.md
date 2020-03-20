@@ -39,7 +39,7 @@ A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) is a flow diagr
 
 
 ### Basic Sankey Diagram
-Sankey diagrams visualize the contributions to a flow by defining [source](https://plot.ly/python/reference/#sankey-link-source) to represent the source node, [target](https://plot.ly/python/reference/#sankey-link-target) for the target node, [value](https://plot.ly/python/reference/#sankey-link-value) to set the flow volum, and [label](https://plot.ly/python/reference/#sankey-node-label) that shows the node name. 
+Sankey diagrams visualize the contributions to a flow by defining [source](https://plot.ly/python/reference/#sankey-link-source) to represent the source node, [target](https://plot.ly/python/reference/#sankey-link-target) for the target node, [value](https://plot.ly/python/reference/#sankey-link-value) to set the flow volum, and [label](https://plot.ly/python/reference/#sankey-node-label) that shows the node name.
 
 ```python
 import plotly.graph_objects as go
@@ -74,7 +74,7 @@ data = json.loads(response.read())
 fig = go.Figure(data=[go.Sankey(
     valueformat = ".0f",
     valuesuffix = "TWh",
-    # Define nodes
+    # Define nodes
     node = dict(
       pad = 15,
       thickness = 15,
@@ -96,7 +96,7 @@ fig.show()
 ```
 
 ### Style Sankey Diagram
-This example also uses [hovermode](https://plot.ly/python/reference/#layout-hovermode) to enable multiple tooltips. 
+This example also uses [hovermode](https://plot.ly/python/reference/#layout-hovermode) to enable multiple tooltips.
 
 ```python
 import plotly.graph_objects as go
@@ -147,7 +147,7 @@ fig = go.Figure(go.Sankey(
         "label": ["A", "B", "C", "D", "E", "F"],
         "x": [0.2, 0.1, 0.5, 0.7, 0.3, 0.5],
         "y": [0.7, 0.5, 0.2, 0.4, 0.2, 0.3],
-        'pad':10},  # 10 Pixels 
+        'pad':10},  # 10 Pixels
     link = {
         "source": [0, 0, 1, 2, 5, 4, 3, 5],
         "target": [5, 3, 4, 3, 0, 2, 2, 3],

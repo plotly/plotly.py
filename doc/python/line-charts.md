@@ -70,7 +70,7 @@ fig = px.line(df, x="year", y="lifeExp", color="continent",
 fig.show()
 ```
 
-### Line Plot with go.Scatter
+### Line Plot with go.Scatter
 
 If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plot.ly/python/reference/#scatter).
 

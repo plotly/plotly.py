@@ -62,7 +62,7 @@ fig = go.Figure(data=go.Scatter(
 fig.show()
 ```
 
-#### Peak Detection
+#### Peak Detection
 
 We need to find the x-axis indices for the peaks in order to determine where the peaks are located.
 
