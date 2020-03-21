@@ -50,7 +50,7 @@ fig.show()
 data_canada
 ```
 
-### Customize bar chart with Plotly Express
+### Customize bar chart with Plotly Express
 
 The bar plot can be customized using keyword arguments.
 
@@ -121,7 +121,7 @@ fig = go.Figure(data=[
     go.Bar(name='SF Zoo', x=animals, y=[20, 14, 23]),
     go.Bar(name='LA Zoo', x=animals, y=[12, 18, 29])
 ])
-# Change the bar mode
+# Change the bar mode
 fig.update_layout(barmode='group')
 fig.show()
 ```
@@ -213,7 +213,7 @@ fig.add_trace(go.Bar(
     marker_color='lightsalmon'
 ))
 
-# Here we modify the tickangle of the xaxis, resulting in rotated labels.
+# Here we modify the tickangle of the xaxis, resulting in rotated labels.
 fig.update_layout(barmode='group', xaxis_tickangle=-45)
 fig.show()
 ```
