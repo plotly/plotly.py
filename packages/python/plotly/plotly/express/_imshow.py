@@ -69,6 +69,8 @@ def imshow(
     zmax=None,
     origin=None,
     labels={},
+    x=None,
+    y=None,
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -167,33 +169,33 @@ def imshow(
     """
     args = locals()
     apply_default_cascade(args)
-    img_is_xarray = False
-    x_label = "x"
-    y_label = "y"
-    z_label = ""
-    if xarray_imported:
-        if isinstance(img, xarray.DataArray):
-            y_label, x_label = img.dims[0], img.dims[1]
-            # np.datetime64 is not handled correctly by go.Heatmap
-            for ax in [x_label, y_label]:
-                if np.issubdtype(img.coords[ax].dtype, np.datetime64):
-                    img.coords[ax] = img.coords[ax].astype(str)
+    labels = labels.copy()
+    if xarray_imported and isinstance(img, xarray.DataArray):
+        y_label, x_label = img.dims[0], img.dims[1]
+        # np.datetime64 is not handled correctly by go.Heatmap
+        for ax in [x_label, y_label]:
+            if np.issubdtype(img.coords[ax].dtype, np.datetime64):
+                img.coords[ax] = img.coords[ax].astype(str)
+        if x is None:
             x = img.coords[x_label]
+        if y is None:
             y = img.coords[y_label]
-            img_is_xarray = True
-            if aspect is None:
-                aspect = "auto"
-            z_label = xarray.plot.utils.label_from_attrs(img).replace("\n", "<br>")
-
-    if labels is not None:
-        if "x" in labels:
-            x_label = labels["x"]
-        if "y" in labels:
-            y_label = labels["y"]
-        if "color" in labels:
-            z_label = labels["color"]
-
-    if not img_is_xarray:
+        if aspect is None:
+            aspect = "auto"
+        if labels.get("x", None) is None:
+            labels["x"] = x_label
+        if labels.get("y", None) is None:
+            labels["y"] = y_label
+        if labels.get("color", None) is None:
+            labels["color"] = xarray.plot.utils.label_from_attrs(img)
+            labels["color"] = labels["color"].replace("\n", "<br>")
+    else:
+        if labels.get("x", None) is None:
+            labels["x"] = ""
+        if labels.get("y", None) is None:
+            labels["y"] = ""
+        if labels.get("color", None) is None:
+            labels["color"] = ""
         if aspect is None:
             aspect = "equal"
 
@@ -205,7 +207,7 @@ def imshow(
 
     # For 2d data, use Heatmap trace
     if img.ndim == 2:
-        trace = go.Heatmap(z=img, coloraxis="coloraxis1")
+        trace = go.Heatmap(x=x, y=y, z=img, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
         layout = dict(yaxis=dict(autorange=autorange))
         if aspect == "equal":
@@ -224,8 +226,9 @@ def imshow(
             cmid=color_continuous_midpoint,
             cmin=range_color[0],
             cmax=range_color[1],
-            colorbar=dict(title=z_label),
         )
+        if labels["color"]:
+            layout["coloraxis1"]["colorbar"] = dict(title=labels["color"])
 
     # For 2D+RGB data, use Image trace
     elif img.ndim == 3 and img.shape[-1] in [3, 4]:
@@ -250,19 +253,13 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
-    if img.ndim <= 2:
-        hovertemplate = (
-            x_label
-            + ": %{x} <br>"
-            + y_label
-            + ": %{y} <br>"
-            + z_label
-            + " : %{z}<extra></extra>"
-        )
-        fig.update_traces(hovertemplate=hovertemplate)
-    if img_is_xarray:
-        fig.update_traces(x=x, y=y)
-    fig.update_xaxes(title_text=x_label)
-    fig.update_yaxes(title_text=y_label)
+    fig.update_traces(
+        hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{z}<extra></extra>"
+        % (labels["x"] or "x", labels["y"] or "y", labels["color"] or "color",)
+    )
+    if labels["x"]:
+        fig.update_xaxes(title_text=labels["x"])
+    if labels["y"]:
+        fig.update_yaxes(title_text=labels["y"])
     fig.update_layout(template=args["template"], overwrite=True)
     return fig

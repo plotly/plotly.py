@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.8
   plotly:
     description: How to display image data in Python with Plotly.
     display_as: scientific
@@ -93,7 +93,11 @@ fig.show()
 import plotly.express as px
 import numpy as np
 img = np.arange(100).reshape((10, 10))
-fig = px.imshow(img, color_continuous_scale='gray')
+fig = px.imshow(img, color_continuous_scale='gray', labels=dict(x="yoo", y="yaa", color="hey"),
+               width=600, height=600, 
+                x=["a","b","c","d","e","f","g","h","i","j"],
+                y=["a","b","c","d","e","f","g","h","i","j"]
+               )
 fig.show()
 ```
 
@@ -120,7 +124,7 @@ import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 airtemps = xr.tutorial.open_dataset('air_temperature').air.sel(lon=250.0)
 fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower',
-                #labels={'colorbar':airtemps.attrs['var_desc']}
+                labels={'color':airtemps.attrs['var_desc']}
                )
 fig.show()
 ```
@@ -133,9 +137,8 @@ For xarrays, by default `px.imshow` does not constrain pixels to be square, sinc
 import plotly.express as px
 import xarray as xr
 airtemps = xr.tutorial.open_dataset('air_temperature').air.isel(time=500)
-colorbar_title = airtemps.attrs['var_desc'] + '<br> (%s)'%airtemps.attrs['units']
-fig = px.imshow(airtemps, color_continuous_scale='RdBu_r', aspect='equal',
-                labels={'colorbar':colorbar_title})
+colorbar_title = airtemps.attrs['var_desc'] + '<br>(%s)'%airtemps.attrs['units']
+fig = px.imshow(airtemps, color_continuous_scale='RdBu_r', aspect='equal')
 fig.show()
 ```
 
