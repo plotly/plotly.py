@@ -74,7 +74,7 @@ fig = px.imshow(img)
 fig.show()
 ```
 
-### Display single-channel 2D image as grayscale
+### Display single-channel 2D data as a heatmap
 
 For a 2D image, `px.imshow` uses a colorscale to map scalar data to colors. The default colorscale is the one of the active template (see [the tutorial on templates](/python/templates/)).
 
@@ -88,22 +88,29 @@ fig.show()
 
 ### Choose the colorscale to display a single-channel image
 
+You can customize the [continuous color scale](/python/colorscales/) just like with any other Plotly Express function:
 
 ```python
 import plotly.express as px
 import numpy as np
 img = np.arange(100).reshape((10, 10))
-fig = px.imshow(img, color_continuous_scale='gray', labels=dict(x="yoo", y="yaa", color="hey"),
-               width=600, height=600, 
-                x=["a","b","c","d","e","f","g","h","i","j"],
-                y=["a","b","c","d","e","f","g","h","i","j"]
-               )
+fig = px.imshow(img, color_continuous_scale='Viridis')
 fig.show()
 ```
 
-### Hiding the colorbar when displaying a single-channel image
+You can use this to make the image grayscale as well:
 
-See [the tutorial on coloraxis](/python/colorscales/#share-color-axis) for more details on coloraxis.
+```python
+import plotly.express as px
+import numpy as np
+img = np.arange(100).reshape((10, 10))
+fig = px.imshow(img, color_continuous_scale='gray')
+fig.show()
+```
+
+### Hiding the colorbar and axis labels
+
+See the [continuous color](/python/colorscales/) and [cartesian axes](/python/axes/) pages for more details.
 
 ```python
 import plotly.express as px
@@ -111,21 +118,37 @@ from skimage import data
 img = data.camera()
 fig = px.imshow(img, color_continuous_scale='gray')
 fig.update_layout(coloraxis_showscale=False)
+fig.update_xaxes(showticklabels=False)
+fig.update_yaxes(showticklabels=False)
+fig.show()
+```
+
+### Customizing the axes and labels on a single-channel image
+
+You can use the `x`, `y` and `labels` arguments to customize the display of a heatmap, and use `.update_xaxes()` to move the x axis tick labels to the top:
+
+```python
+import plotly.express as px
+data=[[1, 25, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, 5, 20]]
+fig = px.imshow(data,
+                labels=dict(x="Day of Week", y="Time of Day", color="Productivity"),
+                x=['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                y=['Morning', 'Afternoon', 'Evening']
+               )
+fig.update_xaxes(side="top")
 fig.show()
 ```
 
 ### Display an xarray image with px.imshow
 
-[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for axis titles. If you don't want this behavior, you can pass `img.values` which is a NumPy array if `img` is an xarray. Alternatively, you can override axis titles hover labels and colorbar title using the `labels` attribute, as in the next example.
+[xarrays](http://xarray.pydata.org/en/stable/) are labeled arrays (with labeled axes and coordinates). If you pass an xarray image to `px.imshow`, its axes labels and coordinates will be used for axis titles. If you don't want this behavior, you can pass `img.values` which is a NumPy array if `img` is an xarray. Alternatively, you can override axis titles hover labels and colorbar title using the `labels` attribute, as above.
 
 ```python
 import plotly.express as px
 import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 airtemps = xr.tutorial.open_dataset('air_temperature').air.sel(lon=250.0)
-fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower',
-                labels={'color':airtemps.attrs['var_desc']}
-               )
+fig = px.imshow(airtemps.T, color_continuous_scale='RdBu_r', origin='lower')
 fig.show()
 ```
 
@@ -233,7 +256,7 @@ fig.show()
 ### imshow and datashader
 
 Arrays of rasterized values build by datashader can be visualized using
-imshow. See the [plotly and datashader tutorial](/python/datashader/) for 
+imshow. See the [plotly and datashader tutorial](/python/datashader/) for
 examples on how to use plotly and datashader.
 
 
