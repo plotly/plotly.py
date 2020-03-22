@@ -101,17 +101,23 @@ def imshow(
         a multichannel image of floats, the max of the image is computed and zmax is the
         smallest power of 256 (1, 255, 65535) greater than this max value,
         with a 5% tolerance. For a single-channel image, the max of the image is used.
+        Overridden by range_color.
 
     origin : str, 'upper' or 'lower' (default 'upper')
         position of the [0, 0] pixel of the image array, in the upper left or lower left
         corner. The convention 'upper' is typically used for matrices and images.
 
     labels : dict with str keys and str values (default `{}`)
-        Overrides names used in the figure for axis titles (keys ``x`` and ``y``),
-        colorbar title and hover (key ``color``). The values should correspond
+        Sets names used in the figure for axis titles (keys ``x`` and ``y``),
+        colorbar title and hoverlabel (key ``color``). The values should correspond
         to the desired label to be displayed. If ``img`` is an xarray, dimension
         names are used for axis titles, and long name for the colorbar title
         (unless overridden in ``labels``). Possible keys are: x, y, and color.
+
+    x, y: list-like, optional
+        x and y are used to label the axes of single-channel heatmap visualizations and
+        their lengths must match the lengths of the second and first dimensions of the
+        img argument. They are auto-populated if the input is an xarray.
 
     color_continuous_scale : str or list of str
         colormap used to map scalar data to colors (for a 2D image). This parameter is
@@ -121,7 +127,7 @@ def imshow(
 
     color_continuous_midpoint : number
         If set, computes the bounds of the continuous color scale to have the desired
-        midpoint.
+        midpoint. Overridden by range_color or zmin and zmax.
 
     range_color : list of two numbers
         If provided, overrides auto-scaling on the continuous color scale, including
@@ -138,7 +144,7 @@ def imshow(
         The figure width in pixels.
 
     height: number
-        The figure height in pixels, defaults to 600.
+        The figure height in pixels.
 
     aspect: 'equal', 'auto', or None
       - 'equal': Ensures an aspect ratio of 1 or pixels (square pixels)
@@ -207,6 +213,16 @@ def imshow(
 
     # For 2d data, use Heatmap trace
     if img.ndim == 2:
+        if y is not None and img.shape[0] != len(y):
+            raise ValueError(
+                "The length of the y vector must match the length of the first "
+                + "dimension of the img matrix."
+            )
+        if x is not None and img.shape[1] != len(x):
+            raise ValueError(
+                "The length of the x vector must match the length of the second "
+                + "dimension of the img matrix."
+            )
         trace = go.Heatmap(x=x, y=y, z=img, coloraxis="coloraxis1")
         autorange = True if origin == "lower" else "reversed"
         layout = dict(yaxis=dict(autorange=autorange))

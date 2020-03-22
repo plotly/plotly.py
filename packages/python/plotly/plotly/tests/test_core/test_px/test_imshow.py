@@ -126,3 +126,27 @@ def test_imshow_xarray():
     assert fig.layout.xaxis.title.text == "dim_cols"
     assert fig.layout.yaxis.title.text == "dim_rows"
     assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
+
+
+def test_imshow_labels_and_ranges():
+    fig = px.imshow([[1, 2], [3, 4], [5, 6]],)
+    assert fig.layout.xaxis.title.text is None
+    assert fig.layout.yaxis.title.text is None
+    assert fig.layout.coloraxis.colorbar.title.text is None
+    assert fig.data[0].x is None
+    assert fig.data[0].y is None
+    fig = px.imshow(
+        [[1, 2], [3, 4], [5, 6]],
+        x=["a", "b"],
+        y=["c", "d", "e"],
+        labels=dict(x="the x", y="the y", color="the color"),
+    )
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "the x"
+    assert fig.layout.yaxis.title.text == "the y"
+    assert fig.layout.coloraxis.colorbar.title.text == "the color"
+    assert fig.data[0].x[0] == "a"
+    assert fig.data[0].y[0] == "c"
+
+    with pytest.raises(ValueError):
+        fig = px.imshow([[1, 2], [3, 4], [5, 6]], x=["a"])
