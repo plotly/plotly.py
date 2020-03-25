@@ -70,7 +70,7 @@ fig.show()
 
 ### Add A and B axis
 
-Use `aaxis` or `baxis` list to make changes to the axes. For a more detailed list of attributes refer to [R reference](https://plot.ly/r/reference/#carpet-aaxis).
+Use `aaxis` or `baxis` list to make changes to the axes. For a more detailed list of attributes refer to [R reference](https://plotly.com/r/reference/#carpet-aaxis).
 
 ```python inputHidden=false outputHidden=false
 import plotly.graph_objects as go
@@ -184,9 +184,9 @@ fig.show()
 
 ### Add Points and Contours
 
-To add points and lines see [Carpet Scatter Plots](https://plot.ly/python/carpet-scatter) or to add contours see [Carpet Contour Plots](https://plot.ly/python/carpet-contour)
+To add points and lines see [Carpet Scatter Plots](https://plotly.com/python/carpet-scatter) or to add contours see [Carpet Contour Plots](https://plotly.com/python/carpet-contour)
 
 
 ### Reference
 
-See https://plot.ly/python/reference/#carpet for more information and chart attribute options!
+See https://plotly.com/python/reference/#carpet for more information and chart attribute options!

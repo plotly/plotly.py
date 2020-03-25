@@ -126,4 +126,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#scatterternary for more information and chart attribute options!
+See https://plotly.com/python/reference/#scatterternary for more information and chart attribute options!

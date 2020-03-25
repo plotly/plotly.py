@@ -34,8 +34,8 @@ jupyter:
 ---
 
 #### Basic Bullet Charts
-Stephen Few's Bullet Chart was invented to replace dashboard [gauges](https://plot.ly/python/gauge-charts/) and meters, combining both types of charts into simple bar charts with qualitative bars (steps), quantitative bar (bar) and performance line (threshold); all into one simple layout.
-  Steps typically are broken into several values, which are defined with an array. The bar represent the actual value that a particular variable reached, and the threshold usually indicate a goal point relative to the value achieved by the bar. See [indicator page](https://plot.ly/python/gauge-charts/) for more detail.
+Stephen Few's Bullet Chart was invented to replace dashboard [gauges](https://plotly.com/python/gauge-charts/) and meters, combining both types of charts into simple bar charts with qualitative bars (steps), quantitative bar (bar) and performance line (threshold); all into one simple layout.
+  Steps typically are broken into several values, which are defined with an array. The bar represent the actual value that a particular variable reached, and the threshold usually indicate a goal point relative to the value achieved by the bar. See [indicator page](https://plotly.com/python/gauge-charts/) for more detail.
 
 ```python
 import plotly.graph_objects as go
@@ -78,7 +78,7 @@ fig.show()
 ```
 
 #### Custom Bullet
-The following example shows how to customize your charts. For more information about all possible options check our [reference page](https://plot.ly/python/reference/#indicator).
+The following example shows how to customize your charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/#indicator).
 
 ```python
 import plotly.graph_objects as go
@@ -167,7 +167,7 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#indicator for more information and chart attribute options!
+See https://plotly.com/python/reference/#indicator for more information and chart attribute options!
 
 ```python
 
