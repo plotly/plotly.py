@@ -69,7 +69,7 @@ fig.show()
 The configuration of the legend is discussed in detail in the [Legends](/python/legend/) page.
 
 ### Align Plot Title
-The following example shows how to align the plot title in [layout.title](https://plot.ly/python/reference/#layout-title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.
+The following example shows how to align the plot title in [layout.title](https://plotly.com/python/reference/#layout-title). `x` sets the x position with respect to `xref` from "0" (left) to "1" (right), and `y` sets the y position with respect to `yref` from "0" (bottom) to "1" (top). Moreover, you can define `xanchor` to `left`,`right`, or `center` for setting the title's horizontal alignment with respect to its x position, and/or `yanchor` to `top`, `bottom`, or `middle` for setting the title's vertical alignment with respect to its y position.
 
 ```python
 import plotly.graph_objects as go
@@ -90,4 +90,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#layout for more information!
+See https://plotly.com/python/reference/#layout for more information!

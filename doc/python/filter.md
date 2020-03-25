@@ -64,4 +64,4 @@ pio.show(fig_dict, validate=False)
 ```
 
 #### Reference
-See https://plot.ly/python/reference/ for more information and chart attribute options!
+See https://plotly.com/python/reference/ for more information and chart attribute options!

@@ -268,7 +268,7 @@ fig.show()
 
 #### Size of Legend Items
 
-In this example [itemsizing](https://plot.ly/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
+In this example [itemsizing](https://plotly.com/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
 
 ```python
 import plotly.graph_objects as go
@@ -434,4 +434,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#layout-legend for more information!
+See https://plotly.com/python/reference/#layout-legend for more information!

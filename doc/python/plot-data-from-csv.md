@@ -76,4 +76,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/getting-started for more information about Plotly's Python API!
+See https://plotly.com/python/getting-started for more information about Plotly's Python API!

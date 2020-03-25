@@ -39,7 +39,7 @@ Upgrading to version 4 of `plotly` is a matter of following the instructions in 
 
 ### Getting Help
 
-If you encounter issues in upgrading from version 3 to version 4, please reach out in our [Community Forum](https://community.plot.ly/c/api/python) or if you've found an issue or regression in version 4, please report a [Github Issue](https://github.com/plotly/plotly.py/issues/new)
+If you encounter issues in upgrading from version 3 to version 4, please reach out in our [Community Forum](https://community.plotly.com/c/api/python) or if you've found an issue or regression in version 4, please report a [Github Issue](https://github.com/plotly/plotly.py/issues/new)
 
 <!-- #region -->
 ### Online features (`plotly.plotly`) moved to `chart-studio` package

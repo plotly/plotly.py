@@ -103,7 +103,7 @@ fig.show()
 
 ### Customize Subplot Figure Titles
 
-Since subplot figure titles are [annotations](https://plot.ly/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
+Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
 
 In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`. 
 
@@ -121,7 +121,7 @@ fig.show()
 
 ### Synchronizing axes in subplots with `matches`
 
-Using `facet_col` from `plotly.express` let [zoom](https://help.plot.ly/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plot.ly/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
 
 Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
 

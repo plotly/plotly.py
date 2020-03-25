@@ -88,7 +88,7 @@ fig.show()
 
 ## Scatter and line plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plot.ly/python/reference/#scatter).
+If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).
 
 #### Simple Scatter Plot
 
@@ -107,7 +107,7 @@ fig.show()
 
 #### Line and Scatter Plots
 
-Use `mode` argument to choose between markers, lines, or a combination of both. For more options about line plots, see also the [line charts notebook](https://plot.ly/python/line-charts/) and the [filled area plots notebook](https://plot.ly/python/filled-area-plots/).
+Use `mode` argument to choose between markers, lines, or a combination of both. For more options about line plots, see also the [line charts notebook](https://plotly.com/python/line-charts/) and the [filled area plots notebook](https://plotly.com/python/filled-area-plots/).
 
 ```python
 import plotly.graph_objects as go
@@ -140,7 +140,7 @@ fig.show()
 
 #### Bubble Scatter Plots
 
-In [bubble charts](https://en.wikipedia.org/wiki/Bubble_chart), a third dimension of the data is shown through the size of markers. For more examples, see the [bubble chart notebook](https://plot.ly/python/bubble-charts/)
+In [bubble charts](https://en.wikipedia.org/wiki/Bubble_chart), a third dimension of the data is shown through the size of markers. For more examples, see the [bubble chart notebook](https://plotly.com/python/bubble-charts/)
 
 ```python
 import plotly.graph_objects as go
@@ -276,4 +276,4 @@ fig.show()
 
 ### Reference
 
-See https://plot.ly/python/reference/#scatter or https://plot.ly/python/reference/#scattergl for more information and chart attribute options!
+See https://plotly.com/python/reference/#scatter or https://plotly.com/python/reference/#scattergl for more information and chart attribute options!
