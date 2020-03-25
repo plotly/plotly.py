@@ -30,6 +30,7 @@ $(IPYNB_FILES): $(IPYNB_DIR)/.mapbox_token
 $(IPYNB_DIR)/%.ipynb: $(MD_DIR)/%.md
 	@mkdir -p $(IPYNB_DIR)
 	@echo "[jupytext]   $<"
+	@cat what_about_dash.md >> $<
 	@jupytext $< --to notebook --quiet --output $@
 
 $(HTML_DIR)/2019-07-03-%.html: $(IPYNB_DIR)/%.ipynb
