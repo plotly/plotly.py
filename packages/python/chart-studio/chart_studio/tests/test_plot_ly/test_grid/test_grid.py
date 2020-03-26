@@ -34,7 +34,7 @@ class GridTest(PlotlyTestCase):
     _grid_id = "chris:3043"
     _grid = Grid([])
     _grid.id = _grid_id
-    _grid_url = "https://plot.ly/~chris/3043/my-grid"
+    _grid_url = "https://plotly.com/~chris/3043/my-grid"
 
     def setUp(self):
         super(GridTest, self).setUp()

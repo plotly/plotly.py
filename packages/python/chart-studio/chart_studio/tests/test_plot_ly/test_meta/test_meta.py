@@ -54,6 +54,6 @@ class MetaTest(PlotlyTestCase):
         + "https://github.com/plotly/python-api/issues/263"
     )
     def test_metadata_to_nonexistent_grid(self):
-        non_exist_meta_url = "https://local.plot.ly/~GridTest/999999999"
+        non_exist_meta_url = "https://local.plotly.com/~GridTest/999999999"
         with self.assertRaises(PlotlyRequestError):
             py.meta_ops.upload(self._meta, grid_url=non_exist_meta_url)

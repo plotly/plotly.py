@@ -20,7 +20,7 @@ default_headers = {
     "plotly-platform": "pythonz",
 }
 
-server = "https://plot.ly"
+server = "https://plotly.com"
 
 
 class GetRequestsTest(PlotlyTestCase):
