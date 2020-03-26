@@ -572,8 +572,8 @@ fig.show()
 ```
 
 #### Reference
-All of the x-axis properties are found here: https://plotly.com/python/reference/#XAxis
-All of the y-axis properties are found here: https://plotly.com/python/reference/#YAxis
+All of the x-axis properties are found here: /python/reference/#XAxis
+All of the y-axis properties are found here: /python/reference/#YAxis
 
 ```python
 from plotly.subplots import make_subplots

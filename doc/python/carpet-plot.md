@@ -184,9 +184,9 @@ fig.show()
 
 ### Add Points and Contours
 
-To add points and lines see [Carpet Scatter Plots](https://plotly.com/python/carpet-scatter) or to add contours see [Carpet Contour Plots](https://plotly.com/python/carpet-contour)
+To add points and lines see [Carpet Scatter Plots](/python/carpet-scatter) or to add contours see [Carpet Contour Plots](/python/carpet-contour)
 
 
 ### Reference
 
-See https://plotly.com/python/reference/#carpet for more information and chart attribute options!
+See /python/reference/#carpet for more information and chart attribute options!

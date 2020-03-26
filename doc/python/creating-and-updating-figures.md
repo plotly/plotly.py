@@ -62,7 +62,7 @@ The value of the top-level `"data"` key is a list of trace specifications. Each 
 
 The value of the top-level `"layout"` key is a dictionary that specifies the properties of the figure's layout. In contrast to trace configuration options that apply to individual traces, the layout configuration options apply to the figure as a whole, customizing items like the axes, annotations, shapes, legend, and more.
 
-The [_Full Reference_](https://plotly.com/python/reference/) page contains descriptions of all of the supported trace and layout options.
+The [_Full Reference_](/python/reference/) page contains descriptions of all of the supported trace and layout options.
 
 If working from the _Full Reference_ to build figures as Python dictionaries and lists suites your needs, go for it! This is a perfectly valid way to use plotly.py to build figures. On the other hand, if you would like an API that offers a bit more assistance, read on to learn about graph objects.
 

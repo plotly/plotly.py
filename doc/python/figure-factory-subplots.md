@@ -210,4 +210,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/subplots/ for more information on working with subplots. See https://plotly.com/python/reference/ for more information regarding chart attributes!
+See /python/subplots/ for more information on working with subplots. See /python/reference/ for more information regarding chart attributes!

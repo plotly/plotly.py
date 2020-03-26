@@ -190,7 +190,7 @@ fig = go.Figure(data=go.Volume(
     ))
 
 # Change camera view for a better view of the sides, XZ plane
-# (see https://plotly.com/python/v3/3d-camera-controls/)
+# (see /python/v3/3d-camera-controls/)
 fig.update_layout(scene_camera = dict(
     up=dict(x=0, y=0, z=1),
     center=dict(x=0, y=0, z=0),
@@ -254,7 +254,7 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#volume for more information and chart attribute options!
+See /python/reference/#volume for more information and chart attribute options!
 
 #### See also
 [3D isosurface documentation](/python/3d-isosurface-plots/)

@@ -92,4 +92,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#barpolar for more information and chart attribute options!
+See /python/reference/#barpolar for more information and chart attribute options!

@@ -418,7 +418,7 @@ fig.show()
 
 ### Setting the Midpoint of a Diverging Color scale with Graph Objects
 
-The following example uses the [marker.cmid](https://plotly.com/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plotly.com/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
+The following example uses the [marker.cmid](/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
 
 ```python
 import plotly.graph_objects as go
@@ -432,7 +432,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-The heatmap chart uses [marker.zmid](https://plotly.com/python/reference/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
+The heatmap chart uses [marker.zmid](/python/reference/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
 
 ```python
 import plotly.graph_objects as go
@@ -558,4 +558,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/ for more information and chart attribute options!
+See /python/reference/ for more information and chart attribute options!

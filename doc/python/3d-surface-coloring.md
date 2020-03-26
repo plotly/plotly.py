@@ -60,5 +60,5 @@ fig.show()
 #### Reference
 
 
-See https://plotly.com/python/reference/#surface-surfacecolor for more information!
+See /python/reference/#surface-surfacecolor for more information!
 

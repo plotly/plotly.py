@@ -98,7 +98,7 @@ fig.update_layout(title='Mt Bruno Elevation', autosize=False,
 fig.show()
 ```
 #### Configure Surface Contour Levels
-This example shows how to slice the surface graph on the desired position for each of x, y and z axis. [contours.x.start](https://plotly.com/python/reference/#surface-contours-x-start) sets the starting contour level value, `end` sets the end of it, and `size` sets the step between each contour level. 
+This example shows how to slice the surface graph on the desired position for each of x, y and z axis. [contours.x.start](/python/reference/#surface-contours-x-start) sets the starting contour level value, `end` sets the end of it, and `size` sets the step between each contour level. 
 
 ```python
 import plotly.graph_objects as go
@@ -166,4 +166,4 @@ fig.show()
 #### Reference
 
 
-See https://plotly.com/python/reference/#surface for more information!
+See /python/reference/#surface for more information!

@@ -54,5 +54,5 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#layout-xaxis-type for more information and chart attribute options!
+See /python/reference/#layout-xaxis-type for more information and chart attribute options!
 

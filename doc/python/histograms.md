@@ -134,7 +134,7 @@ fig.show()
 
 #### Visualizing the distribution
 
-With the `marginal` keyword, a subplot is drawn alongside the histogram, visualizing the distribution. See [the distplot page](https://plotly.com/python/distplot/)for more examples of combined statistical representations.
+With the `marginal` keyword, a subplot is drawn alongside the histogram, visualizing the distribution. See [the distplot page](/python/distplot/)for more examples of combined statistical representations.
 
 ```python
 import plotly.express as px
@@ -146,7 +146,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Histogram` from `plotly.graph_objects`. All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Histogram` from `plotly.graph_objects`. All of the available histogram options are described in the histogram section of the reference page: /python/reference#histogram.
 
 ### Basic Histogram
 
@@ -306,7 +306,7 @@ fig.show()
 
 ### Custom Binning
 
-For custom binning along x-axis, use the attribute [`nbinsx`](https://plotly.com/python/reference/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plotly.com/python/reference/#histogram-xbins) along with `autobinx = False`.
+For custom binning along x-axis, use the attribute [`nbinsx`](/python/reference/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](/python/reference/#histogram-xbins) along with `autobinx = False`.
 
 ```python
 import plotly.graph_objects as go
@@ -369,7 +369,7 @@ fig2.show()
 
 ### Share bins between histograms
 
-In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/python/reference/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/python/2D-Histogram/) trace can share the same `bingroup`.
+In this example both histograms have a compatible bin settings using [bingroup](/python/reference/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](/python/2D-Histogram/) trace can share the same `bingroup`.
 
 ```python
 import plotly.graph_objects as go
@@ -392,4 +392,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#histogram for more information and chart attribute options!
+See /python/reference/#histogram for more information and chart attribute options!

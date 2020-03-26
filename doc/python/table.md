@@ -211,4 +211,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on tables and table attributes see: https://plotly.com/python/reference/#table.
+For more information on tables and table attributes see: /python/reference/#table.

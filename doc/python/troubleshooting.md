@@ -37,7 +37,7 @@ jupyter:
 <!-- #region -->
 ### Version Problems
 
-In order to follow the examples in this documentation, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3.
+In order to follow the examples in this documentation, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under /python) is incompatible with `plotly` version 3.x, for which the documentation is available under /python/v3.
 
 ### Import Problems
 

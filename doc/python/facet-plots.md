@@ -103,7 +103,7 @@ fig.show()
 
 ### Customize Subplot Figure Titles
 
-Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
+Since subplot figure titles are [annotations](/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
 
 In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`. 
 

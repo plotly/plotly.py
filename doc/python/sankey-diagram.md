@@ -39,7 +39,7 @@ A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) is a flow diagr
 
 
 ### Basic Sankey Diagram
-Sankey diagrams visualize the contributions to a flow by defining [source](https://plotly.com/python/reference/#sankey-link-source) to represent the source node, [target](https://plotly.com/python/reference/#sankey-link-target) for the target node, [value](https://plotly.com/python/reference/#sankey-link-value) to set the flow volum, and [label](https://plotly.com/python/reference/#sankey-node-label) that shows the node name.
+Sankey diagrams visualize the contributions to a flow by defining [source](/python/reference/#sankey-link-source) to represent the source node, [target](/python/reference/#sankey-link-target) for the target node, [value](/python/reference/#sankey-link-value) to set the flow volum, and [label](/python/reference/#sankey-node-label) that shows the node name.
 
 ```python
 import plotly.graph_objects as go
@@ -96,7 +96,7 @@ fig.show()
 ```
 
 ### Style Sankey Diagram
-This example also uses [hovermode](https://plotly.com/python/reference/#layout-hovermode) to enable multiple tooltips.
+This example also uses [hovermode](/python/reference/#layout-hovermode) to enable multiple tooltips.
 
 ```python
 import plotly.graph_objects as go
@@ -136,7 +136,7 @@ fig.show()
 
 ### Define Node Position
 
-The following example sets [node.x](https://plotly.com/python/reference/#sankey-node-x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](https://plotly.com/python/reference/#sankey-node-pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
+The following example sets [node.x](/python/reference/#sankey-node-x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](/python/reference/#sankey-node-pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
 
 ```python
 import plotly.graph_objects as go
@@ -158,4 +158,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/#sankey](https://plotly.com/python/reference/#sankey) for more information and options!
+See [/python/reference/#sankey](/python/reference/#sankey) for more information and options!

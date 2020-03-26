@@ -129,4 +129,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatterpolar for more information and chart attribute options!
+See /python/reference/#scatterpolar for more information and chart attribute options!

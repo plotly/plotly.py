@@ -477,7 +477,7 @@ fig.show()
 
 ### Set axis title position
 
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go
@@ -764,4 +764,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#layout-xaxis and https://plotly.com/python/reference/#layout-yaxis for more information and chart attribute options!
+See /python/reference/#layout-xaxis and /python/reference/#layout-yaxis for more information and chart attribute options!

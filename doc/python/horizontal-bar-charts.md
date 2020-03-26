@@ -33,7 +33,7 @@ jupyter:
     thumbnail: thumbnail/horizontal-bar.jpg
 ---
 
-See more examples of bar charts (including vertical bar charts) and styling options [here](https://plotly.com/python/bar-charts/).
+See more examples of bar charts (including vertical bar charts) and styling options [here](/python/bar-charts/).
 
 ### Horizontal Bar Chart with Plotly Express
 
@@ -64,7 +64,7 @@ fig.show()
 
 ### Horizontal Bar Chart with go.Bar
 
-When data are not available as a tidy dataframe, you can use the more generic function `go.Bar` from `plotly.graph_objects`. All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/#bar
+When data are not available as a tidy dataframe, you can use the more generic function `go.Bar` from `plotly.graph_objects`. All the options of `go.Bar` are documented in the reference /python/reference/#bar
 
 #### Basic Horizontal Bar Chart
 
@@ -335,4 +335,4 @@ fig.show()
 
 ### Reference
 
-See more examples of bar charts and styling options [here](https://plotly.com/python/bar-charts/).<br> See https://plotly.com/python/reference/#bar for more information and chart attribute options!
+See more examples of bar charts and styling options [here](/python/bar-charts/).<br> See /python/reference/#bar for more information and chart attribute options!

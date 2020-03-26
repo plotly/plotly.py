@@ -63,7 +63,7 @@ Along with `data` and `layout`, `frames` can be added as a key in a figure objec
 
 #### Adding Control Buttons to Animations
 
-You can add play and pause buttons to control your animated charts by adding an `updatemenus` array to the `layout` of your `figure`. More information on style and placement of the buttons is available in Plotly's [`updatemenus` reference](https://plotly.com/python/reference/#layout-updatemenus).
+You can add play and pause buttons to control your animated charts by adding an `updatemenus` array to the `layout` of your `figure`. More information on style and placement of the buttons is available in Plotly's [`updatemenus` reference](/python/reference/#layout-updatemenus).
 <br>
 The buttons are defined as follows:
 
@@ -389,5 +389,5 @@ fig.show()
 
 #### Reference
 
-For additional information and attributes for creating bubble charts in Plotly see: https://plotly.com/python/bubble-charts/.
-For more documentation on creating animations with Plotly, see https://plotly.com/python/#animations.
+For additional information and attributes for creating bubble charts in Plotly see: /python/bubble-charts/.
+For more documentation on creating animations with Plotly, see /python/#animations.

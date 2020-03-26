@@ -235,5 +235,5 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#isosurface for more information and chart attribute options!
+See /python/reference/#isosurface for more information and chart attribute options!
 

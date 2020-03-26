@@ -103,5 +103,5 @@ fig.show()
 ```
 
 #### Reference
-See  https://plotly.com/python/reference/#table for more information regarding chart attributes! <br>
-For examples of Plotly Tables, see: https://plotly.com/python/table/
+See  /python/reference/#table for more information regarding chart attributes! <br>
+For examples of Plotly Tables, see: /python/table/

@@ -35,7 +35,7 @@ jupyter:
 
 ### Time Series Plot with `datetime` Objects ###
 
-Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`) or `plotly.graph_objects` charts objects (`go.Scatter`). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/).
+Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`) or `plotly.graph_objects` charts objects (`go.Scatter`). For more examples of such charts, see the documentation of [line and scatter plots](/python/line-and-scatter/).
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
@@ -128,4 +128,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#layout-xaxis-rangeslider and<br> https://plotly.com/python/reference/#layout-xaxis-rangeselector for more information and chart attribute options!
+See /python/reference/#layout-xaxis-rangeslider and<br> /python/reference/#layout-xaxis-rangeselector for more information and chart attribute options!

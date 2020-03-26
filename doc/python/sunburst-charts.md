@@ -155,7 +155,7 @@ fig =go.Figure(go.Sunburst(
     values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
 ))
 # Update layout for tight margin
-# See https://plotly.com/python/creating-and-updating-figures/
+# See /python/creating-and-updating-figures/
 fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
 fig.show()
@@ -214,7 +214,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plotly.com/python/reference/#layout-grid) for the suplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/#sunburst-domain) attribute.
+This example uses a [plotly grid attribute](/python/reference/#layout-grid) for the suplots. Reference the row and column destination using the [domain](/python/reference/#sunburst-domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -380,4 +380,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#sunburst for more information and chart attribute options!
+See /python/reference/#sunburst for more information and chart attribute options!

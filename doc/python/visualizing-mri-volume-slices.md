@@ -140,5 +140,5 @@ Here's where you can find her:
 
 
 #### Reference
-For additional information and help setting up a slider in an animation, see https://plotly.com/python/gapminder-example/. For more documentation on creating animations with Plotly, see https://plotly.com/python/#animations.
+For additional information and help setting up a slider in an animation, see /python/gapminder-example/. For more documentation on creating animations with Plotly, see /python/#animations.
 

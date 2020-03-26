@@ -36,7 +36,7 @@ jupyter:
     thumbnail: thumbnail/box.jpg
 ---
 
-A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
+A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](/python/statistical-charts/).
 
 ## Box Plot with `plotly.express`
 
@@ -134,7 +134,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page /python/reference/#box.
 
 ### Basic Box Plot
 
@@ -491,4 +491,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#box for more information and chart attribute options!
+See /python/reference/#box for more information and chart attribute options!
