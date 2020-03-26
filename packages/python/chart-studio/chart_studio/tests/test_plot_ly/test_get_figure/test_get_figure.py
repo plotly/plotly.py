@@ -47,7 +47,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_with_url(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/13183/"
+        url = "https://plotly.com/~PlotlyImageTest/13183/"
         py.sign_in(un, ak)
         py.get_figure(url)
 
