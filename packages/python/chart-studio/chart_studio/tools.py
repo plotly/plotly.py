@@ -73,7 +73,7 @@ def ensure_local_plotly_files():
             "local configuration files. No problem though! You'll "
             "just have to sign-in using 'plotly.plotly.sign_in()'. "
             "For help with that: 'help(plotly.plotly.sign_in)'."
-            "\nQuestions? Visit https://support.plot.ly"
+            "\nQuestions? Visit https://support.plotly.com"
         )
 
 
@@ -155,9 +155,9 @@ def set_config_file(
 ):
     """Set the keyword-value pairs in `~/.plotly/.config`.
 
-    :param (str) plotly_domain: ex - https://plot.ly
-    :param (str) plotly_streaming_domain: ex - stream.plot.ly
-    :param (str) plotly_api_domain: ex - https://api.plot.ly
+    :param (str) plotly_domain: ex - https://plotly.com
+    :param (str) plotly_streaming_domain: ex - stream.plotly.com
+    :param (str) plotly_api_domain: ex - https://api.plotly.com
     :param (bool) plotly_ssl_verification: True = verify, False = don't verify
     :param (bool) plotly_proxy_authorization: True = use plotly proxy auth creds
     :param (bool) world_readable: True = public, False = private
@@ -386,7 +386,7 @@ def embed(file_owner_or_url, file_id=None, width="100%", height=525):
             get_config_defaults()["plotly_domain"]
             != session.get_session_config()["plotly_domain"]
         ):
-            feedback_contact = "Visit support.plot.ly"
+            feedback_contact = "Visit support.plotly.com"
         else:
 
             # different domain likely means enterprise
