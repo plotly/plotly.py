@@ -1399,9 +1399,7 @@ def funnel(
     rectangular sector of a funnel.
     """
     return make_figure(
-        args=locals(),
-        constructor=go.Funnel,
-        trace_patch=dict(opacity=opacity, orientation=orientation),
+        args=locals(), constructor=go.Funnel, trace_patch=dict(orientation=orientation),
     )
 
 
