@@ -34,8 +34,8 @@ http_msg = (
     "with 'https':\n\n\n"
     "import plotly\n"
     "plotly.tools.set_config_file(\n"
-    "    plotly_domain='https://plot.ly',\n"
-    "    plotly_api_domain='https://api.plot.ly'\n"
+    "    plotly_domain='https://plotly.com',\n"
+    "    plotly_api_domain='https://api.plotly.com'\n"
     ")\n\n\n"
     "If you are using On-Premise then you will need to use your company's "
     "domain and api_domain urls:\n\n\n"
@@ -46,7 +46,7 @@ http_msg = (
     ")\n\n\n"
     "Make sure to replace `your-company.com` with the URL of your Plotly "
     "On-Premise server.\nSee "
-    "https://plot.ly/python/getting-started/#special-instructions-for-plotly-onpremise-users "
+    "https://plotly.com/python/getting-started/#special-instructions-for-plotly-onpremise-users "
     "for more help with getting started with On-Premise."
 )
 
