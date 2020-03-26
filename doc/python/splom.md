@@ -82,7 +82,7 @@ fig.show()
 
 ### Scatter matrix (splom) with go.Splom
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Splom` function. All its parameters are documented in the reference page https://plot.ly/python/reference/#splom.
+If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Splom` function. All its parameters are documented in the reference page https://plotly.com/python/reference/#splom.
 
 The Plotly splom trace implementation for the scatterplot matrix does not require to set $x=Xi$ , and $y=Xj$, for each scatter plot. All arrays, $X_1,X_2,…,X_n$ , are passed once, through a list of dicts called dimensions, i.e. each array/variable represents a dimension.
 

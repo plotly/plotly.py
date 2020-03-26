@@ -477,7 +477,7 @@ fig.show()
 
 ### Set axis title position
 
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plot.ly/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go
@@ -743,7 +743,7 @@ fig.show()
 
 #### Synchronizing axes in subplots with `matches`
 
-Using `facet_col` from `plotly.express` let [zoom](https://help.plot.ly/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plot.ly/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
 
 Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
 
@@ -764,4 +764,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#layout-xaxis and https://plot.ly/python/reference/#layout-yaxis for more information and chart attribute options!
+See https://plotly.com/python/reference/#layout-xaxis and https://plotly.com/python/reference/#layout-yaxis for more information and chart attribute options!

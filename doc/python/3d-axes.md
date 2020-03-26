@@ -39,7 +39,7 @@ jupyter:
 attributes such as `xaxis`, `yaxis` and `zaxis` parameters, in order to
 set the range, title, ticks, color etc. of the axes.
 
-For creating 3D charts, see [this page](https://plot.ly/python/3d-charts/).
+For creating 3D charts, see [this page](https://plotly.com/python/3d-charts/).
 
 ```python
 import plotly.graph_objects as go

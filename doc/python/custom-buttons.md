@@ -456,8 +456,8 @@ fig.show()
 ```
 
 #### Animate Button
-Refer to our animation docs: https://plot.ly/python/#animations for examples on how to use the `animate` method with Plotly buttons.
+Refer to our animation docs: https://plotly.com/python/#animations for examples on how to use the `animate` method with Plotly buttons.
 
 
 #### Reference
-See https://plot.ly/python/reference/#layout-updatemenus for more information about `updatemenu` buttons.
+See https://plotly.com/python/reference/#layout-updatemenus for more information about `updatemenu` buttons.

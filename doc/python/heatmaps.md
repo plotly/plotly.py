@@ -67,7 +67,7 @@ fig.show()
 
 ### Heatmap with Categorical Axis Labels
 
-In this example we also show how to ignore [hovertext](https://plot.ly/python/hover-text-and-formatting/) when we have [missing values](https://plot.ly/python/missing_values) in the data by setting the [hoverongaps](https://plot.ly/python/reference/#heatmap-hoverongaps) to False. 
+In this example we also show how to ignore [hovertext](https://plotly.com/python/hover-text-and-formatting/) when we have [missing values](https://plotly.com/python/missing_values) in the data by setting the [hoverongaps](https://plotly.com/python/reference/#heatmap-hoverongaps) to False. 
 
 ```python
 import plotly.graph_objects as go
@@ -168,4 +168,4 @@ Arrays of rasterized values build by datashader can be visualized using
 plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
 
 #### Reference
-See https://plot.ly/python/reference/#heatmap for more information and chart attribute options!
+See https://plotly.com/python/reference/#heatmap for more information and chart attribute options!
