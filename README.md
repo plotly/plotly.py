@@ -9,6 +9,14 @@
         </td>
     </tr>
     <tr>
+        <td>User forum</td>
+        <td>
+            <a href="https://community.plot.ly"/>
+            <img src="https://img.shields.io/badge/help_forum-discourse-blue.svg"/>
+        </td>
+    </tr>
+
+    <tr>
         <td>PyPI Downloads</td>
         <td>
             <a href="https://pepy.tech/project/plotly"/>
@@ -45,7 +53,7 @@ Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-
 
 ## Overview
 
-[plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
+[plotly.py](https://plot.ly/python) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
@@ -61,12 +69,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ---
 
 - [Online Documentation](https://plot.ly/python)
-- [Contributing](contributing.md)
+- [Contributing to plotly](contributing.md)
 - [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Version 4 Migration Guide](https://plot.ly/python/next/v4-migration/)
 - [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
-- [Community](https://community.plot.ly/c/api/python)
+- [Community forum](https://community.plot.ly/c/api/python)
 
 ---
 
