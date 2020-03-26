@@ -939,7 +939,7 @@ class Presentation(dict):
         Default = True.
 
     For examples see the documentation:\n
-    https://plot.ly/python/presentations-api/
+    https://plotly.com/python/presentations-api/
     """
 
     def __init__(self, markdown_string=None, style="moods", imgStretch=True):

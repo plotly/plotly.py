@@ -448,7 +448,7 @@ def get_figure(file_owner_or_url, file_id=None, raw=False):
     pass a valid plotly url as the first argument.
 
     Examples:
-        fig = get_figure('https://plot.ly/~chris/1638')
+        fig = get_figure('https://plotly.com/~chris/1638')
         fig = get_figure('chris', 1638)
 
     Note, if you're using a file_owner string as the first argument, you MUST
@@ -574,7 +574,7 @@ class Stream:
     Every viewer of the graph sees the same data at the same time.
 
     View examples and tutorials here:
-    https://plot.ly/python/streaming/
+    https://plotly.com/python/streaming/
 
     Stream example:
     # Initialize a streaming graph
@@ -602,7 +602,7 @@ class Stream:
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
-        https://plot.ly/python/streaming/
+        https://plotly.com/python/streaming/
 
         """
         self.stream_id = stream_id
@@ -664,7 +664,7 @@ class Stream:
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
-        https://plot.ly/python/streaming/
+        https://plotly.com/python/streaming/
 
         """
         streaming_specs = self.get_streaming_specs()
@@ -746,7 +746,7 @@ class Stream:
 
         For more help, see: `help(plotly.plotly.Stream)`
         or see examples and tutorials here:
-        https://plot.ly/python/streaming/
+        https://plotly.com/python/streaming/
 
         """
         try:
@@ -771,7 +771,7 @@ class image:
         - figure_or_data: The figure dict-like or data list-like object that
                           describes a plotly figure.
                           Same argument used in `py.plot`, `py.iplot`,
-                          see https://plot.ly/python for examples
+                          see https://plotly.com/python for examples
         - format: 'png', 'svg', 'jpeg', 'pdf', 'emf'
         - width: output width
         - height: output height
@@ -798,7 +798,7 @@ class image:
                 "package currently only supports png, svg, jpeg, and pdf. "
                 "Learn more about image exporting, and the currently "
                 "supported file types here: "
-                "https://plot.ly/python/static-image-export/"
+                "https://plotly.com/python/static-image-export/"
             )
         if scale is not None:
             try:
@@ -839,7 +839,7 @@ class image:
         - figure_or_data: The figure dict-like or data list-like object that
                           describes a plotly figure.
                           Same argument used in `py.plot`, `py.iplot`,
-                          see https://plot.ly/python for examples
+                          see https://plotly.com/python for examples
         - format: 'png', 'svg', 'jpeg', 'pdf'
         - width: output width
         - height: output height
@@ -883,7 +883,7 @@ class image:
         - figure_or_data: The figure dict-like or data list-like object that
                           describes a plotly figure.
                           Same argument used in `py.plot`, `py.iplot`,
-                          see https://plot.ly/python for examples
+                          see https://plotly.com/python for examples
         - filename: The filepath to save the image to
         - format: 'png', 'svg', 'jpeg', 'pdf', 'emf'
         - width: output width
@@ -1135,7 +1135,7 @@ class grid_ops:
         from plotly.grid_objs import Grid, Column
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/3143'
+        grid_url = 'https://plotly.com/~chris/3143'
         column_1 = Column([1, 2, 3], 'time')
         py.grid_ops.append_columns([column_1], grid_url=grid_url)
         ```
@@ -1204,7 +1204,7 @@ class grid_ops:
         from plotly.grid_objs import Grid
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/3143'
+        grid_url = 'https://plotly.com/~chris/3143'
 
         row = [1, 5]
         py.grid_ops.append_rows([row], grid=grid_url)
@@ -1276,7 +1276,7 @@ class grid_ops:
         ```
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/3'
+        grid_url = 'https://plotly.com/~chris/3'
         py.grid_ops.delete(grid_url=grid_url)
         ```
 
@@ -1334,7 +1334,7 @@ class meta_ops:
         ```
         import plotly.plotly as py
 
-        grid_url = 'https://plot.ly/~chris/3143'
+        grid_url = 'https://plotly.com/~chris/3143'
 
         meta = {'experment': 'GaAs'}
 
@@ -1371,7 +1371,7 @@ def parse_grid_id_args(grid, grid_url):
             "grid: a plotly.graph_objs.Grid object that has already\n"
             "    been uploaded to Plotly.\n\n"
             "grid_url: the url where the grid can be accessed on\n"
-            "    Plotly, e.g. 'https://plot.ly/~chris/3043'\n\n"
+            "    Plotly, e.g. 'https://plotly.com/~chris/3043'\n\n"
         )
     elif len(supplied_arg_names) > 1:
         raise exceptions.InputError(
