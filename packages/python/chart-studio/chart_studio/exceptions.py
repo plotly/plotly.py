@@ -37,7 +37,7 @@ COLUMN_NOT_YET_UPLOADED_MESSAGE = (
     "column to Plotly before you can assign it to '{reference}'.\n"
     "To upload, try `plotly.plotly.grid_objs.upload` or "
     "`plotly.plotly.grid_objs.append_column`.\n"
-    "Questions? chris@plot.ly"
+    "Questions? chris@plotly.com"
 )
 
 NON_UNIQUE_COLUMN_MESSAGE = (
@@ -65,7 +65,7 @@ class PlotlyLocalCredentialsError(PlotlyLocalError):
             ">>> import plotly.tools as tls\n"
             ">>> tls.set_credentials_file(username='username', "
             "api_key='api-key')\n\n"
-            "For more help, see https://plot.ly/python.\n"
+            "For more help, see https://plotly.com/python.\n"
         )
         super(PlotlyLocalCredentialsError, self).__init__(message)
 
