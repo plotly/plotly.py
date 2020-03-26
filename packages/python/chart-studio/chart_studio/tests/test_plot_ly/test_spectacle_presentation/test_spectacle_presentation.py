@@ -255,7 +255,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 280.0,
                                         "left": 0.0,
@@ -322,7 +322,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -339,7 +339,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -356,7 +356,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -373,7 +373,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -390,7 +390,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -407,7 +407,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,
@@ -424,7 +424,7 @@ class TestPresentation(TestCase):
                                 "props": {
                                     "frameBorder": 0,
                                     "scrolling": "no",
-                                    "src": "https://plot.ly/~AdamKulidjian/3564/.embed?link=false",
+                                    "src": "https://plotly.com/~AdamKulidjian/3564/.embed?link=false",
                                     "style": {
                                         "height": 96.57142857142857,
                                         "left": 400.0,

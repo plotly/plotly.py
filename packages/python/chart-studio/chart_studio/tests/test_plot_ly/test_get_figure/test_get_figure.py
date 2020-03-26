@@ -54,7 +54,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_invalid_1(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/a/"
+        url = "https://plotly.com/~PlotlyImageTest/a/"
         py.sign_in(un, ak)
         with self.assertRaises(exceptions.PlotlyError):
             py.get_figure(url)
@@ -62,7 +62,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_invalid_2(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/-1/"
+        url = "https://plotly.com/~PlotlyImageTest/-1/"
         py.sign_in(un, ak)
         with self.assertRaises(exceptions.PlotlyError):
             py.get_figure(url)
@@ -71,7 +71,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_invalid_3(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/2/"
+        url = "https://plotly.com/~PlotlyImageTest/2/"
         py.sign_in(un, ak)
         with self.assertRaises(ValueError):
             py.get_figure(url)
@@ -79,7 +79,7 @@ class GetFigureTest(PlotlyTestCase):
     def test_get_figure_does_not_exist(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/1000000000/"
+        url = "https://plotly.com/~PlotlyImageTest/1000000000/"
         py.sign_in(un, ak)
         with self.assertRaises(_plotly_utils.exceptions.PlotlyError):
             py.get_figure(url)
@@ -97,6 +97,6 @@ class TestBytesVStrings(PlotlyTestCase):
     def test_proper_escaping(self):
         un = "PlotlyImageTest"
         ak = "786r5mecv0"
-        url = "https://plot.ly/~PlotlyImageTest/13185/"
+        url = "https://plotly.com/~PlotlyImageTest/13185/"
         py.sign_in(un, ak)
         py.get_figure(url)
