@@ -41,7 +41,7 @@ Plotly Express is the easy-to-use, high-level interface to Plotly, which [operat
 
 > **Note**: Plotly Express was previously its own separately-installed `plotly_express` package but is now part of `plotly` and importable via `import plotly.express as px`.
 
-This notebook demonstrates various `plotly.express` features. [Reference documentation](https://plot.ly/python-api-reference/plotly.express.html) is also available, as well as a [tutorial on input argument types](/python/px-arguments) and one on how to [style figures made with Plotly Express](/python/styling-plotly-express/).
+This notebook demonstrates various `plotly.express` features. [Reference documentation](https://plotly.com/python-api-reference/plotly.express.html) is also available, as well as a [tutorial on input argument types](/python/px-arguments) and one on how to [style figures made with Plotly Express](/python/styling-plotly-express/).
 
 You can also read our original [Medium announcement article](https://medium.com/@plotlygraphs/introducing-plotly-express-808df010143d) for more information on this library.
 

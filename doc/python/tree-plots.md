@@ -137,4 +137,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/ for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!
+See https://plotly.com/python/reference/ for more information and chart attribute options and http://igraph.org/python/ for more information about the igraph package!

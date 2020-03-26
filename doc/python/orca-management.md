@@ -184,7 +184,7 @@ will be applied automatically in future sessions. You can do this as follows:
     >>> plotly.io.orca.config.save()
 
 If you're still having trouble, feel free to ask for help on the forums at
-https://community.plot.ly/c/api/python
+https://community.plotly.com/c/api/python
 ----------------------------------------------------------------------------
 ```
 If this happens, follow the instructions in the error message and specify the full path to you orca executable using the `plotly.io.orca.config.executable` configuration property.

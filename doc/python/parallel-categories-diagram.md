@@ -288,4 +288,4 @@ widgets.VBox([color_toggle, fig])
 
 #### Reference
 
-See [reference page](https://plot.ly/python/reference/#parcats) for more information and chart attribute options!
+See [reference page](https://plotly.com/python/reference/#parcats) for more information and chart attribute options!

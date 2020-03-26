@@ -81,4 +81,4 @@ fig.show()
 ```
 
 #### Reference
-Check out https://plot.ly/python/reference/#layout-updatemenus for more information!
+Check out https://plotly.com/python/reference/#layout-updatemenus for more information!

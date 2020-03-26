@@ -142,7 +142,7 @@ import plotly.io as pio
 
 import pandas as pd
 
-df = pd.read_csv("https://plot.ly/~public.health/17.csv")
+df = pd.read_csv("https://plotly.com/~public.health/17.csv")
 
 data = [dict(
   x = df['date'],
@@ -270,4 +270,4 @@ pio.show(fig_dict, validate=False)
 ```
 
 #### Reference
-See https://plot.ly/python/reference/ for more information and chart attribute options!
+See https://plotly.com/python/reference/ for more information and chart attribute options!

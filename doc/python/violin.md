@@ -36,9 +36,9 @@ jupyter:
 
 ## Violin Plot with Plotly Express
 
-A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](https://plot.ly/python/box-plots/), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
+A [violin plot](https://en.wikipedia.org/wiki/Violin_plot) is a statistical representation of numerical data. It is similar to a [box plot](https://plotly.com/python/box-plots/), with the addition of a rotated [kernel density](https://en.wikipedia.org/wiki/Kernel_density_estimation) plot on each side.
 
-See also the [list of other statistical charts](https://plot.ly/python/statistical-charts/).
+See also the [list of other statistical charts](https://plotly.com/python/statistical-charts/).
 
 ### Basic Violin Plot with Plotly Express
 
@@ -88,7 +88,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use the more generic function `go.Violin` from `plotly.graph_objects`. All the options of `go.Violin` are documented in the reference https://plot.ly/python/reference/#violin
+If Plotly Express does not provide a good starting point, you can use the more generic function `go.Violin` from `plotly.graph_objects`. All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/#violin
 
 #### Basic Violin Plot
 
@@ -260,4 +260,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#violin for more information and chart attribute options!
+See https://plotly.com/python/reference/#violin for more information and chart attribute options!

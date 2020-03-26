@@ -36,7 +36,7 @@ jupyter:
 
 #### Imports
 
-The tutorial below imports [Pandas](https://plot.ly/pandas/intro-to-pandas-tutorial/), and [SciPy](https://www.scipy.org/).
+The tutorial below imports [Pandas](https://plotly.com/pandas/intro-to-pandas-tutorial/), and [SciPy](https://www.scipy.org/).
 
 ```python
 import pandas as pd
