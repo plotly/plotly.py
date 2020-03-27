@@ -56,7 +56,7 @@ Mapbox tile maps are composed of various layers, of three different types:
 
 #### Mapbox Access Tokens and When You Need Them
 
-The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox.js open-source library, which is integrated into Plotly.py. If your basemap in `layout.mapbox.style` uses data from the Mapbox _service_, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided in `layout.mapbox.access_token` (or, if using Plotly Express, via the `px.set_mapbox_access_token()` configuration function).
+The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox GL JS open-source library, which is integrated into Plotly.py. If your basemap in `layout.mapbox.style` uses data from the Mapbox _service_, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided in `layout.mapbox.access_token` (or, if using Plotly Express, via the `px.set_mapbox_access_token()` configuration function).
 
 > If your `layout.mapbox.style` does not use data from the Mapbox service, you do _not_ need to register for a Mapbox account.
 
