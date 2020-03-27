@@ -29,17 +29,23 @@ def test_numpy_labels():
     fig = px.scatter(
         x=[1, 2, 3], y=[2, 3, 4], labels={"x": "time"}
     )  # other labels will be kw arguments
-    assert fig.data[0]["hovertemplate"] == "time=%{x}<br>y=%{y}"
+    assert fig.data[0]["hovertemplate"] == "time=%{x}<br>y=%{y}<extra></extra>"
 
 
 def test_with_index():
     tips = px.data.tips()
     fig = px.scatter(tips, x=tips.index, y="total_bill")
-    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
+    assert (
+        fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}<extra></extra>"
+    )
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill)
-    assert fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}"
+    assert (
+        fig.data[0]["hovertemplate"] == "index=%{x}<br>total_bill=%{y}<extra></extra>"
+    )
     fig = px.scatter(tips, x=tips.index, y=tips.total_bill, labels={"index": "number"})
-    assert fig.data[0]["hovertemplate"] == "number=%{x}<br>total_bill=%{y}"
+    assert (
+        fig.data[0]["hovertemplate"] == "number=%{x}<br>total_bill=%{y}<extra></extra>"
+    )
     # We do not allow "x=index"
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(tips, x="index", y="total_bill")
@@ -49,28 +55,34 @@ def test_with_index():
     tips = px.data.tips()
     tips.index.name = "item"
     fig = px.scatter(tips, x=tips.index, y="total_bill")
-    assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}"
+    assert fig.data[0]["hovertemplate"] == "item=%{x}<br>total_bill=%{y}<extra></extra>"
 
 
 def test_pandas_series():
     tips = px.data.tips()
     before_tip = tips.total_bill - tips.tip
     fig = px.bar(tips, x="day", y=before_tip)
-    assert fig.data[0].hovertemplate == "day=%{x}<br>y=%{y}"
+    assert fig.data[0].hovertemplate == "day=%{x}<br>y=%{y}<extra></extra>"
     fig = px.bar(tips, x="day", y=before_tip, labels={"y": "bill"})
-    assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}"
+    assert fig.data[0].hovertemplate == "day=%{x}<br>bill=%{y}<extra></extra>"
     # lock down that we can pass df.col to facet_*
     fig = px.bar(tips, x="day", y="tip", facet_row=tips.day, facet_col=tips.day)
-    assert fig.data[0].hovertemplate == "day=%{x}<br>tip=%{y}"
+    assert fig.data[0].hovertemplate == "day=%{x}<br>tip=%{y}<extra></extra>"
 
 
 def test_several_dataframes():
     df = pd.DataFrame(dict(x=[0, 1], y=[1, 10], z=[0.1, 0.8]))
     df2 = pd.DataFrame(dict(time=[23, 26], money=[100, 200]))
     fig = px.scatter(df, x="z", y=df2.money, size="x")
-    assert fig.data[0].hovertemplate == "z=%{x}<br>y=%{y}<br>x=%{marker.size}"
+    assert (
+        fig.data[0].hovertemplate
+        == "z=%{x}<br>y=%{y}<br>x=%{marker.size}<extra></extra>"
+    )
     fig = px.scatter(df2, x=df.z, y=df2.money, size=df.z)
-    assert fig.data[0].hovertemplate == "x=%{x}<br>money=%{y}<br>size=%{marker.size}"
+    assert (
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>money=%{y}<br>size=%{marker.size}<extra></extra>"
+    )
     # Name conflict
     with pytest.raises(NameError) as err_msg:
         fig = px.scatter(df, x="z", y=df2.money, size="y")
@@ -85,7 +97,7 @@ def test_several_dataframes():
     fig = px.scatter(x=df.y, y=df2.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
-    assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}"
+    assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<extra></extra>"
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
@@ -93,7 +105,10 @@ def test_several_dataframes():
     fig = px.scatter(x=df.y, y=df2.y, size=df3.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
-    assert fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<br>size=%{marker.size}"
+    assert (
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>y=%{y}<br>size=%{marker.size}<extra></extra>"
+    )
 
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
     df2 = pd.DataFrame(dict(x=[3, 5], y=[23, 24]))
@@ -102,7 +117,8 @@ def test_several_dataframes():
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([23, 24]))
     assert (
-        fig.data[0].hovertemplate == "x=%{x}<br>y=%{y}<br>hover_data_0=%{customdata[0]}"
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>y=%{y}<br>hover_data_0=%{customdata[0]}<extra></extra>"
     )
 
 
@@ -111,7 +127,7 @@ def test_name_heuristics():
     fig = px.scatter(df, x=df.y, y=df.x, size=df.y)
     assert np.all(fig.data[0].x == np.array([3, 4]))
     assert np.all(fig.data[0].y == np.array([0, 1]))
-    assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}"
+    assert fig.data[0].hovertemplate == "y=%{marker.size}<br>x=%{y}<extra></extra>"
 
 
 def test_repeated_name():
@@ -133,7 +149,7 @@ def test_arrayattrable_numpy():
     )
     assert (
         fig.data[0]["hovertemplate"]
-        == "total_bill=%{x}<br>tip=%{y}<br>hover_data_0=%{customdata[0]}"
+        == "total_bill=%{x}<br>tip=%{y}<br>hover_data_0=%{customdata[0]}<extra></extra>"
     )
     tips = px.data.tips()
     fig = px.scatter(
@@ -145,7 +161,7 @@ def test_arrayattrable_numpy():
     )
     assert (
         fig.data[0]["hovertemplate"]
-        == "total_bill=%{x}<br>tip=%{y}<br>suppl=%{customdata[0]}"
+        == "total_bill=%{x}<br>tip=%{y}<br>suppl=%{customdata[0]}<extra></extra>"
     )
 
 
@@ -275,7 +291,7 @@ def test_int_col_names():
 
 def test_data_frame_from_dict():
     fig = px.scatter({"time": [0, 1], "money": [1, 2]}, x="time", y="money")
-    assert fig.data[0].hovertemplate == "time=%{x}<br>money=%{y}"
+    assert fig.data[0].hovertemplate == "time=%{x}<br>money=%{y}<extra></extra>"
     assert np.all(fig.data[0].x == [0, 1])
 
 
@@ -306,4 +322,4 @@ def test_pass_df_columns():
 def test_size_column():
     df = px.data.tips()
     fig = px.scatter(df, x=df["size"], y=df.tip)
-    assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}"
+    assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}<extra></extra>"

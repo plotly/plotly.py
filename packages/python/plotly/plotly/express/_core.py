@@ -389,6 +389,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
+        trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
 
 
@@ -1445,8 +1446,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 )
             if trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]:
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
-            if trace_spec.constructor not in [go.Parcats, go.Parcoords]:
-                trace.update(hoverlabel=dict(namelength=0))
             trace_names.add(trace_name)
 
             # Init subplot row/col

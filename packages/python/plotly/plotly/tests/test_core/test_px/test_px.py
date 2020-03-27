@@ -50,7 +50,7 @@ def test_custom_data_scatter():
     assert fig.data[0].customdata.shape[1] == 4
     assert (
         fig.data[0].hovertemplate
-        == "sepal_width=%{x}<br>sepal_length=%{y}<br>petal_length=%{customdata[2]}<br>petal_width=%{customdata[3]}<br>species_id=%{customdata[0]}"
+        == "sepal_width=%{x}<br>sepal_length=%{y}<br>petal_length=%{customdata[2]}<br>petal_width=%{customdata[3]}<br>species_id=%{customdata[0]}<extra></extra>"
     )
 
 
