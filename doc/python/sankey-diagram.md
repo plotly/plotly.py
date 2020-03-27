@@ -74,9 +74,10 @@ data = json.loads(response.read())
 
 # override gray link colors with 'source' colors
 opacity = 0.4
+# change 'magenta' to its 'rgba' value to add opacity
 data['data'][0]['node']['color'] = ['rgba(255,0,255, 0.8)' if color == "magenta" else color for color in data['data'][0]['node']['color']]
-data['data'][0]['link']['color'] = [data['data'][0]['node']['color'][src] for src in data['data'][0]['link']['source']]
-data['data'][0]['link']['color'] = [color.replace("0.8", str(opacity)) for color in data['data'][0]['link']['color']]
+data['data'][0]['link']['color'] = [data['data'][0]['node']['color'][src].replace("0.8", str(opacity)) 
+                                    for src in data['data'][0]['link']['source']]
 
 fig = go.Figure(data=[go.Sankey(
     valueformat = ".0f",
