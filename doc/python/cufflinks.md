@@ -138,7 +138,7 @@ fig.show()
 import cufflinks as cf
 
 df=cf.datagen.lines(4)
-fig = df.iplot(asFigure=True, hline=[2,4],vline=['2015-02-10'])
+fig = df.iplot(asFigure=True, hline=[2,4], vline=['2015-02-10'])
 fig.show()
 ```
 
