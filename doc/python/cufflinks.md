@@ -29,7 +29,6 @@ jupyter:
     layout: base
     name: Cufflinks
     order: 31
-    page_type: example_index
     permalink: python/cufflinks/
     thumbnail: thumbnail/plotly-express.png
 ---
