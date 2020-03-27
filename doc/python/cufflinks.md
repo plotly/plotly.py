@@ -51,7 +51,8 @@ import pandas as pd
 import numpy as np
 
 df = pd.DataFrame(np.random.randn(1000, 2), columns=['A', 'B']).cumsum()
-fig = df.iplot(asFigure=True, xTitle="The X Axis", yTitle="The Y Axis", title="The Figure Title")
+fig = df.iplot(asFigure=True, xTitle="The X Axis",
+                    yTitle="The Y Axis", title="The Figure Title")
 fig.show()
 ```
 
