@@ -90,7 +90,7 @@ Check out our Community Forum: https://community.plot.ly/.
 
 ## Want to improve the plotly documentation?
 
-Thank you! Instructions on how to contribute to the documentation are given [here](doc/contributing.md). Please also read the next section if you need to setup a development environment.
+Thank you! Instructions on how to contribute to the documentation are given [here](doc/README.md). Please also read the next section if you need to setup a development environment.
 
 ## How to contribute - Technical Aspects
 
