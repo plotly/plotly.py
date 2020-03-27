@@ -62,9 +62,9 @@ fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
 fig.show()
 ```
 
-### More complex Sankey diagram
+### More complex Sankey diagram with colored links
 
-```python inputHidden=false outputHidden=false
+```python
 import plotly.graph_objects as go
 import urllib, json
 
@@ -76,7 +76,7 @@ data = json.loads(response.read())
 opacity = 0.4
 # change 'magenta' to its 'rgba' value to add opacity
 data['data'][0]['node']['color'] = ['rgba(255,0,255, 0.8)' if color == "magenta" else color for color in data['data'][0]['node']['color']]
-data['data'][0]['link']['color'] = [data['data'][0]['node']['color'][src].replace("0.8", str(opacity)) 
+data['data'][0]['link']['color'] = [data['data'][0]['node']['color'][src].replace("0.8", str(opacity))
                                     for src in data['data'][0]['link']['source']]
 
 fig = go.Figure(data=[go.Sankey(
