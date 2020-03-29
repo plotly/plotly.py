@@ -41,6 +41,24 @@ class PxDefaults(object):
 defaults = PxDefaults()
 del PxDefaults
 
+
+class IdentityMap(object):
+    """
+    `dict`-like object which can be passed in to arguments like `color_discrete_map` to
+    use the provided data values as colors, rather than mapping them to colors cycled
+    from `color_discrete_sequence`.
+    """
+
+    def __getitem__(self, key):
+        return key
+
+    def __contains__(self, key):
+        return True
+
+    def copy(self):
+        return self
+
+
 MAPBOX_TOKEN = None
 
 
@@ -1491,9 +1509,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         for col, val, m in zip(grouper, group_name, grouped_mappings):
             if col != one_group:
                 key = get_label(args, col)
-                mapping_labels[key] = str(val)
-                if m.show_in_trace_name:
-                    trace_name_labels[key] = str(val)
+                if not isinstance(m.val_map, IdentityMap):
+                    mapping_labels[key] = str(val)
+                    if m.show_in_trace_name:
+                        trace_name_labels[key] = str(val)
                 if m.variable == "animation_frame":
                     frame_name = val
         trace_name = ", ".join(trace_name_labels.values())

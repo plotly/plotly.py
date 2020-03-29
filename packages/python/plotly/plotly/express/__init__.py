@@ -53,6 +53,7 @@ from ._core import (  # noqa: F401
     set_mapbox_access_token,
     defaults,
     get_trendline_results,
+    IdentityMap,
 )
 
 from . import data, colors  # noqa: F401
@@ -95,4 +96,5 @@ __all__ = [
     "colors",
     "set_mapbox_access_token",
     "get_trendline_results",
+    "IdentityMap",
 ]

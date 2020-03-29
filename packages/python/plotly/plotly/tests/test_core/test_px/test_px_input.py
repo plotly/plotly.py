@@ -323,3 +323,18 @@ def test_size_column():
     df = px.data.tips()
     fig = px.scatter(df, x=df["size"], y=df.tip)
     assert fig.data[0].hovertemplate == "size=%{x}<br>tip=%{y}<extra></extra>"
+
+
+def test_identity_map():
+    fig = px.scatter(
+        x=[1, 2],
+        y=[1, 2],
+        symbol=["a", "b"],
+        color=["red", "blue"],
+        color_discrete_map=px.IdentityMap(),
+    )
+    assert fig.data[0].marker.color == "red"
+    assert fig.data[1].marker.color == "blue"
+    assert "color" not in fig.data[0].hovertemplate
+    assert "symbol" in fig.data[0].hovertemplate
+    assert fig.layout.legend.title.text == "symbol"
