@@ -59,6 +59,12 @@ class IdentityMap(object):
         return self
 
 
+class Constant(object):
+    def __init__(self, value, label=None):
+        self.value = value
+        self.label = label
+
+
 MAPBOX_TOKEN = None
 
 
@@ -937,6 +943,8 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    constants = dict()
+
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -968,8 +976,15 @@ def build_dataframe(args, attrables, array_attrables):
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
+            # ----------------- argument is a constant ----------------------
+            if isinstance(argument, Constant):
+                col_name = _check_name_not_reserved(
+                    str(argument.label) if argument.label is not None else field,
+                    reserved_names,
+                )
+                constants[col_name] = argument.value
             # ----------------- argument is a col name ----------------------
-            if isinstance(argument, str) or isinstance(
+            elif isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
                 if not df_provided:
@@ -1049,6 +1064,9 @@ def build_dataframe(args, attrables, array_attrables):
                 args[field_name] = str(col_name)
             else:
                 args[field_name][i] = str(col_name)
+
+    for col_name in constants:
+        df_output[col_name] = constants[col_name]
 
     args["data_frame"] = df_output
     return args

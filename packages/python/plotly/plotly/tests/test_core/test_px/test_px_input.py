@@ -335,6 +335,36 @@ def test_identity_map():
     )
     assert fig.data[0].marker.color == "red"
     assert fig.data[1].marker.color == "blue"
-    assert "color" not in fig.data[0].hovertemplate
-    assert "symbol" in fig.data[0].hovertemplate
+    assert "color=" not in fig.data[0].hovertemplate
+    assert "symbol=" in fig.data[0].hovertemplate
+    assert fig.layout.legend.title.text == "symbol"
+
+
+def test_constants():
+    fig = px.scatter(x=px.Constant(1), y=[1, 2])
+    assert fig.data[0].x[0] == 1
+    assert fig.data[0].x[1] == 1
+    assert "x=" in fig.data[0].hovertemplate
+
+    fig = px.scatter(x=px.Constant(1, label="time"), y=[1, 2])
+    assert fig.data[0].x[0] == 1
+    assert fig.data[0].x[1] == 1
+    assert "x=" not in fig.data[0].hovertemplate
+    assert "time=" in fig.data[0].hovertemplate
+
+    fig = px.scatter(
+        x=[1, 2],
+        y=[1, 2],
+        symbol=["a", "b"],
+        color=px.Constant("red", label="the_identity_label"),
+        hover_data=[px.Constant("data", label="the_data")],
+        color_discrete_map=px.IdentityMap(),
+    )
+    assert fig.data[0].marker.color == "red"
+    assert fig.data[0].customdata[0][0] == "data"
+    assert fig.data[1].marker.color == "red"
+    assert "color=" not in fig.data[0].hovertemplate
+    assert "the_identity_label=" not in fig.data[0].hovertemplate
+    assert "symbol=" in fig.data[0].hovertemplate
+    assert "the_data=" in fig.data[0].hovertemplate
     assert fig.layout.legend.title.text == "symbol"
