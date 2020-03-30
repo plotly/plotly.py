@@ -53,6 +53,9 @@ from ._core import (  # noqa: F401
     set_mapbox_access_token,
     defaults,
     get_trendline_results,
+)
+
+from ._special_inputs import (  # noqa: F401
     IdentityMap,
     Constant,
 )

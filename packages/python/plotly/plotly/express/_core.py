@@ -1,6 +1,7 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
+from ._special_inputs import IdentityMap, Constant
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
@@ -40,29 +41,6 @@ class PxDefaults(object):
 
 defaults = PxDefaults()
 del PxDefaults
-
-
-class IdentityMap(object):
-    """
-    `dict`-like object which can be passed in to arguments like `color_discrete_map` to
-    use the provided data values as colors, rather than mapping them to colors cycled
-    from `color_discrete_sequence`.
-    """
-
-    def __getitem__(self, key):
-        return key
-
-    def __contains__(self, key):
-        return True
-
-    def copy(self):
-        return self
-
-
-class Constant(object):
-    def __init__(self, value, label=None):
-        self.value = value
-        self.label = label
 
 
 MAPBOX_TOKEN = None
@@ -161,11 +139,15 @@ def make_mapping(args, variable):
     if variable == "dash":
         arg_name = "line_dash"
         vprefix = "line_dash"
+    if args[vprefix + "_map"] == "identity":
+        val_map = IdentityMap()
+    else:
+        val_map = args[vprefix + "_map"].copy()
     return Mapping(
         show_in_trace_name=True,
         variable=variable,
         grouper=args[arg_name],
-        val_map=args[vprefix + "_map"].copy(),
+        val_map=val_map,
         sequence=args[vprefix + "_sequence"],
         updater=lambda trace, v: trace.update({parent: {variable: v}}),
         facet=None,
