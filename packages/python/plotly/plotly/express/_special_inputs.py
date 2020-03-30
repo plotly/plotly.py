@@ -1,4 +1,3 @@
-
 class IdentityMap(object):
     """
     `dict`-like object which acts as if the value for any key is the key itself. Objects
@@ -24,6 +23,7 @@ class Constant(object):
     identifiers or list-like objects to indicate that this attribute should take on a
     constant value. An optional label can be provided.
     """
+
     def __init__(self, value, label=None):
         self.value = value
         self.label = label
