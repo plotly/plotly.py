@@ -52,7 +52,7 @@ fig = px.line_geo(df, locations="iso_alpha",
 fig.show()
 ```
 
-## Lines on Maps with plotly.graph_objects
+## Lines on Maps with plotly.graph_objects
 
 ### US Flight Paths Map
 
@@ -215,4 +215,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#scattergeo for more information and chart attribute options!
+See https://plotly.com/python/reference/#scattergeo for more information and chart attribute options!

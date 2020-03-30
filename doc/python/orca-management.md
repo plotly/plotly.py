@@ -164,7 +164,7 @@ Searched for executable 'orca' on the following path:
 
 If you haven't installed orca yet, you can do so using conda as follows:
 
-    $ conda install -c plotly plotly-orca
+    $ conda install -c plotly plotly-orca==1.2.1
 
 Alternatively, see other installation methods in the orca project README at
 https://github.com/plotly/orca.
@@ -184,7 +184,7 @@ will be applied automatically in future sessions. You can do this as follows:
     >>> plotly.io.orca.config.save()
 
 If you're still having trouble, feel free to ask for help on the forums at
-https://community.plot.ly/c/api/python
+https://community.plotly.com/c/api/python
 ----------------------------------------------------------------------------
 ```
 If this happens, follow the instructions in the error message and specify the full path to you orca executable using the `plotly.io.orca.config.executable` configuration property.

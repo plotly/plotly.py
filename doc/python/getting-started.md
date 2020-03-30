@@ -38,9 +38,9 @@ jupyter:
 
 ### Overview
 
-The plotly Python library ([plotly.py](https://plot.ly/python/)) is an interactive, [open-source](https://github.com/plotly/plotly.py) plotting library that supports over 40 unique chart types covering a wide range of statistical, financial, geographic, scientific, and 3-dimensional use-cases.
+The plotly Python library ([plotly.py](https://plotly.com/python/)) is an interactive, [open-source](https://github.com/plotly/plotly.py) plotting library that supports over 40 unique chart types covering a wide range of statistical, financial, geographic, scientific, and 3-dimensional use-cases.
 
-Built on top of the Plotly JavaScript library ([plotly.js](https://plot.ly/javascript/)), plotly.py enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash.
+Built on top of the Plotly JavaScript library ([plotly.js](https://plotly.com/javascript/)), plotly.py enables Python users to create beautiful interactive web-based visualizations that can be displayed in Jupyter notebooks, saved to standalone HTML files, or served as part of pure Python-built web applications using Dash.
 
 Thanks to deep integration with the [orca](https://github.com/plotly/orca) image export utility, plotly.py also provides great support for non-web contexts including desktop editors (e.g. QtConsole, Spyder, PyCharm) and static document publishing (e.g. exporting notebooks to PDF with high-quality vector images).
 
@@ -199,7 +199,7 @@ installation of the plotly [orca](https://github.com/plotly/orca) command line u
 These dependencies can all be installed using conda:
 
 ```
-$ conda install -c plotly plotly-orca psutil requests
+$ conda install -c plotly plotly-orca==1.2.1 psutil requests
 ```
 
 Or, `psutil` and `requests` can be installed using pip...
@@ -240,7 +240,7 @@ or conda.
 $ conda install -c plotly plotly-geo=1.0.0
 ```
 
-See [_USA County Choropleth Maps in Python_](https://plot.ly/python/county-choropleth/) for more information on the county choropleth figure factory.
+See [_USA County Choropleth Maps in Python_](https://plotly.com/python/county-choropleth/) for more information on the county choropleth figure factory.
 
 #### Chart Studio Support
 
@@ -271,8 +271,8 @@ For information on theming plotly figures, see [_Theming and templates with plot
 
 For information on all of the ways that plotly figures can be displayed, see [_Displaying plotly figures with plotly for Python_](/python/renderers/).
 
-For the full searchable reference of every figure property, see the [_Python figure reference_](https://plot.ly/python/reference/).
+For the full searchable reference of every figure property, see the [_Python figure reference_](https://plotly.com/python/reference/).
 
-For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plot.ly/).
+For information on using Python to build web applications containing plotly figures, see the [_Dash User Guide_](https://dash.plotly.com/).
 
 <!-- #endregion -->

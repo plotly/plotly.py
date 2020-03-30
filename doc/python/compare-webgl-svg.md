@@ -101,5 +101,5 @@ fig.show()
 
 
 For more information see <br>
-`Scattergl()` : https://plot.ly/python/reference/#scattergl <br>
-`Scatter()` : https://plot.ly/python/reference/#scatter
+`Scattergl()` : https://plotly.com/python/reference/#scattergl <br>
+`Scatter()` : https://plotly.com/python/reference/#scatter

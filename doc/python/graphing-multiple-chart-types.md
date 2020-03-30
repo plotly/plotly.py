@@ -98,4 +98,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/ for more information and attribute options!
+See https://plotly.com/python/reference/ for more information and attribute options!

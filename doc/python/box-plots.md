@@ -36,7 +36,7 @@ jupyter:
     thumbnail: thumbnail/box.jpg
 ---
 
-A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plot.ly/python/statistical-charts/).
+A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).
 
 ## Box Plot with `plotly.express`
 
@@ -134,7 +134,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plot.ly/python/reference/#box.
+If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
 
 ### Basic Box Plot
 
@@ -280,7 +280,7 @@ fig.add_trace(go.Box(
     name="All Points",
     jitter=0.3,
     pointpos=-1.8,
-    boxpoints='all', # represent all points
+    boxpoints='all', # represent all points
     marker_color='rgb(7,40,89)',
     line_color='rgb(7,40,89)'
 ))
@@ -353,7 +353,7 @@ fig.add_trace(go.Box(
 
 fig.update_layout(
     yaxis_title='normalized moisture',
-    boxmode='group' # group together boxes of the different traces for each value of x
+    boxmode='group' # group together boxes of the different traces for each value of x
 )
 fig.show()
 ```
@@ -491,4 +491,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#box for more information and chart attribute options!
+See https://plotly.com/python/reference/#box for more information and chart attribute options!

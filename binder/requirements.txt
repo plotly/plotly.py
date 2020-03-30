@@ -14,3 +14,4 @@ networkx
 scikit-image
 datashader
 pyarrow
+cufflinks==0.17.3

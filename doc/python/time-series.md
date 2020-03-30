@@ -35,12 +35,12 @@ jupyter:
 
 ### Time Series Plot with `datetime` Objects ###
 
-Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`) or `plotly.graph_objects` charts objects (`go.Scatter`). For more examples of such charts, see the documentation of [line and scatter plots](https://plot.ly/python/line-and-scatter/).
+Time series can be represented using either `plotly.express` functions (`px.line`, `px.scatter`) or `plotly.graph_objects` charts objects (`go.Scatter`). For more examples of such charts, see the documentation of [line and scatter plots](https://plotly.com/python/line-and-scatter/).
 
 Plotly auto-sets the axis type to a date format when the corresponding data are either ISO-formatted date strings or if they're a [date pandas column](https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html) or [datetime NumPy array](https://docs.scipy.org/doc/numpy/reference/arrays.datetime.html).
 
 ```python
-# Using plotly.express
+# Using plotly.express
 import plotly.express as px
 
 import pandas as pd
@@ -51,7 +51,7 @@ fig.show()
 ```
 
 ```python
-# Using graph_objects
+# Using graph_objects
 import plotly.graph_objects as go
 
 import pandas as pd
@@ -101,7 +101,7 @@ fig.add_trace(go.Scatter(
                 line_color='dimgray',
                 opacity=0.8))
 
-# Use date string to set xaxis range
+# Use date string to set xaxis range
 fig.update_layout(xaxis_range=['2016-07-01','2016-12-31'],
                   title_text="Manually Set Date Range")
 fig.show()
@@ -128,4 +128,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#layout-xaxis-rangeslider and<br> https://plot.ly/python/reference/#layout-xaxis-rangeselector for more information and chart attribute options!
+See https://plotly.com/python/reference/#layout-xaxis-rangeslider and<br> https://plotly.com/python/reference/#layout-xaxis-rangeselector for more information and chart attribute options!

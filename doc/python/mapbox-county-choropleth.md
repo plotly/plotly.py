@@ -210,4 +210,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#choroplethmapbox for more information about mapbox and their attribute options.
+See https://plotly.com/python/reference/#choroplethmapbox for more information about mapbox and their attribute options.

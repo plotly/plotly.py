@@ -50,7 +50,7 @@ fig.show()
 data_canada
 ```
 
-### Customize bar chart with Plotly Express
+### Customize bar chart with Plotly Express
 
 The bar plot can be customized using keyword arguments.
 
@@ -121,7 +121,7 @@ fig = go.Figure(data=[
     go.Bar(name='SF Zoo', x=animals, y=[20, 14, 23]),
     go.Bar(name='LA Zoo', x=animals, y=[12, 18, 29])
 ])
-# Change the bar mode
+# Change the bar mode
 fig.update_layout(barmode='group')
 fig.show()
 ```
@@ -213,7 +213,7 @@ fig.add_trace(go.Bar(
     marker_color='lightsalmon'
 ))
 
-# Here we modify the tickangle of the xaxis, resulting in rotated labels.
+# Here we modify the tickangle of the xaxis, resulting in rotated labels.
 fig.update_layout(barmode='group', xaxis_tickangle=-45)
 fig.show()
 ```
@@ -336,7 +336,7 @@ fig.show()
 
 ### Bar Chart with Sorted or Ordered Categories
 
-Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plot.ly/python/reference/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
+Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
 
 This example orders the bar chart alphabetically with `categoryorder: 'category ascending'`
 
@@ -382,8 +382,8 @@ fig.show()
 
 ### Horizontal Bar Charts
 
-See examples of horizontal bar charts [here](https://plot.ly/python/horizontal-bar-charts/).
+See examples of horizontal bar charts [here](https://plotly.com/python/horizontal-bar-charts/).
 
 ### Reference
 
-See https://plot.ly/python/reference/#bar for more information and chart attribute options!
+See https://plotly.com/python/reference/#bar for more information and chart attribute options!

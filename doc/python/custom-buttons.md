@@ -34,10 +34,10 @@ jupyter:
 ---
 
 #### Methods
-The [updatemenu method](https://plot.ly/python/reference/#layout-updatemenus-buttons-method) determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
-- `"restyle"`: modify data or data attributes
-- `"relayout"`: modify layout attributes
-- `"update"`: modify data **and** layout attributes
+The [updatemenu method](https://plot.ly/python/reference/#layout-updatemenus-items-updatemenu-buttons-items-button-method) determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to modify the chart. There are 4 possible methods:
+- `"restyle"`: modify **data** or data attributes
+- `"relayout"`: modify **layout** attributes
+- `"update"`: modify **data and layout** attributes; combination of `"restyle"` and `"relayout"`
 - `"animate"`: start or pause an [animation](https://plot.ly/python/#animations))
 
 
@@ -456,8 +456,8 @@ fig.show()
 ```
 
 #### Animate Button
-Refer to our animation docs: https://plot.ly/python/#animations for examples on how to use the `animate` method with Plotly buttons.
+Refer to our animation docs: https://plotly.com/python/#animations for examples on how to use the `animate` method with Plotly buttons.
 
 
 #### Reference
-See https://plot.ly/python/reference/#layout-updatemenus for more information about `updatemenu` buttons.
+See https://plotly.com/python/reference/#layout-updatemenus for more information about `updatemenu` buttons.
