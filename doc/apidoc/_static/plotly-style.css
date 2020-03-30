@@ -36,3 +36,25 @@ code {
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
     background: lightgrey;
 }
+
+dt {
+    font-weight: normal;
+}
+
+dd {
+    margin-left: 20px;
+}
+
+blockquote {
+    font-size: 15px;
+    border-left: none;
+}
+
+li {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+code {
+    background-color: #F5F5F5
+}
