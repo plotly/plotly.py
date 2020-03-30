@@ -41,9 +41,9 @@ To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public 
 
 There are three different ways to show a filled area in a Mapbox map:
 
-1. Use a [Scattermapbox](https://plot.ly/python/reference/#scattermapbox) trace and set `fill` attribute to 'toself'
-2. Use a Mapbox layout (i.e. by minimally using an empty [Scattermapbox](https://plot.ly/python/reference/#scattermapbox) trace) and add a GeoJSON layer
-3. Use the [Choroplethmapbox](https://plot.ly/python/mapbox-county-choropleth/) trace type
+1. Use a [Scattermapbox](https://plotly.com/python/reference/#scattermapbox) trace and set `fill` attribute to 'toself'
+2. Use a Mapbox layout (i.e. by minimally using an empty [Scattermapbox](https://plotly.com/python/reference/#scattermapbox) trace) and add a GeoJSON layer
+3. Use the [Choroplethmapbox](https://plotly.com/python/mapbox-county-choropleth/) trace type
    <!-- #endregion -->
 
 ### Filled `Scattermapbox` Trace
@@ -70,7 +70,7 @@ fig.show()
 
 ### Multiple Filled Areas with a `Scattermapbox` trace
 
-The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](https://plot.ly/python/reference/#scattermapbox-connectgaps) attribute.
+The following example shows how to use `None` in your data to draw multiple filled areas. Such gaps in trace data are unconnected by default, but this can be controlled via the [connectgaps](https://plotly.com/python/reference/#scattermapbox-connectgaps) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -141,4 +141,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#scattermapbox for more information about mapbox and their attribute options.
+See https://plotly.com/python/reference/#scattermapbox for more information about mapbox and their attribute options.

@@ -37,7 +37,7 @@ jupyter:
 
 ### Basic Carpet Plot
 
-Set the `x` and `y` coorindates, using `x` and `y` attributes. If `x` coorindate values are ommitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [python reference](https://plot.ly/python/reference/#carpet-aaxis).
+Set the `x` and `y` coorindates, using `x` and `y` attributes. If `x` coorindate values are ommitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [python reference](https://plotly.com/python/reference/#carpet-aaxis).
 
 ```python
 import plotly.graph_objects as go
@@ -286,4 +286,4 @@ fig.show()
 
 ### Reference
 
-See https://plot.ly/python/reference/#contourcarpet for more information and chart attribute options!
+See https://plotly.com/python/reference/#contourcarpet for more information and chart attribute options!
