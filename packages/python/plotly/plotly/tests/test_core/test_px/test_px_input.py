@@ -339,6 +339,19 @@ def test_identity_map():
     assert "symbol=" in fig.data[0].hovertemplate
     assert fig.layout.legend.title.text == "symbol"
 
+    fig = px.scatter(
+        x=[1, 2],
+        y=[1, 2],
+        symbol=["a", "b"],
+        color=["red", "blue"],
+        color_discrete_map="identity",
+    )
+    assert fig.data[0].marker.color == "red"
+    assert fig.data[1].marker.color == "blue"
+    assert "color=" not in fig.data[0].hovertemplate
+    assert "symbol=" in fig.data[0].hovertemplate
+    assert fig.layout.legend.title.text == "symbol"
+
 
 def test_constants():
     fig = px.scatter(x=px.Constant(1), y=[1, 2])
