@@ -92,6 +92,10 @@ def get_label(args, column):
         return column
 
 
+def _is_continuous(df, col_name):
+    return df[col_name].dtype.kind in "ifc"
+
+
 def get_decorated_label(args, column, role):
     label = get_label(args, column)
     if "histfunc" in args and (
@@ -188,7 +192,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
-                    or args["data_frame"][name].dtype.kind in "ifc"
+                    or _is_continuous(args["data_frame"], name)
                 )
                 and (
                     trace_spec.constructor != go.Parcats
@@ -1124,7 +1128,7 @@ def process_dataframe_hierarchy(args):
     agg_f[count_colname] = "sum"
 
     if args["color"]:
-        if df[args["color"]].dtype.kind not in "ifc":
+        if not _is_continuous(df, args["color"]):
             aggfunc_color = aggfunc_discrete
             discrete_color = True
         elif not aggfunc_color:
@@ -1212,6 +1216,36 @@ def infer_config(args, constructor, trace_patch):
     if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
 
+    if "orientation" in args:
+        has_x = args["x"] is not None
+        has_y = args["y"] is not None
+        if args["orientation"] is None:
+            if constructor in [go.Histogram, go.Scatter]:
+                if has_y and not has_x:
+                    args["orientation"] = "h"
+            elif constructor in [go.Violin, go.Box, go.Bar, go.Funnel]:
+                if has_x and not has_y:
+                    args["orientation"] = "h"
+
+        if args["orientation"] is None and has_x and has_y:
+            x_is_continuous = _is_continuous(args["data_frame"], args["x"])
+            y_is_continuous = _is_continuous(args["data_frame"], args["y"])
+            if x_is_continuous and not y_is_continuous:
+                args["orientation"] = "h"
+            if y_is_continuous and not x_is_continuous:
+                args["orientation"] = "v"
+
+        if args["orientation"] is None:
+            args["orientation"] = "v"
+
+        if constructor == go.Histogram:
+            orientation = args["orientation"]
+            nbins = args["nbins"]
+            trace_patch["nbinsx"] = nbins if orientation == "v" else None
+            trace_patch["nbinsy"] = None if orientation == "v" else nbins
+            trace_patch["bingroup"] = "x" if orientation == "v" else "y"
+        trace_patch["orientation"] = args["orientation"]
+
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
 
@@ -1226,10 +1260,7 @@ def infer_config(args, constructor, trace_patch):
             if "color_discrete_sequence" not in args:
                 attrs.append("color")
             else:
-                if (
-                    args["color"]
-                    and args["data_frame"][args["color"]].dtype.kind in "ifc"
-                ):
+                if args["color"] and _is_continuous(args["data_frame"], args["color"]):
                     attrs.append("color")
                     args["color_is_continuous"] = True
                 elif constructor in [go.Sunburst, go.Treemap]:
