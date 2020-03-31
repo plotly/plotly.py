@@ -14,14 +14,14 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of the line enclosing each
                 sector. Defaults to the `paper_bgcolor` value.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             width
                 Sets the width (in px) of the line enclosing
                 each sector.
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
 """,
             ),
             **kwargs
