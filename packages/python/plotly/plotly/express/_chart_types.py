@@ -236,7 +236,7 @@ def area(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
+    orientation=None,
     groupnorm=None,
     log_x=False,
     log_y=False,
@@ -256,9 +256,7 @@ def area(
     return make_figure(
         args=locals(),
         constructor=go.Scatter,
-        trace_patch=dict(
-            stackgroup=1, mode="lines", orientation=orientation, groupnorm=groupnorm
-        ),
+        trace_patch=dict(stackgroup=1, mode="lines", groupnorm=groupnorm),
     )
 
 
@@ -291,7 +289,7 @@ def bar(
     range_color=None,
     color_continuous_midpoint=None,
     opacity=None,
-    orientation="v",
+    orientation=None,
     barmode="relative",
     log_x=False,
     log_y=False,
@@ -335,7 +333,7 @@ def histogram(
     color_discrete_map={},
     marginal=None,
     opacity=None,
-    orientation="v",
+    orientation=None,
     barmode="relative",
     barnorm=None,
     histnorm=None,
@@ -361,13 +359,7 @@ def histogram(
         args=locals(),
         constructor=go.Histogram,
         trace_patch=dict(
-            orientation=orientation,
-            histnorm=histnorm,
-            histfunc=histfunc,
-            nbinsx=nbins if orientation == "v" else None,
-            nbinsy=None if orientation == "v" else nbins,
-            cumulative=dict(enabled=cumulative),
-            bingroup="x" if orientation == "v" else "y",
+            histnorm=histnorm, histfunc=histfunc, cumulative=dict(enabled=cumulative),
         ),
         layout_patch=dict(barmode=barmode, barnorm=barnorm),
     )
@@ -393,7 +385,7 @@ def violin(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
+    orientation=None,
     violinmode="group",
     log_x=False,
     log_y=False,
@@ -414,12 +406,7 @@ def violin(
         args=locals(),
         constructor=go.Violin,
         trace_patch=dict(
-            orientation=orientation,
-            points=points,
-            box=dict(visible=box),
-            scalegroup=True,
-            x0=" ",
-            y0=" ",
+            points=points, box=dict(visible=box), scalegroup=True, x0=" ", y0=" ",
         ),
         layout_patch=dict(violinmode=violinmode),
     )
@@ -445,7 +432,7 @@ def box(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
+    orientation=None,
     boxmode="group",
     log_x=False,
     log_y=False,
@@ -470,9 +457,7 @@ def box(
     return make_figure(
         args=locals(),
         constructor=go.Box,
-        trace_patch=dict(
-            orientation=orientation, boxpoints=points, notched=notched, x0=" ", y0=" "
-        ),
+        trace_patch=dict(boxpoints=points, notched=notched, x0=" ", y0=" "),
         layout_patch=dict(boxmode=boxmode),
     )
 
@@ -497,7 +482,7 @@ def strip(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
+    orientation=None,
     stripmode="group",
     log_x=False,
     log_y=False,
@@ -516,7 +501,6 @@ def strip(
         args=locals(),
         constructor=go.Box,
         trace_patch=dict(
-            orientation=orientation,
             boxpoints="all",
             pointpos=0,
             hoveron="points",
@@ -1398,9 +1382,7 @@ def funnel(
     In a funnel plot, each row of `data_frame` is represented as a
     rectangular sector of a funnel.
     """
-    return make_figure(
-        args=locals(), constructor=go.Funnel, trace_patch=dict(orientation=orientation),
-    )
+    return make_figure(args=locals(), constructor=go.Funnel,)
 
 
 funnel.__doc__ = make_docstring(funnel)
