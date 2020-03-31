@@ -307,7 +307,7 @@ def bar(
     return make_figure(
         args=locals(),
         constructor=go.Bar,
-        trace_patch=dict(orientation=orientation, textposition="auto"),
+        trace_patch=dict(textposition="auto"),
         layout_patch=dict(barmode=barmode),
     )
 
@@ -1368,7 +1368,7 @@ def funnel(
     color_discrete_sequence=None,
     color_discrete_map={},
     opacity=None,
-    orientation="h",
+    orientation=None,
     log_x=False,
     log_y=False,
     range_x=None,
@@ -1382,7 +1382,7 @@ def funnel(
     In a funnel plot, each row of `data_frame` is represented as a
     rectangular sector of a funnel.
     """
-    return make_figure(args=locals(), constructor=go.Funnel,)
+    return make_figure(args=locals(), constructor=go.Funnel)
 
 
 funnel.__doc__ = make_docstring(funnel)
