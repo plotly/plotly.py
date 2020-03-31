@@ -60,8 +60,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -157,20 +157,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -184,8 +184,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs
@@ -242,8 +242,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 one or more <br> HTML tags) or if an explicit
                 width is set to override the text width.
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             fill
                 :class:`plotly.graph_objects.table.header.Fill`
                 instance or dict with compatible properties
@@ -257,8 +257,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
             formatsrc
-                Sets the source reference on plot.ly for
-                format .
+                Sets the source reference on Chart Studio Cloud
+                for  format .
             height
                 The height of cells.
             line
@@ -267,13 +267,13 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             prefix
                 Prefix for cell values.
             prefixsrc
-                Sets the source reference on plot.ly for
-                prefix .
+                Sets the source reference on Chart Studio Cloud
+                for  prefix .
             suffix
                 Suffix for cell values.
             suffixsrc
-                Sets the source reference on plot.ly for
-                suffix .
+                Sets the source reference on Chart Studio Cloud
+                for  suffix .
             values
                 Header cell values. `values[m][n]` represents
                 the value of the `n`th point in column `m`,
@@ -282,8 +282,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be truncated). Each value must be a finite
                 number or a string.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
 """,
             ),
             **kwargs
@@ -424,8 +424,8 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 one or more <br> HTML tags) or if an explicit
                 width is set to override the text width.
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             fill
                 :class:`plotly.graph_objects.table.cells.Fill`
                 instance or dict with compatible properties
@@ -439,8 +439,8 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 https://github.com/d3/d3-3.x-api-
                 reference/blob/master/Formatting.md#d3_format
             formatsrc
-                Sets the source reference on plot.ly for
-                format .
+                Sets the source reference on Chart Studio Cloud
+                for  format .
             height
                 The height of cells.
             line
@@ -449,13 +449,13 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             prefix
                 Prefix for cell values.
             prefixsrc
-                Sets the source reference on plot.ly for
-                prefix .
+                Sets the source reference on Chart Studio Cloud
+                for  prefix .
             suffix
                 Suffix for cell values.
             suffixsrc
-                Sets the source reference on plot.ly for
-                suffix .
+                Sets the source reference on Chart Studio Cloud
+                for  suffix .
             values
                 Cell values. `values[m][n]` represents the
                 value of the `n`th point in column `m`,
@@ -464,8 +464,8 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be truncated). Each value must be a finite
                 number or a string.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
 """,
             ),
             **kwargs

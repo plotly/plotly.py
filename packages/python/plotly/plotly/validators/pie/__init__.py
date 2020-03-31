@@ -205,8 +205,8 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
 
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -215,22 +215,23 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             familysrc
-                Sets the source reference on plot.ly for
-                family .
+                Sets the source reference on Chart Studio Cloud
+                for  family .
             size
 
             sizesrc
-                Sets the source reference on plot.ly for  size
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  size .
 """,
             ),
             **kwargs
@@ -270,8 +271,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -382,8 +383,8 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
 
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -392,22 +393,23 @@ class OutsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             familysrc
-                Sets the source reference on plot.ly for
-                family .
+                Sets the source reference on Chart Studio Cloud
+                for  family .
             size
 
             sizesrc
-                Sets the source reference on plot.ly for  size
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  size .
 """,
             ),
             **kwargs
@@ -490,8 +492,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 specified, the default trace color set is used
                 to pick the sector colors.
             colorssrc
-                Sets the source reference on plot.ly for
-                colors .
+                Sets the source reference on Chart Studio Cloud
+                for  colors .
             line
                 :class:`plotly.graph_objects.pie.marker.Line`
                 instance or dict with compatible properties
@@ -589,8 +591,8 @@ class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
 
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -599,22 +601,23 @@ class InsidetextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             familysrc
-                Sets the source reference on plot.ly for
-                family .
+                Sets the source reference on Chart Studio Cloud
+                for  family .
             size
 
             sizesrc
-                Sets the source reference on plot.ly for  size
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  size .
 """,
             ),
             **kwargs
@@ -725,20 +728,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -752,8 +755,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs

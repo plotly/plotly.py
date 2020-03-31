@@ -242,8 +242,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -266,17 +266,20 @@ class StartsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the x components of the starting position
                 of the streamtubes
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y components of the starting position
                 of the streamtubes
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the z components of the starting position
                 of the streamtubes
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -603,20 +606,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -630,8 +633,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs
@@ -889,15 +892,15 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title

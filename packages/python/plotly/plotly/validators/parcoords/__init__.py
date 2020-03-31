@@ -63,12 +63,13 @@ class TickfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             size
@@ -98,8 +99,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -128,12 +129,13 @@ class RangefontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             size
@@ -273,8 +275,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ainbow,Portland,Jet,Hot,Blackbody,Earth,Electri
                 c,Viridis,Cividis.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `line.color`is set to a
@@ -328,12 +330,13 @@ class LabelfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             size
@@ -505,14 +508,14 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the text displayed at the ticks position
                 via `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             values
                 Dimension values. `values[n]` represents the
                 value of the `n`th point in the dataset,
@@ -521,8 +524,8 @@ class DimensionsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 will be truncated). Each value must be a finite
                 number.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
             visible
                 Shows the dimension when set to `true` (the
                 default). Hides the dimension for `false`.

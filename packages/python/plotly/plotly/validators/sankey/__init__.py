@@ -91,12 +91,13 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             size
@@ -126,8 +127,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -184,8 +185,13 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 These defaults are not fully opaque, to allow
                 some visibility of what is beneath the node.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
+            customdata
+                Assigns extra data to each node.
+            customdatasrc
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             groups
                 Groups of nodes. Each group is defined by an
                 array with the indices of the nodes it
@@ -219,7 +225,7 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -230,13 +236,13 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             label
                 The shown name of the node.
             labelsrc
-                Sets the source reference on plot.ly for  label
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  label .
             line
                 :class:`plotly.graph_objects.sankey.node.Line`
                 instance or dict with compatible properties
@@ -247,11 +253,13 @@ class NodeValidator(_plotly_utils.basevalidators.CompoundValidator):
             x
                 The normalized horizontal position of the node.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 The normalized vertical position of the node.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -329,8 +337,13 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 default property values to use for elements of
                 sankey.link.colorscales
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
+            customdata
+                Assigns extra data to each link.
+            customdatasrc
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear when
                 hovering links. If `none` or `skip` are set, no
@@ -360,7 +373,7 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -371,13 +384,13 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             label
                 The shown name of the link.
             labelsrc
-                Sets the source reference on plot.ly for  label
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  label .
             line
                 :class:`plotly.graph_objects.sankey.link.Line`
                 instance or dict with compatible properties
@@ -385,20 +398,20 @@ class LinkValidator(_plotly_utils.basevalidators.CompoundValidator):
                 An integer number `[0..nodes.length - 1]` that
                 represents the source node.
             sourcesrc
-                Sets the source reference on plot.ly for
-                source .
+                Sets the source reference on Chart Studio Cloud
+                for  source .
             target
                 An integer number `[0..nodes.length - 1]` that
                 represents the target node.
             targetsrc
-                Sets the source reference on plot.ly for
-                target .
+                Sets the source reference on Chart Studio Cloud
+                for  target .
             value
                 A numeric value representing the flow volume
                 value.
             valuesrc
-                Sets the source reference on plot.ly for  value
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  value .
 """,
             ),
             **kwargs
@@ -451,20 +464,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -478,8 +491,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs

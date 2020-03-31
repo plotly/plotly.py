@@ -220,8 +220,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -799,15 +799,15 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title

@@ -127,7 +127,8 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def categoryarraysrc(self):
         """
-        Sets the source reference on plot.ly for  categoryarray .
+        Sets the source reference on Chart Studio Cloud for
+        categoryarray .
     
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -852,6 +853,109 @@ class YAxis(_BaseLayoutHierarchyType):
     @range.setter
     def range(self, val):
         self["range"] = val
+
+    # rangebreaks
+    # -----------
+    @property
+    def rangebreaks(self):
+        """
+        The 'rangebreaks' property is a tuple of instances of
+        Rangebreak that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.yaxis.Rangebreak
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Rangebreak constructor
+    
+            Supported dict properties:
+                
+                bounds
+                    Sets the lower and upper bounds of this axis
+                    rangebreak. Can be used with `pattern`.
+                dvalue
+                    Sets the size of each `values` item. The
+                    default is one day in milliseconds.
+                enabled
+                    Determines whether this axis rangebreak is
+                    enabled or disabled. Please note that
+                    `rangebreaks` only work for "date" axis type.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                pattern
+                    Determines a pattern on the time line that
+                    generates breaks. If *day of week* - days of
+                    the week in English e.g. 'Sunday' or `sun`
+                    (matching is case-insensitive and considers
+                    only the first three characters), as well as
+                    Sunday-based integers between 0 and 6. If
+                    "hour" - hour (24-hour clock) as decimal
+                    numbers between 0 and 24. for more info.
+                    Examples: - { pattern: 'day of week', bounds:
+                    [6, 1] }  or simply { bounds: ['sat', 'mon'] }
+                    breaks from Saturday to Monday (i.e. skips the
+                    weekends). - { pattern: 'hour', bounds: [17, 8]
+                    }   breaks from 5pm to 8am (i.e. skips non-work
+                    hours).
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                values
+                    Sets the coordinate values corresponding to the
+                    rangebreaks. An alternative to `bounds`. Use
+                    `dvalue` to set the size of the values along
+                    the axis.
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.yaxis.Rangebreak]
+        """
+        return self["rangebreaks"]
+
+    @rangebreaks.setter
+    def rangebreaks(self, val):
+        self["rangebreaks"] = val
+
+    # rangebreakdefaults
+    # ------------------
+    @property
+    def rangebreakdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.yaxis.rangebreakdefaults), sets the
+        default property values to use for elements of
+        layout.yaxis.rangebreaks
+    
+        The 'rangebreakdefaults' property is an instance of Rangebreak
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`
+          - A dict of string/value properties that will be passed
+            to the Rangebreak constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.yaxis.Rangebreak
+        """
+        return self["rangebreakdefaults"]
+
+    @rangebreakdefaults.setter
+    def rangebreakdefaults(self, val):
+        self["rangebreakdefaults"] = val
 
     # rangemode
     # ---------
@@ -1276,7 +1380,7 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'spikesnap' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['data', 'cursor']
+                ['data', 'cursor', 'hovered data']
 
         Returns
         -------
@@ -1443,12 +1547,13 @@ class YAxis(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -1741,7 +1846,7 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on plot.ly for  ticktext .
+        Sets the source reference on Chart Studio Cloud for  ticktext .
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1782,7 +1887,7 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on plot.ly for  tickvals .
+        Sets the source reference on Chart Studio Cloud for  tickvals .
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1890,12 +1995,13 @@ class YAxis(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -2112,8 +2218,8 @@ class YAxis(_BaseLayoutHierarchyType):
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
         categoryarraysrc
-            Sets the source reference on plot.ly for  categoryarray
-            .
+            Sets the source reference on Chart Studio Cloud for
+            categoryarray .
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2262,6 +2368,15 @@ class YAxis(_BaseLayoutHierarchyType):
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
+        rangebreaks
+            A tuple of
+            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
+            instances or dicts with compatible properties
+        rangebreakdefaults
+            When used in a template (as
+            layout.template.layout.yaxis.rangebreakdefaults), sets
+            the default property values to use for elements of
+            layout.yaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2422,13 +2537,15 @@ class YAxis(_BaseLayoutHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title
@@ -2494,6 +2611,8 @@ class YAxis(_BaseLayoutHierarchyType):
         overlaying=None,
         position=None,
         range=None,
+        rangebreaks=None,
+        rangebreakdefaults=None,
         rangemode=None,
         scaleanchor=None,
         scaleratio=None,
@@ -2571,8 +2690,8 @@ class YAxis(_BaseLayoutHierarchyType):
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
         categoryarraysrc
-            Sets the source reference on plot.ly for  categoryarray
-            .
+            Sets the source reference on Chart Studio Cloud for
+            categoryarray .
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -2721,6 +2840,15 @@ class YAxis(_BaseLayoutHierarchyType):
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
+        rangebreaks
+            A tuple of
+            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
+            instances or dicts with compatible properties
+        rangebreakdefaults
+            When used in a template (as
+            layout.template.layout.yaxis.rangebreakdefaults), sets
+            the default property values to use for elements of
+            layout.yaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2881,13 +3009,15 @@ class YAxis(_BaseLayoutHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title
@@ -2979,6 +3109,8 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         self._validators["overlaying"] = v_yaxis.OverlayingValidator()
         self._validators["position"] = v_yaxis.PositionValidator()
         self._validators["range"] = v_yaxis.RangeValidator()
+        self._validators["rangebreaks"] = v_yaxis.RangebreaksValidator()
+        self._validators["rangebreakdefaults"] = v_yaxis.RangebreakValidator()
         self._validators["rangemode"] = v_yaxis.RangemodeValidator()
         self._validators["scaleanchor"] = v_yaxis.ScaleanchorValidator()
         self._validators["scaleratio"] = v_yaxis.ScaleratioValidator()
@@ -3083,6 +3215,12 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         self["position"] = position if position is not None else _v
         _v = arg.pop("range", None)
         self["range"] = range if range is not None else _v
+        _v = arg.pop("rangebreaks", None)
+        self["rangebreaks"] = rangebreaks if rangebreaks is not None else _v
+        _v = arg.pop("rangebreakdefaults", None)
+        self["rangebreakdefaults"] = (
+            rangebreakdefaults if rangebreakdefaults is not None else _v
+        )
         _v = arg.pop("rangemode", None)
         self["rangemode"] = rangemode if rangemode is not None else _v
         _v = arg.pop("scaleanchor", None)
@@ -3316,7 +3454,8 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def categoryarraysrc(self):
         """
-        Sets the source reference on plot.ly for  categoryarray .
+        Sets the source reference on Chart Studio Cloud for
+        categoryarray .
     
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -4041,6 +4180,109 @@ class XAxis(_BaseLayoutHierarchyType):
     @range.setter
     def range(self, val):
         self["range"] = val
+
+    # rangebreaks
+    # -----------
+    @property
+    def rangebreaks(self):
+        """
+        The 'rangebreaks' property is a tuple of instances of
+        Rangebreak that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.xaxis.Rangebreak
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Rangebreak constructor
+    
+            Supported dict properties:
+                
+                bounds
+                    Sets the lower and upper bounds of this axis
+                    rangebreak. Can be used with `pattern`.
+                dvalue
+                    Sets the size of each `values` item. The
+                    default is one day in milliseconds.
+                enabled
+                    Determines whether this axis rangebreak is
+                    enabled or disabled. Please note that
+                    `rangebreaks` only work for "date" axis type.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                pattern
+                    Determines a pattern on the time line that
+                    generates breaks. If *day of week* - days of
+                    the week in English e.g. 'Sunday' or `sun`
+                    (matching is case-insensitive and considers
+                    only the first three characters), as well as
+                    Sunday-based integers between 0 and 6. If
+                    "hour" - hour (24-hour clock) as decimal
+                    numbers between 0 and 24. for more info.
+                    Examples: - { pattern: 'day of week', bounds:
+                    [6, 1] }  or simply { bounds: ['sat', 'mon'] }
+                    breaks from Saturday to Monday (i.e. skips the
+                    weekends). - { pattern: 'hour', bounds: [17, 8]
+                    }   breaks from 5pm to 8am (i.e. skips non-work
+                    hours).
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                values
+                    Sets the coordinate values corresponding to the
+                    rangebreaks. An alternative to `bounds`. Use
+                    `dvalue` to set the size of the values along
+                    the axis.
+
+        Returns
+        -------
+        tuple[plotly.graph_objs.layout.xaxis.Rangebreak]
+        """
+        return self["rangebreaks"]
+
+    @rangebreaks.setter
+    def rangebreaks(self, val):
+        self["rangebreaks"] = val
+
+    # rangebreakdefaults
+    # ------------------
+    @property
+    def rangebreakdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.xaxis.rangebreakdefaults), sets the
+        default property values to use for elements of
+        layout.xaxis.rangebreaks
+    
+        The 'rangebreakdefaults' property is an instance of Rangebreak
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.Rangebreak`
+          - A dict of string/value properties that will be passed
+            to the Rangebreak constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.Rangebreak
+        """
+        return self["rangebreakdefaults"]
+
+    @rangebreakdefaults.setter
+    def rangebreakdefaults(self, val):
+        self["rangebreakdefaults"] = val
 
     # rangemode
     # ---------
@@ -4592,7 +4834,7 @@ class XAxis(_BaseLayoutHierarchyType):
     
         The 'spikesnap' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['data', 'cursor']
+                ['data', 'cursor', 'hovered data']
 
         Returns
         -------
@@ -4759,12 +5001,13 @@ class XAxis(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -5057,7 +5300,7 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on plot.ly for  ticktext .
+        Sets the source reference on Chart Studio Cloud for  ticktext .
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -5098,7 +5341,7 @@ class XAxis(_BaseLayoutHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on plot.ly for  tickvals .
+        Sets the source reference on Chart Studio Cloud for  tickvals .
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -5206,12 +5449,13 @@ class XAxis(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -5428,8 +5672,8 @@ class XAxis(_BaseLayoutHierarchyType):
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
         categoryarraysrc
-            Sets the source reference on plot.ly for  categoryarray
-            .
+            Sets the source reference on Chart Studio Cloud for
+            categoryarray .
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -5578,6 +5822,15 @@ class XAxis(_BaseLayoutHierarchyType):
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
+        rangebreaks
+            A tuple of
+            :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
+            instances or dicts with compatible properties
+        rangebreakdefaults
+            When used in a template (as
+            layout.template.layout.xaxis.rangebreakdefaults), sets
+            the default property values to use for elements of
+            layout.xaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -5744,13 +5997,15 @@ class XAxis(_BaseLayoutHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title
@@ -5816,6 +6071,8 @@ class XAxis(_BaseLayoutHierarchyType):
         overlaying=None,
         position=None,
         range=None,
+        rangebreaks=None,
+        rangebreakdefaults=None,
         rangemode=None,
         rangeselector=None,
         rangeslider=None,
@@ -5895,8 +6152,8 @@ class XAxis(_BaseLayoutHierarchyType):
             Only has an effect if `categoryorder` is set to
             "array". Used with `categoryorder`.
         categoryarraysrc
-            Sets the source reference on plot.ly for  categoryarray
-            .
+            Sets the source reference on Chart Studio Cloud for
+            categoryarray .
         categoryorder
             Specifies the ordering logic for the case of
             categorical variables. By default, plotly uses "trace",
@@ -6045,6 +6302,15 @@ class XAxis(_BaseLayoutHierarchyType):
             numbers, using the scale where each category is
             assigned a serial number from zero in the order it
             appears.
+        rangebreaks
+            A tuple of
+            :class:`plotly.graph_objects.layout.xaxis.Rangebreak`
+            instances or dicts with compatible properties
+        rangebreakdefaults
+            When used in a template (as
+            layout.template.layout.xaxis.rangebreakdefaults), sets
+            the default property values to use for elements of
+            layout.xaxis.rangebreaks
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -6211,13 +6477,15 @@ class XAxis(_BaseLayoutHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title
@@ -6309,6 +6577,8 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         self._validators["overlaying"] = v_xaxis.OverlayingValidator()
         self._validators["position"] = v_xaxis.PositionValidator()
         self._validators["range"] = v_xaxis.RangeValidator()
+        self._validators["rangebreaks"] = v_xaxis.RangebreaksValidator()
+        self._validators["rangebreakdefaults"] = v_xaxis.RangebreakValidator()
         self._validators["rangemode"] = v_xaxis.RangemodeValidator()
         self._validators["rangeselector"] = v_xaxis.RangeselectorValidator()
         self._validators["rangeslider"] = v_xaxis.RangesliderValidator()
@@ -6415,6 +6685,12 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         self["position"] = position if position is not None else _v
         _v = arg.pop("range", None)
         self["range"] = range if range is not None else _v
+        _v = arg.pop("rangebreaks", None)
+        self["rangebreaks"] = rangebreaks if rangebreaks is not None else _v
+        _v = arg.pop("rangebreakdefaults", None)
+        self["rangebreakdefaults"] = (
+            rangebreakdefaults if rangebreakdefaults is not None else _v
+        )
         _v = arg.pop("rangemode", None)
         self["rangemode"] = rangemode if rangemode is not None else _v
         _v = arg.pop("rangeselector", None)
@@ -6843,12 +7119,13 @@ class Updatemenu(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -7758,12 +8035,13 @@ class Title(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -8387,15 +8665,15 @@ class Ternary(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -8617,15 +8895,15 @@ class Ternary(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -8906,15 +9184,15 @@ class Ternary(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -9788,12 +10066,13 @@ class Slider(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -12094,8 +12373,8 @@ class Scene(_BaseLayoutHierarchyType):
                     appear. Only has an effect if `categoryorder`
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
-                    Sets the source reference on plot.ly for
-                    categoryarray .
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -12326,15 +12605,15 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -12407,8 +12686,8 @@ class Scene(_BaseLayoutHierarchyType):
                     appear. Only has an effect if `categoryorder`
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
-                    Sets the source reference on plot.ly for
-                    categoryarray .
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -12639,15 +12918,15 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -12720,8 +12999,8 @@ class Scene(_BaseLayoutHierarchyType):
                     appear. Only has an effect if `categoryorder`
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
-                    Sets the source reference on plot.ly for
-                    categoryarray .
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -12952,15 +13231,15 @@ class Scene(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -13743,8 +14022,8 @@ class Polar(_BaseLayoutHierarchyType):
                     appear. Only has an effect if `categoryorder`
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
-                    Sets the source reference on plot.ly for
-                    categoryarray .
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -13960,15 +14239,15 @@ class Polar(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 type
@@ -14223,8 +14502,8 @@ class Polar(_BaseLayoutHierarchyType):
                     appear. Only has an effect if `categoryorder`
                     is set to "array". Used with `categoryorder`.
                 categoryarraysrc
-                    Sets the source reference on plot.ly for
-                    categoryarray .
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
                 categoryorder
                     Specifies the ordering logic for the case of
                     categorical variables. By default, plotly uses
@@ -14443,15 +14722,15 @@ class Polar(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -16125,12 +16404,13 @@ class Legend(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -17554,12 +17834,13 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -19881,13 +20162,13 @@ class Font(_BaseLayoutHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -19939,14 +20220,14 @@ class Font(_BaseLayoutHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -19971,14 +20252,14 @@ class Font(_BaseLayoutHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
 
@@ -20577,15 +20858,15 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -21456,12 +21737,13 @@ class Annotation(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size

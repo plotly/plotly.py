@@ -233,8 +233,8 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
             color
 
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             family
                 HTML font family - the typeface that will be
                 applied by the web browser. The web browser
@@ -243,22 +243,23 @@ class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Provide multiple font families, separated by
                 commas, to indicate the preference in which to
                 apply fonts if they aren't available on the
-                system. The plotly service (at https://plot.ly
-                or on-premise) generates images on a server,
-                where only a select number of fonts are
-                installed and supported. These include "Arial",
-                "Balto", "Courier New", "Droid Sans",, "Droid
-                Serif", "Droid Sans Mono", "Gravitas One", "Old
+                system. The Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise)
+                generates images on a server, where only a
+                select number of fonts are installed and
+                supported. These include "Arial", "Balto",
+                "Courier New", "Droid Sans",, "Droid Serif",
+                "Droid Sans Mono", "Gravitas One", "Old
                 Standard TT", "Open Sans", "Overpass", "PT Sans
                 Narrow", "Raleway", "Times New Roman".
             familysrc
-                Sets the source reference on plot.ly for
-                family .
+                Sets the source reference on Chart Studio Cloud
+                for  family .
             size
 
             sizesrc
-                Sets the source reference on plot.ly for  size
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  size .
 """,
             ),
             **kwargs
@@ -314,8 +315,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -581,8 +582,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
                 arth,Electric,Viridis,Cividis.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             gradient
                 :class:`plotly.graph_objects.scatterpolar.marke
                 r.Gradient` instance or dict with compatible
@@ -597,8 +598,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the marker opacity.
             opacitysrc
-                Sets the source reference on plot.ly for
-                opacity .
+                Sets the source reference on Chart Studio Cloud
+                for  opacity .
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.color`is set to a
@@ -626,8 +627,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 determine the rendered size of marker points.
                 Use with `sizemin` and `sizemode`.
             sizesrc
-                Sets the source reference on plot.ly for  size
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  size .
             symbol
                 Sets the marker symbol type. Adding 100 is
                 equivalent to appending "-open" to a symbol
@@ -636,8 +637,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 equivalent to appending "-open-dot" or "dot-
                 open" to a symbol name.
             symbolsrc
-                Sets the source reference on plot.ly for
-                symbol .
+                Sets the source reference on Chart Studio Cloud
+                for  symbol .
 """,
             ),
             **kwargs
@@ -820,20 +821,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -847,8 +848,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs

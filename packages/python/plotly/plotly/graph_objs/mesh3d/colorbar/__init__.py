@@ -30,12 +30,13 @@ class Title(_BaseTraceHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -561,13 +562,13 @@ class Tickfont(_BaseTraceHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -619,14 +620,14 @@ class Tickfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -651,14 +652,14 @@ class Tickfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
 

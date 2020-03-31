@@ -121,12 +121,13 @@ class Symbol(_BaseLayoutHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -342,7 +343,7 @@ class Line(_BaseLayoutHierarchyType):
     @property
     def dashsrc(self):
         """
-        Sets the source reference on plot.ly for  dash .
+        Sets the source reference on Chart Studio Cloud for  dash .
     
         The 'dashsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -394,7 +395,8 @@ class Line(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.line-dasharray). Has an effect only
             when `type` is set to "line".
         dashsrc
-            Sets the source reference on plot.ly for  dash .
+            Sets the source reference on Chart Studio Cloud for
+            dash .
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".
@@ -415,7 +417,8 @@ class Line(_BaseLayoutHierarchyType):
             (mapbox.layer.paint.line-dasharray). Has an effect only
             when `type` is set to "line".
         dashsrc
-            Sets the source reference on plot.ly for  dash .
+            Sets the source reference on Chart Studio Cloud for
+            dash .
         width
             Sets the line width (mapbox.layer.paint.line-width).
             Has an effect only when `type` is set to "line".

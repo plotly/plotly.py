@@ -32,7 +32,8 @@ class Stream(_BaseTraceHierarchyType):
     def token(self):
         """
         The stream id number links a data trace on a plot with a
-        stream. See https://plot.ly/settings for more details.
+        stream. See https://chart-studio.plotly.com/settings for more
+        details.
     
         The 'token' property is a string and must be specified as:
           - A non-empty string
@@ -65,8 +66,8 @@ class Stream(_BaseTraceHierarchyType):
             plot.
         token
             The stream id number links a data trace on a plot with
-            a stream. See https://plot.ly/settings for more
-            details.
+            a stream. See https://chart-studio.plotly.com/settings
+            for more details.
         """
 
     def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
@@ -85,8 +86,8 @@ class Stream(_BaseTraceHierarchyType):
             plot.
         token
             The stream id number links a data trace on a plot with
-            a stream. See https://plot.ly/settings for more
-            details.
+            a stream. See https://chart-studio.plotly.com/settings
+            for more details.
 
         Returns
         -------
@@ -644,7 +645,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def alignsrc(self):
         """
-        Sets the source reference on plot.ly for  align .
+        Sets the source reference on Chart Studio Cloud for  align .
     
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -724,7 +725,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def bgcolorsrc(self):
         """
-        Sets the source reference on plot.ly for  bgcolor .
+        Sets the source reference on Chart Studio Cloud for  bgcolor .
     
         The 'bgcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -804,7 +805,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def bordercolorsrc(self):
         """
-        Sets the source reference on plot.ly for  bordercolor .
+        Sets the source reference on Chart Studio Cloud for
+        bordercolor .
     
         The 'bordercolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -837,8 +839,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 color
     
                 colorsrc
-                    Sets the source reference on plot.ly for  color
-                    .
+                    Sets the source reference on Chart Studio Cloud
+                    for  color .
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -847,22 +849,23 @@ class Hoverlabel(_BaseTraceHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 familysrc
-                    Sets the source reference on plot.ly for
-                    family .
+                    Sets the source reference on Chart Studio Cloud
+                    for  family .
                 size
     
                 sizesrc
-                    Sets the source reference on plot.ly for  size
-                    .
+                    Sets the source reference on Chart Studio Cloud
+                    for  size .
 
         Returns
         -------
@@ -906,7 +909,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
     @property
     def namelengthsrc(self):
         """
-        Sets the source reference on plot.ly for  namelength .
+        Sets the source reference on Chart Studio Cloud for  namelength
+        .
     
         The 'namelengthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -937,17 +941,20 @@ class Hoverlabel(_BaseTraceHierarchyType):
             within hover label box. Has an effect only if the hover
             label text spans more two or more lines
         alignsrc
-            Sets the source reference on plot.ly for  align .
+            Sets the source reference on Chart Studio Cloud for
+            align .
         bgcolor
             Sets the background color of the hover labels for this
             trace
         bgcolorsrc
-            Sets the source reference on plot.ly for  bgcolor .
+            Sets the source reference on Chart Studio Cloud for
+            bgcolor .
         bordercolor
             Sets the border color of the hover labels for this
             trace.
         bordercolorsrc
-            Sets the source reference on plot.ly for  bordercolor .
+            Sets the source reference on Chart Studio Cloud for
+            bordercolor .
         font
             Sets the font used in hover labels.
         namelength
@@ -959,7 +966,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
         namelengthsrc
-            Sets the source reference on plot.ly for  namelength .
+            Sets the source reference on Chart Studio Cloud for
+            namelength .
         """
 
     def __init__(
@@ -990,17 +998,20 @@ class Hoverlabel(_BaseTraceHierarchyType):
             within hover label box. Has an effect only if the hover
             label text spans more two or more lines
         alignsrc
-            Sets the source reference on plot.ly for  align .
+            Sets the source reference on Chart Studio Cloud for
+            align .
         bgcolor
             Sets the background color of the hover labels for this
             trace
         bgcolorsrc
-            Sets the source reference on plot.ly for  bgcolor .
+            Sets the source reference on Chart Studio Cloud for
+            bgcolor .
         bordercolor
             Sets the border color of the hover labels for this
             trace.
         bordercolorsrc
-            Sets the source reference on plot.ly for  bordercolor .
+            Sets the source reference on Chart Studio Cloud for
+            bordercolor .
         font
             Sets the font used in hover labels.
         namelength
@@ -1012,7 +1023,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
             but if it is longer, will truncate to `namelength - 3`
             characters and add an ellipsis.
         namelengthsrc
-            Sets the source reference on plot.ly for  namelength .
+            Sets the source reference on Chart Studio Cloud for
+            namelength .
 
         Returns
         -------
@@ -1729,12 +1741,13 @@ class ColorBar(_BaseTraceHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -2002,7 +2015,7 @@ class ColorBar(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on plot.ly for  ticktext .
+        Sets the source reference on Chart Studio Cloud for  ticktext .
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2043,7 +2056,7 @@ class ColorBar(_BaseTraceHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on plot.ly for  tickvals .
+        Sets the source reference on Chart Studio Cloud for  tickvals .
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2144,12 +2157,13 @@ class ColorBar(_BaseTraceHierarchyType):
                     Provide multiple font families, separated by
                     commas, to indicate the preference in which to
                     apply fonts if they aren't available on the
-                    system. The plotly service (at https://plot.ly
-                    or on-premise) generates images on a server,
-                    where only a select number of fonts are
-                    installed and supported. These include "Arial",
-                    "Balto", "Courier New", "Droid Sans",, "Droid
-                    Serif", "Droid Sans Mono", "Gravitas One", "Old
+                    system. The Chart Studio Cloud (at
+                    https://chart-studio.plotly.com or on-premise)
+                    generates images on a server, where only a
+                    select number of fonts are installed and
+                    supported. These include "Arial", "Balto",
+                    "Courier New", "Droid Sans",, "Droid Serif",
+                    "Droid Sans Mono", "Gravitas One", "Old
                     Standard TT", "Open Sans", "Overpass", "PT Sans
                     Narrow", "Raleway", "Times New Roman".
                 size
@@ -2469,13 +2483,15 @@ class ColorBar(_BaseTraceHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title
@@ -2719,13 +2735,15 @@ class ColorBar(_BaseTraceHierarchyType):
             `tickvals`. Only has an effect if `tickmode` is set to
             "array". Used with `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
             Only has an effect if `tickmode` is set to "array".
             Used with `ticktext`.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         tickwidth
             Sets the tick width (in px).
         title

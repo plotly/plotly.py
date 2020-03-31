@@ -557,8 +557,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 eds,Blues,Picnic,Rainbow,Portland,Jet,Hot,Black
                 body,Earth,Electric,Viridis,Cividis.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.line.color`is set to
@@ -570,8 +570,8 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the lines bounding
                 the marker points.
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
 """,
             ),
             **kwargs
@@ -595,14 +595,14 @@ class GradientValidator(_plotly_utils.basevalidators.CompoundValidator):
                 center color for radial, the right for
                 horizontal, or the bottom for vertical.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             type
                 Sets the type of gradient used to fill the
                 markers
             typesrc
-                Sets the source reference on plot.ly for  type
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  type .
 """,
             ),
             **kwargs
@@ -815,15 +815,15 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title

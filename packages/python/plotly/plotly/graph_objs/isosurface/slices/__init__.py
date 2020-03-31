@@ -54,7 +54,8 @@ class Z(_BaseTraceHierarchyType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on plot.ly for  locations .
+        Sets the source reference on Chart Studio Cloud for  locations
+        .
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -112,7 +113,8 @@ class Z(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis z except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the z
             dimension are drawn.
@@ -147,7 +149,8 @@ class Z(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis z except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the z
             dimension are drawn.
@@ -265,7 +268,8 @@ class Y(_BaseTraceHierarchyType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on plot.ly for  locations .
+        Sets the source reference on Chart Studio Cloud for  locations
+        .
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -323,7 +327,8 @@ class Y(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis y except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the y
             dimension are drawn.
@@ -358,7 +363,8 @@ class Y(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis y except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the y
             dimension are drawn.
@@ -476,7 +482,8 @@ class X(_BaseTraceHierarchyType):
     @property
     def locationssrc(self):
         """
-        Sets the source reference on plot.ly for  locations .
+        Sets the source reference on Chart Studio Cloud for  locations
+        .
     
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -534,7 +541,8 @@ class X(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis x except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the x
             dimension are drawn.
@@ -569,7 +577,8 @@ class X(_BaseTraceHierarchyType):
             not specified slices would be created for all points of
             the axis x except start and end.
         locationssrc
-            Sets the source reference on plot.ly for  locations .
+            Sets the source reference on Chart Studio Cloud for
+            locations .
         show
             Determines whether or not slice planes about the x
             dimension are drawn.

@@ -71,13 +71,13 @@ class Tickfont(_BaseTraceHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -129,14 +129,14 @@ class Tickfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -161,14 +161,14 @@ class Tickfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
 
@@ -260,7 +260,8 @@ class Stream(_BaseTraceHierarchyType):
     def token(self):
         """
         The stream id number links a data trace on a plot with a
-        stream. See https://plot.ly/settings for more details.
+        stream. See https://chart-studio.plotly.com/settings for more
+        details.
     
         The 'token' property is a string and must be specified as:
           - A non-empty string
@@ -293,8 +294,8 @@ class Stream(_BaseTraceHierarchyType):
             plot.
         token
             The stream id number links a data trace on a plot with
-            a stream. See https://plot.ly/settings for more
-            details.
+            a stream. See https://chart-studio.plotly.com/settings
+            for more details.
         """
 
     def __init__(self, arg=None, maxpoints=None, token=None, **kwargs):
@@ -314,8 +315,8 @@ class Stream(_BaseTraceHierarchyType):
             plot.
         token
             The stream id number links a data trace on a plot with
-            a stream. See https://plot.ly/settings for more
-            details.
+            a stream. See https://chart-studio.plotly.com/settings
+            for more details.
 
         Returns
         -------
@@ -441,13 +442,13 @@ class Rangefont(_BaseTraceHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -499,14 +500,14 @@ class Rangefont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -531,14 +532,14 @@ class Rangefont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
 
@@ -990,15 +991,15 @@ class Line(_BaseTraceHierarchyType):
                     `tickmode` is set to "array". Used with
                     `tickvals`.
                 ticktextsrc
-                    Sets the source reference on plot.ly for
-                    ticktext .
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
                 tickvals
                     Sets the values at which ticks on this axis
                     appear. Only has an effect if `tickmode` is set
                     to "array". Used with `ticktext`.
                 tickvalssrc
-                    Sets the source reference on plot.ly for
-                    tickvals .
+                    Sets the source reference on Chart Studio Cloud
+                    for  tickvals .
                 tickwidth
                     Sets the tick width (in px).
                 title
@@ -1108,7 +1109,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on plot.ly for  color .
+        Sets the source reference on Chart Studio Cloud for  color .
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -1243,7 +1244,8 @@ class Line(_BaseTraceHierarchyType):
             ortland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividi
             s.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color`is set to a numerical array. If true,
@@ -1346,7 +1348,8 @@ class Line(_BaseTraceHierarchyType):
             ortland,Jet,Hot,Blackbody,Earth,Electric,Viridis,Cividi
             s.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         reversescale
             Reverses the color mapping if true. Has an effect only
             if in `line.color`is set to a numerical array. If true,
@@ -1512,13 +1515,13 @@ class Labelfont(_BaseTraceHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -1570,14 +1573,14 @@ class Labelfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
         """
@@ -1602,14 +1605,14 @@ class Labelfont(_BaseTraceHierarchyType):
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         size
 
 
@@ -2092,7 +2095,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def ticktextsrc(self):
         """
-        Sets the source reference on plot.ly for  ticktext .
+        Sets the source reference on Chart Studio Cloud for  ticktext .
     
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2132,7 +2135,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def tickvalssrc(self):
         """
-        Sets the source reference on plot.ly for  tickvals .
+        Sets the source reference on Chart Studio Cloud for  tickvals .
     
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2175,7 +2178,7 @@ class Dimension(_BaseTraceHierarchyType):
     @property
     def valuessrc(self):
         """
-        Sets the source reference on plot.ly for  values .
+        Sets the source reference on Chart Studio Cloud for  values .
     
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -2274,11 +2277,13 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
@@ -2286,7 +2291,8 @@ class Dimension(_BaseTraceHierarchyType):
             vectors will be truncated). Each value must be a finite
             number.
         valuessrc
-            Sets the source reference on plot.ly for  values .
+            Sets the source reference on Chart Studio Cloud for
+            values .
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.
@@ -2375,11 +2381,13 @@ class Dimension(_BaseTraceHierarchyType):
             Sets the text displayed at the ticks position via
             `tickvals`.
         ticktextsrc
-            Sets the source reference on plot.ly for  ticktext .
+            Sets the source reference on Chart Studio Cloud for
+            ticktext .
         tickvals
             Sets the values at which ticks on this axis appear.
         tickvalssrc
-            Sets the source reference on plot.ly for  tickvals .
+            Sets the source reference on Chart Studio Cloud for
+            tickvals .
         values
             Dimension values. `values[n]` represents the value of
             the `n`th point in the dataset, therefore the `values`
@@ -2387,7 +2395,8 @@ class Dimension(_BaseTraceHierarchyType):
             vectors will be truncated). Each value must be a finite
             number.
         valuessrc
-            Sets the source reference on plot.ly for  values .
+            Sets the source reference on Chart Studio Cloud for
+            values .
         visible
             Shows the dimension when set to `true` (the default).
             Hides the dimension for `false`.

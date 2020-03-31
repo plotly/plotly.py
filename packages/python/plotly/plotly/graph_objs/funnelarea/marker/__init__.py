@@ -70,7 +70,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on plot.ly for  color .
+        Sets the source reference on Chart Studio Cloud for  color .
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -111,7 +111,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on plot.ly for  width .
+        Sets the source reference on Chart Studio Cloud for  width .
     
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -141,12 +141,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the color of the line enclosing each sector.
             Defaults to the `paper_bgcolor` value.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         width
             Sets the width (in px) of the line enclosing each
             sector.
         widthsrc
-            Sets the source reference on plot.ly for  width .
+            Sets the source reference on Chart Studio Cloud for
+            width .
         """
 
     def __init__(
@@ -165,12 +167,14 @@ class Line(_BaseTraceHierarchyType):
             Sets the color of the line enclosing each sector.
             Defaults to the `paper_bgcolor` value.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         width
             Sets the width (in px) of the line enclosing each
             sector.
         widthsrc
-            Sets the source reference on plot.ly for  width .
+            Sets the source reference on Chart Studio Cloud for
+            width .
 
         Returns
         -------
