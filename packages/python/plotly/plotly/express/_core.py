@@ -869,7 +869,7 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
-def build_dataframe(args, attrables, array_attrables):
+def build_dataframe(args, attrables, array_attrables, constructor):
     """
     Constructs a dataframe and modifies `args` in-place.
 
@@ -898,6 +898,22 @@ def build_dataframe(args, attrables, array_attrables):
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
+
+    if not args.get("x", None) and not args.get("y", None) and df_provided:
+        if constructor in [go.Scatter, go.Bar]:
+            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
+            args["x"] = "index"
+            args["y"] = "value"
+            args["color"] = "variable"
+        if constructor in [go.Violin, go.Box]:
+            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
+            args["x"] = "variable"
+            args["y"] = "value"
+        if constructor in [go.Histogram]:
+            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
+            args["x"] = "value"
+            args["color"] = "variable"
+
     df_input = args["data_frame"]
 
     # We start from an empty DataFrame
@@ -1208,7 +1224,7 @@ def infer_config(args, constructor, trace_patch):
         if group_attr in args:
             all_attrables += [group_attr]
 
-    args = build_dataframe(args, all_attrables, array_attrables)
+    args = build_dataframe(args, all_attrables, array_attrables, constructor)
     if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
 
