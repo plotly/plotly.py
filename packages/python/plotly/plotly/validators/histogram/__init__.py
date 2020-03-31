@@ -395,8 +395,8 @@ class StreamValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points will be displayed on the plot.
             token
                 The stream id number links a data trace on a
-                plot with a stream. See
-                https://plot.ly/settings for more details.
+                plot with a stream. See https://chart-
+                studio.plotly.com/settings for more details.
 """,
             ),
             **kwargs
@@ -661,8 +661,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,E
                 arth,Electric,Viridis,Cividis.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             line
                 :class:`plotly.graph_objects.histogram.marker.L
                 ine` instance or dict with compatible
@@ -670,8 +670,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the bars.
             opacitysrc
-                Sets the source reference on plot.ly for
-                opacity .
+                Sets the source reference on Chart Studio Cloud
+                for  opacity .
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if in `marker.color`is set to a
@@ -809,20 +809,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -836,8 +836,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs
@@ -930,11 +930,11 @@ class ErrorYValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vertical (horizontal) bars Values are plotted
                 relative to the underlying data.
             arrayminussrc
-                Sets the source reference on plot.ly for
-                arrayminus .
+                Sets the source reference on Chart Studio Cloud
+                for  arrayminus .
             arraysrc
-                Sets the source reference on plot.ly for  array
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  array .
             color
                 Sets the stoke color of the error bars.
             symmetric
@@ -1003,11 +1003,11 @@ class ErrorXValidator(_plotly_utils.basevalidators.CompoundValidator):
                 vertical (horizontal) bars Values are plotted
                 relative to the underlying data.
             arrayminussrc
-                Sets the source reference on plot.ly for
-                arrayminus .
+                Sets the source reference on Chart Studio Cloud
+                for  arrayminus .
             arraysrc
-                Sets the source reference on plot.ly for  array
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  array .
             color
                 Sets the stoke color of the error bars.
             copy_ystyle

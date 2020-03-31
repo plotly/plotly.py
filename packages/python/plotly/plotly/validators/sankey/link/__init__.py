@@ -98,14 +98,14 @@ class LineValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of the `line` around each
                 `link`.
             colorsrc
-                Sets the source reference on plot.ly for  color
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  color .
             width
                 Sets the width (in px) of the `line` around
                 each `link`.
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
 """,
             ),
             **kwargs
@@ -191,20 +191,20 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 only if the hover label text spans more two or
                 more lines
             alignsrc
-                Sets the source reference on plot.ly for  align
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  align .
             bgcolor
                 Sets the background color of the hover labels
                 for this trace
             bgcolorsrc
-                Sets the source reference on plot.ly for
-                bgcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bgcolor .
             bordercolor
                 Sets the border color of the hover labels for
                 this trace.
             bordercolorsrc
-                Sets the source reference on plot.ly for
-                bordercolor .
+                Sets the source reference on Chart Studio Cloud
+                for  bordercolor .
             font
                 Sets the font used in hover labels.
             namelength
@@ -218,8 +218,8 @@ class HoverlabelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to `namelength - 3` characters and add an
                 ellipsis.
             namelengthsrc
-                Sets the source reference on plot.ly for
-                namelength .
+                Sets the source reference on Chart Studio Cloud
+                for  namelength .
 """,
             ),
             **kwargs
@@ -237,6 +237,36 @@ class HoverinfoValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop("values", ["all", "none", "skip"]),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class CustomdatasrcValidator(_plotly_utils.basevalidators.SrcValidator):
+    def __init__(
+        self, plotly_name="customdatasrc", parent_name="sankey.link", **kwargs
+    ):
+        super(CustomdatasrcValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "none"),
+            role=kwargs.pop("role", "info"),
+            **kwargs
+        )
+
+
+import _plotly_utils.basevalidators
+
+
+class CustomdataValidator(_plotly_utils.basevalidators.DataArrayValidator):
+    def __init__(self, plotly_name="customdata", parent_name="sankey.link", **kwargs):
+        super(CustomdataValidator, self).__init__(
+            plotly_name=plotly_name,
+            parent_name=parent_name,
+            edit_type=kwargs.pop("edit_type", "calc"),
+            role=kwargs.pop("role", "data"),
             **kwargs
         )
 

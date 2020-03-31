@@ -67,7 +67,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on plot.ly for  color .
+        Sets the source reference on Chart Studio Cloud for  color .
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -106,7 +106,7 @@ class Line(_BaseTraceHierarchyType):
     @property
     def widthsrc(self):
         """
-        Sets the source reference on plot.ly for  width .
+        Sets the source reference on Chart Studio Cloud for  width .
     
         The 'widthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -135,11 +135,13 @@ class Line(_BaseTraceHierarchyType):
         color
 
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         width
 
         widthsrc
-            Sets the source reference on plot.ly for  width .
+            Sets the source reference on Chart Studio Cloud for
+            width .
         """
 
     def __init__(
@@ -157,11 +159,13 @@ class Line(_BaseTraceHierarchyType):
         color
 
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         width
 
         widthsrc
-            Sets the source reference on plot.ly for  width .
+            Sets the source reference on Chart Studio Cloud for
+            width .
 
         Returns
         -------
@@ -289,7 +293,7 @@ class Font(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on plot.ly for  color .
+        Sets the source reference on Chart Studio Cloud for  color .
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -314,13 +318,13 @@ class Font(_BaseTraceHierarchyType):
         it is available on the system which it operates. Provide
         multiple font families, separated by commas, to indicate the
         preference in which to apply fonts if they aren't available on
-        the system. The plotly service (at https://plot.ly or on-
-        premise) generates images on a server, where only a select
-        number of fonts are installed and supported. These include
-        "Arial", "Balto", "Courier New", "Droid Sans",, "Droid Serif",
-        "Droid Sans Mono", "Gravitas One", "Old Standard TT", "Open
-        Sans", "Overpass", "PT Sans Narrow", "Raleway", "Times New
-        Roman".
+        the system. The Chart Studio Cloud (at https://chart-
+        studio.plotly.com or on-premise) generates images on a server,
+        where only a select number of fonts are installed and
+        supported. These include "Arial", "Balto", "Courier New",
+        "Droid Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+        One", "Old Standard TT", "Open Sans", "Overpass", "PT Sans
+        Narrow", "Raleway", "Times New Roman".
     
         The 'family' property is a string and must be specified as:
           - A non-empty string
@@ -341,7 +345,7 @@ class Font(_BaseTraceHierarchyType):
     @property
     def familysrc(self):
         """
-        Sets the source reference on plot.ly for  family .
+        Sets the source reference on Chart Studio Cloud for  family .
     
         The 'familysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -380,7 +384,7 @@ class Font(_BaseTraceHierarchyType):
     @property
     def sizesrc(self):
         """
-        Sets the source reference on plot.ly for  size .
+        Sets the source reference on Chart Studio Cloud for  size .
     
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -409,27 +413,30 @@ class Font(_BaseTraceHierarchyType):
         color
 
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         familysrc
-            Sets the source reference on plot.ly for  family .
+            Sets the source reference on Chart Studio Cloud for
+            family .
         size
 
         sizesrc
-            Sets the source reference on plot.ly for  size .
+            Sets the source reference on Chart Studio Cloud for
+            size .
         """
 
     def __init__(
@@ -455,27 +462,30 @@ class Font(_BaseTraceHierarchyType):
         color
 
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         family
             HTML font family - the typeface that will be applied by
             the web browser. The web browser will only be able to
             apply a font if it is available on the system which it
             operates. Provide multiple font families, separated by
             commas, to indicate the preference in which to apply
-            fonts if they aren't available on the system. The
-            plotly service (at https://plot.ly or on-premise)
-            generates images on a server, where only a select
-            number of fonts are installed and supported. These
-            include "Arial", "Balto", "Courier New", "Droid Sans",,
-            "Droid Serif", "Droid Sans Mono", "Gravitas One", "Old
-            Standard TT", "Open Sans", "Overpass", "PT Sans
-            Narrow", "Raleway", "Times New Roman".
+            fonts if they aren't available on the system. The Chart
+            Studio Cloud (at https://chart-studio.plotly.com or on-
+            premise) generates images on a server, where only a
+            select number of fonts are installed and supported.
+            These include "Arial", "Balto", "Courier New", "Droid
+            Sans",, "Droid Serif", "Droid Sans Mono", "Gravitas
+            One", "Old Standard TT", "Open Sans", "Overpass", "PT
+            Sans Narrow", "Raleway", "Times New Roman".
         familysrc
-            Sets the source reference on plot.ly for  family .
+            Sets the source reference on Chart Studio Cloud for
+            family .
         size
 
         sizesrc
-            Sets the source reference on plot.ly for  size .
+            Sets the source reference on Chart Studio Cloud for
+            size .
 
         Returns
         -------
@@ -612,7 +622,7 @@ class Fill(_BaseTraceHierarchyType):
     @property
     def colorsrc(self):
         """
-        Sets the source reference on plot.ly for  color .
+        Sets the source reference on Chart Studio Cloud for  color .
     
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
@@ -642,7 +652,8 @@ class Fill(_BaseTraceHierarchyType):
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
         """
 
     def __init__(self, arg=None, color=None, colorsrc=None, **kwargs):
@@ -659,7 +670,8 @@ class Fill(_BaseTraceHierarchyType):
             Sets the cell fill color. It accepts either a specific
             color or an array of colors or a 2D array of colors.
         colorsrc
-            Sets the source reference on plot.ly for  color .
+            Sets the source reference on Chart Studio Cloud for
+            color .
 
         Returns
         -------
