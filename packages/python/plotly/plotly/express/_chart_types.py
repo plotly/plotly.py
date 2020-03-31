@@ -1234,6 +1234,7 @@ def pie(
     template=None,
     width=None,
     height=None,
+    opacity=None,
     hole=None,
 ):
     """
@@ -1398,9 +1399,7 @@ def funnel(
     rectangular sector of a funnel.
     """
     return make_figure(
-        args=locals(),
-        constructor=go.Funnel,
-        trace_patch=dict(opacity=opacity, orientation=orientation),
+        args=locals(), constructor=go.Funnel, trace_patch=dict(orientation=orientation),
     )
 
 
@@ -1422,6 +1421,7 @@ def funnel_area(
     template=None,
     width=None,
     height=None,
+    opacity=None,
 ):
     """
     In a funnel area plot, each row of `data_frame` is represented as a
