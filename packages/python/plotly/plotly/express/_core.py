@@ -1194,7 +1194,7 @@ def process_dataframe_hierarchy(args):
     return args
 
 
-def infer_config(args, constructor, trace_patch):
+def infer_config(args, constructor, trace_patch, layout_patch):
     # Declare all supported attributes, across all plot types
     attrables = (
         ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
@@ -1245,6 +1245,16 @@ def infer_config(args, constructor, trace_patch):
             trace_patch["nbinsy"] = None if orientation == "v" else nbins
             trace_patch["bingroup"] = "x" if orientation == "v" else "y"
         trace_patch["orientation"] = args["orientation"]
+
+        if constructor in [go.Violin, go.Box]:
+            mode = "boxmode" if constructor == go.Box else "violinmode"
+            if layout_patch[mode] is None and args["color"] is not None:
+                if args["y"] == args["color"] and args["orientation"] == "h":
+                    layout_patch[mode] = "overlay"
+                elif args["x"] == args["color"] and args["orientation"] == "v":
+                    layout_patch[mode] = "overlay"
+            if layout_patch[mode] is None:
+                layout_patch[mode] = "group"
 
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
@@ -1396,7 +1406,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
     apply_default_cascade(args)
 
     args, trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
-        args, constructor, trace_patch
+        args, constructor, trace_patch, layout_patch
     )
     grouper = [x.grouper or one_group for x in grouped_mappings] or [one_group]
     grouped = args["data_frame"].groupby(grouper, sort=False)
