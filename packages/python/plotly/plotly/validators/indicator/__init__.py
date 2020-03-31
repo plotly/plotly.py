@@ -240,8 +240,8 @@ class GaugeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             axis
-                plotly.graph_objects.indicator.gauge.Axis
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.gauge.Ax
+                is` instance or dict with compatible properties
             bar
                 Set the appearance of the gauge's value
             bgcolor
@@ -255,17 +255,18 @@ class GaugeValidator(_plotly_utils.basevalidators.CompoundValidator):
             shape
                 Set the shape of the gauge
             steps
-                A tuple of
-                plotly.graph_objects.indicator.gauge.Step
-                instances or dicts with compatible properties
+                A tuple of :class:`plotly.graph_objects.indicat
+                or.gauge.Step` instances or dicts with
+                compatible properties
             stepdefaults
                 When used in a template (as layout.template.dat
                 a.indicator.gauge.stepdefaults), sets the
                 default property values to use for elements of
                 indicator.gauge.steps
             threshold
-                plotly.graph_objects.indicator.gauge.Threshold
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.gauge.Th
+                reshold` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -316,13 +317,15 @@ class DeltaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             decreasing
-                plotly.graph_objects.indicator.delta.Decreasing
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.delta.De
+                creasing` instance or dict with compatible
+                properties
             font
                 Set the font used to display the delta
             increasing
-                plotly.graph_objects.indicator.delta.Increasing
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.indicator.delta.In
+                creasing` instance or dict with compatible
+                properties
             position
                 Sets the position of delta with respect to the
                 number.

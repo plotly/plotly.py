@@ -34,7 +34,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'circle' property is an instance of Circle
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Circle
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Circle`
           - A dict of string/value properties that will be passed
             to the Circle constructor
     
@@ -149,7 +149,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Fill
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -177,7 +177,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Line
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -399,7 +399,7 @@ class Layer(_BaseLayoutHierarchyType):
         """
         The 'symbol' property is an instance of Symbol
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.mapbox.layer.Symbol
+          - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.Symbol`
           - A dict of string/value properties that will be passed
             to the Symbol constructor
     
@@ -536,8 +536,8 @@ class Layer(_BaseLayoutHierarchyType):
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objects.layout.mapbox.layer.Circle
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Circle
+            ` instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -555,11 +555,11 @@ class Layer(_BaseLayoutHierarchyType):
             bottom left. Only has an effect for "image"
             `sourcetype`.
         fill
-            plotly.graph_objects.layout.mapbox.layer.Fill instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Fill`
+            instance or dict with compatible properties
         line
-            plotly.graph_objects.layout.mapbox.layer.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Line`
+            instance or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -605,8 +605,8 @@ class Layer(_BaseLayoutHierarchyType):
             Sets the source type for this layer, that is the type
             of the layer data.
         symbol
-            plotly.graph_objects.layout.mapbox.layer.Symbol
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Symbol
+            ` instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -661,14 +661,15 @@ class Layer(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.mapbox.Layer
+            an instance of
+            :class:`plotly.graph_objs.layout.mapbox.Layer`
         below
             Determines if the layer will be inserted before the
             layer with the specified ID. If omitted or set to '',
             the layer will be inserted above every existing layer.
         circle
-            plotly.graph_objects.layout.mapbox.layer.Circle
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Circle
+            ` instance or dict with compatible properties
         color
             Sets the primary layer color. If `type` is "circle",
             color corresponds to the circle color
@@ -686,11 +687,11 @@ class Layer(_BaseLayoutHierarchyType):
             bottom left. Only has an effect for "image"
             `sourcetype`.
         fill
-            plotly.graph_objects.layout.mapbox.layer.Fill instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Fill`
+            instance or dict with compatible properties
         line
-            plotly.graph_objects.layout.mapbox.layer.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Line`
+            instance or dict with compatible properties
         maxzoom
             Sets the maximum zoom level (mapbox.layer.maxzoom). At
             zoom levels equal to or greater than the maxzoom, the
@@ -736,8 +737,8 @@ class Layer(_BaseLayoutHierarchyType):
             Sets the source type for this layer, that is the type
             of the layer data.
         symbol
-            plotly.graph_objects.layout.mapbox.layer.Symbol
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.layout.mapbox.layer.Symbol
+            ` instance or dict with compatible properties
         templateitemname
             Used to refer to a named item in this array in the
             template. Named items from the template will be created
@@ -780,7 +781,7 @@ class Layer(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.Layer 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.Layer"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.Layer`"""
             )
 
         # Handle skip_invalid
@@ -999,7 +1000,8 @@ class Domain(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.mapbox.Domain
+            an instance of
+            :class:`plotly.graph_objs.layout.mapbox.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this mapbox subplot .
@@ -1032,7 +1034,7 @@ class Domain(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.Domain"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.Domain`"""
             )
 
         # Handle skip_invalid
@@ -1143,7 +1145,8 @@ class Center(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.mapbox.Center
+            an instance of
+            :class:`plotly.graph_objs.layout.mapbox.Center`
         lat
             Sets the latitude of the center of the map (in degrees
             North).
@@ -1170,7 +1173,7 @@ class Center(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.mapbox.Center 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.mapbox.Center"""
+an instance of :class:`plotly.graph_objs.layout.mapbox.Center`"""
             )
 
         # Handle skip_invalid

@@ -70,7 +70,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.waterfall.increasing.marker.Line
+          - An instance of :class:`plotly.graph_objs.waterfall.increasing.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -105,8 +105,8 @@ class Marker(_BaseTraceHierarchyType):
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objects.waterfall.increasing.marker.Line
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.increasing.marke
+            r.Line` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, color=None, line=None, **kwargs):
@@ -118,12 +118,12 @@ class Marker(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.waterfall.increasing.Marker
+            :class:`plotly.graph_objs.waterfall.increasing.Marker`
         color
             Sets the marker color of all increasing values.
         line
-            plotly.graph_objects.waterfall.increasing.marker.Line
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.waterfall.increasing.marke
+            r.Line` instance or dict with compatible properties
 
         Returns
         -------
@@ -144,7 +144,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.waterfall.increasing.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.waterfall.increasing.Marker"""
+an instance of :class:`plotly.graph_objs.waterfall.increasing.Marker`"""
             )
 
         # Handle skip_invalid

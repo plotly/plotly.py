@@ -77,7 +77,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.Stream
+            an instance of
+            :class:`plotly.graph_objs.surface.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +108,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.Stream"""
+an instance of :class:`plotly.graph_objs.surface.Stream`"""
             )
 
         # Handle skip_invalid
@@ -235,7 +236,8 @@ class Lightposition(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.Lightposition
+            an instance of
+            :class:`plotly.graph_objs.surface.Lightposition`
         x
             Numeric vector, representing the X coordinate for each
             vertex.
@@ -265,7 +267,7 @@ class Lightposition(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.Lightposition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.Lightposition"""
+an instance of :class:`plotly.graph_objs.surface.Lightposition`"""
             )
 
         # Handle skip_invalid
@@ -459,7 +461,8 @@ class Lighting(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.Lighting
+            an instance of
+            :class:`plotly.graph_objs.surface.Lighting`
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -497,7 +500,7 @@ class Lighting(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.Lighting 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.Lighting"""
+an instance of :class:`plotly.graph_objs.surface.Lighting`"""
             )
 
         # Handle skip_invalid
@@ -757,7 +760,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.surface.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -912,7 +915,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.surface.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -961,7 +965,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.surface.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1027,7 +1031,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         The 'x' property is an instance of X
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.X
+          - An instance of :class:`plotly.graph_objs.surface.contours.X`
           - A dict of string/value properties that will be passed
             to the X constructor
     
@@ -1048,8 +1052,9 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objects.surface.contours.x.Project
-                    instance or dict with compatible properties
+                    :class:`plotly.graph_objects.surface.contours.x
+                    .Project` instance or dict with compatible
+                    properties
                 show
                     Determines whether or not contour lines about
                     the x dimension are drawn.
@@ -1083,7 +1088,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         The 'y' property is an instance of Y
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.Y
+          - An instance of :class:`plotly.graph_objs.surface.contours.Y`
           - A dict of string/value properties that will be passed
             to the Y constructor
     
@@ -1104,8 +1109,9 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objects.surface.contours.y.Project
-                    instance or dict with compatible properties
+                    :class:`plotly.graph_objects.surface.contours.y
+                    .Project` instance or dict with compatible
+                    properties
                 show
                     Determines whether or not contour lines about
                     the y dimension are drawn.
@@ -1139,7 +1145,7 @@ class Contours(_BaseTraceHierarchyType):
         """
         The 'z' property is an instance of Z
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.contours.Z
+          - An instance of :class:`plotly.graph_objs.surface.contours.Z`
           - A dict of string/value properties that will be passed
             to the Z constructor
     
@@ -1160,8 +1166,9 @@ class Contours(_BaseTraceHierarchyType):
                     Sets the width of the highlighted contour
                     lines.
                 project
-                    plotly.graph_objects.surface.contours.z.Project
-                    instance or dict with compatible properties
+                    :class:`plotly.graph_objects.surface.contours.z
+                    .Project` instance or dict with compatible
+                    properties
                 show
                     Determines whether or not contour lines about
                     the z dimension are drawn.
@@ -1200,14 +1207,14 @@ class Contours(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         x
-            plotly.graph_objects.surface.contours.X instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.surface.contours.Y instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.surface.contours.Z instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.Z`
+            instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, x=None, y=None, z=None, **kwargs):
@@ -1218,16 +1225,17 @@ class Contours(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.Contours
+            an instance of
+            :class:`plotly.graph_objs.surface.Contours`
         x
-            plotly.graph_objects.surface.contours.X instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.X`
+            instance or dict with compatible properties
         y
-            plotly.graph_objects.surface.contours.Y instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.Y`
+            instance or dict with compatible properties
         z
-            plotly.graph_objects.surface.contours.Z instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.contours.Z`
+            instance or dict with compatible properties
 
         Returns
         -------
@@ -1248,7 +1256,7 @@ class Contours(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.Contours 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.Contours"""
+an instance of :class:`plotly.graph_objs.surface.Contours`"""
             )
 
         # Handle skip_invalid
@@ -1910,7 +1918,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.surface.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -2044,7 +2052,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.surface.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2282,7 +2290,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.surface.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2325,7 +2333,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.surface.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.surface.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2634,9 +2642,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.surface.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.surface.colorba
+            r.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.surfac
             e.colorbar.tickformatstopdefaults), sets the default
@@ -2676,8 +2684,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.surface.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use surface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2771,7 +2779,8 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.surface.ColorBar
+            an instance of
+            :class:`plotly.graph_objs.surface.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2884,9 +2893,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.surface.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.surface.colorba
+            r.Tickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.surfac
             e.colorbar.tickformatstopdefaults), sets the default
@@ -2926,8 +2935,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.surface.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.surface.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use surface.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2979,7 +2988,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.surface.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.surface.ColorBar"""
+an instance of :class:`plotly.graph_objs.surface.ColorBar`"""
             )
 
         # Handle skip_invalid

@@ -36,7 +36,7 @@ jupyter:
 
 #### Imports
 
-The tutorial below imports [Pandas](https://plot.ly/pandas/intro-to-pandas-tutorial/), and [SciPy](https://www.scipy.org/).
+The tutorial below imports [Pandas](https://plotly.com/pandas/intro-to-pandas-tutorial/), and [SciPy](https://www.scipy.org/).
 
 ```python
 import pandas as pd
@@ -62,7 +62,7 @@ fig = go.Figure(data=go.Scatter(
 fig.show()
 ```
 
-#### Peak Detection
+#### Peak Detection
 
 We need to find the x-axis indices for the peaks in order to determine where the peaks are located.
 

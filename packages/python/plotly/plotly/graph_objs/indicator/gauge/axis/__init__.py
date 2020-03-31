@@ -187,8 +187,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.indicator.gauge.axis.Tickformatstop
+            an instance of :class:`plotly.graph_objs.indicator.gaug
+            e.axis.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -239,7 +239,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.axis.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.axis.Tickformatstop"""
+an instance of :class:`plotly.graph_objs.indicator.gauge.axis.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -439,8 +439,8 @@ class Tickfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.indicator.gauge.axis.Tickfont
+            an instance of :class:`plotly.graph_objs.indicator.gaug
+            e.axis.Tickfont`
         color
 
         family
@@ -479,7 +479,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.indicator.gauge.axis.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.indicator.gauge.axis.Tickfont"""
+an instance of :class:`plotly.graph_objs.indicator.gauge.axis.Tickfont`"""
             )
 
         # Handle skip_invalid

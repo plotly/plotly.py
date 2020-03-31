@@ -11,7 +11,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.unselected.Marker
+          - An instance of :class:`plotly.graph_objs.scattercarpet.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -44,7 +44,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.unselected.Textfont
+          - An instance of :class:`plotly.graph_objs.scattercarpet.unselected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -76,11 +76,11 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.scattercarpet.unselected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.unselected.M
+            arker` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.scattercarpet.unselected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.unselected.T
+            extfont` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -92,13 +92,13 @@ class Unselected(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.scattercarpet.Unselected
+            :class:`plotly.graph_objs.scattercarpet.Unselected`
         marker
-            plotly.graph_objects.scattercarpet.unselected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.unselected.M
+            arker` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.scattercarpet.unselected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.unselected.T
+            extfont` instance or dict with compatible properties
 
         Returns
         -------
@@ -119,7 +119,7 @@ class Unselected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Unselected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Unselected"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Unselected`"""
             )
 
         # Handle skip_invalid
@@ -383,7 +383,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scattercarpet.Textfont
+            an instance of
+            :class:`plotly.graph_objs.scattercarpet.Textfont`
         color
 
         colorsrc
@@ -428,7 +429,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Textfont"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -551,7 +552,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scattercarpet.Stream
+            an instance of
+            :class:`plotly.graph_objs.scattercarpet.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -581,7 +583,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Stream"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Stream`"""
             )
 
         # Handle skip_invalid
@@ -626,7 +628,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.selected.Marker
+          - An instance of :class:`plotly.graph_objs.scattercarpet.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -656,7 +658,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.selected.Textfont
+          - An instance of :class:`plotly.graph_objs.scattercarpet.selected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -687,11 +689,11 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.scattercarpet.selected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.selected.Mar
+            ker` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.scattercarpet.selected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.selected.Tex
+            tfont` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -702,13 +704,14 @@ class Selected(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scattercarpet.Selected
+            an instance of
+            :class:`plotly.graph_objs.scattercarpet.Selected`
         marker
-            plotly.graph_objects.scattercarpet.selected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.selected.Mar
+            ker` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.scattercarpet.selected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.selected.Tex
+            tfont` instance or dict with compatible properties
 
         Returns
         -------
@@ -729,7 +732,7 @@ class Selected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Selected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Selected"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Selected`"""
             )
 
         # Handle skip_invalid
@@ -987,7 +990,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.marker.ColorBar
+          - An instance of :class:`plotly.graph_objs.scattercarpet.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1119,9 +1122,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.scattercarpet.m
-                    arker.colorbar.Tickformatstop instances or
-                    dicts with compatible properties
+                    A tuple of :class:`plotly.graph_objects.scatter
+                    carpet.marker.colorbar.Tickformatstop`
+                    instances or dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.scattercarpet.marker.colorbar.tickformatstopd
@@ -1168,9 +1171,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.scattercarpet.marker.color
-                    bar.Title instance or dict with compatible
-                    properties
+                    :class:`plotly.graph_objects.scattercarpet.mark
+                    er.colorbar.Title` instance or dict with
+                    compatible properties
                 titlefont
                     Deprecated: Please use
                     scattercarpet.marker.colorbar.title.font
@@ -1296,7 +1299,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'gradient' property is an instance of Gradient
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.marker.Gradient
+          - An instance of :class:`plotly.graph_objs.scattercarpet.marker.Gradient`
           - A dict of string/value properties that will be passed
             to the Gradient constructor
     
@@ -1333,7 +1336,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.marker.Line
+          - An instance of :class:`plotly.graph_objs.scattercarpet.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1816,8 +1819,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.scattercarpet.marker.ColorBar
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Color
+            Bar` instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1835,11 +1838,11 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         gradient
-            plotly.graph_objects.scattercarpet.marker.Gradient
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Gradi
+            ent` instance or dict with compatible properties
         line
-            plotly.graph_objects.scattercarpet.marker.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Line`
+            instance or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the
             graph. 0 corresponds to no limit.
@@ -1920,7 +1923,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scattercarpet.Marker
+            an instance of
+            :class:`plotly.graph_objs.scattercarpet.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1968,8 +1972,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.scattercarpet.marker.ColorBar
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Color
+            Bar` instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1987,11 +1991,11 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         gradient
-            plotly.graph_objects.scattercarpet.marker.Gradient
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Gradi
+            ent` instance or dict with compatible properties
         line
-            plotly.graph_objects.scattercarpet.marker.Line instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.scattercarpet.marker.Line`
+            instance or dict with compatible properties
         maxdisplayed
             Sets a maximum number of points to be drawn on the
             graph. 0 corresponds to no limit.
@@ -2054,7 +2058,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Marker"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Marker`"""
             )
 
         # Handle skip_invalid
@@ -2355,7 +2359,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.scattercarpet.Line
+            an instance of
+            :class:`plotly.graph_objs.scattercarpet.Line`
         color
             Sets the line color.
         dash
@@ -2393,7 +2398,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Line"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Line`"""
             )
 
         # Handle skip_invalid
@@ -2653,7 +2658,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.scattercarpet.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.scattercarpet.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2809,7 +2814,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.scattercarpet.Hoverlabel
+            :class:`plotly.graph_objs.scattercarpet.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2858,7 +2863,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.scattercarpet.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.scattercarpet.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.scattercarpet.Hoverlabel`"""
             )
 
         # Handle skip_invalid

@@ -230,7 +230,8 @@ class Textfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Textfont
+            an instance of
+            :class:`plotly.graph_objs.funnel.Textfont`
         color
 
         colorsrc
@@ -275,7 +276,7 @@ class Textfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Textfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Textfont"""
+an instance of :class:`plotly.graph_objs.funnel.Textfont`"""
             )
 
         # Handle skip_invalid
@@ -398,7 +399,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Stream
+            an instance of :class:`plotly.graph_objs.funnel.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -428,7 +429,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Stream"""
+an instance of :class:`plotly.graph_objs.funnel.Stream`"""
             )
 
         # Handle skip_invalid
@@ -692,7 +693,8 @@ class Outsidetextfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Outsidetextfont
+            an instance of
+            :class:`plotly.graph_objs.funnel.Outsidetextfont`
         color
 
         colorsrc
@@ -737,7 +739,7 @@ class Outsidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Outsidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Outsidetextfont"""
+an instance of :class:`plotly.graph_objs.funnel.Outsidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -1007,7 +1009,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.marker.ColorBar
+          - An instance of :class:`plotly.graph_objs.funnel.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1139,9 +1141,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.funnel.marker.c
-                    olorbar.Tickformatstop instances or dicts with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.funnel.
+                    marker.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.funnel.marker.colorbar.tickformatstopdefaults
@@ -1188,8 +1190,9 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.funnel.marker.colorbar.Tit
-                    le instance or dict with compatible properties
+                    :class:`plotly.graph_objects.funnel.marker.colo
+                    rbar.Title` instance or dict with compatible
+                    properties
                 titlefont
                     Deprecated: Please use
                     funnel.marker.colorbar.title.font instead. Sets
@@ -1315,7 +1318,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.marker.Line
+          - An instance of :class:`plotly.graph_objs.funnel.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1564,8 +1567,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.funnel.marker.ColorBar instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1583,8 +1586,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.funnel.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1628,7 +1631,7 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Marker
+            an instance of :class:`plotly.graph_objs.funnel.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1676,8 +1679,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.funnel.marker.ColorBar instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1695,8 +1698,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.funnel.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1731,7 +1734,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Marker"""
+an instance of :class:`plotly.graph_objs.funnel.Marker`"""
             )
 
         # Handle skip_invalid
@@ -2034,7 +2037,8 @@ class Insidetextfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Insidetextfont
+            an instance of
+            :class:`plotly.graph_objs.funnel.Insidetextfont`
         color
 
         colorsrc
@@ -2079,7 +2083,7 @@ class Insidetextfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Insidetextfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Insidetextfont"""
+an instance of :class:`plotly.graph_objs.funnel.Insidetextfont`"""
             )
 
         # Handle skip_invalid
@@ -2342,7 +2346,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.funnel.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2497,7 +2501,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.funnel.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2546,7 +2551,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.funnel.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2671,7 +2676,7 @@ class Connector(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.funnel.connector.Line
+          - An instance of :class:`plotly.graph_objs.funnel.connector.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -2731,8 +2736,8 @@ class Connector(_BaseTraceHierarchyType):
         fillcolor
             Sets the fill color.
         line
-            plotly.graph_objects.funnel.connector.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.connector.Line`
+            instance or dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.
         """
@@ -2745,12 +2750,13 @@ class Connector(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.funnel.Connector
+            an instance of
+            :class:`plotly.graph_objs.funnel.Connector`
         fillcolor
             Sets the fill color.
         line
-            plotly.graph_objects.funnel.connector.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.funnel.connector.Line`
+            instance or dict with compatible properties
         visible
             Determines if connector regions and lines are drawn.
 
@@ -2773,7 +2779,7 @@ class Connector(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.funnel.Connector 
 constructor must be a dict or 
-an instance of plotly.graph_objs.funnel.Connector"""
+an instance of :class:`plotly.graph_objs.funnel.Connector`"""
             )
 
         # Handle skip_invalid

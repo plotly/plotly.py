@@ -152,7 +152,7 @@ class Font(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.legend.title.Font
+            :class:`plotly.graph_objs.layout.legend.title.Font`
         color
 
         family
@@ -191,7 +191,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.legend.title.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.legend.title.Font"""
+an instance of :class:`plotly.graph_objs.layout.legend.title.Font`"""
             )
 
         # Handle skip_invalid

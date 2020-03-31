@@ -156,7 +156,7 @@ The `plotly_mimetype` renderer creates a specification of the plotly figure (cal
 These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface.
 
 ##### Static image renderers
-A set of renderers is provided for displaying figures as static images.  These renderers all rely on the orca static image export utility. See the [Static Image Export](https://plot.ly/python/static-image-export/) page for more information on getting set up with orca.
+A set of renderers is provided for displaying figures as static images.  These renderers all rely on the orca static image export utility. See the [Static Image Export](https://plotly.com/python/static-image-export/) page for more information on getting set up with orca.
 
 ###### `png`, `jpeg`, and `svg`
 These renderers display figures as static PNG, JPEG, and SVG images respectively.  These renderers are useful for user interfaces that do not support inline HTML output, but do support inline static images.  Examples include the [QtConsole](https://qtconsole.readthedocs.io/en/stable/), [Spyder](https://www.spyder-ide.org/), and the PyCharm [notebook interface](https://www.jetbrains.com/help/pycharm/jupyter-notebook-support.html).
@@ -224,11 +224,11 @@ fig.show(renderer="png", width=800, height=300)
 ```
 
 ### Displaying figures using Dash
-Dash is a Python framework for building web applications, and it provides built-in support for displaying Plotly figures. See the [Dash User Guide](https://dash.plot.ly/) for more information.
+Dash is a Python framework for building web applications, and it provides built-in support for displaying Plotly figures. See the [Dash User Guide](https://dash.plotly.com/) for more information.
 
 It is important to note that Dash does not use the renderers framework discussed above, so you should not use the `.show` figure method or the `plotly.io.show` function inside Dash applications.
 
 ## Displaying figures using ipywidgets
-Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (Just like `plotly.graph_objects.Figure`) so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an ipywidgets object, which means that you can display it alongside other ipywidgets to build user interfaces right in the notebook.  See the [Plotly FigureWidget Overview](https://plot.ly/python/figurewidget/) for more information on integrating plotly figures with ipywidgets.
+Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (Just like `plotly.graph_objects.Figure`) so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an ipywidgets object, which means that you can display it alongside other ipywidgets to build user interfaces right in the notebook.  See the [Plotly FigureWidget Overview](https://plotly.com/python/figurewidget/) for more information on integrating plotly figures with ipywidgets.
 
 It is important to note that `FigureWidget` does not use the renderers framework discussed above, so you should not use the `.show` figure method or the `plotly.io.show` function on `FigureWidget` objects.

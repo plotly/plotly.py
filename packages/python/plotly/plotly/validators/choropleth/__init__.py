@@ -114,8 +114,9 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.choropleth.unselected.Mark
-                er instance or dict with compatible properties
+                :class:`plotly.graph_objects.choropleth.unselec
+                ted.Marker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -263,8 +264,9 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.choropleth.selected.Marker
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.choropleth.selecte
+                d.Marker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -341,8 +343,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objects.choropleth.marker.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.choropleth.marker.
+                Line` instance or dict with compatible
+                properties
             opacity
                 Sets the opacity of the locations.
             opacitysrc
@@ -809,9 +812,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.choropleth.colo
-                rbar.Tickformatstop instances or dicts with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.choropl
+                eth.colorbar.Tickformatstop` instances or dicts
+                with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.choropleth.colorbar.tickformatstopdefaults),
@@ -857,8 +860,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.choropleth.colorbar.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.choropleth.colorba
+                r.Title` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 choropleth.colorbar.title.font instead. Sets

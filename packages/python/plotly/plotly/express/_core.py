@@ -188,7 +188,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if ((not attr_value) or (name in attr_value))
                 and (
                     trace_spec.constructor != go.Parcoords
-                    or args["data_frame"][name].dtype.kind in "bifc"
+                    or args["data_frame"][name].dtype.kind in "ifc"
                 )
                 and (
                     trace_spec.constructor != go.Parcats
@@ -389,6 +389,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
+        trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
 
 
@@ -1123,7 +1124,7 @@ def process_dataframe_hierarchy(args):
     agg_f[count_colname] = "sum"
 
     if args["color"]:
-        if df[args["color"]].dtype.kind not in "bifc":
+        if df[args["color"]].dtype.kind not in "ifc":
             aggfunc_color = aggfunc_discrete
             discrete_color = True
         elif not aggfunc_color:
@@ -1167,8 +1168,13 @@ def process_dataframe_hierarchy(args):
             df_tree[cols] = dfg[cols]
         df_all_trees = df_all_trees.append(df_tree, ignore_index=True)
 
+    # we want to make sure than (?) is the first color of the sequence
     if args["color"] and discrete_color:
-        df_all_trees = df_all_trees.sort_values(by=args["color"])
+        sort_col_name = "sort_color_if_discrete_color"
+        while sort_col_name in df_all_trees.columns:
+            sort_col_name += "0"
+        df_all_trees[sort_col_name] = df[args["color"]].astype(str)
+        df_all_trees = df_all_trees.sort_values(by=sort_col_name)
 
     # Now modify arguments
     args["data_frame"] = df_all_trees
@@ -1222,7 +1228,7 @@ def infer_config(args, constructor, trace_patch):
             else:
                 if (
                     args["color"]
-                    and args["data_frame"][args["color"]].dtype.kind in "bifc"
+                    and args["data_frame"][args["color"]].dtype.kind in "ifc"
                 ):
                     attrs.append("color")
                     args["color_is_continuous"] = True
@@ -1440,8 +1446,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 )
             if trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]:
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
-            if trace_spec.constructor not in [go.Parcats, go.Parcoords]:
-                trace.update(hoverlabel=dict(namelength=0))
             trace_names.add(trace_name)
 
             # Init subplot row/col

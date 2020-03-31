@@ -14,7 +14,7 @@ class Title(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.choropleth.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.choropleth.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -132,7 +132,7 @@ class Title(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.choropleth.colorbar.Title
+            :class:`plotly.graph_objs.choropleth.colorbar.Title`
         font
             Sets this color bar's title font. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -167,7 +167,7 @@ class Title(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.colorbar.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.choropleth.colorbar.Title"""
+an instance of :class:`plotly.graph_objs.choropleth.colorbar.Title`"""
             )
 
         # Handle skip_invalid
@@ -391,8 +391,8 @@ class Tickformatstop(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.choropleth.colorbar.Tickformatstop
+            an instance of :class:`plotly.graph_objs.choropleth.col
+            orbar.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -443,7 +443,7 @@ class Tickformatstop(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.colorbar.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.choropleth.colorbar.Tickformatstop"""
+an instance of :class:`plotly.graph_objs.choropleth.colorbar.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -644,7 +644,7 @@ class Tickfont(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.choropleth.colorbar.Tickfont
+            :class:`plotly.graph_objs.choropleth.colorbar.Tickfont`
         color
 
         family
@@ -683,7 +683,7 @@ class Tickfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.choropleth.colorbar.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.choropleth.colorbar.Tickfont"""
+an instance of :class:`plotly.graph_objs.choropleth.colorbar.Tickfont`"""
             )
 
         # Handle skip_invalid

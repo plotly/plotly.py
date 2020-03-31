@@ -231,7 +231,7 @@ class Font(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.isosurface.hoverlabel.Font
+            :class:`plotly.graph_objs.isosurface.hoverlabel.Font`
         color
 
         colorsrc
@@ -276,7 +276,7 @@ class Font(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.isosurface.hoverlabel.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.isosurface.hoverlabel.Font"""
+an instance of :class:`plotly.graph_objs.isosurface.hoverlabel.Font`"""
             )
 
         # Handle skip_invalid
