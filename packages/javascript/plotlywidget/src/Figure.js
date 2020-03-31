@@ -2,7 +2,6 @@ var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
 
 window.PlotlyConfig = {MathJaxConfig: 'local'};
-var Plotly = require("plotly.js/dist/plotly.min");
 var semver_range = "^" + require("../package.json").version;
 
 // Model
@@ -709,110 +708,117 @@ var FigureView = widgets.DOMWidgetView.extend({
         var initialLayout = _.cloneDeep(this.model.get("_layout"));
         var config = this.model.get("_config");
 
-        Plotly.newPlot(that.el, initialTraces, initialLayout, config).then(
-            function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+            Plotly.newPlot(that.el, initialTraces, initialLayout, config).then(
+                function () {
 
-                // ### Send trace deltas ###
-                // We create an array of deltas corresponding to the new
-                // traces.
-                that._sendTraceDeltas(trace_edit_id);
+                    // ### Send trace deltas ###
+                    // We create an array of deltas corresponding to the new
+                    // traces.
+                    that._sendTraceDeltas(trace_edit_id);
 
-                // ### Send layout delta ###
-                that._sendLayoutDelta(layout_edit_id);
+                    // ### Send layout delta ###
+                    that._sendLayoutDelta(layout_edit_id);
 
-                // Wire up plotly event callbacks
-                that.el.on("plotly_restyle",
-                    function (update) {
-                        that.handle_plotly_restyle(update)
-                    });
-                that.el.on("plotly_relayout",
-                    function (update) {
-                        that.handle_plotly_relayout(update)
-                    });
-                that.el.on("plotly_update",
-                    function (update) {
-                        that.handle_plotly_update(update)
-                    });
-                that.el.on("plotly_click",
-                    function (update) {
-                        that.handle_plotly_click(update)
-                    });
-                that.el.on("plotly_hover",
-                    function (update) {
-                        that.handle_plotly_hover(update)
-                    });
-                that.el.on("plotly_unhover",
-                    function (update) {
-                        that.handle_plotly_unhover(update)
-                    });
-                that.el.on("plotly_selected",
-                    function (update) {
-                        that.handle_plotly_selected(update)
-                    });
-                that.el.on("plotly_deselect",
-                    function (update) {
-                        that.handle_plotly_deselect(update)
-                    });
-                that.el.on("plotly_doubleclick",
-                    function (update) {
-                        that.handle_plotly_doubleclick(update)
-                    });
+                    // Wire up plotly event callbacks
+                    that.el.on("plotly_restyle",
+                        function (update) {
+                            that.handle_plotly_restyle(update)
+                        });
+                    that.el.on("plotly_relayout",
+                        function (update) {
+                            that.handle_plotly_relayout(update)
+                        });
+                    that.el.on("plotly_update",
+                        function (update) {
+                            that.handle_plotly_update(update)
+                        });
+                    that.el.on("plotly_click",
+                        function (update) {
+                            that.handle_plotly_click(update)
+                        });
+                    that.el.on("plotly_hover",
+                        function (update) {
+                            that.handle_plotly_hover(update)
+                        });
+                    that.el.on("plotly_unhover",
+                        function (update) {
+                            that.handle_plotly_unhover(update)
+                        });
+                    that.el.on("plotly_selected",
+                        function (update) {
+                            that.handle_plotly_selected(update)
+                        });
+                    that.el.on("plotly_deselect",
+                        function (update) {
+                            that.handle_plotly_deselect(update)
+                        });
+                    that.el.on("plotly_doubleclick",
+                        function (update) {
+                            that.handle_plotly_doubleclick(update)
+                        });
 
-                // Emit event indicating that the widget has finished
-                // rendering
-                var event = new CustomEvent("plotlywidget-after-render",
-                    { "detail": {"element": that.el, 'viewID': that.viewID}});
+                    // Emit event indicating that the widget has finished
+                    // rendering
+                    var event = new CustomEvent("plotlywidget-after-render",
+                        {"detail": {"element": that.el, 'viewID': that.viewID}});
 
-                // Dispatch/Trigger/Fire the event
-                document.dispatchEvent(event);
-            });
+                    // Dispatch/Trigger/Fire the event
+                    document.dispatchEvent(event);
+                });
+        })
     },
 
     /**
      * Respond to phosphorjs events
      */
     processPhosphorMessage: function(msg) {
-        FigureView.__super__.processPhosphorMessage.apply(this, arguments);
-        var that = this;
-        switch (msg.type) {
-            case 'before-attach':
-                // Render an initial empty figure. This establishes with
-                // the page that the element will not be empty, avoiding
-                // some occasions where the dynamic sizing behavior leads
-                // to collapsed figure dimensions.
-                var axisHidden = {
-                    showgrid: false, showline: false, tickvals: []};
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+            FigureView.__super__.processPhosphorMessage.apply(this, arguments);
+            var that = this;
+            switch (msg.type) {
+                case 'before-attach':
+                    // Render an initial empty figure. This establishes with
+                    // the page that the element will not be empty, avoiding
+                    // some occasions where the dynamic sizing behavior leads
+                    // to collapsed figure dimensions.
+                    var axisHidden = {
+                        showgrid: false, showline: false, tickvals: []
+                    };
 
-                Plotly.newPlot(that.el, [], {
-                    xaxis: axisHidden, yaxis: axisHidden
-                });
+                    Plotly.newPlot(that.el, [], {
+                        xaxis: axisHidden, yaxis: axisHidden
+                    });
 
-                window.addEventListener("resize", function(){
-                    that.autosizeFigure();
-                });
-                break;
-            case 'after-attach':
-                // Rendering actual figure in the after-attach event allows
-                // Plotly.js to size the figure to fill the available element
-                this.perform_render();
-                break;
-            case 'resize':
-                this.autosizeFigure();
-                break
-        }
+                    window.addEventListener("resize", function () {
+                        that.autosizeFigure();
+                    });
+                    break;
+                case 'after-attach':
+                    // Rendering actual figure in the after-attach event allows
+                    // Plotly.js to size the figure to fill the available element
+                    this.perform_render();
+                    break;
+                case 'resize':
+                    this.autosizeFigure();
+                    break
+            }
+        })
     },
 
     autosizeFigure: function() {
-        var that = this;
-        var layout = that.model.get('_layout');
-        if (_.isNil(layout) ||
-            _.isNil(layout.width)) {
-            Plotly.Plots.resize(that.el).then(function(){
-                var layout_edit_id = that.model.get(
-                    "_last_layout_edit_id");
-                that._sendLayoutDelta(layout_edit_id);
-            });
-        }
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+            var that = this;
+            var layout = that.model.get('_layout');
+            if (_.isNil(layout) ||
+                _.isNil(layout.width)) {
+                Plotly.Plots.resize(that.el).then(function () {
+                    var layout_edit_id = that.model.get(
+                        "_last_layout_edit_id");
+                    that._sendLayoutDelta(layout_edit_id);
+                });
+            }
+        })
     },
 
     /**
@@ -820,7 +826,9 @@ var FigureView = widgets.DOMWidgetView.extend({
      * element when the view is destroyed
      */
     destroy: function() {
-        Plotly.purge(this.el);
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+            Plotly.purge(this.el);
+        })
     },
 
     /**
@@ -1139,191 +1147,205 @@ var FigureView = widgets.DOMWidgetView.extend({
      * Handle Plotly.addTraces request
      */
     do_addTraces: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
 
-        /** @type {Py2JsAddTracesMsg} */
-        var msgData = this.model.get("_py2js_addTraces");
+            /** @type {Py2JsAddTracesMsg} */
+            var msgData = this.model.get("_py2js_addTraces");
 
-        if (msgData !== null) {
+            if (msgData !== null) {
 
-            // Save off original number of traces
-            var prevNumTraces = this.el.data.length;
+                // Save off original number of traces
+                var prevNumTraces = this.el.data.length;
 
-            var that = this;
-            Plotly.addTraces(this.el, msgData.trace_data).then(function () {
-
-                // ### Send trace deltas ###
-                that._sendTraceDeltas(msgData.trace_edit_id);
-
-                // ### Send layout delta ###
-                var layout_edit_id = msgData.layout_edit_id;
-                that._sendLayoutDelta(layout_edit_id);
-            });
-        }
-    },
-
-    /**
-     * Handle Plotly.deleteTraces request
-     */
-    do_deleteTraces: function () {
-
-        /** @type {Py2JsDeleteTracesMsg} */
-        var msgData = this.model.get("_py2js_deleteTraces");
-
-        if (msgData  !== null){
-            var delete_inds = msgData.delete_inds;
-            var that = this;
-            Plotly.deleteTraces(this.el, delete_inds).then(function () {
-
-                // ### Send trace deltas ###
-                var trace_edit_id = msgData.trace_edit_id;
-                that._sendTraceDeltas(trace_edit_id);
-
-                // ### Send layout delta ###
-                var layout_edit_id = msgData.layout_edit_id;
-                that._sendLayoutDelta(layout_edit_id);
-            });
-        }
-    },
-
-    /**
-     * Handle Plotly.moveTraces request
-     */
-    do_moveTraces: function () {
-
-        /** @type {Py2JsMoveTracesMsg} */
-        var msgData = this.model.get("_py2js_moveTraces");
-
-        if (msgData !== null){
-            // Unpack message
-            var currentInds = msgData.current_trace_inds;
-            var newInds = msgData.new_trace_inds;
-
-            // Check if the new trace indexes are actually different than
-            // the current indexes
-            var inds_equal = _.isEqual(currentInds, newInds);
-
-            if (!inds_equal) {
-                Plotly.moveTraces(this.el, currentInds, newInds)
-            }
-        }
-    },
-
-    /**
-     * Handle Plotly.restyle request
-     */
-    do_restyle: function () {
-
-        /** @type {Py2JsRestyleMsg} */
-        var msgData = this.model.get("_py2js_restyle");
-        if (msgData !== null) {
-            var restyleData = msgData.restyle_data;
-            var traceIndexes = this.model._normalize_trace_indexes(
-                msgData.restyle_traces);
-
-            restyleData["_doNotReportToPy"] = true;
-            Plotly.restyle(this.el, restyleData, traceIndexes);
-
-            // ### Send trace deltas ###
-            // We create an array of deltas corresponding to the restyled
-            // traces.
-            this._sendTraceDeltas(msgData.trace_edit_id);
-
-            // ### Send layout delta ###
-            var layout_edit_id = msgData.layout_edit_id;
-            this._sendLayoutDelta(layout_edit_id);
-        }
-    },
-
-    /**
-     * Handle Plotly.relayout request
-     */
-    do_relayout: function () {
-
-        /** @type {Py2JsRelayoutMsg} */
-        var msgData = this.model.get("_py2js_relayout");
-        if (msgData !== null) {
-            if (msgData.source_view_id !== this.viewID) {
-                var relayoutData = msgData.relayout_data;
-                relayoutData["_doNotReportToPy"] = true;
-                Plotly.relayout(this.el, msgData.relayout_data);
-            }
-
-            // ### Send layout delta ###
-            var layout_edit_id = msgData.layout_edit_id;
-            this._sendLayoutDelta(layout_edit_id);
-        }
-    },
-
-    /**
-     * Handle Plotly.update request
-     */
-    do_update: function () {
-
-        /** @type {Py2JsUpdateMsg} */
-        var msgData = this.model.get("_py2js_update");
-
-        if (msgData !== null) {
-            var style = msgData.style_data || {};
-            var layout = msgData.layout_data || {};
-            var traceIndexes = this.model._normalize_trace_indexes(
-                msgData.style_traces);
-
-            style["_doNotReportToPy"] = true;
-                Plotly.update(this.el, style, layout, traceIndexes);
-
-            // ### Send trace deltas ###
-            // We create an array of deltas corresponding to the updated
-            // traces.
-            this._sendTraceDeltas(msgData.trace_edit_id);
-
-            // ### Send layout delta ###
-            var layout_edit_id = msgData.layout_edit_id;
-            this._sendLayoutDelta(layout_edit_id);
-        }
-    },
-
-    /**
-     * Handle Plotly.animate request
-     */
-    do_animate: function() {
-
-        /** @type {Py2JsAnimateMsg} */
-        var msgData = this.model.get("_py2js_animate");
-
-        if (msgData !== null) {
-
-            // Unpack params
-            // var animationData = msgData[0];
-            var animationOpts = msgData.animation_opts;
-
-            var styles = msgData.style_data;
-            var layout = msgData.layout_data;
-            var traceIndexes = this.model._normalize_trace_indexes(
-                msgData.style_traces);
-
-            var animationData = {
-                data: styles,
-                layout: layout,
-                traces: traceIndexes
-            };
-
-            animationData["_doNotReportToPy"] = true;
-            var that = this;
-
-            Plotly.animate(this.el, animationData, animationOpts).then(
-                function () {
+                var that = this;
+                Plotly.addTraces(this.el, msgData.trace_data).then(function () {
 
                     // ### Send trace deltas ###
-                    // We create an array of deltas corresponding to the
-                    // animated traces.
                     that._sendTraceDeltas(msgData.trace_edit_id);
 
                     // ### Send layout delta ###
                     var layout_edit_id = msgData.layout_edit_id;
                     that._sendLayoutDelta(layout_edit_id);
                 });
+            }
+        })
+    },
 
-        }
+    /**
+     * Handle Plotly.deleteTraces request
+     */
+    do_deleteTraces: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsDeleteTracesMsg} */
+            var msgData = this.model.get("_py2js_deleteTraces");
+
+            if (msgData !== null) {
+                var delete_inds = msgData.delete_inds;
+                var that = this;
+                Plotly.deleteTraces(this.el, delete_inds).then(function () {
+
+                    // ### Send trace deltas ###
+                    var trace_edit_id = msgData.trace_edit_id;
+                    that._sendTraceDeltas(trace_edit_id);
+
+                    // ### Send layout delta ###
+                    var layout_edit_id = msgData.layout_edit_id;
+                    that._sendLayoutDelta(layout_edit_id);
+                });
+            }
+        })
+    },
+
+    /**
+     * Handle Plotly.moveTraces request
+     */
+    do_moveTraces: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsMoveTracesMsg} */
+            var msgData = this.model.get("_py2js_moveTraces");
+
+            if (msgData !== null) {
+                // Unpack message
+                var currentInds = msgData.current_trace_inds;
+                var newInds = msgData.new_trace_inds;
+
+                // Check if the new trace indexes are actually different than
+                // the current indexes
+                var inds_equal = _.isEqual(currentInds, newInds);
+
+                if (!inds_equal) {
+                    Plotly.moveTraces(this.el, currentInds, newInds)
+                }
+            }
+        })
+    },
+
+    /**
+     * Handle Plotly.restyle request
+     */
+    do_restyle: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsRestyleMsg} */
+            var msgData = this.model.get("_py2js_restyle");
+            if (msgData !== null) {
+                var restyleData = msgData.restyle_data;
+                var traceIndexes = this.model._normalize_trace_indexes(
+                    msgData.restyle_traces);
+
+                restyleData["_doNotReportToPy"] = true;
+                Plotly.restyle(this.el, restyleData, traceIndexes);
+
+                // ### Send trace deltas ###
+                // We create an array of deltas corresponding to the restyled
+                // traces.
+                this._sendTraceDeltas(msgData.trace_edit_id);
+
+                // ### Send layout delta ###
+                var layout_edit_id = msgData.layout_edit_id;
+                this._sendLayoutDelta(layout_edit_id);
+            }
+        })
+    },
+
+    /**
+     * Handle Plotly.relayout request
+     */
+    do_relayout: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsRelayoutMsg} */
+            var msgData = this.model.get("_py2js_relayout");
+            if (msgData !== null) {
+                if (msgData.source_view_id !== this.viewID) {
+                    var relayoutData = msgData.relayout_data;
+                    relayoutData["_doNotReportToPy"] = true;
+                    Plotly.relayout(this.el, msgData.relayout_data);
+                }
+
+                // ### Send layout delta ###
+                var layout_edit_id = msgData.layout_edit_id;
+                this._sendLayoutDelta(layout_edit_id);
+            }
+        })
+    },
+
+    /**
+     * Handle Plotly.update request
+     */
+    do_update: function () {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsUpdateMsg} */
+            var msgData = this.model.get("_py2js_update");
+
+            if (msgData !== null) {
+                var style = msgData.style_data || {};
+                var layout = msgData.layout_data || {};
+                var traceIndexes = this.model._normalize_trace_indexes(
+                    msgData.style_traces);
+
+                style["_doNotReportToPy"] = true;
+                Plotly.update(this.el, style, layout, traceIndexes);
+
+                // ### Send trace deltas ###
+                // We create an array of deltas corresponding to the updated
+                // traces.
+                this._sendTraceDeltas(msgData.trace_edit_id);
+
+                // ### Send layout delta ###
+                var layout_edit_id = msgData.layout_edit_id;
+                this._sendLayoutDelta(layout_edit_id);
+            }
+        })
+    },
+
+    /**
+     * Handle Plotly.animate request
+     */
+    do_animate: function() {
+        import(/* webpackChunkName: 'plotly' */ 'plotly.js/dist/plotly').then(Plotly => {
+
+            /** @type {Py2JsAnimateMsg} */
+            var msgData = this.model.get("_py2js_animate");
+
+            if (msgData !== null) {
+
+                // Unpack params
+                // var animationData = msgData[0];
+                var animationOpts = msgData.animation_opts;
+
+                var styles = msgData.style_data;
+                var layout = msgData.layout_data;
+                var traceIndexes = this.model._normalize_trace_indexes(
+                    msgData.style_traces);
+
+                var animationData = {
+                    data: styles,
+                    layout: layout,
+                    traces: traceIndexes
+                };
+
+                animationData["_doNotReportToPy"] = true;
+                var that = this;
+
+                Plotly.animate(this.el, animationData, animationOpts).then(
+                    function () {
+
+                        // ### Send trace deltas ###
+                        // We create an array of deltas corresponding to the
+                        // animated traces.
+                        that._sendTraceDeltas(msgData.trace_edit_id);
+
+                        // ### Send layout delta ###
+                        var layout_edit_id = msgData.layout_edit_id;
+                        that._sendLayoutDelta(layout_edit_id);
+                    });
+
+            }
+        })
     },
 
     /**
