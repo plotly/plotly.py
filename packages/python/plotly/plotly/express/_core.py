@@ -1279,6 +1279,8 @@ def infer_config(args, constructor, trace_patch):
         if args["opacity"] is None:
             if "barmode" in args and args["barmode"] == "overlay":
                 trace_patch["marker"] = dict(opacity=0.5)
+        elif constructor in [go.Densitymapbox, go.Pie, go.Funnel, go.Funnelarea]:
+            trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
     if "line_group" in args:
