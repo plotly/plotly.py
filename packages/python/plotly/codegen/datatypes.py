@@ -293,7 +293,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         (
             f"arg",
             f"dict of properties compatible with this constructor "
-            f"or an instance of {class_name}",
+            f"or an instance of :class:`{class_name}`",
         )
     ]
 
@@ -321,7 +321,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
             raise ValueError(\"\"\"\\
 The first argument to the {class_name} 
 constructor must be a dict or 
-an instance of {class_name}\"\"\")
+an instance of :class:`{class_name}`\"\"\")
 
         # Handle skip_invalid
         # -------------------

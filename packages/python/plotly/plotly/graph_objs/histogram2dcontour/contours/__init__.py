@@ -153,8 +153,8 @@ class Labelfont(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.histogram2dcontour.contours.Labelfont
+            an instance of :class:`plotly.graph_objs.histogram2dcon
+            tour.contours.Labelfont`
         color
 
         family
@@ -193,7 +193,7 @@ class Labelfont(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram2dcontour.contours.Labelfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram2dcontour.contours.Labelfont"""
+an instance of :class:`plotly.graph_objs.histogram2dcontour.contours.Labelfont`"""
             )
 
         # Handle skip_invalid

@@ -159,7 +159,8 @@ class Line(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.sunburst.marker.Line
+            an instance of
+            :class:`plotly.graph_objs.sunburst.marker.Line`
         color
             Sets the color of the line enclosing each sector.
             Defaults to the `paper_bgcolor` value.
@@ -190,7 +191,7 @@ class Line(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.marker.Line 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.marker.Line"""
+an instance of :class:`plotly.graph_objs.sunburst.marker.Line`"""
             )
 
         # Handle skip_invalid
@@ -855,7 +856,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -989,7 +990,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -1227,7 +1228,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -1271,7 +1272,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.sunburst.marker.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.sunburst.marker.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1580,9 +1581,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.sunburst.marker.colorba
-            r.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.sunburst.marker
+            .colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.sunbur
             st.marker.colorbar.tickformatstopdefaults), sets the
@@ -1622,8 +1623,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.sunburst.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.colorbar.T
+            itle` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             sunburst.marker.colorbar.title.font instead. Sets this
@@ -1718,7 +1719,7 @@ class ColorBar(_BaseTraceHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.sunburst.marker.ColorBar
+            :class:`plotly.graph_objs.sunburst.marker.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -1831,9 +1832,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of plotly.graph_objects.sunburst.marker.colorba
-            r.Tickformatstop instances or dicts with compatible
-            properties
+            A tuple of :class:`plotly.graph_objects.sunburst.marker
+            .colorbar.Tickformatstop` instances or dicts with
+            compatible properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.sunbur
             st.marker.colorbar.tickformatstopdefaults), sets the
@@ -1873,8 +1874,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.sunburst.marker.colorbar.Title
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.sunburst.marker.colorbar.T
+            itle` instance or dict with compatible properties
         titlefont
             Deprecated: Please use
             sunburst.marker.colorbar.title.font instead. Sets this
@@ -1926,7 +1927,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.sunburst.marker.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.sunburst.marker.ColorBar"""
+an instance of :class:`plotly.graph_objs.sunburst.marker.ColorBar`"""
             )
 
         # Handle skip_invalid

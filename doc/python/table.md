@@ -26,7 +26,7 @@ jupyter:
 `go.Table` provides a Table object for detailed data viewing. The data are arranged in
 a grid of rows and columns. Most styling can be specified for header, columns, rows or individual cells. Table is using a column-major order, ie. the grid is represented as a vector of column vectors.
 
-Note that [Dash](https://dash.plot.ly/) provides a different type of [DataTable](https://dash.plot.ly/datatable).
+Note that [Dash](https://dash.plotly.com/) provides a different type of [DataTable](https://dash.plotly.com/datatable).
 
 #### Basic Table
 
@@ -211,4 +211,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on tables and table attributes see: https://plot.ly/python/reference/#table.
+For more information on tables and table attributes see: https://plotly.com/python/reference/#table.

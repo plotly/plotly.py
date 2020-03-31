@@ -6,13 +6,6 @@ try:
 except AttributeError:  # python 2
     getfullargspec = inspect.getargspec
 
-# TODO contents of columns
-# TODO explain categorical
-# TODO handle color
-# TODO handle details of box/violin/histogram
-# TODO handle details of column selection with `dimensions`
-# TODO document "or `None`, default `None`" in various places
-# TODO standardize positioning and casing of 'default'
 
 colref_type = "str or int or Series or array-like"
 colref_desc = "Either a name of a column in `data_frame`, or a pandas Series or array_like object."
@@ -325,11 +318,11 @@ docs = dict(
     ],
     title=["str", "The figure title."],
     template=[
-        "or dict or plotly.graph_objects.layout.Template instance",
-        "The figure template name or definition.",
+        "str or dict or plotly.graph_objects.layout.Template instance",
+        "The figure template name (must be a key in plotly.io.templates) or definition.",
     ],
     width=["int (default `None`)", "The figure width in pixels."],
-    height=["int (default `600`)", "The figure height in pixels."],
+    height=["int (default `None`)", "The figure height in pixels."],
     labels=[
         "dict with str keys and str values (default `{}`)",
         "By default, column names are used in the figure for axis titles, legend entries and hovers.",
@@ -536,5 +529,5 @@ def make_docstring(fn, override_dict={}):
         param_type = param_doc[0]
         result += "%s: %s\n%s\n" % (param, param_type, param_desc)
     result += "\nReturns\n-------\n"
-    result += "    A `Figure` object."
+    result += "    plotly.graph_objects.Figure"
     return result

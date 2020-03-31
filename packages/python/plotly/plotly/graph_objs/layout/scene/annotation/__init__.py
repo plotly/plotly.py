@@ -136,7 +136,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.scene.annotation.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.layout.scene.annotation.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -205,8 +205,8 @@ class Hoverlabel(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.scene.annotation.Hoverlabel
+            an instance of :class:`plotly.graph_objs.layout.scene.a
+            nnotation.Hoverlabel`
         bgcolor
             Sets the background color of the hover label. By
             default uses the annotation's `bgcolor` made opaque, or
@@ -239,7 +239,7 @@ class Hoverlabel(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.annotation.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.scene.annotation.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.layout.scene.annotation.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -428,7 +428,7 @@ class Font(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.scene.annotation.Font
+            :class:`plotly.graph_objs.layout.scene.annotation.Font`
         color
 
         family
@@ -467,7 +467,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.scene.annotation.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.scene.annotation.Font"""
+an instance of :class:`plotly.graph_objs.layout.scene.annotation.Font`"""
             )
 
         # Handle skip_invalid

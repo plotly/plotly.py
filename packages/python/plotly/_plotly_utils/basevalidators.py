@@ -2421,7 +2421,7 @@ class CompoundValidator(BaseValidator):
             """\
     The '{plotly_name}' property is an instance of {class_str}
     that may be specified as:
-      - An instance of {module_str}.{class_str}
+      - An instance of :class:`{module_str}.{class_str}`
       - A dict of string/value properties that will be passed
         to the {class_str} constructor
 

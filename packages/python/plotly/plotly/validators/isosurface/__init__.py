@@ -297,14 +297,14 @@ class SlicesValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                plotly.graph_objects.isosurface.slices.X
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.slices.
+                X` instance or dict with compatible properties
             y
-                plotly.graph_objects.isosurface.slices.Y
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.slices.
+                Y` instance or dict with compatible properties
             z
-                plotly.graph_objects.isosurface.slices.Z
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.slices.
+                Z` instance or dict with compatible properties
 """,
             ),
             **kwargs
@@ -930,9 +930,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 tickformat "%H~%M~%S.%2f" would display
                 "09~15~23.46"
             tickformatstops
-                A tuple of plotly.graph_objects.isosurface.colo
-                rbar.Tickformatstop instances or dicts with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.isosurf
+                ace.colorbar.Tickformatstop` instances or dicts
+                with compatible properties
             tickformatstopdefaults
                 When used in a template (as layout.template.dat
                 a.isosurface.colorbar.tickformatstopdefaults),
@@ -978,8 +978,9 @@ class ColorBarValidator(_plotly_utils.basevalidators.CompoundValidator):
             tickwidth
                 Sets the tick width (in px).
             title
-                plotly.graph_objects.isosurface.colorbar.Title
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.colorba
+                r.Title` instance or dict with compatible
+                properties
             titlefont
                 Deprecated: Please use
                 isosurface.colorbar.title.font instead. Sets
@@ -1109,14 +1110,14 @@ class CapsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             x
-                plotly.graph_objects.isosurface.caps.X instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.caps.X`
+                instance or dict with compatible properties
             y
-                plotly.graph_objects.isosurface.caps.Y instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.caps.Y`
+                instance or dict with compatible properties
             z
-                plotly.graph_objects.isosurface.caps.Z instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.isosurface.caps.Z`
+                instance or dict with compatible properties
 """,
             ),
             **kwargs

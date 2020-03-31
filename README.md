@@ -9,6 +9,14 @@
         </td>
     </tr>
     <tr>
+        <td>User forum</td>
+        <td>
+            <a href="https://community.plot.ly"/>
+            <img src="https://img.shields.io/badge/help_forum-discourse-blue.svg"/>
+        </td>
+    </tr>
+
+    <tr>
         <td>PyPI Downloads</td>
         <td>
             <a href="https://pepy.tech/project/plotly"/>
@@ -26,7 +34,7 @@
 
 ## Quickstart
 
-`pip install plotly==4.5.3`
+`pip install plotly==4.5.4`
 
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 
@@ -45,7 +53,7 @@ Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-
 
 ## Overview
 
-[plotly.py](https://plot.ly/d3-js-for-python-and-pandas-charts/) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
+[plotly.py](https://plot.ly/python) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
 
 Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is a high-level, declarative charting library. plotly.js ships with over 30 chart types, including scientific charts, 3D graphs, statistical charts, SVG maps, financial charts, and more.
 
@@ -61,12 +69,12 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 ---
 
 - [Online Documentation](https://plot.ly/python)
-- [Contributing](contributing.md)
+- [Contributing to plotly](contributing.md)
 - [Changelog](CHANGELOG.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Version 4 Migration Guide](https://plot.ly/python/next/v4-migration/)
 - [New! Announcing Dash 1.0](https://medium.com/plotly/welcoming-dash-1-0-0-f3af4b84bae)
-- [Community](https://community.plot.ly/c/api/python)
+- [Community forum](https://community.plot.ly/c/api/python)
 
 ---
 
@@ -75,13 +83,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip...
 
 ```
-pip install plotly==4.5.3
+pip install plotly==4.5.4
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=4.5.3
+conda install -c plotly plotly=4.5.4
 ```
 
 ### Jupyter Notebook Support
@@ -128,10 +136,10 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@1.5.3 --no-build
+jupyter labextension install plotlywidget@1.5.4 --no-build
 
 # and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.5.3 --no-build
+jupyter labextension install jupyterlab-plotly@1.5.4 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
@@ -153,7 +161,7 @@ installation of the plotly [orca](https://github.com/plotly/orca) command line u
 These dependencies can both be installed using conda:
 
 ```
-conda install -c plotly plotly-orca psutil
+conda install -c plotly plotly-orca==1.3.1 psutil
 ```
 
 Or, `psutil` can be installed using pip...

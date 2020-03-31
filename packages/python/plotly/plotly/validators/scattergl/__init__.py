@@ -210,11 +210,13 @@ class UnselectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattergl.unselected.Marke
-                r instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.unselect
+                ed.Marker` instance or dict with compatible
+                properties
             textfont
-                plotly.graph_objects.scattergl.unselected.Textf
-                ont instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.unselect
+                ed.Textfont` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -469,11 +471,13 @@ class SelectedValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.scattergl.selected.Marker
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.selected
+                .Marker` instance or dict with compatible
+                properties
             textfont
-                plotly.graph_objects.scattergl.selected.Textfon
-                t instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.selected
+                .Textfont` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -621,8 +625,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.scattergl.marker.ColorBar
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.marker.C
+                olorBar` instance or dict with compatible
+                properties
             colorscale
                 Sets the colorscale. Has an effect only if in
                 `marker.color`is set to a numerical array. The
@@ -643,8 +648,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for  color
                 .
             line
-                plotly.graph_objects.scattergl.marker.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.scattergl.marker.L
+                ine` instance or dict with compatible
+                properties
             opacity
                 Sets the marker opacity.
             opacitysrc

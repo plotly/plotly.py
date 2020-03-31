@@ -80,8 +80,8 @@ class FileToolsTest(PlotlyTestCase):
 
         tools.reset_config_file()
         config = tools.get_config_file()
-        self.assertEqual(config["plotly_domain"], "https://plot.ly")
-        self.assertEqual(config["plotly_streaming_domain"], "stream.plot.ly")
+        self.assertEqual(config["plotly_domain"], "https://plotly.com")
+        self.assertEqual(config["plotly_streaming_domain"], "stream.plotly.com")
 
     def test_get_credentials_file(self):
 

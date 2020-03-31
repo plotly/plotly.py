@@ -36,7 +36,7 @@ jupyter:
 
 #### Imports
 
-The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://plot.ly/pandas/intro-to-pandas-tutorial/), [SciPy](https://www.scipy.org/) and [Plotly](https://plot.ly/python/getting-started/).
+The tutorial below imports [NumPy](http://www.numpy.org/), [Pandas](https://plotly.com/pandas/intro-to-pandas-tutorial/), [SciPy](https://www.scipy.org/) and [Plotly](https://plotly.com/python/getting-started/).
 
 ```python
 import plotly.graph_objects as go
@@ -97,7 +97,7 @@ fig.add_trace(go.Scatter(
     x=x,
     y=signal.savgol_filter(y,
                            53, # window size used for filtering
-                           3), # order of fitted polynomial
+                           3), # order of fitted polynomial
     mode='markers',
     marker=dict(
         size=6,
