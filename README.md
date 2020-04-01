@@ -15,7 +15,6 @@
             <img src="https://img.shields.io/badge/help_forum-discourse-blue.svg"/>
         </td>
     </tr>
-
     <tr>
         <td>PyPI Downloads</td>
         <td>
