@@ -1292,6 +1292,9 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             args["orientation"] = "v"
 
         if constructor == go.Histogram:
+            if has_x and has_y and args["histfunc"] is None:
+                args["histfunc"] = trace_patch["histfunc"] = "sum"
+
             orientation = args["orientation"]
             nbins = args["nbins"]
             trace_patch["nbinsx"] = nbins if orientation == "v" else None
@@ -1308,6 +1311,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
                     layout_patch[mode] = "overlay"
             if layout_patch[mode] is None:
                 layout_patch[mode] = "group"
+
+    if (
+        constructor == go.Histogram2d
+        and args["z"] is not None
+        and args["histfunc"] is None
+    ):
+        args["histfunc"] = trace_patch["histfunc"] = "sum"
 
     if constructor in [go.Histogram2d, go.Densitymapbox]:
         show_colorbar = True
