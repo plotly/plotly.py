@@ -4,12 +4,10 @@
 ## Release process - plotly package
 
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
-`plotlywidget`/`jupyterlab-plotly` version `A.B.C`.
+`plotlywidget`/`jupyterlab-plotly` with matching versions.
 
-Note: The `plotlywidget` instructions must be followed if any change
-has been made in the `packages/javascript` directory source code, OR if the version of
-plotly.js has been updated.  If neither of these is the case, there's no need
-to increment the `plotlywidget` version or to publish a new version to npm.
+Note: it's easier to lock all three versions together, even if it means we occasionally
+push no-change versions to NPM/PyPI/Conda.
 
 ### Create a release branch
 After all of the functionality for the release has been merged into master,
@@ -52,23 +50,23 @@ Update the `doc/python/getting-started.md` file with the same version numbers.
 Commit Changelog, README and getting-started updates.
 
 ### Bump to release candidate version
- 1) Manually update the plotlywidget version to `A.B.C-rc.1` in the files
+ 1) Manually update the plotlywidget version to `X.Y.Z-rc.1` in the files
 specified below.
 
  - `packages/python/plotly/plotly/_widget_version.py`:
-   + Update `__frontend_version__` to `^A.B.C-rc.1` (Note the `^` prefix)
+   + Update `__frontend_version__` to `^X.Y.Z-rc.1` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
-   + Update `"version"` to `A.B.C-rc.1`
+   + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
-   + Update `"version"` to `A.B.C-rc.1`
+   + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
 
  2) Commit the changes
 
- 3) Tag this commit on the release branch as `vX.Y.Zrc1` and `widget-vA.B.C-rc.1`
+ 3) Tag this commit on the release branch as `vX.Y.Zrc1`
 
 In both cases `rc` is the semantic versioning code for Release Candidate.
 
@@ -174,13 +172,13 @@ When no problems are identified in the release candidate, remove the
 release candidate suffix from the following version strings:
 
  - `plotly/_widget_version.py`:
-   + Update `__frontend_version__` to `^A.B.C` (Note the `^` prefix)
+   + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
-   + Update `"version"` to `A.B.C`
+   + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
-   + Update `"version"` to `A.B.C`
+   + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 8 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
@@ -192,7 +190,7 @@ Make sure the integration tests are passing on the release branch, then merge
 it into master on GitHub.
 
 Make sure tests also pass on master, then update your local master,
-tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`) and `widget-vA.B.C`
+tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`)
 
 push the tag.
 
@@ -202,8 +200,6 @@ push the tag.
 (plotly_dev) $ git pull origin master
 (plotly_dev) $ git tag vX.Y.Z
 (plotly_dev) $ git push origin vX.Y.Z
-(plotly_dev) $ git tag widget-vA.B.C
-(plotly_dev) $ git push origin widget-vA.B.C
 ```
 
 ### Publishing to PYPI
