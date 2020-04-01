@@ -50,14 +50,18 @@ $ pip remove plotly
 
 ### Jupyter Notebook Classic Problems
 
-The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces. The easiest solution is to run "Restart & Clear Output" from the Kernel menu and rerun your notebook.
+The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
 
-If rerunning your notebook is prohibitive, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures:
+The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
+
+If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
 
 ```python
 import plotly.io as pio
 pio.renderers.default='notebook'
 ```
+
+As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
 
 ### JupyterLab Problems
 
