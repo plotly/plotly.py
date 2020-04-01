@@ -238,19 +238,18 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
-                spans more two or more lines (i.e. `text`
-                contains one or more <br> HTML tags) or if an
-                explicit width is set to override the text
-                width.
+                spans two or more lines (i.e. `text` contains
+                one or more <br> HTML tags) or if an explicit
+                width is set to override the text width.
             alignsrc
                 Sets the source reference on plot.ly for  align
                 .
             fill
-                plotly.graph_objects.table.header.Fill instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Fill`
+                instance or dict with compatible properties
             font
-                plotly.graph_objects.table.header.Font instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Font`
+                instance or dict with compatible properties
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
@@ -263,8 +262,8 @@ class HeaderValidator(_plotly_utils.basevalidators.CompoundValidator):
             height
                 The height of cells.
             line
-                plotly.graph_objects.table.header.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.header.Line`
+                instance or dict with compatible properties
             prefix
                 Prefix for cell values.
             prefixsrc
@@ -421,19 +420,18 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             align
                 Sets the horizontal alignment of the `text`
                 within the box. Has an effect only if `text`
-                spans more two or more lines (i.e. `text`
-                contains one or more <br> HTML tags) or if an
-                explicit width is set to override the text
-                width.
+                spans two or more lines (i.e. `text` contains
+                one or more <br> HTML tags) or if an explicit
+                width is set to override the text width.
             alignsrc
                 Sets the source reference on plot.ly for  align
                 .
             fill
-                plotly.graph_objects.table.cells.Fill instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Fill`
+                instance or dict with compatible properties
             font
-                plotly.graph_objects.table.cells.Font instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Font`
+                instance or dict with compatible properties
             format
                 Sets the cell value formatting rule using d3
                 formatting mini-language which is similar to
@@ -446,8 +444,8 @@ class CellsValidator(_plotly_utils.basevalidators.CompoundValidator):
             height
                 The height of cells.
             line
-                plotly.graph_objects.table.cells.Line instance
-                or dict with compatible properties
+                :class:`plotly.graph_objects.table.cells.Line`
+                instance or dict with compatible properties
             prefix
                 Prefix for cell values.
             prefixsrc

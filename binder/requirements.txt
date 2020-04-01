@@ -1,5 +1,5 @@
 jupytext
-plotly==4.5.0
+plotly==4.5.4
 jupyter
 notebook
 pandas==0.23.0
@@ -14,3 +14,4 @@ networkx
 scikit-image
 datashader
 pyarrow
+cufflinks==0.17.3

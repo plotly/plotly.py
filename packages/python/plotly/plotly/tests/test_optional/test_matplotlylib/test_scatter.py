@@ -1,6 +1,5 @@
 from __future__ import absolute_import
-
-from nose.plugins.attrib import attr
+import pytest
 
 from plotly import optional_imports
 from plotly.tests.utils import compare_dict, strip_dict_params
@@ -13,7 +12,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_simple_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D["x1"], D["y1"])
@@ -33,7 +32,7 @@ def test_simple_scatter():
     assert equivalent, msg
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_double_scatter():
     fig, ax = plt.subplots()
     ax.scatter(D["x1"], D["y1"], color="red", s=121, marker="^", alpha=0.5)

@@ -43,7 +43,7 @@ Install the Python library `networkx` with `pip install networkx`.
 
 
 
-### Create random graph
+### Create random graph
 
 ```python
 import plotly.graph_objects as go
@@ -134,7 +134,7 @@ fig = go.Figure(data=[edge_trace, node_trace],
                 hovermode='closest',
                 margin=dict(b=20,l=5,r=5,t=40),
                 annotations=[ dict(
-                    text="Python code: <a href='https://plot.ly/ipython-notebooks/network-graphs/'> https://plot.ly/ipython-notebooks/network-graphs/</a>",
+                    text="Python code: <a href='https://plotly.com/ipython-notebooks/network-graphs/'> https://plotly.com/ipython-notebooks/network-graphs/</a>",
                     showarrow=False,
                     xref="paper", yref="paper",
                     x=0.005, y=-0.002 ) ],
@@ -146,4 +146,4 @@ fig.show()
 
 
 #### Reference
-See https://plot.ly/python/reference/#scatter for more information and chart attribute options!
+See https://plotly.com/python/reference/#scatter for more information and chart attribute options!

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -70,6 +70,21 @@ fig.show()
 import plotly.express as px
 df = px.data.tips()
 fig = px.pie(df, values='tip', names='day', color_discrete_sequence=px.colors.sequential.RdBu)
+fig.show()
+```
+
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.pie(df, values='tip', names='day', color='day',
+             color_discrete_map={'Thur':'lightcyan',
+                                 'Fri':'cyan',
+                                 'Sat':'royalblue',
+                                 'Sun':'darkblue'})
 fig.show()
 ```
 
@@ -198,7 +213,7 @@ fig.add_trace(go.Pie(labels=labels, values=[16, 15, 12, 6, 5, 4, 42], name="GHG 
 fig.add_trace(go.Pie(labels=labels, values=[27, 11, 25, 8, 1, 3, 25], name="CO2 Emissions"),
               1, 2)
 
-# Use `hole` to create a donut-like pie chart
+# Use `hole` to create a donut-like pie chart
 fig.update_traces(hole=.4, hoverinfo="label+percent+name")
 
 fig.update_layout(
@@ -289,4 +304,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#pie for more information and chart attribute options!
+See https://plotly.com/python/reference/#pie for more information and chart attribute options!

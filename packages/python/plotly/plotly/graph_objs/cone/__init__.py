@@ -77,7 +77,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.cone.Stream
+            an instance of :class:`plotly.graph_objs.cone.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +107,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.cone.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.cone.Stream"""
+an instance of :class:`plotly.graph_objs.cone.Stream`"""
             )
 
         # Handle skip_invalid
@@ -235,7 +235,8 @@ class Lightposition(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.cone.Lightposition
+            an instance of
+            :class:`plotly.graph_objs.cone.Lightposition`
         x
             Numeric vector, representing the X coordinate for each
             vertex.
@@ -265,7 +266,7 @@ class Lightposition(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.cone.Lightposition 
 constructor must be a dict or 
-an instance of plotly.graph_objs.cone.Lightposition"""
+an instance of :class:`plotly.graph_objs.cone.Lightposition`"""
             )
 
         # Handle skip_invalid
@@ -509,7 +510,7 @@ class Lighting(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.cone.Lighting
+            an instance of :class:`plotly.graph_objs.cone.Lighting`
         ambient
             Ambient light increases overall color visibility but
             can wash out the image.
@@ -553,7 +554,7 @@ class Lighting(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.cone.Lighting 
 constructor must be a dict or 
-an instance of plotly.graph_objs.cone.Lighting"""
+an instance of :class:`plotly.graph_objs.cone.Lighting`"""
             )
 
         # Handle skip_invalid
@@ -827,7 +828,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.cone.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -982,7 +983,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.cone.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.cone.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -1031,7 +1033,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.cone.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.cone.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.cone.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -1711,7 +1713,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.colorbar.Tickfont
+          - An instance of :class:`plotly.graph_objs.cone.colorbar.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
     
@@ -1845,7 +1847,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.colorbar.Tickformatstop
+          - An instance of :class:`plotly.graph_objs.cone.colorbar.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
     
@@ -2083,7 +2085,7 @@ class ColorBar(_BaseTraceHierarchyType):
         """
         The 'title' property is an instance of Title
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.colorbar.Title
+          - An instance of :class:`plotly.graph_objs.cone.colorbar.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
     
@@ -2126,7 +2128,7 @@ class ColorBar(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.cone.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.cone.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2435,9 +2437,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.cone.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.cone.colorbar.T
+            ickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.cone.c
             olorbar.tickformatstopdefaults), sets the default
@@ -2477,8 +2479,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.cone.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.cone.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use cone.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2572,7 +2574,7 @@ class ColorBar(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.cone.ColorBar
+            an instance of :class:`plotly.graph_objs.cone.ColorBar`
         bgcolor
             Sets the color of padded area.
         bordercolor
@@ -2685,9 +2687,9 @@ class ColorBar(_BaseTraceHierarchyType):
             09:15:23.456* with tickformat "%H~%M~%S.%2f" would
             display "09~15~23.46"
         tickformatstops
-            A tuple of
-            plotly.graph_objects.cone.colorbar.Tickformatstop
-            instances or dicts with compatible properties
+            A tuple of :class:`plotly.graph_objects.cone.colorbar.T
+            ickformatstop` instances or dicts with compatible
+            properties
         tickformatstopdefaults
             When used in a template (as layout.template.data.cone.c
             olorbar.tickformatstopdefaults), sets the default
@@ -2727,8 +2729,8 @@ class ColorBar(_BaseTraceHierarchyType):
         tickwidth
             Sets the tick width (in px).
         title
-            plotly.graph_objects.cone.colorbar.Title instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.cone.colorbar.Title`
+            instance or dict with compatible properties
         titlefont
             Deprecated: Please use cone.colorbar.title.font
             instead. Sets this color bar's title font. Note that
@@ -2780,7 +2782,7 @@ class ColorBar(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.cone.ColorBar 
 constructor must be a dict or 
-an instance of plotly.graph_objs.cone.ColorBar"""
+an instance of :class:`plotly.graph_objs.cone.ColorBar`"""
             )
 
         # Handle skip_invalid

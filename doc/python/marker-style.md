@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.7
+      format_version: '1.2'
+      jupytext_version: 1.3.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.5
+    version: 3.7.0
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -305,6 +305,41 @@ fig.show()
 
 ```
 
+### Custom Marker Symbols
+
+The `marker_symbol` attribute allows you to choose from a wide array of symbols to represent markers in your figures.
+
+The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`. 
+
+Each basic symbol is also represented by a number. Adding 100 to that number is equivalent to appending the suffix "-open" to a symbol name. Adding 200 is equivalent to appending "-dot" to a symbol name. Adding 300 is equivalent to appending "-open-dot" or "dot-open" to a symbol name.
+
+In the following figure, hover over a symbol to see its name or number. Set the `marker_symbol` attribute equal to that name or number to change the marker symbol in your figure.
+
+```python
+import plotly.graph_objects as go
+from plotly.validators.scatter.marker import SymbolValidator
+
+raw_symbols = SymbolValidator().values
+namestems = []
+namevariants = []
+symbols = []
+for i in range(0,len(raw_symbols),2):
+    name = raw_symbols[i+1]
+    symbols.append(raw_symbols[i])
+    namestems.append(name.replace("-open", "").replace("-dot", ""))
+    namevariants.append(name[len(namestems[-1]):])
+    
+fig = go.Figure(go.Scatter(mode="markers", x=namevariants, y=namestems, marker_symbol=symbols,
+                           marker_line_color="midnightblue", marker_color="lightskyblue", 
+                           marker_line_width=2, marker_size=15, 
+                           hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
+fig.update_layout(title="Mouse over symbols for name & number!",
+                  xaxis_range=[-1,4], yaxis_range=[len(set(namestems)),-1], 
+                  margin=dict(b=0,r=0), xaxis_side="top", height=1200, width=400)
+fig.show()
+```
+
+
 ### Reference
 
-See https://plot.ly/python/reference/ for more information and chart attribute options!
+See https://plotly.com/python/reference/ for more information and chart attribute options!

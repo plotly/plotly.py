@@ -457,7 +457,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a path collection\n"
-        if props["offset_coordinates"] is "data":
+        if props["offset_coordinates"] == "data":
             markerstyle = mpltools.get_markerstyle_from_collection(props)
             scatter_props = {
                 "coordinates": "data",
@@ -569,7 +569,7 @@ class PlotlyRenderer(Renderer):
             self.draw_title(**props)
         else:  # just a regular text annotation...
             self.msg += "      Text object is a normal annotation\n"
-            if props["coordinates"] is not "data":
+            if props["coordinates"] != "data":
                 self.msg += (
                     "        Text object isn't linked to 'data' " "coordinates\n"
                 )

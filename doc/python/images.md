@@ -75,7 +75,7 @@ fig.show()
 ```
 
 #### Add a Logo
-See more examples of [adding logos to charts](https://plot.ly/python/logos/)!
+See more examples of [adding logos to charts](https://plotly.com/python/logos/)!
 
 ```python
 import plotly.graph_objects as go
@@ -301,9 +301,9 @@ fig.update_layout(
 )
 
 # Disable the autosize on double click because it adds unwanted margins around the image
-# More detail: https://plot.ly/python/configuration-options/
+# More detail: https://plotly.com/python/configuration-options/
 fig.show(config={'doubleClick': 'reset'})
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#layout-images for more information and chart attribute options!
+See https://plotly.com/python/reference/#layout-images for more information and chart attribute options!

@@ -342,4 +342,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plot.ly/python/reference/#layout-xaxis-rangeselector <br>and https://plot.ly/python/reference/#layout-xaxis-rangeslider <br>for more information and attribute options!
+See https://plotly.com/python/reference/#layout-xaxis-rangeselector <br>and https://plotly.com/python/reference/#layout-xaxis-rangeslider <br>for more information and attribute options!

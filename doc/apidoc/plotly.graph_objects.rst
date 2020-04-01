@@ -3,7 +3,7 @@
 `plotly.graph_objects`: low-level interface to figures, traces and layout
 =========================================
 
-.. currentmodule:: plotly.graph_objects
+.. currentmodule:: plotly.graph_objs
 
 :mod:`plotly.graph_objects` contains the building blocks of plotly :class:`Figure`: traces
 (:class:`Scatter`, :class:`Bar`, ...) and :class:`Layout`
@@ -29,7 +29,6 @@ Layout
    :template: trace.rst
 
    Layout
-
 
 
 Simple charts

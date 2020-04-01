@@ -94,7 +94,7 @@ class {fig_classname}({base_classname}):\n"""
     def __init__(self, data=None, layout=None,
                  frames=None, skip_invalid=False, **kwargs):
         \"\"\"
-        Create a new {fig_classname} instance
+        Create a new :class:{fig_classname} instance
         
         Parameters
         ----------
@@ -473,7 +473,7 @@ class {fig_classname}({base_classname}):\n"""
 
     def update_{method_prefix}{plural_name}(
         self,
-        patch,
+        patch=None,
         selector=None,
         row=None,
         col=None,

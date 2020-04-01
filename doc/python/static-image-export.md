@@ -35,20 +35,22 @@ jupyter:
     thumbnail: thumbnail/static-image-export.png
 ---
 
-<!-- #region -->
-### Static Image Export
-It's possible to programmatically export figures as high quality static images while fully offline.
+### Interactive vs Static Export
 
+Plotly figures are interactive when viewed in a web browser: you can hover over data points, pan and zoom axes, and show and hide traces by clicking or double-clicking on the legend. You can export figures either to static image file formats like PNG, JEPG, SVG or PDF or you can [export them to HTML files which can be opened in a browser and remain interactive](/python/interactive-html-export/). This page explains how to do the former.
+
+
+<!-- #region -->
 #### Install Dependencies
 Static image generation requires the [orca](https://github.com/plotly/orca) commandline utility and the [psutil](https://github.com/giampaolo/psutil) and [requests](https://2.python-requests.org/en/master/) Python libraries. There are 3 general approach to installing these dependencies.
 
 ##### conda
 Using the [conda](https://conda.io/docs/) package manager, you can install these dependencies in a single command:
 ```
-$ conda install -c plotly plotly-orca psutil requests
+$ conda install -c plotly plotly-orca==1.2.1 psutil requests
 ```
 
-**Note:** Even if you do not want to use conda to manage your Python dependencies, it is still useful as a cross platform tool for managing native libraries and command-line utilities (e.g. git, wget, graphviz, boost, gcc, nodejs, cairo, etc.).  For this use-case, start with [Miniconda](https://conda.io/miniconda.html) (~60MB) and tell the installer to add itself to your system `PATH`.  Then run `conda install plotly-orca` and the orca executable will be available system wide.
+**Note:** Even if you do not want to use conda to manage your Python dependencies, it is still useful as a cross platform tool for managing native libraries and command-line utilities (e.g. git, wget, graphviz, boost, gcc, nodejs, cairo, etc.).  For this use-case, start with [Miniconda](https://conda.io/miniconda.html) (~60MB) and tell the installer to add itself to your system `PATH`.  Then run `conda install plotly-orca==1.2.1` and the orca executable will be available system wide.
 
 ##### npm + pip
 You can use the [npm](https://www.npmjs.com/get-npm) package manager to install `orca` (and its `electron` dependency), and then use pip to install `psutil`:

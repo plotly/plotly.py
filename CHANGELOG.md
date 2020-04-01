@@ -2,12 +2,58 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.5.4] - 2020-03-11
+
+### Updated
+
+- The documentation of the API https://plot.ly/python-api-reference/ now
+  documents the full API [#2243](https://github.com/plotly/plotly.py/pull/2243)
+- New documentation examples for facets [#2235](https://github.com/plotly/plotly.py/pull/2235), legend [#2227](https://github.com/plotly/plotly.py/pull/2227), subplots [#2226](https://github.com/plotly/plotly.py/pull/2226), axes [#2234](https://github.com/plotly/plotly.py/pull/2234) and histograms [#2242](https://github.com/plotly/plotly.py/pull/2242). 
+  Thanks to [@SylwiaOliwia2](https://github.com/@SylwiaOliwia2) for all these great
+  examples!
+
+### Fixed
+
+- Jupyterlab extension now compatible with both Jupyterlab 1.2 and 2.0 [#2261](https://github.com/plotly/plotly.py/pull/2261) with thanks to [@consideRatio](https://github.com/consideRatio) for the contribution!
+- Fixed a bug when using boolean values for the color argument of px functions [#2127](https://github.com/plotly/plotly.py/pull/2127)
+- Corrected import bug which was occuring with old versions of ipywidgets [#2265](https://github.com/plotly/plotly.py/pull/2265)
+- Fixed python 3.8 syntax warning [#2262](https://github.com/plotly/plotly.py/pull/2262), with thanks to [@sgn](https://github.com/sgn) for the contribution!
+
+## [4.5.3] - 2020-03-05
+
+### Updated
+
+- Removed development dependency on `nose` testing framework [#2217](https://github.com/plotly/plotly.py/pull/2217)
+
+### Fixed
+
+ - JupyterLab extension now compatible with JupyterLab 2.0 [#2245](https://github.com/plotly/plotly.py/pull/2245) with thanks to [@consideRatio](https://github.com/consideRatio) for the contribution!
+
+## [4.5.2] - 2020-02-24
+
+### Fixed
+
+ - Fix build errors in JupyterLab extension by pinning version of `@types/plotly.js` [#2223](https://github.com/plotly/plotly.py/issues/2223)
+
+## [4.5.1] - 2020-02-19
+
+### Updated
+
+ - Updated Plotly.js to version 1.52.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/releases/tag/v1.52.2) for more information on bug fixes.
+
+### Fixed
+
+ - `update_annotations`, `update_shapes` and `update_layout_images` now no longer require the `patch` argument, as per the docstring [#2167](https://github.com/plotly/plotly.py/issues/2167)
+ - `px.defaults` no longer accepts arbitrary keys [#2168](https://github.com/plotly/plotly.py/issues/2168)
+ - better error message when `pandas` is not installed [#2125](https://github.com/plotly/plotly.py/issues/2125)
+ - support columns of numerical type in `path` argument of `px.sunburst`/`px.treemap` and add values of `color` column in hoverlabel for `px.sunburst`/`px.treemap` [#2133](https://github.com/plotly/plotly.py/pull/2133)
+
+
+
 ## [4.5.0] - 2020-01-22
 
 ### Updated
- - Updated Plotly.js to version 1.52.1. See the
- [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.52.0/CHANGELOG.md#1520----2020-01-08)
- for more information on numerous new attribute and bug fixes.
+ - Updated Plotly.js to version 1.52.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.52.0/CHANGELOG.md#1520----2020-01-08) for more information on numerous new attribute and bug fixes.
  - Plotly Express uses the new `legend.title` attribute and so now has shorter trace `name`s [#2051](https://github.com/plotly/plotly.py/pull/2051)
  - The heuristic used by `px.parallel_categories` to determine which columns of the data frame to draw has been changed and made more configurable with the `dimensions_max_cardinality` argument [#2102](https://github.com/plotly/plotly.py/pull/2102)
  - The `simple_white` colorbar styling has been streamlined [#2110](https://github.com/plotly/plotly.py/pull/2110)

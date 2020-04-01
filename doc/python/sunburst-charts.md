@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -109,6 +109,18 @@ fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='t
 fig.show()
 ```
 
+### Using an explicit mapping for discrete colors
+
+For more information about discrete colors, see the [dedicated page](/python/discrete-color).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.sunburst(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
+                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig.show()
+```
+
 ### Rectangular data with missing values
 
 If the dataset is not fully rectangular, missing values should be supplied as `None`. Note that the parents of `None` entries must be a leaf, i.e. it cannot have other children than `None` (otherwise a `ValueError` is raised).
@@ -143,7 +155,7 @@ fig =go.Figure(go.Sunburst(
     values=[10, 14, 12, 10, 2, 6, 6, 4, 4],
 ))
 # Update layout for tight margin
-# See https://plot.ly/python/creating-and-updating-figures/
+# See https://plotly.com/python/creating-and-updating-figures/
 fig.update_layout(margin = dict(t=0, l=0, r=0, b=0))
 
 fig.show()
@@ -202,7 +214,7 @@ fig.show()
 
 ### Large Number of Slices
 
-This example uses a [plotly grid attribute](https://plot.ly/python/reference/#layout-grid) for the suplots. Reference the row and column destination using the [domain](https://plot.ly/python/reference/#sunburst-domain) attribute.
+This example uses a [plotly grid attribute](https://plotly.com/python/reference/#layout-grid) for the suplots. Reference the row and column destination using the [domain](https://plotly.com/python/reference/#sunburst-domain) attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -314,7 +326,7 @@ def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     df_all_trees = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
     for i, level in enumerate(levels):
         df_tree = pd.DataFrame(columns=['id', 'parent', 'value', 'color'])
-        dfg = df.groupby(levels[i:]).sum(numerical_only=True)
+        dfg = df.groupby(levels[i:]).sum()
         dfg = dfg.reset_index()
         df_tree['id'] = dfg[level].copy()
         if i < len(levels) - 1:
@@ -368,4 +380,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#sunburst for more information and chart attribute options!
+See https://plotly.com/python/reference/#sunburst for more information and chart attribute options!

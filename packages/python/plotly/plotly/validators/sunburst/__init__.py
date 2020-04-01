@@ -435,8 +435,9 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color scales can be linked to the same color
                 axis.
             colorbar
-                plotly.graph_objects.sunburst.marker.ColorBar
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.sunburst.marker.Co
+                lorBar` instance or dict with compatible
+                properties
             colors
                 Sets the color of each sector of this trace. If
                 not specified, the default trace color set is
@@ -461,8 +462,8 @@ class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on plot.ly for
                 colors .
             line
-                plotly.graph_objects.sunburst.marker.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.sunburst.marker.Li
+                ne` instance or dict with compatible properties
             reversescale
                 Reverses the color mapping if true. Has an
                 effect only if colorsis set to a numerical

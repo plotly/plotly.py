@@ -147,7 +147,8 @@ class YBins(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.YBins
+            an instance of
+            :class:`plotly.graph_objs.histogram.YBins`
         end
             Sets the end value for the y axis bins. The last bin
             may not end exactly at this value, we increment the bin
@@ -205,7 +206,7 @@ class YBins(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.YBins 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.YBins"""
+an instance of :class:`plotly.graph_objs.histogram.YBins`"""
             )
 
         # Handle skip_invalid
@@ -389,7 +390,8 @@ class XBins(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.XBins
+            an instance of
+            :class:`plotly.graph_objs.histogram.XBins`
         end
             Sets the end value for the x axis bins. The last bin
             may not end exactly at this value, we increment the bin
@@ -447,7 +449,7 @@ class XBins(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.XBins 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.XBins"""
+an instance of :class:`plotly.graph_objs.histogram.XBins`"""
             )
 
         # Handle skip_invalid
@@ -495,7 +497,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.unselected.Marker
+          - An instance of :class:`plotly.graph_objs.histogram.unselected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -525,7 +527,7 @@ class Unselected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.unselected.Textfont
+          - An instance of :class:`plotly.graph_objs.histogram.unselected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -557,11 +559,11 @@ class Unselected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.histogram.unselected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.unselected.Marke
+            r` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.histogram.unselected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.unselected.Textf
+            ont` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -572,13 +574,14 @@ class Unselected(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Unselected
+            an instance of
+            :class:`plotly.graph_objs.histogram.Unselected`
         marker
-            plotly.graph_objects.histogram.unselected.Marker
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.unselected.Marke
+            r` instance or dict with compatible properties
         textfont
-            plotly.graph_objects.histogram.unselected.Textfont
-            instance or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.unselected.Textf
+            ont` instance or dict with compatible properties
 
         Returns
         -------
@@ -599,7 +602,7 @@ class Unselected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Unselected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Unselected"""
+an instance of :class:`plotly.graph_objs.histogram.Unselected`"""
             )
 
         # Handle skip_invalid
@@ -710,7 +713,8 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Stream
+            an instance of
+            :class:`plotly.graph_objs.histogram.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -740,7 +744,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Stream"""
+an instance of :class:`plotly.graph_objs.histogram.Stream`"""
             )
 
         # Handle skip_invalid
@@ -785,7 +789,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'marker' property is an instance of Marker
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.selected.Marker
+          - An instance of :class:`plotly.graph_objs.histogram.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
     
@@ -813,7 +817,7 @@ class Selected(_BaseTraceHierarchyType):
         """
         The 'textfont' property is an instance of Textfont
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.selected.Textfont
+          - An instance of :class:`plotly.graph_objs.histogram.selected.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
     
@@ -844,11 +848,11 @@ class Selected(_BaseTraceHierarchyType):
     def _prop_descriptions(self):
         return """\
         marker
-            plotly.graph_objects.histogram.selected.Marker instance
-            or dict with compatible properties
-        textfont
-            plotly.graph_objects.histogram.selected.Textfont
+            :class:`plotly.graph_objects.histogram.selected.Marker`
             instance or dict with compatible properties
+        textfont
+            :class:`plotly.graph_objects.histogram.selected.Textfon
+            t` instance or dict with compatible properties
         """
 
     def __init__(self, arg=None, marker=None, textfont=None, **kwargs):
@@ -859,13 +863,14 @@ class Selected(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Selected
+            an instance of
+            :class:`plotly.graph_objs.histogram.Selected`
         marker
-            plotly.graph_objects.histogram.selected.Marker instance
-            or dict with compatible properties
-        textfont
-            plotly.graph_objects.histogram.selected.Textfont
+            :class:`plotly.graph_objects.histogram.selected.Marker`
             instance or dict with compatible properties
+        textfont
+            :class:`plotly.graph_objects.histogram.selected.Textfon
+            t` instance or dict with compatible properties
 
         Returns
         -------
@@ -886,7 +891,7 @@ class Selected(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Selected 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Selected"""
+an instance of :class:`plotly.graph_objs.histogram.Selected`"""
             )
 
         # Handle skip_invalid
@@ -1144,7 +1149,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'colorbar' property is an instance of ColorBar
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.marker.ColorBar
+          - An instance of :class:`plotly.graph_objs.histogram.marker.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
     
@@ -1276,9 +1281,9 @@ class Marker(_BaseTraceHierarchyType):
                     tickformat "%H~%M~%S.%2f" would display
                     "09~15~23.46"
                 tickformatstops
-                    A tuple of plotly.graph_objects.histogram.marke
-                    r.colorbar.Tickformatstop instances or dicts
-                    with compatible properties
+                    A tuple of :class:`plotly.graph_objects.histogr
+                    am.marker.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
                 tickformatstopdefaults
                     When used in a template (as layout.template.dat
                     a.histogram.marker.colorbar.tickformatstopdefau
@@ -1325,8 +1330,8 @@ class Marker(_BaseTraceHierarchyType):
                 tickwidth
                     Sets the tick width (in px).
                 title
-                    plotly.graph_objects.histogram.marker.colorbar.
-                    Title instance or dict with compatible
+                    :class:`plotly.graph_objects.histogram.marker.c
+                    olorbar.Title` instance or dict with compatible
                     properties
                 titlefont
                     Deprecated: Please use
@@ -1453,7 +1458,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.marker.Line
+          - An instance of :class:`plotly.graph_objs.histogram.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1702,8 +1707,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.histogram.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1721,8 +1726,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.histogram.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.histogram.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1766,7 +1771,8 @@ class Marker(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Marker
+            an instance of
+            :class:`plotly.graph_objs.histogram.Marker`
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1814,8 +1820,8 @@ class Marker(_BaseTraceHierarchyType):
             `layout.coloraxis2`, etc. Note that multiple color
             scales can be linked to the same color axis.
         colorbar
-            plotly.graph_objects.histogram.marker.ColorBar instance
-            or dict with compatible properties
+            :class:`plotly.graph_objects.histogram.marker.ColorBar`
+            instance or dict with compatible properties
         colorscale
             Sets the colorscale. Has an effect only if in
             `marker.color`is set to a numerical array. The
@@ -1833,8 +1839,8 @@ class Marker(_BaseTraceHierarchyType):
         colorsrc
             Sets the source reference on plot.ly for  color .
         line
-            plotly.graph_objects.histogram.marker.Line instance or
-            dict with compatible properties
+            :class:`plotly.graph_objects.histogram.marker.Line`
+            instance or dict with compatible properties
         opacity
             Sets the opacity of the bars.
         opacitysrc
@@ -1869,7 +1875,7 @@ class Marker(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Marker 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Marker"""
+an instance of :class:`plotly.graph_objs.histogram.Marker`"""
             )
 
         # Handle skip_invalid
@@ -2159,7 +2165,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.histogram.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.histogram.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -2314,7 +2320,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.histogram.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -2363,7 +2370,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.histogram.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -2847,7 +2854,8 @@ class ErrorY(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.ErrorY
+            an instance of
+            :class:`plotly.graph_objs.histogram.ErrorY`
         array
             Sets the data corresponding the length of each error
             bar. Values are plotted relative to the underlying
@@ -2919,7 +2927,7 @@ class ErrorY(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.ErrorY 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.ErrorY"""
+an instance of :class:`plotly.graph_objs.histogram.ErrorY`"""
             )
 
         # Handle skip_invalid
@@ -3439,7 +3447,8 @@ class ErrorX(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.ErrorX
+            an instance of
+            :class:`plotly.graph_objs.histogram.ErrorX`
         array
             Sets the data corresponding the length of each error
             bar. Values are plotted relative to the underlying
@@ -3513,7 +3522,7 @@ class ErrorX(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.ErrorX 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.ErrorX"""
+an instance of :class:`plotly.graph_objs.histogram.ErrorX`"""
             )
 
         # Handle skip_invalid
@@ -3711,7 +3720,8 @@ class Cumulative(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.histogram.Cumulative
+            an instance of
+            :class:`plotly.graph_objs.histogram.Cumulative`
         currentbin
             Only applies if cumulative is enabled. Sets whether the
             current bin is included, excluded, or has half of its
@@ -3754,7 +3764,7 @@ class Cumulative(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.histogram.Cumulative 
 constructor must be a dict or 
-an instance of plotly.graph_objs.histogram.Cumulative"""
+an instance of :class:`plotly.graph_objs.histogram.Cumulative`"""
             )
 
         # Handle skip_invalid

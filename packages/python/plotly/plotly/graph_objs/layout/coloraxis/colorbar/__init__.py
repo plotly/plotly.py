@@ -14,7 +14,7 @@ class Title(_BaseLayoutHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.layout.coloraxis.colorbar.title.Font
+          - An instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -131,8 +131,8 @@ class Title(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.coloraxis.colorbar.Title
+            an instance of :class:`plotly.graph_objs.layout.colorax
+            is.colorbar.Title`
         font
             Sets this color bar's title font. Note that the title's
             font used to be set by the now deprecated `titlefont`
@@ -167,7 +167,7 @@ class Title(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.coloraxis.colorbar.Title 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.coloraxis.colorbar.Title"""
+an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Title`"""
             )
 
         # Handle skip_invalid
@@ -391,8 +391,8 @@ class Tickformatstop(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.coloraxis.color
-            bar.Tickformatstop
+            an instance of :class:`plotly.graph_objs.layout.colorax
+            is.colorbar.Tickformatstop`
         dtickrange
             range [*min*, *max*], where "min", "max" - dtick values
             which describe some zoom level, it is possible to omit
@@ -443,7 +443,7 @@ class Tickformatstop(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.coloraxis.colorbar.Tickformatstop 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.coloraxis.colorbar.Tickformatstop"""
+an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Tickformatstop`"""
             )
 
         # Handle skip_invalid
@@ -643,8 +643,8 @@ class Tickfont(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of
-            plotly.graph_objs.layout.coloraxis.colorbar.Tickfont
+            an instance of :class:`plotly.graph_objs.layout.colorax
+            is.colorbar.Tickfont`
         color
 
         family
@@ -683,7 +683,7 @@ class Tickfont(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.coloraxis.colorbar.Tickfont 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.coloraxis.colorbar.Tickfont"""
+an instance of :class:`plotly.graph_objs.layout.coloraxis.colorbar.Tickfont`"""
             )
 
         # Handle skip_invalid

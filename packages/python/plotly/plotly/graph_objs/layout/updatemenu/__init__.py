@@ -122,7 +122,8 @@ class Pad(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.updatemenu.Pad
+            an instance of
+            :class:`plotly.graph_objs.layout.updatemenu.Pad`
         b
             The amount of padding (in px) along the bottom of the
             component.
@@ -155,7 +156,7 @@ class Pad(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.updatemenu.Pad 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.updatemenu.Pad"""
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Pad`"""
             )
 
         # Handle skip_invalid
@@ -346,7 +347,8 @@ class Font(_BaseLayoutHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.layout.updatemenu.Font
+            an instance of
+            :class:`plotly.graph_objs.layout.updatemenu.Font`
         color
 
         family
@@ -385,7 +387,7 @@ class Font(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.updatemenu.Font 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.updatemenu.Font"""
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Font`"""
             )
 
         # Handle skip_invalid
@@ -705,7 +707,7 @@ class Button(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of
-            plotly.graph_objs.layout.updatemenu.Button
+            :class:`plotly.graph_objs.layout.updatemenu.Button`
         args
             Sets the arguments values to be passed to the Plotly
             method set in `method` on click.
@@ -773,7 +775,7 @@ class Button(_BaseLayoutHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.layout.updatemenu.Button 
 constructor must be a dict or 
-an instance of plotly.graph_objs.layout.updatemenu.Button"""
+an instance of :class:`plotly.graph_objs.layout.updatemenu.Button`"""
             )
 
         # Handle skip_invalid

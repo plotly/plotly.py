@@ -211,7 +211,7 @@ class NotEncodable(Exception):
 def iso_to_plotly_time_string(iso_string):
     """Remove timezone info and replace 'T' delimeter with ' ' (ws)."""
     # make sure we don't send timezone info to plotly
-    if (iso_string.split("-")[:3] is "00:00") or (iso_string.split("+")[0] is "00:00"):
+    if (iso_string.split("-")[:3] == "00:00") or (iso_string.split("+")[0] == "00:00"):
         raise Exception(
             "Plotly won't accept timestrings with timezone info.\n"
             "All timestrings are assumed to be in UTC."

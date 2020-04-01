@@ -260,7 +260,7 @@ fig.update_layout(
     geo = dict(
         scope='usa',
         projection=go.layout.geo.Projection(type = 'albers usa'),
-        showlakes=True, # lakes
+        showlakes=True, # lakes
         lakecolor='rgb(255, 255, 255)'),
 )
 
@@ -348,4 +348,4 @@ fig.show()
 
 #### Reference
 
-See https://plot.ly/python/reference/#choropleth for more information and chart attribute options!
+See https://plotly.com/python/reference/#choropleth for more information and chart attribute options!

@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from nose.plugins.attrib import attr
+import pytest
 
 from plotly import optional_imports
 from plotly.tests.utils import compare_dict, strip_dict_params
@@ -14,7 +14,7 @@ if matplotlylib:
     import matplotlib.pyplot as plt
 
 
-@attr("matplotlib")
+@pytest.mark.matplotlib
 def test_blank_subplots():
     fig = plt.figure()
     gs = GridSpec(4, 6)

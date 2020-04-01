@@ -1,4 +1,4 @@
-plotly==4.5.0
+plotly==4.5.4
 jupytext==1.1.1
 jupyter
 notebook
@@ -24,3 +24,4 @@ pathlib
 python-frontmatter
 datashader
 pyarrow
+cufflinks==0.17.3

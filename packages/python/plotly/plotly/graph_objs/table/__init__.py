@@ -77,7 +77,7 @@ class Stream(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Stream
+            an instance of :class:`plotly.graph_objs.table.Stream`
         maxpoints
             Sets the maximum number of points to keep on the plots
             from an incoming stream. If `maxpoints` is set to 50,
@@ -107,7 +107,7 @@ class Stream(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Stream 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Stream"""
+an instance of :class:`plotly.graph_objs.table.Stream`"""
             )
 
         # Handle skip_invalid
@@ -358,7 +358,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.hoverlabel.Font
+          - An instance of :class:`plotly.graph_objs.table.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -513,7 +513,8 @@ class Hoverlabel(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Hoverlabel
+            an instance of
+            :class:`plotly.graph_objs.table.Hoverlabel`
         align
             Sets the horizontal alignment of the text content
             within hover label box. Has an effect only if the hover
@@ -562,7 +563,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Hoverlabel 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Hoverlabel"""
+an instance of :class:`plotly.graph_objs.table.Hoverlabel`"""
             )
 
         # Handle skip_invalid
@@ -627,9 +628,9 @@ class Header(_BaseTraceHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -673,7 +674,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Fill
+          - An instance of :class:`plotly.graph_objs.table.header.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -704,7 +705,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Font
+          - An instance of :class:`plotly.graph_objs.table.header.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -820,7 +821,7 @@ class Header(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.table.header.Line
+          - An instance of :class:`plotly.graph_objs.table.header.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -987,18 +988,18 @@ class Header(_BaseTraceHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.header.Fill instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.header.Font instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1009,8 +1010,8 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.header.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1055,21 +1056,21 @@ class Header(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Header
+            an instance of :class:`plotly.graph_objs.table.Header`
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.header.Fill instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Fill`
+            instance or dict with compatible properties
         font
-            plotly.graph_objects.table.header.Font instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Font`
+            instance or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1080,8 +1081,8 @@ class Header(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.header.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.header.Line`
+            instance or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1118,7 +1119,7 @@ class Header(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Header 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Header"""
+an instance of :class:`plotly.graph_objs.table.Header`"""
             )
 
         # Handle skip_invalid
@@ -1321,7 +1322,7 @@ class Domain(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Domain
+            an instance of :class:`plotly.graph_objs.table.Domain`
         column
             If there is a layout grid, use the domain for this
             column in the grid for this table trace .
@@ -1354,7 +1355,7 @@ class Domain(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Domain 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Domain"""
+an instance of :class:`plotly.graph_objs.table.Domain`"""
             )
 
         # Handle skip_invalid
@@ -1404,9 +1405,9 @@ class Cells(_BaseTraceHierarchyType):
     def align(self):
         """
         Sets the horizontal alignment of the `text` within the box. Has
-        an effect only if `text` spans more two or more lines (i.e.
-        `text` contains one or more <br> HTML tags) or if an explicit
-        width is set to override the text width.
+        an effect only if `text` spans two or more lines (i.e. `text`
+        contains one or more <br> HTML tags) or if an explicit width is
+        set to override the text width.
     
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -1450,7 +1451,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'fill' property is an instance of Fill
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Fill
+          - An instance of :class:`plotly.graph_objs.table.cells.Fill`
           - A dict of string/value properties that will be passed
             to the Fill constructor
     
@@ -1481,7 +1482,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'font' property is an instance of Font
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Font
+          - An instance of :class:`plotly.graph_objs.table.cells.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
     
@@ -1597,7 +1598,7 @@ class Cells(_BaseTraceHierarchyType):
         """
         The 'line' property is an instance of Line
         that may be specified as:
-          - An instance of plotly.graph_objs.table.cells.Line
+          - An instance of :class:`plotly.graph_objs.table.cells.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
     
@@ -1764,18 +1765,18 @@ class Cells(_BaseTraceHierarchyType):
         return """\
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.cells.Fill instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Fill` instance
+            or dict with compatible properties
         font
-            plotly.graph_objects.table.cells.Font instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Font` instance
+            or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1786,8 +1787,8 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.cells.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Line` instance
+            or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1832,21 +1833,21 @@ class Cells(_BaseTraceHierarchyType):
         ----------
         arg
             dict of properties compatible with this constructor or
-            an instance of plotly.graph_objs.table.Cells
+            an instance of :class:`plotly.graph_objs.table.Cells`
         align
             Sets the horizontal alignment of the `text` within the
-            box. Has an effect only if `text` spans more two or
-            more lines (i.e. `text` contains one or more <br> HTML
-            tags) or if an explicit width is set to override the
-            text width.
+            box. Has an effect only if `text` spans two or more
+            lines (i.e. `text` contains one or more <br> HTML tags)
+            or if an explicit width is set to override the text
+            width.
         alignsrc
             Sets the source reference on plot.ly for  align .
         fill
-            plotly.graph_objects.table.cells.Fill instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Fill` instance
+            or dict with compatible properties
         font
-            plotly.graph_objects.table.cells.Font instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Font` instance
+            or dict with compatible properties
         format
             Sets the cell value formatting rule using d3 formatting
             mini-language which is similar to those of Python. See
@@ -1857,8 +1858,8 @@ class Cells(_BaseTraceHierarchyType):
         height
             The height of cells.
         line
-            plotly.graph_objects.table.cells.Line instance or dict
-            with compatible properties
+            :class:`plotly.graph_objects.table.cells.Line` instance
+            or dict with compatible properties
         prefix
             Prefix for cell values.
         prefixsrc
@@ -1895,7 +1896,7 @@ class Cells(_BaseTraceHierarchyType):
                 """\
 The first argument to the plotly.graph_objs.table.Cells 
 constructor must be a dict or 
-an instance of plotly.graph_objs.table.Cells"""
+an instance of :class:`plotly.graph_objs.table.Cells`"""
             )
 
         # Handle skip_invalid

@@ -198,8 +198,9 @@ class TotalsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.waterfall.totals.Marker
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.waterfall.totals.M
+                arker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -716,8 +717,9 @@ class IncreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.waterfall.increasing.Marke
-                r instance or dict with compatible properties
+                :class:`plotly.graph_objects.waterfall.increasi
+                ng.Marker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -939,8 +941,9 @@ class DecreasingValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             marker
-                plotly.graph_objects.waterfall.decreasing.Marke
-                r instance or dict with compatible properties
+                :class:`plotly.graph_objects.waterfall.decreasi
+                ng.Marker` instance or dict with compatible
+                properties
 """,
             ),
             **kwargs
@@ -1003,8 +1006,9 @@ class ConnectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             line
-                plotly.graph_objects.waterfall.connector.Line
-                instance or dict with compatible properties
+                :class:`plotly.graph_objects.waterfall.connecto
+                r.Line` instance or dict with compatible
+                properties
             mode
                 Sets the shape of connector lines.
             visible
