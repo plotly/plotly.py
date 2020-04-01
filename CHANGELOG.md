@@ -5,30 +5,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.6] - 2020-03-31
 
 ### Updated
+
  - Updated Plotly.js to version 1.53.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.53.0/CHANGELOG.md) for more information on the numerous new features and bug fixes of this release. The main features of the Plotly.js release are
-    - Introduce a new unified x (or y) hovermode, in which the hover box shows
-      the information for all traces at a given x (or y) position
-    - Introduce rangebreaks on date axes (for example, to remove week-ends)
-    - Add node.customdata and link.customdata to sankey traces 
+    - Introduce range breaks on date axes (for example, to remove week-ends) via `layout.xaxis.rangebreaks`
+    - Introduce a new unified x (or y) hovermode (`layout.hovermode="x unified"`), in which the hover box shows the information for all traces at a given x (or y) position
+    - Add `node.customdata` and `link.customdata` to sankey traces
 - Updated [contributing notes](https://github.com/plotly/plotly.py/blob/master/contributing.md) for more explanations on how to contribute to plotly.py [#2290](https://github.com/plotly/plotly.py/pull/2290). Please give feedback on these notes!
-- Updated documentation examples to explain how to use cufflinks with plotly
-  [#2325](https://github.com/plotly/plotly.py/pull/2325), and to show how to color links in Sankey diagrams
-  [#2291](https://github.com/plotly/plotly.py/pull/2291). Also corrected typos
-and formatting in doc examples. Special thanks to
-[@SylwiaOliwia2](https://github.com/@SylwiaOliwia2) and [@dangercrow](https://github.com/@dangercrow) for improving our documentation!
+- Updated documentation examples [#2325](https://github.com/plotly/plotly.py/pull/2325), and to show how to color links in Sankey diagrams [#2291](https://github.com/plotly/plotly.py/pull/2291).
+- Special thanks to [@SylwiaOliwia2](https://github.com/SylwiaOliwia2) and [@dangercrow](https://github.com/dangercrow) for improving our documentation!
 
 
 ### Added
 
-- `px.imshow` now accepts [`xarray`](http://xarray.pydata.org/), with metadata
-  being used for axis labels, hover and colorbar [#2166](https://github.com/plotly/plotly.py/pull/2166)
+- `px.imshow` now accepts [`xarray`](http://xarray.pydata.org/) inputs, with metadata being used for axis labels, hover and colorbar [#2166](https://github.com/plotly/plotly.py/pull/2166)
 
 
 ### Fixed
 
-- Remove unsupported opacity kwarg from `pie` and `funnel_area` px functions [#2294](https://github.com/plotly/plotly.py/pull/2294)
-- Fixed handling of `opacity` in `px.density_mapbox` [#2317](https://github.com/plotly/plotly.py/pull/2317),
-with thanks to [@tvaucher](https://github.com/tvaucher) for the contribution!
+- Fixed handling of `opacity` in `px.pie`, `px.funnel_area`, `px.density_mapbox`, `px.funnel` [#2317](https://github.com/plotly/plotly.py/pull/2317), with thanks to [@tvaucher](https://github.com/tvaucher) for the contribution!
 
 ## [4.5.4] - 2020-03-11
 
@@ -36,7 +30,7 @@ with thanks to [@tvaucher](https://github.com/tvaucher) for the contribution!
 
 - The documentation of the API https://plot.ly/python-api-reference/ now
   documents the full API [#2243](https://github.com/plotly/plotly.py/pull/2243)
-- New documentation examples for facets [#2235](https://github.com/plotly/plotly.py/pull/2235), legend [#2227](https://github.com/plotly/plotly.py/pull/2227), subplots [#2226](https://github.com/plotly/plotly.py/pull/2226), axes [#2234](https://github.com/plotly/plotly.py/pull/2234) and histograms [#2242](https://github.com/plotly/plotly.py/pull/2242). 
+- New documentation examples for facets [#2235](https://github.com/plotly/plotly.py/pull/2235), legend [#2227](https://github.com/plotly/plotly.py/pull/2227), subplots [#2226](https://github.com/plotly/plotly.py/pull/2226), axes [#2234](https://github.com/plotly/plotly.py/pull/2234) and histograms [#2242](https://github.com/plotly/plotly.py/pull/2242).
   Thanks to [@SylwiaOliwia2](https://github.com/@SylwiaOliwia2) for all these great
   examples!
 
