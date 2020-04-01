@@ -34,7 +34,7 @@
 
 ## Quickstart
 
-`pip install plotly==4.5.4`
+`pip install plotly==4.6.0`
 
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 
@@ -83,13 +83,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip...
 
 ```
-pip install plotly==4.5.4
+pip install plotly==4.6.0
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=4.5.4
+conda install -c plotly plotly=4.6.0
 ```
 
 ### Jupyter Notebook Support
@@ -136,10 +136,10 @@ set NODE_OPTIONS=--max-old-space-size=4096
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build
 
 # FigureWidget support
-jupyter labextension install plotlywidget@1.5.4 --no-build
+jupyter labextension install plotlywidget@4.6.0 --no-build
 
 # and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@1.5.4 --no-build
+jupyter labextension install jupyterlab-plotly@4.6.0 --no-build
 
 # Build extensions (must be done to activate extensions since --no-build is used above)
 jupyter lab build
