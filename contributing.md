@@ -1,15 +1,15 @@
 # Contributing
 
 Thank you for contributing to plotly.py! We are actively looking for
-diverse contributors, with diverse background and skills. 
+diverse contributors, with diverse background and skills.
 
 This guide start by a general description of the different ways to contribute
 to plotly.py, then we explain some technical aspects of preparing your
-contribution. 
+contribution.
 
 ## Code of Conduct
 
-Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it, 
+Please check out the [Code of Conduct](CODE_OF_CONDUCT.md). Don't tl:dr; it,
 but the general idea is to be nice.
 
 ## What are the different ways to contribute?
@@ -37,7 +37,7 @@ the structure of the code and of the repository.
 - the `plotly.figure_factory` module provides Python "recipes" for building
   advanced visualizations, such as Gantt charts, annotated heatmaps, etc.
   Figure factories are one of the easiest entry points into plotly.py, since
-  they consist of Python-only code, with standalone, well-separated functions. 
+  they consist of Python-only code, with standalone, well-separated functions.
   However, please note that some of the figure factories become less relevant
   as we are introducing more features into `plotly.express`. Some issues in the
   tracker are labeled "figure_factory" and can be good issues to work on. More
@@ -70,14 +70,14 @@ also contribute to the project by
 - reporting bugs (see below).
 
 - submitting feature requests (maybe we'll convince you to contribute it as a
-  pull request!). 
+  pull request!).
 
 - helping other users on the [community forum](https://community.plot.ly/).
   Join the list of [nice people](https://community.plot.ly/u) helping other
   plotly users :-).
 
 We also recommend reading the great
-[how to contribute to open source](https://opensource.guide/how-to-contribute/) 
+[how to contribute to open source](https://opensource.guide/how-to-contribute/)
 guide.
 
 ## Have a Bug Report?
@@ -98,7 +98,7 @@ Below we explain the technical aspects of contributing. It is not strictly neces
 
 Note that if you are modifying a single documentation page, you can do it
 directly on Github by clicking on the "Edit this page on GitHub" link, without
-cloning the repository. 
+cloning the repository.
 
 ## Setup a Development Environment
 
@@ -206,6 +206,7 @@ First update the version of the `plotly.js` dependency in `packages/javascript/p
 Then run the `updateplotlyjs` command with:
 
 ```bash
+$ cd packages/python/plotly
 $ python setup.py updateplotlyjs
 ```
 
@@ -213,6 +214,13 @@ This will download new versions of `plot-schema.json` and `plotly.min.js` from
 the `plotly/plotly.js` GitHub repository (and place them in
 `plotly/package_data`). It will then regenerate all of the `graph_objs`
 classes based on the new schema.
+
+For dev branches, it is also possible to use `updateplotlyjsdev --devrepo reponame --devbranch branchname` to update to development versions of `plotly.js`. This will fetch the `plotly.js` in the CircleCI artifact of the branch `branchname` of the repo `reponame`. If `--devrepo` or `--devbranch` are omitted, `updateplotlyjsdev` defaults using `plotly/plotly.js` and `master` respectively. For example, to update to a version from a pull request to the `plotly/plotly.js` repo that is numbered 555, run:
+
+```bash
+$ cd packages/python/plotly
+$ python setup.py updateplotlyjsdev --devbranch pull/555
+```
 
 ## Testing
 
