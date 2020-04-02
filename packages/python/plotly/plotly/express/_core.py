@@ -887,6 +887,8 @@ def build_dataframe(args, attrables, array_attrables, constructor):
     array_attrables : list
         argument names corresponding to iterables, such as `hover_data`, ...
     """
+
+    # make copies of all the fields via dict() and list()
     for field in args:
         if field in array_attrables and args[field] is not None:
             args[field] = (
@@ -894,46 +896,26 @@ def build_dataframe(args, attrables, array_attrables, constructor):
                 if isinstance(args[field], dict)
                 else list(args[field])
             )
+
     # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
 
-    wide_traces = [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
-    has_x = args.get("x", None) is not None
-    has_y = args.get("y", None) is not None
-    if not has_x and not has_y and df_provided and constructor in wide_traces:
-        index_name = args["data_frame"].index.name or "index"
-        id_vars = [index_name]
-        # TODO multi-level index
-        # TODO multi-level columns
-        # TODO orientation
-
-        # TODO do we need to add everything to this candidate list basically? array_attrables?
-        # TODO will we need to be able to glue in non-string values here, like arrays and stuff?
-        # ...like maybe this needs to run after we've glued together the data frame?
-        for candidate in ["color", "symbol", "line_dash", "facet_row", "facet_col"] + [
-            "line_group",
-            "animation_group",
-        ]:
-            if args.get(candidate, None) not in [None, index_name, "value", "variable"]:
-                id_vars.append(args[candidate])
-        args["data_frame"] = args["data_frame"].reset_index().melt(id_vars=id_vars)
-        if constructor in [go.Scatter, go.Bar]:
-            args["x"] = index_name
-            args["y"] = "value"
-            args["color"] = args["color"] or "variable"
-        if constructor in [go.Violin, go.Box]:
-            args["x"] = "variable"
-            args["y"] = "value"
-        if constructor in [go.Histogram]:
-            args["x"] = "value"
-            args["color"] = args["color"] or "variable"
-
     df_input = args["data_frame"]
 
-    # We start from an empty DataFrame
-    df_output = pd.DataFrame()
+    wide_mode = (
+        df_provided
+        and args.get("x", None) is None
+        and args.get("y", None) is None
+        and constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
+    )
+    wide_id_vars = set()
+
+    if wide_mode:
+        df_output = df_input
+    else:
+        df_output = pd.DataFrame()
 
     # Initialize set of column names
     # These are reserved names
@@ -1063,6 +1045,29 @@ def build_dataframe(args, attrables, array_attrables, constructor):
                 args[field_name] = str(col_name)
             else:
                 args[field_name][i] = str(col_name)
+            wide_id_vars.add(str(col_name))
+
+    if wide_mode:
+        # TODO multi-level index
+        # TODO multi-level columns
+        index_name = df_output.index.name or "index"
+        wide_id_vars.add(index_name)
+        if index_name not in df_output.columns:
+            df_output = df_output.reset_index()
+        df_output = df_output.melt(id_vars=wide_id_vars)
+        orient_v = "v" == (args.get("orientation", None) or "v")
+        if "orientation" in args:
+            args["orientation"] = "v" if orient_v else "h"
+        if constructor in [go.Scatter, go.Bar]:
+            args["x" if orient_v else "y"] = index_name
+            args["y" if orient_v else "x"] = "value"
+            args["color"] = args["color"] or "variable"
+        if constructor in [go.Violin, go.Box]:
+            args["x" if orient_v else "y"] = "variable"
+            args["y" if orient_v else "x"] = "value"
+        if constructor in [go.Histogram]:
+            args["x" if orient_v else "y"] = "value"
+            args["color"] = args["color"] or "variable"
 
     args["data_frame"] = df_output
     return args
