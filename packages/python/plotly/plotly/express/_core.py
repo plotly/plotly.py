@@ -899,20 +899,36 @@ def build_dataframe(args, attrables, array_attrables, constructor):
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
 
-    if not args.get("x", None) and not args.get("y", None) and df_provided:
+    wide_traces = [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
+    has_x = args.get("x", None) is not None
+    has_y = args.get("y", None) is not None
+    if not has_x and not has_y and df_provided and constructor in wide_traces:
+        index_name = args["data_frame"].index.name or "index"
+        id_vars = [index_name]
+        # TODO multi-level index
+        # TODO multi-level columns
+        # TODO orientation
+
+        # TODO do we need to add everything to this candidate list basically? array_attrables?
+        # TODO will we need to be able to glue in non-string values here, like arrays and stuff?
+        # ...like maybe this needs to run after we've glued together the data frame?
+        for candidate in ["color", "symbol", "line_dash", "facet_row", "facet_col"] + [
+            "line_group",
+            "animation_group",
+        ]:
+            if args.get(candidate, None) not in [None, index_name, "value", "variable"]:
+                id_vars.append(args[candidate])
+        args["data_frame"] = args["data_frame"].reset_index().melt(id_vars=id_vars)
         if constructor in [go.Scatter, go.Bar]:
-            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
-            args["x"] = "index"
+            args["x"] = index_name
             args["y"] = "value"
-            args["color"] = "variable"
+            args["color"] = args["color"] or "variable"
         if constructor in [go.Violin, go.Box]:
-            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
             args["x"] = "variable"
             args["y"] = "value"
         if constructor in [go.Histogram]:
-            args["data_frame"] = args["data_frame"].reset_index().melt(id_vars="index")
             args["x"] = "value"
-            args["color"] = "variable"
+            args["color"] = args["color"] or "variable"
 
     df_input = args["data_frame"]
 

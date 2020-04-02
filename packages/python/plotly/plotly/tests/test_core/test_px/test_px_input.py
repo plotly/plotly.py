@@ -225,7 +225,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     args["data_frame"] = None
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -235,7 +235,7 @@ def test_build_df_from_lists():
     output = {key: key for key in args}
     df = pd.DataFrame(args)
     args["data_frame"] = None
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(df.sort_index(axis=1), out["data_frame"].sort_index(axis=1))
     out.pop("data_frame")
     assert out == output
@@ -244,7 +244,7 @@ def test_build_df_from_lists():
 def test_build_df_with_index():
     tips = px.data.tips()
     args = dict(data_frame=tips, x=tips.index, y="total_bill")
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
@@ -254,15 +254,15 @@ def test_non_matching_index():
     expected = pd.DataFrame(dict(x=["a", "b", "c"], y=[1, 2, 3]))
 
     args = dict(data_frame=df, x=df.index, y="y")
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(expected, out["data_frame"])
 
     args = dict(data_frame=None, x=df.index, y=df.y)
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(expected, out["data_frame"])
 
     args = dict(data_frame=None, x=["a", "b", "c"], y=df.y)
-    out = build_dataframe(args, all_attrables, array_attrables)
+    out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(expected, out["data_frame"])
 
 
