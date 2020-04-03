@@ -381,3 +381,23 @@ def test_constants():
     assert "symbol=" in fig.data[0].hovertemplate
     assert "the_data=" in fig.data[0].hovertemplate
     assert fig.layout.legend.title.text == "symbol"
+
+
+def test_auto_orient():
+    categorical = ["a", "a", "b", "b"]
+    numerical = [1, 2, 3, 4]
+
+    pattern = [
+        (numerical, numerical, "v"),  # default
+        (numerical, categorical, "h"),  # auto
+        (numerical, None, "h"),  # auto
+        (categorical, numerical, "v"),  # auto/default
+        (categorical, categorical, "v"),  # default
+        (categorical, None, "h"),  # auto
+        (None, categorical, "v"),  # auto/default
+        (None, numerical, "v"),  # auto/default
+    ]
+
+    for fn in [px.violin, px.box, px.strip]:
+        for x, y, result in pattern:
+            assert fn(x=x, y=y).data[0].orientation == result
