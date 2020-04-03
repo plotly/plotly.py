@@ -387,17 +387,75 @@ def test_auto_orient():
     categorical = ["a", "a", "b", "b"]
     numerical = [1, 2, 3, 4]
 
-    pattern = [
-        (numerical, numerical, "v"),  # default
-        (numerical, categorical, "h"),  # auto
+    pattern_x_or_y = [
         (numerical, None, "h"),  # auto
-        (categorical, numerical, "v"),  # auto/default
-        (categorical, categorical, "v"),  # default
         (categorical, None, "h"),  # auto
         (None, categorical, "v"),  # auto/default
         (None, numerical, "v"),  # auto/default
     ]
 
-    for fn in [px.violin, px.box, px.strip]:
-        for x, y, result in pattern:
+    pattern_x_and_y = [
+        (numerical, categorical, "h"),  # auto
+        (categorical, numerical, "v"),  # auto/default
+        (categorical, categorical, "v"),  # default
+        (numerical, numerical, "v"),  # default
+    ]
+
+    for fn in [px.violin, px.box, px.strip, px.bar, px.funnel]:
+        for x, y, result in pattern_x_or_y:
             assert fn(x=x, y=y).data[0].orientation == result
+
+    # these ones are the opposite of the ones above in the "or" cases
+    for fn in [px.area, px.histogram]:
+        for x, y, result in pattern_x_or_y:
+            assert fn(x=x, y=y).data[0].orientation != result
+
+    # all behave the same for the "and" cases
+    for fn in [px.violin, px.box, px.strip, px.bar, px.funnel, px.area, px.histogram]:
+        for x, y, result in pattern_x_and_y:
+            assert fn(x=x, y=y).data[0].orientation == result
+
+    assert px.histogram(x=numerical, nbins=5).data[0].nbinsx == 5
+    assert px.histogram(y=numerical, nbins=5).data[0].nbinsy == 5
+    assert px.histogram(x=numerical, y=numerical, nbins=5).data[0].nbinsx == 5
+
+
+def test_auto_histfunc():
+    a = [1, 2]
+    assert px.histogram(x=a).data[0].histfunc is None
+    assert px.histogram(y=a).data[0].histfunc is None
+    assert px.histogram(x=a, y=a).data[0].histfunc == "sum"
+    assert px.histogram(x=a, y=a, histfunc="avg").data[0].histfunc == "avg"
+
+    assert px.density_heatmap(x=a, y=a).data[0].histfunc is None
+    assert px.density_heatmap(x=a, y=a, z=a).data[0].histfunc == "sum"
+    assert px.density_heatmap(x=a, y=a, z=a, histfunc="avg").data[0].histfunc == "avg"
+
+
+def test_auto_boxlike_overlay():
+    df = pd.DataFrame(
+        dict(
+            categorical1=["a", "a", "b", "b"],
+            categorical2=["a", "a", "b", "b"],
+            numerical=[1, 2, 3, 4],
+        )
+    )
+
+    pattern = [
+        ("categorical1", "numerical", None, "group"),
+        ("categorical1", "numerical", "categorical2", "group"),
+        ("categorical1", "numerical", "categorical1", "overlay"),
+        ("numerical", "categorical1", None, "group"),
+        ("numerical", "categorical1", "categorical2", "group"),
+        ("numerical", "categorical1", "categorical1", "overlay"),
+    ]
+
+    fn_and_mode = [
+        (px.violin, "violinmode"),
+        (px.box, "boxmode"),
+        (px.strip, "boxmode"),
+    ]
+
+    for fn, mode in fn_and_mode:
+        for x, y, color, result in pattern:
+            assert fn(df, x=x, y=y, color=color).layout[mode] == result
