@@ -167,7 +167,7 @@ def test_arrayattrable_numpy():
 
 def test_wrong_column_name():
     with pytest.raises(ValueError) as err_msg:
-        fig = px.scatter(px.data.tips(), x="bla", y="wrong")
+        px.scatter(px.data.tips(), x="bla", y="wrong")
         assert "Value of 'x' is not the name of a column in 'data_frame'" in str(
             err_msg.value
         )
@@ -175,33 +175,33 @@ def test_wrong_column_name():
 
 def test_missing_data_frame():
     with pytest.raises(ValueError) as err_msg:
-        fig = px.scatter(x="arg1", y="arg2")
+        px.scatter(x="arg1", y="arg2")
         assert "String or int arguments are only possible" in str(err_msg.value)
 
 
 def test_wrong_dimensions_of_array():
     with pytest.raises(ValueError) as err_msg:
-        fig = px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
+        px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
         assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_wrong_dimensions_mixed_case():
     with pytest.raises(ValueError) as err_msg:
         df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
-        fig = px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
+        px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
         assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_wrong_dimensions():
     with pytest.raises(ValueError) as err_msg:
-        fig = px.scatter(px.data.tips(), x="tip", y=[1, 2, 3])
+        px.scatter(px.data.tips(), x="tip", y=[1, 2, 3])
         assert "All arguments should have the same length." in str(err_msg.value)
     # the order matters
     with pytest.raises(ValueError) as err_msg:
-        fig = px.scatter(px.data.tips(), x=[1, 2, 3], y="tip")
+        px.scatter(px.data.tips(), x=[1, 2, 3], y="tip")
         assert "All arguments should have the same length." in str(err_msg.value)
     with pytest.raises(ValueError):
-        fig = px.scatter(px.data.tips(), x=px.data.iris().index, y="tip")
+        px.scatter(px.data.tips(), x=px.data.iris().index, y="tip")
         # assert "All arguments should have the same length." in str(err_msg.value)
 
 
@@ -211,9 +211,9 @@ def test_multiindex_raise_error():
     )
     df = pd.DataFrame(np.random.random((6, 3)), index=index, columns=["A", "B", "C"])
     # This is ok
-    fig = px.scatter(df, x="A", y="B")
+    px.scatter(df, x="A", y="B")
     with pytest.raises(TypeError) as err_msg:
-        fig = px.scatter(df, x=df.index, y="B")
+        px.scatter(df, x=df.index, y="B")
         assert "pandas MultiIndex is not supported by plotly express" in str(
             err_msg.value
         )
@@ -299,7 +299,7 @@ def test_arguments_not_modified():
     iris = px.data.iris()
     petal_length = iris.petal_length
     hover_data = [iris.sepal_length]
-    fig = px.scatter(iris, x=petal_length, y="petal_width", hover_data=hover_data)
+    px.scatter(iris, x=petal_length, y="petal_width", hover_data=hover_data)
     assert iris.petal_length.equals(petal_length)
     assert iris.sepal_length.equals(hover_data[0])
 
