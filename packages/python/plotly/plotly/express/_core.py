@@ -241,18 +241,22 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
                     y = sorted_trace_data[args["y"]]
                     x = sorted_trace_data[args["x"]]
-                    trace_patch["x"] = x
+                    # trace_patch["x"] = x
 
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
 
                     if attr_value == "lowess":
-                        trendline = sm.nonparametric.lowess(y, x)
+                        # missing ='drop' is the default value for lowess but not for OLS (None)
+                        # we force it here in case statsmodels change their defaults
+                        trendline = sm.nonparametric.lowess(y, x, missing='drop')
+                        trace_patch["x"] = trendline[:, 0]
                         trace_patch["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif attr_value == "ols":
-                        fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
+                        fit_results = sm.OLS(y.values, sm.add_constant(x.values), missing='drop').fit()
                         trace_patch["y"] = fit_results.predict()
+                        trace_patch["x"] = x[np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))]
                         hover_header = "<b>OLS trendline</b><br>"
                         hover_header += "%s = %g * %s + %g<br>" % (
                             args["y"],
