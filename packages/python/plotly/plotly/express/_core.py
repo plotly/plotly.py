@@ -249,14 +249,18 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if attr_value == "lowess":
                         # missing ='drop' is the default value for lowess but not for OLS (None)
                         # we force it here in case statsmodels change their defaults
-                        trendline = sm.nonparametric.lowess(y, x, missing='drop')
+                        trendline = sm.nonparametric.lowess(y, x, missing="drop")
                         trace_patch["x"] = trendline[:, 0]
                         trace_patch["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif attr_value == "ols":
-                        fit_results = sm.OLS(y.values, sm.add_constant(x.values), missing='drop').fit()
+                        fit_results = sm.OLS(
+                            y.values, sm.add_constant(x.values), missing="drop"
+                        ).fit()
                         trace_patch["y"] = fit_results.predict()
-                        trace_patch["x"] = x[np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))]
+                        trace_patch["x"] = x[
+                            np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
+                        ]
                         hover_header = "<b>OLS trendline</b><br>"
                         hover_header += "%s = %g * %s + %g<br>" % (
                             args["y"],
