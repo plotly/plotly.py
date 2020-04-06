@@ -35,7 +35,7 @@ jupyter:
 
 ## 2D Histogram Contours or Density Contours
 
-A 2D histogram contour plot, also known as a density contour plot, is a 2-dimensional generalization of a [histogram](/python/histograms/) which resembles a [contour plot](/python/contour-plots/) but is computed by grouping a set of points specifed by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the value to be used to compute contours. This kind of visualization (and the related [2D histogram, or density heatmap](/python/2d-histogram/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](/python/line-and-scatter/) would result in points overlapping each other and hiding patterns.
+A 2D histogram contour plot, also known as a density contour plot, is a 2-dimensional generalization of a [histogram](/python/histograms/) which resembles a [contour plot](/python/contour-plots/) but is computed by grouping a set of points specified by their `x` and `y` coordinates into bins, and applying an aggregation function such as `count` or `sum` (if `z` is provided) to compute the value to be used to compute contours. This kind of visualization (and the related [2D histogram, or density heatmap](/python/2d-histogram/)) is often used to manage over-plotting, or situations where showing large data sets as [scatter plots](/python/line-and-scatter/) would result in points overlapping each other and hiding patterns.
 
 ## Density Contours with Plotly Express
 
