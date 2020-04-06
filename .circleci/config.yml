@@ -504,12 +504,8 @@ workflows:
       - python-2.7-optional
       - python-3.5-optional
       - python-3.6-optional
-      # 3.7 optional disabled due to current shapely incompatibility
-      # - python-3.7-optional
-      - python-2.7-plot_ly
-      - python-3.7-plot_ly:
-          requires:
-            - python-2.7-plot_ly
+      - python-3.7-optional
+      - python-3.7-plot_ly
       - python-2-7-orca
       - python-3-5-orca
       - python-3-7-orca
