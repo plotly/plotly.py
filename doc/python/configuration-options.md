@@ -34,19 +34,19 @@ jupyter:
     thumbnail: thumbnail/modebar-icons.png
 ---
 
-# Configuration Options 
+# Configuration Options
 
 The `.show()` method that you use to display your figures also accepts a `config` parameter.
 
-You can set the configuration options for your figure by passing a dictionary to this parameter which contains the options you want to set. 
+You can set the configuration options for your figure by passing a dictionary to this parameter which contains the options you want to set.
 
-If you don't set an option's value, it will be automatically be set to the default value for that option. 
+If you don't set an option's value, it will be automatically be set to the default value for that option.
 
 For the complete list of configuration options and their defaults see: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
 
-##### Enable Scroll Zoom
+##### Enabling Scroll Zoom
 
-This option allows users to zoom in and out of figures using the scroll wheel on their mouse and/or a two-finger scroll. 
+This option allows users to zoom in and out of figures using the scroll wheel on their mouse and/or a two-finger scroll.
 
 ```python
 import plotly.graph_objects as go
@@ -63,7 +63,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Force The Modebar to Always Be Visible
+##### Forcing The Modebar to Always Be Visible
 
 When users hover over a figure generated with plotly.py, a modebar appears in the top-right of the figure. This presents users with several options for interacting with the figure.
 
@@ -84,7 +84,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Never Display The Modebar
+##### Preventing the Modebar from Appearing
 
 When users hover over a figure generated with `plotly.py`, a modebar appears in the top-right of the figure. This presents users with several options for interacting with the figure.
 
@@ -105,43 +105,8 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Display The `Edit Chart` Hyperlink
 
-Set `showLink` to `True` in order to display a hyperlink which allows users to edit the figure using [Chart Studio](https://plot.ly/online-chart-maker). 
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-config = {'showLink': True}
-
-fig.add_trace(
-    go.Scatter(
-        x=[1, 2, 3],
-        y=[1, 3, 1]))
-
-fig.show(config=config)
-```
-
-If you would prefer to use an icon in the modebar as a hyperlink, set `showEditInChartStudio` to `True`. 
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-config = {'showEditInChartStudio': True}
-
-fig.add_trace(
-    go.Scatter(
-        x=[1, 2, 3],
-        y=[1, 3, 1]))
-
-fig.show(config=config)
-```
-
-##### Hide the Plotly Logo on the Modebar
+##### Hiding the Plotly Logo on the Modebar
 
 ```python
 import plotly.graph_objects as go
@@ -158,9 +123,9 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Turn Off Responsiveness
+##### Turning Off Responsiveness
 
-By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](https://plot.ly/python/renderers/) environments. 
+By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](https://plot.ly/python/renderers/) environments.
 
 Try resizing your browser window to see this behavior in effect on this page.
 
@@ -181,23 +146,6 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Editable Mode
-
-In editable mode, users can edit the chart title, axis labels and trace names in the legend.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(
-    go.Scatter(
-        x=[1, 2, 3],
-        y=[1, 3, 1]))
-
-fig.show(config={'editable': True})
-```
-
 ##### Making A Static Chart
 
 ```python
@@ -215,7 +163,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Customize Download Plot Options
+##### Customizing Download Plot Options
 
 ```python
 import plotly.graph_objects as go
@@ -240,9 +188,9 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Specifying Multiple Configuration Options Simultaneously!
+##### Specifying Multiple Configuration Options Simultaneously
 
-The dictionary that you use to specify configuration options for your figures can contain more than one configuration key/value pair. 
+The dictionary that you use to specify configuration options for your figures can contain more than one configuration key/value pair.
 
 ```python
 import plotly.graph_objects as go
@@ -263,7 +211,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Remove Modebar Buttons
+##### Removing Modebar Buttons
 
 To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
 
@@ -288,9 +236,9 @@ fig.show(config={
 })
 ```
 
-### Double Click Delay
-Sets the maximum delay between two consecutive clicks to be interpreted as a double-click in `ms`. This is the time interval between first mousedown and second mouseup. The default timing is 300 ms (less than half a second).
-This setting propagates to all on-subplot double clicks (except for `geo` and `mapbox`). 
+### Double-Click Delay
+Sets the maximum delay between two consecutive clicks to be interpreted as a double-click in milliseconds. This is the time interval between first mousedown and second mouseup. The default timing is 300 ms (less than half a second).
+This setting propagates to all on-subplot double clicks (except for `geo` and `mapbox`).
 
 ```python
 import plotly.graph_objects as go
@@ -310,50 +258,7 @@ fig.show(config=config)
 
 #### Configuring Figures in Dash Apps
 
-The same configuration dictionary that you pass to the `config` parameter of the `show()` method can also be passed to the `config` parameter of a `dcc.Graph` component.
-
-<!-- #raw -->
-<pre><code>
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-config = dict({
-    'scrollZoom': True,
-    'displayModeBar': True,
-    'editable': True
-})
-
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
-    html.Div(children='''
-        Dash: A web application framework for Python.
-    '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure={
-            'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
-            ],
-            'layout': {
-                'title': 'Dash Data Visualization'
-            }
-        },
-        config=config
-    )
-])
-
-# if __name__ == '__main__':
-    # app.run_server(debug=True)
-</code></pre>
-<!-- #raw -->
+The same configuration dictionary that you pass to the `config` parameter of the `show()` method can also be passed to the [`config` property of a `dcc.Graph` component](https://dash.plotly.com/dash-core-components/graph).
 
 #### Reference
 
