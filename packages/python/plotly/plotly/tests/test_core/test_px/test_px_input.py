@@ -251,11 +251,13 @@ def test_build_df_with_index():
 def test_non_matching_index():
     df = pd.DataFrame(dict(y=[1, 2, 3]), index=["a", "b", "c"])
 
-    expected = pd.DataFrame(dict(x=["a", "b", "c"], y=[1, 2, 3]))
+    expected = pd.DataFrame(dict(index=["a", "b", "c"], y=[1, 2, 3]))
 
     args = dict(data_frame=df, x=df.index, y="y")
     out = build_dataframe(args, all_attrables, array_attrables, None)
     assert_frame_equal(expected, out["data_frame"])
+
+    expected = pd.DataFrame(dict(x=["a", "b", "c"], y=[1, 2, 3]))
 
     args = dict(data_frame=None, x=df.index, y=df.y)
     out = build_dataframe(args, all_attrables, array_attrables, None)
