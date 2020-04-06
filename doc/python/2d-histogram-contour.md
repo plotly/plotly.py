@@ -30,6 +30,7 @@ jupyter:
     order: 12
     page_type: u-guide
     permalink: python/2d-histogram-contour/
+    redirect_from: python/2d-density-plots/
     thumbnail: thumbnail/hist2dcontour.png
 ---
 
