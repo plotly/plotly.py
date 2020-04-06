@@ -924,6 +924,7 @@ def build_dataframe(args, attrables, array_attrables, constructor):
 
     if wide_mode:
         df_output = df_input
+        var_name = df_output.columns.name or "_column_"
     else:
         df_output = pd.DataFrame()
 
@@ -996,16 +997,17 @@ def build_dataframe(args, attrables, array_attrables, constructor):
                     )
                 # Check validity of column name
                 if argument not in df_input.columns:
-                    err_msg = (
-                        "Value of '%s' is not the name of a column in 'data_frame'. "
-                        "Expected one of %s but received: %s"
-                        % (field, str(list(df_input.columns)), argument)
-                    )
-                    if argument == "index":
-                        err_msg += (
-                            "\n To use the index, pass it in directly as `df.index`."
+                    if wide_mode and argument in ("_value_", var_name):
+                        continue
+                    else:
+                        err_msg = (
+                            "Value of '%s' is not the name of a column in 'data_frame'. "
+                            "Expected one of %s but received: %s"
+                            % (field, str(list(df_input.columns)), argument)
                         )
-                    raise ValueError(err_msg)
+                        if argument == "index":
+                            err_msg += "\n To use the index, pass it in directly as `df.index`."
+                        raise ValueError(err_msg)
                 if length and len(df_input[argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
@@ -1066,6 +1068,9 @@ def build_dataframe(args, attrables, array_attrables, constructor):
                 args[field_name][i] = str(col_name)
             wide_id_vars.add(str(col_name))
 
+    for col_name in constants:
+        df_output[col_name] = constants[col_name]
+
     if wide_mode:
         # TODO multi-level index
         # TODO multi-level columns
@@ -1073,23 +1078,22 @@ def build_dataframe(args, attrables, array_attrables, constructor):
         wide_id_vars.add(index_name)
         if index_name not in df_output.columns:
             df_output = df_output.reset_index()
-        df_output = df_output.melt(id_vars=wide_id_vars)
+        df_output = df_output.melt(
+            id_vars=wide_id_vars, var_name=var_name, value_name="_value_"
+        )
         orient_v = "v" == (args.get("orientation", None) or "v")
         if "orientation" in args:
             args["orientation"] = "v" if orient_v else "h"
         if constructor in [go.Scatter, go.Bar]:
             args["x" if orient_v else "y"] = index_name
-            args["y" if orient_v else "x"] = "value"
-            args["color"] = args["color"] or "variable"
+            args["y" if orient_v else "x"] = "_value_"
+            args["color"] = args["color"] or var_name
         if constructor in [go.Violin, go.Box]:
-            args["x" if orient_v else "y"] = "variable"
-            args["y" if orient_v else "x"] = "value"
+            args["x" if orient_v else "y"] = var_name
+            args["y" if orient_v else "x"] = "_value_"
         if constructor in [go.Histogram]:
-            args["x" if orient_v else "y"] = "value"
-            args["color"] = args["color"] or "variable"
-
-    for col_name in constants:
-        df_output[col_name] = constants[col_name]
+            args["x" if orient_v else "y"] = "_value_"
+            args["color"] = args["color"] or var_name
 
     args["data_frame"] = df_output
     return args
