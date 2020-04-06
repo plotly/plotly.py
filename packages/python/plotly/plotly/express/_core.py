@@ -1024,7 +1024,7 @@ def build_dataframe(args, attrables, array_attrables, constructor):
                 df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
-                is_index = isinstance(argument, pd.RangeIndex)
+                is_index = isinstance(argument, pd.Index)
                 # First pandas
                 # pandas series have a name but it's None
                 if (
