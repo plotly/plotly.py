@@ -16,6 +16,22 @@ from plotly.subplots import (
 )
 
 
+# Declare all supported attributes, across all plot types
+
+attrables = (
+    ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
+    + ["custom_data", "hover_name", "hover_data", "text"]
+    + ["names", "values", "parents", "ids"]
+    + ["error_x", "error_x_minus"]
+    + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
+    + ["lat", "lon", "locations", "animation_group", "path"]
+)
+group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
+renameable_group_attrables = ["color", "symbol", "line_dash"]
+non_array_attrables = attrables + group_attrables + renameable_group_attrables
+array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
+
+
 class PxDefaults(object):
     __slots__ = [
         "template",
@@ -850,7 +866,7 @@ def _check_name_not_reserved(field_name, reserved_names):
         )
 
 
-def _get_reserved_col_names(args, attrables, array_attrables):
+def _get_reserved_col_names(args):
     """
     This function builds a list of columns of the data_frame argument used
     as arguments, either as str/int arguments or given as columns
@@ -859,7 +875,7 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     df = args["data_frame"]
     reserved_names = set()
     for field in args:
-        if field not in attrables:
+        if field not in non_array_attrables:
             continue
         names = args[field] if field in array_attrables else [args[field]]
         if names is None:
@@ -879,7 +895,7 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
-def build_dataframe(args, attrables, array_attrables, constructor):
+def build_dataframe(args, constructor):
     """
     Constructs a dataframe and modifies `args` in-place.
 
@@ -891,11 +907,8 @@ def build_dataframe(args, attrables, array_attrables, constructor):
     ----------
     args : OrderedDict
         arguments passed to the px function and subsequently modified
-    attrables : list
-        list of keys into `args`, all of whose corresponding values are
-        converted into columns of a dataframe.
-    array_attrables : list
-        argument names corresponding to iterables, such as `hover_data`, ...
+    constructor : graph_object trace class
+        the trace type selected for this figure
     """
 
     # make copies of all the fields via dict() and list()
@@ -931,7 +944,7 @@ def build_dataframe(args, attrables, array_attrables, constructor):
     # Initialize set of column names
     # These are reserved names
     if df_provided:
-        reserved_names = _get_reserved_col_names(args, attrables, array_attrables)
+        reserved_names = _get_reserved_col_names(args)
     else:
         reserved_names = set()
 
@@ -947,7 +960,7 @@ def build_dataframe(args, attrables, array_attrables, constructor):
     constants = dict()
 
     # Loop over possible arguments
-    for field_name in attrables:
+    for field_name in non_array_attrables:
         # Massaging variables
         argument_list = (
             [args.get(field_name)]
@@ -1254,27 +1267,6 @@ def process_dataframe_hierarchy(args):
 
 
 def infer_config(args, constructor, trace_patch, layout_patch):
-    # Declare all supported attributes, across all plot types
-    attrables = (
-        ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
-        + ["custom_data", "hover_name", "hover_data", "text"]
-        + ["names", "values", "parents", "ids"]
-        + ["error_x", "error_x_minus"]
-        + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-        + ["lat", "lon", "locations", "animation_group", "path"]
-    )
-    array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
-    group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
-    all_attrables = attrables + group_attrables + ["color"]
-    group_attrs = ["symbol", "line_dash"]
-    for group_attr in group_attrs:
-        if group_attr in args:
-            all_attrables += [group_attr]
-
-    args = build_dataframe(args, all_attrables, array_attrables, constructor)
-    if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
-        args = process_dataframe_hierarchy(args)
-
     attrs = [k for k in attrables if k in args]
     grouped_attrs = []
 
@@ -1473,6 +1465,10 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     layout_patch = layout_patch or {}
     apply_default_cascade(args)
 
+    args = build_dataframe(args, constructor)
+    if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
+        args = process_dataframe_hierarchy(args)
+
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch
     )
@@ -1651,7 +1647,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         frame_list = sorted(
             frame_list, key=lambda f: orders[args["animation_frame"]].index(f["name"])
         )
-    layout_patch = layout_patch.copy()
+
     if show_colorbar:
         colorvar = "z" if constructor in [go.Histogram2d, go.Densitymapbox] else "color"
         range_color = args["range_color"] or [None, None]

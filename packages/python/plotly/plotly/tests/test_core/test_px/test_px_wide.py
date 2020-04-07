@@ -4,18 +4,6 @@ import pandas as pd
 from plotly.express._core import build_dataframe
 from pandas.util.testing import assert_frame_equal
 
-attrables = (
-    ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
-    + ["custom_data", "hover_name", "hover_data", "text"]
-    + ["names", "values", "parents", "ids"]
-    + ["error_x", "error_x_minus"]
-    + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-    + ["lat", "lon", "locations", "animation_group", "path"]
-)
-array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
-group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
-all_attrables = attrables + group_attrables + ["color"]
-
 
 def test_wide_mode_external():
     df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6], c=[7, 8, 9]), index=[11, 12, 13])
@@ -87,7 +75,7 @@ def test_wide_mode_labels_external():
 def test_wide_mode_internal():
     df_in = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6]), index=[11, 12, 13])
     args_in = dict(data_frame=df_in, color=None)
-    args_out = build_dataframe(args_in, all_attrables, array_attrables, go.Scatter)
+    args_out = build_dataframe(args_in, go.Scatter)
     df_out = args_out["data_frame"]
     df_out_expected = pd.DataFrame(
         dict(
