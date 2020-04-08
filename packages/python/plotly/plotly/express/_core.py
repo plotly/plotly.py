@@ -17,19 +17,22 @@ from plotly.subplots import (
 
 
 # Declare all supported attributes, across all plot types
-
-attrables = (
-    ["x", "y", "z", "a", "b", "c", "r", "theta", "size", "dimensions"]
-    + ["custom_data", "hover_name", "hover_data", "text"]
-    + ["names", "values", "parents", "ids"]
-    + ["error_x", "error_x_minus"]
-    + ["error_y", "error_y_minus", "error_z", "error_z_minus"]
-    + ["lat", "lon", "locations", "animation_group", "path"]
+direct_attrables = (
+    ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
+    + ["hover_name", "text", "names", "values", "parents"]
+    + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
+    + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
-group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
-renameable_group_attrables = ["color", "symbol", "line_dash"]
-non_array_attrables = attrables + group_attrables + renameable_group_attrables
 array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
+group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
+renameable_group_attrables = [
+    "color",  # renamed to marker.color or line.color in infer_config
+    "symbol",  # renamed to marker.symbol in infer_config
+    "line_dash",  # renamed to line.dash in infer_config
+]
+all_attrables = (
+    direct_attrables + array_attrables + group_attrables + renameable_group_attrables
+)
 
 
 class PxDefaults(object):
@@ -875,7 +878,7 @@ def _get_reserved_col_names(args):
     df = args["data_frame"]
     reserved_names = set()
     for field in args:
-        if field not in non_array_attrables:
+        if field not in all_attrables:
             continue
         names = args[field] if field in array_attrables else [args[field]]
         if names is None:
@@ -960,7 +963,7 @@ def build_dataframe(args, constructor):
     constants = dict()
 
     # Loop over possible arguments
-    for field_name in non_array_attrables:
+    for field_name in all_attrables:
         # Massaging variables
         argument_list = (
             [args.get(field_name)]
@@ -1267,7 +1270,7 @@ def process_dataframe_hierarchy(args):
 
 
 def infer_config(args, constructor, trace_patch, layout_patch):
-    attrs = [k for k in attrables if k in args]
+    attrs = [k for k in direct_attrables + array_attrables if k in args]
     grouped_attrs = []
 
     # Compute sizeref
