@@ -1097,6 +1097,7 @@ def build_dataframe(args, constructor):
         df_output = df_output.melt(
             id_vars=wide_id_vars, var_name=var_name, value_name="_value_"
         )
+        df_output[var_name] = df_output[var_name].astype(str)
         orient_v = "v" == (args.get("orientation", None) or "v")
         if "orientation" in args:
             args["orientation"] = "v" if orient_v else "h"

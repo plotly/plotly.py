@@ -120,3 +120,288 @@ def test_wide_mode_internal():
         args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
         args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
         assert args_out == dict(y="_value_", color="_column_", orientation="h")
+
+
+def test_wide_mode_internal_special_cases():
+    def assert_df_and_args(df_in, args_in, args_expect, df_expect):
+        args_in["data_frame"] = df_in
+        args_out = build_dataframe(args_in, go.Scatter)
+        df_out = args_out.pop("data_frame")
+        # print(df_out.info())
+        # print(df_expect.info())
+        assert_frame_equal(
+            df_out.sort_index(axis=1), df_expect.sort_index(axis=1),
+        )
+        assert args_out == args_expect
+
+    # input is single bare array: column comes out as string "0"
+    assert_df_and_args(
+        df_in=[1, 2, 3],
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(index=[0, 1, 2], _value_=[1, 2, 3], _column_=["0", "0", "0"])
+        ),
+    )
+
+    # input is single bare Series: column comes out as string "0"
+    assert_df_and_args(
+        df_in=pd.Series([1, 2, 3]),
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(index=[0, 1, 2], _value_=[1, 2, 3], _column_=["0", "0", "0"])
+        ),
+    )
+
+    # input is a Series from a DF: we pick up the name and index values automatically
+    df = pd.DataFrame(dict(my_col=[1, 2, 3]), index=["a", "b", "c"])
+    assert_df_and_args(
+        df_in=df["my_col"],
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=["a", "b", "c"],
+                _value_=[1, 2, 3],
+                _column_=["my_col", "my_col", "my_col"],
+            )
+        ),
+    )
+
+    # input is an index from a DF: treated like a Series basically
+    df = pd.DataFrame(dict(my_col=[1, 2, 3]), index=["a", "b", "c"])
+    df.index.name = "my_index"
+    assert_df_and_args(
+        df_in=df.index,
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 2],
+                _value_=["a", "b", "c"],
+                _column_=["my_index", "my_index", "my_index"],
+            )
+        ),
+    )
+
+    # input is a data frame with named row and col indices: we grab those
+    df = pd.DataFrame(dict(my_col=[1, 2, 3]), index=["a", "b", "c"])
+    df.index.name = "my_index"
+    df.columns.name = "my_col_name"
+    assert_df_and_args(
+        df_in=df,
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="my_index", y="_value_", color="my_col_name"),
+        df_expect=pd.DataFrame(
+            dict(
+                my_index=["a", "b", "c"],
+                _value_=[1, 2, 3],
+                my_col_name=["my_col", "my_col", "my_col"],
+            )
+        ),
+    )
+
+    # input is array of arrays: treated as rows, columns come out as string "0", "1"
+    assert_df_and_args(
+        df_in=[[1, 2], [4, 5]],
+        args_in=dict(x=None, y=None, color=None),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1], _value_=[1, 4, 2, 5], _column_=["0", "0", "1", "1"],
+            )
+        ),
+    )
+
+    # partial-melting by assigning symbol: we pick up that column and don't melt it
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"])),
+        args_in=dict(x=None, y=None, color=None, symbol="symbol_col"),
+        args_expect=dict(x="index", y="_value_", color="_column_", symbol="symbol_col"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                symbol_col=["q", "r", "q", "r"],
+            )
+        ),
+    )
+
+    # partial-melting by assigning the same column twice: we pick it up once
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"])),
+        args_in=dict(
+            x=None, y=None, color=None, symbol="symbol_col", custom_data=["symbol_col"],
+        ),
+        args_expect=dict(
+            x="index",
+            y="_value_",
+            color="_column_",
+            symbol="symbol_col",
+            custom_data=["symbol_col"],
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                symbol_col=["q", "r", "q", "r"],
+            )
+        ),
+    )
+
+    # partial-melting by assigning more than one column: we pick them both up
+    assert_df_and_args(
+        df_in=pd.DataFrame(
+            dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"], data_col=["i", "j"])
+        ),
+        args_in=dict(
+            x=None, y=None, color=None, symbol="symbol_col", custom_data=["data_col"],
+        ),
+        args_expect=dict(
+            x="index",
+            y="_value_",
+            color="_column_",
+            symbol="symbol_col",
+            custom_data=["data_col"],
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                symbol_col=["q", "r", "q", "r"],
+                data_col=["i", "j", "i", "j"],
+            )
+        ),
+    )
+
+    # partial-melting by assigning symbol to a bare array: we pick it up with the attr name
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
+        args_in=dict(x=None, y=None, color=None, symbol=["q", "r"]),
+        args_expect=dict(x="index", y="_value_", color="_column_", symbol="symbol"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                symbol=["q", "r", "q", "r"],
+            )
+        ),
+    )
+
+    # assigning color to _column_ explicitly: just works
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
+        args_in=dict(x=None, y=None, color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1], _value_=[1, 2, 3, 4], _column_=["a", "a", "b", "b"]
+            )
+        ),
+    )
+
+    # assigning color to a different column: _column_ drops out of args
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], color_col=["q", "r"])),
+        args_in=dict(x=None, y=None, color="color_col"),
+        args_expect=dict(x="index", y="_value_", color="color_col"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                color_col=["q", "r", "q", "r"],
+            )
+        ),
+    )
+
+    # assigning _column_ to something else: just works
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
+        args_in=dict(x=None, y=None, color=None, symbol="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", symbol="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1], _value_=[1, 2, 3, 4], _column_=["a", "a", "b", "b"],
+            )
+        ),
+    )
+
+    # swapping symbol and color: just works
+    assert_df_and_args(
+        df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], color_col=["q", "r"])),
+        args_in=dict(x=None, y=None, color="color_col", symbol="_column_"),
+        args_expect=dict(x="index", y="_value_", color="color_col", symbol="_column_"),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                _column_=["a", "a", "b", "b"],
+                color_col=["q", "r", "q", "r"],
+            )
+        ),
+    )
+
+    # a DF with a named column index: have to use that instead of _column_
+    df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    df.columns.name = "my_col_name"
+    assert_df_and_args(
+        df_in=df,
+        args_in=dict(x=None, y=None, color=None, facet_row="my_col_name"),
+        args_expect=dict(
+            x="index", y="_value_", color="my_col_name", facet_row="my_col_name"
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                index=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                my_col_name=["a", "a", "b", "b"],
+            )
+        ),
+    )
+
+    # passing the DF index into some other attr: works
+    df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    df.columns.name = "my_col_name"
+    df.index.name = "my_index_name"
+    assert_df_and_args(
+        df_in=df,
+        args_in=dict(x=None, y=None, color=None, hover_name=df.index),
+        args_expect=dict(
+            x="my_index_name",
+            y="_value_",
+            color="my_col_name",
+            hover_name="my_index_name",
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                my_index_name=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                my_col_name=["a", "a", "b", "b"],
+            )
+        ),
+    )
+
+    # assigning _value_ to something: works
+    df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    df.columns.name = "my_col_name"
+    df.index.name = "my_index_name"
+    assert_df_and_args(
+        df_in=df,
+        args_in=dict(x=None, y=None, color=None, hover_name="_value_"),
+        args_expect=dict(
+            x="my_index_name", y="_value_", color="my_col_name", hover_name="_value_",
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                my_index_name=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                my_col_name=["a", "a", "b", "b"],
+            )
+        ),
+    )
