@@ -78,14 +78,14 @@ def test_wide_mode_internal():
     def extract_and_check_df(args_out):
         df_out = args_out.pop("data_frame")
         assert_frame_equal(
-            df_out,
+            df_out.sort_index(axis=1),
             pd.DataFrame(
                 dict(
                     index=[11, 12, 13, 11, 12, 13],
                     _column_=["a", "a", "a", "b", "b", "b"],
                     _value_=[1, 2, 3, 4, 5, 6],
                 )
-            ),
+            ).sort_index(axis=1),
         )
         return args_out
 
