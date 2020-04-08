@@ -74,14 +74,49 @@ def test_wide_mode_labels_external():
 
 def test_wide_mode_internal():
     df_in = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6]), index=[11, 12, 13])
-    args_in = dict(data_frame=df_in, color=None)
-    args_out = build_dataframe(args_in, go.Scatter)
-    df_out = args_out["data_frame"]
-    df_out_expected = pd.DataFrame(
-        dict(
-            index=[11, 12, 13, 11, 12, 13],
-            _column_=["a", "a", "a", "b", "b", "b"],
-            _value_=[1, 2, 3, 4, 5, 6],
+
+    def extract_and_check_df(args_out):
+        df_out = args_out.pop("data_frame")
+        assert_frame_equal(
+            df_out,
+            pd.DataFrame(
+                dict(
+                    index=[11, 12, 13, 11, 12, 13],
+                    _column_=["a", "a", "a", "b", "b", "b"],
+                    _value_=[1, 2, 3, 4, 5, 6],
+                )
+            ),
         )
-    )
-    assert_frame_equal(df_out, df_out_expected)
+        return args_out
+
+    for trace_type in [go.Scatter, go.Bar]:
+        args_in = dict(data_frame=df_in.copy(), color=None)
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(x="index", y="_value_", color="_column_")
+
+        # now we check with orientation
+        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(
+            y="index", x="_value_", color="_column_", orientation="h"
+        )
+
+    for trace_type in [go.Violin, go.Box]:
+        args_in = dict(data_frame=df_in.copy(), color=None)
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(x="_column_", y="_value_", color=None)
+
+        # now we check with orientation
+        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(y="_column_", x="_value_", color=None, orientation="h")
+
+    for trace_type in [go.Histogram]:
+        args_in = dict(data_frame=df_in.copy(), color=None)
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(x="_value_", color="_column_")
+
+        # now we check with orientation
+        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
+        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
+        assert args_out == dict(y="_value_", color="_column_", orientation="h")
