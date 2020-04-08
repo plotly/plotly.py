@@ -6,6 +6,10 @@ from pandas.util.testing import assert_frame_equal
 
 
 def test_wide_mode_external():
+    # here we test this feature "black box" style by calling actual PX functions and
+    # inspecting the figure... this is important but clunky, and is mostly a smoke test
+    # allowing us to do more "white box" testing below
+
     df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6], c=[7, 8, 9]), index=[11, 12, 13])
     for px_fn in [px.scatter, px.line, px.area, px.bar]:
         fig = px_fn(df)
@@ -54,6 +58,7 @@ def test_wide_mode_external():
 
 
 def test_wide_mode_labels_external():
+    # here we prove that the _uglylabels_ can be renamed using the usual labels kwarg
     df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6], c=[7, 8, 9]), index=[11, 12, 13])
     fig = px.bar(df)
     assert fig.layout.xaxis.title.text == "index"
@@ -73,6 +78,13 @@ def test_wide_mode_labels_external():
 
 
 def test_wide_mode_internal():
+    # here we do basic exhaustive testing of the various graph_object permutations
+    # via build_dataframe directly, which leads to more compact test code:
+    # we pass in args (which includes df) and look at how build_dataframe mutates
+    # both args and the df, and assume that since the rest of the downstream PX
+    # machinery has not wide-mode-specific code, and the tests above pass, that this is
+    # enough to prove things work
+
     df_in = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6]), index=[11, 12, 13])
 
     def extract_and_check_df(args_out):
@@ -123,6 +135,11 @@ def test_wide_mode_internal():
 
 
 def test_wide_mode_internal_special_cases():
+    # given all of the above tests, and given that the melt() code is not sensitive
+    # to the trace type, we can do all sorts of special-case testing just by focusing
+    # on build_dataframe(args, go.Scatter) for various values of args, and looking at
+    # how args and df get mutated
+
     def assert_df_and_args(df_in, args_in, args_expect, df_expect):
         args_in["data_frame"] = df_in
         args_out = build_dataframe(args_in, go.Scatter)
@@ -402,6 +419,26 @@ def test_wide_mode_internal_special_cases():
                 my_index_name=[0, 1, 0, 1],
                 _value_=[1, 2, 3, 4],
                 my_col_name=["a", "a", "b", "b"],
+            )
+        ),
+    )
+
+    # assigning a px.Constant: works
+    df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+    df.columns.name = "my_col_name"
+    df.index.name = "my_index_name"
+    assert_df_and_args(
+        df_in=df,
+        args_in=dict(x=None, y=None, color=None, symbol=px.Constant(1)),
+        args_expect=dict(
+            x="my_index_name", y="_value_", color="my_col_name", symbol="symbol",
+        ),
+        df_expect=pd.DataFrame(
+            dict(
+                my_index_name=[0, 1, 0, 1],
+                _value_=[1, 2, 3, 4],
+                my_col_name=["a", "a", "b", "b"],
+                symbol=[1, 1, 1, 1],
             )
         ),
     )
