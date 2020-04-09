@@ -389,6 +389,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     ]:
         hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
+        trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
 
 
@@ -1278,6 +1279,8 @@ def infer_config(args, constructor, trace_patch):
         if args["opacity"] is None:
             if "barmode" in args and args["barmode"] == "overlay":
                 trace_patch["marker"] = dict(opacity=0.5)
+        elif constructor in [go.Densitymapbox, go.Pie, go.Funnel, go.Funnelarea]:
+            trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
     if "line_group" in args:
@@ -1445,8 +1448,6 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
                 )
             if trace_spec.constructor in [go.Bar, go.Violin, go.Box, go.Histogram]:
                 trace.update(alignmentgroup=True, offsetgroup=trace_name)
-            if trace_spec.constructor not in [go.Parcats, go.Parcoords]:
-                trace.update(hoverlabel=dict(namelength=0))
             trace_names.add(trace_name)
 
             # Init subplot row/col

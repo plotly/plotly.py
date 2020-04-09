@@ -252,15 +252,15 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title
@@ -490,15 +490,15 @@ class BaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title
@@ -714,15 +714,15 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `tickmode` is set to "array". Used with
                 `tickvals`.
             ticktextsrc
-                Sets the source reference on plot.ly for
-                ticktext .
+                Sets the source reference on Chart Studio Cloud
+                for  ticktext .
             tickvals
                 Sets the values at which ticks on this axis
                 appear. Only has an effect if `tickmode` is set
                 to "array". Used with `ticktext`.
             tickvalssrc
-                Sets the source reference on plot.ly for
-                tickvals .
+                Sets the source reference on Chart Studio Cloud
+                for  tickvals .
             tickwidth
                 Sets the tick width (in px).
             title

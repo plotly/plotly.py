@@ -18,9 +18,9 @@ FILE_CONTENT = {
         "stream_ids": [],
     },
     CONFIG_FILE: {
-        "plotly_domain": "https://plot.ly",
-        "plotly_streaming_domain": "stream.plot.ly",
-        "plotly_api_domain": "https://api.plot.ly",
+        "plotly_domain": "https://plotly.com",
+        "plotly_streaming_domain": "stream.plotly.com",
+        "plotly_api_domain": "https://api.plotly.com",
         "plotly_ssl_verification": True,
         "plotly_proxy_authorization": False,
         "world_readable": True,

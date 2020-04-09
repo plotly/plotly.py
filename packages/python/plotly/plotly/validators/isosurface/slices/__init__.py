@@ -23,8 +23,8 @@ class ZValidator(_plotly_utils.basevalidators.CompoundValidator):
                 created for all points of the axis z except
                 start and end.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             show
                 Determines whether or not slice planes about
                 the z dimension are drawn.
@@ -59,8 +59,8 @@ class YValidator(_plotly_utils.basevalidators.CompoundValidator):
                 created for all points of the axis y except
                 start and end.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             show
                 Determines whether or not slice planes about
                 the y dimension are drawn.
@@ -95,8 +95,8 @@ class XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 created for all points of the axis x except
                 start and end.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             show
                 Determines whether or not slice planes about
                 the x dimension are drawn.

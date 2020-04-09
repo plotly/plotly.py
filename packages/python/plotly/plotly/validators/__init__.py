@@ -209,15 +209,15 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 contain many labels, and can simultaneously
                 hide slices from several pies/funnelarea charts
             hiddenlabelssrc
-                Sets the source reference on plot.ly for
-                hiddenlabels .
+                Sets the source reference on Chart Studio Cloud
+                for  hiddenlabels .
             hidesources
                 Determines whether or not a text link citing
                 the data source is placed at the bottom-right
                 cored of the figure. Has only an effect only on
                 graphs that have been generated via forked
-                graphs from the plotly service (at
-                https://plot.ly or on-premise).
+                graphs from the Chart Studio Cloud (at
+                https://chart-studio.plotly.com or on-premise).
             hoverdistance
                 Sets the default distance (in pixels) to look
                 for data to add hover labels (-1 means no
@@ -233,13 +233,27 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             hovermode
                 Determines the mode of hover interactions. If
-                `clickmode` includes the "select" flag,
-                `hovermode` defaults to "closest". If
-                `clickmode` lacks the "select" flag, it
-                defaults to "x" or "y" (depending on the
-                trace's `orientation` value) for plots based on
-                cartesian coordinates. For anything else the
-                default value is "closest".
+                "closest", a single hoverlabel will appear for
+                the "closest" point within the `hoverdistance`.
+                If "x" (or "y"), multiple hoverlabels will
+                appear for multiple points at the "closest" x-
+                (or y-) coordinate within the `hoverdistance`,
+                with the caveat that no more than one
+                hoverlabel will appear per trace. If *x
+                unified* (or *y unified*), a single hoverlabel
+                will appear multiple points at the closest x-
+                (or y-) coordinate within the `hoverdistance`
+                with the caveat that no more than one
+                hoverlabel will appear per trace. In this mode,
+                spikelines are enabled by default perpendicular
+                to the specified axis. If false, hover
+                interactions are disabled. If `clickmode`
+                includes the "select" flag, `hovermode`
+                defaults to "closest". If `clickmode` lacks the
+                "select" flag, it defaults to "x" or "y"
+                (depending on the trace's `orientation` value)
+                for plots based on cartesian coordinates. For
+                anything else the default value is "closest".
             images
                 A tuple of
                 :class:`plotly.graph_objects.layout.Image`
@@ -271,8 +285,8 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 object for example `{key: value}` which can be
                 accessed %{meta[key]}.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
@@ -523,8 +537,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             decreasing
                 :class:`plotly.graph_objects.waterfall.Decreasi
                 ng` instance or dict with compatible properties
@@ -541,8 +555,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.waterfall.Hoverlab
                 el` instance or dict with compatible properties
@@ -565,7 +579,7 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -576,8 +590,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -586,15 +600,16 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             increasing
                 :class:`plotly.graph_objects.waterfall.Increasi
                 ng` instance or dict with compatible properties
@@ -617,8 +632,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 applied to reset the computed total or to
                 declare an initial value where needed.
             measuresrc
-                Sets the source reference on plot.ly for
-                measure .
+                Sets the source reference on Chart Studio Cloud
+                for  measure .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -634,8 +649,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -650,8 +665,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 where bars of the same position coordinate will
                 line up.
             offsetsrc
-                Sets the source reference on plot.ly for
-                offset .
+                Sets the source reference on Chart Studio Cloud
+                for  offset .
             opacity
                 Sets the opacity of the trace.
             orientation
@@ -710,11 +725,11 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 is stacked on this one the text is moved
                 outside.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -737,8 +752,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available. variables `initial`, `delta`,
                 `final` and `label`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             totals
                 :class:`plotly.graph_objects.waterfall.Totals`
                 instance or dict with compatible properties
@@ -776,8 +791,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the bar width (in position axis units).
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
             x
                 Sets the x coordinates.
             x0
@@ -791,7 +806,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             y0
@@ -805,7 +821,8 @@ class WaterfallValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -891,8 +908,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -904,8 +921,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.volume.Hoverlabel`
                 instance or dict with compatible properties
@@ -928,7 +945,7 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -938,20 +955,21 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             isomax
                 Sets the maximum boundary for iso-surface plot.
             isomin
@@ -981,8 +999,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -1044,8 +1062,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "text" flag and "hovertext" is not set, these
                 elements will be seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -1075,8 +1093,8 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
             value
                 Sets the 4th dimension (value) of the vertices.
             valuesrc
-                Sets the source reference on plot.ly for  value
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  value .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -1086,17 +1104,20 @@ class VolumeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the X coordinates of the vertices on X
                 axis.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the Y coordinates of the vertices on Y
                 axis.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the Z coordinates of the vertices on Z
                 axis.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -1135,8 +1156,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             fillcolor
                 Sets the fill color. Defaults to a half-
                 transparent variant of the line color, marker
@@ -1149,8 +1170,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.violin.Hoverlabel`
                 instance or dict with compatible properties
@@ -1177,7 +1198,7 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -1187,20 +1208,21 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             jitter
                 Sets the amount of jitter in the sample points
                 drawn. If 0, the sample points align along the
@@ -1235,8 +1257,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover. For violin
@@ -1341,8 +1363,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 seen, trace `hoverinfo` must contain a "text"
                 flag.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -1397,7 +1419,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y sample data or coordinates. See
                 overview for more info.
@@ -1413,7 +1436,8 @@ class ViolinValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -1451,8 +1475,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             domain
                 :class:`plotly.graph_objects.treemap.Domain`
                 instance or dict with compatible properties
@@ -1463,8 +1487,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.treemap.Hoverlabel
                 ` instance or dict with compatible properties
@@ -1487,7 +1511,7 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -1499,8 +1523,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -1509,23 +1533,24 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace's sectors. To be seen, trace `hoverinfo`
                 must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
             labels
                 Sets the labels of each of the sectors.
             labelssrc
-                Sets the source reference on plot.ly for
-                labels .
+                Sets the source reference on Chart Studio Cloud
+                for  labels .
             level
                 Sets the level from which this trace hierarchy
                 is rendered. Set `level` to `''` to start from
@@ -1554,8 +1579,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -1577,8 +1602,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly attempts to find matching items in
                 `labels`, but beware they must be unique.
             parentssrc
-                Sets the source reference on plot.ly for
-                parents .
+                Sets the source reference on Chart Studio Cloud
+                for  parents .
             pathbar
                 :class:`plotly.graph_objects.treemap.Pathbar`
                 instance or dict with compatible properties
@@ -1600,8 +1625,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
             textposition
                 Sets the positions of the `text` elements.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -1625,8 +1650,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `entry`, `percentRoot`, `percentEntry`,
                 `percentParent`, `label` and `value`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             tiling
                 :class:`plotly.graph_objects.treemap.Tiling`
                 instance or dict with compatible properties
@@ -1661,8 +1686,8 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sectors. Use with `branchvalues` to determine
                 how the values are summed.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -1696,15 +1721,15 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 will be rendered as the third column, as
                 columns have an index base of zero.
             columnordersrc
-                Sets the source reference on plot.ly for
-                columnorder .
+                Sets the source reference on Chart Studio Cloud
+                for  columnorder .
             columnwidth
                 The width of columns expressed as a ratio.
                 Columns fill the available width in proportion
                 of their specified column widths.
             columnwidthsrc
-                Sets the source reference on plot.ly for
-                columnwidth .
+                Sets the source reference on Chart Studio Cloud
+                for  columnwidth .
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -1712,8 +1737,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             domain
                 :class:`plotly.graph_objects.table.Domain`
                 instance or dict with compatible properties
@@ -1727,8 +1752,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.table.Hoverlabel`
                 instance or dict with compatible properties
@@ -1738,7 +1763,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -1754,8 +1780,8 @@ class TableValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -1878,8 +1904,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hidesurface
                 Determines whether or not a surface is drawn.
                 For example, set `hidesurface` to False
@@ -1892,8 +1918,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.surface.Hoverlabel
                 ` instance or dict with compatible properties
@@ -1916,7 +1942,7 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -1926,20 +1952,21 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -1966,8 +1993,8 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -1980,6 +2007,19 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 surfaces may not perfectly be sorted in depth
                 by the webgl API. This behavior may be improved
                 in the near future and is subject to change.
+            opacityscale
+                Sets the opacityscale. The opacityscale must be
+                an array containing arrays mapping a normalized
+                value to an opacity value. At minimum, a
+                mapping for the lowest (0) and highest (1)
+                values are required. For example, `[[0, 1],
+                [0.5, 0.2], [1, 1]]` means that higher/lower
+                values would have higher opacity values and
+                those in the middle would be more transparent
+                Alternatively, `opacityscale` may be a palette
+                name string of the following list: 'min',
+                'max', 'extremes' and 'uniform'. The default is
+                'uniform'.
             reversescale
                 Reverses the color mapping if true. If true,
                 `cmin` will correspond to the last color in the
@@ -2005,16 +2045,16 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the surface color values, used for setting
                 a color scale independent of `z`.
             surfacecolorsrc
-                Sets the source reference on plot.ly for
-                surfacecolor .
+                Sets the source reference on Chart Studio Cloud
+                for  surfacecolor .
             text
                 Sets the text elements associated with each z
                 value. If trace `hoverinfo` contains a "text"
                 flag and "hovertext" is not set, these elements
                 will be seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -2052,21 +2092,24 @@ class SurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the z coordinates.
             zcalendar
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -2104,8 +2147,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             domain
                 :class:`plotly.graph_objects.sunburst.Domain`
                 instance or dict with compatible properties
@@ -2116,8 +2159,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.sunburst.Hoverlabe
                 l` instance or dict with compatible properties
@@ -2140,7 +2183,7 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -2152,8 +2195,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -2162,15 +2205,16 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace's sectors. To be seen, trace `hoverinfo`
                 must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
@@ -2188,8 +2232,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             labels
                 Sets the labels of each of the sectors.
             labelssrc
-                Sets the source reference on plot.ly for
-                labels .
+                Sets the source reference on Chart Studio Cloud
+                for  labels .
             leaf
                 :class:`plotly.graph_objects.sunburst.Leaf`
                 instance or dict with compatible properties
@@ -2221,8 +2265,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -2244,8 +2288,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 plotly attempts to find matching items in
                 `labels`, but beware they must be unique.
             parentssrc
-                Sets the source reference on plot.ly for
-                parents .
+                Sets the source reference on Chart Studio Cloud
+                for  parents .
             stream
                 :class:`plotly.graph_objects.sunburst.Stream`
                 instance or dict with compatible properties
@@ -2262,8 +2306,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Determines which trace information appear on
                 the graph.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -2287,8 +2331,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `entry`, `percentRoot`, `percentEntry`,
                 `percentParent`, `label` and `value`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -2320,8 +2364,8 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
                 sectors. Use with `branchvalues` to determine
                 how the values are summed.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -2406,8 +2450,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -2415,8 +2459,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.streamtube.Hoverla
                 bel` instance or dict with compatible
@@ -2440,7 +2484,7 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -2452,8 +2496,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             ids
@@ -2462,7 +2506,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -2492,8 +2537,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -2570,7 +2615,8 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             usrc
-                Sets the source reference on plot.ly for  u .
+                Sets the source reference on Chart Studio Cloud
+                for  u .
             v
                 Sets the y components of the vector field.
             visible
@@ -2579,23 +2625,28 @@ class StreamtubeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             vsrc
-                Sets the source reference on plot.ly for  v .
+                Sets the source reference on Chart Studio Cloud
+                for  v .
             w
                 Sets the z components of the vector field.
             wsrc
-                Sets the source reference on plot.ly for  w .
+                Sets the source reference on Chart Studio Cloud
+                for  w .
             x
                 Sets the x coordinates of the vector field.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates of the vector field.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the z coordinates of the vector field.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -2621,8 +2672,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             diagonal
                 :class:`plotly.graph_objects.splom.Diagonal`
                 instance or dict with compatible properties
@@ -2642,8 +2693,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.splom.Hoverlabel`
                 instance or dict with compatible properties
@@ -2666,7 +2717,7 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -2676,20 +2727,21 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -2712,8 +2764,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -2751,8 +2803,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 mapped in order to the this trace's (x,y)
                 coordinates.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -2831,7 +2883,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 they must be normalized to match
                 `ternary<i>.sum`.
             asrc
-                Sets the source reference on plot.ly for  a .
+                Sets the source reference on Chart Studio Cloud
+                for  a .
             b
                 Sets the quantity of component `a` in each data
                 point. If `a`, `b`, and `c` are all provided,
@@ -2840,7 +2893,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 they must be normalized to match
                 `ternary<i>.sum`.
             bsrc
-                Sets the source reference on plot.ly for  b .
+                Sets the source reference on Chart Studio Cloud
+                for  b .
             c
                 Sets the quantity of component `a` in each data
                 point. If `a`, `b`, and `c` are all provided,
@@ -2859,7 +2913,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 missing values) in the provided data arrays are
                 connected.
             csrc
-                Sets the source reference on plot.ly for  c .
+                Sets the source reference on Chart Studio Cloud
+                for  c .
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -2867,8 +2922,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not "none". scatterternary
@@ -2893,8 +2948,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scatterternary.Hov
                 erlabel` instance or dict with compatible
@@ -2925,7 +2980,7 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -2935,8 +2990,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (a,b,c) point. If a single string, the same
@@ -2945,15 +3000,16 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the the data points in (a,b,c). To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -2980,8 +3036,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -3043,11 +3099,11 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -3069,8 +3125,8 @@ class ScatterternaryValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `a`, `b`, `c` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -3135,8 +3191,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dr
                 Sets the r coordinate step.
             dtheta
@@ -3181,8 +3237,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scatterpolargl.Hov
                 erlabel` instance or dict with compatible
@@ -3206,7 +3262,7 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -3216,8 +3272,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -3226,15 +3282,16 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -3261,8 +3318,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -3283,7 +3340,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `dr` where `r0` is the
                 starting coordinate and `dr` the step.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             selected
                 :class:`plotly.graph_objects.scatterpolargl.Sel
                 ected` instance or dict with compatible
@@ -3325,11 +3383,11 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -3351,8 +3409,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `r`, `theta` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             theta
                 Sets the angular coordinates
             theta0
@@ -3361,8 +3419,8 @@ class ScatterpolarglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `theta0` is the starting coordinate and
                 `dtheta` the step.
             thetasrc
-                Sets the source reference on plot.ly for  theta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  theta .
             thetaunit
                 Sets the unit of input "theta" values. Has an
                 effect only when on "linear" angular axes.
@@ -3436,8 +3494,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dr
                 Sets the r coordinate step.
             dtheta
@@ -3468,8 +3526,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scatterpolar.Hover
                 label` instance or dict with compatible
@@ -3500,7 +3558,7 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -3510,8 +3568,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -3520,15 +3578,16 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -3554,8 +3613,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -3576,7 +3635,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `dr` where `r0` is the
                 starting coordinate and `dr` the step.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             selected
                 :class:`plotly.graph_objects.scatterpolar.Selec
                 ted` instance or dict with compatible
@@ -3617,11 +3677,11 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -3643,8 +3703,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `r`, `theta` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             theta
                 Sets the angular coordinates
             theta0
@@ -3653,8 +3713,8 @@ class ScatterpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `theta0` is the starting coordinate and
                 `dtheta` the step.
             thetasrc
-                Sets the source reference on plot.ly for  theta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  theta .
             thetaunit
                 Sets the unit of input "theta" values. Has an
                 effect only when on "linear" angular axes.
@@ -3729,8 +3789,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not "none". "toself"
@@ -3749,8 +3809,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scattermapbox.Hove
                 rlabel` instance or dict with compatible
@@ -3774,7 +3834,7 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -3784,8 +3844,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (lon,lat) pair If a single string, the same
@@ -3795,20 +3855,22 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be seen, trace `hoverinfo` must contain a
                 "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             lat
                 Sets the latitude coordinates (in degrees
                 North).
             latsrc
-                Sets the source reference on plot.ly for  lat .
+                Sets the source reference on Chart Studio Cloud
+                for  lat .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -3820,7 +3882,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the longitude coordinates (in degrees
                 East).
             lonsrc
-                Sets the source reference on plot.ly for  lon .
+                Sets the source reference on Chart Studio Cloud
+                for  lon .
             marker
                 :class:`plotly.graph_objects.scattermapbox.Mark
                 er` instance or dict with compatible properties
@@ -3839,8 +3902,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -3895,8 +3958,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -3918,8 +3981,8 @@ class ScattermapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `lat`, `lon` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -3984,8 +4047,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -4036,8 +4099,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scattergl.Hoverlab
                 el` instance or dict with compatible properties
@@ -4060,7 +4123,7 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -4070,8 +4133,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -4080,15 +4143,16 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -4114,8 +4178,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace.
@@ -4157,11 +4221,11 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -4183,8 +4247,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -4235,7 +4299,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             y0
@@ -4252,7 +4317,8 @@ class ScatterglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -4282,8 +4348,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -4323,8 +4389,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scattergeo.Hoverla
                 bel` instance or dict with compatible
@@ -4348,7 +4414,7 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -4358,8 +4424,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (lon,lat) pair or item in `locations`. If a
@@ -4370,20 +4436,22 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 seen, trace `hoverinfo` must contain a "text"
                 flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             lat
                 Sets the latitude coordinates (in degrees
                 North).
             latsrc
-                Sets the source reference on plot.ly for  lat .
+                Sets the source reference on Chart Studio Cloud
+                for  lat .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -4405,13 +4473,14 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 location given. See `locationmode` for more
                 info.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             lon
                 Sets the longitude coordinates (in degrees
                 East).
             lonsrc
-                Sets the source reference on plot.ly for  lon .
+                Sets the source reference on Chart Studio Cloud
+                for  lon .
             marker
                 :class:`plotly.graph_objects.scattergeo.Marker`
                 instance or dict with compatible properties
@@ -4430,8 +4499,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -4479,11 +4548,11 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -4506,8 +4575,8 @@ class ScattergeoValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available. variables `lat`, `lon`, `location`
                 and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -4564,11 +4633,13 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             a
                 Sets the a-axis coordinates.
             asrc
-                Sets the source reference on plot.ly for  a .
+                Sets the source reference on Chart Studio Cloud
+                for  a .
             b
                 Sets the b-axis coordinates.
             bsrc
-                Sets the source reference on plot.ly for  b .
+                Sets the source reference on Chart Studio Cloud
+                for  b .
             carpet
                 An identifier for this carpet, so that
                 `scattercarpet` and `contourcarpet` traces can
@@ -4584,8 +4655,8 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             fill
                 Sets the area to fill with a solid color. Use
                 with `fillcolor` if not "none". scatterternary
@@ -4610,8 +4681,8 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scattercarpet.Hove
                 rlabel` instance or dict with compatible
@@ -4642,7 +4713,7 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -4652,8 +4723,8 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (a,b) point. If a single string, the same
@@ -4662,15 +4733,16 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 to the the data points in (a,b). To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -4696,8 +4768,8 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -4745,11 +4817,11 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -4771,8 +4843,8 @@ class ScattercarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `a`, `b` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -4849,8 +4921,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             error_x
                 :class:`plotly.graph_objects.scatter3d.ErrorX`
                 instance or dict with compatible properties
@@ -4867,8 +4939,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scatter3d.Hoverlab
                 el` instance or dict with compatible properties
@@ -4891,7 +4963,7 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -4901,8 +4973,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets text elements associated with each (x,y,z)
                 triplet. If a single string, the same string
@@ -4911,15 +4983,16 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y,z) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -4945,8 +5018,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -4999,11 +5072,11 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -5025,8 +5098,8 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -5064,21 +5137,24 @@ class Scatter3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             ycalendar
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the z coordinates.
             zcalendar
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -5114,8 +5190,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -5180,8 +5256,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.scatter.Hoverlabel
                 ` instance or dict with compatible properties
@@ -5211,7 +5287,7 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -5221,8 +5297,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -5231,15 +5307,16 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -5265,8 +5342,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines the drawing mode for this scatter
                 trace. If the provided `mode` includes "text"
@@ -5295,7 +5372,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace type.Sets the radial coordinatesfor
                 legacy polar chart only.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             selected
                 :class:`plotly.graph_objects.scatter.Selected`
                 instance or dict with compatible properties
@@ -5363,11 +5441,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the positions of the `text` elements with
                 respects to the (x,y) coordinates.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -5389,10 +5467,11 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             tsrc
-                Sets the source reference on plot.ly for  t .
+                Sets the source reference on Chart Studio Cloud
+                for  t .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -5443,7 +5522,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             y0
@@ -5460,7 +5540,8 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -5496,8 +5577,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             domain
                 :class:`plotly.graph_objects.sankey.Domain`
                 instance or dict with compatible properties
@@ -5518,7 +5599,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             link
                 The links of the Sankey plot.
             meta
@@ -5536,8 +5618,8 @@ class SankeyValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -5625,8 +5707,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -5634,8 +5716,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.pointcloud.Hoverla
                 bel` instance or dict with compatible
@@ -5646,7 +5728,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             indices
                 A sequential value, 0..n, supply it to avoid
                 creating this array inside plotting. If
@@ -5659,8 +5742,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 points during use, and reuse it on each
                 `Plotly.restyle()` call.
             indicessrc
-                Sets the source reference on plot.ly for
-                indices .
+                Sets the source reference on Chart Studio Cloud
+                for  indices .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -5683,8 +5766,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -5706,8 +5789,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -5753,10 +5836,11 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Use it in conjunction with `xy` and `ybounds`
                 for the performance benefits.
             xboundssrc
-                Sets the source reference on plot.ly for
-                xbounds .
+                Sets the source reference on Chart Studio Cloud
+                for  xbounds .
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             xy
                 Faster alternative to specifying `x` and `y`
                 separately. If supplied, it must be a typed
@@ -5764,7 +5848,8 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 such that `xy[i * 2] = x[i]` and `xy[i * 2 + 1]
                 = y[i]`
             xysrc
-                Sets the source reference on plot.ly for  xy .
+                Sets the source reference on Chart Studio Cloud
+                for  xy .
             y
                 Sets the y coordinates.
             yaxis
@@ -5779,10 +5864,11 @@ class PointcloudValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Use it in conjunction with `xy` and `xbounds`
                 for the performance benefits.
             yboundssrc
-                Sets the source reference on plot.ly for
-                ybounds .
+                Sets the source reference on Chart Studio Cloud
+                for  ybounds .
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -5811,8 +5897,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             direction
                 Specifies the direction at which succeeding
                 sectors follow one another.
@@ -5832,8 +5918,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.pie.Hoverlabel`
                 instance or dict with compatible properties
@@ -5856,7 +5942,7 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -5867,8 +5953,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -5877,15 +5963,16 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace's sectors. To be seen, trace `hoverinfo`
                 must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
@@ -5912,8 +5999,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color) we use the first non-empty entry among
                 all occurrences of the label.
             labelssrc
-                Sets the source reference on plot.ly for
-                labels .
+                Sets the source reference on Chart Studio Cloud
+                for  labels .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -5936,8 +6023,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -5953,8 +6040,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 other equally or an array to highlight one or
                 more slices.
             pullsrc
-                Sets the source reference on plot.ly for  pull
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  pull .
             rotation
                 Instead of the first slice starting at 12
                 o'clock, rotate to some other angle.
@@ -5987,11 +6074,11 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
             textposition
                 Specifies the location of the `textinfo`.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -6014,8 +6101,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available. variables `label`, `color`, `value`,
                 `percent` and `text`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             title
                 :class:`plotly.graph_objects.pie.Title`
                 instance or dict with compatible properties
@@ -6060,8 +6147,8 @@ class PieValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the values of the sectors. If omitted, we
                 count occurrences of each label.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -6092,8 +6179,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dimensions
                 The dimensions (variables) of the parallel
                 coordinates chart. 2..60 dimensions are
@@ -6112,7 +6199,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             labelangle
                 Sets the angle of the labels with respect to
                 the horizontal. For example, a `tickangle` of
@@ -6147,8 +6235,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -6224,8 +6312,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 state. Defaults to 1 so that each state
                 represents one observation
             countssrc
-                Sets the source reference on plot.ly for
-                counts .
+                Sets the source reference on Chart Studio Cloud
+                for  counts .
             dimensions
                 The dimensions (variables) of the parallel
                 categories diagram.
@@ -6269,7 +6357,7 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -6300,8 +6388,8 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -6367,8 +6455,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             close
                 Sets the close values.
             closesrc
-                Sets the source reference on plot.ly for  close
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  close .
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -6376,16 +6464,16 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             decreasing
                 :class:`plotly.graph_objects.ohlc.Decreasing`
                 instance or dict with compatible properties
             high
                 Sets the high values.
             highsrc
-                Sets the source reference on plot.ly for  high
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  high .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -6393,23 +6481,24 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.ohlc.Hoverlabel`
                 instance or dict with compatible properties
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             increasing
                 :class:`plotly.graph_objects.ohlc.Increasing`
                 instance or dict with compatible properties
@@ -6423,7 +6512,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             low
                 Sets the low values.
             lowsrc
-                Sets the source reference on plot.ly for  low .
+                Sets the source reference on Chart Studio Cloud
+                for  low .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -6439,8 +6529,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -6449,8 +6539,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             open
                 Sets the open values.
             opensrc
-                Sets the source reference on plot.ly for  open
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  open .
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -6473,8 +6563,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array of string, the items are mapped in order
                 to this trace's sample points.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             tickwidth
                 Sets the width of the open/close tick marks
                 relative to the "x" minimal interval.
@@ -6522,7 +6612,8 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -6635,8 +6726,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             delaunayaxis
                 Sets the Delaunay axis, which is the axis that
                 is perpendicular to the surface of the Delaunay
@@ -6647,8 +6738,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the color of each face Overrides "color"
                 and "vertexcolor".
             facecolorsrc
-                Sets the source reference on plot.ly for
-                facecolor .
+                Sets the source reference on Chart Studio Cloud
+                for  facecolor .
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -6660,8 +6751,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.mesh3d.Hoverlabel`
                 instance or dict with compatible properties
@@ -6684,7 +6775,7 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -6694,13 +6785,13 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             i
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -6717,7 +6808,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             intensity
                 Sets the intensity values for vertices or cells
                 as defined by `intensitymode`. It can be used
@@ -6725,10 +6817,11 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
             intensitymode
                 Determines the source of `intensity` values.
             intensitysrc
-                Sets the source reference on plot.ly for
-                intensity .
+                Sets the source reference on Chart Studio Cloud
+                for  intensity .
             isrc
-                Sets the source reference on plot.ly for  i .
+                Sets the source reference on Chart Studio Cloud
+                for  i .
             j
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -6741,7 +6834,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 space, which is the second vertex of a
                 triangle.
             jsrc
-                Sets the source reference on plot.ly for  j .
+                Sets the source reference on Chart Studio Cloud
+                for  j .
             k
                 A vector of vertex indices, i.e. integer values
                 between 0 and the length of the vertex vectors,
@@ -6753,7 +6847,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 each element in `k` represents a point in
                 space, which is the third vertex of a triangle.
             ksrc
-                Sets the source reference on plot.ly for  k .
+                Sets the source reference on Chart Studio Cloud
+                for  k .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -6779,8 +6874,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -6820,8 +6915,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "text" flag and "hovertext" is not set, these
                 elements will be seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -6856,8 +6951,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 alpha color should be normalized to be between
                 0 and 1.
             vertexcolorsrc
-                Sets the source reference on plot.ly for
-                vertexcolor .
+                Sets the source reference on Chart Studio Cloud
+                for  vertexcolor .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -6872,7 +6967,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the Y coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -6882,7 +6978,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the Z coordinates of the vertices. The nth
                 element of vectors `x`, `y` and `z` jointly
@@ -6892,7 +6989,8 @@ class Mesh3dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `z` date
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -6978,8 +7076,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             flatshading
                 Determines whether or not normal smoothing is
                 applied to the meshes, creating meshes with an
@@ -6991,8 +7089,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.isosurface.Hoverla
                 bel` instance or dict with compatible
@@ -7016,7 +7114,7 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -7026,20 +7124,21 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             isomax
                 Sets the maximum boundary for iso-surface plot.
             isomin
@@ -7070,8 +7169,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -7121,8 +7220,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "text" flag and "hovertext" is not set, these
                 elements will be seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -7152,8 +7251,8 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
             value
                 Sets the 4th dimension (value) of the vertices.
             valuesrc
-                Sets the source reference on plot.ly for  value
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  value .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -7163,17 +7262,20 @@ class IsosurfaceValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the X coordinates of the vertices on X
                 axis.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the Y coordinates of the vertices on Y
                 axis.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the Z coordinates of the vertices on Z
                 axis.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -7204,8 +7306,8 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             delta
                 :class:`plotly.graph_objects.indicator.Delta`
                 instance or dict with compatible properties
@@ -7220,7 +7322,8 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -7236,8 +7339,8 @@ class IndicatorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             mode
                 Determines how the value is displayed on the
                 graph. `number` displays the value numerically
@@ -7317,8 +7420,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Set the pixel's horizontal size.
             dy
@@ -7330,8 +7433,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.image.Hoverlabel`
                 instance or dict with compatible properties
@@ -7354,7 +7457,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -7365,20 +7468,21 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -7394,8 +7498,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -7408,8 +7512,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each z
                 value.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -7479,7 +7583,8 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 colormodel, it is [0, 0, 0]. For the `hsla`
                 colormodel, it is [0, 0, 0, 0].
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -7567,8 +7672,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             histfunc
                 Specifies the binning function used for this
                 histogram trace. If "count", the histogram
@@ -7603,8 +7708,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.histogram2dcontour
                 .Hoverlabel` instance or dict with compatible
@@ -7628,7 +7733,7 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -7638,15 +7743,16 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -7674,8 +7780,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -7771,7 +7877,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the sample data to be binned on the y
                 axis.
@@ -7797,7 +7904,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the aggregation data.
             zauto
@@ -7827,7 +7935,8 @@ class Histogram2dContourValidator(_plotly_utils.basevalidators.CompoundValidator
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -7904,8 +8013,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             histfunc
                 Specifies the binning function used for this
                 histogram trace. If "count", the histogram
@@ -7940,8 +8049,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.histogram2d.Hoverl
                 abel` instance or dict with compatible
@@ -7965,7 +8074,7 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -7975,15 +8084,16 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -8006,8 +8116,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -8097,7 +8207,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the horizontal gap (in pixels) between
                 bricks.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the sample data to be binned on the y
                 axis.
@@ -8125,7 +8236,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the vertical gap (in pixels) between
                 bricks.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the aggregation data.
             zauto
@@ -8158,7 +8270,8 @@ class Histogram2dValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picks a smoothing algorithm use to smooth `z`
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -8216,8 +8329,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             error_x
                 :class:`plotly.graph_objects.histogram.ErrorX`
                 instance or dict with compatible properties
@@ -8258,8 +8371,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.histogram.Hoverlab
                 el` instance or dict with compatible properties
@@ -8282,7 +8395,7 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -8292,20 +8405,21 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -8328,8 +8442,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -8381,8 +8495,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the items are mapped in order to the this
                 trace's coordinates.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -8433,7 +8547,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the sample data to be binned on the y
                 axis.
@@ -8450,7 +8565,8 @@ class HistogramValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -8510,8 +8626,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -8525,8 +8641,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.heatmapgl.Hoverlab
                 el` instance or dict with compatible properties
@@ -8536,7 +8652,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -8552,8 +8669,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -8574,8 +8691,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each z
                 value.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             transpose
                 Transposes the z data.
             uid
@@ -8622,7 +8739,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             xtype
                 If "array", the heatmap's x coordinates are
                 given by "x" (the default behavior when `x` is
@@ -8642,7 +8760,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             ytype
                 If "array", the heatmap's y coordinates are
                 given by "y" (the default behavior when `y` is
@@ -8672,7 +8791,8 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -8738,8 +8858,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -8753,8 +8873,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.heatmap.Hoverlabel
                 ` instance or dict with compatible properties
@@ -8781,7 +8901,7 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -8791,20 +8911,21 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -8824,8 +8945,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -8849,8 +8970,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each z
                 value.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             transpose
                 Transposes the z data.
             uid
@@ -8903,7 +9024,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the horizontal gap (in pixels) between
                 bricks.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             xtype
                 If "array", the heatmap's x coordinates are
                 given by "x" (the default behavior when `x` is
@@ -8929,7 +9051,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the vertical gap (in pixels) between
                 bricks.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             ytype
                 If "array", the heatmap's y coordinates are
                 given by "y" (the default behavior when `y` is
@@ -8968,7 +9091,8 @@ class HeatmapValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Picks a smoothing algorithm use to smooth `z`
                 data.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -8999,8 +9123,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dlabel
                 Sets the label step. See `label0` for more
                 info.
@@ -9014,8 +9138,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.funnelarea.Hoverla
                 bel` instance or dict with compatible
@@ -9039,7 +9163,7 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -9050,8 +9174,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 sector. If a single string, the same string
@@ -9060,15 +9184,16 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace's sectors. To be seen, trace `hoverinfo`
                 must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextfont
                 Sets the font used for `textinfo` lying inside
                 the sector.
@@ -9084,8 +9209,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 color) we use the first non-empty entry among
                 all occurrences of the label.
             labelssrc
-                Sets the source reference on plot.ly for
-                labels .
+                Sets the source reference on Chart Studio Cloud
+                for  labels .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -9108,8 +9233,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -9141,11 +9266,11 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
             textposition
                 Specifies the location of the `textinfo`.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -9168,8 +9293,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 available. variables `label`, `color`, `value`,
                 `text` and `percent`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             title
                 :class:`plotly.graph_objects.funnelarea.Title`
                 instance or dict with compatible properties
@@ -9203,8 +9328,8 @@ class FunnelareaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the values of the sectors. If omitted, we
                 count occurrences of each label.
             valuessrc
-                Sets the source reference on plot.ly for
-                values .
+                Sets the source reference on Chart Studio Cloud
+                for  values .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -9253,8 +9378,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -9268,8 +9393,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.funnel.Hoverlabel`
                 instance or dict with compatible properties
@@ -9292,7 +9417,7 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -9303,8 +9428,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -9313,15 +9438,16 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextanchor
                 Determines if texts are kept at center or
                 start/end points in `textposition` "inside"
@@ -9351,8 +9477,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -9429,11 +9555,11 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 is stacked on this one the text is moved
                 outside.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -9457,8 +9583,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `percentPrevious`, `percentTotal`, `label` and
                 `value`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -9505,7 +9631,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             y0
@@ -9519,7 +9646,8 @@ class FunnelValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -9587,8 +9715,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -9596,8 +9724,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.densitymapbox.Hove
                 rlabel` instance or dict with compatible
@@ -9621,7 +9749,7 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -9631,8 +9759,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (lon,lat) pair If a single string, the same
@@ -9642,20 +9770,22 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 be seen, trace `hoverinfo` must contain a
                 "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             lat
                 Sets the latitude coordinates (in degrees
                 North).
             latsrc
-                Sets the source reference on plot.ly for  lat .
+                Sets the source reference on Chart Studio Cloud
+                for  lat .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -9664,7 +9794,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the longitude coordinates (in degrees
                 East).
             lonsrc
-                Sets the source reference on plot.ly for  lon .
+                Sets the source reference on Chart Studio Cloud
+                for  lon .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -9680,8 +9811,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -9693,8 +9824,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 makes the densitymapbox trace smoother, but
                 less detailed.
             radiussrc
-                Sets the source reference on plot.ly for
-                radius .
+                Sets the source reference on Chart Studio Cloud
+                for  radius .
             reversescale
                 Reverses the color mapping if true. If true,
                 `zmin` will correspond to the last color in the
@@ -9725,8 +9856,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "hovertext" is not set, these elements will be
                 seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -9783,7 +9914,8 @@ class DensitymapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -9809,7 +9941,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `dx` where `x0` is the
                 starting coordinate and `dx` the step.
             asrc
-                Sets the source reference on plot.ly for  a .
+                Sets the source reference on Chart Studio Cloud
+                for  a .
             atype
                 If "array", the heatmap's x coordinates are
                 given by "x" (the default behavior when `x` is
@@ -9837,7 +9970,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `dy` where `y0` is the
                 starting coordinate and `dy` the step.
             bsrc
-                Sets the source reference on plot.ly for  b .
+                Sets the source reference on Chart Studio Cloud
+                for  b .
             btype
                 If "array", the heatmap's y coordinates are
                 given by "y" (the default behavior when `y` is
@@ -9885,8 +10019,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             da
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -9901,15 +10035,16 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -9932,8 +10067,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -9964,8 +10099,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each z
                 value.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             transpose
                 Transposes the z data.
             uid
@@ -10034,7 +10169,8 @@ class ContourcarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -10109,8 +10245,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -10129,8 +10265,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.contour.Hoverlabel
                 ` instance or dict with compatible properties
@@ -10157,7 +10293,7 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -10167,20 +10303,21 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -10203,8 +10340,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -10235,8 +10372,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each z
                 value.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             transpose
                 Transposes the z data.
             uid
@@ -10286,7 +10423,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             xtype
                 If "array", the heatmap's x coordinates are
                 given by "x" (the default behavior when `x` is
@@ -10309,7 +10447,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             ytype
                 If "array", the heatmap's y coordinates are
                 given by "y" (the default behavior when `y` is
@@ -10345,7 +10484,8 @@ class ContourValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -10430,8 +10570,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -10439,8 +10579,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.cone.Hoverlabel`
                 instance or dict with compatible properties
@@ -10463,7 +10603,7 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -10473,20 +10613,21 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -10512,8 +10653,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -10574,8 +10715,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 flag and "hovertext" is not set, these elements
                 will be seen in the hover labels.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             u
                 Sets the x components of the vector field.
             uid
@@ -10605,7 +10746,8 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 driven changes if you give each trace a `uid`
                 that stays with it as it moves.
             usrc
-                Sets the source reference on plot.ly for  u .
+                Sets the source reference on Chart Studio Cloud
+                for  u .
             v
                 Sets the y components of the vector field.
             visible
@@ -10614,26 +10756,31 @@ class ConeValidator(_plotly_utils.basevalidators.CompoundValidator):
                 drawn, but can appear as a legend item
                 (provided that the legend itself is visible).
             vsrc
-                Sets the source reference on plot.ly for  v .
+                Sets the source reference on Chart Studio Cloud
+                for  v .
             w
                 Sets the z components of the vector field.
             wsrc
-                Sets the source reference on plot.ly for  w .
+                Sets the source reference on Chart Studio Cloud
+                for  w .
             x
                 Sets the x coordinates of the vector field and
                 of the displayed cones.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates of the vector field and
                 of the displayed cones.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
             z
                 Sets the z coordinates of the vector field and
                 of the displayed cones.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -10701,8 +10848,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -10722,8 +10869,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.choroplethmapbox.H
                 overlabel` instance or dict with compatible
@@ -10747,7 +10894,7 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -10757,20 +10904,21 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 To hide the secondary box completely, use an
                 empty tag `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -10779,8 +10927,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets which features found in "geojson" to plot
                 using their feature `id` field.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             marker
                 :class:`plotly.graph_objects.choroplethmapbox.M
                 arker` instance or dict with compatible
@@ -10800,8 +10948,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -10843,8 +10991,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each
                 location.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -10903,7 +11051,8 @@ class ChoroplethmapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -10963,8 +11112,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             featureidkey
                 Sets the key in GeoJSON features which is used
                 as id to match the items included in the
@@ -10993,8 +11142,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.choropleth.Hoverla
                 bel` instance or dict with compatible
@@ -11018,7 +11167,7 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -11028,20 +11177,21 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -11058,8 +11208,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the coordinates via location IDs or names.
                 See `locationmode` for more info.
             locationssrc
-                Sets the source reference on plot.ly for
-                locations .
+                Sets the source reference on Chart Studio Cloud
+                for  locations .
             marker
                 :class:`plotly.graph_objects.choropleth.Marker`
                 instance or dict with compatible properties
@@ -11078,8 +11228,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -11113,8 +11263,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the text elements associated with each
                 location.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -11173,7 +11323,8 @@ class ChoroplethValidator(_plotly_utils.basevalidators.CompoundValidator):
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
             zsrc
-                Sets the source reference on plot.ly for  z .
+                Sets the source reference on Chart Studio Cloud
+                for  z .
 """,
             ),
             **kwargs
@@ -11203,7 +11354,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.carpet.Aaxis`
                 instance or dict with compatible properties
             asrc
-                Sets the source reference on plot.ly for  a .
+                Sets the source reference on Chart Studio Cloud
+                for  a .
             b
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -11215,7 +11367,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.carpet.Baxis`
                 instance or dict with compatible properties
             bsrc
-                Sets the source reference on plot.ly for  b .
+                Sets the source reference on Chart Studio Cloud
+                for  b .
             carpet
                 An identifier for this carpet, so that
                 `scattercarpet` and `contourcarpet` traces can
@@ -11237,8 +11390,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             da
                 Sets the a coordinate step. See `a0` for more
                 info.
@@ -11254,7 +11407,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11270,8 +11424,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -11323,7 +11477,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.xaxis`. If "x2", the x coordinates
                 refer to `layout.xaxis2`, and so on.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 A two dimensional array of y coordinates at
                 each carpet point.
@@ -11334,7 +11489,8 @@ class CarpetValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `layout.yaxis`. If "y2", the y coordinates
                 refer to `layout.yaxis2`, and so on.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -11356,8 +11512,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             close
                 Sets the close values.
             closesrc
-                Sets the source reference on plot.ly for  close
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  close .
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -11365,8 +11521,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             decreasing
                 :class:`plotly.graph_objects.candlestick.Decrea
                 sing` instance or dict with compatible
@@ -11374,8 +11530,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             high
                 Sets the high values.
             highsrc
-                Sets the source reference on plot.ly for  high
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  high .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -11383,8 +11539,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.candlestick.Hoverl
                 abel` instance or dict with compatible
@@ -11392,15 +11548,16 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             increasing
                 :class:`plotly.graph_objects.candlestick.Increa
                 sing` instance or dict with compatible
@@ -11415,7 +11572,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             low
                 Sets the low values.
             lowsrc
-                Sets the source reference on plot.ly for  low .
+                Sets the source reference on Chart Studio Cloud
+                for  low .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11431,8 +11589,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -11441,8 +11599,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
             open
                 Sets the open values.
             opensrc
-                Sets the source reference on plot.ly for  open
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  open .
             selectedpoints
                 Array containing integer indices of selected
                 points. Has an effect only for traces that
@@ -11465,8 +11623,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 array of string, the items are mapped in order
                 to this trace's sample points.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -11515,7 +11673,8 @@ class CandlestickValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             yaxis
                 Sets a reference between this trace's y
                 coordinates and a 2D cartesian y axis. If "y"
@@ -11573,8 +11732,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step for multi-box traces
                 set using q1/median/q3.
@@ -11593,8 +11752,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.box.Hoverlabel`
                 instance or dict with compatible properties
@@ -11620,7 +11779,7 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -11630,20 +11789,21 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             jitter
                 Sets the amount of jitter in the sample points
                 drawn. If 0, the sample points align along the
@@ -11666,8 +11826,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 we compute the lower as the last sample point
                 below 1.5 times the IQR.
             lowerfencesrc
-                Sets the source reference on plot.ly for
-                lowerfence .
+                Sets the source reference on Chart Studio Cloud
+                for  lowerfence .
             marker
                 :class:`plotly.graph_objects.box.Marker`
                 instance or dict with compatible properties
@@ -11680,14 +11840,14 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 we compute the mean for each box using the
                 sample values.
             meansrc
-                Sets the source reference on plot.ly for  mean
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  mean .
             median
                 Sets the median values. There should be as many
                 items as the number of boxes desired.
             mediansrc
-                Sets the source reference on plot.ly for
-                median .
+                Sets the source reference on Chart Studio Cloud
+                for  median .
             meta
                 Assigns extra meta information associated with
                 this trace that can be used in various text
@@ -11703,8 +11863,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover. For box traces,
@@ -11733,8 +11893,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `y` or `x`) is set, we compute it as 1.57 * IQR
                 / sqrt(N), where N is the sample size.
             notchspansrc
-                Sets the source reference on plot.ly for
-                notchspan .
+                Sets the source reference on Chart Studio Cloud
+                for  notchspan .
             notchwidth
                 Sets the width of the notches relative to the
                 box' width. For example, with 0, the notches
@@ -11761,12 +11921,14 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the Quartile 1 values. There should be as
                 many items as the number of boxes desired.
             q1src
-                Sets the source reference on plot.ly for  q1 .
+                Sets the source reference on Chart Studio Cloud
+                for  q1 .
             q3
                 Sets the Quartile 3 values. There should be as
                 many items as the number of boxes desired.
             q3src
-                Sets the source reference on plot.ly for  q3 .
+                Sets the source reference on Chart Studio Cloud
+                for  q3 .
             quartilemethod
                 Sets the method used to compute the sample's Q1
                 and Q3 quartiles. The "linear" method uses the
@@ -11793,7 +11955,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 we compute the standard deviation for each box
                 using the sample values.
             sdsrc
-                Sets the source reference on plot.ly for  sd .
+                Sets the source reference on Chart Studio Cloud
+                for  sd .
             selected
                 :class:`plotly.graph_objects.box.Selected`
                 instance or dict with compatible properties
@@ -11821,8 +11984,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 seen, trace `hoverinfo` must contain a "text"
                 flag.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -11861,8 +12024,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 we compute the lower as the last sample point
                 above 1.5 times the IQR.
             upperfencesrc
-                Sets the source reference on plot.ly for
-                upperfence .
+                Sets the source reference on Chart Studio Cloud
+                for  upperfence .
             visible
                 Determines whether or not this trace is
                 visible. If "legendonly", the trace is not
@@ -11895,7 +12058,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y sample data or coordinates. See
                 overview for more info.
@@ -11914,7 +12078,8 @@ class BoxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -11939,8 +12104,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 set "base" will be excluded and drawn in
                 "overlay" mode instead.
             basesrc
-                Sets the source reference on plot.ly for  base
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  base .
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -11948,8 +12113,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dr
                 Sets the r coordinate step.
             dtheta
@@ -11963,8 +12128,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.barpolar.Hoverlabe
                 l` instance or dict with compatible properties
@@ -11987,7 +12152,7 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -11997,20 +12162,21 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Same as `text`.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -12033,8 +12199,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -12042,8 +12208,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Shifts the angular position where the bar is
                 drawn (in "thetatunit" units).
             offsetsrc
-                Sets the source reference on plot.ly for
-                offset .
+                Sets the source reference on Chart Studio Cloud
+                for  offset .
             opacity
                 Sets the opacity of the trace.
             r
@@ -12053,7 +12219,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 coordinates. Use with `dr` where `r0` is the
                 starting coordinate and `dr` the step.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             selected
                 :class:`plotly.graph_objects.barpolar.Selected`
                 instance or dict with compatible properties
@@ -12085,8 +12252,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the items are mapped in order to the this
                 trace's coordinates.
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             theta
                 Sets the angular coordinates
             theta0
@@ -12095,8 +12262,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `theta0` is the starting coordinate and
                 `dtheta` the step.
             thetasrc
-                Sets the source reference on plot.ly for  theta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  theta .
             thetaunit
                 Sets the unit of input "theta" values. Has an
                 effect only when on "linear" angular axes.
@@ -12138,8 +12305,8 @@ class BarpolarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the bar angular width (in "thetaunit"
                 units).
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
 """,
             ),
             **kwargs
@@ -12170,8 +12337,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 traces that set "base" will be excluded and
                 drawn in "overlay" mode instead.
             basesrc
-                Sets the source reference on plot.ly for  base
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  base .
             cliponaxis
                 Determines whether the text nodes are clipped
                 about the subplot axes. To show the text nodes
@@ -12188,8 +12355,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             dx
                 Sets the x coordinate step. See `x0` for more
                 info.
@@ -12209,8 +12376,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.bar.Hoverlabel`
                 instance or dict with compatible properties
@@ -12233,7 +12400,7 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for details on the date formatting syntax. The
                 variables available in `hovertemplate` are the
                 ones emitted as event data described at this
-                link https://plot.ly/javascript/plotlyjs-
+                link https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -12244,8 +12411,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 secondary box completely, use an empty tag
                 `<extra></extra>`.
             hovertemplatesrc
-                Sets the source reference on plot.ly for
-                hovertemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertemplate .
             hovertext
                 Sets hover text elements associated with each
                 (x,y) pair. If a single string, the same string
@@ -12254,15 +12421,16 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 this trace's (x,y) coordinates. To be seen,
                 trace `hoverinfo` must contain a "text" flag.
             hovertextsrc
-                Sets the source reference on plot.ly for
-                hovertext .
+                Sets the source reference on Chart Studio Cloud
+                for  hovertext .
             ids
                 Assigns id labels to each datum. These ids for
                 object constancy of data points during
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             insidetextanchor
                 Determines if texts are kept at center or
                 start/end points in `textposition` "inside"
@@ -12292,8 +12460,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -12308,8 +12476,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 where bars of the same position coordinate will
                 line up.
             offsetsrc
-                Sets the source reference on plot.ly for
-                offset .
+                Sets the source reference on Chart Studio Cloud
+                for  offset .
             opacity
                 Sets the opacity of the trace.
             orientation
@@ -12325,7 +12493,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace type.Sets the radial coordinatesfor
                 legacy polar chart only.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             selected
                 :class:`plotly.graph_objects.bar.Selected`
                 instance or dict with compatible properties
@@ -12378,11 +12547,11 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 is stacked on this one the text is moved
                 outside.
             textpositionsrc
-                Sets the source reference on plot.ly for
-                textposition .
+                Sets the source reference on Chart Studio Cloud
+                for  textposition .
             textsrc
-                Sets the source reference on plot.ly for  text
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  text .
             texttemplate
                 Template string used for rendering the
                 information text that appear on points. Note
@@ -12404,10 +12573,11 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 point (the ones that are `arrayOk: true`) are
                 available. variables `value` and `label`.
             texttemplatesrc
-                Sets the source reference on plot.ly for
-                texttemplate .
+                Sets the source reference on Chart Studio Cloud
+                for  texttemplate .
             tsrc
-                Sets the source reference on plot.ly for  t .
+                Sets the source reference on Chart Studio Cloud
+                for  t .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during
@@ -12445,8 +12615,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
             width
                 Sets the bar width (in position axis units).
             widthsrc
-                Sets the source reference on plot.ly for  width
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  width .
             x
                 Sets the x coordinates.
             x0
@@ -12463,7 +12633,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `x` date
                 data.
             xsrc
-                Sets the source reference on plot.ly for  x .
+                Sets the source reference on Chart Studio Cloud
+                for  x .
             y
                 Sets the y coordinates.
             y0
@@ -12480,7 +12651,8 @@ class BarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the calendar system to use with `y` date
                 data.
             ysrc
-                Sets the source reference on plot.ly for  y .
+                Sets the source reference on Chart Studio Cloud
+                for  y .
 """,
             ),
             **kwargs
@@ -12506,8 +12678,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 also appends customdata items in the markers
                 DOM elements
             customdatasrc
-                Sets the source reference on plot.ly for
-                customdata .
+                Sets the source reference on Chart Studio Cloud
+                for  customdata .
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no
@@ -12515,8 +12687,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `none` is set, click and hover events are still
                 fired.
             hoverinfosrc
-                Sets the source reference on plot.ly for
-                hoverinfo .
+                Sets the source reference on Chart Studio Cloud
+                for  hoverinfo .
             hoverlabel
                 :class:`plotly.graph_objects.area.Hoverlabel`
                 instance or dict with compatible properties
@@ -12526,7 +12698,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 animation. Should be an array of strings, not
                 numbers or any other type.
             idssrc
-                Sets the source reference on plot.ly for  ids .
+                Sets the source reference on Chart Studio Cloud
+                for  ids .
             legendgroup
                 Sets the legend group for this trace. Traces
                 part of the same legend group hide/show at the
@@ -12549,8 +12722,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `%{data[n[.meta[i]}` where `i` is the index or
                 key of the `meta` and `n` is the trace index.
             metasrc
-                Sets the source reference on plot.ly for  meta
-                .
+                Sets the source reference on Chart Studio Cloud
+                for  meta .
             name
                 Sets the trace name. The trace name appear as
                 the legend item and on hover.
@@ -12561,7 +12734,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the "barpolar" trace type. Sets the radial
                 coordinates for legacy polar chart only.
             rsrc
-                Sets the source reference on plot.ly for  r .
+                Sets the source reference on Chart Studio Cloud
+                for  r .
             showlegend
                 Determines whether or not an item corresponding
                 to this trace is shown in the legend.
@@ -12573,7 +12747,8 @@ class AreaValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the "barpolar" trace type. Sets the angular
                 coordinates for legacy polar chart only.
             tsrc
-                Sets the source reference on plot.ly for  t .
+                Sets the source reference on Chart Studio Cloud
+                for  t .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

@@ -23,7 +23,7 @@ if matplotlylib:
 @pytest.mark.matplotlib
 class PlotMPLTest(TestCase):
     def setUp(self):
-        py.sign_in("PlotlyImageTest", "786r5mecv0", plotly_domain="https://plot.ly")
+        py.sign_in("PlotlyImageTest", "786r5mecv0", plotly_domain="https://plotly.com")
 
     def test_update_type_error(self):
         fig, ax = plt.subplots()
@@ -45,7 +45,7 @@ class PlotMPLTest(TestCase):
         title = "new title"
         update = {"layout": {"title": title}}
         url = py.plot_mpl(fig, update=update, filename="nosetests", auto_open=False)
-        un = url.replace("https://plot.ly/~", "").split("/")[0]
-        fid = url.replace("https://plot.ly/~", "").split("/")[1]
+        un = url.replace("https://plotly.com/~", "").split("/")[0]
+        fid = url.replace("https://plotly.com/~", "").split("/")[1]
         pfig = py.get_figure(un, fid)
         assert pfig["layout"]["title"]["text"] == title

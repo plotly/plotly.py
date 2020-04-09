@@ -56,7 +56,7 @@ fig.add_trace(
 # Add images
 fig.add_layout_image(
         dict(
-            source="https://images.plotly.com/language-icons/api-home/python-logo.png",
+            source="https://images.plot.ly/language-icons/api-home/python-logo.png",
             xref="x",
             yref="y",
             x=0,
