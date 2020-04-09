@@ -374,6 +374,21 @@ def test_constants():
     assert fig.layout.legend.title.text == "symbol"
 
 
+def test_ranges():
+    fig = px.scatter(x=px.Range(), y=[1, 2], hover_data=[px.Range()])
+    assert fig.data[0].x[0] == 0
+    assert fig.data[0].x[1] == 1
+    assert fig.data[0].customdata[0][0] == 0
+    assert fig.data[0].customdata[1][0] == 1
+    assert "x=" in fig.data[0].hovertemplate
+
+    fig = px.scatter(x=px.Range(label="time"), y=[1, 2])
+    assert fig.data[0].x[0] == 0
+    assert fig.data[0].x[1] == 1
+    assert "x=" not in fig.data[0].hovertemplate
+    assert "time=" in fig.data[0].hovertemplate
+
+
 def test_auto_orient():
     categorical = ["a", "a", "b", "b"]
     numerical = [1, 2, 3, 4]

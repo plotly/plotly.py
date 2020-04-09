@@ -1,7 +1,7 @@
 import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
-from ._special_inputs import IdentityMap, Constant
+from ._special_inputs import IdentityMap, Constant, Range
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from .colors import qualitative, sequential
@@ -961,6 +961,7 @@ def build_dataframe(args, constructor):
             df_output[df_input.columns] = df_input[df_input.columns]
 
     constants = dict()
+    ranges = list()
 
     # Loop over possible arguments
     for field_name in all_attrables:
@@ -993,13 +994,16 @@ def build_dataframe(args, constructor):
                     "pandas MultiIndex is not supported by plotly express "
                     "at the moment." % field
                 )
-            # ----------------- argument is a constant ----------------------
-            if isinstance(argument, Constant):
+            # ----------------- argument is a special value ----------------------
+            if isinstance(argument, Constant) or isinstance(argument, Range):
                 col_name = _check_name_not_reserved(
                     str(argument.label) if argument.label is not None else field,
                     reserved_names,
                 )
-                constants[col_name] = argument.value
+                if isinstance(argument, Constant):
+                    constants[col_name] = argument.value
+                else:
+                    ranges.append(col_name)
             # ----------------- argument is a col name ----------------------
             elif isinstance(argument, str) or isinstance(
                 argument, int
@@ -1086,6 +1090,9 @@ def build_dataframe(args, constructor):
 
     for col_name in constants:
         df_output[col_name] = constants[col_name]
+
+    for col_name in ranges:
+        df_output[col_name] = range(len(df_output))
 
     if wide_mode:
         # TODO multi-level index
