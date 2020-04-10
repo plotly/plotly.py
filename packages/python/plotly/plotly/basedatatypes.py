@@ -13,18 +13,6 @@ from _plotly_utils.utils import _natural_sort_strings
 from plotly._validate import validate
 from .optional_imports import get_module
 
-from _plotly_utils.basevalidators import (
-    CompoundValidator,
-    CompoundArrayValidator,
-    BaseDataValidator,
-    BaseValidator,
-    LiteralValidator,
-)
-from . import animation
-from .callbacks import Points, InputDeviceState
-from plotly.utils import ElidedPrettyPrinter
-from .validators import DataValidator, LayoutValidator, FramesValidator
-
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
@@ -100,6 +88,8 @@ class BaseFigure(object):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
+        from .validators import DataValidator, LayoutValidator, FramesValidator
+
         super(BaseFigure, self).__init__()
 
         # Assign layout_plotly to layout
@@ -257,6 +247,8 @@ class BaseFigure(object):
 
         # Animation property validators
         # -----------------------------
+        from . import animation
+
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
 
@@ -764,6 +756,7 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
+        from plotly.subplots import _get_subplot_ref_for_trace
 
         for trace in self.data:
             # Filter by subplot
@@ -1795,6 +1788,8 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
+        from plotly.subplots import _set_trace_grid_reference
+
         grid_ref = self._validate_get_grid_ref()
         return _set_trace_grid_reference(
             trace, self.layout, grid_ref, row, col, secondary_y
@@ -1850,6 +1845,8 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
+        from plotly.subplots import _get_grid_subplot
+
         return _get_grid_subplot(self, row, col, secondary_y)
 
     # Child property operations
@@ -2847,6 +2844,10 @@ Invalid property path '{key_path_str}' for layout
             :class:`BasePlotlyType`, ``update_obj`` should be a tuple or list
             of dicts
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+        )
 
         if update_obj is None:
             # Nothing to do
@@ -2960,6 +2961,10 @@ class BasePlotlyType(object):
     # of relative path to new property (e.g. ('title', 'font')
     _mapped_properties = {}
 
+    _parent_path_str = ""
+    _path_str = ""
+    _valid_props = set()
+
     def __init__(self, plotly_name, **kwargs):
         """
         Construct a new BasePlotlyType
@@ -2986,10 +2991,6 @@ class BasePlotlyType(object):
 
         # Initialize properties
         # ---------------------
-        # ### _validators ###
-        # A dict from property names to property validators
-        self._validators = {}
-
         # ### _compound_props ###
         # A dict from compound property names to compound objects
         self._compound_props = {}
@@ -3085,30 +3086,6 @@ class BasePlotlyType(object):
         str
         """
         return self._plotly_name
-
-    @property
-    def _parent_path_str(self):
-        """
-        dot-separated path string to this object's parent.
-
-        Returns
-        -------
-        str
-
-        Examples
-        --------
-
-        >>> import plotly.graph_objs as go
-        >>> go.Layout()._parent_path_str
-        ''
-
-        >>> go.layout.XAxis()._parent_path_str
-        'layout'
-
-        >>> go.layout.xaxis.rangeselector.Button()._parent_path_str
-        'layout.xaxis.rangeselector'
-        """
-        raise NotImplementedError
 
     @property
     def _prop_descriptions(self):
@@ -3680,6 +3657,8 @@ class BasePlotlyType(object):
         str
             The representation string
         """
+        from plotly.utils import ElidedPrettyPrinter
+
         if parent_path_str:
             class_name = parent_path_str + "." + class_name
 
@@ -3702,6 +3681,7 @@ class BasePlotlyType(object):
         Customize object representation when displayed in the
         terminal/notebook
         """
+        from _plotly_utils.basevalidators import LiteralValidator
 
         # Get all properties
         props = self._props if self._props is not None else {}
@@ -4285,7 +4265,7 @@ on_change callbacks are not supported in this case.
         bool
             True if v1 and v2 are equal, False otherwise
         """
-        np = get_module("numpy")
+        np = get_module("numpy", should_load=False)
         if np is not None and (
             isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray)
         ):
