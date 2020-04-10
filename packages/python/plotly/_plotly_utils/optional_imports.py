@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 _not_importable = set()
 
 
-def get_module(name):
+def get_module(name, should_load=True):
     """
     Return module or None. Absolute import is required.
 
@@ -23,6 +23,8 @@ def get_module(name):
     """
     if name in sys.modules:
         return sys.modules[name]
+    if not should_load:
+        return None
     if name not in _not_importable:
         try:
             return import_module(name)

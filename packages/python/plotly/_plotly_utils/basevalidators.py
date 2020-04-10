@@ -35,8 +35,8 @@ def to_scalar_or_list(v):
     # Python native scalar type ('float' in the example above).
     # We explicitly check if is has the 'item' method, which conventionally
     # converts these types to native scalars.
-    np = get_module("numpy")
-    pd = get_module("pandas")
+    np = get_module("numpy", should_load=False)
+    pd = get_module("pandas", should_load=False)
     if np and np.isscalar(v) and hasattr(v, "item"):
         return v.item()
     if isinstance(v, (list, tuple)):
@@ -74,7 +74,9 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         Numpy array with the 'WRITEABLE' flag set to False
     """
     np = get_module("numpy")
-    pd = get_module("pandas")
+
+    # Don't force pandas to be loaded, we only want to know if it's already loaded
+    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -166,8 +168,8 @@ def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
     """
-    np = get_module("numpy")
-    pd = get_module("pandas")
+    np = get_module("numpy", should_load=False)
+    pd = get_module("pandas", should_load=False)
     if (
         np
         and isinstance(v, np.ndarray)
