@@ -21,16 +21,15 @@ def test_wide_mode_external():
         assert fig.layout.xaxis.title.text == "index"
         assert fig.layout.yaxis.title.text == "_value_"
         assert fig.layout.legend.title.text == "_column_"
-        if px_fn in [px.area, px.bar]:
-            fig = px_fn(df, orientation="h")
-            assert len(fig.data) == 3
-            assert list(fig.data[0].y) == [11, 12, 13]
-            assert list(fig.data[0].x) == [1, 2, 3]
-            assert list(fig.data[1].y) == [11, 12, 13]
-            assert list(fig.data[1].x) == [4, 5, 6]
-            assert fig.layout.yaxis.title.text == "index"
-            assert fig.layout.xaxis.title.text == "_value_"
-            assert fig.layout.legend.title.text == "_column_"
+        fig = px_fn(df, orientation="h")
+        assert len(fig.data) == 3
+        assert list(fig.data[0].y) == [11, 12, 13]
+        assert list(fig.data[0].x) == [1, 2, 3]
+        assert list(fig.data[1].y) == [11, 12, 13]
+        assert list(fig.data[1].x) == [4, 5, 6]
+        assert fig.layout.yaxis.title.text == "index"
+        assert fig.layout.xaxis.title.text == "_value_"
+        assert fig.layout.legend.title.text == "_column_"
     for px_fn in [px.violin, px.box, px.strip]:
         fig = px_fn(df)
         assert len(fig.data) == 1
