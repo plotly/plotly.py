@@ -104,7 +104,9 @@ def test_wide_mode_internal():
     for trace_type in [go.Scatter, go.Bar]:
         args_in = dict(data_frame=df_in.copy(), color=None)
         args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(x="index", y="_value_", color="_column_")
+        assert args_out == dict(
+            x="index", y="_value_", color="_column_", orientation="v"
+        )
 
         # now we check with orientation
         args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
@@ -116,7 +118,7 @@ def test_wide_mode_internal():
     for trace_type in [go.Violin, go.Box]:
         args_in = dict(data_frame=df_in.copy(), color=None)
         args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(x="_column_", y="_value_", color=None)
+        assert args_out == dict(x="_column_", y="_value_", color=None, orientation="v")
 
         # now we check with orientation
         args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
@@ -126,7 +128,7 @@ def test_wide_mode_internal():
     for trace_type in [go.Histogram]:
         args_in = dict(data_frame=df_in.copy(), color=None)
         args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(x="_value_", color="_column_")
+        assert args_out == dict(x="_value_", color="_column_", orientation="v")
 
         # now we check with orientation
         args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
@@ -155,7 +157,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=[1, 2, 3],
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(index=[0, 1, 2], _value_=[1, 2, 3], _column_=["0", "0", "0"])
         ),
@@ -165,7 +167,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.Series([1, 2, 3]),
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(index=[0, 1, 2], _value_=[1, 2, 3], _column_=["0", "0", "0"])
         ),
@@ -176,7 +178,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=df["my_col"],
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(
                 index=["a", "b", "c"],
@@ -192,7 +194,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=df.index,
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 2],
@@ -209,7 +211,9 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=df,
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="my_index", y="_value_", color="my_col_name"),
+        args_expect=dict(
+            x="my_index", y="_value_", color="my_col_name", orientation="v"
+        ),
         df_expect=pd.DataFrame(
             dict(
                 my_index=["a", "b", "c"],
@@ -223,7 +227,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=[[1, 2], [4, 5]],
         args_in=dict(x=None, y=None, color=None),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1], _value_=[1, 4, 2, 5], _column_=["0", "0", "1", "1"],
@@ -235,7 +239,13 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], symbol_col=["q", "r"])),
         args_in=dict(x=None, y=None, color=None, symbol="symbol_col"),
-        args_expect=dict(x="index", y="_value_", color="_column_", symbol="symbol_col"),
+        args_expect=dict(
+            x="index",
+            y="_value_",
+            color="_column_",
+            symbol="symbol_col",
+            orientation="v",
+        ),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1],
@@ -258,6 +268,7 @@ def test_wide_mode_internal_special_cases():
             color="_column_",
             symbol="symbol_col",
             custom_data=["symbol_col"],
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(
@@ -283,6 +294,7 @@ def test_wide_mode_internal_special_cases():
             color="_column_",
             symbol="symbol_col",
             custom_data=["data_col"],
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(
@@ -299,7 +311,9 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
         args_in=dict(x=None, y=None, color=None, symbol=["q", "r"]),
-        args_expect=dict(x="index", y="_value_", color="_column_", symbol="symbol"),
+        args_expect=dict(
+            x="index", y="_value_", color="_column_", symbol="symbol", orientation="v"
+        ),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1],
@@ -314,7 +328,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
         args_in=dict(x=None, y=None, color="_column_"),
-        args_expect=dict(x="index", y="_value_", color="_column_"),
+        args_expect=dict(x="index", y="_value_", color="_column_", orientation="v"),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1], _value_=[1, 2, 3, 4], _column_=["a", "a", "b", "b"]
@@ -326,7 +340,7 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], color_col=["q", "r"])),
         args_in=dict(x=None, y=None, color="color_col"),
-        args_expect=dict(x="index", y="_value_", color="color_col"),
+        args_expect=dict(x="index", y="_value_", color="color_col", orientation="v"),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1],
@@ -341,7 +355,9 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4])),
         args_in=dict(x=None, y=None, color=None, symbol="_column_"),
-        args_expect=dict(x="index", y="_value_", color="_column_", symbol="_column_"),
+        args_expect=dict(
+            x="index", y="_value_", color="_column_", symbol="_column_", orientation="v"
+        ),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1], _value_=[1, 2, 3, 4], _column_=["a", "a", "b", "b"],
@@ -353,7 +369,13 @@ def test_wide_mode_internal_special_cases():
     assert_df_and_args(
         df_in=pd.DataFrame(dict(a=[1, 2], b=[3, 4], color_col=["q", "r"])),
         args_in=dict(x=None, y=None, color="color_col", symbol="_column_"),
-        args_expect=dict(x="index", y="_value_", color="color_col", symbol="_column_"),
+        args_expect=dict(
+            x="index",
+            y="_value_",
+            color="color_col",
+            symbol="_column_",
+            orientation="v",
+        ),
         df_expect=pd.DataFrame(
             dict(
                 index=[0, 1, 0, 1],
@@ -371,7 +393,11 @@ def test_wide_mode_internal_special_cases():
         df_in=df,
         args_in=dict(x=None, y=None, color=None, facet_row="my_col_name"),
         args_expect=dict(
-            x="index", y="_value_", color="my_col_name", facet_row="my_col_name"
+            x="index",
+            y="_value_",
+            color="my_col_name",
+            facet_row="my_col_name",
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(
@@ -394,6 +420,7 @@ def test_wide_mode_internal_special_cases():
             y="_value_",
             color="my_col_name",
             hover_name="my_index_name",
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(
@@ -412,7 +439,11 @@ def test_wide_mode_internal_special_cases():
         df_in=df,
         args_in=dict(x=None, y=None, color=None, hover_name="_value_"),
         args_expect=dict(
-            x="my_index_name", y="_value_", color="my_col_name", hover_name="_value_",
+            x="my_index_name",
+            y="_value_",
+            color="my_col_name",
+            hover_name="_value_",
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(
@@ -431,7 +462,11 @@ def test_wide_mode_internal_special_cases():
         df_in=df,
         args_in=dict(x=None, y=None, color=None, symbol=px.Constant(1)),
         args_expect=dict(
-            x="my_index_name", y="_value_", color="my_col_name", symbol="symbol",
+            x="my_index_name",
+            y="_value_",
+            color="my_col_name",
+            symbol="symbol",
+            orientation="v",
         ),
         df_expect=pd.DataFrame(
             dict(

@@ -930,12 +930,10 @@ def build_dataframe(args, constructor):
 
     df_input = args["data_frame"]
 
-    wide_mode = (
-        df_provided
-        and args.get("x", None) is None
-        and args.get("y", None) is None
-        and constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
-    )
+    no_x = args.get("x", None) is None
+    no_y = args.get("y", None) is None
+    wideable = [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
+    wide_mode = df_provided and no_x and no_y and constructor in wideable
     wide_id_vars = set()
 
     if wide_mode:
@@ -943,6 +941,17 @@ def build_dataframe(args, constructor):
         var_name = df_output.columns.name or "_column_"
     else:
         df_output = pd.DataFrame()
+
+    missing_bar_dim = None
+    if constructor in [go.Scatter, go.Bar] and (no_x != no_y):
+        for ax in ["x", "y"]:
+            if args.get(ax, None) is None:
+                args[ax] = df_input.index if df_provided else Range()
+                if constructor == go.Scatter:
+                    if args["orientation"] is None:
+                        args["orientation"] = "v" if ax == "x" else "h"
+                if constructor == go.Bar:
+                    missing_bar_dim = ax
 
     # Initialize set of column names
     # These are reserved names
@@ -1088,11 +1097,26 @@ def build_dataframe(args, constructor):
                 args[field_name][i] = str(col_name)
             wide_id_vars.add(str(col_name))
 
-    for col_name in constants:
-        df_output[col_name] = constants[col_name]
+    if missing_bar_dim and constructor == go.Bar:
+        # now that we've populated df_output, we check to see if the non-missing
+        # dimensio is categorical: if so, then setting the missing dimension to a
+        # constant 1 is a less-insane thing to do than setting it to the index by
+        # default and we let the normal auto-orientation-code do its thing later
+        other_dim = "x" if missing_bar_dim == "y" else "y"
+        if not _is_continuous(df_output, args[other_dim]):
+            args[missing_bar_dim] = missing_bar_dim
+            constants[missing_bar_dim] = 1
+        else:
+            # on the other hand, if the non-missing dimension is continuous, then we
+            # can use this information to override the normal auto-orientation code
+            if args["orientation"] is None:
+                args["orientation"] = "v" if missing_bar_dim == "x" else "h"
 
     for col_name in ranges:
         df_output[col_name] = range(len(df_output))
+
+    for col_name in constants:
+        df_output[col_name] = constants[col_name]
 
     if wide_mode:
         # TODO multi-level index
@@ -1105,9 +1129,8 @@ def build_dataframe(args, constructor):
             id_vars=wide_id_vars, var_name=var_name, value_name="_value_"
         )
         df_output[var_name] = df_output[var_name].astype(str)
-        orient_v = "v" == (args.get("orientation", None) or "v")
-        if "orientation" in args:
-            args["orientation"] = "v" if orient_v else "h"
+        args["orientation"] = args.get("orientation", None) or "v"
+        orient_v = args["orientation"] == "v"
         if constructor in [go.Scatter, go.Bar]:
             args["x" if orient_v else "y"] = index_name
             args["y" if orient_v else "x"] = "_value_"
