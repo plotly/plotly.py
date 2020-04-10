@@ -10,11 +10,7 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 
 from _plotly_utils.utils import _natural_sort_strings
-from plotly.subplots import (
-    _set_trace_grid_reference,
-    _get_grid_subplot,
-    _get_subplot_ref_for_trace,
-)
+from plotly._validate import validate
 from .optional_imports import get_module
 
 from _plotly_utils.basevalidators import (
@@ -3070,6 +3066,9 @@ class BasePlotlyType(object):
             if k in self:
                 # e.g. underscore kwargs like marker_line_color
                 self[k] = v
+            elif not validate._should_validate:
+                # Set extra property as-is
+                self[k] = v
             else:
                 invalid_kwargs[k] = v
 
@@ -3551,24 +3550,49 @@ class BasePlotlyType(object):
             # ### Unwrap scalar tuple ###
             prop = prop[0]
 
-            # ### Validate prop ###
-            if prop not in self._validators:
-                self._raise_on_invalid_property_error(prop)
+            if validate._should_validate:
+                if prop not in self._valid_props:
+                    self._raise_on_invalid_property_error(prop)
 
-            # ### Get validator for this property ###
-            validator = self._validators[prop]
+                # ### Get validator for this property ###
+                validator = self._get_validator(prop)
 
-            # ### Handle compound property ###
-            if isinstance(validator, CompoundValidator):
-                self._set_compound_prop(prop, value)
+                # ### Handle compound property ###
+                if isinstance(validator, CompoundValidator):
+                    self._set_compound_prop(prop, value)
 
-            # ### Handle compound array property ###
-            elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
-                self._set_array_prop(prop, value)
+                # ### Handle compound array property ###
+                elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
+                    self._set_array_prop(prop, value)
 
-            # ### Handle simple property ###
+                # ### Handle simple property ###
+                else:
+                    self._set_prop(prop, value)
             else:
-                self._set_prop(prop, value)
+                # Make sure properties dict is initialized
+                self._init_props()
+
+                if isinstance(value, BasePlotlyType):
+                    # Extract json from graph objects
+                    value = value.to_plotly_json()
+
+                # Check for list/tuple of graph objects
+                if (
+                    isinstance(value, (list, tuple))
+                    and value
+                    and isinstance(value[0], BasePlotlyType)
+                ):
+                    value = [
+                        v.to_plotly_json() if isinstance(v, BasePlotlyType) else v
+                        for v in value
+                    ]
+
+                self._props[prop] = value
+
+                # Remove any already constructed graph object so that it will be
+                # reconstructed on property access
+                self._compound_props.pop(prop, None)
+                self._compound_array_props.pop(prop, None)
 
         # Handle non-scalar case
         # ----------------------

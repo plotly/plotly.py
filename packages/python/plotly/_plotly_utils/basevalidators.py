@@ -2457,6 +2457,10 @@ class CompoundValidator(BaseValidator):
         v._plotly_name = self.plotly_name
         return v
 
+    def present(self, v):
+        # Return compound object as-is
+        return v
+
 
 class TitleValidator(CompoundValidator):
     """
@@ -2550,6 +2554,10 @@ class CompoundArrayValidator(BaseValidator):
                 self.raise_invalid_val(v)
 
         return v
+
+    def present(self, v):
+        # Return compound object as tuple
+        return tuple(v)
 
 
 class BaseDataValidator(BaseValidator):
