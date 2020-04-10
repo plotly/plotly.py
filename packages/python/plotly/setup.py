@@ -475,6 +475,7 @@ setup(
         "plotly.figure_factory",
         "plotly.data",
         "plotly.express",
+        "plotly.graph_objects",
         "_plotly_utils",
         "_plotly_utils.colors",
         "_plotly_future_",

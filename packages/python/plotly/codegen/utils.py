@@ -42,46 +42,55 @@ def write_source_py(py_source, filepath, leading_newlines=0):
             f.write(py_source)
 
 
-def build_from_imports_py(imports_info):
+def build_from_imports_py(rel_modules=(), rel_classes=(), init_extra=""):
     """
     Build a string containing a series of `from X import Y` lines
 
     Parameters
     ----------
-    imports_info : str or list of (str, str or list of str)
-          List of import info
-            If element is a pair first entry is the package to be imported
-            from and the second entry is either a string of the single name
-            to be
-
-            If element is a string, insert string directly
+    rel_modules: list of str
+        list of submodules to import, of the form .submodule
+    rel_classes: list of str
+        list of submodule classes/variables to import, of the form ._submodule.Foo
+    init_extra: str
+        Extra code snippet to append to end of __init__.py file
     Returns
     -------
     str
         String containing a series of imports
     """
-    buffer = StringIO()
-    for import_info in imports_info:
 
-        if isinstance(import_info, tuple):
-            from_pkg, class_name = import_info
-            if isinstance(class_name, str):
-                class_name_str = class_name
-            else:
-                class_name_str = "(" + ", ".join(class_name) + ")"
+    rel_modules = list(rel_modules)
+    rel_classes = list(rel_classes)
 
-            buffer.write(
-                f"""\
-from {from_pkg} import {class_name_str}\n"""
-            )
+    import_lines = []
+    for rel in rel_classes + rel_modules:
+        rel_parts = rel.split(".")
+        parent_module = ".".join(rel_parts[:-1]) or "."
+        import_target = rel_parts[-1]
+        import_line = f"from {parent_module} import {import_target}"
+        import_lines.append(import_line)
 
-        elif isinstance(import_info, str):
-            buffer.write(import_info)
+    imports_str = "\n    ".join(import_lines)
 
-    return buffer.getvalue()
+    result = f"""\
+import sys
+if sys.version_info < (3, 7):
+    {imports_str}
+else:
+    from _plotly_utils.importers import relative_import
+    __all__, __getattr__ = relative_import(
+        __name__,
+        {repr(rel_modules)},
+        {repr(rel_classes)}
+    )
+
+{init_extra}
+"""
+    return result
 
 
-def write_init_py(pkg_root, path_parts, import_pairs):
+def write_init_py(pkg_root, path_parts, rel_modules=(), rel_classes=(), init_extra=""):
     """
     Build __init__.py source code and write to a file
 
@@ -93,22 +102,24 @@ def write_init_py(pkg_root, path_parts, import_pairs):
     path_parts : tuple of str
         Tuple of sub-packages under pkg_root where the __init__.py
         file should be written
-    import_pairs : list of (str, str or list of str)
-        List of pairs where first entry is the package to be imported from.
-        The second entry is either a string of the single name to be
-        imported, or a list of names to be imported.
+    rel_modules: list of str
+        list of submodules to import, of the form .submodule
+    rel_classes: list of str
+        list of submodule classes/variables to import, of the form ._submodule.Foo
+    init_extra: str
+        Extra code snippet to append to end of __init__.py file
     Returns
     -------
     None
     """
     # Generate source code
     # --------------------
-    init_source = build_from_imports_py(import_pairs)
+    init_source = build_from_imports_py(rel_modules, rel_classes, init_extra)
 
     # Write file
     # ----------
     filepath = opath.join(pkg_root, *path_parts, "__init__.py")
-    write_source_py(init_source, filepath, leading_newlines=2)
+    write_source_py(init_source, filepath)
 
 
 def format_description(desc):
@@ -411,11 +422,7 @@ class PlotlyNode:
         -------
         str
         """
-        return (
-            self.name_datatype_class
-            + ("s" if self.is_array_element else "")
-            + "Validator"
-        )
+        return self.name_property.title() + "Validator"
 
     @property
     def name_base_validator(self) -> str:
