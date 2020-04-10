@@ -26,20 +26,58 @@ Modules:
 
 """
 from __future__ import absolute_import
+import sys
+from _plotly_utils.importers import relative_import
 
-from plotly import (
-    graph_objs,
-    tools,
-    utils,
-    offline,
-    colors,
-    io,
-    data,
-    colors,
-    _docstring_gen,
-)
 
-from plotly.version import __version__
+if sys.version_info < (3, 7):
+    from plotly import (
+        graph_objs,
+        tools,
+        utils,
+        offline,
+        colors,
+        io,
+        data,
+        colors,
+        _docstring_gen,
+    )
+    from plotly.version import __version__
 
-# Set default template here to make sure import process is complete
-io.templates._default = "plotly"
+    __all__ = [
+        "graph_objs",
+        "tools",
+        "utils",
+        "offline",
+        "colors",
+        "io",
+        "data",
+        "colors",
+        "__version__",
+    ]
+
+    # Set default template (for >= 3.7 this is done in ploty/io/__init__.py)
+    from plotly.io import templates
+
+    templates._default = "plotly"
+else:
+    __all__, __getattr__ = relative_import(
+        __name__,
+        [
+            ".graph_objs",
+            ".graph_objects",
+            ".tools",
+            ".utils",
+            ".offline",
+            ".colors",
+            ".io",
+            ".data",
+            ".colors",
+            ".express",
+        ],
+        [".version.__version__"],
+    )
+
+    # Trigger docstring generation
+    # TODO: come back to _docstring_gen
+    # from plotly import _docstring_gen
