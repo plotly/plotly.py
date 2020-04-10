@@ -304,7 +304,7 @@ def walk_push_to_template(fig_obj, template_obj, skip):
         fig_val = fig_obj[prop]
         template_val = template_obj[prop]
 
-        validator = fig_obj._validators[prop]
+        validator = fig_obj._get_validator(prop)
 
         if isinstance(validator, CompoundValidator):
             walk_push_to_template(fig_val, template_val, skip)

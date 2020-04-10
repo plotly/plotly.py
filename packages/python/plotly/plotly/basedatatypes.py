@@ -1945,11 +1945,12 @@ Please use the add_trace method with the row and col parameters.
     def _initialize_layout_template(self):
         import plotly.io as pio
 
-        if self._layout_obj.template is None:
+        if self._layout_obj._props.get("template", None) is None:
             if pio.templates.default is not None:
-                self._layout_obj.template = pio.templates.default
-            else:
-                self._layout_obj.template = None
+                with validate(False):
+                    # Assume default template is already validated
+                    template_dict = pio.templates[pio.templates.default]
+                    self._layout_obj.template = template_dict
 
     @property
     def layout(self):
@@ -3019,6 +3020,47 @@ class BasePlotlyType(object):
         # properties is modified
         self._change_callbacks = {}
 
+        # ### Backing property for backward compatible _validator property ##
+        self.__validators = None
+
+    def _get_validator(self, prop):
+        from .validator_cache import ValidatorCache
+
+        return ValidatorCache.get_validator(self._path_str, prop)
+
+    @property
+    def _validators(self):
+        """
+        Validators used to be stored in a private _validators property. This was
+        eliminated when we switched to building validators on demand using the
+        _get_validator method.
+
+        This property returns a simple object that
+
+        Returns
+        -------
+        dict-like interface for accessing the object's validators
+        """
+        obj = self
+        if self.__validators is None:
+
+            class ValidatorCompat(object):
+                def __getitem__(self, item):
+                    return obj._get_validator(item)
+
+                def __contains__(self, item):
+                    return obj.__contains__(item)
+
+                def __iter__(self):
+                    return iter(obj)
+
+                def items(self):
+                    return [(k, self[k]) for k in self]
+
+            self.__validators = ValidatorCompat()
+
+        return self.__validators
+
     def _process_kwargs(self, **kwargs):
         """
         Process any extra kwargs that are not predefined as constructor params
@@ -3122,21 +3164,30 @@ class BasePlotlyType(object):
             return None
         else:
             # ### Child a compound property ###
-            if child.plotly_name in self._compound_props:
-                return self._props.get(child.plotly_name, None)
-
-            # ### Child an element of a compound array property ###
-            elif child.plotly_name in self._compound_array_props:
-                children = self._compound_array_props[child.plotly_name]
-                child_ind = BaseFigure._index_is(children, child)
-                assert child_ind is not None
-
-                children_props = self._props.get(child.plotly_name, None)
-                return (
-                    children_props[child_ind]
-                    if children_props is not None and len(children_props) > child_ind
-                    else None
+            if child.plotly_name in self:
+                from _plotly_utils.basevalidators import (
+                    CompoundValidator,
+                    CompoundArrayValidator,
                 )
+
+                validator = self._get_validator(child.plotly_name)
+
+                if isinstance(validator, CompoundValidator):
+                    return self._props.get(child.plotly_name, None)
+
+                # ### Child an element of a compound array property ###
+                elif isinstance(validator, CompoundArrayValidator):
+                    children = self[child.plotly_name]
+                    child_ind = BaseFigure._index_is(children, child)
+                    assert child_ind is not None
+
+                    children_props = self._props.get(child.plotly_name, None)
+                    return (
+                        children_props[child_ind]
+                        if children_props is not None
+                        and len(children_props) > child_ind
+                        else None
+                    )
 
             # ### Invalid child ###
             else:
@@ -3282,7 +3333,7 @@ class BasePlotlyType(object):
 
         # Return validator
         # ----------------
-        return plotly_obj._validators[prop]
+        return plotly_obj._get_validator(prop)
 
     @property
     def parent(self):
@@ -3344,6 +3395,11 @@ class BasePlotlyType(object):
         -------
         Any
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+            BaseDataValidator,
+        )
 
         # Normalize prop
         # --------------
@@ -3361,13 +3417,33 @@ class BasePlotlyType(object):
         if len(prop) == 1:
             # Unwrap scalar tuple
             prop = prop[0]
-            if prop not in self._validators:
+            if prop not in self._valid_props:
                 raise KeyError(prop)
 
-            validator = self._validators[prop]
-            if prop in self._compound_props:
+            validator = self._get_validator(prop)
+
+            if isinstance(validator, CompoundValidator):
+                if self._compound_props.get(prop, None) is None:
+                    # Init compound objects
+                    self._compound_props[prop] = validator.data_class(
+                        _parent=self, plotly_name=prop
+                    )
+                    # Update plotly_name value in case the validator applies
+                    # non-standard name (e.g. imagedefaults instead of image)
+                    self._compound_props[prop]._plotly_name = prop
+
                 return validator.present(self._compound_props[prop])
-            elif prop in self._compound_array_props:
+            elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
+                if self._compound_array_props.get(prop, None) is None:
+                    # Init list of compound objects
+                    if self._props is not None:
+                        self._compound_array_props[prop] = [
+                            validator.data_class(_parent=self)
+                            for _ in self._props.get(prop, [])
+                        ]
+                    else:
+                        self._compound_array_props[prop] = []
+
                 return validator.present(self._compound_array_props[prop])
             elif self._props is not None and prop in self._props:
                 return validator.present(self._props[prop])
@@ -3422,7 +3498,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._validators:
+                if obj is not None and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False
@@ -3445,6 +3521,11 @@ class BasePlotlyType(object):
         -------
         None
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+            BaseDataValidator,
+        )
 
         # Normalize prop
         # --------------
@@ -3511,7 +3592,7 @@ class BasePlotlyType(object):
         -------
         None
         """
-        if prop.startswith("_") or hasattr(self, prop) or prop in self._validators:
+        if prop.startswith("_") or hasattr(self, prop) or prop in self._valid_props:
             # Let known properties and private properties through
             super(BasePlotlyType, self).__setattr__(prop, value)
         else:
@@ -3522,7 +3603,7 @@ class BasePlotlyType(object):
         """
         Return an iterator over the object's properties
         """
-        res = list(self._validators.keys())
+        res = list(self._valid_props)
         for prop in self._mapped_properties:
             res.append(prop)
         return iter(res)
@@ -3605,8 +3686,8 @@ class BasePlotlyType(object):
         props = {
             p: v
             for p, v in props.items()
-            if p in self._validators
-            and not isinstance(self._validators[p], LiteralValidator)
+            if p in self._valid_props
+            and not isinstance(self._get_validator(p), LiteralValidator)
         }
 
         # Elide template
@@ -3767,7 +3848,8 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
+
         try:
             val = validator.validate_coerce(val)
         except ValueError as err:
@@ -3832,7 +3914,7 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
@@ -3906,7 +3988,7 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
@@ -4331,10 +4413,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Construct and add validator
         # ---------------------------
-        if prop not in self._validators:
-            validator_class = self._subplotid_validators[subplot_prop]
-            validator = validator_class(plotly_name=prop)
-            self._validators[prop] = validator
+        if prop not in self._valid_props:
+            self._valid_props.add(prop)
 
         # Import value
         # ------------
@@ -4395,7 +4475,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         prop = self._strip_subplot_suffix_of_1(prop)
         if prop != "_subplotid_props" and prop in self._subplotid_props:
-            validator = self._validators[prop]
+            validator = self._get_validator(prop)
             return validator.present(self._compound_props[prop])
         else:
             return super(BaseLayoutHierarchyType, self).__getattribute__(prop)
