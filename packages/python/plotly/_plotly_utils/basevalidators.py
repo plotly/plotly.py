@@ -2561,7 +2561,7 @@ class BaseDataValidator(BaseValidator):
         )
 
         self.class_strs_map = class_strs_map
-        self._class_map = None
+        self._class_map = {}
         self.set_uid = set_uid
 
     def description(self):
@@ -2597,21 +2597,17 @@ class BaseDataValidator(BaseValidator):
 
         return desc
 
-    @property
-    def class_map(self):
-        if self._class_map is None:
-
-            # Initialize class map
-            self._class_map = {}
-
-            # Import trace classes
+    def get_trace_class(self, trace_name):
+        # Import trace classes
+        if trace_name not in self._class_map:
             trace_module = import_module("plotly.graph_objs")
-            for k, class_str in self.class_strs_map.items():
-                self._class_map[k] = getattr(trace_module, class_str)
+            trace_class_name = self.class_strs_map[trace_name]
+            self._class_map[trace_name] = getattr(trace_module, trace_class_name)
 
-        return self._class_map
+        return self._class_map[trace_name]
 
     def validate_coerce(self, v, skip_invalid=False):
+        from plotly.basedatatypes import BaseTraceType
 
         # Import Histogram2dcontour, this is the deprecated name of the
         # Histogram2dContour trace.
@@ -2623,13 +2619,11 @@ class BaseDataValidator(BaseValidator):
             if not isinstance(v, (list, tuple)):
                 v = [v]
 
-            trace_classes = tuple(self.class_map.values())
-
             res = []
             invalid_els = []
             for v_el in v:
 
-                if isinstance(v_el, trace_classes):
+                if isinstance(v_el, BaseTraceType):
                     # Clone input traces
                     v_el = v_el.to_plotly_json()
 
@@ -2643,10 +2637,10 @@ class BaseDataValidator(BaseValidator):
                     else:
                         trace_type = "scatter"
 
-                    if trace_type not in self.class_map:
+                    if trace_type not in self.class_strs_map:
                         if skip_invalid:
                             # Treat as scatter trace
-                            trace = self.class_map["scatter"](
+                            trace = self.get_trace_class("scatter")(
                                 skip_invalid=skip_invalid, **v_copy
                             )
                             res.append(trace)
@@ -2654,14 +2648,14 @@ class BaseDataValidator(BaseValidator):
                             res.append(None)
                             invalid_els.append(v_el)
                     else:
-                        trace = self.class_map[trace_type](
+                        trace = self.get_trace_class(trace_type)(
                             skip_invalid=skip_invalid, **v_copy
                         )
                         res.append(trace)
                 else:
                     if skip_invalid:
                         # Add empty scatter trace
-                        trace = self.class_map["scatter"]()
+                        trace = self.get_trace_class("scatter")()
                         res.append(trace)
                     else:
                         res.append(None)
