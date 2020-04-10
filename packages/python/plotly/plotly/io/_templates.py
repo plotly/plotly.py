@@ -390,7 +390,7 @@ def to_templated(fig, skip=("title", "text")):
     >>> templated_fig = pio.to_templated(fig)
     >>> templated_fig.layout.template
     layout.Template({
-        'data': {}, 'layout': {'font': {'family': 'Courier', 'size': 20}}
+        'layout': {'font': {'family': 'Courier', 'size': 20}}
     })
     >>> templated_fig
     Figure({
@@ -483,10 +483,17 @@ def to_templated(fig, skip=("title", "text")):
         trace_type_indexes[trace.type] = template_index + 1
 
     # Remove useless trace arrays
+    any_non_empty = False
     for trace_type in templated_fig.layout.template.data:
         traces = templated_fig.layout.template.data[trace_type]
         is_empty = [trace.to_plotly_json() == {"type": trace_type} for trace in traces]
         if all(is_empty):
             templated_fig.layout.template.data[trace_type] = None
+        else:
+            any_non_empty = True
+
+    # Check if we can remove the data altogether key
+    if not any_non_empty:
+        templated_fig.layout.template.data = None
 
     return templated_fig
