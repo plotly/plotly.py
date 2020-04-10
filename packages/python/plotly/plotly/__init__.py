@@ -40,7 +40,6 @@ if sys.version_info < (3, 7):
         io,
         data,
         colors,
-        _docstring_gen,
     )
     from plotly.version import __version__
 
@@ -77,7 +76,3 @@ else:
         ],
         [".version.__version__"],
     )
-
-    # Trigger docstring generation
-    # TODO: come back to _docstring_gen
-    # from plotly import _docstring_gen
