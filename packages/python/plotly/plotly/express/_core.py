@@ -1565,11 +1565,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                         and args["animation_frame"] is None
                     )
                 ):
-                    constructor_to_use = (
-                        go.Scattergl
-                        if constructor_to_use == go.Scatter
-                        else go.Scatterpolargl
-                    )
+                    if constructor_to_use == go.Scatter:
+                        constructor_to_use = go.Scattergl
+                        if "orientation" in trace_patch:
+                            del trace_patch["orientation"]
+                    else:
+                        constructor_to_use = go.Scatterpolargl
             # Create the trace
             trace = constructor_to_use(name=trace_name)
             if trace_spec.constructor not in [
