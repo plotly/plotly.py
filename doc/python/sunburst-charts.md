@@ -196,7 +196,7 @@ fig.show()
 
 With branchvalues "total", the value of the parent represents the width of its wedge. In the example below, "Enoch" is 4 and "Awan" is 6 and so Enoch's width is 4/6ths of Awans. With branchvalues "remainder", the parent's width is determined by its own value plus those of its children. So, Enoch's width is 4/10ths of Awan's (4 / (6 + 4)).
 
-Note that this means that the sum of the values of the children cannot exceed the value of their parent when branchvalues "total". When branchvalues "relative" (the default), children will not take up all of the space below their parent (unless the parent is the root and it has a value of 0).
+Note that this means that the sum of the values of the children cannot exceed the value of their parent when branchvalues "total". When branchvalues "remainder" (the default), children will not take up all of the space below their parent (unless the parent is the root and it has a value of 0).
 
 ```python
 import plotly.graph_objects as go
