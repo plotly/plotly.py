@@ -235,7 +235,6 @@ It is important to note that Dash does not use the renderers framework discussed
 
 Instead, pass your figure as the `figure` parameter to the [`dcc.Graph`](https://dash.plot.ly/dash-core-components/graph) component, which is part of the [Dash Core Components](https://dash.plot.ly/dash-core-components) library. The code below demonstrates how to do this. 
 
-```python
 import dash_core_components as dcc
 import plotly.graph_objs as go
 
