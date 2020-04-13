@@ -290,7 +290,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
+                    hover_is_dict = isinstance(attr_value, dict)
                     for col in attr_value:
+                        if hover_is_dict and not attr_value[col]:
+                            continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -387,7 +390,20 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         go.Parcoords,
         go.Parcats,
     ]:
-        hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
+        # Modify mapping_labels according to hover_data keys
+        # if hover_data is a dict
+        mapping_labels_copy = OrderedDict(mapping_labels)
+        if args["hover_data"] and isinstance(args["hover_data"], dict):
+            for k, v in mapping_labels.items():
+                if k in args["hover_data"]:
+                    if args["hover_data"][k]:
+                        if isinstance(args["hover_data"][k], str):
+                            mapping_labels_copy[k] = v.replace(
+                                "}", ":%s}" % args["hover_data"][k]
+                            )
+                    else:
+                        _ = mapping_labels_copy.pop(k)
+        hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
         trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
@@ -1029,6 +1045,8 @@ def build_dataframe(args, attrables, array_attrables):
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
                 args[field_name] = str(col_name)
+            elif isinstance(args[field_name], dict):
+                pass
             else:
                 args[field_name][i] = str(col_name)
 

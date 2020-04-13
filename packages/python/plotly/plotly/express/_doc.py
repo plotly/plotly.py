@@ -180,8 +180,12 @@ docs = dict(
         "Values from this column or array_like appear in bold in the hover tooltip.",
     ],
     hover_data=[
-        colref_list_type,
-        colref_list_desc,
+        "list of str or int, or Series or array-like, or dict",
+        "Either a list of names of columns in `data_frame`, or pandas Series,",
+        "or array_like objects",
+        "or a dict with column names as keys, with values True (for default formatting)",
+        "False (in order to remove this column from hover information),",
+        "or a formatting string, for example '.3f'."
         "Values from these columns appear as extra data in the hover tooltip.",
     ],
     custom_data=[
