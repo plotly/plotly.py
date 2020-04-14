@@ -399,7 +399,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     if args["hover_data"][k]:
                         if isinstance(args["hover_data"][k], str):
                             mapping_labels_copy[k] = v.replace(
-                                "}", ":%s}" % args["hover_data"][k]
+                                "}", "%s}" % args["hover_data"][k]
                             )
                     else:
                         _ = mapping_labels_copy.pop(k)

@@ -185,7 +185,7 @@ docs = dict(
         "or array_like objects",
         "or a dict with column names as keys, with values True (for default formatting)",
         "False (in order to remove this column from hover information),",
-        "or a formatting string, for example '.3f'."
+        "or a formatting string, for example ':.3f' or '|%a'."
         "Values from these columns appear as extra data in the hover tooltip.",
     ],
     custom_data=[

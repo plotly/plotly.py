@@ -21,7 +21,7 @@ def test_skip_hover():
 def test_composite_hover():
     df = px.data.tips()
     hover_dict = OrderedDict(
-        {"day": False, "sex": True, "time": False, "total_bill": ".1f"}
+            {"day": False, "sex": True, "time": False, "total_bill": ":.1f"}
     )
     fig = px.scatter(
         df,
