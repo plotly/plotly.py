@@ -3,7 +3,7 @@ import importlib
 
 def relative_import(parent_name, rel_modules=(), rel_classes=()):
     """
-    Helper function to import submodules lazily in Pythong 3.7+
+    Helper function to import submodules lazily in Python 3.7+
 
     Parameters
     ----------
