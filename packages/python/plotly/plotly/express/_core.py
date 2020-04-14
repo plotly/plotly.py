@@ -708,6 +708,21 @@ def configure_animation_controls(args, constructor, fig):
 
 
 def make_trace_spec(args, constructor, attrs, trace_patch):
+    if constructor in [go.Scatter, go.Scatterpolar]:
+        if "render_mode" in args and (
+            args["render_mode"] == "webgl"
+            or (
+                args["render_mode"] == "auto"
+                and len(args["data_frame"]) > 1000
+                and args["animation_frame"] is None
+            )
+        ):
+            if constructor == go.Scatter:
+                constructor = go.Scattergl
+                if "orientation" in trace_patch:
+                    del trace_patch["orientation"]
+            else:
+                constructor = go.Scatterpolargl
     # Create base trace specification
     result = [TraceSpec(constructor, attrs, trace_patch, None)]
 
@@ -1555,24 +1570,8 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
         trace_names = trace_names_by_frame[frame_name]
 
         for trace_spec in trace_specs:
-            constructor_to_use = trace_spec.constructor
-            if constructor_to_use in [go.Scatter, go.Scatterpolar]:
-                if "render_mode" in args and (
-                    args["render_mode"] == "webgl"
-                    or (
-                        args["render_mode"] == "auto"
-                        and len(args["data_frame"]) > 1000
-                        and args["animation_frame"] is None
-                    )
-                ):
-                    if constructor_to_use == go.Scatter:
-                        constructor_to_use = go.Scattergl
-                        if "orientation" in trace_patch:
-                            del trace_patch["orientation"]
-                    else:
-                        constructor_to_use = go.Scatterpolargl
             # Create the trace
-            trace = constructor_to_use(name=trace_name)
+            trace = trace_spec.constructor(name=trace_name)
             if trace_spec.constructor not in [
                 go.Parcats,
                 go.Parcoords,
