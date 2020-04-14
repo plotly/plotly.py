@@ -28,7 +28,7 @@ author = "plotly team"
 # The short X.Y version
 version = ""
 # The full version, including alpha/beta/rc tags
-release = "4.5.4"
+release = "4.6.0"
 
 
 # -- General configuration ---------------------------------------------------

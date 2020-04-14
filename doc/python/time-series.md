@@ -204,7 +204,7 @@ fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15
 fig.update_xaxes(
     rangebreaks=[
         dict(bounds=["sat", "mon"]), #hide weekends
-        dict(values=["2015-12-25", "2016-01-01"]) #hide Christmas and New Year's
+        dict(values=["2015-12-25", "2016-01-01"])  # hide Christmas and New Year's
     ]
 )
 fig.show()
