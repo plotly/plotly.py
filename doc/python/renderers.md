@@ -227,26 +227,6 @@ fig = go.Figure(
 fig.show(renderer="png", width=800, height=300)
 ```
 
-### Displaying Figures Using Dash
-
-[Dash](https://dash.plot.ly) is a Python framework for building web applications, and it provides built-in support for displaying figures created with Plotly's graphing libraries. See the [Dash User Guide](https://dash.plot.ly/) for more information.
-
-It is important to note that Dash does not use the renderers framework discussed above, so you should not try to use the `.show()` figure method or the `plotly.io.show` function to render figures inside Dash applications.
-
-Instead, pass your figure as the `figure` parameter to the [`dcc.Graph`](https://dash.plot.ly/dash-core-components/graph) component, which is part of the [Dash Core Components](https://dash.plot.ly/dash-core-components) library. The code below demonstrates how to do this. 
-
-```
-import dash_core_components as dcc
-import plotly.graph_objs as go
-
-fig = go.Figure(data=[go.Scatter(x=[1, 2, 3], y=[4, 1, 2])])
-
-dcc.Graph(
-        id='example-graph-2',
-        figure=fig
-    )
-```
-
 ## Displaying Figures Using `ipywidgets`
 Plotly figures can be displayed in [ipywidgets](https://ipywidgets.readthedocs.io/en/stable/) contexts using `plotly.graph_objects.FigureWidget` objects.  `FigureWidget` is a figure graph object (just like `plotly.graph_objects.Figure`), so you can add traces to it and update it just like a regular `Figure`.  But `FigureWidget` is also an `ipywidgets` object, which means that you can display it alongside other `ipywidgets` to build user interfaces right in the notebook.  
 
