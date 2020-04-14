@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import plotly.graph_objects as go
+from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
 def test_skip_hover():
@@ -19,13 +20,16 @@ def test_skip_hover():
 
 def test_composite_hover():
     df = px.data.tips()
+    hover_dict = OrderedDict(
+        {"day": False, "sex": True, "time": False, "total_bill": ".1f"}
+    )
     fig = px.scatter(
         df,
         x="tip",
         y="total_bill",
         color="day",
         facet_row="time",
-        hover_data={"day": False, "sex": True, "time": False, "total_bill": ".1f"},
+        hover_data=hover_dict,
     )
     assert (
         fig.data[0].hovertemplate
