@@ -2,7 +2,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
 from plotly.express._core import build_dataframe
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
+import pytest
 
 
 def test_wide_mode_external():
@@ -76,63 +77,47 @@ def test_wide_mode_labels_external():
     assert fig.layout.legend.title.text == "my column"
 
 
-def test_wide_mode_internal():
-    # here we do basic exhaustive testing of the various graph_object permutations
-    # via build_dataframe directly, which leads to more compact test code:
-    # we pass in args (which includes df) and look at how build_dataframe mutates
-    # both args and the df, and assume that since the rest of the downstream PX
-    # machinery has not wide-mode-specific code, and the tests above pass, that this is
-    # enough to prove things work
-
+# here we do basic exhaustive testing of the various graph_object permutations
+# via build_dataframe directly, which leads to more compact test code:
+# we pass in args (which includes df) and look at how build_dataframe mutates
+# both args and the df, and assume that since the rest of the downstream PX
+# machinery has not wide-mode-specific code, and the tests above pass, that this is
+# enough to prove things work
+@pytest.mark.parametrize(
+    "trace_type,x,y,color",
+    [
+        (go.Scatter, "index", "_value_", "_column_"),
+        (go.Bar, "index", "_value_", "_column_"),
+        (go.Box, "_column_", "_value_", None),
+        (go.Violin, "_column_", "_value_", None),
+        (go.Histogram, "_value_", None, "_column_"),
+    ],
+)
+@pytest.mark.parametrize(
+    "orientation", [None, "v", "h"],
+)
+def test_wide_mode_internal(trace_type, x, y, color, orientation):
     df_in = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6]), index=[11, 12, 13])
-
-    def extract_and_check_df(args_out):
-        df_out = args_out.pop("data_frame")
-        assert_frame_equal(
-            df_out.sort_index(axis=1),
-            pd.DataFrame(
-                dict(
-                    index=[11, 12, 13, 11, 12, 13],
-                    _column_=["a", "a", "a", "b", "b", "b"],
-                    _value_=[1, 2, 3, 4, 5, 6],
-                )
-            ).sort_index(axis=1),
-        )
-        return args_out
-
-    for trace_type in [go.Scatter, go.Bar]:
-        args_in = dict(data_frame=df_in.copy(), color=None)
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(
-            x="index", y="_value_", color="_column_", orientation="v"
-        )
-
-        # now we check with orientation
-        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(
-            y="index", x="_value_", color="_column_", orientation="h"
-        )
-
-    for trace_type in [go.Violin, go.Box]:
-        args_in = dict(data_frame=df_in.copy(), color=None)
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(x="_column_", y="_value_", color=None, orientation="v")
-
-        # now we check with orientation
-        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(y="_column_", x="_value_", color=None, orientation="h")
-
-    for trace_type in [go.Histogram]:
-        args_in = dict(data_frame=df_in.copy(), color=None)
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(x="_value_", color="_column_", orientation="v")
-
-        # now we check with orientation
-        args_in = dict(data_frame=df_in.copy(), color=None, orientation="h")
-        args_out = extract_and_check_df(build_dataframe(args_in, trace_type))
-        assert args_out == dict(y="_value_", color="_column_", orientation="h")
+    args_in = dict(data_frame=df_in, color=None, orientation=orientation)
+    args_out = build_dataframe(args_in, trace_type)
+    df_out = args_out.pop("data_frame")
+    assert_frame_equal(
+        df_out.sort_index(axis=1),
+        pd.DataFrame(
+            dict(
+                index=[11, 12, 13, 11, 12, 13],
+                _column_=["a", "a", "a", "b", "b", "b"],
+                _value_=[1, 2, 3, 4, 5, 6],
+            )
+        ).sort_index(axis=1),
+    )
+    for arg in ["x", "y"]:
+        if arg not in args_out:
+            args_out[arg] = None  # so this doesn't fail for histogram
+    if orientation is None or orientation == "v":
+        assert args_out == dict(x=x, y=y, color=color, orientation="v")
+    else:
+        assert args_out == dict(x=y, y=x, color=color, orientation="h")
 
 
 def test_wide_mode_internal_special_cases():
