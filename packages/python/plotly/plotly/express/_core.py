@@ -906,7 +906,7 @@ def build_dataframe(args, attrables, array_attrables):
     for field in args:
         if field in array_attrables and args[field] is not None:
             args[field] = (
-                dict(args[field])
+                OrderedDict(args[field])
                 if isinstance(args[field], dict)
                 else list(args[field])
             )
