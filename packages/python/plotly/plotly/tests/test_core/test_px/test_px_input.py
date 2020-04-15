@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 from plotly.express._core import build_dataframe
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 
 
 def test_numpy():
@@ -389,37 +389,38 @@ def test_ranges():
     assert "time=" in fig.data[0].hovertemplate
 
 
-def test_auto_orient():
-    categorical = ["a", "a", "b", "b"]
+@pytest.mark.parametrize(
+    "fn",
+    [px.scatter, px.line, px.area, px.violin, px.box, px.strip]
+    + [px.bar, px.funnel, px.histogram],
+)
+@pytest.mark.parametrize(
+    "x,y,result",
+    [
+        ("numerical", "categorical", "h"),
+        ("categorical", "numerical", "v"),
+        ("categorical", "categorical", "v"),
+        ("numerical", "numerical", "v"),
+        ("numerical", "none", "h"),
+        ("categorical", "none", "h"),
+        ("none", "categorical", "v"),
+        ("none", "numerical", "v"),
+    ],
+)
+def test_auto_orient_x_and_y(fn, x, y, result):
+    series = dict(categorical=["a", "a", "b", "b"], numerical=[1, 2, 3, 4], none=None)
+
+    if "none" not in [x, y]:
+        assert fn(x=series[x], y=series[y]).data[0].orientation == result
+    else:
+        if fn == px.histogram or (fn == px.bar and "categorical" in [x, y]):
+            assert fn(x=series[x], y=series[y]).data[0].orientation != result
+        else:
+            assert fn(x=series[x], y=series[y]).data[0].orientation == result
+
+
+def test_histogram_auto_orient():
     numerical = [1, 2, 3, 4]
-
-    auto_orientable = [px.scatter, px.line, px.area, px.violin, px.box, px.strip]
-    auto_orientable += [px.bar, px.funnel, px.histogram]
-
-    pattern_x_and_y = [
-        (numerical, categorical, "h"),  # auto
-        (categorical, numerical, "v"),  # auto/default
-        (categorical, categorical, "v"),  # default
-        (numerical, numerical, "v"),  # default
-    ]
-    for fn in auto_orientable:
-        for x, y, result in pattern_x_and_y:
-            assert fn(x=x, y=y).data[0].orientation == result
-
-    pattern_x_or_y = [
-        (numerical, None, "h"),  # auto
-        (categorical, None, "h"),  # auto
-        (None, categorical, "v"),  # auto/default
-        (None, numerical, "v"),  # auto/default
-    ]
-
-    for fn in auto_orientable:
-        for x, y, result in pattern_x_or_y:
-            if fn == px.histogram or (fn == px.bar and categorical in [x, y]):
-                assert fn(x=x, y=y).data[0].orientation != result
-            else:
-                assert fn(x=x, y=y).data[0].orientation == result
-
     assert px.histogram(x=numerical, nbins=5).data[0].nbinsx == 5
     assert px.histogram(y=numerical, nbins=5).data[0].nbinsy == 5
     assert px.histogram(x=numerical, y=numerical, nbins=5).data[0].nbinsx == 5
@@ -437,7 +438,21 @@ def test_auto_histfunc():
     assert px.density_heatmap(x=a, y=a, z=a, histfunc="avg").data[0].histfunc == "avg"
 
 
-def test_auto_boxlike_overlay():
+@pytest.mark.parametrize(
+    "fn,mode", [(px.violin, "violinmode"), (px.box, "boxmode"), (px.strip, "boxmode")]
+)
+@pytest.mark.parametrize(
+    "x,y,color,result",
+    [
+        ("categorical1", "numerical", None, "group"),
+        ("categorical1", "numerical", "categorical2", "group"),
+        ("categorical1", "numerical", "categorical1", "overlay"),
+        ("numerical", "categorical1", None, "group"),
+        ("numerical", "categorical1", "categorical2", "group"),
+        ("numerical", "categorical1", "categorical1", "overlay"),
+    ],
+)
+def test_auto_boxlike_overlay(fn, mode, x, y, color, result):
     df = pd.DataFrame(
         dict(
             categorical1=["a", "a", "b", "b"],
@@ -445,28 +460,11 @@ def test_auto_boxlike_overlay():
             numerical=[1, 2, 3, 4],
         )
     )
-
-    pattern = [
-        ("categorical1", "numerical", None, "group"),
-        ("categorical1", "numerical", "categorical2", "group"),
-        ("categorical1", "numerical", "categorical1", "overlay"),
-        ("numerical", "categorical1", None, "group"),
-        ("numerical", "categorical1", "categorical2", "group"),
-        ("numerical", "categorical1", "categorical1", "overlay"),
-    ]
-
-    fn_and_mode = [
-        (px.violin, "violinmode"),
-        (px.box, "boxmode"),
-        (px.strip, "boxmode"),
-    ]
-
-    for fn, mode in fn_and_mode:
-        for x, y, color, result in pattern:
-            assert fn(df, x=x, y=y, color=color).layout[mode] == result
+    assert fn(df, x=x, y=y, color=color).layout[mode] == result
 
 
-def test_x_or_y():
+@pytest.mark.parametrize("fn", [px.scatter, px.line, px.area, px.bar])
+def test_x_or_y(fn):
     categorical = ["a", "a", "b", "b"]
     numerical = [1, 2, 3, 4]
     constant = [1, 1, 1, 1]
@@ -474,28 +472,25 @@ def test_x_or_y():
     index = [11, 12, 13, 14]
     numerical_df = pd.DataFrame(dict(col=numerical), index=index)
     categorical_df = pd.DataFrame(dict(col=categorical), index=index)
-    scatter_like = [px.scatter, px.line, px.area]
-    bar_like = [px.bar]
 
-    for fn in scatter_like + bar_like:
-        fig = fn(x=numerical)
-        assert list(fig.data[0].x) == numerical
-        assert list(fig.data[0].y) == range_4
-        assert fig.data[0].orientation == "h"
-        fig = fn(y=numerical)
-        assert list(fig.data[0].x) == range_4
-        assert list(fig.data[0].y) == numerical
-        assert fig.data[0].orientation == "v"
-        fig = fn(numerical_df, x="col")
-        assert list(fig.data[0].x) == numerical
-        assert list(fig.data[0].y) == index
-        assert fig.data[0].orientation == "h"
-        fig = fn(numerical_df, y="col")
-        assert list(fig.data[0].x) == index
-        assert list(fig.data[0].y) == numerical
-        assert fig.data[0].orientation == "v"
+    fig = fn(x=numerical)
+    assert list(fig.data[0].x) == numerical
+    assert list(fig.data[0].y) == range_4
+    assert fig.data[0].orientation == "h"
+    fig = fn(y=numerical)
+    assert list(fig.data[0].x) == range_4
+    assert list(fig.data[0].y) == numerical
+    assert fig.data[0].orientation == "v"
+    fig = fn(numerical_df, x="col")
+    assert list(fig.data[0].x) == numerical
+    assert list(fig.data[0].y) == index
+    assert fig.data[0].orientation == "h"
+    fig = fn(numerical_df, y="col")
+    assert list(fig.data[0].x) == index
+    assert list(fig.data[0].y) == numerical
+    assert fig.data[0].orientation == "v"
 
-    for fn in scatter_like:
+    if fn != px.bar:
         fig = fn(x=categorical)
         assert list(fig.data[0].x) == categorical
         assert list(fig.data[0].y) == range_4
@@ -513,7 +508,7 @@ def test_x_or_y():
         assert list(fig.data[0].y) == categorical
         assert fig.data[0].orientation == "v"
 
-    for fn in bar_like:
+    else:
         fig = fn(x=categorical)
         assert list(fig.data[0].x) == categorical
         assert list(fig.data[0].y) == constant
