@@ -21,7 +21,7 @@ def test_skip_hover():
 def test_composite_hover():
     df = px.data.tips()
     hover_dict = OrderedDict(
-            {"day": False, "sex": True, "time": False, "total_bill": ":.1f"}
+        {"day": False, "sex": True, "time": False, "total_bill": ":.1f"}
     )
     fig = px.scatter(
         df,
@@ -33,5 +33,24 @@ def test_composite_hover():
     )
     assert (
         fig.data[0].hovertemplate
-        == "tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[0]}<extra></extra>"
+        == "tip=%{x}<br>total_bill=%{customdata[3]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
+    )
+
+
+def test_tuple_hover_data():
+    fig = px.scatter(
+        x=[1, 2, 3], y=[3, 4, 5], hover_data={"comment": (True, ["a", "b", "c"])}
+    )
+    assert (
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]}<extra></extra>"
+    )
+    fig = px.scatter(
+        x=[1, 2, 3],
+        y=[3, 4, 5],
+        hover_data={"comment": (":.1f", [1.234, 45.3455, 5666.234])},
+    )
+    assert (
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]:.1f}<extra></extra>"
     )

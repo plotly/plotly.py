@@ -396,10 +396,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         if args["hover_data"] and isinstance(args["hover_data"], dict):
             for k, v in mapping_labels.items():
                 if k in args["hover_data"]:
-                    if args["hover_data"][k]:
-                        if isinstance(args["hover_data"][k], str):
+                    if args["hover_data"][k][0]:
+                        if isinstance(args["hover_data"][k][0], str):
                             mapping_labels_copy[k] = v.replace(
-                                "}", "%s}" % args["hover_data"][k]
+                                "}", "%s}" % args["hover_data"][k][0]
                             )
                     else:
                         _ = mapping_labels_copy.pop(k)
@@ -935,6 +935,17 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    # hover_data is a dict
+    hover_data_is_dict = (
+        "hover_data" in args
+        and args["hover_data"]
+        and isinstance(args["hover_data"], dict)
+    )
+    if hover_data_is_dict:
+        for k in args["hover_data"]:
+            if not isinstance(args["hover_data"][k], tuple):
+                args["hover_data"][k] = (args["hover_data"][k], None)
+
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -970,7 +981,12 @@ def build_dataframe(args, attrables, array_attrables):
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
-                if not df_provided:
+                bypass_warnings = (
+                    hover_data_is_dict
+                    and argument in args["hover_data"]
+                    and args["hover_data"][argument][1]
+                )
+                if not df_provided and not bypass_warnings:
                     raise ValueError(
                         "String or int arguments are only possible when a "
                         "DataFrame or an array is provided in the `data_frame` "
@@ -978,7 +994,7 @@ def build_dataframe(args, attrables, array_attrables):
                         "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in df_input.columns:
+                if not bypass_warnings and argument not in df_input.columns:
                     err_msg = (
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
@@ -989,7 +1005,7 @@ def build_dataframe(args, attrables, array_attrables):
                             "\n To use the index, pass it in directly as `df.index`."
                         )
                     raise ValueError(err_msg)
-                if length and len(df_input[argument]) != length:
+                if not bypass_warnings and length and len(df_input[argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
@@ -1002,7 +1018,14 @@ def build_dataframe(args, attrables, array_attrables):
                         )
                     )
                 col_name = str(argument)
-                df_output[col_name] = df_input[argument].values
+                if (
+                    field_name == "hover_data"
+                    and hover_data_is_dict
+                    and args["hover_data"][col_name][1]
+                ):
+                    df_output[col_name] = args["hover_data"][col_name][1]
+                else:
+                    df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)
