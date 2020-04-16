@@ -23,7 +23,7 @@ direct_attrables = (
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
-array_attrables = ["dimensions", "custom_data", "hover_data", "path"]
+array_attrables = ["dimensions", "custom_data", "hover_data", "path", "wide_cols"]
 group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 renameable_group_attrables = [
     "color",  # renamed to marker.color or line.color in infer_config
@@ -942,7 +942,6 @@ def build_dataframe(args, constructor):
     df_provided = args["data_frame"] is not None
     if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
         args["data_frame"] = pd.DataFrame(args["data_frame"])
-
     df_input = args["data_frame"]
 
     no_x = args.get("x", None) is None
@@ -952,10 +951,35 @@ def build_dataframe(args, constructor):
     wide_id_vars = set()
 
     if wide_mode:
-        df_output = df_input
-        var_name = df_output.columns.name or "_column_"
-    else:
-        df_output = pd.DataFrame()
+        # currently assuming that df_provided == True
+        args["wide_cols"] = [df_input.index] + list(df_input.columns)
+        var_name = df_input.columns.name or "_column_"
+        index_name = df_input.index.name or "index"
+        wide_id_vars.add(index_name)
+
+    """
+    wide_x detection
+    - if scalar = False
+    - else if list of lists = True
+    - else if not df_provided = False
+    - else if contents are unique and are contained in columns = True
+    - else = False
+
+
+    wide detection:
+    - if no_x and no_y = wide mode
+    - else if wide_x and wide_y = error
+    - else if wide_x xor wide_y = wide mode
+    - else = long mode
+
+    so what we want is:
+    - y = [col col] -> melt just those
+    - x = [col col] -> melt just those but swap the orientation? except in hist mode
+    - y = [col col] / x=col -> melt just those and force x to not be the index ... what about hist
+    - y = [col col] / x=[col col] -> error
+    """
+
+    df_output = pd.DataFrame()
 
     missing_bar_dim = None
     if constructor in [go.Scatter, go.Bar] and (no_x != no_y):
@@ -1110,7 +1134,8 @@ def build_dataframe(args, constructor):
                 args[field_name] = str(col_name)
             else:
                 args[field_name][i] = str(col_name)
-            wide_id_vars.add(str(col_name))
+            if field_name != "wide_cols":
+                wide_id_vars.add(str(col_name))
 
     if missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
@@ -1134,14 +1159,13 @@ def build_dataframe(args, constructor):
         df_output[col_name] = constants[col_name]
 
     if wide_mode:
-        # TODO multi-level index
-        # TODO multi-level columns
-        index_name = df_output.index.name or "index"
-        wide_id_vars.add(index_name)
-        if index_name not in df_output.columns:
-            df_output = df_output.reset_index()
+        wide_value_vars = [c for c in args["wide_cols"] if c not in wide_id_vars]
+        del args["wide_cols"]
         df_output = df_output.melt(
-            id_vars=wide_id_vars, var_name=var_name, value_name="_value_"
+            id_vars=wide_id_vars,
+            value_vars=wide_value_vars,
+            var_name=var_name,
+            value_name="_value_",
         )
         df_output[var_name] = df_output[var_name].astype(str)
         args["orientation"] = args.get("orientation", None) or "v"
