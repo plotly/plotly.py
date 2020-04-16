@@ -1114,13 +1114,13 @@ def build_dataframe(args, constructor):
 
     if missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
-        # dimensio is categorical: if so, then setting the missing dimension to a
+        # dimension is categorical: if so, then setting the missing dimension to a
         # constant 1 is a less-insane thing to do than setting it to the index by
         # default and we let the normal auto-orientation-code do its thing later
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
-            args[missing_bar_dim] = missing_bar_dim
-            constants[missing_bar_dim] = 1
+            args[missing_bar_dim] = "_count_"
+            constants["_count_"] = 1
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
@@ -1146,14 +1146,24 @@ def build_dataframe(args, constructor):
         df_output[var_name] = df_output[var_name].astype(str)
         args["orientation"] = args.get("orientation", None) or "v"
         orient_v = args["orientation"] == "v"
-        if constructor in [go.Scatter, go.Bar]:
+        if constructor == go.Scatter:
             args["x" if orient_v else "y"] = index_name
             args["y" if orient_v else "x"] = "_value_"
             args["color"] = args["color"] or var_name
+        if constructor == go.Bar:
+            if _is_continuous(df_output, "_value_"):
+                args["x" if orient_v else "y"] = index_name
+                args["y" if orient_v else "x"] = "_value_"
+                args["color"] = args["color"] or var_name
+            else:
+                args["x" if orient_v else "y"] = "_value_"
+                args["y" if orient_v else "x"] = "_count_"
+                df_output["_count_"] = 1
+                args["color"] = args["color"] or var_name
         if constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = var_name
             args["y" if orient_v else "x"] = "_value_"
-        if constructor in [go.Histogram]:
+        if constructor == go.Histogram:
             args["x" if orient_v else "y"] = "_value_"
             args["color"] = args["color"] or var_name
 

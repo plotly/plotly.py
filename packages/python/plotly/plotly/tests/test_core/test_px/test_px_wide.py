@@ -120,6 +120,35 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
         assert args_out == dict(x=y, y=x, color=color, orientation="h")
 
 
+@pytest.mark.parametrize(
+    "orientation", [None, "v", "h"],
+)
+def test_wide_mode_internal_bar_exception(orientation):
+    df_in = pd.DataFrame(dict(a=["q", "r", "s"], b=["t", "u", "v"]), index=[11, 12, 13])
+    args_in = dict(data_frame=df_in, color=None, orientation=orientation)
+    args_out = build_dataframe(args_in, go.Bar)
+    df_out = args_out.pop("data_frame")
+    assert_frame_equal(
+        df_out.sort_index(axis=1),
+        pd.DataFrame(
+            dict(
+                index=[11, 12, 13, 11, 12, 13],
+                _column_=["a", "a", "a", "b", "b", "b"],
+                _value_=["q", "r", "s", "t", "u", "v"],
+                _count_=[1, 1, 1, 1, 1, 1],
+            )
+        ).sort_index(axis=1),
+    )
+    if orientation is None or orientation == "v":
+        assert args_out == dict(
+            x="_value_", y="_count_", color="_column_", orientation="v"
+        )
+    else:
+        assert args_out == dict(
+            x="_count_", y="_value_", color="_column_", orientation="h"
+        )
+
+
 def test_wide_mode_internal_special_cases():
     # given all of the above tests, and given that the melt() code is not sensitive
     # to the trace type, we can do all sorts of special-case testing just by focusing
