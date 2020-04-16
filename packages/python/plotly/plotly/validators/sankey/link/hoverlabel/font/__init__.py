@@ -1,106 +1,24 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._sizesrc import SizesrcValidator
+    from ._size import SizeValidator
+    from ._familysrc import FamilysrcValidator
+    from ._family import FamilyValidator
+    from ._colorsrc import ColorsrcValidator
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class SizesrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self, plotly_name="sizesrc", parent_name="sankey.link.hoverlabel.font", **kwargs
-    ):
-        super(SizesrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(
-        self, plotly_name="size", parent_name="sankey.link.hoverlabel.font", **kwargs
-    ):
-        super(SizeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "calc"),
-            min=kwargs.pop("min", 1),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class FamilysrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self,
-        plotly_name="familysrc",
-        parent_name="sankey.link.hoverlabel.font",
-        **kwargs
-    ):
-        super(FamilysrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class FamilyValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(
-        self, plotly_name="family", parent_name="sankey.link.hoverlabel.font", **kwargs
-    ):
-        super(FamilyValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "calc"),
-            no_blank=kwargs.pop("no_blank", True),
-            role=kwargs.pop("role", "style"),
-            strict=kwargs.pop("strict", True),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self,
-        plotly_name="colorsrc",
-        parent_name="sankey.link.hoverlabel.font",
-        **kwargs
-    ):
-        super(ColorsrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="color", parent_name="sankey.link.hoverlabel.font", **kwargs
-    ):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._sizesrc.SizesrcValidator",
+            "._size.SizeValidator",
+            "._familysrc.FamilysrcValidator",
+            "._family.FamilyValidator",
+            "._colorsrc.ColorsrcValidator",
+            "._color.ColorValidator",
+        ],
+    )

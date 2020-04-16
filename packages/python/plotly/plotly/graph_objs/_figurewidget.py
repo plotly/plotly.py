@@ -1,54 +1,4 @@
 from plotly.basewidget import BaseFigureWidget
-from plotly.graph_objs import (
-    Area,
-    Bar,
-    Barpolar,
-    Box,
-    Candlestick,
-    Carpet,
-    Choropleth,
-    Choroplethmapbox,
-    Cone,
-    Contour,
-    Contourcarpet,
-    Densitymapbox,
-    Funnel,
-    Funnelarea,
-    Heatmap,
-    Heatmapgl,
-    Histogram,
-    Histogram2d,
-    Histogram2dContour,
-    Image,
-    Indicator,
-    Isosurface,
-    Mesh3d,
-    Ohlc,
-    Parcats,
-    Parcoords,
-    Pie,
-    Pointcloud,
-    Sankey,
-    Scatter,
-    Scatter3d,
-    Scattercarpet,
-    Scattergeo,
-    Scattergl,
-    Scattermapbox,
-    Scatterpolar,
-    Scatterpolargl,
-    Scatterternary,
-    Splom,
-    Streamtube,
-    Sunburst,
-    Surface,
-    Table,
-    Treemap,
-    Violin,
-    Volume,
-    Waterfall,
-    layout as _layout,
-)
 
 
 class FigureWidget(BaseFigureWidget):
@@ -774,6 +724,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Area
+
         new_trace = Area(
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -1199,6 +1151,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Bar
+
         new_trace = Bar(
             alignmentgroup=alignmentgroup,
             base=base,
@@ -1528,6 +1482,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Barpolar
+
         new_trace = Barpolar(
             base=base,
             basesrc=basesrc,
@@ -2046,6 +2002,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Box
+
         new_trace = Box(
             alignmentgroup=alignmentgroup,
             boxmean=boxmean,
@@ -2359,6 +2317,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Candlestick
+
         new_trace = Candlestick(
             close=close,
             closesrc=closesrc,
@@ -2611,6 +2571,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Carpet
+
         new_trace = Carpet(
             a=a,
             a0=a0,
@@ -2944,6 +2906,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Choropleth
+
         new_trace = Choropleth(
             autocolorscale=autocolorscale,
             coloraxis=coloraxis,
@@ -3286,6 +3250,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Choroplethmapbox
+
         new_trace = Choroplethmapbox(
             autocolorscale=autocolorscale,
             below=below,
@@ -3665,6 +3631,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Cone
+
         new_trace = Cone(
             anchor=anchor,
             autocolorscale=autocolorscale,
@@ -4087,6 +4055,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Contour
+
         new_trace = Contour(
             autocolorscale=autocolorscale,
             autocontour=autocontour,
@@ -4451,6 +4421,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Contourcarpet
+
         new_trace = Contourcarpet(
             a=a,
             a0=a0,
@@ -4796,6 +4768,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Densitymapbox
+
         new_trace = Densitymapbox(
             autocolorscale=autocolorscale,
             below=below,
@@ -5201,6 +5175,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Funnel
+
         new_trace = Funnel(
             alignmentgroup=alignmentgroup,
             cliponaxis=cliponaxis,
@@ -5533,6 +5509,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Funnelarea
+
         new_trace = Funnelarea(
             aspectratio=aspectratio,
             baseratio=baseratio,
@@ -5938,6 +5916,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Heatmap
+
         new_trace = Heatmap(
             autocolorscale=autocolorscale,
             coloraxis=coloraxis,
@@ -6265,6 +6245,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Heatmapgl
+
         new_trace = Heatmapgl(
             autocolorscale=autocolorscale,
             coloraxis=coloraxis,
@@ -6653,6 +6635,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Histogram
+
         new_trace = Histogram(
             alignmentgroup=alignmentgroup,
             autobinx=autobinx,
@@ -7087,6 +7071,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Histogram2d
+
         new_trace = Histogram2d(
             autobinx=autobinx,
             autobiny=autobiny,
@@ -7538,6 +7524,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Histogram2dContour
+
         new_trace = Histogram2dContour(
             autobinx=autobinx,
             autobiny=autobiny,
@@ -7829,6 +7817,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Image
+
         new_trace = Image(
             colormodel=colormodel,
             customdata=customdata,
@@ -8007,6 +7997,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Indicator
+
         new_trace = Indicator(
             align=align,
             customdata=customdata,
@@ -8352,6 +8344,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Isosurface
+
         new_trace = Isosurface(
             autocolorscale=autocolorscale,
             caps=caps,
@@ -8817,6 +8811,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Mesh3d
+
         new_trace = Mesh3d(
             alphahull=alphahull,
             autocolorscale=autocolorscale,
@@ -9122,6 +9118,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Ohlc
+
         new_trace = Ohlc(
             close=close,
             closesrc=closesrc,
@@ -9340,6 +9338,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Parcats
+
         new_trace = Parcats(
             arrangement=arrangement,
             bundlecolors=bundlecolors,
@@ -9510,6 +9510,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Parcoords
+
         new_trace = Parcoords(
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -9856,6 +9858,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Pie
+
         new_trace = Pie(
             automargin=automargin,
             customdata=customdata,
@@ -10138,6 +10142,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Pointcloud
+
         new_trace = Pointcloud(
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -10337,6 +10343,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Sankey
+
         new_trace = Sankey(
             arrangement=arrangement,
             customdata=customdata,
@@ -10791,6 +10799,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scatter
+
         new_trace = Scatter(
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
@@ -11156,6 +11166,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scatter3d
+
         new_trace = Scatter3d(
             connectgaps=connectgaps,
             customdata=customdata,
@@ -11524,6 +11536,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scattercarpet
+
         new_trace = Scattercarpet(
             a=a,
             asrc=asrc,
@@ -11891,6 +11905,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scattergeo
+
         new_trace = Scattergeo(
             connectgaps=connectgaps,
             customdata=customdata,
@@ -12285,6 +12301,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scattergl
+
         new_trace = Scattergl(
             connectgaps=connectgaps,
             customdata=customdata,
@@ -12626,6 +12644,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scattermapbox
+
         new_trace = Scattermapbox(
             below=below,
             connectgaps=connectgaps,
@@ -13001,6 +13021,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scatterpolar
+
         new_trace = Scatterpolar(
             cliponaxis=cliponaxis,
             connectgaps=connectgaps,
@@ -13380,6 +13402,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scatterpolargl
+
         new_trace = Scatterpolargl(
             connectgaps=connectgaps,
             customdata=customdata,
@@ -13761,6 +13785,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Scatterternary
+
         new_trace = Scatterternary(
             a=a,
             asrc=asrc,
@@ -14053,6 +14079,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Splom
+
         new_trace = Splom(
             customdata=customdata,
             customdatasrc=customdatasrc,
@@ -14406,6 +14434,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Streamtube
+
         new_trace = Streamtube(
             autocolorscale=autocolorscale,
             cauto=cauto,
@@ -14749,6 +14779,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Sunburst
+
         new_trace = Sunburst(
             branchvalues=branchvalues,
             count=count,
@@ -15124,6 +15156,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Surface
+
         new_trace = Surface(
             autocolorscale=autocolorscale,
             cauto=cauto,
@@ -15330,6 +15364,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Table
+
         new_trace = Table(
             cells=cells,
             columnorder=columnorder,
@@ -15642,6 +15678,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Treemap
+
         new_trace = Treemap(
             branchvalues=branchvalues,
             count=count,
@@ -16053,6 +16091,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Violin
+
         new_trace = Violin(
             alignmentgroup=alignmentgroup,
             bandwidth=bandwidth,
@@ -16444,6 +16484,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Volume
+
         new_trace = Volume(
             autocolorscale=autocolorscale,
             caps=caps,
@@ -16884,6 +16926,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import Waterfall
+
         new_trace = Waterfall(
             alignmentgroup=alignmentgroup,
             base=base,
@@ -18245,6 +18289,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import layout as _layout
+
         new_obj = _layout.Annotation(
             arg,
             align=align,
@@ -18552,6 +18598,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import layout as _layout
+
         new_obj = _layout.Image(
             arg,
             layer=layer,
@@ -18889,6 +18937,8 @@ class FigureWidget(BaseFigureWidget):
         -------
         FigureWidget
         """
+        from plotly.graph_objs import layout as _layout
+
         new_obj = _layout.Shape(
             arg,
             fillcolor=fillcolor,
