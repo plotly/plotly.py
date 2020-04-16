@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -34,9 +34,11 @@ jupyter:
 
 ### Hover Labels
 
-One of the most deceptively-power features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursort over the point and having a hover label appear. 
+One of the most deceptively-power features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear. 
 
-There are three hover modes available in Plotly. The default setting is `layout.hovermode='closest'`, wherein a single hover label appears for the point directly underneat the cursor:
+There are three hover modes available in Plotly. The default setting is `layout.hovermode='closest'`, wherein a single hover label appears for the point directly underneath the cursor.
+
+#### Hovermode `closest` (default mode)
 
 ```python
 import plotly.express as px
@@ -48,6 +50,8 @@ fig.update_traces(mode="markers+lines")
 
 fig.show()
 ```
+
+#### Hovermode `x` or `y` 
 
 If `layout.hovermode='x'` (or `'y'`), a single hover label appears per trace, for points at the same `x` (or `y`) value as the cursor. If multiple points in a given trace exist at the same coordinate, only one will get a hover label. In the line plot below we have forced markers to appear, to make it clearer what can be hovered over, and we have disabled the built-in Plotly Express `hovertemplate` by setting it to `None`, resulting in a more compact hover label per point:
 
@@ -63,6 +67,8 @@ fig.update_layout(hovermode="x")
 fig.show()
 ```
 
+#### Unified hovermode
+
 If `layout.hovermode='x unified'` (or `'y unified'`), a single hover label appear, describing one point per trace, for points at the same `x` (or `y`) value as the cursor.  If multiple points in a given trace exist at the same coordinate, only one will get an entry in the hover label. In the line plot below we have forced markers to appear, to make it clearer what can be hovered over, and we have disabled the built-in Plotly Express `hovertemplate` by setting it to `None`, resulting in a more compact entry per point in the hover label:
 
 ```python
@@ -74,6 +80,21 @@ fig = px.line(df, x="year", y="lifeExp", color="country", title="layout.hovermod
 fig.update_traces(mode="markers+lines", hovertemplate=None)
 fig.update_layout(hovermode="x unified")
 
+fig.show()
+```
+
+#### Selecting a hovermode in a figure created with `plotly.graph_objects`
+
+The hovermode is a property of the figure layout, so you can select a hovermode no matter how you created the figure, either with `plotly.express` or with `plotly.graph_objects`. Below is an example with a figure created with `plotly.graph_objects`. If you're not familiar with the structure of plotly figures, you can read [the tutorial on creating and updating plotly figures](/python/creating-and-updating-figures/).
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+t = np.linspace(0, 2 * np.pi, 100)
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=t, y=np.sin(t), name='sin(t)'))
+fig.add_trace(go.Scatter(x=t, y=np.cos(t), name='cost(t)'))
+fig.update_layout(hovermode='x unified')
 fig.show()
 ```
 

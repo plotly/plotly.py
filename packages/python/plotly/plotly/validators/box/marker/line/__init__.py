@@ -1,62 +1,20 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._width import WidthValidator
+    from ._outlierwidth import OutlierwidthValidator
+    from ._outliercolor import OutliercolorValidator
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="width", parent_name="box.marker.line", **kwargs):
-        super(WidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", False),
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OutlierwidthValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(
-        self, plotly_name="outlierwidth", parent_name="box.marker.line", **kwargs
-    ):
-        super(OutlierwidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OutliercolorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="outliercolor", parent_name="box.marker.line", **kwargs
-    ):
-        super(OutliercolorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(self, plotly_name="color", parent_name="box.marker.line", **kwargs):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", False),
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._width.WidthValidator",
+            "._outlierwidth.OutlierwidthValidator",
+            "._outliercolor.OutliercolorValidator",
+            "._color.ColorValidator",
+        ],
+    )

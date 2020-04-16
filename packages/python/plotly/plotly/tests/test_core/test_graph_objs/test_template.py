@@ -195,7 +195,7 @@ class TestToTemplated(TestCaseNoTemplate):
                     "layout": {
                         "font": {"family": "Courier New"},
                         "paper_bgcolor": "yellow",
-                    }
+                    },
                 },
                 "title": "Hello",
             }
