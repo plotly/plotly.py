@@ -15,7 +15,7 @@ def test_lazy_imports():
 
     # Check that submodules are not auto-imported, but can be be accessed using
     # attribute syntax
-    submodules = ["graph_objs", "io", "express"]
+    submodules = ["graph_objs", "io"]
     for m in submodules:
         module_str = "plotly." + m
         assert module_str not in sys.modules
