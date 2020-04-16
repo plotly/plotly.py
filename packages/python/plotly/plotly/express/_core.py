@@ -19,7 +19,7 @@ from plotly.subplots import (
 # Declare all supported attributes, across all plot types
 direct_attrables = (
     ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
-    + ["hover_name", "text", "names", "values", "parents"]
+    + ["hover_name", "text", "names", "values", "parents", "wide_cross"]
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
@@ -952,10 +952,11 @@ def build_dataframe(args, constructor):
 
     if wide_mode:
         # currently assuming that df_provided == True
-        args["wide_cols"] = [df_input.index] + list(df_input.columns)
+        args["wide_cols"] = list(df_input.columns)
+        args["wide_cross"] = df_input.index
         var_name = df_input.columns.name or "_column_"
-        index_name = df_input.index.name or "index"
-        wide_id_vars.add(index_name)
+        wide_orientation = args.get("orientation", None) or "v"
+        args["orientation"] = wide_orientation
 
     """
     wide_x detection
@@ -973,10 +974,11 @@ def build_dataframe(args, constructor):
     - else = long mode
 
     so what we want is:
-    - y = [col col] -> melt just those
-    - x = [col col] -> melt just those but swap the orientation? except in hist mode
-    - y = [col col] / x=col -> melt just those and force x to not be the index ... what about hist
+    - y = [col col] -> melt just those, wide_orientation = 'v'/no override, cross_dim = index or range
+    - y = [col col] / x=col -> wide_orientation = 'h'/no override, cross_dim = x
     - y = [col col] / x=[col col] -> error
+
+    need to merge wide logic into no_x/no_y logic below for range() etc
     """
 
     df_output = pd.DataFrame()
@@ -1161,6 +1163,8 @@ def build_dataframe(args, constructor):
     if wide_mode:
         wide_value_vars = [c for c in args["wide_cols"] if c not in wide_id_vars]
         del args["wide_cols"]
+        wide_cross = args["wide_cross"]
+        del args["wide_cross"]
         df_output = df_output.melt(
             id_vars=wide_id_vars,
             value_vars=wide_value_vars,
@@ -1168,15 +1172,15 @@ def build_dataframe(args, constructor):
             value_name="_value_",
         )
         df_output[var_name] = df_output[var_name].astype(str)
-        args["orientation"] = args.get("orientation", None) or "v"
-        orient_v = args["orientation"] == "v"
+        orient_v = wide_orientation == "v"
+
         if constructor == go.Scatter:
-            args["x" if orient_v else "y"] = index_name
+            args["x" if orient_v else "y"] = wide_cross
             args["y" if orient_v else "x"] = "_value_"
             args["color"] = args["color"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, "_value_"):
-                args["x" if orient_v else "y"] = index_name
+                args["x" if orient_v else "y"] = wide_cross
                 args["y" if orient_v else "x"] = "_value_"
                 args["color"] = args["color"] or var_name
             else:
