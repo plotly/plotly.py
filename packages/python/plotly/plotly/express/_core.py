@@ -941,6 +941,7 @@ def build_dataframe(args, attrables, array_attrables):
         and args["hover_data"]
         and isinstance(args["hover_data"], dict)
     )
+    # If dict, convert all values of hover_data to tuples to simplify processing
     if hover_data_is_dict:
         for k in args["hover_data"]:
             if not isinstance(args["hover_data"][k], tuple):
