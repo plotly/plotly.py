@@ -1,46 +1,18 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._sequentialminus import SequentialminusValidator
+    from ._sequential import SequentialValidator
+    from ._diverging import DivergingValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class SequentialminusValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-    def __init__(
-        self, plotly_name="sequentialminus", parent_name="layout.colorscale", **kwargs
-    ):
-        super(SequentialminusValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SequentialValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-    def __init__(
-        self, plotly_name="sequential", parent_name="layout.colorscale", **kwargs
-    ):
-        super(SequentialValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class DivergingValidator(_plotly_utils.basevalidators.ColorscaleValidator):
-    def __init__(
-        self, plotly_name="diverging", parent_name="layout.colorscale", **kwargs
-    ):
-        super(DivergingValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._sequentialminus.SequentialminusValidator",
+            "._sequential.SequentialValidator",
+            "._diverging.DivergingValidator",
+        ],
+    )

@@ -1,75 +1,22 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._uirevision import UirevisionValidator
+    from ._orientation import OrientationValidator
+    from ._color import ColorValidator
+    from ._bgcolor import BgcolorValidator
+    from ._activecolor import ActivecolorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class UirevisionValidator(_plotly_utils.basevalidators.AnyValidator):
-    def __init__(
-        self, plotly_name="uirevision", parent_name="layout.modebar", **kwargs
-    ):
-        super(UirevisionValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OrientationValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-    def __init__(
-        self, plotly_name="orientation", parent_name="layout.modebar", **kwargs
-    ):
-        super(OrientationValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "modebar"),
-            role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["v", "h"]),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(self, plotly_name="color", parent_name="layout.modebar", **kwargs):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "modebar"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BgcolorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(self, plotly_name="bgcolor", parent_name="layout.modebar", **kwargs):
-        super(BgcolorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "modebar"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ActivecolorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="activecolor", parent_name="layout.modebar", **kwargs
-    ):
-        super(ActivecolorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "modebar"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._uirevision.UirevisionValidator",
+            "._orientation.OrientationValidator",
+            "._color.ColorValidator",
+            "._bgcolor.BgcolorValidator",
+            "._activecolor.ActivecolorValidator",
+        ],
+    )

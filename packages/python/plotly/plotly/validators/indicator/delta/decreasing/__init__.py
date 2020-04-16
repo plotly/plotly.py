@@ -1,30 +1,11 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._symbol import SymbolValidator
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class SymbolValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(
-        self, plotly_name="symbol", parent_name="indicator.delta.decreasing", **kwargs
-    ):
-        super(SymbolValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="color", parent_name="indicator.delta.decreasing", **kwargs
-    ):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._symbol.SymbolValidator", "._color.ColorValidator"]
+    )

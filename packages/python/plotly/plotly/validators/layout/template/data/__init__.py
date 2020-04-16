@@ -1,938 +1,106 @@
-import _plotly_utils.basevalidators
-
-
-class WaterfallsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="waterfall", parent_name="layout.template.data", **kwargs
-    ):
-        super(WaterfallsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Waterfall"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class VolumesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="volume", parent_name="layout.template.data", **kwargs
-    ):
-        super(VolumesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Volume"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ViolinsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="violin", parent_name="layout.template.data", **kwargs
-    ):
-        super(ViolinsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Violin"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TreemapsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="treemap", parent_name="layout.template.data", **kwargs
-    ):
-        super(TreemapsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Treemap"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TablesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="table", parent_name="layout.template.data", **kwargs
-    ):
-        super(TablesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Table"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="surface", parent_name="layout.template.data", **kwargs
-    ):
-        super(SurfacesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Surface"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SunburstsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="sunburst", parent_name="layout.template.data", **kwargs
-    ):
-        super(SunburstsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Sunburst"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class StreamtubesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="streamtube", parent_name="layout.template.data", **kwargs
-    ):
-        super(StreamtubesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Streamtube"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SplomsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="splom", parent_name="layout.template.data", **kwargs
-    ):
-        super(SplomsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Splom"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScatterternarysValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scatterternary", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScatterternarysValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scatterternary"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScattersValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scatter", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScattersValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scatter"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScatterpolarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scatterpolar", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScatterpolarsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scatterpolar"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScatterpolarglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scatterpolargl", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScatterpolarglsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scatterpolargl"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScattermapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scattermapbox", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScattermapboxsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scattermapbox"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScatterglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scattergl", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScatterglsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scattergl"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScattergeosValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scattergeo", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScattergeosValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scattergeo"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ScattercarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scattercarpet", parent_name="layout.template.data", **kwargs
-    ):
-        super(ScattercarpetsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scattercarpet"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class Scatter3dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="scatter3d", parent_name="layout.template.data", **kwargs
-    ):
-        super(Scatter3dsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Scatter3d"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SankeysValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="sankey", parent_name="layout.template.data", **kwargs
-    ):
-        super(SankeysValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Sankey"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class PointcloudsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="pointcloud", parent_name="layout.template.data", **kwargs
-    ):
-        super(PointcloudsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Pointcloud"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class PiesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(self, plotly_name="pie", parent_name="layout.template.data", **kwargs):
-        super(PiesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Pie"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ParcoordssValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="parcoords", parent_name="layout.template.data", **kwargs
-    ):
-        super(ParcoordssValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Parcoords"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ParcatssValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="parcats", parent_name="layout.template.data", **kwargs
-    ):
-        super(ParcatssValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Parcats"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OhlcsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="ohlc", parent_name="layout.template.data", **kwargs
-    ):
-        super(OhlcsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Ohlc"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class Mesh3dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="mesh3d", parent_name="layout.template.data", **kwargs
-    ):
-        super(Mesh3dsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Mesh3d"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class IsosurfacesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="isosurface", parent_name="layout.template.data", **kwargs
-    ):
-        super(IsosurfacesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Isosurface"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class IndicatorsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="indicator", parent_name="layout.template.data", **kwargs
-    ):
-        super(IndicatorsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Indicator"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="image", parent_name="layout.template.data", **kwargs
-    ):
-        super(ImagesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Image"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HistogramsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="histogram", parent_name="layout.template.data", **kwargs
-    ):
-        super(HistogramsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Histogram"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class Histogram2dsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="histogram2d", parent_name="layout.template.data", **kwargs
-    ):
-        super(Histogram2dsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Histogram2d"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class Histogram2dContoursValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self,
-        plotly_name="histogram2dcontour",
-        parent_name="layout.template.data",
-        **kwargs
-    ):
-        super(Histogram2dContoursValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Histogram2dContour"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HeatmapsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="heatmap", parent_name="layout.template.data", **kwargs
-    ):
-        super(HeatmapsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Heatmap"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class HeatmapglsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="heatmapgl", parent_name="layout.template.data", **kwargs
-    ):
-        super(HeatmapglsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Heatmapgl"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class FunnelsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="funnel", parent_name="layout.template.data", **kwargs
-    ):
-        super(FunnelsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Funnel"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class FunnelareasValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="funnelarea", parent_name="layout.template.data", **kwargs
-    ):
-        super(FunnelareasValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Funnelarea"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class DensitymapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="densitymapbox", parent_name="layout.template.data", **kwargs
-    ):
-        super(DensitymapboxsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Densitymapbox"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ContoursValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="contour", parent_name="layout.template.data", **kwargs
-    ):
-        super(ContoursValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Contour"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ContourcarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="contourcarpet", parent_name="layout.template.data", **kwargs
-    ):
-        super(ContourcarpetsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Contourcarpet"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ConesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="cone", parent_name="layout.template.data", **kwargs
-    ):
-        super(ConesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Cone"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ChoroplethsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="choropleth", parent_name="layout.template.data", **kwargs
-    ):
-        super(ChoroplethsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Choropleth"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ChoroplethmapboxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self,
-        plotly_name="choroplethmapbox",
-        parent_name="layout.template.data",
-        **kwargs
-    ):
-        super(ChoroplethmapboxsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Choroplethmapbox"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class CarpetsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="carpet", parent_name="layout.template.data", **kwargs
-    ):
-        super(CarpetsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Carpet"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class CandlesticksValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="candlestick", parent_name="layout.template.data", **kwargs
-    ):
-        super(CandlesticksValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Candlestick"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BoxsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(self, plotly_name="box", parent_name="layout.template.data", **kwargs):
-        super(BoxsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Box"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(self, plotly_name="bar", parent_name="layout.template.data", **kwargs):
-        super(BarsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Bar"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BarpolarsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="barpolar", parent_name="layout.template.data", **kwargs
-    ):
-        super(BarpolarsValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Barpolar"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class AreasValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
-    def __init__(
-        self, plotly_name="area", parent_name="layout.template.data", **kwargs
-    ):
-        super(AreasValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Area"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-""",
-            ),
-            **kwargs
-        )
+import sys
+
+if sys.version_info < (3, 7):
+    from ._waterfall import WaterfallValidator
+    from ._volume import VolumeValidator
+    from ._violin import ViolinValidator
+    from ._treemap import TreemapValidator
+    from ._table import TableValidator
+    from ._surface import SurfaceValidator
+    from ._sunburst import SunburstValidator
+    from ._streamtube import StreamtubeValidator
+    from ._splom import SplomValidator
+    from ._scatterternary import ScatterternaryValidator
+    from ._scatter import ScatterValidator
+    from ._scatterpolar import ScatterpolarValidator
+    from ._scatterpolargl import ScatterpolarglValidator
+    from ._scattermapbox import ScattermapboxValidator
+    from ._scattergl import ScatterglValidator
+    from ._scattergeo import ScattergeoValidator
+    from ._scattercarpet import ScattercarpetValidator
+    from ._scatter3d import Scatter3DValidator
+    from ._sankey import SankeyValidator
+    from ._pointcloud import PointcloudValidator
+    from ._pie import PieValidator
+    from ._parcoords import ParcoordsValidator
+    from ._parcats import ParcatsValidator
+    from ._ohlc import OhlcValidator
+    from ._mesh3d import Mesh3DValidator
+    from ._isosurface import IsosurfaceValidator
+    from ._indicator import IndicatorValidator
+    from ._image import ImageValidator
+    from ._histogram import HistogramValidator
+    from ._histogram2d import Histogram2DValidator
+    from ._histogram2dcontour import Histogram2DcontourValidator
+    from ._heatmap import HeatmapValidator
+    from ._heatmapgl import HeatmapglValidator
+    from ._funnel import FunnelValidator
+    from ._funnelarea import FunnelareaValidator
+    from ._densitymapbox import DensitymapboxValidator
+    from ._contour import ContourValidator
+    from ._contourcarpet import ContourcarpetValidator
+    from ._cone import ConeValidator
+    from ._choropleth import ChoroplethValidator
+    from ._choroplethmapbox import ChoroplethmapboxValidator
+    from ._carpet import CarpetValidator
+    from ._candlestick import CandlestickValidator
+    from ._box import BoxValidator
+    from ._bar import BarValidator
+    from ._barpolar import BarpolarValidator
+    from ._area import AreaValidator
+else:
+    from _plotly_utils.importers import relative_import
+
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._waterfall.WaterfallValidator",
+            "._volume.VolumeValidator",
+            "._violin.ViolinValidator",
+            "._treemap.TreemapValidator",
+            "._table.TableValidator",
+            "._surface.SurfaceValidator",
+            "._sunburst.SunburstValidator",
+            "._streamtube.StreamtubeValidator",
+            "._splom.SplomValidator",
+            "._scatterternary.ScatterternaryValidator",
+            "._scatter.ScatterValidator",
+            "._scatterpolar.ScatterpolarValidator",
+            "._scatterpolargl.ScatterpolarglValidator",
+            "._scattermapbox.ScattermapboxValidator",
+            "._scattergl.ScatterglValidator",
+            "._scattergeo.ScattergeoValidator",
+            "._scattercarpet.ScattercarpetValidator",
+            "._scatter3d.Scatter3DValidator",
+            "._sankey.SankeyValidator",
+            "._pointcloud.PointcloudValidator",
+            "._pie.PieValidator",
+            "._parcoords.ParcoordsValidator",
+            "._parcats.ParcatsValidator",
+            "._ohlc.OhlcValidator",
+            "._mesh3d.Mesh3DValidator",
+            "._isosurface.IsosurfaceValidator",
+            "._indicator.IndicatorValidator",
+            "._image.ImageValidator",
+            "._histogram.HistogramValidator",
+            "._histogram2d.Histogram2DValidator",
+            "._histogram2dcontour.Histogram2DcontourValidator",
+            "._heatmap.HeatmapValidator",
+            "._heatmapgl.HeatmapglValidator",
+            "._funnel.FunnelValidator",
+            "._funnelarea.FunnelareaValidator",
+            "._densitymapbox.DensitymapboxValidator",
+            "._contour.ContourValidator",
+            "._contourcarpet.ContourcarpetValidator",
+            "._cone.ConeValidator",
+            "._choropleth.ChoroplethValidator",
+            "._choroplethmapbox.ChoroplethmapboxValidator",
+            "._carpet.CarpetValidator",
+            "._candlestick.CandlestickValidator",
+            "._box.BoxValidator",
+            "._bar.BarValidator",
+            "._barpolar.BarpolarValidator",
+            "._area.AreaValidator",
+        ],
+    )

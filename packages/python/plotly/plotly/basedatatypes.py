@@ -10,24 +10,8 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 
 from _plotly_utils.utils import _natural_sort_strings
-from plotly.subplots import (
-    _set_trace_grid_reference,
-    _get_grid_subplot,
-    _get_subplot_ref_for_trace,
-)
+from plotly._validate import validate
 from .optional_imports import get_module
-
-from _plotly_utils.basevalidators import (
-    CompoundValidator,
-    CompoundArrayValidator,
-    BaseDataValidator,
-    BaseValidator,
-    LiteralValidator,
-)
-from . import animation
-from .callbacks import Points, InputDeviceState
-from plotly.utils import ElidedPrettyPrinter
-from .validators import DataValidator, LayoutValidator, FramesValidator
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -104,6 +88,8 @@ class BaseFigure(object):
             if a property in the specification of data, layout, or frames
             is invalid AND skip_invalid is False
         """
+        from .validators import DataValidator, LayoutValidator, FramesValidator
+
         super(BaseFigure, self).__init__()
 
         # Assign layout_plotly to layout
@@ -261,6 +247,8 @@ class BaseFigure(object):
 
         # Animation property validators
         # -----------------------------
+        from . import animation
+
         self._animation_duration_validator = animation.DurationValidator()
         self._animation_easing_validator = animation.EasingValidator()
 
@@ -768,6 +756,7 @@ class BaseFigure(object):
         )
 
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
+        from plotly.subplots import _get_subplot_ref_for_trace
 
         for trace in self.data:
             # Filter by subplot
@@ -1799,6 +1788,8 @@ Please use the add_trace method with the row and col parameters.
         self.add_trace(trace=trace, row=row, col=col)
 
     def _set_trace_grid_position(self, trace, row, col, secondary_y=False):
+        from plotly.subplots import _set_trace_grid_reference
+
         grid_ref = self._validate_get_grid_ref()
         return _set_trace_grid_reference(
             trace, self.layout, grid_ref, row, col, secondary_y
@@ -1854,6 +1845,8 @@ Please use the add_trace method with the row and col parameters.
                 - xaxis: plotly.graph_objs.layout.XAxis instance for subplot
                 - yaxis: plotly.graph_objs.layout.YAxis instance for subplot
         """
+        from plotly.subplots import _get_grid_subplot
+
         return _get_grid_subplot(self, row, col, secondary_y)
 
     # Child property operations
@@ -1945,11 +1938,12 @@ Please use the add_trace method with the row and col parameters.
     def _initialize_layout_template(self):
         import plotly.io as pio
 
-        if self._layout_obj.template is None:
+        if self._layout_obj._props.get("template", None) is None:
             if pio.templates.default is not None:
-                self._layout_obj.template = pio.templates.default
-            else:
-                self._layout_obj.template = None
+                with validate(False):
+                    # Assume default template is already validated
+                    template_dict = pio.templates[pio.templates.default]
+                    self._layout_obj.template = template_dict
 
     @property
     def layout(self):
@@ -2789,36 +2783,394 @@ Invalid property path '{key_path_str}' for layout
     # -----------------
     # Note that docstrings are auto-generated in plotly/_docstring_gen.py
     def show(self, *args, **kwargs):
+        """
+        Show a figure using either the default renderer(s) or the renderer(s)
+        specified by the renderer argument
+
+        Parameters
+        ----------
+        renderer: str or None (default None)
+            A string containing the names of one or more registered renderers
+            (separated by '+' characters) or None.  If None, then the default
+            renderers specified in plotly.io.renderers.default are used.
+
+        validate: bool (default True)
+            True if the figure should be validated before being shown,
+            False otherwise.
+
+        Returns
+        -------
+        None
+        """
         import plotly.io as pio
 
         return pio.show(self, *args, **kwargs)
 
     def to_json(self, *args, **kwargs):
+        """
+        Convert a figure to a JSON string representation
+
+        Parameters
+        ----------
+        validate: bool (default True)
+            True if the figure should be validated before being converted to
+            JSON, False otherwise.
+
+        pretty: bool (default False)
+            True if JSON representation should be pretty-printed, False if
+            representation should be as compact as possible.
+
+        remove_uids: bool (default True)
+            True if trace UIDs should be omitted from the JSON representation
+
+        Returns
+        -------
+        str
+            Representation of figure as a JSON string
+        """
         import plotly.io as pio
 
         return pio.to_json(self, *args, **kwargs)
 
     def write_json(self, *args, **kwargs):
+        """
+        Convert a figure to JSON and write it to a file or writeable
+        object
+
+        Parameters
+        ----------
+        file: str or writeable
+            A string representing a local file path or a writeable object
+            (e.g. an open file descriptor)
+
+        pretty: bool (default False)
+            True if JSON representation should be pretty-printed, False if
+            representation should be as compact as possible.
+
+        remove_uids: bool (default True)
+            True if trace UIDs should be omitted from the JSON representation
+
+        Returns
+        -------
+        None
+        """
         import plotly.io as pio
 
         return pio.write_json(self, *args, **kwargs)
 
     def to_html(self, *args, **kwargs):
+        """
+        Convert a figure to an HTML string representation.
+
+        Parameters
+        ----------
+        config: dict or None (default None)
+            Plotly.js figure config options
+        auto_play: bool (default=True)
+            Whether to automatically start the animation sequence on page load
+            if the figure contains frames. Has no effect if the figure does not
+            contain frames.
+        include_plotlyjs: bool or string (default True)
+            Specifies how the plotly.js library is included/loaded in the output
+            div string.
+
+            If True, a script tag containing the plotly.js source code (~3MB)
+            is included in the output.  HTML files generated with this option are
+            fully self-contained and can be used offline.
+
+            If 'cdn', a script tag that references the plotly.js CDN is included
+            in the output. HTML files generated with this option are about 3MB
+            smaller than those generated with include_plotlyjs=True, but they
+            require an active internet connection in order to load the plotly.js
+            library.
+
+            If 'directory', a script tag is included that references an external
+            plotly.min.js bundle that is assumed to reside in the same
+            directory as the HTML file.
+
+            If 'require', Plotly.js is loaded using require.js.  This option
+            assumes that require.js is globally available and that it has been
+            globally configured to know how to find Plotly.js as 'plotly'.
+            This option is not advised when full_html=True as it will result
+            in a non-functional html file.
+
+            If a string that ends in '.js', a script tag is included that
+            references the specified path. This approach can be used to point
+            the resulting HTML file to an alternative CDN or local bundle.
+
+            If False, no script tag referencing plotly.js is included. This is
+            useful when the resulting div string will be placed inside an HTML
+            document that already loads plotly.js. This option is not advised
+            when full_html=True as it will result in a non-functional html file.
+        include_mathjax: bool or string (default False)
+            Specifies how the MathJax.js library is included in the output html
+            div string.  MathJax is required in order to display labels
+            with LaTeX typesetting.
+
+            If False, no script tag referencing MathJax.js will be included in the
+            output.
+
+            If 'cdn', a script tag that references a MathJax CDN location will be
+            included in the output.  HTML div strings generated with this option
+            will be able to display LaTeX typesetting as long as internet access
+            is available.
+
+            If a string that ends in '.js', a script tag is included that
+            references the specified path. This approach can be used to point the
+            resulting HTML div string to an alternative CDN.
+        post_script: str or list or None (default None)
+            JavaScript snippet(s) to be included in the resulting div just after
+            plot creation.  The string(s) may include '{plot_id}' placeholders
+            that will then be replaced by the `id` of the div element that the
+            plotly.js figure is associated with.  One application for this script
+            is to install custom plotly.js event handlers.
+        full_html: bool (default True)
+            If True, produce a string containing a complete HTML document
+            starting with an <html> tag.  If False, produce a string containing
+            a single <div> element.
+        animation_opts: dict or None (default None)
+            dict of custom animation parameters to be passed to the function
+            Plotly.animate in Plotly.js. See
+            https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+            for available options. Has no effect if the figure does not contain
+            frames, or auto_play is False.
+        default_width, default_height: number or str (default '100%')
+            The default figure width/height to use if the provided figure does not
+            specify its own layout.width/layout.height property.  May be
+            specified in pixels as an integer (e.g. 500), or as a css width style
+            string (e.g. '500px', '100%').
+        validate: bool (default True)
+            True if the figure should be validated before being converted to
+            JSON, False otherwise.
+        Returns
+        -------
+        str
+            Representation of figure as an HTML div string
+        """
         import plotly.io as pio
 
         return pio.to_html(self, *args, **kwargs)
 
     def write_html(self, *args, **kwargs):
+        """
+        Write a figure to an HTML file representation
+
+        Parameters
+        ----------
+        file: str or writeable
+            A string representing a local file path or a writeable object
+            (e.g. an open file descriptor)
+        config: dict or None (default None)
+            Plotly.js figure config options
+        auto_play: bool (default=True)
+            Whether to automatically start the animation sequence on page load
+            if the figure contains frames. Has no effect if the figure does not
+            contain frames.
+        include_plotlyjs: bool or string (default True)
+            Specifies how the plotly.js library is included/loaded in the output
+            div string.
+
+            If True, a script tag containing the plotly.js source code (~3MB)
+            is included in the output.  HTML files generated with this option are
+            fully self-contained and can be used offline.
+
+            If 'cdn', a script tag that references the plotly.js CDN is included
+            in the output. HTML files generated with this option are about 3MB
+            smaller than those generated with include_plotlyjs=True, but they
+            require an active internet connection in order to load the plotly.js
+            library.
+
+            If 'directory', a script tag is included that references an external
+            plotly.min.js bundle that is assumed to reside in the same
+            directory as the HTML file. If `file` is a string to a local file path
+            and `full_html` is True then
+
+            If 'directory', a script tag is included that references an external
+            plotly.min.js bundle that is assumed to reside in the same
+            directory as the HTML file.  If `file` is a string to a local file
+            path and `full_html` is True, then the plotly.min.js bundle is copied
+            into the directory of the resulting HTML file. If a file named
+            plotly.min.js already exists in the output directory then this file
+            is left unmodified and no copy is performed. HTML files generated
+            with this option can be used offline, but they require a copy of
+            the plotly.min.js bundle in the same directory. This option is
+            useful when many figures will be saved as HTML files in the same
+            directory because the plotly.js source code will be included only
+            once per output directory, rather than once per output file.
+
+            If 'require', Plotly.js is loaded using require.js.  This option
+            assumes that require.js is globally available and that it has been
+            globally configured to know how to find Plotly.js as 'plotly'.
+            This option is not advised when full_html=True as it will result
+            in a non-functional html file.
+
+            If a string that ends in '.js', a script tag is included that
+            references the specified path. This approach can be used to point
+            the resulting HTML file to an alternative CDN or local bundle.
+
+            If False, no script tag referencing plotly.js is included. This is
+            useful when the resulting div string will be placed inside an HTML
+            document that already loads plotly.js.  This option is not advised
+            when full_html=True as it will result in a non-functional html file.
+
+        include_mathjax: bool or string (default False)
+            Specifies how the MathJax.js library is included in the output html
+            div string.  MathJax is required in order to display labels
+            with LaTeX typesetting.
+
+            If False, no script tag referencing MathJax.js will be included in the
+            output.
+
+            If 'cdn', a script tag that references a MathJax CDN location will be
+            included in the output.  HTML div strings generated with this option
+            will be able to display LaTeX typesetting as long as internet access
+            is available.
+
+            If a string that ends in '.js', a script tag is included that
+            references the specified path. This approach can be used to point the
+            resulting HTML div string to an alternative CDN.
+        post_script: str or list or None (default None)
+            JavaScript snippet(s) to be included in the resulting div just after
+            plot creation.  The string(s) may include '{plot_id}' placeholders
+            that will then be replaced by the `id` of the div element that the
+            plotly.js figure is associated with.  One application for this script
+            is to install custom plotly.js event handlers.
+        full_html: bool (default True)
+            If True, produce a string containing a complete HTML document
+            starting with an <html> tag.  If False, produce a string containing
+            a single <div> element.
+        animation_opts: dict or None (default None)
+            dict of custom animation parameters to be passed to the function
+            Plotly.animate in Plotly.js. See
+            https://github.com/plotly/plotly.js/blob/master/src/plots/animation_attributes.js
+            for available options. Has no effect if the figure does not contain
+            frames, or auto_play is False.
+        default_width, default_height: number or str (default '100%')
+            The default figure width/height to use if the provided figure does not
+            specify its own layout.width/layout.height property.  May be
+            specified in pixels as an integer (e.g. 500), or as a css width style
+            string (e.g. '500px', '100%').
+        validate: bool (default True)
+            True if the figure should be validated before being converted to
+            JSON, False otherwise.
+        auto_open: bool (default True
+            If True, open the saved file in a web browser after saving.
+            This argument only applies if `full_html` is True.
+        Returns
+        -------
+        str
+            Representation of figure as an HTML div string
+        """
         import plotly.io as pio
 
         return pio.write_html(self, *args, **kwargs)
 
     def to_image(self, *args, **kwargs):
+        """
+        Convert a figure to a static image bytes string
+
+        Parameters
+        ----------
+        format: str or None
+            The desired image format. One of
+              - 'png'
+              - 'jpg' or 'jpeg'
+              - 'webp'
+              - 'svg'
+              - 'pdf'
+              - 'eps' (Requires the poppler library to be installed)
+
+            If not specified, will default to `plotly.io.config.default_format`
+
+        width: int or None
+            The width of the exported image in layout pixels. If the `scale`
+            property is 1.0, this will also be the width of the exported image
+            in physical pixels.
+
+            If not specified, will default to `plotly.io.config.default_width`
+
+        height: int or None
+            The height of the exported image in layout pixels. If the `scale`
+            property is 1.0, this will also be the height of the exported image
+            in physical pixels.
+
+            If not specified, will default to `plotly.io.config.default_height`
+
+        scale: int or float or None
+            The scale factor to use when exporting the figure. A scale factor
+            larger than 1.0 will increase the image resolution with respect
+            to the figure's layout pixel dimensions. Whereas as scale factor of
+            less than 1.0 will decrease the image resolution.
+
+            If not specified, will default to `plotly.io.config.default_scale`
+
+        validate: bool
+            True if the figure should be validated before being converted to
+            an image, False otherwise.
+
+        Returns
+        -------
+        bytes
+            The image data
+        """
         import plotly.io as pio
 
         return pio.to_image(self, *args, **kwargs)
 
     def write_image(self, *args, **kwargs):
+        """
+        Convert a figure to a static image and write it to a file or writeable
+        object
+
+        Parameters
+        ----------
+        file: str or writeable
+            A string representing a local file path or a writeable object
+            (e.g. an open file descriptor)
+
+        format: str or None
+            The desired image format. One of
+              - 'png'
+              - 'jpg' or 'jpeg'
+              - 'webp'
+              - 'svg'
+              - 'pdf'
+              - 'eps' (Requires the poppler library to be installed)
+
+            If not specified and `file` is a string then this will default to the
+            file extension. If not specified and `file` is not a string then this
+            will default to `plotly.io.config.default_format`
+
+        width: int or None
+            The width of the exported image in layout pixels. If the `scale`
+            property is 1.0, this will also be the width of the exported image
+            in physical pixels.
+
+            If not specified, will default to `plotly.io.config.default_width`
+
+        height: int or None
+            The height of the exported image in layout pixels. If the `scale`
+            property is 1.0, this will also be the height of the exported image
+            in physical pixels.
+
+            If not specified, will default to `plotly.io.config.default_height`
+
+        scale: int or float or None
+            The scale factor to use when exporting the figure. A scale factor
+            larger than 1.0 will increase the image resolution with respect
+            to the figure's layout pixel dimensions. Whereas as scale factor of
+            less than 1.0 will decrease the image resolution.
+
+            If not specified, will default to `plotly.io.config.default_scale`
+
+        validate: bool
+            True if the figure should be validated before being converted to
+            an image, False otherwise.
+
+        Returns
+        -------
+        None
+        """
         import plotly.io as pio
 
         return pio.write_image(self, *args, **kwargs)
@@ -2850,6 +3202,10 @@ Invalid property path '{key_path_str}' for layout
             :class:`BasePlotlyType`, ``update_obj`` should be a tuple or list
             of dicts
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+        )
 
         if update_obj is None:
             # Nothing to do
@@ -2963,6 +3319,10 @@ class BasePlotlyType(object):
     # of relative path to new property (e.g. ('title', 'font')
     _mapped_properties = {}
 
+    _parent_path_str = ""
+    _path_str = ""
+    _valid_props = set()
+
     def __init__(self, plotly_name, **kwargs):
         """
         Construct a new BasePlotlyType
@@ -2989,10 +3349,6 @@ class BasePlotlyType(object):
 
         # Initialize properties
         # ---------------------
-        # ### _validators ###
-        # A dict from property names to property validators
-        self._validators = {}
-
         # ### _compound_props ###
         # A dict from compound property names to compound objects
         self._compound_props = {}
@@ -3019,6 +3375,47 @@ class BasePlotlyType(object):
         # properties is modified
         self._change_callbacks = {}
 
+        # ### Backing property for backward compatible _validator property ##
+        self.__validators = None
+
+    def _get_validator(self, prop):
+        from .validator_cache import ValidatorCache
+
+        return ValidatorCache.get_validator(self._path_str, prop)
+
+    @property
+    def _validators(self):
+        """
+        Validators used to be stored in a private _validators property. This was
+        eliminated when we switched to building validators on demand using the
+        _get_validator method.
+
+        This property returns a simple object that
+
+        Returns
+        -------
+        dict-like interface for accessing the object's validators
+        """
+        obj = self
+        if self.__validators is None:
+
+            class ValidatorCompat(object):
+                def __getitem__(self, item):
+                    return obj._get_validator(item)
+
+                def __contains__(self, item):
+                    return obj.__contains__(item)
+
+                def __iter__(self):
+                    return iter(obj)
+
+                def items(self):
+                    return [(k, self[k]) for k in self]
+
+            self.__validators = ValidatorCompat()
+
+        return self.__validators
+
     def _process_kwargs(self, **kwargs):
         """
         Process any extra kwargs that are not predefined as constructor params
@@ -3027,6 +3424,9 @@ class BasePlotlyType(object):
         for k, v in kwargs.items():
             if k in self:
                 # e.g. underscore kwargs like marker_line_color
+                self[k] = v
+            elif not validate._should_validate:
+                # Set extra property as-is
                 self[k] = v
             else:
                 invalid_kwargs[k] = v
@@ -3044,30 +3444,6 @@ class BasePlotlyType(object):
         str
         """
         return self._plotly_name
-
-    @property
-    def _parent_path_str(self):
-        """
-        dot-separated path string to this object's parent.
-
-        Returns
-        -------
-        str
-
-        Examples
-        --------
-
-        >>> import plotly.graph_objs as go
-        >>> go.Layout()._parent_path_str
-        ''
-
-        >>> go.layout.XAxis()._parent_path_str
-        'layout'
-
-        >>> go.layout.xaxis.rangeselector.Button()._parent_path_str
-        'layout.xaxis.rangeselector'
-        """
-        raise NotImplementedError
 
     @property
     def _prop_descriptions(self):
@@ -3122,21 +3498,30 @@ class BasePlotlyType(object):
             return None
         else:
             # ### Child a compound property ###
-            if child.plotly_name in self._compound_props:
-                return self._props.get(child.plotly_name, None)
-
-            # ### Child an element of a compound array property ###
-            elif child.plotly_name in self._compound_array_props:
-                children = self._compound_array_props[child.plotly_name]
-                child_ind = BaseFigure._index_is(children, child)
-                assert child_ind is not None
-
-                children_props = self._props.get(child.plotly_name, None)
-                return (
-                    children_props[child_ind]
-                    if children_props is not None and len(children_props) > child_ind
-                    else None
+            if child.plotly_name in self:
+                from _plotly_utils.basevalidators import (
+                    CompoundValidator,
+                    CompoundArrayValidator,
                 )
+
+                validator = self._get_validator(child.plotly_name)
+
+                if isinstance(validator, CompoundValidator):
+                    return self._props.get(child.plotly_name, None)
+
+                # ### Child an element of a compound array property ###
+                elif isinstance(validator, CompoundArrayValidator):
+                    children = self[child.plotly_name]
+                    child_ind = BaseFigure._index_is(children, child)
+                    assert child_ind is not None
+
+                    children_props = self._props.get(child.plotly_name, None)
+                    return (
+                        children_props[child_ind]
+                        if children_props is not None
+                        and len(children_props) > child_ind
+                        else None
+                    )
 
             # ### Invalid child ###
             else:
@@ -3282,7 +3667,7 @@ class BasePlotlyType(object):
 
         # Return validator
         # ----------------
-        return plotly_obj._validators[prop]
+        return plotly_obj._get_validator(prop)
 
     @property
     def parent(self):
@@ -3344,6 +3729,11 @@ class BasePlotlyType(object):
         -------
         Any
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+            BaseDataValidator,
+        )
 
         # Normalize prop
         # --------------
@@ -3361,13 +3751,33 @@ class BasePlotlyType(object):
         if len(prop) == 1:
             # Unwrap scalar tuple
             prop = prop[0]
-            if prop not in self._validators:
+            if prop not in self._valid_props:
                 raise KeyError(prop)
 
-            validator = self._validators[prop]
-            if prop in self._compound_props:
+            validator = self._get_validator(prop)
+
+            if isinstance(validator, CompoundValidator):
+                if self._compound_props.get(prop, None) is None:
+                    # Init compound objects
+                    self._compound_props[prop] = validator.data_class(
+                        _parent=self, plotly_name=prop
+                    )
+                    # Update plotly_name value in case the validator applies
+                    # non-standard name (e.g. imagedefaults instead of image)
+                    self._compound_props[prop]._plotly_name = prop
+
                 return validator.present(self._compound_props[prop])
-            elif prop in self._compound_array_props:
+            elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
+                if self._compound_array_props.get(prop, None) is None:
+                    # Init list of compound objects
+                    if self._props is not None:
+                        self._compound_array_props[prop] = [
+                            validator.data_class(_parent=self)
+                            for _ in self._props.get(prop, [])
+                        ]
+                    else:
+                        self._compound_array_props[prop] = []
+
                 return validator.present(self._compound_array_props[prop])
             elif self._props is not None and prop in self._props:
                 return validator.present(self._props[prop])
@@ -3422,7 +3832,7 @@ class BasePlotlyType(object):
                 else:
                     return False
             else:
-                if obj is not None and p in obj._validators:
+                if obj is not None and p in obj._valid_props:
                     obj = obj[p]
                 else:
                     return False
@@ -3445,6 +3855,11 @@ class BasePlotlyType(object):
         -------
         None
         """
+        from _plotly_utils.basevalidators import (
+            CompoundValidator,
+            CompoundArrayValidator,
+            BaseDataValidator,
+        )
 
         # Normalize prop
         # --------------
@@ -3470,24 +3885,49 @@ class BasePlotlyType(object):
             # ### Unwrap scalar tuple ###
             prop = prop[0]
 
-            # ### Validate prop ###
-            if prop not in self._validators:
-                self._raise_on_invalid_property_error(prop)
+            if validate._should_validate:
+                if prop not in self._valid_props:
+                    self._raise_on_invalid_property_error(prop)
 
-            # ### Get validator for this property ###
-            validator = self._validators[prop]
+                # ### Get validator for this property ###
+                validator = self._get_validator(prop)
 
-            # ### Handle compound property ###
-            if isinstance(validator, CompoundValidator):
-                self._set_compound_prop(prop, value)
+                # ### Handle compound property ###
+                if isinstance(validator, CompoundValidator):
+                    self._set_compound_prop(prop, value)
 
-            # ### Handle compound array property ###
-            elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
-                self._set_array_prop(prop, value)
+                # ### Handle compound array property ###
+                elif isinstance(validator, (CompoundArrayValidator, BaseDataValidator)):
+                    self._set_array_prop(prop, value)
 
-            # ### Handle simple property ###
+                # ### Handle simple property ###
+                else:
+                    self._set_prop(prop, value)
             else:
-                self._set_prop(prop, value)
+                # Make sure properties dict is initialized
+                self._init_props()
+
+                if isinstance(value, BasePlotlyType):
+                    # Extract json from graph objects
+                    value = value.to_plotly_json()
+
+                # Check for list/tuple of graph objects
+                if (
+                    isinstance(value, (list, tuple))
+                    and value
+                    and isinstance(value[0], BasePlotlyType)
+                ):
+                    value = [
+                        v.to_plotly_json() if isinstance(v, BasePlotlyType) else v
+                        for v in value
+                    ]
+
+                self._props[prop] = value
+
+                # Remove any already constructed graph object so that it will be
+                # reconstructed on property access
+                self._compound_props.pop(prop, None)
+                self._compound_array_props.pop(prop, None)
 
         # Handle non-scalar case
         # ----------------------
@@ -3511,7 +3951,7 @@ class BasePlotlyType(object):
         -------
         None
         """
-        if prop.startswith("_") or hasattr(self, prop) or prop in self._validators:
+        if prop.startswith("_") or hasattr(self, prop) or prop in self._valid_props:
             # Let known properties and private properties through
             super(BasePlotlyType, self).__setattr__(prop, value)
         else:
@@ -3522,7 +3962,7 @@ class BasePlotlyType(object):
         """
         Return an iterator over the object's properties
         """
-        res = list(self._validators.keys())
+        res = list(self._valid_props)
         for prop in self._mapped_properties:
             res.append(prop)
         return iter(res)
@@ -3575,6 +4015,8 @@ class BasePlotlyType(object):
         str
             The representation string
         """
+        from plotly.utils import ElidedPrettyPrinter
+
         if parent_path_str:
             class_name = parent_path_str + "." + class_name
 
@@ -3597,6 +4039,7 @@ class BasePlotlyType(object):
         Customize object representation when displayed in the
         terminal/notebook
         """
+        from _plotly_utils.basevalidators import LiteralValidator
 
         # Get all properties
         props = self._props if self._props is not None else {}
@@ -3605,8 +4048,8 @@ class BasePlotlyType(object):
         props = {
             p: v
             for p, v in props.items()
-            if p in self._validators
-            and not isinstance(self._validators[p], LiteralValidator)
+            if p in self._valid_props
+            and not isinstance(self._get_validator(p), LiteralValidator)
         }
 
         # Elide template
@@ -3767,7 +4210,8 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
+
         try:
             val = validator.validate_coerce(val)
         except ValueError as err:
@@ -3832,7 +4276,7 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
@@ -3906,7 +4350,7 @@ class BasePlotlyType(object):
 
         # Import value
         # ------------
-        validator = self._validators.get(prop)
+        validator = self._get_validator(prop)
         val = validator.validate_coerce(val, skip_invalid=self._skip_invalid)
 
         # Save deep copies of current and new states
@@ -4179,7 +4623,7 @@ on_change callbacks are not supported in this case.
         bool
             True if v1 and v2 are equal, False otherwise
         """
-        np = get_module("numpy")
+        np = get_module("numpy", should_load=False)
         if np is not None and (
             isinstance(v1, np.ndarray) or isinstance(v2, np.ndarray)
         ):
@@ -4331,10 +4775,8 @@ class BaseLayoutType(BaseLayoutHierarchyType):
 
         # Construct and add validator
         # ---------------------------
-        if prop not in self._validators:
-            validator_class = self._subplotid_validators[subplot_prop]
-            validator = validator_class(plotly_name=prop)
-            self._validators[prop] = validator
+        if prop not in self._valid_props:
+            self._valid_props.add(prop)
 
         # Import value
         # ------------
@@ -4395,7 +4837,7 @@ class BaseLayoutType(BaseLayoutHierarchyType):
         """
         prop = self._strip_subplot_suffix_of_1(prop)
         if prop != "_subplotid_props" and prop in self._subplotid_props:
-            validator = self._validators[prop]
+            validator = self._get_validator(prop)
             return validator.present(self._compound_props[prop])
         else:
             return super(BaseLayoutHierarchyType, self).__getattribute__(prop)

@@ -52,7 +52,7 @@ class TestBackwardsCompat(TestCase):
         # compat, so we basically just create a checkpoint with this test.
 
         for class_name in OLD_CLASS_NAMES:
-            self.assertIn(class_name, go.__dict__.keys())
+            self.assertIsNotNone(getattr(go, class_name, None))
 
     def test_title_as_string_layout(self):
         """

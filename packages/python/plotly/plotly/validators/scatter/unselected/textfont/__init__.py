@@ -1,14 +1,10 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="color", parent_name="scatter.unselected.textfont", **kwargs
-    ):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._color.ColorValidator"]
+    )

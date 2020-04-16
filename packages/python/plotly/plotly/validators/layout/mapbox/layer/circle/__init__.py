@@ -1,14 +1,10 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._radius import RadiusValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class RadiusValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(
-        self, plotly_name="radius", parent_name="layout.mapbox.layer.circle", **kwargs
-    ):
-        super(RadiusValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._radius.RadiusValidator"]
+    )

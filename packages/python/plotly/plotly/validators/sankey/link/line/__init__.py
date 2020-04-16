@@ -1,61 +1,20 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._widthsrc import WidthsrcValidator
+    from ._width import WidthValidator
+    from ._colorsrc import ColorsrcValidator
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class WidthsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self, plotly_name="widthsrc", parent_name="sankey.link.line", **kwargs
-    ):
-        super(WidthsrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="width", parent_name="sankey.link.line", **kwargs):
-        super(WidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "calc"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorsrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self, plotly_name="colorsrc", parent_name="sankey.link.line", **kwargs
-    ):
-        super(ColorsrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(self, plotly_name="color", parent_name="sankey.link.line", **kwargs):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            array_ok=kwargs.pop("array_ok", True),
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._widthsrc.WidthsrcValidator",
+            "._width.WidthValidator",
+            "._colorsrc.ColorsrcValidator",
+            "._color.ColorValidator",
+        ],
+    )
