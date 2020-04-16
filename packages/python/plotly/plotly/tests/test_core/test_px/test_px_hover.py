@@ -33,7 +33,7 @@ def test_composite_hover():
         fig.data[0].hovertemplate
         == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[2]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
         or fig.data[0].hovertemplate
-        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[2]}<extra></extra>"
+        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[0]}<extra></extra>"
     )
 
 
