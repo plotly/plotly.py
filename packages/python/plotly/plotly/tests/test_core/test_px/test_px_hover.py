@@ -20,9 +20,7 @@ def test_skip_hover():
 
 def test_composite_hover():
     df = px.data.tips()
-    hover_dict = OrderedDict(
-        {"day": False, "sex": True, "time": False, "total_bill": ":.1f"}
-    )
+    hover_dict = OrderedDict({"day": False, "sex": True, "total_bill": ":.1f"})
     fig = px.scatter(
         df,
         x="tip",
@@ -33,9 +31,9 @@ def test_composite_hover():
     )
     assert (
         fig.data[0].hovertemplate
-        == "tip=%{x}<br>total_bill=%{customdata[3]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
+        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[2]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
         or fig.data[0].hovertemplate
-        == "tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[3]}<extra></extra>"
+        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[2]}<extra></extra>"
     )
 
 
