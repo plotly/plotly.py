@@ -33,8 +33,8 @@ def test_composite_hover():
     )
     assert (
         fig.data[0].hovertemplate
-        == "tip=%{x}<br>total_bill=%{customdata[3]:.1f}<br>sex=%{customdata[1]}<extra></extra>" or
-        fig.data[0].hovertemplate
+        == "tip=%{x}<br>total_bill=%{customdata[3]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
+        or fig.data[0].hovertemplate
         == "tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[3]}<extra></extra>"
     )
 
