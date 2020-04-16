@@ -25,13 +25,11 @@ def relative_import(parent_name, rel_modules=(), rel_classes=()):
 
         # Check for submodule
         if import_name in module_names:
-            # print(parent_name, import_name)
             rel_import = module_names[import_name]
             return importlib.import_module(rel_import, parent_name)
 
         # Check for submodule class
         if import_name in class_names:
-            # print(parent_name, import_name)
             rel_path_parts = class_names[import_name].split(".")
             rel_module = ".".join(rel_path_parts[:-1])
             class_name = import_name
