@@ -20,7 +20,9 @@ def test_skip_hover():
 
 def test_composite_hover():
     df = px.data.tips()
-    hover_dict = OrderedDict({"day": False, "sex": True, "total_bill": ":.1f"})
+    hover_dict = OrderedDict(
+        {"day": False, "time": False, "sex": True, "total_bill": ":.1f"}
+    )
     fig = px.scatter(
         df,
         x="tip",
@@ -29,12 +31,11 @@ def test_composite_hover():
         facet_row="time",
         hover_data=hover_dict,
     )
-    assert (
-        fig.data[0].hovertemplate
-        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[2]:.1f}<br>sex=%{customdata[1]}<extra></extra>"
-        or fig.data[0].hovertemplate
-        == "time=Dinner<br>tip=%{x}<br>total_bill=%{customdata[1]:.1f}<br>sex=%{customdata[0]}<extra></extra>"
-    )
+    for el in ["tip", "total_bill", "sex"]:
+        assert el in fig.data[0].hovertemplate
+    for el in ["day", "time"]:
+        assert el not in fig.data[0].hovertemplate
+    assert ":.1f" in fig.data[0].hovertemplate
 
 
 def test_tuple_hover_data():
@@ -45,12 +46,38 @@ def test_tuple_hover_data():
         fig.data[0].hovertemplate
         == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]}<extra></extra>"
     )
-    fig = px.scatter(
-        x=[1, 2, 3],
-        y=[3, 4, 5],
-        hover_data={"comment": (":.1f", [1.234, 45.3455, 5666.234])},
-    )
-    assert (
-        fig.data[0].hovertemplate
-        == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]:.1f}<extra></extra>"
-    )
+    hover_dicts = [
+        {"comment": (":.1f", [1.234, 45.3455, 5666.234])},
+        {"comment": (":.1f", np.array([1.234, 45.3455, 5666.234]))},
+        {"comment": (":.1f", pd.Series([1.234, 45.3455, 5666.234]))},
+    ]
+    for hover_dict in hover_dicts:
+        fig = px.scatter(x=[1, 2, 3], y=[3, 4, 5], hover_data=hover_dict,)
+        assert (
+            fig.data[0].hovertemplate
+            == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]:.1f}<extra></extra>"
+        )
+
+
+def test_fail_wrong_column():
+    with pytest.raises(ValueError):
+        fig = px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"d": True},
+        )
+    with pytest.raises(ValueError):
+        fig = px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"d": ":.1f"},
+        )
+    with pytest.raises(ValueError):
+        fig = px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"d": (True, [3, 4, 5])},
+        )

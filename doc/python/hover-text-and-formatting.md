@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to use hover text and formatting in Python with Plotly.
     display_as: file_settings
@@ -102,7 +102,7 @@ fig.show()
 
 ### Customizing Hover text with Plotly Express
 
-Plotly Express functions automatically add all the data being plotted (x, y, color etc) to the hover label. Many Plotly Express functions also support configurable hover text. The `hover_data` argument accepts a list of column names to be added to the hover tooltip. The `hover_name` property controls which column is displayed in bold as the tooltip title.
+Plotly Express functions automatically add all the data being plotted (x, y, color etc) to the hover label. Many Plotly Express functions also support configurable hover text. The `hover_data` argument accepts a list of column names to be added to the hover tooltip, or a dictionary for advanced formatting (see the next section). The `hover_name` property controls which column is displayed in bold as the tooltip title.
 
 Here is an example that creates a scatter plot using Plotly Express with custom hover data and a custom hover name.
 
@@ -114,6 +114,35 @@ df_2007 = px.data.gapminder().query("year==2007")
 fig = px.scatter(df_2007, x="gdpPercap", y="lifeExp", log_x=True,
                  hover_name="country", hover_data=["continent", "pop"])
 
+fig.show()
+```
+
+### Disabling or customizing hover of columns in plotly express
+
+`hover_data` can also be a dictionary. Its keys are existing columns of the `dataframe` argument, or new labels. For an existing column, the values can be
+* `False` to remove the column from the hover data (for example, if one wishes to remove the column of the `x` argument)
+* `True` to add a different column, with default formatting
+* a formatting string starting with `:` for numbers [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `|` for dates in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format), for example `:.3f`, `|%a`.
+
+For passing new data, the value is a tuple, which first element is one of the possible values described above for existing columns, and the second element correspond to the hover values, for example `(True, [1, 2, 3])` or `(':.1f', [1.54, 2.345])`.
+
+These different cases are illustrated in the following example.
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.iris()
+fig = px.scatter(df, x='petal_length', y='sepal_length', facet_col='species', color='species',
+                 hover_data={'species':False, # remove species from hover data
+                             'sepal_length':':.2f', # customize hover for column of y attribute
+                             'petal_width':True, # add other column, default formatting
+                             'sepal_width':':.2f', # add other column, customized formatting
+                             # data not in dataframe, default formatting
+                             'suppl_1': (True, np.random.random(len(df))),
+                             # data not in dataframe, customized formatting
+                             'suppl_2': (':.3f', np.random.random(len(df)))
+                            })
+fig.update_layout(height=300)
 fig.show()
 ```
 

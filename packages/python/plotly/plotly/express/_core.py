@@ -985,7 +985,7 @@ def build_dataframe(args, attrables, array_attrables):
                 bypass_warnings = (
                     hover_data_is_dict
                     and argument in args["hover_data"]
-                    and args["hover_data"][argument][1]
+                    and args["hover_data"][argument][1] is not None
                 )
                 if not df_provided and not bypass_warnings:
                     raise ValueError(
@@ -1022,7 +1022,7 @@ def build_dataframe(args, attrables, array_attrables):
                 if (
                     field_name == "hover_data"
                     and hover_data_is_dict
-                    and args["hover_data"][col_name][1]
+                    and args["hover_data"][col_name][1] is not None
                 ):
                     df_output[col_name] = args["hover_data"][col_name][1]
                 else:
