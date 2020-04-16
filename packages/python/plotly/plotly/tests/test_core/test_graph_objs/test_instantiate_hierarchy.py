@@ -19,9 +19,9 @@ class HierarchyTest(TestCase):
         for datatypes_module in datatype_modules:
             module = importlib.import_module(datatypes_module)
             for name in getattr(module, "__all__", []):
-                obj = getattr(module, name)
                 if name.startswith("_") or name[0].islower() or name == "FigureWidget":
                     continue
+                obj = getattr(module, name)
                 try:
                     v = obj()
                 except Exception:
