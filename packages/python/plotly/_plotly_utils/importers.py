@@ -46,4 +46,7 @@ def relative_import(parent_name, rel_modules=(), rel_classes=()):
 
     __all__ = list(module_names) + list(class_names)
 
-    return __all__, __getattr__
+    def __dir__():
+        return __all__
+
+    return __all__, __getattr__, __dir__

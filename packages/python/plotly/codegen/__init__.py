@@ -279,6 +279,7 @@ if sys.version_info < (3, 7):
     except ImportError:
         pass
 else:
+    __all__.append("FigureWidget")
     orig_getattr = __getattr__
     def __getattr__(import_name):
         if import_name == "FigureWidget":

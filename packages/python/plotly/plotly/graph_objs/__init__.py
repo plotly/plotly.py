@@ -127,7 +127,7 @@ if sys.version_info < (3, 7):
 else:
     from _plotly_utils.importers import relative_import
 
-    __all__, __getattr__ = relative_import(
+    __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
             ".waterfall",
@@ -272,6 +272,7 @@ if sys.version_info < (3, 7):
     except ImportError:
         pass
 else:
+    __all__.append("FigureWidget")
     orig_getattr = __getattr__
 
     def __getattr__(import_name):

@@ -79,7 +79,7 @@ if sys.version_info < (3, 7):
     {imports_str}
 else:
     from _plotly_utils.importers import relative_import
-    __all__, __getattr__ = relative_import(
+    __all__, __getattr__, __dir__ = relative_import(
         __name__,
         {repr(rel_modules)},
         {repr(rel_classes)}
