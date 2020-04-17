@@ -1,9 +1,48 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
-from plotly.express._core import build_dataframe
+from plotly.express._core import build_dataframe, _is_col_list
 from pandas.testing import assert_frame_equal
 import pytest
+
+
+def test_is_col_list():
+    df_input = pd.DataFrame(dict(a=[1, 2], b=[1, 2]))
+    assert _is_col_list(df_input, ["a"])
+    assert _is_col_list(df_input, ["a", "b"])
+    assert _is_col_list(df_input, [[3, 4]])
+    assert _is_col_list(df_input, [[3, 4], [3, 4]])
+    assert not _is_col_list(df_input, pytest)
+    assert not _is_col_list(df_input, False)
+    assert not _is_col_list(df_input, ["a", 1])
+    assert not _is_col_list(df_input, "a")
+    assert not _is_col_list(df_input, 1)
+    assert not _is_col_list(df_input, ["a", "b", "c"])
+    assert not _is_col_list(df_input, [1, 2])
+    df_input = pd.DataFrame([[1, 2], [1, 2]])
+    assert _is_col_list(df_input, [0])
+    assert _is_col_list(df_input, [0, 1])
+    assert _is_col_list(df_input, [[3, 4]])
+    assert _is_col_list(df_input, [[3, 4], [3, 4]])
+    assert not _is_col_list(df_input, pytest)
+    assert not _is_col_list(df_input, False)
+    assert not _is_col_list(df_input, ["a", 1])
+    assert not _is_col_list(df_input, "a")
+    assert not _is_col_list(df_input, 1)
+    assert not _is_col_list(df_input, [0, 1, 2])
+    assert not _is_col_list(df_input, ["a", "b"])
+    df_input = None
+    assert _is_col_list(df_input, [[3, 4]])
+    assert _is_col_list(df_input, [[3, 4], [3, 4]])
+    assert not _is_col_list(df_input, [0])
+    assert not _is_col_list(df_input, [0, 1])
+    assert not _is_col_list(df_input, pytest)
+    assert not _is_col_list(df_input, False)
+    assert not _is_col_list(df_input, ["a", 1])
+    assert not _is_col_list(df_input, "a")
+    assert not _is_col_list(df_input, 1)
+    assert not _is_col_list(df_input, [0, 1, 2])
+    assert not _is_col_list(df_input, ["a", "b"])
 
 
 def test_wide_mode_external():
@@ -101,23 +140,33 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
     args_in = dict(data_frame=df_in, color=None, orientation=orientation)
     args_out = build_dataframe(args_in, trace_type)
     df_out = args_out.pop("data_frame")
-    assert_frame_equal(
-        df_out.sort_index(axis=1),
-        pd.DataFrame(
-            dict(
-                index=[11, 12, 13, 11, 12, 13],
-                _column_=["a", "a", "a", "b", "b", "b"],
-                _value_=[1, 2, 3, 4, 5, 6],
-            )
-        ).sort_index(axis=1),
+    expected = dict(
+        _column_=["a", "a", "a", "b", "b", "b"], _value_=[1, 2, 3, 4, 5, 6],
     )
-    for arg in ["x", "y"]:
-        if arg not in args_out:
-            args_out[arg] = None  # so this doesn't fail for histogram
+    if x == "index":
+        expected["index"] = [11, 12, 13, 11, 12, 13]
+    assert_frame_equal(
+        df_out.sort_index(axis=1), pd.DataFrame(expected).sort_index(axis=1),
+    )
     if orientation is None or orientation == "v":
         assert args_out == dict(x=x, y=y, color=color, orientation="v")
     else:
         assert args_out == dict(x=y, y=x, color=color, orientation="h")
+
+
+def test_wide_x_or_y():
+    args_in = dict(data_frame=None, y=[[1, 2], [3, 4]], color=None, orientation=None)
+    args_out = build_dataframe(args_in, go.Scatter)
+    df_out = args_out.pop("data_frame")
+    expected = dict(
+        _column_=["_column__0", "_column__0", "_column__1", "_column__1"],
+        _value_=[1, 2, 3, 4],
+        # x=["a", "b", "a", "b"],
+        index=[0, 1, 0, 1],
+    )
+    assert_frame_equal(
+        df_out.sort_index(axis=1), pd.DataFrame(expected).sort_index(axis=1),
+    )
 
 
 @pytest.mark.parametrize(
@@ -159,8 +208,6 @@ def test_wide_mode_internal_special_cases():
         args_in["data_frame"] = df_in
         args_out = build_dataframe(args_in, go.Scatter)
         df_out = args_out.pop("data_frame")
-        # print(df_out.info())
-        # print(df_expect.info())
         assert_frame_equal(
             df_out.sort_index(axis=1), df_expect.sort_index(axis=1),
         )

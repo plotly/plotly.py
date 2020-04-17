@@ -23,7 +23,7 @@ direct_attrables = (
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
-array_attrables = ["dimensions", "custom_data", "hover_data", "path", "wide_cols"]
+array_attrables = ["dimensions", "custom_data", "hover_data", "path", "_column_"]
 group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 renameable_group_attrables = [
     "color",  # renamed to marker.color or line.color in infer_config
@@ -913,6 +913,27 @@ def _get_reserved_col_names(args):
     return reserved_names
 
 
+def _is_col_list(df_input, arg):
+    if arg is None or isinstance(arg, str) or isinstance(arg, int):
+        return False
+    if isinstance(arg, pd.MultiIndex):
+        return False  # just to keep existing behaviour for now
+    try:
+        iter(arg)
+    except TypeError:
+        return False  # not iterable
+    for c in arg:
+        if isinstance(c, str) or isinstance(c, int):
+            if df_input is None or c not in df_input.columns:
+                return False
+        else:
+            try:
+                iter(c)
+            except TypeError:
+                return False  # not iterable
+    return True
+
+
 def build_dataframe(args, constructor):
     """
     Constructs a dataframe and modifies `args` in-place.
@@ -946,60 +967,60 @@ def build_dataframe(args, constructor):
 
     no_x = args.get("x", None) is None
     no_y = args.get("y", None) is None
-    wideable = [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]
-    wide_mode = df_provided and no_x and no_y and constructor in wideable
-    wide_id_vars = set()
+    wide_x = False if no_x else _is_col_list(df_input, args["x"])
+    wide_y = False if no_y else _is_col_list(df_input, args["y"])
 
-    if wide_mode:
-        # currently assuming that df_provided == True
-        args["wide_cols"] = list(df_input.columns)
-        args["wide_cross"] = df_input.index
-        var_name = df_input.columns.name or "_column_"
-        wide_orientation = args.get("orientation", None) or "v"
-        args["orientation"] = wide_orientation
-
-    """
-    wide_x detection
-    - if scalar = False
-    - else if list of lists = True
-    - else if not df_provided = False
-    - else if contents are unique and are contained in columns = True
-    - else = False
-
-
-    wide detection:
-    - if no_x and no_y = wide mode
-    - else if wide_x and wide_y = error
-    - else if wide_x xor wide_y = wide mode
-    - else = long mode
-
-    so what we want is:
-    - y = [col col] -> melt just those, wide_orientation = 'v'/no override, cross_dim = index or range
-    - y = [col col] / x=col -> wide_orientation = 'h'/no override, cross_dim = x
-    - y = [col col] / x=[col col] -> error
-
-    need to merge wide logic into no_x/no_y logic below for range() etc
-    """
-
-    df_output = pd.DataFrame()
+    wide_mode = False
+    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]:
+        wide_cross_name = None
+        if wide_x and wide_y:
+            raise ValueError(
+                "Cannot accept list of column references or list of columns for both `x` and `y`."
+            )
+        if df_provided and no_x and no_y:
+            wide_mode = True
+            args["_column_"] = list(df_input.columns)
+            var_name = df_input.columns.name or "_column_"
+            wide_orientation = args.get("orientation", None) or "v"
+            args["orientation"] = wide_orientation
+            args["wide_cross"] = None
+        elif wide_x != wide_y:
+            wide_mode = True
+            args["_column_"] = args["y"] if wide_y else args["x"]
+            var_name = "_column_"
+            if constructor == go.Histogram:
+                wide_orientation = "v" if wide_x else "h"
+            else:
+                wide_orientation = "v" if wide_y else "h"
+            args["y" if wide_y else "x"] = None
+            args["wide_cross"] = None
+            if not no_x and not no_y:
+                wide_cross_name = "__x__" if wide_y else "__y__"
 
     missing_bar_dim = None
-    if constructor in [go.Scatter, go.Bar] and (no_x != no_y):
-        for ax in ["x", "y"]:
-            if args.get(ax, None) is None:
-                args[ax] = df_input.index if df_provided else Range()
-                if constructor == go.Scatter:
-                    if args["orientation"] is None:
-                        args["orientation"] = "v" if ax == "x" else "h"
-                if constructor == go.Bar:
-                    missing_bar_dim = ax
+    if constructor in [go.Scatter, go.Bar]:
+        if not wide_mode and (no_x != no_y):
+            for ax in ["x", "y"]:
+                if args.get(ax, None) is None:
+                    args[ax] = df_input.index if df_provided else Range()
+                    if constructor == go.Scatter:
+                        if args["orientation"] is None:
+                            args["orientation"] = "v" if ax == "x" else "h"
+                    if constructor == go.Bar:
+                        missing_bar_dim = ax
+        if wide_mode and wide_cross_name is None:
+            if df_provided:
+                args["wide_cross"] = df_input.index
+                wide_cross_name = df_input.index.name or "index"
+            else:
+                args["wide_cross"] = Range(label="index")
+                wide_cross_name = "index"
 
-    # Initialize set of column names
-    # These are reserved names
-    if df_provided:
-        reserved_names = _get_reserved_col_names(args)
-    else:
-        reserved_names = set()
+    df_output = pd.DataFrame()
+    constants = dict()
+    ranges = list()
+    wide_id_vars = set()
+    reserved_names = _get_reserved_col_names(args) if df_provided else set()
 
     # Case of functions with a "dimensions" kw: scatter_matrix, parcats, parcoords
     if "dimensions" in args and args["dimensions"] is None:
@@ -1010,8 +1031,6 @@ def build_dataframe(args, constructor):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
-    constants = dict()
-    ranges = list()
 
     # Loop over possible arguments
     for field_name in all_attrables:
@@ -1136,10 +1155,10 @@ def build_dataframe(args, constructor):
                 args[field_name] = str(col_name)
             else:
                 args[field_name][i] = str(col_name)
-            if field_name != "wide_cols":
+            if field_name != "_column_":
                 wide_id_vars.add(str(col_name))
 
-    if missing_bar_dim and constructor == go.Bar:
+    if not wide_mode and missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
         # dimension is categorical: if so, then setting the missing dimension to a
         # constant 1 is a less-insane thing to do than setting it to the index by
@@ -1161,9 +1180,8 @@ def build_dataframe(args, constructor):
         df_output[col_name] = constants[col_name]
 
     if wide_mode:
-        wide_value_vars = [c for c in args["wide_cols"] if c not in wide_id_vars]
-        del args["wide_cols"]
-        wide_cross = args["wide_cross"]
+        wide_value_vars = [c for c in args["_column_"] if c not in wide_id_vars]
+        del args["_column_"]
         del args["wide_cross"]
         df_output = df_output.melt(
             id_vars=wide_id_vars,
@@ -1173,14 +1191,18 @@ def build_dataframe(args, constructor):
         )
         df_output[var_name] = df_output[var_name].astype(str)
         orient_v = wide_orientation == "v"
+        if wide_cross_name == "__x__":
+            wide_cross_name = args["x"]
+        if wide_cross_name == "__y__":
+            wide_cross_name = args["y"]
 
         if constructor == go.Scatter:
-            args["x" if orient_v else "y"] = wide_cross
+            args["x" if orient_v else "y"] = wide_cross_name
             args["y" if orient_v else "x"] = "_value_"
             args["color"] = args["color"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, "_value_"):
-                args["x" if orient_v else "y"] = wide_cross
+                args["x" if orient_v else "y"] = wide_cross_name
                 args["y" if orient_v else "x"] = "_value_"
                 args["color"] = args["color"] or var_name
             else:
@@ -1189,10 +1211,11 @@ def build_dataframe(args, constructor):
                 df_output["_count_"] = 1
                 args["color"] = args["color"] or var_name
         if constructor in [go.Violin, go.Box]:
-            args["x" if orient_v else "y"] = var_name
+            args["x" if orient_v else "y"] = wide_cross_name or var_name
             args["y" if orient_v else "x"] = "_value_"
         if constructor == go.Histogram:
             args["x" if orient_v else "y"] = "_value_"
+            args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
 
     args["data_frame"] = df_output
