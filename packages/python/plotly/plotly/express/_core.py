@@ -934,88 +934,16 @@ def _is_col_list(df_input, arg):
     return True
 
 
-def build_dataframe(args, constructor):
+def process_args_into_dataframe(args, wide_mode, var_name):
     """
-    Constructs a dataframe and modifies `args` in-place.
-
-    The argument values in `args` can be either strings corresponding to
-    existing columns of a dataframe, or data arrays (lists, numpy arrays,
-    pandas columns, series).
-
-    Parameters
-    ----------
-    args : OrderedDict
-        arguments passed to the px function and subsequently modified
-    constructor : graph_object trace class
-        the trace type selected for this figure
+    After this function runs, the `all_attrables` keys of `args` all contain only
+    references to columns of `df_output`. This function handles the extraction of data
+    from `args["attrable"]` and column-name-generation as appropriate, and adds the
+    data to `df_output` and then replaces `args["attrable"]` with the appropriate
+    reference.
     """
-
-    # make copies of all the fields via dict() and list()
-    for field in args:
-        if field in array_attrables and args[field] is not None:
-            args[field] = (
-                dict(args[field])
-                if isinstance(args[field], dict)
-                else list(args[field])
-            )
-
-    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
-    df_provided = args["data_frame"] is not None
-    if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
     df_input = args["data_frame"]
-
-    no_x = args.get("x", None) is None
-    no_y = args.get("y", None) is None
-    wide_x = False if no_x else _is_col_list(df_input, args["x"])
-    wide_y = False if no_y else _is_col_list(df_input, args["y"])
-
-    wide_mode = False
-    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]:
-        wide_cross_name = None
-        if wide_x and wide_y:
-            raise ValueError(
-                "Cannot accept list of column references or list of columns for both `x` and `y`."
-            )
-        if df_provided and no_x and no_y:
-            wide_mode = True
-            args["_column_"] = list(df_input.columns)
-            var_name = df_input.columns.name or "_column_"
-            wide_orientation = args.get("orientation", None) or "v"
-            args["orientation"] = wide_orientation
-            args["wide_cross"] = None
-        elif wide_x != wide_y:
-            wide_mode = True
-            args["_column_"] = args["y"] if wide_y else args["x"]
-            var_name = "_column_"
-            if constructor == go.Histogram:
-                wide_orientation = "v" if wide_x else "h"
-            else:
-                wide_orientation = "v" if wide_y else "h"
-            args["y" if wide_y else "x"] = None
-            args["wide_cross"] = None
-            if not no_x and not no_y:
-                wide_cross_name = "__x__" if wide_y else "__y__"
-
-    missing_bar_dim = None
-    if constructor in [go.Scatter, go.Bar]:
-        if not wide_mode and (no_x != no_y):
-            for ax in ["x", "y"]:
-                if args.get(ax, None) is None:
-                    args[ax] = df_input.index if df_provided else Range()
-                    if constructor == go.Scatter:
-                        if args["orientation"] is None:
-                            args["orientation"] = "v" if ax == "x" else "h"
-                    if constructor == go.Bar:
-                        missing_bar_dim = ax
-        if wide_mode and wide_cross_name is None:
-            if df_provided:
-                args["wide_cross"] = df_input.index
-                wide_cross_name = df_input.index.name or "index"
-            else:
-                args["wide_cross"] = Range(label="index")
-                wide_cross_name = "index"
-
+    df_provided = df_input is not None
     df_output = pd.DataFrame()
     constants = dict()
     ranges = list()
@@ -1030,7 +958,6 @@ def build_dataframe(args, constructor):
             )
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
-
 
     # Loop over possible arguments
     for field_name in all_attrables:
@@ -1158,6 +1085,108 @@ def build_dataframe(args, constructor):
             if field_name != "_column_":
                 wide_id_vars.add(str(col_name))
 
+    for col_name in ranges:
+        df_output[col_name] = range(len(df_output))
+
+    for col_name in constants:
+        df_output[col_name] = constants[col_name]
+
+    return df_output, wide_id_vars
+
+
+def build_dataframe(args, constructor):
+    """
+    Constructs a dataframe and modifies `args` in-place.
+
+    The argument values in `args` can be either strings corresponding to
+    existing columns of a dataframe, or data arrays (lists, numpy arrays,
+    pandas columns, series).
+
+    Parameters
+    ----------
+    args : OrderedDict
+        arguments passed to the px function and subsequently modified
+    constructor : graph_object trace class
+        the trace type selected for this figure
+    """
+
+    # make copies of all the fields via dict() and list()
+    for field in args:
+        if field in array_attrables and args[field] is not None:
+            args[field] = (
+                dict(args[field])
+                if isinstance(args[field], dict)
+                else list(args[field])
+            )
+
+    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
+    df_provided = args["data_frame"] is not None
+    if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
+        args["data_frame"] = pd.DataFrame(args["data_frame"])
+    df_input = args["data_frame"]
+
+    # now we handle special cases like wide-mode or x-xor-y specification
+    # by rearranging args to tee things up for process_args_into_dataframe to work
+    no_x = args.get("x", None) is None
+    no_y = args.get("y", None) is None
+    wide_x = False if no_x else _is_col_list(df_input, args["x"])
+    wide_y = False if no_y else _is_col_list(df_input, args["y"])
+
+    wide_mode = False
+    var_name = None
+    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]:
+        wide_cross_name = None
+        if wide_x and wide_y:
+            raise ValueError(
+                "Cannot accept list of column references or list of columns for both `x` and `y`."
+            )
+        if df_provided and no_x and no_y:
+            wide_mode = True
+            args["_column_"] = list(df_input.columns)
+            var_name = df_input.columns.name or "_column_"
+            wide_orientation = args.get("orientation", None) or "v"
+            args["orientation"] = wide_orientation
+            args["wide_cross"] = None
+        elif wide_x != wide_y:
+            wide_mode = True
+            args["_column_"] = args["y"] if wide_y else args["x"]
+            var_name = "_column_"
+            if constructor == go.Histogram:
+                wide_orientation = "v" if wide_x else "h"
+            else:
+                wide_orientation = "v" if wide_y else "h"
+            args["y" if wide_y else "x"] = None
+            args["wide_cross"] = None
+            if not no_x and not no_y:
+                wide_cross_name = "__x__" if wide_y else "__y__"
+
+    missing_bar_dim = None
+    if constructor in [go.Scatter, go.Bar]:
+        if not wide_mode and (no_x != no_y):
+            for ax in ["x", "y"]:
+                if args.get(ax, None) is None:
+                    args[ax] = df_input.index if df_provided else Range()
+                    if constructor == go.Scatter:
+                        if args["orientation"] is None:
+                            args["orientation"] = "v" if ax == "x" else "h"
+                    if constructor == go.Bar:
+                        missing_bar_dim = ax
+        if wide_mode and wide_cross_name is None:
+            if df_provided:
+                args["wide_cross"] = df_input.index
+                wide_cross_name = df_input.index.name or "index"
+            else:
+                args["wide_cross"] = Range(label="index")
+                wide_cross_name = "index"
+
+    # now that things have been prepped, we do the systematic rewriting of `args`
+
+    df_output, wide_id_vars = process_args_into_dataframe(args, wide_mode, var_name)
+
+    # now that `df_output` exists and `args` contains only references, we complete
+    # the special-case and wide-mode handling by further rewriting args and/or mutating
+    # df_output
+
     if not wide_mode and missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
         # dimension is categorical: if so, then setting the missing dimension to a
@@ -1166,20 +1195,17 @@ def build_dataframe(args, constructor):
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
             args[missing_bar_dim] = "_count_"
-            constants["_count_"] = 1
+            df_output["_count_"] = 1
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
             if args["orientation"] is None:
                 args["orientation"] = "v" if missing_bar_dim == "x" else "h"
 
-    for col_name in ranges:
-        df_output[col_name] = range(len(df_output))
-
-    for col_name in constants:
-        df_output[col_name] = constants[col_name]
-
     if wide_mode:
+        # at this point, `df_output` is semi-long/semi-wide, but we know which columns
+        # are which, so we melt it and reassign `args` to refer to the newly-tidy
+        # columns, keeping track of various names and manglings set up above
         wide_value_vars = [c for c in args["_column_"] if c not in wide_id_vars]
         del args["_column_"]
         del args["wide_cross"]
