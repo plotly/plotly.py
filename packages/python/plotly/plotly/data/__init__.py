@@ -102,7 +102,31 @@ Returns:
     return _get_dataset("carshare")
 
 
-def _get_dataset(d):
+def timeseries():
+    """
+Each row in this wide dataset represents values from 6 random walk time-series. The
+index contains dates.
+
+Returns:
+    A `pandas.DataFrame` with 100 rows and the following columns:
+    `['MOL.AA', 'JJK.OB', 'LFF.KP', 'UJS.PX', 'BTK.HH', 'SHX.QQ']`.
+"""
+    return _get_dataset("timeseries", index_col=0)
+
+
+def experiment():
+    """
+Each row in this wide dataset represents the results of 100 simulated participants
+on three hypothetical experiments, along with their gender and smoker status.
+
+Returns:
+    A `pandas.DataFrame` with 100 rows and the following columns:
+    `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'smoker']`.
+"""
+    return _get_dataset("experiment")
+
+
+def _get_dataset(d, index_col=None):
     import pandas
     import os
 
@@ -112,5 +136,6 @@ def _get_dataset(d):
             "package_data",
             "datasets",
             d + ".csv.gz",
-        )
+        ),
+        index_col=index_col,
     )

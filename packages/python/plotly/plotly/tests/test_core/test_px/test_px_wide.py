@@ -168,6 +168,15 @@ def test_wide_x_or_y():
         df_out.sort_index(axis=1), pd.DataFrame(expected).sort_index(axis=1),
     )
 
+    """
+    for each orientation
+    for each trace type
+    with and without df
+    wide x or y
+    numerical or categorical wide values
+    with and without cross value
+    """
+
 
 @pytest.mark.parametrize(
     "orientation", [None, "v", "h"],
