@@ -1,30 +1,11 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._width import WidthValidator
+    from ._dash import DashValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="width", parent_name="ohlc.line", **kwargs):
-        super(WidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class DashValidator(_plotly_utils.basevalidators.DashValidator):
-    def __init__(self, plotly_name="dash", parent_name="ohlc.line", **kwargs):
-        super(DashValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            values=kwargs.pop(
-                "values", ["solid", "dot", "dash", "longdash", "dashdot", "longdashdot"]
-            ),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._width.WidthValidator", "._dash.DashValidator"]
+    )

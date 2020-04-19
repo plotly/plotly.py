@@ -1,47 +1,11 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._textfont import TextfontValidator
+    from ._marker import MarkerValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class TextfontValidator(_plotly_utils.basevalidators.CompoundValidator):
-    def __init__(
-        self, plotly_name="textfont", parent_name="barpolar.unselected", **kwargs
-    ):
-        super(TextfontValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Textfont"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-            color
-                Sets the text font color of unselected points,
-                applied only when a selection exists.
-""",
-            ),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class MarkerValidator(_plotly_utils.basevalidators.CompoundValidator):
-    def __init__(
-        self, plotly_name="marker", parent_name="barpolar.unselected", **kwargs
-    ):
-        super(MarkerValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            data_class_str=kwargs.pop("data_class_str", "Marker"),
-            data_docs=kwargs.pop(
-                "data_docs",
-                """
-            color
-                Sets the marker color of unselected points,
-                applied only when a selection exists.
-            opacity
-                Sets the marker opacity of unselected points,
-                applied only when a selection exists.
-""",
-            ),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._textfont.TextfontValidator", "._marker.MarkerValidator"]
+    )
