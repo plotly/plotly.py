@@ -38,7 +38,12 @@ def test_composite_hover():
     assert ":.1f" in fig.data[0].hovertemplate
 
 
-def test_tuple_hover_data():
+def test_newdatain_hover_data():
+    fig = px.scatter(x=[1, 2, 3], y=[3, 4, 5], hover_data={"comment": ["a", "b", "c"]})
+    assert (
+        fig.data[0].hovertemplate
+        == "x=%{x}<br>y=%{y}<br>comment=%{customdata[0]}<extra></extra>"
+    )
     fig = px.scatter(
         x=[1, 2, 3], y=[3, 4, 5], hover_data={"comment": (True, ["a", "b", "c"])}
     )

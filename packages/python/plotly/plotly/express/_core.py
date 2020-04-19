@@ -885,6 +885,10 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
+def _isinstance_listlike(x):
+    return isinstance(x, list) or isinstance(x, np.ndarray) or isinstance(x, pd.Series)
+
+
 def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
@@ -944,6 +948,8 @@ def build_dataframe(args, attrables, array_attrables):
     # If dict, convert all values of hover_data to tuples to simplify processing
     if hover_data_is_dict:
         for k in args["hover_data"]:
+            if _isinstance_listlike(args["hover_data"][k]):
+                args["hover_data"][k] = (True, args["hover_data"][k])
             if not isinstance(args["hover_data"][k], tuple):
                 args["hover_data"][k] = (args["hover_data"][k], None)
 

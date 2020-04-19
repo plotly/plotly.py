@@ -186,6 +186,7 @@ docs = dict(
         "or a dict with column names as keys, with values True (for default formatting)",
         "False (in order to remove this column from hover information),",
         "or a formatting string, for example ':.3f' or '|%a'",
+        "or list-like data to appear in the hover tooltip",
         "or tuples with a bool or formatting string as first element,",
         "and list-like data to appear in hover as second element",
         "Values from these columns appear as extra data in the hover tooltip.",

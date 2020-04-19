@@ -124,7 +124,7 @@ fig.show()
 * `True` to add a different column, with default formatting
 * a formatting string starting with `:` for numbers [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `|` for dates in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format), for example `:.3f`, `|%a`.
 
-For passing new data, the value is a tuple, which first element is one of the possible values described above for existing columns, and the second element correspond to the hover values, for example `(True, [1, 2, 3])` or `(':.1f', [1.54, 2.345])`.
+It is also possible to pass new data as values of the `hover_data` dict, either as list-like data, or inside a tuple, which first element is one of the possible values described above for existing columns, and the second element correspond to the list-like data, for example `(True, [1, 2, 3])` or `(':.1f', [1.54, 2.345])`.
 
 These different cases are illustrated in the following example.
 
@@ -138,7 +138,7 @@ fig = px.scatter(df, x='petal_length', y='sepal_length', facet_col='species', co
                              'petal_width':True, # add other column, default formatting
                              'sepal_width':':.2f', # add other column, customized formatting
                              # data not in dataframe, default formatting
-                             'suppl_1': (True, np.random.random(len(df))),
+                             'suppl_1': np.random.random(len(df)),
                              # data not in dataframe, customized formatting
                              'suppl_2': (':.3f', np.random.random(len(df)))
                             })
