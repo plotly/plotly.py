@@ -988,12 +988,17 @@ def build_dataframe(args, attrables, array_attrables):
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
-                bypass_warnings = (
-                    hover_data_is_dict
-                    and argument in args["hover_data"]
-                    and args["hover_data"][argument][1] is not None
-                )
-                if not df_provided and not bypass_warnings:
+
+                if (
+                    field_name == "hover_data"
+                    and hover_data_is_dict
+                    and args["hover_data"][str(argument)][1] is not None
+                ):
+                    col_name = str(argument)
+                    df_output[col_name] = args["hover_data"][col_name][1]
+                    continue
+
+                if not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
                         "DataFrame or an array is provided in the `data_frame` "
@@ -1001,7 +1006,7 @@ def build_dataframe(args, attrables, array_attrables):
                         "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
-                if not bypass_warnings and argument not in df_input.columns:
+                if argument not in df_input.columns:
                     err_msg = (
                         "Value of '%s' is not the name of a column in 'data_frame'. "
                         "Expected one of %s but received: %s"
@@ -1012,7 +1017,7 @@ def build_dataframe(args, attrables, array_attrables):
                             "\n To use the index, pass it in directly as `df.index`."
                         )
                     raise ValueError(err_msg)
-                if not bypass_warnings and length and len(df_input[argument]) != length:
+                if length and len(df_input[argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
@@ -1025,14 +1030,7 @@ def build_dataframe(args, attrables, array_attrables):
                         )
                     )
                 col_name = str(argument)
-                if (
-                    field_name == "hover_data"
-                    and hover_data_is_dict
-                    and args["hover_data"][col_name][1] is not None
-                ):
-                    df_output[col_name] = args["hover_data"][col_name][1]
-                else:
-                    df_output[col_name] = df_input[argument].values
+                df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
                 is_index = isinstance(argument, pd.RangeIndex)
