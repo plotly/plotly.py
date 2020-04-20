@@ -424,14 +424,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
 
 def configure_axes(args, constructor, fig, orders):
     configurators = {
-        go.Scatter: configure_cartesian_axes,
-        go.Scattergl: configure_cartesian_axes,
-        go.Bar: configure_cartesian_axes,
-        go.Box: configure_cartesian_axes,
-        go.Violin: configure_cartesian_axes,
-        go.Histogram: configure_cartesian_axes,
-        go.Histogram2dContour: configure_cartesian_axes,
-        go.Histogram2d: configure_cartesian_axes,
         go.Scatter3d: configure_3d_axes,
         go.Scatterternary: configure_ternary_axes,
         go.Scatterpolar: configure_polar_axes,
@@ -443,6 +435,10 @@ def configure_axes(args, constructor, fig, orders):
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
+    cartesians = [go.Scatter, go.Scattergl, go.Bar, go.Funnel, go.Box, go.Violin]
+    cartesians += [go.Histogram, go.Histogram2d, go.Histogram2dContour]
+    for c in cartesians:
+        configurators[c] = configure_cartesian_axes
     if constructor in configurators:
         configurators[constructor](args, fig, orders)
 
@@ -1134,7 +1130,7 @@ def build_dataframe(args, constructor):
 
     wide_mode = False
     var_name = None
-    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram]:
+    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram, go.Funnel]:
         wide_cross_name = None
         if wide_x and wide_y:
             raise ValueError(
@@ -1144,7 +1140,10 @@ def build_dataframe(args, constructor):
             wide_mode = True
             args["_column_"] = list(df_input.columns)
             var_name = df_input.columns.name or "_column_"
-            wide_orientation = args.get("orientation", None) or "v"
+            if constructor == go.Funnel:
+                wide_orientation = args.get("orientation", None) or "h"
+            else:
+                wide_orientation = args.get("orientation", None) or "v"
             args["orientation"] = wide_orientation
             args["wide_cross"] = None
         elif wide_x != wide_y:
@@ -1161,17 +1160,19 @@ def build_dataframe(args, constructor):
                 wide_cross_name = "__x__" if wide_y else "__y__"
 
     missing_bar_dim = None
-    if constructor in [go.Scatter, go.Bar]:
+    if constructor in [go.Scatter, go.Bar, go.Funnel]:
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
                 if args.get(ax, None) is None:
                     args[ax] = df_input.index if df_provided else Range()
-                    if constructor == go.Scatter:
-                        if args["orientation"] is None:
-                            args["orientation"] = "v" if ax == "x" else "h"
                     if constructor == go.Bar:
                         missing_bar_dim = ax
+                    else:
+                        if args["orientation"] is None:
+                            args["orientation"] = "v" if ax == "x" else "h"
         if wide_mode and wide_cross_name is None:
+            if no_x != no_y and args["orientation"] is None:
+                args["orientation"] = "v" if no_x else "h"
             if df_provided:
                 args["wide_cross"] = df_input.index
                 wide_cross_name = df_input.index.name or "index"
@@ -1222,7 +1223,7 @@ def build_dataframe(args, constructor):
         if wide_cross_name == "__y__":
             wide_cross_name = args["y"]
 
-        if constructor == go.Scatter:
+        if constructor in [go.Scatter, go.Funnel]:
             args["x" if orient_v else "y"] = wide_cross_name
             args["y" if orient_v else "x"] = "_value_"
             args["color"] = args["color"] or var_name

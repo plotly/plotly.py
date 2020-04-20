@@ -47,7 +47,8 @@ def test_is_col_list():
 
 @pytest.mark.parametrize(
     "px_fn",
-    [px.scatter, px.line, px.area, px.bar, px.violin, px.box, px.strip, px.histogram],
+    [px.scatter, px.line, px.area, px.bar, px.violin, px.box, px.strip]
+    + [px.histogram, px.funnel],
 )
 @pytest.mark.parametrize("orientation", [None, "v", "h"])
 @pytest.mark.parametrize("style", ["implicit", "explicit"])
@@ -56,14 +57,17 @@ def test_wide_mode_external(px_fn, orientation, style):
     # inspecting the figure... this is important but clunky, and is mostly a smoke test
     # allowing us to do more "white box" testing below
 
-    x, y = ("y", "x") if orientation == "h" else ("x", "y")
+    if px_fn != px.funnel:
+        x, y = ("y", "x") if orientation == "h" else ("x", "y")
+    else:
+        x, y = ("y", "x") if orientation != "v" else ("x", "y")
     xaxis, yaxis = x + "axis", y + "axis"
 
     df = pd.DataFrame(dict(a=[1, 2, 3], b=[4, 5, 6], c=[7, 8, 9]), index=[11, 12, 13])
     if style == "implicit":
         fig = px_fn(df, orientation=orientation)
 
-    if px_fn in [px.scatter, px.line, px.area, px.bar]:
+    if px_fn in [px.scatter, px.line, px.area, px.bar, px.funnel]:
         if style == "explicit":
             fig = px_fn(**{"data_frame": df, y: list(df.columns), x: df.index})
         assert len(fig.data) == 3
@@ -149,7 +153,7 @@ def test_wide_mode_internal(trace_type, x, y, color, orientation):
 
 cases = []
 for transpose in [True, False]:
-    for tt in [go.Scatter, go.Bar]:
+    for tt in [go.Scatter, go.Bar, go.Funnel]:
         df_in = dict(a=[1, 2], b=[3, 4])
         args = dict(x=None, y=["a", "b"], color=None, orientation=None)
         df_exp = dict(
@@ -238,10 +242,13 @@ def test_wide_x_or_y(tt, df_in, args_in, x, y, color, df_out_exp, transpose):
     args_out = build_dataframe(args_in, tt)
     df_out = args_out.pop("data_frame").sort_index(axis=1)
     assert_frame_equal(df_out, pd.DataFrame(df_out_exp).sort_index(axis=1))
+    orientation_exp = args_in["orientation"]
+    if (args_in["x"] is None) != (args_in["y"] is None) and tt != go.Histogram:
+        orientation_exp = "h" if transpose else "v"
     if transpose:
-        assert args_out == dict(x=y, y=x, color=color, orientation=None)
+        assert args_out == dict(x=y, y=x, color=color, orientation=orientation_exp)
     else:
-        assert args_out == dict(x=x, y=y, color=color, orientation=None)
+        assert args_out == dict(x=x, y=y, color=color, orientation=orientation_exp)
 
 
 @pytest.mark.parametrize("orientation", [None, "v", "h"])
