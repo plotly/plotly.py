@@ -34,6 +34,9 @@ all_attrables = (
     direct_attrables + array_attrables + group_attrables + renameable_group_attrables
 )
 
+cartesians = [go.Scatter, go.Scattergl, go.Bar, go.Funnel, go.Box, go.Violin]
+cartesians += [go.Histogram, go.Histogram2d, go.Histogram2dContour]
+
 
 class PxDefaults(object):
     __slots__ = [
@@ -435,8 +438,6 @@ def configure_axes(args, constructor, fig, orders):
         go.Scattergeo: configure_geo,
         go.Choropleth: configure_geo,
     }
-    cartesians = [go.Scatter, go.Scattergl, go.Bar, go.Funnel, go.Box, go.Violin]
-    cartesians += [go.Histogram, go.Histogram2d, go.Histogram2dContour]
     for c in cartesians:
         configurators[c] = configure_cartesian_axes
     if constructor in configurators:
@@ -1130,7 +1131,8 @@ def build_dataframe(args, constructor):
 
     wide_mode = False
     var_name = None
-    if constructor in [go.Scatter, go.Bar, go.Violin, go.Box, go.Histogram, go.Funnel]:
+    hist2d_types = [go.Histogram2d, go.Histogram2dContour]
+    if constructor in cartesians:
         wide_cross_name = None
         if wide_x and wide_y:
             raise ValueError(
@@ -1160,7 +1162,7 @@ def build_dataframe(args, constructor):
                 wide_cross_name = "__x__" if wide_y else "__y__"
 
     missing_bar_dim = None
-    if constructor in [go.Scatter, go.Bar, go.Funnel]:
+    if constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types:
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
                 if args.get(ax, None) is None:
@@ -1203,6 +1205,9 @@ def build_dataframe(args, constructor):
             if args["orientation"] is None:
                 args["orientation"] = "v" if missing_bar_dim == "x" else "h"
 
+    if constructor in hist2d_types:
+        del args["orientation"]
+
     if wide_mode:
         # at this point, `df_output` is semi-long/semi-wide, but we know which columns
         # are which, so we melt it and reassign `args` to refer to the newly-tidy
@@ -1223,10 +1228,11 @@ def build_dataframe(args, constructor):
         if wide_cross_name == "__y__":
             wide_cross_name = args["y"]
 
-        if constructor in [go.Scatter, go.Funnel]:
+        if constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name
             args["y" if orient_v else "x"] = "_value_"
-            args["color"] = args["color"] or var_name
+            if constructor != go.Histogram2d:
+                args["color"] = args["color"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, "_value_"):
                 args["x" if orient_v else "y"] = wide_cross_name
