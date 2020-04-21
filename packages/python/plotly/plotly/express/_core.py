@@ -960,7 +960,6 @@ def build_dataframe(args, attrables, array_attrables):
                 args["hover_data"][k] = (True, args["hover_data"][k])
             if not isinstance(args["hover_data"][k], tuple):
                 args["hover_data"][k] = (args["hover_data"][k], None)
-    print(args["hover_data"])
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
