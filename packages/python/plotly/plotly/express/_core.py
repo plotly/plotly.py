@@ -290,7 +290,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
+                    hover_is_dict = isinstance(attr_value, dict)
                     for col in attr_value:
+                        if hover_is_dict and not attr_value[col]:
+                            continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -387,7 +390,20 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         go.Parcoords,
         go.Parcats,
     ]:
-        hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
+        # Modify mapping_labels according to hover_data keys
+        # if hover_data is a dict
+        mapping_labels_copy = OrderedDict(mapping_labels)
+        if args["hover_data"] and isinstance(args["hover_data"], dict):
+            for k, v in mapping_labels.items():
+                if k in args["hover_data"]:
+                    if args["hover_data"][k][0]:
+                        if isinstance(args["hover_data"][k][0], str):
+                            mapping_labels_copy[k] = v.replace(
+                                "}", "%s}" % args["hover_data"][k][0]
+                            )
+                    else:
+                        _ = mapping_labels_copy.pop(k)
+        hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
         trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
@@ -869,6 +885,22 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
+def _isinstance_listlike(x):
+    """Returns True if x is an iterable which can be transformed into a pandas Series,
+    False for the other types of possible values of a `hover_data` dict.
+    A tuple of length 2 is a special case corresponding to a (format, data) tuple.
+    """
+    if (
+        isinstance(x, str)
+        or (isinstance(x, tuple) and len(x) == 2)
+        or isinstance(x, bool)
+        or x is None
+    ):
+        return False
+    else:
+        return True
+
+
 def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
@@ -890,7 +922,7 @@ def build_dataframe(args, attrables, array_attrables):
     for field in args:
         if field in array_attrables and args[field] is not None:
             args[field] = (
-                dict(args[field])
+                OrderedDict(args[field])
                 if isinstance(args[field], dict)
                 else list(args[field])
             )
@@ -919,6 +951,19 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    # hover_data is a dict
+    hover_data_is_dict = (
+        "hover_data" in args
+        and args["hover_data"]
+        and isinstance(args["hover_data"], dict)
+    )
+    # If dict, convert all values of hover_data to tuples to simplify processing
+    if hover_data_is_dict:
+        for k in args["hover_data"]:
+            if _isinstance_listlike(args["hover_data"][k]):
+                args["hover_data"][k] = (True, args["hover_data"][k])
+            if not isinstance(args["hover_data"][k], tuple):
+                args["hover_data"][k] = (args["hover_data"][k], None)
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -954,6 +999,16 @@ def build_dataframe(args, attrables, array_attrables):
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
+
+                if (
+                    field_name == "hover_data"
+                    and hover_data_is_dict
+                    and args["hover_data"][str(argument)][1] is not None
+                ):
+                    col_name = str(argument)
+                    df_output[col_name] = args["hover_data"][col_name][1]
+                    continue
+
                 if not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1029,6 +1084,8 @@ def build_dataframe(args, attrables, array_attrables):
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
                 args[field_name] = str(col_name)
+            elif isinstance(args[field_name], dict):
+                pass
             else:
                 args[field_name][i] = str(col_name)
 
