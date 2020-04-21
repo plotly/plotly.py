@@ -886,6 +886,10 @@ def _get_reserved_col_names(args, attrables, array_attrables):
 
 
 def _isinstance_listlike(x):
+    """Returns True if x is an iterable which can be transformed into a pandas Series,
+    False for the other types of possible values of a `hover_data` dict.
+    A tuple of length 2 is a special case corresponding to a (format, data) tuple.
+    """
     if (
         isinstance(x, str)
         or (isinstance(x, tuple) and len(x) == 2)
