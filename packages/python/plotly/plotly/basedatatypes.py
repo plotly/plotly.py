@@ -1951,9 +1951,8 @@ Please use the add_trace method with the row and col parameters.
                 try:
                     template_dict = pio.templates[pio.templates.default]
                     self._layout_obj.template = template_dict
-                except Exception:
+                finally:
                     self._layout_obj._validate = self._validate
-                    raise
 
     @property
     def layout(self):
