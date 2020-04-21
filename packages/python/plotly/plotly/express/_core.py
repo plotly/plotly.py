@@ -886,7 +886,15 @@ def _get_reserved_col_names(args, attrables, array_attrables):
 
 
 def _isinstance_listlike(x):
-    return isinstance(x, list) or isinstance(x, np.ndarray) or isinstance(x, pd.Series)
+    if (
+        isinstance(x, str)
+        or (isinstance(x, tuple) and len(x) == 2)
+        or isinstance(x, bool)
+        or x is None
+    ):
+        return False
+    else:
+        return True
 
 
 def build_dataframe(args, attrables, array_attrables):
@@ -952,7 +960,7 @@ def build_dataframe(args, attrables, array_attrables):
                 args["hover_data"][k] = (True, args["hover_data"][k])
             if not isinstance(args["hover_data"][k], tuple):
                 args["hover_data"][k] = (args["hover_data"][k], None)
-
+    print(args["hover_data"])
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
