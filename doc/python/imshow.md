@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.3
   plotly:
     description: How to display image data in Python with Plotly.
     display_as: scientific
@@ -259,6 +259,53 @@ Arrays of rasterized values build by datashader can be visualized using
 imshow. See the [plotly and datashader tutorial](/python/datashader/) for
 examples on how to use plotly and datashader.
 
+
+### Annotating image traces with shapes
+
+_introduced in plotly 4.7_
+
+It can be useful to add shapes to an image trace, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm. 
+
+In order to enable shape drawing, you need to
+- define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
+- add modebar buttons corresponding to the drawing tools you wish to use.
+
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
+
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+
+```python
+import plotly.express as px
+from skimage import data
+img = data.chelsea()
+fig = px.imshow(img)
+fig.add_annotation(
+    x=0.5,
+    y=0.9,
+    text="Drag and draw annotations",
+    xref="paper",
+    yref="paper",
+    showarrow=False,
+    font_size=20, font_color='cyan')
+# Shape defined programatically
+fig.add_shape(
+    type='rect',
+    x0=230, x1=290, y0=230, y1=280,
+    xref='x', yref='y',
+    line_color='cyan'
+)
+# Define dragmode, newshape parameters, amd add modebar buttons
+fig.update_layout(
+    dragmode='drawrect',
+    newshape=dict(line_color='cyan'))
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
+```
 
 #### Reference
 See https://plotly.com/python/reference/#image for more information and chart attribute options!
