@@ -1,7 +1,7 @@
 # This module defines an image scraper for sphinx-gallery
 # https://sphinx-gallery.github.io/
 # which can be used by projects using plotly in their documentation.
-import inspect, os
+import inspect, os, pathlib
 
 import plotly
 from glob import glob
@@ -45,10 +45,20 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     Add this function to the image scrapers 
     """
     examples_dirs = gallery_conf["examples_dirs"]
-    if isinstance(examples_dirs, (list, tuple)):
-        examples_dirs = examples_dirs[0]
-    pngs = sorted(glob(os.path.join(examples_dirs, "*.png")))
-    htmls = sorted(glob(os.path.join(examples_dirs, "*.html")))
+    if not isinstance(examples_dirs, (list, tuple)):
+        examples_dirs = [examples_dirs]
+    pngs = []
+    htmls = []
+    for examples_dir in examples_dirs:
+        # sphinx hack, since the conf file can be either in the same dir as Makefile
+        # or in a subdirectory
+        if not os.path.isabs(examples_dir) and not os.path.exists(examples_dir):
+            examples_dir = pathlib.Path(*pathlib.Path(examples_dir).parts[1:])
+        # Look for pngs and htmls in examples_dirs and subdirectories
+        pngs += sorted(glob(os.path.join(examples_dir, "*.png")) +
+            glob(os.path.join(examples_dir, "*", "*.png")))
+        htmls += sorted(glob(os.path.join(examples_dir, "*.html")) + 
+            glob(os.path.join(examples_dir, "*", "*.html")))
     image_path_iterator = block_vars["image_path_iterator"]
     image_names = list()
     seen = set()
