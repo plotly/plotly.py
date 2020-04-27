@@ -241,7 +241,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
                     y = sorted_trace_data[args["y"]]
                     x = sorted_trace_data[args["x"]]
-                    # trace_patch["x"] = x
 
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
