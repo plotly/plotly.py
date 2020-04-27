@@ -551,9 +551,9 @@ def configure_cartesian_axes(args, fig, orders):
 def configure_ternary_axes(args, fig, orders):
     fig.update_layout(
         ternary=dict(
-            aaxis=dict(title=get_label(args, args["a"])),
-            baxis=dict(title=get_label(args, args["b"])),
-            caxis=dict(title=get_label(args, args["c"])),
+            aaxis=dict(title_text=get_label(args, args["a"])),
+            baxis=dict(title_text=get_label(args, args["b"])),
+            caxis=dict(title_text=get_label(args, args["c"])),
         )
     )
 
@@ -588,9 +588,9 @@ def configure_polar_axes(args, fig, orders):
 def configure_3d_axes(args, fig, orders):
     layout = dict(
         scene=dict(
-            xaxis=dict(title=get_label(args, args["x"])),
-            yaxis=dict(title=get_label(args, args["y"])),
-            zaxis=dict(title=get_label(args, args["z"])),
+            xaxis=dict(title_text=get_label(args, args["x"])),
+            yaxis=dict(title_text=get_label(args, args["y"])),
+            zaxis=dict(title_text=get_label(args, args["z"])),
         )
     )
 
@@ -1611,15 +1611,19 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
             cmid=args["color_continuous_midpoint"],
             cmin=range_color[0],
             cmax=range_color[1],
-            colorbar=dict(title=get_decorated_label(args, args[colorvar], colorvar)),
+            colorbar=dict(
+                title_text=get_decorated_label(args, args[colorvar], colorvar)
+            ),
         )
-    for v in ["title", "height", "width"]:
+    for v in ["height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
     layout_patch["legend"] = dict(tracegroupgap=0)
     if trace_name_labels:
-        layout_patch["legend"]["title"] = ", ".join(trace_name_labels)
-    if "title" not in layout_patch and args["template"].layout.margin.t is None:
+        layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
+    if args["title"]:
+        layout_patch["title_text"] = args["title"]
+    elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (
         "size" in args
@@ -1649,7 +1653,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
 
     # Add traces, layout and frames to figure
     fig.add_traces(frame_list[0]["data"] if len(frame_list) > 0 else [])
-    fig.layout.update(layout_patch)
+    fig.update_layout(layout_patch)
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
     fig.frames = frame_list if len(frames) > 1 else []
