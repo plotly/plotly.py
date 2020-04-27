@@ -9,7 +9,6 @@ def test_trendline_nan_values():
     modes = ["ols", "lowess"]
     for mode in modes:
         fig = px.scatter(df, x="year", y="pop", color="country", trendline=mode)
-        country_numbers = len(fig["data"]) // 2
         for trendline in fig["data"][1::2]:
             assert trendline.x[0] >= start_date
             assert len(trendline.x) == len(trendline.y)
