@@ -26,11 +26,11 @@ def test_validate_false():
         # Build figure with variety of invalid properties (both name and value),
         # make sure underscore notation is still applied properly
 
-        fig = go.Figure(validate=False, **build_invalid_fig())
+        fig = go.Figure(_validate=False, **build_invalid_fig())
         assert json.loads(fig.to_json()) == expected_invalid_dict
 
         with pytest.raises(ValueError):
-            go.Figure(validate=True, **build_invalid_fig())
+            go.Figure(_validate=True, **build_invalid_fig())
 
     finally:
         pio.templates.default = template
