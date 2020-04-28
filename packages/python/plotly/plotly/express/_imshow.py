@@ -244,7 +244,7 @@ def imshow(
             cmax=range_color[1],
         )
         if labels["color"]:
-            layout["coloraxis1"]["colorbar"] = dict(title=labels["color"])
+            layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 
     # For 2D+RGB data, use Image trace
     elif img.ndim == 3 and img.shape[-1] in [3, 4]:
@@ -262,10 +262,12 @@ def imshow(
         )
 
     layout_patch = dict()
-    for attr_name in ["title", "height", "width"]:
+    for attr_name in ["height", "width"]:
         if args[attr_name]:
             layout_patch[attr_name] = args[attr_name]
-    if "title" not in layout_patch and args["template"].layout.margin.t is None:
+    if args["title"]:
+        layout_patch["title_text"] = args["title"]
+    elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)

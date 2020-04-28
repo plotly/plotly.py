@@ -258,7 +258,6 @@ else:
         ],
     )
 
-from .._validate import validate
 
 if sys.version_info < (3, 7):
     try:
