@@ -1,9 +1,9 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._line import Line
-    from ._hoverlabel import Hoverlabel
     from ._colorscale import Colorscale
+    from ._hoverlabel import Hoverlabel
+    from ._line import Line
     from . import hoverlabel
 else:
     from _plotly_utils.importers import relative_import
@@ -11,5 +11,5 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [".hoverlabel"],
-        ["._line.Line", "._hoverlabel.Hoverlabel", "._colorscale.Colorscale"],
+        ["._colorscale.Colorscale", "._hoverlabel.Hoverlabel", "._line.Line"],
     )
