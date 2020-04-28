@@ -418,6 +418,14 @@ class BaseFigure(object):
 
         return repr_str
 
+
+    def _repr_html_(self):
+        """
+        Customizes html representation
+        """
+        return self.to_html(full_html=False, include_plotlyjs='cdn')
+
+
     def _ipython_display_(self):
         """
         Handle rich display of figures in ipython contexts
