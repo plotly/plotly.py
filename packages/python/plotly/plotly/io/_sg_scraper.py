@@ -44,21 +44,10 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
     -----
     Add this function to the image scrapers 
     """
-    examples_dirs = gallery_conf["examples_dirs"]
-    if not isinstance(examples_dirs, (list, tuple)):
-        examples_dirs = [examples_dirs]
-    pngs = []
-    htmls = []
-    for examples_dir in examples_dirs:
-        # sphinx hack, since the conf file can be either in the same dir as Makefile
-        # or in a subdirectory
-        if not os.path.isabs(examples_dir) and not os.path.exists(examples_dir):
-            examples_dir = pathlib.Path(*pathlib.Path(examples_dir).parts[1:])
-        # Look for pngs and htmls in examples_dirs and subdirectories
-        pngs += sorted(glob(os.path.join(examples_dir, "*.png")) +
-            glob(os.path.join(examples_dir, "*", "*.png")))
-        htmls += sorted(glob(os.path.join(examples_dir, "*.html")) + 
-            glob(os.path.join(examples_dir, "*", "*.html")))
+    examples_dir = os.path.dirname(block_vars['src_file'])
+    print('----------------------')
+    pngs = sorted(glob(os.path.join(examples_dir, "*.png")))
+    htmls = sorted(glob(os.path.join(examples_dir, "*.html")))
     image_path_iterator = block_vars["image_path_iterator"]
     image_names = list()
     seen = set()
