@@ -92,7 +92,7 @@ class BaseFigure(object):
         super(BaseFigure, self).__init__()
 
         # Initialize validation
-        self._validate = kwargs.pop("validate", True)
+        self._validate = kwargs.pop("_validate", True)
 
         # Assign layout_plotly to layout
         # ------------------------------
@@ -143,7 +143,7 @@ class BaseFigure(object):
 
         # ### Import traces ###
         data = self._data_validator.validate_coerce(
-            data, skip_invalid=skip_invalid, validate=self._validate
+            data, skip_invalid=skip_invalid, _validate=self._validate
         )
 
         # ### Save tuple of trace objects ###
@@ -186,7 +186,7 @@ class BaseFigure(object):
 
         # ### Import Layout ###
         self._layout_obj = self._layout_validator.validate_coerce(
-            layout, skip_invalid=skip_invalid, validate=self._validate
+            layout, skip_invalid=skip_invalid, _validate=self._validate
         )
 
         # ### Import clone of layout properties ###

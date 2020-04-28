@@ -88,7 +88,7 @@ class TemplatesConfig(object):
                     )
                     template_str = pkgutil.get_data("plotly", path).decode("utf-8")
                     template_dict = json.loads(template_str)
-                    template = Template(template_dict, validate=False)
+                    template = Template(template_dict, _validate=False)
 
                     self._templates[template_name] = template
             templates.append(self._templates[template_name])

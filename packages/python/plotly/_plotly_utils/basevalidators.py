@@ -2438,12 +2438,12 @@ class CompoundValidator(BaseValidator):
 
         return desc
 
-    def validate_coerce(self, v, skip_invalid=False, validate=True):
+    def validate_coerce(self, v, skip_invalid=False, _validate=True):
         if v is None:
             v = self.data_class()
 
         elif isinstance(v, dict):
-            v = self.data_class(v, skip_invalid=skip_invalid, validate=validate)
+            v = self.data_class(v, skip_invalid=skip_invalid, _validate=_validate)
 
         elif isinstance(v, self.data_class):
             # Copy object
@@ -2614,7 +2614,7 @@ class BaseDataValidator(BaseValidator):
 
         return self._class_map[trace_name]
 
-    def validate_coerce(self, v, skip_invalid=False, validate=True):
+    def validate_coerce(self, v, skip_invalid=False, _validate=True):
         from plotly.basedatatypes import BaseTraceType
 
         # Import Histogram2dcontour, this is the deprecated name of the
@@ -2649,7 +2649,7 @@ class BaseDataValidator(BaseValidator):
                         if skip_invalid:
                             # Treat as scatter trace
                             trace = self.get_trace_class("scatter")(
-                                skip_invalid=skip_invalid, validate=validate, **v_copy
+                                skip_invalid=skip_invalid, _validate=_validate, **v_copy
                             )
                             res.append(trace)
                         else:
@@ -2657,7 +2657,7 @@ class BaseDataValidator(BaseValidator):
                             invalid_els.append(v_el)
                     else:
                         trace = self.get_trace_class(trace_type)(
-                            skip_invalid=skip_invalid, validate=validate, **v_copy
+                            skip_invalid=skip_invalid, _validate=_validate, **v_copy
                         )
                         res.append(trace)
                 else:
