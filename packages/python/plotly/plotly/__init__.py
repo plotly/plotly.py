@@ -72,7 +72,6 @@ else:
             ".io",
             ".data",
             ".colors",
-            ".express",
         ],
         [".version.__version__"],
     )

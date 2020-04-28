@@ -10,7 +10,6 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 
 from _plotly_utils.utils import _natural_sort_strings
-from plotly._validate import validate
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
@@ -92,6 +91,9 @@ class BaseFigure(object):
 
         super(BaseFigure, self).__init__()
 
+        # Initialize validation
+        self._validate = kwargs.pop("_validate", True)
+
         # Assign layout_plotly to layout
         # ------------------------------
         # See docstring note for explanation
@@ -140,7 +142,9 @@ class BaseFigure(object):
         self._data_validator = DataValidator(set_uid=self._set_trace_uid)
 
         # ### Import traces ###
-        data = self._data_validator.validate_coerce(data, skip_invalid=skip_invalid)
+        data = self._data_validator.validate_coerce(
+            data, skip_invalid=skip_invalid, _validate=self._validate
+        )
 
         # ### Save tuple of trace objects ###
         self._data_objs = data
@@ -182,7 +186,7 @@ class BaseFigure(object):
 
         # ### Import Layout ###
         self._layout_obj = self._layout_validator.validate_coerce(
-            layout, skip_invalid=skip_invalid
+            layout, skip_invalid=skip_invalid, _validate=self._validate
         )
 
         # ### Import clone of layout properties ###
@@ -313,6 +317,8 @@ class BaseFigure(object):
             res = self
             for p in prop[:-1]:
                 res = res[p]
+
+            res._validate = self._validate
 
             res[prop[-1]] = value
 
@@ -1940,10 +1946,13 @@ Please use the add_trace method with the row and col parameters.
 
         if self._layout_obj._props.get("template", None) is None:
             if pio.templates.default is not None:
-                with validate(False):
-                    # Assume default template is already validated
+                # Assume default template is already validated
+                self._layout_obj._validate = False
+                try:
                     template_dict = pio.templates[pio.templates.default]
                     self._layout_obj.template = template_dict
+                finally:
+                    self._layout_obj._validate = self._validate
 
     @property
     def layout(self):
@@ -3339,6 +3348,8 @@ class BasePlotlyType(object):
         # invalid properties will result in an exception
         self._skip_invalid = False
 
+        self._validate = True
+
         # Validate inputs
         # ---------------
         self._process_kwargs(**kwargs)
@@ -3377,6 +3388,14 @@ class BasePlotlyType(object):
 
         # ### Backing property for backward compatible _validator property ##
         self.__validators = None
+
+    # @property
+    # def _validate(self):
+    #     fig = self.figure
+    #     if fig is None:
+    #         return True
+    #     else:
+    #         return fig._validate
 
     def _get_validator(self, prop):
         from .validator_cache import ValidatorCache
@@ -3425,7 +3444,7 @@ class BasePlotlyType(object):
             if k in self:
                 # e.g. underscore kwargs like marker_line_color
                 self[k] = v
-            elif not validate._should_validate:
+            elif not self._validate:
                 # Set extra property as-is
                 self[k] = v
             else:
@@ -3885,7 +3904,7 @@ class BasePlotlyType(object):
             # ### Unwrap scalar tuple ###
             prop = prop[0]
 
-            if validate._should_validate:
+            if self._validate:
                 if prop not in self._valid_props:
                     self._raise_on_invalid_property_error(prop)
 
@@ -3936,6 +3955,8 @@ class BasePlotlyType(object):
             res = self
             for p in prop[:-1]:
                 res = res[p]
+
+            res._validate = self._validate
 
             res[prop[-1]] = value
 
