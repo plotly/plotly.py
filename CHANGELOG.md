@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## Dev version
+
+### Added
+
+- The `hover_data` parameter of `px` functions can now be a dictionary. This
+  makes it possible to skip hover information for some arguments or to change  
+  the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+
 ## [4.6] - 2020-03-31
 
 ### Updated
