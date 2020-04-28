@@ -203,7 +203,7 @@ an instance of :class:`plotly.graph_objs.contour.contours.Labelfont`"""
         # Handle skip_invalid
         # -------------------
         self._skip_invalid = kwargs.pop("skip_invalid", False)
-        self._validate = kwargs.pop("validate", True)
+        self._validate = kwargs.pop("_validate", True)
 
         # Populate data dict with properties
         # ----------------------------------
