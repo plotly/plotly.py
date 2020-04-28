@@ -1,7 +1,7 @@
 # This module defines an image scraper for sphinx-gallery
 # https://sphinx-gallery.github.io/
 # which can be used by projects using plotly in their documentation.
-import inspect, os, pathlib
+import inspect, os
 
 import plotly
 from glob import glob
