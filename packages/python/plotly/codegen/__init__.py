@@ -266,7 +266,6 @@ def perform_codegen():
     for dep_clas in DEPRECATED_DATATYPES:
         root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
-    validate_import = "from .._validate import validate\n"
     optional_figure_widget_import = f"""
 if sys.version_info < (3, 7):
     try:
@@ -307,7 +306,7 @@ else:
         rel_classes = datatype_rel_class_imports[path_parts]
         rel_modules = datatype_rel_module_imports.get(path_parts, [])
         if path_parts == ():
-            init_extra = validate_import + optional_figure_widget_import
+            init_extra = optional_figure_widget_import
         else:
             init_extra = ""
         write_init_py(graph_objs_pkg, path_parts, rel_modules, rel_classes, init_extra)
@@ -325,7 +324,7 @@ else:
     graph_objects_init_source = build_from_imports_py(
         graph_objects_rel_modules,
         graph_objects_rel_classes,
-        init_extra=validate_import + optional_figure_widget_import,
+        init_extra=optional_figure_widget_import,
     )
     graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
     os.makedirs(opath.join(outdir, "graph_objects"), exist_ok=True)
