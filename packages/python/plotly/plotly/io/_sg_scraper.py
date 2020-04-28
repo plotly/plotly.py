@@ -42,10 +42,9 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
 
     Notes
     -----
-    Add this function to the image scrapers 
+    Add this function to the image scrapers
     """
     examples_dir = os.path.dirname(block_vars["src_file"])
-    print("----------------------")
     pngs = sorted(glob(os.path.join(examples_dir, "*.png")))
     htmls = sorted(glob(os.path.join(examples_dir, "*.html")))
     image_path_iterator = block_vars["image_path_iterator"]
