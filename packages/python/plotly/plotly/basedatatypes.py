@@ -418,13 +418,11 @@ class BaseFigure(object):
 
         return repr_str
 
-
     def _repr_html_(self):
         """
-        Customizes html representation
+        Customize html representation
         """
-        return self.to_html(full_html=False, include_plotlyjs='cdn')
-
+        return self.to_html(full_html=False, include_plotlyjs="cdn", auto_play=False)
 
     def _ipython_display_(self):
         """
