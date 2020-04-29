@@ -1,11 +1,11 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._projection import Projection
-    from ._lonaxis import Lonaxis
-    from ._lataxis import Lataxis
-    from ._domain import Domain
     from ._center import Center
+    from ._domain import Domain
+    from ._lataxis import Lataxis
+    from ._lonaxis import Lonaxis
+    from ._projection import Projection
     from . import projection
 else:
     from _plotly_utils.importers import relative_import
@@ -14,10 +14,10 @@ else:
         __name__,
         [".projection"],
         [
-            "._projection.Projection",
-            "._lonaxis.Lonaxis",
-            "._lataxis.Lataxis",
-            "._domain.Domain",
             "._center.Center",
+            "._domain.Domain",
+            "._lataxis.Lataxis",
+            "._lonaxis.Lonaxis",
+            "._projection.Projection",
         ],
     )
