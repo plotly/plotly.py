@@ -141,8 +141,9 @@ fig.show()
 ### Customizing hover text with a hovertemplate
 
 To customize the tooltip on your graph you can use [hovertemplate](https://plotly.com/python/reference/#pie-hovertemplate), which is a template string used for rendering the information that appear on hoverbox.
-This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format).
-Hovertemplate customize the tooltip text vs. [texttemplate](https://plotly.com/python/reference/#pie-texttemplate) which customizes the text that appears on your chart. <br>
+This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
+
+Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/#pie-texttemplate) customizes the text that appears on your chart. <br>
 Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/#layout-hoverlabel-align).
 
 Plotly Express automatically sets the `hovertemplate`, but you can set it manually when using `graph_objects`.
