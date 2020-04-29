@@ -287,3 +287,29 @@ def test_reject_invalid_renderer(renderer):
 )
 def test_accept_valid_renderer(renderer):
     pio.renderers.default = renderer
+
+
+# _repr_html
+# ----------
+# independent of renderer
+def test_repr_html():
+    fig = go.Figure()
+    fig.update_layout(template=None)
+    s = fig._repr_html_()
+    # id number of figure
+    id_figure = s.split('document.getElementById("')[1].split('")')[0]
+    id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
+    template = (
+        '<div>\n        \n                <script type="text/javascript">'
+        "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
+        '<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    \n            '
+        '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
+        'style="height:100%; width:100%;"></div>\n            <script type="text/javascript">'
+        "\n                \n                    window.PLOTLYENV=window.PLOTLYENV || {};"
+        '\n                    \n                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
+        " {\n                    Plotly.newPlot(\n                        'cd462b94-79ce-42a2-887f-2650a761a144',"
+        '\n                        [],\n                        {"template": {}},'
+        '\n                        {"responsive": true}\n                    )\n                };'
+        "\n                \n            </script>\n        </div>"
+    )
+    assert s.replace(id_figure, id_pattern) == template
