@@ -303,8 +303,8 @@ else:
     # ### Output datatype __init__.py files ###
     graph_objs_pkg = opath.join(outdir, "graph_objs")
     for path_parts in datatype_rel_class_imports:
-        rel_classes = datatype_rel_class_imports[path_parts]
-        rel_modules = datatype_rel_module_imports.get(path_parts, [])
+        rel_classes = sorted(datatype_rel_class_imports[path_parts])
+        rel_modules = sorted(datatype_rel_module_imports.get(path_parts, []))
         if path_parts == ():
             init_extra = optional_figure_widget_import
         else:
