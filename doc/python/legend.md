@@ -159,7 +159,7 @@ fig.add_trace(go.Scatter(
     name="Decreasing"
 ))
 
-fig.update_layout(legend_title='<b> Trend </b>')
+fig.update_layout(legend_title_text='Trend')
 fig.show()
 ```
 
