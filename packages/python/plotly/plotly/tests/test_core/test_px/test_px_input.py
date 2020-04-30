@@ -38,9 +38,7 @@ def test_with_index():
     # We do not allow "x=index"
     with pytest.raises(ValueError) as err_msg:
         fig = px.scatter(tips, x="index", y="total_bill")
-        assert "To use the index, pass it in directly as `df.index`." in str(
-            err_msg.value
-        )
+    assert "To use the index, pass it in directly as `df.index`." in str(err_msg.value)
     tips = px.data.tips()
     tips.index.name = "item"
     fig = px.scatter(tips, x=tips.index, y="total_bill")
@@ -75,10 +73,10 @@ def test_several_dataframes():
     # Name conflict
     with pytest.raises(NameError) as err_msg:
         fig = px.scatter(df, x="z", y=df2.money, size="y")
-        assert "A name conflict was encountered for argument y" in str(err_msg.value)
+    assert "A name conflict was encountered for argument y" in str(err_msg.value)
     with pytest.raises(NameError) as err_msg:
         fig = px.scatter(df, x="z", y=df2.money, size=df.y)
-        assert "A name conflict was encountered for argument y" in str(err_msg.value)
+    assert "A name conflict was encountered for argument y" in str(err_msg.value)
 
     # No conflict when the dataframe is not given, fields are used
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
@@ -157,41 +155,41 @@ def test_arrayattrable_numpy():
 def test_wrong_column_name():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(px.data.tips(), x="bla", y="wrong")
-        assert "Value of 'x' is not the name of a column in 'data_frame'" in str(
-            err_msg.value
-        )
+    assert "Value of 'x' is not the name of a column in 'data_frame'" in str(
+        err_msg.value
+    )
 
 
 def test_missing_data_frame():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(x="arg1", y="arg2")
-        assert "String or int arguments are only possible" in str(err_msg.value)
+    assert "String or int arguments are only possible" in str(err_msg.value)
 
 
 def test_wrong_dimensions_of_array():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(x=[1, 2, 3], y=[2, 3, 4, 5])
-        assert "All arguments should have the same length." in str(err_msg.value)
+    assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_wrong_dimensions_mixed_case():
     with pytest.raises(ValueError) as err_msg:
         df = pd.DataFrame(dict(time=[1, 2, 3], temperature=[20, 30, 25]))
         px.scatter(df, x="time", y="temperature", color=[1, 3, 9, 5])
-        assert "All arguments should have the same length." in str(err_msg.value)
+    assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_wrong_dimensions():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(px.data.tips(), x="tip", y=[1, 2, 3])
-        assert "All arguments should have the same length." in str(err_msg.value)
+    assert "All arguments should have the same length." in str(err_msg.value)
     # the order matters
     with pytest.raises(ValueError) as err_msg:
         px.scatter(px.data.tips(), x=[1, 2, 3], y="tip")
-        assert "All arguments should have the same length." in str(err_msg.value)
+    assert "All arguments should have the same length." in str(err_msg.value)
     with pytest.raises(ValueError):
         px.scatter(px.data.tips(), x=px.data.iris().index, y="tip")
-        # assert "All arguments should have the same length." in str(err_msg.value)
+    assert "All arguments should have the same length." in str(err_msg.value)
 
 
 def test_multiindex_raise_error():
@@ -203,9 +201,7 @@ def test_multiindex_raise_error():
     px.scatter(df, x="A", y="B")
     with pytest.raises(TypeError) as err_msg:
         px.scatter(df, x=df.index, y="B")
-        assert "pandas MultiIndex is not supported by plotly express" in str(
-            err_msg.value
-        )
+    assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
 
 
 def test_build_df_from_lists():
