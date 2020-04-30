@@ -23,7 +23,7 @@ direct_attrables = (
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
 )
-array_attrables = ["dimensions", "custom_data", "hover_data", "path", "_column_"]
+array_attrables = ["dimensions", "custom_data", "hover_data", "path", "wide_variable"]
 group_attrables = ["animation_frame", "facet_row", "facet_col", "line_group"]
 renameable_group_attrables = [
     "color",  # renamed to marker.color or line.color in infer_config
@@ -1083,7 +1083,7 @@ def process_args_into_dataframe(args, wide_mode, var_name):
                     )
                 # Check validity of column name
                 if argument not in df_input.columns:
-                    if wide_mode and argument in ("_value_", var_name):
+                    if wide_mode and argument in ("value", var_name):
                         continue
                     else:
                         err_msg = (
@@ -1154,7 +1154,7 @@ def process_args_into_dataframe(args, wide_mode, var_name):
                 pass
             else:
                 args[field_name][i] = str(col_name)
-            if field_name != "_column_":
+            if field_name != "wide_variable":
                 wide_id_vars.add(str(col_name))
 
     for col_name in ranges:
@@ -1215,8 +1215,8 @@ def build_dataframe(args, constructor):
             )
         if df_provided and no_x and no_y:
             wide_mode = True
-            args["_column_"] = list(df_input.columns)
-            var_name = df_input.columns.name or "_column_"
+            args["wide_variable"] = list(df_input.columns)
+            var_name = df_input.columns.name or "variable"
             if constructor == go.Funnel:
                 wide_orientation = args.get("orientation", None) or "h"
             else:
@@ -1225,8 +1225,8 @@ def build_dataframe(args, constructor):
             args["wide_cross"] = None
         elif wide_x != wide_y:
             wide_mode = True
-            args["_column_"] = args["y"] if wide_y else args["x"]
-            var_name = "_column_"
+            args["wide_variable"] = args["y"] if wide_y else args["x"]
+            var_name = "variable"
             if constructor == go.Histogram:
                 wide_orientation = "v" if wide_x else "h"
             else:
@@ -1272,8 +1272,8 @@ def build_dataframe(args, constructor):
         # default and we let the normal auto-orientation-code do its thing later
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
-            args[missing_bar_dim] = "_count_"
-            df_output["_count_"] = 1
+            args[missing_bar_dim] = "count"
+            df_output["count"] = 1
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
@@ -1287,14 +1287,14 @@ def build_dataframe(args, constructor):
         # at this point, `df_output` is semi-long/semi-wide, but we know which columns
         # are which, so we melt it and reassign `args` to refer to the newly-tidy
         # columns, keeping track of various names and manglings set up above
-        wide_value_vars = [c for c in args["_column_"] if c not in wide_id_vars]
-        del args["_column_"]
+        wide_value_vars = [c for c in args["wide_variable"] if c not in wide_id_vars]
+        del args["wide_variable"]
         del args["wide_cross"]
         df_output = df_output.melt(
             id_vars=wide_id_vars,
             value_vars=wide_value_vars,
             var_name=var_name,
-            value_name="_value_",
+            value_name="value",
         )
         df_output[var_name] = df_output[var_name].astype(str)
         orient_v = wide_orientation == "v"
@@ -1305,24 +1305,24 @@ def build_dataframe(args, constructor):
 
         if constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name
-            args["y" if orient_v else "x"] = "_value_"
+            args["y" if orient_v else "x"] = "value"
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
         if constructor == go.Bar:
-            if _is_continuous(df_output, "_value_"):
+            if _is_continuous(df_output, "value"):
                 args["x" if orient_v else "y"] = wide_cross_name
-                args["y" if orient_v else "x"] = "_value_"
+                args["y" if orient_v else "x"] = "value"
                 args["color"] = args["color"] or var_name
             else:
-                args["x" if orient_v else "y"] = "_value_"
-                args["y" if orient_v else "x"] = "_count_"
-                df_output["_count_"] = 1
+                args["x" if orient_v else "y"] = "value"
+                args["y" if orient_v else "x"] = "count"
+                df_output["count"] = 1
                 args["color"] = args["color"] or var_name
         if constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
-            args["y" if orient_v else "x"] = "_value_"
+            args["y" if orient_v else "x"] = "value"
         if constructor == go.Histogram:
-            args["x" if orient_v else "y"] = "_value_"
+            args["x" if orient_v else "y"] = "value"
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
 
