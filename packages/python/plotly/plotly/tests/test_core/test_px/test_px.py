@@ -1,6 +1,7 @@
 import plotly.express as px
 import numpy as np
 import pytest
+from itertools import permutations
 
 
 def test_scatter():
@@ -185,44 +186,40 @@ def test_px_templates():
     assert fig.layout.yaxis3.showgrid
 
 
-def test_orthogonal_orderings():
-    from itertools import permutations
-
-    df = px.data.tips()
-
+def assert_orderings(days_order, days_check, times_order, times_check):
     symbol_sequence = ["circle", "diamond", "square", "cross"]
     color_sequence = ["red", "blue"]
+    fig = px.scatter(
+        px.data.tips(),
+        x="total_bill",
+        y="tip",
+        facet_row="time",
+        facet_col="day",
+        color="time",
+        symbol="day",
+        symbol_sequence=symbol_sequence,
+        color_discrete_sequence=color_sequence,
+        category_orders=dict(day=days_order, time=times_order),
+    )
 
-    def assert_orderings(days_order, days_check, times_order, times_check):
-        fig = px.scatter(
-            df,
-            x="total_bill",
-            y="tip",
-            facet_row="time",
-            facet_col="day",
-            color="time",
-            symbol="day",
-            symbol_sequence=symbol_sequence,
-            color_discrete_sequence=color_sequence,
-            category_orders=dict(day=days_order, time=times_order),
-        )
+    for col in range(len(days_check)):
+        for trace in fig.select_traces(col=col + 1):
+            assert days_check[col] in trace.hovertemplate
 
-        for col in range(len(days_check)):
-            for trace in fig.select_traces(col=col + 1):
-                assert days_check[col] in trace.hovertemplate
+    for row in range(len(times_check)):
+        for trace in fig.select_traces(row=2 - row):
+            assert times_check[row] in trace.hovertemplate
 
-        for row in range(len(times_check)):
-            for trace in fig.select_traces(row=2 - row):
-                assert times_check[row] in trace.hovertemplate
+    for trace in fig.data:
+        for i, day in enumerate(days_check):
+            if day in trace.name:
+                assert trace.marker.symbol == symbol_sequence[i]
+        for i, time in enumerate(times_check):
+            if time in trace.name:
+                assert trace.marker.color == color_sequence[i]
 
-        for trace in fig.data:
-            for i, day in enumerate(days_check):
-                if day in trace.name:
-                    assert trace.marker.symbol == symbol_sequence[i]
-            for i, time in enumerate(times_check):
-                if time in trace.name:
-                    assert trace.marker.color == color_sequence[i]
 
+def test_noisy_orthogonal_orderings():
     assert_orderings(
         ["x", "Sun", "Sat", "y", "Fri", "z"],  # add extra noise, missing Thur
         ["Sun", "Sat", "Fri", "Thur"],  # Thur is at the back
@@ -230,9 +227,11 @@ def test_orthogonal_orderings():
         ["Lunch", "Dinner"],  # Dinner is at the back
     )
 
-    for days in permutations(df["day"].unique()):
-        for times in permutations(df["time"].unique()):
-            assert_orderings(days, days, times, times)
+
+@pytest.mark.parametrize("days", permutations(["Sun", "Sat", "Fri", "Thur"]))
+@pytest.mark.parametrize("times", permutations(["Lunch", "Dinner"]))
+def test_orthogonal_orderings(days, times):
+    assert_orderings(days, days, times, times)
 
 
 def test_permissive_defaults():
