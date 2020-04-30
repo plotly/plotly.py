@@ -1215,6 +1215,12 @@ def build_dataframe(args, constructor):
             )
         if df_provided and no_x and no_y:
             wide_mode = True
+            if isinstance(df_input.columns, pd.MultiIndex):
+                raise TypeError(
+                    "Data frame columns is a pandas MultiIndex. "
+                    "pandas MultiIndex is not supported by plotly express "
+                    "at the moment."
+                )
             args["wide_variable"] = list(df_input.columns)
             var_name = df_input.columns.name or "variable"
             if constructor == go.Funnel:
@@ -1251,6 +1257,12 @@ def build_dataframe(args, constructor):
             if no_x != no_y and args["orientation"] is None:
                 args["orientation"] = "v" if no_x else "h"
             if df_provided:
+                if isinstance(df_input.index, pd.MultiIndex):
+                    raise TypeError(
+                        "Data frame index is a pandas MultiIndex. "
+                        "pandas MultiIndex is not supported by plotly express "
+                        "at the moment."
+                    )
                 args["wide_cross"] = df_input.index
                 wide_cross_name = df_input.index.name or "index"
             else:
