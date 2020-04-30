@@ -635,14 +635,20 @@ def test_multi_index():
     df.index = [["a", "a", "b", "b"], ["c", "d", "c", "d"]]
     with pytest.raises(TypeError) as err_msg:
         px.scatter(df)
-        assert "pandas MultiIndex is not supported by plotly express" in str(
-            err_msg.value
-        )
+    assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
 
     df = pd.DataFrame([[1, 2, 3, 4], [3, 4, 5, 6], [1, 2, 3, 4], [3, 4, 5, 6]])
     df.columns = [["e", "e", "f", "f"], ["g", "h", "g", "h"]]
     with pytest.raises(TypeError) as err_msg:
         px.scatter(df)
-        assert "pandas MultiIndex is not supported by plotly express" in str(
-            err_msg.value
-        )
+    assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
+
+
+def test_special_name_collisions():
+    df = pd.DataFrame(
+        dict(a=range(10), b=range(10), value=range(10), variable=range(10))
+    )
+    args_in = dict(data_frame=df, color="value", symbol="variable")
+    args_out = build_dataframe(args_in, go.Scatter)
+    df_out = args_out["data_frame"]
+    assert len(set(df_out.columns)) == len(df_out.columns)

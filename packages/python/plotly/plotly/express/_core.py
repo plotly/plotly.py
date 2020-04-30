@@ -970,7 +970,13 @@ def _isinstance_listlike(x):
         return True
 
 
-def process_args_into_dataframe(args, wide_mode, var_name):
+def _escape_col_name(df_input, col_name):
+    while df_input is not None and col_name in df_input.columns:
+        col_name = "_" + col_name
+    return col_name
+
+
+def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     """
     After this function runs, the `all_attrables` keys of `args` all contain only
     references to columns of `df_output`. This function handles the extraction of data
@@ -978,19 +984,10 @@ def process_args_into_dataframe(args, wide_mode, var_name):
     data to `df_output` and then replaces `args["attrable"]` with the appropriate
     reference.
     """
-    for field in args:
-        if field in array_attrables and args[field] is not None:
-            args[field] = (
-                OrderedDict(args[field])
-                if isinstance(args[field], dict)
-                else list(args[field])
-            )
-    # Cast data_frame argument to DataFrame (it could be a numpy array, dict etc.)
-    df_provided = args["data_frame"] is not None
-    if df_provided and not isinstance(args["data_frame"], pd.DataFrame):
-        args["data_frame"] = pd.DataFrame(args["data_frame"])
+
     df_input = args["data_frame"]
     df_provided = df_input is not None
+
     df_output = pd.DataFrame()
     constants = dict()
     ranges = list()
@@ -1083,7 +1080,7 @@ def process_args_into_dataframe(args, wide_mode, var_name):
                     )
                 # Check validity of column name
                 if argument not in df_input.columns:
-                    if wide_mode and argument in ("value", var_name):
+                    if wide_mode and argument in (value_name, var_name):
                         continue
                     else:
                         err_msg = (
@@ -1205,10 +1202,11 @@ def build_dataframe(args, constructor):
     wide_y = False if no_y else _is_col_list(df_input, args["y"])
 
     wide_mode = False
-    var_name = None
+    var_name = None  # will likely be "variable" in wide_mode
+    wide_cross_name = None  # will likely be "index" in wide_mode
+    value_name = "value"
     hist2d_types = [go.Histogram2d, go.Histogram2dContour]
     if constructor in cartesians:
-        wide_cross_name = None
         if wide_x and wide_y:
             raise ValueError(
                 "Cannot accept list of column references or list of columns for both `x` and `y`."
@@ -1266,17 +1264,24 @@ def build_dataframe(args, constructor):
                 args["wide_cross"] = df_input.index
                 wide_cross_name = df_input.index.name or "index"
             else:
-                args["wide_cross"] = Range(label="index")
-                wide_cross_name = "index"
+                wide_cross_name = _escape_col_name(df_input, "index")
+                args["wide_cross"] = Range(label=wide_cross_name)
+
+    if wide_mode:
+        var_name = _escape_col_name(df_input, var_name)
+        value_name = _escape_col_name(df_input, value_name)
 
     # now that things have been prepped, we do the systematic rewriting of `args`
 
-    df_output, wide_id_vars = process_args_into_dataframe(args, wide_mode, var_name)
+    df_output, wide_id_vars = process_args_into_dataframe(
+        args, wide_mode, var_name, value_name
+    )
 
     # now that `df_output` exists and `args` contains only references, we complete
     # the special-case and wide-mode handling by further rewriting args and/or mutating
     # df_output
 
+    count_name = _escape_col_name(df_output, "count")
     if not wide_mode and missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
         # dimension is categorical: if so, then setting the missing dimension to a
@@ -1284,8 +1289,8 @@ def build_dataframe(args, constructor):
         # default and we let the normal auto-orientation-code do its thing later
         other_dim = "x" if missing_bar_dim == "y" else "y"
         if not _is_continuous(df_output, args[other_dim]):
-            args[missing_bar_dim] = "count"
-            df_output["count"] = 1
+            args[missing_bar_dim] = count_name
+            df_output[count_name] = 1
         else:
             # on the other hand, if the non-missing dimension is continuous, then we
             # can use this information to override the normal auto-orientation code
@@ -1306,7 +1311,7 @@ def build_dataframe(args, constructor):
             id_vars=wide_id_vars,
             value_vars=wide_value_vars,
             var_name=var_name,
-            value_name="value",
+            value_name=value_name,
         )
         df_output[var_name] = df_output[var_name].astype(str)
         orient_v = wide_orientation == "v"
@@ -1317,24 +1322,24 @@ def build_dataframe(args, constructor):
 
         if constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name
-            args["y" if orient_v else "x"] = "value"
+            args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
         if constructor == go.Bar:
-            if _is_continuous(df_output, "value"):
+            if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
-                args["y" if orient_v else "x"] = "value"
+                args["y" if orient_v else "x"] = value_name
                 args["color"] = args["color"] or var_name
             else:
-                args["x" if orient_v else "y"] = "value"
-                args["y" if orient_v else "x"] = "count"
-                df_output["count"] = 1
+                args["x" if orient_v else "y"] = value_name
+                args["y" if orient_v else "x"] = count_name
+                df_output[count_name] = 1
                 args["color"] = args["color"] or var_name
         if constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
-            args["y" if orient_v else "x"] = "value"
+            args["y" if orient_v else "x"] = value_name
         if constructor == go.Histogram:
-            args["x" if orient_v else "y"] = "value"
+            args["x" if orient_v else "y"] = value_name
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
 
