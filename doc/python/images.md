@@ -313,7 +313,7 @@ It can be useful to add shapes to a layout image, for highlighting an object, dr
 
 In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
-- add modebar buttons corresponding to the drawing tools you wish to use.
+- add [modebar buttons](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
 
 The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
 
@@ -327,7 +327,6 @@ img_width = 1600
 img_height = 900
 scale_factor = 0.5
 fig.add_layout_image(
-    dict(
         x=0,
         sizex=img_width,
         y=0,
@@ -336,7 +335,7 @@ fig.add_layout_image(
         yref="y",
         opacity=1.0,
         layer="below",
-        source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg")
+        source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg"
 )
 fig.update_xaxes(showgrid=False, range=(0, img_width))
 fig.update_yaxes(showgrid=False, scaleanchor='x', range=(img_height, 0))
