@@ -628,3 +628,21 @@ def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect
         df_out.sort_index(axis=1), df_expect.sort_index(axis=1),
     )
     assert args_out == args_expect
+
+
+def test_multi_index():
+    df = pd.DataFrame([[1, 2, 3, 4], [3, 4, 5, 6], [1, 2, 3, 4], [3, 4, 5, 6]])
+    df.index = [["a", "a", "b", "b"], ["c", "d", "c", "d"]]
+    with pytest.raises(TypeError) as err_msg:
+        px.scatter(df)
+        assert "pandas MultiIndex is not supported by plotly express" in str(
+            err_msg.value
+        )
+
+    df = pd.DataFrame([[1, 2, 3, 4], [3, 4, 5, 6], [1, 2, 3, 4], [3, 4, 5, 6]])
+    df.columns = [["e", "e", "f", "f"], ["g", "h", "g", "h"]]
+    with pytest.raises(TypeError) as err_msg:
+        px.scatter(df)
+        assert "pandas MultiIndex is not supported by plotly express" in str(
+            err_msg.value
+        )
