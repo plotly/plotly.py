@@ -1,36 +1,36 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._unselected import Unselected
-    from ._textfont import Textfont
-    from ._stream import Stream
-    from ._selected import Selected
-    from ._outsidetextfont import Outsidetextfont
-    from ._marker import Marker
-    from ._insidetextfont import Insidetextfont
-    from ._hoverlabel import Hoverlabel
-    from ._error_y import ErrorY
     from ._error_x import ErrorX
-    from . import unselected
-    from . import selected
-    from . import marker
+    from ._error_y import ErrorY
+    from ._hoverlabel import Hoverlabel
+    from ._insidetextfont import Insidetextfont
+    from ._marker import Marker
+    from ._outsidetextfont import Outsidetextfont
+    from ._selected import Selected
+    from ._stream import Stream
+    from ._textfont import Textfont
+    from ._unselected import Unselected
     from . import hoverlabel
+    from . import marker
+    from . import selected
+    from . import unselected
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".unselected", ".selected", ".marker", ".hoverlabel"],
+        [".hoverlabel", ".marker", ".selected", ".unselected"],
         [
-            "._unselected.Unselected",
-            "._textfont.Textfont",
-            "._stream.Stream",
-            "._selected.Selected",
-            "._outsidetextfont.Outsidetextfont",
-            "._marker.Marker",
-            "._insidetextfont.Insidetextfont",
-            "._hoverlabel.Hoverlabel",
-            "._error_y.ErrorY",
             "._error_x.ErrorX",
+            "._error_y.ErrorY",
+            "._hoverlabel.Hoverlabel",
+            "._insidetextfont.Insidetextfont",
+            "._marker.Marker",
+            "._outsidetextfont.Outsidetextfont",
+            "._selected.Selected",
+            "._stream.Stream",
+            "._textfont.Textfont",
+            "._unselected.Unselected",
         ],
     )

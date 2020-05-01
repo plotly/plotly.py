@@ -22,6 +22,9 @@ if sys.version_info < (3, 7):
     from ._cmax import CmaxValidator
     from ._cauto import CautoValidator
     from ._autocolorscale import AutocolorscaleValidator
+    from ._anglesrc import AnglesrcValidator
+    from ._angle import AngleValidator
+    from ._allowoverlap import AllowoverlapValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -50,5 +53,8 @@ else:
             "._cmax.CmaxValidator",
             "._cauto.CautoValidator",
             "._autocolorscale.AutocolorscaleValidator",
+            "._anglesrc.AnglesrcValidator",
+            "._angle.AngleValidator",
+            "._allowoverlap.AllowoverlapValidator",
         ],
     )
