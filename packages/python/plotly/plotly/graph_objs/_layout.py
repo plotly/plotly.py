@@ -58,6 +58,7 @@ class Layout(_BaseLayoutType):
     _parent_path_str = ""
     _path_str = "layout"
     _valid_props = {
+        "activeshape",
         "angularaxis",
         "annotationdefaults",
         "annotations",
@@ -104,6 +105,7 @@ class Layout(_BaseLayoutType):
         "meta",
         "metasrc",
         "modebar",
+        "newshape",
         "orientation",
         "paper_bgcolor",
         "piecolorway",
@@ -141,6 +143,35 @@ class Layout(_BaseLayoutType):
         "xaxis",
         "yaxis",
     }
+
+    # activeshape
+    # -----------
+    @property
+    def activeshape(self):
+        """
+        The 'activeshape' property is an instance of Activeshape
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Activeshape`
+          - A dict of string/value properties that will be passed
+            to the Activeshape constructor
+    
+            Supported dict properties:
+                
+                fillcolor
+                    Sets the color filling the active shape'
+                    interior.
+                opacity
+                    Sets the opacity of the active shape.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Activeshape
+        """
+        return self["activeshape"]
+
+    @activeshape.setter
+    def activeshape(self, val):
+        self["activeshape"] = val
 
     # angularaxis
     # -----------
@@ -964,8 +995,9 @@ class Layout(_BaseLayoutType):
     
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
-                ['zoom', 'pan', 'select', 'lasso', 'orbit', 'turntable',
-                False]
+                ['zoom', 'pan', 'select', 'lasso', 'drawclosedpath',
+                'drawopenpath', 'drawline', 'drawrect', 'drawcircle',
+                'orbit', 'turntable', False]
 
         Returns
         -------
@@ -2120,6 +2152,57 @@ class Layout(_BaseLayoutType):
     def modebar(self, val):
         self["modebar"] = val
 
+    # newshape
+    # --------
+    @property
+    def newshape(self):
+        """
+        The 'newshape' property is an instance of Newshape
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.Newshape`
+          - A dict of string/value properties that will be passed
+            to the Newshape constructor
+    
+            Supported dict properties:
+                
+                drawdirection
+                    When `dragmode` is set to "drawrect",
+                    "drawline" or "drawcircle" this limits the drag
+                    to be horizontal, vertical or diagonal. Using
+                    "diagonal" there is no limit e.g. in drawing
+                    lines in any direction. "ortho" limits the draw
+                    to be either horizontal or vertical.
+                    "horizontal" allows horizontal extend.
+                    "vertical" allows vertical extend.
+                fillcolor
+                    Sets the color filling new shapes' interior.
+                    Please note that if using a fillcolor with
+                    alpha greater than half, drag inside the active
+                    shape starts moving the shape underneath,
+                    otherwise a new shape could be started over.
+                fillrule
+                    Determines the path's interior. For more info
+                    please visit https://developer.mozilla.org/en-
+                    US/docs/Web/SVG/Attribute/fill-rule
+                layer
+                    Specifies whether new shapes are drawn below or
+                    above traces.
+                line
+                    :class:`plotly.graph_objects.layout.newshape.Li
+                    ne` instance or dict with compatible properties
+                opacity
+                    Sets the opacity of new shapes.
+
+        Returns
+        -------
+        plotly.graph_objs.layout.Newshape
+        """
+        return self["newshape"]
+
+    @newshape.setter
+    def newshape(self, val):
+        self["newshape"] = val
+
     # orientation
     # -----------
     @property
@@ -2510,7 +2593,7 @@ class Layout(_BaseLayoutType):
     @property
     def selectdirection(self):
         """
-        When "dragmode" is set to "select", this limits the selection
+        When `dragmode` is set to "select", this limits the selection
         of the drag to horizontal, vertical or diagonal. "h" only
         allows horizontal selection, "v" only vertical, "d" only
         diagonal and "any" sets no limit.
@@ -2586,8 +2669,20 @@ class Layout(_BaseLayoutType):
     
             Supported dict properties:
                 
+                editable
+                    Determines whether the shape could be activated
+                    for edit or not. Has no effect when the older
+                    editable shapes mode is enabled via
+                    `config.editable` or
+                    `config.edits.shapePosition`.
                 fillcolor
                     Sets the color filling the shape's interior.
+                    Only applies to closed shapes.
+                fillrule
+                    Determines which regions of complex paths
+                    constitute the interior. For more info please
+                    visit https://developer.mozilla.org/en-
+                    US/docs/Web/SVG/Attribute/fill-rule
                 layer
                     Specifies whether shapes are drawn below or
                     above traces.
@@ -4543,6 +4638,9 @@ class Layout(_BaseLayoutType):
     @property
     def _prop_descriptions(self):
         return """\
+        activeshape
+            :class:`plotly.graph_objects.layout.Activeshape`
+            instance or dict with compatible properties
         angularaxis
             :class:`plotly.graph_objects.layout.AngularAxis`
             instance or dict with compatible properties
@@ -4795,6 +4893,9 @@ class Layout(_BaseLayoutType):
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
+        newshape
+            :class:`plotly.graph_objects.layout.Newshape` instance
+            or dict with compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -4820,7 +4921,7 @@ class Layout(_BaseLayoutType):
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
         selectdirection
-            When "dragmode" is set to "select", this limits the
+            When `dragmode` is set to "select", this limits the
             selection of the drag to horizontal, vertical or
             diagonal. "h" only allows horizontal selection, "v"
             only vertical, "d" only diagonal and "any" sets no
@@ -4982,6 +5083,7 @@ class Layout(_BaseLayoutType):
     def __init__(
         self,
         arg=None,
+        activeshape=None,
         angularaxis=None,
         annotations=None,
         annotationdefaults=None,
@@ -5028,6 +5130,7 @@ class Layout(_BaseLayoutType):
         meta=None,
         metasrc=None,
         modebar=None,
+        newshape=None,
         orientation=None,
         paper_bgcolor=None,
         piecolorway=None,
@@ -5074,6 +5177,9 @@ class Layout(_BaseLayoutType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.Layout`
+        activeshape
+            :class:`plotly.graph_objects.layout.Activeshape`
+            instance or dict with compatible properties
         angularaxis
             :class:`plotly.graph_objects.layout.AngularAxis`
             instance or dict with compatible properties
@@ -5326,6 +5432,9 @@ class Layout(_BaseLayoutType):
         modebar
             :class:`plotly.graph_objects.layout.Modebar` instance
             or dict with compatible properties
+        newshape
+            :class:`plotly.graph_objects.layout.Newshape` instance
+            or dict with compatible properties
         orientation
             Legacy polar charts are deprecated! Please switch to
             "polar" subplots. Rotates the entire polar by the given
@@ -5351,7 +5460,7 @@ class Layout(_BaseLayoutType):
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
         selectdirection
-            When "dragmode" is set to "select", this limits the
+            When `dragmode` is set to "select", this limits the
             selection of the drag to horizontal, vertical or
             diagonal. "h" only allows horizontal selection, "v"
             only vertical, "d" only diagonal and "any" sets no
@@ -5520,6 +5629,7 @@ class Layout(_BaseLayoutType):
         # Override _valid_props for instance so that instance can mutate set
         # to support subplot properties (e.g. xaxis2)
         self._valid_props = {
+            "activeshape",
             "angularaxis",
             "annotationdefaults",
             "annotations",
@@ -5566,6 +5676,7 @@ class Layout(_BaseLayoutType):
             "meta",
             "metasrc",
             "modebar",
+            "newshape",
             "orientation",
             "paper_bgcolor",
             "piecolorway",
@@ -5627,6 +5738,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("activeshape", None)
+        _v = activeshape if activeshape is not None else _v
+        if _v is not None:
+            self["activeshape"] = _v
         _v = arg.pop("angularaxis", None)
         _v = angularaxis if angularaxis is not None else _v
         if _v is not None:
@@ -5811,6 +5926,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = modebar if modebar is not None else _v
         if _v is not None:
             self["modebar"] = _v
+        _v = arg.pop("newshape", None)
+        _v = newshape if newshape is not None else _v
+        if _v is not None:
+            self["newshape"] = _v
         _v = arg.pop("orientation", None)
         _v = orientation if orientation is not None else _v
         if _v is not None:

@@ -9,7 +9,9 @@ class Shape(_BaseLayoutHierarchyType):
     _parent_path_str = "layout"
     _path_str = "layout.shape"
     _valid_props = {
+        "editable",
         "fillcolor",
+        "fillrule",
         "layer",
         "line",
         "name",
@@ -30,12 +32,35 @@ class Shape(_BaseLayoutHierarchyType):
         "ysizemode",
     }
 
+    # editable
+    # --------
+    @property
+    def editable(self):
+        """
+        Determines whether the shape could be activated for edit or
+        not. Has no effect when the older editable shapes mode is
+        enabled via `config.editable` or `config.edits.shapePosition`.
+    
+        The 'editable' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["editable"]
+
+    @editable.setter
+    def editable(self, val):
+        self["editable"] = val
+
     # fillcolor
     # ---------
     @property
     def fillcolor(self):
         """
-        Sets the color filling the shape's interior.
+        Sets the color filling the shape's interior. Only applies to
+        closed shapes.
     
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
@@ -88,6 +113,30 @@ class Shape(_BaseLayoutHierarchyType):
     @fillcolor.setter
     def fillcolor(self, val):
         self["fillcolor"] = val
+
+    # fillrule
+    # --------
+    @property
+    def fillrule(self):
+        """
+        Determines which regions of complex paths constitute the
+        interior. For more info please visit
+        https://developer.mozilla.org/en-
+        US/docs/Web/SVG/Attribute/fill-rule
+    
+        The 'fillrule' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['evenodd', 'nonzero']
+
+        Returns
+        -------
+        Any
+        """
+        return self["fillrule"]
+
+    @fillrule.setter
+    def fillrule(self, val):
+        self["fillrule"] = val
 
     # layer
     # -----
@@ -550,8 +599,19 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        editable
+            Determines whether the shape could be activated for
+            edit or not. Has no effect when the older editable
+            shapes mode is enabled via `config.editable` or
+            `config.edits.shapePosition`.
         fillcolor
-            Sets the color filling the shape's interior.
+            Sets the color filling the shape's interior. Only
+            applies to closed shapes.
+        fillrule
+            Determines which regions of complex paths constitute
+            the interior. For more info please visit
+            https://developer.mozilla.org/en-
+            US/docs/Web/SVG/Attribute/fill-rule
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -685,7 +745,9 @@ class Shape(_BaseLayoutHierarchyType):
     def __init__(
         self,
         arg=None,
+        editable=None,
         fillcolor=None,
+        fillrule=None,
         layer=None,
         line=None,
         name=None,
@@ -714,8 +776,19 @@ class Shape(_BaseLayoutHierarchyType):
         arg
             dict of properties compatible with this constructor or
             an instance of :class:`plotly.graph_objs.layout.Shape`
+        editable
+            Determines whether the shape could be activated for
+            edit or not. Has no effect when the older editable
+            shapes mode is enabled via `config.editable` or
+            `config.edits.shapePosition`.
         fillcolor
-            Sets the color filling the shape's interior.
+            Sets the color filling the shape's interior. Only
+            applies to closed shapes.
+        fillrule
+            Determines which regions of complex paths constitute
+            the interior. For more info please visit
+            https://developer.mozilla.org/en-
+            US/docs/Web/SVG/Attribute/fill-rule
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -878,10 +951,18 @@ an instance of :class:`plotly.graph_objs.layout.Shape`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("editable", None)
+        _v = editable if editable is not None else _v
+        if _v is not None:
+            self["editable"] = _v
         _v = arg.pop("fillcolor", None)
         _v = fillcolor if fillcolor is not None else _v
         if _v is not None:
             self["fillcolor"] = _v
+        _v = arg.pop("fillrule", None)
+        _v = fillrule if fillrule is not None else _v
+        if _v is not None:
+            self["fillrule"] = _v
         _v = arg.pop("layer", None)
         _v = layer if layer is not None else _v
         if _v is not None:
