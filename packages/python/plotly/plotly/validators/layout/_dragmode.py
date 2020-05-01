@@ -10,7 +10,20 @@ class DragmodeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             role=kwargs.pop("role", "info"),
             values=kwargs.pop(
                 "values",
-                ["zoom", "pan", "select", "lasso", "orbit", "turntable", False],
+                [
+                    "zoom",
+                    "pan",
+                    "select",
+                    "lasso",
+                    "drawclosedpath",
+                    "drawopenpath",
+                    "drawline",
+                    "drawrect",
+                    "drawcircle",
+                    "orbit",
+                    "turntable",
+                    False,
+                ],
             ),
             **kwargs
         )

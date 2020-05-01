@@ -629,6 +629,17 @@ class Scattermapbox(_BaseTraceType):
     
             Supported dict properties:
                 
+                allowoverlap
+                    Flag to draw all symbols, even if they overlap.
+                angle
+                    Sets the marker orientation from true North, in
+                    degrees clockwise. When using the "auto"
+                    default, no rotation would be applied in
+                    perspective views which is different from using
+                    a zero angle.
+                anglesrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  angle .
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette

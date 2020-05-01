@@ -9,6 +9,9 @@ class Marker(_BaseTraceHierarchyType):
     _parent_path_str = "scattermapbox"
     _path_str = "scattermapbox.marker"
     _valid_props = {
+        "allowoverlap",
+        "angle",
+        "anglesrc",
         "autocolorscale",
         "cauto",
         "cmax",
@@ -31,6 +34,70 @@ class Marker(_BaseTraceHierarchyType):
         "symbol",
         "symbolsrc",
     }
+
+    # allowoverlap
+    # ------------
+    @property
+    def allowoverlap(self):
+        """
+        Flag to draw all symbols, even if they overlap.
+    
+        The 'allowoverlap' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["allowoverlap"]
+
+    @allowoverlap.setter
+    def allowoverlap(self, val):
+        self["allowoverlap"] = val
+
+    # angle
+    # -----
+    @property
+    def angle(self):
+        """
+        Sets the marker orientation from true North, in degrees
+        clockwise. When using the "auto" default, no rotation would be
+        applied in perspective views which is different from using a
+        zero angle.
+    
+        The 'angle' property is a number and may be specified as:
+          - An int or float
+          - A tuple, list, or one-dimensional numpy array of the above
+
+        Returns
+        -------
+        int|float|numpy.ndarray
+        """
+        return self["angle"]
+
+    @angle.setter
+    def angle(self, val):
+        self["angle"] = val
+
+    # anglesrc
+    # --------
+    @property
+    def anglesrc(self):
+        """
+        Sets the source reference on Chart Studio Cloud for  angle .
+    
+        The 'anglesrc' property must be specified as a string or
+        as a plotly.grid_objs.Column object
+
+        Returns
+        -------
+        str
+        """
+        return self["anglesrc"]
+
+    @anglesrc.setter
+    def anglesrc(self, val):
+        self["anglesrc"] = val
 
     # autocolorscale
     # --------------
@@ -797,6 +864,16 @@ class Marker(_BaseTraceHierarchyType):
     @property
     def _prop_descriptions(self):
         return """\
+        allowoverlap
+            Flag to draw all symbols, even if they overlap.
+        angle
+            Sets the marker orientation from true North, in degrees
+            clockwise. When using the "auto" default, no rotation
+            would be applied in perspective views which is
+            different from using a zero angle.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            angle .
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -909,6 +986,9 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(
         self,
         arg=None,
+        allowoverlap=None,
+        angle=None,
+        anglesrc=None,
         autocolorscale=None,
         cauto=None,
         cmax=None,
@@ -941,6 +1021,16 @@ class Marker(_BaseTraceHierarchyType):
             dict of properties compatible with this constructor or
             an instance of
             :class:`plotly.graph_objs.scattermapbox.Marker`
+        allowoverlap
+            Flag to draw all symbols, even if they overlap.
+        angle
+            Sets the marker orientation from true North, in degrees
+            clockwise. When using the "auto" default, no rotation
+            would be applied in perspective views which is
+            different from using a zero angle.
+        anglesrc
+            Sets the source reference on Chart Studio Cloud for
+            angle .
         autocolorscale
             Determines whether the colorscale is a default palette
             (`autocolorscale: true`) or the palette determined by
@@ -1082,6 +1172,18 @@ an instance of :class:`plotly.graph_objs.scattermapbox.Marker`"""
 
         # Populate data dict with properties
         # ----------------------------------
+        _v = arg.pop("allowoverlap", None)
+        _v = allowoverlap if allowoverlap is not None else _v
+        if _v is not None:
+            self["allowoverlap"] = _v
+        _v = arg.pop("angle", None)
+        _v = angle if angle is not None else _v
+        if _v is not None:
+            self["angle"] = _v
+        _v = arg.pop("anglesrc", None)
+        _v = anglesrc if anglesrc is not None else _v
+        if _v is not None:
+            self["anglesrc"] = _v
         _v = arg.pop("autocolorscale", None)
         _v = autocolorscale if autocolorscale is not None else _v
         if _v is not None:
