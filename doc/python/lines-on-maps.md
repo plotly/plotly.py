@@ -147,9 +147,15 @@ fig.add_trace(go.Scattergeo(
 flight_paths = []
 lons = []
 lats = []
-for i in range(len(df_flight_paths)):
-    lons += [df_flight_paths['start_lon'][i], df_flight_paths['end_lon'][i], None] 
-    lats += [df_flight_paths['start_lat'][i], df_flight_paths['end_lat'][i], None]
+import numpy as np
+lons = np.empty(3 * len(df_flight_paths))
+lons[::3] = df_flight_paths['start_lon']
+lons[1::3] = df_flight_paths['end_lon']
+lons[::3] = None
+lats = np.empty(3 * len(df_flight_paths))
+lats[::3] = df_flight_paths['start_lat']
+lats[1::3] = df_flight_paths['end_lat']
+lats[::3] = None
 
 fig.add_trace(
     go.Scattergeo(
