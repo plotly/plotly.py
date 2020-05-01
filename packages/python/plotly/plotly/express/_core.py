@@ -899,8 +899,8 @@ def _check_name_not_reserved(field_name, reserved_names):
         return field_name
     else:
         raise NameError(
-            "A name conflict was encountered for argument %s. "
-            "A column with name %s is already used." % (field_name, field_name)
+            "A name conflict was encountered for argument '%s'. "
+            "A column or index with name '%s' is ambiguous." % (field_name, field_name)
         )
 
 
@@ -929,6 +929,8 @@ def _get_reserved_col_names(args):
                     in_df = arg is df[arg_name]
                     if in_df:
                         reserved_names.add(arg_name)
+            elif arg is df.index and arg.name is not None:
+                reserved_names.add(arg.name)
 
     return reserved_names
 
@@ -970,8 +972,8 @@ def _isinstance_listlike(x):
         return True
 
 
-def _escape_col_name(df_input, col_name):
-    while df_input is not None and col_name in df_input.columns:
+def _escape_col_name(df_input, col_name, extra):
+    while df_input is not None and (col_name in df_input.columns or col_name in extra):
         col_name = "_" + col_name
     return col_name
 
@@ -1040,6 +1042,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
             length = len(df_output)
             if argument is None:
                 continue
+            col_name = None
             # Case of multiindex
             if isinstance(argument, pd.MultiIndex):
                 raise TypeError(
@@ -1107,31 +1110,25 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
-                is_index = isinstance(argument, pd.Index)
-                # First pandas
-                # pandas series have a name but it's None
-                if (
-                    hasattr(argument, "name") and argument.name is not None
-                ) or is_index:
-                    col_name = argument.name  # pandas df
-                    if col_name is None and is_index:
-                        col_name = "index"
-                    if not df_provided:
-                        col_name = field
-                    else:
-                        if is_index:
-                            keep_name = df_provided and argument is df_input.index
+                if df_provided and hasattr(argument, "name"):
+                    if argument is df_input.index:
+                        if argument.name is None or argument.name in df_input:
+                            col_name = "index"
                         else:
-                            keep_name = (
-                                col_name in df_input and argument is df_input[col_name]
-                            )
-                        col_name = (
-                            col_name
-                            if keep_name
-                            else _check_name_not_reserved(field, reserved_names)
+                            col_name = argument.name
+                        col_name = _escape_col_name(
+                            df_input, col_name, [var_name, value_name]
                         )
-                else:  # numpy array, list...
+                    else:
+                        if (
+                            argument.name is not None
+                            and argument.name in df_input
+                            and argument is df_input[argument.name]
+                        ):
+                            col_name = argument.name
+                if col_name is None:  # numpy array, list...
                     col_name = _check_name_not_reserved(field, reserved_names)
+
                 if length and len(argument) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
@@ -1145,6 +1142,12 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     df_output[str(col_name)] = np.array(argument)
 
             # Finally, update argument with column name now that column exists
+            assert col_name is not None, (
+                "Data-frame processing failure, likely due to a internal bug. "
+                "Please report this to "
+                "https://github.com/plotly/plotly.py/issues/new and we will try to "
+                "replicate and fix it."
+            )
             if field_name not in array_attrables:
                 args[field_name] = str(col_name)
             elif isinstance(args[field_name], dict):
@@ -1204,7 +1207,7 @@ def build_dataframe(args, constructor):
     wide_mode = False
     var_name = None  # will likely be "variable" in wide_mode
     wide_cross_name = None  # will likely be "index" in wide_mode
-    value_name = "value"
+    value_name = None  # will likely be "value" in wide_mode
     hist2d_types = [go.Histogram2d, go.Histogram2dContour]
     if constructor in cartesians:
         if wide_x and wide_y:
@@ -1220,7 +1223,9 @@ def build_dataframe(args, constructor):
                     "at the moment."
                 )
             args["wide_variable"] = list(df_input.columns)
-            var_name = df_input.columns.name or "variable"
+            var_name = df_input.columns.name
+            if var_name in [None, "value", "index"] or var_name in df_input:
+                var_name = "variable"
             if constructor == go.Funnel:
                 wide_orientation = args.get("orientation", None) or "h"
             else:
@@ -1239,6 +1244,10 @@ def build_dataframe(args, constructor):
             args["wide_cross"] = None
             if not no_x and not no_y:
                 wide_cross_name = "__x__" if wide_y else "__y__"
+
+    if wide_mode:
+        value_name = _escape_col_name(df_input, "value", [])
+        var_name = _escape_col_name(df_input, var_name, [])
 
     missing_bar_dim = None
     if constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types:
@@ -1262,14 +1271,10 @@ def build_dataframe(args, constructor):
                         "at the moment."
                     )
                 args["wide_cross"] = df_input.index
-                wide_cross_name = df_input.index.name or "index"
             else:
-                wide_cross_name = _escape_col_name(df_input, "index")
-                args["wide_cross"] = Range(label=wide_cross_name)
-
-    if wide_mode:
-        var_name = _escape_col_name(df_input, var_name)
-        value_name = _escape_col_name(df_input, value_name)
+                args["wide_cross"] = Range(
+                    label=_escape_col_name(df_input, "index", [var_name, value_name])
+                )
 
     # now that things have been prepped, we do the systematic rewriting of `args`
 
@@ -1281,7 +1286,7 @@ def build_dataframe(args, constructor):
     # the special-case and wide-mode handling by further rewriting args and/or mutating
     # df_output
 
-    count_name = _escape_col_name(df_output, "count")
+    count_name = _escape_col_name(df_output, "count", [var_name, value_name])
     if not wide_mode and missing_bar_dim and constructor == go.Bar:
         # now that we've populated df_output, we check to see if the non-missing
         # dimension is categorical: if so, then setting the missing dimension to a
@@ -1306,6 +1311,12 @@ def build_dataframe(args, constructor):
         # columns, keeping track of various names and manglings set up above
         wide_value_vars = [c for c in args["wide_variable"] if c not in wide_id_vars]
         del args["wide_variable"]
+        if wide_cross_name == "__x__":
+            wide_cross_name = args["x"]
+        elif wide_cross_name == "__y__":
+            wide_cross_name = args["y"]
+        else:
+            wide_cross_name = args["wide_cross"]
         del args["wide_cross"]
         df_output = df_output.melt(
             id_vars=wide_id_vars,
@@ -1313,12 +1324,14 @@ def build_dataframe(args, constructor):
             var_name=var_name,
             value_name=value_name,
         )
+        assert len(df_output.columns) == len(set(df_output.columns)), (
+            "Wide-mode name-inference failure, likely due to a internal bug. "
+            "Please report this to "
+            "https://github.com/plotly/plotly.py/issues/new and we will try to "
+            "replicate and fix it."
+        )
         df_output[var_name] = df_output[var_name].astype(str)
         orient_v = wide_orientation == "v"
-        if wide_cross_name == "__x__":
-            wide_cross_name = args["x"]
-        if wide_cross_name == "__y__":
-            wide_cross_name = args["y"]
 
         if constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name

@@ -73,10 +73,10 @@ def test_several_dataframes():
     # Name conflict
     with pytest.raises(NameError) as err_msg:
         fig = px.scatter(df, x="z", y=df2.money, size="y")
-    assert "A name conflict was encountered for argument y" in str(err_msg.value)
+    assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
     with pytest.raises(NameError) as err_msg:
         fig = px.scatter(df, x="z", y=df2.money, size=df.y)
-    assert "A name conflict was encountered for argument y" in str(err_msg.value)
+    assert "A name conflict was encountered for argument 'y'" in str(err_msg.value)
 
     # No conflict when the dataframe is not given, fields are used
     df = pd.DataFrame(dict(x=[0, 1], y=[3, 4]))
