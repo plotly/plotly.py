@@ -1,6 +1,7 @@
 import sys
 
 if sys.version_info < (3, 7):
+    from ._activeshape import Activeshape
     from ._angularaxis import AngularAxis
     from ._annotation import Annotation
     from ._coloraxis import Coloraxis
@@ -14,6 +15,7 @@ if sys.version_info < (3, 7):
     from ._mapbox import Mapbox
     from ._margin import Margin
     from ._modebar import Modebar
+    from ._newshape import Newshape
     from ._polar import Polar
     from ._radialaxis import RadialAxis
     from ._scene import Scene
@@ -34,6 +36,7 @@ if sys.version_info < (3, 7):
     from . import hoverlabel
     from . import legend
     from . import mapbox
+    from . import newshape
     from . import polar
     from . import scene
     from . import shape
@@ -57,6 +60,7 @@ else:
             ".hoverlabel",
             ".legend",
             ".mapbox",
+            ".newshape",
             ".polar",
             ".scene",
             ".shape",
@@ -69,6 +73,7 @@ else:
             ".yaxis",
         ],
         [
+            "._activeshape.Activeshape",
             "._angularaxis.AngularAxis",
             "._annotation.Annotation",
             "._coloraxis.Coloraxis",
@@ -82,6 +87,7 @@ else:
             "._mapbox.Mapbox",
             "._margin.Margin",
             "._modebar.Modebar",
+            "._newshape.Newshape",
             "._polar.Polar",
             "._radialaxis.RadialAxis",
             "._scene.Scene",

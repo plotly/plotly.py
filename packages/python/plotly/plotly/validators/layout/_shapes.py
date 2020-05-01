@@ -10,8 +10,20 @@ class ShapesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            editable
+                Determines whether the shape could be activated
+                for edit or not. Has no effect when the older
+                editable shapes mode is enabled via
+                `config.editable` or
+                `config.edits.shapePosition`.
             fillcolor
                 Sets the color filling the shape's interior.
+                Only applies to closed shapes.
+            fillrule
+                Determines which regions of complex paths
+                constitute the interior. For more info please
+                visit https://developer.mozilla.org/en-
+                US/docs/Web/SVG/Attribute/fill-rule
             layer
                 Specifies whether shapes are drawn below or
                 above traces.

@@ -10,6 +10,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
+            activeshape
+                :class:`plotly.graph_objects.layout.Activeshape
+                ` instance or dict with compatible properties
             angularaxis
                 :class:`plotly.graph_objects.layout.AngularAxis
                 ` instance or dict with compatible properties
@@ -290,6 +293,9 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             modebar
                 :class:`plotly.graph_objects.layout.Modebar`
                 instance or dict with compatible properties
+            newshape
+                :class:`plotly.graph_objects.layout.Newshape`
+                instance or dict with compatible properties
             orientation
                 Legacy polar charts are deprecated! Please
                 switch to "polar" subplots. Rotates the entire
@@ -317,7 +323,7 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.layout.Scene`
                 instance or dict with compatible properties
             selectdirection
-                When "dragmode" is set to "select", this limits
+                When `dragmode` is set to "select", this limits
                 the selection of the drag to horizontal,
                 vertical or diagonal. "h" only allows
                 horizontal selection, "v" only vertical, "d"
