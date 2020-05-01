@@ -618,16 +618,61 @@ append_special_case(
     ),
 )
 
+# df has columns named after every special string
+df = pd.DataFrame(dict(variable=[1, 2], index=[3, 4], value=[5, 6]), index=[7, 8])
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=None),
+    args_expect=dict(x="_index", y="_value", color="_variable", orientation="v",),
+    df_expect=pd.DataFrame(
+        dict(
+            _index=[7, 8, 7, 8, 7, 8],
+            _value=[1, 2, 3, 4, 5, 6],
+            _variable=["variable", "variable", "index", "index", "value", "value"],
+        )
+    ),
+)
+
+# df has columns with name collisions with indexes
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]), index=[7, 8])
+df.index.name = "a"
+df.columns.name = "b"
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=None),
+    args_expect=dict(x="index", y="value", color="variable", orientation="v",),
+    df_expect=pd.DataFrame(
+        dict(index=[7, 8, 7, 8], value=[1, 2, 3, 4], variable=["a", "a", "b", "b"],)
+    ),
+)
+
+# everything is called value, OMG
+df = pd.DataFrame(dict(value=[1, 2], b=[3, 4]), index=[7, 8])
+df.index.name = "value"
+df.columns.name = "value"
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=None),
+    args_expect=dict(x="index", y="_value", color="variable", orientation="v",),
+    df_expect=pd.DataFrame(
+        dict(
+            index=[7, 8, 7, 8],
+            _value=[1, 2, 3, 4],
+            variable=["value", "value", "b", "b"],
+        )
+    ),
+)
+
 
 @pytest.mark.parametrize("df_in, args_in, args_expect, df_expect", special_cases)
 def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect):
     args_in["data_frame"] = df_in
     args_out = build_dataframe(args_in, go.Scatter)
     df_out = args_out.pop("data_frame")
+    assert args_out == args_expect
     assert_frame_equal(
         df_out.sort_index(axis=1), df_expect.sort_index(axis=1),
     )
-    assert args_out == args_expect
 
 
 def test_multi_index():
@@ -642,13 +687,3 @@ def test_multi_index():
     with pytest.raises(TypeError) as err_msg:
         px.scatter(df)
     assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
-
-
-def test_special_name_collisions():
-    df = pd.DataFrame(
-        dict(a=range(10), b=range(10), value=range(10), variable=range(10))
-    )
-    args_in = dict(data_frame=df, color="value", symbol="variable")
-    args_out = build_dataframe(args_in, go.Scatter)
-    df_out = args_out["data_frame"]
-    assert len(set(df_out.columns)) == len(df_out.columns)
