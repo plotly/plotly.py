@@ -52,7 +52,10 @@ def test_scraper():
     tempdir = tempfile.mkdtemp()
     gallery_conf = {"src_dir": tempdir, "examples_dirs": here}
     names = iter(["0", "1", "2"])
-    block_vars = {"image_path_iterator": names}
+    block_vars = {
+        "image_path_iterator": names,
+        "src_file": os.path.join(here, "plot_example.py"),
+    }
     execute_plotly_example()
     res = plotly_sg_scraper(block, block_vars, gallery_conf)
     shutil.rmtree(tempdir)

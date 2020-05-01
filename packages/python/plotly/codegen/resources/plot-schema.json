@@ -41235,6 +41235,21 @@
                         "description": "Sets the marker symbol. Full list: https://www.mapbox.com/maki-icons/ Note that the array `marker.color` and `marker.size` are only available for *circle* symbols.",
                         "editType": "calc"
                     },
+                    "angle": {
+                        "valType": "number",
+                        "dflt": "auto",
+                        "role": "style",
+                        "arrayOk": true,
+                        "description": "Sets the marker orientation from true North, in degrees clockwise. When using the *auto* default, no rotation would be applied in perspective views which is different from using a zero angle.",
+                        "editType": "calc"
+                    },
+                    "allowoverlap": {
+                        "valType": "boolean",
+                        "dflt": false,
+                        "role": "style",
+                        "description": "Flag to draw all symbols, even if they overlap.",
+                        "editType": "calc"
+                    },
                     "opacity": {
                         "valType": "number",
                         "min": 0,
@@ -41862,6 +41877,12 @@
                         "valType": "string",
                         "role": "info",
                         "description": "Sets the source reference on Chart Studio Cloud for  symbol .",
+                        "editType": "none"
+                    },
+                    "anglesrc": {
+                        "valType": "string",
+                        "role": "info",
+                        "description": "Sets the source reference on Chart Studio Cloud for  angle .",
                         "editType": "none"
                     },
                     "opacitysrc": {
@@ -57469,6 +57490,114 @@
                 "editType": "modebar",
                 "role": "object"
             },
+            "newshape": {
+                "line": {
+                    "color": {
+                        "valType": "color",
+                        "editType": "none",
+                        "role": "info",
+                        "description": "Sets the line color. By default uses either dark grey or white to increase contrast with background color."
+                    },
+                    "width": {
+                        "valType": "number",
+                        "min": 0,
+                        "dflt": 4,
+                        "role": "info",
+                        "editType": "none",
+                        "description": "Sets the line width (in px)."
+                    },
+                    "dash": {
+                        "valType": "string",
+                        "values": [
+                            "solid",
+                            "dot",
+                            "dash",
+                            "longdash",
+                            "dashdot",
+                            "longdashdot"
+                        ],
+                        "dflt": "solid",
+                        "role": "style",
+                        "editType": "none",
+                        "description": "Sets the dash style of lines. Set to a dash type string (*solid*, *dot*, *dash*, *longdash*, *dashdot*, or *longdashdot*) or a dash length list in px (eg *5px,10px,2px,2px*)."
+                    },
+                    "role": "object",
+                    "editType": "none"
+                },
+                "fillcolor": {
+                    "valType": "color",
+                    "dflt": "rgba(0,0,0,0)",
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Sets the color filling new shapes' interior. Please note that if using a fillcolor with alpha greater than half, drag inside the active shape starts moving the shape underneath, otherwise a new shape could be started over."
+                },
+                "fillrule": {
+                    "valType": "enumerated",
+                    "values": [
+                        "evenodd",
+                        "nonzero"
+                    ],
+                    "dflt": "evenodd",
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Determines the path's interior. For more info please visit https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule"
+                },
+                "opacity": {
+                    "valType": "number",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 1,
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Sets the opacity of new shapes."
+                },
+                "layer": {
+                    "valType": "enumerated",
+                    "values": [
+                        "below",
+                        "above"
+                    ],
+                    "dflt": "above",
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Specifies whether new shapes are drawn below or above traces."
+                },
+                "drawdirection": {
+                    "valType": "enumerated",
+                    "role": "info",
+                    "values": [
+                        "ortho",
+                        "horizontal",
+                        "vertical",
+                        "diagonal"
+                    ],
+                    "dflt": "diagonal",
+                    "editType": "none",
+                    "description": "When `dragmode` is set to *drawrect*, *drawline* or *drawcircle* this limits the drag to be horizontal, vertical or diagonal. Using *diagonal* there is no limit e.g. in drawing lines in any direction. *ortho* limits the draw to be either horizontal or vertical. *horizontal* allows horizontal extend. *vertical* allows vertical extend."
+                },
+                "editType": "none",
+                "role": "object"
+            },
+            "activeshape": {
+                "fillcolor": {
+                    "valType": "color",
+                    "dflt": "rgb(255,0,255)",
+                    "role": "style",
+                    "editType": "none",
+                    "description": "Sets the color filling the active shape' interior."
+                },
+                "opacity": {
+                    "valType": "number",
+                    "min": 0,
+                    "max": 1,
+                    "dflt": 0.5,
+                    "role": "info",
+                    "editType": "none",
+                    "description": "Sets the opacity of the active shape."
+                },
+                "editType": "none",
+                "role": "object"
+            },
             "meta": {
                 "valType": "any",
                 "arrayOk": true,
@@ -57598,6 +57727,11 @@
                     "pan",
                     "select",
                     "lasso",
+                    "drawclosedpath",
+                    "drawopenpath",
+                    "drawline",
+                    "drawrect",
+                    "drawcircle",
                     "orbit",
                     "turntable",
                     false
@@ -57708,7 +57842,7 @@
                     "any"
                 ],
                 "dflt": "any",
-                "description": "When \"dragmode\" is set to \"select\", this limits the selection of the drag to horizontal, vertical or diagonal. \"h\" only allows horizontal selection, \"v\" only vertical, \"d\" only diagonal and \"any\" sets no limit.",
+                "description": "When `dragmode` is set to *select*, this limits the selection of the drag to horizontal, vertical or diagonal. *h* only allows horizontal selection, *v* only vertical, *d* only diagonal and *any* sets no limit.",
                 "editType": "none"
             },
             "grid": {
@@ -66817,7 +66951,25 @@
                             "dflt": "rgba(0,0,0,0)",
                             "role": "info",
                             "editType": "arraydraw",
-                            "description": "Sets the color filling the shape's interior."
+                            "description": "Sets the color filling the shape's interior. Only applies to closed shapes."
+                        },
+                        "fillrule": {
+                            "valType": "enumerated",
+                            "values": [
+                                "evenodd",
+                                "nonzero"
+                            ],
+                            "dflt": "evenodd",
+                            "role": "info",
+                            "editType": "arraydraw",
+                            "description": "Determines which regions of complex paths constitute the interior. For more info please visit https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule"
+                        },
+                        "editable": {
+                            "valType": "boolean",
+                            "role": "info",
+                            "dflt": false,
+                            "editType": "calc+arraydraw",
+                            "description": "Determines whether the shape could be activated for edit or not. Has no effect when the older editable shapes mode is enabled via `config.editable` or `config.edits.shapePosition`."
                         },
                         "editType": "arraydraw",
                         "name": {

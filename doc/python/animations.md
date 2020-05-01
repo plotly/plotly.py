@@ -261,18 +261,6 @@ fig_dict = {
 fig_dict["layout"]["xaxis"] = {"range": [30, 85], "title": "Life Expectancy"}
 fig_dict["layout"]["yaxis"] = {"title": "GDP per Capita", "type": "log"}
 fig_dict["layout"]["hovermode"] = "closest"
-fig_dict["layout"]["sliders"] = {
-    "args": [
-        "transition", {
-            "duration": 400,
-            "easing": "cubic-in-out"
-        }
-    ],
-    "initialValue": "1952",
-    "plotlycommand": "animate",
-    "values": years,
-    "visible": True
-}
 fig_dict["layout"]["updatemenus"] = [
     {
         "buttons": [
