@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Dev version
 
+### Updated
+
+- Updated Plotly.js to version 1.54.0. The main feature of the Plotly.js is the
+  possibility to draw layout shapes, using custom dragmodes and corresponding
+  modebar buttons.
+
 ### Added
 
 - The `hover_data` parameter of `px` functions can now be a dictionary. This
