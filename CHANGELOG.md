@@ -4,6 +4,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Dev version
 
+To add:
+* https://github.com/plotly/plotly.py/pull/2349
+* https://github.com/plotly/plotly.py/pull/2357
+* https://github.com/plotly/plotly.py/pull/2419
+
 ### Updated
 
 - Updated Plotly.js to version 1.54.0. The main feature of the Plotly.js is the
