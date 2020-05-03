@@ -817,6 +817,38 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
             animation_opts=animation_opts,
         )
 
+    def to_mimebundle(self, fig_dict):
+
+        from plotly.io import to_html
+
+        if self.requirejs:
+            include_plotlyjs = "require"
+            include_mathjax = False
+        elif self.connected:
+            include_plotlyjs = "cdn"
+            include_mathjax = "cdn"
+        else:
+            include_plotlyjs = True
+            include_mathjax = "cdn"
+
+
+        html = to_html(
+            fig_dict,
+            config=self.config,
+            auto_play=self.auto_play,
+            include_plotlyjs=include_plotlyjs,
+            include_mathjax=include_mathjax,
+            full_html=self.full_html,
+            animation_opts=self.animation_opts,
+            default_width="100%",
+            default_height=525,
+            validate=False,
+        )
+
+        return {"text/html": html}
+
+
+
 
 class SphinxGalleryOrcaRenderer(ExternalRenderer):
 
