@@ -24,7 +24,8 @@ from plotly.io._base_renderers import (
     PdfRenderer,
     BrowserRenderer,
     IFrameRenderer,
-    SphinxGalleryRenderer,
+    SphinxGalleryHtmlRenderer,
+    SphinxGalleryOrcaRenderer,
     CoCalcRenderer,
     DatabricksRenderer,
 )
@@ -430,7 +431,8 @@ renderers["chrome"] = BrowserRenderer(config=config, using="chrome")
 renderers["chromium"] = BrowserRenderer(config=config, using="chromium")
 renderers["iframe"] = IFrameRenderer(config=config, include_plotlyjs=True)
 renderers["iframe_connected"] = IFrameRenderer(config=config, include_plotlyjs="cdn")
-renderers["sphinx_gallery"] = SphinxGalleryRenderer()
+renderers["sphinx_gallery"] = SphinxGalleryHtmlRenderer()
+renderers["sphinx_gallery_png"] = SphinxGalleryOrcaRenderer()
 
 # Set default renderer
 # --------------------

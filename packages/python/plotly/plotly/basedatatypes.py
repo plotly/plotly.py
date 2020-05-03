@@ -422,7 +422,26 @@ class BaseFigure(object):
         """
         Customize html representation
         """
-        return self.to_html(full_html=False, include_plotlyjs="cdn", auto_play=False)
+        bundle = self._repr_mimebundle_()
+        if 'text/html' in bundle:
+            return bundle['text/html']
+        else:
+            return ''
+            #return self.to_html(full_html=False, include_plotlyjs="cdn")
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        import plotly.io as pio
+        renderer_str = pio.renderers.default
+        renderers = pio._renderers.renderers
+        from plotly.io._utils import validate_coerce_fig_to_dict
+        fig_dict = validate_coerce_fig_to_dict(self, validate)
+        # Mimetype renderers
+        renderer = renderers[renderer_str]
+        bundle = renderer.to_mimebundle(fig_dict)
+        return bundle
 
     def _ipython_display_(self):
         """

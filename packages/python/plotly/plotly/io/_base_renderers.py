@@ -796,7 +796,30 @@ supported when called from within the Databricks notebook environment."""
         self.displayHTML(html)
 
 
-class SphinxGalleryRenderer(ExternalRenderer):
+class SphinxGalleryHtmlRenderer(HtmlRenderer):
+
+    def __init__(
+        self,
+        connected=True,
+        config=None,
+        auto_play=False,
+        post_script=None,
+        animation_opts=None,
+    ):
+        super(SphinxGalleryHtmlRenderer, self).__init__(
+            connected=connected,
+            full_html=False,
+            requirejs=False,
+            global_init=False,
+            config=config,
+            auto_play=auto_play,
+            post_script=post_script,
+            animation_opts=animation_opts,
+        )
+
+
+class SphinxGalleryOrcaRenderer(ExternalRenderer):
+
     def render(self, fig_dict):
         stack = inspect.stack()
         # Name of script from which plot function was called is retrieved
@@ -809,4 +832,17 @@ class SphinxGalleryRenderer(ExternalRenderer):
         filename_png = filename_root + ".png"
         figure = return_figure_from_figure_or_data(fig_dict, True)
         _ = write_html(fig_dict, file=filename_html)
-        write_image(figure, filename_png)
+        try:
+            write_image(figure, filename_png)
+        except (ValueError, ImportError):
+            raise ImportError(
+            "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
+            "See https://plotly.com/python/static-image-export/ for instructions on"
+            "how to install orca. Alternatively, you can use the `sphinx-gallery`"
+            "renderer (note that png thumbnails can only be generated with"
+            "the `sphinx-gallery-orca` renderer)."
+            )
+
+
+
+
