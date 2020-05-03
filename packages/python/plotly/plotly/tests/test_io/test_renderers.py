@@ -324,7 +324,30 @@ def test_repr_html(renderer):
         assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
 
 
-@pytest.mark.parametrize("renderer_str", pio.renderers)
+all_renderers_without_orca = [
+    "plotly_mimetype",
+    "jupyterlab",
+    "nteract",
+    "vscode",
+    "notebook",
+    "notebook_connected",
+    "kaggle",
+    "azure",
+    "colab",
+    "cocalc",
+    "databricks",
+    "json",
+    "browser",
+    "firefox",
+    "chrome",
+    "chromium",
+    "iframe",
+    "iframe_connected",
+    "sphinx_gallery",
+]
+
+
+@pytest.mark.parametrize("renderer_str", all_renderers_without_orca)
 def test_repr_mimebundle(renderer_str):
     pio.renderers.default = renderer_str
     fig = go.Figure()
