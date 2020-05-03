@@ -423,24 +423,30 @@ class BaseFigure(object):
         Customize html representation
         """
         bundle = self._repr_mimebundle_()
-        if 'text/html' in bundle:
-            return bundle['text/html']
+        if "text/html" in bundle:
+            return bundle["text/html"]
         else:
-            return ''
-            #return self.to_html(full_html=False, include_plotlyjs="cdn")
+            return self.to_html(full_html=False, include_plotlyjs="cdn")
 
     def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
         """
         Return mimebundle corresponding to default renderer.
         """
         import plotly.io as pio
+
         renderer_str = pio.renderers.default
         renderers = pio._renderers.renderers
+        renderer_names = renderers._validate_coerce_renderers(renderer_str)
+        renderers_list = [renderers[name] for name in renderer_names]
         from plotly.io._utils import validate_coerce_fig_to_dict
+        from plotly.io._renderers import MimetypeRenderer
+
         fig_dict = validate_coerce_fig_to_dict(self, validate)
         # Mimetype renderers
-        renderer = renderers[renderer_str]
-        bundle = renderer.to_mimebundle(fig_dict)
+        bundle = {}
+        for renderer in renderers_list:
+            if isinstance(renderer, MimetypeRenderer):
+                bundle.update(renderer.to_mimebundle(fig_dict))
         return bundle
 
     def _ipython_display_(self):

@@ -797,7 +797,6 @@ supported when called from within the Databricks notebook environment."""
 
 
 class SphinxGalleryHtmlRenderer(HtmlRenderer):
-
     def __init__(
         self,
         connected=True,
@@ -831,7 +830,6 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
             include_plotlyjs = True
             include_mathjax = "cdn"
 
-
         html = to_html(
             fig_dict,
             config=self.config,
@@ -848,10 +846,7 @@ class SphinxGalleryHtmlRenderer(HtmlRenderer):
         return {"text/html": html}
 
 
-
-
 class SphinxGalleryOrcaRenderer(ExternalRenderer):
-
     def render(self, fig_dict):
         stack = inspect.stack()
         # Name of script from which plot function was called is retrieved
@@ -868,13 +863,9 @@ class SphinxGalleryOrcaRenderer(ExternalRenderer):
             write_image(figure, filename_png)
         except (ValueError, ImportError):
             raise ImportError(
-            "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
-            "See https://plotly.com/python/static-image-export/ for instructions on"
-            "how to install orca. Alternatively, you can use the `sphinx-gallery`"
-            "renderer (note that png thumbnails can only be generated with"
-            "the `sphinx-gallery-orca` renderer)."
+                "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
+                "See https://plotly.com/python/static-image-export/ for instructions on"
+                "how to install orca. Alternatively, you can use the `sphinx-gallery`"
+                "renderer (note that png thumbnails can only be generated with"
+                "the `sphinx-gallery-orca` renderer)."
             )
-
-
-
-

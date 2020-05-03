@@ -289,15 +289,19 @@ def test_accept_valid_renderer(renderer):
     pio.renderers.default = renderer
 
 
-# _repr_html
-# ----------
-# independent of renderer
-def test_repr_html():
+@pytest.mark.parametrize(
+    "renderer",
+    plotly_mimetype_renderers
+    + ["notebook", "notebook_connected", "browser", "notebook+plotly_mimetype"],
+)
+def test_repr_html(renderer):
+    pio.renderers.default = renderer
     fig = go.Figure()
     fig.update_layout(template=None)
-    s = fig._repr_html_()
+    str_html = fig._repr_html_()
+    bundle = fig._repr_mimebundle_()
     # id number of figure
-    id_figure = s.split('document.getElementById("')[1].split('")')[0]
+    id_html = str_html.split('document.getElementById("')[1].split('")')[0]
     id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
     template = (
         '<div>\n        \n                <script type="text/javascript">'
@@ -312,4 +316,31 @@ def test_repr_html():
         '\n                        {"responsive": true}\n                    )\n                };'
         "\n                \n            </script>\n        </div>"
     )
-    assert s.replace(id_figure, id_pattern) == template
+    if "text/html" in bundle:
+        str_bundle = bundle["text/html"]
+        id_bundle = str_bundle.split('document.getElementById("')[1].split('")')[0]
+        assert str_html.replace(id_html, "") == str_bundle.replace(id_bundle, "")
+    else:
+        assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
+
+
+@pytest.mark.parametrize("renderer_str", pio.renderers)
+def test_repr_mimebundle(renderer_str):
+    pio.renderers.default = renderer_str
+    fig = go.Figure()
+    fig.update_layout(template=None)
+    bundle = fig._repr_mimebundle_()
+    renderer = pio.renderers[renderer_str]
+    from plotly.io._renderers import MimetypeRenderer
+
+    if isinstance(renderer, MimetypeRenderer):
+        ref_bundle = renderer.to_mimebundle(fig.to_dict())
+        for key in bundle:
+            if "getElementById" in bundle[key]:
+                id1 = bundle[key].split('document.getElementById("')[1].split('")')[0]
+                id2 = (
+                    ref_bundle[key].split('document.getElementById("')[1].split('")')[0]
+                )
+                assert bundle[key].replace(id1, "") == ref_bundle[key].replace(id2, "")
+    else:
+        assert bundle == {}
