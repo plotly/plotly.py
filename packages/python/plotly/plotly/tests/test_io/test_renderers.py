@@ -344,3 +344,10 @@ def test_repr_mimebundle(renderer_str):
                 assert bundle[key].replace(id1, "") == ref_bundle[key].replace(id2, "")
     else:
         assert bundle == {}
+
+
+def test_repr_mimebundle_mixed_renderer(fig1):
+    pio.renderers.default = "notebook+plotly_mimetype"
+    assert set(fig1._repr_mimebundle_().keys()) == set(
+        {"application/vnd.plotly.v1+json", "text/html"}
+    )
