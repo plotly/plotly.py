@@ -268,8 +268,8 @@ for continent_name, continent in continent_data.items():
         text=df_2007['continent'],
         hovertemplate=
         "<b>%{text}</b><br><br>" +
-        "GDP per Capita: %{y:$,.0f}<br>" +
-        "Life Expectation: %{x:.0%}<br>" +
+        "GDP per Capita: %{x:$,.0f}<br>" +
+        "Life Expectation: %{y:.0%}<br>" +
         "Population: %{marker.size:,}" +
         "<extra></extra>",
         marker_size=continent['size'],
