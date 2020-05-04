@@ -4,24 +4,22 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Dev version
 
-To add:
-* https://github.com/plotly/plotly.py/pull/2349
-* https://github.com/plotly/plotly.py/pull/2357
-* https://github.com/plotly/plotly.py/pull/2419
-
 ### Updated
 
-- Updated Plotly.js to version 1.54.0. The main feature of the Plotly.js is the
-  possibility to draw layout shapes, using custom dragmodes and corresponding
-  modebar buttons.
+- Updated Plotly.js to version 1.54.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.0/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
+- The sphinx-gallery scraper has been updated to work with different structures of galleries [#2149](https://github.com/plotly/plotly.py/pull/2419)
 
 ### Added
 
-- The `hover_data` parameter of `px` functions can now be a dictionary. This
-  makes it possible to skip hover information for some arguments or to change  
-  the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+- The `hover_data` parameter of `px` functions can now be a dictionary. This makes it possible to skip hover information for some arguments or to change the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+- It's now possible to build a development version of Plotly.py against the build artifacts from a non-`master` branch of Plotly.js, which makes for faster QA and development cycles [#2349](https://github.com/plotly/plotly.py/pull/2349). Thanks [@zouhairm](https://github.com/zouhairm) for this Pull Request!
+
+### Fixed
+
+- Plotly Express trendlines now handle missing data correctly [#2357](https://github.com/plotly/plotly.py/pull/2357)
 
 ### Performance
+
 This version includes several performance improvements ([#2368](https://github.com/plotly/plotly.py/pull/2368), [#2403](https://github.com/plotly/plotly.py/pull/2403)).
  
  - Child graph objects (e.g. `figure.layout.xaxis`) are no longer created eagerly during graph object construction. Instead, they are created lazily the first time the property is accessed.
