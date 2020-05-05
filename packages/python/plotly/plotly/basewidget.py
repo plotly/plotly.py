@@ -101,6 +101,7 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     _last_trace_edit_id = Integer(0).tag(sync=True)
 
     _set_trace_uid = True
+    _allow_disable_validation = False
 
     # Constructor
     # -----------
