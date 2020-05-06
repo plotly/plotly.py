@@ -2,11 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Dev version
+## [4.7.0] - 2020-05-06
 
 ### Updated
 
-- Updated Plotly.js to version 1.54.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.0/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
+- Updated Plotly.js to version 1.54.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.1/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
 - The sphinx-gallery scraper has been updated to work with different structures of galleries [#2149](https://github.com/plotly/plotly.py/pull/2419)
 
 ### Added
@@ -21,12 +21,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Performance
 
 This version includes several performance improvements ([#2368](https://github.com/plotly/plotly.py/pull/2368), [#2403](https://github.com/plotly/plotly.py/pull/2403)).
- 
+
  - Child graph objects (e.g. `figure.layout.xaxis`) are no longer created eagerly during graph object construction. Instead, they are created lazily the first time the property is accessed.
  - Property validation is now disabled for select internal operations.
  - When used with Python 3.7 and above, ploty.py now takes advantage of [PEP-562](https://www.python.org/dev/peps/pep-0562/) to perform submodule imports lazily.  This dramatically improves import times.
 
-## [4.6] - 2020-03-31
+## [4.6.0] - 2020-03-31
 
 ### Updated
 
