@@ -134,29 +134,11 @@ $ conda install "ipywidgets=7.5"
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
-# Avoid "JavaScript heap out of memory" errors during extension installation
-# (OS X/Linux)
-export NODE_OPTIONS=--max-old-space-size=4096
-# (Windows)
-set NODE_OPTIONS=--max-old-space-size=4096
+# JupyterLab renderer support
+jupyter labextension install jupyterlab-plotly@4.7.0
 
-# Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build
-
-# jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@4.7.0 --no-build
-
-# FigureWidget support
-jupyter labextension install plotlywidget@4.7.0 --no-build
-
-# Build extensions (must be done to activate extensions since --no-build is used above)
-jupyter lab build
-
-# Unset NODE_OPTIONS environment variable
-# (OS X/Linux)
-unset NODE_OPTIONS
-# (Windows)
-set NODE_OPTIONS=
+# OPTIONAL: Jupyter widgets extension
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.7.0
 ```
 
 These packages contain everything you need to run JupyterLab...
@@ -175,13 +157,15 @@ fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
 fig.show()
 ```
 
-or using `FigureWidget` objects.
+or using `FigureWidget` objects (if the "OPTIONAL" step above was executed).
 
 ```python
 import plotly.graph_objects as go
 fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
+
+Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
 
 <!-- #region -->
 
