@@ -112,43 +112,26 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip...
 
 ```
-pip install jupyterlab==1.2 "ipywidgets==7.5"
+pip install jupyterlab "ipywidgets=7.5"
 ```
 
 or conda.
 
 ```
-conda install jupyterlab=1.2
-conda install "ipywidgets=7.5"
+conda install jupyterlab "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
-# Avoid "JavaScript heap out of memory" errors during extension installation
-# (OS X/Linux)
-export NODE_OPTIONS=--max-old-space-size=4096
-# (Windows)
-set NODE_OPTIONS=--max-old-space-size=4096
+# Basic JupyterLab renderer support
+jupyter labextension install jupyterlab-plotly@4.7.0
 
-# Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1 --no-build
-
-# FigureWidget support
-jupyter labextension install plotlywidget@4.7.0 --no-build
-
-# and jupyterlab renderer support
-jupyter labextension install jupyterlab-plotly@4.7.0 --no-build
-
-# Build extensions (must be done to activate extensions since --no-build is used above)
-jupyter lab build
-
-# Unset NODE_OPTIONS environment variable
-# (OS X/Linux)
-unset NODE_OPTIONS
-# (Windows)
-set NODE_OPTIONS=
+# OPTIONAL: Jupyter widgets extension for FigureWidget support
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.7.0
 ```
+
+Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
 
 ### Static Image Export
 
