@@ -269,14 +269,14 @@ def perform_codegen():
     optional_figure_widget_import = f"""
 if sys.version_info < (3, 7):
     try:
-        import ipywidgets
-        from distutils.version import LooseVersion
-        if LooseVersion(ipywidgets.__version__) >= LooseVersion('7.0.0'):
+        import ipywidgets as _ipywidgets
+        from distutils.version import LooseVersion as _LooseVersion
+        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
-        del LooseVersion
-        del ipywidgets
-    except ImportError:
-        pass
+        else:
+            raise ImportError()
+    except Exception:
+        from ..missing_ipywidgets import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -285,12 +285,17 @@ else:
             try:
                 import ipywidgets
                 from distutils.version import LooseVersion
-                if LooseVersion(ipywidgets.__version__) >= LooseVersion('7.0.0'):
+
+                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
                     from ..graph_objs._figurewidget import FigureWidget
+
                     return FigureWidget
-            except ImportError:
-                    pass
-        
+                else:
+                    raise ImportError()
+            except Exception:
+                from ..missing_ipywidgets import FigureWidget
+                return FigureWidget
+
         return orig_getattr(import_name)
 """
     # ### __all__ ###
