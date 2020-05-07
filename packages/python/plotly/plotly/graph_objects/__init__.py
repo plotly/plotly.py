@@ -261,15 +261,15 @@ else:
 
 if sys.version_info < (3, 7):
     try:
-        import ipywidgets
-        from distutils.version import LooseVersion
+        import ipywidgets as _ipywidgets
+        from distutils.version import LooseVersion as _LooseVersion
 
-        if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
-        del LooseVersion
-        del ipywidgets
-    except ImportError:
-        pass
+        else:
+            raise ImportError()
+    except Exception:
+        from ..missing_ipywidgets import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -284,7 +284,11 @@ else:
                     from ..graph_objs._figurewidget import FigureWidget
 
                     return FigureWidget
-            except ImportError:
-                pass
+                else:
+                    raise ImportError()
+            except Exception:
+                from ..missing_ipywidgets import FigureWidget
+
+                return FigureWidget
 
         return orig_getattr(import_name)
