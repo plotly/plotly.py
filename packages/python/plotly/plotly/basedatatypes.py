@@ -1951,8 +1951,14 @@ Please use the add_trace method with the row and col parameters.
                 if self._allow_disable_validation:
                     self._layout_obj._validate = False
                 try:
-                    template_dict = pio.templates[pio.templates.default]
-                    self._layout_obj.template = template_dict
+                    if isinstance(pio.templates.default, BasePlotlyType):
+                        # Template object. Don't want to actually import `Template`
+                        # here for performance so we check against `BasePlotlyType`
+                        template_object = pio.templates.default
+                    else:
+                        # Name of registered template object
+                        template_object = pio.templates[pio.templates.default]
+                    self._layout_obj.template = template_object
                 finally:
                     self._layout_obj._validate = self._validate
 
