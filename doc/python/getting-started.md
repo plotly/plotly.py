@@ -49,13 +49,13 @@ Thanks to deep integration with the [orca](https://github.com/plotly/orca) image
 plotly.py may be installed using pip...
 
 ```
-$ pip install plotly==4.7.0
+$ pip install plotly==4.7.1
 ```
 
 or conda.
 
 ```
-$ conda install -c plotly plotly=4.7.0
+$ conda install -c plotly plotly=4.7.1
 ```
 
 This package contains everything you need to write figures to standalone HTML files.
@@ -134,10 +134,10 @@ Then run the following commands to install the required JupyterLab extensions (n
 
 ```
 # JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.7.0
+jupyter labextension install jupyterlab-plotly@4.7.1
 
 # OPTIONAL: Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.7.0
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.7.1
 ```
 
 These packages contain everything you need to run JupyterLab...

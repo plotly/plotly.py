@@ -613,20 +613,22 @@ There are also `for_each_xaxis()` and `for_each_yaxis()` methods that are analog
 ### Other Update Methods
 
 Figures created with the plotly.py graphing library also support:
-    - the `update_layout_images()` method in order to [update background layout images](/python/images/), 
-    - `update_annotations()` in order to [update annotations](/python/text-and-annotations/#multiple-annotations), 
-    - and `update-shapes()` in order to [update shapes](/python/shapes/).
+
+  - the `update_layout_images()` method in order to [update background layout images](/python/images/), 
+  - `update_annotations()` in order to [update annotations](/python/text-and-annotations/#multiple-annotations), 
+  - and `update_shapes()` in order to [update shapes](/python/shapes/).
 
 #### Chaining Figure Operations
 
 All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible the chain multiple figure modification operations together into a single expression.
 
 Here is an example of a chained expression that creates:
-    - a faceted scatter plot with OLS trend lines using Plotly Express, 
-    - sets the title font size using `update_layout()`, 
-    - disables vertical grid lines using `update_xaxes()`, 
-    - updates the width and dash pattern of the trend lines using `update_traces()`, 
-    - and then displays the figure using `show()`.
+
+  - a faceted scatter plot with OLS trend lines using Plotly Express, 
+  - sets the title font size using `update_layout()`, 
+  - disables vertical grid lines using `update_xaxes()`, 
+  - updates the width and dash pattern of the trend lines using `update_traces()`, 
+  - and then displays the figure using `show()`.
 
 ```python
 import plotly.express as px
