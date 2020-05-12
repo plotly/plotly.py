@@ -274,3 +274,7 @@ fig.show()
 ```
 
 Also see Mapbox county choropleths made in Python: [https://plotly.com/python/mapbox-county-choropleth/](https://plotly.com/python/mapbox-county-choropleth/)
+
+### Reference
+
+For more info on `ff.create_choropleth()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_choropleth.html)
