@@ -85,13 +85,13 @@ This is a perfectly valid way to use `plotly.py` to build figures. On the other 
 
 As an alternative to working with Python dictionaries, the `plotly.py` graphing library provides a hierarchy of classes called "graph objects" that may be used to construct figures. Graph objects have several benefits compared to plain Python dictionaries.
 
-1.  Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
+1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
 
-2.  Graph objects contain descriptions of each valid property as Python `docstrings`. You can use these `docstrings` in the development environment of your choice to learn about the available properties as an alternative to consulting the online _Full Reference_.
+2. Graph objects contain descriptions of each valid property as Python `docstrings`. You can use these `docstrings` in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/).
 
-3.  Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
+3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
 
-4.  Graph objects support higher-level convenience functions for making updates to already constructed figures, as described below.
+4. Graph objects support higher-level convenience functions for making updates to already constructed figures, as described below.
 
 **Graph objects are stored in a hierarchy of modules under the `plotly.graph_objects` package, so make sure to remember to `import plotly.graph_objects as go` when you want to use them.**
 
@@ -136,21 +136,22 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Bar(x=[1, 2, 3], y=[1, 3, 2])],
-    layout=go.Layout(
-        title=go.layout.Title(text="Converting Graph Objects To Dictionaries and JSON")
-    )
+    layout=go.Layout(height=600, width=800)
 )
 
-print("Dictionary Representation of A Graph Object:\n" + str(fig.to_dict()))
+fig.layout.template = None # to slim down the output
 
-print("\n\nJSON Representation of A Graph Object:\n" + str(fig.to_json()))
+print("Dictionary Representation of A Graph Object:\n\n" + str(fig.to_dict()))
+print("\n\n")
+print("JSON Representation of A Graph Object:\n\n" + str(fig.to_json()))
+print("\n\n")
 ```
 
 ### Creating Figures
 
 This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
-#### Constructor
+#### Graph Objects `Figure` Constructor
 
 As demonstrated above, you can build a complete figure by passing trace and layout specifications to the `plotly.graph_objects.Figure` constructor. These trace and layout specifications can be either dictionaries or graph objects.
 
