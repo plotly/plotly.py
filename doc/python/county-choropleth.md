@@ -37,7 +37,7 @@ jupyter:
 ### Deprecation warning
 
 
-This page describes a legacy "figure factory" method for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
+This page describes a [legacy "figure factory" method](/python/figure-factories/) for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
 
 
 #### Required Packages
@@ -274,10 +274,3 @@ fig.show()
 ```
 
 Also see Mapbox county choropleths made in Python: [https://plotly.com/python/mapbox-county-choropleth/](https://plotly.com/python/mapbox-county-choropleth/)
-
-
-#### Reference
-
-```python
-help(ff.create_choropleth)
-```
