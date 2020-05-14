@@ -230,14 +230,14 @@ def to_html(
     # Serialize config dict to JSON
     jconfig = json.dumps(config)
 
-    script = """
-                if (document.getElementById("{id}")) {{
-                    Plotly.newPlot(
-                        '{id}',
-                        {data},
-                        {layout},
-                        {config}
-                    ){then_addframes}{then_animate}{then_post_script}
+    script = """\
+                if (document.getElementById("{id}")) {{\
+                    Plotly.newPlot(\
+                        "{id}",\
+                        {data},\
+                        {layout},\
+                        {config}\
+                    ){then_addframes}{then_animate}{then_post_script}\
                 }}""".format(
         id=plotdivid,
         data=jdata,
