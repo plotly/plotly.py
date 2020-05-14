@@ -360,7 +360,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         require_start=require_start,
         script=script,
         require_end=require_end,
-    )
+    ).strip()
 
     if full_html:
         return """\
