@@ -117,11 +117,11 @@ Returns:
 def experiment():
     """
 Each row in this wide dataset represents the results of 100 simulated participants
-on three hypothetical experiments, along with their gender and smoker status.
+on three hypothetical experiments, along with their gender and control/treatment group.
 
 Returns:
     A `pandas.DataFrame` with 100 rows and the following columns:
-    `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'smoker']`.
+    `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
 """
     return _get_dataset("experiment")
 
