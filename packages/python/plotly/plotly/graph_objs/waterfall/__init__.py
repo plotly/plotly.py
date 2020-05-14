@@ -1,35 +1,35 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._totals import Totals
-    from ._textfont import Textfont
-    from ._stream import Stream
-    from ._outsidetextfont import Outsidetextfont
-    from ._insidetextfont import Insidetextfont
-    from ._increasing import Increasing
-    from ._hoverlabel import Hoverlabel
-    from ._decreasing import Decreasing
     from ._connector import Connector
-    from . import totals
-    from . import increasing
-    from . import hoverlabel
-    from . import decreasing
+    from ._decreasing import Decreasing
+    from ._hoverlabel import Hoverlabel
+    from ._increasing import Increasing
+    from ._insidetextfont import Insidetextfont
+    from ._outsidetextfont import Outsidetextfont
+    from ._stream import Stream
+    from ._textfont import Textfont
+    from ._totals import Totals
     from . import connector
+    from . import decreasing
+    from . import hoverlabel
+    from . import increasing
+    from . import totals
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".totals", ".increasing", ".hoverlabel", ".decreasing", ".connector"],
+        [".connector", ".decreasing", ".hoverlabel", ".increasing", ".totals"],
         [
-            "._totals.Totals",
-            "._textfont.Textfont",
-            "._stream.Stream",
-            "._outsidetextfont.Outsidetextfont",
-            "._insidetextfont.Insidetextfont",
-            "._increasing.Increasing",
-            "._hoverlabel.Hoverlabel",
-            "._decreasing.Decreasing",
             "._connector.Connector",
+            "._decreasing.Decreasing",
+            "._hoverlabel.Hoverlabel",
+            "._increasing.Increasing",
+            "._insidetextfont.Insidetextfont",
+            "._outsidetextfont.Outsidetextfont",
+            "._stream.Stream",
+            "._textfont.Textfont",
+            "._totals.Totals",
         ],
     )

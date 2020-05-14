@@ -36,6 +36,7 @@ if sys.version_info < (3, 7):
     from ._piecolorway import PiecolorwayValidator
     from ._paper_bgcolor import Paper_BgcolorValidator
     from ._orientation import OrientationValidator
+    from ._newshape import NewshapeValidator
     from ._modebar import ModebarValidator
     from ._metasrc import MetasrcValidator
     from ._meta import MetaValidator
@@ -82,6 +83,7 @@ if sys.version_info < (3, 7):
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
     from ._angularaxis import AngularaxisValidator
+    from ._activeshape import ActiveshapeValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -124,6 +126,7 @@ else:
             "._piecolorway.PiecolorwayValidator",
             "._paper_bgcolor.Paper_BgcolorValidator",
             "._orientation.OrientationValidator",
+            "._newshape.NewshapeValidator",
             "._modebar.ModebarValidator",
             "._metasrc.MetasrcValidator",
             "._meta.MetaValidator",
@@ -170,5 +173,6 @@ else:
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
             "._angularaxis.AngularaxisValidator",
+            "._activeshape.ActiveshapeValidator",
         ],
     )

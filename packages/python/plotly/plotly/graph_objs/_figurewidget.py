@@ -49,6 +49,9 @@ class FigureWidget(BaseFigureWidget):
         
                 Supported dict properties:
                     
+                    activeshape
+                        :class:`plotly.graph_objects.layout.Activeshape
+                        ` instance or dict with compatible properties
                     angularaxis
                         :class:`plotly.graph_objects.layout.AngularAxis
                         ` instance or dict with compatible properties
@@ -329,6 +332,9 @@ class FigureWidget(BaseFigureWidget):
                     modebar
                         :class:`plotly.graph_objects.layout.Modebar`
                         instance or dict with compatible properties
+                    newshape
+                        :class:`plotly.graph_objects.layout.Newshape`
+                        instance or dict with compatible properties
                     orientation
                         Legacy polar charts are deprecated! Please
                         switch to "polar" subplots. Rotates the entire
@@ -356,7 +362,7 @@ class FigureWidget(BaseFigureWidget):
                         :class:`plotly.graph_objects.layout.Scene`
                         instance or dict with compatible properties
                     selectdirection
-                        When "dragmode" is set to "select", this limits
+                        When `dragmode` is set to "select", this limits
                         the selection of the drag to horizontal,
                         vertical or diagonal. "h" only allows
                         horizontal selection, "v" only vertical, "d"
@@ -18765,7 +18771,9 @@ class FigureWidget(BaseFigureWidget):
     def add_shape(
         self,
         arg=None,
+        editable=None,
         fillcolor=None,
+        fillrule=None,
         layer=None,
         line=None,
         name=None,
@@ -18796,8 +18804,19 @@ class FigureWidget(BaseFigureWidget):
         ----------
         arg
             instance of Shape or dict with compatible properties
+        editable
+            Determines whether the shape could be activated for
+            edit or not. Has no effect when the older editable
+            shapes mode is enabled via `config.editable` or
+            `config.edits.shapePosition`.
         fillcolor
-            Sets the color filling the shape's interior.
+            Sets the color filling the shape's interior. Only
+            applies to closed shapes.
+        fillrule
+            Determines which regions of complex paths constitute
+            the interior. For more info please visit
+            https://developer.mozilla.org/en-
+            US/docs/Web/SVG/Attribute/fill-rule
         layer
             Specifies whether shapes are drawn below or above
             traces.
@@ -18941,7 +18960,9 @@ class FigureWidget(BaseFigureWidget):
 
         new_obj = _layout.Shape(
             arg,
+            editable=editable,
             fillcolor=fillcolor,
+            fillrule=fillrule,
             layer=layer,
             line=line,
             name=name,
