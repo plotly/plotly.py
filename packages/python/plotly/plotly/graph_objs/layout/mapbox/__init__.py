@@ -1,13 +1,13 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._layer import Layer
-    from ._domain import Domain
     from ._center import Center
+    from ._domain import Domain
+    from ._layer import Layer
     from . import layer
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
-        __name__, [".layer"], ["._layer.Layer", "._domain.Domain", "._center.Center"]
+        __name__, [".layer"], ["._center.Center", "._domain.Domain", "._layer.Layer"]
     )

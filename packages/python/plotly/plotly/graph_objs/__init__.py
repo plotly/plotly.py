@@ -1,67 +1,30 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._waterfall import Waterfall
-    from ._volume import Volume
-    from ._violin import Violin
-    from ._treemap import Treemap
-    from ._table import Table
-    from ._surface import Surface
-    from ._sunburst import Sunburst
-    from ._streamtube import Streamtube
-    from ._splom import Splom
-    from ._scatterternary import Scatterternary
-    from ._scatterpolargl import Scatterpolargl
-    from ._scatterpolar import Scatterpolar
-    from ._scattermapbox import Scattermapbox
-    from ._scattergl import Scattergl
-    from ._scattergeo import Scattergeo
-    from ._scattercarpet import Scattercarpet
-    from ._scatter3d import Scatter3d
-    from ._scatter import Scatter
-    from ._sankey import Sankey
-    from ._pointcloud import Pointcloud
-    from ._pie import Pie
-    from ._parcoords import Parcoords
-    from ._parcats import Parcats
-    from ._ohlc import Ohlc
-    from ._mesh3d import Mesh3d
-    from ._isosurface import Isosurface
-    from ._indicator import Indicator
-    from ._image import Image
-    from ._histogram2dcontour import Histogram2dContour
-    from ._histogram2d import Histogram2d
-    from ._histogram import Histogram
-    from ._heatmapgl import Heatmapgl
-    from ._heatmap import Heatmap
-    from ._funnelarea import Funnelarea
-    from ._funnel import Funnel
-    from ._densitymapbox import Densitymapbox
-    from ._contourcarpet import Contourcarpet
-    from ._contour import Contour
-    from ._cone import Cone
-    from ._choroplethmapbox import Choroplethmapbox
-    from ._choropleth import Choropleth
-    from ._carpet import Carpet
-    from ._candlestick import Candlestick
-    from ._box import Box
-    from ._barpolar import Barpolar
-    from ._bar import Bar
     from ._area import Area
-    from ._layout import Layout
-    from ._frame import Frame
-    from ._figure import Figure
-    from ._deprecations import Data
-    from ._deprecations import Annotations
-    from ._deprecations import Frames
+    from ._bar import Bar
+    from ._barpolar import Barpolar
+    from ._box import Box
+    from ._candlestick import Candlestick
+    from ._carpet import Carpet
+    from ._choropleth import Choropleth
+    from ._choroplethmapbox import Choroplethmapbox
+    from ._cone import Cone
+    from ._contour import Contour
+    from ._contourcarpet import Contourcarpet
+    from ._densitymapbox import Densitymapbox
     from ._deprecations import AngularAxis
     from ._deprecations import Annotation
+    from ._deprecations import Annotations
     from ._deprecations import ColorBar
     from ._deprecations import Contours
+    from ._deprecations import Data
     from ._deprecations import ErrorX
     from ._deprecations import ErrorY
     from ._deprecations import ErrorZ
     from ._deprecations import Font
+    from ._deprecations import Frames
+    from ._deprecations import Histogram2dcontour
     from ._deprecations import Legend
     from ._deprecations import Line
     from ._deprecations import Margin
@@ -69,178 +32,178 @@ if sys.version_info < (3, 7):
     from ._deprecations import RadialAxis
     from ._deprecations import Scene
     from ._deprecations import Stream
-    from ._deprecations import XAxis
-    from ._deprecations import YAxis
-    from ._deprecations import ZAxis
-    from ._deprecations import XBins
-    from ._deprecations import YBins
     from ._deprecations import Trace
-    from ._deprecations import Histogram2dcontour
-    from . import waterfall
-    from . import volume
-    from . import violin
-    from . import treemap
-    from . import table
-    from . import surface
-    from . import sunburst
-    from . import streamtube
-    from . import splom
-    from . import scatterternary
-    from . import scatterpolargl
-    from . import scatterpolar
-    from . import scattermapbox
-    from . import scattergl
-    from . import scattergeo
-    from . import scattercarpet
-    from . import scatter3d
-    from . import scatter
-    from . import sankey
-    from . import pointcloud
-    from . import pie
-    from . import parcoords
-    from . import parcats
-    from . import ohlc
-    from . import mesh3d
-    from . import isosurface
-    from . import indicator
-    from . import image
-    from . import histogram2dcontour
-    from . import histogram2d
-    from . import histogram
-    from . import heatmapgl
-    from . import heatmap
-    from . import funnelarea
-    from . import funnel
-    from . import densitymapbox
-    from . import contourcarpet
-    from . import contour
-    from . import cone
-    from . import choroplethmapbox
-    from . import choropleth
-    from . import carpet
-    from . import candlestick
-    from . import box
-    from . import barpolar
-    from . import bar
+    from ._deprecations import XAxis
+    from ._deprecations import XBins
+    from ._deprecations import YAxis
+    from ._deprecations import YBins
+    from ._deprecations import ZAxis
+    from ._figure import Figure
+    from ._frame import Frame
+    from ._funnel import Funnel
+    from ._funnelarea import Funnelarea
+    from ._heatmap import Heatmap
+    from ._heatmapgl import Heatmapgl
+    from ._histogram import Histogram
+    from ._histogram2d import Histogram2d
+    from ._histogram2dcontour import Histogram2dContour
+    from ._image import Image
+    from ._indicator import Indicator
+    from ._isosurface import Isosurface
+    from ._layout import Layout
+    from ._mesh3d import Mesh3d
+    from ._ohlc import Ohlc
+    from ._parcats import Parcats
+    from ._parcoords import Parcoords
+    from ._pie import Pie
+    from ._pointcloud import Pointcloud
+    from ._sankey import Sankey
+    from ._scatter import Scatter
+    from ._scatter3d import Scatter3d
+    from ._scattercarpet import Scattercarpet
+    from ._scattergeo import Scattergeo
+    from ._scattergl import Scattergl
+    from ._scattermapbox import Scattermapbox
+    from ._scatterpolar import Scatterpolar
+    from ._scatterpolargl import Scatterpolargl
+    from ._scatterternary import Scatterternary
+    from ._splom import Splom
+    from ._streamtube import Streamtube
+    from ._sunburst import Sunburst
+    from ._surface import Surface
+    from ._table import Table
+    from ._treemap import Treemap
+    from ._violin import Violin
+    from ._volume import Volume
+    from ._waterfall import Waterfall
     from . import area
+    from . import bar
+    from . import barpolar
+    from . import box
+    from . import candlestick
+    from . import carpet
+    from . import choropleth
+    from . import choroplethmapbox
+    from . import cone
+    from . import contour
+    from . import contourcarpet
+    from . import densitymapbox
+    from . import funnel
+    from . import funnelarea
+    from . import heatmap
+    from . import heatmapgl
+    from . import histogram
+    from . import histogram2d
+    from . import histogram2dcontour
+    from . import image
+    from . import indicator
+    from . import isosurface
     from . import layout
+    from . import mesh3d
+    from . import ohlc
+    from . import parcats
+    from . import parcoords
+    from . import pie
+    from . import pointcloud
+    from . import sankey
+    from . import scatter
+    from . import scatter3d
+    from . import scattercarpet
+    from . import scattergeo
+    from . import scattergl
+    from . import scattermapbox
+    from . import scatterpolar
+    from . import scatterpolargl
+    from . import scatterternary
+    from . import splom
+    from . import streamtube
+    from . import sunburst
+    from . import surface
+    from . import table
+    from . import treemap
+    from . import violin
+    from . import volume
+    from . import waterfall
 else:
     from _plotly_utils.importers import relative_import
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            ".waterfall",
-            ".volume",
-            ".violin",
-            ".treemap",
-            ".table",
-            ".surface",
-            ".sunburst",
-            ".streamtube",
-            ".splom",
-            ".scatterternary",
-            ".scatterpolargl",
-            ".scatterpolar",
-            ".scattermapbox",
-            ".scattergl",
-            ".scattergeo",
-            ".scattercarpet",
-            ".scatter3d",
-            ".scatter",
-            ".sankey",
-            ".pointcloud",
-            ".pie",
-            ".parcoords",
-            ".parcats",
-            ".ohlc",
-            ".mesh3d",
-            ".isosurface",
-            ".indicator",
-            ".image",
-            ".histogram2dcontour",
-            ".histogram2d",
-            ".histogram",
-            ".heatmapgl",
-            ".heatmap",
-            ".funnelarea",
-            ".funnel",
-            ".densitymapbox",
-            ".contourcarpet",
-            ".contour",
-            ".cone",
-            ".choroplethmapbox",
-            ".choropleth",
-            ".carpet",
-            ".candlestick",
-            ".box",
-            ".barpolar",
-            ".bar",
             ".area",
+            ".bar",
+            ".barpolar",
+            ".box",
+            ".candlestick",
+            ".carpet",
+            ".choropleth",
+            ".choroplethmapbox",
+            ".cone",
+            ".contour",
+            ".contourcarpet",
+            ".densitymapbox",
+            ".funnel",
+            ".funnelarea",
+            ".heatmap",
+            ".heatmapgl",
+            ".histogram",
+            ".histogram2d",
+            ".histogram2dcontour",
+            ".image",
+            ".indicator",
+            ".isosurface",
             ".layout",
+            ".mesh3d",
+            ".ohlc",
+            ".parcats",
+            ".parcoords",
+            ".pie",
+            ".pointcloud",
+            ".sankey",
+            ".scatter",
+            ".scatter3d",
+            ".scattercarpet",
+            ".scattergeo",
+            ".scattergl",
+            ".scattermapbox",
+            ".scatterpolar",
+            ".scatterpolargl",
+            ".scatterternary",
+            ".splom",
+            ".streamtube",
+            ".sunburst",
+            ".surface",
+            ".table",
+            ".treemap",
+            ".violin",
+            ".volume",
+            ".waterfall",
         ],
         [
-            "._waterfall.Waterfall",
-            "._volume.Volume",
-            "._violin.Violin",
-            "._treemap.Treemap",
-            "._table.Table",
-            "._surface.Surface",
-            "._sunburst.Sunburst",
-            "._streamtube.Streamtube",
-            "._splom.Splom",
-            "._scatterternary.Scatterternary",
-            "._scatterpolargl.Scatterpolargl",
-            "._scatterpolar.Scatterpolar",
-            "._scattermapbox.Scattermapbox",
-            "._scattergl.Scattergl",
-            "._scattergeo.Scattergeo",
-            "._scattercarpet.Scattercarpet",
-            "._scatter3d.Scatter3d",
-            "._scatter.Scatter",
-            "._sankey.Sankey",
-            "._pointcloud.Pointcloud",
-            "._pie.Pie",
-            "._parcoords.Parcoords",
-            "._parcats.Parcats",
-            "._ohlc.Ohlc",
-            "._mesh3d.Mesh3d",
-            "._isosurface.Isosurface",
-            "._indicator.Indicator",
-            "._image.Image",
-            "._histogram2dcontour.Histogram2dContour",
-            "._histogram2d.Histogram2d",
-            "._histogram.Histogram",
-            "._heatmapgl.Heatmapgl",
-            "._heatmap.Heatmap",
-            "._funnelarea.Funnelarea",
-            "._funnel.Funnel",
-            "._densitymapbox.Densitymapbox",
-            "._contourcarpet.Contourcarpet",
-            "._contour.Contour",
-            "._cone.Cone",
-            "._choroplethmapbox.Choroplethmapbox",
-            "._choropleth.Choropleth",
-            "._carpet.Carpet",
-            "._candlestick.Candlestick",
-            "._box.Box",
-            "._barpolar.Barpolar",
-            "._bar.Bar",
             "._area.Area",
-            "._layout.Layout",
-            "._frame.Frame",
-            "._figure.Figure",
-            "._deprecations.Data",
-            "._deprecations.Annotations",
-            "._deprecations.Frames",
+            "._bar.Bar",
+            "._barpolar.Barpolar",
+            "._box.Box",
+            "._candlestick.Candlestick",
+            "._carpet.Carpet",
+            "._choropleth.Choropleth",
+            "._choroplethmapbox.Choroplethmapbox",
+            "._cone.Cone",
+            "._contour.Contour",
+            "._contourcarpet.Contourcarpet",
+            "._densitymapbox.Densitymapbox",
             "._deprecations.AngularAxis",
             "._deprecations.Annotation",
+            "._deprecations.Annotations",
             "._deprecations.ColorBar",
             "._deprecations.Contours",
+            "._deprecations.Data",
             "._deprecations.ErrorX",
             "._deprecations.ErrorY",
             "._deprecations.ErrorZ",
             "._deprecations.Font",
+            "._deprecations.Frames",
+            "._deprecations.Histogram2dcontour",
             "._deprecations.Legend",
             "._deprecations.Line",
             "._deprecations.Margin",
@@ -248,28 +211,65 @@ else:
             "._deprecations.RadialAxis",
             "._deprecations.Scene",
             "._deprecations.Stream",
-            "._deprecations.XAxis",
-            "._deprecations.YAxis",
-            "._deprecations.ZAxis",
-            "._deprecations.XBins",
-            "._deprecations.YBins",
             "._deprecations.Trace",
-            "._deprecations.Histogram2dcontour",
+            "._deprecations.XAxis",
+            "._deprecations.XBins",
+            "._deprecations.YAxis",
+            "._deprecations.YBins",
+            "._deprecations.ZAxis",
+            "._figure.Figure",
+            "._frame.Frame",
+            "._funnel.Funnel",
+            "._funnelarea.Funnelarea",
+            "._heatmap.Heatmap",
+            "._heatmapgl.Heatmapgl",
+            "._histogram.Histogram",
+            "._histogram2d.Histogram2d",
+            "._histogram2dcontour.Histogram2dContour",
+            "._image.Image",
+            "._indicator.Indicator",
+            "._isosurface.Isosurface",
+            "._layout.Layout",
+            "._mesh3d.Mesh3d",
+            "._ohlc.Ohlc",
+            "._parcats.Parcats",
+            "._parcoords.Parcoords",
+            "._pie.Pie",
+            "._pointcloud.Pointcloud",
+            "._sankey.Sankey",
+            "._scatter.Scatter",
+            "._scatter3d.Scatter3d",
+            "._scattercarpet.Scattercarpet",
+            "._scattergeo.Scattergeo",
+            "._scattergl.Scattergl",
+            "._scattermapbox.Scattermapbox",
+            "._scatterpolar.Scatterpolar",
+            "._scatterpolargl.Scatterpolargl",
+            "._scatterternary.Scatterternary",
+            "._splom.Splom",
+            "._streamtube.Streamtube",
+            "._sunburst.Sunburst",
+            "._surface.Surface",
+            "._table.Table",
+            "._treemap.Treemap",
+            "._violin.Violin",
+            "._volume.Volume",
+            "._waterfall.Waterfall",
         ],
     )
 
 
 if sys.version_info < (3, 7):
     try:
-        import ipywidgets
-        from distutils.version import LooseVersion
+        import ipywidgets as _ipywidgets
+        from distutils.version import LooseVersion as _LooseVersion
 
-        if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
             from ..graph_objs._figurewidget import FigureWidget
-        del LooseVersion
-        del ipywidgets
-    except ImportError:
-        pass
+        else:
+            raise ImportError()
+    except Exception:
+        from ..missing_ipywidgets import FigureWidget
 else:
     __all__.append("FigureWidget")
     orig_getattr = __getattr__
@@ -284,7 +284,11 @@ else:
                     from ..graph_objs._figurewidget import FigureWidget
 
                     return FigureWidget
-            except ImportError:
-                pass
+                else:
+                    raise ImportError()
+            except Exception:
+                from ..missing_ipywidgets import FigureWidget
+
+                return FigureWidget
 
         return orig_getattr(import_name)

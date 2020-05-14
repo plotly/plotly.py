@@ -37,6 +37,7 @@ class BaseFigure(object):
     }
 
     _set_trace_uid = False
+    _allow_disable_validation = True
 
     # Constructor
     # -----------
@@ -1947,10 +1948,17 @@ Please use the add_trace method with the row and col parameters.
         if self._layout_obj._props.get("template", None) is None:
             if pio.templates.default is not None:
                 # Assume default template is already validated
-                self._layout_obj._validate = False
+                if self._allow_disable_validation:
+                    self._layout_obj._validate = False
                 try:
-                    template_dict = pio.templates[pio.templates.default]
-                    self._layout_obj.template = template_dict
+                    if isinstance(pio.templates.default, BasePlotlyType):
+                        # Template object. Don't want to actually import `Template`
+                        # here for performance so we check against `BasePlotlyType`
+                        template_object = pio.templates.default
+                    else:
+                        # Name of registered template object
+                        template_object = pio.templates[pio.templates.default]
+                    self._layout_obj.template = template_object
                 finally:
                     self._layout_obj._validate = self._validate
 
