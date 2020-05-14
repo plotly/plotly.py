@@ -241,18 +241,25 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
                     y = sorted_trace_data[args["y"]]
                     x = sorted_trace_data[args["x"]]
-                    trace_patch["x"] = x
 
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
 
                     if attr_value == "lowess":
-                        trendline = sm.nonparametric.lowess(y, x)
+                        # missing ='drop' is the default value for lowess but not for OLS (None)
+                        # we force it here in case statsmodels change their defaults
+                        trendline = sm.nonparametric.lowess(y, x, missing="drop")
+                        trace_patch["x"] = trendline[:, 0]
                         trace_patch["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif attr_value == "ols":
-                        fit_results = sm.OLS(y.values, sm.add_constant(x.values)).fit()
+                        fit_results = sm.OLS(
+                            y.values, sm.add_constant(x.values), missing="drop"
+                        ).fit()
                         trace_patch["y"] = fit_results.predict()
+                        trace_patch["x"] = x[
+                            np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
+                        ]
                         hover_header = "<b>OLS trendline</b><br>"
                         hover_header += "%s = %g * %s + %g<br>" % (
                             args["y"],
@@ -290,7 +297,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Histogram2d,
                     go.Histogram2dContour,
                 ]:
+                    hover_is_dict = isinstance(attr_value, dict)
                     for col in attr_value:
+                        if hover_is_dict and not attr_value[col]:
+                            continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -387,7 +397,20 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         go.Parcoords,
         go.Parcats,
     ]:
-        hover_lines = [k + "=" + v for k, v in mapping_labels.items()]
+        # Modify mapping_labels according to hover_data keys
+        # if hover_data is a dict
+        mapping_labels_copy = OrderedDict(mapping_labels)
+        if args["hover_data"] and isinstance(args["hover_data"], dict):
+            for k, v in mapping_labels.items():
+                if k in args["hover_data"]:
+                    if args["hover_data"][k][0]:
+                        if isinstance(args["hover_data"][k][0], str):
+                            mapping_labels_copy[k] = v.replace(
+                                "}", "%s}" % args["hover_data"][k][0]
+                            )
+                    else:
+                        _ = mapping_labels_copy.pop(k)
+        hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
         trace_patch["hovertemplate"] = hover_header + "<br>".join(hover_lines)
         trace_patch["hovertemplate"] += "<extra></extra>"
     return trace_patch, fit_results
@@ -535,9 +558,9 @@ def configure_cartesian_axes(args, fig, orders):
 def configure_ternary_axes(args, fig, orders):
     fig.update_layout(
         ternary=dict(
-            aaxis=dict(title=get_label(args, args["a"])),
-            baxis=dict(title=get_label(args, args["b"])),
-            caxis=dict(title=get_label(args, args["c"])),
+            aaxis=dict(title_text=get_label(args, args["a"])),
+            baxis=dict(title_text=get_label(args, args["b"])),
+            caxis=dict(title_text=get_label(args, args["c"])),
         )
     )
 
@@ -572,9 +595,9 @@ def configure_polar_axes(args, fig, orders):
 def configure_3d_axes(args, fig, orders):
     layout = dict(
         scene=dict(
-            xaxis=dict(title=get_label(args, args["x"])),
-            yaxis=dict(title=get_label(args, args["y"])),
-            zaxis=dict(title=get_label(args, args["z"])),
+            xaxis=dict(title_text=get_label(args, args["x"])),
+            yaxis=dict(title_text=get_label(args, args["y"])),
+            zaxis=dict(title_text=get_label(args, args["z"])),
         )
     )
 
@@ -869,6 +892,22 @@ def _get_reserved_col_names(args, attrables, array_attrables):
     return reserved_names
 
 
+def _isinstance_listlike(x):
+    """Returns True if x is an iterable which can be transformed into a pandas Series,
+    False for the other types of possible values of a `hover_data` dict.
+    A tuple of length 2 is a special case corresponding to a (format, data) tuple.
+    """
+    if (
+        isinstance(x, str)
+        or (isinstance(x, tuple) and len(x) == 2)
+        or isinstance(x, bool)
+        or x is None
+    ):
+        return False
+    else:
+        return True
+
+
 def build_dataframe(args, attrables, array_attrables):
     """
     Constructs a dataframe and modifies `args` in-place.
@@ -890,7 +929,7 @@ def build_dataframe(args, attrables, array_attrables):
     for field in args:
         if field in array_attrables and args[field] is not None:
             args[field] = (
-                dict(args[field])
+                OrderedDict(args[field])
                 if isinstance(args[field], dict)
                 else list(args[field])
             )
@@ -919,6 +958,19 @@ def build_dataframe(args, attrables, array_attrables):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
+    # hover_data is a dict
+    hover_data_is_dict = (
+        "hover_data" in args
+        and args["hover_data"]
+        and isinstance(args["hover_data"], dict)
+    )
+    # If dict, convert all values of hover_data to tuples to simplify processing
+    if hover_data_is_dict:
+        for k in args["hover_data"]:
+            if _isinstance_listlike(args["hover_data"][k]):
+                args["hover_data"][k] = (True, args["hover_data"][k])
+            if not isinstance(args["hover_data"][k], tuple):
+                args["hover_data"][k] = (args["hover_data"][k], None)
     # Loop over possible arguments
     for field_name in attrables:
         # Massaging variables
@@ -954,6 +1006,16 @@ def build_dataframe(args, attrables, array_attrables):
             if isinstance(argument, str) or isinstance(
                 argument, int
             ):  # just a column name given as str or int
+
+                if (
+                    field_name == "hover_data"
+                    and hover_data_is_dict
+                    and args["hover_data"][str(argument)][1] is not None
+                ):
+                    col_name = str(argument)
+                    df_output[col_name] = args["hover_data"][col_name][1]
+                    continue
+
                 if not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1029,6 +1091,8 @@ def build_dataframe(args, attrables, array_attrables):
             # Finally, update argument with column name now that column exists
             if field_name not in array_attrables:
                 args[field_name] = str(col_name)
+            elif isinstance(args[field_name], dict):
+                pass
             else:
                 args[field_name][i] = str(col_name)
 
@@ -1279,6 +1343,8 @@ def infer_config(args, constructor, trace_patch):
         if args["opacity"] is None:
             if "barmode" in args and args["barmode"] == "overlay":
                 trace_patch["marker"] = dict(opacity=0.5)
+        elif constructor in [go.Densitymapbox, go.Pie, go.Funnel, go.Funnelarea]:
+            trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
     if "line_group" in args:
@@ -1552,15 +1618,19 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
             cmid=args["color_continuous_midpoint"],
             cmin=range_color[0],
             cmax=range_color[1],
-            colorbar=dict(title=get_decorated_label(args, args[colorvar], colorvar)),
+            colorbar=dict(
+                title_text=get_decorated_label(args, args[colorvar], colorvar)
+            ),
         )
-    for v in ["title", "height", "width"]:
+    for v in ["height", "width"]:
         if args[v]:
             layout_patch[v] = args[v]
     layout_patch["legend"] = dict(tracegroupgap=0)
     if trace_name_labels:
-        layout_patch["legend"]["title"] = ", ".join(trace_name_labels)
-    if "title" not in layout_patch and args["template"].layout.margin.t is None:
+        layout_patch["legend"]["title_text"] = ", ".join(trace_name_labels)
+    if args["title"]:
+        layout_patch["title_text"] = args["title"]
+    elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
     if (
         "size" in args
@@ -1590,7 +1660,7 @@ def make_figure(args, constructor, trace_patch={}, layout_patch={}):
 
     # Add traces, layout and frames to figure
     fig.add_traces(frame_list[0]["data"] if len(frame_list) > 0 else [])
-    fig.layout.update(layout_patch)
+    fig.update_layout(layout_patch)
     if "template" in args and args["template"] is not None:
         fig.update_layout(template=args["template"], overwrite=True)
     fig.frames = frame_list if len(frames) > 1 else []

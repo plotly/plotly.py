@@ -50,14 +50,18 @@ $ pip remove plotly
 
 ### Jupyter Notebook Classic Problems
 
-The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces. The easiest solution is to run "Restart & Clear Output" from the Kernel menu and rerun your notebook.
+The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
 
-If rerunning your notebook is prohibitive, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures:
+The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
+
+If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
 
 ```python
 import plotly.io as pio
 pio.renderers.default='notebook'
 ```
+
+As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
 
 ### JupyterLab Problems
 
@@ -71,7 +75,7 @@ To list your current extensions, run the following command in a terminal shell:
 $ jupyter labextension list
 ```
 
-To uninstall your `plotly` extensions, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
+To uninstall your Plotly extensions, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
 
 ```bash
 $ jupyter labextension uninstall jupyterlab-plotly
@@ -79,6 +83,22 @@ $ jupyter labextension uninstall plotlywidget
 ```
 <!-- #endregion -->
 
-```python
+If you run into "out of memory" problems while installing the extensions, try running these commands before running `jupyter labextension install`...
 
+```
+# Avoid "JavaScript heap out of memory" errors during extension installation
+# (OS X/Linux)
+export NODE_OPTIONS=--max-old-space-size=4096
+# (Windows)
+set NODE_OPTIONS=--max-old-space-size=4096
+```
+
+...and these commands afterwards.
+
+```
+# Unset NODE_OPTIONS environment variable
+# (OS X/Linux)
+unset NODE_OPTIONS
+# (Windows)
+set NODE_OPTIONS=
 ```

@@ -1,100 +1,22 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._value import ValueValidator
+    from ._templateitemname import TemplateitemnameValidator
+    from ._name import NameValidator
+    from ._enabled import EnabledValidator
+    from ._dtickrange import DtickrangeValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class ValueValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(
-        self,
-        plotly_name="value",
-        parent_name="scattermapbox.marker.colorbar.tickformatstop",
-        **kwargs
-    ):
-        super(ValueValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TemplateitemnameValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(
-        self,
-        plotly_name="templateitemname",
-        parent_name="scattermapbox.marker.colorbar.tickformatstop",
-        **kwargs
-    ):
-        super(TemplateitemnameValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class NameValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(
-        self,
-        plotly_name="name",
-        parent_name="scattermapbox.marker.colorbar.tickformatstop",
-        **kwargs
-    ):
-        super(NameValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class EnabledValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(
-        self,
-        plotly_name="enabled",
-        parent_name="scattermapbox.marker.colorbar.tickformatstop",
-        **kwargs
-    ):
-        super(EnabledValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class DtickrangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
-    def __init__(
-        self,
-        plotly_name="dtickrange",
-        parent_name="scattermapbox.marker.colorbar.tickformatstop",
-        **kwargs
-    ):
-        super(DtickrangeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            items=kwargs.pop(
-                "items",
-                [
-                    {"valType": "any", "editType": "calc"},
-                    {"valType": "any", "editType": "calc"},
-                ],
-            ),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._value.ValueValidator",
+            "._templateitemname.TemplateitemnameValidator",
+            "._name.NameValidator",
+            "._enabled.EnabledValidator",
+            "._dtickrange.DtickrangeValidator",
+        ],
+    )

@@ -232,12 +232,12 @@ def request_json(url):
     return json.loads(req.content.decode("utf-8"))
 
 
-def get_latest_publish_build_info(branch):
+def get_latest_publish_build_info(repo, branch):
 
     url = (
         r"https://circleci.com/api/v1.1/project/github/"
-        r"plotly/plotly.js/tree/{branch}?limit=10000\&filter=completed"
-    ).format(branch=branch)
+        r"{repo}/tree/{branch}?limit=10000\&filter=completed"
+    ).format(repo=repo, branch=branch)
 
     branch_jobs = request_json(url)
 
@@ -338,14 +338,15 @@ class UpdateBundleSchemaDevCommand(Command):
     user_options = []
 
     def initialize_options(self):
-        pass
+        self.devrepo = None
+        self.devbranch = None
 
     def finalize_options(self):
-        pass
+        self.set_undefined_options("updateplotlyjsdev", ("devrepo", "devrepo"))
+        self.set_undefined_options("updateplotlyjsdev", ("devbranch", "devbranch"))
 
     def run(self):
-        branch = "master"
-        build_info = get_latest_publish_build_info(branch)
+        build_info = get_latest_publish_build_info(self.devrepo, self.devbranch)
 
         archive_url, bundle_url, schema_url = get_bundle_schema_urls(
             build_info["build_num"]
@@ -370,16 +371,20 @@ class UpdateBundleSchemaDevCommand(Command):
         # update plotly.js version in _plotlyjs_version
         rev = build_info["vcs_revision"]
         date = build_info["committer_date"]
-        version = "_".join([branch, date[:10], rev[:8]])
+        version = "_".join([self.devrepo, self.devbranch, date[:10], rev[:8]])
         overwrite_plotlyjs_version_file(version)
 
 
 class UpdatePlotlyJsDevCommand(Command):
     description = "Update project to a new development version of plotly.js"
-    user_options = []
+    user_options = [
+        ("devrepo=", None, "Repository name"),
+        ("devbranch=", None, "branch or pull/number"),
+    ]
 
     def initialize_options(self):
-        pass
+        self.devrepo = "plotly/plotly.js"
+        self.devbranch = "master"
 
     def finalize_options(self):
         pass
@@ -475,6 +480,7 @@ setup(
         "plotly.figure_factory",
         "plotly.data",
         "plotly.express",
+        "plotly.graph_objects",
         "_plotly_utils",
         "_plotly_utils.colors",
         "_plotly_future_",

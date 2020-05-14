@@ -107,7 +107,10 @@ def write_validator_py(outdir, node: PlotlyNode):
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, "validators", *node.parent_path_parts, "__init__.py")
+    # filepath = opath.join(outdir, "validators", *node.parent_path_parts, "__init__.py")
+    filepath = opath.join(
+        outdir, "validators", *node.parent_path_parts, "_" + node.name_property + ".py"
+    )
 
     write_source_py(validator_source, filepath, leading_newlines=2)
 
@@ -259,5 +262,6 @@ def write_data_validator_py(outdir, base_trace_node: TraceNode):
 
     # Write file
     # ----------
-    filepath = opath.join(outdir, "validators", "__init__.py")
+    # filepath = opath.join(outdir, "validators", "__init__.py")
+    filepath = opath.join(outdir, "validators", "_data.py")
     write_source_py(source, filepath, leading_newlines=2)

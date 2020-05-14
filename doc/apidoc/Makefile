@@ -18,9 +18,15 @@ help:
 # For sphinx-apidoc the first positional path is the module to document
 # then all the other ones are paths to exclude for the doc generation
 %: Makefile
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*/*/*.py
 	sphinx-apidoc -o generated ../../packages/python/plotly/plotly ../../packages/python/plotly/plotly/validators ../../packages/python/plotly/plotly/tests ../../packages/python/plotly/plotly/matplotlylib/ ../../packages/python/plotly/plotly/offline ../../packages/python/plotly/plotly/api
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	git checkout -- ../../packages/python/plotly/plotly/graph_objs
 	rename 's/graph_objs/graph_objects/' _build/html/*.html _build/html/generated/*.html
+	mv _build/html/generated/plotly.graph_objs.html _build/html/generated/plotly.graph_objects.html
 	sed -i 's/graph_objs/graph_objects/g' _build/html/*.html 
 	sed -i 's/graph_objs/graph_objects/g' _build/html/*.inv 
 	sed -i 's/graph_objs/graph_objects/g' _build/html/*.js 

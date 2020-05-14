@@ -36,7 +36,7 @@ jupyter:
 
 [datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc.
 
-### Passing datashader rasters as a mabox image layer
+### Passing datashader rasters as a mapbox image layer
 
 We visualize here the spatial distribution of taxi rides in New York City. A higher density
 is observed on major avenues. For more details about mapbox charts, see [the mapbox layers tutorial](/python/mapbox-layers). No mapbox token is needed here.
@@ -105,7 +105,9 @@ df = pd.read_parquet('https://raw.githubusercontent.com/plotly/datasets/master/2
 
 cvs = ds.Canvas(plot_width=100, plot_height=100)
 agg = cvs.points(df, 'SCHEDULED_DEPARTURE', 'DEPARTURE_DELAY')
-agg.values = np.log10(agg.values)
+zero_mask = agg.values == 0
+agg.values = np.log10(agg.values, where=np.logical_not(zero_mask))
+agg.values[zero_mask] = np.nan
 fig = px.imshow(agg, origin='lower', labels={'color':'Log10(count)'})
 fig.update_traces(hoverongaps=False)
 fig.update_layout(coloraxis_colorbar=dict(title='Count', tickprefix='1.e'))

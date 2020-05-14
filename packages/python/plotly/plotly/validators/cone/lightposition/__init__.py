@@ -1,46 +1,12 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._z import ZValidator
+    from ._y import YValidator
+    from ._x import XValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class ZValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="z", parent_name="cone.lightposition", **kwargs):
-        super(ZValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            max=kwargs.pop("max", 100000),
-            min=kwargs.pop("min", -100000),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class YValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="y", parent_name="cone.lightposition", **kwargs):
-        super(YValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            max=kwargs.pop("max", 100000),
-            min=kwargs.pop("min", -100000),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class XValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="x", parent_name="cone.lightposition", **kwargs):
-        super(XValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            max=kwargs.pop("max", 100000),
-            min=kwargs.pop("min", -100000),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._z.ZValidator", "._y.YValidator", "._x.XValidator"]
+    )
