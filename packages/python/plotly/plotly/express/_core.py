@@ -936,6 +936,10 @@ def _get_reserved_col_names(args):
 
 
 def _is_col_list(df_input, arg):
+    """Returns True if arg looks like it's a list of columns or references to columns
+    in df_input, and False otherwise (in which case it's assumed to be a single column
+    or reference to a column).
+    """
     if arg is None or isinstance(arg, str) or isinstance(arg, int):
         return False
     if isinstance(arg, pd.MultiIndex):
