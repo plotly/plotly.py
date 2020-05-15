@@ -128,6 +128,7 @@ density_contour.__doc__ = make_docstring(
         z=[
             "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
         ],
+        histfunc=["The arguments to this function are the values of `z`."],
     ),
 )
 
@@ -193,6 +194,7 @@ density_heatmap.__doc__ = make_docstring(
         z=[
             "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
         ],
+        histfunc=["The arguments to this function are the values of `z`.",],
     ),
 )
 
@@ -396,10 +398,13 @@ def histogram(
 histogram.__doc__ = make_docstring(
     histogram,
     append_dict=dict(
-        x=["For horizontal histograms, these values are used as inputs to `histfunc`."]
+        x=["If `orientation` is `'h'`, these values are used as inputs to `histfunc`."]
         + _wide_mode_xy_append,
-        y=["For vertical histograms, these values are used as inputs to `histfunc`."]
+        y=["If `orientation` is `'v'`, these values are used as inputs to `histfunc`."]
         + _wide_mode_xy_append,
+        histfunc=[
+            "The arguments to this function are the values of `y`(`x`) if `orientation` is `'v'`(`'h'`).",
+        ],
     ),
 )
 
