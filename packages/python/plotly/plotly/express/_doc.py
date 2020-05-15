@@ -383,12 +383,9 @@ docs = dict(
         "Sets start angle for the angular axis, with 0 being due east and 90 being due north.",
     ],
     histfunc=[
-        "str (default `'count'`)",
+        "str (default `'count'` if no arguments are provided, else `'sum'`)",
         "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`."
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
-        "The arguments to this function for `histogram` are the values of `y` if `orientation` is `'v'`,",
-        "otherwise the arguements are the values of `x`.",
-        "The arguments to this function for `density_heatmap` and `density_contour` are the values of `z`.",
     ],
     histnorm=[
         "str (default `None`)",
@@ -440,8 +437,10 @@ docs = dict(
     ],
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
-        "str (default `'v'`)",
-        "One of `'h'` for horizontal or `'v'` for vertical)",
+        "str, one of `'h'` for horizontal or `'v'` for vertical. ",
+        "(default `'v'` if `x` and `y` are provided and both continous or both categorical, ",
+        "otherwise `'v'`(`'h'`) if `x`(`y`) is categorical and `y`(`x`) is continuous, ",
+        "otherwise `'v'`(`'h'`) if only `x`(`y`) is provided) ",
     ],
     line_close=[
         "boolean (default `False`)",
