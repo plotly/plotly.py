@@ -520,9 +520,9 @@ def make_docstring(fn, override_dict={}, append_dict={}):
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:
         if override_dict.get(param):
-            param_doc = override_dict[param].copy()
+            param_doc = list(override_dict[param])
         else:
-            param_doc = docs[param].copy()
+            param_doc = list(docs[param])
             if append_dict.get(param):
                 param_doc += append_dict[param]
         param_desc_list = param_doc[1:]
