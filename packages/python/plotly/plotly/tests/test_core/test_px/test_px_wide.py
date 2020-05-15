@@ -619,7 +619,7 @@ append_special_case(
 )
 
 # df has columns named after every special string
-df = pd.DataFrame(dict(variable=[1, 2], index=[3, 4], value=[5, 6]), index=[7, 8])
+df = pd.DataFrame(dict(index=[1, 2], value=[3, 4], variable=[5, 6]), index=[7, 8])
 append_special_case(
     df_in=df,
     args_in=dict(x=None, y=None, color=None),
@@ -628,7 +628,7 @@ append_special_case(
         dict(
             _index=[7, 8, 7, 8, 7, 8],
             _value=[1, 2, 3, 4, 5, 6],
-            _variable=["variable", "variable", "index", "index", "value", "value"],
+            _variable=["index", "index", "value", "value", "variable", "variable"],
         )
     ),
 )
@@ -647,7 +647,7 @@ append_special_case(
 )
 
 # everything is called value, OMG
-df = pd.DataFrame(dict(value=[1, 2], b=[3, 4]), index=[7, 8])
+df = pd.DataFrame(dict(b=[1, 2], value=[3, 4]), index=[7, 8])
 df.index.name = "value"
 df.columns.name = "value"
 append_special_case(
@@ -658,7 +658,7 @@ append_special_case(
         dict(
             index=[7, 8, 7, 8],
             _value=[1, 2, 3, 4],
-            variable=["value", "value", "b", "b"],
+            variable=["b", "b", "value", "value",],
         )
     ),
 )
