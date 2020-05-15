@@ -25,19 +25,16 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
-        "For horizontal histograms, these values are used as inputs to `histfunc`.",
     ],
     y=[
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the y axis in cartesian coordinates.",
-        "For vertical histograms, these values are used as inputs to `histfunc`.",
     ],
     z=[
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the z axis in cartesian coordinates.",
-        "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
     ],
     a=[
         colref_type,
@@ -173,7 +170,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
-    radius=["int (default is 30)", "Sets the radius of influence of each point.",],
+    radius=["int (default is 30)", "Sets the radius of influence of each point."],
     hover_name=[
         colref_type,
         colref_desc,
@@ -518,14 +515,16 @@ docs = dict(
 )
 
 
-def make_docstring(fn, override_dict={}):
+def make_docstring(fn, override_dict={}, append_dict={}):
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:
         if override_dict.get(param):
-            param_doc = override_dict[param]
+            param_doc = override_dict[param].copy()
         else:
-            param_doc = docs[param]
+            param_doc = docs[param].copy()
+            if append_dict.get(param):
+                param_doc += append_dict[param]
         param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))

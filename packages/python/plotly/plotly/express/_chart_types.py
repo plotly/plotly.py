@@ -2,6 +2,12 @@ from ._core import make_figure
 from ._doc import make_docstring
 import plotly.graph_objs as go
 
+_wide_mode_xy_append = [
+    "Either `x` or `y` can optionally be a list of column references or array_likes, ",
+    "in which case the data will be treated as if it were 'wide' rather than 'long'.",
+]
+_cartesian_append_dict = dict(x=_wide_mode_xy_append, y=_wide_mode_xy_append)
+
 
 def scatter(
     data_frame=None,
@@ -56,7 +62,7 @@ def scatter(
     return make_figure(args=locals(), constructor=go.Scatter)
 
 
-scatter.__doc__ = make_docstring(scatter)
+scatter.__doc__ = make_docstring(scatter, append_dict=_cartesian_append_dict)
 
 
 def density_contour(
@@ -114,7 +120,16 @@ def density_contour(
     )
 
 
-density_contour.__doc__ = make_docstring(density_contour)
+density_contour.__doc__ = make_docstring(
+    density_contour,
+    append_dict=dict(
+        x=_wide_mode_xy_append,
+        y=_wide_mode_xy_append,
+        z=[
+            "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
+        ],
+    ),
+)
 
 
 def density_heatmap(
@@ -170,7 +185,16 @@ def density_heatmap(
     )
 
 
-density_heatmap.__doc__ = make_docstring(density_heatmap)
+density_heatmap.__doc__ = make_docstring(
+    density_heatmap,
+    append_dict=dict(
+        x=_wide_mode_xy_append,
+        y=_wide_mode_xy_append,
+        z=[
+            "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
+        ],
+    ),
+)
 
 
 def line(
@@ -218,7 +242,7 @@ def line(
     return make_figure(args=locals(), constructor=go.Scatter)
 
 
-line.__doc__ = make_docstring(line)
+line.__doc__ = make_docstring(line, append_dict=_cartesian_append_dict)
 
 
 def area(
@@ -264,7 +288,7 @@ def area(
     )
 
 
-area.__doc__ = make_docstring(area)
+area.__doc__ = make_docstring(area, append_dict=_cartesian_append_dict)
 
 
 def bar(
@@ -316,7 +340,7 @@ def bar(
     )
 
 
-bar.__doc__ = make_docstring(bar)
+bar.__doc__ = make_docstring(bar, append_dict=_cartesian_append_dict)
 
 
 def histogram(
@@ -369,7 +393,15 @@ def histogram(
     )
 
 
-histogram.__doc__ = make_docstring(histogram)
+histogram.__doc__ = make_docstring(
+    histogram,
+    append_dict=dict(
+        x=["For horizontal histograms, these values are used as inputs to `histfunc`."]
+        + _wide_mode_xy_append,
+        y=["For vertical histograms, these values are used as inputs to `histfunc`."]
+        + _wide_mode_xy_append,
+    ),
+)
 
 
 def violin(
@@ -416,7 +448,7 @@ def violin(
     )
 
 
-violin.__doc__ = make_docstring(violin)
+violin.__doc__ = make_docstring(violin, append_dict=_cartesian_append_dict)
 
 
 def box(
@@ -466,7 +498,7 @@ def box(
     )
 
 
-box.__doc__ = make_docstring(box)
+box.__doc__ = make_docstring(box, append_dict=_cartesian_append_dict)
 
 
 def strip(
@@ -517,7 +549,7 @@ def strip(
     )
 
 
-strip.__doc__ = make_docstring(strip)
+strip.__doc__ = make_docstring(strip, append_dict=_cartesian_append_dict)
 
 
 def scatter_3d(
@@ -1389,7 +1421,7 @@ def funnel(
     return make_figure(args=locals(), constructor=go.Funnel)
 
 
-funnel.__doc__ = make_docstring(funnel)
+funnel.__doc__ = make_docstring(funnel, append_dict=_cartesian_append_dict)
 
 
 def funnel_area(
