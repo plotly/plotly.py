@@ -93,7 +93,7 @@ Returns:
 def carshare():
     """
 Each row represents the availability of car-sharing services near the centroid of a zone
-in Montreal.
+in Montreal over a month-long period.
 
 Returns:
     A `pandas.DataFrame` with 249 rows and the following columns:
@@ -102,31 +102,78 @@ Returns:
     return _get_dataset("carshare")
 
 
-def timeseries():
+def timeseries(indexed=False):
     """
 Each row in this wide dataset represents values from 6 random walk time-series. The
 index contains dates.
 
 Returns:
     A `pandas.DataFrame` with 100 rows and the following columns:
-    `['MOL.AA', 'JJK.OB', 'LFF.KP', 'UJS.PX', 'BTK.HH', 'SHX.QQ']`.
+    `['day', 'MOL.AA', 'JJK.OB', 'LFF.KP', 'UJS.PX', 'BTK.HH', 'SHX.QQ']`.
+    If `indexed` is True, the 'day' column is used as the index and the column index
+    is named 'ticker'
 """
-    return _get_dataset("timeseries", index_col=0)
+    df = _get_dataset("timeseries")
+    if indexed:
+        df = df.set_index("day")
+        df.columns.name = "ticker"
+    return df
 
 
-def experiment():
+def experiment(indexed=False):
     """
 Each row in this wide dataset represents the results of 100 simulated participants
 on three hypothetical experiments, along with their gender and control/treatment group.
 
+
 Returns:
     A `pandas.DataFrame` with 100 rows and the following columns:
     `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
+    If `indexed` is True, the data frame index is named "participant"
 """
-    return _get_dataset("experiment")
+    df = _get_dataset("experiment")
+    if indexed:
+        df.index.name = "participant"
+    return df
 
 
-def _get_dataset(d, index_col=None):
+def short_track_wide(indexed=False):
+    """
+This dataset represents the medal table for Olympic Short Track Speed Skating for the
+top three nations as of 2020.
+
+Returns:
+    A `pandas.DataFrame` with 3 rows and the following columns:
+    `['nation', 'gold', 'silver', 'bronze']`.
+    If `indexed` is True, the 'nation' column is used as the index and the column index
+    is named 'medal'
+"""
+    df = _get_dataset("short_track")
+    if indexed:
+        df = df.set_index("nation")
+        df.index.name = "medal"
+    return df
+
+
+def short_track_long(indexed=False):
+    """
+This dataset represents the medal table for Olympic Short Track Speed Skating for the
+top three nations as of 2020.
+
+Returns:
+    A `pandas.DataFrame` with 9 rows and the following columns:
+    `['nation', 'medal', 'count']`.
+    If `indexed` is True, the 'nation' column is used as the index.
+"""
+    df = _get_dataset("short_track").melt(
+        id_vars=["nation"], value_name="count", var_name="medal"
+    )
+    if indexed:
+        df = df.set_index("nation")
+    return df
+
+
+def _get_dataset(d):
     import pandas
     import os
 
@@ -136,6 +183,5 @@ def _get_dataset(d, index_col=None):
             "package_data",
             "datasets",
             d + ".csv.gz",
-        ),
-        index_col=index_col,
+        )
     )
