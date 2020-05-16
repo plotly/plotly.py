@@ -102,21 +102,20 @@ Returns:
     return _get_dataset("carshare")
 
 
-def timeseries(indexed=False):
+def stocks(indexed=False):
     """
-Each row in this wide dataset represents values from 6 random walk time-series. The
-index contains dates.
+Each row in this wide dataset represents closing prices from 6 tech stocks in 2018/2019.
 
 Returns:
     A `pandas.DataFrame` with 100 rows and the following columns:
-    `['day', 'MOL.AA', 'JJK.OB', 'LFF.KP', 'UJS.PX', 'BTK.HH', 'SHX.QQ']`.
-    If `indexed` is True, the 'day' column is used as the index and the column index
-    is named 'ticker'
+    `['date', 'GOOG', 'AAPL', 'AMZN', 'FB', 'NFLX', 'MSFT']`.
+    If `indexed` is True, the 'date' column is used as the index and the column index
+    is named 'company'
 """
-    df = _get_dataset("timeseries")
+    df = _get_dataset("stocks")
     if indexed:
-        df = df.set_index("day")
-        df.columns.name = "ticker"
+        df = df.set_index("date")
+        df.columns.name = "company"
     return df
 
 
