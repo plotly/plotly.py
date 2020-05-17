@@ -1239,7 +1239,13 @@ def build_dataframe(args, constructor):
         elif wide_x != wide_y:
             wide_mode = True
             args["wide_variable"] = args["y"] if wide_y else args["x"]
-            var_name = "variable"
+            if df_provided and args["wide_variable"] is df_input.columns:
+                var_name = df_input.columns.name
+                args["wide_variable"] = list(args["wide_variable"])
+            if var_name in [None, "value", "index"] or (
+                df_provided and var_name in df_input
+            ):
+                var_name = "variable"
             if constructor == go.Histogram:
                 wide_orientation = "v" if wide_x else "h"
             else:
