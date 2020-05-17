@@ -663,6 +663,19 @@ append_special_case(
     ),
 )
 
+# y = columns
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]), index=[7, 8])
+df.index.name = "c"
+df.columns.name = "d"
+append_special_case(
+    df_in=df,
+    args_in=dict(x=df.index, y=df.columns, color=None),
+    args_expect=dict(x="c", y="value", color="d"),
+    df_expect=pd.DataFrame(
+        dict(c=[7, 8, 7, 8], d=["a", "a", "b", "b"], value=[1, 2, 3, 4])
+    ),
+)
+
 
 @pytest.mark.parametrize("df_in, args_in, args_expect, df_expect", special_cases)
 def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect):
