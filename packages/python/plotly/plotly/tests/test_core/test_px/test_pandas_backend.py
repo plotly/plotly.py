@@ -4,6 +4,10 @@ import pandas as pd
 import pytest
 
 
+@pytest.mark.skipif(
+    not hasattr(pd.options.plotting, "backend"),
+    reason="Currently installed pandas doesn't support plotting backends.",
+)
 @pytest.mark.parametrize(
     "pandas_fn,px_fn",
     [
