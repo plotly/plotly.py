@@ -23,4 +23,4 @@ import pytest
 def test_pandas_equiv(pandas_fn, px_fn):
     pd.options.plotting.backend = "plotly"
     df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD")).cumsum()
-    assert pandas_fn(df).to_json() == px_fn(df).to_json()
+    assert pandas_fn(df) == px_fn(df)
