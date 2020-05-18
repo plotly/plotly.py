@@ -244,12 +244,14 @@ docs = dict(
         "String values should define plotly.js symbols",
         "Used to override `symbol_sequence` to assign a specific symbols to marks corresponding with specific values.",
         "Keys in `symbol_map` should be values in the column denoted by `symbol`.",
+        "Alternatively, if the values of `symbol` are valid symbol names, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     line_dash_map=[
         "dict with str keys and str values (default `{}`)",
         "Strings values define plotly.js dash-patterns.",
         "Used to override `line_dash_sequences` to assign a specific dash-patterns to lines corresponding with specific values.",
         "Keys in `line_dash_map` should be values in the column denoted by `line_dash`.",
+        "Alternatively, if the values of `line_dash` are valid line-dash names, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     line_dash_sequence=[
         "list of str",
@@ -267,6 +269,7 @@ docs = dict(
         "String values should define valid CSS-colors",
         "Used to override `color_discrete_sequence` to assign a specific colors to marks corresponding with specific values.",
         "Keys in `color_discrete_map` should be values in the column denoted by `color`.",
+        "Alternatively, if the values of `color` are valid colors, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     color_continuous_scale=[
         "list of str",
