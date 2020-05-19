@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.6.10
   plotly:
     description: Plotly allows you to save static images of your plots. Save the image
       to your local computer, or embed it inside your Jupyter notebooks as a static
@@ -157,6 +157,33 @@ fig.write_image("images/fig1.eps")
 
 **Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
+<!-- #region -->
+### Install orca on Google Colab
+```
+!pip install plotly>=4.7.1
+!wget https://github.com/plotly/orca/releases/download/v1.2.1/orca-1.2.1-x86_64.AppImage -O /usr/local/bin/orca
+!chmod +x /usr/local/bin/orca
+!apt-get install xvfb libgtk2.0-0 libgconf-2-4
+```
+
+Once this is done you can use this code to make, show and export a figure:
+<!-- #endregion -->
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure( go.Scatter(x=[1,2,3], y=[1,3,2] ) )
+fig.show()
+fig.write_image("fig1.svg")
+fig.write_image("fig1.png")
+```
+
+The files can then be downloaded with:
+
+```python
+from google.colab import files
+files.download('fig1.svg')
+files.download('fig1.png')
+```
 
 ### Get Image as Bytes
 The `plotly.io.to_image` function is used to return an image as a bytes object. You can also use the `.to_image` graph object figure method.
