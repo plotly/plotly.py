@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.1'
+      jupytext_version: 1.1.6
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.10
+    version: 3.7.3
   plotly:
     description: Plotly allows you to save static images of your plots. Save the image
       to your local computer, or embed it inside your Jupyter notebooks as a static
