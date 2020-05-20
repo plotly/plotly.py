@@ -384,6 +384,26 @@ fig.show()
 
 See examples of horizontal bar charts [here](https://plotly.com/python/horizontal-bar-charts/).
 
+### Bar Charts With Multicategory Axis Type
+
+If your traces have arrays for `x` or `y`, then the axis type is automatically inferred to be `multicategory`. 
+
+```python
+import plotly.graph_objects as go
+x = [
+    ["BB+", "BB+", "BB+", "BB", "BB", "BB"],
+    [16, 17, 18, 16, 17, 18,]
+]
+fig = go.Figure()
+fig.add_bar(x=x,y=[1,2,3,4,5,6])
+fig.add_bar(x=x,y=[6,5,4,3,2,1])
+fig.update_layout(barmode="relative")
+fig.show()
+```
+
+
+
+
 ### Reference
 
 See https://plotly.com/python/reference/#bar for more information and chart attribute options!

@@ -489,6 +489,15 @@ fig.update_layout(
 fig.show()
 ```
 
+### Box Plot With Only Points
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.strip(df, x='day', y='tip')
+fig.show()
+```
+
 #### Reference
 
 See https://plotly.com/python/reference/#box for more information and chart attribute options!

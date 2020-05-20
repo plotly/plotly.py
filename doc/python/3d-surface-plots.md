@@ -163,6 +163,19 @@ fig = go.Figure(data=[
 fig.show()
 ```
 
+### Setting the Surface Color
+
+You can use the `surfacecolor` attribute to define the color of the surface of your figure. In this example, the surface color is drawn relation to the x-axis data. 
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+x, y = 4 * np.pi * np.mgrid[0:1:20j, 0:1:20j]
+z = np.sin(x)
+fig = go.Figure(go.Surface(x=x, y=y, z=z, surfacecolor=x))
+fig.show()
+```
+
 #### Reference
 
 
