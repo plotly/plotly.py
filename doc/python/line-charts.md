@@ -70,6 +70,20 @@ fig = px.line(df, x="year", y="lifeExp", color="continent",
 fig.show()
 ```
 
+### Sparklines with Plotly Express
+
+Sparklines are scatter plots inside subplots, with gridlines, axis lines, and ticks removed. 
+
+```python
+import plotly.express as px
+df = px.data.gapminder().query("continent == 'Oceania'")
+fig = px.line(df, x='year', y='gdpPercap', facet_row='country')
+fig.update_layout(template=None, height=400)
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+fig.show()
+```
+
 ### Line Plot with go.Scatter
 
 If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).

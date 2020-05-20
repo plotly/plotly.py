@@ -258,6 +258,10 @@ fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
 fig.show()
 ```
 
+### Violin Plot With Only Points
+
+See https://plotly.com/python/box-plots/#box-plot-with-only-points.
+
 #### Reference
 
 See https://plotly.com/python/reference/#violin for more information and chart attribute options!
