@@ -150,7 +150,7 @@ Returns:
     df = _get_dataset("short_track")
     if indexed:
         df = df.set_index("nation")
-        df.index.name = "medal"
+        df.columns.name = "medal"
     return df
 
 
