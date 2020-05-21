@@ -112,7 +112,7 @@ For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
 packages using pip...
 
 ```
-pip install jupyterlab "ipywidgets=7.5"
+pip install jupyterlab "ipywidgets==7.5"
 ```
 
 or conda.

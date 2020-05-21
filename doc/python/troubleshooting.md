@@ -81,11 +81,10 @@ To uninstall your Plotly extensions, run the following commands in a terminal sh
 $ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
-<!-- #endregion -->
 
 If you run into "out of memory" problems while installing the extensions, try running these commands before running `jupyter labextension install`...
 
-```
+```bash
 # Avoid "JavaScript heap out of memory" errors during extension installation
 # (OS X/Linux)
 export NODE_OPTIONS=--max-old-space-size=4096
@@ -95,10 +94,12 @@ set NODE_OPTIONS=--max-old-space-size=4096
 
 ...and these commands afterwards.
 
-```
+```bash
 # Unset NODE_OPTIONS environment variable
 # (OS X/Linux)
 unset NODE_OPTIONS
 # (Windows)
 set NODE_OPTIONS=
 ```
+
+<!-- #endregion -->

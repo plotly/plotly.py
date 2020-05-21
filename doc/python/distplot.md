@@ -58,7 +58,7 @@ fig.show()
 
 ## Combined statistical representations with distplot figure factory
 
-The distplot figure factory displays a combination of statistical representations of numerical data, such as histogram, kernel density estimation or normal curve, and rug plot.
+The distplot [figure factory](/python/figure-factories/) displays a combination of statistical representations of numerical data, such as histogram, kernel density estimation or normal curve, and rug plot.
 
 #### Basic Distplot
 
@@ -286,6 +286,5 @@ fig.show()
 
 #### Reference
 
-```python
-help(ff.create_distplot)
-```
+
+For more info on `ff.create_distplot()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_distplot.html)
