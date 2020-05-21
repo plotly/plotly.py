@@ -121,14 +121,13 @@ For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install t
 packages using pip...
 
 ```
-$ pip install jupyterlab==1.2 "ipywidgets>=7.5"
+$ pip install jupyterlab "ipywidgets>=7.5"
 ```
 
 or conda.
 
 ```
-$ conda install jupyterlab=1.2
-$ conda install "ipywidgets=7.5"
+$ conda install jupyterlab "ipywidgets=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):

@@ -18,7 +18,7 @@ Figure
    :toctree: generated/
    :template: class_figure.rst
 
-   Figure  
+   Figure
 
 
 Layout
@@ -31,7 +31,7 @@ Layout
    Layout
 
 
-Simple charts
+Simple Traces
 --------------
 
 .. autosummary::
@@ -47,7 +47,7 @@ Simple charts
    Contour
    Table
 
-Distributions
+Distribution Traces
 -------------
 
 .. autosummary::
@@ -60,7 +60,7 @@ Distributions
    Histogram2d
    Histogram2dContour
 
-Finance
+Finance Traces
 -------
 
 .. autosummary::
@@ -74,7 +74,7 @@ Finance
    Funnelarea
    Indicator
 
-3D
+3D Traces
 --
 
 .. autosummary::
@@ -89,7 +89,7 @@ Finance
    Volume
    Isosurface
 
-Maps
+Map Traces
 ----
 
 .. autosummary::
@@ -102,7 +102,7 @@ Maps
    Choroplethmapbox
    Densitymapbox
 
-Specialized
+Specialized Traces
 -----------
 
 .. autosummary::
