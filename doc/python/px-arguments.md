@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.7
   plotly:
-    description: Arguments accepted by Plotly Express functions
+    description: Input data arguments accepted by Plotly Express functions
     display_as: file_settings
     language: python
     layout: base
@@ -43,7 +43,7 @@ Plotly Express provides functions to visualize a variety of types of data. Most 
 
 *Until version 4.8, Plotly Express only operated on long-form (previously called "tidy") data, but [now accepts wide-form and mixed-form data](/python/wide-form/) as well.*
 
-There are three common conventions for storing data in a data frame:
+There are three common conventions for storing column-oriented data, usually in a data frame with column names:
 
 * **long-form data** is suitable for storing multivariate data (i.e. dimensions greater than 2), with one row per observation, and one column per variable.
 * **wide-form data** is suitable for storing 2-dimensional data, with one row per value of one of the first variable, and one column per value of the second variable.
@@ -83,14 +83,14 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Fo
 fig.show()
 ```
 
-You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
+You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
 
 ```python
 import plotly.express as px
 wide_df = px.data.short_track_wide()
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input, relabelled",
-            labels={"value": "count", "variable": "medals"})
+            labels={"value": "count", "variable": "medal"})
 fig.show()
 ```
 
