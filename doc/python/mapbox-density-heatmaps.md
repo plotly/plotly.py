@@ -39,7 +39,7 @@ To plot on Mapbox maps with Plotly you _may_ need a Mapbox account and a public 
 
 ### Stamen Terrain base map (no token needed): density mapbox with `plotly.express`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.density_mapbox`, each row of the DataFrame is represented as a point smoothed with a given radius of influence.
 

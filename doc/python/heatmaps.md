@@ -36,7 +36,7 @@ jupyter:
 
 ### Heatmap with `plotly.express` and `px.imshow`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array is represented as a heatmap pixel.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array is represented as a heatmap pixel.
 
 For more examples using `px.imshow`, see the [tutorial on displaying image data with plotly](/python/imshow).
 
