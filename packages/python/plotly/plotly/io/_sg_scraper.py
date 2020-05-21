@@ -7,7 +7,7 @@ import plotly
 from glob import glob
 import shutil
 
-plotly.io.renderers.default = "sphinx_gallery"
+plotly.io.renderers.default = "sphinx_gallery_png"
 
 
 def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
