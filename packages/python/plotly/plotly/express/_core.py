@@ -3,7 +3,7 @@ import plotly.io as pio
 from collections import namedtuple, OrderedDict
 
 from _plotly_utils.basevalidators import ColorscaleValidator
-from .colors import qualitative, sequential
+from plotly.colors import qualitative, sequential
 import math
 import pandas as pd
 import numpy as np
