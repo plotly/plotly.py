@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Click Events
-    order: 24
+    order: 4
     page_type: example_index
     permalink: python/click-events/
     thumbnail: thumbnail/figurewidget-click-events.gif
