@@ -157,6 +157,7 @@ fig.write_image("images/fig1.eps")
 
 **Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
+<!-- #region -->
 ### Install orca on Google Colab
 ```
 !pip install plotly>=4.7.1
@@ -170,7 +171,6 @@ Once this is done you can use this code to make, show and export a figure:
 ```python
 import plotly.graph_objects as go
 fig = go.Figure( go.Scatter(x=[1,2,3], y=[1,3,2] ) )
-fig.show()
 fig.write_image("fig1.svg")
 fig.write_image("fig1.png")
 ```
@@ -182,6 +182,7 @@ from google.colab import files
 files.download('fig1.svg')
 files.download('fig1.png')
 ```
+<!-- #endregion -->
 
 ### Get Image as Bytes
 The `plotly.io.to_image` function is used to return an image as a bytes object. You can also use the `.to_image` graph object figure method.
