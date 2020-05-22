@@ -7,8 +7,9 @@
 from __future__ import absolute_import
 from plotly.colors import *
 
-__all__ = ['cyclical',
-           'diverging',
-           'sequential',
-           'qualitative',
-        ]
+__all__ = [
+    "cyclical",
+    "diverging",
+    "sequential",
+    "qualitative",
+]
