@@ -56,6 +56,6 @@ plotly's high-level API for rapid figure generation. ::
 .. toctree::
    :maxdepth: 1
 
-   generated/plotly.data.rst
+   generated/plotly.express.data.rst
    generated/plotly.express.colors.rst
 
