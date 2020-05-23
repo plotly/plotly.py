@@ -480,6 +480,8 @@ setup(
         "plotly.figure_factory",
         "plotly.data",
         "plotly.express",
+        "plotly.express.data",
+        "plotly.express.colors",
         "plotly.graph_objects",
         "_plotly_utils",
         "_plotly_utils.colors",
