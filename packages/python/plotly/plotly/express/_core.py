@@ -1022,6 +1022,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 args["hover_data"][k] = (True, args["hover_data"][k])
             if not isinstance(args["hover_data"][k], tuple):
                 args["hover_data"][k] = (args["hover_data"][k], None)
+            if df_provided and args["hover_data"][k][1] is not None and k in df_input:
+                raise ValueError(
+                    "Ambiguous input: values for '%s' appear both in hover_data and data_frame"
+                    % k
+                )
     # Loop over possible arguments
     for field_name in all_attrables:
         # Massaging variables
@@ -1074,11 +1079,28 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     and hover_data_is_dict
                     and args["hover_data"][str(argument)][1] is not None
                 ):
+                    # hover_data has onboard data
+                    # previously-checked to have no name-conflict with data_frame
                     col_name = str(argument)
-                    df_output[col_name] = args["hover_data"][col_name][1]
-                    continue
+                    real_argument = args["hover_data"][col_name][1]
 
-                if not df_provided:
+                    if length and len(real_argument) != length:
+                        raise ValueError(
+                            "All arguments should have the same length. "
+                            "The length of hover_data key `%s` is %d, whereas the "
+                            "length of previously-processed arguments %s is %d"
+                            % (
+                                argument,
+                                len(real_argument),
+                                str(list(df_output.columns)),
+                                length,
+                            )
+                        )
+                    if hasattr(real_argument, "values"):
+                        df_output[col_name] = real_argument.values
+                    else:
+                        df_output[col_name] = np.array(real_argument)
+                elif not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
                         "DataFrame or an array is provided in the `data_frame` "
@@ -1086,7 +1108,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         "'%s' is of type str or int." % field
                     )
                 # Check validity of column name
-                if argument not in df_input.columns:
+                elif argument not in df_input.columns:
                     if wide_mode and argument in (value_name, var_name):
                         continue
                     else:
@@ -1098,11 +1120,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         if argument == "index":
                             err_msg += "\n To use the index, pass it in directly as `df.index`."
                         raise ValueError(err_msg)
-                if length and len(df_input[argument]) != length:
+                elif length and len(df_input[argument]) != length:
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of column argument `df[%s]` is %d, whereas the "
-                        "length of previous arguments %s is %d"
+                        "length of  previously-processed arguments %s is %d"
                         % (
                             field,
                             len(df_input[argument]),
@@ -1110,8 +1132,9 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                             length,
                         )
                     )
-                col_name = str(argument)
-                df_output[col_name] = df_input[argument].values
+                else:
+                    col_name = str(argument)
+                    df_output[col_name] = df_input[argument].values
             # ----------------- argument is a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
@@ -1137,7 +1160,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     raise ValueError(
                         "All arguments should have the same length. "
                         "The length of argument `%s` is %d, whereas the "
-                        "length of previous arguments %s is %d"
+                        "length of  previously-processed arguments %s is %d"
                         % (field, len(argument), str(list(df_output.columns)), length)
                     )
                 if hasattr(argument, "values"):

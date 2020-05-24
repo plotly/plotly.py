@@ -675,7 +675,8 @@ append_special_case(
         dict(c=[7, 8, 7, 8], d=["a", "a", "b", "b"], value=[1, 2, 3, 4])
     ),
 )
-# y = columns
+
+# y = columns subset
 df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]), index=[7, 8])
 df.index.name = "c"
 df.columns.name = "d"
@@ -684,6 +685,27 @@ append_special_case(
     args_in=dict(x=df.index, y=df.columns[:1], color=None),
     args_expect=dict(x="c", y="value", color="variable"),
     df_expect=pd.DataFrame(dict(c=[7, 8], variable=["a", "a"], value=[1, 2])),
+)
+
+# list-like hover_data
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]), index=[7, 8])
+df.index.name = "c"
+df.columns.name = "d"
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=None, hover_data=dict(new=[5, 6])),
+    args_expect=dict(
+        x="c",
+        y="value",
+        color="d",
+        orientation="v",
+        hover_data=dict(new=(True, [5, 6])),
+    ),
+    df_expect=pd.DataFrame(
+        dict(
+            c=[7, 8, 7, 8], d=["a", "a", "b", "b"], new=[5, 6, 5, 6], value=[1, 2, 3, 4]
+        )
+    ),
 )
 
 
