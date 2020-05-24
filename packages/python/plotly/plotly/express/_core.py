@@ -1329,6 +1329,14 @@ def build_dataframe(args, constructor):
         else:
             wide_cross_name = args["wide_cross"]
         del args["wide_cross"]
+        dtype = None
+        for v in wide_value_vars:
+            if dtype is None:
+                dtype = df_output[v].dtype
+            elif dtype != df_output[v].dtype:
+                raise ValueError(
+                    "Plotly Express cannot process wide-form data with columns of different type."
+                )
         df_output = df_output.melt(
             id_vars=wide_id_vars,
             value_vars=wide_value_vars,
