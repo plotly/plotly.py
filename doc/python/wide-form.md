@@ -54,13 +54,13 @@ By way of example here is the same data, represented in long-form first, and the
 
 ```python
 import plotly.express as px
-long_df = px.data.short_track_long()
+long_df = px.data.medals_long()
 long_df
 ```
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 wide_df
 ```
 
@@ -68,7 +68,7 @@ Plotly Express can produce the same plot from either form:
 
 ```python
 import plotly.express as px
-long_df = px.data.short_track_long()
+long_df = px.data.medals_long()
 
 fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
 fig.show()
@@ -76,7 +76,7 @@ fig.show()
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
 fig.show()
@@ -88,7 +88,7 @@ You might notice that y-axis and legend labels are slightly different for the se
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input, relabelled",
             labels={"value": "count", "variable": "medal"})
@@ -99,9 +99,9 @@ Plotly Express figures created using wide-form data can be [styled just like any
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 
-fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], 
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"],
              title="Wide-Form Input, styled",
              labels={"value": "Medal Count", "variable": "Medal", "nation": "Olympic Nation"},
              color_discrete_map={"gold": "gold", "silver": "silver", "bronze": "#c96"},
@@ -113,11 +113,11 @@ fig.show()
 
 ### Data Frames with Named Indexes
 
-Pandas `DataFrames` support not only column names and "row names" via the value of `index`, but the indexes themselves can be named. Here is how to assign one column of the wide sample data frame above as the index, and to name the column index. The result "indexed" sample data frame can also be obtained by calling `px.data.short_track_wide(indexed=True)`
+Pandas `DataFrames` support not only column names and "row names" via the value of `index`, but the indexes themselves can be named. Here is how to assign one column of the wide sample data frame above as the index, and to name the column index. The result "indexed" sample data frame can also be obtained by calling `px.data.medals_wide(indexed=True)`
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 wide_df = wide_df.set_index("nation")
 wide_df.columns.name = "medals"
 wide_df
@@ -127,7 +127,7 @@ When working with a data frame like the one above, you can pass the index refere
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=True)
+wide_df = px.data.medals_wide(indexed=True)
 
 fig = px.bar(wide_df, x=wide_df.index, y=wide_df.columns)
 fig.show()
@@ -137,7 +137,7 @@ If you transpose `x` and `y`, thereby assigning the columns to `x`, the orientat
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=True)
+wide_df = px.data.medals_wide(indexed=True)
 
 fig = px.bar(wide_df, x=wide_df.columns, y=wide_df.index)
 fig.show()
@@ -149,7 +149,7 @@ For bar, scatter, line and area charts, this pattern of assigning `x=df.index` a
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=True)
+wide_df = px.data.medals_wide(indexed=True)
 
 fig = px.bar(wide_df)
 fig.show()
@@ -170,7 +170,7 @@ If you specify neither `x` nor `y`, you can specify whether the Y or X xaxis is 
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=True)
+wide_df = px.data.medals_wide(indexed=True)
 
 fig = px.bar(wide_df, orientation="h")
 fig.show()
@@ -183,7 +183,7 @@ In the examples above, the columns of the wide data frame are always assigned to
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=False)
+wide_df = px.data.medals_wide(indexed=False)
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], facet_col="variable", color="nation")
 fig.show()
@@ -193,7 +193,7 @@ If using a data frame's named indexes, either explicitly or relying on the defau
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide(indexed=True)
+wide_df = px.data.medals_wide(indexed=True)
 
 fig = px.bar(wide_df, facet_col="medal", color=wide_df.index)
 fig.show()
@@ -228,7 +228,7 @@ We can also leverage the long-form portion of the data frame, for example to col
 import plotly.express as px
 mixed_df = px.data.experiment(indexed=True)
 
-fig = px.violin(mixed_df, y=["experiment_1", "experiment_2", "experiment_3"], 
+fig = px.violin(mixed_df, y=["experiment_1", "experiment_2", "experiment_3"],
                 color="gender", facet_col="group", hover_data=[mixed_df.index])
 fig.show()
 ```
@@ -239,7 +239,7 @@ And of course, we can reassign `variable` to another argument as well, in this c
 import plotly.express as px
 mixed_df = px.data.experiment(indexed=True)
 
-fig = px.box(mixed_df, x="group", y=["experiment_1", "experiment_2", "experiment_3"], 
+fig = px.box(mixed_df, x="group", y=["experiment_1", "experiment_2", "experiment_3"],
                 color="gender", facet_col="variable", hover_data=[mixed_df.index])
 fig.show()
 ```

@@ -55,13 +55,13 @@ By way of example here is the same data, represented in long-form first, and the
 
 ```python
 import plotly.express as px
-long_df = px.data.short_track_long()
+long_df = px.data.medals_long()
 long_df
 ```
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 wide_df
 ```
 
@@ -69,7 +69,7 @@ Plotly Express can produce the same plot from either form:
 
 ```python
 import plotly.express as px
-long_df = px.data.short_track_long()
+long_df = px.data.medals_long()
 
 fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
 fig.show()
@@ -77,7 +77,7 @@ fig.show()
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
 fig.show()
@@ -87,7 +87,7 @@ You might notice that y-axis and legend labels are slightly different for the se
 
 ```python
 import plotly.express as px
-wide_df = px.data.short_track_wide()
+wide_df = px.data.medals_wide()
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input, relabelled",
             labels={"value": "count", "variable": "medal"})
