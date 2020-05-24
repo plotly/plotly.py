@@ -658,7 +658,7 @@ append_special_case(
         dict(
             index=[7, 8, 7, 8],
             _value=[1, 2, 3, 4],
-            variable=["b", "b", "value", "value",],
+            variable=["b", "b", "value", "value"],
         )
     ),
 )
@@ -674,6 +674,16 @@ append_special_case(
     df_expect=pd.DataFrame(
         dict(c=[7, 8, 7, 8], d=["a", "a", "b", "b"], value=[1, 2, 3, 4])
     ),
+)
+# y = columns
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]), index=[7, 8])
+df.index.name = "c"
+df.columns.name = "d"
+append_special_case(
+    df_in=df,
+    args_in=dict(x=df.index, y=df.columns[:1], color=None),
+    args_expect=dict(x="c", y="value", color="variable"),
+    df_expect=pd.DataFrame(dict(c=[7, 8], variable=["a", "a"], value=[1, 2])),
 )
 
 

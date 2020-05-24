@@ -1241,6 +1241,7 @@ def build_dataframe(args, constructor):
             args["wide_variable"] = args["y"] if wide_y else args["x"]
             if df_provided and args["wide_variable"] is df_input.columns:
                 var_name = df_input.columns.name
+            if isinstance(args["wide_variable"], pd.Index):
                 args["wide_variable"] = list(args["wide_variable"])
             if var_name in [None, "value", "index"] or (
                 df_provided and var_name in df_input
