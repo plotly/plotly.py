@@ -710,3 +710,13 @@ def test_multi_index():
     with pytest.raises(TypeError) as err_msg:
         px.scatter(df)
     assert "pandas MultiIndex is not supported by plotly express" in str(err_msg.value)
+
+
+@pytest.mark.parametrize("df", [px.data.stocks(), dict(a=[1, 2], b=["1", "2"])])
+def test_mixed_input_error(df):
+    with pytest.raises(ValueError) as err_msg:
+        px.line(df)
+    assert (
+        "Plotly Express cannot process wide-form data with columns of different type"
+        in str(err_msg.value)
+    )
