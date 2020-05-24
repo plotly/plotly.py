@@ -80,7 +80,7 @@ else:
 def plot(data_frame, kind, **kwargs):
     """
     Pandas plotting backend function, not meant to be called directly.
-    To activate, set pandas.options.plotting.backend="plotly.express.pandas_backend"
+    To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
     from .express import scatter, line, area, bar, box, histogram
@@ -103,14 +103,14 @@ def plot(data_frame, kind, **kwargs):
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["by", "bins"]}
         return histogram(data_frame, **new_kwargs)
     raise NotImplementedError(
-        "The plotly.express backend doesn't yet support kind='%s'" % kind
+        "kind='%s' not yet supported for plotting.backend='plotly'" % kind
     )
 
 
 def boxplot_frame(data_frame, **kwargs):
     """
     Pandas plotting backend function, not meant to be called directly.
-    To activate, set pandas.options.plotting.backend="plotly.express.pandas_backend"
+    To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
     from .express import box
@@ -124,7 +124,7 @@ def boxplot_frame(data_frame, **kwargs):
 def hist_frame(data_frame, **kwargs):
     """
     Pandas plotting backend function, not meant to be called directly.
-    To activate, set pandas.options.plotting.backend="plotly.express.pandas_backend"
+    To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
     from .express import histogram
@@ -138,7 +138,7 @@ def hist_frame(data_frame, **kwargs):
 def hist_series(data_frame, **kwargs):
     """
     Pandas plotting backend function, not meant to be called directly.
-    To activate, set pandas.options.plotting.backend="plotly.express.pandas_backend"
+    To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
     from .express import histogram
