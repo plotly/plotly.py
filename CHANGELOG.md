@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `plotly` now provides a Plotly Express-backed Pandas-compatible plotting backend, which can be activated via `pandas.options.plotting.backend = "plotly"`. Note that it is not intended to implement every Pandas plotting function, nor is it intended to replicate the behaviour of every argument, although per the changes below, `x` and `y` should behave similarly. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
-- New datasets have been added to `plotly.express.data`: `stocks`, `experiment`, `short_track_wide` and `short_track_long`. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
+- New datasets have been added to `plotly.express.data`: `stocks`, `experiment`, `medals_wide` and `medals_long`. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
 - plotly `go.Figure` and `go.FigureWidget` now have a `_repr_html_` and a `_repr_mimebundle_` method, which are [standard hooks for integration in systems based on IPython](https://ipython.readthedocs.io/en/stable/config/integrating.html). In particular, with `_repr_html_` plotly figures can now be used within [sphinx-gallery](https://sphinx-gallery.github.io/stable/index.html) without any scraper. These additions should not change anything to the way plotly figures are displayed in notebook environments, since the `_ipython_display_` method (already present in earlier versions) takes precedence over the new methods.
 
 ### Updated
