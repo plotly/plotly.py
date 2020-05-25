@@ -2,6 +2,12 @@ from ._core import make_figure
 from ._doc import make_docstring
 import plotly.graph_objs as go
 
+_wide_mode_xy_append = [
+    "Either `x` or `y` can optionally be a list of column references or array_likes, ",
+    "in which case the data will be treated as if it were 'wide' rather than 'long'.",
+]
+_cartesian_append_dict = dict(x=_wide_mode_xy_append, y=_wide_mode_xy_append)
+
 
 def scatter(
     data_frame=None,
@@ -25,6 +31,7 @@ def scatter(
     animation_group=None,
     category_orders={},
     labels={},
+    orientation=None,
     color_discrete_sequence=None,
     color_discrete_map={},
     color_continuous_scale=None,
@@ -55,7 +62,7 @@ def scatter(
     return make_figure(args=locals(), constructor=go.Scatter)
 
 
-scatter.__doc__ = make_docstring(scatter)
+scatter.__doc__ = make_docstring(scatter, append_dict=_cartesian_append_dict)
 
 
 def density_contour(
@@ -73,6 +80,7 @@ def density_contour(
     animation_group=None,
     category_orders={},
     labels={},
+    orientation=None,
     color_discrete_sequence=None,
     color_discrete_map={},
     marginal_x=None,
@@ -112,7 +120,17 @@ def density_contour(
     )
 
 
-density_contour.__doc__ = make_docstring(density_contour)
+density_contour.__doc__ = make_docstring(
+    density_contour,
+    append_dict=dict(
+        x=_wide_mode_xy_append,
+        y=_wide_mode_xy_append,
+        z=[
+            "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
+        ],
+        histfunc=["The arguments to this function are the values of `z`."],
+    ),
+)
 
 
 def density_heatmap(
@@ -129,6 +147,7 @@ def density_heatmap(
     animation_group=None,
     category_orders={},
     labels={},
+    orientation=None,
     color_continuous_scale=None,
     range_color=None,
     color_continuous_midpoint=None,
@@ -167,7 +186,17 @@ def density_heatmap(
     )
 
 
-density_heatmap.__doc__ = make_docstring(density_heatmap)
+density_heatmap.__doc__ = make_docstring(
+    density_heatmap,
+    append_dict=dict(
+        x=_wide_mode_xy_append,
+        y=_wide_mode_xy_append,
+        z=[
+            "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
+        ],
+        histfunc=["The arguments to this function are the values of `z`.",],
+    ),
+)
 
 
 def line(
@@ -192,6 +221,7 @@ def line(
     animation_group=None,
     category_orders={},
     labels={},
+    orientation=None,
     color_discrete_sequence=None,
     color_discrete_map={},
     line_dash_sequence=None,
@@ -214,7 +244,7 @@ def line(
     return make_figure(args=locals(), constructor=go.Scatter)
 
 
-line.__doc__ = make_docstring(line)
+line.__doc__ = make_docstring(line, append_dict=_cartesian_append_dict)
 
 
 def area(
@@ -236,7 +266,7 @@ def area(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
+    orientation=None,
     groupnorm=None,
     log_x=False,
     log_y=False,
@@ -256,13 +286,11 @@ def area(
     return make_figure(
         args=locals(),
         constructor=go.Scatter,
-        trace_patch=dict(
-            stackgroup=1, mode="lines", orientation=orientation, groupnorm=groupnorm
-        ),
+        trace_patch=dict(stackgroup=1, mode="lines", groupnorm=groupnorm),
     )
 
 
-area.__doc__ = make_docstring(area)
+area.__doc__ = make_docstring(area, append_dict=_cartesian_append_dict)
 
 
 def bar(
@@ -291,7 +319,7 @@ def bar(
     range_color=None,
     color_continuous_midpoint=None,
     opacity=None,
-    orientation="v",
+    orientation=None,
     barmode="relative",
     log_x=False,
     log_y=False,
@@ -309,12 +337,12 @@ def bar(
     return make_figure(
         args=locals(),
         constructor=go.Bar,
-        trace_patch=dict(orientation=orientation, textposition="auto"),
+        trace_patch=dict(textposition="auto"),
         layout_patch=dict(barmode=barmode),
     )
 
 
-bar.__doc__ = make_docstring(bar)
+bar.__doc__ = make_docstring(bar, append_dict=_cartesian_append_dict)
 
 
 def histogram(
@@ -335,7 +363,7 @@ def histogram(
     color_discrete_map={},
     marginal=None,
     opacity=None,
-    orientation="v",
+    orientation=None,
     barmode="relative",
     barnorm=None,
     histnorm=None,
@@ -361,19 +389,24 @@ def histogram(
         args=locals(),
         constructor=go.Histogram,
         trace_patch=dict(
-            orientation=orientation,
-            histnorm=histnorm,
-            histfunc=histfunc,
-            nbinsx=nbins if orientation == "v" else None,
-            nbinsy=None if orientation == "v" else nbins,
-            cumulative=dict(enabled=cumulative),
-            bingroup="x" if orientation == "v" else "y",
+            histnorm=histnorm, histfunc=histfunc, cumulative=dict(enabled=cumulative),
         ),
         layout_patch=dict(barmode=barmode, barnorm=barnorm),
     )
 
 
-histogram.__doc__ = make_docstring(histogram)
+histogram.__doc__ = make_docstring(
+    histogram,
+    append_dict=dict(
+        x=["If `orientation` is `'h'`, these values are used as inputs to `histfunc`."]
+        + _wide_mode_xy_append,
+        y=["If `orientation` is `'v'`, these values are used as inputs to `histfunc`."]
+        + _wide_mode_xy_append,
+        histfunc=[
+            "The arguments to this function are the values of `y`(`x`) if `orientation` is `'v'`(`'h'`).",
+        ],
+    ),
+)
 
 
 def violin(
@@ -393,8 +426,8 @@ def violin(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
-    violinmode="group",
+    orientation=None,
+    violinmode=None,
     log_x=False,
     log_y=False,
     range_x=None,
@@ -414,18 +447,13 @@ def violin(
         args=locals(),
         constructor=go.Violin,
         trace_patch=dict(
-            orientation=orientation,
-            points=points,
-            box=dict(visible=box),
-            scalegroup=True,
-            x0=" ",
-            y0=" ",
+            points=points, box=dict(visible=box), scalegroup=True, x0=" ", y0=" ",
         ),
         layout_patch=dict(violinmode=violinmode),
     )
 
 
-violin.__doc__ = make_docstring(violin)
+violin.__doc__ = make_docstring(violin, append_dict=_cartesian_append_dict)
 
 
 def box(
@@ -445,8 +473,8 @@ def box(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
-    boxmode="group",
+    orientation=None,
+    boxmode=None,
     log_x=False,
     log_y=False,
     range_x=None,
@@ -470,14 +498,12 @@ def box(
     return make_figure(
         args=locals(),
         constructor=go.Box,
-        trace_patch=dict(
-            orientation=orientation, boxpoints=points, notched=notched, x0=" ", y0=" "
-        ),
+        trace_patch=dict(boxpoints=points, notched=notched, x0=" ", y0=" "),
         layout_patch=dict(boxmode=boxmode),
     )
 
 
-box.__doc__ = make_docstring(box)
+box.__doc__ = make_docstring(box, append_dict=_cartesian_append_dict)
 
 
 def strip(
@@ -497,8 +523,8 @@ def strip(
     labels={},
     color_discrete_sequence=None,
     color_discrete_map={},
-    orientation="v",
-    stripmode="group",
+    orientation=None,
+    stripmode=None,
     log_x=False,
     log_y=False,
     range_x=None,
@@ -516,7 +542,6 @@ def strip(
         args=locals(),
         constructor=go.Box,
         trace_patch=dict(
-            orientation=orientation,
             boxpoints="all",
             pointpos=0,
             hoveron="points",
@@ -529,7 +554,7 @@ def strip(
     )
 
 
-strip.__doc__ = make_docstring(strip)
+strip.__doc__ = make_docstring(strip, append_dict=_cartesian_append_dict)
 
 
 def scatter_3d(
@@ -1384,7 +1409,7 @@ def funnel(
     color_discrete_sequence=None,
     color_discrete_map={},
     opacity=None,
-    orientation="h",
+    orientation=None,
     log_x=False,
     log_y=False,
     range_x=None,
@@ -1398,12 +1423,10 @@ def funnel(
     In a funnel plot, each row of `data_frame` is represented as a
     rectangular sector of a funnel.
     """
-    return make_figure(
-        args=locals(), constructor=go.Funnel, trace_patch=dict(orientation=orientation),
-    )
+    return make_figure(args=locals(), constructor=go.Funnel)
 
 
-funnel.__doc__ = make_docstring(funnel)
+funnel.__doc__ = make_docstring(funnel, append_dict=_cartesian_append_dict)
 
 
 def funnel_area(
