@@ -2,6 +2,16 @@
 
 * the `tutorial on discrete color sequences <https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express>`_
 * the `list of built-in continuous color scales <https://plotly.com/python/builtin-colorscales/>`_
+
+Color scales are available within the following namespaces
+
+* carto (``px.colors.carto``)
+* cmocean
+* colorbrewer
+* cyclical
+* diverging
+* qualitative
+* sequential
 """
 
 from __future__ import absolute_import
