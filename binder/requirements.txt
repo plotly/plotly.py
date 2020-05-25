@@ -2,7 +2,7 @@ jupytext
 plotly==4.7.0
 jupyter
 notebook
-pandas
+pandas==1.0.3
 statsmodels==0.10.1
 scipy
 patsy==0.5.1
