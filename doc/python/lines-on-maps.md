@@ -41,7 +41,7 @@ Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` func
 
 ## Lines on Maps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -112,11 +112,11 @@ fig.update_layout(
 fig.show()
 ```
 ### Performance improvement: put many lines in the same trace
-For very large amounts (>1000) of lines, performance may become critcal. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption. 
+For very large amounts (>1000) of lines, performance may become critcal. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption.
 
-Use ```None``` between path coordinates to create a break in the otherwise connected paths. 
+Use ```None``` between path coordinates to create a break in the otherwise connected paths.
 
-```python 
+```python
 import plotly.graph_objects as go
 import pandas as pd
 
@@ -164,7 +164,7 @@ fig.add_trace(
         lat = lats,
         mode = 'lines',
         line = dict(width = 1,color = 'red'),
-        opacity = 0.5 
+        opacity = 0.5
     )
 )
 
