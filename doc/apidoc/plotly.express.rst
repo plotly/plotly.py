@@ -49,7 +49,7 @@ plotly's high-level API for rapid figure generation. ::
     imshow
 
 
-`plotly.express` submodules
+`plotly.express` subpackages
 ---------------------------
 
 
@@ -58,4 +58,3 @@ plotly's high-level API for rapid figure generation. ::
 
    generated/plotly.express.data.rst
    generated/plotly.express.colors.rst
-
