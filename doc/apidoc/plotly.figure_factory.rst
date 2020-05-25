@@ -13,6 +13,7 @@
    create_annotated_heatmap
    create_bullet
    create_candlestick
+   create_choropleth
    create_dendrogram
    create_distplot
    create_facet_grid

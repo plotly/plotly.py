@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,9 +20,9 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
-    description: Arguments accepted by Plotly Express functions
+    description: Input data arguments accepted by Plotly Express functions
     display_as: file_settings
     language: python
     layout: base
@@ -33,41 +33,73 @@ jupyter:
     thumbnail: thumbnail/plotly-express.png
 ---
 
-### Tidy Data
+### Column-oriented, Matrix or Geographic Data
 
-[Plotly Express](/python/plotly-express) operates on "tidy" or "long" data rather than "wide" data. You may pass data in either as a Pandas `DataFrame` objects or as individual array-like objects which `px` will assemble into a data frame internally, such as lists, `numpy` arrays or Pandas `Series` objects.
+Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a Pandas `DataFrame` (in either "long" or "wide" format, see below). [`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide column-oriented data to most Plotly Express functions.
 
-What follows is a very short example of the difference between wide and tidy/long data, and the excellent [Tidy Data in Python blog post](https://www.jeannicholashould.com/tidy-data-in-python.html) contains much more information about the tidy approach to structuring data.
+
+
+### Long-, Wide-, and Mixed-Form Data
+
+*Until version 4.8, Plotly Express only operated on long-form (previously called "tidy") data, but [now accepts wide-form and mixed-form data](/python/wide-form/) as well.*
+
+There are three common conventions for storing column-oriented data, usually in a data frame with column names:
+
+* **long-form data** is suitable for storing multivariate data (i.e. dimensions greater than 2), with one row per observation, and one column per variable.
+* **wide-form data** is suitable for storing 2-dimensional data, with one row per value of one of the first variable, and one column per value of the second variable.
+* **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables (see our [wide-form documentation](/python/wide-form/) for examples of how to use Plotly Express to visualize this kind of data)
+
+All Plotly Express functions can operate on long-form data, and the following 2D-Cartesian functions can operate on wide-form data as well:: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`. Read on for a short example of the differences between these forms, or check out our [detailed documentation about wide-form support](/python/wide-form/).
+
+By way of example here is the same data, represented in long-form first, and then in wide-form:
 
 ```python
-import pandas as pd
-print("This is 'wide' data, unsuitable as-is for Plotly Express:")
-wide_df = pd.DataFrame(dict(Month=["Jan", "Feb", "Mar"], London=[1,2,3], Paris=[3,1,2]))
-wide_df
-```
-
-```python
-import pandas as pd
-print("This is the same data in 'long' format, ready for Plotly Express:")
-wide_df = pd.DataFrame(dict(Month=["Jan", "Feb", "Mar"], London=[1,2,3], Paris=[3,1,2]))
-tidy_df = wide_df.melt(id_vars="Month")
-tidy_df
+import plotly.express as px
+long_df = px.data.medals_long()
+long_df
 ```
 
 ```python
 import plotly.express as px
-import pandas as pd
+wide_df = px.data.medals_wide()
+wide_df
+```
 
-wide_df = pd.DataFrame(dict(Month=["Jan", "Feb", "Mar"], London=[1,2,3], Paris=[3,1,2]))
-tidy_df = wide_df.melt(id_vars="Month")
+Plotly Express can produce the same plot from either form:
 
-fig = px.bar(tidy_df, x="Month", y="value", color="variable", barmode="group")
+```python
+import plotly.express as px
+long_df = px.data.medals_long()
+
+fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
 fig.show()
 ```
 
-### pandas DataFrame input data
+```python
+import plotly.express as px
+wide_df = px.data.medals_wide()
 
-`px` functions supports natively pandas DataFrame. Arguments can either be passed as dataframe columns, or as column names if the `data_frame` argument is provided.
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+fig.show()
+```
+
+You might notice that y-axis and legend labels are slightly different for the second plot: they are "value" and "variable", respectively, and this is also reflected in the hoverlabel text. This is because Plotly Express performed an [internal Pandas `melt()` operation](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) to convert the wide-form data into long-form for plotting, and used the Pandas convention for assign column names to the intermediate long-form data. Note that the labels "medal" and "count" do not appear in the wide-form data frame, so in this case, you must supply these yourself, or [you can use a data frame with named row- and column-indexes](/python/wide-form/). You can [rename these labels with the `labels` argument](/python/styling-plotly-express/):
+
+```python
+import plotly.express as px
+wide_df = px.data.medals_wide()
+
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input, relabelled",
+            labels={"value": "count", "variable": "medal"})
+fig.show()
+```
+
+Many more examples of wide-form and messy data input can be found in our [detailed wide-form support documentation](/python/wide-form/).
+
+
+### Input Data as Pandas `DataFrame`s
+
+As shown above, `px` functions supports natively pandas DataFrame. Arguments can either be passed as dataframe columns, or as column names if the `data_frame` argument is provided.
 
 #### Passing columns as arguments
 
@@ -101,7 +133,7 @@ fig = px.scatter(df, x=df.sepal_length, y=df.sepal_width, size=df.petal_length,
 fig.show()
 ```
 
-### Columns not in the data_frame argument
+### Columns not in the `data_frame` argument
 
 In the addition to columns from the `data_frame` argument, one may also pass columns from a different DataFrame, _as long as all columns have the same length_. It is also possible to pass columns without passing the `data_frame` argument.
 
@@ -132,15 +164,25 @@ fig = px.bar(df, x='year', y=gdp, color='continent', labels={'y':'gdp'},
 fig.show()
 ```
 
-### Using array-like arguments: NumPy arrays, lists...
+### Input Data as array-like columns: NumPy arrays, lists...
 
-`px` arguments can also be array-like objects such as lists, NumPy arrays.
+`px` arguments can also be array-like objects such as lists, NumPy arrays, in both long-form or wide-form (for certain functions).
 
 ```python
 import plotly.express as px
 
 # List arguments
 fig = px.line(x=[1, 2, 3, 4], y=[3, 5, 4, 8])
+fig.show()
+```
+
+```python
+import plotly.express as px
+
+# List arguments in wide form
+series1 = [3, 5, 4, 8]
+series2 = [5, 4, 8, 3]
+fig = px.line(x=[1, 2, 3, 4], y=[series1, series2])
 fig.show()
 ```
 

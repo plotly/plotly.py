@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Random Walk
-    order: 10
+    order: 2
     page_type: example_index
     permalink: python/random-walk/
     thumbnail: /images/static-image

@@ -93,13 +93,83 @@ Returns:
 def carshare():
     """
 Each row represents the availability of car-sharing services near the centroid of a zone
-in Montreal.
+in Montreal over a month-long period.
 
 Returns:
     A `pandas.DataFrame` with 249 rows and the following columns:
     `['centroid_lat', 'centroid_lon', 'car_hours', 'peak_hour']`.
 """
     return _get_dataset("carshare")
+
+
+def stocks(indexed=False):
+    """
+Each row in this wide dataset represents closing prices from 6 tech stocks in 2018/2019.
+
+Returns:
+    A `pandas.DataFrame` with 100 rows and the following columns:
+    `['date', 'GOOG', 'AAPL', 'AMZN', 'FB', 'NFLX', 'MSFT']`.
+    If `indexed` is True, the 'date' column is used as the index and the column index
+    is named 'company'
+"""
+    df = _get_dataset("stocks")
+    if indexed:
+        df = df.set_index("date")
+        df.columns.name = "company"
+    return df
+
+
+def experiment(indexed=False):
+    """
+Each row in this wide dataset represents the results of 100 simulated participants
+on three hypothetical experiments, along with their gender and control/treatment group.
+
+
+Returns:
+    A `pandas.DataFrame` with 100 rows and the following columns:
+    `['experiment_1', 'experiment_2', 'experiment_3', 'gender', 'group']`.
+    If `indexed` is True, the data frame index is named "participant"
+"""
+    df = _get_dataset("experiment")
+    if indexed:
+        df.index.name = "participant"
+    return df
+
+
+def medals_wide(indexed=False):
+    """
+This dataset represents the medal table for Olympic Short Track Speed Skating for the
+top three nations as of 2020.
+
+Returns:
+    A `pandas.DataFrame` with 3 rows and the following columns:
+    `['nation', 'gold', 'silver', 'bronze']`.
+    If `indexed` is True, the 'nation' column is used as the index and the column index
+    is named 'medal'
+"""
+    df = _get_dataset("medals")
+    if indexed:
+        df = df.set_index("nation")
+        df.columns.name = "medal"
+    return df
+
+
+def medals_long(indexed=False):
+    """
+This dataset represents the medal table for Olympic Short Track Speed Skating for the
+top three nations as of 2020.
+
+Returns:
+    A `pandas.DataFrame` with 9 rows and the following columns:
+    `['nation', 'medal', 'count']`.
+    If `indexed` is True, the 'nation' column is used as the index.
+"""
+    df = _get_dataset("medals").melt(
+        id_vars=["nation"], value_name="count", var_name="medal"
+    )
+    if indexed:
+        df = df.set_index("nation")
+    return df
 
 
 def _get_dataset(d):
