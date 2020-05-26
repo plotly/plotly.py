@@ -24,6 +24,10 @@ import pytest
         (lambda df: df["A"].hist(), lambda df: px.histogram(df["A"])),
     ],
 )
+@pytest.mark.skipif(
+    not hasattr(pd.options.plotting, "backend"),
+    reason="Currently installed pandas doesn't support plotting backends.",
+)
 def test_pandas_equiv(pandas_fn, px_fn):
     pd.options.plotting.backend = "plotly"
     df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD")).cumsum()
