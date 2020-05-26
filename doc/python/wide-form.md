@@ -34,21 +34,21 @@ jupyter:
     thumbnail: thumbnail/plotly-express.png
 ---
 
-### Plotly Express with Column-oriented, Matrix or Geographic Data
+### Plotly Express works with Column-oriented, Matrix or Geographic Data
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a Pandas `DataFrame` (in either "long" or "wide" format, see below). [`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions, but you can also check out our [detailed column-input-format documentation](/python/px-arguments/).
 
-### Plotly Express with Long-, Wide-, and Mixed-Form Data
+### Plotly Express works with Long-, Wide-, and Mixed-Form Data
 
 *Until version 4.8, Plotly Express only operated on long-form (previously called "tidy") data, but now accepts wide-form and mixed-form data as well.*
 
 There are three common conventions for storing column-oriented data, usually in a data frame with column names:
 
-* **long-form data** is suitable for storing multivariate data (i.e. dimensions greater than 2), with one row per observation, and one column per variable.
-* **wide-form data** is suitable for storing 2-dimensional data, with one row per value of one of the first variable, and one column per value of the second variable.
-* **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables
+* **long-form data** has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
+* **wide-form data** has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
+* **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables.
 
-All Plotly Express functions other than `imshow` can operate on long-form data, and in addition, the following 2D-Cartesian functions can operate on wide-form and mixed-form data: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`.
+Every Plotly Express function other than `imshow` can operate on long-form data, and in addition, the following 2D-Cartesian functions can operate on wide-form and mixed-form data: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`.
 
 By way of example here is the same data, represented in long-form first, and then in wide-form:
 
