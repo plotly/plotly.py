@@ -24,16 +24,16 @@ import pytest
         (lambda df: df["A"].hist(), lambda df: px.histogram(df["A"])),
     ],
 )
-@pytest.mark.skipif(
-    not hasattr(pd.options.plotting, "backend"),
-    reason="Currently installed pandas doesn't support plotting backends.",
-)
 def test_pandas_equiv(pandas_fn, px_fn):
     pd.options.plotting.backend = "plotly"
     df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD")).cumsum()
     assert pandas_fn(df) == px_fn(df)
 
 
+@pytest.mark.skipif(
+    not hasattr(pd.options.plotting, "backend"),
+    reason="Currently installed pandas doesn't support plotting backends.",
+)
 def test_pandas_example():
     pd.options.plotting.backend = "plotly"
     ts = pd.Series(np.random.randn(1000), index=pd.date_range("1/1/2000", periods=1000))
