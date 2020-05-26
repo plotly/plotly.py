@@ -28,3 +28,11 @@ def test_pandas_equiv(pandas_fn, px_fn):
     pd.options.plotting.backend = "plotly"
     df = pd.DataFrame(np.random.randn(100, 4), columns=list("ABCD")).cumsum()
     assert pandas_fn(df) == px_fn(df)
+
+
+def test_pandas_example():
+    pd.options.plotting.backend = "plotly"
+    ts = pd.Series(np.random.randn(1000), index=pd.date_range("1/1/2000", periods=1000))
+    df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index, columns=list("ABCD"))
+    fig = df.iloc[5].plot.bar()
+    assert len(fig.data) == 1
