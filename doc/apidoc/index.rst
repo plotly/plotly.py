@@ -18,6 +18,7 @@ Submodules
 * :ref:`Figure Factories: helper methods for building specific complex charts <ff>`
 * :ref:`I/O: low-level interface for displaying, reading and writing figures <io>`
 * :mod:`plotly.colors`: colorscales and utility functions
+* :mod:`plotly.data`: built-in datasets for demonstration, educational and test purposes
 
 Full reference list
 -------------------
