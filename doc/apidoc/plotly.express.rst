@@ -1,7 +1,7 @@
 .. _px:
 
 `plotly.express`: high-level interface for data visualization
-================================
+=============================================================
 
 The `plotly.express <https://plot.ly/python/plotly-express/>`_ module is
 plotly's high-level API for rapid figure generation. ::
@@ -49,4 +49,12 @@ plotly's high-level API for rapid figure generation. ::
     imshow
 
 
+`plotly.express` subpackages
+---------------------------
 
+
+.. toctree::
+   :maxdepth: 1
+
+   generated/plotly.express.data.rst
+   generated/plotly.express.colors.rst
