@@ -3,7 +3,7 @@
 * the `tutorial on discrete color sequences <https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express>`_
 * the `list of built-in continuous color scales <https://plotly.com/python/builtin-colorscales/>`_
 
-Color scales are available within the following namespaces
+Color scales and sequences are available within the following namespaces
 
 * cyclical
 * diverging
