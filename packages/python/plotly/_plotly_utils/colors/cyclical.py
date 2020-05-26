@@ -185,3 +185,9 @@ for _k, _cols in _contents.items():
     if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
         continue
     globals()[_k + "_r"] = _cols[::-1]
+
+
+__all__ = [
+    "swatches",
+    "swatches_cyclical",
+]

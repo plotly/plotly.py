@@ -37,9 +37,9 @@ jupyter:
 
 Dot plots (also known as [Cleveland dot plots](<https://en.wikipedia.org/wiki/Dot_plot_(statistics)>)) show changes between two (or more) points in time or between two (or more) conditions. Compared to a [bar chart](/python/bar-charts/), dot plots can be less cluttered and allow for an easier comparison between conditions.
 
-For the same data, we show below how to create a dot plot using either `px.scatter` (for a tidy pandas DataFrame) or `go.Scatter`.
+For the same data, we show below how to create a dot plot using either `px.scatter` or `go.Scatter`.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px

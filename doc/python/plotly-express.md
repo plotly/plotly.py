@@ -37,7 +37,7 @@ jupyter:
 
 ### Plotly Express
 
-Plotly Express is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
+Plotly Express is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
 
 > **Note**: Plotly Express was previously its own separately-installed `plotly_express` package but is now part of `plotly` and importable via `import plotly.express as px`.
 

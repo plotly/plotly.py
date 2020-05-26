@@ -35,7 +35,7 @@ jupyter:
 
 ## 3D scatter plot with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 Like the [2D scatter plot](https://plotly.com/python/line-and-scatter/) `px.scatter`, the 3D function `px.scatter_3d` plots individual data in three-dimensional space.
 

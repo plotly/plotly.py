@@ -42,7 +42,7 @@ A 2D histogram, also known as a density heatmap, is the 2-dimensional generaliza
 
 ## Density Heatmaps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_heatmap()` can be used to produce density heatmaps.
 
 ```python
 import plotly.express as px

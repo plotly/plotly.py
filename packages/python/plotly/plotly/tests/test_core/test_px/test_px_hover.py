@@ -2,7 +2,6 @@ import plotly.express as px
 import numpy as np
 import pandas as pd
 import pytest
-import plotly.graph_objects as go
 from collections import OrderedDict  # an OrderedDict is needed for Python 2
 
 
@@ -74,24 +73,69 @@ def test_newdatain_hover_data():
 
 
 def test_fail_wrong_column():
-    with pytest.raises(ValueError):
-        fig = px.scatter(
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
             {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
             x="a",
             y="b",
             hover_data={"d": True},
         )
-    with pytest.raises(ValueError):
-        fig = px.scatter(
+    assert (
+        "Value of 'hover_data_0' is not the name of a column in 'data_frame'."
+        in str(err_msg.value)
+    )
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
             {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
             x="a",
             y="b",
             hover_data={"d": ":.1f"},
         )
-    with pytest.raises(ValueError):
-        fig = px.scatter(
+    assert (
+        "Value of 'hover_data_0' is not the name of a column in 'data_frame'."
+        in str(err_msg.value)
+    )
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
             {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
             x="a",
             y="b",
-            hover_data={"d": (True, [3, 4, 5])},
+            hover_data={"d": [3, 4, 5]},  # d is too long
         )
+    assert (
+        "All arguments should have the same length. The length of hover_data key `d` is 3"
+        in str(err_msg.value)
+    )
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"d": (True, [3, 4, 5])},  # d is too long
+        )
+    assert (
+        "All arguments should have the same length. The length of hover_data key `d` is 3"
+        in str(err_msg.value)
+    )
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"c": [3, 4]},
+        )
+    assert (
+        "Ambiguous input: values for 'c' appear both in hover_data and data_frame"
+        in str(err_msg.value)
+    )
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(
+            {"a": [1, 2], "b": [3, 4], "c": [2, 1]},
+            x="a",
+            y="b",
+            hover_data={"c": (True, [3, 4])},
+        )
+    assert (
+        "Ambiguous input: values for 'c' appear both in hover_data and data_frame"
+        in str(err_msg.value)
+    )

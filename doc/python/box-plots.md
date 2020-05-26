@@ -40,7 +40,7 @@ A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representa
 
 ## Box Plot with `plotly.express`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 
