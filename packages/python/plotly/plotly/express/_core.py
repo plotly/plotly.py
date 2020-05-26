@@ -1069,11 +1069,8 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     constants[col_name] = argument.value
                 else:
                     ranges.append(col_name)
-            # ----------------- argument is a col name ----------------------
-            elif isinstance(argument, str) or isinstance(
-                argument, int
-            ):  # just a column name given as str or int
-
+            # ----------------- argument is likely a col name ----------------------
+            elif isinstance(argument, str) or not hasattr(argument, "__len__"):
                 if (
                     field_name == "hover_data"
                     and hover_data_is_dict
@@ -1135,7 +1132,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 else:
                     col_name = str(argument)
                     df_output[col_name] = df_input[argument].values
-            # ----------------- argument is a column / array / list.... -------
+            # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
                     if argument is df_input.index:
