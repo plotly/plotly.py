@@ -36,9 +36,9 @@ jupyter:
 
 ### Introduction
 
-The popular [Pandas](https://pandas.pydata.org/) data analysis and manipulation tool provides plotting functions on its `DataFrame` and `Series` objects, which have historically produced `matplotlib` plots. Since version 0.25, Pandas has provided a mechanism to use different backends, and as of version 4.8 of `plotly`, you can now use a [Plotly Express-powered](/python/plotly-express/) backend for Pandas plotting.
+The popular [Pandas](https://pandas.pydata.org/) data analysis and manipulation tool provides [plotting functions on its `DataFrame` and `Series` objects](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html), which have historically produced `matplotlib` plots. Since version 0.25, Pandas has provided a mechanism to use different backends, and as of version 4.8 of `plotly`, you can now use a [Plotly Express-powered](/python/plotly-express/) backend for Pandas plotting. This means you can now produce interactive plots directly from a data frame, without even needing to import Plotly.
 
-To activate it, you just need to set `pd.options.plotting.backend` to `"plotly"` and call `.plot()` to get a `plotly.graph_objects.Figure` object back, just like if you had called Plotly Express directly:
+To activate this backend, you will need to [have Plotly installed](/python/getting-started/), and then just need to set `pd.options.plotting.backend` to `"plotly"` and call `.plot()` to get a `plotly.graph_objects.Figure` object back, just like if you had called Plotly Express directly:
 
 ```python
 import pandas as pd
@@ -64,9 +64,9 @@ fig.show()
 
 ### A Note on API Compatibility
 
-> The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc. 
+> The Plotly plotting backend for Pandas is *not intended* to be a drop-in replacement for the default; it does not implement all or even most of the same keyword arguments, such as `subplots=True` etc.
 
-The Plotly plotting backend for Pandas is a more convenient way to invoke certain [Plotly Express](/python/plotly-express/) functions by chaining a `.plot()` call without having to import Plotly Express directly. Plotly Express, as of version 4.8 with [wide-form data support](/python/wide-form/) implements behaviour for the `x` and `y` keywords that are very simlar to the `matplotlib` backend.
+The Plotly plotting backend for Pandas is a more convenient way to invoke certain [Plotly Express](/python/plotly-express/) functions by chaining a `.plot()` call without having to import Plotly Express directly. Plotly Express, as of version 4.8 with [wide-form data support](/python/wide-form/) in addition to its robust long-form data support, implements behaviour for the `x` and `y` keywords that are very simlar to the `matplotlib` backend.
 
 In practice, this means that the following two ways of making a chart are identical and support the same additional arguments, because they call the same underlying code:
 
@@ -85,7 +85,7 @@ fig2 = px.bar(df)
 fig2.show()
 ```
 
-To achieve a similar effect to `subplots=True`, the [Plotly Express `facet_row` and `facet_col` options](/python/facet-plots/) can be used, the same was as they work when directly calling [Plotly Express with wide-form data](/python/wide-form/):
+To achieve a similar effect to `subplots=True`, for example, the [Plotly Express `facet_row` and `facet_col` options](/python/facet-plots/) can be used, the same was as they work when directly calling [Plotly Express with wide-form data](/python/wide-form/):
 
 ```python
 import pandas as pd
@@ -98,7 +98,7 @@ fig.show()
 
 ### Supported Methods
 
-The Plotly backend supports the following `kind`s of Pandas plots: `scatter`, `line`, `area`, `bar`, `barh`, `hist` and `box`, via the call pattern `df.plot(kind='scatter')` or `df.plot.scatter()`.
+The Plotly backend supports the following `kind`s of Pandas plots: `scatter`, `line`, `area`, `bar`, `barh`, `hist` and `box`, via the call pattern `df.plot(kind='scatter')` or `df.plot.scatter()`. These delegate to the corresponding Plotly Express functions.
 
 ```python
 import pandas as pd
@@ -107,7 +107,7 @@ pd.options.plotting.backend = "plotly"
 np.random.seed(1)
 
 df = pd.DataFrame(dict(
-    a=np.random.normal(loc=1, scale=2, size=100), 
+    a=np.random.normal(loc=1, scale=2, size=100),
     b=np.random.normal(loc=2, scale=1, size=100)
 ))
 fig = df.plot.scatter(x="a", y="b")
@@ -157,7 +157,7 @@ pd.options.plotting.backend = "plotly"
 np.random.seed(1)
 
 df = pd.DataFrame(dict(
-    a=np.random.normal(loc=1, scale=2, size=100), 
+    a=np.random.normal(loc=1, scale=2, size=100),
     b=np.random.normal(loc=2, scale=1, size=100)
 ))
 fig = df.plot.hist()
@@ -171,7 +171,7 @@ pd.options.plotting.backend = "plotly"
 np.random.seed(1)
 
 df = pd.DataFrame(dict(
-    a=np.random.normal(loc=1, scale=2, size=100), 
+    a=np.random.normal(loc=1, scale=2, size=100),
     b=np.random.normal(loc=2, scale=1, size=100)
 ))
 fig = df.plot.box()
@@ -189,7 +189,7 @@ pd.options.plotting.backend = "plotly"
 np.random.seed(1)
 
 df = pd.DataFrame(dict(
-    a=np.random.normal(loc=1, scale=2, size=100), 
+    a=np.random.normal(loc=1, scale=2, size=100),
     b=np.random.normal(loc=2, scale=1, size=100)
 ))
 fig = df.boxplot()
