@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      Figure Factories are dedicated functions for creating very specific types of plots.
+    description: Figure Factories are dedicated functions for creating very specific
+      types of plots.
     display_as: file_settings
     language: python
     layout: base
@@ -31,6 +31,7 @@ jupyter:
     order: 32
     permalink: python/figure-factories/
     thumbnail: thumbnail/streamline.jpg
+order: 31
 ---
 
 #### `plotly.figure_factory`

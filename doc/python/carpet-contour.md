@@ -33,6 +33,7 @@ jupyter:
     page_type: u-guide
     permalink: python/carpet-contour/
     thumbnail: thumbnail/contourcarpet.jpg
+order: 14
 ---
 
 ### Basic Carpet Plot

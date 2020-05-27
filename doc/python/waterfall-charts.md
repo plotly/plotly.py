@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/waterfall-charts/
     thumbnail: thumbnail/waterfall-charts.jpg
+order: 3
 ---
 
 ### Simple Waterfall Chart

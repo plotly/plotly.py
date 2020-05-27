@@ -32,6 +32,7 @@ jupyter:
     page_type: u-guide
     permalink: python/wide-form/
     thumbnail: thumbnail/plotly-express.png
+order: 32
 ---
 
 ### Plotly Express works with Column-oriented, Matrix or Geographic Data

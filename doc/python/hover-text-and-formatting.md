@@ -30,6 +30,7 @@ jupyter:
     order: 22
     permalink: python/hover-text-and-formatting/
     thumbnail: thumbnail/hover-text.png
+order: 21
 ---
 
 ### Hover Labels

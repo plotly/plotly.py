@@ -30,6 +30,7 @@ jupyter:
     order: 6
     permalink: python/3d-camera-controls/
     thumbnail: thumbnail/3d-camera-controls.jpg
+order: 5
 ---
 
 ### How camera controls work

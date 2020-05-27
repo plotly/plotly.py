@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/scattermapbox/
     thumbnail: thumbnail/scatter-mapbox.jpg
+order: 9
 ---
 
 #### Mapbox Access Token and Base Map Configuration

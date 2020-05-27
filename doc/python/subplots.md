@@ -33,6 +33,7 @@ jupyter:
     permalink: python/subplots/
     redirect_from: ipython-notebooks/subplots/
     thumbnail: thumbnail/subplots.jpg
+order: 15
 ---
 
 #### Simple Subplot

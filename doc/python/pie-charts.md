@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/pie-charts/
     thumbnail: thumbnail/pie-chart.jpg
+order: 4
 ---
 
 A pie chart is a circular statistical chart, which is divided into sectors to illustrate numerical proportion.

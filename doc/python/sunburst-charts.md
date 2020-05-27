@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/sunburst-charts/
     thumbnail: thumbnail/sunburst.gif
+order: 10
 ---
 
 Sunburst plots visualize hierarchical data spanning outwards radially from root to leaves. The sunburst sector hierarchy is determined by the entries in `labels` (`names` in `px.sunburst`) and in `parents`. The root starts from the center and children are added to the outer rings.

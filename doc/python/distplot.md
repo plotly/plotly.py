@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/distplot/
     thumbnail: thumbnail/distplot.jpg
+order: 4
 ---
 
 ## Combined statistical representations with px.histogram

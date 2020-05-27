@@ -30,6 +30,7 @@ jupyter:
     order: 11
     permalink: python/tick-formatting/
     thumbnail: thumbnail/tick-formatting.gif
+order: 10
 ---
 
 #### Tickmode - Linear
@@ -195,4 +196,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#layout-xaxis for more information and chart attribute options!
-

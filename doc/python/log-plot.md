@@ -30,6 +30,7 @@ jupyter:
     order: 6
     permalink: python/log-plot/
     thumbnail: thumbnail/log.jpg
+order: 5
 ---
 
 ### Logarithmic Axes ###
@@ -55,4 +56,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#layout-xaxis-type for more information and chart attribute options!
-

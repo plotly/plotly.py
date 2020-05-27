@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,7 +22,9 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description: Figures made with Plotly Express can be customized in all the same ways as figures made with graph objects, as well as with PX-specific function arguments.
+    description: Figures made with Plotly Express can be customized in all the same
+      ways as figures made with graph objects, as well as with PX-specific function
+      arguments.
     display_as: file_settings
     language: python
     layout: base
@@ -31,6 +33,7 @@ jupyter:
     page_type: u-guide
     permalink: python/styling-plotly-express/
     thumbnail: thumbnail/plotly-express.png
+order: 28
 ---
 
 ### Styling Figures made with Plotly Express

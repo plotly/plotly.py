@@ -35,6 +35,7 @@ jupyter:
     - ipython-notebooks/networks/
     - ipython-notebooks/network-graphs/
     thumbnail: thumbnail/net.jpg
+order: 12
 ---
 
 In this example we show how to visualize a network graph created using `networkx`.

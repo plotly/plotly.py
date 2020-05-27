@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/3d-mesh/
     thumbnail: thumbnail/3d-mesh.jpg
+order: 9
 ---
 
 ### Simple 3D Mesh example ###

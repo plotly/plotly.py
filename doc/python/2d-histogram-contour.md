@@ -32,6 +32,7 @@ jupyter:
     permalink: python/2d-histogram-contour/
     redirect_from: python/2d-density-plots/
     thumbnail: thumbnail/hist2dcontour.png
+order: 11
 ---
 
 ## 2D Histogram Contours or Density Contours

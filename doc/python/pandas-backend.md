@@ -32,6 +32,7 @@ jupyter:
     permalink: python/pandas-backend/
     redirect_from: python/cufflinks/
     thumbnail: thumbnail/plotly-express.png
+order: 30
 ---
 
 ### Introduction

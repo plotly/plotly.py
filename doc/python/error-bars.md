@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.2.0
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/error-bars/
     thumbnail: thumbnail/error-bar.jpg
+order: 1
 ---
 
 ### Error Bars with Plotly Express

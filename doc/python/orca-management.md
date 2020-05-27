@@ -31,6 +31,7 @@ jupyter:
     order: 8
     permalink: python/orca-management/
     thumbnail: thumbnail/orca-management.png
+order: 7
 ---
 
 ### Overview

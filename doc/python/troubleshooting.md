@@ -32,6 +32,7 @@ jupyter:
     page_type: u-guide
     permalink: python/troubleshooting/
     thumbnail: thumbnail/modebar-icons.png
+order: 25
 ---
 
 <!-- #region -->

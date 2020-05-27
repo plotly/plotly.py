@@ -31,6 +31,7 @@ jupyter:
     order: 15
     permalink: python/trisurf/
     thumbnail: thumbnail/trisurf.jpg
+order: 14
 ---
 
 Trisurf plots can be made using a [figure factory](/python/figure-factories/) as detailed in this page.
@@ -129,4 +130,3 @@ fig.show()
 #### Reference
 
 For more info on `ff.create_trisurf()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_trisurf.html)
-

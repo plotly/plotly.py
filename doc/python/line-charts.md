@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description:
-      How to make line charts in Python with Plotly. Examples on creating
+    description: How to make line charts in Python with Plotly. Examples on creating
       and styling line charts in Python with Plotly.
     display_as: basic
     language: python
@@ -33,6 +32,7 @@ jupyter:
     page_type: example_index
     permalink: python/line-charts/
     thumbnail: thumbnail/line-plot.jpg
+order: 2
 ---
 
 ### Line Plot with plotly.express

@@ -30,6 +30,7 @@ jupyter:
     order: 25
     permalink: python/ipython-vs-python/
     thumbnail: thumbnail/venn.jpg
+order: 24
 ---
 
 #### What is the difference between IPython and Python?

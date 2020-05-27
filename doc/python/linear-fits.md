@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,9 +22,9 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      Add linear Ordinary Least Squares (OLS) regression trendlines or non-linear
-      Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots in Python.
+    description: Add linear Ordinary Least Squares (OLS) regression trendlines or
+      non-linear Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots
+      in Python.
     display_as: statistical
     language: python
     layout: base
@@ -33,6 +33,7 @@ jupyter:
     page_type: u-guide
     permalink: python/linear-fits/
     thumbnail: thumbnail/linear_fit.jpg
+order: 12
 ---
 
 ### Linear fit trendlines with Plotly Express

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/filled-area-plots/
     thumbnail: thumbnail/area.jpg
+order: 7
 ---
 
 This example shows how to fill the area enclosed by traces.

@@ -33,6 +33,7 @@ jupyter:
     page_type: example_index
     permalink: python/candlestick-charts/
     thumbnail: thumbnail/candlestick.jpg
+order: 2
 ---
 
 The [candlestick chart](https://en.wikipedia.org/wiki/Candlestick_chart) is a style of financial chart describing open, high, low and close for a given `x` coordinate (most likely

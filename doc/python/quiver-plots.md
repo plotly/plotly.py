@@ -31,6 +31,7 @@ jupyter:
     order: 11
     permalink: python/quiver-plots/
     thumbnail: thumbnail/quiver-plot.jpg
+order: 10
 ---
 
 Quiver plots can be made using a [figure factory](/python/figure-factories/) as detailed in this page.

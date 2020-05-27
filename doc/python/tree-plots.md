@@ -31,6 +31,7 @@ jupyter:
     order: 10
     permalink: python/tree-plots/
     thumbnail: thumbnail/treeplot.jpg
+order: 9
 ---
 
 #### Set Up Tree with [igraph](http://igraph.org/python/)

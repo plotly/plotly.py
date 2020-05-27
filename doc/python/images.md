@@ -31,6 +31,7 @@ jupyter:
     permalink: python/images/
     thumbnail: thumbnail/images.png
     v4upgrade: true
+order: 22
 ---
 
 #### Add a Background Image

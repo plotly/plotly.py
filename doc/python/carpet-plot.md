@@ -33,6 +33,7 @@ jupyter:
     page_type: u-guide
     permalink: python/carpet-plot/
     thumbnail: thumbnail/carpet.jpg
+order: 13
 ---
 
 <!-- #region -->

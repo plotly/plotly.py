@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/templates/
     thumbnail: thumbnail/theming-and-templates.png
+order: 6
 ---
 
 ### Theming and templates

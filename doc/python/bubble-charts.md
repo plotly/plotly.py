@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -32,6 +32,7 @@ jupyter:
     permalink: python/bubble-charts/
     redirect_from: python/bubble-charts-tutorial/
     thumbnail: thumbnail/bubble.jpg
+order: 5
 ---
 
 ## Bubble chart with plotly.express

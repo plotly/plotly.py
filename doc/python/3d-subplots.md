@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/3d-subplots/
     thumbnail: thumbnail/3d-subplots.jpg
+order: 4
 ---
 
 #### 3D Surface Subplots

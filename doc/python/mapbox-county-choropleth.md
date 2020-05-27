@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to make a Mapbox Choropleth Map of US Counties in Python with
+    description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
     display_as: maps
     language: python
@@ -33,6 +32,7 @@ jupyter:
     page_type: example_index
     permalink: python/mapbox-county-choropleth/
     thumbnail: thumbnail/mapbox-choropleth.png
+order: 1
 ---
 
 A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **tile-map** choropleth maps, but you can also build [**outline** choropleth maps using our non-Mapbox trace types](/python/choropleth-maps).

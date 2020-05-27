@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -22,6 +22,7 @@ jupyter:
     permalink: python/funnel-charts/
     redirect_from: python/funnel-chart/
     thumbnail: thumbnail/funnel.jpg
+order: 4
 ---
 
 ### Introduction

@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/ternary-plots/
     thumbnail: thumbnail/v4-migration.png
+order: 4
 ---
 
 ## Ternary Plots

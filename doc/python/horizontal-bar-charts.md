@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/horizontal-bar-charts/
     thumbnail: thumbnail/horizontal-bar.jpg
+order: 8
 ---
 
 See more examples of bar charts (including vertical bar charts) and styling options [here](https://plotly.com/python/bar-charts/).

@@ -34,6 +34,7 @@ jupyter:
     permalink: python/imshow/
     thumbnail: thumbnail/imshow.jpg
     v4upgrade: true
+order: 3
 ---
 
 This tutorial shows how to display and explore image data. If you would like
@@ -309,4 +310,3 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 
 #### Reference
 See https://plotly.com/python/reference/#image for more information and chart attribute options!
-

@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/treemaps/
     thumbnail: thumbnail/treemap.png
+order: 13
 ---
 
 [Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Same as [Sunburst](https://plotly.com/python/sunburst-charts/) the hierarchy is defined by [labels](https://plotly.com/python/reference/#treemap-labels) (`names` for `px.treemap`) and [parents](https://plotly.com/python/reference/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.

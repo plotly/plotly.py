@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/lines-on-maps/
     thumbnail: thumbnail/flight-paths.jpg
+order: 6
 ---
 
 Below we show how to create geographical line plots using either Plotly Express with `px.line_geo` function or the lower-level `go.Scattergeo` object.

@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/time-series/
     thumbnail: thumbnail/time-series.jpg
+order: 1
 ---
 
 ### Time Series using Axes of type `date`

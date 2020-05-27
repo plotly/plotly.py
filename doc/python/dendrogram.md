@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/dendrogram/
     thumbnail: thumbnail/dendrogram.jpg
+order: 6
 ---
 
 #### Basic Dendrogram

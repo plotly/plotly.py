@@ -34,6 +34,7 @@ jupyter:
     - python/trellis-plots/
     - python/facet-trellis/
     thumbnail: thumbnail/facet-trellis-thumbnail.jpg
+order: 7
 ---
 
 ### Facet and Trellis Plots

@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/ternary-contour/
     thumbnail: thumbnail/ternary-contour.jpg
+order: 18
 ---
 
 ## Ternary contour plots

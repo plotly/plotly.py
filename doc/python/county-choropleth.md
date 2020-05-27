@@ -32,6 +32,7 @@ jupyter:
     page_type: u-guide
     permalink: python/county-choropleth/
     thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg
+order: 10
 ---
 
 ### Deprecation warning

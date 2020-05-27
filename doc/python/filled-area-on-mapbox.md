@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/filled-area-on-mapbox/
     thumbnail: thumbnail/area.jpg
+order: 3
 ---
 
 <!-- #region -->

@@ -30,6 +30,7 @@ jupyter:
     order: 10
     permalink: python/setting-graph-size/
     thumbnail: thumbnail/sizing.png
+order: 9
 ---
 
 ### Adjusting Height, Width, & Margins with Plotly Express

@@ -31,8 +31,8 @@ jupyter:
     page_type: u-guide
     permalink: python/streamtube-plot/
     thumbnail: thumbnail/streamtube.jpg
+order: 13
 ---
-
 
 ### Introduction
 
@@ -132,4 +132,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#streamtube for more information and chart attribute options!
-

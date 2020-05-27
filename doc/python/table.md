@@ -21,6 +21,7 @@ jupyter:
     page_type: u-guide
     permalink: python/table/
     thumbnail: thumbnail/table.gif
+order: 11
 ---
 
 `go.Table` provides a Table object for detailed data viewing. The data are arranged in

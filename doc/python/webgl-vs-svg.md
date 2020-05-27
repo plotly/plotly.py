@@ -31,6 +31,7 @@ jupyter:
     order: 15
     permalink: python/webgl-vs-svg/
     thumbnail: thumbnail/webgl.jpg
+order: 14
 ---
 
 Here we show that it is possible to represent millions of points with WebGL.

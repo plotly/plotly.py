@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/v4-migration/
     thumbnail: thumbnail/v4-migration.png
+order: 3
 ---
 
 ### Upgrading to Version 4

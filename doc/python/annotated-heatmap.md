@@ -32,6 +32,7 @@ jupyter:
     permalink: python/annotated-heatmap/
     redirect_from: python/annotated_heatmap/
     thumbnail: thumbnail/ann_heat.jpg
+order: 7
 ---
 
 #### Simple Annotated Heatmap

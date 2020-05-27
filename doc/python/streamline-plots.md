@@ -31,6 +31,7 @@ jupyter:
     order: 12
     permalink: python/streamline-plots/
     thumbnail: thumbnail/streamline.jpg
+order: 11
 ---
 
 A Streamline plot is a representation based on a 2-D vector field interpreted as a velocity field, consisting of closed curves tangent to the velocity field. In the case of a stationary velocity field, streamlines coincide with trajectories (see also the [Wikipedia page on streamlines, streaklines and pathlines](https://en.wikipedia.org/wiki/Streamlines,_streaklines,_and_pathlines)).
@@ -107,4 +108,3 @@ For representing the 2-D vector field as arrows, see the [quiver plot tutorial](
 #### Reference
 
 For more info on `ff.create_streamline()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_streamline.html)
-

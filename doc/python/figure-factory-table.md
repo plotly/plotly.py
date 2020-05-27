@@ -33,6 +33,7 @@ jupyter:
     - python/figure-factory/table/
     - python/v3/figure-factory/table/
     thumbnail: thumbnail/table.gif
+order: 15
 ---
 
 Tables can be created using a [`table` trace type](/python/table/), or by using a [figure factory](/python/figure-factories/) as detailed in this page.
@@ -279,4 +280,3 @@ fig.show()
 #### Reference
 
 For more info on `ff.create_table()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_table.html)
-

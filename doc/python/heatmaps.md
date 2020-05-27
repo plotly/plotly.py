@@ -32,6 +32,7 @@ jupyter:
     permalink: python/heatmaps/
     redirect_from: python/heatmap/
     thumbnail: thumbnail/heatmap.jpg
+order: 2
 ---
 
 ### Heatmap with `plotly.express` and `px.imshow`

@@ -31,6 +31,7 @@ jupyter:
     order: 24
     permalink: python/shapes/
     thumbnail: thumbnail/shape.jpg
+order: 23
 ---
 
 ### Filled Area Chart

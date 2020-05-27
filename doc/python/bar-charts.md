@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/bar-charts/
     thumbnail: thumbnail/bar.jpg
+order: 3
 ---
 
 ### Bar chart with Plotly Express

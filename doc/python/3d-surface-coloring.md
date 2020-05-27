@@ -30,6 +30,7 @@ jupyter:
     order: 9
     permalink: python/3d-surface-coloring/
     thumbnail: thumbnail/3d-surface-color.jpg
+order: 8
 ---
 
 ```python
@@ -61,4 +62,3 @@ fig.show()
 
 
 See https://plotly.com/python/reference/#surface-surfacecolor for more information!
-

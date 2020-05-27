@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/3d-volume-plots/
     thumbnail: thumbnail/3d-volume-plots.jpg
+order: 11
 ---
 
 A volume plot with `go.Volume` shows several partially transparent isosurfaces for volume rendering. The API of `go.Volume` is close to the one of `go.Isosurface`. However, whereas [isosurface plots](/python/3d-isosurface-plots/) show all surfaces with the same opacity, tweaking the `opacityscale` parameter of `go.Volume` results in a depth effect and better volume rendering.

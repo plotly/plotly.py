@@ -34,6 +34,7 @@ jupyter:
     permalink: python/discrete-color/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true
+order: 27
 ---
 
 ### Discrete vs Continuous Color

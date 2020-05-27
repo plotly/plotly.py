@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      A reference for the built-in named continuous (sequential, diverging
+    description: A reference for the built-in named continuous (sequential, diverging
       and cylclical) color scales in Plotly.
     display_as: file_settings
     has_thumbnail: true
@@ -35,6 +34,7 @@ jupyter:
     permalink: python/builtin-colorscales/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true
+order: 26
 ---
 
 ### Using Built-In Continuous Color Scales

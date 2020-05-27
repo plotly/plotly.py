@@ -32,6 +32,7 @@ jupyter:
     page_type: u-guide
     permalink: python/datashader/
     thumbnail: thumbnail/datashader.jpg
+order: 20
 ---
 
 [datashader](https://datashader.org/) creates rasterized representations of large datasets for easier visualization, with a pipeline approach consisting of several steps: projecting the data on a regular grid, creating a color representation of the grid, etc.

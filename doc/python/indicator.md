@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/indicator/
     thumbnail: thumbnail/indicator.jpg
+order: 6
 ---
 
 #### Overview

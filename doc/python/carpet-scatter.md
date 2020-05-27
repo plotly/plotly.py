@@ -33,8 +33,8 @@ jupyter:
     page_type: u-guide
     permalink: python/carpet-scatter/
     thumbnail: thumbnail/scattercarpet.jpg
+order: 15
 ---
-
 
 ### Basic Carpet Plot
 

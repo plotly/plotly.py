@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/graphing-multiple-chart-types/
     thumbnail: thumbnail/multiple-chart-type.jpg
+order: 16
 ---
 
 #### Line Chart and a Bar Chart

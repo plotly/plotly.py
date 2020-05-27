@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/parallel-categories-diagram/
     thumbnail: thumbnail/parcats.jpg
+order: 8
 ---
 
 #### Parallel Categories Diagram

@@ -32,6 +32,7 @@ jupyter:
     permalink: python/cone-plot/
     redirect_from: python/3d-cone/
     thumbnail: thumbnail/3dcone.png
+order: 12
 ---
 
 A cone plot is the 3D equivalent of a 2D [quiver plot](/python/quiver-plots/), i.e., it represents a 3D vector field using cones to represent the direction and norm of the vectors. 3-D coordinates are given by `x`, `y` and `z`, and the coordinates of the vector field by `u`, `v` and `w`.
@@ -128,4 +129,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/ for more information and chart attribute options!
-

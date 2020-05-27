@@ -31,6 +31,7 @@ jupyter:
     page_type: example_index
     permalink: python/contour-plots/
     thumbnail: thumbnail/contour.jpg
+order: 1
 ---
 
 ### Basic Contour Plot

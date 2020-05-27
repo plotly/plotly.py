@@ -34,6 +34,7 @@ jupyter:
     - python/gauge-chart/
     - python/gauge-meter/
     thumbnail: thumbnail/gauge.jpg
+order: 7
 ---
 
 #### Basic Gauge

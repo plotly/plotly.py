@@ -30,6 +30,7 @@ jupyter:
     order: 15
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
+order: 14
 ---
 
 #### Two Y Axes

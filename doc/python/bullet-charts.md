@@ -31,6 +31,7 @@ jupyter:
     page_type: u-guide
     permalink: python/bullet-charts/
     thumbnail: thumbnail/bullet.png
+order: 8
 ---
 
 #### Basic Bullet Charts

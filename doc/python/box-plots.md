@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -31,9 +31,10 @@ jupyter:
     page_type: example_index
     permalink: python/box-plots/
     redirect_from:
-      - /python/box/
-      - /python/basic_statistics/
+    - /python/box/
+    - /python/basic_statistics/
     thumbnail: thumbnail/box.jpg
+order: 2
 ---
 
 A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representation of numerical data through their quartiles. The ends of the box represent the lower and upper quartiles, while the median (second quartile) is marked by a line inside the box. For other statistical representations of numerical data, see [other statistical charts](https://plotly.com/python/statistical-charts/).

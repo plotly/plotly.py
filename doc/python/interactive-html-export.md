@@ -32,6 +32,7 @@ jupyter:
     page_type: u-guide
     permalink: python/interactive-html-export/
     thumbnail: thumbnail/static-image-export.png
+order: 29
 ---
 
 ### Interactive vs Static Export
