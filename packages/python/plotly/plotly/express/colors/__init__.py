@@ -44,4 +44,7 @@ __all__ = [
     "validate_colors_dict",
     "validate_colorscale",
     "validate_scale_values",
+    "plotlyjs",
+    "DEFAULT_PLOTLY_COLORS",
+    "PLOTLY_SCALES",
 ]

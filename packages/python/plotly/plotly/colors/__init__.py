@@ -24,7 +24,6 @@ __all__ = [
     "colorbrewer",
     "carto",
     "cmocean",
-    "carto",
     "color_parser",
     "colorscale_to_colors",
     "colorscale_to_scale",
@@ -43,4 +42,7 @@ __all__ = [
     "validate_colors_dict",
     "validate_colorscale",
     "validate_scale_values",
+    "plotlyjs",
+    "DEFAULT_PLOTLY_COLORS",
+    "PLOTLY_SCALES",
 ]
