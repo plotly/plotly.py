@@ -478,8 +478,8 @@ def create_choropleth(
     :param **layout_options: a **kwargs argument for all layout parameters
 
 
-    Example 1: Florida:: 
-    
+    Example 1: Florida::
+
         import plotly.plotly as py
         import plotly.figure_factory as ff
 
@@ -506,106 +506,99 @@ def create_choropleth(
             exponent_format=True,
         )
 
-    Example 2: New England
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
+    Example 2: New England::
 
-    import pandas as pd
+        import plotly.figure_factory as ff
 
-    NE_states = ['Connecticut', 'Maine', 'Massachusetts',
-                 'New Hampshire', 'Rhode Island']
-    df_sample = pd.read_csv(
-        'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
-    )
-    df_sample_r = df_sample[df_sample['STNAME'].isin(NE_states)]
-    colorscale = ['rgb(68.0, 1.0, 84.0)',
-     'rgb(66.0, 64.0, 134.0)',
-     'rgb(38.0, 130.0, 142.0)',
-     'rgb(63.0, 188.0, 115.0)',
-     'rgb(216.0, 226.0, 25.0)']
+        import pandas as pd
 
-    values = df_sample_r['TOT_POP'].tolist()
-    fips = df_sample_r['FIPS'].tolist()
-    fig = ff.create_choropleth(
-        fips=fips, values=values, scope=NE_states, show_state_data=True
-    )
-    py.iplot(fig, filename='choropleth_new_england')
-    ```
+        NE_states = ['Connecticut', 'Maine', 'Massachusetts',
+                    'New Hampshire', 'Rhode Island']
+        df_sample = pd.read_csv(
+            'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
+        )
+        df_sample_r = df_sample[df_sample['STNAME'].isin(NE_states)]
+        colorscale = ['rgb(68.0, 1.0, 84.0)',
+        'rgb(66.0, 64.0, 134.0)',
+        'rgb(38.0, 130.0, 142.0)',
+        'rgb(63.0, 188.0, 115.0)',
+        'rgb(216.0, 226.0, 25.0)']
 
-    Example 3: California and Surrounding States
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
+        values = df_sample_r['TOT_POP'].tolist()
+        fips = df_sample_r['FIPS'].tolist()
+        fig = ff.create_choropleth(
+            fips=fips, values=values, scope=NE_states, show_state_data=True
+        )
+        fig.show()
 
-    import pandas as pd
+    Example 3: California and Surrounding States::
 
-    df_sample = pd.read_csv(
-        'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
-    )
-    df_sample_r = df_sample[df_sample['STNAME'] == 'California']
+        import plotly.figure_factory as ff
 
-    values = df_sample_r['TOT_POP'].tolist()
-    fips = df_sample_r['FIPS'].tolist()
+        import pandas as pd
 
-    colorscale = [
-        'rgb(193, 193, 193)',
-        'rgb(239,239,239)',
-        'rgb(195, 196, 222)',
-        'rgb(144,148,194)',
-        'rgb(101,104,168)',
-        'rgb(65, 53, 132)'
-    ]
+        df_sample = pd.read_csv(
+            'https://raw.githubusercontent.com/plotly/datasets/master/minoritymajority.csv'
+        )
+        df_sample_r = df_sample[df_sample['STNAME'] == 'California']
 
-    fig = ff.create_choropleth(
-        fips=fips, values=values, colorscale=colorscale,
-        scope=['CA', 'AZ', 'Nevada', 'Oregon', ' Idaho'],
-        binning_endpoints=[14348, 63983, 134827, 426762, 2081313],
-        county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
-        legend_title='California Counties',
-        title='California and Nearby States'
-    )
-    py.iplot(fig, filename='choropleth_california_and_surr_states_outlines')
-    ```
+        values = df_sample_r['TOT_POP'].tolist()
+        fips = df_sample_r['FIPS'].tolist()
 
-    Example 4: USA
-    ```
-    import plotly.plotly as py
-    import plotly.figure_factory as ff
+        colorscale = [
+            'rgb(193, 193, 193)',
+            'rgb(239,239,239)',
+            'rgb(195, 196, 222)',
+            'rgb(144,148,194)',
+            'rgb(101,104,168)',
+            'rgb(65, 53, 132)'
+        ]
 
-    import numpy as np
-    import pandas as pd
+        fig = ff.create_choropleth(
+            fips=fips, values=values, colorscale=colorscale,
+            scope=['CA', 'AZ', 'Nevada', 'Oregon', ' Idaho'],
+            binning_endpoints=[14348, 63983, 134827, 426762, 2081313],
+            county_outline={'color': 'rgb(255,255,255)', 'width': 0.5},
+            legend_title='California Counties',
+            title='California and Nearby States'
+        )
+        fig.show()
 
-    df_sample = pd.read_csv(
-        'https://raw.githubusercontent.com/plotly/datasets/master/laucnty16.csv'
-    )
-    df_sample['State FIPS Code'] = df_sample['State FIPS Code'].apply(
-        lambda x: str(x).zfill(2)
-    )
-    df_sample['County FIPS Code'] = df_sample['County FIPS Code'].apply(
-        lambda x: str(x).zfill(3)
-    )
-    df_sample['FIPS'] = (
-        df_sample['State FIPS Code'] + df_sample['County FIPS Code']
-    )
+    Example 4: USA::
 
-    binning_endpoints = list(np.linspace(1, 12, len(colorscale) - 1))
-    colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef",
-                  "#b3d2e9", "#9ecae1", "#85bcdb", "#6baed6", "#57a0ce",
-                  "#4292c6", "#3082be", "#2171b5", "#1361a9", "#08519c",
-                  "#0b4083","#08306b"]
-    fips = df_sample['FIPS']
-    values = df_sample['Unemployment Rate (%)']
-    fig = ff.create_choropleth(
-        fips=fips, values=values, scope=['usa'],
-        binning_endpoints=binning_endpoints, colorscale=colorscale,
-        show_hover=True, centroid_marker={'opacity': 0},
-        asp=2.9, title='USA by Unemployment %',
-        legend_title='Unemployment %'
-    )
+        import plotly.figure_factory as ff
 
-    py.iplot(fig, filename='choropleth_full_usa')
-    ```
+        import numpy as np
+        import pandas as pd
+
+        df_sample = pd.read_csv(
+            'https://raw.githubusercontent.com/plotly/datasets/master/laucnty16.csv'
+        )
+        df_sample['State FIPS Code'] = df_sample['State FIPS Code'].apply(
+            lambda x: str(x).zfill(2)
+        )
+        df_sample['County FIPS Code'] = df_sample['County FIPS Code'].apply(
+            lambda x: str(x).zfill(3)
+        )
+        df_sample['FIPS'] = (
+            df_sample['State FIPS Code'] + df_sample['County FIPS Code']
+        )
+
+        binning_endpoints = list(np.linspace(1, 12, len(colorscale) - 1))
+        colorscale = ["#f7fbff", "#ebf3fb", "#deebf7", "#d2e3f3", "#c6dbef",
+                    "#b3d2e9", "#9ecae1", "#85bcdb", "#6baed6", "#57a0ce",
+                    "#4292c6", "#3082be", "#2171b5", "#1361a9", "#08519c",
+                    "#0b4083","#08306b"]
+        fips = df_sample['FIPS']
+        values = df_sample['Unemployment Rate (%)']
+        fig = ff.create_choropleth(
+            fips=fips, values=values, scope=['usa'],
+            binning_endpoints=binning_endpoints, colorscale=colorscale,
+            show_hover=True, centroid_marker={'opacity': 0},
+            asp=2.9, title='USA by Unemployment %',
+            legend_title='Unemployment %'
+        )
+        fig.show()
     """
     # ensure optional modules imported
     if not _plotly_geo:
