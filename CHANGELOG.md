@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.8.1] - 2020-05-28
+
+### Fixed
+
+- Fixed the accidental removal of some functions and submodules from `plotly.colors` and `plotly.express.colors`
+
 ## [4.8.0] - 2020-05-26
 
 ### Added
