@@ -156,6 +156,129 @@ fig.update_traces(box_visible=True, meanline_visible=True)
 fig.update_layout(violinmode='group')
 fig.show()
 ```
+### Control Violin Position in Different Subplots
+
+To control violins positional range among several subplots, set the same axes to the same [alignmentgroup](https://plot.ly/python/reference/#violin-alignmentgroup). In the following example we have two subplots sharing an x axis with two bar traces (trace0, trace1) on the top, and one bar trace (trace2) on the bottom, that all are aligned by setting the same `alignmentgroup`. 
+You also can line up bars of the same positional coordinate by setting [offsetgroup](https://plot.ly/python/reference/#violin-offsetgroup).
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
+
+fig = go.Figure()
+fig.add_trace(go.Violin(x=df['day'][ df['sex'] == 'Male' ],
+                        y=df['total_bill'][df['sex'] == 'Male' ],
+                        alignmentgroup = 'a',
+                        offsetgroup = 0,
+                        xaxis = 'x',
+                        yaxis = 'y'))
+            
+fig.add_trace(go.Violin(x=df['day'][ df['sex'] == 'Female' ],
+                        y=df['total_bill'][df['sex'] == 'Male' ], 
+                        alignmentgroup = 'a',
+                        offsetgroup = 1,
+                        xaxis = 'x',
+                        yaxis = 'y'))
+
+fig.add_trace(go.Violin(x=df['day'][ df['sex'] == 'Male' ],
+                        y=df['total_bill'][df['sex'] == 'Male' ],
+                        alignmentgroup = 'a',
+                        offsetgroup = 0,
+                        xaxis = 'x',
+                        yaxis = 'y2'))
+
+fig.update_layout(
+    violinmode='group',
+    yaxis = {'domain': [.55,1]},
+    yaxis2 = {'domain': [0,.45]})
+
+fig.show()
+```
+### Offsetgroup vs. Alignmentgroup
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
+
+fig = go.Figure()
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 0,
+                        xaxis = 'x',
+                        yaxis = 'y'))
+            
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 1,
+                        xaxis = 'x',
+                        yaxis = 'y'))
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 2,
+                        xaxis = 'x',
+                        yaxis = 'y2'))
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 0,
+                        xaxis = 'x2',
+                        yaxis = 'y'))
+            
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 1,
+                        xaxis = 'x2',
+                        yaxis = 'y'))
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'b',
+                        offsetgroup = 1,
+                        xaxis = 'x2',
+                        yaxis = 'y2'))
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 0,
+                        xaxis = 'x3',
+                        yaxis = 'y'))
+            
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 1,
+                        xaxis = 'x3',
+                        yaxis = 'y'))
+
+fig.add_trace(go.Violin(x=['A','A'],
+                        y=[1,2,3],
+                        alignmentgroup = 'a',
+                        offsetgroup = 1,
+                        xaxis = 'x3',
+                        yaxis = 'y2'))
+fig.update_layout(
+    showlegend = False,
+    violinmode = 'group',
+    yaxis = {'domain': [.55,1]},
+    yaxis2 = {'domain': [0,.45]},
+    xaxis = {'domain': [0,.30], 'anchor': 'y2', 'title': "=alignment<br>≠offset"},
+    xaxis2 = {'domain': [.35, .65], 'anchor': 'y2', 'title': "≠alignment<br>=offset"},
+    xaxis3 = {'domain': [.7,1], 'anchor': 'y2', 'title': "=alignment<br>=offset"})
+
+fig.show()
+```
 
 #### Split Violin Plot
 
