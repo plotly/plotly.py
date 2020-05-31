@@ -38,7 +38,7 @@
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 
 ```python
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 fig = go.Figure()
 fig.add_trace(go.Scatter(y=[2, 1, 4, 3]))
 fig.add_trace(go.Bar(y=[1, 4, 3, 2]))
