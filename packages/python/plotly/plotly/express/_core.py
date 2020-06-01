@@ -1432,23 +1432,11 @@ def process_dataframe_hierarchy(args):
     _check_dataframe_all_leaves(df[path[::-1]])
     discrete_color = False
 
-    if args["color"] and args["color"] in path:
-        series_to_copy = df[args["color"]]
-        new_col_name = args["color"] + "additional_col_for_color"
-        path = [new_col_name if x == args["color"] else x for x in path]
+    for col_name in path:
+        series_to_copy = df[col_name]
+        new_col_name = col_name + "_path_copy"
+        path = [new_col_name if x == col_name else x for x in path]
         df[new_col_name] = series_to_copy
-    if args["hover_data"]:
-        for col_name in args["hover_data"]:
-            if col_name == args["color"]:
-                series_to_copy = df[col_name]
-                new_col_name = str(args["color"]) + "additional_col_for_hover"
-                df[new_col_name] = series_to_copy
-                args["color"] = new_col_name
-            elif col_name in path:
-                series_to_copy = df[col_name]
-                new_col_name = col_name + "additional_col_for_hover"
-                path = [new_col_name if x == col_name else x for x in path]
-                df[new_col_name] = series_to_copy
     # ------------ Define aggregation functions --------------------------------
 
     def aggfunc_discrete(x):
