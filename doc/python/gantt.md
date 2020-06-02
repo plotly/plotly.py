@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Gantt Charts
-    order: 10
+    order: 9
     page_type: u-guide
     permalink: python/gantt/
     thumbnail: thumbnail/gantt.jpg
