@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Trisurf Plots
-    order: 15
+    order: 14
     permalink: python/trisurf/
     thumbnail: thumbnail/trisurf.jpg
 ---
@@ -129,4 +129,3 @@ fig.show()
 #### Reference
 
 For more info on `ff.create_trisurf()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_trisurf.html)
-

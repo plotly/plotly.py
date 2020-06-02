@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to make a Mapbox Choropleth Map of US Counties in Python with
+    description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
     display_as: maps
     language: python

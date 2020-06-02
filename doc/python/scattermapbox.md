@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Scatter Plots on Mapbox
-    order: 10
+    order: 9
     page_type: u-guide
     permalink: python/scattermapbox/
     thumbnail: thumbnail/scatter-mapbox.jpg

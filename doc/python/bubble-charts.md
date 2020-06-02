@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Bubble Charts
-    order: 6
+    order: 5
     page_type: u-guide
     permalink: python/bubble-charts/
     redirect_from: python/bubble-charts-tutorial/
