@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Treemap Charts
-    order: 14
+    order: 13
     page_type: u-guide
     permalink: python/treemaps/
     thumbnail: thumbnail/treemap.png

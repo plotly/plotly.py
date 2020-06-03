@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Theming and templates
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/templates/
     thumbnail: thumbnail/theming-and-templates.png

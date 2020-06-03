@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Annotated Heatmaps
-    order: 8
+    order: 7
     page_type: u-guide
     permalink: python/annotated-heatmap/
     redirect_from: python/annotated_heatmap/

@@ -309,4 +309,3 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 
 #### Reference
 See https://plotly.com/python/reference/#image for more information and chart attribute options!
-

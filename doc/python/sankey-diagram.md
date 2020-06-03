@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Sankey Diagram
-    order: 13
+    order: 12
     page_type: u-guide
     permalink: python/sankey-diagram/
     thumbnail: thumbnail/sankey.jpg
