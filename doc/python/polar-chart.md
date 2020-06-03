@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Polar Charts
-    order: 17
+    order: 16
     page_type: u-guide
     permalink: python/polar-chart/
     thumbnail: thumbnail/polar.gif

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 3D Volume Plots
-    order: 12
+    order: 11
     page_type: u-guide
     permalink: python/3d-volume-plots/
     thumbnail: thumbnail/3d-volume-plots.jpg

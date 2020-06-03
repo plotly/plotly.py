@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 2D Histogram Contour
-    order: 12
+    order: 11
     page_type: u-guide
     permalink: python/2d-histogram-contour/
     redirect_from: python/2d-density-plots/

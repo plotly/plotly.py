@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Bullet Charts
-    order: 9
+    order: 8
     page_type: u-guide
     permalink: python/bullet-charts/
     thumbnail: thumbnail/bullet.png

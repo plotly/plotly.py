@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Mapbox Density Heatmap
-    order: 6
+    order: 5
     page_type: u-guide
     permalink: python/mapbox-density-heatmaps/
     thumbnail: thumbnail/mapbox-density.png
