@@ -1432,11 +1432,12 @@ def process_dataframe_hierarchy(args):
     _check_dataframe_all_leaves(df[path[::-1]])
     discrete_color = False
 
+    new_path = []
     for col_name in path:
-        series_to_copy = df[col_name]
         new_col_name = col_name + "_path_copy"
-        path = [new_col_name if x == col_name else x for x in path]
-        df[new_col_name] = series_to_copy
+        new_path.append(new_col_name)
+        df[new_col_name] = df[col_name]
+    path = new_path
     # ------------ Define aggregation functions --------------------------------
 
     def aggfunc_discrete(x):
