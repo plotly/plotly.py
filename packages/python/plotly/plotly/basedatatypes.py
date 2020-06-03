@@ -1560,7 +1560,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             if len(vals) != n:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-            if [r for r in vals if not isinstance(r, int)]:
+            try:
+                import numpy as np
+
+                int_type = (int, np.integer)
+            except ImportError:
+                int_type = (int,)
+
+            if [r for r in vals if not isinstance(r, int_type)]:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
