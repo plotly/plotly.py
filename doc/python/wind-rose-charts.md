@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,14 +22,13 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description:
-      How to graph wind rose charts in python. Wind Rose charts display
+    description: How to graph wind rose charts in python. Wind Rose charts display
       wind speed and direction of a given location.
     display_as: scientific
     language: python
     layout: base
     name: Wind Rose and Polar Bar Charts
-    order: 20
+    order: 19
     page_type: u-guide
     permalink: python/wind-rose-charts/
     thumbnail: thumbnail/wind-rose.jpg

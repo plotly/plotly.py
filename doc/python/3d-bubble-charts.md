@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.2.3
   kernelspec:
     display_name: Python 3
@@ -22,14 +22,13 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description:
-      How to make 3D Bubble Charts in Python with Plotly. Three examples
+    description: How to make 3D Bubble Charts in Python with Plotly. Three examples
       of 3D Bubble Charts.
     display_as: 3d_charts
     language: python
     layout: base
     name: 3D Bubble Charts
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/3d-bubble-charts/
     thumbnail: thumbnail/3dbubble.jpg

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -31,8 +31,8 @@ jupyter:
     page_type: example_index
     permalink: python/box-plots/
     redirect_from:
-      - /python/box/
-      - /python/basic_statistics/
+    - /python/box/
+    - /python/basic_statistics/
     thumbnail: thumbnail/box.jpg
 ---
 
