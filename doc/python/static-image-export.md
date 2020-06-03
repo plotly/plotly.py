@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Static Image Export
-    order: 6
+    order: 5
     page_type: u-guide
     permalink: python/static-image-export/
     thumbnail: thumbnail/static-image-export.png

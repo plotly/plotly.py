@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernel_info:
     name: python2
@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Parallel Coordinates Plot
-    order: 10
+    order: 9
     page_type: u-guide
     permalink: python/parallel-coordinates-plot/
     thumbnail: thumbnail/parcoords.jpg

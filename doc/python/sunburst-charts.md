@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Sunburst Charts
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/sunburst-charts/
     thumbnail: thumbnail/sunburst.gif
