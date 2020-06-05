@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixed special cases with `px.sunburst` and `px.treemap` with `path` input ([#2524](https://github.com/plotly/plotly.py/pull/2524))
 
+### Updated
+
+- `plotly.express.imshow` now uses data frame index names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
+
 ## [4.8.1] - 2020-05-28
 
 ### Fixed
