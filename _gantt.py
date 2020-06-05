@@ -851,7 +851,7 @@ def create_gantt(
     :param (float) width: the width of the chart
     :param (str|list|dict|tuple) tasks: tasks to chart
     :param (str|list|dict|tuple) task_names: task name that will be displayed on the chart
-    :param group_tasks: default=False. If true, tasks assigned the same task name will be charted in the same row.
+    :param (bool) group_tasks: default=False. If true, tasks assigned the same task name will be charted in the same row.
 
     Example 1: Simple Gantt Chart
 
