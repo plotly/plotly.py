@@ -116,6 +116,14 @@ def get_label(args, column):
         return column
 
 
+def invert_label(args, column):
+    reversed_labels = {value: key for (key, value) in args["labels"].items()}
+    try:
+        return reversed_labels[column]
+    except Exception:
+        return column
+
+
 def _is_continuous(df, col_name):
     return df[col_name].dtype.kind in "ifc"
 
@@ -434,11 +442,12 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         mapping_labels_copy = OrderedDict(mapping_labels)
         if args["hover_data"] and isinstance(args["hover_data"], dict):
             for k, v in mapping_labels.items():
-                if k in args["hover_data"]:
-                    if args["hover_data"][k][0]:
-                        if isinstance(args["hover_data"][k][0], str):
+                k_args = invert_label(args, k)
+                if k_args in args["hover_data"]:
+                    if args["hover_data"][k_args][0]:
+                        if isinstance(args["hover_data"][k_args][0], str):
                             mapping_labels_copy[k] = v.replace(
-                                "}", "%s}" % args["hover_data"][k][0]
+                                "}", "%s}" % args["hover_data"][k_args][0]
                             )
                     else:
                         _ = mapping_labels_copy.pop(k)
