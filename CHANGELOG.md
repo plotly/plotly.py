@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.9.0] - unreleased
+
+### Updated
+
+- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
+
 ## [4.8.2] - unreleased
 
 ### Fixed
