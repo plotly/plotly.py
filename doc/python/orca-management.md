@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Orca Management
-    order: 8
+    order: 7
     permalink: python/orca-management/
     thumbnail: thumbnail/orca-management.png
 ---

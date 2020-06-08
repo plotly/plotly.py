@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Smoothing
-    order: 1
+    order: 4
     page_type: example_index
     permalink: python/smoothing/
     thumbnail: /images/static-image

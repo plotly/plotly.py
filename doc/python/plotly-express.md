@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      Plotly Express is a terse, consistent, high-level API for rapid data
+    description: Plotly Express is a terse, consistent, high-level API for rapid data
       exploration and figure generation.
     display_as: file_settings
     language: python
@@ -37,7 +36,7 @@ jupyter:
 
 ### Plotly Express
 
-Plotly Express is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
+Plotly Express is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
 
 > **Note**: Plotly Express was previously its own separately-installed `plotly_express` package but is now part of `plotly` and importable via `import plotly.express as px`.
 

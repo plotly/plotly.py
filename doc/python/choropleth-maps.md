@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Choropleth Maps
-    order: 8
+    order: 7
     page_type: u-guide
     permalink: python/choropleth-maps/
     thumbnail: thumbnail/choropleth.jpg
@@ -56,7 +56,7 @@ The GeoJSON data is passed to the `geojson` argument, and the data is passed int
 
 ### Choropleth Map with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 #### GeoJSON with `feature.id`
 
@@ -208,7 +208,6 @@ fig.show()
 ```python
 import plotly.graph_objects as go
 
-# Load data frame and tidy it.
 import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv')
 

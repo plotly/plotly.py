@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: USA County Choropleth Maps
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/county-choropleth/
     thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg
@@ -37,7 +37,7 @@ jupyter:
 ### Deprecation warning
 
 
-This page describes a legacy "figure factory" method for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
+This page describes a [legacy "figure factory" method](/python/figure-factories/) for creating map-like figures using [self-filled scatter traces](/python/shapes). **This is no longer the recommended way to make county-level choropleth maps**, instead we recommend using a [GeoJSON-based approach to making outline choropleth maps](/python/choropleth-maps/) or the alternative [Mapbox tile-based choropleth maps](/python/mapbox-county-choropleth).
 
 
 #### Required Packages
@@ -275,9 +275,6 @@ fig.show()
 
 Also see Mapbox county choropleths made in Python: [https://plotly.com/python/mapbox-county-choropleth/](https://plotly.com/python/mapbox-county-choropleth/)
 
+### Reference
 
-#### Reference
-
-```python
-help(ff.create_choropleth)
-```
+For more info on `ff.create_choropleth()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_choropleth.html)

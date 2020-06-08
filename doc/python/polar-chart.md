@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Polar Charts
-    order: 17
+    order: 16
     page_type: u-guide
     permalink: python/polar-chart/
     thumbnail: thumbnail/polar.gif
@@ -37,7 +37,7 @@ jupyter:
 
 A polar chart represents data along radial and angular axes. With Plotly Express, it is possible to represent polar data as scatter markers with `px.scatter_polar`, and as lines with `px.line_polar`.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 For other types of arguments, see the section below using `go.Scatterpolar`.
 

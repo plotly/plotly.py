@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Plotly and Datashader
-    order: 21
+    order: 20
     page_type: u-guide
     permalink: python/datashader/
     thumbnail: thumbnail/datashader.jpg

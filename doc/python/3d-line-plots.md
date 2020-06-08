@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.2.3
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 3D Line Plots
-    order: 8
+    order: 7
     page_type: u-guide
     permalink: python/3d-line-plots/
     thumbnail: thumbnail/3d-line.jpg

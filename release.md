@@ -42,7 +42,7 @@ people to the README of the `release_X.Y.Z` as the instructions for trying out
 the release candidate.
 
 Note that the conda installation instructions must include
-"-c plotly/lable/test" rather than "-c plotly" in order to install the
+"-c plotly/label/test" rather than "-c plotly" in order to install the
 release candidate version.
 
 Update the `doc/python/getting-started.md` file with the same version numbers.

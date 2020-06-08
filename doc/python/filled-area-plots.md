@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Filled Area Plots
-    order: 8
+    order: 7
     page_type: u-guide
     permalink: python/filled-area-plots/
     thumbnail: thumbnail/area.jpg
@@ -37,7 +37,7 @@ This example shows how to fill the area enclosed by traces.
 
 ## Filled area plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 `px.area` creates a stacked area plot. Each filled area corresponds to one value of the column given by the `line_group` parameter.
 

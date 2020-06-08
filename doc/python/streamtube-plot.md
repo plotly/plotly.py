@@ -27,12 +27,11 @@ jupyter:
     language: python
     layout: base
     name: 3D Streamtube Plots
-    order: 14
+    order: 13
     page_type: u-guide
     permalink: python/streamtube-plot/
     thumbnail: thumbnail/streamtube.jpg
 ---
-
 
 ### Introduction
 
@@ -132,4 +131,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#streamtube for more information and chart attribute options!
-

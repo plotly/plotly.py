@@ -1,9 +1,9 @@
 jupytext
-plotly==4.6.0
+plotly==4.8.1
 jupyter
 notebook
-pandas
-statsmodels==0.10.1
+pandas==1.0.3
+statsmodels==0.11.1
 scipy
 patsy==0.5.1
 numpy

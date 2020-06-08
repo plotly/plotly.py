@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Ternary contours
-    order: 19
+    order: 18
     page_type: u-guide
     permalink: python/ternary-contour/
     thumbnail: thumbnail/ternary-contour.jpg
@@ -38,7 +38,7 @@ jupyter:
 
 A ternary contour plots represents isovalue lines of a quantity defined inside a [ternary diagram](https://en.wikipedia.org/wiki/Ternary_plot), i.e. as a function of three variables which sum is constant. Coordinates of the ternary plot often correspond to concentrations of three species, and the quantity represented as contours is some property (e.g., physical, chemical, thermodynamical) varying with the composition.
 
-For ternary contour plots, use the figure factory ``create_ternary_contour``. The figure factory interpolates between given data points in order to compute the contours.
+For ternary contour plots, use the [figure factory](/python/figure-factories/) called ``create_ternary_contour``. The figure factory interpolates between given data points in order to compute the contours.
 
 Below we represent an example from metallurgy, where the mixing enthalpy is represented as a contour plot for aluminum-copper-yttrium (Al-Cu-Y) alloys.
 
@@ -145,3 +145,7 @@ fig = ff.create_ternary_contour(coords, value, interp_mode='cartesian',
                                 ncontours=9)
 fig.show()
 ```
+
+#### Reference
+
+For more info on `ff.create_ternary_contour()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_ternary_contour.html)
