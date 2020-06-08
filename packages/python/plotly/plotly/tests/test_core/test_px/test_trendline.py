@@ -38,10 +38,23 @@ def test_trendline_enough_values(mode):
     fig = px.scatter(x=[0, 1], y=[0, None], trendline=mode)
     assert len(fig.data) == 2
     assert fig.data[1].x is None
+    fig = px.scatter(x=[0, 1], y=np.array([0, np.nan]), trendline=mode)
+    assert len(fig.data) == 2
+    assert fig.data[1].x is None
     fig = px.scatter(x=[0, 1, None], y=[0, None, 1], trendline=mode)
     assert len(fig.data) == 2
     assert fig.data[1].x is None
+    fig = px.scatter(
+        x=np.array([0, 1, np.nan]), y=np.array([0, np.nan, 1]), trendline=mode
+    )
+    assert len(fig.data) == 2
+    assert fig.data[1].x is None
     fig = px.scatter(x=[0, 1, None, 2], y=[1, None, 1, 2], trendline=mode)
+    assert len(fig.data) == 2
+    assert len(fig.data[1].x) == 2
+    fig = px.scatter(
+        x=np.array([0, 1, np.nan, 2]), y=np.array([1, np.nan, 1, 2]), trendline=mode
+    )
     assert len(fig.data) == 2
     assert len(fig.data[1].x) == 2
 
