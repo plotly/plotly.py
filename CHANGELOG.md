@@ -2,22 +2,73 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## Dev version
+## [4.8.2] - unreleased
+
+### Fixed
+
+- Fixed special cases with `px.sunburst` and `px.treemap` with `path` input ([#2524](https://github.com/plotly/plotly.py/pull/2524))
+
+## [4.8.1] - 2020-05-28
+
+### Fixed
+
+- Fixed the accidental removal of some functions and submodules from `plotly.colors` and `plotly.express.colors`
+
+## [4.8.0] - 2020-05-26
 
 ### Added
 
-- The `hover_data` parameter of `px` functions can now be a dictionary. This
-  makes it possible to skip hover information for some arguments or to change  
-  the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+- `plotly` now provides a Plotly Express-backed Pandas-compatible plotting backend, which can be activated via `pandas.options.plotting.backend = "plotly"`. Note that it is not intended to implement every Pandas plotting function, nor is it intended to replicate the behaviour of every argument, although per the changes below, `x` and `y` should behave similarly. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
+- New datasets have been added to `plotly.express.data`: `stocks`, `experiment`, `medals_wide` and `medals_long`. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
+- plotly `go.Figure` and `go.FigureWidget` now have a `_repr_html_` and a `_repr_mimebundle_` method, which are [standard hooks for integration in systems based on IPython](https://ipython.readthedocs.io/en/stable/config/integrating.html). In particular, with `_repr_html_` plotly figures can now be used within [sphinx-gallery](https://sphinx-gallery.github.io/stable/index.html) without any scraper. These additions should not change anything to the way plotly figures are displayed in notebook environments, since the `_ipython_display_` method (already present in earlier versions) takes precedence over the new methods.
+
+### Updated
+
+- The behaviour of the `x`, `y`, `orientation`, `histfunc`, `violinmode`, `boxmode` and `stripmode` arguments for 2d-cartesian functions in Plotly Express (i.e. `scatter`, `line`, `area`, `bar`, `histogram`, `violin`, `box`, `strip`, `funnel`, `density_heatmap` and `density_contour`) has been refined ([#2336](https://github.com/plotly/plotly.py/pull/2336)):
+    - if `x` or `y` is missing, it is inferred to be the index of `data_frame` if `data_frame` provided, otherwise a stable index of integers starting at 0. In the case of `px.bar`, if the provided value is not continuous, the missing value is treated as a column of 1s named "count", so as to behave more like `px.histogram` and to avoid sizing the resulting bars differently based on their position in the column. Previously, missing values defaulted to integers starting at 0 *per trace* which made it potentially inconsistent or misleading.
+    - if `x` (`y`) is missing, `orientation` now defaults to `v` (`h`). Previously it always defaulted to `v` but this is not considered a breaking change, as the cases in which it now defaults to `h` caused unreadable output if set to `v`.
+    - if both `x` and `y` are provided and one of them does not contain continuous values, `orientation` defaults to the value perpendicular to that axis. Previously it always defaulted to `v` but this is not considered a breaking change, as the cases in which it now defaults to `h` caused unreadable output if set to `v`.
+    - if either `x` or `y` (but not both) may now be provided as a list of column references into `data_frame` or columns of data, in which case the imputed data frame will be treated as "wide" data and `melt()`ed internally before applying the usual mapping rules, with function-specific defaults.
+    - if neither `x` nor `y` is provided but `data_frame` is, the data frame will be treated as "wide" with defaults depending on the value of `orientation` (and `orientation` has accordingly been added to `scatter`, `line`, `density_heatmap`, and `density_contour` for this purpose). Previously this would have resulted in an empty figure.
+    - if both `x` and `y` are provided to `histogram`, and if `x`, `y` and `z` are provided to `density_heatmap` or `density_contour`, then `histfunc` now defaults to `sum` so as to avoid ignoring the provided data, and to cause `histogram` and `bar` to behave more similarly.
+    - `violinmode`, `boxmode` and `stripmode` now default to `overlay` if `x` (`y`) in in `v` (`h`) orientation is also mapped to `color`, to avoid strange spacing issues with the previous default of `group` in all cases.
+- The Plotly Express arguments `color_discrete_map`, `symbol_map` and `line_dash_map` now accept the string `"identity"` which causes the corresponding input data to be used as-is rather than mapped into `color_discrete_sequence`, `symbol_sequence` or `line_dash_sequence`, respectively. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
+- Plotly Express now accepts `px.Constant` or `px.Range` objects in the place of column references so as to express constant or increasing integer values. ([#2336](https://github.com/plotly/plotly.py/pull/2336))
+
+
+## [4.7.1] - 2020-05-08
+
+### Fixed
+
+ - Fix `AttributeError: module 'plotly.graph_objs' has no attribute 'FigureWidget'` exception on `from plotly.graph_objs import *` when `ipywidgets` is not installed. Error also occurred when importing `plotly.figure_factor`. It is now possible to import `plotly.graph_objs.FigureWidget` when `ipywidgets` is not installed, and an informative `ImportError` exception will be raised in the `FigureWidget` constructor ([#2443](https://github.com/plotly/plotly.py/issues/2443), [#1111](https://github.com/plotly/plotly.py/issues/1111)).
+ - Fix `TypeError: unhashable type: 'Template'` during `Figure` construction when `plotly.io.templates.default` is set to a `Template` object rather than a string.
+
+
+## [4.7.0] - 2020-05-06
+
+### Updated
+
+- Updated Plotly.js to version 1.54.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.1/CHANGELOG.md) for more information. The main new feature of this version of Plotly.js is the possibility to draw layout shapes, using custom dragmodes and corresponding modebar buttons.
+- The sphinx-gallery scraper has been updated to work with different structures of galleries [#2149](https://github.com/plotly/plotly.py/pull/2419)
+
+### Added
+
+- The `hover_data` parameter of `px` functions can now be a dictionary. This makes it possible to skip hover information for some arguments or to change the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+- It's now possible to build a development version of Plotly.py against the build artifacts from a non-`master` branch of Plotly.js, which makes for faster QA and development cycles [#2349](https://github.com/plotly/plotly.py/pull/2349). Thanks [@zouhairm](https://github.com/zouhairm) for this Pull Request!
+
+### Fixed
+
+- Plotly Express trendlines now handle missing data correctly [#2357](https://github.com/plotly/plotly.py/pull/2357)
 
 ### Performance
+
 This version includes several performance improvements ([#2368](https://github.com/plotly/plotly.py/pull/2368), [#2403](https://github.com/plotly/plotly.py/pull/2403)).
- 
+
  - Child graph objects (e.g. `figure.layout.xaxis`) are no longer created eagerly during graph object construction. Instead, they are created lazily the first time the property is accessed.
  - Property validation is now disabled for select internal operations.
  - When used with Python 3.7 and above, ploty.py now takes advantage of [PEP-562](https://www.python.org/dev/peps/pep-0562/) to perform submodule imports lazily.  This dramatically improves import times.
 
-## [4.6] - 2020-03-31
+## [4.6.0] - 2020-03-31
 
 ### Updated
 

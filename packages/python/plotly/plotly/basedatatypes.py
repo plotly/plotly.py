@@ -37,6 +37,7 @@ class BaseFigure(object):
     }
 
     _set_trace_uid = False
+    _allow_disable_validation = True
 
     # Constructor
     # -----------
@@ -417,6 +418,37 @@ class BaseFigure(object):
         )
 
         return repr_str
+
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        bundle = self._repr_mimebundle_()
+        if "text/html" in bundle:
+            return bundle["text/html"]
+        else:
+            return self.to_html(full_html=False, include_plotlyjs="cdn")
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        import plotly.io as pio
+
+        renderer_str = pio.renderers.default
+        renderers = pio._renderers.renderers
+        renderer_names = renderers._validate_coerce_renderers(renderer_str)
+        renderers_list = [renderers[name] for name in renderer_names]
+        from plotly.io._utils import validate_coerce_fig_to_dict
+        from plotly.io._renderers import MimetypeRenderer
+
+        fig_dict = validate_coerce_fig_to_dict(self, validate)
+        # Mimetype renderers
+        bundle = {}
+        for renderer in renderers_list:
+            if isinstance(renderer, MimetypeRenderer):
+                bundle.update(renderer.to_mimebundle(fig_dict))
+        return bundle
 
     def _ipython_display_(self):
         """
@@ -1528,7 +1560,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             if len(vals) != n:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-            if [r for r in vals if not isinstance(r, int)]:
+            try:
+                import numpy as np
+
+                int_type = (int, np.integer)
+            except ImportError:
+                int_type = (int,)
+
+            if [r for r in vals if not isinstance(r, int_type)]:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
@@ -1947,10 +1986,17 @@ Please use the add_trace method with the row and col parameters.
         if self._layout_obj._props.get("template", None) is None:
             if pio.templates.default is not None:
                 # Assume default template is already validated
-                self._layout_obj._validate = False
+                if self._allow_disable_validation:
+                    self._layout_obj._validate = False
                 try:
-                    template_dict = pio.templates[pio.templates.default]
-                    self._layout_obj.template = template_dict
+                    if isinstance(pio.templates.default, BasePlotlyType):
+                        # Template object. Don't want to actually import `Template`
+                        # here for performance so we check against `BasePlotlyType`
+                        template_object = pio.templates.default
+                    else:
+                        # Name of registered template object
+                        template_object = pio.templates[pio.templates.default]
+                    self._layout_obj.template = template_object
                 finally:
                     self._layout_obj._validate = self._validate
 

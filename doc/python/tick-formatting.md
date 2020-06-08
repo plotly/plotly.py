@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Formatting Ticks
-    order: 11
+    order: 10
     permalink: python/tick-formatting/
     thumbnail: thumbnail/tick-formatting.gif
 ---
@@ -195,4 +195,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#layout-xaxis for more information and chart attribute options!
-

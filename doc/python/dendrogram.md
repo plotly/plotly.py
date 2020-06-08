@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Dendrograms
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/dendrogram/
     thumbnail: thumbnail/dendrogram.jpg
@@ -35,7 +35,7 @@ jupyter:
 
 #### Basic Dendrogram
 
-A [dendrogram](https://en.wikipedia.org/wiki/Dendrogram) is a diagram representing a tree. The figure factory `create_dendrogram` performs [hierachical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) on data and represents the resulting tree. Values on the tree depth axis correspond to distances between clusters.
+A [dendrogram](https://en.wikipedia.org/wiki/Dendrogram) is a diagram representing a tree. The [figure factory](/python/figure-factories/) called `create_dendrogram` performs [hierachical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) on data and represents the resulting tree. Values on the tree depth axis correspond to distances between clusters.
 
 Dendrogram plots are commonly used in computational biology to show the clustering of genes or samples, sometimes in the margin of heatmaps.
 
@@ -178,6 +178,4 @@ fig.show()
 
 ### Reference
 
-```python
-help(ff.create_dendrogram)
-```
+For more info on `ff.create_dendrogram()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_dendrogram.html)

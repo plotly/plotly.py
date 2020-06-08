@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.2
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Shapes
-    order: 24
+    order: 23
     permalink: python/shapes/
     thumbnail: thumbnail/shape.jpg
 ---
@@ -714,6 +714,92 @@ fig.update_layout(
 )
 
 fig.show()
+```
+
+### Drawing shapes on Cartesian plots
+
+_introduced in plotly 4.7_
+
+You can create layout shapes programatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+
+This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
+
+Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can 
+- drag and resize it for lines, rectangles and circles/ellipses
+- drag and move individual vertices for closed paths
+- move individual vertices for open paths.
+
+An activated shape is deleted by cliking on the `eraseshape` button.
+
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure()
+text="Click and drag here <br> to draw a rectangle <br><br> or select another shape <br>in the modebar"
+fig.add_annotation(
+            x=0.5,
+            y=0.5,
+            text=text,
+            xref="paper",
+            yref="paper",
+            showarrow=False,
+            font_size=20
+)
+# shape defined programatically
+fig.add_shape(editable=True,
+              x0=-1, x1=0, y0=2, y1=3,
+              xref='x1', yref='y1')
+# define dragmode and add modebar buttons
+fig.update_layout(dragmode='drawrect')
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
+```
+
+### Style of user-drawn shapes
+
+The layout `newshape` attribute controls the visual appearance of new shapes drawn by the user. `newshape` attributes have the same names as layout shapes.
+
+_Note on shape opacity_: having a new shape's opacity > 0.5 makes it possible to activate a shape by clicking inside the shape (for opacity <= 0.5 you have to click on the border of the shape), but you cannot start a new shape within an existing shape (which is possible for an opacity <= 0.5).
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure()
+text="Click and drag<br> to draw a rectangle <br><br> or select another shape <br>in the modebar"
+fig.add_annotation(
+            x=0.5,
+            y=0.5,
+            text=text,
+            xref="paper",
+            yref="paper",
+            showarrow=False,
+            font_size=20
+)
+# shape defined programatically
+fig.add_shape(line_color='yellow',
+              fillcolor='turquoise',
+              opacity=0.4,
+              editable=True,
+              x0=0, x1=1, y0=2, y1=3,
+              xref='x1', yref='y1'
+)
+fig.update_layout(dragmode='drawrect',
+                  # style of new shapes
+                  newshape=dict(line_color='yellow',
+                                fillcolor='turquoise',
+                                opacity=0.5))
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
 ```
 
 ### Reference

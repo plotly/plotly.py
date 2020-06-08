@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Gantt Charts
-    order: 10
+    order: 9
     page_type: u-guide
     permalink: python/gantt/
     thumbnail: thumbnail/gantt.jpg
@@ -36,7 +36,8 @@ jupyter:
 
 A [Gantt chart](https://en.wikipedia.org/wiki/Gantt_chart) is a type of bar chart that illustrates a project schedule. The chart lists the tasks to be performed on the vertical axis, and time intervals on the horizontal axis. The width of the horizontal bars in the graph shows the duration of each activity.
 
-See also the [bar charts examples](https://plotly.com/python/bar-charts/).
+
+Gantt charts can be made using a [figure factory](/python/figure-factories/) as detailed in this page. See also the [bar charts examples](https://plotly.com/python/bar-charts/).
 
 
 #### Simple Gantt Chart
@@ -164,10 +165,4 @@ fig.show()
 #### Reference
 
 
-```python
-help(ff.create_gantt)
-```
-
-```python
-
-```
+For more info on `ff.create_gantt()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_gantt.html)

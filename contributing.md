@@ -128,18 +128,28 @@ conda activate plotly-dev
 [conda-env]: https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-with-commands
 [virtualenv]: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 
-### Install requirements
+### Install requirements - (Non-Windows)
+```bash
+(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
+(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+ ```   
+### Install requirements - (Windows + Conda)
+Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
+complete installation and avoid gdal-config errors.
 
-    $ pip install -r packages/python/plotly/requirements.txt
-    $ pip install -r packages/python/plotly/optional-requirements.txt
+```bash
+(plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
+(plotly_dev) $ conda install fiona
+(plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
+```
 
-### Editable install of plotly packages (install from source)
-
-    $ pip install -e packages/python/plotly/
-    $ pip install -e packages/python/chart-studio/
-    $ pip install -e packages/python/plotly-geo/
-
-This will ensure that the installed packages link to your local development
+### Editable install of plotly packages
+```bash
+(plotly_dev) $ pip install -e packages/python/plotly/
+(plotly_dev) $ pip install -e packages/python/chart-studio/
+(plotly_dev) $ pip install -e packages/python/plotly-geo/
+```
+This will ensure that the installed packages links to your local development
 directory, meaning that all changes you make reflect directly in your
 environment (don't forget to restart the Jupyter kernel though!). For more
 information see the
@@ -152,11 +162,11 @@ documentation on _development mode_.
 
 Run the following commands in your virtual environment to use the
 development version of `FigureWidget`,
-
-    $ jupyter nbextension enable --py widgetsnbextension
-    $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
-    $ jupyter nbextension enable --py --sys-prefix plotlywidget
-
+```bash
+(plotly_dev) $ jupyter nbextension enable --py widgetsnbextension
+(plotly_dev) $ jupyter nbextension install --py --symlink --sys-prefix plotlywidget
+(plotly_dev) $ jupyter nbextension enable --py --sys-prefix plotlywidget
+```
 To make plotly plots show up in JupyterLab, you also need to [install the plotly jupyterlab extensions][plotly-jl].
 
 [plotly-jl]: https://plot.ly/python/getting-started/#jupyterlab-support-python-35

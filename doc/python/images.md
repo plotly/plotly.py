@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.2
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Images
-    order: 23
+    order: 22
     permalink: python/images/
     thumbnail: thumbnail/images.png
     v4upgrade: true
@@ -303,6 +303,60 @@ fig.update_layout(
 # Disable the autosize on double click because it adds unwanted margins around the image
 # More detail: https://plotly.com/python/configuration-options/
 fig.show(config={'doubleClick': 'reset'})
+```
+
+### Annotating layout image with shapes
+
+_introduced in plotly 4.7_
+
+It can be useful to add shapes to a layout image, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm. 
+
+In order to enable shape drawing, you need to
+- define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
+- add [modebar buttons](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) corresponding to the drawing tools you wish to use.
+
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
+
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure()
+# Add image
+img_width = 1600
+img_height = 900
+scale_factor = 0.5
+fig.add_layout_image(
+        x=0,
+        sizex=img_width,
+        y=0,
+        sizey=img_height,
+        xref="x",
+        yref="y",
+        opacity=1.0,
+        layer="below",
+        source="https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg"
+)
+fig.update_xaxes(showgrid=False, range=(0, img_width))
+fig.update_yaxes(showgrid=False, scaleanchor='x', range=(img_height, 0))
+# Line shape added programatically 
+fig.add_shape(
+    type='line', xref='x', yref='y',
+    x0=650, x1=1080, y0=380, y1=180, line_color='cyan'
+)
+# Set dragmode and newshape properties; add modebar buttons
+fig.update_layout(
+    dragmode='drawrect',
+    newshape=dict(line_color='cyan'),
+    title_text='Drag to add annotations - use modebar to change drawing tool'
+)
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
 ```
 
 #### Reference

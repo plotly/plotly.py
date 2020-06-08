@@ -52,3 +52,21 @@ class TestNodeGenerator(TestCase):
         ]
         for i, item in enumerate(node_generator(node0)):
             self.assertEqual(item, expected_node_path_tuples[i])
+
+
+class TestNumpyIntegerBaseType(TestCase):
+    def test_numpy_integer_import(self):
+        # should generate a figure with subplots of array and not throw a ValueError
+        import numpy as np
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+
+        indices_rows = np.array([1], dtype=np.int)
+        indices_cols = np.array([1], dtype=np.int)
+        fig = make_subplots(rows=1, cols=1)
+        fig.add_trace(go.Scatter(y=[1]), row=indices_rows[0], col=indices_cols[0])
+
+        data_path = ("data", 0, "y")
+        value = get_by_path(fig, data_path)
+        expected_value = (1,)
+        self.assertEqual(value, expected_value)

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,14 +22,13 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description:
-      How to make scatter plots on maps in Python. Scatter plots on maps
+    description: How to make scatter plots on maps in Python. Scatter plots on maps
       highlight geographic areas and can be colored by value.
     display_as: maps
     language: python
     layout: base
     name: Scatter Plots on Maps
-    order: 12
+    order: 11
     page_type: u-guide
     permalink: python/scatter-plots-on-maps/
     thumbnail: thumbnail/scatter-plot-on-maps.jpg
@@ -43,7 +42,7 @@ Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` func
 
 Here we show the [Plotly Express](/python/plotly-express/) function `px.scatter_geo` for a geographical scatter plot. The `size` argument is used to set the size of markers from a given column of the DataFrame.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px

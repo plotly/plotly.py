@@ -171,6 +171,23 @@ def test_sunburst_treemap_with_path_and_hover():
     )
     assert "smoker" in fig.data[0].hovertemplate
 
+    df = px.data.gapminder().query("year == 2007")
+    fig = px.sunburst(
+        df, path=["continent", "country"], color="lifeExp", hover_data=df.columns
+    )
+    assert fig.layout.coloraxis.colorbar.title.text == "lifeExp"
+
+    df = px.data.tips()
+    fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], hover_name="smoker")
+    assert "smoker" not in fig.data[0].hovertemplate  # represented as '%{hovertext}'
+    assert "%{hovertext}" in fig.data[0].hovertemplate  # represented as '%{hovertext}'
+
+    df = px.data.tips()
+    fig = px.sunburst(df, path=["sex", "day", "time", "smoker"], custom_data=["smoker"])
+    assert fig.data[0].customdata[0][0] in ["Yes", "No"]
+    assert "smoker" not in fig.data[0].hovertemplate
+    assert "%{hovertext}" not in fig.data[0].hovertemplate
+
 
 def test_sunburst_treemap_with_path_color():
     vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]

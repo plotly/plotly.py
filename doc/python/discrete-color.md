@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to use and configure discrete color sequences, also known as
       categorical or qualitative color scales.
@@ -30,7 +30,7 @@ jupyter:
     language: python
     layout: base
     name: Discrete Colors
-    order: 28
+    order: 27
     permalink: python/discrete-color/
     thumbnail: thumbnail/heatmap_colorscale.jpg
     v4upgrade: true
@@ -175,6 +175,15 @@ fig = px.bar(df, y="continent", x="pop", color="continent", orientation="h", hov
                 "Africa": "magenta"},
              title="Explicit color mapping")
 
+fig.show()
+```
+
+If your data set already contains valid CSS colors which you wish to use directly, you can pass the special value `"identity"` to `color_discrete_map`, in which case the legend is hidden by default, and the color does not appear in the hover label:
+
+```python
+import plotly.express as px
+
+fig = px.bar(x=["a","b","c"], y=[1,3,2], color=["red", "goldenrod", "#00D"], color_discrete_map="identity")
 fig.show()
 ```
 

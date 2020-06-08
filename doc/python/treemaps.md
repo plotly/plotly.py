@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Treemap Charts
-    order: 14
+    order: 13
     page_type: u-guide
     permalink: python/treemaps/
     thumbnail: thumbnail/treemap.png
@@ -37,7 +37,7 @@ jupyter:
 
 ### Basic Treemap with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.treemap`, each row of the DataFrame is represented as a sector of the treemap.
 

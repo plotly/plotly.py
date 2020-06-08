@@ -55,6 +55,8 @@ from ._core import (  # noqa: F401
     get_trendline_results,
 )
 
+from ._special_inputs import IdentityMap, Constant, Range  # noqa: F401
+
 from . import data, colors  # noqa: F401
 
 __all__ = [
@@ -95,4 +97,7 @@ __all__ = [
     "colors",
     "set_mapbox_access_token",
     "get_trendline_results",
+    "IdentityMap",
+    "Constant",
+    "Range",
 ]

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to make a Mapbox Choropleth Map of US Counties in Python with
+    description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
     display_as: maps
     language: python
@@ -80,7 +79,7 @@ df.head()
 
 ### Choropleth map using plotly.express and carto base map (no token needed)
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.choropleth_mapbox`, each row of the DataFrame is represented as a region of the choropleth.
 

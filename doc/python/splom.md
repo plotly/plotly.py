@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,14 +22,13 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description:
-      How to make scatterplot matrices or sploms natively in Python with
+    description: How to make scatterplot matrices or sploms natively in Python with
       Plotly.
     display_as: statistical
     language: python
     layout: base
     name: Scatterplot Matrix
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/splom/
     redirect_from: python/scatterplot-matrix/
@@ -42,7 +41,7 @@ A scatterplot matrix is a matrix associated to n numerical arrays (data variable
 
 Here we show the Plotly Express function `px.scatter_matrix` to plot the scatter matrix for the columns of the dataframe. By default, all columns are considered.
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px

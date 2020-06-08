@@ -2,9 +2,15 @@ from unittest import TestCase
 import plotly.graph_objs as go
 import pytest
 
+try:
+    go.FigureWidget()
+    figure_widget_available = True
+except ImportError:
+    figure_widget_available = False
+
 
 class TestNoFrames(TestCase):
-    if "FigureWidget" in go.__dict__.keys():
+    if figure_widget_available:
 
         def test_no_frames_in_constructor_kwarg(self):
             with pytest.raises(ValueError):

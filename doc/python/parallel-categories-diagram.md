@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Parallel Categories Diagram
-    order: 9
+    order: 8
     page_type: u-guide
     permalink: python/parallel-categories-diagram/
     thumbnail: thumbnail/parcats.jpg
