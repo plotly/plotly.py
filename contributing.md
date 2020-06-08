@@ -64,7 +64,7 @@ the structure of the code and of the repository.
   https://github.com/plotly/plotly.py/issues/1965. If you have writing skills,
   the wording of existing examples can also be improved in places.
 
-Contributing code or documentation are not the only way to contribute! You can
+Contributing code or documentation is not the only way to contribute! You can
 also contribute to the project by
 
 - reporting bugs (see below).
@@ -133,15 +133,20 @@ conda activate plotly-dev
     $ pip install -r packages/python/plotly/requirements.txt
     $ pip install -r packages/python/plotly/optional-requirements.txt
 
-### Editable install of plotly packages
+### Editable install of plotly packages (install from source)
 
     $ pip install -e packages/python/plotly/
     $ pip install -e packages/python/chart-studio/
     $ pip install -e packages/python/plotly-geo/
 
-This will ensure that the installed packages links to your local development
+This will ensure that the installed packages link to your local development
 directory, meaning that all changes you make reflect directly in your
-environment (don't forget to restart the Jupyter kernel though!).
+environment (don't forget to restart the Jupyter kernel though!). For more
+information see the
+[`setuptools`](https://setuptools.readthedocs.io/en/latest/setuptools.html#development-mode)
+and
+[`pip`](https://pip.pypa.io/en/stable/reference/pip_install/#install-editable)
+documentation on _development mode_.
 
 ### ipywidgets development install
 
