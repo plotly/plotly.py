@@ -8,6 +8,7 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
+import itertools
 
 from _plotly_utils.utils import _natural_sort_strings
 from .optional_imports import get_module
@@ -16,6 +17,50 @@ from .optional_imports import get_module
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
+
+
+def _rcindex_type(d):
+    if type(d) == type(int()):
+        return "i"
+    elif type(d) == type(list()):
+        return "l"
+    elif d == "all":
+        return "a"
+    else:
+        raise TypeError(
+            "argument must be 'all', int or list, got {d_type}".format(
+                d_type=str(type(d))
+            )
+        )
+
+
+def _rcsingle_index_to_list(d):
+    if type(d) == type(int()):
+        return [d]
+    return d
+
+
+def _row_col_index_combinations(rows, cols, max_n_rows, max_n_cols):
+    rtype = _rcindex_type(rows)
+    ctype = _rcindex_type(cols)
+    rows = _rcsingle_index_to_list(rows)
+    cols = _rcsingle_index_to_list(cols)
+    ptype = (rtype, ctype)
+    all_rows = range(1, max_n_rows + 1)
+    all_cols = range(1, max_n_cols + 1)
+    if ptype == ("a", "a"):
+        return list(itertools.product(all_rows, all_cols))
+    elif ptype == ("l", "a") or ptype == ("i", "a"):
+        return list(itertools.product(rows, all_cols))
+    elif ptype == ("a", "l") or ("a", "i"):
+        return list(itertools.product(all_rows, cols))
+    elif ptype == ("l", "l"):
+        if len(rows) == len(cols):
+            return list(zip(rows, cols))
+        else:
+            return list(itertools.product(rows, cols))
+    elif ptype == ("l", "i") or ptype == ("i", "i") or ptype == ("i", "l"):
+        return list(itertools.product(rows, cols))
 
 
 class BaseFigure(object):
@@ -1090,42 +1135,51 @@ class BaseFigure(object):
                 "Received col parameter but not row.\n"
                 "row and col must be specified together"
             )
+        grid_ref = self._validate_get_grid_ref()
 
         # Get grid_ref if specific row or column requested
         if row is not None:
-            grid_ref = self._validate_get_grid_ref()
-            refs = grid_ref[row - 1][col - 1]
+            # TODO It is assumed that grid_ref has an equal number of columns in
+            # each row. Is this ever not true?
+            rows_cols = _row_col_index_combinations(
+                row, col, len(grid_ref), len(grid_ref[0])
+            )
 
-            if not refs:
-                raise ValueError(
-                    "No subplot found at position ({r}, {c})".format(r=row, c=col)
-                )
+            for r, c in rows_cols:
+                refs = grid_ref[r - 1][c - 1]
 
-            if refs[0].subplot_type != "xy":
-                raise ValueError(
-                    """
-Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
-is of type {subplot_type}.""".format(
-                        prop_singular=prop_singular,
-                        r=row,
-                        c=col,
-                        subplot_type=refs[0].subplot_type,
+                if not refs:
+                    raise ValueError(
+                        "No subplot found at position ({r}, {c})".format(r=r, c=c)
                     )
-                )
-            if len(refs) == 1 and secondary_y:
-                raise ValueError(
-                    """
-Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-because subplot does not have a secondary y-axis"""
-                )
-            if secondary_y:
-                xaxis, yaxis = refs[1].layout_keys
-            else:
-                xaxis, yaxis = refs[0].layout_keys
-            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
-            new_obj.update(xref=xref, yref=yref)
 
-        self.layout[prop_plural] += (new_obj,)
+                if refs[0].subplot_type != "xy":
+                    raise ValueError(
+                        """
+    Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+    is of type {subplot_type}.""".format(
+                            prop_singular=prop_singular,
+                            r=r,
+                            c=c,
+                            subplot_type=refs[0].subplot_type,
+                        )
+                    )
+                if len(refs) == 1 and secondary_y:
+                    raise ValueError(
+                        """
+    Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+    because subplot does not have a secondary y-axis""".format(
+                            prop_singular=prop_singular, r=r, c=c
+                        )
+                    )
+                if secondary_y:
+                    xaxis, yaxis = refs[1].layout_keys
+                else:
+                    xaxis, yaxis = refs[0].layout_keys
+                xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+                new_obj.update(xref=xref, yref=yref)
+
+                self.layout[prop_plural] += (new_obj,)
 
         return self
 
