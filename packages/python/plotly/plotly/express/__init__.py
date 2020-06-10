@@ -47,6 +47,7 @@ from ._chart_types import (  # noqa: F401
     choropleth_mapbox,
     density_mapbox,
 )
+from ._hexbin_mapbox import hexbin_mapbox
 
 
 from ._core import (  # noqa: F401
@@ -100,4 +101,5 @@ __all__ = [
     "IdentityMap",
     "Constant",
     "Range",
+    "hexbin_mapbox",
 ]
