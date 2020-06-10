@@ -20,12 +20,17 @@ Undefined = object()
 
 
 def _rcindex_type(d):
+    all_flag = False
+    if type(d) == type(tuple()):
+        d, f = d
+        if f == "all":
+            all_flag = True
     if type(d) == type(int()):
-        return "i"
+        return (d, "i", all_flag)
     elif type(d) == type(list()):
-        return "l"
+        return (d, "l", all_flag)
     elif d == "all":
-        return "a"
+        return (d, "a", all_flag)
     else:
         raise TypeError(
             "argument must be 'all', int or list, got {d_type}".format(
@@ -41,8 +46,11 @@ def _rcsingle_index_to_list(d):
 
 
 def _row_col_index_combinations(rows, cols, max_n_rows, max_n_cols):
-    rtype = _rcindex_type(rows)
-    ctype = _rcindex_type(cols)
+    all_flag = False
+    rows, rtype, f = _rcindex_type(rows)
+    all_flag |= f
+    cols, ctype, f = _rcindex_type(cols)
+    all_flag |= f
     rows = _rcsingle_index_to_list(rows)
     cols = _rcsingle_index_to_list(cols)
     ptype = (rtype, ctype)
@@ -52,10 +60,10 @@ def _row_col_index_combinations(rows, cols, max_n_rows, max_n_cols):
         return list(itertools.product(all_rows, all_cols))
     elif ptype == ("l", "a") or ptype == ("i", "a"):
         return list(itertools.product(rows, all_cols))
-    elif ptype == ("a", "l") or ("a", "i"):
+    elif ptype == ("a", "l") or ptype == ("a", "i"):
         return list(itertools.product(all_rows, cols))
     elif ptype == ("l", "l"):
-        if len(rows) == len(cols):
+        if len(rows) == len(cols) and not all_flag:
             return list(zip(rows, cols))
         else:
             return list(itertools.product(rows, cols))
