@@ -25,6 +25,8 @@ def _rcindex_type(d):
         d, f = d
         if f == "all":
             all_flag = True
+    if type(d) == type(range(1)):
+        d = list(d)
     if type(d) == type(int()):
         return (d, "i", all_flag)
     elif type(d) == type(list()):
