@@ -444,6 +444,21 @@ fig = px.line_mapbox(
 fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
 
 import plotly.express as px
+import numpy as np
+
+carshare = px.data.carshare()
+fig = px.hexbin_mapbox(
+    carshare,
+    lat="centroid_lat",
+    lon="centroid_lon",
+    color="peak_hour",
+    color_continuous_scale=px.colors.cyclical.IceFire,
+    gridsize=10,
+    agg_func=np.mean,
+)
+fig.write_html(os.path.join(dir_name, "hexbin_mapbox.html"))
+
+import plotly.express as px
 
 sample_geojson = {
     "type": "FeatureCollection",
