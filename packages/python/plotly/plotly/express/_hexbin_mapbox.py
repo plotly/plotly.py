@@ -308,7 +308,9 @@ def hexbin_mapbox(
             mapDim = dict(height=height, width=height)
         else:
             mapDim = dict(height=height, width=width)
-        zoom = _getBoundsZoomLevel(*lon_range, *lat_range, mapDim)
+        zoom = _getBoundsZoomLevel(
+            lon_range[0], lon_range[1], lat_range[0], lat_range[1], mapDim
+        )
 
     if center is None:
         center = dict(lat=lat_range.mean(), lon=lon_range.mean())
