@@ -25,16 +25,6 @@ def _project_wgs84_to_latlon(x, y):
     return lat, lon
 
 
-def _human_format(number):
-    """
-    Transforms high numbers to human readable numer string
-    """
-    units = ["", "K", "M", "G", "T", "P"]
-    k = 1000.0
-    magnitude = int(np.floor(np.log(number, k)))
-    return "%.2f%s" % (number / k ** magnitude, units[magnitude])
-
-
 def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
     """
     Get the mapbox zoom level given bounds and a figure dimension
