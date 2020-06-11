@@ -18,6 +18,34 @@ from .optional_imports import get_module
 Undefined = object()
 
 
+def _indexing_combinations(dims, alls, product=False):
+    """
+    Gives indexing tuples specified by the coordinates in dims.
+    If a member of dims is 'all' then it is replaced by the corresponding member
+    in alls.
+    If product is True, then the cartesian product of all the indices is
+    returned, otherwise the zip (that means index lists of mis-matched length
+    will yield a list of tuples whose length is the length of the shortest
+    list).
+    """
+    r = []
+    for d, a in zip(dims, alls):
+        if type(d) == type(int()):
+            d = [d]
+        elif d == "all":
+            d = a
+        if type(d) != type(list()):
+            raise TypeError(
+                "Indices in dimension must be of type int, list or the string 'all'. Got %s"
+                % (str(type(d),))
+            )
+        r.append(d)
+    if product:
+        return itertools.product(*r)
+    else:
+        return zip(*r)
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -1853,6 +1881,34 @@ Please use the add_trace method with the row and col parameters.
                 "to create the figure with a subplot grid."
             )
         return grid_ref
+
+    def _get_subplot_coordinates(self):
+        """
+        Returns an iterator over (row,col) pairs representing all the possible
+        subplot coordinates.
+        """
+        # currently, this just iterates over all the rows and columns (because
+        # self._grid_ref is currently always rectangular)
+        grid_ref = self._validate_get_grid_ref()
+        nrows = len(grid_ref)
+        ncols = len(grid_ref[0])
+        return itertools.product(range(1, nrows + 1), range(1, ncols + 1))
+
+    def _select_subplot_coordinates(self, rows, cols, product=False):
+        """
+        Allows selecting all or a subset of the subplots.
+        If any of rows or columns is 'all', product is set to True. This is
+        probably the expected behaviour, so that rows=1,cols='all' selects all
+        the columns in row 1 (otherwise it would just select the subplot in the
+        first row and first column).
+        """
+        product = any([s == "all" for s in [rows, cols]])
+        r, c = _indexing_combinations(
+            [rows, cols],
+            [t[n] for n in self._get_subplot_coordinates() for n in range(2)],
+            product=product,
+        )
+        return (r, c)
 
     def get_subplot(self, row, col, secondary_y=False):
         """
