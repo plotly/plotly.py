@@ -12,8 +12,9 @@ def _project_latlon_to_wgs84(lat, lon):
     Projects lat and lon to WGS84 to get regular hexagons on a mapbox map
     """
     x = lon * np.pi / 180
-    y = np.arctanh(np.sin(lat * np.pi/180))
+    y = np.arctanh(np.sin(lat * np.pi / 180))
     return x, y
+
 
 def _project_wgs84_to_latlon(x, y):
     """
@@ -22,6 +23,7 @@ def _project_wgs84_to_latlon(x, y):
     lon = x * 180 / np.pi
     lat = (2 * np.arctan(np.exp(y)) - np.pi / 2) * 180 / np.pi
     return lat, lon
+
 
 def _human_format(number):
     """
@@ -32,14 +34,17 @@ def _human_format(number):
     magnitude = int(np.floor(np.log(number, k)))
     return "%.2f%s" % (number / k ** magnitude, units[magnitude])
 
+
 def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
     """
     Get the mapbox zoom level given bounds and a figure dimension
     Source: https://stackoverflow.com/questions/6048975/google-maps-v3-how-to-calculate-the-zoom-level-for-a-given-bounds
     """
 
-    scale = 2 # adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
-    WORLD_DIM = {'height': 256 * scale, 'width': 256 * scale}
+    scale = (
+        2  # adjustment to reflect MapBox base tiles are 512x512 vs. Google's 256x256
+    )
+    WORLD_DIM = {"height": 256 * scale, "width": 256 * scale}
     ZOOM_MAX = 18
 
     def latRad(lat):
@@ -55,10 +60,11 @@ def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
     lngDiff = lon_max - lon_min
     lngFraction = ((lngDiff + 360) if lngDiff < 0 else lngDiff) / 360
 
-    latZoom = zoom(mapDim['height'], WORLD_DIM['height'], latFraction)
-    lngZoom = zoom(mapDim['width'], WORLD_DIM['width'], lngFraction)
+    latZoom = zoom(mapDim["height"], WORLD_DIM["height"], latFraction)
+    lngZoom = zoom(mapDim["width"], WORLD_DIM["width"], lngFraction)
 
     return min(latZoom, lngZoom, ZOOM_MAX)
+
 
 def _compute_hexbin(
     lat=None,
@@ -68,7 +74,7 @@ def _compute_hexbin(
     color=None,
     nx=None,
     agg_func=None,
-    min_count=None
+    min_count=None,
 ):
     """
     Computes the aggregation at hexagonal bin level.
@@ -135,7 +141,7 @@ def _compute_hexbin(
 
     d1 = (x - ix1) ** 2 + 3.0 * (y - iy1) ** 2
     d2 = (x - ix2 - 0.5) ** 2 + 3.0 * (y - iy2 - 0.5) ** 2
-    bdist = (d1 < d2)
+    bdist = d1 < d2
 
     if color is None:
         lattice1 = np.zeros((nx1, ny1))
@@ -186,17 +192,18 @@ def _compute_hexbin(
                 else:
                     lattice2[i, j] = np.nan
 
-        accum = np.hstack((lattice1.astype(float).ravel(),
-                        lattice2.astype(float).ravel()))
+        accum = np.hstack(
+            (lattice1.astype(float).ravel(), lattice2.astype(float).ravel())
+        )
         good_idxs = ~np.isnan(accum)
-        
+
     agreggated_value = accum[good_idxs]
 
     centers = np.zeros((n, 2), float)
-    centers[:nx1 * ny1, 0] = np.repeat(np.arange(nx1), ny1)
-    centers[:nx1 * ny1, 1] = np.tile(np.arange(ny1), nx1)
-    centers[nx1 * ny1:, 0] = np.repeat(np.arange(nx2) + 0.5, ny2)
-    centers[nx1 * ny1:, 1] = np.tile(np.arange(ny2), nx2) + 0.5
+    centers[: nx1 * ny1, 0] = np.repeat(np.arange(nx1), ny1)
+    centers[: nx1 * ny1, 1] = np.tile(np.arange(ny1), nx1)
+    centers[nx1 * ny1 :, 0] = np.repeat(np.arange(nx2) + 0.5, ny2)
+    centers[nx1 * ny1 :, 1] = np.tile(np.arange(ny2), nx2) + 0.5
     centers[:, 0] *= dx
     centers[:, 1] *= dy
     centers[:, 0] += xmin
@@ -204,14 +211,14 @@ def _compute_hexbin(
     centers = centers[good_idxs]
 
     # Define normalised regular hexagon coordinates
-    hx = [0, .5, .5, 0, -.5, -.5]
+    hx = [0, 0.5, 0.5, 0, -0.5, -0.5]
     hy = [
         -0.5 / np.cos(np.pi / 6),
         -0.5 * np.tan(np.pi / 6),
         0.5 * np.tan(np.pi / 6),
         0.5 / np.cos(np.pi / 6),
         0.5 * np.tan(np.pi / 6),
-        -0.5 * np.tan(np.pi / 6)
+        -0.5 * np.tan(np.pi / 6),
     ]
 
     # Number of hexagons needed
@@ -221,7 +228,7 @@ def _compute_hexbin(
     dxh = sorted(list(set(np.diff(sorted(centers[:, 0])))))[1]
     dyh = sorted(list(set(np.diff(sorted(centers[:, 1])))))[1]
     nx = dxh * 2
-    ny = 2/3 * dyh / (0.5 / np.cos(np.pi / 6))
+    ny = 2 / 3 * dyh / (0.5 / np.cos(np.pi / 6))
 
     # Coordinates for all hexagonal patches
     hxs = np.array([hx] * m) * nx + np.vstack(centers[:, 0])
@@ -236,6 +243,7 @@ def _compute_hexbin(
 
     return hexagons_lats, hexagons_lons, hexagons_ids, agreggated_value
 
+
 def _hexagons_to_geojson(hexagons_lats, hexagons_lons, ids=None):
     """
     Creates a geojson of hexagonal features based on the outputs of
@@ -249,12 +257,13 @@ def _hexagons_to_geojson(hexagons_lats, hexagons_lons, ids=None):
         points.append(points[0])
         features.append(
             dict(
-                type='Feature',
+                type="Feature",
                 id=idx,
-                geometry=dict(type='Polygon', coordinates=[points])
+                geometry=dict(type="Polygon", coordinates=[points]),
             )
         )
-    return dict(type='FeatureCollection', features=features)
+    return dict(type="FeatureCollection", features=features)
+
 
 def hexbin_mapbox(
     data_frame=None,
@@ -280,10 +289,10 @@ def hexbin_mapbox(
     height=None,
 ):
     args = build_dataframe(args=locals(), constructor=None)
-    
+
     if agg_func is None:
         agg_func = np.mean
-    
+
     lat_range = args["data_frame"][args["lat"]].agg(["min", "max"]).values
     lon_range = args["data_frame"][args["lon"]].agg(["min", "max"]).values
 
@@ -310,9 +319,9 @@ def hexbin_mapbox(
         else:
             mapDim = dict(height=height, width=width)
         zoom = _getBoundsZoomLevel(*lon_range, *lat_range, mapDim)
-    
+
     if center is None:
-        center=dict(lat=lat_range.mean(), lon=lon_range.mean())
+        center = dict(lat=lat_range.mean(), lon=lon_range.mean())
 
     if args["animation_frame"] is not None:
         groups = args["data_frame"].groupby(args["animation_frame"]).groups
@@ -334,21 +343,19 @@ def hexbin_mapbox(
         )
         agg_data_frame_list.append(
             pd.DataFrame(
-                np.c_[hexagons_ids, aggregated_value],
-                columns=["locations", "color"]
+                np.c_[hexagons_ids, aggregated_value], columns=["locations", "color"]
             )
         )
-    agg_data_frame = pd.concat(
-        agg_data_frame_list, axis=0, keys=groups.keys()
-    ).rename_axis(index=("frame", "index")).reset_index("frame")
-    
+    agg_data_frame = (
+        pd.concat(agg_data_frame_list, axis=0, keys=groups.keys())
+        .rename_axis(index=("frame", "index"))
+        .reset_index("frame")
+    )
+
     agg_data_frame["color"] = pd.to_numeric(agg_data_frame["color"])
 
     if range_color is None:
-        range_color = [
-            agg_data_frame["color"].min(),
-            agg_data_frame["color"].max()
-        ]
+        range_color = [agg_data_frame["color"].min(), agg_data_frame["color"].max()]
 
     return choropleth_mapbox(
         data_frame=agg_data_frame,
@@ -356,9 +363,7 @@ def hexbin_mapbox(
         locations="locations",
         color="color",
         hover_data={"color": True, "locations": False, "frame": False},
-        animation_frame=(
-            "frame" if args["animation_frame"] is not None else None
-        ),
+        animation_frame=("frame" if args["animation_frame"] is not None else None),
         color_discrete_sequence=color_discrete_sequence,
         color_discrete_map=color_discrete_map,
         labels=labels,
@@ -374,5 +379,6 @@ def hexbin_mapbox(
         width=width,
         height=height,
     )
+
 
 hexbin_mapbox.__doc__ = make_docstring(hexbin_mapbox)
