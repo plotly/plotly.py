@@ -1133,51 +1133,58 @@ class BaseFigure(object):
                 "Received col parameter but not row.\n"
                 "row and col must be specified together"
             )
-        grid_ref = self._validate_get_grid_ref()
+
+        # Address multiple subplots
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO add product argument
+            rows, cols = self._select_subplot_coordinates(row, col)
+            # TODO do we have to unzip the row and columns, just to zip them again?
+            for r, c in zip(rows, cols):
+                self._add_annotation_like(
+                    prop_singular,
+                    prop_plural,
+                    new_obj,
+                    row=r,
+                    col=c,
+                    secondary_y=secondary_y,
+                )
+            return self
 
         # Get grid_ref if specific row or column requested
         if row is not None:
-            # TODO It is assumed that grid_ref has an equal number of columns in
-            # each row. Is this ever not true?
-            rows_cols = _row_col_index_combinations(
-                row, col, len(grid_ref), len(grid_ref[0])
-            )
+            grid_ref = self._validate_get_grid_ref()
+            refs = grid_ref[row - 1][col - 1]
 
-            for r, c in rows_cols:
-                refs = grid_ref[r - 1][c - 1]
+            if not refs:
+                raise ValueError(
+                    "No subplot found at position ({r}, {c})".format(r=row, c=col)
+                )
 
-                if not refs:
-                    raise ValueError(
-                        "No subplot found at position ({r}, {c})".format(r=r, c=c)
+            if refs[0].subplot_type != "xy":
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+is of type {subplot_type}.""".format(
+                        prop_singular=prop_singular,
+                        r=row,
+                        c=col,
+                        subplot_type=refs[0].subplot_type,
                     )
+                )
+            if len(refs) == 1 and secondary_y:
+                raise ValueError(
+                    """
+Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
+because subplot does not have a secondary y-axis"""
+                )
+            if secondary_y:
+                xaxis, yaxis = refs[1].layout_keys
+            else:
+                xaxis, yaxis = refs[0].layout_keys
+            xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            new_obj.update(xref=xref, yref=yref)
 
-                if refs[0].subplot_type != "xy":
-                    raise ValueError(
-                        """
-    Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
-    is of type {subplot_type}.""".format(
-                            prop_singular=prop_singular,
-                            r=r,
-                            c=c,
-                            subplot_type=refs[0].subplot_type,
-                        )
-                    )
-                if len(refs) == 1 and secondary_y:
-                    raise ValueError(
-                        """
-    Cannot add {prop_singular} to secondary y-axis of subplot at position ({r}, {c})
-    because subplot does not have a secondary y-axis""".format(
-                            prop_singular=prop_singular, r=r, c=c
-                        )
-                    )
-                if secondary_y:
-                    xaxis, yaxis = refs[1].layout_keys
-                else:
-                    xaxis, yaxis = refs[0].layout_keys
-                xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
-                new_obj.update(xref=xref, yref=yref)
-
-                self.layout[prop_plural] += (new_obj,)
+        self.layout[prop_plural] += (new_obj,)
 
         return self
 
@@ -1702,6 +1709,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 "row and col must be specified together"
             )
 
+        # Address multiple subplots
         if row is not None and _is_select_subplot_coordinates_arg(row, col):
             # TODO add product argument
             rows, cols = self._select_subplot_coordinates(row, col)
