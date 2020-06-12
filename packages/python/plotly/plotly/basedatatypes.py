@@ -19,58 +19,41 @@ from .optional_imports import get_module
 Undefined = object()
 
 
-def _rcindex_type(d):
-    all_flag = False
-    if type(d) == type(tuple()):
-        d, f = d
-        if f == "all":
-            all_flag = True
-    if type(d) == type(range(1)):
-        d = list(d)
-    if type(d) == type(int()):
-        return (d, "i", all_flag)
-    elif type(d) == type(list()):
-        return (d, "l", all_flag)
-    elif d == "all":
-        return (d, "a", all_flag)
-    else:
-        raise TypeError(
-            "argument must be 'all', int or list, got {d_type}".format(
-                d_type=str(type(d))
-            )
+def _unzip_pairs(pairs):
+    pairs = list(pairs)
+    return ([t[0] for t in pairs], [t[1] for t in pairs])
+
+
+def _indexing_combinations(dims, alls, product=False):
+    """
+    Gives indexing tuples specified by the coordinates in dims.
+    If a member of dims is 'all' then it is replaced by the corresponding member
+    in alls.
+    If product is True, then the cartesian product of all the indices is
+    returned, otherwise the zip (that means index lists of mis-matched length
+    will yield a list of tuples whose length is the length of the shortest
+    list).
+    """
+    if len(dims) == 0:
+        # this is because list(itertools.product(*[])) returns [()] which has non-zero
+        # length!
+        return []
+    if len(dims) != len(alls):
+        raise ValueError(
+            "Must have corresponding values in alls for each value of dims. Got dims=%s and alls=%s."
+            % (str(dims), str(alls))
         )
-
-
-def _rcsingle_index_to_list(d):
-    if type(d) == type(int()):
-        return [d]
-    return d
-
-
-def _row_col_index_combinations(rows, cols, max_n_rows, max_n_cols):
-    all_flag = False
-    rows, rtype, f = _rcindex_type(rows)
-    all_flag |= f
-    cols, ctype, f = _rcindex_type(cols)
-    all_flag |= f
-    rows = _rcsingle_index_to_list(rows)
-    cols = _rcsingle_index_to_list(cols)
-    ptype = (rtype, ctype)
-    all_rows = range(1, max_n_rows + 1)
-    all_cols = range(1, max_n_cols + 1)
-    if ptype == ("a", "a"):
-        return list(itertools.product(all_rows, all_cols))
-    elif ptype == ("l", "a") or ptype == ("i", "a"):
-        return list(itertools.product(rows, all_cols))
-    elif ptype == ("a", "l") or ptype == ("a", "i"):
-        return list(itertools.product(all_rows, cols))
-    elif ptype == ("l", "l"):
-        if len(rows) == len(cols) and not all_flag:
-            return list(zip(rows, cols))
-        else:
-            return list(itertools.product(rows, cols))
-    elif ptype == ("l", "i") or ptype == ("i", "i") or ptype == ("i", "l"):
-        return list(itertools.product(rows, cols))
+    r = []
+    for d, a in zip(dims, alls):
+        if d == "all":
+            d = a
+        elif type(d) != type(list()):
+            d = [d]
+        r.append(d)
+    if product:
+        return itertools.product(*r)
+    else:
+        return zip(*r)
 
 
 class BaseFigure(object):
@@ -1917,6 +1900,41 @@ Please use the add_trace method with the row and col parameters.
                 "to create the figure with a subplot grid."
             )
         return grid_ref
+
+    def _get_subplot_rows_columns(self):
+        """
+        Returns a pair of lists, the first containing all the row indices and
+        the second all the column indices.
+        """
+        # currently, this just iterates over all the rows and columns (because
+        # self._grid_ref is currently always rectangular)
+        grid_ref = self._validate_get_grid_ref()
+        nrows = len(grid_ref)
+        ncols = len(grid_ref[0])
+        return (range(1, nrows + 1), range(1, ncols + 1))
+
+    def _get_subplot_coordinates(self):
+        """
+        Returns an iterator over (row,col) pairs representing all the possible
+        subplot coordinates.
+        """
+        return itertools.product(*self._get_subplot_rows_columns())
+
+    def _select_subplot_coordinates(self, rows, cols, product=False):
+        """
+        Allows selecting all or a subset of the subplots.
+        If any of rows or columns is 'all', product is set to True. This is
+        probably the expected behaviour, so that rows=1,cols='all' selects all
+        the columns in row 1 (otherwise it would just select the subplot in the
+        first row and first column).
+        """
+        product |= any([s == "all" for s in [rows, cols]])
+        t = _indexing_combinations(
+            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
+        )
+        t = list(t)
+        r, c = _unzip_pairs(t)
+        return (r, c)
 
     def get_subplot(self, row, col, secondary_y=False):
         """
