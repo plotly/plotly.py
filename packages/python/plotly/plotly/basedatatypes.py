@@ -8,6 +8,7 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
+import itertools
 
 from _plotly_utils.utils import _natural_sort_strings
 from .optional_imports import get_module
@@ -28,17 +29,21 @@ def _indexing_combinations(dims, alls, product=False):
     will yield a list of tuples whose length is the length of the shortest
     list).
     """
+    if len(dims) == 0:
+        # this is because list(itertools.product(*[])) returns [()] which has non-zero
+        # length!
+        return []
+    if len(dims) != len(alls):
+        raise ValueError(
+            "Must have corresponding values in alls for each value of dims. Got dims=%s and alls=%s."
+            % (str(dims), str(alls))
+        )
     r = []
     for d, a in zip(dims, alls):
-        if type(d) == type(int()):
-            d = [d]
-        elif d == "all":
+        if d == "all":
             d = a
-        if type(d) != type(list()):
-            raise TypeError(
-                "Indices in dimension must be of type int, list or the string 'all'. Got %s"
-                % (str(type(d),))
-            )
+        elif type(d) != type(list()):
+            d = [d]
         r.append(d)
     if product:
         return itertools.product(*r)
@@ -1905,7 +1910,7 @@ Please use the add_trace method with the row and col parameters.
         product = any([s == "all" for s in [rows, cols]])
         r, c = _indexing_combinations(
             [rows, cols],
-            [t[n] for n in self._get_subplot_coordinates() for n in range(2)],
+            [t[n] for t in self._get_subplot_coordinates() for n in range(2)],
             product=product,
         )
         return (r, c)
