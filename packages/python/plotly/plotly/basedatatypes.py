@@ -56,6 +56,11 @@ def _indexing_combinations(dims, alls, product=False):
         return zip(*r)
 
 
+def _is_select_subplot_coordinates_arg(*args):
+    """ Returns true if any args are lists or the string 'all' """
+    return any((a == "all") or (type(a) == type(list())) for a in args)
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -1697,6 +1702,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 "row and col must be specified together"
             )
 
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO add product argument
+            rows, cols = self._select_subplot_coordinates(row, col)
+            # TODO do we have to unzip the row and columns, just to zip them again?
+            for r, c in zip(rows, cols):
+                self.add_trace(trace, row=r, col=c, secondary_y=secondary_y)
+            return self
+
         return self.add_traces(
             data=[trace],
             rows=[row] if row is not None else None,
@@ -1929,6 +1942,10 @@ Please use the add_trace method with the row and col parameters.
         first row and first column).
         """
         product |= any([s == "all" for s in [rows, cols]])
+        # TODO: If grid_ref ever becomes non-rectangular, then t should be the
+        # set-intersection of the result of _indexing_combinations and
+        # _get_subplot_coordinates, because some coordinates given by
+        # the _indexing_combinations function might be invalid.
         t = _indexing_combinations(
             [rows, cols], list(self._get_subplot_rows_columns()), product=product,
         )
