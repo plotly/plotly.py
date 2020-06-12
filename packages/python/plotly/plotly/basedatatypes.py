@@ -19,6 +19,11 @@ from .optional_imports import get_module
 Undefined = object()
 
 
+def _unzip_pairs(pairs):
+    pairs = list(pairs)
+    return ([t[0] for t in pairs], [t[1] for t in pairs])
+
+
 def _indexing_combinations(dims, alls, product=False):
     """
     Gives indexing tuples specified by the coordinates in dims.
@@ -1887,17 +1892,24 @@ Please use the add_trace method with the row and col parameters.
             )
         return grid_ref
 
-    def _get_subplot_coordinates(self):
+    def _get_subplot_rows_columns(self):
         """
-        Returns an iterator over (row,col) pairs representing all the possible
-        subplot coordinates.
+        Returns a pair of lists, the first containing all the row indices and
+        the second all the column indices.
         """
         # currently, this just iterates over all the rows and columns (because
         # self._grid_ref is currently always rectangular)
         grid_ref = self._validate_get_grid_ref()
         nrows = len(grid_ref)
         ncols = len(grid_ref[0])
-        return itertools.product(range(1, nrows + 1), range(1, ncols + 1))
+        return (range(1, nrows + 1), range(1, ncols + 1))
+
+    def _get_subplot_coordinates(self):
+        """
+        Returns an iterator over (row,col) pairs representing all the possible
+        subplot coordinates.
+        """
+        return itertools.product(*self._get_subplot_rows_columns())
 
     def _select_subplot_coordinates(self, rows, cols, product=False):
         """
@@ -1907,12 +1919,12 @@ Please use the add_trace method with the row and col parameters.
         the columns in row 1 (otherwise it would just select the subplot in the
         first row and first column).
         """
-        product = any([s == "all" for s in [rows, cols]])
-        r, c = _indexing_combinations(
-            [rows, cols],
-            [t[n] for t in self._get_subplot_coordinates() for n in range(2)],
-            product=product,
+        product |= any([s == "all" for s in [rows, cols]])
+        t = _indexing_combinations(
+            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
         )
+        t = list(t)
+        r, c = _unzip_pairs(t)
         return (r, c)
 
     def get_subplot(self, row, col, secondary_y=False):

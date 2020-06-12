@@ -1,6 +1,6 @@
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-from plotly.basedatatypes import _indexing_combinations
+from plotly.basedatatypes import _indexing_combinations, _unzip_pairs
 import pytest
 
 NROWS = 4
@@ -30,7 +30,7 @@ def test_get_subplot_coordinates(subplot_fig_fixture):
     )
 
 
-def test_indexing_combinations_edge_cases(subplot_fig_fixture):
+def test_indexing_combinations_edge_cases():
     # Although in theory _indexing_combinations works for any number of
     # dimensions, we're just interested in 2D for subplots so that's what we
     # test here.
@@ -135,5 +135,47 @@ all_cols = [1, 2, 3, 4, 5]
         (dict(dims=[2, 3], alls=[all_rows, all_cols], product=True), set([(2, 3)])),
     ],
 )
-def test_indexing_combinations(subplot_fig_fixture, test_input, expected):
+def test_indexing_combinations(test_input, expected):
     assert set(_indexing_combinations(**test_input)) == expected
+
+
+def _sort_row_col_lists(rows, cols):
+    # makes sure that row and column lists are compared in the same order
+    # sorted on rows
+    si = sorted(range(len(rows)), key=lambda i: rows[i])
+    rows = [rows[i] for i in si]
+    cols = [cols[i] for i in si]
+    return (rows, cols)
+
+
+# _indexing_combinations tests most cases of the following function
+# we just need to test that setting rows or cols to 'all' makes product True,
+# and if not, we can still set product to True.
+@pytest.mark.parametrize(
+    "test_input,expected",
+    [
+        (
+            ("all", [2, 4, 5], False),
+            _unzip_pairs([(r, c) for r in range(1, NROWS + 1) for c in [2, 4, 5]]),
+        ),
+        (
+            ([1, 3], "all", False),
+            _unzip_pairs([(r, c) for r in [1, 3] for c in range(1, NCOLS + 1)]),
+        ),
+        (
+            ([1, 3], "all", True),
+            _unzip_pairs([(r, c) for r in [1, 3] for c in range(1, NCOLS + 1)]),
+        ),
+        (([1, 3], [2, 4, 5], False), _unzip_pairs([(1, 2), (3, 4)])),
+        (
+            ([1, 3], [2, 4, 5], True),
+            _unzip_pairs([(r, c) for r in [1, 3] for c in [2, 4, 5]]),
+        ),
+    ],
+)
+def test_select_subplot_coordinates(subplot_fig_fixture, test_input, expected):
+    rows, cols, product = test_input
+    er, ec = _sort_row_col_lists(*expected)
+    r, c = subplot_fig_fixture._select_subplot_coordinates(rows, cols, product=product)
+    r, c = _sort_row_col_lists(r, c)
+    assert (r == er) and (c == ec)
