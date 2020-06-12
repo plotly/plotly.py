@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.3.4
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.0
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -46,8 +46,54 @@ fig = px.bar(data_canada, x='year', y='pop')
 fig.show()
 ```
 
+
+#### Bar chart with Long Format Data
+
+Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
+
 ```python
-data_canada
+import plotly.express as px
+
+long_df = px.data.medals_long()
+
+fig = px.bar(long_df, x="nation", y="count", color="medal", title="Long-Form Input")
+fig.show()
+```
+
+```python
+
+```
+
+```python
+long_df
+```
+
+#### Bar chart with Wide Format Data
+Wide-form data has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
+
+```python
+import plotly.express as px
+
+wide_df = px.data.medals_wide()
+
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], title="Wide-Form Input")
+fig.show()
+```
+
+```python
+wide_df
+```
+
+#### Bar chart with Mixed Form Data
+
+```python
+import plotly.express as px
+mixed_df = px.data.experiment(indexed=True)
+mixed_df.head()
+```
+
+```python
+mixed_df
 ```
 
 ### Customize bar chart with Plotly Express
@@ -77,7 +123,8 @@ fig.show()
 ```python
 # Change the default stacking
 import plotly.express as px
-fig = px.bar(df, x="sex", y="total_bill", color='smoker', barmode='group',
+fig = px.bar(df, x="sex", y="total_bill", 
+             color='smoker', barmode='group',
              height=400)
 fig.show()
 ```
