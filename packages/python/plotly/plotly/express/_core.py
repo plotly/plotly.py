@@ -117,6 +117,10 @@ def get_label(args, column):
 
 
 def invert_label(args, column):
+    """Invert mapping.
+    Find key corresponding to value column in dict args["labels"].
+    Returns `column` if the value does not exist.
+    """
     reversed_labels = {value: key for (key, value) in args["labels"].items()}
     try:
         return reversed_labels[column]
@@ -442,6 +446,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         mapping_labels_copy = OrderedDict(mapping_labels)
         if args["hover_data"] and isinstance(args["hover_data"], dict):
             for k, v in mapping_labels.items():
+                # We need to invert the mapping here
                 k_args = invert_label(args, k)
                 if k_args in args["hover_data"]:
                     if args["hover_data"][k_args][0]:
