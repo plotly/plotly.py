@@ -1185,6 +1185,14 @@ because subplot does not have a secondary y-axis"""
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             new_obj.update(xref=xref, yref=yref)
 
+        # xref and yref are set to the first axes if not set.
+        # This is so that routines that need these to be specified if row and
+        # col were not specified can still work (e.g., `add_vline`).
+        if new_obj.xref is None:
+            new_obj.xref = "x"
+        if new_obj.yref is None:
+            new_obj.yref = "y"
+
         self.layout[prop_plural] += (new_obj,)
 
         return self
@@ -3473,6 +3481,13 @@ Invalid property path '{key_path_str}' for layout
         return index_list[0]
 
     def _make_paper_spanning_shape(self, direction, shape):
+        """
+        Convert a shape drawn on a plot or a subplot into one whose yref or
+        xref is 'paper' so that the shape will seem to extend infinitely in that
+        dimension. This is useful for drawing lines or boxes on a plot where one
+        dimension of the shape will not move out of bounds when moving the
+        plot's view.
+        """
         if direction == "vertical":
             # fix y points to top and bottom of subplot
             axis = "y"
@@ -3498,6 +3513,135 @@ Invalid property path '{key_path_str}' for layout
             raise e("Shape does not support paper spanning.")
         shape[ref] = "paper"
         return shape
+
+    def _process_multiple_paper_spanning_shapes(
+        self, shape_args, row, col, direction, **kwargs
+    ):
+        """
+        Add a shape or multiple shapes and call _make_paper_spanning_shape on
+        all the new shapes.
+        """
+        # shapes are always added at the end of the tuple of shapes, so we see
+        # how long the tuple is before the call and after the call, and adjust
+        # the new shapes that were added at the end
+        n_shapes_before = len(self.layout["shapes"])
+        self.add_shape(row=row, col=col, **shape_args, **kwargs)
+        n_shapes_after = len(self.layout["shapes"])
+        new_shapes = tuple(
+            [
+                self._make_paper_spanning_shape(direction, self.layout["shapes"][n])
+                for n in range(n_shapes_before, n_shapes_after)
+            ]
+        )
+        self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
+
+    def add_vline(self, x, row=None, col=None, **kwargs):
+        """
+        Add a vertical line to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x: float or int
+            A number representing the x coordinate of the vertical line.
+        row: None, int or 'all'
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        col: None, int or 'all'
+            Subplot col for shape. If 'all', addresses all columns in
+            the specified row(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, x1 or type.
+        """
+        self._process_multiple_paper_spanning_shapes(
+            dict(type="line", x0=x, x1=x, y0=0, y1=1), row, col, "vertical", **kwargs
+        )
+
+    def add_hline(self, y, row=None, col=None, **kwargs):
+        """
+        Add a horizontal line to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y: float or int
+            A number representing the y coordinate of the horizontal line.
+        row: None, int or 'all'
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        col: None, int or 'all'
+            Subplot col for shape. If 'all', addresses all columns in
+            the specified row(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, x1 or type.
+        """
+        self._process_multiple_paper_spanning_shapes(
+            dict(type="line", x0=0, x1=1, y0=y, y1=y,), row, col, "horizontal", **kwargs
+        )
+
+    def add_vrect(self, x0, x1, row=None, col=None, **kwargs):
+        """
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        y-dimension.
+
+        Parameters
+        ----------
+        x0: float or int
+            A number representing the x coordinate of one side of the rectangle.
+        x1: float or int
+            A number representing the x coordinate of the other side of the rectangle.
+        row: None, int or 'all'
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        col: None, int or 'all'
+            Subplot col for shape. If 'all', addresses all columns in
+            the specified row(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, x1 or type.
+        """
+        self._process_multiple_paper_spanning_shapes(
+            dict(type="rect", x0=x0, x1=x1, y0=0, y1=1), row, col, "vertical", **kwargs
+        )
+
+    def add_hrect(self, y0, y1, row=None, col=None, **kwargs):
+        """
+        Add a rectangle to a plot or subplot that extends infinitely in the
+        x-dimension.
+
+        Parameters
+        ----------
+        y0: float or int
+            A number representing the y coordinate of one side of the rectangle.
+        y1: float or int
+            A number representing the y coordinate of the other side of the rectangle.
+        row: None, int or 'all'
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        col: None, int or 'all'
+            Subplot col for shape. If 'all', addresses all columns in
+            the specified row(s). If both row and col are None, addresses the
+            first subplot if subplots exist, or the only plot.
+        **kwargs:
+            Any named function parameters that can be passed to 'add_shape',
+            except for x0, x1, y0, x1 or type.
+        """
+        self._process_multiple_paper_spanning_shapes(
+            dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
+            row,
+            col,
+            "horizontal",
+            **kwargs
+        )
 
 
 class BasePlotlyType(object):
