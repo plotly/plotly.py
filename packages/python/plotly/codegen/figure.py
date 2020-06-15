@@ -147,7 +147,7 @@ class {fig_classname}({base_classname}):\n"""
                 "row : 'all', int or None (default)",
                 "Subplot row index (starting from 1) for the trace to be "
                 "added. Only valid if figure was created using "
-                "`plotly.tools.make_subplots`.",
+                "`plotly.tools.make_subplots`."
                 "If 'all', addresses all rows in the specified column(s).",
             ),
             (

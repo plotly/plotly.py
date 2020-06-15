@@ -1649,14 +1649,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        row : int or None (default None)
-            Subplot row index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
-        col : int or None (default None)
-            Subplot col index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
