@@ -51,6 +51,11 @@ fig.show()
 
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
+To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
+documentation](https://plotly.com/python/wide-form/). 
+
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/). 
+
 ```python
 import plotly.express as px
 
@@ -71,6 +76,11 @@ long_df
 #### Bar chart with Wide Format Data
 Wide-form data has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
 
+To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
+documentation](https://plotly.com/python/wide-form/). 
+
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/). 
+
 ```python
 import plotly.express as px
 
@@ -85,6 +95,13 @@ wide_df
 ```
 
 #### Bar chart with Mixed Form Data
+
+Mixed-form data is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables.
+
+To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
+documentation](https://plotly.com/python/wide-form/). 
+
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/).
 
 ```python
 import plotly.express as px
