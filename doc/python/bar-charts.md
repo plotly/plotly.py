@@ -66,10 +66,6 @@ fig.show()
 ```
 
 ```python
-
-```
-
-```python
 long_df
 ```
 
@@ -106,11 +102,14 @@ For  detailed column-input-format documentation, see the [Plotly Express Argumen
 ```python
 import plotly.express as px
 mixed_df = px.data.experiment(indexed=True)
-mixed_df.head()
+fig = px.bar(mixed_df, x=mixed_df.index,  
+             y=["experiment_1", "experiment_2", "experiment_3"], 
+             title="Mixed Form Input")
+fig.show()
 ```
 
 ```python
-mixed_df
+mixed_df.head()
 ```
 
 ### Customize bar chart with Plotly Express
