@@ -3554,7 +3554,7 @@ Invalid property path '{key_path_str}' for layout
             first subplot if subplots exist, or the only plot.
         **kwargs:
             Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, x1 or type.
+            except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1), row, col, "vertical", **kwargs
@@ -3579,7 +3579,7 @@ Invalid property path '{key_path_str}' for layout
             first subplot if subplots exist, or the only plot.
         **kwargs:
             Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, x1 or type.
+            except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
             dict(type="line", x0=0, x1=1, y0=y, y1=y,), row, col, "horizontal", **kwargs
@@ -3606,7 +3606,7 @@ Invalid property path '{key_path_str}' for layout
             first subplot if subplots exist, or the only plot.
         **kwargs:
             Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, x1 or type.
+            except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1), row, col, "vertical", **kwargs
@@ -3633,7 +3633,7 @@ Invalid property path '{key_path_str}' for layout
             first subplot if subplots exist, or the only plot.
         **kwargs:
             Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, x1 or type.
+            except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
