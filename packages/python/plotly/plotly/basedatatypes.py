@@ -3507,6 +3507,9 @@ Invalid property path '{key_path_str}' for layout
         axis_num = shape[ref].strip(axis)
         axis_layout_key = axis_layout_key_template % (axis_num,)
         domain = self.layout[axis_layout_key]["domain"]
+        if domain is None:
+            # This could occur if the plot was not made with make_subplots
+            domain = [0, 1]
         try:
             shape[axis + "0"], shape[axis + "1"] = domain
         except KeyError as e:
