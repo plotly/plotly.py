@@ -9,6 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 import itertools
+import pdb
 
 from _plotly_utils.utils import _natural_sort_strings
 from .optional_imports import get_module
@@ -3470,6 +3471,33 @@ Invalid property path '{key_path_str}' for layout
             raise ValueError("Invalid value")
 
         return index_list[0]
+
+    def _make_paper_spanning_shape(self, direction, shape):
+        if direction == "vertical":
+            # fix y points to top and bottom of subplot
+            axis = "y"
+            ref = "yref"
+            axis_layout_key_template = "yaxis%s"
+        elif direction == "horizontal":
+            # fix x points to left and right of subplot
+            axis = "x"
+            ref = "xref"
+            axis_layout_key_template = "xaxis%s"
+        else:
+            raise ValueError(
+                "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
+                % (direction,)
+            )
+        # find axis paper "domain" by looking up the axis in the shape
+        axis_num = shape[ref].strip(axis)
+        axis_layout_key = axis_layout_key_template % (axis_num,)
+        domain = self.layout[axis_layout_key]["domain"]
+        try:
+            shape[axis + "0"], shape[axis + "1"] = domain
+        except KeyError as e:
+            raise e("Shape does not support paper spanning.")
+        shape[ref] = "paper"
+        return shape
 
 
 class BasePlotlyType(object):
