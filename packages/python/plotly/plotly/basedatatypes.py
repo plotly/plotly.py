@@ -9,7 +9,6 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 import itertools
-import pdb
 
 from _plotly_utils.utils import _natural_sort_strings
 from .optional_imports import get_module
@@ -3562,6 +3561,7 @@ Invalid property path '{key_path_str}' for layout
         self._process_multiple_paper_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1), row, col, "vertical", **kwargs
         )
+        return self
 
     def add_hline(self, y, row=None, col=None, **kwargs):
         """
@@ -3587,6 +3587,7 @@ Invalid property path '{key_path_str}' for layout
         self._process_multiple_paper_spanning_shapes(
             dict(type="line", x0=0, x1=1, y0=y, y1=y,), row, col, "horizontal", **kwargs
         )
+        return self
 
     def add_vrect(self, x0, x1, row=None, col=None, **kwargs):
         """
@@ -3614,6 +3615,7 @@ Invalid property path '{key_path_str}' for layout
         self._process_multiple_paper_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1), row, col, "vertical", **kwargs
         )
+        return self
 
     def add_hrect(self, y0, y1, row=None, col=None, **kwargs):
         """
@@ -3645,6 +3647,7 @@ Invalid property path '{key_path_str}' for layout
             "horizontal",
             **kwargs
         )
+        return self
 
 
 class BasePlotlyType(object):
