@@ -3479,7 +3479,7 @@ Invalid property path '{key_path_str}' for layout
 
         return index_list[0]
 
-    def _make_paper_spanning_shape(self, direction, shape):
+    def _make_paper_spanning_shape(self, direction, shape, none_if_no_trace=True):
         """
         Convert a shape drawn on a plot or a subplot into one whose yref or
         xref is 'paper' so that the shape will seem to extend infinitely in that
@@ -3513,6 +3513,15 @@ Invalid property path '{key_path_str}' for layout
             shape[axis + "0"], shape[axis + "1"] = domain
         except KeyError as e:
             raise e("Shape does not support paper spanning.")
+        if none_if_no_trace:
+            # iterate through all the traces and check to see if one with the
+            # same xref and yref pair is there, if not, we return None (we don't
+            # want to draw a shape if there is no trace)
+            if not any(
+                t == (shape["xref"], shape["yref"])
+                for t in [(d["xaxis"], d["yaxis"]) for d in self.data]
+            ):
+                return None
         shape[ref] = "paper"
         return shape
 
@@ -3530,10 +3539,13 @@ Invalid property path '{key_path_str}' for layout
         self.add_shape(row=row, col=col, **shape_args, **kwargs)
         n_shapes_after = len(self.layout["shapes"])
         new_shapes = tuple(
-            [
-                self._make_paper_spanning_shape(direction, self.layout["shapes"][n])
-                for n in range(n_shapes_before, n_shapes_after)
-            ]
+            filter(
+                lambda x: x is not None,
+                [
+                    self._make_paper_spanning_shape(direction, self.layout["shapes"][n])
+                    for n in range(n_shapes_before, n_shapes_after)
+                ],
+            )
         )
         self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
 
