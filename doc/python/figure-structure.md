@@ -30,7 +30,7 @@ jupyter:
     order: 1
     page_type: u-guide
     permalink: python/figure-structure/
-    thumbnail: thumbnail/plotly-express.png
+    thumbnail: thumbnail/violin.jpg
 ---
 
 The `plotly` Python package exists to [create, manipulate](/python/creating-and-updating-figures/) and [render](/python/renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by data structures also referred to as figures. The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
