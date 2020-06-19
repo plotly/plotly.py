@@ -369,14 +369,28 @@ def test_add_span_shape_no_empty_plot(
                 {
                     "type": "line",
                     "x0": 0,
-                    "x1": 0.4,
+                    "x1": 1,
                     "xref": "paper",
                     "y0": 6,
                     "y1": 6,
                     "yref": "y",
                 }
             ],
-        )
+        ),
+        (
+            (go.Figure.add_vline, dict(x=6)),
+            [
+                {
+                    "type": "line",
+                    "y0": 0,
+                    "y1": 1,
+                    "xref": "x",
+                    "x0": 6,
+                    "x1": 6,
+                    "yref": "paper",
+                }
+            ],
+        ),
     ],
 )
 def test_non_subplot_add_span_shape(test_input, expected, non_subplot_fig_fixture):

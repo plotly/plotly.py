@@ -1193,14 +1193,6 @@ because subplot does not have a secondary y-axis"""
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
             new_obj.update(xref=xref, yref=yref)
 
-        # xref and yref are set to the first axes if not set.
-        # This is so that routines that need these to be specified if row and
-        # col were not specified can still work (e.g., `add_vline`).
-        if new_obj.xref is None:
-            new_obj.xref = "x"
-        if new_obj.yref is None:
-            new_obj.yref = "y"
-
         self.layout[prop_plural] += (new_obj,)
 
         return self
@@ -3549,6 +3541,14 @@ Invalid property path '{key_path_str}' for layout
         # the new shapes that were added at the end
         n_shapes_before = len(self.layout["shapes"])
         self.add_shape(row=row, col=col, **shape_args, **kwargs)
+        if row == None and col == None:
+            # this was called intending to add to a single plot (and
+            # self.add_shape succeeded)
+            # however, in the case of a single plot, xref and yref are not
+            # specified, so we specify them here to the following routines can work
+            # (they need to change xref or yref to paper and change their range
+            # to the domain)
+            self.layout["shapes"][-1].update(xref="x", yref="y")
         n_shapes_after = len(self.layout["shapes"])
         new_shapes = tuple(
             filter(
