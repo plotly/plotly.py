@@ -39,7 +39,6 @@ if sys.version_info < (3, 7):
         colors,
         io,
         data,
-        colors,
     )
     from plotly.version import __version__
 
@@ -51,7 +50,6 @@ if sys.version_info < (3, 7):
         "colors",
         "io",
         "data",
-        "colors",
         "__version__",
     ]
 
@@ -71,7 +69,6 @@ else:
             ".colors",
             ".io",
             ".data",
-            ".colors",
         ],
         [".version.__version__"],
     )
