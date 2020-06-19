@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Version 4 Migration Guide
-    order: 3
+    order: 6
     page_type: example_index
     permalink: python/v4-migration/
     thumbnail: thumbnail/v4-migration.png
