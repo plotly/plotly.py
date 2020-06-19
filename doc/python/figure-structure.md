@@ -49,20 +49,24 @@ fig.show()
 
 Plotly.js supports inputs adhering to a well-defined schema, whose overall architecture is explained in this page and which is exhaustively documented in the [Figure Reference](/python/reference/) (which is itself generated from a [machine-readable JSON representation of the schema](https://raw.githubusercontent.com/plotly/plotly.js/master/dist/plot-schema.json)).
 
-Figures are represented as trees with named nodes called "attributes" which are referred to in text and in the [Figure Reference](/python/reference/) by their full "path" i.e. the dot-delimited concatenation of their parents. For example `"layout.width"` refers to the attribute whose key is `"width"` inside a dict which is the value associated with a key `"layout"` at the root of the figure. If one of the parents is a list rather than a dict, a set of brackets is inserted in the path when referring to the attribute in the abstract, e.g. `"layout.annotations[].text"`. Finally, as explained below, the top-level "data" attribute defines a list of typed objects called "traces" with the schema dependent upon the type, and these attributes' paths are listed in the [Figure Reference](/python/reference/) as `"data[type=scatter].name"`. When [manipulating a `plotly.graph_objects.Figure` object](/python/creating-and-updating-figures/), attributes can be set either directly using Python object attributes e.g. `fig.layout.title.font.family="Open Sans"` or using [update methods and "magic underscores"](/python/creating-and-updating-figures/#magic-underscore-notation) e.g. `fig.update_layout(title_font_family="Open Sans")`
+Figures are represented as trees with named nodes called "attributes". The root node of the tree has three top-level attributes: `data`, `layout` and `frames` (see below). Attributes are referred to in text and in the [Figure Reference](/python/reference/) by their full "path" i.e. the dot-delimited concatenation of their parents. For example `"layout.width"` refers to the attribute whose key is `"width"` inside a dict which is the value associated with a key `"layout"` at the root of the figure. If one of the parents is a list rather than a dict, a set of brackets is inserted in the path when referring to the attribute in the abstract, e.g. `"layout.annotations[].text"`. Finally, as explained below, the top-level "data" attribute defines a list of typed objects called "traces" with the schema dependent upon the type, and these attributes' paths are listed in the [Figure Reference](/python/reference/) as `"data[type=scatter].name"`. When [manipulating a `plotly.graph_objects.Figure` object](/python/creating-and-updating-figures/), attributes can be set either directly using Python object attributes e.g. `fig.layout.title.font.family="Open Sans"` or using [update methods and "magic underscores"](/python/creating-and-updating-figures/#magic-underscore-notation) e.g. `fig.update_layout(title_font_family="Open Sans")`
 
 When building a figure, it is *not necessary to populate every attribute* of every object. At render-time, the JavaScript layer will compute default values for each required unspecified attribute, depending upon the ones that are specified, as documented in the [Figure Reference](/python/reference/). An example of this would be `layout.xaxis.range`, which may be specified explicitly, but if not will be computed based on the range of `x` values for every trace linked to that axis. The JavaScript layer will ignore unknown attributes or malformed values, although the `plotly.graph_objects` module provides Python-side validation for attribute values. Note also that if [the `layout.template` key is present (as it is by default)](/python/templates/) then default values will be drawn first from the contents of the template and only if missing from there will the JavaScript layer infer further defaults. The built-in template can be disabled by setting `layout.template="none"`.
 
-### High-Level Structure
+#### The Top-Level `data` Attribute
 
-The root node of a figure may contain three attributes:
+The first of the three top-level attributes of a figure is `data`, whose value must be a list of dicts referred to as "traces".
 
-* `data`, whose value must be a list of dicts referred to as "traces".
-  * Each trace has one of more than 40 possible types (see below for a list organized by subplot type, including e.g. [`scatter`](/python/line-and-scatter/), [`bar`](/python/bar-charts/), [`pie`](/python/pie-charts/), [`surface`](/python/3d-surface-plots/), [`choropleth`](/python/choropleth-maps/) etc), and represents a set of related graphical marks in a figure.
-  * Each trace is drawn on a single [subplot](/python/subplots/) whose type must be compatible with the trace's type, or is its own subplot (see below).
-  * Traces may have a single [legend](/python/legend/) entry, with the exception of pie and funnelarea traces (see below).
-  * Certain trace types support [continuous color, with an associated colorbar](/python/colorscales/), which can be controlled by attributes either within the trace, or within the layout when using the [coloraxis attribute](/python/colorscales/).
-* `layout`, whose value is referred to in text as "the layout" and must be a dict, containing attributes that control positioning and configuration of non-data-related parts of the figure such as
+* Each trace has one of more than 40 possible types (see below for a list organized by subplot type, including e.g. [`scatter`](/python/line-and-scatter/), [`bar`](/python/bar-charts/), [`pie`](/python/pie-charts/), [`surface`](/python/3d-surface-plots/), [`choropleth`](/python/choropleth-maps/) etc), and represents a set of related graphical marks in a figure.
+* Each trace is drawn on a single [subplot](/python/subplots/) whose type must be compatible with the trace's type, or is its own subplot (see below).
+* Traces may have a single [legend](/python/legend/) entry, with the exception of pie and funnelarea traces (see below).
+* Certain trace types support [continuous color, with an associated colorbar](/python/colorscales/), which can be controlled by attributes either within the trace, or within the layout when using the [coloraxis attribute](/python/colorscales/).
+
+
+#### The Top-Level `layout` Attribute
+
+The second of the three top-level attributes of a figure is `layout`, whose value is referred to in text as "the layout" and must be a dict, containing attributes that control positioning and configuration of non-data-related parts of the figure such as:
+
   * Dimensions and margins, which define the bounds of "paper coordinates" (see below)
   * Figure-wide defaults: [templates](/python/templates/), [fonts](/python/figure-labels/), colors, hover-label and modebar defaults
   * [Title](/python/figure-labels/) and [legend](/python/legend/) (positionable in container and/or paper coordinates)
@@ -78,9 +82,14 @@ The root node of a figure may contain three attributes:
   * Controls which can be positioned in paper coordinates and which can trigger Plotly.js functions when interacted with by a user:
     * `updatemenus`: [single buttons, toggles](/python/custom-buttons/) and [dropdown menus](/python/dropdowns/)
     * `sliders`: [slider controls](/python/sliders/)
-* `frames`, whose value must be a list of dicts that define sequential frames in an [animated plot](/python/animations/). Each frame contains its own data attribute as well as other parameters. Animations are usually triggered and controlled via controls defined in layout.sliders and/or layout.updatemenus
 
-> Note: At [render-time](/python/renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behaviour of the "modebar" and how the figure relates to mouse actions like scrolling. The object that contains these options is called the [`config`, and has its own documentation page](/python/configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
+#### The Top-Level `frames` Attribute
+
+The third of the three top-level attributes of a figure is `frames`, whose value must be a list of dicts that define sequential frames in an [animated plot](/python/animations/). Each frame contains its own data attribute as well as other parameters. Animations are usually triggered and controlled via controls defined in layout.sliders and/or layout.updatemenus
+
+### The `config` Object
+
+At [render-time](/python/renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behaviour of the "modebar" and how the figure relates to mouse actions like scrolling etc. The object that contains these options is called the [`config`, and has its own documentation page](/python/configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
 
 ### Positioning With Paper or Container Coordinates
 
