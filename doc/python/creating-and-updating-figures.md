@@ -37,17 +37,13 @@ jupyter:
     v4upgrade: true
 ---
 
-### Representing Figures
+The `plotly` Python package exists to create, manipulate and [render](/python/renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](/python/figure-structure/). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
-The goal of the plotly.py package is to provide a pleasant Python interface for creating figure specifications which are displayed by the [plotly.js](https://plot.ly/javascript) JavaScript graphing library.
+> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](/python/plotly-express/), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
 
-In the context of the plotly.js library, a figure is specified by a declarative [JSON](https://www.json.org/json-en.html) data structure.
+### Figures As Dictionaries
 
-Therefore, you should always keep in mind as you are creating and updating figures using the plotly.py package that its ultimate goal is to help users produce Python [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) that can be automatically [serialized](https://en.wikipedia.org/wiki/Serialization) into the JSON data structure that the plotly.js graphing library understands.
-
-#### Figures As Dictionaries
-
-The `fig` dictonary in the example below describes a figure. It contains a single `bar` trace and a title.
+At a low level, figures can be represented as dictionaries and displayed using functions from the `plotly.io` module. The `fig` dictonary in the example below describes a figure. It contains a single `bar` trace and a title.
 
 ```python
 fig = dict({
@@ -63,27 +59,11 @@ import plotly.io as pio
 pio.show(fig)
 ```
 
-Let's take a closer look at structure of the `fig` dictionary in order to better understand how `plotly.py` figures are built.
+### Figures as Graph Objects
 
-##### The `"data"` Key
+The `plotly.graph_objects` module provides a hierarchy of classes called "graph objects" that may be used to represent figures. The *recommended alternative* to working with Python dictionaries is to [create figures using Plotly Express](/python/plotly-express/) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page.
 
-The `"data"` key stores the value of list which describes the trace or traces which make up a figure. It is still a list even if the figure only contains one trace, as in the example above.
-
-Each trace in the list stored by the `"data"` key is itself defined by a dictionary. The type of the trace (`"bar"`, `"scatter"`, `"contour"`, etc...) is specified with a `"type"` key, and the rest of the keys in a trace specification dictionary (`x`, `y`, etc...) are used to define the properties specific to the trace of that type.
-
-##### The `"layout"` Key
-
-The`"layout"` key stores a dictionary that specifies properties related to customizing how the figure looks, such as its title, typography, margins, axes, annotations, shapes, legend and more. In contrast to trace configuration options, which apply only to individual traces, layout configuration options apply to the figure as a whole.
-
-The [_Full Reference_](https://plot.ly/python/reference/) page contains descriptions of all of the supported trace and layout attributes and configuration options.
-
-If working from the _Full Reference_ to build figures as Python dictionaries and lists suites your needs, go for it!
-
-This is a perfectly valid way to use `plotly.py` to build figures. On the other hand, if you would like to use an API that offers you a bit more assistance in the figure creation process, read on to learn about `graph objects`.
-
-#### Figures as Graph Objects
-
-As an alternative to working with Python dictionaries, the `plotly.py` graphing library provides a hierarchy of classes called "graph objects" that may be used to construct figures. Graph objects have several benefits compared to plain Python dictionaries.
+Graph objects have several benefits compared to plain Python dictionaries.
 
 1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
 
@@ -151,6 +131,25 @@ print("\n\n")
 
 This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
+> The *recommended way* to create figures and populate them is to use [Plotly Express](/python/plotly-express/) but this page documents various other options for completeness
+
+
+#### Plotly Express
+
+[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", title="A Plotly Express Figure")
+
+# If you print fig, you'll see that it's just a regular figure with data and layout
+# print(fig)
+
+fig.show()
+```
+
 #### Graph Objects `Figure` Constructor
 
 As demonstrated above, you can build a complete figure by passing trace and layout specifications to the `plotly.graph_objects.Figure` constructor. These trace and layout specifications can be either dictionaries or graph objects.
@@ -164,22 +163,6 @@ fig = go.Figure(
     data=[go.Bar(x=[1, 2, 3], y=[1, 3, 2])],
     layout=dict(title=dict(text="A Figure Specified By A Graph Object"))
 )
-
-fig.show()
-```
-
-#### Plotly Express
-
-[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data exploration API that produces graph object figures.
-
-```python
-import plotly.express as px
-
-df = px.data.iris()
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", title="A Plotly Express Figure")
-
-# If you print fig, you'll see that it's just a regular figure with data and layout
-# print(fig)
 
 fig.show()
 ```

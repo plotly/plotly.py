@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Pandas Plotting Backend
-    order: 30
+    order: 31
     permalink: python/pandas-backend/
     redirect_from: python/cufflinks/
     thumbnail: thumbnail/plotly-express.png

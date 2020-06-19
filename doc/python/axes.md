@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Axes
-    order: 12
+    order: 13
     permalink: python/axes/
     thumbnail: thumbnail/axes.png
 ---

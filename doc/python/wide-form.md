@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Plotly Express Wide-Form Support
-    order: 32
+    order: 33
     page_type: u-guide
     permalink: python/wide-form/
     thumbnail: thumbnail/plotly-express.png
