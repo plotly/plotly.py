@@ -24,6 +24,14 @@ def _unzip_pairs(pairs):
     return ([t[0] for t in pairs], [t[1] for t in pairs])
 
 
+def _combine_dicts(dicts):
+    all_args = dict()
+    for d in dicts:
+        for k in d:
+            all_args[k] = d[k]
+    return all_args
+
+
 def _indexing_combinations(dims, alls, product=False):
     """
     Gives indexing tuples specified by the coordinates in dims.
@@ -3540,7 +3548,7 @@ Invalid property path '{key_path_str}' for layout
         # how long the tuple is before the call and after the call, and adjust
         # the new shapes that were added at the end
         n_shapes_before = len(self.layout["shapes"])
-        self.add_shape(row=row, col=col, **shape_args, **kwargs)
+        self.add_shape(row=row, col=col, **_combine_dicts([shape_args, kwargs]))
         if row == None and col == None:
             # this was called intending to add to a single plot (and
             # self.add_shape succeeded)
