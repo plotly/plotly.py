@@ -3522,11 +3522,19 @@ Invalid property path '{key_path_str}' for layout
                 for t in [(d["xaxis"], d["yaxis"]) for d in self.data]
             ):
                 return None
+        # set the ref to paper so that it always spans to the edges of the
+        # subplot
         shape[ref] = "paper"
         return shape
 
     def _process_multiple_paper_spanning_shapes(
-        self, shape_args, row, col, direction, **kwargs
+        self,
+        shape_args,
+        row,
+        col,
+        direction,
+        exclude_subplots_without_data=True,
+        **kwargs
     ):
         """
         Add a shape or multiple shapes and call _make_paper_spanning_shape on
@@ -3542,14 +3550,20 @@ Invalid property path '{key_path_str}' for layout
             filter(
                 lambda x: x is not None,
                 [
-                    self._make_paper_spanning_shape(direction, self.layout["shapes"][n])
+                    self._make_paper_spanning_shape(
+                        direction,
+                        self.layout["shapes"][n],
+                        none_if_no_trace=exclude_subplots_without_data,
+                    )
                     for n in range(n_shapes_before, n_shapes_after)
                 ],
             )
         )
         self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
 
-    def add_vline(self, x, row=None, col=None, **kwargs):
+    def add_vline(
+        self, x, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+    ):
         """
         Add a vertical line to a plot or subplot that extends infinitely in the
         y-dimension.
@@ -3571,11 +3585,18 @@ Invalid property path '{key_path_str}' for layout
             except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
-            dict(type="line", x0=x, x1=x, y0=0, y1=1), row, col, "vertical", **kwargs
+            dict(type="line", x0=x, x1=x, y0=0, y1=1),
+            row,
+            col,
+            "vertical",
+            exclude_subplots_without_data=exclude_subplots_without_data,
+            **kwargs
         )
         return self
 
-    def add_hline(self, y, row=None, col=None, **kwargs):
+    def add_hline(
+        self, y, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+    ):
         """
         Add a horizontal line to a plot or subplot that extends infinitely in the
         x-dimension.
@@ -3597,11 +3618,18 @@ Invalid property path '{key_path_str}' for layout
             except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
-            dict(type="line", x0=0, x1=1, y0=y, y1=y,), row, col, "horizontal", **kwargs
+            dict(type="line", x0=0, x1=1, y0=y, y1=y,),
+            row,
+            col,
+            "horizontal",
+            exclude_subplots_without_data=exclude_subplots_without_data,
+            **kwargs
         )
         return self
 
-    def add_vrect(self, x0, x1, row=None, col=None, **kwargs):
+    def add_vrect(
+        self, x0, x1, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+    ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
         y-dimension.
@@ -3625,11 +3653,18 @@ Invalid property path '{key_path_str}' for layout
             except for x0, x1, y0, y1 or type.
         """
         self._process_multiple_paper_spanning_shapes(
-            dict(type="rect", x0=x0, x1=x1, y0=0, y1=1), row, col, "vertical", **kwargs
+            dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
+            row,
+            col,
+            "vertical",
+            exclude_subplots_without_data=exclude_subplots_without_data,
+            **kwargs
         )
         return self
 
-    def add_hrect(self, y0, y1, row=None, col=None, **kwargs):
+    def add_hrect(
+        self, y0, y1, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+    ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
         x-dimension.
@@ -3657,6 +3692,7 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "horizontal",
+            exclude_subplots_without_data=exclude_subplots_without_data,
             **kwargs
         )
         return self
