@@ -53,7 +53,7 @@ Figures are represented as trees with named nodes called "attributes" which are 
 
 When building a figure, it is *not necessary to populate every attribute* of every object. At render-time, the JavaScript layer will compute default values for each required unspecified attribute, depending upon the ones that are specified, as documented in the [Figure Reference](/python/reference/). An example of this would be `layout.xaxis.range`, which may be specified explicitly, but if not will be computed based on the range of `x` values for every trace linked to that axis. The JavaScript layer will ignore unknown attributes or malformed values, although the `plotly.graph_objects` module provides Python-side validation for attribute values. Note also that if [the `layout.template` key is present (as it is by default)](/python/templates/) then default values will be drawn first from the contents of the template and only if missing from there will the JavaScript layer infer further defaults. The built-in template can be disabled by setting `layout.template="none"`.
 
-## High-Level Structure
+### High-Level Structure
 
 The root node of a figure may contain three attributes:
 
@@ -82,7 +82,7 @@ The root node of a figure may contain three attributes:
 
 > Note: At [render-time](/python/renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behaviour of the "modebar" and how the figure relates to mouse actions like scrolling. The object that contains these options is called the [`config`, and has its own documentation page](/python/configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
 
-## Positioning With Paper or Container Coordinates
+### Positioning With Paper or Container Coordinates
 
 Various figure components configured within the layout of the figure support positioning attributes named `x` or `y`, whose values may be specified in "paper coordinates" (sometimes referred to as "plot fractions" or "normalized coordinates"). Examples include `layout.xaxis.domain` or `layout.legend.x` or `layout.annotation[].x`.
 
@@ -92,7 +92,7 @@ Note that the contents of the `layout.margin` attribute are by default computed 
 
 The figure title may be positioned using "container coordinates" which have `(0,0)` and `(1,1)` anchored at the bottom-left and top-right of the figure, respectively, and therefore are independent of the values of layout.margin.
 
-## 2D Cartesian Trace Types and Subplots
+### 2D Cartesian Trace Types and Subplots
 
 The most commonly-used kind of subplot is a [two-dimensional Cartesian subplot](/python/axes/). Traces compatible with these subplots support `xaxis` and `yaxis` attributes whose values must refer to corresponding objects in the layout portion of the figure. For example, if `xaxis="x"`, and `yaxis="y"` (which is the default) then this trace is drawn on the subplot at the intersection of the axes configured under `layout.xaxis` and `layout.yaxis`, but if `xaxis="x2"` and `yaxis="y3"` then the trace is drawn at the intersection of the axes configured under `layout.xaxis2` and `layout.yaxis3`. Note that attributes such as `layout.xaxis` and `layout.xaxis2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of different types can be drawn on the same subplot.
 
@@ -110,7 +110,7 @@ The following trace types are compatible with 2d-cartesian subplots via the `xax
 * [`carpet`](/python/carpet-plot/): a special trace type for building [carpet plots](/python/carpet-plot/), in that other traces can use as subplots (see below)
 * [`splom`](/python/splom/): multi-dimensional scatter plots which implicitly refer to many 2-d cartesian subplots at once.
 
-## 3D, Polar and Ternary Trace Types and Subplots
+### 3D, Polar and Ternary Trace Types and Subplots
 
 Beyond 2D cartesian subplots, figures can include [three-dimensional cartesian subplots](/python/3d-charts/), [polar subplots](/python/polar-chart/) and [ternary subplots](/python/ternary-plots/). The following trace types support attributes named `scene`, `polar` or `ternary`, whose values must refer to corresponding objects in the layout portion of the figure i.e. `ternary="ternary2"` etc. Note that attributes such as `layout.scene` and `layout.ternary2` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
@@ -130,7 +130,7 @@ The following trace types are compatible with ternary subplots via the `ternary`
 
 * [`scatterternary`](/python/ternary-plots/), which can be used to draw individual markers, [curves and filled areas](/python/ternary-contour/)
 
-## Map Trace Types and Subplots
+### Map Trace Types and Subplots
 
 Figures can include two different types of map subplots: [geo subplots for outline maps](/python/map-configuration/) and [mapbox subplots for tile maps](/python/mapbox-layers/). The following trace types support attributes named `geo` or `mapbox`, whose values must refer to corresponding objects in the layout i.e. `geo="geo2"` etc.  Note that attributes such as `layout.geo2` and `layout.mapbox` etc do not have to be explicitly defined, in which case default values will be inferred. Multiple traces of a compatible type can be placed on the same subplot.
 
@@ -145,7 +145,7 @@ The following trace types are compatible with mapbox subplots via the `mapbox` a
 * [`choroplethmapbox`](/python/mapbox-county-choropleth/): colored polygons on tile maps
 * [`densitymapbox`](/python/mapbox-density-heatmaps/): density heatmaps on tile maps
 
-## Traces Which Are Their Own Subplots
+### Traces Which Are Their Own Subplots
 
 Certain trace types cannot share subplots, and hence have no attribute to map to a corresponding subplot in the layout. Instead, these traces are their own subplot and support a `domain` attribute for position, which enables the trace to be positioned in paper coordinates (see below). With the exception of `pie` and `funnelarea`, such traces also do not support legends (see below)
 
@@ -158,7 +158,7 @@ The following trace types are their own subplots and support a domain attribute:
 * [`table`](/python/table/): [text-based tables](/python/table/)
 * [`indicator`](http://indicators/): big numbers, [gauges](/python/gauge-charts/), and [bullet charts](/python/bullet-charts/)
 
-## Carpet Trace Types and Subplots
+### Carpet Trace Types and Subplots
 
 Certain trace types use [traces of type `carpet` as a subplot](/python/carpet-plot/). These support a `carpet` attribute whose value must match the value of the `carpet` attribute of the `carpet` trace they are to be drawn on. Multiple compatible traces can be placed on the same `carpet` trace.
 
@@ -167,7 +167,7 @@ The following trace types are compatible with `carpet` trace subplots via the `c
 * [`scattercarpet`](/python/carpet-scatter/), which can be used to draw individual markers, curves and filled areas
 * [`contourcarpet`](/python/carpet-plot/)
 
-## Trace Types, Legends and Color Bars
+### Trace Types, Legends and Color Bars
 
 Traces of most types can be optionally associated with a single legend item in the [legend](/python/legend/), which can be shown via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items also support the `legendgroup` attribute, and all traces with the same legend group are treated the same way during click/double-click interactions.
 
