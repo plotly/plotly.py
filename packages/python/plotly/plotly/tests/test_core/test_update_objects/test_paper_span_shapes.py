@@ -383,6 +383,96 @@ def test_non_subplot_add_span_shape(test_input, expected, non_subplot_fig_fixtur
     _check_figure_shapes(test_input, expected, non_subplot_fig_fixture)
 
 
-def test_invalid_subplot_address(subplot_fig_fixture):
+@pytest.mark.parametrize(
+    "test_input",
+    [
+        (go.Figure.add_hline, dict(y=10, row=4, col=5)),
+        # valid row, invalid column
+        (go.Figure.add_hline, dict(y=10, row=1, col=5)),
+    ],
+)
+def test_invalid_subplot_address(test_input, subplot_fig_fixture):
+    f, kwargs = test_input
     with pytest.raises(IndexError):
-        subplot_fig_fixture.add_hline(y=10, row=4, col=5)
+        f(subplot_fig_fixture, **kwargs)
+
+
+def _check_figure_shapes_custom_sized(test_input, expected, fig):
+    # look up domains in fig
+    corrects = []
+    for d, ax in expected:
+        dom = fig["layout"][ax]["domain"]
+        if ax[: len("xaxis")] == "xaxis":
+            d["x0"], d["x1"] = dom
+        elif ax[: len("yaxis")] == "yaxis":
+            d["y0"], d["y1"] = dom
+        else:
+            raise ValueError("bad axis")
+        corrects.append(d)
+    f, kwargs = test_input
+    f(fig, **kwargs)
+    ret = True
+    for s, d in zip(fig.layout.shapes, corrects):
+        ret &= _cmp_partial_dict(s, d)
+    assert ret
+
+
+@pytest.mark.parametrize(
+    "test_input,expected",
+    # test_input: (function,kwargs)
+    # expected: list of dictionaries with key:value pairs we expect in the added shapes
+    [
+        (
+            (go.Figure.add_vline, dict(x=1.5, row="all", col=2)),
+            [
+                (
+                    {
+                        "type": "line",
+                        "x0": 1.5,
+                        "x1": 1.5,
+                        "xref": "x2",
+                        "yref": "paper",
+                    },
+                    "yaxis2",
+                ),
+                (
+                    {
+                        "type": "line",
+                        "x0": 1.5,
+                        "x1": 1.5,
+                        "xref": "x6",
+                        "yref": "paper",
+                    },
+                    "yaxis6",
+                ),
+            ],
+        ),
+        (
+            (go.Figure.add_hline, dict(y=1.5, row=5, col="all")),
+            [
+                (
+                    {
+                        "type": "line",
+                        "yref": "y5",
+                        "y0": 1.5,
+                        "y1": 1.5,
+                        "xref": "paper",
+                    },
+                    "xaxis5",
+                ),
+                (
+                    {
+                        "type": "line",
+                        "yref": "y6",
+                        "y0": 1.5,
+                        "y1": 1.5,
+                        "xref": "paper",
+                    },
+                    "xaxis6",
+                ),
+            ],
+        ),
+    ],
+)
+def test_custom_sized_subplots(test_input, expected, custom_sized_subplots):
+    _check_figure_shapes_custom_sized(test_input, expected, custom_sized_subplots)

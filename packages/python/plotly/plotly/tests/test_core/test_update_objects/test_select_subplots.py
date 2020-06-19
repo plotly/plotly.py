@@ -176,6 +176,7 @@ def _sort_row_col_lists(rows, cols):
 def test_select_subplot_coordinates(subplot_fig_fixture, test_input, expected):
     rows, cols, product = test_input
     er, ec = _sort_row_col_lists(*expected)
-    r, c = subplot_fig_fixture._select_subplot_coordinates(rows, cols, product=product)
+    t = subplot_fig_fixture._select_subplot_coordinates(rows, cols, product=product)
+    r, c = _unzip_pairs(t)
     r, c = _sort_row_col_lists(r, c)
     assert (r == er) and (c == ec)

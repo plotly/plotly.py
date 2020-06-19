@@ -1136,10 +1136,9 @@ class BaseFigure(object):
 
         # Address multiple subplots
         if row is not None and _is_select_subplot_coordinates_arg(row, col):
-            # TODO add product argument
-            rows, cols = self._select_subplot_coordinates(row, col)
-            # TODO do we have to unzip the row and columns, just to zip them again?
-            for r, c in zip(rows, cols):
+            # TODO product argument could be added
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
                 self._add_annotation_like(
                     prop_singular,
                     prop_plural,
@@ -1732,9 +1731,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Address multiple subplots
         if row is not None and _is_select_subplot_coordinates_arg(row, col):
             # TODO add product argument
-            rows, cols = self._select_subplot_coordinates(row, col)
-            # TODO do we have to unzip the row and columns, just to zip them again?
-            for r, c in zip(rows, cols):
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
                 self.add_trace(trace, row=r, col=c, secondary_y=secondary_y)
             return self
 
@@ -1978,8 +1976,10 @@ Please use the add_trace method with the row and col parameters.
             [rows, cols], list(self._get_subplot_rows_columns()), product=product,
         )
         t = list(t)
-        r, c = _unzip_pairs(t)
-        return (r, c)
+        # remove rows and cols where the subplot is "None"
+        grid_ref = self._validate_get_grid_ref()
+        t = list(filter(lambda u: grid_ref[u[0] - 1][u[1] - 1] is not None, t))
+        return t
 
     def get_subplot(self, row, col, secondary_y=False):
         """
