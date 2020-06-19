@@ -1153,8 +1153,18 @@ class BaseFigure(object):
         # Get grid_ref if specific row or column requested
         if row is not None:
             grid_ref = self._validate_get_grid_ref()
+            if row > len(grid_ref):
+                raise IndexError(
+                    "row index %d out-of-bounds, row index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref))
+                )
+            if col > len(grid_ref[row - 1]):
+                raise IndexError(
+                    "column index %d out-of-bounds, "
+                    "column index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref[row - 1]))
+                )
             refs = grid_ref[row - 1][col - 1]
-
             if not refs:
                 raise ValueError(
                     "No subplot found at position ({r}, {c})".format(r=row, c=col)

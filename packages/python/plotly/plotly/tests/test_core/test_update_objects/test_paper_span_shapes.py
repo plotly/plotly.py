@@ -55,6 +55,32 @@ def non_subplot_fig_fixture():
     return fig
 
 
+# Fixture is here for testing custom-sized subplots, but still need to confirm
+# what policy we will take
+@pytest.fixture
+def custom_sized_subplots():
+    fig = make_subplots(
+        rows=5,
+        cols=2,
+        specs=[
+            [{}, {"rowspan": 2}],
+            [{}, None],
+            [{"rowspan": 2, "colspan": 2}, None],
+            [None, None],
+            [{}, {}],
+        ],
+        print_grid=True,
+    )
+
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(1,1)"), row=1, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(1,2)"), row=1, col=2)
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(2,1)"), row=2, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(3,1)"), row=3, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(5,1)"), row=5, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2], y=[1, 2], name="(5,2)"), row=5, col=2)
+    return fig
+
+
 # stuff to test:
 # add_vline, hline etc. add the intended shape
 #   - then WLOG maybe we can just test 1 of them, e.g., add_vline?
@@ -355,3 +381,8 @@ def test_add_span_shape_no_empty_plot(
 )
 def test_non_subplot_add_span_shape(test_input, expected, non_subplot_fig_fixture):
     _check_figure_shapes(test_input, expected, non_subplot_fig_fixture)
+
+
+def test_invalid_subplot_address(subplot_fig_fixture):
+    with pytest.raises(IndexError):
+        subplot_fig_fixture.add_hline(y=10, row=4, col=5)
