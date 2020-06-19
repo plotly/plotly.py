@@ -309,7 +309,7 @@ def test_add_span_shape(test_input, expected, subplot_fig_fixture):
         (
             (
                 go.Figure.add_vline,
-                dict(x=20, row="all", col=2, exclude_subplots_without_data=False),
+                dict(x=20, row="all", col=2, exclude_empty_subplots=False),
             ),
             [
                 {

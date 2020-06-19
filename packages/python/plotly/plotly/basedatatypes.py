@@ -3538,13 +3538,7 @@ Invalid property path '{key_path_str}' for layout
         return shape
 
     def _process_multiple_paper_spanning_shapes(
-        self,
-        shape_args,
-        row,
-        col,
-        direction,
-        exclude_subplots_without_data=True,
-        **kwargs
+        self, shape_args, row, col, direction, exclude_empty_subplots=True, **kwargs
     ):
         """
         Add a shape or multiple shapes and call _make_paper_spanning_shape on
@@ -3563,7 +3557,7 @@ Invalid property path '{key_path_str}' for layout
                     self._make_paper_spanning_shape(
                         direction,
                         self.layout["shapes"][n],
-                        none_if_no_trace=exclude_subplots_without_data,
+                        none_if_no_trace=exclude_empty_subplots,
                     )
                     for n in range(n_shapes_before, n_shapes_after)
                 ],
@@ -3571,9 +3565,7 @@ Invalid property path '{key_path_str}' for layout
         )
         self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
 
-    def add_vline(
-        self, x, row=None, col=None, exclude_subplots_without_data=True, **kwargs
-    ):
+    def add_vline(self, x, row=None, col=None, exclude_empty_subplots=True, **kwargs):
         """
         Add a vertical line to a plot or subplot that extends infinitely in the
         y-dimension.
@@ -3599,14 +3591,12 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "vertical",
-            exclude_subplots_without_data=exclude_subplots_without_data,
+            exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
         return self
 
-    def add_hline(
-        self, y, row=None, col=None, exclude_subplots_without_data=True, **kwargs
-    ):
+    def add_hline(self, y, row=None, col=None, exclude_empty_subplots=True, **kwargs):
         """
         Add a horizontal line to a plot or subplot that extends infinitely in the
         x-dimension.
@@ -3632,13 +3622,13 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "horizontal",
-            exclude_subplots_without_data=exclude_subplots_without_data,
+            exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
         return self
 
     def add_vrect(
-        self, x0, x1, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+        self, x0, x1, row=None, col=None, exclude_empty_subplots=True, **kwargs
     ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
@@ -3667,13 +3657,13 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "vertical",
-            exclude_subplots_without_data=exclude_subplots_without_data,
+            exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
         return self
 
     def add_hrect(
-        self, y0, y1, row=None, col=None, exclude_subplots_without_data=True, **kwargs
+        self, y0, y1, row=None, col=None, exclude_empty_subplots=True, **kwargs
     ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
@@ -3702,7 +3692,7 @@ Invalid property path '{key_path_str}' for layout
             row,
             col,
             "horizontal",
-            exclude_subplots_without_data=exclude_subplots_without_data,
+            exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
         return self
