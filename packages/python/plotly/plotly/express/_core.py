@@ -291,10 +291,21 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
                         x_is_date = True
                     elif x.dtype.type == np.object_:
-                        x = x.astype(np.float64)
-
+                        try:
+                            x = x.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'x' ('%s') into a numeric type. "
+                                "If 'x' contains stringified dates, please convert to a datetime column."
+                                % args["x"]
+                            )
                     if y.dtype.type == np.object_:
-                        y = y.astype(np.float64)
+                        try:
+                            y = y.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'y' into a numeric type."
+                            )
 
                     if attr_value == "lowess":
                         # missing ='drop' is the default value for lowess but not for OLS (None)
