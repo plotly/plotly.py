@@ -61,19 +61,19 @@ pio.show(fig)
 
 ### Figures as Graph Objects
 
-The `plotly.graph_objects` module provides a hierarchy of classes called "graph objects" that may be used to represent figures. The *recommended alternative* to working with Python dictionaries is to [create figures using Plotly Express](/python/plotly-express/) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page.
+The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](https://plotly.com/python-api-reference/plotly.graph_objects.html) called ["graph objects"](/python/graph-objects/) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
+
+> Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](/python/plotly-express/) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](/python/graph-objects/).
 
 Graph objects have several benefits compared to plain Python dictionaries.
 
 1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
-
-2. Graph objects contain descriptions of each valid property as Python `docstrings`. You can use these `docstrings` in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/).
-
+2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/).
 3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
+4. Graph objects support higher-level convenience functions for making updates to already constructed figures (`.update_layout()`, `.add_trace()` etc) as described below.
+5. Graph object constructors and update methods accept "magic underscores" (e.g. `go.Figure(layout_title_text="The Title")` rather than `dict(layout=dict(title=dict(text="The Title")))`) for more compact code, as described below.
+6. Graph objects support attached rendering (`.show()`) and exporting functions (`.write_image()`) that automatically invoke the appropriate functions from [the `plotly.io` module](https://plotly.com/python-api-reference/plotly.io.html).
 
-4. Graph objects support higher-level convenience functions for making updates to already constructed figures, as described below.
-
-**Graph objects are stored in a hierarchy of modules under the `plotly.graph_objects` package, so make sure to remember to `import plotly.graph_objects as go` when you want to use them.**
 
 Below you can find an example of one way that the figure in the example above could be specified using a graph object instead of a dictionary.
 
@@ -136,7 +136,7 @@ This section summarizes several ways to create new graph object figures with the
 
 #### Plotly Express
 
-[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures.
+[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures in single function-calls.
 
 ```python
 import plotly.express as px
@@ -144,7 +144,7 @@ import plotly.express as px
 df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", title="A Plotly Express Figure")
 
-# If you print fig, you'll see that it's just a regular figure with data and layout
+# If you print the figure, you'll see that it's just a regular figure with data and layout
 # print(fig)
 
 fig.show()
