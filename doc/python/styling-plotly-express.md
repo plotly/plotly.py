@@ -37,7 +37,7 @@ jupyter:
 
 ### Styling Figures made with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/). Every Plotly Express function returns a `graph_objects.Figure` object whose `data` and `layout` has been pre-populated according to the provided arguments.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/). Every Plotly Express function returns [a `plotly.graph_objects.Figure` object](/python/graph-objects/) whose `data` and `layout` has been pre-populated according to the provided arguments.
 
 > You can style and customize figures made with Plotly Express _in all the same ways_ as you can style figures made more manually by explicitly assembling `graph_objects` into a figure.
 
@@ -92,7 +92,7 @@ fig.show()
 
 ### Updating or Modifying Figures made with Plotly Express
 
-If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use [the `update_*` and `add_*` methods](/python/creating-and-updating-figures/) on the `graph_objects.Figure` object returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](/python/axes/), control [legends](/python/legend/) and [colorbars](/python/colorscales/), add [shapes](/python/shapes/) and [annotations](/python/text-and-annotations/) etc.
+If none of the built-in Plotly Express arguments allow you to customize the figure the way you need to, you can use [the `update_*` and `add_*` methods](/python/creating-and-updating-figures/) on [the `plotly.graph_objects.Figure` object](/python/graph-objects/) returned by the PX function to make any further modifications to the figure. This approach is the one used throughout the Plotly.py documentation to [customize axes](/python/axes/), control [legends](/python/legend/) and [colorbars](/python/colorscales/), add [shapes](/python/shapes/) and [annotations](/python/text-and-annotations/) etc.
 
 Here is the same figure as above, with some additional customizations to the axes and legend via `.update_yaxes()`, and `.update_layout()`, as well as some annotations added via `.add_shape()` and `.add_annotation()`.
 

@@ -60,7 +60,7 @@ fig.show()
 
 ### Basic Funnel Chart with graph_objects trace go.Funnel
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnel` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 from plotly import graph_objects as go
@@ -138,7 +138,7 @@ fig.show()
 
 ### Basic Area Funnel Plot with go.Funnelarea
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnelarea` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 from plotly import graph_objects as go
