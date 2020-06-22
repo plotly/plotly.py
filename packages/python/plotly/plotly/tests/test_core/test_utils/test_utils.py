@@ -70,3 +70,28 @@ class TestNumpyIntegerBaseType(TestCase):
         value = get_by_path(fig, data_path)
         expected_value = (1,)
         self.assertEqual(value, expected_value)
+
+    def test_get_numpy_int_type(self):
+        import numpy as np
+        from _plotly_utils.utils import _get_int_type
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int, np.integer)
+
+        self.assertEqual(int_type_tuple, expected_tuple)
+
+
+class TestNoNumpyIntegerBaseType(TestCase):
+    def test_no_numpy_int_type(self):
+        import sys
+        from _plotly_utils.utils import _get_int_type
+        from _plotly_utils.optional_imports import get_module
+
+        np = get_module("numpy", should_load=False)
+        if np:
+            sys.modules.pop("numpy")
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int,)
+
+        self.assertEqual(int_type_tuple, expected_tuple)
