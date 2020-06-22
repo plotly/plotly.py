@@ -56,7 +56,7 @@ fig.show()
 
 ### Stamen Terrain base map (no token needed): density mapbox with `plotly.graph_objects`
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Densitymapbox` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Densitymapbox` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 import pandas as pd
