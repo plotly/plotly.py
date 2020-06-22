@@ -72,6 +72,18 @@ def test_newdatain_hover_data():
         )
 
 
+def test_formatted_hover_and_labels():
+    df = px.data.tips()
+    fig = px.scatter(
+        df,
+        x="tip",
+        y="total_bill",
+        hover_data={"total_bill": ":.1f"},
+        labels={"total_bill": "Total bill"},
+    )
+    assert ":.1f" in fig.data[0].hovertemplate
+
+
 def test_fail_wrong_column():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(
