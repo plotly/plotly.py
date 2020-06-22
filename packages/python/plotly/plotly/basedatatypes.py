@@ -1682,7 +1682,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             List of subplot column indexes (starting from 1) for the traces
             to be added. Only valid if figure was created using
             `plotly.tools.make_subplots`
-            If a single integer is added, all traces will be added to column number
+            If a single integer is passed, all traces will be added to column number
 
 
         secondary_ys: None or list[boolean] (default None)
