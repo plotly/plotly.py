@@ -94,6 +94,13 @@ def test_no_slope_ols_trendline():
 @pytest.mark.parametrize("mode", ["ols", "lowess"])
 def test_trendline_on_timeseries(mode):
     df = px.data.stocks()
+
+    with pytest.raises(ValueError) as err_msg:
+        px.scatter(df, x="date", y="GOOG", trendline=mode)
+    assert "Could not convert value of 'x' ('date') into a numeric type." in str(
+        err_msg.value
+    )
+
     df["date"] = pd.to_datetime(df["date"])
     fig = px.scatter(df, x="date", y="GOOG", trendline=mode)
     assert len(fig.data) == 2
