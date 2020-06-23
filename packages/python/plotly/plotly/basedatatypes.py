@@ -9,7 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
-from _plotly_utils.utils import _natural_sort_strings
+from _plotly_utils.utils import _natural_sort_strings, _get_int_type
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
@@ -1560,12 +1560,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             if len(vals) != n:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-            try:
-                import numpy as np
-
-                int_type = (int, np.integer)
-            except ImportError:
-                int_type = (int,)
+            int_type = _get_int_type()
 
             if [r for r in vals if not isinstance(r, int_type)]:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
@@ -1677,14 +1672,19 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        rows : None or list[int] (default None)
+        rows : None, list[int], or int (default None)
             List of subplot row indexes (starting from 1) for the traces to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to row number
+
         cols : None or list[int] (default None)
             List of subplot column indexes (starting from 1) for the traces
             to be added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to column number
+
+
         secondary_ys: None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
@@ -1722,6 +1722,15 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Set trace indexes
         for ind, new_trace in enumerate(data):
             new_trace._trace_ind = ind + len(self.data)
+
+        # Allow integers as inputs to subplots
+        int_type = _get_int_type()
+
+        if isinstance(rows, int_type):
+            rows = [rows] * len(data)
+
+        if isinstance(cols, int_type):
+            cols = [cols] * len(data)
 
         # Validate rows / cols
         n = len(data)

@@ -117,6 +117,10 @@ def get_label(args, column):
 
 
 def invert_label(args, column):
+    """Invert mapping.
+    Find key corresponding to value column in dict args["labels"].
+    Returns `column` if the value does not exist.
+    """
     reversed_labels = {value: key for (key, value) in args["labels"].items()}
     try:
         return reversed_labels[column]
@@ -273,17 +277,35 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     attr_value in ["ols", "lowess"]
                     and args["x"]
                     and args["y"]
-                    and len(trace_data) > 1
+                    and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
                     import statsmodels.api as sm
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
-                    y = sorted_trace_data[args["y"]]
-                    x = sorted_trace_data[args["x"]]
+                    y = sorted_trace_data[args["y"]].values
+                    x = sorted_trace_data[args["x"]].values
 
+                    x_is_date = False
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
+                        x_is_date = True
+                    elif x.dtype.type == np.object_:
+                        try:
+                            x = x.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'x' ('%s') into a numeric type. "
+                                "If 'x' contains stringified dates, please convert to a datetime column."
+                                % args["x"]
+                            )
+                    if y.dtype.type == np.object_:
+                        try:
+                            y = y.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'y' into a numeric type."
+                            )
 
                     if attr_value == "lowess":
                         # missing ='drop' is the default value for lowess but not for OLS (None)
@@ -294,25 +316,32 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif attr_value == "ols":
                         fit_results = sm.OLS(
-                            y.values, sm.add_constant(x.values), missing="drop"
+                            y, sm.add_constant(x), missing="drop"
                         ).fit()
                         trace_patch["y"] = fit_results.predict()
                         trace_patch["x"] = x[
                             np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
                         ]
                         hover_header = "<b>OLS trendline</b><br>"
-                        hover_header += "%s = %g * %s + %g<br>" % (
-                            args["y"],
-                            fit_results.params[1],
-                            args["x"],
-                            fit_results.params[0],
-                        )
+                        if len(fit_results.params) == 2:
+                            hover_header += "%s = %g * %s + %g<br>" % (
+                                args["y"],
+                                fit_results.params[1],
+                                args["x"],
+                                fit_results.params[0],
+                            )
+                        else:
+                            hover_header += "%s = %g<br>" % (
+                                args["y"],
+                                fit_results.params[0],
+                            )
                         hover_header += (
                             "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
                         )
+                    if x_is_date:
+                        trace_patch["x"] = pd.to_datetime(trace_patch["x"] * 10 ** 9)
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
-
             elif attr_name.startswith("error"):
                 error_xy = attr_name[:7]
                 arr = "arrayminus" if attr_name.endswith("minus") else "array"
@@ -442,6 +471,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         mapping_labels_copy = OrderedDict(mapping_labels)
         if args["hover_data"] and isinstance(args["hover_data"], dict):
             for k, v in mapping_labels.items():
+                # We need to invert the mapping here
                 k_args = invert_label(args, k)
                 if k_args in args["hover_data"]:
                     if args["hover_data"][k_args][0]:
