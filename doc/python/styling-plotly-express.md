@@ -54,17 +54,18 @@ Many common styling options can be set directly in the `px` function call. Every
 
 - `title` to set the figure title
 - `width` and `height` to set the figure dimensions
-- `labels` to override the default axis and legend labels behaviour, which is to use the data frame column name if available, and otherwise to use the label name itself like "x", "y", "color" etc. `labels` accepts a `dict` whose keys are the label to rename and whose values are the desired labels.
-- `category_orders` to override the default category ordering behaviour, which is to use the order in which the data appears in the input. `category_orders` accepts a `dict` whose keys are the column name to reorder and whose values are a `list` of values in the desired order.
-- [Various color-related attributes](/python/colorscales/) such as `color_continuous_scale`, `color_range`, `color_discrete_sequence` and/or `color_discrete_map` set the colors used in the figure. `color_discrete_map` accepts a dict whose keys are values mapped to `color` and whose values are the desired CSS colors.
 - `template` to [set many styling parameters at once](/python/templates/) (see below for more details)
+- `labels` to override the default axis and legend labels behaviour, which is to use the data frame column name if available, and otherwise to use the label name itself like "x", "y", "color" etc. `labels` accepts a `dict` whose keys are the label to rename and whose values are the desired labels. These labels appear in axis labels, legend and color bar titles, and in hover labels.
+- `category_orders` to override the default category ordering behaviour, which is to use the order in which the data appears in the input. `category_orders` accepts a `dict` whose keys are the column name to reorder and whose values are a `list` of values in the desired order. These orderings apply everywhere categories appear: in legends, on axes, in bar stacks, in the order of facets, in the order of animation frames etc.
+- `hover_data` and `hover_name` to control which attributes appear in the hover label and how they are formatted.
+- [Various color-related attributes](/python/colorscales/) such as `color_continuous_scale`, `color_range`, `color_discrete_sequence` and/or `color_discrete_map` set the colors used in the figure. `color_discrete_map` accepts a dict whose keys are values mapped to `color` and whose values are the desired CSS colors.
 
 To illustrate each of these, here is a simple, default figure made with Plotly Express. Note the default orderings for the x-axis categories and the usage of lowercase & snake_case data frame columns for axis labelling.
 
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.histogram(df, x="day", y="total_bill", color="sex", histfunc="sum")
+fig = px.histogram(df, x="day", y="total_bill", color="sex")
 fig.show()
 ```
 
@@ -73,7 +74,7 @@ Here is the same figure, restyled by adding some extra parameters to the initial
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.histogram(df, x="day", y="total_bill", color="sex", histfunc="sum",
+fig = px.histogram(df, x="day", y="total_bill", color="sex",
             title="Receipts by Payer Gender and Day of Week",
             width=600, height=400,
             labels={ # replaces default labels by column name
@@ -99,7 +100,7 @@ Here is the same figure as above, with some additional customizations to the axe
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.histogram(df, x="day", y="total_bill", color="sex", histfunc="sum",
+fig = px.histogram(df, x="day", y="total_bill", color="sex",
             title="Receipts by Payer Gender and Day of Week vs Target",
             width=600, height=400,
             labels={"sex": "Payer Gender",  "day": "Day of Week", "total_bill": "Receipts"},

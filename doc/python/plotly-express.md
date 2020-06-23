@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,9 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
-    description: Plotly Express is a terse, consistent, high-level API for creating figures.
+    description: Plotly Express is a terse, consistent, high-level API for creating
+      figures.
     display_as: file_settings
     language: python
     layout: base
@@ -55,14 +56,14 @@ Plotly Express currently includes the following functions:
 
 ### High-Level Features
 
-The Plotly Express API in general offers the following features::
+The Plotly Express API in general offers the following features:
 
 * **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors)
 * **Sensible, Overrideable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
 * **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
 * **Styling Control**: PX functions [read styling information from the default figure template](/python/styling-plotly-express/), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](/python/styling-plotly-express/) to precisely control categorical variables.
-* **Figure Labelling**: PX functions label axes, legends and colorbars based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
-* **Hover-labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).
+* **Automatic Figure Labelling**: PX functions label axes, legends and colorbars based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
+* **Automatic Hover Labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).
 * **Uniform Color Handling**: PX functions automatically switch between [continuous](/python/colorscales/) and [categorical color](/python/discrete-color/) based on the input type.
 * **Faceting**: the 2D-cartesian plotting functions support [row, column and wrapped facetting with `facet_row`, `facet_col` and `facet_col_wrap` arguments](/python/facet-plots/).
 * **Marginal Plots**: the 2D-cartesian plotting functions support marginal distribution plots with the `marginal`, `marginal_x` and `marginal_y` arguments.
