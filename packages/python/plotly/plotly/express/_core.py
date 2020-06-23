@@ -473,12 +473,16 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             for k, v in mapping_labels.items():
                 # We need to invert the mapping here
                 k_args = invert_label(args, k)
+                print(k, k_args, args["hover_data"])
                 if k_args in args["hover_data"]:
-                    if args["hover_data"][k_args][0]:
-                        if isinstance(args["hover_data"][k_args][0], str):
-                            mapping_labels_copy[k] = v.replace(
-                                "}", "%s}" % args["hover_data"][k_args][0]
-                            )
+                    formatter = (
+                        args["hover_data"][k_args][0]
+                        if isinstance(args["hover_data"][k_args], tuple)
+                        else args["hover_data"][k_args]
+                    )
+                    if formatter:
+                        if isinstance(formatter, str):
+                            mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
                     else:
                         _ = mapping_labels_copy.pop(k)
         hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
@@ -1499,7 +1503,9 @@ def process_dataframe_hierarchy(args):
 
         if args["color"]:
             if args["color"] == args["values"]:
-                aggfunc_color = "sum"
+                new_value_col_name = args["values"] + "_total"
+                df[new_value_col_name] = df[args["values"]]
+                args["values"] = new_value_col_name
         count_colname = args["values"]
     else:
         # we need a count column for the first groupby and the weighted mean of color
@@ -1518,7 +1524,7 @@ def process_dataframe_hierarchy(args):
         if not _is_continuous(df, args["color"]):
             aggfunc_color = aggfunc_discrete
             discrete_color = True
-        elif not aggfunc_color:
+        else:
 
             def aggfunc_continuous(x):
                 return np.average(x, weights=df.loc[x.index, count_colname])
@@ -1576,6 +1582,9 @@ def process_dataframe_hierarchy(args):
     if args["color"]:
         if not args["hover_data"]:
             args["hover_data"] = [args["color"]]
+        elif isinstance(args["hover_data"], dict):
+            if not args["hover_data"].get(args["color"]):
+                args["hover_data"][args["color"]] = True
         else:
             args["hover_data"].append(args["color"])
     return args
