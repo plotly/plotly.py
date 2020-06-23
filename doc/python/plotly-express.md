@@ -43,17 +43,17 @@ Plotly Express provides [more than 30 functions for creating different types of 
 
 Plotly Express currently includes the following functions:
 
-* **Basics**: [`scatter`](https://plotly.com/python/line-and-scatter/), [`line`](https://plotly.com/python/line-charts/), [`area`](https://plotly.com/python/filled-area-plots/), [`bar`](https://plotly.com/python/bar-charts/), [`funnel`](https://plotly.com/python/funnel-charts/)
-* **Part-of-Whole**: [`pie`](https://plotly.com/python/pie-charts/), [`sunburst`](https://plotly.com/python/sunburst-charts/), [`treemap`](https://plotly.com/python/treemaps/), [`funnel_area`](https://plotly.com/python/funnel-charts/)
-* **1D Distributions**: [`histogram`](https://plotly.com/python/histograms/), [`box`](https://plotly.com/python/box-plots/), [`violin`](https://plotly.com/python/violin/), `strip`
-* **2D Distributions**: [`density_heatmap`](https://plotly.com/python/2D-Histogram/), [`density_contour`](https://plotly.com/python/2d-histogram-contour/)
-* **Matrix Input**: [`imshow`](https://plotly.com/python/imshow/)
-* **3-Dimensional**: [`scatter_3d`](https://plotly.com/python/3d-scatter-plots/), [`line_3d`](https://plotly.com/python/3d-line-plots/)
-* **Multidimensional**: [`scatter_matrix`](https://plotly.com/python/splom/), [`parallel_coordinates`](https://plotly.com/python/parallel-coordinates-plot/), [`parallel_categories`](https://plotly.com/python/parallel-categories-diagram/)
-* **Tile Maps**: [`scatter_mapbox`](https://plotly.com/python/scattermapbox/), [`line_mapbox`](https://plotly.com/python/lines-on-mapbox/), [`choropleth_mapbox`](https://plotly.com/python/mapbox-county-choropleth/), [`density_mapbox`](https://plotly.com/python/mapbox-density-heatmaps/)
-* **Outline Maps**: [`scatter_geo`](https://plotly.com/python/scatter-plots-on-maps/), [`line_geo`](https://plotly.com/python/lines-on-maps/), [`choropleth`](https://plotly.com/python/choropleth-maps/)
-* **Polar Charts**: [`scatter_polar`](https://plotly.com/python/polar-chart/), [`line_polar`](https://plotly.com/python/polar-chart/), [`bar_polar`](https://plotly.com/python/wind-rose-charts/)
-* **Ternary Charts**: [`scatter_ternary`](https://plotly.com/python/ternary-plots/), [`line_ternary`](https://plotly.com/python/ternary-plots/)
+* **Basics**: [`scatter`](/python/line-and-scatter/), [`line`](/python/line-charts/), [`area`](/python/filled-area-plots/), [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/)
+* **Part-of-Whole**: [`pie`](/python/pie-charts/), [`sunburst`](/python/sunburst-charts/), [`treemap`](/python/treemaps/), [`funnel_area`](/python/funnel-charts/)
+* **1D Distributions**: [`histogram`](/python/histograms/), [`box`](/python/box-plots/), [`violin`](/python/violin/), `strip`
+* **2D Distributions**: [`density_heatmap`](/python/2D-Histogram/), [`density_contour`](/python/2d-histogram-contour/)
+* **Matrix Input**: [`imshow`](/python/imshow/)
+* **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
+* **Multidimensional**: [`scatter_matrix`](/python/splom/), [`parallel_coordinates`](/python/parallel-coordinates-plot/), [`parallel_categories`](/python/parallel-categories-diagram/)
+* **Tile Maps**: [`scatter_mapbox`](/python/scattermapbox/), [`line_mapbox`](/python/lines-on-mapbox/), [`choropleth_mapbox`](/python/mapbox-county-choropleth/), [`density_mapbox`](/python/mapbox-density-heatmaps/)
+* **Outline Maps**: [`scatter_geo`](/python/scatter-plots-on-maps/), [`line_geo`](/python/lines-on-maps/), [`choropleth`](/python/choropleth-maps/)
+* **Polar Charts**: [`scatter_polar`](/python/polar-chart/), [`line_polar`](/python/polar-chart/), [`bar_polar`](/python/wind-rose-charts/)
+* **Ternary Charts**: [`scatter_ternary`](/python/ternary-plots/), [`line_ternary`](/python/ternary-plots/)
 
 ### High-Level Features
 
@@ -61,16 +61,16 @@ The Plotly Express API in general offers the following features::
 
 * **A single entry point into `plotly`**: just `import plotly.express as px` and get access to [all the plotting functions](https://plotly.com/python-api-reference/plotly.express.html), plus [built-in demo datasets under `px.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data) and [built-in color scales and sequences under `px.color`](https://plotly.com/python-api-reference/generated/plotly.colors.html#module-plotly.colors)
 * **Sensible, Overrideable Defaults**: PX functions will infer sensible defaults wherever possible, and will always let you override them.
-* **Flexible Input Formats**: PX functions [accept input in a variety of formats](https://plotly.com/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](https://plotly.com/python/wide-form/) to [`numpy` arrays and `xarrays`](https://plotly.com/python/imshow/) to [GeoPandas `GeoDataFrames`](https://plotly.com/python/maps/).
-* **Styling Control**: PX functions [read styling information from the default figure template](https://plotly.com/python/styling-plotly-express/), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](https://plotly.com/python/styling-plotly-express/) to precisely control categorical variables.
-* **Figure Labelling**: PX functions label axes, legends and colorbars based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](https://plotly.com/python/styling-plotly-express/).
-* **Hover-labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](https://plotly.com/python/hover-text-and-formatting/).
-* **Uniform Color Handling**: PX functions automatically switch between [continuous](https://plotly.com/python/colorscales/) and [categorical color](https://plotly.com/python/discrete-color/) based on the input type.
-* **Faceting**: the 2D-cartesian plotting functions support [row, column and wrapped facetting with `facet_row`, `facet_col` and `facet_col_wrap` arguments](https://plotly.com/python/facet-plots/).
+* **Flexible Input Formats**: PX functions [accept input in a variety of formats](/python/px-arguments/), from `list`s and `dict`s to [long-form or wide-form Pandas `DataFrame`s](/python/wide-form/) to [`numpy` arrays and `xarrays`](/python/imshow/) to [GeoPandas `GeoDataFrames`](/python/maps/).
+* **Styling Control**: PX functions [read styling information from the default figure template](/python/styling-plotly-express/), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](/python/styling-plotly-express/) to precisely control categorical variables.
+* **Figure Labelling**: PX functions label axes, legends and colorbars based in the input `DataFrame` or `xarray`, and provide [extra control with the `labels` argument](/python/styling-plotly-express/).
+* **Hover-labels**: PX functions populate the hover-label using the labels mentioned above, and provide [extra control with the `hover_name` and `hover_data` arguments](/python/hover-text-and-formatting/).
+* **Uniform Color Handling**: PX functions automatically switch between [continuous](/python/colorscales/) and [categorical color](/python/discrete-color/) based on the input type.
+* **Faceting**: the 2D-cartesian plotting functions support [row, column and wrapped facetting with `facet_row`, `facet_col` and `facet_col_wrap` arguments](/python/facet-plots/).
 * **Marginal Plots**: the 2D-cartesian plotting functions support marginal distribution plots with the `marginal`, `marginal_x` and `marginal_y` arguments.
-* **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](https://plotly.com/python/pandas-backend/) so you can call them via `df.plot()`.
-* **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](https://plotly.com/python/linear-fits/).
-* **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](https://plotly.com/python/animations/).
+* **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](/python/pandas-backend/) so you can call them via `df.plot()`.
+* **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](/python/linear-fits/).
+* **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](/python/animations/).
 
 ### Gallery
 
@@ -78,14 +78,7 @@ The following set of figures is just a sampling of what can be done with Plotly 
 
 #### Scatter, Line, Area and Bar Charts
 
-Read more about [scatter plots](https://plotly.com/python/line-and-scatter/) and [discrete color](https://plotly.com/python/discrete-color/).
-
-```python
-import plotly.express as px
-df = px.data.iris()
-fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.show()
-```
+Read more about [scatter plots](/python/line-and-scatter/) and [discrete color](/python/discrete-color/).
 
 ```python
 import plotly.express as px
@@ -94,24 +87,17 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species")
 fig.show()
 ```
 
-```python
-import plotly.express as px
-df = px.data.iris()
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", marginal_y="rug", marginal_x="histogram")
-fig
-```
-
-Read more about [trendlines](https://plotly.com/python/linear-fits/).
+Read more about [trendlines](/python/linear-fits/) and [templates](/python/templates/).
 
 ```python
 import plotly.express as px
 df = px.data.iris()
 fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", marginal_y="violin",
-           marginal_x="box", trendline="ols")
+           marginal_x="box", trendline="ols", template="simple_white")
 fig.show()
 ```
 
-Read more about [error bars](https://plotly.com/python/error-bars/).
+Read more about [error bars](/python/error-bars/).
 
 ```python
 import plotly.express as px
@@ -121,15 +107,7 @@ fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", error_x
 fig.show()
 ```
 
-```python
-import plotly.express as px
-df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", facet_row="time", facet_col="day", color="smoker", trendline="ols",
-          category_orders={"day": ["Thur", "Fri", "Sat", "Sun"], "time": ["Lunch", "Dinner"]})
-fig.show()
-```
-
-Read more about [bar charts](https://plotly.com/python/bar-charts/).
+Read more about [bar charts](/python/bar-charts/).
 
 ```python
 import plotly.express as px
@@ -137,6 +115,8 @@ df = px.data.tips()
 fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group")
 fig.show()
 ```
+
+Read more about [facet plots](/python/facet-plots/).
 
 ```python
 import plotly.express as px
@@ -146,14 +126,8 @@ fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group", facet
 fig.show()
 ```
 
-Read more about [scatterplot matrices (SPLOMs)](https://plotly.com/python/splom/).
+Read more about [scatterplot matrices (SPLOMs)](/python/splom/).
 
-```python
-import plotly.express as px
-df = px.data.iris()
-fig = px.scatter_matrix(df)
-fig.show()
-```
 
 ```python
 import plotly.express as px
@@ -162,7 +136,7 @@ fig = px.scatter_matrix(df, dimensions=["sepal_width", "sepal_length", "petal_wi
 fig.show()
 ```
 
-Read more about [parallel coordinates](https://plotly.com/python/parallel-coordinates-plot/) and [parallel categories](https://plotly.com/python/parallel-categories-diagram/), as well as [continuous color](https://plotly.com/python/colorscales/).
+Read more about [parallel coordinates](/python/parallel-coordinates-plot/) and [parallel categories](/python/parallel-categories-diagram/), as well as [continuous color](/python/colorscales/).
 
 ```python
 import plotly.express as px
@@ -181,17 +155,7 @@ fig = px.parallel_categories(df, color="size", color_continuous_scale=px.colors.
 fig.show()
 ```
 
-Read more about [facet plots](https://plotly.com/python/facet-plots/).
-
-```python
-import plotly.express as px
-df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", color="size", facet_col="sex",
-           color_continuous_scale=px.colors.sequential.Viridis, render_mode="webgl")
-fig.show()
-```
-
-Read more about [hover labels](https://plotly.com/python/hover-text-and-formatting/).
+Read more about [hover labels](/python/hover-text-and-formatting/).
 
 ```python
 import plotly.express as px
@@ -201,7 +165,7 @@ fig = px.scatter(df.query("year==2007"), x="gdpPercap", y="lifeExp", size="pop",
 fig.show()
 ```
 
-Read more about [animations](https://plotly.com/python/animations/).
+Read more about [animations](/python/animations/).
 
 ```python
 import plotly.express as px
@@ -212,7 +176,7 @@ fig = px.scatter(df, x="gdpPercap", y="lifeExp", animation_frame="year", animati
 fig.show()
 ```
 
-Read more about [line charts](https://plotly.com/python/line-charts/).
+Read more about [line charts](/python/line-charts/).
 
 ```python
 import plotly.express as px
@@ -222,7 +186,7 @@ fig = px.line(df, x="year", y="lifeExp", color="continent", line_group="country"
 fig.show()
 ```
 
-Read more about [area charts](https://plotly.com/python/filled-area-plots/).
+Read more about [area charts](/python/filled-area-plots/).
 
 ```python
 import plotly.express as px
@@ -233,7 +197,7 @@ fig.show()
 
 ### Part to Whole Charts
 
-Read more about [pie charts](https://plotly.com/python/pie-charts/).
+Read more about [pie charts](/python/pie-charts/).
 
 ```python
 import plotly.express as px
@@ -243,7 +207,7 @@ fig = px.pie(df, values='pop', names='country', title='Population of European co
 fig.show()
 ```
 
-Read more about [sunburst charts](https://plotly.com/python/sunburst-charts/).
+Read more about [sunburst charts](/python/sunburst-charts/).
 
 ```python
 import plotly.express as px
@@ -254,7 +218,7 @@ fig = px.sunburst(df, path=['continent', 'country'], values='pop',
 fig.show()
 ```
 
-Read more about [treemaps](https://plotly.com/python/treemaps/).
+Read more about [treemaps](/python/treemaps/).
 
 ```python
 import plotly.express as px
@@ -267,7 +231,7 @@ fig.show()
 
 #### Distributions
 
-Read more about [histograms](https://plotly.com/python/histograms/).
+Read more about [histograms](/python/histograms/).
 
 ```python
 import plotly.express as px
@@ -285,7 +249,7 @@ fig = px.histogram(df, x="sex", y="tip", histfunc="avg", color="smoker", barmode
 fig.show()
 ```
 
-Read more about [box plots](https://plotly.com/python/box-plots/).
+Read more about [box plots](/python/box-plots/).
 
 ```python
 import plotly.express as px
@@ -294,7 +258,7 @@ fig = px.box(df, x="day", y="total_bill", color="smoker", notched=True)
 fig.show()
 ```
 
-Read more about [violin plots](https://plotly.com/python/violin/).
+Read more about [violin plots](/python/violin/).
 
 ```python
 import plotly.express as px
@@ -310,7 +274,7 @@ fig = px.strip(df, x="total_bill", y="time", orientation="h", color="smoker")
 fig.show()
 ```
 
-Read more about [density contours, also known as 2D histogram contours](https://plotly.com/python/2d-histogram-contour/).
+Read more about [density contours, also known as 2D histogram contours](/python/2d-histogram-contour/).
 
 ```python
 import plotly.express as px
@@ -326,7 +290,7 @@ fig = px.density_contour(df, x="sepal_width", y="sepal_length", color="species",
 fig.show()
 ```
 
-Read more about [density heatmaps, also known as 2D histograms](https://plotly.com/python/2D-Histogram/).
+Read more about [density heatmaps, also known as 2D histograms](/python/2D-Histogram/).
 
 ```python
 import plotly.express as px
@@ -337,7 +301,7 @@ fig.show()
 
 ### Images and Heatmaps
 
-Read more about [heatmaps and images](https://plotly.com/python/imshow/).
+Read more about [heatmaps and images](/python/imshow/).
 
 ```python
 import plotly.express as px
@@ -360,26 +324,25 @@ fig.show()
 
 #### Maps
 
-Read more about [tile maps](https://plotly.com/python/mapbox-layers/) and [point](https://plotly.com/python/scattermapbox/) and [line](https://plotly.com/python/lines-on-mapbox/) maps.
+Read more about [tile maps](/python/mapbox-layers/) and [point](/python/scattermapbox/) and [line](/python/lines-on-mapbox/) maps.
 
 ```python
 import plotly.express as px
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
-fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
-                  color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10)
+fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", size="car_hours",
+                  color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10,
+                  mapbox_style="carto-positron")
 fig.show()
 ```
 
 ```python
 import plotly.express as px
-px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
-fig = px.line_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour")
+fig = px.line_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour", mapbox_style="carto-positron")
 fig.show()
 ```
 
-Read more about [tile map GeoJSON choropleths](https://plotly.com/python/mapbox-county-choropleth/).
+Read more about [tile map GeoJSON choropleths](/python/mapbox-county-choropleth/).
 
 ```python
 import plotly.express as px
@@ -394,7 +357,7 @@ fig = px.choropleth_mapbox(df, geojson=geojson, color="Bergeron",
 fig.show()
 ```
 
-Read more about [outline map scatter](https://plotly.com/python/scatter-plots-on-maps/) and [line plots](https://plotly.com/python/lines-on-maps/).
+Read more about [outline map scatter](/python/scatter-plots-on-maps/) and [line plots](/python/lines-on-maps/).
 
 ```python
 import plotly.express as px
@@ -412,7 +375,7 @@ fig.show()
 ```
 
 
-Read more about [choropleth maps](https://plotly.com/python/choropleth-maps/).
+Read more about [choropleth maps](/python/choropleth-maps/).
 
 ```python
 import plotly.express as px
@@ -424,7 +387,7 @@ fig.show()
 
 #### Polar Coordinates
 
-Read more about [polar plots](https://plotly.com/python/polar-chart/).
+Read more about [polar plots](/python/polar-chart/).
 
 ```python
 import plotly.express as px
@@ -442,7 +405,7 @@ fig = px.line_polar(df, r="frequency", theta="direction", color="strength", line
 fig.show()
 ```
 
-Read more about [polar bar charts](https://plotly.com/python/wind-rose-charts/).
+Read more about [polar bar charts](/python/wind-rose-charts/).
 
 ```python
 import plotly.express as px
@@ -454,7 +417,7 @@ fig.show()
 
 #### 3D Coordinates
 
-Read more about [3D scatter plots](https://plotly.com/python/3d-scatter-plots/) and [3D line plots](https://plotly.com/python/3d-line-plots/).
+Read more about [3D scatter plots](/python/3d-scatter-plots/) and [3D line plots](/python/3d-line-plots/).
 
 ```python
 import plotly.express as px
@@ -473,7 +436,7 @@ fig.show()
 
 #### Ternary Coordinates
 
-Read more about [ternary charts](https://plotly.com/python/ternary-plots/).
+Read more about [ternary charts](/python/ternary-plots/).
 
 ```python
 import plotly.express as px
