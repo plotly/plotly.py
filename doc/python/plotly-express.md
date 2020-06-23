@@ -6,11 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-<<<<<<< HEAD
-      jupytext_version: 1.3.1
-=======
       jupytext_version: 1.4.2
->>>>>>> doc-prod
   kernelspec:
     display_name: Python 3
     language: python
@@ -26,13 +22,8 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.7
   plotly:
-<<<<<<< HEAD
-    description: Plotly Express is a terse, consistent, high-level API for rapid data
-      exploration and figure generation.
-=======
     description: Plotly Express is a terse, consistent, high-level API for creating
       figures.
->>>>>>> doc-prod
     display_as: file_settings
     language: python
     layout: base
