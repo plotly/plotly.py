@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Figure Factories
-    order: 31
+    order: 32
     permalink: python/figure-factories/
     thumbnail: thumbnail/streamline.jpg
 ---
