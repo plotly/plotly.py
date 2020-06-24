@@ -17,7 +17,7 @@ class Layout(_BaseLayoutType):
 
     import re
 
-    _subplotid_prop_re = re.compile("^(" + "|".join(_subplotid_prop_names) + ")(\d+)$")
+    _subplotid_prop_re = re.compile("^(" + "|".join(_subplotid_prop_names) + r")(\d+)$")
 
     @property
     def _subplotid_validators(self):
