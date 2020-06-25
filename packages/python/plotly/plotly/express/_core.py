@@ -1391,7 +1391,7 @@ def build_dataframe(args, constructor):
         dtype = None
         for v in wide_value_vars:
             v_dtype = df_output[v].dtype.kind
-            v_dtype = "number" if v_dtype in ["i", "f"] else v_dtype
+            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
             if dtype is None:
                 dtype = v_dtype
             elif dtype != v_dtype:
