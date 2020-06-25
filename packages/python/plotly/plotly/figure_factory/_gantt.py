@@ -68,20 +68,20 @@ def validate_gantt(df):
 
 
 def gantt(
-    chart,
-    colors,
-    title,
-    bar_width,
-    showgrid_x,
-    showgrid_y,
-    height,
-    width,
-    tasks=None,
-    task_names=None,
-    data=None,
-    group_tasks=False,
-    show_hover_fill=True,
-    show_colorbar=True,
+        chart,
+        colors,
+        title,
+        bar_width,
+        showgrid_x,
+        showgrid_y,
+        height,
+        width,
+        tasks=None,
+        task_names=None,
+        data=None,
+        group_tasks=False,
+        show_hover_fill=True,
+        show_colorbar=True,
 ):
     """
     Refer to create_gantt() for docstring
@@ -255,21 +255,22 @@ def gantt(
 
 
 def gantt_colorscale(
-    chart,
-    colors,
-    title,
-    index_col,
-    show_colorbar,
-    bar_width,
-    showgrid_x,
-    showgrid_y,
-    height,
-    width,
-    tasks=None,
-    task_names=None,
-    data=None,
-    group_tasks=False,
-    show_hover_fill=True,
+        chart,
+        colors,
+        title,
+        index_col,
+        show_colorbar,
+        bar_width,
+        showgrid_x,
+        showgrid_y,
+        height,
+        width,
+        colorscale_range='default',
+        tasks=None,
+        task_names=None,
+        data=None,
+        group_tasks=False,
+        show_hover_fill=True,
 ):
     """
     Refer to FigureFactory.create_gantt() for docstring
@@ -280,6 +281,7 @@ def gantt_colorscale(
         task_names = []
     if data is None:
         data = []
+
     showlegend = False
 
     for index in range(len(chart)):
@@ -354,10 +356,52 @@ def gantt_colorscale(
         if group_tasks:
             task_names.reverse()
 
+        # Test for validity of colorscale_range tuple or compute range automatically.
+        # set default values and then test against submitted values.
+        c_min = 0
+        c_max = 100
+        if isinstance(colorscale_range, tuple):
+            if len(colorscale_range) != 2:
+                raise exceptions.PlotlyError(
+                    "colorscale_range must be a 2 item tuple of min/max values or a string. "
+                    f"There were {len(colorscale_range)} values in this tuple"
+                )
+            else:
+                for c_param in colorscale_range:
+                    if not isinstance(c_param, int) or not isinstance(c_param, float):
+                        raise exceptions.PlotlyError(
+                            "colorscale_range tuple values must be of type integer or float"
+                        )
+                c_min = colorscale_range[0]
+                c_max = colorscale_range[1]
+                if float(c_min) > float(c_max):
+                    raise exceptions.PlotlyError(
+                        "colorscale_range tuple values must be in order of (min, max). "
+                        f"Minimum value of {c_min} was larger than maximum value {c_max}."
+                    )
+                elif c_min < 0:
+                    raise exceptions.PlotlyError(
+                        f"colorscale_range minimum tuple value '{c_min}' is less than zero. "
+                        f"Negative numbers cannot be converted into a color."
+                    )
+        elif isinstance(colorscale_range, str):
+            # replicate previous functionality to avoid breaking changes
+            if colorscale_range == 'default':
+                c_min = 0
+                c_max = 100
+            # generate null value to force automatic calculation
+            elif colorscale_range == 'auto':
+                c_min = None
+                c_max = None
+            else:
+                raise exceptions.PlotlyError(
+                    f"Unrecognized colorscale_range string: '{colorscale_range}'. "
+                    "Acceptable string values for colorscale_range are 'default' or 'auto'."
+                )
+
         for index in range(len(tasks)):
             tn = tasks[index]["name"]
             del tasks[index]["name"]
-
             # If group_tasks is True, all tasks with the same name belong
             # to the same row.
             groupID = index
@@ -366,12 +410,46 @@ def gantt_colorscale(
             tasks[index]["y0"] = groupID - bar_width
             tasks[index]["y1"] = groupID + bar_width
 
+            # automatically derive complete value range for color scales to address issue #1237
+            if c_min is None:
+                c_min = min([c[index_col] for c in chart])
+            if c_max is None:
+                c_max = max([c[index_col] for c in chart])
+            if c_min < 0:
+                raise exceptions.PlotlyError(
+                    f"colorscale_range minimum value '{c_min}' is less than zero. "
+                    f"Negative numbers cannot be converted into a color. "
+                    f"If this results from 'auto' setting, set min/max manually, i.e. (0,100)."
+                )
+            # avoid division by zero
+            if c_max <= 0:
+                raise exceptions.PlotlyError(
+                    f"colorscale_range maximum value '{c_max}' less than or equal zero. "
+                    f"This value cannot be converted into a color range."
+                )
+
+            # _plotly_utils\colors requires an integer for calculating values
+            c_min = int(c_min)
+            c_max = int(c_max)
+
             # unlabel color
-            colors = clrs.color_parser(colors, clrs.unlabel_rgb)
+            try:
+                colors = clrs.color_parser(colors, clrs.unlabel_rgb)
+            except TypeError:
+                raise exceptions.PlotlyError(
+                    f"Error parsing color: '{c_min}'. Please note CSS color names are not supported. "
+                    f"Acceptable string color values for gantt charts are rgb, hex, and Plotly Scale labels."
+                )
             lowcolor = colors[0]
             highcolor = colors[1]
 
-            intermed = (chart[index][index_col]) / 100.0
+            # clrs.find_intermediate_color fails if 'intermed' is greater than 1. This allows colorscales to have
+            # a maximum scale value lower than the maximum data value to avoid distortion by outliers.
+            col_numerator = chart[index][index_col]
+            if col_numerator > c_max:
+                c_max = col_numerator
+
+            intermed = col_numerator / c_max
             intermed_color = clrs.find_intermediate_color(lowcolor, highcolor, intermed)
             intermed_color = clrs.color_parser(intermed_color, clrs.label_rgb)
             tasks[index]["fillcolor"] = intermed_color
@@ -431,8 +509,8 @@ def gantt_colorscale(
                 dict(
                     colorscale=[[0, colors[0]], [1, colors[1]]],
                     showscale=True,
-                    cmax=100,
-                    cmin=0,
+                    cmax=c_max,
+                    cmin=c_min,
                 )
             )
 
@@ -597,21 +675,21 @@ def gantt_colorscale(
 
 
 def gantt_dict(
-    chart,
-    colors,
-    title,
-    index_col,
-    show_colorbar,
-    bar_width,
-    showgrid_x,
-    showgrid_y,
-    height,
-    width,
-    tasks=None,
-    task_names=None,
-    data=None,
-    group_tasks=False,
-    show_hover_fill=True,
+        chart,
+        colors,
+        title,
+        index_col,
+        show_colorbar,
+        bar_width,
+        showgrid_x,
+        showgrid_y,
+        height,
+        width,
+        tasks=None,
+        task_names=None,
+        data=None,
+        group_tasks=False,
+        show_hover_fill=True,
 ):
     """
     Refer to FigureFactory.create_gantt() for docstring
@@ -801,22 +879,23 @@ def gantt_dict(
 
 
 def create_gantt(
-    df,
-    colors=None,
-    index_col=None,
-    show_colorbar=False,
-    reverse_colors=False,
-    title="Gantt Chart",
-    bar_width=0.2,
-    showgrid_x=False,
-    showgrid_y=False,
-    height=600,
-    width=None,
-    tasks=None,
-    task_names=None,
-    data=None,
-    group_tasks=False,
-    show_hover_fill=True,
+        df,
+        colors=None,
+        index_col=None,
+        show_colorbar=False,
+        reverse_colors=False,
+        title="Gantt Chart",
+        bar_width=0.2,
+        showgrid_x=False,
+        showgrid_y=False,
+        height=600,
+        width=None,
+        colorscale_range='default',
+        tasks=None,
+        task_names=None,
+        data=None,
+        group_tasks=False,
+        show_hover_fill=True,
 ):
     """
     Returns figure for a gantt chart
@@ -849,6 +928,9 @@ def create_gantt(
     :param (bool) showgrid_y: show/hide the y-axis grid
     :param (float) height: the height of the chart
     :param (float) width: the width of the chart
+    :param (tuple|str) colorscale_range: string or tuple of min/max range values for colorscale.
+        'default' is the default setting (0, 100), and 'auto' will compute min/max from data.
+         Manually set min/max to custom values if outliers are distorting 'auto' scaling.
 
     Example 1: Simple Gantt Chart
 
@@ -963,7 +1045,14 @@ def create_gantt(
     if isinstance(colors, dict):
         colors = clrs.validate_colors_dict(colors, "rgb")
     else:
-        colors = clrs.validate_colors(colors, "rgb")
+        # added more descriptive failure message when users input CSS color names.
+        try:
+            colors = clrs.validate_colors(colors, "rgb")
+        except TypeError:
+            raise exceptions.PlotlyError(
+                f"Error parsing colors: {colors}. Please note CSS color names are not supported. "
+                f"Acceptable string color values for gantt charts are rgb, hex, and Plotly Scale labels."
+            )
 
     if reverse_colors is True:
         colors.reverse()
@@ -1005,6 +1094,7 @@ def create_gantt(
                 showgrid_y,
                 height,
                 width,
+                colorscale_range,
                 tasks=None,
                 task_names=None,
                 data=None,

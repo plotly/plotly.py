@@ -97,6 +97,22 @@ fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=Tru
 fig.show()
 ```
 
+#### Set a color scale gradient based on values
+
+```python
+import plotly.figure_factory as ff
+
+df = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple', Complete=40),
+      dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape', Complete=80),
+      dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana', Complete=10)]
+
+# For gantt charts, colors must be rbg, hex, or "plotly scales" strings. CSS colors are not permitted.
+colors = ['rgb(5, 92, 98)', 'rgb(250, 5, 5)']
+
+fig = ff.create_gantt(df, colors=colors, index_col='Complete', show_colorbar=True, colorscale_range='auto')
+fig.show()
+```
+
 #### Use a Pandas Dataframe
 
 ```python
