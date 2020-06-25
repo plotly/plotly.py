@@ -474,11 +474,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 # We need to invert the mapping here
                 k_args = invert_label(args, k)
                 if k_args in args["hover_data"]:
-                    formatter = (
-                        args["hover_data"][k_args][0]
-                        if isinstance(args["hover_data"][k_args], tuple)
-                        else args["hover_data"][k_args]
-                    )
+                    formatter = args["hover_data"][k_args][0]
                     if formatter:
                         if isinstance(formatter, str):
                             mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
@@ -1583,7 +1579,7 @@ def process_dataframe_hierarchy(args):
             args["hover_data"] = [args["color"]]
         elif isinstance(args["hover_data"], dict):
             if not args["hover_data"].get(args["color"]):
-                args["hover_data"][args["color"]] = True
+                args["hover_data"][args["color"]] = (True, None)
         else:
             args["hover_data"].append(args["color"])
     return args
