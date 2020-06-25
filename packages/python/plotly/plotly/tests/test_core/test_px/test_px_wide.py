@@ -748,3 +748,20 @@ def test_mixed_number_input():
     df = pd.DataFrame(dict(a=[1, 2], b=[1.1, 2.1]))
     fig = px.line(df)
     assert len(fig.data) == 2
+
+
+def test_line_group():
+    df = pd.DataFrame(
+        data={
+            "who": ["a", "a", "b", "b"],
+            "x": [0, 1, 0, 1],
+            "score": [1.0, 2, 3, 4],
+            "miss": [3.2, 2.5, 1.3, 1.5],
+        }
+    )
+    fig = px.line(df, x="x", y=["miss", "score"])
+    assert len(fig.data) == 2
+    fig = px.line(df, x="x", y=["miss", "score"], color="who")
+    assert len(fig.data) == 4
+    fig = px.scatter(df, x="x", y=["miss", "score"], color="who")
+    assert len(fig.data) == 2
