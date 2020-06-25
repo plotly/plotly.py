@@ -742,3 +742,9 @@ def test_mixed_input_error(df):
         "Plotly Express cannot process wide-form data with columns of different type"
         in str(err_msg.value)
     )
+
+
+def test_mixed_number_input():
+    df = pd.DataFrame(dict(a=[1, 2], b=[1.1, 2.1]))
+    fig = px.line(df)
+    assert len(fig.data) == 2
