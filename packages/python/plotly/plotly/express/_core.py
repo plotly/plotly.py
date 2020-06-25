@@ -1390,9 +1390,11 @@ def build_dataframe(args, constructor):
         del args["wide_cross"]
         dtype = None
         for v in wide_value_vars:
+            v_dtype = df_output[v].dtype.kind
+            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
             if dtype is None:
-                dtype = df_output[v].dtype
-            elif dtype != df_output[v].dtype:
+                dtype = v_dtype
+            elif dtype != v_dtype:
                 raise ValueError(
                     "Plotly Express cannot process wide-form data with columns of different type."
                 )
