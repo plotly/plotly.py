@@ -473,7 +473,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
             for k, v in mapping_labels.items():
                 # We need to invert the mapping here
                 k_args = invert_label(args, k)
-                print(k, k_args, args["hover_data"])
                 if k_args in args["hover_data"]:
                     formatter = (
                         args["hover_data"][k_args][0]
