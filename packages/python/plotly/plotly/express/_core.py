@@ -543,14 +543,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
+        fig.update_yaxes(
+            showticklabels=False, showline=False, ticks="", range=None, row=nrows
+        )
         if args["template"].layout.yaxis.showgrid is None:
             fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
+        fig.update_xaxes(
+            showticklabels=False, showline=False, ticks="", range=None, col=ncols
+        )
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
         if args["template"].layout.yaxis.showgrid is None:
