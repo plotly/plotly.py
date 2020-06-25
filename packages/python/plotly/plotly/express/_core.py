@@ -1422,6 +1422,8 @@ def build_dataframe(args, constructor):
             args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
+            if "line_group" in args:
+                args["line_group"] = args["line_group"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
