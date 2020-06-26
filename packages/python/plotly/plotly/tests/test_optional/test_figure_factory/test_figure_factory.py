@@ -20,7 +20,6 @@ sk_measure = optional_imports.get_module("skimage")
 
 class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_wrong_curve_type(self):
-
         # check: PlotlyError (and specific message) is raised if curve_type is
         # not 'kde' or 'normal'
 
@@ -37,7 +36,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_wrong_histdata_format(self):
-
         # check: PlotlyError if hist_data is not a list of lists or list of
         # np.ndarrays (if hist_data is entered as just a list the function
         # will fail)
@@ -53,7 +51,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_distplot, **kwargs)
 
     def test_simple_distplot_prob_density(self):
-
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
@@ -107,7 +104,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][2], expected_dp_data_rug)
 
     def test_simple_distplot_prob(self):
-
         # we should be able to create a single distplot with a simple dataset
         # and default kwargs
 
@@ -159,7 +155,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][2], expected_dp_data_rug)
 
     def test_distplot_more_args_prob_dens(self):
-
         # we should be able to create a distplot with 2 datasets no
         # rugplot, defined bin_size, and added title
 
@@ -283,7 +278,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assert_fig_equal(dp["data"][1], expected_dp_data_hist_2)
 
     def test_distplot_more_args_prob(self):
-
         # we should be able to create a distplot with 2 datasets no
         # rugplot, defined bin_size, and added title
 
@@ -627,7 +621,6 @@ class TestDistplot(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestStreamline(TestCaseNoTemplate):
     def test_wrong_arrow_scale(self):
-
         # check for ValueError if arrow_scale is <= 0
 
         kwargs = {
@@ -640,7 +633,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_wrong_density(self):
-
         # check for ValueError if density is <= 0
 
         kwargs = {
@@ -653,7 +645,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(ValueError, ff.create_streamline, **kwargs)
 
     def test_uneven_x(self):
-
         # check for PlotlyError if x is not evenly spaced
 
         kwargs = {
@@ -665,7 +656,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_uneven_y(self):
-
         # check for PlotlyError if y is not evenly spaced
 
         kwargs = {
@@ -677,7 +667,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_xy(self):
-
         # check for PlotlyError if u and v are not the same length
 
         kwargs = {
@@ -689,7 +678,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_unequal_length_uv(self):
-
         # check for PlotlyError if u and v are not the same length
 
         kwargs = {
@@ -701,7 +689,6 @@ class TestStreamline(TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_streamline, **kwargs)
 
     def test_simple_streamline(self):
-
         # Need np to check streamline data,
         # this checks that the first 101 x and y values from streamline are
         # what we expect for a simple streamline where:
@@ -1267,7 +1254,6 @@ class TestDendrogram(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_vmin_and_vmax(self):
-
         # check if vmin is greater than or equal to vmax
         u = np.linspace(0, 2, 2)
         v = np.linspace(0, 2, 2)
@@ -1293,7 +1279,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colormap(self):
-
         # create data for trisurf plot
         u = np.linspace(-np.pi, np.pi, 3)
         v = np.linspace(-np.pi, np.pi, 3)
@@ -1355,7 +1340,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_trisurf_all_args(self):
-
         # check if trisurf plot matches with expected output
         u = np.linspace(-1, 1, 3)
         v = np.linspace(-1, 1, 3)
@@ -1606,7 +1590,6 @@ class TestTrisurf(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_dataframe_input(self):
-
         # check: dataframe is imported
         df = "foo"
 
@@ -1618,7 +1601,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_one_column_dataframe(self):
-
         # check: dataframe has 1 column or less
         df = pd.DataFrame([1, 2, 3])
 
@@ -1630,14 +1612,12 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_valid_diag_choice(self):
-
         # make sure that the diagonal param is valid
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
         self.assertRaises(PlotlyError, ff.create_scatterplotmatrix, df, diag="foo")
 
     def test_forbidden_params(self):
-
         # check: the forbidden params of 'marker' in **kwargs
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6]])
 
@@ -1655,7 +1635,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_index_choice(self):
-
         # check: index is a column name
         df = pd.DataFrame([[1, 2], [3, 4]], columns=["apple", "pear"])
 
@@ -1669,7 +1648,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_same_data_in_dataframe_columns(self):
-
         # check: either all numbers or strings in each dataframe column
         df = pd.DataFrame([["a", 2], [3, 4]])
 
@@ -1685,7 +1663,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegexp(PlotlyError, pattern, ff.create_scatterplotmatrix, df)
 
     def test_same_data_in_index(self):
-
         # check: either all numbers or strings in index column
         df = pd.DataFrame([["a", 2], [3, 4]], columns=["apple", "pear"])
 
@@ -1705,7 +1682,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colormap(self):
-
         # check: the colormap argument is in a valid form
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]], columns=["a", "b", "c"])
 
@@ -1765,7 +1741,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_endpts(self):
-
         # check: the endpts is a list or a tuple
         df = pd.DataFrame([[1, 2, 3], [4, 5, 6], [7, 8, 9]], columns=["a", "b", "c"])
 
@@ -1807,7 +1782,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_dictionary_colormap(self):
-
         # if colormap is a dictionary, make sure it all the values in the
         # index column are keys in colormap
         df = pd.DataFrame(
@@ -1830,7 +1804,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_scatter_plot_matrix(self):
-
         # check if test scatter plot matrix without index or theme matches
         # with the expected output
         df = pd.DataFrame(
@@ -1942,7 +1915,6 @@ class TestScatterPlotMatrix(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_scatter_plot_matrix_kwargs(self):
-
         # check if test scatter plot matrix matches with
         # the expected output
         df = pd.DataFrame(
@@ -2027,6 +1999,202 @@ class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
         # validate dataframe has correct column names
         df1 = pd.DataFrame([[2, "Apple"]], columns=["Numbers", "Fruit"])
         self.assertRaises(PlotlyError, ff.create_gantt, df1)
+
+    # Example 1 functionality covered by later tests
+    # Example 3 functionality covered by Example 5
+    # Example 4 functionality covered by Example 8
+    # Example 6 functionality covered by Example 7
+
+    def test_doc_example_2(self):
+        # evaluate if documentation example #2 still works
+        # also tests use of plotly color scale label
+
+        exp2 = [
+            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28", Complete=10),
+            dict(Task="Job B", Start="2008-12-05", Finish="2009-04-15", Complete=60),
+            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30", Complete=95),
+        ]
+        with self.assertRaises(Exception):
+            try:
+                ff.create_gantt(
+                    exp2, colors="Viridis", index_col="Complete", show_colorbar=True
+                )
+            except PlotlyError:
+                pass
+            else:
+                raise Exception
+
+    def test_doc_example_5(self):
+        # evaluate if documentation example #5 still works
+        # tests colorscale_range use of 'auto' string
+        exp5 = [
+            dict(
+                Task="Job A",
+                Start="2016-01-01",
+                Finish="2016-01-02",
+                Resource="Apple",
+                Complete=40,
+            ),
+            dict(
+                Task="Job B",
+                Start="2016-01-02",
+                Finish="2016-01-04",
+                Resource="Grape",
+                Complete=120,
+            ),
+            dict(
+                Task="Job C",
+                Start="2016-01-02",
+                Finish="2016-01-03",
+                Resource="Banana",
+                Complete=10,
+            ),
+        ]
+        colors = ["rgb(5, 92, 98)", "rgb(250, 5, 5)"]
+        with self.assertRaises(Exception):
+            try:
+                ff.create_gantt(
+                    exp5,
+                    colors=colors,
+                    index_col="Complete",
+                    reverse_colors=True,
+                    show_colorbar=True,
+                    colorscale_range="auto",
+                )
+            except PlotlyError:
+                pass
+            else:
+                raise Exception
+
+    def test_doc_example_6(self):
+        # evaluate if documentation example #6 still works
+        # test colorscale_range use of integer tuple
+        exp6 = [
+            dict(
+                Task="Job A",
+                Start="2016-01-01",
+                Finish="2016-01-02",
+                Resource="Apple",
+                Complete=40,
+            ),
+            dict(
+                Task="Job B",
+                Start="2016-01-02",
+                Finish="2016-01-04",
+                Resource="Grape",
+                Complete=120,
+            ),
+            dict(
+                Task="Job C",
+                Start="2016-01-02",
+                Finish="2016-01-03",
+                Resource="Banana",
+                Complete=10,
+            ),
+        ]
+        colors = ["#7a0504", (0.2, 0.7, 0.3)]
+        with self.assertRaises(Exception):
+            try:
+                ff.create_gantt(
+                    exp6,
+                    colors=colors,
+                    index_col="Complete",
+                    show_colorbar=True,
+                    colorscale_range=(9, 111),
+                )
+            except PlotlyError:
+                pass
+            else:
+                raise Exception
+
+    def test_doc_example_8(self):
+        # example #7 is covered by dataframe_all_args test below. Evaluate if documentation example #8 still works
+        exp8 = [
+            dict(
+                Task="Morning Sleep",
+                Start="2016-01-01",
+                Finish="2016-01-01 6:00:00",
+                Resource="Sleep",
+            ),
+            dict(
+                Task="Breakfast",
+                Start="2016-01-01 7:00:00",
+                Finish="2016-01-01 7:30:00",
+                Resource="Food",
+            ),
+            dict(
+                Task="Work",
+                Start="2016-01-01 9:00:00",
+                Finish="2016-01-01 11:25:00",
+                Resource="Brain",
+            ),
+            dict(
+                Task="Break",
+                Start="2016-01-01 11:30:00",
+                Finish="2016-01-01 12:00:00",
+                Resource="Rest",
+            ),
+            dict(
+                Task="Lunch",
+                Start="2016-01-01 12:00:00",
+                Finish="2016-01-01 13:00:00",
+                Resource="Food",
+            ),
+            dict(
+                Task="Work",
+                Start="2016-01-01 13:00:00",
+                Finish="2016-01-01 17:00:00",
+                Resource="Brain",
+            ),
+            dict(
+                Task="Exercise",
+                Start="2016-01-01 17:30:00",
+                Finish="2016-01-01 18:30:00",
+                Resource="Cardio",
+            ),
+            dict(
+                Task="Post Workout Rest",
+                Start="2016-01-01 18:30:00",
+                Finish="2016-01-01 19:00:00",
+                Resource="Rest",
+            ),
+            dict(
+                Task="Dinner",
+                Start="2016-01-01 19:00:00",
+                Finish="2016-01-01 20:00:00",
+                Resource="Food",
+            ),
+            dict(
+                Task="Evening Sleep",
+                Start="2016-01-01 21:00:00",
+                Finish="2016-01-01 23:59:00",
+                Resource="Sleep",
+            ),
+        ]
+        colors = dict(
+            Cardio="rgb(46, 137, 205)",
+            Food="Viridis",
+            Sleep=(0.2, 0.7, 0.3),
+            Brain="#7a0504",
+            Rest="rgb(107, 127, 135)",
+        )
+        with self.assertRaises(Exception):
+            try:
+                ff.create_gantt(
+                    exp8,
+                    colors=colors,
+                    index_col="Resource",
+                    title="Daily Schedule",
+                    reverse_colors=True,
+                    show_colorbar=True,
+                    bar_width=0.8,
+                    showgrid_x=True,
+                    showgrid_y=True,
+                )
+            except PlotlyError:
+                pass
+            else:
+                raise Exception
 
     def test_df_dataframe_all_args(self):
 
@@ -2154,14 +2322,14 @@ class TestGantt(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
         self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
-        self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
+        # unknown why the following test was duplicated. removed.
+        # self.assert_fig_equal(test_gantt_chart["data"][1], exp_gantt_chart["data"][1])
         self.assert_fig_equal(test_gantt_chart["data"][2], exp_gantt_chart["data"][2])
         self.assert_fig_equal(test_gantt_chart["data"][3], exp_gantt_chart["data"][3])
 
 
 class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
     def test_colors_validation(self):
-
         # check: colors is in an acceptable form
 
         data = [1, 5, 8]
@@ -2204,7 +2372,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaises(PlotlyError, ff.create_violin, data, colors="foo")
 
     def test_data_header(self):
-
         # make sure data_header is entered
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2224,7 +2391,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_data_as_list(self):
-
         # check: data is a non empty list of numbers
 
         data = []
@@ -2243,7 +2409,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         self.assertRaisesRegexp(PlotlyError, pattern2, ff.create_violin, data)
 
     def test_dataframe_input(self):
-
         # check: dataframe is entered if group_header is True
 
         data = [1, 2, 3]
@@ -2257,7 +2422,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_colors_dict(self):
-
         # check: if colorscale is True, make sure colors is not a dictionary
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2296,7 +2460,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_valid_colorscale(self):
-
         # check: if colorscale is enabled, colors is a list with 2+ items
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2318,7 +2481,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_group_stats(self):
-
         # check: group_stats is a dictionary
 
         data = pd.DataFrame([["apple", 2], ["pear", 4]], columns=["a", "b"])
@@ -2357,7 +2519,6 @@ class TestViolin(NumpyTestUtilsMixin, TestCaseNoTemplate):
         )
 
     def test_violin_fig(self):
-
         # check: test violin fig matches expected fig
 
         test_violin = ff.create_violin(data=[1, 2])
@@ -4055,7 +4216,6 @@ class TestBullet(NumpyTestUtilsMixin, TestCaseNoTemplate):
 
 
 class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
-
     # run tests if required packages are installed
     if shapely and shapefile and gp:
 
@@ -4095,7 +4255,6 @@ class TestChoropleth(NumpyTestUtilsMixin, TestCaseNoTemplate):
             )
 
         def test_scope_is_not_list(self):
-
             pattern = "'scope' must be a list/tuple/sequence"
 
             self.assertRaisesRegexp(
