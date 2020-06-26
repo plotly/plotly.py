@@ -43,90 +43,130 @@ Gantt charts can be made using a [figure factory](/python/figure-factories/) as 
 #### Simple Gantt Chart
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
-df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
-      dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
-      dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')]
+data = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
+        dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+        dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')]
 
-fig = ff.create_gantt(df)
+fig = create_gantt(data)
 fig.show()
 ```
 
 #### Index by Numeric Variable
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
-df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Complete=10),
-      dict(Task="Job B", Start='2008-12-05', Finish='2009-04-15', Complete=60),
-      dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Complete=95)]
+data = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Complete=10),
+        dict(Task="Job B", Start='2008-12-05', Finish='2009-04-15', Complete=60),
+        dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Complete=95)]
 
-fig = ff.create_gantt(df, colors='Viridis', index_col='Complete', show_colorbar=True)
+fig = create_gantt(data, colors='Viridis', index_col='Complete', show_colorbar=True)
 fig.show()
 ```
 
 #### Index by String Variable
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
-df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-01', Resource='Apple'),
-      dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource='Grape'),
-      dict(Task="Job C", Start='2009-04-20', Finish='2009-09-30', Resource='Banana')]
+data = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-01', Resource='Apple'),
+        dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource='Grape'),
+        dict(Task="Job C", Start='2009-04-20', Finish='2009-09-30', Resource='Banana')]
 
 colors = ['#7a0504', (0.2, 0.7, 0.3), 'rgb(210, 60, 180)']
 
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', reverse_colors=True,
-                      show_colorbar=True)
+fig = create_gantt(data, colors=colors, index_col='Resource', reverse_colors=True, show_colorbar=True)
 fig.show()
 ```
 
 #### Use a Dictionary for Colors
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
-df = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple'),
-      dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape'),
-      dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana')]
+data = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple'),
+        dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape'),
+        dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana')]
 
 colors = dict(Apple='rgb(220, 0, 0)', Grape='rgb(170, 14, 200)', Banana=(1, 0.9, 0.16))
 
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True)
+fig = create_gantt(data, colors=colors, index_col='Resource', show_colorbar=True)
+fig.show()
+```
+
+#### Automatically set a color scale gradient based on min/max `index_col` values
+
+The default colorscale_range is set to a minimum of 0 and a maximum of 100. 
+While this works well for task completion values which are usually reported in percentages, 
+it is less useful when plotting other arbitrary values or for data closely clustered together within a narrow band. 
+
+If you want plotly to evaluate your data, find the minimum and maximum values, and use those for the color gradient range, 
+set `colorscale_range` to `'auto'`.
+
+```python
+from plotly.figure_factory import create_gantt
+
+data = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple', Complete=40),
+        dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape', Complete=120),
+        dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana', Complete=10)]
+
+# For gantt charts, colors must be rbg, hex, or "plotly scales" strings. CSS colors are not permitted.
+colors = ['rgb(5, 92, 98)', 'rgb(250, 5, 5)']
+
+fig = create_gantt(data, colors=colors, index_col='Complete', show_colorbar=True, colorscale_range='auto')
+fig.show()
+```
+
+#### Manually set a color scale gradient using custom values (tuple of min/max)
+
+If your data has outliers that skew your colors when `colorscale_range` is set to `'auto'`--or you otherwise wish to 
+manually define the gradient range--set `colorscale_range` to a min/max tuple of desired integers, i.e. `(9, 56)`
+
+```python
+from plotly.figure_factory import create_gantt
+
+data = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple', Complete=40),
+        dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape', Complete=120),
+        dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana', Complete=10)]
+
+# For gantt charts, colors must be rbg, hex, or "plotly scales" strings. CSS colors are not permitted.
+colors = ['#7a0504', (0.2, 0.7, 0.3)]
+
+fig = create_gantt(data, colors=colors, index_col='Complete', show_colorbar=True, colorscale_range=(9, 111))
 fig.show()
 ```
 
 #### Use a Pandas Dataframe
 
 ```python
-import plotly.figure_factory as ff
-
+from plotly.figure_factory import create_gantt
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gantt_example.csv')
 
-fig = ff.create_gantt(df, colors=['#333F44', '#93e4c1'], index_col='Complete',
-                      show_colorbar=True, bar_width=0.2, showgrid_x=True, showgrid_y=True)
+fig = create_gantt(df, colors=['#333F44', '#93e4c1'], index_col='Complete',
+                   show_colorbar=True, bar_width=0.2, showgrid_x=True, showgrid_y=True)
 fig.show()
 ```
 
 #### Using Hours and Minutes in Times
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
-df = [
-    dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
-    dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
-    dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
-    dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
-    dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
-    dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
-    dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
-    dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
-    dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
-    dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
-]
+data = [dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
+        dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
+        dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
+        dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
+        dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
+        dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
+        dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
+        dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
+        dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
+        dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
+        ]
 
 colors = dict(Cardio = 'rgb(46, 137, 205)',
               Food = 'rgb(114, 44, 121)',
@@ -134,15 +174,15 @@ colors = dict(Cardio = 'rgb(46, 137, 205)',
               Brain = 'rgb(58, 149, 136)',
               Rest = 'rgb(107, 127, 135)')
 
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', title='Daily Schedule',
-                      show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
+fig = create_gantt(data, colors=colors, index_col='Resource', title='Daily Schedule',
+                   show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
 fig.show()
 ```
 
 #### Group Tasks Together
 
 ```python
-import plotly.figure_factory as ff
+from plotly.figure_factory import create_gantt
 
 df = [dict(Task="Job-1", Start='2017-01-01', Finish='2017-02-02', Resource='Complete'),
       dict(Task="Job-1", Start='2017-02-15', Finish='2017-03-15', Resource='Incomplete'),
@@ -157,12 +197,12 @@ colors = {'Not Started': 'rgb(220, 0, 0)',
           'Incomplete': (1, 0.9, 0.16),
           'Complete': 'rgb(0, 255, 100)'}
 
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True,
-                      group_tasks=True)
+fig = create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True,
+                   group_tasks=True)
 fig.show()
 ```
 
 #### Reference
 
 
-For more info on `ff.create_gantt()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_gantt.html)
+For more info on `create_gantt()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_gantt.html)
