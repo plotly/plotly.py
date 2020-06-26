@@ -11,7 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Made the Plotly Express `trendline` argument more robust and made it work with datetime `x` values ([#2554](https://github.com/plotly/plotly.py/pull/2554))
 - Fixed bug in `px.sunburst` and `px.treemap`: when the `color` and `values`
   arguments correspond to the same column, a different aggregation function has
-to be used for the two arguments ([#2591](https://github.com/plotly/plotly.py/pull/2591))#2591 
+  to be used for the two arguments ([#2591](https://github.com/plotly/plotly.py/pull/2591))
+- Plotly Express wide mode now accepts mixed integer and float columns ([#2598](https://github.com/plotly/plotly.py/pull/2598))
+- Plotly Express `range_(x|y)` should not impact the unlinked range of marginal subplots ([#2600](https://github.com/plotly/plotly.py/pull/2600))
+- `px.line` now sets `line_group=<variable>` in wide mode by default ([#2599](https://github.com/plotly/plotly.py/pull/2599))
 
 ## [4.8.1] - 2020-05-28
 

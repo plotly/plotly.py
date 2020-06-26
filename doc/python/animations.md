@@ -51,6 +51,12 @@ fig = px.bar(df, x="continent", y="pop", color="continent",
 fig.show()
 ```
 
+### Current Animation Limitations and Caveats
+
+* Animations are designed to work well when each row of input is present across all animation frames, and when categorical values mapped to symbol, color and facet are constant across frames. Animations *may be misleading or inconsistent* if these constraints are not met.
+* Although Plotly Express supports animation for many chart and map types, smooth inter-frame transitions are today only possible for scatter and bar
+* Plotly Express will not automatically compute the union of all x/y/color ranges, so these must be specified manually to avoid scale jumps across frames
+
 #### Animated figures with Graph Objects
 
 The remainder of this section describes the low-level API for constructing animated figures manually.

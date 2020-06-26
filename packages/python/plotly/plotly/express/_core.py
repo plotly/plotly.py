@@ -542,14 +542,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
+        fig.update_yaxes(
+            showticklabels=False, showline=False, ticks="", range=None, row=nrows
+        )
         if args["template"].layout.yaxis.showgrid is None:
             fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
+        fig.update_xaxes(
+            showticklabels=False, showline=False, ticks="", range=None, col=ncols
+        )
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
         if args["template"].layout.yaxis.showgrid is None:
@@ -1389,9 +1393,11 @@ def build_dataframe(args, constructor):
         del args["wide_cross"]
         dtype = None
         for v in wide_value_vars:
+            v_dtype = df_output[v].dtype.kind
+            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
             if dtype is None:
-                dtype = df_output[v].dtype
-            elif dtype != df_output[v].dtype:
+                dtype = v_dtype
+            elif dtype != v_dtype:
                 raise ValueError(
                     "Plotly Express cannot process wide-form data with columns of different type."
                 )
@@ -1415,6 +1421,8 @@ def build_dataframe(args, constructor):
             args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
+            if "line_group" in args:
+                args["line_group"] = args["line_group"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
