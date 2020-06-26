@@ -9,6 +9,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed special cases with `px.sunburst` and `px.treemap` with `path` input ([#2524](https://github.com/plotly/plotly.py/pull/2524))
 - Fixed bug in `hover_data` argument of `px` functions, when the column name is changed with labels and `hover_data` is a dictionary setting up a specific format for the hover data ([#2544](https://github.com/plotly/plotly.py/pull/2544)).
 - Made the Plotly Express `trendline` argument more robust and made it work with datetime `x` values ([#2554](https://github.com/plotly/plotly.py/pull/2554))
+- Fixed bug in `px.sunburst` and `px.treemap`: when the `color` and `values`
+  arguments correspond to the same column, a different aggregation function has
+to be used for the two arguments ([#2591](https://github.com/plotly/plotly.py/pull/2591))#2591 
 
 ## [4.8.1] - 2020-05-28
 

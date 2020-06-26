@@ -1498,7 +1498,7 @@ def process_dataframe_hierarchy(args):
 
         if args["color"]:
             if args["color"] == args["values"]:
-                new_value_col_name = args["values"] + "_total"
+                new_value_col_name = args["values"] + "_sum"
                 df[new_value_col_name] = df[args["values"]]
                 args["values"] = new_value_col_name
         count_colname = args["values"]
