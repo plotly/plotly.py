@@ -149,10 +149,6 @@ def test_sunburst_treemap_with_path():
     fig = px.sunburst(df, path=path, values="values")
     assert fig.data[0].branchvalues == "total"
     assert fig.data[0].values[-1] == np.sum(values)
-    # Continuous colorscale
-    fig = px.sunburst(df, path=path, values="values", color="values")
-    assert "coloraxis" in fig.data[0].marker
-    assert np.all(np.array(fig.data[0].marker.colors) == np.array(fig.data[0].values))
     # Error when values cannot be converted to numerical data type
     df["values"] = ["1 000", "3 000", "2", "4", "2", "2", "1 000", "4 000"]
     msg = "Column `values` of `df` could not be converted to a numerical data type."
@@ -162,6 +158,12 @@ def test_sunburst_treemap_with_path():
     path = [df.total, "regions", df.sectors, "vendors"]
     fig = px.sunburst(df, path=path)
     assert fig.data[0].branchvalues == "total"
+    # Continuous colorscale
+    df["values"] = 1
+    fig = px.sunburst(df, path=path, values="values", color="values")
+    assert "coloraxis" in fig.data[0].marker
+    assert np.all(np.array(fig.data[0].marker.colors) == 1)
+    assert fig.data[0].values[-1] == 8
 
 
 def test_sunburst_treemap_with_path_and_hover():
