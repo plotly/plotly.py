@@ -53,6 +53,7 @@ from ._core import (  # noqa: F401
     set_mapbox_access_token,
     defaults,
     get_trendline_results,
+    NO_COLOR,
 )
 
 from ._special_inputs import IdentityMap, Constant, Range  # noqa: F401
@@ -100,4 +101,5 @@ __all__ = [
     "IdentityMap",
     "Constant",
     "Range",
+    "NO_COLOR",
 ]
