@@ -15,6 +15,7 @@ from plotly.subplots import (
     _subplot_type_for_trace_type,
 )
 
+NO_COLOR = "px_no_color_constant"
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -1349,6 +1350,10 @@ def build_dataframe(args, constructor):
                     label=_escape_col_name(df_input, "index", [var_name, value_name])
                 )
 
+    no_color = False
+    if args.get("color", None) == NO_COLOR:
+        no_color = True
+        args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
 
     df_output, wide_id_vars = process_args_into_dataframe(
@@ -1440,7 +1445,8 @@ def build_dataframe(args, constructor):
             args["x" if orient_v else "y"] = value_name
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
-
+    if no_color:
+        args["color"] = None
     args["data_frame"] = df_output
     return args
 

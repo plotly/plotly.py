@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.9.0] - unreleased
+
+### Added
+
+- `px.NO_COLOR` constant to override wide-form color assignment
+
+
 ## [4.8.2] - 2020-06-26
 
 ### Updated

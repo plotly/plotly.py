@@ -708,6 +708,17 @@ append_special_case(
     ),
 )
 
+# NO_COLOR
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=px.NO_COLOR),
+    args_expect=dict(x="index", y="value", color=None, orientation="v",),
+    df_expect=pd.DataFrame(
+        dict(variable=["a", "a", "b", "b"], index=[0, 1, 0, 1], value=[1, 2, 3, 4])
+    ),
+)
+
 
 @pytest.mark.parametrize("df_in, args_in, args_expect, df_expect", special_cases)
 def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect):
