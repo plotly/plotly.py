@@ -843,7 +843,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
     # Add trendline trace specifications
     if "trendline" in args and args["trendline"]:
         trace_spec = TraceSpec(
-            constructor=go.Scatter,
+            constructor=go.Scattergl if constructor == go.Scattergl else go.Scatter,
             attrs=["trendline"],
             trace_patch=dict(mode="lines"),
             marginal=None,
