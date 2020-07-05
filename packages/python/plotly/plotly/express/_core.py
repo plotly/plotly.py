@@ -2060,9 +2060,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif args.get("facet_col_wrap", 0):
-            vertical_spacing = 0.07
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
-            vertical_spacing = 0.03
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
 
         if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2073,7 +2073,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = 0.02
+            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None

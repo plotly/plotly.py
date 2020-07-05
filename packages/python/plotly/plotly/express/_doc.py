@@ -224,6 +224,11 @@ docs = dict(
         "Wraps the column variable at this width, so that the column facets span multiple rows.",
         "Ignored if 0, and forced to 0 if `facet_row` or a `marginal` is set.",
     ],
+    facet_row_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet rows, in paper units.",
+    ],
+    facet_col_spacing=["int", "Spacing between facet columns, in paper units",],
     animation_frame=[
         colref_type,
         colref_desc,
