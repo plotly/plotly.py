@@ -6,7 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- `px.NO_COLOR` constant to override wide-form color assignment
+- `px.NO_COLOR` constant to override wide-form color assignment in Plotly Express
+- trendline traces are now of type `scattergl` when `render_mode="webgl"` in Plotly Express
 
 
 ## [4.8.2] - 2020-06-26
