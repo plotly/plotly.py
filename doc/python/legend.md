@@ -428,7 +428,7 @@ fig.add_trace(go.Streamtube(
 ))
 # Update all traces together
 fig.update_traces(showlegend=True, showscale=False)
-fig.update_layout(width=600, title_text='Exporation of a vector field using several traces')
+fig.update_layout(width=600, title_text='Exploration of a vector field using several traces')
 fig.show()
 ```
 
