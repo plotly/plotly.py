@@ -15,6 +15,7 @@ from plotly.subplots import (
     _subplot_type_for_trace_type,
 )
 
+NO_COLOR = "px_no_color_constant"
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -842,7 +843,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
     # Add trendline trace specifications
     if "trendline" in args and args["trendline"]:
         trace_spec = TraceSpec(
-            constructor=go.Scatter,
+            constructor=go.Scattergl if constructor == go.Scattergl else go.Scatter,
             attrs=["trendline"],
             trace_patch=dict(mode="lines"),
             marginal=None,
@@ -1349,6 +1350,10 @@ def build_dataframe(args, constructor):
                     label=_escape_col_name(df_input, "index", [var_name, value_name])
                 )
 
+    no_color = False
+    if type(args.get("color", None)) == str and args["color"] == NO_COLOR:
+        no_color = True
+        args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
 
     df_output, wide_id_vars = process_args_into_dataframe(
@@ -1440,7 +1445,8 @@ def build_dataframe(args, constructor):
             args["x" if orient_v else "y"] = value_name
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
-
+    if no_color:
+        args["color"] = None
     args["data_frame"] = df_output
     return args
 
@@ -2054,9 +2060,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif args.get("facet_col_wrap", 0):
-            vertical_spacing = 0.07
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
-            vertical_spacing = 0.03
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
 
         if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2067,7 +2073,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = 0.02
+            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None

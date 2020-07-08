@@ -196,6 +196,17 @@ def imshow(
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
     else:
+        if hasattr(img, "columns") and hasattr(img.columns, "__len__"):
+            if x is None:
+                x = img.columns
+            if labels.get("x", None) is None and hasattr(img.columns, "name"):
+                labels["x"] = img.columns.name or ""
+        if hasattr(img, "index") and hasattr(img.index, "__len__"):
+            if y is None:
+                y = img.index
+            if labels.get("y", None) is None and hasattr(img.index, "name"):
+                labels["y"] = img.index.name or ""
+
         if labels.get("x", None) is None:
             labels["x"] = ""
         if labels.get("y", None) is None:
