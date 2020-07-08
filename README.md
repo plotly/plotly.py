@@ -133,12 +133,27 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.
 
 Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
 
-### Static Image Export
+### Static Image Export with Kaleido
 
 plotly.py supports static image export using the `to_image` and `write_image`
-functions in the `plotly.io` package. This functionality requires the
-installation of the plotly [orca](https://github.com/plotly/orca) command line utility and the
-[`psutil`](https://github.com/giampaolo/psutil) Python package.
+functions in the `plotly.io` module. This functionality requires the
+[`kaleido`](https://github.com/plotly/Kaleido) package which can be installed
+using pip...
+
+```
+$ pip install -U kaleido
+```
+
+or conda.
+```
+$ conda install -c conda-forge kaleido
+``` 
+
+### Static Image Export with Orca
+
+While Kaleido is now the recommended approach, image export can also be supported
+by the [orca](https://github.com/plotly/orca) command line utility and the
+ [`psutil`](https://github.com/giampaolo/psutil) Python package.
 
 These dependencies can both be installed using conda:
 
