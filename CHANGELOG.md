@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
+- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
 - `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
 
 

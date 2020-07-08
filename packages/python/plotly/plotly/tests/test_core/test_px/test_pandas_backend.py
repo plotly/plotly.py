@@ -22,6 +22,18 @@ import pytest
         (lambda df: df.boxplot(), px.box),
         (lambda df: df.hist(), px.histogram),
         (lambda df: df["A"].hist(), lambda df: px.histogram(df["A"])),
+        (lambda df: df.plot(kind="line"), px.line),
+        (lambda df: df.plot(kind="area"), px.area),
+        (lambda df: df.plot(kind="bar"), px.bar),
+        (lambda df: df.plot(kind="box"), px.box),
+        (lambda df: df.plot(kind="hist"), px.histogram),
+        (lambda df: df.plot(kind="histogram"), px.histogram),
+        (lambda df: df.plot(kind="violin"), px.violin),
+        (lambda df: df.plot(kind="strip"), px.strip),
+        (lambda df: df.plot(kind="funnel"), px.funnel),
+        (lambda df: df.plot(kind="density_contour"), px.density_contour),
+        (lambda df: df.plot(kind="density_heatmap"), px.density_heatmap),
+        (lambda df: df.plot(kind="imshow"), px.imshow),
     ],
 )
 def test_pandas_equiv(pandas_fn, px_fn):
