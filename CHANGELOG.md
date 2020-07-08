@@ -5,10 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.9.0] - unreleased
 
+### Added
+
+- `px.NO_COLOR` constant to override wide-form color assignment in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
+- `facet_row_spacing` and `facet_col_spacing` added to Plotly Express cartesian 2d functions ([#2614](https://github.com/plotly/plotly.py/pull/2614))
+
+### Fixed
+
+- trendline traces are now of type `scattergl` when `render_mode="webgl"` in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
+
 ### Updated
 
 - Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
 - `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
+
 
 
 ## [4.8.2] - 2020-06-26
