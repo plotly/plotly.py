@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Hover Text and Formatting
-    order: 21
+    order: 22
     permalink: python/hover-text-and-formatting/
     thumbnail: thumbnail/hover-text.png
 ---
@@ -228,7 +228,7 @@ df_2007 = px.data.gapminder().query("year==2007")
 fig = px.scatter(df_2007, x="gdpPercap", y="lifeExp", log_x=True, color='continent'
                 )
 print("plotly express hovertemplate:", fig.data[0].hovertemplate)
-fig.update_traces(hovertemplate='GDP: %{x} <br>Life Expectany: %{y}') # 
+fig.update_traces(hovertemplate='GDP: %{x} <br>Life Expectancy: %{y}') # 
 fig.update_traces(hovertemplate=None, selector={'name':'Europe'}) # revert to default hover
 print("user_defined hovertemplate:", fig.data[0].hovertemplate)
 fig.show()

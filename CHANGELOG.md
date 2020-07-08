@@ -2,17 +2,34 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
 ## [4.9.0] - unreleased
 
 ### Updated
 
 - Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
+- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
 
-## [4.8.2] - unreleased
+
+## [4.8.2] - 2020-06-26
+
+### Updated
+
+- Updated Plotly.js to version 1.54.5. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.5/CHANGELOG.md) for more information.
+- `add_traces()` now accepts bare `int`-like values for `rows`/`cols` as well as lists thereof ([#2546](https://github.com/plotly/plotly.py/pull/2546)), with thanks to [@MCBoarder289](https://github.com/MCBoarder289) for the contribution!
+
 
 ### Fixed
 
+- `row`/`col` now accept `int`-like values, not strictly `int` values ([#2451](https://github.com/plotly/plotly.py/pull/2451)), with thanks to [@MCBoarder289](https://github.com/MCBoarder289) for the contribution!
 - Fixed special cases with `px.sunburst` and `px.treemap` with `path` input ([#2524](https://github.com/plotly/plotly.py/pull/2524))
+- Fixed bug in `hover_data` argument of `px` functions, when the column name is changed with labels and `hover_data` is a dictionary setting up a specific format for the hover data ([#2544](https://github.com/plotly/plotly.py/pull/2544)).
+- Made the Plotly Express `trendline` argument more robust and made it work with datetime `x` values ([#2554](https://github.com/plotly/plotly.py/pull/2554))
+- Fixed bug in `px.sunburst` and `px.treemap`: when the `color` and `values` arguments correspond to the same column, a different aggregation function has to be used for the two arguments ([#2591](https://github.com/plotly/plotly.py/pull/2591))
+- Plotly Express wide mode now accepts mixed integer and float columns ([#2598](https://github.com/plotly/plotly.py/pull/2598))
+- Plotly Express `range_(x|y)` should not impact the unlinked range of marginal subplots ([#2600](https://github.com/plotly/plotly.py/pull/2600))
+- `px.line` now sets `line_group=<variable>` in wide mode by default ([#2599](https://github.com/plotly/plotly.py/pull/2599))
+- Corrected some regex warnings ([#2577](https://github.com/plotly/plotly.py/pull/2577)), with thanks to [@georgevdd](https://github.com/georgevdd) for the contribution!
 
 ## [4.8.1] - 2020-05-28
 

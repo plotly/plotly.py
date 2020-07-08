@@ -30,7 +30,7 @@ jupyter:
     language: python
     layout: base
     name: Continuous Color Scales and Color Bars
-    order: 19
+    order: 20
     permalink: python/colorscales/
     redirect_from: python/logarithmic-color-scale/
     thumbnail: thumbnail/heatmap_colorscale.jpg

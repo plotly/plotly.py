@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Multiple Axes
-    order: 14
+    order: 15
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
 ---
@@ -189,7 +189,7 @@ fig.update_layout(
         position=0.15
     ),
     yaxis3=dict(
-        title="yaxis4 title",
+        title="yaxis3 title",
         titlefont=dict(
             color="#d62728"
         ),
@@ -201,7 +201,7 @@ fig.update_layout(
         side="right"
     ),
     yaxis4=dict(
-        title="yaxis5 title",
+        title="yaxis4 title",
         titlefont=dict(
             color="#9467bd"
         ),

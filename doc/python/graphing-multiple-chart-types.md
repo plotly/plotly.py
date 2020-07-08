@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Multiple Chart Types
-    order: 16
+    order: 17
     page_type: u-guide
     permalink: python/graphing-multiple-chart-types/
     thumbnail: thumbnail/multiple-chart-type.jpg
