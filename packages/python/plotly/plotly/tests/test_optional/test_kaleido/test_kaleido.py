@@ -23,6 +23,11 @@ def mocked_scope():
         pio._kaleido.scope = original_scope
 
 
+def test_kaleido_engine_to_image_returns_bytes():
+    result = pio.to_image(fig, format="svg", engine="kaleido", validate=False)
+    assert result.startswith(b"<svg")
+
+
 def test_kaleido_engine_to_image():
     with mocked_scope() as scope:
         pio.to_image(fig, engine="kaleido", validate=False)
