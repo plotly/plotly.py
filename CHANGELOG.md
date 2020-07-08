@@ -5,7 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.9.0] - ???
 
 ### Added
- - Added preview image export support using Kaleido. Kaleido support is enabled by installing the `kaleido` package from PyPI and setting the `kaleido_export` future flag before importing `plotly` ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
+ - Added image export support using Kaleido. The image export backend can be configured using the new `engine` argument to `plotly.io.to_image` and `plotly.io.write_image`. The `engine` argument may be set to `"kaleido"`, `"orca"`, or `"auto"`. The default is `engine="auto"`, in which case the Kaleido backend is enabled if the `kaleido` package from PyPI is installed, otherwise Orca is used.   ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
 
 ## [4.8.2] - 2020-06-26
 
