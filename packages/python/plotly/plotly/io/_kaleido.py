@@ -38,7 +38,6 @@ def to_image(
           - 'svg'
           - 'pdf'
           - 'eps' (Requires the poppler library to be installed and on the PATH)
-          - 'emf' ("kaleido" engine only, requires inkscape on the PATH)
 
         If not specified, will default to:
              - `plotly.io.kaleido.scope.default_format` if engine is "kaleido"
@@ -166,7 +165,6 @@ def write_image(
           - 'svg'
           - 'pdf'
           - 'eps' (Requires the poppler library to be installed and on the PATH)
-          - 'emf' ("kaleido" engine only, requires inkscape on the PATH)
 
         If not specified and `file` is a string then this will default to the
         file extension. If not specified and `file` is not a string then this
