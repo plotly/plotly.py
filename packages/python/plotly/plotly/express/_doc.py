@@ -226,9 +226,12 @@ docs = dict(
     ],
     facet_row_spacing=[
         "float between 0 and 1",
-        "Spacing between facet rows, in paper units.",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
     ],
-    facet_col_spacing=["int", "Spacing between facet columns, in paper units",],
+    facet_col_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet columns, in paper units Default is 0.02.",
+    ],
     animation_frame=[
         colref_type,
         colref_desc,
