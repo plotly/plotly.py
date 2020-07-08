@@ -158,6 +158,16 @@ fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], facet_col="var
 fig.show()
 ```
 
+You can also prevent `color` from getting assigned if you're mapping `variable` to some other argument:
+
+```python
+import plotly.express as px
+wide_df = px.data.medals_wide(indexed=False)
+
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], facet_col="variable", color=px.NO_COLOR)
+fig.show()
+```
+
 If using a data frame's named indexes, either explicitly or relying on the defaults, the row-index references (i.e. `df.index`) or column-index names (i.e. the value of `df.columns.name`) must be used:
 
 ```python
