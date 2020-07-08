@@ -1351,7 +1351,7 @@ def build_dataframe(args, constructor):
                 )
 
     no_color = False
-    if type(args["color"]) == str and args["color"] == NO_COLOR:
+    if type(args.get("color", None)) == str and args["color"] == NO_COLOR:
         no_color = True
         args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
