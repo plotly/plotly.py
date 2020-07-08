@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+
 ## [4.9.0] - unreleased
 
 ### Added
@@ -13,6 +14,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - trendline traces are now of type `scattergl` when `render_mode="webgl"` in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
 
+### Updated
+
+- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
+- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
+
+
 
 ## [4.8.2] - 2020-06-26
 
@@ -20,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Updated Plotly.js to version 1.54.5. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.5/CHANGELOG.md) for more information.
 - `add_traces()` now accepts bare `int`-like values for `rows`/`cols` as well as lists thereof ([#2546](https://github.com/plotly/plotly.py/pull/2546)), with thanks to [@MCBoarder289](https://github.com/MCBoarder289) for the contribution!
+
 
 ### Fixed
 
