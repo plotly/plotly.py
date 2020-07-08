@@ -41,7 +41,7 @@ def test_kaleido_engine_write_image():
         fig, format=None, width=None, height=None, scale=None
     )
 
-    writeable_mock.write.assert_called_once()
+    assert writeable_mock.write.call_count == 1
 
 
 def test_kaleido_engine_to_image_kwargs():
@@ -79,7 +79,7 @@ def test_kaleido_engine_write_image_kwargs():
         fig, format="jpg", width=700, height=600, scale=2
     )
 
-    writeable_mock.write.assert_called_once()
+    assert writeable_mock.write.call_count == 1
 
 
 def test_image_renderer():
