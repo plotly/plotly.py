@@ -52,7 +52,7 @@ fig.show()
 
 ## Bubble Chart with plotly.graph_objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Scatter` from `plotly.graph_objects`, and define the size of markers to create a bubble chart. All of the available options are described in the scatter section of the reference page: https://plotly.com/python/reference#scatter.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/), and define the size of markers to create a bubble chart. All of the available options are described in the scatter section of the reference page: https://plotly.com/python/reference#scatter.
 
 ### Simple Bubble Chart
 

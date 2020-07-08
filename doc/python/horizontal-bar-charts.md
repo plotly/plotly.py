@@ -64,7 +64,7 @@ fig.show()
 
 ### Horizontal Bar Chart with go.Bar
 
-You can also use the more generic function `go.Bar` from `plotly.graph_objects`. All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/#bar
+You can also use [the more generic `go.Bar` class from `plotly.graph_objects`](/python/graph-objects/). All the options of `go.Bar` are documented in the reference https://plotly.com/python/reference/#bar
 
 #### Basic Horizontal Bar Chart
 
