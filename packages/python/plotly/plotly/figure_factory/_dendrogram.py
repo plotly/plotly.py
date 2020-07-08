@@ -198,7 +198,7 @@ class _Dendrogram(object):
         default_colors = OrderedDict(sorted(d.items(), key=lambda t: t[0]))
 
         if colorscale is None:
-            colorscale = [
+            rgb_colorscale = [
                 "rgb(0,116,217)",  # blue
                 "rgb(35,205,205)",  # cyan
                 "rgb(61,153,112)",  # green
@@ -206,13 +206,37 @@ class _Dendrogram(object):
                 "rgb(133,20,75)",  # magenta
                 "rgb(255,65,54)",  # red
                 "rgb(255,255,255)",  # white
-                "rgb(255,220,0)",
-            ]  # yellow
+                "rgb(255,220,0)",  # yellow
+            ]
+        else:
+            rgb_colorscale = colorscale
 
         for i in range(len(default_colors.keys())):
             k = list(default_colors.keys())[i]  # PY3 won't index keys
-            if i < len(colorscale):
-                default_colors[k] = colorscale[i]
+            if i < len(rgb_colorscale):
+                default_colors[k] = rgb_colorscale[i]
+
+        # add support for cyclic format colors as introduced in scipy===1.5.0
+        # before this, color_list, from which the color_key is obtained was:
+        # ['g', 'r', 'b', 'c', 'm', 'b', 'b', 'b', 'b'], now it is
+        # ['C1', 'C2', 'C0', 'C3', 'C4', 'C0', 'C0', 'C0', 'C0'], so to keep the
+        # colors consistent regardless of the version of scipy, 'C1' is mapped
+        # to 'rgb(61,153,112)' (what 'g' was mapped to before), 'C2' is mapped
+        # to 'rgb(255,65,54)', etc.
+        cyclic_color_names = ["C%d" % (n,) for n in range(5)]
+        if colorscale is None:
+            cyclic_color_rgb = [
+                "rgb(0,116,217)",
+                "rgb(61,153,112)",
+                "rgb(255,65,54)",
+                "rgb(35,205,205)",
+                "rgb(133,20,75)",
+            ]
+        else:
+            cyclic_color_rgb = colorscale
+
+        for k, c in zip(cyclic_color_names, cyclic_color_rgb):
+            default_colors[k] = c
 
         return default_colors
 
