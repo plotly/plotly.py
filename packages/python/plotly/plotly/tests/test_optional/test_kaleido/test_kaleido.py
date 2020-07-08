@@ -1,8 +1,12 @@
 import plotly.io as pio
 import plotly.io.kaleido
-from unittest.mock import Mock
+import sys
 from contextlib import contextmanager
 
+if sys.version_info >= (3, 3):
+    from unittest.mock import Mock
+else:
+    from mock import Mock
 
 fig = {"layout": {"title": {"text": "figure title"}}}
 
