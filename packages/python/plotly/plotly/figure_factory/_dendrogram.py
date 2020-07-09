@@ -32,7 +32,29 @@ def create_dendrogram(
     :param (ndarray) X: Matrix of observations as array of arrays
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'
     :param (list) labels: List of axis category labels(observation labels)
-    :param (list) colorscale: Optional colorscale for dendrogram tree
+    :param (list) colorscale: Optional colorscale for dendrogram tree. To
+                              totally replace the default colorscale, a custom 
+                              colorscale must contain 8 colors, corresponding 
+                              to when the underlying 
+                              scipy.cluster.hierarchy.dendrogram specifies 
+                              'b', 'c', 'g', 'k', 'm', 'r', 'w', 'y', in that 
+                              order. So if you want 'b', 'c', 'g', 'k', to map 
+                              to rgb(255,0,0) and 'm', 'r', 'w', 'y', to map 
+                              to rgb(0,255,0), the colorscale should be 
+                              ['rgb(255,0,0)','rgb(255,0,0)','rgb(255,0,0)',
+                              'rgb(255,0,0)','rgb(0,255,0)','rgb(0,255,0)',
+                              'rgb(0,255,0)','rgb(0,255,0)',] If using 
+                              scipy >= 1.5.1, instead of the letters above, the
+                              colors are specfied as 'C0', 'C1', etc. and in
+                              that case the list corresponds to the colors:
+                              'C0', 'C3' or 'C9', 'C1' or 'C7', 'C6', 'C2',
+                              'C4', 'C8',<ignored>, 'C5', 'C7', e.g., if
+                              scipy.cluster.hierarchy.dendrogram uses the color
+                              'C3' or 'C9' this is mapped to the rgb value in
+                              index 1, and there is not color that maps to index
+                              7, of the colorscale.  If the colorscale has less
+                              than 8 colors, the remaining colors remain the
+                              default.
     :param (function) distfun: Function to compute the pairwise distance from
                                the observations
     :param (function) linkagefun: Function to compute the linkage matrix from
@@ -160,8 +182,8 @@ class _Dendrogram(object):
         if len(self.zero_vals) > len(yvals) + 1:
             # If the length of zero_vals is larger than the length of yvals,
             # it means that there are wrong vals because of the identicial samples.
-            # Three and more identicial samples will make the yvals of spliting center into 0 and it will \
-            # accidentally take it as leaves.
+            # Three and more identicial samples will make the yvals of spliting
+            # center into 0 and it will accidentally take it as leaves.
             l_border = int(min(self.zero_vals))
             r_border = int(max(self.zero_vals))
             correct_leaves_pos = range(
@@ -185,6 +207,9 @@ class _Dendrogram(object):
 
         # These are the color codes returned for dendrograms
         # We're replacing them with nicer colors
+        # This list is the colors that can be used by dendrogram, which were
+        # determined as the combination of the default above_threshold_color and
+        # the default color palette (see scipy/cluster/hierarchy.py)
         d = {
             "r": "red",
             "g": "green",
@@ -193,6 +218,8 @@ class _Dendrogram(object):
             "m": "magenta",
             "y": "yellow",
             "k": "black",
+            # TODO: 'w' doesn't seem to be in the default color
+            # palette in scipy/cluster/hierarchy.py
             "w": "white",
         }
         default_colors = OrderedDict(sorted(d.items(), key=lambda t: t[0]))
@@ -217,26 +244,32 @@ class _Dendrogram(object):
                 default_colors[k] = rgb_colorscale[i]
 
         # add support for cyclic format colors as introduced in scipy===1.5.0
-        # before this, color_list, from which the color_key is obtained was:
-        # ['g', 'r', 'b', 'c', 'm', 'b', 'b', 'b', 'b'], now it is
-        # ['C1', 'C2', 'C0', 'C3', 'C4', 'C0', 'C0', 'C0', 'C0'], so to keep the
-        # colors consistent regardless of the version of scipy, 'C1' is mapped
-        # to 'rgb(61,153,112)' (what 'g' was mapped to before), 'C2' is mapped
-        # to 'rgb(255,65,54)', etc.
-        cyclic_color_names = ["C%d" % (n,) for n in range(5)]
-        if colorscale is None:
-            cyclic_color_rgb = [
-                "rgb(0,116,217)",
-                "rgb(61,153,112)",
-                "rgb(255,65,54)",
-                "rgb(35,205,205)",
-                "rgb(133,20,75)",
-            ]
-        else:
-            cyclic_color_rgb = colorscale
-
-        for k, c in zip(cyclic_color_names, cyclic_color_rgb):
-            default_colors[k] = c
+        # before this, the colors were named 'r', 'b', 'y' etc., now they are
+        # named 'C0', 'C1', etc. To keep the colors consistent regardless of the
+        # scipy version, we try as much as possible to map the new colors to the
+        # old colors
+        # this mapping was found by inpecting scipy/cluster/hierarchy.py (see
+        # comment above).
+        new_old_color_map = [
+            ("C0", "b"),
+            ("C1", "g"),
+            ("C2", "r"),
+            ("C3", "c"),
+            ("C4", "m"),
+            ("C5", "y"),
+            ("C6", "k"),
+            ("C7", "g"),
+            ("C8", "r"),
+            ("C9", "c"),
+        ]
+        for nc, oc in new_old_color_map:
+            try:
+                default_colors[nc] = default_colors[oc]
+            except KeyError:
+                # it could happen that the old color isn't found (if a custom
+                # colorscale was specified), in this case we set it to an
+                # arbitrary default.
+                default_colors[n] = "rgb(0,116,217)"
 
         return default_colors
 
