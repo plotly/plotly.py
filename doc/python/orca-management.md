@@ -34,13 +34,65 @@ jupyter:
 ---
 
 ### Overview
-This section covers the lower-level details of how plotly.py uses orca to perform static image generation. Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
+This section covers the lower-level details of how plotly.py can use orca to perform static image generation. Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
 
-### What is Orca?
+### What is orca?
 Orca is an [Electron](https://electronjs.org/) application that inputs plotly figure specifications and converts them into static images.  Orca can run as a command-line utility or as a long-running server process. In order to provide the fastest possible image export experience, plotly.py launches orca in server mode, and communicates with it over a local port. See https://github.com/plotly/orca for more information.
 
 By default, plotly.py launches the orca server process the first time an image export operation is performed, and then leaves it running until the main Python process exits. Because of this, the first image export operation in an interactive session will typically take a couple of seconds, but then all subsequent export operations will be significantly faster, since the server is already running.
 
+### Installing orca
+There are 3 general approaches to installing orca and its Python dependencies.
+
+##### conda
+Using the [conda](https://conda.io/docs/) package manager, you can install these dependencies in a single command:
+```
+$ conda install -c plotly plotly-orca==1.2.1 psutil requests
+```
+
+**Note:** Even if you do not want to use conda to manage your Python dependencies, it is still useful as a cross platform tool for managing native libraries and command-line utilities (e.g. git, wget, graphviz, boost, gcc, nodejs, cairo, etc.).  For this use-case, start with [Miniconda](https://conda.io/miniconda.html) (~60MB) and tell the installer to add itself to your system `PATH`.  Then run `conda install plotly-orca==1.2.1` and the orca executable will be available system wide.
+
+##### npm + pip
+You can use the [npm](https://www.npmjs.com/get-npm) package manager to install `orca` (and its `electron` dependency), and then use pip to install `psutil`:
+
+```
+$ npm install -g electron@1.8.4 orca
+$ pip install psutil requests
+```
+
+##### Standalone Binaries + pip
+If you are unable to install conda or npm, you can install orca as a precompiled binary for your operating system. Follow the instructions in the orca [README](https://github.com/plotly/orca) to install orca and add it to your system `PATH`. Then use pip to install `psutil`.
+
+```
+$ pip install psutil requests
+```
+
+<!-- #region -->
+### Install orca on Google Colab
+```
+!pip install plotly>=4.7.1
+!wget https://github.com/plotly/orca/releases/download/v1.2.1/orca-1.2.1-x86_64.AppImage -O /usr/local/bin/orca
+!chmod +x /usr/local/bin/orca
+!apt-get install xvfb libgtk2.0-0 libgconf-2-4
+```
+
+Once this is done you can use this code to make, show and export a figure:
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure( go.Scatter(x=[1,2,3], y=[1,3,2] ) )
+fig.write_image("fig1.svg")
+fig.write_image("fig1.png")
+```
+
+The files can then be downloaded with:
+
+```python
+from google.colab import files
+files.download('fig1.svg')
+files.download('fig1.png')
+```
+<!-- #endregion -->
 
 ### Create a Figure
 Now let's create a simple scatter plot with 100 random points of variying color and size.
