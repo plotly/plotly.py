@@ -3172,6 +3172,12 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
+
         Returns
         -------
         bytes
@@ -3231,6 +3237,11 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
         Returns
         -------
         None
