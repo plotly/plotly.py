@@ -538,7 +538,7 @@ def make_docstring(fn, override_dict={}, append_dict={}):
         param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))
-            if param in docs
+            if param in docs or param in override_dict
             else "(documentation missing from map)"
         )
 
