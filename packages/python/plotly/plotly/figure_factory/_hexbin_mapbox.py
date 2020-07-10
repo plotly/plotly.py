@@ -97,11 +97,25 @@ def _compute_hexbin(x, y, x_range, y_range, color, nx, agg_func, min_count):
     ymin = y_range.min()
     ymax = y_range.max()
 
+    # In the x-direction, the hexagons exactly cover the region from
+    # xmin to xmax. Need some padding to avoid roundoff errors.
+    padding = 1.0e-9 * (xmax - xmin)
+    xmin -= padding
+    xmax += padding
+
     Dx = xmax - xmin
     Dy = ymax - ymin
-    dx = Dx / nx
+    if Dx == 0 and Dy > 0:
+        dx = Dy / nx
+    elif Dx == 0 and Dy == 0:
+        dx, _ = _project_latlon_to_wgs84(1, 1)
+    else:
+        dx = Dx / nx
     dy = dx * np.sqrt(3)
-    ny = np.round(Dy / dy).astype(int)
+    ny = np.ceil(Dy / dy).astype(int)
+
+    # Center the hexagons vertically since we only want regular hexagons
+    ymin -= (ymin + dy * ny - ymax) / 2
 
     x = (x - xmin) / dx
     y = (y - ymin) / dy
@@ -134,7 +148,7 @@ def _compute_hexbin(x, y, x_range, y_range, color, nx, agg_func, min_count):
         good_idxs = ~np.isnan(accum)
     else:
         if min_count is None:
-            min_count = 0
+            min_count = 1
 
         # create accumulation arrays
         lattice1 = np.empty((nx1, ny1), dtype=object)
@@ -157,14 +171,14 @@ def _compute_hexbin(x, y, x_range, y_range, color, nx, agg_func, min_count):
         for i in range(nx1):
             for j in range(ny1):
                 vals = lattice1[i, j]
-                if len(vals) > min_count:
+                if len(vals) >= min_count:
                     lattice1[i, j] = agg_func(vals)
                 else:
                     lattice1[i, j] = np.nan
         for i in range(nx2):
             for j in range(ny2):
                 vals = lattice2[i, j]
-                if len(vals) > min_count:
+                if len(vals) >= min_count:
                     lattice2[i, j] = agg_func(vals)
                 else:
                     lattice2[i, j] = np.nan
@@ -201,15 +215,9 @@ def _compute_hexbin(x, y, x_range, y_range, color, nx, agg_func, min_count):
     # Number of hexagons needed
     m = len(centers)
 
-    # Scale of hexagons
-    dxh = sorted(list(set(np.diff(sorted(centers[:, 0])))))[1]
-    dyh = sorted(list(set(np.diff(sorted(centers[:, 1])))))[1]
-    nx = dxh * 2
-    ny = 2 / 3 * dyh / (0.5 / np.cos(np.pi / 6))
-
     # Coordinates for all hexagonal patches
-    hxs = np.array([hx] * m) * nx + np.vstack(centers[:, 0])
-    hys = np.array([hy] * m) * ny + np.vstack(centers[:, 1])
+    hxs = np.array([hx] * m) * dx + np.vstack(centers[:, 0])
+    hys = np.array([hy] * m) * dy / np.sqrt(3) + np.vstack(centers[:, 1])
 
     return hxs, hys, centers, agreggated_value
 
@@ -328,6 +336,7 @@ def create_hexbin_mapbox(
     template=None,
     width=None,
     height=None,
+    min_count=None,
 ):
     """
     Returns a figure aggregating scattered points into connected hexagons 
@@ -348,7 +357,7 @@ def create_hexbin_mapbox(
         color=None,
         nx=nx_hexagon,
         agg_func=agg_func,
-        min_count=-np.inf,
+        min_count=min_count,
     )
 
     geojson = _hexagons_to_geojson(hexagons_lats, hexagons_lons, hexagons_ids)
@@ -385,7 +394,7 @@ def create_hexbin_mapbox(
             color=df[args["color"]].values if args["color"] else None,
             nx=nx_hexagon,
             agg_func=agg_func,
-            min_count=None,
+            min_count=min_count,
         )
         agg_data_frame_list.append(
             pd.DataFrame(
@@ -435,6 +444,12 @@ create_hexbin_mapbox.__doc__ = make_docstring(
             "function",
             "Numpy array aggregator, it must take as input a 1D array",
             "and output a scalar value.",
+        ],
+        min_count=[
+            "int",
+            "Minimum number of points in a hexagon for it to be displayed.",
+            "If None and color is not set, display all hexagons.",
+            "If None and color is set, only display hexagons that contain points.",
         ],
     ),
 )
