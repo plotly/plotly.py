@@ -1,15 +1,13 @@
-from ._core import make_figure, build_dataframe
-from ._doc import make_docstring, docs
-from ._chart_types import choropleth_mapbox
-import plotly.graph_objs as go
+from plotly.express._core import build_dataframe
+from plotly.express._doc import make_docstring
+from plotly.express._chart_types import choropleth_mapbox
 import numpy as np
 import pandas as pd
-import re
 
 
 def _project_latlon_to_wgs84(lat, lon):
     """
-    Projects lat and lon to WGS84 to get regular hexagons on a mapbox map
+    Projects lat and lon to WGS84, used to get regular hexagons on a mapbox map
     """
     x = lon * np.pi / 180
     y = np.arctanh(np.sin(lat * np.pi / 180))
@@ -18,7 +16,7 @@ def _project_latlon_to_wgs84(lat, lon):
 
 def _project_wgs84_to_latlon(x, y):
     """
-    Projects lat and lon to WGS84 to get regular hexagons on a mapbox map
+    Projects WGS84 to lat and lon, used to get regular hexagons on a mapbox map
     """
     lon = x * 180 / np.pi
     lat = (2 * np.arctan(np.exp(y)) - np.pi / 2) * 180 / np.pi
@@ -55,16 +53,8 @@ def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
 
     return min(latZoom, lngZoom, ZOOM_MAX)
 
-
 def _compute_hexbin(
-    lat=None,
-    lon=None,
-    lat_range=None,
-    lon_range=None,
-    color=None,
-    nx=None,
-    agg_func=None,
-    min_count=None,
+    x, y, x_range, y_range, color, nx, agg_func, min_count
 ):
     """
     Computes the aggregation at hexagonal bin level.
@@ -73,38 +63,36 @@ def _compute_hexbin(
 
     Parameters
     ----------
-    lat : np.ndarray
-        Array of latitudes
-    lon : np.ndarray
-        Array of longitudes
-    lat_range : np.ndarray
-        Min and max latitudes
-    lon_range : np.ndarray
-        Min and max longitudes
+    x : np.ndarray
+        Array of x values (shape N)
+    y : np.ndarray
+        Array of y values (shape N)
+    x_range : np.ndarray
+        Min and max x (shape 2)
+    y_range : np.ndarray
+        Min and max y (shape 2)
     color : np.ndarray
-        Metric to aggregate at hexagon level
+        Metric to aggregate at hexagon level (shape N)
     nx : int
         Number of hexagons horizontally
     agg_func : function
         Numpy compatible aggregator, this function must take a one-dimensional
         np.ndarray as input and output a scalar
-    min_count : float
-        Minimum value for which to display the aggregate
+    min_count : int
+        Minimum number of points in the hexagon for the hexagon to be displayed
 
     Returns
     -------
+    np.ndarray
+        X coordinates of each hexagon (shape M x 6)
+    np.ndarray
+        Y coordinates of each hexagon (shape M x 6)
+    np.ndarray
+        Centers of the hexagons (shape M x 2)
+    np.ndarray
+        Aggregated value in each hexagon (shape M)
 
     """
-    # Project to WGS 84
-    x, y = _project_latlon_to_wgs84(lat, lon)
-
-    if lat_range is None:
-        lat_range = np.array([lat.min(), lat.max()])
-    if lon_range is None:
-        lon_range = np.array([lon.min(), lon.max()])
-
-    x_range, y_range = _project_latlon_to_wgs84(lat_range, lon_range)
-
     xmin = x_range.min()
     xmax = x_range.max()
     ymin = y_range.min()
@@ -224,6 +212,69 @@ def _compute_hexbin(
     hxs = np.array([hx] * m) * nx + np.vstack(centers[:, 0])
     hys = np.array([hy] * m) * ny + np.vstack(centers[:, 1])
 
+    return hxs, hys, centers, agreggated_value
+
+def _compute_wgs84_hexbin(
+    lat=None,
+    lon=None,
+    lat_range=None,
+    lon_range=None,
+    color=None,
+    nx=None,
+    agg_func=None,
+    min_count=None,
+):
+    """
+    Computes the lat-lon aggregation at hexagonal bin level.
+    Latitude and longitude need to be projected to WGS84 before aggregating
+    in order to display regular hexagons on the map.
+
+    Parameters
+    ----------
+    lat : np.ndarray
+        Array of latitudes (shape N)
+    lon : np.ndarray
+        Array of longitudes (shape N)
+    lat_range : np.ndarray
+        Min and max latitudes (shape 2)
+    lon_range : np.ndarray
+        Min and max longitudes (shape 2)
+    color : np.ndarray
+        Metric to aggregate at hexagon level (shape N)
+    nx : int
+        Number of hexagons horizontally
+    agg_func : function
+        Numpy compatible aggregator, this function must take a one-dimensional
+        np.ndarray as input and output a scalar
+    min_count : int
+        Minimum number of points in the hexagon for the hexagon to be displayed
+
+    Returns
+    -------
+    np.ndarray
+        Lat coordinates of each hexagon (shape M x 6)
+    np.ndarray
+        Lon coordinates of each hexagon (shape M x 6)
+    pd.Series
+        Unique id for each hexagon, to be used in the geojson data (shape M)
+    np.ndarray
+        Aggregated value in each hexagon (shape M)
+
+    """
+    # Project to WGS 84
+    x, y = _project_latlon_to_wgs84(lat, lon)
+
+    if lat_range is None:
+        lat_range = np.array([lat.min(), lat.max()])
+    if lon_range is None:
+        lon_range = np.array([lon.min(), lon.max()])
+
+    x_range, y_range = _project_latlon_to_wgs84(lat_range, lon_range)
+
+    hxs, hys, centers, agreggated_value = _compute_hexbin(
+        x, y, x_range, y_range, color, nx, agg_func, min_count
+    )    
+
     # Convert back to lat-lon
     hexagons_lats, hexagons_lons = _project_wgs84_to_latlon(hxs, hys)
 
@@ -237,7 +288,7 @@ def _compute_hexbin(
 def _hexagons_to_geojson(hexagons_lats, hexagons_lons, ids=None):
     """
     Creates a geojson of hexagonal features based on the outputs of
-    _compute_hexbin
+    _compute_wgs84_hexbin
     """
     features = []
     if ids is None:
@@ -255,12 +306,12 @@ def _hexagons_to_geojson(hexagons_lats, hexagons_lons, ids=None):
     return dict(type="FeatureCollection", features=features)
 
 
-def hexbin_mapbox(
+def create_hexbin_mapbox(
     data_frame=None,
     lat=None,
     lon=None,
     color=None,
-    gridsize=5,
+    nx_hexagon=5,
     agg_func=None,
     animation_frame=None,
     color_discrete_sequence=None,
@@ -278,6 +329,9 @@ def hexbin_mapbox(
     width=None,
     height=None,
 ):
+    """
+    Returns a figure aggregating scattered points into connected hexagons 
+    """
     args = build_dataframe(args=locals(), constructor=None)
 
     if agg_func is None:
@@ -286,13 +340,13 @@ def hexbin_mapbox(
     lat_range = args["data_frame"][args["lat"]].agg(["min", "max"]).values
     lon_range = args["data_frame"][args["lon"]].agg(["min", "max"]).values
 
-    hexagons_lats, hexagons_lons, hexagons_ids, count = _compute_hexbin(
+    hexagons_lats, hexagons_lons, hexagons_ids, count = _compute_wgs84_hexbin(
         lat=args["data_frame"][args["lat"]].values,
         lon=args["data_frame"][args["lon"]].values,
         lat_range=lat_range,
         lon_range=lon_range,
         color=None,
-        nx=gridsize,
+        nx=nx_hexagon,
         agg_func=agg_func,
         min_count=-np.inf,
     )
@@ -323,13 +377,13 @@ def hexbin_mapbox(
     agg_data_frame_list = []
     for frame, index in groups.items():
         df = args["data_frame"].loc[index]
-        _, _, hexagons_ids, aggregated_value = _compute_hexbin(
+        _, _, hexagons_ids, aggregated_value = _compute_wgs84_hexbin(
             lat=df[args["lat"]].values,
             lon=df[args["lon"]].values,
             lat_range=lat_range,
             lon_range=lon_range,
             color=df[args["color"]].values if args["color"] else None,
-            nx=gridsize,
+            nx=nx_hexagon,
             agg_func=agg_func,
             min_count=None,
         )
@@ -372,5 +426,14 @@ def hexbin_mapbox(
         height=height,
     )
 
-
-hexbin_mapbox.__doc__ = make_docstring(hexbin_mapbox)
+create_hexbin_mapbox.__doc__ = make_docstring(
+    create_hexbin_mapbox,
+    override_dict=dict(
+        nx_hexagon=["int", "Number of hexagons (horizontally) to be created"],
+        agg_func=[
+            "function",
+            "Numpy array aggregator, it must take as input a 1D array",
+            "and output a scalar value.",
+        ],
+    )
+)
