@@ -34,6 +34,7 @@ else:
 
     def create_choropleth(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_choropleth`")
+
     def create_hexbin_mapbox(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_hexbin_mapbox`")
 
