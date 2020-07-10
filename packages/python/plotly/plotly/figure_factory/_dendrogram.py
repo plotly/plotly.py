@@ -25,36 +25,22 @@ def create_dendrogram(
     color_threshold=None,
 ):
     """
-    Function that returns a dendrogram Plotly figure object.
+    Function that returns a dendrogram Plotly figure object. This is a thin
+    wrapper around scipy.cluster.hierarchy.dendrogram.
 
     See also https://dash.plot.ly/dash-bio/clustergram.
 
     :param (ndarray) X: Matrix of observations as array of arrays
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'
     :param (list) labels: List of axis category labels(observation labels)
-    :param (list) colorscale: Optional colorscale for dendrogram tree. To
-                              totally replace the default colorscale, a custom 
-                              colorscale must contain 8 colors, corresponding 
-                              to when the underlying 
-                              scipy.cluster.hierarchy.dendrogram specifies 
-                              'b', 'c', 'g', 'k', 'm', 'r', 'w', 'y', in that 
-                              order. So if you want 'b', 'c', 'g', 'k', to map 
-                              to rgb(255,0,0) and 'm', 'r', 'w', 'y', to map 
-                              to rgb(0,255,0), the colorscale should be 
-                              ['rgb(255,0,0)','rgb(255,0,0)','rgb(255,0,0)',
-                              'rgb(255,0,0)','rgb(0,255,0)','rgb(0,255,0)',
-                              'rgb(0,255,0)','rgb(0,255,0)',] If using 
-                              scipy >= 1.5.1, instead of the letters above, the
-                              colors are specfied as 'C0', 'C1', etc. and in
-                              that case the list corresponds to the colors:
-                              'C0', 'C3' or 'C9', 'C1' or 'C7', 'C6', 'C2',
-                              'C4', 'C8',<ignored>, 'C5', 'C7', e.g., if
-                              scipy.cluster.hierarchy.dendrogram uses the color
-                              'C3' or 'C9' this is mapped to the rgb value in
-                              index 1, and there is not color that maps to index
-                              7, of the colorscale.  If the colorscale has less
-                              than 8 colors, the remaining colors remain the
-                              default.
+    :param (list) colorscale: Optional colorscale for the dendrogram tree. With
+                              scipy<=1.4.1 requires 8 colors to be specified,
+                              the 7th of which is ignored.  With scipy>=1.5.0,
+                              requires 10 colors. In this case the 8th color is
+                              ignored and the 2nd, 3rd and 6th are used twice as
+                              often as the others. Given a shorter list, the
+                              missing values are replaced with defaults and with
+                              a longer list the extra values are ignored.
     :param (function) distfun: Function to compute the pairwise distance from
                                the observations
     :param (function) linkagefun: Function to compute the linkage matrix from
