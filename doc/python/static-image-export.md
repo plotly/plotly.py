@@ -49,7 +49,7 @@ $ pip install -U kaleido
 
 or conda.
 ```
-$ conda install -c conda-forge kaleido
+$ conda install -c plotly kaleido
 ``` 
 
 #### Install Dependencies (Orca)
