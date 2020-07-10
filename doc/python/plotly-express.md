@@ -342,17 +342,6 @@ fig.show()
 
 ```python
 import plotly.express as px
-import numpy as np
-px.set_mapbox_access_token(open(".mapbox_token").read())
-df = px.data.carshare()
-fig = px.hexbin_mapbox(df, lat="centroid_lat", lon="centroid_lon", color="peak_hour",
-                  color_continuous_scale=px.colors.cyclical.IceFire, labels={"color": "Average peak hour"},
-                  gridsize=10, agg_func=np.mean)
-fig.show()
-```
-
-```python
-import plotly.express as px
 df = px.data.gapminder()
 fig = px.scatter_geo(df, locations="iso_alpha", color="continent", hover_name="country", size="pop",
                animation_frame="year", projection="natural earth")
