@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to configure and style the legend in Plotly with Python.
     display_as: file_settings
@@ -32,6 +32,18 @@ jupyter:
     redirect_from: python/horizontal-legend/
     thumbnail: thumbnail/legends.gif
 ---
+
+### Legends versus Color Bars
+
+Plotly figures can contain two different legend-like guides: legends and color bars. Legends are used to provide a key for discrete visual variables such as [discrete colors](/python/discrete-color/) or [symbols](/python/marker-style/), whereas [color bars are used to provide a key for continuous color, and are configured differently](/python/colorscales/).
+
+
+### Legends with Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+Plotly Express will automatically construct and label a legend for any figure that uses [discrete color](/python/discrete-color/) or marker [symbols](/python/marker-style/)
+
 
 #### Show Legend
 
