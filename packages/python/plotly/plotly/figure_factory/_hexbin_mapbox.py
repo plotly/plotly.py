@@ -53,9 +53,8 @@ def _getBoundsZoomLevel(lon_min, lon_max, lat_min, lat_max, mapDim):
 
     return min(latZoom, lngZoom, ZOOM_MAX)
 
-def _compute_hexbin(
-    x, y, x_range, y_range, color, nx, agg_func, min_count
-):
+
+def _compute_hexbin(x, y, x_range, y_range, color, nx, agg_func, min_count):
     """
     Computes the aggregation at hexagonal bin level.
     Also defines the coordinates of the hexagons for plotting.
@@ -214,6 +213,7 @@ def _compute_hexbin(
 
     return hxs, hys, centers, agreggated_value
 
+
 def _compute_wgs84_hexbin(
     lat=None,
     lon=None,
@@ -273,7 +273,7 @@ def _compute_wgs84_hexbin(
 
     hxs, hys, centers, agreggated_value = _compute_hexbin(
         x, y, x_range, y_range, color, nx, agg_func, min_count
-    )    
+    )
 
     # Convert back to lat-lon
     hexagons_lats, hexagons_lons = _project_wgs84_to_latlon(hxs, hys)
@@ -426,6 +426,7 @@ def create_hexbin_mapbox(
         height=height,
     )
 
+
 create_hexbin_mapbox.__doc__ = make_docstring(
     create_hexbin_mapbox,
     override_dict=dict(
@@ -435,5 +436,5 @@ create_hexbin_mapbox.__doc__ = make_docstring(
             "Numpy array aggregator, it must take as input a 1D array",
             "and output a scalar value.",
         ],
-    )
+    ),
 )
