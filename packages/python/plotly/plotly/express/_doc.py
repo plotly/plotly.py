@@ -514,12 +514,6 @@ docs = dict(
         "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
         "levels in the hierarchy.",
     ],
-    agg_func=[
-        "function",
-        "Numpy array aggregator, it must take as input a 1D array",
-        "and output a scalar value.",
-    ],
-    gridsize=["int", "Number of hexagons (horizontally) to be created",],
 )
 
 
