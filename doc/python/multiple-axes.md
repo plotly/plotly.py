@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.2
   plotly:
-    description: How to make a graph with multiple axes in python.
+    description: How to make a graph with multiple axes (dual y-axis plots, plots with secondary axes) in python.
     display_as: file_settings
     language: python
     layout: base
