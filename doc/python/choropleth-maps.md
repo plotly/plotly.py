@@ -39,7 +39,7 @@ Below we show how to create Choropleth Maps using either Plotly Express' `px.cho
 
 #### Base Map Configuration
 
-Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+Plotly figures made with [Plotly Express](/python/plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](/python/graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
 
 ### Introduction: main parameters for choropleth outline maps
 

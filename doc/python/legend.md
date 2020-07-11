@@ -33,104 +33,128 @@ jupyter:
     thumbnail: thumbnail/legends.gif
 ---
 
-### Legends versus Color Bars
+### Trace Types, Legends and Color Bars
 
-Plotly figures can contain two different legend-like guides: legends and color bars. Legends are used to provide a key for discrete visual variables such as [discrete colors](/python/discrete-color/) or [symbols](/python/marker-style/), whereas [color bars are used to provide a key for continuous color, and are configured differently](/python/colorscales/).
+[Traces](/python/figure-structure) of most types can be optionally associated with a single legend item in the [legend](/python/legend/). Whether or not a given trace appears in the legend is controlled via the `showlegend` attribute. Traces which are their own subplots (see above) do not support this, with the exception of traces of type `pie` and `funnelarea` for which every distinct color represented in the trace gets a separate legend item. Users may show or hide traces by clicking or double-clicking on their associated legend item. Traces that support legend items also support the `legendgroup` attribute, and all traces with the same legend group are treated the same way during click/double-click interactions.
+
+The fact that legend items are linked to traces means that when using [discrete color](/python/discrete-color/), a figure must have one trace per color in order to get a meaningful legend. [Plotly Express has robust support for discrete color](/python/discrete-color/) to make this easy.
+
+Traces which support [continuous color](/python/colorscales/) can also be associated with color axes in the layout via the `coloraxis` attribute. Multiple traces can be linked to the same color axis. Color axes have a legend-like component called color bars. Alternatively, color axes can be configured within the trace itself.
 
 
 ### Legends with Plotly Express
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-Plotly Express will automatically construct and label a legend for any figure that uses [discrete color](/python/discrete-color/) or marker [symbols](/python/marker-style/)
-
-
-#### Show Legend
-
-By default the legend is displayed on Plotly charts with multiple traces.
+Plotly Express functions will create one [trace](/python/figure-structure) per animation frame for each unique combination of data values mapped to discrete color, symbol, line-dash, facet-row and/or facet-column. Traces' `legendgroup` and `showlegend` attributed are set such that only one legend item appears per unique combination of discrete color, symbol and/or line-dash. The legend title is automatically set, and can be overrided with the `labels` keyword argument:
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-))
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[5, 4, 3, 2, 1],
-))
-
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex", symbol="smoker", facet_col="time",
+          labels={"sex": "Gender", "smoker": "Smokes"})
 fig.show()
 ```
 
-Add `showlegend=True` to the `layout` object to display the legend on a plot with a single trace.
+#### Showing and Hiding the Legend
+
+By default the legend is displayed on Plotly charts with multiple traces, and this can be explicitly set with the `layout.showlegend` attribute:
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-))
-
-fig.update_layout(showlegend=True)
-
-fig.show()
-```
-
-#### Hide Legend
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-))
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[5, 4, 3, 2, 1],
-))
-
+df = px.data.tips()
+fig = px.histogram(df, x="sex", y="total_bill", color="time",
+                  title="Total Bill by Sex, Colored by Time")
 fig.update_layout(showlegend=False)
-
 fig.show()
 ```
 
-#### Hide Legend Entries
+
+### Legend Positioning
+
+Legends have an anchor point, which can be set to a point within the legend using `layout.legend.xanchor` and `layout.legend.yanchor`. The coordinate of the anchor can be positioned with `layout.legend.x` and `layout.legend.y` in [paper coordinates](/python/figure-structure/). Note that the plot margins will grow so as to accomodate the legend. The legend may also be placed within the plotting area.
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 
-fig = go.Figure()
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
 
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-    showlegend=False
+fig.update_layout(legend=dict(
+    yanchor="top",
+    y=0.99,
+    xanchor="left",
+    x=0.01
 ))
-
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[5, 4, 3, 2, 1],
-))
-
-fig.update_layout(showlegend=True)
 
 fig.show()
 ```
 
-#### Legend Names
+#### Horizontal Legends
+
+The `layout.legend.orientation` attribute can be set to `"h"` for a horizontal legend. Here we also position it above the plotting area.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+fig.update_layout(legend=dict(
+    orientation="h",
+    yanchor="bottom",
+    y=1.02,
+    xanchor="right",
+    x=1
+))
+
+fig.show()
+```
+
+#### Styling Legends
+
+Legends support many styling options.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("year==2007")
+fig = px.scatter(df, x="gdpPercap", y="lifeExp", color="continent",
+    size="pop", size_max=45, log_x=True)
+
+
+fig.update_layout(
+    legend=dict(
+        x=0,
+        y=1,
+        traceorder="reversed",
+        title_font_family="Times New Roman",
+        font=dict(
+            family="Courier",
+            size=12,
+            color="black"
+        ),
+        bgcolor="LightSteelBlue",
+        bordercolor="Black",
+        borderwidth=2
+    )
+)
+
+fig.show()
+```
+
+### Legends with Graph Objects
+
+When creating figures using [graph objects](/python/graph-objects/) without using [Plotly Express](/python/plotly-express/), legends must be manually configured using some of the options below.
+
+
+#### Legend Item Names
+
+Legend items appear per trace, and the legend item name is taken from the trace's `name` attribute.
 
 ```python
 import plotly.graph_objects as go
@@ -175,7 +199,7 @@ fig.update_layout(legend_title_text='Trend')
 fig.show()
 ```
 
-#### Horizontal Legend
+### Hiding Legend Items
 
 ```python
 import plotly.graph_objects as go
@@ -185,79 +209,23 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(
     x=[1, 2, 3, 4, 5],
     y=[1, 2, 3, 4, 5],
+    showlegend=False
 ))
+
 
 fig.add_trace(go.Scatter(
     x=[1, 2, 3, 4, 5],
     y=[5, 4, 3, 2, 1],
 ))
 
-fig.update_layout(legend_orientation="h")
+fig.update_layout(showlegend=True)
 
 fig.show()
 ```
 
-#### Legend Position
+#### Hiding the Trace Initially
 
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-))
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[5, 4, 3, 2, 1],
-))
-
-fig.update_layout(legend=dict(x=-.1, y=1.2))
-
-fig.show()
-```
-
-#### Style Legend
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[1, 2, 3, 4, 5],
-))
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, 4, 5],
-    y=[5, 4, 3, 2, 1],
-))
-
-fig.update_layout(
-    legend=dict(
-        x=0,
-        y=1,
-        traceorder="normal",
-        font=dict(
-            family="sans-serif",
-            size=12,
-            color="black"
-        ),
-        bgcolor="LightSteelBlue",
-        bordercolor="Black",
-        borderwidth=2
-    )
-)
-
-fig.show()
-```
-
-#### Hide the Trace Implicitly
-
-`Graph_objects` traces have a `visible` attribute. If set to `legendonly`, the trace is hidden from the graph implicitly. Click on the name in the legend to display the hidden trace.
+Traces have a `visible` attribute. If set to `legendonly`, the trace is hidden from the graph implicitly. Click on the name in the legend to display the hidden trace.
 
 ```python
 import plotly.graph_objects as go
@@ -306,7 +274,9 @@ fig.update_layout(legend= {'itemsizing': 'constant'})
 fig.show()
 ```
 
-#### Grouped Legend
+#### Grouped Legend Items
+
+Grouping legend items together by setting the `legendgroup` attribute of traces causes their legend entries to be next to each other, and clicking on any legend entry in the group will show or hide the whole group.
 
 ```python
 import plotly.graph_objects as go
@@ -349,10 +319,12 @@ fig.add_trace(go.Scatter(
     line=dict(color="MediumPurple")
 ))
 
+fig.update_layout(title="Try Clicking on the Legend Items!")
+
 fig.show()
 ```
 
-You can also hide entries in grouped legends:
+You can also hide entries in grouped legends, preserving the grouped show/hide behaviour. This is what Plotly Express does with its legends.
 
 ```python
 import plotly.graph_objects as go
@@ -394,9 +366,10 @@ fig.add_trace(go.Scatter(
     name="second legend group - average",
     mode="lines",
     line=dict(color="MediumPurple"),
-    showlegend=False,
+    showlegend=False
 ))
 
+fig.update_layout(title="Try Clicking on the Legend Items!")
 fig.show()
 ```
 
