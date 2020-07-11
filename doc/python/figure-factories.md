@@ -42,6 +42,7 @@ The following types of plots are still difficult to create with Graph Objects or
   * [Annotated Heatmaps](/python/annotated-heatmap/)
   * [Dendrograms](/python/dendrogram/)
   * [Gantt Charts](/python/gantt/)
+  * [Hexagonal Binning Mapbox](/python/hexbin-mapbox/)
   * [Quiver Plots](/python/quiver-plots/)
   * [Streamline Plots](/python/streamline-plots/)
   * [Tables](/python/figure-factory-table/)
