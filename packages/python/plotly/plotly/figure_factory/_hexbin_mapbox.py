@@ -1,6 +1,6 @@
 from plotly.express._core import build_dataframe
 from plotly.express._doc import make_docstring
-from plotly.express._chart_types import choropleth_mapbox
+from plotly.express._chart_types import choropleth_mapbox, scatter_mapbox
 import numpy as np
 import pandas as pd
 
@@ -337,6 +337,8 @@ def create_hexbin_mapbox(
     width=None,
     height=None,
     min_count=None,
+    show_original_data=False,
+    original_data_marker=None,
 ):
     """
     Returns a figure aggregating scattered points into connected hexagons 
@@ -412,7 +414,7 @@ def create_hexbin_mapbox(
     if range_color is None:
         range_color = [agg_data_frame["color"].min(), agg_data_frame["color"].max()]
 
-    return choropleth_mapbox(
+    fig = choropleth_mapbox(
         data_frame=agg_data_frame,
         geojson=geojson,
         locations="locations",
@@ -435,6 +437,35 @@ def create_hexbin_mapbox(
         height=height,
     )
 
+    if show_original_data:
+        original_fig = scatter_mapbox(
+            data_frame=(
+                args["data_frame"].sort_values(by=args["animation_frame"])
+                if args["animation_frame"] is not None else
+                args["data_frame"]
+            ),
+            lat=args["lat"],
+            lon=args["lon"],
+            animation_frame=args["animation_frame"]
+        )
+        original_fig.data[0].hoverinfo = "skip"
+        original_fig.data[0].hovertemplate = None
+        original_fig.data[0].marker = original_data_marker
+
+        fig.add_trace(original_fig.data[0])
+
+        if args["animation_frame"] is not None:
+            for i in range(len(original_fig.frames)):
+                original_fig.frames[i].data[0].hoverinfo = "skip"
+                original_fig.frames[i].data[0].hovertemplate = None
+                original_fig.frames[i].data[0].marker = original_data_marker
+
+                fig.frames[i].data = [
+                    fig.frames[i].data[0], original_fig.frames[i].data[0],
+                ]
+
+    return fig
+
 
 create_hexbin_mapbox.__doc__ = make_docstring(
     create_hexbin_mapbox,
@@ -451,5 +482,10 @@ create_hexbin_mapbox.__doc__ = make_docstring(
             "If None and color is not set, display all hexagons.",
             "If None and color is set, only display hexagons that contain points.",
         ],
+        show_original_data=[
+            "bool",
+            "Whether to show the original data on top of the hexbin aggregation."
+        ],
+        original_data_marker=["dict", "Scattermapbox marker options."]
     ),
 )
