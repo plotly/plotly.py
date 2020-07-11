@@ -441,12 +441,12 @@ def create_hexbin_mapbox(
         original_fig = scatter_mapbox(
             data_frame=(
                 args["data_frame"].sort_values(by=args["animation_frame"])
-                if args["animation_frame"] is not None else
-                args["data_frame"]
+                if args["animation_frame"] is not None
+                else args["data_frame"]
             ),
             lat=args["lat"],
             lon=args["lon"],
-            animation_frame=args["animation_frame"]
+            animation_frame=args["animation_frame"],
         )
         original_fig.data[0].hoverinfo = "skip"
         original_fig.data[0].hovertemplate = None
@@ -461,7 +461,8 @@ def create_hexbin_mapbox(
                 original_fig.frames[i].data[0].marker = original_data_marker
 
                 fig.frames[i].data = [
-                    fig.frames[i].data[0], original_fig.frames[i].data[0],
+                    fig.frames[i].data[0],
+                    original_fig.frames[i].data[0],
                 ]
 
     return fig
@@ -484,8 +485,8 @@ create_hexbin_mapbox.__doc__ = make_docstring(
         ],
         show_original_data=[
             "bool",
-            "Whether to show the original data on top of the hexbin aggregation."
+            "Whether to show the original data on top of the hexbin aggregation.",
         ],
-        original_data_marker=["dict", "Scattermapbox marker options."]
+        original_data_marker=["dict", "Scattermapbox marker options."],
     ),
 )
