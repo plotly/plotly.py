@@ -146,7 +146,7 @@ $ pip install -U kaleido
 
 or conda.
 ```
-$ conda install -c plotly kaleido
+$ conda install -c plotly python-kaleido
 ``` 
 
 ### Static Image Export with Orca
