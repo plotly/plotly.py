@@ -33,14 +33,13 @@ def create_dendrogram(
     :param (ndarray) X: Matrix of observations as array of arrays
     :param (str) orientation: 'top', 'right', 'bottom', or 'left'
     :param (list) labels: List of axis category labels(observation labels)
-    :param (list) colorscale: Optional colorscale for the dendrogram tree. With
-                              scipy<=1.4.1 requires 8 colors to be specified,
-                              the 7th of which is ignored.  With scipy>=1.5.0,
-                              requires 10 colors. In this case the 8th color is
-                              ignored and the 2nd, 3rd and 6th are used twice as
-                              often as the others. Given a shorter list, the
-                              missing values are replaced with defaults and with
-                              a longer list the extra values are ignored.
+    :param (list) colorscale: Optional colorscale for the dendrogram tree.
+                              Requires 8 colors to be specified, the 7th of
+                              which is ignored.  With scipy>=1.5.0, the 2nd, 3rd
+                              and 6th are used twice as often as the others.
+                              Given a shorter list, the missing values are
+                              replaced with defaults and with a longer list the
+                              extra values are ignored.
     :param (function) distfun: Function to compute the pairwise distance from
                                the observations
     :param (function) linkagefun: Function to compute the linkage matrix from
