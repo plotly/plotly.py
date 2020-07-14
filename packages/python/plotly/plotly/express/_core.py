@@ -1546,8 +1546,9 @@ def process_dataframe_hierarchy(args):
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
             agg_f[col] = aggfunc_discrete
+    # Avoid collisions with reserved names - columns in the path have been copied already
+    cols = list(set(cols) - set(["labels", "parent", "id"]))
     # ----------------------------------------------------------------------------
-
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
     #  Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
