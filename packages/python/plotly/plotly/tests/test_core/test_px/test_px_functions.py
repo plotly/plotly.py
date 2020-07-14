@@ -250,6 +250,25 @@ def test_sunburst_treemap_with_path_color():
     assert np.all(np.array(colors[:8]) == np.array(calls))
 
 
+def test_sunburst_treemap_column_parent():
+    vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    df = pd.DataFrame(dict(id=vendors, sectors=sectors, parent=regions, values=values,))
+    path = ["parent", "sectors", "id"]
+    fig = px.sunburst(df, path=path, values="values")
+
+
 def test_sunburst_treemap_with_path_non_rectangular():
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
     sectors = [
