@@ -39,11 +39,13 @@ docs = dict(
     x_start=[
         colref_type,
         colref_desc,
+        "(required)",
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
     ],
     x_end=[
         colref_type,
         colref_desc,
+        "(required)",
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
     ],
     a=[
