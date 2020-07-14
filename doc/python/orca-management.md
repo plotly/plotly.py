@@ -254,7 +254,7 @@ In addition to the `executable` property, the `plotly.io.orca.config` object can
  - **`timeout`**: The number of seconds of inactivity required before the orca server is shut down. For example, if timeout is set to 20, then the orca server will shutdown once is has not been used for at least 20 seconds. If timeout is set to `None` (the default), then the server will not be automatically shut down due to inactivity.
  - **`default_width`**: The default pixel width to use on image export.
  - **`default_height`**: The default pixel height to use on image export.
- - **`default_scale`**: The default image scale facor applied on image export.
+ - **`default_scale`**: The default image scale factor applied on image export.
  - **`default_format`**: The default image format used on export. One of `"png"`, `"jpeg"`, `"webp"`, `"svg"`, `"pdf"`, or `"eps"`.
  - **`mathjax`**: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
  - **`topojson`**: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the [Plotly.js topojson files](https://github.com/plotly/plotly.js/tree/master/dist/topojson).
