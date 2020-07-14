@@ -104,7 +104,7 @@ If you are running this notebook live, click to [open the output directory](./im
 #### Raster Formats: PNG, JPEG, and WebP
 
 
-Orca can output figures to several raster image formats including **PNG**, ...
+plotly.py can output figures to several raster image formats including **PNG**, ...
 
 ```python
 fig.write_image("images/fig1.png")
@@ -125,7 +125,7 @@ fig.write_image("images/fig1.webp")
 #### Vector Formats: SVG and PDF...
 
 
-Orca can also output figures in several vector formats including **SVG**, ...
+plotly.py can also output figures in several vector formats including **SVG**, ...
 
 ```python
 fig.write_image("images/fig1.svg")
