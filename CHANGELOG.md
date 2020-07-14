@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `facet_row_spacing` and `facet_col_spacing` added to Plotly Express cartesian 2d functions ([#2614](https://github.com/plotly/plotly.py/pull/2614))
 - `base` added to Plotly Express `bar` and `bar_polar` functions
 - `plotly.express.timeline()` added as an official alternative to `plotly.figure_factories.create_gantt()`
+-  `create_hexbin_mapbox()` added to Figure Factories, with thanks to [@RenaudLN](https://github.com/RenaudLN) for the contribution!
 
 ### Fixed
 
@@ -20,8 +21,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
 - `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
-
-
 
 
 ## [4.8.2] - 2020-06-26
@@ -42,6 +41,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Plotly Express `range_(x|y)` should not impact the unlinked range of marginal subplots ([#2600](https://github.com/plotly/plotly.py/pull/2600))
 - `px.line` now sets `line_group=<variable>` in wide mode by default ([#2599](https://github.com/plotly/plotly.py/pull/2599))
 - Corrected some regex warnings ([#2577](https://github.com/plotly/plotly.py/pull/2577)), with thanks to [@georgevdd](https://github.com/georgevdd) for the contribution!
+
 
 ## [4.8.1] - 2020-05-28
 
