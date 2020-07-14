@@ -41,8 +41,8 @@ Plotly figures are interactive when viewed in a web browser: you can hover over 
 
 
 <!-- #region -->
-#### Install Dependencies (Kaleido)
-Static image generation requires the [`kaleido`](https://github.com/plotly/Kaleido) package which can be installed using pip...
+#### Install Dependencies
+Static image generation requires either [Kaleido](https://github.com/plotly/Kaleido) (recommended) or [orca](https://github.com/plotly/orca) (legacy). The `kaleido` package can be installed using pip...
 ```
 $ pip install -U kaleido
 ```
@@ -52,8 +52,7 @@ or conda.
 $ conda install -c plotly python-kaleido
 ``` 
 
-#### Install Dependencies (Orca)
-While Kaleido is now the recommended approach, image export can also be supported by the [orca](https://github.com/plotly/orca) command line utility. See the [Orca Management](/python/orca-management/) section for instructions on installing, configuring, and troubleshooting orca.
+While Kaleido is now the recommended approach, image export can also be supported by the legacy [orca](https://github.com/plotly/orca) command line utility. See the [Orca Management](/python/orca-management/) section for instructions on installing, configuring, and troubleshooting orca.
 
 <!-- #endregion -->
 
