@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.5.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,14 +20,14 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.4
+    version: 3.7.7
   plotly:
     description: How to make a map with Hexagonal Binning of data in Python with Plotly.
-    display_as: scientific
+    display_as: maps
     language: python
     layout: base
     name: Hexbin Mapbox
-    order: 7
+    order: 13
     page_type: u-guide
     permalink: python/hexbin-mapbox/
     redirect_from: python/hexbin-mapbox/
@@ -55,7 +55,7 @@ fig.update_layout(margin=dict(b=0, t=0, l=0, r=0))
 fig.show()
 ```
 
-#### Count Hexbin with Minimum Count
+#### Count Hexbin with Minimum Count and Opacity
 
 ```python
 import plotly.figure_factory as ff
@@ -66,13 +66,13 @@ df = px.data.carshare()
 
 fig = ff.create_hexbin_mapbox(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
-    nx_hexagon=10, opacity=0.9, labels={"color": "Point Count"},
+    nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1,
 )
 fig.show()
 ```
 
-#### Display the Underlying Data 
+#### Display the Underlying Data
 
 ```python
 import plotly.figure_factory as ff
@@ -83,7 +83,7 @@ df = px.data.carshare()
 
 fig = ff.create_hexbin_mapbox(
     data_frame=df, lat="centroid_lat", lon="centroid_lon",
-    nx_hexagon=10, opacity=0.9, labels={"color": "Point Count"},
+    nx_hexagon=10, opacity=0.5, labels={"color": "Point Count"},
     min_count=1, color_continuous_scale="Viridis",
     show_original_data=True,
     original_data_marker=dict(size=4, opacity=0.6, color="deeppink")
@@ -96,6 +96,7 @@ fig.show()
 ```python
 import plotly.figure_factory as ff
 import plotly.express as px
+import numpy as np
 
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
@@ -113,6 +114,7 @@ fig.show()
 ```python
 import plotly.figure_factory as ff
 import plotly.express as px
+import numpy as np
 
 px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
@@ -138,7 +140,7 @@ np.random.seed(0)
 N = 500
 n_frames = 12
 lat = np.concatenate([
-    np.random.randn(N) * 0.5 + np.cos(i / n_frames * 2 * np.pi)
+    np.random.randn(N) * 0.5 + np.cos(i / n_frames * 2 * np.pi) + 10
     for i in range(n_frames)
 ])
 lon = np.concatenate([
@@ -152,6 +154,7 @@ frame = np.concatenate([
 fig = ff.create_hexbin_mapbox(
     lat=lat, lon=lon, nx_hexagon=15, animation_frame=frame,
     color_continuous_scale="Cividis", labels={"color": "Point Count", "frame": "Period"},
+    opacity=0.5, min_count=1,
     show_original_data=True, original_data_marker=dict(opacity=0.6, size=4, color="deeppink")
 )
 fig.update_layout(margin=dict(b=0, t=0, l=0, r=0))
