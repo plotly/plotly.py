@@ -150,9 +150,8 @@ $ conda install -c plotly python-kaleido
 ``` 
 
 ### Static Image Export with Orca
-
-While Kaleido is now the recommended approach, image export can also be supported
-by the [orca](https://github.com/plotly/orca) command line utility and the
+While Kaleido is now the recommended image export approach because it is easier to install and more widely compatible, image export can also be supported
+by the legacy [orca](https://github.com/plotly/orca) command line utility and the
  [`psutil`](https://github.com/giampaolo/psutil) Python package.
 
 These dependencies can both be installed using conda:
