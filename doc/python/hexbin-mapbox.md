@@ -30,7 +30,6 @@ jupyter:
     order: 13
     page_type: u-guide
     permalink: python/hexbin-mapbox/
-    redirect_from: python/hexbin-mapbox/
     thumbnail: thumbnail/hexbin_mapbox.jpg
 ---
 
