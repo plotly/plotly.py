@@ -1,31 +1,26 @@
-## This script uses px functions to generate html figures, which will be
-## tested with percy.
+import plotly.express as px
+import numpy as np
+import os
+import pandas as pd
+
+# This script uses px functions to generate html figures, which will be
+# tested with percy.
 
 # this directory
-import os
-
 dir_name = os.path.join("test", "percy")
-
-import plotly.express as px
-
-print(px.data.iris.__doc__)
-px.data.iris().head()
 
 # #### Scatter and Line plots
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter(iris, x="sepal_width", y="sepal_length")
 fig.write_html(os.path.join(dir_name, "scatter.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter(iris, x="sepal_width", y="sepal_length", color="species")
 fig.write_html(os.path.join(dir_name, "scatter_color.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter(
@@ -38,7 +33,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_marginal.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter(
@@ -52,7 +46,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_trendline.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 iris["e"] = iris["sepal_width"] / 100
@@ -61,7 +54,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_errorbar.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.scatter(
@@ -76,13 +68,11 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_categories.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter_matrix(iris)
 fig.write_html(os.path.join(dir_name, "scatter_matrix.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.scatter_matrix(
@@ -92,7 +82,6 @@ fig = px.scatter_matrix(
 )
 fig.write_html(os.path.join(dir_name, "scatter_matrix_dimensions.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.parallel_coordinates(
@@ -110,7 +99,6 @@ fig = px.parallel_coordinates(
 )
 fig.write_html(os.path.join(dir_name, "parallel_coordinates.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.parallel_categories(
@@ -118,7 +106,6 @@ fig = px.parallel_categories(
 )
 fig.write_html(os.path.join(dir_name, "parallel_categories.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.scatter(
@@ -132,7 +119,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_webgl.html"))
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.scatter(
@@ -147,7 +133,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_hover.html"))
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.scatter(
@@ -167,7 +152,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "scatter_log.html"), auto_play=False)
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.line(
@@ -182,7 +166,6 @@ fig = px.line(
 )
 fig.write_html(os.path.join(dir_name, "line.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.scatter(
@@ -195,7 +178,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "facet_wrap_neat.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.scatter(
@@ -209,7 +191,6 @@ fig = px.scatter(
 )
 fig.write_html(os.path.join(dir_name, "facet_wrap_ragged.html"))
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.area(gapminder, x="year", y="pop", color="continent", line_group="country")
@@ -217,13 +198,11 @@ fig.write_html(os.path.join(dir_name, "area.html"))
 
 # #### Visualize Distributions
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.density_contour(iris, x="sepal_width", y="sepal_length")
 fig.write_html(os.path.join(dir_name, "density_contour.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.density_contour(
@@ -236,7 +215,6 @@ fig = px.density_contour(
 )
 fig.write_html(os.path.join(dir_name, "density_contour_marginal.html"))
 
-import plotly.express as px
 
 iris = px.data.iris()
 fig = px.density_heatmap(
@@ -244,13 +222,11 @@ fig = px.density_heatmap(
 )
 fig.write_html(os.path.join(dir_name, "density_heatmap.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.bar(tips, x="sex", y="total_bill", color="smoker", barmode="group")
 fig.write_html(os.path.join(dir_name, "bar.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.bar(
@@ -265,7 +241,6 @@ fig = px.bar(
 )
 fig.write_html(os.path.join(dir_name, "bar_facet.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.histogram(
@@ -273,7 +248,6 @@ fig = px.histogram(
 )
 fig.write_html(os.path.join(dir_name, "histogram.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.histogram(
@@ -289,19 +263,16 @@ fig = px.histogram(
 )
 fig.write_html(os.path.join(dir_name, "histogram_histfunc.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.strip(tips, x="total_bill", y="time", orientation="h", color="smoker")
 fig.write_html(os.path.join(dir_name, "strip.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.box(tips, x="day", y="total_bill", color="smoker", notched=True)
 fig.write_html(os.path.join(dir_name, "box.html"))
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.violin(
@@ -317,7 +288,6 @@ fig.write_html(os.path.join(dir_name, "violin.html"))
 
 # #### Ternary Coordinates
 
-import plotly.express as px
 
 election = px.data.election()
 fig = px.scatter_ternary(
@@ -333,7 +303,6 @@ fig = px.scatter_ternary(
 )
 fig.write_html(os.path.join(dir_name, "scatter_ternary.html"))
 
-import plotly.express as px
 
 election = px.data.election()
 fig = px.line_ternary(
@@ -341,8 +310,6 @@ fig = px.line_ternary(
 )
 fig.write_html(os.path.join(dir_name, "line_ternary.html"))
 
-import plotly.express as px
-import numpy as np
 
 img_rgb = np.array(
     [[[255, 0, 0], [0, 255, 0], [0, 0, 255]], [[0, 255, 0], [0, 0, 255], [255, 0, 0]]],
@@ -353,7 +320,6 @@ fig.write_html(os.path.join(dir_name, "imshow.html"))
 
 # #### 3D Coordinates
 
-import plotly.express as px
 
 election = px.data.election()
 fig = px.scatter_3d(
@@ -369,7 +335,6 @@ fig = px.scatter_3d(
 )
 fig.write_html(os.path.join(dir_name, "scatter_3d.html"))
 
-import plotly.express as px
 
 election = px.data.election()
 fig = px.line_3d(
@@ -379,7 +344,6 @@ fig.write_html(os.path.join(dir_name, "line_3d.html"))
 
 # #### Polar Coordinates
 
-import plotly.express as px
 
 wind = px.data.wind()
 fig = px.scatter_polar(
@@ -392,7 +356,6 @@ fig = px.scatter_polar(
 )
 fig.write_html(os.path.join(dir_name, "scatter_polar.html"))
 
-import plotly.express as px
 
 wind = px.data.wind()
 fig = px.line_polar(
@@ -405,7 +368,6 @@ fig = px.line_polar(
 )
 fig.write_html(os.path.join(dir_name, "line_polar.html"))
 
-import plotly.express as px
 
 wind = px.data.wind()
 fig = px.bar_polar(
@@ -420,7 +382,6 @@ fig.write_html(os.path.join(dir_name, "bar_polar.html"))
 
 # #### Maps
 
-import plotly.express as px
 
 carshare = px.data.carshare()
 fig = px.scatter_mapbox(
@@ -435,7 +396,6 @@ fig = px.scatter_mapbox(
 )
 fig.write_html(os.path.join(dir_name, "scatter_mapbox.html"))
 
-import plotly.express as px
 
 carshare = px.data.carshare()
 fig = px.line_mapbox(
@@ -443,7 +403,6 @@ fig = px.line_mapbox(
 )
 fig.write_html(os.path.join(dir_name, "line_mapbox.html"))
 
-import plotly.express as px
 
 sample_geojson = {
     "type": "FeatureCollection",
@@ -465,15 +424,12 @@ fig = px.choropleth_mapbox(
 )
 fig.write_html(os.path.join(dir_name, "choropleth_mapbox.html"), auto_play=False)
 
-import plotly.express as px
 
 carshare = px.data.carshare()
 fig = px.density_mapbox(
     carshare, lat="centroid_lat", lon="centroid_lon", z="peak_hour",
 )
 fig.write_html(os.path.join(dir_name, "density_mapbox.html"), auto_play=False)
-
-import plotly.express as px
 
 
 gapminder = px.data.gapminder()
@@ -488,7 +444,6 @@ fig = px.scatter_geo(
 )
 fig.write_html(os.path.join(dir_name, "scatter_geo.html"), auto_play=False)
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.line_geo(
@@ -499,7 +454,6 @@ fig = px.line_geo(
 )
 fig.write_html(os.path.join(dir_name, "line_geo.html"))
 
-import plotly.express as px
 
 gapminder = px.data.gapminder()
 fig = px.choropleth(
@@ -512,19 +466,16 @@ fig = px.choropleth(
 )
 fig.write_html(os.path.join(dir_name, "choropleth.html"), auto_play=False)
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.pie(tips, names="smoker", values="total_bill")
 fig.write_html(os.path.join(dir_name, "pie.html"), auto_play=False)
 
-import plotly.express as px
 
 tips = px.data.tips()
 fig = px.funnel_area(tips, names="smoker", values="total_bill")
 fig.write_html(os.path.join(dir_name, "funnel_area.html"), auto_play=False)
 
-import plotly.express as px
 
 fig = px.treemap(
     names=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
@@ -534,8 +485,6 @@ fig = px.treemap(
 fig.write_html(os.path.join(dir_name, "treemap.html"), auto_play=False)
 
 
-import plotly.express as px
-
 fig = px.sunburst(
     names=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
     parents=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
@@ -544,26 +493,19 @@ fig = px.sunburst(
 fig.write_html(os.path.join(dir_name, "sunburst.html"), auto_play=False)
 
 
-import plotly.express as px
-
 fig = px.funnel(
     y=["first", "second", "first", "second"], x=[3, 1, 4, 2], color=["A", "A", "B", "B"]
 )
 fig.write_html(os.path.join(dir_name, "funnel.html"), auto_play=False)
 
-import plotly.express as px
 
 fig = px.scatter(x=[1, 2, 1, 2], y=[4, 3, 2, 4], color=[True, True, False, False])
 fig.write_html(os.path.join(dir_name, "scatter_bool_color.html"), auto_play=False)
 
 
-import plotly.express as px
-
 fig = px.pie(values=[1, 2, 3, 4], color=[True, False, True, False])
 fig.write_html(os.path.join(dir_name, "pie_bool_color.html"), auto_play=False)
 
-import plotly.express as px
-import numpy as np
 
 df = px.data.gapminder().query("year == 2007")
 np.random.seed(0)
@@ -571,7 +513,6 @@ df["color"] = np.random.choice([True, False], len(df))
 fig = px.choropleth(df, locations="iso_alpha", color="color")
 fig.write_html(os.path.join(dir_name, "choropleth_bool_color.html"), auto_play=False)
 
-import plotly.express as px
 
 df = px.data.iris()
 df["is_setosa"] = df["species"] == "setosa"
@@ -580,9 +521,19 @@ fig.write_html(
     os.path.join(dir_name, "density_contour_bool_color.html"), auto_play=False
 )
 
-import plotly.express as px
 
 fig = px.sunburst(
     path=[["yes", "no", "no"], ["yes", "no", "a"]], color=[True, False, True]
 )
 fig.write_html(os.path.join(dir_name, "sunburst_bool_color.html"), auto_play=False)
+
+
+df = pd.DataFrame(
+    [
+        dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28"),
+        dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15"),
+        dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30"),
+    ]
+)
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Task")
+fig.write_html(os.path.join(dir_name, "timeline.html"), auto_play=False)

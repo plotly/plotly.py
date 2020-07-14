@@ -72,6 +72,18 @@ def test_newdatain_hover_data():
         )
 
 
+def test_formatted_hover_and_labels():
+    df = px.data.tips()
+    fig = px.scatter(
+        df,
+        x="tip",
+        y="total_bill",
+        hover_data={"total_bill": ":.1f"},
+        labels={"total_bill": "Total bill"},
+    )
+    assert ":.1f" in fig.data[0].hovertemplate
+
+
 def test_fail_wrong_column():
     with pytest.raises(ValueError) as err_msg:
         px.scatter(
@@ -139,3 +151,15 @@ def test_fail_wrong_column():
         "Ambiguous input: values for 'c' appear both in hover_data and data_frame"
         in str(err_msg.value)
     )
+
+
+def test_sunburst_hoverdict_color():
+    df = px.data.gapminder().query("year == 2007")
+    fig = px.sunburst(
+        df,
+        path=["continent", "country"],
+        values="pop",
+        color="lifeExp",
+        hover_data={"pop": ":,"},
+    )
+    assert "color" in fig.data[0].hovertemplate

@@ -28,6 +28,7 @@ from ._chart_types import (  # noqa: F401
     line_geo,
     area,
     bar,
+    timeline,
     bar_polar,
     violin,
     box,
@@ -53,6 +54,7 @@ from ._core import (  # noqa: F401
     set_mapbox_access_token,
     defaults,
     get_trendline_results,
+    NO_COLOR,
 )
 
 from ._special_inputs import IdentityMap, Constant, Range  # noqa: F401
@@ -80,6 +82,7 @@ __all__ = [
     "parallel_categories",
     "area",
     "bar",
+    "timeline",
     "bar_polar",
     "violin",
     "box",
@@ -100,4 +103,5 @@ __all__ = [
     "IdentityMap",
     "Constant",
     "Range",
+    "NO_COLOR",
 ]
