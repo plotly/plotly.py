@@ -57,7 +57,7 @@ While Kaleido is now the recommended approach, image export can also be supporte
 <!-- #endregion -->
 
 ### Create a Figure
-Now let's create a simple scatter plot with 100 random points of variying color and size.
+Now let's create a simple scatter plot with 100 random points of varying color and size.
 
 ```python
 import plotly.graph_objects as go
