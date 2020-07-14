@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Formatting Ticks
-    order: 10
+    order: 11
     permalink: python/tick-formatting/
     thumbnail: thumbnail/tick-formatting.gif
 ---
@@ -98,7 +98,7 @@ fig.update_layout(yaxis_tickformat = '%')
 fig.show()
 ```
 
-#### Using Tickformat Atttribute - Date/Time
+#### Using Tickformat Attribute - Date/Time
 
 
 For more date/time formatting types, see: https://github.com/d3/d3-time-format/blob/master/README.md

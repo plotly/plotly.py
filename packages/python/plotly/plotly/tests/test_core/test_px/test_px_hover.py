@@ -151,3 +151,15 @@ def test_fail_wrong_column():
         "Ambiguous input: values for 'c' appear both in hover_data and data_frame"
         in str(err_msg.value)
     )
+
+
+def test_sunburst_hoverdict_color():
+    df = px.data.gapminder().query("year == 2007")
+    fig = px.sunburst(
+        df,
+        path=["continent", "country"],
+        values="pop",
+        color="lifeExp",
+        hover_data={"pop": ":,"},
+    )
+    assert "color" in fig.data[0].hovertemplate

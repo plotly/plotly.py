@@ -15,6 +15,7 @@ from plotly.subplots import (
     _subplot_type_for_trace_type,
 )
 
+NO_COLOR = "px_no_color_constant"
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -474,11 +475,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 # We need to invert the mapping here
                 k_args = invert_label(args, k)
                 if k_args in args["hover_data"]:
-                    if args["hover_data"][k_args][0]:
-                        if isinstance(args["hover_data"][k_args][0], str):
-                            mapping_labels_copy[k] = v.replace(
-                                "}", "%s}" % args["hover_data"][k_args][0]
-                            )
+                    formatter = args["hover_data"][k_args][0]
+                    if formatter:
+                        if isinstance(formatter, str):
+                            mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
                     else:
                         _ = mapping_labels_copy.pop(k)
         hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
@@ -543,14 +543,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
+        fig.update_yaxes(
+            showticklabels=False, showline=False, ticks="", range=None, row=nrows
+        )
         if args["template"].layout.yaxis.showgrid is None:
             fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
+        fig.update_xaxes(
+            showticklabels=False, showline=False, ticks="", range=None, col=ncols
+        )
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
         if args["template"].layout.yaxis.showgrid is None:
@@ -839,7 +843,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
     # Add trendline trace specifications
     if "trendline" in args and args["trendline"]:
         trace_spec = TraceSpec(
-            constructor=go.Scatter,
+            constructor=go.Scattergl if constructor == go.Scattergl else go.Scatter,
             attrs=["trendline"],
             trace_patch=dict(mode="lines"),
             marginal=None,
@@ -1346,6 +1350,10 @@ def build_dataframe(args, constructor):
                     label=_escape_col_name(df_input, "index", [var_name, value_name])
                 )
 
+    no_color = False
+    if type(args.get("color", None)) == str and args["color"] == NO_COLOR:
+        no_color = True
+        args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
 
     df_output, wide_id_vars = process_args_into_dataframe(
@@ -1390,9 +1398,11 @@ def build_dataframe(args, constructor):
         del args["wide_cross"]
         dtype = None
         for v in wide_value_vars:
+            v_dtype = df_output[v].dtype.kind
+            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
             if dtype is None:
-                dtype = df_output[v].dtype
-            elif dtype != df_output[v].dtype:
+                dtype = v_dtype
+            elif dtype != v_dtype:
                 raise ValueError(
                     "Plotly Express cannot process wide-form data with columns of different type."
                 )
@@ -1416,6 +1426,8 @@ def build_dataframe(args, constructor):
             args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
+            if "line_group" in args:
+                args["line_group"] = args["line_group"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
@@ -1433,7 +1445,8 @@ def build_dataframe(args, constructor):
             args["x" if orient_v else "y"] = value_name
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
-
+    if no_color:
+        args["color"] = None
     args["data_frame"] = df_output
     return args
 
@@ -1499,7 +1512,9 @@ def process_dataframe_hierarchy(args):
 
         if args["color"]:
             if args["color"] == args["values"]:
-                aggfunc_color = "sum"
+                new_value_col_name = args["values"] + "_sum"
+                df[new_value_col_name] = df[args["values"]]
+                args["values"] = new_value_col_name
         count_colname = args["values"]
     else:
         # we need a count column for the first groupby and the weighted mean of color
@@ -1518,7 +1533,7 @@ def process_dataframe_hierarchy(args):
         if not _is_continuous(df, args["color"]):
             aggfunc_color = aggfunc_discrete
             discrete_color = True
-        elif not aggfunc_color:
+        else:
 
             def aggfunc_continuous(x):
                 return np.average(x, weights=df.loc[x.index, count_colname])
@@ -1576,6 +1591,9 @@ def process_dataframe_hierarchy(args):
     if args["color"]:
         if not args["hover_data"]:
             args["hover_data"] = [args["color"]]
+        elif isinstance(args["hover_data"], dict):
+            if not args["hover_data"].get(args["color"]):
+                args["hover_data"][args["color"]] = (True, None)
         else:
             args["hover_data"].append(args["color"])
     return args
@@ -2042,9 +2060,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif args.get("facet_col_wrap", 0):
-            vertical_spacing = 0.07
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
-            vertical_spacing = 0.03
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
 
         if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2055,7 +2073,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = 0.02
+            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None

@@ -117,7 +117,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     
     import re
     _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
+        '^(' + '|'.join(_subplotid_prop_names) + r')(\d+)$')
 """
         )
 

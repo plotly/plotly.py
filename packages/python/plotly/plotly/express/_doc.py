@@ -224,6 +224,14 @@ docs = dict(
         "Wraps the column variable at this width, so that the column facets span multiple rows.",
         "Ignored if 0, and forced to 0 if `facet_row` or a `marginal` is set.",
     ],
+    facet_row_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+    ],
+    facet_col_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet columns, in paper units Default is 0.02.",
+    ],
     animation_frame=[
         colref_type,
         colref_desc,
@@ -530,7 +538,7 @@ def make_docstring(fn, override_dict={}, append_dict={}):
         param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))
-            if param in docs
+            if param in docs or param in override_dict
             else "(documentation missing from map)"
         )
 
