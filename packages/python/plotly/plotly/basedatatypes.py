@@ -23,7 +23,7 @@ class BaseFigure(object):
     Base class for all figure types (both widget and non-widget)
     """
 
-    _bracket_re = re.compile("^(.*)\[(\d+)\]$")
+    _bracket_re = re.compile(r"^(.*)\[(\d+)\]$")
 
     _valid_underscore_properties = {
         "error_x": "error-x",

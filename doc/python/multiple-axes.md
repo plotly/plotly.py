@@ -22,12 +22,12 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.2
   plotly:
-    description: How to make a graph with multiple axes in python.
+    description: How to make a graph with multiple axes (dual y-axis plots, plots with secondary axes) in python.
     display_as: file_settings
     language: python
     layout: base
     name: Multiple Axes
-    order: 14
+    order: 15
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
 ---
@@ -189,7 +189,7 @@ fig.update_layout(
         position=0.15
     ),
     yaxis3=dict(
-        title="yaxis4 title",
+        title="yaxis3 title",
         titlefont=dict(
             color="#d62728"
         ),
@@ -201,7 +201,7 @@ fig.update_layout(
         side="right"
     ),
     yaxis4=dict(
-        title="yaxis5 title",
+        title="yaxis4 title",
         titlefont=dict(
             color="#9467bd"
         ),

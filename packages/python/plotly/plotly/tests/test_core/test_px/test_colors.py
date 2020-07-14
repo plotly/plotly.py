@@ -1,5 +1,4 @@
 import plotly.express as px
-import numpy as np
 
 
 def test_reversed_colorscale():
