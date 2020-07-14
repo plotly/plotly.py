@@ -99,7 +99,7 @@ files.download('fig1.png')
 <!-- #endregion -->
 
 ### Create a Figure
-Now let's create a simple scatter plot with 100 random points of variying color and size.
+Now let's create a simple scatter plot with 100 random points of varying color and size.
 
 ```python
 import plotly.graph_objects as go
