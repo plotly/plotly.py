@@ -238,3 +238,40 @@ def test_permissive_defaults():
     msg = "'PxDefaults' object has no attribute 'should_not_work'"
     with pytest.raises(AttributeError, match=msg):
         px.defaults.should_not_work = "test"
+
+
+def test_marginal_ranges():
+    df = px.data.tips()
+    fig = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        marginal_x="histogram",
+        marginal_y="histogram",
+        range_x=[5, 10],
+        range_y=[5, 10],
+    )
+    assert fig.layout.xaxis2.range is None
+    assert fig.layout.yaxis3.range is None
+
+
+def test_render_mode():
+    df = px.data.gapminder()
+    df2007 = df.query("year == 2007")
+    fig = px.scatter(df2007, x="gdpPercap", y="lifeExp", trendline="ols")
+    assert fig.data[0].type == "scatter"
+    assert fig.data[1].type == "scatter"
+    fig = px.scatter(
+        df2007, x="gdpPercap", y="lifeExp", trendline="ols", render_mode="webgl"
+    )
+    assert fig.data[0].type == "scattergl"
+    assert fig.data[1].type == "scattergl"
+    fig = px.scatter(df, x="gdpPercap", y="lifeExp", trendline="ols")
+    assert fig.data[0].type == "scattergl"
+    assert fig.data[1].type == "scattergl"
+    fig = px.scatter(df, x="gdpPercap", y="lifeExp", trendline="ols", render_mode="svg")
+    assert fig.data[0].type == "scatter"
+    assert fig.data[1].type == "scatter"
+    fig = px.density_contour(df, x="gdpPercap", y="lifeExp", trendline="ols")
+    assert fig.data[0].type == "histogram2dcontour"
+    assert fig.data[1].type == "scatter"

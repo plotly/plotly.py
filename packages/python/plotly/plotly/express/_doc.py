@@ -36,6 +36,18 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to position marks along the z axis in cartesian coordinates.",
     ],
+    x_start=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
+    ],
+    x_end=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
+    ],
     a=[
         colref_type,
         colref_desc,
@@ -96,6 +108,11 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are to be interpreted according to `locationmode` and mapped to longitude/latitude.",
+    ],
+    base=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to position the base of the bar.",
     ],
     dimensions=[
         colref_list_type,
@@ -223,6 +240,14 @@ docs = dict(
         "Maximum number of facet columns.",
         "Wraps the column variable at this width, so that the column facets span multiple rows.",
         "Ignored if 0, and forced to 0 if `facet_row` or a `marginal` is set.",
+    ],
+    facet_row_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+    ],
+    facet_col_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet columns, in paper units Default is 0.02.",
     ],
     animation_frame=[
         colref_type,
@@ -530,7 +555,7 @@ def make_docstring(fn, override_dict={}, append_dict={}):
         param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))
-            if param in docs
+            if param in docs or param in override_dict
             else "(documentation missing from map)"
         )
 

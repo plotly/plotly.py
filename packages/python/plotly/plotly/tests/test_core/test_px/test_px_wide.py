@@ -708,6 +708,17 @@ append_special_case(
     ),
 )
 
+# NO_COLOR
+df = pd.DataFrame(dict(a=[1, 2], b=[3, 4]))
+append_special_case(
+    df_in=df,
+    args_in=dict(x=None, y=None, color=px.NO_COLOR),
+    args_expect=dict(x="index", y="value", color=None, orientation="v",),
+    df_expect=pd.DataFrame(
+        dict(variable=["a", "a", "b", "b"], index=[0, 1, 0, 1], value=[1, 2, 3, 4])
+    ),
+)
+
 
 @pytest.mark.parametrize("df_in, args_in, args_expect, df_expect", special_cases)
 def test_wide_mode_internal_special_cases(df_in, args_in, args_expect, df_expect):
@@ -742,3 +753,26 @@ def test_mixed_input_error(df):
         "Plotly Express cannot process wide-form data with columns of different type"
         in str(err_msg.value)
     )
+
+
+def test_mixed_number_input():
+    df = pd.DataFrame(dict(a=[1, 2], b=[1.1, 2.1]))
+    fig = px.line(df)
+    assert len(fig.data) == 2
+
+
+def test_line_group():
+    df = pd.DataFrame(
+        data={
+            "who": ["a", "a", "b", "b"],
+            "x": [0, 1, 0, 1],
+            "score": [1.0, 2, 3, 4],
+            "miss": [3.2, 2.5, 1.3, 1.5],
+        }
+    )
+    fig = px.line(df, x="x", y=["miss", "score"])
+    assert len(fig.data) == 2
+    fig = px.line(df, x="x", y=["miss", "score"], color="who")
+    assert len(fig.data) == 4
+    fig = px.scatter(df, x="x", y=["miss", "score"], color="who")
+    assert len(fig.data) == 2

@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Subplots
-    order: 15
+    order: 16
     page_type: u-guide
     permalink: python/subplots/
     redirect_from: ipython-notebooks/subplots/
