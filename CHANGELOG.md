@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Added image export support using Kaleido. The image export backend can be configured using the new `engine` argument to `plotly.io.to_image` and `plotly.io.write_image`. The `engine` argument may be set to `"kaleido"`, `"orca"`, or `"auto"`. The default is `engine="auto"`, in which case the Kaleido backend is enabled if the `kaleido` package from PyPI is installed, otherwise Orca is used. ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
+- Added image export support using [Kaleido](https://github.com/plotly/Kaleido). The image export backend can be configured using the new `engine` argument to `plotly.io.to_image` and `plotly.io.write_image`. The `engine` argument may be set to `"kaleido"`, `"orca"`, or `"auto"`. The default is `engine="auto"`, in which case the Kaleido backend is enabled if the `kaleido` package from PyPI is installed, otherwise Orca is used. ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
 - `px.NO_COLOR` constant to override wide-form color assignment in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
 - `facet_row_spacing` and `facet_col_spacing` added to Plotly Express cartesian 2d functions ([#2614](https://github.com/plotly/plotly.py/pull/2614))
 
