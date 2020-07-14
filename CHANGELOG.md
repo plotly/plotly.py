@@ -4,6 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.9.0] - unreleased
 
+### Updated
+
+- Updated Plotly.js to version 1.54.6. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.6/CHANGELOG.md) for more information.
+- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
+- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
+-
 ### Added
 
 - Added image export support using [Kaleido](https://github.com/plotly/Kaleido). The image export backend can be configured using the new `engine` argument to `plotly.io.to_image` and `plotly.io.write_image`. The `engine` argument may be set to `"kaleido"`, `"orca"`, or `"auto"`. The default is `engine="auto"`, in which case the Kaleido backend is enabled if the `kaleido` package from PyPI is installed, otherwise Orca is used. ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
@@ -16,11 +22,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - trendline traces are now of type `scattergl` when `render_mode="webgl"` in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
-
-### Updated
-
-- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
-- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
 
 
 ## [4.8.2] - 2020-06-26
