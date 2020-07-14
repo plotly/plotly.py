@@ -205,7 +205,7 @@ Here is a complete listing of the available image export settings:
 
  - **`default_width`**: The default pixel width to use on image export.
  - **`default_height`**: The default pixel height to use on image export.
- - **`default_scale`**: The default image scale facor applied on image export.
+ - **`default_scale`**: The default image scale factor applied on image export.
  - **`default_format`**: The default image format used on export. One of `"png"`, `"jpeg"`, `"webp"`, `"svg"`, `"pdf"`, or `"eps"`.
  - **`mathjax`**: Location of the MathJax bundle needed to render LaTeX characters. Defaults to a CDN location. If fully offline export is required, set this to a local MathJax bundle.
  - **`topojson`**: Location of the topojson files needed to render choropleth traces. Defaults to a CDN location. If fully offline export is required, set this to a local directory containing the [Plotly.js topojson files](https://github.com/plotly/plotly.js/tree/master/dist/topojson).
