@@ -1056,11 +1056,10 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     # in which case the dataframe is massaged into a new format
     # and column with reserved names will be created
     uses_path = False
-    reserved_names = []
+    reserved_names_sunburst = []
     if "path" in args and args["path"] is not None:
         uses_path = True
-        reserved_names = ["id", "labels", "parent"]
-    print(uses_path)
+        reserved_names_sunburst = ["id", "labels", "parent"]
 
     # hover_data is a dict
     hover_data_is_dict = (
@@ -1186,7 +1185,11 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 else:
                     col_name = str(argument)
                     df_output[col_name] = df_input[argument].values
-                if uses_path and argument in reserved_names and field_name != "path":
+                if (
+                    uses_path
+                    and argument in reserved_names_sunburst
+                    and field_name != "path"
+                ):
                     if args["labels"] is None or argument not in args["labels"]:
                         raise ValueError(
                             "%s is a reserved name for px.sunburst and px.treemap. "

@@ -289,10 +289,18 @@ def test_sunburst_treemap_column_parent():
     assert "parent is a reserved name for px.sunburst and px.treemap." in str(
         err_msg.value
     )
+    with pytest.raises(ValueError) as err_msg:
+        fig = px.sunburst(df, path=path, hover_data={"parent": True})
+    assert "parent is a reserved name for px.sunburst and px.treemap." in str(
+        err_msg.value
+    )
     # Use a reserved_name in a non-path argument but modify with labels - this is ok
     fig = px.sunburst(df, path=path, color="parent", labels={"parent": "parent_color"})
     assert "parent_color=%{customdata[0]}" in fig.data[0].hovertemplate
     assert np.all(np.array(fig.data[0].customdata).ravel()[:8] == np.array(vendors))
+    fig = px.sunburst(
+        df, path=path, hover_data={"parent": True}, labels={"parent": "parent_color"}
+    )
     # Dataframe has a parent column but it's not used, this should not raise.
     fig = px.sunburst(df, path=path)
 
