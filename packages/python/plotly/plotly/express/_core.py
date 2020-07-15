@@ -1124,15 +1124,14 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     ranges.append(col_name)
             # ----------------- argument is likely a col name ----------------------
             elif isinstance(argument, str) or not hasattr(argument, "__len__"):
-                if uses_path and argument in reserved_names and field_name != 'path':
-                    if (args["labels"] is None or argument not in args["labels"]):
+                if uses_path and argument in reserved_names and field_name != "path":
+                    if args["labels"] is None or argument not in args["labels"]:
                         raise ValueError(
                             "%s is a reserved name for px.sunburst and px.treemap. "
                             "Please use the labels argument to provide another name "
                             "for the column, for example "
-                            "labels={'%s': '%s_col'}"
-                            % (argument, argument, argument)
-                            )
+                            "labels={'%s': '%s_col'}" % (argument, argument, argument)
+                        )
                     else:
                         col_name = args["labels"][argument]
                         df_output[col_name] = df_input[argument]
@@ -1572,11 +1571,10 @@ def process_dataframe_hierarchy(args):
         if col not in agg_f:
             agg_f[col] = aggfunc_discrete
     # Avoid collisions with reserved names - columns in the path have been copied already
-    #for col in cols:
+    # for col in cols:
     #    if col in reserved_names and args["labels"] is not None and col in args["labels"]:
     #        df[args["labels"][col]] = df[col]
     cols = list(set(cols) - set(reserved_names))
-
 
     # ----------------------------------------------------------------------------
     df_all_trees = pd.DataFrame(columns=reserved_names + cols)
