@@ -264,45 +264,10 @@ def test_sunburst_treemap_column_parent():
     ]
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
-    # One column of the path is a reserved name - this is ok and should not raise
     df = pd.DataFrame(dict(id=vendors, sectors=sectors, parent=regions, values=values,))
     path = ["parent", "sectors", "id"]
+    # One column of the path is a reserved name - this is ok and should not raise
     fig = px.sunburst(df, path=path, values="values")
-    # Use a reserved name in a non-path argument - should raise a ValueError
-    df = pd.DataFrame(
-        dict(
-            vendors=vendors,
-            sectors=sectors,
-            regions=regions,
-            parent=vendors,
-            values=values,
-        )
-    )
-    path = ["regions", "sectors", "vendors"]
-    with pytest.raises(ValueError) as err_msg:
-        fig = px.sunburst(df, path=path, color="parent")
-    assert "parent is a reserved name for px.sunburst and px.treemap." in str(
-        err_msg.value
-    )
-    with pytest.raises(ValueError) as err_msg:
-        fig = px.sunburst(df, path=path, hover_data=["parent"])
-    assert "parent is a reserved name for px.sunburst and px.treemap." in str(
-        err_msg.value
-    )
-    with pytest.raises(ValueError) as err_msg:
-        fig = px.sunburst(df, path=path, hover_data={"parent": True})
-    assert "parent is a reserved name for px.sunburst and px.treemap." in str(
-        err_msg.value
-    )
-    # Use a reserved_name in a non-path argument but modify with labels - this is ok
-    fig = px.sunburst(df, path=path, color="parent", labels={"parent": "parent_color"})
-    assert "parent_color=%{customdata[0]}" in fig.data[0].hovertemplate
-    assert np.all(np.array(fig.data[0].customdata).ravel()[:8] == np.array(vendors))
-    fig = px.sunburst(
-        df, path=path, hover_data={"parent": True}, labels={"parent": "parent_color"}
-    )
-    # Dataframe has a parent column but it's not used, this should not raise.
-    fig = px.sunburst(df, path=path)
 
 
 def test_sunburst_treemap_with_path_non_rectangular():
