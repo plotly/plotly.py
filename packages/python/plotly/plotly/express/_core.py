@@ -1052,15 +1052,6 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
         else:
             df_output[df_input.columns] = df_input[df_input.columns]
 
-    # Case of sunburst and treemap, used with the `path` argument
-    # in which case the dataframe is massaged into a new format
-    # and column with reserved names will be created
-    uses_path = False
-    reserved_names_sunburst = []
-    if "path" in args and args["path"] is not None:
-        uses_path = True
-        reserved_names_sunburst = ["id", "labels", "parent"]
-
     # hover_data is a dict
     hover_data_is_dict = (
         "hover_data" in args
@@ -1104,7 +1095,6 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
             if argument is None:
                 continue
             col_name = None
-
             # Case of multiindex
             if isinstance(argument, pd.MultiIndex):
                 raise TypeError(
@@ -1185,22 +1175,6 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 else:
                     col_name = str(argument)
                     df_output[col_name] = df_input[argument].values
-                if (
-                    uses_path
-                    and argument in reserved_names_sunburst
-                    and field_name != "path"
-                ):
-                    if args["labels"] is None or argument not in args["labels"]:
-                        raise ValueError(
-                            "%s is a reserved name for px.sunburst and px.treemap. "
-                            "Please use the labels argument to provide another name "
-                            "for the column, for example "
-                            "labels={'%s': '%s_col'}" % (argument, argument, argument)
-                        )
-                    else:
-                        col_name = str(args["labels"][argument])
-                        df_output[col_name] = df_input[str(argument)].values
-
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
@@ -1510,15 +1484,12 @@ def process_dataframe_hierarchy(args):
     _check_dataframe_all_leaves(df[path[::-1]])
     discrete_color = False
 
-    reserved_names = ["labels", "parent", "id"]
-
     new_path = []
     for col_name in path:
         new_col_name = col_name + "_path_copy"
         new_path.append(new_col_name)
         df[new_col_name] = df[col_name]
     path = new_path
-
     # ------------ Define aggregation functions --------------------------------
 
     def aggfunc_discrete(x):
@@ -1576,13 +1547,9 @@ def process_dataframe_hierarchy(args):
         if col not in agg_f:
             agg_f[col] = aggfunc_discrete
     # Avoid collisions with reserved names - columns in the path have been copied already
-    # for col in cols:
-    #    if col in reserved_names and args["labels"] is not None and col in args["labels"]:
-    #        df[args["labels"][col]] = df[col]
-    cols = list(set(cols) - set(reserved_names))
-
+    cols = list(set(cols) - set(["labels", "parent", "id"]))
     # ----------------------------------------------------------------------------
-    df_all_trees = pd.DataFrame(columns=reserved_names + cols)
+    df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
     #  Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
         df_all_trees[col] = df_all_trees[col].astype(df[col].dtype)
