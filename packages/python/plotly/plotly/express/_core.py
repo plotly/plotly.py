@@ -1060,6 +1060,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     if "path" in args and args["path"] is not None:
         uses_path = True
         reserved_names = ["id", "labels", "parent"]
+    print(uses_path)
 
     # hover_data is a dict
     hover_data_is_dict = (
@@ -1124,18 +1125,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     ranges.append(col_name)
             # ----------------- argument is likely a col name ----------------------
             elif isinstance(argument, str) or not hasattr(argument, "__len__"):
-                if uses_path and argument in reserved_names and field_name != "path":
-                    if args["labels"] is None or argument not in args["labels"]:
-                        raise ValueError(
-                            "%s is a reserved name for px.sunburst and px.treemap. "
-                            "Please use the labels argument to provide another name "
-                            "for the column, for example "
-                            "labels={'%s': '%s_col'}" % (argument, argument, argument)
-                        )
-                    else:
-                        col_name = args["labels"][argument]
-                        df_output[col_name] = df_input[argument]
-                elif (
+                if (
                     field_name == "hover_data"
                     and hover_data_is_dict
                     and args["hover_data"][str(argument)][1] is not None
@@ -1196,6 +1186,18 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                 else:
                     col_name = str(argument)
                     df_output[col_name] = df_input[argument].values
+                if uses_path and argument in reserved_names and field_name != "path":
+                    if args["labels"] is None or argument not in args["labels"]:
+                        raise ValueError(
+                            "%s is a reserved name for px.sunburst and px.treemap. "
+                            "Please use the labels argument to provide another name "
+                            "for the column, for example "
+                            "labels={'%s': '%s_col'}" % (argument, argument, argument)
+                        )
+                    else:
+                        col_name = args["labels"][argument]
+                        df_output[col_name] = df_input[argument]
+
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
