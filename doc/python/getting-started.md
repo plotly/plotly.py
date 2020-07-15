@@ -180,42 +180,49 @@ Please check out our [Troubleshooting guide](/python/troubleshooting/) if you ru
 
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
-#### Static Image Export Support
+### Static Image Export
 
-plotly.py supports static image export using the `to_image` and `write_image`
-functions in the `plotly.io` package. This functionality requires the
-installation of the plotly [orca](https://github.com/plotly/orca) command line utility and the
-[`psutil`](https://github.com/giampaolo/psutil) and [`requests`](https://2.python-requests.org/en/master/) Python packages.
+plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
+using the either the [`kaleido`](https://github.com/plotly/Kaleido)
+package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
+command line utility (legacy as of `plotly` version 4.9).
 
-> Note: The `requests` library is used to communicate between the Python process and a local orca server process, it is not used to communicate with any external services.
+#### Kaleido
 
-These dependencies can all be installed using conda:
-
-```
-$ conda install -c plotly plotly-orca==1.2.1 psutil requests
-```
-
-Or, `psutil` and `requests` can be installed using pip...
+The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
+using pip...
 
 ```
-$ pip install psutil requests
+$ pip install -U kaleido
+```
+
+or conda.
+
+```
+$ conda install -c plotly python-kaleido
+```
+
+#### Orca
+
+While Kaleido is now the recommended image export approach because it is easier to install
+and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
+can also be supported
+by the legacy [orca](https://github.com/plotly/orca) command line utility and the
+ [`psutil`](https://github.com/giampaolo/psutil) Python package.
+
+These dependencies can both be installed using conda:
+
+```
+conda install -c plotly plotly-orca==1.3.1 psutil
+```
+
+Or, `psutil` can be installed using pip...
+
+```
+pip install psutil
 ```
 
 and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
-
-These packages contain everything you need to save figures as static images.
-
-<!-- #endregion -->
-
-```python
-import plotly.graph_objects as go
-fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
-fig.write_image('figure.png')
-```
-
-<!-- #region -->
-
-See [_Static Image Export in Python_](/python/static-image-export/) for more information on static image export.
 
 #### Extended Geo Support
 

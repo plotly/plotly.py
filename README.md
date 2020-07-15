@@ -133,11 +133,16 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.
 
 Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
 
-### Static Image Export with Kaleido
+### Static Image Export
 
-plotly.py supports static image export using the `to_image` and `write_image`
-functions in the `plotly.io` module. This functionality requires the
-[`kaleido`](https://github.com/plotly/Kaleido) package which can be installed
+plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
+using the either the [`kaleido`](https://github.com/plotly/Kaleido)
+package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
+command line utility (legacy as of `plotly` version 4.9).
+
+#### Kaleido
+
+The [`kaleido`](https://github.com/plotly/Kaleido) package has no dependencies and can be installed
 using pip...
 
 ```
@@ -145,12 +150,16 @@ $ pip install -U kaleido
 ```
 
 or conda.
+
 ```
 $ conda install -c plotly python-kaleido
-``` 
+```
 
-### Static Image Export with Orca
-While Kaleido is now the recommended image export approach because it is easier to install and more widely compatible, image export can also be supported
+#### Orca
+
+While Kaleido is now the recommended image export approach because it is easier to install
+and more widely compatible, [static image export](https://plotly.com/python/static-image-export/)
+can also be supported
 by the legacy [orca](https://github.com/plotly/orca) command line utility and the
  [`psutil`](https://github.com/giampaolo/psutil) Python package.
 
@@ -168,13 +177,6 @@ pip install psutil
 
 and orca can be installed according to the instructions in the [orca README](https://github.com/plotly/orca).
 
-#### Troubleshooting
-
-##### Wrong Executable found
-
-If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
-
-`plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`
 
 ### Extended Geo Support
 
