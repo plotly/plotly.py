@@ -36,7 +36,7 @@ jupyter:
 ### Overview
 This section covers the lower-level details of how plotly.py can use orca to perform static image generation.
 
-> Orca is no longer the recommended way to do static image export.  We now recommend Kaleido, as described in the [Static Image Export](/python/static-image-export/) section .
+> As of `plotly` version 4.9, Orca is no longer the recommended way to do static image export.  We now recommend Kaleido, as described in the [Static Image Export](/python/static-image-export/) section .
 
 Please refer to the [Static Image Export](/python/static-image-export/) section for general information on creating static images from plotly.py figures.
 

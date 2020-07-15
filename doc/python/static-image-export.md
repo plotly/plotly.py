@@ -42,7 +42,8 @@ Plotly figures are interactive when viewed in a web browser: you can hover over 
 
 <!-- #region -->
 #### Install Dependencies
-Static image generation requires either [Kaleido](https://github.com/plotly/Kaleido) (recommended) or [orca](https://github.com/plotly/orca) (legacy). The `kaleido` package can be installed using pip...
+
+Static image generation requires either [Kaleido](https://github.com/plotly/Kaleido) (recommended, supported as of `plotly` 4.9) or [orca](https://github.com/plotly/orca) (legacy as of `plotly` 4.9). The `kaleido` package can be installed using pip...
 ```
 $ pip install -U kaleido
 ```
@@ -50,13 +51,14 @@ $ pip install -U kaleido
 or conda.
 ```
 $ conda install -c plotly python-kaleido
-``` 
+```
 
 While Kaleido is now the recommended approach, image export can also be supported by the legacy [orca](https://github.com/plotly/orca) command line utility. See the [Orca Management](/python/orca-management/) section for instructions on installing, configuring, and troubleshooting orca.
 
 <!-- #endregion -->
 
 ### Create a Figure
+
 Now let's create a simple scatter plot with 100 random points of varying color and size.
 
 ```python
@@ -87,6 +89,7 @@ fig.show()
 ```
 
 ### Write Image File
+
 The `plotly.io.write_image` function is used to write an image to a file or file-like python object.  You can also use the `.write_image` graph object figure method.
 
 Let's first create an output directory to store our images
@@ -146,6 +149,7 @@ fig.write_image("images/fig1.eps")
 **Note:** It is important to note that any figures containing WebGL traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, or `parcoords`) that are exported in a vector format will include encapsulated rasters, instead of vectors, for some parts of the image.
 
 ### Get Image as Bytes
+
 The `plotly.io.to_image` function is used to return an image as a bytes object. You can also use the `.to_image` graph object figure method.
 
 Let convert the figure to a **PNG** bytes object...
@@ -178,7 +182,7 @@ Image(img_bytes)
 
 <!-- #region -->
 ### Specify Image Export Engine
-If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use orca instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
+If `kaleido` is installed, it will automatically be used to perform image export.  If it is not installed, plotly.py will attempt to use `orca` instead. The `engine` argument to the `to_image` and `write_image` functions can be used to override this default behavior.
 
 Here is an example of specifying that orca should be used:
 ```python
@@ -199,7 +203,7 @@ Various image export settings can be configured using the `plotly.io.kaleido.sco
 ```python
 import plotly.io as pio
 pio.kaleido.scope.default_format = "svg"
-```  
+```
 
 Here is a complete listing of the available image export settings:
 

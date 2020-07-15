@@ -4,24 +4,27 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.9.0] - unreleased
 
-### Updated
-
-- Updated Plotly.js to version 1.54.6. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.6/CHANGELOG.md) for more information.
-- Added all cartesian-2d Plotly Express functions, plus `imshow` to Pandas backend with `kind` option
-- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
--
 ### Added
 
 - Added image export support using [Kaleido](https://github.com/plotly/Kaleido). The image export backend can be configured using the new `engine` argument to `plotly.io.to_image` and `plotly.io.write_image`. The `engine` argument may be set to `"kaleido"`, `"orca"`, or `"auto"`. The default is `engine="auto"`, in which case the Kaleido backend is enabled if the `kaleido` package from PyPI is installed, otherwise Orca is used. ([#2613](https://github.com/plotly/plotly.py/pull/2613)).
-- `px.NO_COLOR` constant to override wide-form color assignment in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
+- `plotly.express.timeline()` added as an official alternative to `plotly.figure_factories.create_gantt()` ([#2626](https://github.com/plotly/plotly.py/pull/2626))
+- `create_hexbin_mapbox()` added to Figure Factories, with thanks to [@RenaudLN](https://github.com/RenaudLN) for the impressive contribution!
 - `facet_row_spacing` and `facet_col_spacing` added to Plotly Express cartesian 2d functions ([#2614](https://github.com/plotly/plotly.py/pull/2614))
-- `base` added to Plotly Express `bar` and `bar_polar` functions
-- `plotly.express.timeline()` added as an official alternative to `plotly.figure_factories.create_gantt()`
--  `create_hexbin_mapbox()` added to Figure Factories, with thanks to [@RenaudLN](https://github.com/RenaudLN) for the contribution!
+- `base` added to Plotly Express `bar` and `bar_polar` functions ([#2626](https://github.com/plotly/plotly.py/pull/2626))
+- `px.NO_COLOR` constant to override wide-form color assignment in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
 
 ### Fixed
 
 - trendline traces are now of type `scattergl` when `render_mode="webgl"` in Plotly Express ([#2614](https://github.com/plotly/plotly.py/pull/2614))
+- regression from 4.8.1 whereby `"parent"` was not accepted as part of `path` for `px.sunburst()` and `px.treemap()` ([#2640](https://github.com/plotly/plotly.py/pull/2640))
+- `create_dendrogram()` figure factory now works correctly with `scipy` 1.5.1 ([#2627](https://github.com/plotly/plotly.py/pull/2627))
+
+### Updated
+
+- Updated Plotly.js to version 1.54.6. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.54.6/CHANGELOG.md) for more information.
+- Added all cartesian-2d Plotly Express functions, plus `imshow`, to Pandas backend with `kind` option ([#2541](https://github.com/plotly/plotly.py/pull/2541))
+- `plotly.express.imshow` now uses data frame index and columns names and values to populate axis parameters by default ([#2539](https://github.com/plotly/plotly.py/pull/2539))
+- Javascript extensions are now build using Node 12, and have an updated `package-lock.json` with many fewer security warnings ([#2636](https://github.com/plotly/plotly.py/pull/2636))
 
 
 ## [4.8.2] - 2020-06-26
