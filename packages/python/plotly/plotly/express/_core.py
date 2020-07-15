@@ -1198,8 +1198,8 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                             "labels={'%s': '%s_col'}" % (argument, argument, argument)
                         )
                     else:
-                        col_name = args["labels"][argument]
-                        df_output[col_name] = df_input[argument]
+                        col_name = str(args["labels"][argument])
+                        df_output[col_name] = df_input[str(argument)].values
 
             # ----------------- argument is likely a column / array / list.... -------
             else:
