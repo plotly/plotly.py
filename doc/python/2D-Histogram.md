@@ -96,7 +96,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of plot without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure using [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 
 ### 2D Histogram of a Bivariate Normal Distribution ###
