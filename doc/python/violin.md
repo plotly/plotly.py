@@ -262,7 +262,14 @@ fig.show()
 
 ### Violin Plot With Only Points
 
-See https://plotly.com/python/box-plots/#box-plot-with-only-points.
+A [strip chart](/python/strip-charts/) is like a violin plot with points showing, and no violin:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.strip(df, x='day', y='tip')
+fig.show()
+```
 
 #### Reference
 
