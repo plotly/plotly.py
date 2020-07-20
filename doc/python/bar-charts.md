@@ -52,9 +52,9 @@ fig.show()
 Long-form data has one row per observation, and one column per variable. This is suitable for storing and displaying multivariate data i.e. with dimension greater than 2. This format is sometimes called "tidy".
 
 To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
-documentation](https://plotly.com/python/wide-form/). 
+documentation](https://plotly.com/python/wide-form/).
 
-For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/). 
+For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/).
 
 ```python
 import plotly.express as px
@@ -72,11 +72,6 @@ long_df
 #### Bar chart with Wide Format Data
 Wide-form data has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
 
-To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
-documentation](https://plotly.com/python/wide-form/). 
-
-For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/). 
-
 ```python
 import plotly.express as px
 
@@ -88,28 +83,6 @@ fig.show()
 
 ```python
 wide_df
-```
-
-#### Bar chart with Mixed Form Data
-
-Mixed-form data is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables.
-
-To learn more about how to provide a specific form of column-oriented data to 2D-Cartesian Plotly Express functions such as `px.bar`, see the [Plotly Express Wide-Form Support in Python
-documentation](https://plotly.com/python/wide-form/). 
-
-For  detailed column-input-format documentation, see the [Plotly Express Arguments documentation](https://plotly.com/python/px-arguments/).
-
-```python
-import plotly.express as px
-mixed_df = px.data.experiment(indexed=True)
-fig = px.bar(mixed_df, x=mixed_df.index,  
-             y=["experiment_1", "experiment_2", "experiment_3"], 
-             title="Mixed Form Input")
-fig.show()
-```
-
-```python
-mixed_df.head()
 ```
 
 ### Customize bar chart with Plotly Express
@@ -139,7 +112,7 @@ fig.show()
 ```python
 # Change the default stacking
 import plotly.express as px
-fig = px.bar(df, x="sex", y="total_bill", 
+fig = px.bar(df, x="sex", y="total_bill",
              color='smoker', barmode='group',
              height=400)
 fig.show()
@@ -449,7 +422,7 @@ See examples of horizontal bar charts [here](https://plotly.com/python/horizonta
 
 ### Bar Charts With Multicategory Axis Type
 
-If your traces have arrays for `x` or `y`, then the axis type is automatically inferred to be `multicategory`. 
+If your traces have arrays for `x` or `y`, then the axis type is automatically inferred to be `multicategory`.
 
 ```python
 import plotly.graph_objects as go
