@@ -22,17 +22,19 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to manipulate the graph size in Python with Plotly.
+    description: How to manipulate the graph size, margins and background color.
     display_as: file_settings
     language: python
     layout: base
     name: Setting Graph Size
-    order: 9
+    order: 10
     permalink: python/setting-graph-size/
     thumbnail: thumbnail/sizing.png
 ---
 
 ### Adjusting Height, Width, & Margins with Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -49,7 +51,9 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adjusting Height, Width, & Margins
+### Adjusting Height, Width, & Margins With Graph Objects
+
+[Graph objects](/python/graph-objects/) are the low-level building blocks of figures which you can use instead of Plotly Express for greater control.
 
 ```python
 import plotly.graph_objects as go

@@ -134,7 +134,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](/python/graph-objects/). All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
 
 ### Basic Box Plot
 
@@ -486,6 +486,17 @@ fig.update_layout(
     showlegend=False
 )
 
+fig.show()
+```
+
+### Box Plot With Only Points
+
+A [strip chart](/python/strip-charts/) is like a box plot with points showing, and no box:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.strip(df, x='day', y='tip')
 fig.show()
 ```
 

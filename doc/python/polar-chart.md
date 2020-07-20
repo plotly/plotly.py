@@ -85,7 +85,7 @@ fig.show()
 
 ## Polar Scatter Plot with go.Scatterpolar
 
-If Plotly Express does not provide a good starting point, you can use the more generic `go.Scatterpolar`. All the options are documented in the [reference page](https://plotly.com/python/reference/#scatterpolar).
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Scatterpolar` class from `plotly.graph_objects`](/python/graph-objects/). All the options are documented in the [reference page](https://plotly.com/python/reference/#scatterpolar).
 
 #### Basic Polar Chart
 
