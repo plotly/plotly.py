@@ -39,7 +39,6 @@ if sys.version_info < (3, 7):
         colors,
         io,
         data,
-        colors,
     )
     from plotly.version import __version__
 
@@ -51,7 +50,6 @@ if sys.version_info < (3, 7):
         "colors",
         "io",
         "data",
-        "colors",
         "__version__",
     ]
 
@@ -71,7 +69,6 @@ else:
             ".colors",
             ".io",
             ".data",
-            ".colors",
         ],
         [".version.__version__"],
     )
@@ -83,7 +80,20 @@ def plot(data_frame, kind, **kwargs):
     To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
-    from .express import scatter, line, area, bar, box, histogram
+    from .express import (
+        scatter,
+        line,
+        area,
+        bar,
+        box,
+        histogram,
+        violin,
+        strip,
+        funnel,
+        density_contour,
+        density_heatmap,
+        imshow,
+    )
 
     if kind == "scatter":
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["s", "c"]}
@@ -99,9 +109,27 @@ def plot(data_frame, kind, **kwargs):
     if kind == "box":
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["by"]}
         return box(data_frame, **new_kwargs)
-    if kind in "hist":
+    if kind in ["hist", "histogram"]:
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["by", "bins"]}
         return histogram(data_frame, **new_kwargs)
+    if kind == "violin":
+        return violin(data_frame, **kwargs)
+    if kind == "strip":
+        return strip(data_frame, **kwargs)
+    if kind == "funnel":
+        return funnel(data_frame, **kwargs)
+    if kind == "density_contour":
+        return density_contour(data_frame, **kwargs)
+    if kind == "density_heatmap":
+        return density_heatmap(data_frame, **kwargs)
+    if kind == "imshow":
+        return imshow(data_frame, **kwargs)
+    if kind == "heatmap":
+        raise ValueError(
+            "kind='heatmap' not supported plotting.backend='plotly'. "
+            "Please use kind='imshow' or kind='density_heatmap'."
+        )
+
     raise NotImplementedError(
         "kind='%s' not yet supported for plotting.backend='plotly'" % kind
     )

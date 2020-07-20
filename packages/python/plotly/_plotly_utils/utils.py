@@ -247,3 +247,12 @@ def _natural_sort_strings(vals, reverse=False):
         return tuple(v_parts)
 
     return sorted(vals, key=key, reverse=reverse)
+
+
+def _get_int_type():
+    np = get_module("numpy", should_load=False)
+    if np:
+        int_type = (int, np.integer)
+    else:
+        int_type = (int,)
+    return int_type

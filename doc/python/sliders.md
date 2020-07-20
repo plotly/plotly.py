@@ -34,7 +34,7 @@ jupyter:
 ---
 
 ### Simple Slider Control
-Sliders can be used in Plotly to change the data displayed or style of a plot. 
+Sliders can be used in Plotly to change the data displayed or style of a plot.
 
 ```python
 import plotly.graph_objects as go
@@ -83,13 +83,14 @@ fig.show()
 
 #### Methods
 The method determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](https://plot.ly/python/reference/#layout-updatemenus-items-updatemenu-buttons-items-button-method) methods to add the slider:
+- `"update"`: modify **data and layout** attributes (as above)
 - `"restyle"`: modify **data** attributes
 - `"relayout"`: modify **layout** attributes
-- `"update"`: modify **data and layout** attributes
 - `"animate"`: start or pause an animation
 
+
 ### Sliders in Plotly Express
-Plotly Express provide sliders, but with implicit animation. The animation can be ommited by removing `updatemenus` in the `layout`:
+Plotly Express provide sliders, but with implicit animation using the `"animate"` method described above. The animation play button can be ommited by removing `updatemenus` in the `layout`:
 
 ```python
 import plotly.express as px

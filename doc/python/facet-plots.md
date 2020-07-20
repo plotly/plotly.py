@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.4
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.0
+    version: 3.7.7
   plotly:
     description: How to make Facet and Trellis Plots in Python with Plotly.
     display_as: statistical
@@ -39,7 +39,9 @@ jupyter:
 ### Facet and Trellis Plots
 
 Facet plots, also known as trellis plots or small multiples, are figures made up of multiple subplots which have the same set of axes, where each subplot shows a subset of the data. While it is straightforward to use `plotly`'s
-[subplot capabilities](/python/subplots/) to make such figures, it's far easier to use the built-in `facet_row` and `facet_col` arguments in the various [Plotly Express](/python/plotly-express/) functions.
+[subplot capabilities](/python/subplots/) to make such figures, it's far easier to use the built-in `facet_row` and `facet_col` arguments in the various Plotly Express functions.
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ### Scatter Plot Column Facets
 
@@ -103,7 +105,7 @@ fig.show()
 
 ### Customize Subplot Figure Titles
 
-Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them.
+Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
 
 In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`. 
 
@@ -115,8 +117,25 @@ fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
 fig.show()
 ```
 
-```python
+### Controlling Facet Spacing
 
+The `facet_row_spacing` and `facet_col_spacing` arguments can be used to control the spacing between rows and columns. These values are specified in fractions of the plotting area in paper coordinates and not in pixels, so they will grow or shrink with the `width` and `height` of the figure. 
+
+The defaults work well with 1-4 rows or columns at the default figure size with the default font size, but need to be reduced to around 0.01 for very large figures or figures with many rows or columns. Conversely, if activating tick labels on all facets, the spacing will need to be increased.
+
+```python
+import plotly.express as px
+
+df = px.data.gapminder().query("continent == 'Africa'")
+
+fig = px.line(df, x="year", y="lifeExp", facet_col="country", facet_col_wrap=7,
+              facet_row_spacing=0.04, # default is 0.07 when facet_col_wrap is used
+              facet_col_spacing=0.04, # default is 0.03
+              height=600, width=800,
+              title="Life Expectancy in Africa")
+fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+fig.update_yaxes(showticklabels=True)
+fig.show()
 ```
 
 ### Synchronizing axes in subplots with `matches`

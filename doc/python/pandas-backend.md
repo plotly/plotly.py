@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Pandas Plotting Backend
-    order: 30
+    order: 31
     permalink: python/pandas-backend/
     redirect_from: python/cufflinks/
     thumbnail: thumbnail/plotly-express.png
@@ -98,7 +98,7 @@ fig.show()
 
 ### Supported Methods
 
-The Plotly backend supports the following `kind`s of Pandas plots: `scatter`, `line`, `area`, `bar`, `barh`, `hist` and `box`, via the call pattern `df.plot(kind='scatter')` or `df.plot.scatter()`. These delegate to the corresponding Plotly Express functions.
+The Plotly backend supports the following `kind`s of Pandas plots: `scatter`, `line`, `area`, `bar`, `barh`, `hist` and `box`, via the call pattern `df.plot(kind='scatter')` or `df.plot.scatter()`. These delegate to the corresponding Plotly Express functions. In addition, the following are valid options to the `kind` argument of `df.plot()`: `violin`, `strip`, `funnel`, `density_heatmap`, `density_contour` and `imshow`, even though the call pattern `df.plot.violin()` is not supported for these kinds of charts, per the Pandas API.
 
 ```python
 import pandas as pd

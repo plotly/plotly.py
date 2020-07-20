@@ -2,4 +2,4 @@
 # for automated dev builds
 #
 # It is edited by hand prior to official releases
-__frontend_version__ = "^4.8.0"
+__frontend_version__ = "^4.9.0"

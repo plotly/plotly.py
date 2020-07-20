@@ -150,3 +150,25 @@ def test_imshow_labels_and_ranges():
 
     with pytest.raises(ValueError):
         fig = px.imshow([[1, 2], [3, 4], [5, 6]], x=["a"])
+
+
+def test_imshow_dataframe():
+    df = px.data.medals_wide(indexed=False)
+    fig = px.imshow(df)
+    assert fig.data[0].x[0] == df.columns[0]
+    assert fig.data[0].x[0] == "nation"
+    assert fig.layout.xaxis.title.text is None
+    assert fig.data[0].y[0] == df.index[0]
+    assert fig.data[0].y[0] == 0
+    assert fig.layout.yaxis.title.text is None
+
+    df = px.data.medals_wide(indexed=True)
+    fig = px.imshow(df)
+    assert fig.data[0].x[0] == df.columns[0]
+    assert fig.data[0].x[0] == "gold"
+    assert fig.layout.xaxis.title.text == df.columns.name
+    assert fig.layout.xaxis.title.text == "medal"
+    assert fig.data[0].y[0] == df.index[0]
+    assert fig.data[0].y[0] == "South Korea"
+    assert fig.layout.yaxis.title.text == df.index.name
+    assert fig.layout.yaxis.title.text == "nation"
