@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 2D Histogram Contour
-    order: 12
+    order: 11
     page_type: u-guide
     permalink: python/2d-histogram-contour/
     redirect_from: python/2d-density-plots/
@@ -40,7 +40,7 @@ A 2D histogram contour plot, also known as a density contour plot, is a 2-dimens
 
 ## Density Contours with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_contour()` can be used to produce density contours.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). The Plotly Express function `density_contour()` can be used to produce density contours.
 
 ```python
 import plotly.express as px
@@ -95,7 +95,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of plot without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure with [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 #### Basic 2D Histogram Contour
 

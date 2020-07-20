@@ -13,10 +13,12 @@
    create_annotated_heatmap
    create_bullet
    create_candlestick
+   create_choropleth
    create_dendrogram
    create_distplot
    create_facet_grid
    create_gantt
+   create_hexbin_mapbox
    create_ohlc
    create_quiver
    create_scatterplotmatrix

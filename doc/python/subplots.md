@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.2
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.0
+    version: 3.7.7
   plotly:
     description: How to make subplots in with Plotly's Python graphing library. Examples
       of stacked, custom-sized, gridded, and annotated subplots.
@@ -34,6 +34,15 @@ jupyter:
     redirect_from: ipython-notebooks/subplots/
     thumbnail: thumbnail/subplots.jpg
 ---
+
+### Subplots and Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+Plotly Express does not support arbitrary subplot capabilities, instead it supports [faceting by a given data dimension](/python/facet-plots/), and it also supports [marginal charts to display distribution information](/python/marginal-plots/). 
+
+This page documents the usage of the lower-level `plotly.subplots` module and the `make_subplots` function it exposes to construct figures with arbitrary subplots. **Plotly Express faceting uses `make_subplots` internally** so adding traces to Plotly Express facets works just as documented here, with `fig.add_trace(..., row=<R>, col=<C>)`.
+
 
 #### Simple Subplot
 

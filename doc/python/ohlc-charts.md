@@ -18,7 +18,7 @@ jupyter:
     language: python
     layout: base
     name: OHLC Charts
-    order: 6
+    order: 5
     permalink: python/ohlc-charts/
     thumbnail: thumbnail/ohlc.jpg
 ---

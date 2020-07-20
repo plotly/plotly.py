@@ -1,52 +1,18 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._size import SizeValidator
+    from ._opacity import OpacityValidator
+    from ._color import ColorValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(
-        self, plotly_name="size", parent_name="scatterpolar.selected.marker", **kwargs
-    ):
-        super(SizeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class OpacityValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(
-        self,
-        plotly_name="opacity",
-        parent_name="scatterpolar.selected.marker",
-        **kwargs
-    ):
-        super(OpacityValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            max=kwargs.pop("max", 1),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(
-        self, plotly_name="color", parent_name="scatterpolar.selected.marker", **kwargs
-    ):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._size.SizeValidator",
+            "._opacity.OpacityValidator",
+            "._color.ColorValidator",
+        ],
+    )

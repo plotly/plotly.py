@@ -1,76 +1,24 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._traces import TracesValidator
+    from ._name import NameValidator
+    from ._layout import LayoutValidator
+    from ._group import GroupValidator
+    from ._data import DataValidator
+    from ._baseframe import BaseframeValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class TracesValidator(_plotly_utils.basevalidators.AnyValidator):
-    def __init__(self, plotly_name="traces", parent_name="frame", **kwargs):
-        super(TracesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class NameValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(self, plotly_name="name", parent_name="frame", **kwargs):
-        super(NameValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import plotly.validators
-
-
-class LayoutValidator(plotly.validators.LayoutValidator):
-    def __init__(self, plotly_name="layout", parent_name="frame", **kwargs):
-        super(LayoutValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "object"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class GroupValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(self, plotly_name="group", parent_name="frame", **kwargs):
-        super(GroupValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import plotly.validators
-
-
-class DataValidator(plotly.validators.DataValidator):
-    def __init__(self, plotly_name="data", parent_name="frame", **kwargs):
-        super(DataValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "object"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BaseframeValidator(_plotly_utils.basevalidators.StringValidator):
-    def __init__(self, plotly_name="baseframe", parent_name="frame", **kwargs):
-        super(BaseframeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._traces.TracesValidator",
+            "._name.NameValidator",
+            "._layout.LayoutValidator",
+            "._group.GroupValidator",
+            "._data.DataValidator",
+            "._baseframe.BaseframeValidator",
+        ],
+    )

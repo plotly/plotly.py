@@ -1,219 +1,42 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._width import WidthValidator
+    from ._visible import VisibleValidator
+    from ._valueminus import ValueminusValidator
+    from ._value import ValueValidator
+    from ._type import TypeValidator
+    from ._tracerefminus import TracerefminusValidator
+    from ._traceref import TracerefValidator
+    from ._thickness import ThicknessValidator
+    from ._symmetric import SymmetricValidator
+    from ._copy_ystyle import Copy_YstyleValidator
+    from ._color import ColorValidator
+    from ._arraysrc import ArraysrcValidator
+    from ._arrayminussrc import ArrayminussrcValidator
+    from ._arrayminus import ArrayminusValidator
+    from ._array import ArrayValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class WidthValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="width", parent_name="bar.error_x", **kwargs):
-        super(WidthValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class VisibleValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(self, plotly_name="visible", parent_name="bar.error_x", **kwargs):
-        super(VisibleValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ValueminusValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="valueminus", parent_name="bar.error_x", **kwargs):
-        super(ValueminusValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ValueValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="value", parent_name="bar.error_x", **kwargs):
-        super(ValueValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-    def __init__(self, plotly_name="type", parent_name="bar.error_x", **kwargs):
-        super(TypeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["percent", "constant", "sqrt", "data"]),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TracerefminusValidator(_plotly_utils.basevalidators.IntegerValidator):
-    def __init__(
-        self, plotly_name="tracerefminus", parent_name="bar.error_x", **kwargs
-    ):
-        super(TracerefminusValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class TracerefValidator(_plotly_utils.basevalidators.IntegerValidator):
-    def __init__(self, plotly_name="traceref", parent_name="bar.error_x", **kwargs):
-        super(TracerefValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ThicknessValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="thickness", parent_name="bar.error_x", **kwargs):
-        super(ThicknessValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class SymmetricValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(self, plotly_name="symmetric", parent_name="bar.error_x", **kwargs):
-        super(SymmetricValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class CopyYstyleValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(self, plotly_name="copy_ystyle", parent_name="bar.error_x", **kwargs):
-        super(CopyYstyleValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
-    def __init__(self, plotly_name="color", parent_name="bar.error_x", **kwargs):
-        super(ColorValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ArraysrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(self, plotly_name="arraysrc", parent_name="bar.error_x", **kwargs):
-        super(ArraysrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ArrayminussrcValidator(_plotly_utils.basevalidators.SrcValidator):
-    def __init__(
-        self, plotly_name="arrayminussrc", parent_name="bar.error_x", **kwargs
-    ):
-        super(ArrayminussrcValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "none"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ArrayminusValidator(_plotly_utils.basevalidators.DataArrayValidator):
-    def __init__(self, plotly_name="arrayminus", parent_name="bar.error_x", **kwargs):
-        super(ArrayminusValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "data"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ArrayValidator(_plotly_utils.basevalidators.DataArrayValidator):
-    def __init__(self, plotly_name="array", parent_name="bar.error_x", **kwargs):
-        super(ArrayValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "data"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._width.WidthValidator",
+            "._visible.VisibleValidator",
+            "._valueminus.ValueminusValidator",
+            "._value.ValueValidator",
+            "._type.TypeValidator",
+            "._tracerefminus.TracerefminusValidator",
+            "._traceref.TracerefValidator",
+            "._thickness.ThicknessValidator",
+            "._symmetric.SymmetricValidator",
+            "._copy_ystyle.Copy_YstyleValidator",
+            "._color.ColorValidator",
+            "._arraysrc.ArraysrcValidator",
+            "._arrayminussrc.ArrayminussrcValidator",
+            "._arrayminus.ArrayminusValidator",
+            "._array.ArrayValidator",
+        ],
+    )

@@ -37,17 +37,13 @@ jupyter:
     v4upgrade: true
 ---
 
-### Representing Figures
+The `plotly` Python package exists to create, manipulate and [render](/python/renderers/) graphical figures (i.e. charts, plots, maps and diagrams) represented by [data structures also referred to as figures](/python/figure-structure/). The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although Python developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in Python either as dicts or as instances of the `plotly.graph_objects.Figure` class, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
 
-The goal of the plotly.py package is to provide a pleasant Python interface for creating figure specifications which are displayed by the [plotly.js](https://plot.ly/javascript) JavaScript graphing library. 
+> Note: the recommended entry-point into the plotly package is the [high-level plotly.express module, also known as Plotly Express](/python/plotly-express/), which consists of Python functions which return fully-populated `plotly.graph_objects.Figure` objects. This page exists to document the structure of the data structure that these objects represent for users who wish to understand more about how to customize them, or assemble them from other `plotly.graph_objects` components.
 
-In the context of the plotly.js library, a figure is specified by a declarative [JSON](https://www.json.org/json-en.html) data structure. 
+### Figures As Dictionaries
 
-Therefore, you should always keep in mind as you are creating and updating figures using the plotly.py package that its ultimate goal is to help users produce Python [dictionaries](https://docs.python.org/3/tutorial/datastructures.html#dictionaries) that can be automatically [serialized](https://en.wikipedia.org/wiki/Serialization) into the JSON data structure that the plotly.js graphing library understands.
-
-#### Figures As Dictionaries
-
-The `fig` dictonary in the example below describes a figure. It contains a single `bar` trace and a title.
+At a low level, figures can be represented as dictionaries and displayed using functions from the `plotly.io` module. The `fig` dictonary in the example below describes a figure. It contains a single `bar` trace and a title.
 
 ```python
 fig = dict({
@@ -63,37 +59,21 @@ import plotly.io as pio
 pio.show(fig)
 ```
 
-Let's take a closer look at structure of the `fig` dictionary in order to better understand how `plotly.py` figures are built. 
+### Figures as Graph Objects
 
-##### The `"data"` Key
+The [`plotly.graph_objects` module provides an automatically-generated hierarchy of classes](https://plotly.com/python-api-reference/plotly.graph_objects.html) called ["graph objects"](/python/graph-objects/) that may be used to represent figures, with a top-level class `plotly.graph_objects.Figure`.
 
-The `"data"` key stores the value of list which describes the trace or traces which make up a figure. It is still a list even if the figure only contains one trace, as in the example above.
+> Note that the *recommended alternative* to working with Python dictionaries is to [create entire figures at once using Plotly Express](/python/plotly-express/) and to manipulate the resulting `plotly.graph_objects.Figure` objects as described in this page, wherever possible, rather than to assemble figures bottom-up from underlying graph objects. See ["When to use Graph Objects"](/python/graph-objects/).
 
-Each trace in the list stored by the `"data"` key is itself defined by a dictionary. The type of the trace (`"bar"`, `"scatter"`, `"contour"`, etc...) is specified with a `"type"` key, and the rest of the keys in a trace specification dictionary (`x`, `y`, etc...) are used to define the properties specific to the trace of that type.
+Graph objects have several benefits compared to plain Python dictionaries.
 
-##### The `"layout"` Key 
+1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
+2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/).
+3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
+4. Graph objects support higher-level convenience functions for making updates to already constructed figures (`.update_layout()`, `.add_trace()` etc) as described below.
+5. Graph object constructors and update methods accept "magic underscores" (e.g. `go.Figure(layout_title_text="The Title")` rather than `dict(layout=dict(title=dict(text="The Title")))`) for more compact code, as described below.
+6. Graph objects support attached rendering (`.show()`) and exporting functions (`.write_image()`) that automatically invoke the appropriate functions from [the `plotly.io` module](https://plotly.com/python-api-reference/plotly.io.html).
 
-The`"layout"` key stores a dictionary that specifies properties related to customizing how the figure looks, such as its title, typography, margins, axes, annotations, shapes, legend and more. In contrast to trace configuration options, which apply only to individual traces, layout configuration options apply to the figure as a whole.
-
-The [_Full Reference_](https://plot.ly/python/reference/) page contains descriptions of all of the supported trace and layout attributes and configuration options.
-
-If working from the _Full Reference_ to build figures as Python dictionaries and lists suites your needs, go for it! 
-
-This is a perfectly valid way to use `plotly.py` to build figures. On the other hand, if you would like to use an API that offers you a bit more assistance in the figure creation process, read on to learn about `graph objects`.
-
-#### Figures as Graph Objects
-
-As an alternative to working with Python dictionaries, the `plotly.py` graphing library provides a hierarchy of classes called "graph objects" that may be used to construct figures. Graph objects have several benefits compared to plain Python dictionaries.
-
-1.  Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
-
-2.  Graph objects contain descriptions of each valid property as Python `docstrings`. You can use these `docstrings` in the development environment of your choice to learn about the available properties as an alternative to consulting the online _Full Reference_.
-
-3.  Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
-
-4.  Graph objects support higher-level convenience functions for making updates to already constructed figures, as described below.
-
-**Graph objects are stored in a hierarchy of modules under the `plotly.graph_objects` package, so make sure to remember to `import plotly.graph_objects as go` when you want to use them.** 
 
 Below you can find an example of one way that the figure in the example above could be specified using a graph object instead of a dictionary.
 
@@ -136,23 +116,43 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Bar(x=[1, 2, 3], y=[1, 3, 2])],
-    layout=go.Layout(
-        title=go.layout.Title(text="Converting Graph Objects To Dictionaries and JSON")
-    )
+    layout=go.Layout(height=600, width=800)
 )
 
-print("Dictionary Representation of A Graph Object:\n" + str(fig.to_dict()))
+fig.layout.template = None # to slim down the output
 
-print("\n\nJSON Representation of A Graph Object:\n" + str(fig.to_json()))
+print("Dictionary Representation of A Graph Object:\n\n" + str(fig.to_dict()))
+print("\n\n")
+print("JSON Representation of A Graph Object:\n\n" + str(fig.to_json()))
+print("\n\n")
 ```
 
 ### Creating Figures
 
-This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library. 
+This section summarizes several ways to create new graph object figures with the `plotly.py` graphing library.
 
-#### Constructor
+> The *recommended way* to create figures and populate them is to use [Plotly Express](/python/plotly-express/) but this page documents various other options for completeness
 
-As demonstrated above, you can build a complete figure by passing trace and layout specifications to the `plotly.graph_objects.Figure` constructor. These trace and layout specifications can be either dictionaries or graph objects. 
+
+#### Plotly Express
+
+[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data visualization API that produces fully-populated graph object figures in single function-calls.
+
+```python
+import plotly.express as px
+
+df = px.data.iris()
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", title="A Plotly Express Figure")
+
+# If you print the figure, you'll see that it's just a regular figure with data and layout
+# print(fig)
+
+fig.show()
+```
+
+#### Graph Objects `Figure` Constructor
+
+As demonstrated above, you can build a complete figure by passing trace and layout specifications to the `plotly.graph_objects.Figure` constructor. These trace and layout specifications can be either dictionaries or graph objects.
 
 In the following example, the traces are specified using graph objects and the layout is specified as a dictionary.
 
@@ -167,25 +167,9 @@ fig = go.Figure(
 fig.show()
 ```
 
-#### Plotly Express
-
-[Plotly Express](https://plot.ly/python/plotly-express/) (included as the `plotly.express` module) is a high-level data exploration API that produces graph object figures.
-
-```python
-import plotly.express as px
-
-df = px.data.iris()
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", title="A Plotly Express Figure")
-
-# If you print fig, you'll see that it's just a regular figure with data and layout
-# print(fig)
-
-fig.show()
-```
-
 #### Figure Factories
 
-Figure factories (included in `plotly.py` in the `plotly.figure_factory` module) are functions that produce graph object figures, often to satisfy the needs of specialized domains. Here's an example of using the `create_quiver()` figure factory to construct a graph object figure that displays a 2D quiver plot.
+[Figure factories](/python/figure-factories) (included in `plotly.py` in the `plotly.figure_factory` module) are functions that produce graph object figures, often to satisfy the needs of specialized domains. Here's an example of using the `create_quiver()` figure factory to construct a graph object figure that displays a 2D quiver plot.
 
 ```python
 import numpy as np
@@ -240,7 +224,7 @@ import plotly.express as px
 
 df = px.data.iris()
 
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", 
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  title="Using The add_trace() method With A Plotly Express Figure")
 
 fig.add_trace(
@@ -276,7 +260,7 @@ import plotly.express as px
 
 df = px.data.iris()
 
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", facet_col="species", 
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", facet_col="species",
                  title="Adding Traces To Subplots Witin A Plotly Express Figure")
 
 reference_line = go.Scatter(x=[2, 4],
@@ -294,7 +278,7 @@ fig.show()
 
 #### Add Trace Convenience Methods
 
-As an alternative to the `add_trace()` method, graph object figures have a family of methods of the form `add_{trace}` (where `{trace}` is the name of a trace type) for constructing and adding traces of each trace type. 
+As an alternative to the `add_trace()` method, graph object figures have a family of methods of the form `add_{trace}` (where `{trace}` is the name of a trace type) for constructing and adding traces of each trace type.
 
 Here is the previous subplot example, adapted to add the scatter trace using `fig.add_scatter()` and to add the bar trace using `fig.add_bar()`.
 
@@ -311,11 +295,11 @@ fig.show()
 
 #### Magic Underscore Notation
 
-To make it easier to work with nested properties, graph object constructors and many graph object methods support magic underscore notation. 
+To make it easier to work with nested properties, graph object constructors and many graph object methods support magic underscore notation.
 
 This allows you to reference nested properties by joining together multiple nested property names with underscores.
 
-For example, specifying the figure title in the figure constructor _without_ magic underscore notation requires setting the `layout` argument to `dict(title=dict(text="A Chart"))`. 
+For example, specifying the figure title in the figure constructor _without_ magic underscore notation requires setting the `layout` argument to `dict(title=dict(text="A Chart"))`.
 
 Similarly, setting the line color of a scatter trace requires setting the `marker` property to `dict(color="crimson")`.
 
@@ -349,7 +333,7 @@ Magic underscore notation is supported throughout the graph objects API, and it 
 
 #### Updating Figure Layouts
 
-Graph object figures support an `update_layout()` method that may be used to update multiple nested properties of a figure's layout. 
+Graph object figures support an `update_layout()` method that may be used to update multiple nested properties of a figure's layout.
 
 Here is an example of updating the text and font size of a figure's title using `update_layout()`.
 
@@ -386,7 +370,7 @@ fig.update_layout(title=go.layout.Title(text="update_layout() Syntax Example",
 
 #### Updating Traces
 
-Graph object figures support an `update_traces()` method that may be used to update multiple nested properties of one or more of a figure's traces. 
+Graph object figures support an `update_traces()` method that may be used to update multiple nested properties of one or more of a figure's traces.
 
 To show some examples, we will start with a figure that contains `bar` and `scatter` traces across two subplots.
 
@@ -537,7 +521,7 @@ import plotly.express as px
 
 df = px.data.iris()
 
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", 
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  facet_col="species", trendline="ols", title="Using update_traces() With Plotly Express Figures")
 
 fig.update_traces(
@@ -580,7 +564,7 @@ import plotly.express as px
 
 df = px.data.iris()
 
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", 
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  title="Conditionally Updating Traces In A Plotly Express Figure With for_each_trace()")
 
 fig.for_each_trace(
@@ -600,7 +584,7 @@ import plotly.express as px
 
 df = px.data.iris()
 
-fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species", 
+fig = px.scatter(df, x="sepal_width", y="sepal_length", color="species",
                  facet_col="species", title="Using update_xaxes() With A Plotly Express Figure")
 
 fig.update_xaxes(showgrid=False)
@@ -613,20 +597,22 @@ There are also `for_each_xaxis()` and `for_each_yaxis()` methods that are analog
 ### Other Update Methods
 
 Figures created with the plotly.py graphing library also support:
-    - the `update_layout_images()` method in order to [update background layout images](/python/images/), 
-    - `update_annotations()` in order to [update annotations](/python/text-and-annotations/#multiple-annotations), 
-    - and `update-shapes()` in order to [update shapes](/python/shapes/).
+
+  - the `update_layout_images()` method in order to [update background layout images](/python/images/),
+  - `update_annotations()` in order to [update annotations](/python/text-and-annotations/#multiple-annotations),
+  - and `update_shapes()` in order to [update shapes](/python/shapes/).
 
 #### Chaining Figure Operations
 
 All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible the chain multiple figure modification operations together into a single expression.
 
 Here is an example of a chained expression that creates:
-    - a faceted scatter plot with OLS trend lines using Plotly Express, 
-    - sets the title font size using `update_layout()`, 
-    - disables vertical grid lines using `update_xaxes()`, 
-    - updates the width and dash pattern of the trend lines using `update_traces()`, 
-    - and then displays the figure using `show()`.
+
+  - a faceted scatter plot with OLS trend lines using Plotly Express,
+  - sets the title font size using `update_layout()`,
+  - disables vertical grid lines using `update_xaxes()`,
+  - updates the width and dash pattern of the trend lines using `update_traces()`,
+  - and then displays the figure using `show()`.
 
 ```python
 import plotly.express as px
@@ -634,7 +620,7 @@ import plotly.express as px
 df = px.data.iris()
 
 (px.scatter(df, x="sepal_width", y="sepal_length", color="species",
-            facet_col="species", trendline="ols", 
+            facet_col="species", trendline="ols",
             title="Chaining Multiple Figure Operations With A Plotly Express Figure")
  .update_layout(title_font_size=24)
  .update_xaxes(showgrid=False)

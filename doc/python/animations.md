@@ -25,7 +25,7 @@ jupyter:
 
 #### Animated figures with Plotly Express
 
-Several Plotly Express functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
+Several [Plotly Express](/python/plotly-express/)  functions support the creation of animated figures through the `animation_frame` and `animation_group` arguments.
 
 Here is an example of an animated scatter plot creating using Plotly Express. Note that you should always fix the `x_range` and `y_range` to ensure that your data remains visible throughout the animation.
 
@@ -51,9 +51,15 @@ fig = px.bar(df, x="continent", y="pop", color="continent",
 fig.show()
 ```
 
+### Current Animation Limitations and Caveats
+
+* Animations are designed to work well when each row of input is present across all animation frames, and when categorical values mapped to symbol, color and facet are constant across frames. Animations *may be misleading or inconsistent* if these constraints are not met.
+* Although Plotly Express supports animation for many chart and map types, smooth inter-frame transitions are today *only* possible for `scatter` and `bar`
+* Plotly Express will *not* automatically compute the union of all x/y/color ranges, so these must be specified manually to avoid scale jumps across frames
+
 #### Animated figures with Graph Objects
 
-The remainder of this section describes the low-level API for constructing animated figures manually.
+The remainder of this section describes the low-level [graph objects](/python/graph-objects/) API for constructing animated figures manually.
 
 #### Frames
 
@@ -261,18 +267,6 @@ fig_dict = {
 fig_dict["layout"]["xaxis"] = {"range": [30, 85], "title": "Life Expectancy"}
 fig_dict["layout"]["yaxis"] = {"title": "GDP per Capita", "type": "log"}
 fig_dict["layout"]["hovermode"] = "closest"
-fig_dict["layout"]["sliders"] = {
-    "args": [
-        "transition", {
-            "duration": 400,
-            "easing": "cubic-in-out"
-        }
-    ],
-    "initialValue": "1952",
-    "plotlycommand": "animate",
-    "values": years,
-    "visible": True
-}
 fig_dict["layout"]["updatemenus"] = [
     {
         "buttons": [

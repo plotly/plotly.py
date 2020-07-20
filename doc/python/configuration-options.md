@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.0
+    version: 3.7.3
   plotly:
     description: How to set the configuration options of figures using the Plotly
       Python graphing library.
@@ -163,12 +163,14 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Customizing Download Plot Options
+##### Customizing Download Plot Button Options
+
+The camera icon on the modebar causes a static version of the figure to be downloaded via the user's browser. The default behaviour is to download a PNG of size 700 by 450 pixels.
+
+This behavior can be controlled via the `toImageButtonOptions` configuration key.
 
 ```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
+import plotly.express as px
 
 config = {
   'toImageButtonOptions': {
@@ -180,10 +182,22 @@ config = {
   }
 }
 
-fig.add_trace(
-    go.Scatter(
-        x=[1, 2, 3],
-        y=[1, 3, 1]))
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
+
+fig.show(config=config)
+```
+
+Figures can be set to download at the currently-rendered size by setting `height` and `width` to `None`:
+
+
+```python
+import plotly.express as px
+
+config = {
+  'toImageButtonOptions': { 'height': None, 'width': None, }
+}
+
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
 
 fig.show(config=config)
 ```
@@ -234,6 +248,29 @@ fig.add_trace(
 fig.show(config={
     'modeBarButtonsToRemove': ['toggleSpikelines','hoverCompareCartesian']
 })
+```
+
+### Add optional shape-drawing buttons to modebar
+
+Some modebar buttons of Cartesian plots are optional and have to be added explictly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+df = px.data.iris()
+fig = px.scatter(df, x='petal_width', y='sepal_length', color='species')
+fig.update_layout(
+    dragmode='drawopenpath',
+    newshape_line_color='cyan',
+    title_text='Draw a path to separate versicolor and virginica'
+)
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
 ```
 
 ### Double-Click Delay

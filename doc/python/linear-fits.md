@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,14 +22,14 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      Add linear Ordinary Least Squares (OLS) regression trendlines or non-linear
-      Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots in Python.
+    description: Add linear Ordinary Least Squares (OLS) regression trendlines or
+      non-linear Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots
+      in Python.
     display_as: statistical
     language: python
     layout: base
     name: Linear and Non-Linear Trendlines
-    order: 13
+    order: 12
     page_type: u-guide
     permalink: python/linear-fits/
     thumbnail: thumbnail/linear_fit.jpg
@@ -37,7 +37,7 @@ jupyter:
 
 ### Linear fit trendlines with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 Plotly Express allows you to add [Ordinary Least](https://en.wikipedia.org/wiki/Ordinary_least_squares) Squares regression trendline to scatterplots with the `trendline` argument. In order to do so, you will need to install `statsmodels` and its dependencies. Hovering over the trendline will show the equation of the line and its R-squared value.
 

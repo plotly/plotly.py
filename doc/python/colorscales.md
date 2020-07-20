@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.8
   plotly:
-    description:
-      How to set, create and control continous color scales and color bars
+    description: How to set, create and control continous color scales and color bars
       in scatter, bar, map and heatmap figures.
     display_as: file_settings
     has_thumbnail: true
@@ -53,7 +52,7 @@ This document explains the following four continuous-color-related concepts:
 
 ### Continuous Color with Plotly Express
 
-Most Plotly Express functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/discrete-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
+Most [Plotly Express](/python/plotly-express/) functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/discrete-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
 
 For example, in the `tips` dataset, the `size` column contains numbers:
 
@@ -93,7 +92,7 @@ fig.show()
 
 ### Color Scales in Plotly Express
 
-By default, Plotly Express will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in color scales](/python/builtin-colorscales/), however, or define your own.
+By default, [Plotly Express](/python/plotly-express/) will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in color scales](/python/builtin-colorscales/), however, or define your own.
 
 Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis color scale.
 

@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description:
-      How to adjust axes properties in python. Includes examples of linear
+    description: How to adjust axes properties in python. Includes examples of linear
       and logarithmic axes, axes titles, styling and coloring axes and grid lines,
       and more.
     display_as: file_settings
@@ -532,6 +531,20 @@ fig.update_yaxes(range=[3, 9])
 fig.show()
 ```
 
+#### Disabling Pan/Zoom on Axes (Fixed Range)
+
+Pan/Zoom can be disabled for a given axis by setting `fixedrange` to `True`.
+
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(fixedrange=True)
+
+fig.show()
+```
+
 ### Fixed Ratio Axes
 
 The `scaleanchor` and `scaleratio` axis properties can be used to force a fixed ratio of pixels per unit between two axes.
@@ -743,7 +756,7 @@ fig.show()
 
 #### Synchronizing axes in subplots with `matches`
 
-Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly.
 
 Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
 

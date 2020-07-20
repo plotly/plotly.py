@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Sunburst Charts
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/sunburst-charts/
     thumbnail: thumbnail/sunburst.gif
@@ -43,7 +43,7 @@ Main arguments:
 
 ### Basic Sunburst Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
@@ -144,7 +144,7 @@ fig.show()
 
 ### Basic Sunburst Plot with go.Sunburst
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 import plotly.graph_objects as go
@@ -196,7 +196,7 @@ fig.show()
 
 With branchvalues "total", the value of the parent represents the width of its wedge. In the example below, "Enoch" is 4 and "Awan" is 6 and so Enoch's width is 4/6ths of Awans. With branchvalues "remainder", the parent's width is determined by its own value plus those of its children. So, Enoch's width is 4/10ths of Awan's (4 / (6 + 4)).
 
-Note that this means that the sum of the values of the children cannot exceed the value of their parent when branchvalues "total". When branchvalues "relative" (the default), children will not take up all of the space below their parent (unless the parent is the root and it has a value of 0).
+Note that this means that the sum of the values of the children cannot exceed the value of their parent when branchvalues is set to "total". When branchvalues is set to "remainder" (the default), children will not take up all of the space below their parent (unless the parent is the root and it has a value of 0).
 
 ```python
 import plotly.graph_objects as go

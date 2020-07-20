@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Carpet Contour Plot
-    order: 15
+    order: 14
     page_type: u-guide
     permalink: python/carpet-contour/
     thumbnail: thumbnail/contourcarpet.jpg
