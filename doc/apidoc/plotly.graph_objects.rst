@@ -43,6 +43,7 @@ Simple Traces
    Bar
    Pie
    Heatmap
+   Heatmapgl
    Image
    Contour
    Table

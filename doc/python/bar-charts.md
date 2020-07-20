@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -35,7 +35,7 @@ jupyter:
 
 ### Bar chart with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.bar`, each row of the DataFrame is represented as a rectangular mark.
 
@@ -99,7 +99,7 @@ To learn more, see the _link to px.bar reference page_.
 
 #### Basic Bar Chart with plotly.graph_objects
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Bar` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Bar` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 import plotly.graph_objects as go

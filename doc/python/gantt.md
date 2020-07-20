@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.7
   plotly:
     description: How to make Gantt Charts in Python with Plotly. Gantt Charts use
       horizontal bars to represent the start and end times of tasks.
@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Gantt Charts
-    order: 10
+    order: 9
     page_type: u-guide
     permalink: python/gantt/
     thumbnail: thumbnail/gantt.jpg
@@ -37,10 +37,82 @@ jupyter:
 A [Gantt chart](https://en.wikipedia.org/wiki/Gantt_chart) is a type of bar chart that illustrates a project schedule. The chart lists the tasks to be performed on the vertical axis, and time intervals on the horizontal axis. The width of the horizontal bars in the graph shows the duration of each activity.
 
 
-Gantt charts can be made using a [figure factory](/python/figure-factories/) as detailed in this page. See also the [bar charts examples](https://plotly.com/python/bar-charts/).
+### Gantt Charts and Timelines with plotly.express
 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.timeline` (*introduced in version 4.9*) each data point is represented as a horizontal bar with a start and end point specified as dates. 
 
-#### Simple Gantt Chart
+The `px.timeline` function by default sets the X-axis to be of `type=date`, so it can be configured like any [time-series chart](/python/time-series/).
+
+Plotly Express also supports a [general-purpose `px.bar` function for bar charts](/python/bar-charts/).
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame([
+    dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
+    dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15'),
+    dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30')
+])
+
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task")
+fig.update_yaxes(autorange="reversed") # otherwise tasks are listed from the bottom up
+fig.show()
+```
+
+`px.timeline` supports [discrete color](/python/discrete-color/) as above, or [continuous color](/python/colorscales/) as follows.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame([
+    dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Resource="Alex"),
+    dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource="Alex"),
+    dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Resource="Max")
+])
+
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Resource")
+fig.update_yaxes(autorange="reversed")
+fig.show()
+```
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame([
+    dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Completion_pct=50),
+    dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Completion_pct=25),
+    dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Completion_pct=75)
+])
+
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Completion_pct")
+fig.update_yaxes(autorange="reversed")
+fig.show()
+```
+
+It is also possible to have multiple bars on the same horizontal line, say by resource:
+
+*Note*: When setting `color` to the same value as `y`, `autorange` should not be set to `reverse`, so as to list the value of the Y axis in the same order as the legend entries.
+
+```python
+import plotly.express as px
+import pandas as pd
+
+df = pd.DataFrame([
+    dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Resource="Alex"),
+    dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource="Alex"),
+    dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Resource="Max")
+])
+
+fig = px.timeline(df, x_start="Start", x_end="Finish", y="Resource", color="Resource")
+fig.show()
+```
+
+#### Deprecated Figure Factory
+
+Prior to the introduction of `plotly.express.timeline()` in version 4.9, the recommended way to make Gantt charts was to use the now-deprecated `create_gantt()` [figure factory](/python/figure-factories/), as follows:
 
 ```python
 import plotly.figure_factory as ff
@@ -53,93 +125,12 @@ fig = ff.create_gantt(df)
 fig.show()
 ```
 
-#### Index by Numeric Variable
-
-```python
-import plotly.figure_factory as ff
-
-df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Complete=10),
-      dict(Task="Job B", Start='2008-12-05', Finish='2009-04-15', Complete=60),
-      dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Complete=95)]
-
-fig = ff.create_gantt(df, colors='Viridis', index_col='Complete', show_colorbar=True)
-fig.show()
-```
-
-#### Index by String Variable
-
-```python
-import plotly.figure_factory as ff
-
-df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-01', Resource='Apple'),
-      dict(Task="Job B", Start='2009-03-05', Finish='2009-04-15', Resource='Grape'),
-      dict(Task="Job C", Start='2009-04-20', Finish='2009-09-30', Resource='Banana')]
-
-colors = ['#7a0504', (0.2, 0.7, 0.3), 'rgb(210, 60, 180)']
-
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', reverse_colors=True,
-                      show_colorbar=True)
-fig.show()
-```
-
-#### Use a Dictionary for Colors
-
-```python
-import plotly.figure_factory as ff
-
-df = [dict(Task="Job A", Start='2016-01-01', Finish='2016-01-02', Resource='Apple'),
-      dict(Task="Job B", Start='2016-01-02', Finish='2016-01-04', Resource='Grape'),
-      dict(Task="Job C", Start='2016-01-02', Finish='2016-01-03', Resource='Banana')]
-
-colors = dict(Apple='rgb(220, 0, 0)', Grape='rgb(170, 14, 200)', Banana=(1, 0.9, 0.16))
-
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True)
-fig.show()
-```
-
-#### Use a Pandas Dataframe
-
-```python
-import plotly.figure_factory as ff
-
-import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gantt_example.csv')
-
-fig = ff.create_gantt(df, colors=['#333F44', '#93e4c1'], index_col='Complete',
-                      show_colorbar=True, bar_width=0.2, showgrid_x=True, showgrid_y=True)
-fig.show()
-```
-
-#### Using Hours and Minutes in Times
-
-```python
-import plotly.figure_factory as ff
-
-df = [
-    dict(Task='Morning Sleep', Start='2016-01-01', Finish='2016-01-01 6:00:00', Resource='Sleep'),
-    dict(Task='Breakfast', Start='2016-01-01 7:00:00', Finish='2016-01-01 7:30:00', Resource='Food'),
-    dict(Task='Work', Start='2016-01-01 9:00:00', Finish='2016-01-01 11:25:00', Resource='Brain'),
-    dict(Task='Break', Start='2016-01-01 11:30:00', Finish='2016-01-01 12:00:00', Resource='Rest'),
-    dict(Task='Lunch', Start='2016-01-01 12:00:00', Finish='2016-01-01 13:00:00', Resource='Food'),
-    dict(Task='Work', Start='2016-01-01 13:00:00', Finish='2016-01-01 17:00:00', Resource='Brain'),
-    dict(Task='Exercise', Start='2016-01-01 17:30:00', Finish='2016-01-01 18:30:00', Resource='Cardio'),
-    dict(Task='Post Workout Rest', Start='2016-01-01 18:30:00', Finish='2016-01-01 19:00:00', Resource='Rest'),
-    dict(Task='Dinner', Start='2016-01-01 19:00:00', Finish='2016-01-01 20:00:00', Resource='Food'),
-    dict(Task='Evening Sleep', Start='2016-01-01 21:00:00', Finish='2016-01-01 23:59:00', Resource='Sleep')
-]
-
-colors = dict(Cardio = 'rgb(46, 137, 205)',
-              Food = 'rgb(114, 44, 121)',
-              Sleep = 'rgb(198, 47, 105)',
-              Brain = 'rgb(58, 149, 136)',
-              Rest = 'rgb(107, 127, 135)')
-
-fig = ff.create_gantt(df, colors=colors, index_col='Resource', title='Daily Schedule',
-                      show_colorbar=True, bar_width=0.8, showgrid_x=True, showgrid_y=True)
-fig.show()
-```
-
+<!-- #region -->
 #### Group Tasks Together
+
+
+The following example shows how to use the now-deprecated `create_gantt()` [figure factory](/python/figure-factories/) to color tasks by a numeric variable.
+<!-- #endregion -->
 
 ```python
 import plotly.figure_factory as ff
@@ -159,6 +150,21 @@ colors = {'Not Started': 'rgb(220, 0, 0)',
 
 fig = ff.create_gantt(df, colors=colors, index_col='Resource', show_colorbar=True,
                       group_tasks=True)
+fig.show()
+```
+
+#### Color by Numeric Variable
+
+The following example shows how to use the now-deprecated `create_gantt()` [figure factory](/python/figure-factories/) to color tasks by a numeric variable.
+
+```python
+import plotly.figure_factory as ff
+
+df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28', Complete=10),
+      dict(Task="Job B", Start='2008-12-05', Finish='2009-04-15', Complete=60),
+      dict(Task="Job C", Start='2009-02-20', Finish='2009-05-30', Complete=95)]
+
+fig = ff.create_gantt(df, colors='Viridis', index_col='Complete', show_colorbar=True)
 fig.show()
 ```
 

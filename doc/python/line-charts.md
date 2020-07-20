@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.6.7
   plotly:
-    description:
-      How to make line charts in Python with Plotly. Examples on creating
+    description: How to make line charts in Python with Plotly. Examples on creating
       and styling line charts in Python with Plotly.
     display_as: basic
     language: python
@@ -37,7 +36,7 @@ jupyter:
 
 ### Line Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.line`, each data point is represented as a vertex (which location is given by the `x` and `y` columns) of a **polyline mark** in 2D space.
 
 For more examples of line plots, see the [line and scatter notebook](https://plotly.com/python/line-and-scatter/).
 
@@ -86,7 +85,7 @@ fig.show()
 
 ### Line Plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).
 
 #### Simple Line Plot
 

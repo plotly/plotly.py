@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
@@ -30,7 +30,7 @@ Funnel charts are often used to represent data in different stages of a business
 
 ### Basic Funnel Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.funnel`, each row of the DataFrame is represented as a stage of the funnel.
 
@@ -60,7 +60,7 @@ fig.show()
 
 ### Basic Funnel Chart with graph_objects trace go.Funnel
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnel` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnel` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 from plotly import graph_objects as go
@@ -138,7 +138,7 @@ fig.show()
 
 ### Basic Area Funnel Plot with go.Funnelarea
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Funnelarea` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Funnelarea` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 from plotly import graph_objects as go

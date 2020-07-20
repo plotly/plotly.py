@@ -40,7 +40,7 @@ If you're looking instead for a multilevel hierarchical pie-like chart, go to th
 
 ### Pie chart with plotly express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In `px.pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `names`.
 
@@ -104,7 +104,7 @@ fig.show()
 
 ### Basic Pie Chart with go.Pie
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Pie` class from `plotly.graph_objects`](/python/graph-objects/).
 
 In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`.
 

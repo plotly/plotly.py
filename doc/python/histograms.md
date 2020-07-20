@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -41,7 +41,7 @@ bar, go to the [Bar Chart tutorial](/python/bar-charts/).
 
 ## Histogram with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -146,7 +146,7 @@ fig.show()
 
 ## Histograms with go.Histogram
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Histogram` from `plotly.graph_objects`. All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Histogram` class from `plotly.graph_objects`](/python/graph-objects/). All of the available histogram options are described in the histogram section of the reference page: https://plotly.com/python/reference#histogram.
 
 ### Basic Histogram
 

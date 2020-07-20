@@ -25,19 +25,28 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
-        "For horizontal histograms, these values are used as inputs to `histfunc`.",
     ],
     y=[
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the y axis in cartesian coordinates.",
-        "For vertical histograms, these values are used as inputs to `histfunc`.",
     ],
     z=[
         colref_type,
         colref_desc,
         "Values from this column or array_like are used to position marks along the z axis in cartesian coordinates.",
-        "For `density_heatmap` and `density_contour` these values are used as the inputs to `histfunc`.",
+    ],
+    x_start=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
+    ],
+    x_end=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
     ],
     a=[
         colref_type,
@@ -99,6 +108,11 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are to be interpreted according to `locationmode` and mapped to longitude/latitude.",
+    ],
+    base=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to position the base of the bar.",
     ],
     dimensions=[
         colref_list_type,
@@ -173,7 +187,7 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to assign mark sizes.",
     ],
-    radius=["int (default is 30)", "Sets the radius of influence of each point.",],
+    radius=["int (default is 30)", "Sets the radius of influence of each point."],
     hover_name=[
         colref_type,
         colref_desc,
@@ -227,6 +241,14 @@ docs = dict(
         "Wraps the column variable at this width, so that the column facets span multiple rows.",
         "Ignored if 0, and forced to 0 if `facet_row` or a `marginal` is set.",
     ],
+    facet_row_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7 when facet_col_wrap is used.",
+    ],
+    facet_col_spacing=[
+        "float between 0 and 1",
+        "Spacing between facet columns, in paper units Default is 0.02.",
+    ],
     animation_frame=[
         colref_type,
         colref_desc,
@@ -247,12 +269,14 @@ docs = dict(
         "String values should define plotly.js symbols",
         "Used to override `symbol_sequence` to assign a specific symbols to marks corresponding with specific values.",
         "Keys in `symbol_map` should be values in the column denoted by `symbol`.",
+        "Alternatively, if the values of `symbol` are valid symbol names, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     line_dash_map=[
         "dict with str keys and str values (default `{}`)",
         "Strings values define plotly.js dash-patterns.",
         "Used to override `line_dash_sequences` to assign a specific dash-patterns to lines corresponding with specific values.",
         "Keys in `line_dash_map` should be values in the column denoted by `line_dash`.",
+        "Alternatively, if the values of `line_dash` are valid line-dash names, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     line_dash_sequence=[
         "list of str",
@@ -270,6 +294,7 @@ docs = dict(
         "String values should define valid CSS-colors",
         "Used to override `color_discrete_sequence` to assign a specific colors to marks corresponding with specific values.",
         "Keys in `color_discrete_map` should be values in the column denoted by `color`.",
+        "Alternatively, if the values of `color` are valid colors, the string `'identity'` may be passed to cause them to be used directly.",
     ],
     color_continuous_scale=[
         "list of str",
@@ -386,12 +411,9 @@ docs = dict(
         "Sets start angle for the angular axis, with 0 being due east and 90 being due north.",
     ],
     histfunc=[
-        "str (default `'count'`)",
+        "str (default `'count'` if no arguments are provided, else `'sum'`)",
         "One of `'count'`, `'sum'`, `'avg'`, `'min'`, or `'max'`."
         "Function used to aggregate values for summarization (note: can be normalized with `histnorm`).",
-        "The arguments to this function for `histogram` are the values of `y` if `orientation` is `'v'`,",
-        "otherwise the arguements are the values of `x`.",
-        "The arguments to this function for `density_heatmap` and `density_contour` are the values of `z`.",
     ],
     histnorm=[
         "str (default `None`)",
@@ -443,8 +465,10 @@ docs = dict(
     ],
     zoom=["int (default `8`)", "Between 0 and 20.", "Sets map zoom level."],
     orientation=[
-        "str (default `'v'`)",
-        "One of `'h'` for horizontal or `'v'` for vertical)",
+        "str, one of `'h'` for horizontal or `'v'` for vertical. ",
+        "(default `'v'` if `x` and `y` are provided and both continous or both categorical, ",
+        "otherwise `'v'`(`'h'`) if `x`(`y`) is categorical and `y`(`x`) is continuous, ",
+        "otherwise `'v'`(`'h'`) if only `x`(`y`) is provided) ",
     ],
     line_close=[
         "boolean (default `False`)",
@@ -518,18 +542,20 @@ docs = dict(
 )
 
 
-def make_docstring(fn, override_dict={}):
+def make_docstring(fn, override_dict={}, append_dict={}):
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:
         if override_dict.get(param):
-            param_doc = override_dict[param]
+            param_doc = list(override_dict[param])
         else:
-            param_doc = docs[param]
+            param_doc = list(docs[param])
+            if append_dict.get(param):
+                param_doc += append_dict[param]
         param_desc_list = param_doc[1:]
         param_desc = (
             tw.fill(" ".join(param_desc_list or ""))
-            if param in docs
+            if param in docs or param in override_dict
             else "(documentation missing from map)"
         )
 

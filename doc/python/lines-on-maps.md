@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Lines on Maps
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/lines-on-maps/
     thumbnail: thumbnail/flight-paths.jpg
@@ -37,11 +37,11 @@ Below we show how to create geographical line plots using either Plotly Express 
 
 #### Base Map Configuration
 
-Plotly figures made with `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` graph objects have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
+Plotly figures made with [Plotly Express](/python/plotly-express/) `px.scatter_geo`, `px.line_geo` or `px.choropleth` functions or containing `go.Choropleth` or `go.Scattergeo` [graph objects](/python/graph-objects/) have a `go.layout.Geo` object which can be used to [control the appearance of the base map](/python/map-configuration/) onto which data is plotted.
 
 ## Lines on Maps with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -112,11 +112,11 @@ fig.update_layout(
 fig.show()
 ```
 ### Performance improvement: put many lines in the same trace
-For very large amounts (>1000) of lines, performance may become critcal. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption. 
+For very large amounts (>1000) of lines, performance may become critcal. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption.
 
-Use ```None``` between path coordinates to create a break in the otherwise connected paths. 
+Use ```None``` between path coordinates to create a break in the otherwise connected paths.
 
-```python 
+```python
 import plotly.graph_objects as go
 import pandas as pd
 
@@ -164,7 +164,7 @@ fig.add_trace(
         lat = lats,
         mode = 'lines',
         line = dict(width = 1,color = 'red'),
-        opacity = 0.5 
+        opacity = 0.5
     )
 )
 

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Sunburst Charts
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/sunburst-charts/
     thumbnail: thumbnail/sunburst.gif
@@ -43,7 +43,7 @@ Main arguments:
 
 ### Basic Sunburst Plot with plotly.express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 With `px.sunburst`, each row of the DataFrame is represented as a sector of the sunburst.
 
@@ -144,7 +144,7 @@ fig.show()
 
 ### Basic Sunburst Plot with go.Sunburst
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Sunburst` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Sunburst` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 import plotly.graph_objects as go

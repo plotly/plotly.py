@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Figure Factory Tables
-    order: 16
+    order: 15
     permalink: python/figure-factory-table/
     redirect_from:
     - python/figure-factory/table/
@@ -279,4 +279,3 @@ fig.show()
 #### Reference
 
 For more info on `ff.create_table()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_table.html)
-

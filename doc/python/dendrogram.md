@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Dendrograms
-    order: 7
+    order: 6
     page_type: u-guide
     permalink: python/dendrogram/
     thumbnail: thumbnail/dendrogram.jpg

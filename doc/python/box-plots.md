@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.2"
+      format_version: '1.2'
       jupytext_version: 1.3.1
   kernelspec:
     display_name: Python 3
@@ -31,8 +31,8 @@ jupyter:
     page_type: example_index
     permalink: python/box-plots/
     redirect_from:
-      - /python/box/
-      - /python/basic_statistics/
+    - /python/box/
+    - /python/basic_statistics/
     thumbnail: thumbnail/box.jpg
 ---
 
@@ -40,7 +40,7 @@ A [box plot](https://en.wikipedia.org/wiki/Box_plot) is a statistical representa
 
 ## Box Plot with `plotly.express`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 In a box plot created by `px.box`, the distribution of the column given as `y` argument is represented.
 
@@ -134,7 +134,7 @@ fig.show()
 
 ## Box plot with go.Box
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Box` function from `plotly.graph_objects`. All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Box` class from `plotly.graph_objects`](/python/graph-objects/). All available options for `go.Box` are described in the reference page https://plotly.com/python/reference/#box.
 
 ### Basic Box Plot
 

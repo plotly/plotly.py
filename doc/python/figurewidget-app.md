@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Interactive Data Analysis with FigureWidget ipywidgets
-    order: 23
+    order: 3
     page_type: example_index
     permalink: python/figurewidget-app/
     thumbnail: thumbnail/multi-widget.jpg
