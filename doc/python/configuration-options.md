@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to set the configuration options of figures using the Plotly
       Python graphing library.
@@ -34,7 +34,7 @@ jupyter:
     thumbnail: thumbnail/modebar-icons.png
 ---
 
-# Configuration Options
+## Configuration Options
 
 The `.show()` method that you use to display your figures also accepts a `config` parameter.
 
@@ -44,7 +44,7 @@ If you don't set an option's value, it will be automatically be set to the defau
 
 For the complete list of configuration options and their defaults see: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
 
-##### Enabling Scroll Zoom
+### Enabling Scroll Zoom
 
 This option allows users to zoom in and out of figures using the scroll wheel on their mouse and/or a two-finger scroll.
 
@@ -63,7 +63,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Forcing The Modebar to Always Be Visible
+### Forcing The Modebar to Always Be Visible
 
 When users hover over a figure generated with plotly.py, a modebar appears in the top-right of the figure. This presents users with several options for interacting with the figure.
 
@@ -84,7 +84,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Preventing the Modebar from Appearing
+### Preventing the Modebar from Appearing
 
 When users hover over a figure generated with `plotly.py`, a modebar appears in the top-right of the figure. This presents users with several options for interacting with the figure.
 
@@ -106,7 +106,7 @@ fig.show(config=config)
 ```
 
 
-##### Hiding the Plotly Logo on the Modebar
+### Hiding the Plotly Logo on the Modebar
 
 ```python
 import plotly.graph_objects as go
@@ -123,7 +123,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Turning Off Responsiveness
+### Turning Off Responsiveness
 
 By default, figures you create with the `plotly.py` package are [responsive](https://en.wikipedia.org/wiki/Responsive_web_design). Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other [rendering](https://plot.ly/python/renderers/) environments.
 
@@ -146,7 +146,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Making A Static Chart
+### Making A Static Chart
 
 ```python
 import plotly.graph_objects as go
@@ -163,7 +163,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Customizing Download Plot Button Options
+### Customizing Download Plot Button Options
 
 The camera icon on the modebar causes a static version of the figure to be downloaded via the user's browser. The default behaviour is to download a PNG of size 700 by 450 pixels.
 
@@ -182,7 +182,7 @@ config = {
   }
 }
 
-fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1])
 
 fig.show(config=config)
 ```
@@ -197,12 +197,12 @@ config = {
   'toImageButtonOptions': { 'height': None, 'width': None, }
 }
 
-fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1])
 
 fig.show(config=config)
 ```
 
-##### Specifying Multiple Configuration Options Simultaneously
+### Specifying Multiple Configuration Options Simultaneously
 
 The dictionary that you use to specify configuration options for your figures can contain more than one configuration key/value pair.
 
@@ -225,7 +225,7 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Removing Modebar Buttons
+### Removing Modebar Buttons
 
 To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
 
@@ -293,7 +293,7 @@ fig.update_layout(xaxis = {'type': 'date'})
 fig.show(config=config)
 ```
 
-#### Configuring Figures in Dash Apps
+### Configuring Figures in Dash Apps
 
 The same configuration dictionary that you pass to the `config` parameter of the `show()` method can also be passed to the [`config` property of a `dcc.Graph` component](https://dash.plotly.com/dash-core-components/graph).
 
