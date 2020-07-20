@@ -9,7 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
-from _plotly_utils.utils import _natural_sort_strings
+from _plotly_utils.utils import _natural_sort_strings, _get_int_type
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
@@ -23,7 +23,7 @@ class BaseFigure(object):
     Base class for all figure types (both widget and non-widget)
     """
 
-    _bracket_re = re.compile("^(.*)\[(\d+)\]$")
+    _bracket_re = re.compile(r"^(.*)\[(\d+)\]$")
 
     _valid_underscore_properties = {
         "error_x": "error-x",
@@ -418,6 +418,37 @@ class BaseFigure(object):
         )
 
         return repr_str
+
+    def _repr_html_(self):
+        """
+        Customize html representation
+        """
+        bundle = self._repr_mimebundle_()
+        if "text/html" in bundle:
+            return bundle["text/html"]
+        else:
+            return self.to_html(full_html=False, include_plotlyjs="cdn")
+
+    def _repr_mimebundle_(self, include=None, exclude=None, validate=True, **kwargs):
+        """
+        Return mimebundle corresponding to default renderer.
+        """
+        import plotly.io as pio
+
+        renderer_str = pio.renderers.default
+        renderers = pio._renderers.renderers
+        renderer_names = renderers._validate_coerce_renderers(renderer_str)
+        renderers_list = [renderers[name] for name in renderer_names]
+        from plotly.io._utils import validate_coerce_fig_to_dict
+        from plotly.io._renderers import MimetypeRenderer
+
+        fig_dict = validate_coerce_fig_to_dict(self, validate)
+        # Mimetype renderers
+        bundle = {}
+        for renderer in renderers_list:
+            if isinstance(renderer, MimetypeRenderer):
+                bundle.update(renderer.to_mimebundle(fig_dict))
+        return bundle
 
     def _ipython_display_(self):
         """
@@ -1529,7 +1560,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             if len(vals) != n:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-            if [r for r in vals if not isinstance(r, int)]:
+            int_type = _get_int_type()
+
+            if [r for r in vals if not isinstance(r, int_type)]:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
@@ -1639,14 +1672,19 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        rows : None or list[int] (default None)
+        rows : None, list[int], or int (default None)
             List of subplot row indexes (starting from 1) for the traces to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to row number
+
         cols : None or list[int] (default None)
             List of subplot column indexes (starting from 1) for the traces
             to be added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to column number
+
+
         secondary_ys: None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
@@ -1684,6 +1722,15 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Set trace indexes
         for ind, new_trace in enumerate(data):
             new_trace._trace_ind = ind + len(self.data)
+
+        # Allow integers as inputs to subplots
+        int_type = _get_int_type()
+
+        if isinstance(rows, int_type):
+            rows = [rows] * len(data)
+
+        if isinstance(cols, int_type):
+            cols = [cols] * len(data)
 
         # Validate rows / cols
         n = len(data)
@@ -3125,6 +3172,12 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
+
         Returns
         -------
         bytes
@@ -3184,6 +3237,11 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
         Returns
         -------
         None

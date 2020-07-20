@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Streamline Plots
-    order: 12
+    order: 11
     permalink: python/streamline-plots/
     thumbnail: thumbnail/streamline.jpg
 ---
@@ -107,4 +107,3 @@ For representing the 2-D vector field as arrows, see the [quiver plot tutorial](
 #### Reference
 
 For more info on `ff.create_streamline()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_streamline.html)
-

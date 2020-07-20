@@ -163,12 +163,14 @@ fig.add_trace(
 fig.show(config=config)
 ```
 
-##### Customizing Download Plot Options
+##### Customizing Download Plot Button Options
+
+The camera icon on the modebar causes a static version of the figure to be downloaded via the user's browser. The default behaviour is to download a PNG of size 700 by 450 pixels.
+
+This behavior can be controlled via the `toImageButtonOptions` configuration key.
 
 ```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
+import plotly.express as px
 
 config = {
   'toImageButtonOptions': {
@@ -180,10 +182,22 @@ config = {
   }
 }
 
-fig.add_trace(
-    go.Scatter(
-        x=[1, 2, 3],
-        y=[1, 3, 1]))
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
+
+fig.show(config=config)
+```
+
+Figures can be set to download at the currently-rendered size by setting `height` and `width` to `None`:
+
+
+```python
+import plotly.express as px
+
+config = {
+  'toImageButtonOptions': { 'height': None, 'width': None, }
+}
+
+fig = px.bar(x=[1, 2, 3], y=[1, 3, 1]))
 
 fig.show(config=config)
 ```

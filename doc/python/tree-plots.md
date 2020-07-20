@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Tree-plots
-    order: 10
+    order: 9
     permalink: python/tree-plots/
     thumbnail: thumbnail/treeplot.jpg
 ---

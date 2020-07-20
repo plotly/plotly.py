@@ -287,3 +287,90 @@ def test_reject_invalid_renderer(renderer):
 )
 def test_accept_valid_renderer(renderer):
     pio.renderers.default = renderer
+
+
+@pytest.mark.parametrize(
+    "renderer",
+    plotly_mimetype_renderers
+    + ["notebook", "notebook_connected", "browser", "notebook+plotly_mimetype"],
+)
+def test_repr_html(renderer):
+    pio.renderers.default = renderer
+    fig = go.Figure()
+    fig.update_layout(template=None)
+    str_html = fig._repr_html_()
+    bundle = fig._repr_mimebundle_()
+    # id number of figure
+    id_html = str_html.split('document.getElementById("')[1].split('")')[0]
+    id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
+    template = (
+        '<div>\n        \n                <script type="text/javascript">'
+        "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
+        '<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    \n            '
+        '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
+        'style="height:100%; width:100%;"></div>\n            <script type="text/javascript">'
+        "\n                \n                    window.PLOTLYENV=window.PLOTLYENV || {};"
+        '\n                    \n                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
+        " {\n                    Plotly.newPlot(\n                        'cd462b94-79ce-42a2-887f-2650a761a144',"
+        '\n                        [],\n                        {"template": {}},'
+        '\n                        {"responsive": true}\n                    )\n                };'
+        "\n                \n            </script>\n        </div>"
+    )
+    if "text/html" in bundle:
+        str_bundle = bundle["text/html"]
+        id_bundle = str_bundle.split('document.getElementById("')[1].split('")')[0]
+        assert str_html.replace(id_html, "") == str_bundle.replace(id_bundle, "")
+    else:
+        assert str_html.replace(id_html, "") == template.replace(id_pattern, "")
+
+
+all_renderers_without_orca = [
+    "plotly_mimetype",
+    "jupyterlab",
+    "nteract",
+    "vscode",
+    "notebook",
+    "notebook_connected",
+    "kaggle",
+    "azure",
+    "colab",
+    "cocalc",
+    "databricks",
+    "json",
+    "browser",
+    "firefox",
+    "chrome",
+    "chromium",
+    "iframe",
+    "iframe_connected",
+    "sphinx_gallery",
+]
+
+
+@pytest.mark.parametrize("renderer_str", all_renderers_without_orca)
+def test_repr_mimebundle(renderer_str):
+    pio.renderers.default = renderer_str
+    fig = go.Figure()
+    fig.update_layout(template=None)
+    bundle = fig._repr_mimebundle_()
+    renderer = pio.renderers[renderer_str]
+    from plotly.io._renderers import MimetypeRenderer
+
+    if isinstance(renderer, MimetypeRenderer):
+        ref_bundle = renderer.to_mimebundle(fig.to_dict())
+        for key in bundle:
+            if "getElementById" in bundle[key]:
+                id1 = bundle[key].split('document.getElementById("')[1].split('")')[0]
+                id2 = (
+                    ref_bundle[key].split('document.getElementById("')[1].split('")')[0]
+                )
+                assert bundle[key].replace(id1, "") == ref_bundle[key].replace(id2, "")
+    else:
+        assert bundle == {}
+
+
+def test_repr_mimebundle_mixed_renderer(fig1):
+    pio.renderers.default = "notebook+plotly_mimetype"
+    assert set(fig1._repr_mimebundle_().keys()) == set(
+        {"application/vnd.plotly.v1+json", "text/html"}
+    )

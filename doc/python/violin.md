@@ -5,7 +5,7 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
+      format_version: '1.1'
       jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
@@ -27,10 +27,12 @@ jupyter:
     language: python
     layout: base
     name: Violin Plots
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/violin/
-    redirect_from: /python/violin-plot/
+    redirect_from:
+    - /python/violin-plot/
+    - /python/violin-plots/
     thumbnail: thumbnail/violin.jpg
 ---
 
@@ -42,7 +44,7 @@ See also the [list of other statistical charts](https://plotly.com/python/statis
 
 ### Basic Violin Plot with Plotly Express
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on "tidy" data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 ```python
 import plotly.express as px
@@ -88,7 +90,7 @@ fig.show()
 
 ## Violin Plot with go.Violin
 
-If Plotly Express does not provide a good starting point, you can use the more generic function `go.Violin` from `plotly.graph_objects`. All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/#violin
+If Plotly Express does not provide a good starting point, you can use [the more generic `go.Violin` class from `plotly.graph_objects`](/python/graph-objects/). All the options of `go.Violin` are documented in the reference https://plotly.com/python/reference/#violin
 
 #### Basic Violin Plot
 

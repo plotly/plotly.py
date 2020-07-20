@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: USA County Choropleth Maps
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/county-choropleth/
     thumbnail: thumbnail/county-choropleth-usa-greybkgd.jpg

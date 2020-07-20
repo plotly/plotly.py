@@ -98,7 +98,7 @@ fig.update_layout(yaxis_tickformat = '%')
 fig.show()
 ```
 
-#### Using Tickformat Atttribute - Date/Time
+#### Using Tickformat Attribute - Date/Time
 
 
 For more date/time formatting types, see: https://github.com/d3/d3-time-format/blob/master/README.md
@@ -195,4 +195,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#layout-xaxis for more information and chart attribute options!
-
