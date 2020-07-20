@@ -274,25 +274,6 @@ fig = go.Figure(data=go.Scattergl(
 fig.show()
 ```
 
-### Sparklines With go.Scatter
-
-Sparklines are scatter plots inside subplots, with gridlines, axis lines, and ticks removed. 
-
-```python
-import plotly.express as px
-from plotly.subplots import make_subplots
-df = px.data.gapminder()
-fig = make_subplots(2, 1)
-df1 = df.query("country == 'Canada'")
-fig.add_trace(go.Scatter(x=df1['year'], y=df1['gdpPercap'], mode='lines', name='Canada'), 1, 1)
-df2 = df.query("country == 'France'")
-fig.add_trace(go.Scatter(x=df2['year'], y=df2['gdpPercap'], mode='lines', name='France'), 2, 1)
-fig.update_layout(template=None, height=400)
-fig.update_xaxes(showgrid=False)
-fig.update_yaxes(showgrid=False)
-fig.show()
-```
-
 ### Reference
 
 See https://plotly.com/python/reference/#scatter or https://plotly.com/python/reference/#scattergl for more information and chart attribute options!
