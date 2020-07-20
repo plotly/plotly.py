@@ -1,58 +1,15 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._t import TValidator
+    from ._r import RValidator
+    from ._l import LValidator
+    from ._b import BValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class TValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="t", parent_name="treemap.marker.pad", **kwargs):
-        super(TValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class RValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="r", parent_name="treemap.marker.pad", **kwargs):
-        super(RValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class LValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="l", parent_name="treemap.marker.pad", **kwargs):
-        super(LValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="b", parent_name="treemap.marker.pad", **kwargs):
-        super(BValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        ["._t.TValidator", "._r.RValidator", "._l.LValidator", "._b.BValidator"],
+    )

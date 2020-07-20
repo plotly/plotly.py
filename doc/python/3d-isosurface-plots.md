@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 3D Isosurface Plots
-    order: 11
+    order: 10
     page_type: u-guide
     permalink: python/3d-isosurface-plots/
     redirect_from: python/isosurfaces-with-marching-cubes/
@@ -236,4 +236,3 @@ fig.show()
 
 #### Reference
 See https://plotly.com/python/reference/#isosurface for more information and chart attribute options!
-

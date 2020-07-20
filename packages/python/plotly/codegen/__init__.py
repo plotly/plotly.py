@@ -1,4 +1,5 @@
 import json
+import os
 import os.path as opath
 import shutil
 import subprocess
@@ -17,6 +18,7 @@ from codegen.utils import (
     FrameNode,
     write_init_py,
     ElementDefaultsNode,
+    build_from_imports_py,
 )
 from codegen.validators import (
     write_validator_py,
@@ -190,14 +192,6 @@ def perform_codegen():
     # -------------------
     for node in all_compound_nodes:
         write_datatype_py(outdir, node)
-        alls.setdefault(node.path_parts, [])
-        alls[node.path_parts].extend(
-            c.name_datatype_class for c in node.child_compound_datatypes
-        )
-        if node.parent_path_parts == ():
-            # Add top-level classes to alls
-            alls.setdefault((), [])
-            alls[node.parent_path_parts].append(node.name_datatype_class)
 
     # ### Deprecated ###
     # These are deprecated legacy datatypes like graph_objs.Marker
@@ -219,20 +213,45 @@ def perform_codegen():
         layout_array_nodes,
     )
 
+    # Write validator __init__.py files
+    # ---------------------------------
+    # ### Write __init__.py files for each validator package ###
+    validator_rel_class_imports = {}
+    for node in all_datatype_nodes:
+        if node.is_mapped:
+            continue
+        key = node.parent_path_parts
+        validator_rel_class_imports.setdefault(key, []).append(
+            f"._{node.name_property}.{node.name_validator_class}"
+        )
+
+    # Add Data validator
+    root_validator_pairs = validator_rel_class_imports[()]
+    root_validator_pairs.append("._data.DataValidator")
+
+    # Output validator __init__.py files
+    validators_pkg = opath.join(outdir, "validators")
+    for path_parts, rel_classes in validator_rel_class_imports.items():
+        write_init_py(validators_pkg, path_parts, [], rel_classes)
+
     # Write datatype __init__.py files
     # --------------------------------
-    # ### Build mapping from parent package to datatype class ###
-    path_to_datatype_import_info = {}
+    datatype_rel_class_imports = {}
+    datatype_rel_module_imports = {}
+
     for node in all_compound_nodes:
         key = node.parent_path_parts
 
+        # class import
+        datatype_rel_class_imports.setdefault(key, []).append(
+            f"._{node.name_undercase}.{node.name_datatype_class}"
+        )
+
         # submodule import
         if node.child_compound_datatypes:
-
-            path_to_datatype_import_info.setdefault(key, []).append(
-                (f"plotly.graph_objs{node.parent_dotpath_str}", node.name_undercase)
+            datatype_rel_module_imports.setdefault(key, []).append(
+                f".{node.name_undercase}"
             )
-            alls[node.parent_path_parts].append(node.name_undercase)
 
     # ### Write plotly/graph_objs/graph_objs.py ###
     # This if for backward compatibility. It just imports everything from
@@ -240,33 +259,45 @@ def perform_codegen():
     write_graph_objs_graph_objs(outdir)
 
     # ### Add Figure and FigureWidget ###
-    root_datatype_imports = path_to_datatype_import_info[()]
-    root_datatype_imports.append(("._figure", "Figure"))
-    alls[()].append("Figure")
+    root_datatype_imports = datatype_rel_class_imports[()]
+    root_datatype_imports.append("._figure.Figure")
 
     # ### Add deprecations ###
-    root_datatype_imports.append(("._deprecations", DEPRECATED_DATATYPES.keys()))
-    alls[()].extend(DEPRECATED_DATATYPES.keys())
-
-    # Sort alls
-    for k, v in alls.items():
-        alls[k] = list(sorted(v))
+    for dep_clas in DEPRECATED_DATATYPES:
+        root_datatype_imports.append(f"._deprecations.{dep_clas}")
 
     optional_figure_widget_import = f"""
-__all__ = {alls[()]}
-try:
-    import ipywidgets
-    from distutils.version import LooseVersion
-    if LooseVersion(ipywidgets.__version__) >= LooseVersion('7.0.0'):
-        from ._figurewidget import FigureWidget
-        __all__.append("FigureWidget")
-    del LooseVersion
-    del ipywidgets
-except ImportError:
-    pass
-"""
-    root_datatype_imports.append(optional_figure_widget_import)
+if sys.version_info < (3, 7):
+    try:
+        import ipywidgets as _ipywidgets
+        from distutils.version import LooseVersion as _LooseVersion
+        if _LooseVersion(_ipywidgets.__version__) >= _LooseVersion("7.0.0"):
+            from ..graph_objs._figurewidget import FigureWidget
+        else:
+            raise ImportError()
+    except Exception:
+        from ..missing_ipywidgets import FigureWidget
+else:
+    __all__.append("FigureWidget")
+    orig_getattr = __getattr__
+    def __getattr__(import_name):
+        if import_name == "FigureWidget":
+            try:
+                import ipywidgets
+                from distutils.version import LooseVersion
 
+                if LooseVersion(ipywidgets.__version__) >= LooseVersion("7.0.0"):
+                    from ..graph_objs._figurewidget import FigureWidget
+
+                    return FigureWidget
+                else:
+                    raise ImportError()
+            except Exception:
+                from ..missing_ipywidgets import FigureWidget
+                return FigureWidget
+
+        return orig_getattr(import_name)
+"""
     # ### __all__ ###
     for path_parts, class_names in alls.items():
         if path_parts and class_names:
@@ -276,18 +307,34 @@ except ImportError:
 
     # ### Output datatype __init__.py files ###
     graph_objs_pkg = opath.join(outdir, "graph_objs")
-    for path_parts, import_pairs in path_to_datatype_import_info.items():
-        write_init_py(graph_objs_pkg, path_parts, import_pairs)
+    for path_parts in datatype_rel_class_imports:
+        rel_classes = sorted(datatype_rel_class_imports[path_parts])
+        rel_modules = sorted(datatype_rel_module_imports.get(path_parts, []))
+        if path_parts == ():
+            init_extra = optional_figure_widget_import
+        else:
+            init_extra = ""
+        write_init_py(graph_objs_pkg, path_parts, rel_modules, rel_classes, init_extra)
 
     # ### Output graph_objects.py alias
-    graph_objects_path = opath.join(outdir, "graph_objects.py")
+    graph_objects_rel_classes = [
+        "..graph_objs." + rel_path.split(".")[-1]
+        for rel_path in datatype_rel_class_imports[()]
+    ]
+    graph_objects_rel_modules = [
+        "..graph_objs." + rel_module.split(".")[-1]
+        for rel_module in datatype_rel_module_imports[()]
+    ]
+
+    graph_objects_init_source = build_from_imports_py(
+        graph_objects_rel_modules,
+        graph_objects_rel_classes,
+        init_extra=optional_figure_widget_import,
+    )
+    graph_objects_path = opath.join(outdir, "graph_objects", "__init__.py")
+    os.makedirs(opath.join(outdir, "graph_objects"), exist_ok=True)
     with open(graph_objects_path, "wt") as f:
-        f.write(
-            f"""\
-from __future__ import absolute_import
-from plotly.graph_objs import *
-__all__ = {alls[()]}"""
-        )
+        f.write(graph_objects_init_source)
 
     # ### Run black code formatter on output directories ###
     subprocess.call(["black", "--target-version=py27", validators_pkgdir])

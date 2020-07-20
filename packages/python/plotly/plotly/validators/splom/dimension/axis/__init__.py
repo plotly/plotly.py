@@ -1,31 +1,11 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._type import TypeValidator
+    from ._matches import MatchesValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class TypeValidator(_plotly_utils.basevalidators.EnumeratedValidator):
-    def __init__(
-        self, plotly_name="type", parent_name="splom.dimension.axis", **kwargs
-    ):
-        super(TypeValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc+clearAxisTypes"),
-            role=kwargs.pop("role", "info"),
-            values=kwargs.pop("values", ["linear", "log", "date", "category"]),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class MatchesValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(
-        self, plotly_name="matches", parent_name="splom.dimension.axis", **kwargs
-    ):
-        super(MatchesValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__, [], ["._type.TypeValidator", "._matches.MatchesValidator"]
+    )

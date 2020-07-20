@@ -117,7 +117,7 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
     
     import re
     _subplotid_prop_re = re.compile(
-        '^(' + '|'.join(_subplotid_prop_names) + ')(\d+)$')
+        '^(' + '|'.join(_subplotid_prop_names) + r')(\d+)$')
 """
         )
 
@@ -153,10 +153,22 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
 """
         )
 
-    # ### Property definitions ###
     child_datatype_nodes = node.child_datatypes
-
     subtype_nodes = child_datatype_nodes
+    valid_props_list = sorted(
+        [node.name_property for node in subtype_nodes + literal_nodes]
+    )
+    buffer.write(
+        f"""
+    # class properties
+    # --------------------
+    _parent_path_str = '{node.parent_path_str}'
+    _path_str = '{node.path_str}'
+    _valid_props = {{"{'", "'.join(valid_props_list)}"}}
+"""
+    )
+
+    # ### Property definitions ###
     for subtype_node in subtype_nodes:
         if subtype_node.is_array_element:
             prop_type = (
@@ -243,15 +255,9 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         )
 
     # ### Private properties descriptions ###
+    valid_props = {node.name_property for node in subtype_nodes}
     buffer.write(
         f"""
-
-    # property parent name
-    # --------------------
-    @property
-    def _parent_path_str(self):
-        return '{node.parent_path_str}'
-
     # Self properties description
     # ---------------------------
     @property
@@ -309,6 +315,23 @@ class {datatype_class}(_{node.name_base_datatype}):\n"""
         f"""
         super({datatype_class}, self).__init__('{node.name_property}')
 
+        if '_parent' in kwargs:
+            self._parent = kwargs['_parent']
+            return
+"""
+    )
+
+    if datatype_class == "Layout":
+        buffer.write(
+            f"""
+        # Override _valid_props for instance so that instance can mutate set
+        # to support subplot properties (e.g. xaxis2)
+        self._valid_props = {{"{'", "'.join(valid_props_list)}"}}
+"""
+        )
+
+    buffer.write(
+        f"""
         # Validate arg
         # ------------
         if arg is None:
@@ -326,23 +349,9 @@ an instance of :class:`{class_name}`\"\"\")
         # Handle skip_invalid
         # -------------------
         self._skip_invalid = kwargs.pop('skip_invalid', False)
-        
-        # Import validators
-        # -----------------
-        from plotly.validators{node.parent_dotpath_str} import (
-            {undercase} as v_{undercase}) 
-
-        # Initialize validators
-        # ---------------------"""
+        self._validate = kwargs.pop('_validate', True)
+        """
     )
-    for subtype_node in subtype_nodes:
-        if not subtype_node.is_mapped:
-            sub_name = subtype_node.name_property
-            sub_validator = subtype_node.name_validator_class
-            buffer.write(
-                f"""
-        self._validators['{sub_name}'] = v_{undercase}.{sub_validator}()"""
-            )
 
     buffer.write(
         f"""
@@ -352,27 +361,13 @@ an instance of :class:`{class_name}`\"\"\")
     )
     for subtype_node in subtype_nodes:
         name_prop = subtype_node.name_property
-        if name_prop == "template" or subtype_node.is_mapped:
-            # Special handling for layout.template to avoid infinite
-            # recursion.  Only initialize layout.template object if non-None
-            # value specified.
-            #
-            # Same special handling for mapped nodes (e.g. layout.titlefont)
-            # to keep them for overriding mapped property with None
-            buffer.write(
-                f"""
+        buffer.write(
+            f"""
         _v = arg.pop('{name_prop}', None)
         _v = {name_prop} if {name_prop} is not None else _v
         if _v is not None:
             self['{name_prop}'] = _v"""
-            )
-        else:
-            buffer.write(
-                f"""
-        _v = arg.pop('{name_prop}', None)
-        self['{name_prop}'] = {name_prop} \
-if {name_prop} is not None else _v"""
-            )
+        )
 
     # ### Literals ###
     if literal_nodes:
@@ -381,18 +376,14 @@ if {name_prop} is not None else _v"""
 
         # Read-only literals
         # ------------------
-        from _plotly_utils.basevalidators import LiteralValidator"""
+"""
         )
         for literal_node in literal_nodes:
             lit_name = literal_node.name_property
-            lit_parent = literal_node.parent_path_str
             lit_val = repr(literal_node.node_data)
             buffer.write(
                 f"""
         self._props['{lit_name}'] = {lit_val}
-        self._validators['{lit_name}'] =\
-LiteralValidator(plotly_name='{lit_name}',\
-    parent_name='{lit_parent}', val={lit_val})
         arg.pop('{lit_name}', None)"""
             )
 
@@ -609,7 +600,10 @@ def write_datatype_py(outdir, node):
 
     # Build file path
     # ---------------
-    filepath = opath.join(outdir, "graph_objs", *node.parent_path_parts, "__init__.py")
+    # filepath = opath.join(outdir, "graph_objs", *node.parent_path_parts, "__init__.py")
+    filepath = opath.join(
+        outdir, "graph_objs", *node.parent_path_parts, "_" + node.name_undercase + ".py"
+    )
 
     # Generate source code
     # --------------------
@@ -617,5 +611,4 @@ def write_datatype_py(outdir, node):
 
     # Write file
     # ----------
-
     write_source_py(datatype_source, filepath, leading_newlines=2)

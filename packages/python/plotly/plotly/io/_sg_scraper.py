@@ -7,7 +7,7 @@ import plotly
 from glob import glob
 import shutil
 
-plotly.io.renderers.default = "sphinx_gallery"
+plotly.io.renderers.default = "sphinx_gallery_png"
 
 
 def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
@@ -42,13 +42,11 @@ def plotly_sg_scraper(block, block_vars, gallery_conf, **kwargs):
 
     Notes
     -----
-    Add this function to the image scrapers 
+    Add this function to the image scrapers
     """
-    examples_dirs = gallery_conf["examples_dirs"]
-    if isinstance(examples_dirs, (list, tuple)):
-        examples_dirs = examples_dirs[0]
-    pngs = sorted(glob(os.path.join(examples_dirs, "*.png")))
-    htmls = sorted(glob(os.path.join(examples_dirs, "*.html")))
+    examples_dir = os.path.dirname(block_vars["src_file"])
+    pngs = sorted(glob(os.path.join(examples_dir, "*.png")))
+    htmls = sorted(glob(os.path.join(examples_dir, "*.html")))
     image_path_iterator = block_vars["image_path_iterator"]
     image_names = list()
     seen = set()

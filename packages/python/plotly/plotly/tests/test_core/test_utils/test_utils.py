@@ -52,3 +52,46 @@ class TestNodeGenerator(TestCase):
         ]
         for i, item in enumerate(node_generator(node0)):
             self.assertEqual(item, expected_node_path_tuples[i])
+
+
+class TestNumpyIntegerBaseType(TestCase):
+    def test_numpy_integer_import(self):
+        # should generate a figure with subplots of array and not throw a ValueError
+        import numpy as np
+        import plotly.graph_objects as go
+        from plotly.subplots import make_subplots
+
+        indices_rows = np.array([1], dtype=np.int)
+        indices_cols = np.array([1], dtype=np.int)
+        fig = make_subplots(rows=1, cols=1)
+        fig.add_trace(go.Scatter(y=[1]), row=indices_rows[0], col=indices_cols[0])
+
+        data_path = ("data", 0, "y")
+        value = get_by_path(fig, data_path)
+        expected_value = (1,)
+        self.assertEqual(value, expected_value)
+
+    def test_get_numpy_int_type(self):
+        import numpy as np
+        from _plotly_utils.utils import _get_int_type
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int, np.integer)
+
+        self.assertEqual(int_type_tuple, expected_tuple)
+
+
+class TestNoNumpyIntegerBaseType(TestCase):
+    def test_no_numpy_int_type(self):
+        import sys
+        from _plotly_utils.utils import _get_int_type
+        from _plotly_utils.optional_imports import get_module
+
+        np = get_module("numpy", should_load=False)
+        if np:
+            sys.modules.pop("numpy")
+
+        int_type_tuple = _get_int_type()
+        expected_tuple = (int,)
+
+        self.assertEqual(int_type_tuple, expected_tuple)

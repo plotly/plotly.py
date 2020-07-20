@@ -18,9 +18,10 @@ class HierarchyTest(TestCase):
     def test_construct_datatypes(self):
         for datatypes_module in datatype_modules:
             module = importlib.import_module(datatypes_module)
-            for name, obj in inspect.getmembers(module, inspect.isclass):
-                if name.startswith("_"):
+            for name in getattr(module, "__all__", []):
+                if name.startswith("_") or name[0].islower() or name == "FigureWidget":
                     continue
+                obj = getattr(module, name)
                 try:
                     v = obj()
                 except Exception:
@@ -29,6 +30,7 @@ class HierarchyTest(TestCase):
                             obj=obj, module=datatypes_module
                         )
                     )
+                    raise
 
                 if obj.__module__ == "plotly.graph_objs._deprecations":
                     self.assertTrue(isinstance(v, list) or isinstance(v, dict))

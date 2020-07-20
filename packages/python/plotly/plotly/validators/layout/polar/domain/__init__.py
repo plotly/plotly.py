@@ -1,72 +1,20 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._y import YValidator
+    from ._x import XValidator
+    from ._row import RowValidator
+    from ._column import ColumnValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class YValidator(_plotly_utils.basevalidators.InfoArrayValidator):
-    def __init__(self, plotly_name="y", parent_name="layout.polar.domain", **kwargs):
-        super(YValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            items=kwargs.pop(
-                "items",
-                [
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
-                ],
-            ),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class XValidator(_plotly_utils.basevalidators.InfoArrayValidator):
-    def __init__(self, plotly_name="x", parent_name="layout.polar.domain", **kwargs):
-        super(XValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            items=kwargs.pop(
-                "items",
-                [
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
-                    {"valType": "number", "min": 0, "max": 1, "editType": "plot"},
-                ],
-            ),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class RowValidator(_plotly_utils.basevalidators.IntegerValidator):
-    def __init__(self, plotly_name="row", parent_name="layout.polar.domain", **kwargs):
-        super(RowValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class ColumnValidator(_plotly_utils.basevalidators.IntegerValidator):
-    def __init__(
-        self, plotly_name="column", parent_name="layout.polar.domain", **kwargs
-    ):
-        super(ColumnValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._y.YValidator",
+            "._x.XValidator",
+            "._row.RowValidator",
+            "._column.ColumnValidator",
+        ],
+    )

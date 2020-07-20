@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: 3D Camera Controls
-    order: 6
+    order: 5
     permalink: python/3d-camera-controls/
     thumbnail: thumbnail/3d-camera-controls.jpg
 ---

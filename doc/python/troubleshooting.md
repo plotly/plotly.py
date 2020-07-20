@@ -75,14 +75,41 @@ To list your current extensions, run the following command in a terminal shell:
 $ jupyter labextension list
 ```
 
-To uninstall your `plotly` extensions, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
+To uninstall your Plotly extensions, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
 
 ```bash
 $ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
+
+If you run into "out of memory" problems while installing the extensions, try running these commands before running `jupyter labextension install`...
+
+```bash
+# Avoid "JavaScript heap out of memory" errors during extension installation
+# (OS X/Linux)
+export NODE_OPTIONS=--max-old-space-size=4096
+# (Windows)
+set NODE_OPTIONS=--max-old-space-size=4096
+```
+
+...and these commands afterwards.
+
+```bash
+# Unset NODE_OPTIONS environment variable
+# (OS X/Linux)
+unset NODE_OPTIONS
+# (Windows)
+set NODE_OPTIONS=
+```
+
 <!-- #endregion -->
 
-```python
 
-```
+### Orca Problems
+
+> Note: as of `plotly` version 4.9, we recommend using [`kaleido`](https://github.com/plotly/Kaleido)
+> instead of Orca for [static image export](/python/static-image-export/)
+
+If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
+
+`plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`

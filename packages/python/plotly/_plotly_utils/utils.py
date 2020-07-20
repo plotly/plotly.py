@@ -147,7 +147,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_pandas(obj):
         """Attempt to convert pandas.NaT"""
-        pandas = get_module("pandas")
+        pandas = get_module("pandas", should_load=False)
         if not pandas:
             raise NotEncodable
 
@@ -159,7 +159,7 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
     @staticmethod
     def encode_as_numpy(obj):
         """Attempt to convert numpy.ma.core.masked"""
-        numpy = get_module("numpy")
+        numpy = get_module("numpy", should_load=False)
         if not numpy:
             raise NotEncodable
 
@@ -247,3 +247,12 @@ def _natural_sort_strings(vals, reverse=False):
         return tuple(v_parts)
 
     return sorted(vals, key=key, reverse=reverse)
+
+
+def _get_int_type():
+    np = get_module("numpy", should_load=False)
+    if np:
+        int_type = (int, np.integer)
+    else:
+        int_type = (int,)
+    return int_type

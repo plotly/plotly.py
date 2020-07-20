@@ -1,87 +1,24 @@
-import _plotly_utils.basevalidators
+import sys
 
+if sys.version_info < (3, 7):
+    from ._t import TValidator
+    from ._r import RValidator
+    from ._pad import PadValidator
+    from ._l import LValidator
+    from ._b import BValidator
+    from ._autoexpand import AutoexpandValidator
+else:
+    from _plotly_utils.importers import relative_import
 
-class TValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="t", parent_name="layout.margin", **kwargs):
-        super(TValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class RValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="r", parent_name="layout.margin", **kwargs):
-        super(RValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class PadValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="pad", parent_name="layout.margin", **kwargs):
-        super(PadValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class LValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="l", parent_name="layout.margin", **kwargs):
-        super(LValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class BValidator(_plotly_utils.basevalidators.NumberValidator):
-    def __init__(self, plotly_name="b", parent_name="layout.margin", **kwargs):
-        super(BValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
-
-
-import _plotly_utils.basevalidators
-
-
-class AutoexpandValidator(_plotly_utils.basevalidators.BooleanValidator):
-    def __init__(self, plotly_name="autoexpand", parent_name="layout.margin", **kwargs):
-        super(AutoexpandValidator, self).__init__(
-            plotly_name=plotly_name,
-            parent_name=parent_name,
-            edit_type=kwargs.pop("edit_type", "plot"),
-            role=kwargs.pop("role", "info"),
-            **kwargs
-        )
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._t.TValidator",
+            "._r.RValidator",
+            "._pad.PadValidator",
+            "._l.LValidator",
+            "._b.BValidator",
+            "._autoexpand.AutoexpandValidator",
+        ],
+    )

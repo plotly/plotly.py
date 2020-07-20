@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Annotated Heatmaps
-    order: 8
+    order: 7
     page_type: u-guide
     permalink: python/annotated-heatmap/
     redirect_from: python/annotated_heatmap/
@@ -36,7 +36,7 @@ jupyter:
 
 #### Simple Annotated Heatmap
 
-For more examples with Heatmaps, see [this page](/python/heatmaps/).
+This page details the use of a [figure factory](/python/figure-factories/). For more examples with Heatmaps, see [this page](/python/heatmaps/).
 
 ```python
 import plotly.figure_factory as ff
@@ -202,8 +202,5 @@ fig.show()
 ```
 
 #### Reference
-For more info on Plotly heatmaps, see: https://plotly.com/python/reference/#heatmap.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/ <br>For more info on annotated_heatmaps, see:
 
-```python
-help(ff.create_annotated_heatmap)
-```
+For more info on Plotly heatmaps, see: https://plotly.com/python/reference/#heatmap.<br> For more info on using colorscales with Plotly see: https://plotly.com/python/heatmap-and-contour-colorscales/ <br>For more info on `ff.create_annotated_heatmap()`, see the [full function reference](https://plotly.com/python-api-reference/generated/plotly.figure_factory.create_annotated_heatmap.html#plotly.figure_factory.create_annotated_heatmap)

@@ -175,6 +175,12 @@ class TemplateTest(TestCase):
     def test_template_iter(self):
         self.assertIn("test_template", set(pio.templates))
 
+    def test_template_default_as_object(self):
+        template = go.layout.Template({"layout": {"font": {"family": "Rockwell"}}})
+        pio.templates.default = template
+        fig = go.Figure()
+        self.assertEqual(fig.layout.template, template)
+
 
 class TestToTemplated(TestCaseNoTemplate):
     def test_move_layout_nested_properties(self):
@@ -195,7 +201,7 @@ class TestToTemplated(TestCaseNoTemplate):
                     "layout": {
                         "font": {"family": "Courier New"},
                         "paper_bgcolor": "yellow",
-                    }
+                    },
                 },
                 "title": "Hello",
             }

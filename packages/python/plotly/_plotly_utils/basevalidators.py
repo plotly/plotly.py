@@ -35,8 +35,8 @@ def to_scalar_or_list(v):
     # Python native scalar type ('float' in the example above).
     # We explicitly check if is has the 'item' method, which conventionally
     # converts these types to native scalars.
-    np = get_module("numpy")
-    pd = get_module("pandas")
+    np = get_module("numpy", should_load=False)
+    pd = get_module("pandas", should_load=False)
     if np and np.isscalar(v) and hasattr(v, "item"):
         return v.item()
     if isinstance(v, (list, tuple)):
@@ -74,7 +74,9 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         Numpy array with the 'WRITEABLE' flag set to False
     """
     np = get_module("numpy")
-    pd = get_module("pandas")
+
+    # Don't force pandas to be loaded, we only want to know if it's already loaded
+    pd = get_module("pandas", should_load=False)
     assert np is not None
 
     # ### Process kind ###
@@ -166,8 +168,8 @@ def is_homogeneous_array(v):
     """
     Return whether a value is considered to be a homogeneous array
     """
-    np = get_module("numpy")
-    pd = get_module("pandas")
+    np = get_module("numpy", should_load=False)
+    pd = get_module("pandas", should_load=False)
     if (
         np
         and isinstance(v, np.ndarray)
@@ -2436,12 +2438,12 @@ class CompoundValidator(BaseValidator):
 
         return desc
 
-    def validate_coerce(self, v, skip_invalid=False):
+    def validate_coerce(self, v, skip_invalid=False, _validate=True):
         if v is None:
             v = self.data_class()
 
         elif isinstance(v, dict):
-            v = self.data_class(v, skip_invalid=skip_invalid)
+            v = self.data_class(v, skip_invalid=skip_invalid, _validate=_validate)
 
         elif isinstance(v, self.data_class):
             # Copy object
@@ -2453,6 +2455,10 @@ class CompoundValidator(BaseValidator):
                 self.raise_invalid_val(v)
 
         v._plotly_name = self.plotly_name
+        return v
+
+    def present(self, v):
+        # Return compound object as-is
         return v
 
 
@@ -2549,6 +2555,10 @@ class CompoundArrayValidator(BaseValidator):
 
         return v
 
+    def present(self, v):
+        # Return compound object as tuple
+        return tuple(v)
+
 
 class BaseDataValidator(BaseValidator):
     def __init__(
@@ -2559,7 +2569,7 @@ class BaseDataValidator(BaseValidator):
         )
 
         self.class_strs_map = class_strs_map
-        self._class_map = None
+        self._class_map = {}
         self.set_uid = set_uid
 
     def description(self):
@@ -2595,21 +2605,17 @@ class BaseDataValidator(BaseValidator):
 
         return desc
 
-    @property
-    def class_map(self):
-        if self._class_map is None:
-
-            # Initialize class map
-            self._class_map = {}
-
-            # Import trace classes
+    def get_trace_class(self, trace_name):
+        # Import trace classes
+        if trace_name not in self._class_map:
             trace_module = import_module("plotly.graph_objs")
-            for k, class_str in self.class_strs_map.items():
-                self._class_map[k] = getattr(trace_module, class_str)
+            trace_class_name = self.class_strs_map[trace_name]
+            self._class_map[trace_name] = getattr(trace_module, trace_class_name)
 
-        return self._class_map
+        return self._class_map[trace_name]
 
-    def validate_coerce(self, v, skip_invalid=False):
+    def validate_coerce(self, v, skip_invalid=False, _validate=True):
+        from plotly.basedatatypes import BaseTraceType
 
         # Import Histogram2dcontour, this is the deprecated name of the
         # Histogram2dContour trace.
@@ -2621,13 +2627,11 @@ class BaseDataValidator(BaseValidator):
             if not isinstance(v, (list, tuple)):
                 v = [v]
 
-            trace_classes = tuple(self.class_map.values())
-
             res = []
             invalid_els = []
             for v_el in v:
 
-                if isinstance(v_el, trace_classes):
+                if isinstance(v_el, BaseTraceType):
                     # Clone input traces
                     v_el = v_el.to_plotly_json()
 
@@ -2641,25 +2645,25 @@ class BaseDataValidator(BaseValidator):
                     else:
                         trace_type = "scatter"
 
-                    if trace_type not in self.class_map:
+                    if trace_type not in self.class_strs_map:
                         if skip_invalid:
                             # Treat as scatter trace
-                            trace = self.class_map["scatter"](
-                                skip_invalid=skip_invalid, **v_copy
+                            trace = self.get_trace_class("scatter")(
+                                skip_invalid=skip_invalid, _validate=_validate, **v_copy
                             )
                             res.append(trace)
                         else:
                             res.append(None)
                             invalid_els.append(v_el)
                     else:
-                        trace = self.class_map[trace_type](
-                            skip_invalid=skip_invalid, **v_copy
+                        trace = self.get_trace_class(trace_type)(
+                            skip_invalid=skip_invalid, _validate=_validate, **v_copy
                         )
                         res.append(trace)
                 else:
                     if skip_invalid:
                         # Add empty scatter trace
-                        trace = self.class_map["scatter"]()
+                        trace = self.get_trace_class("scatter")()
                         res.append(trace)
                     else:
                         res.append(None)

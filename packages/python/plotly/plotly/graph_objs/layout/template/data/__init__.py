@@ -1,143 +1,106 @@
-from plotly.graph_objs import Waterfall
+import sys
 
-from plotly.graph_objs import Volume
+if sys.version_info < (3, 7):
+    from ._area import Area
+    from ._bar import Bar
+    from ._barpolar import Barpolar
+    from ._box import Box
+    from ._candlestick import Candlestick
+    from ._carpet import Carpet
+    from ._choropleth import Choropleth
+    from ._choroplethmapbox import Choroplethmapbox
+    from ._cone import Cone
+    from ._contour import Contour
+    from ._contourcarpet import Contourcarpet
+    from ._densitymapbox import Densitymapbox
+    from ._funnel import Funnel
+    from ._funnelarea import Funnelarea
+    from ._heatmap import Heatmap
+    from ._heatmapgl import Heatmapgl
+    from ._histogram import Histogram
+    from ._histogram2d import Histogram2d
+    from ._histogram2dcontour import Histogram2dContour
+    from ._image import Image
+    from ._indicator import Indicator
+    from ._isosurface import Isosurface
+    from ._mesh3d import Mesh3d
+    from ._ohlc import Ohlc
+    from ._parcats import Parcats
+    from ._parcoords import Parcoords
+    from ._pie import Pie
+    from ._pointcloud import Pointcloud
+    from ._sankey import Sankey
+    from ._scatter import Scatter
+    from ._scatter3d import Scatter3d
+    from ._scattercarpet import Scattercarpet
+    from ._scattergeo import Scattergeo
+    from ._scattergl import Scattergl
+    from ._scattermapbox import Scattermapbox
+    from ._scatterpolar import Scatterpolar
+    from ._scatterpolargl import Scatterpolargl
+    from ._scatterternary import Scatterternary
+    from ._splom import Splom
+    from ._streamtube import Streamtube
+    from ._sunburst import Sunburst
+    from ._surface import Surface
+    from ._table import Table
+    from ._treemap import Treemap
+    from ._violin import Violin
+    from ._volume import Volume
+    from ._waterfall import Waterfall
+else:
+    from _plotly_utils.importers import relative_import
 
-from plotly.graph_objs import Violin
-
-from plotly.graph_objs import Treemap
-
-from plotly.graph_objs import Table
-
-from plotly.graph_objs import Surface
-
-from plotly.graph_objs import Sunburst
-
-from plotly.graph_objs import Streamtube
-
-from plotly.graph_objs import Splom
-
-from plotly.graph_objs import Scatterternary
-
-from plotly.graph_objs import Scatter
-
-from plotly.graph_objs import Scatterpolar
-
-from plotly.graph_objs import Scatterpolargl
-
-from plotly.graph_objs import Scattermapbox
-
-from plotly.graph_objs import Scattergl
-
-from plotly.graph_objs import Scattergeo
-
-from plotly.graph_objs import Scattercarpet
-
-from plotly.graph_objs import Scatter3d
-
-from plotly.graph_objs import Sankey
-
-from plotly.graph_objs import Pointcloud
-
-from plotly.graph_objs import Pie
-
-from plotly.graph_objs import Parcoords
-
-from plotly.graph_objs import Parcats
-
-from plotly.graph_objs import Ohlc
-
-from plotly.graph_objs import Mesh3d
-
-from plotly.graph_objs import Isosurface
-
-from plotly.graph_objs import Indicator
-
-from plotly.graph_objs import Image
-
-from plotly.graph_objs import Histogram
-
-from plotly.graph_objs import Histogram2d
-
-from plotly.graph_objs import Histogram2dContour
-
-from plotly.graph_objs import Heatmap
-
-from plotly.graph_objs import Heatmapgl
-
-from plotly.graph_objs import Funnel
-
-from plotly.graph_objs import Funnelarea
-
-from plotly.graph_objs import Densitymapbox
-
-from plotly.graph_objs import Contour
-
-from plotly.graph_objs import Contourcarpet
-
-from plotly.graph_objs import Cone
-
-from plotly.graph_objs import Choropleth
-
-from plotly.graph_objs import Choroplethmapbox
-
-from plotly.graph_objs import Carpet
-
-from plotly.graph_objs import Candlestick
-
-from plotly.graph_objs import Box
-
-from plotly.graph_objs import Bar
-
-from plotly.graph_objs import Barpolar
-
-from plotly.graph_objs import Area
-
-__all__ = [
-    "Area",
-    "Bar",
-    "Barpolar",
-    "Box",
-    "Candlestick",
-    "Carpet",
-    "Choropleth",
-    "Choroplethmapbox",
-    "Cone",
-    "Contour",
-    "Contourcarpet",
-    "Densitymapbox",
-    "Funnel",
-    "Funnelarea",
-    "Heatmap",
-    "Heatmapgl",
-    "Histogram",
-    "Histogram2d",
-    "Histogram2dContour",
-    "Image",
-    "Indicator",
-    "Isosurface",
-    "Mesh3d",
-    "Ohlc",
-    "Parcats",
-    "Parcoords",
-    "Pie",
-    "Pointcloud",
-    "Sankey",
-    "Scatter",
-    "Scatter3d",
-    "Scattercarpet",
-    "Scattergeo",
-    "Scattergl",
-    "Scattermapbox",
-    "Scatterpolar",
-    "Scatterpolargl",
-    "Scatterternary",
-    "Splom",
-    "Streamtube",
-    "Sunburst",
-    "Surface",
-    "Table",
-    "Treemap",
-    "Violin",
-    "Volume",
-    "Waterfall",
-]
+    __all__, __getattr__, __dir__ = relative_import(
+        __name__,
+        [],
+        [
+            "._area.Area",
+            "._bar.Bar",
+            "._barpolar.Barpolar",
+            "._box.Box",
+            "._candlestick.Candlestick",
+            "._carpet.Carpet",
+            "._choropleth.Choropleth",
+            "._choroplethmapbox.Choroplethmapbox",
+            "._cone.Cone",
+            "._contour.Contour",
+            "._contourcarpet.Contourcarpet",
+            "._densitymapbox.Densitymapbox",
+            "._funnel.Funnel",
+            "._funnelarea.Funnelarea",
+            "._heatmap.Heatmap",
+            "._heatmapgl.Heatmapgl",
+            "._histogram.Histogram",
+            "._histogram2d.Histogram2d",
+            "._histogram2dcontour.Histogram2dContour",
+            "._image.Image",
+            "._indicator.Indicator",
+            "._isosurface.Isosurface",
+            "._mesh3d.Mesh3d",
+            "._ohlc.Ohlc",
+            "._parcats.Parcats",
+            "._parcoords.Parcoords",
+            "._pie.Pie",
+            "._pointcloud.Pointcloud",
+            "._sankey.Sankey",
+            "._scatter.Scatter",
+            "._scatter3d.Scatter3d",
+            "._scattercarpet.Scattercarpet",
+            "._scattergeo.Scattergeo",
+            "._scattergl.Scattergl",
+            "._scattermapbox.Scattermapbox",
+            "._scatterpolar.Scatterpolar",
+            "._scatterpolargl.Scatterpolargl",
+            "._scatterternary.Scatterternary",
+            "._splom.Splom",
+            "._streamtube.Streamtube",
+            "._sunburst.Sunburst",
+            "._surface.Surface",
+            "._table.Table",
+            "._treemap.Treemap",
+            "._violin.Violin",
+            "._volume.Volume",
+            "._waterfall.Waterfall",
+        ],
+    )
