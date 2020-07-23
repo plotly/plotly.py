@@ -66615,7 +66615,7 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
@@ -66651,7 +66651,7 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
@@ -66822,11 +66822,11 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate. If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
+                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate. If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side. If set to an x axis id followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x axis. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
                         },
                         "xsizemode": {
                             "valType": "enumerated",
@@ -66861,11 +66861,11 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top)."
+                            "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis id followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "ysizemode": {
                             "valType": "enumerated",
@@ -67093,7 +67093,7 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "dflt": "paper",
                             "role": "info",
@@ -67104,7 +67104,7 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "dflt": "paper",
                             "role": "info",

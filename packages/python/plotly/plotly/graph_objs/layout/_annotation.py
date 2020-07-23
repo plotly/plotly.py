@@ -1056,7 +1056,7 @@ class Annotation(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$']
+                ['^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1178,7 +1178,7 @@ class Annotation(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
-                ['^y([2-9]|[1-9][0-9]+)?$']
+                ['^[xyz]([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
