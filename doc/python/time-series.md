@@ -115,6 +115,8 @@ A range slider is a small subplot-like area below a plot which allows users to p
 ```python
 import plotly.graph_objects as go
 import pandas as pd
+import plotly.express as px
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.line(df, x='Date', y='AAPL.High', title='Time Series with Rangeslider')
@@ -130,6 +132,8 @@ Range selector buttons are special controls that work well with time series and 
 ```python
 import plotly.graph_objects as go
 import pandas as pd
+import plotly.express as px
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.line(df, x='Date', y='AAPL.High', title='Time Series with Range Slider and Selectors')
@@ -189,6 +193,8 @@ The `rangebreaks` attribute available on x- and y-axes of type `date` can be use
 ```python
 import plotly.express as px
 import pandas as pd
+import plotly.express as px
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15'],
@@ -199,6 +205,8 @@ fig.show()
 ```python
 import plotly.express as px
 import pandas as pd
+import plotly.express as px
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15'],
