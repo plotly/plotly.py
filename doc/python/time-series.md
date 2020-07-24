@@ -113,9 +113,8 @@ fig.show()
 A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-rangeslider
 
 ```python
-import plotly.graph_objects as go
-import pandas as pd
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -130,9 +129,8 @@ fig.show()
 Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-rangeselector
 
 ```python
-import plotly.graph_objects as go
-import pandas as pd
 import plotly.express as px
+import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -158,6 +156,7 @@ fig.show()
 The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-tickformatstops
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
@@ -193,7 +192,6 @@ The `rangebreaks` attribute available on x- and y-axes of type `date` can be use
 ```python
 import plotly.express as px
 import pandas as pd
-import plotly.express as px
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
@@ -205,7 +203,6 @@ fig.show()
 ```python
 import plotly.express as px
 import pandas as pd
-import plotly.express as px
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
