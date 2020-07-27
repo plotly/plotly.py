@@ -127,7 +127,7 @@ def test_sunburst_treemap_with_path():
     ]
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
-    total = ["total",] * 8
+    total = ["total"] * 8
     df = pd.DataFrame(
         dict(
             vendors=vendors,
@@ -206,7 +206,7 @@ def test_sunburst_treemap_with_path_color():
     regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
     values = [1, 3, 2, 4, 2, 2, 1, 4]
     calls = [8, 2, 1, 3, 2, 2, 4, 1]
-    total = ["total",] * 8
+    total = ["total"] * 8
     df = pd.DataFrame(
         dict(
             vendors=vendors,
@@ -250,6 +250,26 @@ def test_sunburst_treemap_with_path_color():
     assert np.all(np.array(colors[:8]) == np.array(calls))
 
 
+def test_sunburst_treemap_column_parent():
+    vendors = ["A", "B", "C", "D", "E", "F", "G", "H"]
+    sectors = [
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+        "Tech",
+        "Tech",
+        "Finance",
+        "Finance",
+    ]
+    regions = ["North", "North", "North", "North", "South", "South", "South", "South"]
+    values = [1, 3, 2, 4, 2, 2, 1, 4]
+    df = pd.DataFrame(dict(id=vendors, sectors=sectors, parent=regions, values=values,))
+    path = ["parent", "sectors", "id"]
+    # One column of the path is a reserved name - this is ok and should not raise
+    fig = px.sunburst(df, path=path, values="values")
+
+
 def test_sunburst_treemap_with_path_non_rectangular():
     vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
     sectors = [
@@ -277,7 +297,7 @@ def test_sunburst_treemap_with_path_non_rectangular():
         "South",
     ]
     values = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
-    total = ["total",] * 10
+    total = ["total"] * 10
     df = pd.DataFrame(
         dict(
             vendors=vendors,
@@ -357,3 +377,29 @@ def test_parcats_dimensions_max():
         df, dimensions=["sex", "smoker", "day", "size"], dimensions_max_cardinality=4
     )
     assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
+
+
+def test_timeline():
+    df = pd.DataFrame(
+        [
+            dict(Task="Job A", Start="2009-01-01", Finish="2009-02-28"),
+            dict(Task="Job B", Start="2009-03-05", Finish="2009-04-15"),
+            dict(Task="Job C", Start="2009-02-20", Finish="2009-05-30"),
+        ]
+    )
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", color="Task")
+    assert len(fig.data) == 3
+    assert fig.layout.xaxis.type == "date"
+    assert fig.layout.xaxis.title.text is None
+    fig = px.timeline(df, x_start="Start", x_end="Finish", y="Task", facet_row="Task")
+    assert len(fig.data) == 3
+    assert fig.data[1].xaxis == "x2"
+    assert fig.layout.xaxis.type == "date"
+
+    msg = "Both x_start and x_end are required"
+    with pytest.raises(ValueError, match=msg):
+        px.timeline(df, x_start="Start", y="Task", color="Task")
+
+    msg = "Both x_start and x_end must refer to data convertible to datetimes."
+    with pytest.raises(TypeError, match=msg):
+        px.timeline(df, x_start="Start", x_end=["a", "b", "c"], y="Task", color="Task")
