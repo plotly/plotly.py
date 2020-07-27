@@ -4307,3 +4307,202 @@ class TestTernarycontour(NumpyTestUtilsMixin, TestCaseNoTemplate):
             # This test does not work for ilr interpolation
             print(len(fig.data))
             assert len(fig.data) == ncontours + 2 + arg_set["showscale"]
+
+
+class TestHexbinMapbox(NumpyTestUtilsMixin, TestCaseNoTemplate):
+    def test_aggregation(self):
+
+        lat = [0, 1, 1, 2, 4, 5, 1, 2, 4, 5, 2, 3, 2, 1, 5, 3, 5]
+        lon = [1, 2, 3, 3, 0, 4, 5, 0, 5, 3, 1, 5, 4, 0, 1, 2, 5]
+        color = np.ones(len(lat))
+
+        fig1 = ff.create_hexbin_mapbox(lat=lat, lon=lon, nx_hexagon=1)
+
+        actual_geojson = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "id": "-8.726646259971648e-11,-0.031886255679892235",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [-5e-09, -4.7083909316316985],
+                                [2.4999999999999996, -3.268549270944215],
+                                [2.4999999999999996, -0.38356933397072673],
+                                [-5e-09, 1.0597430482129082],
+                                [-2.50000001, -0.38356933397072673],
+                                [-2.50000001, -3.268549270944215],
+                                [-5e-09, -4.7083909316316985],
+                            ]
+                        ],
+                    },
+                },
+                {
+                    "type": "Feature",
+                    "id": "-8.726646259971648e-11,0.1192636916419258",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [-5e-09, 3.9434377827164666],
+                                [2.4999999999999996, 5.381998306154031],
+                                [2.4999999999999996, 8.248045720432454],
+                                [-5e-09, 9.673766164509932],
+                                [-2.50000001, 8.248045720432454],
+                                [-2.50000001, 5.381998306154031],
+                                [-5e-09, 3.9434377827164666],
+                            ]
+                        ],
+                    },
+                },
+                {
+                    "type": "Feature",
+                    "id": "0.08726646268698293,-0.031886255679892235",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [5.0000000049999995, -4.7083909316316985],
+                                [7.500000009999999, -3.268549270944215],
+                                [7.500000009999999, -0.38356933397072673],
+                                [5.0000000049999995, 1.0597430482129082],
+                                [2.5, -0.38356933397072673],
+                                [2.5, -3.268549270944215],
+                                [5.0000000049999995, -4.7083909316316985],
+                            ]
+                        ],
+                    },
+                },
+                {
+                    "type": "Feature",
+                    "id": "0.08726646268698293,0.1192636916419258",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [5.0000000049999995, 3.9434377827164666],
+                                [7.500000009999999, 5.381998306154031],
+                                [7.500000009999999, 8.248045720432454],
+                                [5.0000000049999995, 9.673766164509932],
+                                [2.5, 8.248045720432454],
+                                [2.5, 5.381998306154031],
+                                [5.0000000049999995, 3.9434377827164666],
+                            ]
+                        ],
+                    },
+                },
+                {
+                    "type": "Feature",
+                    "id": "0.04363323129985823,0.04368871798101678",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [2.4999999999999996, -0.38356933397072673],
+                                [5.0000000049999995, 1.0597430482129082],
+                                [5.0000000049999995, 3.9434377827164666],
+                                [2.4999999999999996, 5.381998306154031],
+                                [-5.0000001310894304e-09, 3.9434377827164666],
+                                [-5.0000001310894304e-09, 1.0597430482129082],
+                                [2.4999999999999996, -0.38356933397072673],
+                            ]
+                        ],
+                    },
+                },
+            ],
+        }
+
+        actual_agg = [2.0, 2.0, 1.0, 3.0, 9.0]
+
+        self.assert_dict_equal(fig1.data[0].geojson, actual_geojson)
+        assert np.array_equal(fig1.data[0].z, actual_agg)
+
+        fig2 = ff.create_hexbin_mapbox(
+            lat=lat, lon=lon, nx_hexagon=1, color=color, agg_func=np.mean,
+        )
+
+        assert np.array_equal(fig2.data[0].z, np.ones(5))
+
+        fig3 = ff.create_hexbin_mapbox(
+            lat=np.random.randn(1000), lon=np.random.randn(1000), nx_hexagon=20,
+        )
+
+        assert fig3.data[0].z.sum() == 1000
+
+    def test_build_dataframe(self):
+        np.random.seed(0)
+        N = 10000
+        nx_hexagon = 20
+        n_frames = 3
+
+        lat = np.random.randn(N)
+        lon = np.random.randn(N)
+        color = np.ones(N)
+        frame = np.random.randint(0, n_frames, N)
+        df = pd.DataFrame(
+            np.c_[lat, lon, color, frame],
+            columns=["Latitude", "Longitude", "Metric", "Frame"],
+        )
+
+        fig1 = ff.create_hexbin_mapbox(lat=lat, lon=lon, nx_hexagon=nx_hexagon)
+        fig2 = ff.create_hexbin_mapbox(
+            data_frame=df, lat="Latitude", lon="Longitude", nx_hexagon=nx_hexagon
+        )
+
+        assert isinstance(fig1, go.Figure)
+        assert len(fig1.data) == 1
+        self.assert_dict_equal(
+            fig1.to_plotly_json()["data"][0], fig2.to_plotly_json()["data"][0]
+        )
+
+        fig3 = ff.create_hexbin_mapbox(
+            lat=lat,
+            lon=lon,
+            nx_hexagon=nx_hexagon,
+            color=color,
+            agg_func=np.sum,
+            min_count=0,
+        )
+        fig4 = ff.create_hexbin_mapbox(
+            lat=lat, lon=lon, nx_hexagon=nx_hexagon, color=color, agg_func=np.sum,
+        )
+        fig5 = ff.create_hexbin_mapbox(
+            data_frame=df,
+            lat="Latitude",
+            lon="Longitude",
+            nx_hexagon=nx_hexagon,
+            color="Metric",
+            agg_func=np.sum,
+        )
+
+        self.assert_dict_equal(
+            fig1.to_plotly_json()["data"][0], fig3.to_plotly_json()["data"][0]
+        )
+        self.assert_dict_equal(
+            fig4.to_plotly_json()["data"][0], fig5.to_plotly_json()["data"][0]
+        )
+
+        fig6 = ff.create_hexbin_mapbox(
+            data_frame=df,
+            lat="Latitude",
+            lon="Longitude",
+            nx_hexagon=nx_hexagon,
+            color="Metric",
+            agg_func=np.sum,
+            animation_frame="Frame",
+        )
+
+        fig7 = ff.create_hexbin_mapbox(
+            lat=lat,
+            lon=lon,
+            nx_hexagon=nx_hexagon,
+            color=color,
+            agg_func=np.sum,
+            animation_frame=frame,
+        )
+
+        assert len(fig6.frames) == n_frames
+        assert len(fig7.frames) == n_frames
+        assert fig6.data[0].geojson == fig1.data[0].geojson

@@ -19,7 +19,7 @@ NO_COLOR = "px_no_color_constant"
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
-    ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
+    ["base", "x", "y", "z", "a", "b", "c", "r", "theta", "size", "x_start", "x_end"]
     + ["hover_name", "text", "names", "values", "parents", "wide_cross"]
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
@@ -610,7 +610,8 @@ def configure_cartesian_axes(args, fig, orders):
     # Set x-axis titles and axis options in the bottom-most row
     x_title = get_decorated_label(args, args["x"], "x")
     for xaxis in fig.select_xaxes(row=1):
-        xaxis.update(title_text=x_title)
+        if "is_timeline" not in args:
+            xaxis.update(title_text=x_title)
         set_cartesian_axis_opts(args, xaxis, "x", orders)
 
     # Configure axis type across all x-axes
@@ -620,6 +621,9 @@ def configure_cartesian_axes(args, fig, orders):
     # Configure axis type across all y-axes
     if "log_y" in args and args["log_y"]:
         fig.update_yaxes(type="log")
+
+    if "is_timeline" in args:
+        fig.update_xaxes(type="date")
 
     return fig.layout
 
@@ -1546,8 +1550,9 @@ def process_dataframe_hierarchy(args):
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
             agg_f[col] = aggfunc_discrete
+    # Avoid collisions with reserved names - columns in the path have been copied already
+    cols = list(set(cols) - set(["labels", "parent", "id"]))
     # ----------------------------------------------------------------------------
-
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
     #  Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
@@ -1596,6 +1601,31 @@ def process_dataframe_hierarchy(args):
                 args["hover_data"][args["color"]] = (True, None)
         else:
             args["hover_data"].append(args["color"])
+    return args
+
+
+def process_dataframe_timeline(args):
+    """
+    Massage input for bar traces for px.timeline()
+    """
+    args["is_timeline"] = True
+    if args["x_start"] is None or args["x_end"] is None:
+        raise ValueError("Both x_start and x_end are required")
+
+    try:
+        x_start = pd.to_datetime(args["data_frame"][args["x_start"]])
+        x_end = pd.to_datetime(args["data_frame"][args["x_end"]])
+    except (ValueError, TypeError):
+        raise TypeError(
+            "Both x_start and x_end must refer to data convertible to datetimes."
+        )
+
+    # note that we are not adding any columns to the data frame here, so no risk of overwrite
+    args["data_frame"][args["x_end"]] = (x_end - x_start).astype("timedelta64[ms]")
+    args["x"] = args["x_end"]
+    del args["x_end"]
+    args["base"] = args["x_start"]
+    del args["x_start"]
     return args
 
 
@@ -1801,6 +1831,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
+    if constructor == "timeline":
+        constructor = go.Bar
+        args = process_dataframe_timeline(args)
 
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch

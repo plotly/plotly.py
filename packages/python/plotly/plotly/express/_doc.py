@@ -36,6 +36,18 @@ docs = dict(
         colref_desc,
         "Values from this column or array_like are used to position marks along the z axis in cartesian coordinates.",
     ],
+    x_start=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
+    ],
+    x_end=[
+        colref_type,
+        colref_desc,
+        "(required)",
+        "Values from this column or array_like are used to position marks along the x axis in cartesian coordinates.",
+    ],
     a=[
         colref_type,
         colref_desc,
@@ -96,6 +108,11 @@ docs = dict(
         colref_type,
         colref_desc,
         "Values from this column or array_like are to be interpreted according to `locationmode` and mapped to longitude/latitude.",
+    ],
+    base=[
+        colref_type,
+        colref_desc,
+        "Values from this column or array_like are used to position the base of the bar.",
     ],
     dimensions=[
         colref_list_type,
