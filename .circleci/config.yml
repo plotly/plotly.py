@@ -479,15 +479,15 @@ jobs:
               rm -rf .git
               cd ../..
             fi
-
+            tar -zcf _build/api.tgz _build/html
             cd ../..
 
       - store_artifacts:
           path: doc/build
           destination: doc/build
       - store_artifacts:
-          path: doc/apidoc/_build/html
-          destination: doc/apidoc/_build/html
+          path: doc/apidoc/_build/
+          destination: doc/apidoc/_build/
 
 workflows:
   version: 2
