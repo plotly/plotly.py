@@ -32,6 +32,7 @@ help:
 	sphinx-apidoc -M -o generated ../../packages/python/plotly/plotly ../../packages/python/plotly/plotly/validators ../../packages/python/plotly/plotly/tests ../../packages/python/plotly/plotly/matplotlylib/ ../../packages/python/plotly/plotly/offline ../../packages/python/plotly/plotly/api
 	# Run sphinx-build to build html pages from the rst pages
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	git checkout -- ../../packages/python/plotly/plotly/graph_objs
 	# Remove files which were added only for docstring generation
 	rm ../../packages/python/plotly/plotly/colors/diverging.py ../../packages/python/plotly/plotly/colors/sequential.py ../../packages/python/plotly/plotly/colors/qualitative.py ../../packages/python/plotly/plotly/colors/cyclical.py ../../packages/python/plotly/plotly/colors/colorbrewer.py ../../packages/python/plotly/plotly/colors/carto.py ../../packages/python/plotly/plotly/colors/cmocean.py
 	rm ../../packages/python/plotly/plotly/express/colors/diverging.py ../../packages/python/plotly/plotly/express/colors/sequential.py ../../packages/python/plotly/plotly/express/colors/qualitative.py ../../packages/python/plotly/plotly/express/colors/cyclical.py ../../packages/python/plotly/plotly/express/colors/colorbrewer.py ../../packages/python/plotly/plotly/express/colors/carto.py ../../packages/python/plotly/plotly/express/colors/cmocean.py
