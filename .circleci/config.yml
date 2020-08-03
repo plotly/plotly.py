@@ -400,7 +400,7 @@ jobs:
             . venv/bin/activate
             npm install electron@1.8.4
             npm install orca
-            sudo apt install -y bison flex
+            # sudo apt install -y bison flex
             pip install -U pip
             pip uninstall -y plotly
             pip install -r requirements.txt
