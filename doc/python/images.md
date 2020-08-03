@@ -360,4 +360,4 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#layout-images for more information and chart attribute options!
+See https://plotly.com/python/reference/layout/images/ for more information and chart attribute options!

@@ -307,7 +307,7 @@ fig.show()
 
 ### Subplots with Shared Colorscale
 
-To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/#scatter-marker-line-coloraxis).
+To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/scatter/#scatter-marker-line-coloraxis).
 
 ```python
 from plotly.subplots import make_subplots
@@ -582,8 +582,8 @@ fig.show()
 ```
 
 #### Reference
-All of the x-axis properties are found here: https://plotly.com/python/reference/#XAxis
-All of the y-axis properties are found here: https://plotly.com/python/reference/#YAxis
+All of the x-axis properties are found here: https://plotly.com/python/reference/XAxis/
+All of the y-axis properties are found here: https://plotly.com/python/reference/YAxis/
 
 ```python
 from plotly.subplots import make_subplots

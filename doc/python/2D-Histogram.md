@@ -137,7 +137,7 @@ fig = go.Figure(go.Histogram2d(x=x, y=y, histnorm='probability',
 fig.show()
 ```
 ### Sharing bin settings between 2D Histograms
-This example shows how to use [bingroup](https://plotly.com/python/reference/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis seperatly, set [ybins](https://plotly.com/python/reference/#histogram2dcontour-ybins) and `xbins`.
+This example shows how to use [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute to have a compatible bin settings for both histograms. To define `start`, `end` and `size` value of x-axis and y-axis seperatly, set [ybins](https://plotly.com/python/reference/histogram2dcontour/#histogram2dcontour-ybins) and `xbins`.
 
 ```python
 import plotly.graph_objects as go
@@ -236,4 +236,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#histogram2d for more information and chart attribute options!
+See https://plotly.com/python/reference/histogram2d/ for more information and chart attribute options!

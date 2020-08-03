@@ -209,7 +209,7 @@ fig.show()
 
 ### Hiding or Customizing the Plotly Express Color Bar
 
-Plotly Express binds all traces to [`layout.coloraxis`](/python/reference/#layout-coloraxis), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
+Plotly Express binds all traces to [`layout.coloraxis`](/python/reference/layout/coloraxis/), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
 
 ```python
 import plotly.express as px
@@ -417,7 +417,7 @@ fig.show()
 
 ### Setting the Midpoint of a Diverging Color scale with Graph Objects
 
-The following example uses the [marker.cmid](https://plotly.com/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plotly.com/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
+The following example uses the [marker.cmid](https://plotly.com/python/reference/scatter/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plotly.com/python/reference/scattercarpet/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
 
 ```python
 import plotly.graph_objects as go
@@ -431,7 +431,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-The heatmap chart uses [marker.zmid](https://plotly.com/python/reference/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
+The heatmap chart uses [marker.zmid](https://plotly.com/python/reference/scatter/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
 
 ```python
 import plotly.graph_objects as go
@@ -507,7 +507,7 @@ fig.show()
 
 ### Sharing a Color Axis with Graph Objects
 
-To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/#scatter-marker-line-coloraxis).
+To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/scatter/#scatter-marker-line-coloraxis).
 
 ```python
 import plotly.graph_objects as go

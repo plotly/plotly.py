@@ -306,7 +306,7 @@ fig.show()
 
 ### Custom Binning
 
-For custom binning along x-axis, use the attribute [`nbinsx`](https://plotly.com/python/reference/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plotly.com/python/reference/#histogram-xbins) along with `autobinx = False`.
+For custom binning along x-axis, use the attribute [`nbinsx`](https://plotly.com/python/reference/histogram/#histogram-nbinsx). Please note that the autobin algorithm will choose a 'nice' round bin size that may result in somewhat fewer than `nbinsx` total bins. Alternatively, you can set the exact values for [`xbins`](https://plotly.com/python/reference/histogram/#histogram-xbins) along with `autobinx = False`.
 
 ```python
 import plotly.graph_objects as go
@@ -369,7 +369,7 @@ fig2.show()
 
 ### Share bins between histograms
 
-In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/python/reference/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/python/2D-Histogram/) trace can share the same `bingroup`.
+In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/python/reference/histogram/#histogram-bingroup) attribute. Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/python/2D-Histogram/) trace can share the same `bingroup`.
 
 ```python
 import plotly.graph_objects as go
@@ -392,4 +392,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#histogram for more information and chart attribute options!
+See https://plotly.com/python/reference/histogram/ for more information and chart attribute options!

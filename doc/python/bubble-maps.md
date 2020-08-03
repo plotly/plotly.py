@@ -74,7 +74,7 @@ To scale the bubble size, use the attribute sizeref. We recommend using the foll
 
 Note that setting `sizeref` to a value greater than $1$, decreases the rendered marker sizes, while setting `sizeref` to less than $1$, increases the rendered marker sizes.
 
-See https://plotly.com/python/reference/#scatter-marker-sizeref for more information. Additionally, we recommend setting the sizemode attribute: https://plotly.com/python/reference/#scatter-marker-sizemode to area.
+See https://plotly.com/python/reference/scatter/#scatter-marker-sizeref for more information. Additionally, we recommend setting the sizemode attribute: https://plotly.com/python/reference/scatter/#scatter-marker-sizemode to area.
 
 ```python
 import plotly.graph_objects as go
@@ -208,4 +208,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#choropleth and https://plotly.com/python/reference/#scattergeo for more information and chart attribute options!
+See https://plotly.com/python/reference/choropleth/ and https://plotly.com/python/reference/scattergeo/ for more information and chart attribute options!

@@ -220,7 +220,7 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/#layout-geo for more information and chart attribute options!
+See https://plotly.com/python/reference/layout/geo/ for more information and chart attribute options!
 
 ```python
 
