@@ -18,6 +18,10 @@ help:
 # For sphinx-apidoc the first positional path is the module to document
 # then all the other ones are paths to exclude for the doc generation
 %: Makefile
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*/*.py
+	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*/*/*.py
 	# Copy _plotly_utils file so that they appear in the API doc
 	cp ../../packages/python/plotly/_plotly_utils/colors/sequential.py ../../packages/python/plotly/_plotly_utils/colors/diverging.py ../../packages/python/plotly/_plotly_utils/colors/qualitative.py ../../packages/python/plotly/_plotly_utils/colors/cyclical.py ../../packages/python/plotly/_plotly_utils/colors/colorbrewer.py ../../packages/python/plotly/_plotly_utils/colors/carto.py ../../packages/python/plotly/_plotly_utils/colors/cmocean.py ../../packages/python/plotly/plotly/colors
 	cp ../../packages/python/plotly/_plotly_utils/colors/sequential.py ../../packages/python/plotly/_plotly_utils/colors/diverging.py ../../packages/python/plotly/_plotly_utils/colors/qualitative.py ../../packages/python/plotly/_plotly_utils/colors/cyclical.py ../../packages/python/plotly/_plotly_utils/colors/colorbrewer.py ../../packages/python/plotly/_plotly_utils/colors/carto.py ../../packages/python/plotly/_plotly_utils/colors/cmocean.py ../../packages/python/plotly/plotly/express/colors
