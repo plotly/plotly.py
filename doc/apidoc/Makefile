@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = python3 -m sphinx
+SPHINXBUILD   = python -m sphinx
 SOURCEDIR     = .
 BUILDDIR      = _build
 
@@ -18,7 +18,6 @@ help:
 # For sphinx-apidoc the first positional path is the module to document
 # then all the other ones are paths to exclude for the doc generation
 %: Makefile
-	sphinx-build --version
 	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*.py
 	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*.py
 	sed -i 's/:class:`plotly.graph_objects/:class:`plotly.graph_objs/g' ../../packages/python/plotly/plotly/graph_objs/*/*/*.py

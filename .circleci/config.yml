@@ -465,7 +465,6 @@ jobs:
             cd doc
             . venv/bin/activate
             cd apidoc
-            pip list | grep plotly
             make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
               cd _build/html
@@ -480,7 +479,6 @@ jobs:
               rm -rf .git
               cd ../..
             fi
-            tar -zcf _build/api.tgz _build/html
             cd ../..
 
       - store_artifacts:
