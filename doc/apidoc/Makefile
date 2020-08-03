@@ -24,6 +24,7 @@ help:
 	# Run sphinx-apidoc script to create hierarchy of rst files to generate
 	# docstrings. The first path is the one to process, the following ones
 	# are excluded from the search.
+	rm -rf _build generated
 	sphinx-apidoc -M -o generated ../../packages/python/plotly/plotly ../../packages/python/plotly/plotly/validators ../../packages/python/plotly/plotly/tests ../../packages/python/plotly/plotly/matplotlylib/ ../../packages/python/plotly/plotly/offline ../../packages/python/plotly/plotly/api
 	# Run sphinx-build to build html pages from the rst pages
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
