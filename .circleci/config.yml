@@ -484,6 +484,9 @@ jobs:
       - store_artifacts:
           path: doc/build
           destination: doc/build
+      - store_artifacts:
+          path: doc/apidoc/_build/html
+          destination: doc/apidoc/_build/html
 
 workflows:
   version: 2
