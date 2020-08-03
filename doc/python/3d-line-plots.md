@@ -120,4 +120,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatter3d-marker-line for more information and chart attribute options!
+See https://plotly.com/python/reference/scatter3d/#scatter3d-marker-line for more information and chart attribute options!

@@ -210,6 +210,6 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatter-line
-and https://plotly.com/python/reference/#scatter-fill
+See https://plotly.com/python/reference/scatter/#scatter-line
+and https://plotly.com/python/reference/scatter/#scatter-fill
 for more information and attribute options!
