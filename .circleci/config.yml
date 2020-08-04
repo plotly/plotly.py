@@ -464,6 +464,15 @@ jobs:
           command: |
             cd doc
             . venv/bin/activate
+            # For the API doc, we need to use the local version of plotly
+            # since we are tweaking the source because of
+            # graph_objs/graph_objects
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              pip uninstall -y plotly
+              cd ../packages/python/plotly
+              pip install -e .
+              cd ../../../doc
+            fi
             cd apidoc
             make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
