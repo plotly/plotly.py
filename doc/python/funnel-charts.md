@@ -74,7 +74,7 @@ fig.show()
 
 ### Setting Marker Size and Color
 
-This example uses [textposition](https://plotly.com/python/reference/#scatter-textposition) and [textinfo](https://plotly.com/python/reference/#funnel-textinfo) to determine information apears on the graph, and shows how to customize the bars.
+This example uses [textposition](https://plotly.com/python/reference/scatter/#scatter-textposition) and [textinfo](https://plotly.com/python/reference/funnel/#funnel-textinfo) to determine information apears on the graph, and shows how to customize the bars.
 
 ```python
 from plotly import graph_objects as go
@@ -202,4 +202,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#funnel and https://plotly.com/python/reference/#funnelarea for more information and chart attribute options!
+See https://plotly.com/python/reference/funnel/ and https://plotly.com/python/reference/funnelarea/ for more information and chart attribute options!

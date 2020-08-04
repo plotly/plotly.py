@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,9 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.2
+    version: 3.7.7
   plotly:
-    description: How to make a graph with multiple axes (dual y-axis plots, plots with secondary axes) in python.
+    description: How to make a graph with multiple axes (dual y-axis plots, plots
+      with secondary axes) in python.
     display_as: file_settings
     language: python
     layout: base
@@ -31,6 +32,13 @@ jupyter:
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
 ---
+
+### Multiple Y Axes and Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+> *Note*: At this time, Plotly Express does not support multiple Y axes on a single figure. To make such a figure, use the [`make_subplots()`](/python/subplots/) function in conjunction with [graph objects](/python/graph-objects/) as documented below.
+
 
 #### Two Y Axes
 
@@ -225,4 +233,4 @@ fig.show()
 ```
 
 #### Reference
-All of the y-axis properties are found here: https://plotly.com/python/reference/#YAxis.  For more information on creating subplots see the [Subplots in Python](/python/subplots/) section.
+All of the y-axis properties are found here: https://plotly.com/python/reference/YAxis/.  For more information on creating subplots see the [Subplots in Python](/python/subplots/) section.

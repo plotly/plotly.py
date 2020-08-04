@@ -42,9 +42,9 @@ Plotly Express provides [more than 30 functions for creating different types of 
 
 Plotly Express currently includes the following functions:
 
-* **Basics**: [`scatter`](/python/line-and-scatter/), [`line`](/python/line-charts/), [`area`](/python/filled-area-plots/), [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/)
+* **Basics**: [`scatter`](/python/line-and-scatter/), [`line`](/python/line-charts/), [`area`](/python/filled-area-plots/), [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/), [`timeline`](https://plotly.com/python/gantt/)
 * **Part-of-Whole**: [`pie`](/python/pie-charts/), [`sunburst`](/python/sunburst-charts/), [`treemap`](/python/treemaps/), [`funnel_area`](/python/funnel-charts/)
-* **1D Distributions**: [`histogram`](/python/histograms/), [`box`](/python/box-plots/), [`violin`](/python/violin/), `strip`
+* **1D Distributions**: [`histogram`](/python/histograms/), [`box`](/python/box-plots/), [`violin`](/python/violin/), [`strip`](/python/strip-charts/)
 * **2D Distributions**: [`density_heatmap`](/python/2D-Histogram/), [`density_contour`](/python/2d-histogram-contour/)
 * **Matrix Input**: [`imshow`](/python/imshow/)
 * **3-Dimensional**: [`scatter_3d`](/python/3d-scatter-plots/), [`line_3d`](/python/3d-line-plots/)
@@ -67,7 +67,7 @@ The Plotly Express API in general offers the following features:
 * **Styling Control**: PX functions [read styling information from the default figure template](/python/styling-plotly-express/), and support commonly-needed [cosmetic controls like `category_orders` and `color_discrete_map`](/python/styling-plotly-express/) to precisely control categorical variables.
 * **Uniform Color Handling**: PX functions automatically switch between [continuous](/python/colorscales/) and [categorical color](/python/discrete-color/) based on the input type.
 * **Faceting**: the 2D-cartesian plotting functions support [row, column and wrapped facetting with `facet_row`, `facet_col` and `facet_col_wrap` arguments](/python/facet-plots/).
-* **Marginal Plots**: the 2D-cartesian plotting functions support marginal distribution plots with the `marginal`, `marginal_x` and `marginal_y` arguments.
+* **Marginal Plots**: the 2D-cartesian plotting functions support [marginal distribution plots](/python/marginal-plots/) with the `marginal`, `marginal_x` and `marginal_y` arguments.
 * **A Pandas backend**: the 2D-cartesian plotting functions are available as [a Pandas plotting backend](/python/pandas-backend/) so you can call them via `df.plot()`.
 * **Trendlines**: `px.scatter` supports [built-in trendlines with accessible model output](/python/linear-fits/).
 * **Animations**: many PX functions support [simple animation support via the `animation_frame` and `animation_group` arguments](/python/animations/).
