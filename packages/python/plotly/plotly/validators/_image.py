@@ -105,6 +105,11 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
+            source
+                Specifies the URL of the image to be used. The
+                URL must be accessible from the domain where
+                the plot code is run, and can be either
+                relative or absolute.
             stream
                 :class:`plotly.graph_objects.image.Stream`
                 instance or dict with compatible properties
