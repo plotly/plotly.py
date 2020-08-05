@@ -27,6 +27,7 @@ class Image(_BaseTraceType):
         "metasrc",
         "name",
         "opacity",
+        "source",
         "stream",
         "text",
         "textsrc",
@@ -491,6 +492,29 @@ class Image(_BaseTraceType):
     def opacity(self, val):
         self["opacity"] = val
 
+    # source
+    # ------
+    @property
+    def source(self):
+        """
+        Specifies the URL of the image to be used. The URL must be
+        accessible from the domain where the plot code is run, and can
+        be either relative or absolute.
+    
+        The 'source' property is a string and must be specified as:
+          - A string
+          - A number that will be converted to a string
+
+        Returns
+        -------
+        str
+        """
+        return self["source"]
+
+    @source.setter
+    def source(self, val):
+        self["source"] = val
+
     # stream
     # ------
     @property
@@ -935,6 +959,10 @@ class Image(_BaseTraceType):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        source
+            Specifies the URL of the image to be used. The URL must
+            be accessible from the domain where the plot code is
+            run, and can be either relative or absolute.
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -1028,6 +1056,7 @@ class Image(_BaseTraceType):
         metasrc=None,
         name=None,
         opacity=None,
+        source=None,
         stream=None,
         text=None,
         textsrc=None,
@@ -1145,6 +1174,10 @@ class Image(_BaseTraceType):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        source
+            Specifies the URL of the image to be used. The URL must
+            be accessible from the domain where the plot code is
+            run, and can be either relative or absolute.
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -1321,6 +1354,10 @@ an instance of :class:`plotly.graph_objs.Image`"""
         _v = opacity if opacity is not None else _v
         if _v is not None:
             self["opacity"] = _v
+        _v = arg.pop("source", None)
+        _v = source if source is not None else _v
+        if _v is not None:
+            self["source"] = _v
         _v = arg.pop("stream", None)
         _v = stream if stream is not None else _v
         if _v is not None:

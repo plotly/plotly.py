@@ -16979,6 +16979,12 @@
                     "editType": "none",
                     "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
                 },
+                "source": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Specifies the URL of the image to be used. The URL must be accessible from the domain where the plot code is run, and can be either relative or absolute."
+                },
                 "z": {
                     "valType": "data_array",
                     "role": "data",
