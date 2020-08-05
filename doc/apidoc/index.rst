@@ -31,6 +31,8 @@ Full reference list
    plotly.subplots.rst
    plotly.figure_factory.rst
    plotly.io.rst
+   plotly.colors
+   plotly.data
 
 
 
