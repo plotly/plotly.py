@@ -23,5 +23,5 @@ recommonmark
 pathlib
 python-frontmatter
 datashader
-pyarrow
+pyarrow 
 cufflinks==0.17.3
