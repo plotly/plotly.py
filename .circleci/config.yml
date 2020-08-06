@@ -406,6 +406,7 @@ jobs:
               pip uninstall -y plotly
               cd ../packages/python/plotly
               # To be removed after plotly.js release
+              pip install inflect
               python3 setup.py updateplotlyjsdev --devbranch fast-image
               python3 setup.py install
               cd ../../../doc
