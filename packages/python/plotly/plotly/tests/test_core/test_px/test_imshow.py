@@ -141,6 +141,13 @@ def test_zmin_zmax_range_color():
     assert fig.layout.coloraxis.cmax == 0.8
 
 
+def test_zmin_zmax_range_color_source():
+    img = img_gray / 100.0
+    fig1 = px.imshow(img, zmin=0.2, zmax=0.8, use_binary_string=True)
+    fig2 = px.imshow(img, range_color=[0.2, 0.8], use_binary_string=True)
+    assert fig1 == fig2
+
+
 def test_imshow_xarray():
     img = np.random.random((20, 30))
     da = xr.DataArray(img, dims=["dim_rows", "dim_cols"])

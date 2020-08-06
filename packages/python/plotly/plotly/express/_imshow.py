@@ -287,8 +287,12 @@ def imshow(
     if img.dtype == np.bool:
         img = 255 * img.astype(np.uint8)
 
+    if range_color is not None:
+        zmin = range_color[0]
+        zmax = range_color[1]
     if contrast_rescaling is None:
         contrast_rescaling = "image" if img.ndim == 2 else "dtype"
+
     if contrast_rescaling == "image":
         if (zmin is not None or use_binary_string) and zmax is None:
             zmax = img.max()
@@ -319,14 +323,13 @@ def imshow(
             layout["xaxis"] = dict(scaleanchor="y", constrain="domain")
             layout["yaxis"]["constrain"] = "domain"
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
-        range_color = range_color or [zmin, zmax]
         layout["coloraxis1"] = dict(
             colorscale=colorscale_validator.validate_coerce(
                 args["color_continuous_scale"]
             ),
             cmid=color_continuous_midpoint,
-            cmin=range_color[0],
-            cmax=range_color[1],
+            cmin=zmin,
+            cmax=zmax,
         )
         if labels["color"]:
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
