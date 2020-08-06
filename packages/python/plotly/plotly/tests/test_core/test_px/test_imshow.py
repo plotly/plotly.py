@@ -2,17 +2,35 @@ import plotly.express as px
 import numpy as np
 import pytest
 import xarray as xr
+from PIL import Image
+from io import BytesIO
+import base64
+from skimage.exposure import rescale_intensity
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
-img_gray = np.arange(100).reshape((10, 10))
+img_gray = np.arange(100, dtype=np.float).reshape((10, 10))
 
 
-def test_rgb_uint8():
-    fig = px.imshow(img_rgb)
-    assert fig.data[0]["zmax"] == (255, 255, 255, 1)
+def decode_image_string(image_string):
+    """
+    Converts image string to numpy array.
+    """
+    if 'png' in image_string[:22]:
+        return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[22:]))))
+    elif 'jpeg' in image_string[:23]:
+        return np.asaray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
+    else:
+        raise ValueError("image string format not recognized")
 
 
-def test_vmax():
+@pytest.mark.parametrize("use_binary_string", [False])
+def test_rgb_uint8(use_binary_string):
+    fig = px.imshow(img_rgb, use_binary_string=use_binary_string)
+    if not use_binary_string:
+        assert fig.data[0]["zmax"] == (255, 255, 255, 1)
+
+
+def test_zmax():
     for zmax in [
         100,
         [100],
@@ -21,7 +39,7 @@ def test_vmax():
         (100, 100, 100),
         (100, 100, 100, 1),
     ]:
-        fig = px.imshow(img_rgb, zmax=zmax)
+        fig = px.imshow(img_rgb, zmax=zmax, use_binary_string=False)
         assert fig.data[0]["zmax"] == (100, 100, 100, 1)
 
 
@@ -35,7 +53,7 @@ def test_automatic_zmax_from_dtype():
     for key, val in dtypes_dict.items():
         img = np.array([0, 1], dtype=key)
         img = np.dstack((img,) * 3)
-        fig = px.imshow(img)
+        fig = px.imshow(img, use_binary_string=False)
         assert fig.data[0]["zmax"] == (val, val, val, 1)
 
 
@@ -66,7 +84,7 @@ def test_wrong_dimensions():
 
 
 def test_nan_inf_data():
-    imgs = [np.ones((20, 20)), 255 * np.ones((20, 20), dtype=np.uint8)]
+    imgs = [np.ones((20, 20)), 255 * np.ones((20, 20))]
     zmaxs = [1, 255]
     for zmax, img in zip(zmaxs, imgs):
         img[0] = 0
@@ -86,7 +104,7 @@ def test_zmax_floats():
     ]
     zmaxs = [1, 1, 255, 65535]
     for zmax, img in zip(zmaxs, imgs):
-        fig = px.imshow(img)
+        fig = px.imshow(img, use_binary_string=False)
         assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
     # single-channel
     imgs = [
@@ -97,14 +115,13 @@ def test_zmax_floats():
     ]
     for zmax, img in zip(zmaxs, imgs):
         fig = px.imshow(img)
-        print(fig.data[0]["zmax"], zmax)
         assert fig.data[0]["zmax"] == None
 
 
 def test_zmin_zmax_range_color():
     img = img_gray / 100.0
     fig = px.imshow(img)
-    assert not (fig.layout.coloraxis.cmin or fig.layout.coloraxis.cmax)
+    #assert not (fig.layout.coloraxis.cmin or fig.layout.coloraxis.cmax)
     fig1 = px.imshow(img, zmin=0.2, zmax=0.8)
     fig2 = px.imshow(img, range_color=[0.2, 0.8])
     assert fig1 == fig2
@@ -172,3 +189,12 @@ def test_imshow_dataframe():
     assert fig.data[0].y[0] == "South Korea"
     assert fig.layout.yaxis.title.text == df.index.name
     assert fig.layout.yaxis.title.text == "nation"
+
+
+def test_imshow_source():
+    fig = px.imshow(img_rgb, use_binary_string=True)
+    decoded_img = decode_image_string(fig.data[0].source)
+    assert np.all(decoded_img == img_rgb)
+
+
+# def test_imshow_source_dtype_zmax():

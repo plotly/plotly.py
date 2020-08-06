@@ -2,6 +2,11 @@ import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
 import numpy as np
+from PIL import Image
+from io import BytesIO
+import base64
+from skimage.exposure import rescale_intensity
+import pandas as pd
 
 try:
     import xarray
@@ -26,6 +31,22 @@ _integer_types = (
     np.ulonglong,
 )  # 64 bits
 _integer_ranges = {t: (np.iinfo(t).min, np.iinfo(t).max) for t in _integer_types}
+
+
+def _array_to_b64str(img, ext='png'):
+    pil_img = Image.fromarray(img)
+    if ext == "jpg":
+       ext = "jpeg"
+    buff = BytesIO()
+    pil_img.save(buff, format=ext)
+    if ext == 'png':
+        prefix = b'data:image/png;base64,'
+    elif ext == 'jpeg':
+        prefix = b'data:image/jpeg;base64,'
+    else:
+        raise ValueError("accepted image formats are 'png' and 'jpeg' but %s was passed" %format)
+    image_string = (prefix + base64.b64encode(buff.getvalue())).decode("utf-8")
+    return image_string
 
 
 def _vectorize_zvalue(z):
@@ -79,6 +100,8 @@ def imshow(
     width=None,
     height=None,
     aspect=None,
+    use_binary_string=None,
+    contrast_rescaling=None,
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -176,7 +199,14 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
+        if use_binary_string:
+            raise ValueError(
+                    "It is not possible to use binary image strings for xarrays."
+                    "Please pass your data as a numpy array instead using"
+                    "`img.values`"
+                    )
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -216,14 +246,42 @@ def imshow(
         if aspect is None:
             aspect = "equal"
 
+    # Set the value of use_binary_string
+    if isinstance(img, pd.DataFrame):
+        if use_binary_string:
+            raise ValueError("Binary strings cannot be used with pandas arrays")
+        has_nans = True
+    else:
+        has_nans = np.any(np.isnan(img))
+        if has_nans and use_binary_string:
+            raise ValueError("Binary strings cannot be used with arrays containing NaNs")
+
+    # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
+
+    # Default behaviour of use_binary_string: True for RGB images, False for 2D
+    if use_binary_string is None:
+        use_binary_string = img.ndim >= 3 and not has_nans
 
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
         img = 255 * img.astype(np.uint8)
 
-    # For 2d data, use Heatmap trace
-    if img.ndim == 2:
+    if contrast_rescaling is None:
+        contrast_rescaling='image' if img.ndim == 2 else 'dtype'
+    if contrast_rescaling == 'image':
+        if (zmin is not None or use_binary_string) and zmax is None:
+            zmax = img.max()
+        if (zmax is not None or use_binary_string) and zmin is None:
+            zmin = img.min()
+    else:
+        if zmax is None and img.dtype is not np.uint8:
+            zmax = _infer_zmax_from_type(img)
+        if zmin is None:
+            zmin = 0
+
+        # For 2d data, use Heatmap trace, unless use_binary_string is True
+    if img.ndim == 2 and not use_binary_string:
         if y is not None and img.shape[0] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
@@ -241,10 +299,6 @@ def imshow(
             layout["xaxis"] = dict(scaleanchor="y", constrain="domain")
             layout["yaxis"]["constrain"] = "domain"
         colorscale_validator = ColorscaleValidator("colorscale", "imshow")
-        if zmin is not None and zmax is None:
-            zmax = img.max()
-        if zmax is not None and zmin is None:
-            zmin = img.min()
         range_color = range_color or [zmin, zmax]
         layout["coloraxis1"] = dict(
             colorscale=colorscale_validator.validate_coerce(
@@ -258,11 +312,18 @@ def imshow(
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 
     # For 2D+RGB data, use Image trace
-    elif img.ndim == 3 and img.shape[-1] in [3, 4]:
-        if zmax is None and img.dtype is not np.uint8:
-            zmax = _infer_zmax_from_type(img)
+    elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and use_binary_string):
         zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
-        trace = go.Image(z=img, zmin=zmin, zmax=zmax)
+        if use_binary_string:
+            if img.ndim == 2:
+                img_rescaled = rescale_intensity(img, in_range=(zmin[0], zmax[0]), out_range=np.uint8)
+            else:
+                img_rescaled = np.dstack([rescale_intensity(img[..., ch], in_range=(zmin[ch], zmax[ch]), out_range=np.uint8)
+                                            for ch in range(img.shape[-1])])
+            img_str = _array_to_b64str(img_rescaled)
+            trace = go.Image(source=img_str)
+        else:
+            trace = go.Image(z=img, zmin=zmin, zmax=zmax)
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
@@ -282,10 +343,11 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
-    fig.update_traces(
-        hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{z}<extra></extra>"
-        % (labels["x"] or "x", labels["y"] or "y", labels["color"] or "color",)
-    )
+    if not use_binary_string:
+        fig.update_traces(
+            hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{z}<extra></extra>"
+            % (labels["x"] or "x", labels["y"] or "y", labels["color"] or "color",)
+        )
     if labels["x"]:
         fig.update_xaxes(title_text=labels["x"])
     if labels["y"]:
