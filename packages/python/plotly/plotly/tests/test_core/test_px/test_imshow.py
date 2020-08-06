@@ -15,9 +15,9 @@ def decode_image_string(image_string):
     """
     Converts image string to numpy array.
     """
-    if 'png' in image_string[:22]:
+    if "png" in image_string[:22]:
         return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[22:]))))
-    elif 'jpeg' in image_string[:23]:
+    elif "jpeg" in image_string[:23]:
         return np.asaray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
     else:
         raise ValueError("image string format not recognized")
@@ -57,14 +57,20 @@ def test_automatic_zmax_from_dtype():
         assert fig.data[0]["zmax"] == (val, val, val, 1)
 
 
-def test_origin():
-    for img in [img_rgb, img_gray]:
-        fig = px.imshow(img, origin="lower")
+@pytest.mark.parametrize("use_binary_string", [False, True])
+def test_origin(use_binary_string):
+    for i, img in enumerate([img_rgb, img_gray]):
+        fig = px.imshow(img, origin="lower", use_binary_string=use_binary_string)
         assert fig.layout.yaxis.autorange == True
-    fig = px.imshow(img_rgb)
+        if use_binary_string and i == 0:
+            assert np.all(img[::-1] == decode_image_string(fig.data[0].source))
+    fig = px.imshow(img_rgb, use_binary_string=use_binary_string)
     assert fig.layout.yaxis.autorange is None
-    fig = px.imshow(img_gray)
-    assert fig.layout.yaxis.autorange == "reversed"
+    fig = px.imshow(img_gray, use_binary_string=use_binary_string)
+    if use_binary_string:
+        assert fig.layout.yaxis.autorange is None
+    else:
+        assert fig.layout.yaxis.autorange == "reversed"
 
 
 def test_colorscale():
@@ -121,7 +127,7 @@ def test_zmax_floats():
 def test_zmin_zmax_range_color():
     img = img_gray / 100.0
     fig = px.imshow(img)
-    #assert not (fig.layout.coloraxis.cmin or fig.layout.coloraxis.cmax)
+    # assert not (fig.layout.coloraxis.cmin or fig.layout.coloraxis.cmax)
     fig1 = px.imshow(img, zmin=0.2, zmax=0.8)
     fig2 = px.imshow(img, range_color=[0.2, 0.8])
     assert fig1 == fig2
@@ -197,4 +203,41 @@ def test_imshow_source():
     assert np.all(decoded_img == img_rgb)
 
 
-# def test_imshow_source_dtype_zmax():
+@pytest.mark.parametrize(
+    "dtype",
+    [
+        np.uint8,
+        np.uint16,
+        np.int8,
+        np.int16,
+        np.int32,
+        np.int64,
+        np.float32,
+        np.float64,
+    ],
+)
+@pytest.mark.parametrize("contrast_rescaling", ["image", "dtype"])
+def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
+    img = np.arange(100, dtype=dtype).reshape((10, 10))
+    fig = px.imshow(img, use_binary_string=True, contrast_rescaling=contrast_rescaling)
+    if contrast_rescaling == "image":
+        assert (
+            np.max(
+                np.abs(
+                    rescale_intensity(img, in_range="image", out_range=np.uint8)
+                    - decode_image_string(fig.data[0].source)
+                )
+            )
+            < 1
+        )
+    else:
+        if dtype in [np.uint8, np.float32, np.float64]:
+            assert np.all(img == decode_image_string(fig.data[0].source))
+        else:
+            assert (
+                np.abs(
+                    np.max(decode_image_string(fig.data[0].source))
+                    - 255 * img.max() / np.iinfo(dtype).max
+                )
+                < 1
+            )
