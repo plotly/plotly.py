@@ -33,18 +33,20 @@ _integer_types = (
 _integer_ranges = {t: (np.iinfo(t).min, np.iinfo(t).max) for t in _integer_types}
 
 
-def _array_to_b64str(img, ext='png'):
+def _array_to_b64str(img, ext="png"):
     pil_img = Image.fromarray(img)
     if ext == "jpg":
-       ext = "jpeg"
+        ext = "jpeg"
     buff = BytesIO()
     pil_img.save(buff, format=ext)
-    if ext == 'png':
-        prefix = b'data:image/png;base64,'
-    elif ext == 'jpeg':
-        prefix = b'data:image/jpeg;base64,'
+    if ext == "png":
+        prefix = b"data:image/png;base64,"
+    elif ext == "jpeg":
+        prefix = b"data:image/jpeg;base64,"
     else:
-        raise ValueError("accepted image formats are 'png' and 'jpeg' but %s was passed" %format)
+        raise ValueError(
+            "accepted image formats are 'png' and 'jpeg' but %s was passed" % format
+        )
     image_string = (prefix + base64.b64encode(buff.getvalue())).decode("utf-8")
     return image_string
 
@@ -177,6 +179,22 @@ def imshow(
       - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
         (which have typically heterogeneous coordinates)
 
+    use_binary_string: bool, default None
+        if True, the image data are first rescaled and encoded as uint8 and
+        then passed to plotly.js as a b64 PNG string. If False, data are passed
+        unchanged as a numerical array. Setting to True may lead to performance
+        gains, at the cost of a loss of precision depending on the original data
+        type. If None, use_binary_string is set to True for multichannel (eg) RGB
+        arrays, and to False for single-channel (2D) arrays. 2D arrays are
+        represented as grayscale and with no colorbar if use_binary_string is
+        True.
+
+    contrast_rescaling: 'image', 'dtype', or None
+        how to determine data values corresponding to the bounds of the color
+        range, when zmin or zmax are not passed. If `image`, the min and max
+        values of the image are used. If `dtype`, a heuristic based on the image
+        data type is used.
+
     Returns
     -------
     fig : graph_objects.Figure containing the displayed image
@@ -203,10 +221,10 @@ def imshow(
     if xarray_imported and isinstance(img, xarray.DataArray):
         if use_binary_string:
             raise ValueError(
-                    "It is not possible to use binary image strings for xarrays."
-                    "Please pass your data as a numpy array instead using"
-                    "`img.values`"
-                    )
+                "It is not possible to use binary image strings for xarrays."
+                "Please pass your data as a numpy array instead using"
+                "`img.values`"
+            )
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -254,7 +272,9 @@ def imshow(
     else:
         has_nans = np.any(np.isnan(img))
         if has_nans and use_binary_string:
-            raise ValueError("Binary strings cannot be used with arrays containing NaNs")
+            raise ValueError(
+                "Binary strings cannot be used with arrays containing NaNs"
+            )
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
@@ -268,8 +288,8 @@ def imshow(
         img = 255 * img.astype(np.uint8)
 
     if contrast_rescaling is None:
-        contrast_rescaling='image' if img.ndim == 2 else 'dtype'
-    if contrast_rescaling == 'image':
+        contrast_rescaling = "image" if img.ndim == 2 else "dtype"
+    if contrast_rescaling == "image":
         if (zmin is not None or use_binary_string) and zmax is None:
             zmax = img.max()
         if (zmax is not None or use_binary_string) and zmin is None:
@@ -312,14 +332,30 @@ def imshow(
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 
     # For 2D+RGB data, use Image trace
-    elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and use_binary_string):
+    elif (
+        img.ndim == 3
+        and img.shape[-1] in [3, 4]
+        or (img.ndim == 2 and use_binary_string)
+    ):
         zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
         if use_binary_string:
             if img.ndim == 2:
-                img_rescaled = rescale_intensity(img, in_range=(zmin[0], zmax[0]), out_range=np.uint8)
+                img_rescaled = rescale_intensity(
+                    img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
+                )
             else:
-                img_rescaled = np.dstack([rescale_intensity(img[..., ch], in_range=(zmin[ch], zmax[ch]), out_range=np.uint8)
-                                            for ch in range(img.shape[-1])])
+                img_rescaled = np.dstack(
+                    [
+                        rescale_intensity(
+                            img[..., ch],
+                            in_range=(zmin[ch], zmax[ch]),
+                            out_range=np.uint8,
+                        )
+                        for ch in range(img.shape[-1])
+                    ]
+                )
+            if origin == "lower":
+                img_rescaled = img_rescaled[::-1]
             img_str = _array_to_b64str(img_rescaled)
             trace = go.Image(source=img_str)
         else:
@@ -343,11 +379,17 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
-    if not use_binary_string:
-        fig.update_traces(
-            hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{z}<extra></extra>"
-            % (labels["x"] or "x", labels["y"] or "y", labels["color"] or "color",)
+    # does not work yet, Antoine working on it
+    hover_name = "z" if not use_binary_string else "colorLabel"
+    fig.update_traces(
+        hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{%s}<extra></extra>"
+        % (
+            labels["x"] or "x",
+            labels["y"] or "y",
+            labels["color"] or "color",
+            hover_name,
         )
+    )
     if labels["x"]:
         fig.update_xaxes(title_text=labels["x"])
     if labels["y"]:
