@@ -405,6 +405,8 @@ jobs:
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
               cd ../packages/python/plotly
+              # To be removed after plotly.js release
+              python3 setup.py updateplotlyjsdev --devbranch fast-image
               python3 setup.py install
               cd ../../../doc
             fi
@@ -441,7 +443,9 @@ jobs:
               cd ../..
             fi
             tar -zcf build/html.tgz build/html
-            rm -rf build/html build/ipynb
+            # Do not zip so that reviewers can take a look at doc online
+            # rm -rf build/html build/ipynb
+            rm -rf build/ipynb
             cd ..
 
       - run:

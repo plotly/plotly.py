@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -83,6 +83,26 @@ import plotly.express as px
 import numpy as np
 img = np.arange(15**2).reshape((15, 15))
 fig = px.imshow(img)
+fig.show()
+```
+
+### Passing image data as a binary string
+
+... add explanations here about `use_binary_string` and `contrast_rescaling`
+
+```python
+import plotly.express as px
+import numpy as np
+img = np.arange(15**2).reshape((15, 15))
+fig = px.imshow(img, use_binary_string=True)
+fig.show()
+```
+
+```python
+import plotly.express as px
+import numpy as np
+img = np.arange(13**2, dtype=np.uint8).reshape((13, 13))
+fig = px.imshow(img, use_binary_string=True, contrast_rescaling='dtype')
 fig.show()
 ```
 
@@ -167,7 +187,7 @@ fig.show()
 
 ### Display multichannel image data with go.Image
 
-It is also possible to use the `go.Image` trace from the low-level `graph_objects` API in order to display image data. Note that `go.Image` only accepts multichannel images. For single images, use [`go.Heatmap`](/python/heatmaps).
+It is also possible to use the `go.Image` trace from the low-level `graph_objects` API in order to display image data. Note that `go.Image` only accepts multichannel images. For single-channel images, use [`go.Heatmap`](/python/heatmaps).
 
 Note that the `go.Image` trace is different from the `go.layout.Image` class, which can be used for [adding background images or logos to figures](/python/images).
 
