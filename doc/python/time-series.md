@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to plot date and time in python.
     display_as: financial
@@ -207,11 +207,56 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15'],
-                 title="Hide Gaps with rangebreaks")
+                 title="Hide Weekend and Holiday Gaps with rangebreaks")
 fig.update_xaxes(
     rangebreaks=[
         dict(bounds=["sat", "mon"]), #hide weekends
         dict(values=["2015-12-25", "2016-01-01"])  # hide Christmas and New Year's
+    ]
+)
+fig.show()
+```
+
+### Hiding Non-Business Hours
+
+The `rangebreaks` feature described above works for hiding hourly periods as well.
+
+```python
+import plotly.express as px
+import pandas as pd
+import numpy as np
+np.random.seed(1)
+
+work_week_40h = pd.date_range(start='2020-03-01', end='2020-03-07', freq="BH")
+
+df = pd.DataFrame(dict(
+    date = work_week_40h,
+    value = np.cumsum(np.random.rand(40)-0.5)
+))
+
+fig = px.scatter(df, x="date", y="value",
+                 title="Default Display with Gaps")
+fig.show()
+```
+
+```python
+import plotly.express as px
+import pandas as pd
+import numpy as np
+np.random.seed(1)
+
+work_week_40h = pd.date_range(start='2020-03-01', end='2020-03-07', freq="BH")
+
+df = pd.DataFrame(dict(
+    date = work_week_40h,
+    value = np.cumsum(np.random.rand(40)-0.5)
+))
+
+fig = px.scatter(df, x="date", y="value",
+                 title="Hide Non-Business Hour Gaps with rangebreaks")
+fig.update_xaxes(
+    rangebreaks=[
+        dict(bounds=[17, 9], pattern="hour"), #hide hours outside of 9am-5pm
     ]
 )
 fig.show()
