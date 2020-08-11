@@ -189,10 +189,10 @@ def imshow(
         represented as grayscale and with no colorbar if use_binary_string is
         True.
 
-    contrast_rescaling: 'image', 'dtype', or None
+    contrast_rescaling: 'minmax', 'infer', or None
         how to determine data values corresponding to the bounds of the color
-        range, when zmin or zmax are not passed. If `image`, the min and max
-        values of the image are used. If `dtype`, a heuristic based on the image
+        range, when zmin or zmax are not passed. If `minmax`, the min and max
+        values of the image are used. If `infer`, a heuristic based on the image
         data type is used.
 
     Returns
@@ -291,9 +291,9 @@ def imshow(
         zmin = range_color[0]
         zmax = range_color[1]
     if contrast_rescaling is None:
-        contrast_rescaling = "image" if img.ndim == 2 else "dtype"
+        contrast_rescaling = "minmax" if img.ndim == 2 else "infer"
 
-    if contrast_rescaling == "image":
+    if contrast_rescaling == "minmax":
         if (zmin is not None or use_binary_string) and zmax is None:
             zmax = img.max()
         if (zmax is not None or use_binary_string) and zmin is None:
