@@ -223,11 +223,11 @@ def test_imshow_source():
         np.float64,
     ],
 )
-@pytest.mark.parametrize("contrast_rescaling", ["image", "dtype"])
+@pytest.mark.parametrize("contrast_rescaling", ["minmax", "infer"])
 def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
     img = np.arange(100, dtype=dtype).reshape((10, 10))
     fig = px.imshow(img, use_binary_string=True, contrast_rescaling=contrast_rescaling)
-    if contrast_rescaling == "image":
+    if contrast_rescaling == "minmax":
         assert (
             np.max(
                 np.abs(
