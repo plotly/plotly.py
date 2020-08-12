@@ -45,7 +45,6 @@ We will train a [k-Nearest Neighbors (kNN)](https://scikit-learn.org/stable/modu
 
 ### Display training and test splits
 
-
 Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](https://plotly.com/python/line-and-scatter/).
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
