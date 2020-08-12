@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: Interpret the results of your classification using Receiver Operating
       Characteristics (ROC) and Precision-Recall (PR) Curves in Python with Plotly.
