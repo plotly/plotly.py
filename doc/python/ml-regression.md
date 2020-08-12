@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: Visualize regression in scikit-learn with Plotly.
     display_as: ai_ml
@@ -33,13 +33,28 @@ jupyter:
     thumbnail: thumbnail/ml-regression.png
 ---
 
+<!-- #region -->
+This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html), and progressively move towards models like [Decision Tree][tree] and [Polynomial Features][poly]. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, [surface plots](https://plotly.com/python/3d-surface-plots/) for 3D data, and enhanced prediction error analysis with [Plotly Express](https://plotly.com/python/plotly-express/).
+
+We will use [Scikit-learn](https://scikit-learn.org/) to split and preprocess our data and train various regression models. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
+
+
+[lasso]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html
+[tree]: https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html
+[poly]: https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html
+<!-- #endregion -->
+
 ## Basic linear regression plots
 
+In this section, we show you how to apply a simple regression model for predicting tips a server will receive based on various client attributes (such as sex, time of the week, and whether they are a smoker).
+
+We will be using the [Linear Regression][lr], which is a simple model that fit an intercept (the mean tip received by a server), and add a slope for each feature we use, such as the value of the total bill. We show you how to do that with both Plotly Express and Scikit-learn.
 
 ### Ordinary Least Square (OLS) with `plotly.express`
 
-
 This example shows how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS) for predicting the tips waiters will receive based on the value of the total bill.
+
+[lr]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 
 ```python
 import plotly.express as px
@@ -78,7 +93,7 @@ fig.show()
 
 ## Model generalization on unseen data
 
-Easily color your plot based on a predefined data split.
+With `go.Scatter`, you can easily color your plot based on a predefined data split. By coloring the training and the testing data points with different colors, you can easily see if whether the model generalizes well to the test data or not.
 
 ```python
 import numpy as np
@@ -108,7 +123,11 @@ fig.show()
 
 ## Comparing different kNN models parameters
 
-Compare the performance of two different models on the same dataset. This can be easily combined with discrete color legends from `px`, such as coloring by the assigned `sex`.
+In addition to linear regression, it's possible to fit the same data using [k-Nearest Neighbors][knn]. When you perform a prediction on a new sample, this model either takes the weighted or un-weighted average of the neighbors. In order to see the difference between those two averaging options, we train a kNN model with both of those parameters, and we plot them in the same way as the previous graph.
+
+Notice how we can combine scatter points with lines using Plotly.py. You can learn more about [multiple chart types](https://plotly.com/python/graphing-multiple-chart-types/).
+
+[knn]: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
 
 ```python
 import numpy as np
@@ -136,9 +155,14 @@ fig.add_traces(go.Scatter(x=x_range, y=y_dist, name='Weights: Distance'))
 fig.show()
 ```
 
+<!-- #region -->
 ## Displaying `PolynomialFeatures` using $\LaTeX$
 
-It's easy to diplay latex equations in legend and titles by simply adding `$` before and after your equation.
+Notice how linear regression fits a straight line, but kNN can take non-linear shapes. Moreover, it is possible to extend linear regression to polynomial regression by using scikit-learn's `PolynomialFeatures`, which lets you fit a slope for your features raised to the power of `n`, where `n=1,2,3,4` in our example.
+
+
+With Plotly, it's easy to diplay latex equations in legend and titles by simply adding `$` before and after your equation. This way, you can see the coefficients that our polynomial regression fitted.
+<!-- #endregion -->
 
 ```python
 import numpy as np
@@ -220,7 +244,9 @@ fig.show()
 
 ## Visualizing coefficients for multiple linear regression (MLR)
 
-When you are fitting a linear regression, you want to often know what feature matters the most in your regression's output.
+Visualizing regression with one or two variables is straightforward, since we can respectively plot them with scatter plots and 3D scatter plots. Moreover, if you have more than 2 features, you will need to find alternative ways to visualize your data.
+
+One way is to use [bar charts](https://plotly.com/python/bar-charts/). In our example, each bar indicates the coefficients of our linear regression model for each input feature. Our model was trained on the [Iris dataset](https://archive.ics.uci.edu/ml/datasets/iris).
 
 ```python
 import pandas as pd
