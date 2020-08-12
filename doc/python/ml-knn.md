@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
       in Python with Plotly.
@@ -36,13 +36,19 @@ jupyter:
 
 ## Basic binary classification with kNN
 
-This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](https://plot.ly/python/marker-style/), then demonstrate how to evaluate a kNN classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
+This section gets us started with displaying basic binary classification using 2D data. We first show how to display training versus testing data using [various marker styles](https://plot.ly/python/marker-style/), then demonstrate how to evaluate our classifier's performance on the **test split** using a continuous color gradient to indicate the model's predicted score.
+
+We will use [Scikit-learn](https://scikit-learn.org/) for training our model and for loading and splitting data. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
+
+We will train a [k-Nearest Neighbors (kNN)](https://scikit-learn.org/stable/modules/neighbors.html) classifier. First, the model records the label of each training sample. Then, whenever we give it a new sample, it will look at the `k` closest samples from the training set to find the most common label, and assign it to our new sample.
 
 
 ### Display training and test splits
 
 
-Here, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
+Using Scikit-learn, we first generate synthetic data that form the shape of a moon. We then split it into a training and testing set. Finally, we display the ground truth labels using [a scatter plot](https://plotly.com/python/line-and-scatter/).
+
+In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
 ```python
 import numpy as np
@@ -52,6 +58,7 @@ from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
+# Load and split data
 X, y = make_moons(noise=0.3, random_state=0)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y.astype(str), test_size=0.25, random_state=0)
@@ -78,10 +85,12 @@ fig.update_traces(
 fig.show()
 ```
 
-### Visualize predictions on test split
+### Visualize predictions on test split with [`plotly.express`](https://plotly.com/python/plotly-express/)
 
 
-Now, we evaluate the model only on the test set. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
+Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
+
+Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
 
 ```python
 import numpy as np
@@ -113,6 +122,56 @@ fig.show()
 ```
 
 ## Probability Estimates with `go.Contour`
+
+Just like the previous example, we will first train our kNN model on the training set.
+
+Instead of predicting the conference for the test set, we can predict the confidence map for the entire area that wraps around the dimensions of our dataset. To do this, we use [`np.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) to create a grid, where the distance between each point is denoted by the `mesh_size` variable. 
+
+Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](https://plotly.com/python/contour-plots/).
+
+```python
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+mesh_size = .02
+margin = 0.25
+
+# Load and split data
+X, y = make_moons(noise=0.3, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y.astype(str), test_size=0.25, random_state=0)
+
+# Create a mesh grid on which we will run our model
+x_min, x_max = X[:, 0].min() - margin, X[:, 0].max() + margin
+y_min, y_max = X[:, 1].min() - margin, X[:, 1].max() + margin
+xrange = np.arange(x_min, x_max, mesh_size)
+yrange = np.arange(y_min, y_max, mesh_size)
+xx, yy = np.meshgrid(xrange, yrange)
+
+# Create classifier, run predictions on grid
+clf = KNeighborsClassifier(15, weights='uniform')
+clf.fit(X, y)
+Z = clf.predict_proba(np.c_[xx.ravel(), yy.ravel()])[:, 1]
+Z = Z.reshape(xx.shape)
+
+
+# Plot the figure
+fig = go.Figure(data=[
+    go.Contour(
+        x=xrange, 
+        y=yrange, 
+        z=Z, 
+        colorscale='RdBu'
+    )    
+])
+fig.show()
+```
+
+Now, let's try to combine our `go.Contour` plot with the first scatter plot of our data points, so that we can visually compare the confidence of our model with the true labels.
 
 ```python
 import numpy as np
@@ -178,9 +237,9 @@ fig.add_trace(
 fig.show()
 ```
 
-## Multi-class prediction confidence with `go.Heatmap`
+## Multi-class prediction confidence with [`go.Heatmap`](https://plotly.com/python/heatmaps/)
 
-It is also possible to visualize the prediction confidence of the model using `go.Heatmap`. In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
+It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/python/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
 
 ```python
 import numpy as np
