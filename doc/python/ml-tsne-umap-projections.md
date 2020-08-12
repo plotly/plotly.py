@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
       in Python with Plotly.
