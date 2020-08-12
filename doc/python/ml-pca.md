@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: Visualize Principle Component Analysis (PCA) of your high-dimensional
       data in Python with Plotly.
@@ -34,12 +34,21 @@ jupyter:
     thumbnail: thumbnail/ml-pca.png
 ---
 
+This page first shows how to visualize higher dimension data using various Plotly figures combined with dimensionality reduction (aka projection). Then, we dive into the specific details of our projection algorithm.
+
+We will use [Scikit-learn](https://scikit-learn.org/) to load one of the datasets, and apply dimensionality reduction. Scikit-learn is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It was designed to be accessible, and to work seamlessly with popular libraries like NumPy and Pandas.
+
+
 ## High-dimensional PCA Analysis with  `px.scatter_matrix`
+
+The dimensionality reduction technique we will be using is called the [Principal Component Analysis (PCA)](https://scikit-learn.org/stable/modules/decomposition.html#pca). It is a powerful technique that arises from linear algebra and probability theory. In essense, it computes a matrix that represents the variation of your data ([covariance matrix/eigenvectors][covmatrix]), and rank them by their relevance (explained variance/eigenvalues). For a video tutorial, see [this segment on PCA](https://youtu.be/rng04VJxUt4?t=98) from the Coursera ML course.
+
+[covmatrix]: https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues#:~:text=As%20it%20is%20a%20square%20symmetric%20matrix%2C%20it%20can%20be%20diagonalized%20by%20choosing%20a%20new%20orthogonal%20coordinate%20system%2C%20given%20by%20its%20eigenvectors%20(incidentally%2C%20this%20is%20called%20spectral%20theorem)%3B%20corresponding%20eigenvalues%20will%20then%20be%20located%20on%20the%20diagonal.%20In%20this%20new%20coordinate%20system%2C%20the%20covariance%20matrix%20is%20diagonal%20and%20looks%20like%20that%3A
 
 
 ### Visualize all the original dimensions
 
-First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [splom](https://plot.ly/python/splom/), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
+First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](https://plot.ly/python/splom/), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
 
 In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
 
@@ -169,6 +178,8 @@ fig.show()
 
 Often, you might be interested in seeing how much variance PCA is able to explain as you increase the number of components, in order to decide how many dimensions to ultimately keep or analyze. This example shows you how to quickly plot the cumulative sum of explained variance for a high-dimensional dataset like [Diabetes](https://scikit-learn.org/stable/datasets/index.html#diabetes-dataset).
 
+With a higher explained variance, you are able to capture more variability in your dataset, which could potentially lead to better performance when training your model. For a more mathematical explanation, see this [Q&A thread](https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained).
+
 ```python
 import numpy as np
 import pandas as pd
@@ -197,6 +208,8 @@ It is also possible to visualize loadings using `shapes`, and use `annotations` 
 $$
 loadings = eigenvectors \cdot \sqrt{eigenvalues}
 $$
+
+For more details about the linear algebra behind eigenvectors and loadings, see this [Q&A thread](https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another).
 
 ```python
 import plotly.express as px
@@ -244,3 +257,5 @@ The following resources offer an in-depth overview of PCA and explained variance
 * https://en.wikipedia.org/wiki/Explained_variation
 * https://scikit-learn.org/stable/modules/decomposition.html#pca
 * https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
+* https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another
+* https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained
