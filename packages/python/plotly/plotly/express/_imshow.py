@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 import base64
-from skimage.exposure import rescale_intensity
+from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
 
 try:
@@ -16,21 +16,6 @@ except ImportError:
     xarray_imported = False
 
 _float_types = []
-
-# Adapted from skimage.util.dtype
-_integer_types = (
-    np.byte,
-    np.ubyte,  # 8 bits
-    np.short,
-    np.ushort,  # 16 bits
-    np.intc,
-    np.uintc,  # 16 or 32 or 64 bits
-    np.int_,
-    np.uint,  # 32 or 64 bits
-    np.longlong,
-    np.ulonglong,
-)  # 64 bits
-_integer_ranges = {t: (np.iinfo(t).min, np.iinfo(t).max) for t in _integer_types}
 
 
 def _array_to_b64str(img, ext="png"):
