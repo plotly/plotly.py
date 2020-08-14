@@ -1,13 +1,13 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
-import numpy as np
 from PIL import Image
 from io import BytesIO
 import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
-
+import png
+import numpy as np
 try:
     import xarray
 
@@ -18,22 +18,35 @@ except ImportError:
 _float_types = []
 
 
-def _array_to_b64str(img, ext="png"):
-    pil_img = Image.fromarray(img)
-    if ext == "jpg":
-        ext = "jpeg"
-    buff = BytesIO()
-    pil_img.save(buff, format=ext)
-    if ext == "png":
-        prefix = b"data:image/png;base64,"
-    elif ext == "jpeg":
-        prefix = b"data:image/jpeg;base64,"
+def _array_to_b64str(img, backend='pil', compression=4):
+    if img.ndim == 2:
+        mode = 'L'
+    elif img.ndim == 3 and img.shape[-1] == 3:
+        mode = 'RGB'
+    elif img.ndim == 3 and img.shape[-1] == 4:
+        mode = 'RGBA'
     else:
         raise ValueError(
-            "accepted image formats are 'png' and 'jpeg' but %s was passed" % format
-        )
-    image_string = (prefix + base64.b64encode(buff.getvalue())).decode("utf-8")
-    return image_string
+                "Invalid image shape"
+                )
+    if backend=='png':
+        ndim = img.ndim
+        sh = img.shape
+        if ndim == 3:
+            img = img.reshape((sh[0], sh[1] * sh[2]))
+        w = png.Writer(sh[1], sh[0], greyscale=(ndim == 2), compression=compression)
+        img_png = png.from_array(img, mode=mode)
+        prefix = "data:image/png;base64,"
+        with BytesIO() as stream:
+            w.write(stream, img_png.rows)
+            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
+    else:
+        pil_img = Image.fromarray(img)
+        prefix = "data:image/png;base64,"
+        with BytesIO() as stream:
+            pil_img.save(stream, format='png', compress_level=compression)
+            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
+    return base64_string
 
 
 def _vectorize_zvalue(z):
