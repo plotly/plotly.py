@@ -889,10 +889,17 @@ var FigureView = widgets.DOMWidgetView.extend({
       var pointObjects = data["points"];
       var numPoints = pointObjects.length;
 
-      var hasNestedPointObjects = pointObjects.every(value => value.hasOwnProperty("pointNumbers"));
+      var hasNestedPointObjects = true;
+      for (let i = 0; i < numPoints; i++) {
+        hasNestedPointObjects = (hasNestedPointObjects && pointObjects[i].hasOwnProperty("pointNumbers"));
+        if (!hasNestedPointObjects) break;
+      }
       var numPointNumbers = numPoints;
       if (hasNestedPointObjects) {
-        numPointNumbers = pointObjects.reduce((acc, v) => acc + v["pointNumbers"].length, 0)
+        numPointNumbers = 0;
+        for (let i = 0; i < numPoints; i++) {
+          numPointNumbers += pointObjects[i]["pointNumbers"].length;
+        }
       }
       pointsObject = {
         trace_indexes: new Array(numPointNumbers),
