@@ -23,11 +23,13 @@ def decode_image_string(image_string):
         raise ValueError("image string format not recognized")
 
 
-@pytest.mark.parametrize("use_binary_string", [False])
-def test_rgb_uint8(use_binary_string):
-    fig = px.imshow(img_rgb, use_binary_string=use_binary_string)
-    if not use_binary_string:
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_rgb_uint8(binary_string):
+    fig = px.imshow(img_rgb, binary_string=binary_string)
+    if not binary_string:
         assert fig.data[0]["zmax"] == (255, 255, 255, 1)
+    else:
+        assert fig.data[0]["zmax"] is None
 
 
 def test_zmax():
@@ -39,7 +41,7 @@ def test_zmax():
         (100, 100, 100),
         (100, 100, 100, 1),
     ]:
-        fig = px.imshow(img_rgb, zmax=zmax, use_binary_string=False)
+        fig = px.imshow(img_rgb, zmax=zmax, binary_string=False)
         assert fig.data[0]["zmax"] == (100, 100, 100, 1)
 
 
@@ -53,21 +55,21 @@ def test_automatic_zmax_from_dtype():
     for key, val in dtypes_dict.items():
         img = np.array([0, 1], dtype=key)
         img = np.dstack((img,) * 3)
-        fig = px.imshow(img, use_binary_string=False)
+        fig = px.imshow(img, binary_string=False)
         assert fig.data[0]["zmax"] == (val, val, val, 1)
 
 
-@pytest.mark.parametrize("use_binary_string", [False, True])
-def test_origin(use_binary_string):
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_origin(binary_string):
     for i, img in enumerate([img_rgb, img_gray]):
-        fig = px.imshow(img, origin="lower", use_binary_string=use_binary_string)
-        assert fig.layout.yaxis.autorange == True
-        if use_binary_string and i == 0:
+        fig = px.imshow(img, origin="lower", binary_string=binary_string)
+        assert fig.layout.yaxis.autorange is True
+        if binary_string and i == 0:
             assert np.all(img[::-1] == decode_image_string(fig.data[0].source))
-    fig = px.imshow(img_rgb, use_binary_string=use_binary_string)
+    fig = px.imshow(img_rgb, binary_string=binary_string)
     assert fig.layout.yaxis.autorange is None
-    fig = px.imshow(img_gray, use_binary_string=use_binary_string)
-    if use_binary_string:
+    fig = px.imshow(img_gray, binary_string=binary_string)
+    if binary_string:
         assert fig.layout.yaxis.autorange is None
     else:
         assert fig.layout.yaxis.autorange == "reversed"
@@ -86,7 +88,7 @@ def test_wrong_dimensions():
     msg = "px.imshow only accepts 2D single-channel, RGB or RGBA images."
     for img in imgs:
         with pytest.raises(ValueError, match=msg):
-            fig = px.imshow(img)
+            _ = px.imshow(img)
 
 
 def test_nan_inf_data():
@@ -110,7 +112,7 @@ def test_zmax_floats():
     ]
     zmaxs = [1, 1, 255, 65535]
     for zmax, img in zip(zmaxs, imgs):
-        fig = px.imshow(img, use_binary_string=False)
+        fig = px.imshow(img, binary_string=False)
         assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
     # single-channel
     imgs = [
@@ -121,7 +123,7 @@ def test_zmax_floats():
     ]
     for zmax, img in zip(zmaxs, imgs):
         fig = px.imshow(img)
-        assert fig.data[0]["zmax"] == None
+        assert fig.data[0]["zmax"] is None
 
 
 def test_zmin_zmax_range_color():
@@ -143,8 +145,8 @@ def test_zmin_zmax_range_color():
 
 def test_zmin_zmax_range_color_source():
     img = img_gray / 100.0
-    fig1 = px.imshow(img, zmin=0.2, zmax=0.8, use_binary_string=True)
-    fig2 = px.imshow(img, range_color=[0.2, 0.8], use_binary_string=True)
+    fig1 = px.imshow(img, zmin=0.2, zmax=0.8, binary_string=True)
+    fig2 = px.imshow(img, range_color=[0.2, 0.8], binary_string=True)
     assert fig1 == fig2
 
 
@@ -204,12 +206,6 @@ def test_imshow_dataframe():
     assert fig.layout.yaxis.title.text == "nation"
 
 
-def test_imshow_source():
-    fig = px.imshow(img_rgb, use_binary_string=True)
-    decoded_img = decode_image_string(fig.data[0].source)
-    assert np.all(decoded_img == img_rgb)
-
-
 @pytest.mark.parametrize(
     "dtype",
     [
@@ -226,7 +222,7 @@ def test_imshow_source():
 @pytest.mark.parametrize("contrast_rescaling", ["minmax", "infer"])
 def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
     img = np.arange(100, dtype=dtype).reshape((10, 10))
-    fig = px.imshow(img, use_binary_string=True, contrast_rescaling=contrast_rescaling)
+    fig = px.imshow(img, binary_string=True, contrast_rescaling=contrast_rescaling)
     if contrast_rescaling == "minmax":
         assert (
             np.max(
@@ -248,3 +244,44 @@ def test_imshow_source_dtype_zmax(dtype, contrast_rescaling):
                 )
                 < 1
             )
+
+
+@pytest.mark.parametrize("backend", ["auto", "pypng", "pil"])
+def test_imshow_backend(backend):
+    fig = px.imshow(img_rgb, binary_backend=backend)
+    decoded_img = decode_image_string(fig.data[0].source)
+    assert np.all(decoded_img == img_rgb)
+
+
+@pytest.mark.parametrize("level", [0, 3, 6, 9])
+def test_imshow_compression(level):
+    _, grid_img = np.mgrid[0:10, 0:100]
+    grid_img = grid_img.astype(np.uint8)
+    fig = px.imshow(
+        grid_img,
+        binary_string=True,
+        binary_compression_level=level,
+        contrast_rescaling="infer",
+    )
+    decoded_img = decode_image_string(fig.data[0].source)
+    assert np.all(decoded_img == grid_img)
+    if level > 0:
+        assert len(fig.data[0].source) < grid_img.size
+    else:
+        assert len(fig.data[0].source) > grid_img.size
+
+
+@pytest.mark.parametrize("level", [-1, 10])
+def test_imshow_invalid_compression(level):
+    with pytest.raises(ValueError) as msg:
+        _ = px.imshow(img_rgb, binary_compression_level=level)
+    assert "between 0 and 9" in str(msg.value)
+
+
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_imshow_hovertemplate(binary_string):
+    fig = px.imshow(img_rgb, binary_string=binary_string)
+    assert (
+        fig.data[0].hovertemplate
+        == "x: %{x}<br>y: %{y}<br>color: %{color}<extra></extra>"
+    )
