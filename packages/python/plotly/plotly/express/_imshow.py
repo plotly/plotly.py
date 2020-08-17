@@ -1,35 +1,56 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
-from PIL import Image
 from io import BytesIO
 import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
 import png
 import numpy as np
+
 try:
     import xarray
 
     xarray_imported = True
 except ImportError:
     xarray_imported = False
+try:
+    from PIL import Image
+
+    pil_imported = True
+except ImportError:
+    pil_imported = False
 
 _float_types = []
 
 
-def _array_to_b64str(img, backend='pil', compression=4):
+def _array_to_b64str(img, backend="pil", compression=4):
+    """Converts a numpy array of uint8 into a base64 png string.
+
+    Parameters
+    ----------
+    img: ndarray of uint8
+        array image
+    backend: str
+        'auto', 'pil' or 'pypng'. If 'auto', Pillow is used if installed,
+        otherwise pypng.
+    compression: int, between 0 and 9
+        compression level to be passed to the backend
+    """
+    # PIL and pypng error messages are quite obscure so we catch invalid compression values
+    if compression < 0 or compression > 9:
+        raise ValueError("compression level must be between 0 and 9.")
     if img.ndim == 2:
-        mode = 'L'
+        mode = "L"
     elif img.ndim == 3 and img.shape[-1] == 3:
-        mode = 'RGB'
+        mode = "RGB"
     elif img.ndim == 3 and img.shape[-1] == 4:
-        mode = 'RGBA'
+        mode = "RGBA"
     else:
-        raise ValueError(
-                "Invalid image shape"
-                )
-    if backend=='png':
+        raise ValueError("Invalid image shape")
+    if backend == "auto":
+        backend = "pil" if pil_imported else "pypng"
+    if backend == "pypng":
         ndim = img.ndim
         sh = img.shape
         if ndim == 3:
@@ -40,11 +61,16 @@ def _array_to_b64str(img, backend='pil', compression=4):
         with BytesIO() as stream:
             w.write(stream, img_png.rows)
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
-    else:
+    else:  # pil
+        if not pil_imported:
+            raise ImportError(
+                "pillow needs to be installed to use `backend='pil'. Please"
+                "install pillow or use `backend='pypng'."
+            )
         pil_img = Image.fromarray(img)
         prefix = "data:image/png;base64,"
         with BytesIO() as stream:
-            pil_img.save(stream, format='png', compress_level=compression)
+            pil_img.save(stream, format="png", compress_level=compression)
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
     return base64_string
 
@@ -100,8 +126,10 @@ def imshow(
     width=None,
     height=None,
     aspect=None,
-    use_binary_string=None,
     contrast_rescaling=None,
+    binary_string=None,
+    binary_backend="auto",
+    binary_compression_level=4,
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -177,7 +205,13 @@ def imshow(
       - if None, 'equal' is used for numpy arrays and 'auto' for xarrays
         (which have typically heterogeneous coordinates)
 
-    use_binary_string: bool, default None
+    contrast_rescaling: 'minmax', 'infer', or None
+        how to determine data values corresponding to the bounds of the color
+        range, when zmin or zmax are not passed. If `minmax`, the min and max
+        values of the image are used. If `infer`, a heuristic based on the image
+        data type is used.
+
+    binary_string: bool, default None
         if True, the image data are first rescaled and encoded as uint8 and
         then passed to plotly.js as a b64 PNG string. If False, data are passed
         unchanged as a numerical array. Setting to True may lead to performance
@@ -187,11 +221,18 @@ def imshow(
         represented as grayscale and with no colorbar if use_binary_string is
         True.
 
-    contrast_rescaling: 'minmax', 'infer', or None
-        how to determine data values corresponding to the bounds of the color
-        range, when zmin or zmax are not passed. If `minmax`, the min and max
-        values of the image are used. If `infer`, a heuristic based on the image
-        data type is used.
+    binary_backend: str, 'auto' (default), 'pil' or 'pypng'
+        Third-party package for the transformation of numpy arrays to
+        png b64 strings. If 'auto', Pillow is used if installed,  otherwise
+        pypng.
+
+    binary_compression_level: int, between 0 and 9 (default 4)
+        png compression level to be passed to the backend when transforming an
+        array to a png b64 string. Increasing `binary_compression` decreases the
+        size of the png string, but the compression step takes more time. For most
+        images it is not worth using levels greater than 5, but it's possible to
+        test `len(fig.data[0].source)` and to time the execution of `imshow` to
+        tune the level of compression. 0 means no compression (not recommended).
 
     Returns
     -------
@@ -217,7 +258,7 @@ def imshow(
     labels = labels.copy()
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        if use_binary_string:
+        if binary_string:
             raise ValueError(
                 "It is not possible to use binary image strings for xarrays."
                 "Please pass your data as a numpy array instead using"
@@ -262,14 +303,14 @@ def imshow(
         if aspect is None:
             aspect = "equal"
 
-    # Set the value of use_binary_string
+    # Set the value of binary_string
     if isinstance(img, pd.DataFrame):
-        if use_binary_string:
+        if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
         has_nans = True
     else:
         has_nans = np.any(np.isnan(img))
-        if has_nans and use_binary_string:
+        if has_nans and binary_string:
             raise ValueError(
                 "Binary strings cannot be used with arrays containing NaNs"
             )
@@ -277,9 +318,9 @@ def imshow(
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
 
-    # Default behaviour of use_binary_string: True for RGB images, False for 2D
-    if use_binary_string is None:
-        use_binary_string = img.ndim >= 3 and not has_nans
+    # Default behaviour of binary_string: True for RGB images, False for 2D
+    if binary_string is None:
+        binary_string = img.ndim >= 3 and not has_nans
 
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
@@ -292,18 +333,18 @@ def imshow(
         contrast_rescaling = "minmax" if img.ndim == 2 else "infer"
 
     if contrast_rescaling == "minmax":
-        if (zmin is not None or use_binary_string) and zmax is None:
+        if (zmin is not None or binary_string) and zmax is None:
             zmax = img.max()
-        if (zmax is not None or use_binary_string) and zmin is None:
+        if (zmax is not None or binary_string) and zmin is None:
             zmin = img.min()
     else:
-        if zmax is None and img.dtype is not np.uint8:
+        if zmax is None and (img.dtype is not np.uint8 or img.ndim == 2):
             zmax = _infer_zmax_from_type(img)
         if zmin is None:
             zmin = 0
 
-        # For 2d data, use Heatmap trace, unless use_binary_string is True
-    if img.ndim == 2 and not use_binary_string:
+        # For 2d data, use Heatmap trace, unless binary_string is True
+    if img.ndim == 2 and not binary_string:
         if y is not None and img.shape[0] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
@@ -333,13 +374,9 @@ def imshow(
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 
     # For 2D+RGB data, use Image trace
-    elif (
-        img.ndim == 3
-        and img.shape[-1] in [3, 4]
-        or (img.ndim == 2 and use_binary_string)
-    ):
+    elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
         zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
-        if use_binary_string:
+        if binary_string:
             if img.ndim == 2:
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
@@ -357,7 +394,11 @@ def imshow(
                 )
             if origin == "lower":
                 img_rescaled = img_rescaled[::-1]
-            img_str = _array_to_b64str(img_rescaled)
+            img_str = _array_to_b64str(
+                img_rescaled,
+                backend=binary_backend,
+                compression=binary_compression_level,
+            )
             trace = go.Image(source=img_str)
         else:
             trace = go.Image(z=img, zmin=zmin, zmax=zmax)
@@ -380,8 +421,13 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
-    # does not work yet, Antoine working on it
-    hover_name = "z" if not use_binary_string else "colorLabel"
+    # Hover name, z or color
+    if trace["type"] == "heatmap":
+        hover_name = "z"
+    elif img.ndim == 2:
+        hover_name = "color[0]"
+    else:
+        hover_name = "color"
     fig.update_traces(
         hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{%s}<extra></extra>"
         % (
