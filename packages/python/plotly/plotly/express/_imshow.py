@@ -422,21 +422,25 @@ def imshow(
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
     # Hover name, z or color
-    if trace["type"] == "heatmap":
-        hover_name = "z"
-    elif img.ndim == 2:
-        hover_name = "color[0]"
+    if binary_string and not (img_rescaled.max() == img.max()):
+        hovertemplate = "%s: %%{x}<br>%s: %%{y}<extra></extra>" % (
+            labels["x"] or "x",
+            labels["y"] or "y",
+        )
     else:
-        hover_name = "color"
-    fig.update_traces(
-        hovertemplate="%s: %%{x}<br>%s: %%{y}<br>%s: %%{%s}<extra></extra>"
-        % (
+        if trace["type"] == "heatmap":
+            hover_name = "z"
+        elif img.ndim == 2:
+            hover_name = "color[0]"
+        else:
+            hover_name = "color"
+        hovertemplate = "%s: %%{x}<br>%s: %%{y}<br>%s: %%{%s}<extra></extra>" % (
             labels["x"] or "x",
             labels["y"] or "y",
             labels["color"] or "color",
             hover_name,
         )
-    )
+    fig.update_traces(hovertemplate=hovertemplate)
     if labels["x"]:
         fig.update_xaxes(title_text=labels["x"])
     if labels["y"]:

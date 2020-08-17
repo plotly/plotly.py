@@ -285,3 +285,11 @@ def test_imshow_hovertemplate(binary_string):
         fig.data[0].hovertemplate
         == "x: %{x}<br>y: %{y}<br>color: %{color}<extra></extra>"
     )
+    fig = px.imshow(img_gray, binary_string=binary_string)
+    if binary_string:
+        assert fig.data[0].hovertemplate == "x: %{x}<br>y: %{y}<extra></extra>"
+    else:
+        assert (
+            fig.data[0].hovertemplate
+            == "x: %{x}<br>y: %{y}<br>color: %{z}<extra></extra>"
+        )
