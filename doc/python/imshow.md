@@ -86,29 +86,9 @@ fig = px.imshow(img)
 fig.show()
 ```
 
-### Passing image data as a binary string
-
-... add explanations here about `use_binary_string` and `contrast_rescaling`
-
-```python
-import plotly.express as px
-import numpy as np
-img = np.arange(15**2).reshape((15, 15))
-fig = px.imshow(img, use_binary_string=True)
-fig.show()
-```
-
-```python
-import plotly.express as px
-import numpy as np
-img = np.arange(13**2, dtype=np.uint8).reshape((13, 13))
-fig = px.imshow(img, use_binary_string=True, contrast_rescaling='dtype')
-fig.show()
-```
-
 ### Choose the colorscale to display a single-channel image
 
-You can customize the [continuous color scale](/python/colorscales/) just like with any other Plotly Express function:
+You can customize the [continuous color scale](/python/colorscales/) just like with any other Plotly Express function. However, `color_continuous_scale` is ignored when using `binary_string=True`, since the image is always represented as grayscale (and no colorbar is displayed).
 
 ```python
 import plotly.express as px
@@ -199,22 +179,41 @@ fig = go.Figure(go.Image(z=img_rgb))
 fig.show()
 ```
 
+### Passing image data as a binary string to `go.Image`
+
+The `z` parameter of `go.Image` passes image data in the form of an array or a list of numerical values, but it is also possible to use the `source` parameter, which takes a b64 binary string. Thanks to png or jpg compression, using `source` is a way to reduce the quantity of data passed to the browser, and also to reduce the serialization time of the figure, resulting in increased performance.
+
+Note than an easier way of creating binary strings with `px.imshow` is explained below.
+
+```python
+import plotly.graph_objects as go
+from skimage import data
+from PIL import Image
+import base64
+from io import BytesIO
+
+img = data.astronaut()  # numpy array
+pil_img = Image.fromarray(img) # PIL image object
+prefix = "data:image/png;base64,"
+with BytesIO() as stream:
+    pil_img.save(stream, format="png")
+    base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
+fig = go.Figure(go.Image(source=base64_string))
+fig.show()
+```
+
 ### Defining the data range covered by the color range with zmin and zmax
 
-The data range and color range are mapped together using the parameters `zmin` and `zmax`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case on single-channel data.
+The data range and color range are mapped together using the parameters `zmin` and `zmax` of `px.imshow` or `go.Image`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case on single-channel data.
 
-For single-channel data, the defaults values of `zmin` and `zmax` used by `px.imshow` and `go.Heatmap` are the extrema of the data range. For multichannel data, `px.imshow` and `go.Image` use slightly different default values for `zmin` and `zmax`. For `go.Image`, the default value is `zmin=[0, 0, 0]` and `zmax=[255, 255, 255]`, no matter the data type. On the other hand, `px.imshow` adapts the default `zmin` and `zmax` to the data type:
-- for integer data types, `zmin` and `zmax` correspond to the extreme values of the data type, for example 0 and 255 for `uint8`, 0 and 65535 for `uint16`, etc.
-- for float numbers, the maximum value of the data is computed, and zmax is 1 if the max is smaller than 1, 255 if the max is smaller than 255, etc. (with higher thresholds 2**16 - 1 and 2**32 -1).
-
-These defaults can be overriden by setting the values of `zmin` and `zmax`. For `go.Image`, `zmin` and `zmax` need to be given for all channels, whereas it is also possible to pass a scalar value (used for all channels) to `px.imshow`.
+For `go.Image`, `zmin` and `zmax` need to be given for all channels, whereas it is also possible to pass a scalar value (used for all channels) to `px.imshow`.
 
 ```python
 import plotly.express as px
 from skimage import data
 img = data.astronaut()
 # Increase contrast by clipping the data range between 50 and 200
-fig = px.imshow(img, zmin=50, zmax=200)
+fig = px.imshow(img, zmin=50, zmax=200, binary_string=False)
 # We customize the hovertemplate to show both the data and the color values
 # See https://plotly.com/python/hover-text-and-formatting/#customize-tooltip-text-with-a-hovertemplate
 fig.update_traces(hovertemplate="x: %{x} <br> y: %{y} <br> z: %{z} <br> color: %{color}")
@@ -227,6 +226,21 @@ from skimage import data
 img = data.astronaut()
 # Stretch the contrast of the red channel only, resulting in a more red image
 fig = px.imshow(img, zmin=[50, 0, 0], zmax=[200, 255, 255])
+fig.show()
+```
+
+### Automatic contrast rescaling in `px.imshow`
+
+When `zmin` and `zmax` are not specified, the `contrast_rescaling` arguments determines how `zmin` and `zmax` are computed. For `contrast_rescaling='minmax'`, the extrema of the data range are used. For `contrast_rescaling='infer'`, a heuristic based on the data type is used:
+- for integer data types, `zmin` and `zmax` correspond to the extreme values of the data type, for example 0 and 255 for `uint8`, 0 and 65535 for `uint16`, etc.
+- for float numbers, the maximum value of the data is computed, and zmax is 1 if the max is smaller than 1, 255 if the max is smaller than 255, etc. (with higher thresholds 2**16 - 1 and 2**32 -1).
+
+These two modes can be used for single- and multichannel data. The default value is to use `'minmax'` for single-channel data (as in a Heatmap trace) and `infer` for multi-channel data (which often consist of uint8 data). In the example below we override the default value by setting `contrast_rescaling='infer'` for a single-channel image.
+
+```python
+import plotly.express as px
+img = np.arange(100, dtype=np.uint8).reshape((10, 10))
+fig = px.imshow(img, contrast_rescaling='infer')
 fig.show()
 ```
 
@@ -325,6 +339,32 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
                                         'drawrect',
                                         'eraseshape'
                                        ]})
+```
+
+### Passing image data as a binary string
+
+`px.imshow` can pass the data to the figure object either as a list of numerical values, or as a png binary string which is passed directly to the browser. While the former solution offers more flexibility (values can be of float or int type, while values are rescaled to the range [0-255] for an image string), using a binary string is usually faster for large arrays. The parameter `binary_string` controls whether the image is passed as a png string (when `True`) or a list of values (`False`). Its default value is `True` for multi-channel images and `False` for single-channel images. When `binary_string=True`, image data are always represented using a `go.Image` trace.
+
+```python
+import plotly.express as px
+import numpy as np
+img = np.arange(15**2).reshape((15, 15))
+fig = px.imshow(img, binary_string=True)
+fig.show()
+```
+
+### Changing the level of compression of the binary string in `px.imshow`
+
+The `binary_compression_level` parameter controls the level of compression to be used by the backend creating the png string. Two different backends can be used, `pypng` (which is a dependency of `plotly` and is therefore always available), and `pil` for Pillow, which is often more performant. The compression level has to be between 0 (no compression) and 9 (highest compression), although increasing the compression above 4 and 5 usually only offers diminishing returns (no significant compression gain, at the cost of a longer execution time).
+
+```python
+import plotly.express as px
+from skimage import data
+img = data.camera()
+for compression_level in range(0, 9):
+    fig = px.imshow(img, binary_string=True, binary_compression_level=compression_level)
+    print(f"compression level {compression_level}: length of {len(fig.data[0].source)}")
+fig.show()
 ```
 
 #### Reference
