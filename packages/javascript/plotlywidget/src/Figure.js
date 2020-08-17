@@ -928,7 +928,6 @@ var FigureView = widgets.DOMWidgetView.extend({
         }
       }
 
-
       // Add z if present
       var hasZ =
         pointObjects[0] !== undefined && pointObjects[0].hasOwnProperty("z");
