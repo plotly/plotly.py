@@ -908,8 +908,8 @@ var FigureView = widgets.DOMWidgetView.extend({
         ys: new Array(numPointNumbers),
       };
 
-      var flatPointIndex = 0;
       if (hasNestedPointObjects) {
+        var flatPointIndex = 0;
         for (var p = 0; p < numPoints; p++) {
           for (let i = 0; i < pointObjects[p]["pointNumbers"].length; i++, flatPointIndex++) {
             pointsObject["point_indexes"][flatPointIndex] = pointObjects[p]["pointNumbers"][i]
