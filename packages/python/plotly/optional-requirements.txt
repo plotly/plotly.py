@@ -51,5 +51,5 @@ pyshp
 geopandas
 shapely
 
-# image uri conversion
+## image uri conversion
 pillow
