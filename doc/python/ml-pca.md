@@ -29,7 +29,7 @@ jupyter:
     layout: base
     name: PCA Visualization
     order: 4
-    page_type: example_index
+    page_type: u-guide
     permalink: python/pca-visualization/
     thumbnail: thumbnail/ml-pca.png
 ---
@@ -52,6 +52,8 @@ First, let's plot all the features and see how the `species` in the Iris dataset
 
 In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
 
+In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+
 ```python
 import plotly.express as px
 
@@ -69,9 +71,11 @@ fig.show()
 
 ###  Visualize all the principal components
 
-Now, we apply `PCA` the same dataset, and retrieve **all** the components. We use the same `px.scatter_matrix` trace to display our results, but this time our features are the resulting *principal components*, ordered by how much variance they are able to explain. 
+Now, we apply `PCA` the same dataset, and retrieve **all** the components. We use the same `px.scatter_matrix` trace to display our results, but this time our features are the resulting *principal components*, ordered by how much variance they are able to explain.
 
 The importance of explained variance is demonstrated in the example below. The subplot between PC3 and PC4 is clearly unable to separate each class, whereas the subplot between PC1 and PC2 shows a clear separation between each species.
+
+In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
 
 ```python
 import plotly.express as px
@@ -83,7 +87,7 @@ features = ["sepal_width", "sepal_length", "petal_width", "petal_length"]
 pca = PCA()
 components = pca.fit_transform(df[features])
 labels = {
-    str(i): f"PC {i+1} ({var:.1f}%)" 
+    str(i): f"PC {i+1} ({var:.1f}%)"
     for i, var in enumerate(pca.explained_variance_ratio_ * 100)
 }
 
@@ -122,7 +126,7 @@ labels = {str(i): f"PC {i+1}" for i in range(n_components)}
 labels['color'] = 'Median Price'
 
 fig = px.scatter_matrix(
-    components, 
+    components,
     color=boston.target,
     dimensions=range(n_components),
     labels=labels,
@@ -167,7 +171,7 @@ components = pca.fit_transform(X)
 total_var = pca.explained_variance_ratio_.sum() * 100
 
 fig = px.scatter_3d(
-    components, x=0, y=1, z=2, color=df['species'], 
+    components, x=0, y=1, z=2, color=df['species'],
     title=f'Total Explained Variance: {total_var:.2f}%',
     labels={'0': 'PC 1', '1': 'PC 2', '2': 'PC 3'}
 )
@@ -181,9 +185,9 @@ Often, you might be interested in seeing how much variance PCA is able to explai
 With a higher explained variance, you are able to capture more variability in your dataset, which could potentially lead to better performance when training your model. For a more mathematical explanation, see this [Q&A thread](https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained).
 
 ```python
+import plotly.express as px
 import numpy as np
 import pandas as pd
-import plotly.express as px
 from sklearn.decomposition import PCA
 from sklearn.datasets import load_diabetes
 
@@ -196,7 +200,7 @@ exp_var_cumul = np.cumsum(pca.explained_variance_ratio_)
 
 px.area(
     x=range(1, exp_var_cumul.shape[0] + 1),
-    y=exp_var_cumul, 
+    y=exp_var_cumul,
     labels={"x": "# Components", "y": "Explained Variance"}
 )
 ```

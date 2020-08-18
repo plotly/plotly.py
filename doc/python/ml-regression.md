@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -27,8 +27,8 @@ jupyter:
     language: python
     layout: base
     name: ML Regression
-    order: 2
-    page_type: example_index
+    order: 1
+    page_type: u-guide
     permalink: python/ml-regression/
     thumbnail: thumbnail/ml-regression.png
 ---
@@ -52,7 +52,7 @@ We will be using the [Linear Regression][lr], which is a simple model that fit a
 
 ### Ordinary Least Square (OLS) with `plotly.express`
 
-This example shows how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS) for predicting the tips waiters will receive based on the value of the total bill.
+This example shows [how to use `plotly.express`'s `trendline` parameter to train a simply Ordinary Least Square (OLS)](/python/linear-fits/) for predicting the tips waiters will receive based on the value of the total bill.
 
 [lr]: https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
 
@@ -174,11 +174,11 @@ from sklearn.preprocessing import PolynomialFeatures
 def format_coefs(coefs):
     equation_list = [f"{coef}x^{i}" for i, coef in enumerate(coefs)]
     equation = "$" +  " + ".join(equation_list) + "$"
-    
+
     replace_map = {"x^0": "", "x^1": "x", '+ -': '- '}
     for old, new in replace_map.items():
         equation = equation.replace(old, new)
-        
+
     return equation
 
 df = px.data.tips()
@@ -195,7 +195,7 @@ for degree in [1, 2, 3, 4]:
     model = LinearRegression(fit_intercept=False)
     model.fit(X_poly, df.tip)
     y_poly = model.predict(x_range_poly)
-    
+
     equation = format_coefs(model.coef_.round(2))
     fig.add_traces(go.Scatter(x=x_range.squeeze(), y=y_poly, name=equation))
 
@@ -300,7 +300,7 @@ y_pred = model.predict(X)
 fig = px.scatter(x=y, y=y_pred, labels={'x': 'ground truth', 'y': 'prediction'})
 fig.add_shape(
     type="line", line=dict(dash='dash'),
-    x0=y.min(), y0=y.min(), 
+    x0=y.min(), y0=y.min(),
     x1=y.max(), y1=y.max()
 )
 fig.show()
@@ -341,7 +341,7 @@ fig = px.scatter(
 fig.update_traces(histnorm='probability', selector={'type':'histogram'})
 fig.add_shape(
     type="line", line=dict(dash='dash'),
-    x0=y.min(), y0=y.min(), 
+    x0=y.min(), y0=y.min(),
     x1=y.max(), y1=y.max()
 )
 
@@ -411,14 +411,14 @@ mean_alphas = model.mse_path_.mean(axis=-1)
 
 fig = go.Figure([
     go.Scatter(
-        x=model.alphas_, y=model.mse_path_[:, i], 
+        x=model.alphas_, y=model.mse_path_[:, i],
         name=f"Fold: {i+1}", opacity=.5, line=dict(dash='dash'),
         hovertemplate="alpha: %{x} <br>MSE: %{y}"
     )
     for i in range(N_FOLD)
 ])
 fig.add_traces(go.Scatter(
-    x=model.alphas_, y=mean_alphas, 
+    x=model.alphas_, y=mean_alphas,
     name='Mean', line=dict(color='black', width=3),
     hovertemplate="alpha: %{x} <br>MSE: %{y}",
 ))
@@ -431,8 +431,8 @@ fig.add_shape(
 )
 
 fig.update_layout(
-    xaxis_title='alpha', 
-    xaxis_type="log", 
+    xaxis_title='alpha',
+    xaxis_type="log",
     yaxis_title="Mean Square Error (MSE)"
 )
 fig.show()
@@ -462,14 +462,14 @@ y = df['petal_width']
 # Define and fit the grid
 model = DecisionTreeRegressor()
 param_grid = {
-    'criterion': ['mse', 'friedman_mse', 'mae'], 
+    'criterion': ['mse', 'friedman_mse', 'mae'],
     'max_depth': range(2, 5)
 }
 grid = GridSearchCV(model, param_grid, cv=N_FOLD)
 grid.fit(X, y)
 grid_df = pd.DataFrame(grid.cv_results_)
 
-# Convert the wide format of the grid into the long format 
+# Convert the wide format of the grid into the long format
 # accepted by plotly.express
 melted = (
     grid_df
@@ -491,7 +491,7 @@ melted['cv_split'] = (
 
 # Single function call to plot each figure
 fig_hmap = px.density_heatmap(
-    melted, x="max_depth", y='criterion', 
+    melted, x="max_depth", y='criterion',
     histfunc="sum", z="r_squared",
     title='Grid search results on individual fold',
     hover_data=['mean_fit_time'],
@@ -500,7 +500,7 @@ fig_hmap = px.density_heatmap(
 )
 
 fig_box = px.box(
-    melted, x='max_depth', y='r_squared', 
+    melted, x='max_depth', y='r_squared',
     title='Grid search results ',
     hover_data=['mean_fit_time'],
     points='all',

@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -28,8 +28,8 @@ jupyter:
     language: python
     layout: base
     name: kNN Classification
-    order: 1
-    page_type: example_index
+    order: 2
+    page_type: u-guide
     permalink: python/knn-classification/
     thumbnail: thumbnail/knn-classification.png
 ---
@@ -49,10 +49,11 @@ Using Scikit-learn, we first generate synthetic data that form the shape of a mo
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
+In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+
 ```python
-import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -72,13 +73,13 @@ trace_specs = [
 fig = go.Figure(data=[
     go.Scatter(
         x=X[y==label, 0], y=X[y==label, 1],
-        name=f'{split} Split, Label {label}', 
+        name=f'{split} Split, Label {label}',
         mode='markers', marker_symbol=marker
     )
     for X, y, label, split, marker in trace_specs
 ])
 fig.update_traces(
-    marker_size=12, marker_line_width=1.5, 
+    marker_size=12, marker_line_width=1.5,
     marker_color="lightyellow"
 )
 fig.show()
@@ -89,12 +90,11 @@ fig.show()
 
 Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
 
-Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
+In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures. Notice that `px.scatter` only require 1 function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `y_score` output by our kNN model.
 
 ```python
-import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
+import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -110,7 +110,7 @@ clf.fit(X_train, y_train)
 y_score = clf.predict_proba(X_test)[:, 1]
 
 fig = px.scatter(
-    X_test, x=0, y=1, 
+    X_test, x=0, y=1,
     color=y_score, color_continuous_scale='RdBu',
     symbol=y_test, symbol_map={'0': 'square-dot', '1': 'circle-dot'},
     labels={'symbol': 'label', 'color': 'score of <br>first class'}
@@ -124,14 +124,15 @@ fig.show()
 
 Just like the previous example, we will first train our kNN model on the training set.
 
-Instead of predicting the conference for the test set, we can predict the confidence map for the entire area that wraps around the dimensions of our dataset. To do this, we use [`np.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) to create a grid, where the distance between each point is denoted by the `mesh_size` variable. 
+Instead of predicting the conference for the test set, we can predict the confidence map for the entire area that wraps around the dimensions of our dataset. To do this, we use [`np.meshgrid`](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) to create a grid, where the distance between each point is denoted by the `mesh_size` variable.
 
 Then, for each of those points, we will use our model to give a confidence score, and plot it with a [contour plot](https://plotly.com/python/contour-plots/).
 
+In this example, we will use [graph objects](/python/graph-objects/), Plotly's low-level API for building figures.
+
 ```python
-import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -161,11 +162,11 @@ Z = Z.reshape(xx.shape)
 # Plot the figure
 fig = go.Figure(data=[
     go.Contour(
-        x=xrange, 
-        y=yrange, 
-        z=Z, 
+        x=xrange,
+        y=yrange,
+        z=Z,
         colorscale='RdBu'
-    )    
+    )
 ])
 fig.show()
 ```
@@ -173,9 +174,8 @@ fig.show()
 Now, let's try to combine our `go.Contour` plot with the first scatter plot of our data points, so that we can visually compare the confidence of our model with the true labels.
 
 ```python
-import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 from sklearn.datasets import make_moons
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
@@ -211,21 +211,21 @@ trace_specs = [
 fig = go.Figure(data=[
     go.Scatter(
         x=X[y==label, 0], y=X[y==label, 1],
-        name=f'{split} Split, Label {label}', 
+        name=f'{split} Split, Label {label}',
         mode='markers', marker_symbol=marker
     )
     for X, y, label, split, marker in trace_specs
 ])
 fig.update_traces(
-    marker_size=12, marker_line_width=1.5, 
+    marker_size=12, marker_line_width=1.5,
     marker_color="lightyellow"
 )
 
 fig.add_trace(
     go.Contour(
-        x=xrange, 
-        y=yrange, 
-        z=Z, 
+        x=xrange,
+        y=yrange,
+        z=Z,
         showscale=False,
         colorscale='RdBu',
         opacity=0.4,
@@ -240,10 +240,12 @@ fig.show()
 
 It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/python/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
 
+In this example, we will use [Plotly Express](/python/plotly-express/), Plotly's high-level API for building figures.
+
 ```python
-import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
 mesh_size = .02
@@ -275,21 +277,21 @@ diff = proba.max(axis=-1) - (proba.sum(axis=-1) - proba.max(axis=-1))
 
 fig = px.scatter(
     df_test, x='sepal_length', y='sepal_width',
-    symbol='species', 
+    symbol='species',
     symbol_map={
-        'setosa': 'square-dot', 
-        'versicolor': 'circle-dot', 
+        'setosa': 'square-dot',
+        'versicolor': 'circle-dot',
         'virginica': 'diamond-dot'},
 )
 fig.update_traces(
-    marker_size=12, marker_line_width=1.5, 
+    marker_size=12, marker_line_width=1.5,
     marker_color="lightyellow"
 )
 fig.add_trace(
     go.Heatmap(
-        x=lrange, 
-        y=wrange, 
-        z=diff, 
+        x=lrange,
+        y=wrange,
+        z=diff,
         opacity=0.25,
         customdata=proba,
         colorscale='RdBu',
