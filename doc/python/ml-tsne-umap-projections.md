@@ -22,28 +22,27 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.7
   plotly:
-    description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
-      in Python with Plotly.
+    description: Visualize scikit-learn's t-SNE and UMAP in Python with Plotly.
     display_as: ai_ml
     language: python
     layout: base
     name: t-SNE and UMAP projections
-    order: 1
-    page_type: example_index
+    order: 5
+    page_type: u-guide
     permalink: python/t-sne-and-umap-projections/
     thumbnail: thumbnail/tsne-umap-projections.png
 ---
 
-This page presents various ways to visualize two popular dimensionality reduction techniques, namely the [t-distributed stochastic neighbor embedding](https://lvdmaaten.github.io/tsne/) (t-SNE) and [Uniform Manifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/index.html) (UMAP). They are needed whenever you want to visualize data with more than two or three features (i.e. dimensions). 
+This page presents various ways to visualize two popular dimensionality reduction techniques, namely the [t-distributed stochastic neighbor embedding](https://lvdmaaten.github.io/tsne/) (t-SNE) and [Uniform Manifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/index.html) (UMAP). They are needed whenever you want to visualize data with more than two or three features (i.e. dimensions).
 
-We first show how to visualize data with more than three features using the [scatter plot matrix](https://medium.com/plotly/what-is-a-splom-chart-make-scatterplot-matrices-in-python-8dc4998921c3), then we apply dimensionality reduction techniques to get 2D/3D representation of our data, and visualize the results with [scatter plots](https://plotly.com/python/line-and-scatter/) and [3D scatter plots](https://plotly.com/python/3d-scatter-plots/). 
+We first show how to visualize data with more than three features using the [scatter plot matrix](https://medium.com/plotly/what-is-a-splom-chart-make-scatterplot-matrices-in-python-8dc4998921c3), then we apply dimensionality reduction techniques to get 2D/3D representation of our data, and visualize the results with [scatter plots](https://plotly.com/python/line-and-scatter/) and [3D scatter plots](https://plotly.com/python/3d-scatter-plots/).
 
 
 ## Basic t-SNE projections
 
-t-SNE is a popular dimensionality reduction algorithm that arises from probability theory. Simply put, it projects the high-dimensional data points (sometimes with hundreds of features) into 2D/3D by inducing the projected data to have a similar distribution as the original data points by minimizing something called the [KL divergence](https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-understanding-kl-divergence-2b382ca2b2a8). 
+t-SNE is a popular dimensionality reduction algorithm that arises from probability theory. Simply put, it projects the high-dimensional data points (sometimes with hundreds of features) into 2D/3D by inducing the projected data to have a similar distribution as the original data points by minimizing something called the [KL divergence](https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-understanding-kl-divergence-2b382ca2b2a8).
 
-Compared to a method like Principal Component Analysis (PCA), it takes signficantly more time to converge, but present signficiantly better insights when visualized. For example, by projecting features of a flowers, it will be able to distinctly group 
+Compared to a method like Principal Component Analysis (PCA), it takes signficantly more time to converge, but present signficiantly better insights when visualized. For example, by projecting features of a flowers, it will be able to distinctly group
 
 
 ### Visualizing high-dimensional data with `px.scatter_matrix`
@@ -75,7 +74,7 @@ tsne = TSNE(n_components=2, random_state=0)
 projections = tsne.fit_transform(features)
 
 fig = px.scatter(
-    projections, x=0, y=1, 
+    projections, x=0, y=1,
     color=df.species, labels={'color': 'species'}
 )
 fig.show()
@@ -97,7 +96,7 @@ tsne = TSNE(n_components=3, random_state=0)
 projections = tsne.fit_transform(features, )
 
 fig = px.scatter_3d(
-    projections, x=0, y=1, z=2, 
+    projections, x=0, y=1, z=2,
     color=df.species, labels={'color': 'species'}
 )
 fig.update_traces(marker_size=8)
@@ -129,7 +128,7 @@ fig_2d = px.scatter(
     color=df.species, labels={'color': 'species'}
 )
 fig_3d = px.scatter_3d(
-    proj_3d, x=0, y=1, z=2, 
+    proj_3d, x=0, y=1, z=2,
     color=df.species, labels={'color': 'species'}
 )
 fig_3d.update_traces(marker_size=5)
@@ -157,7 +156,7 @@ umap_2d.fit(digits.data)
 projections = umap_2d.transform(digits.data)
 
 fig = px.scatter(
-    projections, x=0, y=1, 
+    projections, x=0, y=1,
     color=digits.target.astype(str), labels={'color': 'digit'}
 )
 fig.show()
