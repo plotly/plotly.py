@@ -205,7 +205,7 @@ Regardless of how a graph object figure was constructed, it can be updated by ad
 
 #### Adding Traces
 
-New traces can be added to a graph object figure using the `add_trace()` method. This method accepts a graph object trace (an instance of `go.Scatter`, `go.Bar`, etc.) and adds it to the figure. This allows you to start with an empty figure, and add traces to it sequentially.
+New traces can be added to a graph object figure using the `add_trace()` method. This method accepts a graph object trace (an instance of `go.Scatter`, `go.Bar`, etc.) and adds it to the figure. This allows you to start with an empty figure, and add traces to it sequentially. The `append_trace()` method does the same thing, although it does not return the figure.
 
 ```python
 import plotly.graph_objects as go
