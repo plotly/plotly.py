@@ -17,6 +17,7 @@ requests
 networkx
 squarify
 scikit-image
+scikit-learn
 sphinx
 sphinx_bootstrap_theme
 recommonmark
@@ -25,3 +26,4 @@ python-frontmatter
 datashader
 pyarrow 
 cufflinks==0.17.3
+umap-learn
