@@ -172,6 +172,6 @@ def hist_series(data_frame, **kwargs):
     from .express import histogram
 
     skip = ["by", "grid", "xlabelsize", "xrot", "ylabelsize", "yrot", "ax"]
-    skip += ["figsize", "bins"]
+    skip += ["figsize", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
