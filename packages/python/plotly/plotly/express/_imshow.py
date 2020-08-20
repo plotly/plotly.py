@@ -380,11 +380,13 @@ def imshow(
 
     # For 2D+RGB data, use Image trace
     elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
+        rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
             zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
         if binary_string:
-            if zmin is None and zmax is None:
+            if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
+                rescale_image = False
             elif img.ndim == 2:
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
@@ -429,19 +431,23 @@ def imshow(
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
     # Hover name, z or color
-    if binary_string and not (img_rescaled.max() == img.max()):
+    if binary_string and rescale_image and not (img_rescaled.max() == img.max()):
+        # we rescaled the image, hence z is not displayed in hover since it does
+        # not correspond to img values
         hovertemplate = "%s: %%{x}<br>%s: %%{y}<extra></extra>" % (
             labels["x"] or "x",
             labels["y"] or "y",
         )
     else:
         if trace["type"] == "heatmap":
-            hover_name = "z"
+            hover_name = "%{z}"
         elif img.ndim == 2:
-            hover_name = "color[0]"
+            hover_name = "%{z[0]}"
+        elif img.ndim == 3 and img.shape[-1] == 3:
+            hover_name = "[%{z[0]}, %{z[1]}, %{z[2]}]"
         else:
-            hover_name = "color"
-        hovertemplate = "%s: %%{x}<br>%s: %%{y}<br>%s: %%{%s}<extra></extra>" % (
+            hover_name = "%{z}"
+        hovertemplate = "%s: %%{x}<br>%s: %%{y}<br>%s: %s<extra></extra>" % (
             labels["x"] or "x",
             labels["y"] or "y",
             labels["color"] or "color",
