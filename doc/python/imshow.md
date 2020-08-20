@@ -343,6 +343,8 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 
 ### Passing image data as a binary string
 
+_introduced in plotly.py 4.10_
+
 `px.imshow` can pass the data to the figure object either as a list of numerical values, or as a png binary string which is passed directly to the browser. While the former solution offers more flexibility (values can be of float or int type, while values are rescaled to the range [0-255] for an image string), using a binary string is usually faster for large arrays. The parameter `binary_string` controls whether the image is passed as a png string (when `True`) or a list of values (`False`). Its default value is `True` for multi-channel images and `False` for single-channel images. When `binary_string=True`, image data are always represented using a `go.Image` trace.
 
 ```python
