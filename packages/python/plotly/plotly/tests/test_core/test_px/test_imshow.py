@@ -26,10 +26,7 @@ def decode_image_string(image_string):
 @pytest.mark.parametrize("binary_string", [False, True])
 def test_rgb_uint8(binary_string):
     fig = px.imshow(img_rgb, binary_string=binary_string)
-    if not binary_string:
-        assert fig.data[0]["zmax"] == (255, 255, 255, 1)
-    else:
-        assert fig.data[0]["zmax"] is None
+    assert fig.data[0]["zmax"] is None
 
 
 def test_zmax():
@@ -39,10 +36,10 @@ def test_zmax():
         (100,),
         [100, 100, 100],
         (100, 100, 100),
-        (100, 100, 100, 1),
+        (100, 100, 100, 255),
     ]:
         fig = px.imshow(img_rgb, zmax=zmax, binary_string=False)
-        assert fig.data[0]["zmax"] == (100, 100, 100, 1)
+        assert fig.data[0]["zmax"] == (100, 100, 100, 255)
 
 
 def test_automatic_zmax_from_dtype():
@@ -56,7 +53,11 @@ def test_automatic_zmax_from_dtype():
         img = np.array([0, 1], dtype=key)
         img = np.dstack((img,) * 3)
         fig = px.imshow(img, binary_string=False)
-        assert fig.data[0]["zmax"] == (val, val, val, 1)
+        # For uint8 in "infer" mode we don't pass zmin/zmax unless specified
+        if key in [np.uint8, np.bool]:
+            assert fig.data[0]["zmax"] is None
+        else:
+            assert fig.data[0]["zmax"] == (val, val, val, 255)
 
 
 @pytest.mark.parametrize("binary_string", [False, True])
@@ -91,15 +92,23 @@ def test_wrong_dimensions():
             _ = px.imshow(img)
 
 
-def test_nan_inf_data():
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_nan_inf_data(binary_string):
     imgs = [np.ones((20, 20)), 255 * np.ones((20, 20))]
     zmaxs = [1, 255]
     for zmax, img in zip(zmaxs, imgs):
         img[0] = 0
         img[10:12] = np.nan
         # the case of 2d/heatmap is handled gracefully by the JS trace but I don't know how to check it
-        fig = px.imshow(np.dstack((img,) * 3))
-        assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
+        fig = px.imshow(
+            np.dstack((img,) * 3),
+            binary_string=binary_string,
+            contrast_rescaling="minxmax",
+        )
+        if not binary_string:
+            assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 255)
+        else:
+            assert fig.data[0]["zmax"] is None
 
 
 def test_zmax_floats():
@@ -113,7 +122,7 @@ def test_zmax_floats():
     zmaxs = [1, 1, 255, 65535]
     for zmax, img in zip(zmaxs, imgs):
         fig = px.imshow(img, binary_string=False)
-        assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 1)
+        assert fig.data[0]["zmax"] == (zmax, zmax, zmax, 255)
     # single-channel
     imgs = [
         np.ones((5, 5)),

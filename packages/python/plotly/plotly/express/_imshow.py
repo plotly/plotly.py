@@ -57,7 +57,9 @@ def _array_to_b64str(img, backend="pil", compression=4):
         sh = img.shape
         if ndim == 3:
             img = img.reshape((sh[0], sh[1] * sh[2]))
-        w = png.Writer(sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression)
+        w = png.Writer(
+            sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression
+        )
         img_png = png.from_array(img, mode=mode)
         prefix = "data:image/png;base64,"
         with BytesIO() as stream:
@@ -81,11 +83,11 @@ def _vectorize_zvalue(z):
     if z is None:
         return z
     elif np.isscalar(z):
-        return [z] * 3 + [1]
+        return [z] * 3 + [255]
     elif len(z) == 1:
-        return list(z) * 3 + [1]
+        return list(z) * 3 + [255]
     elif len(z) == 3:
-        return list(z) + [1]
+        return list(z) + [255]
     elif len(z) == 4:
         return z
     else:
@@ -311,11 +313,7 @@ def imshow(
             raise ValueError("Binary strings cannot be used with pandas arrays")
         has_nans = True
     else:
-        has_nans = np.any(np.isnan(img))
-        if has_nans and binary_string:
-            raise ValueError(
-                "Binary strings cannot be used with arrays containing NaNs"
-            )
+        has_nans = False
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
@@ -340,9 +338,9 @@ def imshow(
         if (zmax is not None or binary_string) and zmin is None:
             zmin = img.min()
     else:
-        if zmax is None and (img.dtype is not np.uint8 or img.ndim == 2):
+        if zmax is None and (img.dtype != np.uint8 or img.ndim == 2):
             zmax = _infer_zmax_from_type(img)
-        if zmin is None:
+        if zmin is None and zmax is not None:
             zmin = 0
 
         # For 2d data, use Heatmap trace, unless binary_string is True
@@ -377,9 +375,12 @@ def imshow(
 
     # For 2D+RGB data, use Image trace
     elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
-        zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
+        if zmin is not None and zmax is not None:
+            zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
         if binary_string:
-            if img.ndim == 2:
+            if zmin is None and zmax is None:
+                img_rescaled = img
+            elif img.ndim == 2:
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
@@ -403,7 +404,8 @@ def imshow(
             )
             trace = go.Image(source=img_str)
         else:
-            trace = go.Image(z=img, zmin=zmin, zmax=zmax)
+            colormodel = "rgb" if img.shape[-1] == 3 else "rgba"
+            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
