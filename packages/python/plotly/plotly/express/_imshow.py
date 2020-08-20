@@ -307,20 +307,20 @@ def imshow(
         if aspect is None:
             aspect = "equal"
 
-    # Set the value of binary_string
+    # --- Set the value of binary_string (forbidden for pandas)
     if isinstance(img, pd.DataFrame):
         if binary_string:
             raise ValueError("Binary strings cannot be used with pandas arrays")
-        has_nans = True
+        is_dataframe = True
     else:
-        has_nans = False
+        is_dataframe = False
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
-        binary_string = img.ndim >= 3 and not has_nans
+        binary_string = img.ndim >= 3 and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
@@ -329,16 +329,21 @@ def imshow(
     if range_color is not None:
         zmin = range_color[0]
         zmax = range_color[1]
+
+    # -------- Contrast rescaling: either minmax or infer ------------------
     if contrast_rescaling is None:
         contrast_rescaling = "minmax" if img.ndim == 2 else "infer"
 
+    # We try to set zmin and zmax only if necessary, because traces have good defaults
     if contrast_rescaling == "minmax":
+        # When using binary_string and minmax we need to set zmin and zmax to rescale the image
         if (zmin is not None or binary_string) and zmax is None:
             zmax = img.max()
         if (zmax is not None or binary_string) and zmin is None:
             zmin = img.min()
     else:
-        if zmax is None and (img.dtype != np.uint8 or img.ndim == 2):
+        # For uint8 data and infer we let zmin and zmax to be None if passed as None
+        if zmax is None and img.dtype != np.uint8:
             zmax = _infer_zmax_from_type(img)
         if zmin is None and zmax is not None:
             zmin = 0
@@ -395,8 +400,6 @@ def imshow(
                         for ch in range(img.shape[-1])
                     ]
                 )
-            if origin == "lower":
-                img_rescaled = img_rescaled[::-1]
             img_str = _array_to_b64str(
                 img_rescaled,
                 backend=binary_backend,
