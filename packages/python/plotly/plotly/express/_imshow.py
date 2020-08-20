@@ -40,12 +40,14 @@ def _array_to_b64str(img, backend="pil", compression=4):
     # PIL and pypng error messages are quite obscure so we catch invalid compression values
     if compression < 0 or compression > 9:
         raise ValueError("compression level must be between 0 and 9.")
+    alpha = False
     if img.ndim == 2:
         mode = "L"
     elif img.ndim == 3 and img.shape[-1] == 3:
         mode = "RGB"
     elif img.ndim == 3 and img.shape[-1] == 4:
         mode = "RGBA"
+        alpha = True
     else:
         raise ValueError("Invalid image shape")
     if backend == "auto":
@@ -55,7 +57,7 @@ def _array_to_b64str(img, backend="pil", compression=4):
         sh = img.shape
         if ndim == 3:
             img = img.reshape((sh[0], sh[1] * sh[2]))
-        w = png.Writer(sh[1], sh[0], greyscale=(ndim == 2), compression=compression)
+        w = png.Writer(sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression)
         img_png = png.from_array(img, mode=mode)
         prefix = "data:image/png;base64,"
         with BytesIO() as stream:
