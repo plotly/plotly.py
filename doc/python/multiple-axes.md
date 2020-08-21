@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Multiple Axes
-    order: 15
+    order: 16
     permalink: python/multiple-axes/
     thumbnail: thumbnail/multiple-axes.jpg
 ---

@@ -29,7 +29,7 @@ jupyter:
     language: python
     layout: base
     name: Styling Plotly Express Figures
-    order: 29
+    order: 30
     page_type: u-guide
     permalink: python/styling-plotly-express/
     thumbnail: thumbnail/plotly-express.png

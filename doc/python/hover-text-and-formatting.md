@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Hover Text and Formatting
-    order: 22
+    order: 23
     permalink: python/hover-text-and-formatting/
     thumbnail: thumbnail/hover-text.png
 ---
