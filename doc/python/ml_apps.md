@@ -26,7 +26,7 @@ jupyter:
     display_as: ai_ml
     language: python
     layout: base
-    name: Analytical Apps with Dash
+    name: AI/ML Apps with Dash
     order: 5
     page_type: example_index
     permalink: https://plotly.com/building-machine-learning-web-apps-in-python/
