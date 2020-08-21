@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: t-SNE and UMAP projections
-    order: 5
+    order: 6
     page_type: u-guide
     permalink: python/t-sne-and-umap-projections/
     thumbnail: thumbnail/tsne-umap-projections.png

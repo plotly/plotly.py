@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Analytical Apps with Dash
-    order: 6
+    order: 5
     page_type: example_index
     permalink: https://plotly.com/building-machine-learning-web-apps-in-python/
     sitemap: false
