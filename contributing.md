@@ -19,16 +19,16 @@ the structure of the code and of the repository.
 
 - [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
   is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
-  so changes to be made in this package need to be 
-  [contributed to Plotly.js](https://github.com/plotly/plotly.js) or to the `codegen` system 
+  so changes to be made in this package need to be
+  [contributed to Plotly.js](https://github.com/plotly/plotly.js) or to the `codegen` system
   in `packages/python/plotly/codegen`. Most of the codegen code concerns the generation of docstrings from
   the schema JSON in Plotly.js. Traces and
   Layout classes have a direct correspondence with their Javascript
-  counterpart. Additional helper methods are defined there for the `Figure` object, such as
+  counterpart. Higher-level methods that work on on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
   `update_layout`, `add_trace`, etc.
 
 - [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level
-  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/express`. 
+  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/express`.
   Plotly Express functions
   are designed to be highly consistent with each other, and to do *as little computation
   in Python as possible*, generally concerning themselves with formatting data and creating
@@ -42,7 +42,7 @@ the structure of the code and of the repository.
 
 - [the `plotly.figure_factory` module](https://plotly.com/python/figure-factories/) (usually imported as `ff`)
   provides Python "recipes" for building
-  advanced visualizations with involved computation done in Python, such as 
+  advanced visualizations with involved computation done in Python, such as
   Hexbin maps, ternary contour plots, etc.
   Figure factories are one of the easiest entry points into contributing to plotly.py, since
   they consist of Python-only code, with standalone, well-separated functions.
@@ -140,7 +140,7 @@ conda activate plotly-dev
 ```bash
 (plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
 (plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
- ```   
+ ```
 ### Install requirements - (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
 complete installation and avoid gdal-config errors.
