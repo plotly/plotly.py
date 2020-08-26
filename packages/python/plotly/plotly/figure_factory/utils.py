@@ -28,6 +28,7 @@ try:
 except ImportError:
     from collections import Sequence
 
+
 def is_sequence(obj):
     return isinstance(obj, Sequence) and not isinstance(obj, str)
 
