@@ -79,15 +79,16 @@ def _array_to_b64str(img, backend="pil", compression=4):
     return base64_string
 
 
-def _vectorize_zvalue(z):
+def _vectorize_zvalue(z, mode='max'):
+    alpha = 255 if mode == 'max' else 0
     if z is None:
         return z
     elif np.isscalar(z):
-        return [z] * 3 + [255]
+        return [z] * 3 + [alpha]
     elif len(z) == 1:
-        return list(z) * 3 + [255]
+        return list(z) * 3 + [alpha]
     elif len(z) == 3:
-        return list(z) + [255]
+        return list(z) + [alpha]
     elif len(z) == 4:
         return z
     else:
@@ -382,7 +383,7 @@ def imshow(
     elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
         rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
-            zmin, zmax = _vectorize_zvalue(zmin), _vectorize_zvalue(zmax)
+            zmin, zmax = _vectorize_zvalue(zmin, mode='min'), _vectorize_zvalue(zmax, mode='max')
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
@@ -392,6 +393,7 @@ def imshow(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
             else:
+                print(zmin, zmax)
                 img_rescaled = np.dstack(
                     [
                         rescale_intensity(
@@ -409,7 +411,7 @@ def imshow(
             )
             trace = go.Image(source=img_str)
         else:
-            colormodel = "rgb" if img.shape[-1] == 3 else "rgba"
+            colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
             trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)
         layout = {}
         if origin == "lower":
