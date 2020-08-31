@@ -5,7 +5,7 @@ import xarray as xr
 from PIL import Image
 from io import BytesIO
 import base64
-from skimage.exposure import rescale_intensity
+from plotly.express.imshow_utils import rescale_intensity
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
 img_gray = np.arange(100, dtype=np.float).reshape((10, 10))
