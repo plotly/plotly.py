@@ -5,7 +5,7 @@ from io import BytesIO
 import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
-import png
+from .png import Writer, from_array
 import numpy as np
 
 try:
@@ -57,10 +57,10 @@ def _array_to_b64str(img, backend="pil", compression=4):
         sh = img.shape
         if ndim == 3:
             img = img.reshape((sh[0], sh[1] * sh[2]))
-        w = png.Writer(
+        w = Writer(
             sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression
         )
-        img_png = png.from_array(img, mode=mode)
+        img_png = from_array(img, mode=mode)
         prefix = "data:image/png;base64,"
         with BytesIO() as stream:
             w.write(stream, img_png.rows)

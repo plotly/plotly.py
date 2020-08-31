@@ -10,6 +10,3 @@ six==1.8.0
 
 ## retrying requests ##
 retrying==1.3.3
-
-## transforming images to png b64 strings ##
-pypng
