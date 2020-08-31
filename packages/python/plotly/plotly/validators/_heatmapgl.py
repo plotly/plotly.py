@@ -215,6 +215,9 @@ class HeatmapglValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the lower bound of the color domain. Value
                 should have the same units as in `z` and if
                 set, `zmax` must be set as well.
+            zsmooth
+                Picks a smoothing algorithm use to smooth `z`
+                data.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

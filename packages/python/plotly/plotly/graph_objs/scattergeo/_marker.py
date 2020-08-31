@@ -378,13 +378,12 @@ class Marker(_BaseTraceHierarchyType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.scatter
                     geo.marker.colorbar.Tickformatstop` instances
@@ -971,7 +970,14 @@ class Marker(_BaseTraceHierarchyType):
                 'y-right', 140, 'y-right-open', 41, 'line-ew', 141,
                 'line-ew-open', 42, 'line-ns', 142, 'line-ns-open', 43,
                 'line-ne', 143, 'line-ne-open', 44, 'line-nw', 144,
-                'line-nw-open']
+                'line-nw-open', 45, 'arrow-up', 145, 'arrow-up-open', 46,
+                'arrow-down', 146, 'arrow-down-open', 47, 'arrow-left',
+                147, 'arrow-left-open', 48, 'arrow-right', 148,
+                'arrow-right-open', 49, 'arrow-bar-up', 149,
+                'arrow-bar-up-open', 50, 'arrow-bar-down', 150,
+                'arrow-bar-down-open', 51, 'arrow-bar-left', 151,
+                'arrow-bar-left-open', 52, 'arrow-bar-right', 152,
+                'arrow-bar-right-open']
           - A tuple, list, or one-dimensional numpy array of the above
 
         Returns

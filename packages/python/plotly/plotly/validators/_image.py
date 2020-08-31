@@ -12,7 +12,9 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
             colormodel
                 Color model used to map the numerical color
-                components described in `z` into colors.
+                components described in `z` into colors. If
+                `source` is specified, this attribute will be
+                set to `rgba256`.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -52,12 +54,12 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 formatted using d3-time-format's syntax
                 %{variable|d3-time-format}, for example "Day:
                 %{2019-01-01|%A}".
-                https://github.com/d3/d3-3.x-api-
-                reference/blob/master/Time-Formatting.md#format
-                for details on the date formatting syntax. The
-                variables available in `hovertemplate` are the
-                ones emitted as event data described at this
-                link https://plotly.com/javascript/plotlyjs-
+                https://github.com/d3/d3-time-
+                format#locale_format for details on the date
+                formatting syntax. The variables available in
+                `hovertemplate` are the ones emitted as event
+                data described at this link
+                https://plotly.com/javascript/plotlyjs-
                 events/#event-data. Additionally, every
                 attributes that can be specified per-point (the
                 ones that are `arrayOk: true`) are available.
@@ -106,10 +108,9 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
             opacity
                 Sets the opacity of the trace.
             source
-                Specifies the URL of the image to be used. The
-                URL must be accessible from the domain where
-                the plot code is run, and can be either
-                relative or absolute.
+                Specifies the data URI of the image to be
+                visualized. The URI consists of "data:[<media
+                type>][;base64],<data>"
             stream
                 :class:`plotly.graph_objects.image.Stream`
                 instance or dict with compatible properties
@@ -176,17 +177,19 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 depend on the colormodel. For the `rgb`
                 colormodel, it is [255, 255, 255]. For the
                 `rgba` colormodel, it is [255, 255, 255, 1].
-                For the `hsl` colormodel, it is [360, 100,
-                100]. For the `hsla` colormodel, it is [360,
-                100, 100, 1].
+                For the `rgba256` colormodel, it is [255, 255,
+                255, 255]. For the `hsl` colormodel, it is
+                [360, 100, 100]. For the `hsla` colormodel, it
+                is [360, 100, 100, 1].
             zmin
                 Array defining the lower bound for each color
                 component. Note that the default value will
                 depend on the colormodel. For the `rgb`
                 colormodel, it is [0, 0, 0]. For the `rgba`
-                colormodel, it is [0, 0, 0, 0]. For the `hsl`
-                colormodel, it is [0, 0, 0]. For the `hsla`
-                colormodel, it is [0, 0, 0, 0].
+                colormodel, it is [0, 0, 0, 0]. For the
+                `rgba256` colormodel, it is [0, 0, 0, 0]. For
+                the `hsl` colormodel, it is [0, 0, 0]. For the
+                `hsla` colormodel, it is [0, 0, 0, 0].
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

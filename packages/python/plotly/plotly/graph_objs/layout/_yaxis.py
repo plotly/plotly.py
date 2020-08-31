@@ -64,6 +64,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelmode",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -654,11 +655,10 @@ class YAxis(_BaseLayoutHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see: https://github.com/d3/d3-3.x-api-
         reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Time-Formatting.md#format We add one item
-        to d3's date formatter: "%{n}f" for fractional seconds with n
-        digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        "%H~%M~%S.%2f" would display "09~15~23.46"
+        see: https://github.com/d3/d3-time-format#locale_format We add
+        one item to d3's date formatter: "%{n}f" for fractional seconds
+        with n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'hoverformat' property is a string and must be specified as:
           - A string
@@ -1658,11 +1658,10 @@ class YAxis(_BaseLayoutHierarchyType):
         languages which are very similar to those in Python. For
         numbers, see: https://github.com/d3/d3-3.x-api-
         reference/blob/master/Formatting.md#d3_format And for dates
-        see: https://github.com/d3/d3-3.x-api-
-        reference/blob/master/Time-Formatting.md#format We add one item
-        to d3's date formatter: "%{n}f" for fractional seconds with n
-        digits. For example, *2016-10-13 09:15:23.456* with tickformat
-        "%H~%M~%S.%2f" would display "09~15~23.46"
+        see: https://github.com/d3/d3-time-format#locale_format We add
+        one item to d3's date formatter: "%{n}f" for fractional seconds
+        with n digits. For example, *2016-10-13 09:15:23.456* with
+        tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
     
         The 'tickformat' property is a string and must be specified as:
           - A string
@@ -1762,6 +1761,30 @@ class YAxis(_BaseLayoutHierarchyType):
     @tickformatstopdefaults.setter
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
+
+    # ticklabelmode
+    # -------------
+    @property
+    def ticklabelmode(self):
+        """
+        Determines where tick labels are drawn with respect to their
+        corresponding ticks and grid lines. Only has an effect for axes
+        of `type` "date" When set to "period", tick labels are drawn in
+        the middle of the period between ticks.
+    
+        The 'ticklabelmode' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['instant', 'period']
+
+        Returns
+        -------
+        Any
+        """
+        return self["ticklabelmode"]
+
+    @ticklabelmode.setter
+    def ticklabelmode(self, val):
+        self["ticklabelmode"] = val
 
     # ticklen
     # -------
@@ -2380,12 +2403,11 @@ class YAxis(_BaseLayoutHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format We add
-            one item to d3's date formatter: "%{n}f" for fractional
-            seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
-            display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -2566,12 +2588,11 @@ class YAxis(_BaseLayoutHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format We add
-            one item to d3's date formatter: "%{n}f" for fractional
-            seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
-            display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
             A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
             ckformatstop` instances or dicts with compatible
@@ -2581,6 +2602,12 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.template.layout.yaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.yaxis.tickformatstops
+        ticklabelmode
+            Determines where tick labels are drawn with respect to
+            their corresponding ticks and grid lines. Only has an
+            effect for axes of `type` "date" When set to "period",
+            tick labels are drawn in the middle of the period
+            between ticks.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2713,6 +2740,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelmode=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -2852,12 +2880,11 @@ class YAxis(_BaseLayoutHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format We add
-            one item to d3's date formatter: "%{n}f" for fractional
-            seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
-            display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         layer
             Sets the layer on which this axis is displayed. If
             *above traces*, this axis is displayed above all the
@@ -3038,12 +3065,11 @@ class YAxis(_BaseLayoutHierarchyType):
             Python. For numbers, see:
             https://github.com/d3/d3-3.x-api-
             reference/blob/master/Formatting.md#d3_format And for
-            dates see: https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format We add
-            one item to d3's date formatter: "%{n}f" for fractional
-            seconds with n digits. For example, *2016-10-13
-            09:15:23.456* with tickformat "%H~%M~%S.%2f" would
-            display "09~15~23.46"
+            dates see: https://github.com/d3/d3-time-
+            format#locale_format We add one item to d3's date
+            formatter: "%{n}f" for fractional seconds with n
+            digits. For example, *2016-10-13 09:15:23.456* with
+            tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
             A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
             ckformatstop` instances or dicts with compatible
@@ -3053,6 +3079,12 @@ class YAxis(_BaseLayoutHierarchyType):
             layout.template.layout.yaxis.tickformatstopdefaults),
             sets the default property values to use for elements of
             layout.yaxis.tickformatstops
+        ticklabelmode
+            Determines where tick labels are drawn with respect to
+            their corresponding ticks and grid lines. Only has an
+            effect for axes of `type` "date" When set to "period",
+            tick labels are drawn in the middle of the period
+            between ticks.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -3377,6 +3409,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelmode", None)
+        _v = ticklabelmode if ticklabelmode is not None else _v
+        if _v is not None:
+            self["ticklabelmode"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

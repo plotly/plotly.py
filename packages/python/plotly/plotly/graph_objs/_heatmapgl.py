@@ -51,6 +51,7 @@ class Heatmapgl(_BaseTraceType):
         "zmax",
         "zmid",
         "zmin",
+        "zsmooth",
         "zsrc",
     }
 
@@ -237,13 +238,12 @@ class Heatmapgl(_BaseTraceType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.heatmap
                     gl.colorbar.Tickformatstop` instances or dicts
@@ -1256,6 +1256,27 @@ class Heatmapgl(_BaseTraceType):
     def zmin(self, val):
         self["zmin"] = val
 
+    # zsmooth
+    # -------
+    @property
+    def zsmooth(self):
+        """
+        Picks a smoothing algorithm use to smooth `z` data.
+    
+        The 'zsmooth' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['fast', False]
+
+        Returns
+        -------
+        Any
+        """
+        return self["zsmooth"]
+
+    @zsmooth.setter
+    def zsmooth(self, val):
+        self["zsmooth"] = val
+
     # zsrc
     # ----
     @property
@@ -1471,6 +1492,8 @@ class Heatmapgl(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zsmooth
+            Picks a smoothing algorithm use to smooth `z` data.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -1520,6 +1543,7 @@ class Heatmapgl(_BaseTraceType):
         zmax=None,
         zmid=None,
         zmin=None,
+        zsmooth=None,
         zsrc=None,
         **kwargs
     ):
@@ -1717,6 +1741,8 @@ class Heatmapgl(_BaseTraceType):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zsmooth
+            Picks a smoothing algorithm use to smooth `z` data.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -1918,6 +1944,10 @@ an instance of :class:`plotly.graph_objs.Heatmapgl`"""
         _v = zmin if zmin is not None else _v
         if _v is not None:
             self["zmin"] = _v
+        _v = arg.pop("zsmooth", None)
+        _v = zsmooth if zsmooth is not None else _v
+        if _v is not None:
+            self["zsmooth"] = _v
         _v = arg.pop("zsrc", None)
         _v = zsrc if zsrc is not None else _v
         if _v is not None:

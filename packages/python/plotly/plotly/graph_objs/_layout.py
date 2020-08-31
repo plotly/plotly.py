@@ -3873,13 +3873,12 @@ class Layout(_BaseLayoutType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4084,13 +4083,12 @@ class Layout(_BaseLayoutType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     xaxis.Tickformatstop` instances or dicts with
@@ -4100,6 +4098,13 @@ class Layout(_BaseLayoutType):
                     out.xaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.xaxis.tickformatstops
+                ticklabelmode
+                    Determines where tick labels are drawn with
+                    respect to their corresponding ticks and grid
+                    lines. Only has an effect for axes of `type`
+                    "date" When set to "period", tick labels are
+                    drawn in the middle of the period between
+                    ticks.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -4326,13 +4331,12 @@ class Layout(_BaseLayoutType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 layer
                     Sets the layer on which this axis is displayed.
                     If *above traces*, this axis is displayed above
@@ -4529,13 +4533,12 @@ class Layout(_BaseLayoutType):
                     https://github.com/d3/d3-3.x-api-
                     reference/blob/master/Formatting.md#d3_format
                     And for dates see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Time-Formatting.md#format
-                    We add one item to d3's date formatter: "%{n}f"
-                    for fractional seconds with n digits. For
-                    example, *2016-10-13 09:15:23.456* with
-                    tickformat "%H~%M~%S.%2f" would display
-                    "09~15~23.46"
+                    https://github.com/d3/d3-time-
+                    format#locale_format We add one item to d3's
+                    date formatter: "%{n}f" for fractional seconds
+                    with n digits. For example, *2016-10-13
+                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
+                    would display "09~15~23.46"
                 tickformatstops
                     A tuple of :class:`plotly.graph_objects.layout.
                     yaxis.Tickformatstop` instances or dicts with
@@ -4545,6 +4548,13 @@ class Layout(_BaseLayoutType):
                     out.yaxis.tickformatstopdefaults), sets the
                     default property values to use for elements of
                     layout.yaxis.tickformatstops
+                ticklabelmode
+                    Determines where tick labels are drawn with
+                    respect to their corresponding ticks and grid
+                    lines. Only has an effect for axes of `type`
+                    "date" When set to "period", tick labels are
+                    drawn in the middle of the period between
+                    ticks.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
