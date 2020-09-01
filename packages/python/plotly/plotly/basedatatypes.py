@@ -1104,7 +1104,7 @@ class BaseFigure(object):
             if refs[0].subplot_type != "xy":
                 raise ValueError(
                     """
-Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot
 is of type {subplot_type}.""".format(
                         prop_singular=prop_singular,
                         r=row,
@@ -2895,6 +2895,35 @@ Invalid property path '{key_path_str}' for layout
         import plotly.io as pio
 
         return pio.to_json(self, *args, **kwargs)
+
+    def full_figure_for_development(self, warn=True, as_dict=False):
+        """
+        Compute default values for all attributes not specified in the input figure and
+        returns the output as a "full" figure. This function calls Plotly.js via Kaleido
+        to populate unspecified attributes. This function is intended for interactive use
+        during development to learn more about how Plotly.js computes default values and is
+        not generally necessary or recommended for production use.
+
+        Parameters
+        ----------
+        fig:
+            Figure object or dict representing a figure
+
+        warn: bool
+            If False, suppress warnings about not using this in production.
+
+        as_dict: bool
+            If True, output is a dict with some keys that go.Figure can't parse.
+            If False, output is a go.Figure with unparseable keys skipped.
+
+        Returns
+        -------
+        plotly.graph_objects.Figure or dict
+            The full figure
+        """
+        import plotly.io as pio
+
+        return pio.full_figure_for_development(self, warn, as_dict)
 
     def write_json(self, *args, **kwargs):
         """
