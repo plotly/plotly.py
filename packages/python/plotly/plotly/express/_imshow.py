@@ -79,8 +79,8 @@ def _array_to_b64str(img, backend="pil", compression=4):
     return base64_string
 
 
-def _vectorize_zvalue(z, mode='max'):
-    alpha = 255 if mode == 'max' else 0
+def _vectorize_zvalue(z, mode="max"):
+    alpha = 255 if mode == "max" else 0
     if z is None:
         return z
     elif np.isscalar(z):
@@ -383,7 +383,10 @@ def imshow(
     elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
         rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
-            zmin, zmax = _vectorize_zvalue(zmin, mode='min'), _vectorize_zvalue(zmax, mode='max')
+            zmin, zmax = (
+                _vectorize_zvalue(zmin, mode="min"),
+                _vectorize_zvalue(zmax, mode="max"),
+            )
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
@@ -393,7 +396,6 @@ def imshow(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
             else:
-                print(zmin, zmax)
                 img_rescaled = np.dstack(
                     [
                         rescale_intensity(
@@ -433,7 +435,7 @@ def imshow(
     fig = go.Figure(data=trace, layout=layout)
     fig.update_layout(layout_patch)
     # Hover name, z or color
-    if binary_string and rescale_image and not (img_rescaled.max() == img.max()):
+    if binary_string and rescale_image and not np.all(img == img_rescaled):
         # we rescaled the image, hence z is not displayed in hover since it does
         # not correspond to img values
         hovertemplate = "%s: %%{x}<br>%s: %%{y}<extra></extra>" % (

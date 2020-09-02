@@ -213,10 +213,10 @@ import plotly.express as px
 from skimage import data
 img = data.astronaut()
 # Increase contrast by clipping the data range between 50 and 200
-fig = px.imshow(img, zmin=50, zmax=200, binary_string=False)
+fig = px.imshow(img, zmin=50, zmax=200)
 # We customize the hovertemplate to show both the data and the color values
 # See https://plotly.com/python/hover-text-and-formatting/#customize-tooltip-text-with-a-hovertemplate
-fig.update_traces(hovertemplate="x: %{x} <br> y: %{y} <br> z: %{z} <br> color: %{color}")
+#fig.update_traces(hovertemplate="x: %{x} <br> y: %{y} <br> z: %{z} <br> color: %{color}")
 fig.show()
 ```
 
@@ -352,6 +352,36 @@ import plotly.express as px
 import numpy as np
 img = np.arange(15**2).reshape((15, 15))
 fig = px.imshow(img, binary_string=True)
+fig.show()
+```
+
+### Contrast rescaling im imshow with binary string
+
+When the image is passed to the plotly figure as a binary string (which is the default mode for RGB images), and when the image is rescaled to adjust the contrast (for example when setting `zmin` and `zmax`), the original intensity values are not passed to the plotly figure and therefore no intensity value is displayed in the hover.
+
+```python
+import plotly.express as px
+from skimage import data
+import numpy as np
+img = np.arange(100).reshape((10, 10))
+fig = px.imshow(img, binary_string=True)
+# You can check that only x and y are displayed in the hover
+# You can use a hovertemplate to override the hover information
+# See https://plotly.com/python/hover-text-and-formatting/#customize-tooltip-text-with-a-hovertemplate
+fig.show()
+```
+
+You can set `binary_string=False` if you want the intensity value to appear in the hover even for a rescaled image. In the example below we also modify the hovertemplate to display both `z` (the data of the original image array) and `color` (the pixel value displayed in the figure).
+
+```python
+import plotly.express as px
+from skimage import data
+img = data.chelsea()
+# Increase contrast by clipping the data range between 50 and 200
+fig = px.imshow(img, binary_string=False, zmin=50, zmax=200)
+# We customize the hovertemplate to show both the data and the color values
+# See https://plotly.com/python/hover-text-and-formatting/#customize-tooltip-text-with-a-hovertemplate
+fig.update_traces(hovertemplate="x: %{x} <br> y: %{y} <br> z: %{z} <br> color: %{color}")
 fig.show()
 ```
 
