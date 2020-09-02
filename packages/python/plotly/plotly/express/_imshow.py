@@ -24,7 +24,7 @@ except ImportError:
 _float_types = []
 
 
-def _array_to_b64str(img, backend="pil", compression=4):
+def _array_to_b64str(img, backend="pil", compression=4, ext="png"):
     """Converts a numpy array of uint8 into a base64 png string.
 
     Parameters
@@ -36,6 +36,8 @@ def _array_to_b64str(img, backend="pil", compression=4):
         otherwise pypng.
     compression: int, between 0 and 9
         compression level to be passed to the backend
+    ext: str, 'png' or 'jpg'
+        compression format used to generate b64 string
     """
     # PIL and pypng error messages are quite obscure so we catch invalid compression values
     if compression < 0 or compression > 9:
@@ -52,6 +54,9 @@ def _array_to_b64str(img, backend="pil", compression=4):
         raise ValueError("Invalid image shape")
     if backend == "auto":
         backend = "pil" if pil_imported else "pypng"
+    if ext != "png" and backend != "pil":
+        raise ValueError("jpg binary strings are only available with PIL backend")
+
     if backend == "pypng":
         ndim = img.ndim
         sh = img.shape
@@ -72,9 +77,14 @@ def _array_to_b64str(img, backend="pil", compression=4):
                 "install pillow or use `backend='pypng'."
             )
         pil_img = Image.fromarray(img)
-        prefix = "data:image/png;base64,"
+        if ext == "jpg" or ext == "jpeg":
+            prefix = "data:image/jpeg;base64,"
+            ext = "jpeg"
+        else:
+            prefix = "data:image/png;base64,"
+            ext = "png"
         with BytesIO() as stream:
-            pil_img.save(stream, format="png", compress_level=compression)
+            pil_img.save(stream, format=ext, compress_level=compression)
             base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
     return base64_string
 
@@ -135,6 +145,7 @@ def imshow(
     binary_string=None,
     binary_backend="auto",
     binary_compression_level=4,
+    binary_format="png",
 ):
     """
     Display an image, i.e. data on a 2D regular raster.
@@ -238,6 +249,9 @@ def imshow(
         images it is not worth using levels greater than 5, but it's possible to
         test `len(fig.data[0].source)` and to time the execution of `imshow` to
         tune the level of compression. 0 means no compression (not recommended).
+
+    binary_format: str, 'png' (default) or 'jpg'
+        compression format used to generate b64 string
 
     Returns
     -------
@@ -410,6 +424,7 @@ def imshow(
                 img_rescaled,
                 backend=binary_backend,
                 compression=binary_compression_level,
+                ext=binary_format,
             )
             trace = go.Image(source=img_str)
         else:
