@@ -18,7 +18,7 @@ def decode_image_string(image_string):
     if "png" in image_string[:22]:
         return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[22:]))))
     elif "jpeg" in image_string[:23]:
-        return np.asaray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
+        return np.asarray(Image.open(BytesIO(base64.b64decode(image_string[23:]))))
     else:
         raise ValueError("image string format not recognized")
 
@@ -61,12 +61,24 @@ def test_automatic_zmax_from_dtype():
 
 
 @pytest.mark.parametrize("binary_string", [False, True])
-def test_origin(binary_string):
+@pytest.mark.parametrize("binary_format", ["png", "jpg"])
+def test_origin(binary_string, binary_format):
     for i, img in enumerate([img_rgb, img_gray]):
-        fig = px.imshow(img, origin="lower", binary_string=binary_string)
+        fig = px.imshow(
+            img,
+            origin="lower",
+            binary_string=binary_string,
+            binary_format=binary_format,
+        )
         assert fig.layout.yaxis.autorange is True
-        if binary_string and i == 0:
+        if binary_string and i == 0 and binary_format == "png":
+            # The equality below does not hold for jpeg compression since it's lossy
             assert np.all(img[::-1] == decode_image_string(fig.data[0].source))
+        if binary_string:
+            if binary_format == "jpg":
+                assert fig.data[0].source[:15] == "data:image/jpeg"
+            else:
+                assert fig.data[0].source[:14] == "data:image/png"
     fig = px.imshow(img_rgb, binary_string=binary_string)
     assert fig.layout.yaxis.autorange is None
     fig = px.imshow(img_gray, binary_string=binary_string)
