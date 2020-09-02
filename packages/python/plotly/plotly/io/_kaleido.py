@@ -291,7 +291,7 @@ def full_figure_for_development(fig, warn=True, as_dict=False):
     if scope is None:
         raise ValueError(
             """
-Image export using the "kaleido" engine requires the kaleido package,
+Full figure generation requires the kaleido package,
 which can be installed using pip:
     $ pip install -U kaleido
 """
