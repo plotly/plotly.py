@@ -306,7 +306,7 @@ which can be installed using pip:
             "To suppress this warning, set warn=False"
         )
 
-    fig = json.loads(str(scope.transform(fig, format="json")))
+    fig = json.loads(scope.transform(fig, format="json"))
     if as_dict:
         return fig
     else:
