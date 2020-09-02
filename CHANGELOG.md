@@ -4,8 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.10.0] - unreleased
 
+### Added
 
-## [4.9.1] - unreleased
+- Added `plotly.io.full_figure_for_development()` and `plotly.graph_objects.Figure.full_figure_for_development()` ([#2737](https://github.com/plotly/plotly.py/pull/2737))
 
 
 ## [4.9.0] - 2020-07-16

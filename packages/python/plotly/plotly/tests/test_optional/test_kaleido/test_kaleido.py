@@ -28,6 +28,12 @@ def test_kaleido_engine_to_image_returns_bytes():
     assert result.startswith(b"<svg")
 
 
+def test_kaleido_fulljson():
+    empty_fig = dict(data=[], layout={})
+    result = pio.full_figure_for_development(empty_fig, warn=False, as_dict=True)
+    assert result["layout"]["calendar"] == "gregorian"
+
+
 def test_kaleido_engine_to_image():
     with mocked_scope() as scope:
         pio.to_image(fig, engine="kaleido", validate=False)
