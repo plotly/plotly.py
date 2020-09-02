@@ -251,7 +251,9 @@ def imshow(
         tune the level of compression. 0 means no compression (not recommended).
 
     binary_format: str, 'png' (default) or 'jpg'
-        compression format used to generate b64 string
+        compression format used to generate b64 string. 'png' is recommended
+        since it uses lossless compression, but 'jpg' (lossy) compression can
+        result if smaller binary strings for natural images.
 
     Returns
     -------
