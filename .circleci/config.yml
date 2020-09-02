@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install black
-          command: "sudo pip install black"
+          command: "sudo pip install black==19.10b0"
       - run:
           name: Check formatting with black
           command: "black --check ."
