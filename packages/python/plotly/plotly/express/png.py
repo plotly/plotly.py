@@ -2348,17 +2348,3 @@ def cli_open(path):
     if path == "-":
         return binary_stdin()
     return open(path, "rb")
-
-
-def main(argv):
-    """
-    Run command line PNG.
-    """
-    print("What should the command line tool do?", file=sys.stderr)
-
-
-if __name__ == "__main__":
-    try:
-        main(sys.argv)
-    except Error as e:
-        print(e, file=sys.stderr)
