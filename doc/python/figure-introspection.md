@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Introspecting Figures
-    order: 35
+    order: 36
     page_type: u-guide
     permalink: python/figure-introspection/
     thumbnail: thumbnail/violin.jpg
@@ -35,7 +35,7 @@ jupyter:
 
 ### The Figure Lifecycle
 
-As explained in the [Figure Data Structure documentation](/python/figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](/python/plotly-express/) or [Graph Objects](/python/graph-objects/) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations. 
+As explained in the [Figure Data Structure documentation](/python/figure-structure/), when building a figure object with Plotly.py, it is not necessary to populate every possible attribute. At render-time, figure objects (whether generated via [Plotly Express](/python/plotly-express/) or [Graph Objects](/python/graph-objects/) are passed from Plotly.py to [Plotly.js](/javascript/), which is the Javascript library responsible for turning JSON descriptions of figures into graphical representations.
 
 As part of this rendering process, Plotly.js will determine, based on the attributes that have been set, which other attributes require values in order to draw the figure. Plotly.js will then apply either static or dynamic defaults to all of the remaining required attributes and render the figure. A good example of a static default would be the text font size: if unspecified, the default value is always the same. A good example of a dynamic default would be the range of an axis: if unspecified, the default will be computed based on the range of the data in traces associated with that axis.
 
@@ -71,9 +71,9 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Scatter(
-        mode="markers+text", 
-        x=[10,20], 
-        y=[20, 10], 
+        mode="markers+text",
+        x=[10,20],
+        y=[20, 10],
         text=["Point A", "Point B"]
     )],
     layout=dict(height=400, width=400, template="none")
@@ -89,7 +89,7 @@ print(fig)
 
 Now let's look at the "full" figure after Plotly.js has computed the default values for every necessary attribute.
 
-> Heads-up: the full figure is quite long and intimidating, and this page is meant to help demystify things so **please read on**! 
+> Heads-up: the full figure is quite long and intimidating, and this page is meant to help demystify things so **please read on**!
 
 Please also note that the `.full_figure_for_development()` function is really meant for interactive learning and debugging, rather than production use, hence its name and the warning it produces by default, which you can see below, and which can be supressed with `warn=False`.
 
@@ -108,7 +108,7 @@ print("full_fig.layout.xaxis.range: ", full_fig.layout.xaxis.range)
 ### Learning About Attributes
 
 
-What else can we use this `full_fig` for? Let's start by looking at the first entry of the `data` 
+What else can we use this `full_fig` for? Let's start by looking at the first entry of the `data`
 
 ```python
 print(full_fig.data[0])
@@ -144,12 +144,12 @@ import plotly.graph_objects as go
 
 fig = go.Figure(
     data=[go.Scattergeo(
-        mode="markers+text", 
-        lat=[10, 20], 
-        lon=[20, 10], 
+        mode="markers+text",
+        lat=[10, 20],
+        lon=[20, 10],
         text=["Point A", "Point B"]
     )],
-    layout=dict(height=400, width=400, 
+    layout=dict(height=400, width=400,
                 margin=dict(l=0,r=0,b=0,t=0),
                 template="none")
 )
