@@ -314,3 +314,24 @@ def test_imshow_hovertemplate(binary_string):
             fig.data[0].hovertemplate
             == "x: %{x}<br>y: %{y}<br>color: %{z}<extra></extra>"
         )
+
+
+@pytest.mark.parametrize("facet_col", [0, 1, 2, -1])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_facet_col(facet_col, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8))
+    facet_col_wrap = 3
+    fig = px.imshow(
+        img,
+        facet_col=facet_col,
+        facet_col_wrap=facet_col_wrap,
+        binary_string=binary_string,
+    )
+    if facet_col is not None:
+        nslices = img.shape[facet_col]
+        ncols = int(facet_col_wrap)
+        nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
+        nmax = ncols * nrows
+        assert "yaxis%d" % nmax in fig.layout
+        assert "yaxis%d" % (nmax + 1) not in fig.layout
+        assert len(fig.data) == nslices
