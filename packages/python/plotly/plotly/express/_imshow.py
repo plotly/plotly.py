@@ -1,6 +1,6 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
-from ._core import apply_default_cascade
+from ._core import apply_default_cascade, init_figure
 from io import BytesIO
 import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
@@ -133,6 +133,9 @@ def imshow(
     labels={},
     x=None,
     y=None,
+    animation_frame=False,
+    facet_col=False,
+    facet_col_wrap=None,
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -277,6 +280,14 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    if facet_col:
+        nslices = img.shape[-1]
+        ncols = facet_col_wrap
+        nrows = nslices / ncols
+    else:
+        nrows = 1
+        ncols = 1
+    fig = init_figure(args, 'xy', [], nrows, ncols, [], [])
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
         if binary_string:
@@ -449,7 +460,8 @@ def imshow(
         layout_patch["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
-    fig = go.Figure(data=trace, layout=layout)
+    fig.add_trace(trace)
+    fig.update_layout(layout)
     fig.update_layout(layout_patch)
     # Hover name, z or color
     if binary_string and rescale_image and not np.all(img == img_rescaled):
