@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Styling Markers
-    order: 19
+    order: 20
     permalink: python/marker-style/
     thumbnail: thumbnail/marker-style.gif
 ---

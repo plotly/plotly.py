@@ -374,7 +374,7 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.6.8-node
+      - image: circleci/python:3.7-stretch-node-browsers
 
         working_directory: ~/project
 
@@ -400,12 +400,13 @@ jobs:
             . venv/bin/activate
             npm install electron@1.8.4
             npm install orca
+            pip install -U pip
             pip uninstall -y plotly
             pip install -r requirements.txt
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
               cd ../packages/python/plotly
-              python3 setup.py install
+              pip install -e .
               cd ../../../doc
             fi
             echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
@@ -463,6 +464,15 @@ jobs:
           command: |
             cd doc
             . venv/bin/activate
+            # For the API doc, we need to use the local version of plotly
+            # since we are tweaking the source because of
+            # graph_objs/graph_objects
+            if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
+              pip uninstall -y plotly
+              cd ../packages/python/plotly
+              pip install -e .
+              cd ../../../doc
+            fi
             cd apidoc
             make html
             if [ "${CIRCLE_BRANCH}" == "doc-prod" ]; then
@@ -478,12 +488,14 @@ jobs:
               rm -rf .git
               cd ../..
             fi
-
             cd ../..
 
       - store_artifacts:
           path: doc/build
           destination: doc/build
+      - store_artifacts:
+          path: doc/apidoc/_build/
+          destination: doc/apidoc/_build/
 
 workflows:
   version: 2

@@ -155,4 +155,4 @@ fig.show()
 ```
 
 #### Reference
-For more information on candlestick attributes, see: https://plotly.com/python/reference/#ohlc
+For more information on candlestick attributes, see: https://plotly.com/python/reference/ohlc/

@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Plotly Express Arguments
-    order: 18
+    order: 19
     page_type: u-guide
     permalink: python/px-arguments/
     thumbnail: thumbnail/plotly-express.png

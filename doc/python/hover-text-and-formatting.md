@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Hover Text and Formatting
-    order: 22
+    order: 23
     permalink: python/hover-text-and-formatting/
     thumbnail: thumbnail/hover-text.png
 ---
@@ -169,12 +169,12 @@ fig.show()
 
 ### Customizing hover text with a hovertemplate
 
-To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/#pie-hovertemplate) attribute of `graph_objects` tracces, which is a template string used for rendering the information that appear on hoverbox.
+To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` tracces, which is a template string used for rendering the information that appear on hoverbox.
 This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
 
-Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/#pie-texttemplate) customizes the text that appears on your chart. <br>
+Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
 
-Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/#layout-hoverlabel-align).
+Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plotly.com/python/reference/layout/#layout-hoverlabel-align).
 
 ```python
 import plotly.graph_objects as go

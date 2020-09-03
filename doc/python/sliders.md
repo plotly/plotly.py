@@ -82,7 +82,7 @@ fig.show()
 ```
 
 #### Methods
-The method determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](https://plot.ly/python/reference/#layout-updatemenus-items-updatemenu-buttons-items-button-method) methods to add the slider:
+The method determines which [plotly.js function](https://plot.ly/javascript/plotlyjs-function-reference/) will be used to update the chart. Plotly can use several [updatemenu](https://plot.ly/python/reference/layout/updatemenus/#layout-updatemenus-items-updatemenu-buttons-items-button-method) methods to add the slider:
 - `"update"`: modify **data and layout** attributes (as above)
 - `"restyle"`: modify **data** attributes
 - `"relayout"`: modify **layout** attributes
@@ -105,4 +105,4 @@ fig.show()
 ```
 
 #### Reference
-Check out https://plotly.com/python/reference/#layout-updatemenus for more information!
+Check out https://plotly.com/python/reference/layout/updatemenus/ for more information!
