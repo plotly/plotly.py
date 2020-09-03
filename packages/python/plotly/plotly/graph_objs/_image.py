@@ -52,7 +52,8 @@ class Image(_BaseTraceType):
         """
         Color model used to map the numerical color components
         described in `z` into colors. If `source` is specified, this
-        attribute will be set to `rgba256`.
+        attribute will be set to `rgba256` otherwise it defaults to
+        `rgb`.
     
         The 'colormodel' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -499,7 +500,7 @@ class Image(_BaseTraceType):
     def source(self):
         """
         Specifies the data URI of the image to be visualized. The URI
-        consists of "data:[<media type>][;base64],<data>"
+        consists of "data:image/[<media subtype>][;base64],<data>"
     
         The 'source' property is a string and must be specified as:
           - A string
@@ -878,7 +879,8 @@ class Image(_BaseTraceType):
         colormodel
             Color model used to map the numerical color components
             described in `z` into colors. If `source` is specified,
-            this attribute will be set to `rgba256`.
+            this attribute will be set to `rgba256` otherwise it
+            defaults to `rgb`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -963,8 +965,8 @@ class Image(_BaseTraceType):
             Sets the opacity of the trace.
         source
             Specifies the data URI of the image to be visualized.
-            The URI consists of "data:[<media
-            type>][;base64],<data>"
+            The URI consists of "data:image/[<media
+            subtype>][;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -1095,7 +1097,8 @@ class Image(_BaseTraceType):
         colormodel
             Color model used to map the numerical color components
             described in `z` into colors. If `source` is specified,
-            this attribute will be set to `rgba256`.
+            this attribute will be set to `rgba256` otherwise it
+            defaults to `rgb`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -1180,8 +1183,8 @@ class Image(_BaseTraceType):
             Sets the opacity of the trace.
         source
             Specifies the data URI of the image to be visualized.
-            The URI consists of "data:[<media
-            type>][;base64],<data>"
+            The URI consists of "data:image/[<media
+            subtype>][;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
