@@ -125,7 +125,7 @@ def _output_dtype(dtype_or_range):
     else:
         raise ValueError(
             "Incorrect value for out_range, should be a valid image data "
-            f"type or a pair of values, got {dtype_or_range}."
+            "type or a pair of values, got %s." % str(dtype_or_range)
         )
 
 
