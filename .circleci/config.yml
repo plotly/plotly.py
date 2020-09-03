@@ -314,7 +314,7 @@ jobs:
             pytest packages/python/plotly/plotly/tests/test_orca
 
       - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
+          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
   plotlyjs_dev_build:
     docker:
