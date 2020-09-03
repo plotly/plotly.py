@@ -25,3 +25,4 @@ python-frontmatter
 datashader
 pyarrow
 cufflinks==0.17.3
+kaleido

@@ -489,6 +489,17 @@ fig.update_layout(
 fig.show()
 ```
 
+### Box Plot With Only Points
+
+A [strip chart](/python/strip-charts/) is like a box plot with points showing, and no box:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.strip(df, x='day', y='tip')
+fig.show()
+```
+
 #### Reference
 
 See https://plotly.com/python/reference/#box for more information and chart attribute options!

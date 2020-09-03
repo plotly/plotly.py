@@ -1,9 +1,9 @@
 # Contributing
 
-Thank you for contributing to plotly.py! We are actively looking for
+Thank you for your interest in contributing to plotly.py! We are actively looking for
 diverse contributors, with diverse background and skills.
 
-This guide start by a general description of the different ways to contribute
+This guide starts with a general description of the different ways to contribute
 to plotly.py, then we explain some technical aspects of preparing your
 contribution.
 
@@ -17,26 +17,34 @@ but the general idea is to be nice.
 There are many ways to contribute to plotly.py. It helps to understand first
 the structure of the code and of the repository.
 
-- the `codegen` (package in `packages/python/plotly/codegen`): all the code
-  inside `plotly.graph_objects` is generated from the plotly javascript API
-  (the "schema"). The `codegen` package is where the code generation is done.
-  Most of the codegen code concerns the generation of docstrings. Traces and
+- [the `plotly.graph_objects` module](https://plotly.com/python/graph-objects/) (usually imported as `go`)
+  is [generated from the Plotly.js schema](https://plotly.com/python/figure-structure/),
+  so changes to be made in this package need to be
+  [contributed to Plotly.js](https://github.com/plotly/plotly.js) or to the `codegen` system
+  in `packages/python/plotly/codegen`. Most of the codegen code concerns the generation of docstrings from
+  the schema JSON in Plotly.js. Traces and
   Layout classes have a direct correspondence with their Javascript
-  counterpart. Additional methods are defined for the `Figure` object, such as
+  counterpart. Higher-level methods that work on on figures regardless of the current schema (e.g., `BaseFigure.for_each_trace`) are defined in `packages/python/plotly/plotly/basedatatypes.py`. Additional helper methods are defined there for the `Figure` object, such as
   `update_layout`, `add_trace`, etc.
 
-- the `plotly.express` package (usually imported as `px`) is a high-level
-  functional API. Its code is in `packages/python/plotly/express`. Most
-  functions of `plotly.express` call the internal `_make_figure` function
+- [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level
+  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/express`.
+  Plotly Express functions
+  are designed to be highly consistent with each other, and to do *as little computation
+  in Python as possible*, generally concerning themselves with formatting data and creating
+  figures out of `plotly.graph_objects` instances. Most
+  functions of `plotly.express` call the same internal `_make_figure` function
   in `_core.py`. More generally, the internals of `px` consist of general
   functions taking care of building the figure (defining subplots, traces
   or frames, for example), with special cases for different traces handled
   within these functions. There is also subsequent code reuse for `px`
   docstrings, in particular for documenting parameters.
 
-- the `plotly.figure_factory` module provides Python "recipes" for building
-  advanced visualizations, such as Gantt charts, annotated heatmaps, etc.
-  Figure factories are one of the easiest entry points into plotly.py, since
+- [the `plotly.figure_factory` module](https://plotly.com/python/figure-factories/) (usually imported as `ff`)
+  provides Python "recipes" for building
+  advanced visualizations with involved computation done in Python, such as
+  Hexbin maps, ternary contour plots, etc.
+  Figure factories are one of the easiest entry points into contributing to plotly.py, since
   they consist of Python-only code, with standalone, well-separated functions.
   However, please note that some of the figure factories become less relevant
   as we are introducing more features into `plotly.express`. Some issues in the
@@ -132,7 +140,7 @@ conda activate plotly-dev
 ```bash
 (plotly_dev) $ pip install -r packages/python/plotly/requirements.txt
 (plotly_dev) $ pip install -r packages/python/plotly/optional-requirements.txt
- ```   
+ ```
 ### Install requirements - (Windows + Conda)
 Because Windows requires Visual Studio libraries to compile some of the optional dependencies, follow these steps to
 complete installation and avoid gdal-config errors.

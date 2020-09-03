@@ -30,7 +30,9 @@ jupyter:
     order: 10
     page_type: u-guide
     permalink: python/violin/
-    redirect_from: /python/violin-plot/
+    redirect_from:
+    - /python/violin-plot/
+    - /python/violin-plots/
     thumbnail: thumbnail/violin.jpg
 ---
 
@@ -255,6 +257,17 @@ for data_line, color in zip(data, colors):
 
 fig.update_traces(orientation='h', side='positive', width=3, points=False)
 fig.update_layout(xaxis_showgrid=False, xaxis_zeroline=False)
+fig.show()
+```
+
+### Violin Plot With Only Points
+
+A [strip chart](/python/strip-charts/) is like a violin plot with points showing, and no violin:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.strip(df, x='day', y='tip')
 fig.show()
 ```
 
