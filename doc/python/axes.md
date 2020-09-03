@@ -29,19 +29,19 @@ jupyter:
     language: python
     layout: base
     name: Axes
-    order: 13
+    order: 14
     permalink: python/axes/
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely [`go.layout.XAxis`](/python/reference/#layout-xaxis) and [`go.layout.YAxis`](python/reference/#layout-xaxis). Other kinds of axes are described in other tutorials:
+This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/). Other kinds of axes are described in other tutorials:
 
-- [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/#layout-scene)
-- [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/#layout-polar)
-- [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/#layout-ternary)
-- [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/#layout-geo)
-- [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/#layout-mapbox)
-- [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/#layout-coloraxis).
+- [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/layout/scene/)
+- [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
+- [Ternary axes](/python/ternary-plots). The axis object is [`go.layout.Ternary`](/python/reference/layout/ternary/)
+- [Geo axes](/python/map-configuration/). The axis object is [`go.layout.Geo`](/python/reference/layout/geo/)
+- [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/layout/mapbox/)
+- [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
 **See also** the tutorials on [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
 
@@ -777,4 +777,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#layout-xaxis and https://plotly.com/python/reference/#layout-yaxis for more information and chart attribute options!
+See https://plotly.com/python/reference/layout/xaxis/ and https://plotly.com/python/reference/layout/yaxis/ for more information and chart attribute options!

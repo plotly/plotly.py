@@ -191,4 +191,4 @@ See the example in the [plotly and datashader tutorial](/python/datashader).
 
 #### Reference
 
-See https://plotly.com/python/reference/#layout-mapbox for more information and options!
+See https://plotly.com/python/reference/layout/mapbox/ for more information and options!

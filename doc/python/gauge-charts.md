@@ -78,7 +78,7 @@ fig.show()
 ```
 
 #### Custom Gauge Chart
-The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/#indicator).
+The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plotly.com/python/reference/indicator/).
 
 ```python
 import plotly.graph_objects as go
@@ -110,4 +110,4 @@ fig.show()
 
 
 #### Reference
-See https://plotly.com/python/reference/#indicator for more information and chart attribute options!
+See https://plotly.com/python/reference/indicator/ for more information and chart attribute options!

@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Configuration
-    order: 9
+    order: 10
     page_type: u-guide
     permalink: python/configuration-options/
     thumbnail: thumbnail/modebar-icons.png

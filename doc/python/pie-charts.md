@@ -304,4 +304,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#pie for more information and chart attribute options!
+See https://plotly.com/python/reference/pie/ for more information and chart attribute options!

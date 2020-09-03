@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Legends
-    order: 14
+    order: 15
     permalink: python/legend/
     redirect_from: python/horizontal-legend/
     thumbnail: thumbnail/legends.gif
@@ -248,7 +248,7 @@ fig.show()
 
 #### Size of Legend Items
 
-In this example [itemsizing](https://plotly.com/python/reference/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
+In this example [itemsizing](https://plotly.com/python/reference/layout/#layout-legend-itemsizing) attribute determines the legend items symbols remain constant, regardless of how tiny/huge the bubbles would be in the graph.
 
 ```python
 import plotly.graph_objects as go
@@ -419,4 +419,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#layout-legend for more information!
+See https://plotly.com/python/reference/layout/#layout-legend for more information!

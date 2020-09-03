@@ -372,7 +372,7 @@ fig.show()
 
 ### Bar Chart with Sorted or Ordered Categories
 
-Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
+Set `categoryorder` to `"category ascending"` or `"category descending"` for the alphanumerical order of the category names or `"total ascending"` or `"total descending"` for numerical order of values. [categoryorder](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-categoryorder) for more information. Note that sorting the bars by a particular trace isn't possible right now - it's only possible to sort by the total values. Of course, you can always sort your data _before_ plotting it if you need more customization.
 
 This example orders the bar chart alphabetically with `categoryorder: 'category ascending'`
 
@@ -442,4 +442,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/#bar for more information and chart attribute options!
+See https://plotly.com/python/reference/bar/ for more information and chart attribute options!

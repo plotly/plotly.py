@@ -196,7 +196,7 @@ fig.show()
 
 ### Set Marker Symbols
 
-You can define a symbol on your map by setting [symbol](https://plotly.com/python/reference/#scattermapbox-marker-symbol) attribute. This attribute only works on Mapbox-provided `style`s:
+You can define a symbol on your map by setting [symbol](https://plotly.com/python/reference/scattermapbox/#scattermapbox-marker-symbol) attribute. This attribute only works on Mapbox-provided `style`s:
 
 - basic
 - streets
@@ -228,4 +228,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scattermapbox for more information and options!
+See https://plotly.com/python/reference/scattermapbox/ for more information and options!
