@@ -888,18 +888,47 @@ var FigureView = widgets.DOMWidgetView.extend({
       // Most cartesian plots
       var pointObjects = data["points"];
       var numPoints = pointObjects.length;
+
+      var hasNestedPointObjects = true;
+      for (let i = 0; i < numPoints; i++) {
+        hasNestedPointObjects = (hasNestedPointObjects && pointObjects[i].hasOwnProperty("pointNumbers"));
+        if (!hasNestedPointObjects) break;
+      }
+      var numPointNumbers = numPoints;
+      if (hasNestedPointObjects) {
+        numPointNumbers = 0;
+        for (let i = 0; i < numPoints; i++) {
+          numPointNumbers += pointObjects[i]["pointNumbers"].length;
+        }
+      }
       pointsObject = {
-        trace_indexes: new Array(numPoints),
-        point_indexes: new Array(numPoints),
-        xs: new Array(numPoints),
-        ys: new Array(numPoints),
+        trace_indexes: new Array(numPointNumbers),
+        point_indexes: new Array(numPointNumbers),
+        xs: new Array(numPointNumbers),
+        ys: new Array(numPointNumbers),
       };
 
-      for (var p = 0; p < numPoints; p++) {
-        pointsObject["trace_indexes"][p] = pointObjects[p]["curveNumber"];
-        pointsObject["point_indexes"][p] = pointObjects[p]["pointNumber"];
-        pointsObject["xs"][p] = pointObjects[p]["x"];
-        pointsObject["ys"][p] = pointObjects[p]["y"];
+      if (hasNestedPointObjects) {
+        var flatPointIndex = 0;
+        for (var p = 0; p < numPoints; p++) {
+          for (let i = 0; i < pointObjects[p]["pointNumbers"].length; i++, flatPointIndex++) {
+            pointsObject["point_indexes"][flatPointIndex] = pointObjects[p]["pointNumbers"][i]
+            // also add xs, ys and traces so that the array doesn't get truncated later
+            pointsObject["xs"][flatPointIndex] = pointObjects[p]["x"];
+            pointsObject["ys"][flatPointIndex] = pointObjects[p]["y"];
+            pointsObject["trace_indexes"][flatPointIndex] = pointObjects[p]["curveNumber"];
+          }
+        }
+        pointsObject["point_indexes"].sort(function(a, b) {
+          return a - b;
+        });
+      } else {
+        for (var p = 0; p < numPoints; p++) {
+          pointsObject["trace_indexes"][p] = pointObjects[p]["curveNumber"];
+          pointsObject["point_indexes"][p] = pointObjects[p]["pointNumber"];
+          pointsObject["xs"][p] = pointObjects[p]["x"];
+          pointsObject["ys"][p] = pointObjects[p]["y"];
+        }
       }
 
       // Add z if present
