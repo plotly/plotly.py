@@ -1,6 +1,6 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
-from ._core import apply_default_cascade, init_figure
+from ._core import apply_default_cascade, init_figure, configure_animation_controls
 from io import BytesIO
 import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
@@ -133,7 +133,7 @@ def imshow(
     labels={},
     x=None,
     y=None,
-    animation_frame=False,
+    animation_frame=None,
     facet_col=None,
     facet_col_wrap=None,
     color_continuous_scale=None,
@@ -353,13 +353,21 @@ def imshow(
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
+    slice_through = False
     if facet_col is not None:
         img = np.moveaxis(img, facet_col, 0)
         facet_col = True
+        slice_through = True
+    if animation_frame is not None:
+        img = np.moveaxis(img, animation_frame, 0)
+        animation_frame = True
+        args["animation_frame"] = "plane"
+        slice_through = True
 
+    print("slice_through", slice_through)
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
-        if facet_col:
+        if slice_through:
             binary_string = img.ndim >= 4 and not is_dataframe
         else:
             binary_string = img.ndim >= 3 and not is_dataframe
@@ -391,7 +399,7 @@ def imshow(
             zmin = 0
 
         # For 2d data, use Heatmap trace, unless binary_string is True
-    if (img.ndim == 2 or (img.ndim == 3 and facet_col)) and not binary_string:
+    if (img.ndim == 2 or (img.ndim == 3 and slice_through)) and not binary_string:
         if y is not None and img.shape[0] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
@@ -402,10 +410,10 @@ def imshow(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
-        if facet_col:
+        if slice_through:
             traces = [
-                go.Heatmap(x=x, y=y, z=img_slice, coloraxis="coloraxis1")
-                for img_slice in img
+                go.Heatmap(x=x, y=y, z=img_slice, coloraxis="coloraxis1", name=str(i))
+                for i, img_slice in enumerate(img)
             ]
         else:
             traces = [go.Heatmap(x=x, y=y, z=img, coloraxis="coloraxis1")]
@@ -429,7 +437,7 @@ def imshow(
     # For 2D+RGB data, use Image trace
     elif (
         img.ndim == 3
-        and (img.shape[-1] in [3, 4] or (facet_col and binary_string))
+        and (img.shape[-1] in [3, 4] or (slice_through and binary_string))
         or (img.ndim == 2 and binary_string)
     ):
         rescale_image = True  # to check whether image has been modified
@@ -442,7 +450,7 @@ def imshow(
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
                 rescale_image = False
-            elif img.ndim == 2 or (img.ndim == 3 and facet_col):
+            elif img.ndim == 2 or (img.ndim == 3 and slice_through):
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
@@ -457,7 +465,7 @@ def imshow(
                         for ch in range(img.shape[-1])
                     ]
                 )
-            if facet_col:
+            if slice_through:
                 img_str = [
                     _array_to_b64str(
                         img_rescaled_slice,
@@ -477,7 +485,7 @@ def imshow(
                         ext=binary_format,
                     )
                 ]
-            traces = [go.Image(source=img_str_slice) for img_str_slice in img_str]
+            traces = [go.Image(source=img_str_slice, name=str(i)) for i, img_str_slice in enumerate(img_str)]
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
             traces = [go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)]
@@ -498,8 +506,15 @@ def imshow(
         layout_patch["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
         layout_patch["margin"] = {"t": 60}
+
+    frame_list = []
     for index, trace in enumerate(traces):
-        fig.add_trace(trace, row=nrows - index // ncols, col=index % ncols + 1)
+        if facet_col or index == 0:
+            fig.add_trace(trace, row=nrows - index // ncols, col=index % ncols + 1)
+        if animation_frame:
+            frame_list.append(dict(data=trace, layout=layout, name=str(index)))
+    if animation_frame:
+        fig.frames = frame_list
     fig.update_layout(layout)
     fig.update_layout(layout_patch)
     # Hover name, z or color
@@ -530,5 +545,6 @@ def imshow(
         fig.update_xaxes(title_text=labels["x"])
     if labels["y"]:
         fig.update_yaxes(title_text=labels["y"])
-    fig.update_layout(template=args["template"], overwrite=True)
+    configure_animation_controls(args, go.Image, fig)
+    #fig.update_layout(template=args["template"], overwrite=True)
     return fig
