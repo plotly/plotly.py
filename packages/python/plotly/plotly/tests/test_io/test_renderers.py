@@ -304,17 +304,17 @@ def test_repr_html(renderer):
     id_html = str_html.split('document.getElementById("')[1].split('")')[0]
     id_pattern = "cd462b94-79ce-42a2-887f-2650a761a144"
     template = (
-        '<div>\n        \n                <script type="text/javascript">'
-        "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>\n        "
-        '<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>    \n            '
+        '<div>                        <script type="text/javascript">'
+        "window.PlotlyConfig = {MathJaxConfig: 'local'};</script>        "
+        '<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>                '
         '<div id="cd462b94-79ce-42a2-887f-2650a761a144" class="plotly-graph-div" '
-        'style="height:100%; width:100%;"></div>\n            <script type="text/javascript">'
-        "\n                \n                    window.PLOTLYENV=window.PLOTLYENV || {};"
-        '\n                    \n                if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
-        " {\n                    Plotly.newPlot(\n                        'cd462b94-79ce-42a2-887f-2650a761a144',"
-        '\n                        [],\n                        {"template": {}},'
-        '\n                        {"responsive": true}\n                    )\n                };'
-        "\n                \n            </script>\n        </div>"
+        'style="height:100%; width:100%;"></div>            <script type="text/javascript">'
+        "                                    window.PLOTLYENV=window.PLOTLYENV || {};"
+        '                                    if (document.getElementById("cd462b94-79ce-42a2-887f-2650a761a144"))'
+        " {                    Plotly.newPlot(                        'cd462b94-79ce-42a2-887f-2650a761a144',"
+        '                        [],                        {"template": {}},'
+        '                        {"responsive": true}                    )                };'
+        "                            </script>        </div>"
     )
     if "text/html" in bundle:
         str_bundle = bundle["text/html"]
