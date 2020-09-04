@@ -340,17 +340,18 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
         )
 
     plotly_html_div = """\
-        <div>\
-            {mathjax_script}\
-            {load_plotlyjs}\
-                <div id="{id}" class="plotly-graph-div" \
-                    style="height:{height}; width:{width};">\
-                </div>\
-                <script type="text/javascript">\
-                    {require_start}window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}{script};{require_end}\
-                </script>\
-        </div>\
-        """.format(
+<div>\
+        {mathjax_script}\
+        {load_plotlyjs}\
+            <div id="{id}" class="plotly-graph-div" \
+style="height:{height}; width:{width};"></div>\
+            <script type="text/javascript">\
+                {require_start}\
+                    window.PLOTLYENV=window.PLOTLYENV || {{}};{base_url_line}\
+                    {script};\
+                {require_end}\
+            </script>\
+        </div>""".format(
         mathjax_script=mathjax_script,
         load_plotlyjs=load_plotlyjs,
         id=plotdivid,
