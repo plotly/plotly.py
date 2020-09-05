@@ -327,11 +327,29 @@ def test_facet_col(facet_col, binary_string):
         facet_col_wrap=facet_col_wrap,
         binary_string=binary_string,
     )
-    if facet_col is not None:
-        nslices = img.shape[facet_col]
-        ncols = int(facet_col_wrap)
-        nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
-        nmax = ncols * nrows
-        assert "yaxis%d" % nmax in fig.layout
-        assert "yaxis%d" % (nmax + 1) not in fig.layout
-        assert len(fig.data) == nslices
+    nslices = img.shape[facet_col]
+    ncols = int(facet_col_wrap)
+    nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
+    nmax = ncols * nrows
+    assert "yaxis%d" % nmax in fig.layout
+    assert "yaxis%d" % (nmax + 1) not in fig.layout
+    assert len(fig.data) == nslices
+
+
+@pytest.mark.parametrize("animation_frame", [0, 1, 2, -1])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_frame_grayscale(animation_frame, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    nslices = img.shape[animation_frame]
+    assert len(fig.frames) == nslices
+
+
+@pytest.mark.parametrize("animation_frame", [0, 1, 2])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_frame_rgb(animation_frame, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8, 3)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    print(binary_string)
+    nslices = img.shape[animation_frame]
+    assert len(fig.frames) == nslices

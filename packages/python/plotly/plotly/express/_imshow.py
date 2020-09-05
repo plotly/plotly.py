@@ -364,7 +364,6 @@ def imshow(
         args["animation_frame"] = "plane"
         slice_through = True
 
-    print("slice_through", slice_through)
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
         if slice_through:
@@ -382,7 +381,11 @@ def imshow(
 
     # -------- Contrast rescaling: either minmax or infer ------------------
     if contrast_rescaling is None:
-        contrast_rescaling = "minmax" if img.ndim == 2 else "infer"
+        contrast_rescaling = (
+            "minmax"
+            if (img.ndim == 2 or (img.ndim == 3 and slice_through))
+            else "infer"
+        )
 
     # We try to set zmin and zmax only if necessary, because traces have good defaults
     if contrast_rescaling == "minmax":
@@ -436,10 +439,8 @@ def imshow(
 
     # For 2D+RGB data, use Image trace
     elif (
-        img.ndim == 3
-        and (img.shape[-1] in [3, 4] or (slice_through and binary_string))
-        or (img.ndim == 2 and binary_string)
-    ):
+        img.ndim >= 3 and (img.shape[-1] in [3, 4] or slice_through and binary_string)
+    ) or (img.ndim == 2 and binary_string):
         rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
             zmin, zmax = (
@@ -455,7 +456,7 @@ def imshow(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
             else:
-                img_rescaled = np.dstack(
+                img_rescaled = np.stack(
                     [
                         rescale_intensity(
                             img[..., ch],
@@ -463,7 +464,8 @@ def imshow(
                             out_range=np.uint8,
                         )
                         for ch in range(img.shape[-1])
-                    ]
+                    ],
+                    axis=-1,
                 )
             if slice_through:
                 img_str = [
@@ -485,10 +487,19 @@ def imshow(
                         ext=binary_format,
                     )
                 ]
-            traces = [go.Image(source=img_str_slice, name=str(i)) for i, img_str_slice in enumerate(img_str)]
+            traces = [
+                go.Image(source=img_str_slice, name=str(i))
+                for i, img_str_slice in enumerate(img_str)
+            ]
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            traces = [go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)]
+            if slice_through:
+                traces = [
+                    go.Image(z=img_slice, zmin=zmin, zmax=zmax, colormodel=colormodel)
+                    for img_slice in img
+                ]
+            else:
+                traces = [go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)]
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
@@ -546,5 +557,5 @@ def imshow(
     if labels["y"]:
         fig.update_yaxes(title_text=labels["y"])
     configure_animation_controls(args, go.Image, fig)
-    #fig.update_layout(template=args["template"], overwrite=True)
+    # fig.update_layout(template=args["template"], overwrite=True)
     return fig
