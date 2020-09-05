@@ -16,8 +16,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   `binary_backend`, `binary_format` and `binary_compression_level` control
   how to generate the b64 string ([#2691](https://github.com/plotly/plotly.py/pull/2691)
 - `px.imshow` has a new `constrast_rescaling` argument in order to choose how
-  to set data values corresponding to the bounds of the color range 
+  to set data values corresponding to the bounds of the color range
   ([#2691](https://github.com/plotly/plotly.py/pull/2691)
+
+### Fixed
+
+- Plotly Express no longer converts datetime columns of input dataframes to UTC ([#2749](https://github.com/plotly/plotly.py/pull/2749))
+- Plotly Express has more complete support for datetimes as additional `hover_data` ([#2749](https://github.com/plotly/plotly.py/pull/2749))
+
 
 ## [4.9.0] - 2020-07-16
 

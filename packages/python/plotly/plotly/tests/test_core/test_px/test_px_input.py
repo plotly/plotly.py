@@ -233,6 +233,14 @@ def test_build_df_with_index():
     assert_frame_equal(tips.reset_index()[out["data_frame"].columns], out["data_frame"])
 
 
+def test_timezones():
+    df = pd.DataFrame({"date": ["2015-04-04 19:31:30+1:00"], "value": [3]})
+    df["date"] = pd.to_datetime(df["date"])
+    args = dict(data_frame=df, x="date", y="value")
+    out = build_dataframe(args, go.Scatter)
+    assert str(out["data_frame"]["date"][0]) == str(df["date"][0])
+
+
 def test_non_matching_index():
     df = pd.DataFrame(dict(y=[1, 2, 3]), index=["a", "b", "c"])
 
