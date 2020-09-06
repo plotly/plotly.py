@@ -288,14 +288,17 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    col_labels = []
     if facet_col is not None:
         nslices = img.shape[facet_col]
-        ncols = int(facet_col_wrap)
+        ncols = int(facet_col_wrap) if facet_col_wrap is not None else nslices
         nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
+        col_labels = ["plane = %d" % i for i in range(nslices)]
     else:
         nrows = 1
         ncols = 1
-    fig = init_figure(args, "xy", [], nrows, ncols, [], [])
+    slice_through = (facet_col is not None) or (animation_frame is not None)
+    fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
         if binary_string:
@@ -353,16 +356,13 @@ def imshow(
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
-    slice_through = False
     if facet_col is not None:
         img = np.moveaxis(img, facet_col, 0)
         facet_col = True
-        slice_through = True
     if animation_frame is not None:
         img = np.moveaxis(img, animation_frame, 0)
         animation_frame = True
         args["animation_frame"] = "plane"
-        slice_through = True
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
