@@ -2,7 +2,7 @@ import uuid
 import json
 import os
 import webbrowser
-
+from pathlib import Path
 import six
 
 from plotly.io._utils import validate_coerce_fig_to_dict
@@ -399,8 +399,8 @@ def write_html(
     ----------
     fig:
         Figure object or dict representing a figure
-    file: str or writeable
-        A string representing a local file path or a writeable object
+    file: str, writeable, or posix path
+        A string representing a local file path, a writeable object or a posix path to save to.
         (e.g. an open file descriptor)
     config: dict or None (default None)
         Plotly.js figure config options
@@ -518,6 +518,8 @@ def write_html(
         default_height=default_height,
         validate=validate,
     )
+
+    file = str(file) if isinstance(file, Path) else file
 
     # Check if file is a string
     file_is_str = isinstance(file, six.string_types)
