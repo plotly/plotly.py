@@ -403,7 +403,7 @@ fig.show()
 
 *Introduced in plotly 4.11*
 
-For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axes the image is sliced through to make the facets. With `facet_col_wrap` , one can set the maximum number of columns.
+For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axes the image is sliced through to make the facets. With `facet_col_wrap` , one can set the maximum number of columns. For image datasets passed as xarrays, it is also possible to give an axis name as a string for `facet_col`.
 
 It is recommended to use `binary_string=True` for facetted plots of images in order to keep a small figure size and a short rendering time.
 
@@ -455,12 +455,14 @@ fig.show()
 
 *Introduced in plotly 4.11*
 
+For xarray datasets, one can pass either an axis number or an axis name to `animation_frame`. Axis names and coordinates are automatically used for the labels, ticks and animation controls of the figure.
+
 ```python
 import plotly.express as px
 import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 ds = xr.tutorial.open_dataset('air_temperature').air[:20]
-fig = px.imshow(ds, animation_frame='lat', color_continuous_scale='RdBu_r')
+fig = px.imshow(ds, animation_frame='time', zmin=220, zmax=300, color_continuous_scale='RdBu_r')
 fig.show()
 ```
 
