@@ -183,61 +183,66 @@ def create_distplot(
     if isinstance(bin_size, (float, int)):
         bin_size = [bin_size] * len(hist_data)
 
-    hist = _Distplot(
-        hist_data,
-        histnorm,
-        group_labels,
-        bin_size,
-        curve_type,
-        colors,
-        rug_text,
-        show_hist,
-        show_curve,
-    ).make_hist()
-
-    if curve_type == "normal":
-        curve = _Distplot(
-            hist_data,
-            histnorm,
-            group_labels,
-            bin_size,
-            curve_type,
-            colors,
-            rug_text,
-            show_hist,
-            show_curve,
-        ).make_normal()
-    else:
-        curve = _Distplot(
-            hist_data,
-            histnorm,
-            group_labels,
-            bin_size,
-            curve_type,
-            colors,
-            rug_text,
-            show_hist,
-            show_curve,
-        ).make_kde()
-
-    rug = _Distplot(
-        hist_data,
-        histnorm,
-        group_labels,
-        bin_size,
-        curve_type,
-        colors,
-        rug_text,
-        show_hist,
-        show_curve,
-    ).make_rug()
-
     data = []
     if show_hist:
+
+        hist = _Distplot(
+            hist_data,
+            histnorm,
+            group_labels,
+            bin_size,
+            curve_type,
+            colors,
+            rug_text,
+            show_hist,
+            show_curve,
+        ).make_hist()
+
         data.append(hist)
+
     if show_curve:
+
+        if curve_type == "normal":
+            curve = _Distplot(
+                hist_data,
+                histnorm,
+                group_labels,
+                bin_size,
+                curve_type,
+                colors,
+                rug_text,
+                show_hist,
+                show_curve,
+            ).make_normal()
+        else:
+            curve = _Distplot(
+                hist_data,
+                histnorm,
+                group_labels,
+                bin_size,
+                curve_type,
+                colors,
+                rug_text,
+                show_hist,
+                show_curve,
+            ).make_kde()
+
         data.append(curve)
+
     if show_rug:
+
+        rug = _Distplot(
+            hist_data,
+            histnorm,
+            group_labels,
+            bin_size,
+            curve_type,
+            colors,
+            rug_text,
+            show_hist,
+            show_curve,
+        ).make_rug()
+
         data.append(rug)
         layout = graph_objs.Layout(
             barmode="overlay",

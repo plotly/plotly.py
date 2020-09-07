@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Trisurf Plots
-    order: 14
+    order: 8
     permalink: python/trisurf/
     thumbnail: thumbnail/trisurf.jpg
 ---

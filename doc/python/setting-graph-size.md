@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Setting Graph Size
-    order: 10
+    order: 11
     permalink: python/setting-graph-size/
     thumbnail: thumbnail/sizing.png
 ---
@@ -84,7 +84,7 @@ fig.show()
 
 ### Automatically Adjust Margins
 
-Set [automargin](https://plotly.com/python/reference/#layout-xaxis-automargin) to `True` and Plotly will automatically increase the margin size to prevent ticklabels from being cut off or overlapping with axis titles.
+Set [automargin](https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-automargin) to `True` and Plotly will automatically increase the margin size to prevent ticklabels from being cut off or overlapping with axis titles.
 
 ```python
 import plotly.graph_objects as go
@@ -117,4 +117,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#layout for more information and chart attribute options!
+See https://plotly.com/python/reference/layout/ for more information and chart attribute options!

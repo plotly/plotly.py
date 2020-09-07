@@ -38,6 +38,7 @@ $(HTML_DIR)/2019-07-03-%.html: $(IPYNB_DIR)/%.ipynb
 	@mkdir -p $(FAIL_DIR)
 	@echo "[nbconvert]  $<"
 	@jupyter nbconvert $< --to html --template nb.tpl \
+			--ExecutePreprocessor.timeout=600\
 	  	--output-dir $(HTML_DIR) --output 2019-07-03-$*.html \
 	  	--execute > $(FAIL_DIR)/$* 2>&1  && rm -f $(FAIL_DIR)/$*
 
