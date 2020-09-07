@@ -171,14 +171,16 @@ def test_zmin_zmax_range_color_source():
     assert fig1 == fig2
 
 
-def test_imshow_xarray():
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_imshow_xarray(binary_string):
     img = np.random.random((20, 30))
     da = xr.DataArray(img, dims=["dim_rows", "dim_cols"])
-    fig = px.imshow(da)
+    fig = px.imshow(da, binary_string=binary_string)
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_cols"
     assert fig.layout.yaxis.title.text == "dim_rows"
-    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
+    if not binary_string:
+        assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
 
 
 def test_imshow_labels_and_ranges():
