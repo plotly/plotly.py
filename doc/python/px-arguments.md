@@ -27,13 +27,15 @@ jupyter:
     language: python
     layout: base
     name: Plotly Express Arguments
-    order: 18
+    order: 19
     page_type: u-guide
     permalink: python/px-arguments/
     thumbnail: thumbnail/plotly-express.png
 ---
 
 ### Plotly Express works with Column-oriented, Matrix or Geographic Data
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
 Plotly Express provides functions to visualize a variety of types of data. Most functions such as `px.bar` or `px.scatter` expect to operate on column-oriented data of the type you might store in a Pandas `DataFrame` (in either "long" or "wide" format, see below). [`px.imshow` operates on matrix-like data](/python/imshow/) you might store in a `numpy` or `xarray` array and functions like [`px.choropleth` and `px.choropleth_mapbox` can operate on geographic data](/python/maps/) of the kind you might store in a GeoPandas `GeoDataFrame`. This page details how to provide column-oriented data to most Plotly Express functions.
 

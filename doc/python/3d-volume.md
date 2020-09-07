@@ -254,7 +254,7 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#volume for more information and chart attribute options!
+See https://plotly.com/python/reference/volume/ for more information and chart attribute options!
 
 #### See also
 [3D isosurface documentation](/python/3d-isosurface-plots/)

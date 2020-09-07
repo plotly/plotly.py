@@ -68,7 +68,7 @@ The [`plotly.graph_objects` module provides an automatically-generated hierarchy
 Graph objects have several benefits compared to plain Python dictionaries.
 
 1. Graph objects provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a graph object, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain Python dictionaries and lists to build your figures.
-2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/).
+2. Graph objects contain descriptions of each valid property as Python docstrings, with a [full API reference available](https://plotly.com/python-api-reference/). You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](/python/reference/index/).
 3. Properties of graph objects can be accessed using both dictionary-style key lookup (e.g. `fig["layout"]`) or class-style property access (e.g. `fig.layout`).
 4. Graph objects support higher-level convenience functions for making updates to already constructed figures (`.update_layout()`, `.add_trace()` etc) as described below.
 5. Graph object constructors and update methods accept "magic underscores" (e.g. `go.Figure(layout_title_text="The Title")` rather than `dict(layout=dict(title=dict(text="The Title")))`) for more compact code, as described below.
@@ -205,7 +205,7 @@ Regardless of how a graph object figure was constructed, it can be updated by ad
 
 #### Adding Traces
 
-New traces can be added to a graph object figure using the `add_trace()` method. This method accepts a graph object trace (an instance of `go.Scatter`, `go.Bar`, etc.) and adds it to the figure. This allows you to start with an empty figure, and add traces to it sequentially.
+New traces can be added to a graph object figure using the `add_trace()` method. This method accepts a graph object trace (an instance of `go.Scatter`, `go.Bar`, etc.) and adds it to the figure. This allows you to start with an empty figure, and add traces to it sequentially. The `append_trace()` method does the same thing, although it does not return the figure.
 
 ```python
 import plotly.graph_objects as go

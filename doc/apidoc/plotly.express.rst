@@ -28,6 +28,7 @@ plotly's high-level API for rapid figure generation. ::
     line_geo
     area
     bar
+    timeline
     bar_polar
     violin
     box

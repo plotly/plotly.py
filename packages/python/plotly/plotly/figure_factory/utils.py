@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-import collections
 import decimal
 import six
 
@@ -24,9 +23,14 @@ from plotly.colors import (
     validate_scale_values,
 )
 
+try:
+    from collections.abc import Sequence
+except ImportError:
+    from collections import Sequence
+
 
 def is_sequence(obj):
-    return isinstance(obj, collections.Sequence) and not isinstance(obj, str)
+    return isinstance(obj, Sequence) and not isinstance(obj, str)
 
 
 def validate_index(index_vals):

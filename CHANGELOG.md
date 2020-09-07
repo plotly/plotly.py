@@ -4,9 +4,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.10.0] - unreleased
 
+### Added
 
-## [4.9.1] - unreleased
+- Added `plotly.io.full_figure_for_development()` and `plotly.graph_objects.Figure.full_figure_for_development()` ([#2737](https://github.com/plotly/plotly.py/pull/2737))
 
+### Updated
+
+- `px.imshow` has a new `binary_string` boolean argument, which passes the
+  image data as a b64 binary string when True. Using binary strings allow for
+  faster image rendering and smaller figure size. Additional optional arguments
+  `binary_backend`, `binary_format` and `binary_compression_level` control
+  how to generate the b64 string ([#2691](https://github.com/plotly/plotly.py/pull/2691)
+- `px.imshow` has a new `constrast_rescaling` argument in order to choose how
+  to set data values corresponding to the bounds of the color range 
+  ([#2691](https://github.com/plotly/plotly.py/pull/2691)
 
 ## [4.9.0] - 2020-07-16
 
