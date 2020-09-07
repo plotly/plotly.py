@@ -288,23 +288,23 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
-    col_labels = []
+    nslices = 1
     if facet_col is not None:
         if isinstance(facet_col, str):
             facet_col = img.dims.index(facet_col)
         nslices = img.shape[facet_col]
         ncols = int(facet_col_wrap) if facet_col_wrap is not None else nslices
         nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
-        col_labels = ["plane = %d" % i for i in range(nslices)]
     else:
         nrows = 1
         ncols = 1
     if animation_frame is not None:
         if isinstance(animation_frame, str):
             animation_frame = img.dims.index(animation_frame)
+        nslices = img.shape[animation_frame]
     slice_through = (facet_col is not None) or (animation_frame is not None)
-    plane_label = None
-    fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
+    slice_label = None
+    slices = range(nslices)
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
         # if binary_string:
@@ -314,13 +314,12 @@ def imshow(
         #        "`img.values`"
         #    )
         dims = list(img.dims)
-        print(dims)
         if slice_through:
             slice_index = facet_col if facet_col is not None else animation_frame
+            slices = img.coords[img.dims[slice_index]].values
             _ = dims.pop(slice_index)
-            plane_label = img.dims[slice_index]
+            slice_label = img.dims[slice_index]
         y_label, x_label = dims[0], dims[1]
-        print(y_label, x_label)
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
             if np.issubdtype(img.coords[ax].dtype, np.datetime64):
@@ -335,8 +334,8 @@ def imshow(
             labels["x"] = x_label
         if labels.get("y", None) is None:
             labels["y"] = y_label
-        if labels.get("plane", None) is None:
-            labels["plane"] = plane_label
+        if labels.get("slice", None) is None:
+            labels["slice"] = slice_label
         if labels.get("color", None) is None:
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
@@ -378,7 +377,7 @@ def imshow(
         img = np.moveaxis(img, animation_frame, 0)
         animation_frame = True
         args["animation_frame"] = (
-            "plane" if labels.get("plane") is None else labels["plane"]
+            "slice" if labels.get("slice") is None else labels["slice"]
         )
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
@@ -531,6 +530,14 @@ def imshow(
             % str(img.shape)
         )
 
+    # Now build figure
+    col_labels = []
+    if facet_col is not None:
+        slice_label = "slice" if labels.get("slice") is None else labels["slice"]
+        if slices is None:
+            slices = range(nslices)
+        col_labels = ["%s = %d" % (slice_label, i) for i in slices]
+    fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     layout_patch = dict()
     for attr_name in ["height", "width"]:
         if args[attr_name]:
@@ -541,11 +548,11 @@ def imshow(
         layout_patch["margin"] = {"t": 60}
 
     frame_list = []
-    for index, trace in enumerate(traces):
+    for index, (slice_index, trace) in enumerate(zip(slices, traces)):
         if facet_col or index == 0:
             fig.add_trace(trace, row=nrows - index // ncols, col=index % ncols + 1)
         if animation_frame:
-            frame_list.append(dict(data=trace, layout=layout, name=str(index)))
+            frame_list.append(dict(data=trace, layout=layout, name=str(slice_index)))
     if animation_frame:
         fig.frames = frame_list
     fig.update_layout(layout)
