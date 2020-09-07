@@ -301,12 +301,12 @@ def imshow(
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        if binary_string:
-            raise ValueError(
-                "It is not possible to use binary image strings for xarrays."
-                "Please pass your data as a numpy array instead using"
-                "`img.values`"
-            )
+        # if binary_string:
+        #    raise ValueError(
+        #        "It is not possible to use binary image strings for xarrays."
+        #        "Please pass your data as a numpy array instead using"
+        #        "`img.values`"
+        #    )
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -506,7 +506,10 @@ def imshow(
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
-            "An image of shape %s was provided" % str(img.shape)
+            "An image of shape %s was provided"
+            "Alternatively, 3-D single or multichannel datasets can be"
+            "visualized using the `facet_col` or `animation_frame` arguments."
+            % str(img.shape)
         )
 
     layout_patch = dict()
