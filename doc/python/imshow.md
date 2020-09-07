@@ -451,6 +451,19 @@ fig = px.imshow(img, animation_frame=0, binary_string=True)
 fig.show()
 ```
 
+### Animations of xarray datasets
+
+*Introduced in plotly 4.11*
+
+```python
+import plotly.express as px
+import xarray as xr
+# Load xarray from dataset included in the xarray tutorial
+ds = xr.tutorial.open_dataset('air_temperature').air[:20]
+fig = px.imshow(ds, animation_frame='lat', color_continuous_scale='RdBu_r')
+fig.show()
+```
+
 #### Reference
 
 See https://plotly.com/python/reference/image/ for more information and chart attribute options!

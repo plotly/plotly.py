@@ -290,6 +290,8 @@ def imshow(
     labels = labels.copy()
     col_labels = []
     if facet_col is not None:
+        if isinstance(facet_col, str):
+            facet_col = img.dims.index(facet_col)
         nslices = img.shape[facet_col]
         ncols = int(facet_col_wrap) if facet_col_wrap is not None else nslices
         nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
@@ -297,7 +299,11 @@ def imshow(
     else:
         nrows = 1
         ncols = 1
+    if animation_frame is not None:
+        if isinstance(animation_frame, str):
+            animation_frame = img.dims.index(animation_frame)
     slice_through = (facet_col is not None) or (animation_frame is not None)
+    plane_label = None
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
@@ -307,7 +313,14 @@ def imshow(
         #        "Please pass your data as a numpy array instead using"
         #        "`img.values`"
         #    )
-        y_label, x_label = img.dims[0], img.dims[1]
+        dims = list(img.dims)
+        print(dims)
+        if slice_through:
+            slice_index = facet_col if facet_col is not None else animation_frame
+            _ = dims.pop(slice_index)
+            plane_label = img.dims[slice_index]
+        y_label, x_label = dims[0], dims[1]
+        print(y_label, x_label)
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
             if np.issubdtype(img.coords[ax].dtype, np.datetime64):
@@ -322,6 +335,8 @@ def imshow(
             labels["x"] = x_label
         if labels.get("y", None) is None:
             labels["y"] = y_label
+        if labels.get("plane", None) is None:
+            labels["plane"] = plane_label
         if labels.get("color", None) is None:
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
@@ -362,7 +377,9 @@ def imshow(
     if animation_frame is not None:
         img = np.moveaxis(img, animation_frame, 0)
         animation_frame = True
-        args["animation_frame"] = "plane"
+        args["animation_frame"] = (
+            "plane" if labels.get("plane") is None else labels["plane"]
+        )
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
@@ -403,12 +420,14 @@ def imshow(
 
         # For 2d data, use Heatmap trace, unless binary_string is True
     if (img.ndim == 2 or (img.ndim == 3 and slice_through)) and not binary_string:
-        if y is not None and img.shape[0] != len(y):
+        y_index = 1 if slice_through else 0
+        if y is not None and img.shape[y_index] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
                 + "dimension of the img matrix."
             )
-        if x is not None and img.shape[1] != len(x):
+        x_index = 2 if slice_through else 1
+        if x is not None and img.shape[x_index] != len(x):
             raise ValueError(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
