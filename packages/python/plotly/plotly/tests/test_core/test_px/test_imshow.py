@@ -183,6 +183,16 @@ def test_imshow_xarray(binary_string):
         assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
 
 
+def test_imshow_xarray_slicethrough():
+    img = np.random.random((8, 9, 10))
+    da = xr.DataArray(img, dims=["dim_0", "dim_1", "dim_2"])
+    fig = px.imshow(da, animation_frame="dim_0")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
+
+
 def test_imshow_labels_and_ranges():
     fig = px.imshow([[1, 2], [3, 4], [5, 6]],)
     assert fig.layout.xaxis.title.text is None
