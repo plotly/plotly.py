@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
+- Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 - `px.imshow` has a new `binary_string` boolean argument, which passes the
   image data as a b64 binary string when True. Using binary strings allow for
   faster image rendering and smaller figure size. Additional optional arguments
@@ -23,6 +24,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Plotly Express no longer converts datetime columns of input dataframes to UTC ([#2749](https://github.com/plotly/plotly.py/pull/2749))
 - Plotly Express has more complete support for datetimes as additional `hover_data` ([#2749](https://github.com/plotly/plotly.py/pull/2749))
+- Histogram selection behaviour with `FigureWidget` ([#2711](https://github.com/plotly/plotly.py/pull/2711)) with thanks to [@meffmadd](https://github.com/meffmadd)
+- Behaviour of `full_html()` with `html=False` ([#2469](https://github.com/plotly/plotly.py/pull/2469)) with thanks to [@tallamjr](https://github.com/tallamjr)
+- `ff.distplot()` now only computes traces that will be shown ([#2730](https://github.com/plotly/plotly.py/pull/2730)) with thanks to [@akbo](https://github.com/akbo)
+- Pandas backend `.hist()` works with latest version of Pandas ([#2713](https://github.com/plotly/plotly.py/pull/2713)) with thanks to [@Kerybas](https://github.com/Kerybas)
 
 
 ## [4.9.0] - 2020-07-16
