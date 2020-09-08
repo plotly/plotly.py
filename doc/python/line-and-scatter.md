@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make scatter plots in Python with Plotly.
     display_as: basic
@@ -88,7 +88,7 @@ fig.show()
 
 ## Scatter and line plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
 
 #### Simple Scatter Plot
 
@@ -276,4 +276,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/#scatter or https://plotly.com/python/reference/#scattergl for more information and chart attribute options!
+See https://plotly.com/python/reference/scatter/ or https://plotly.com/python/reference/scattergl/ for more information and chart attribute options!

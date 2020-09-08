@@ -30,7 +30,7 @@ jupyter:
     language: python
     layout: base
     name: Continuous Color Scales and Color Bars
-    order: 19
+    order: 21
     permalink: python/colorscales/
     redirect_from: python/logarithmic-color-scale/
     thumbnail: thumbnail/heatmap_colorscale.jpg
@@ -52,7 +52,7 @@ This document explains the following four continuous-color-related concepts:
 
 ### Continuous Color with Plotly Express
 
-Most Plotly Express functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/discrete-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
+Most [Plotly Express](/python/plotly-express/) functions accept a `color` argument which automatically assigns data values to continuous color **if the data is numeric**. If the data contains strings, the color will automatically be considered [discrete (also known as categorical or qualitative)](/python/discrete-color/). This means that numeric strings must be parsed to be used for continuous color, and conversely, numbers used as category codes must be converted to strings.
 
 For example, in the `tips` dataset, the `size` column contains numbers:
 
@@ -92,7 +92,7 @@ fig.show()
 
 ### Color Scales in Plotly Express
 
-By default, Plotly Express will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in color scales](/python/builtin-colorscales/), however, or define your own.
+By default, [Plotly Express](/python/plotly-express/) will use the color scale from the active [template](/python/templates/)'s `layout.colorscales.sequential` attribute, and the default active template is `plotly` which uses the `Plasma` color scale. You can choose any of the [built-in color scales](/python/builtin-colorscales/), however, or define your own.
 
 Here is an example that creates a scatter plot using Plotly Express, with points colored using the Viridis color scale.
 
@@ -209,7 +209,7 @@ fig.show()
 
 ### Hiding or Customizing the Plotly Express Color Bar
 
-Plotly Express binds all traces to [`layout.coloraxis`](/python/reference/#layout-coloraxis), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
+Plotly Express binds all traces to [`layout.coloraxis`](/python/reference/layout/coloraxis/), rather than using trace-specific color axes. This means that the color bar can configured there, for example it can be hidden:
 
 ```python
 import plotly.express as px
@@ -417,7 +417,7 @@ fig.show()
 
 ### Setting the Midpoint of a Diverging Color scale with Graph Objects
 
-The following example uses the [marker.cmid](https://plotly.com/python/reference/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plotly.com/python/reference/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
+The following example uses the [marker.cmid](https://plotly.com/python/reference/scatter/#scatter-marker-cmid) attribute to set the mid-point of the color domain by scaling 'cmin' and/or 'cmax' to be equidistant to this point. It only has impact when [marker.color](https://plotly.com/python/reference/scattercarpet/#scattercarpet-marker-line-color) sets to a numerical array, and 'marker.cauto' is `True`.
 
 ```python
 import plotly.graph_objects as go
@@ -431,7 +431,7 @@ fig.add_trace(go.Scatter(
 fig.show()
 ```
 
-The heatmap chart uses [marker.zmid](https://plotly.com/python/reference/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
+The heatmap chart uses [marker.zmid](https://plotly.com/python/reference/scatter/#scatter-marker-zmid) attribute to set the mid-point of the color domain.
 
 ```python
 import plotly.graph_objects as go
@@ -507,7 +507,7 @@ fig.show()
 
 ### Sharing a Color Axis with Graph Objects
 
-To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/#scatter-marker-line-coloraxis).
+To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/javascript/reference/scatter/#scatter-marker-line-coloraxis).
 
 ```python
 import plotly.graph_objects as go

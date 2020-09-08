@@ -27,7 +27,7 @@ jupyter:
     language: python
     layout: base
     name: Images
-    order: 22
+    order: 24
     permalink: python/images/
     thumbnail: thumbnail/images.png
     v4upgrade: true
@@ -360,4 +360,4 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#layout-images for more information and chart attribute options!
+See https://plotly.com/python/reference/layout/images/ for more information and chart attribute options!

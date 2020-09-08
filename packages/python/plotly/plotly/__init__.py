@@ -80,7 +80,20 @@ def plot(data_frame, kind, **kwargs):
     To activate, set pandas.options.plotting.backend="plotly"
     See https://github.com/pandas-dev/pandas/blob/master/pandas/plotting/__init__.py
     """
-    from .express import scatter, line, area, bar, box, histogram
+    from .express import (
+        scatter,
+        line,
+        area,
+        bar,
+        box,
+        histogram,
+        violin,
+        strip,
+        funnel,
+        density_contour,
+        density_heatmap,
+        imshow,
+    )
 
     if kind == "scatter":
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["s", "c"]}
@@ -96,9 +109,27 @@ def plot(data_frame, kind, **kwargs):
     if kind == "box":
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["by"]}
         return box(data_frame, **new_kwargs)
-    if kind in "hist":
+    if kind in ["hist", "histogram"]:
         new_kwargs = {k: kwargs[k] for k in kwargs if k not in ["by", "bins"]}
         return histogram(data_frame, **new_kwargs)
+    if kind == "violin":
+        return violin(data_frame, **kwargs)
+    if kind == "strip":
+        return strip(data_frame, **kwargs)
+    if kind == "funnel":
+        return funnel(data_frame, **kwargs)
+    if kind == "density_contour":
+        return density_contour(data_frame, **kwargs)
+    if kind == "density_heatmap":
+        return density_heatmap(data_frame, **kwargs)
+    if kind == "imshow":
+        return imshow(data_frame, **kwargs)
+    if kind == "heatmap":
+        raise ValueError(
+            "kind='heatmap' not supported plotting.backend='plotly'. "
+            "Please use kind='imshow' or kind='density_heatmap'."
+        )
+
     raise NotImplementedError(
         "kind='%s' not yet supported for plotting.backend='plotly'" % kind
     )
@@ -127,7 +158,7 @@ def hist_frame(data_frame, **kwargs):
     from .express import histogram
 
     skip = ["column", "by", "grid", "xlabelsize", "xrot", "ylabelsize", "yrot"]
-    skip += ["ax", "sharex", "sharey", "figsize", "layout", "bins"]
+    skip += ["ax", "sharex", "sharey", "figsize", "layout", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)
 
@@ -141,6 +172,6 @@ def hist_series(data_frame, **kwargs):
     from .express import histogram
 
     skip = ["by", "grid", "xlabelsize", "xrot", "ylabelsize", "yrot", "ax"]
-    skip += ["figsize", "bins"]
+    skip += ["figsize", "bins", "legend"]
     new_kwargs = {k: kwargs[k] for k in kwargs if k not in skip}
     return histogram(data_frame, **new_kwargs)

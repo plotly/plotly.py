@@ -2,8 +2,8 @@ from _plotly_utils.importers import relative_import
 import sys
 
 if sys.version_info < (3, 7):
-    from ._orca import to_image, write_image
-    from . import orca
+    from ._kaleido import to_image, write_image, full_figure_for_development
+    from . import orca, kaleido
     from ._json import to_json, from_json, read_json, write_json
     from ._templates import templates, to_templated
     from ._html import to_html, write_html
@@ -25,14 +25,16 @@ if sys.version_info < (3, 7):
         "renderers",
         "show",
         "base_renderers",
+        "full_figure_for_development",
     ]
 else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".orca", ".base_renderers"],
+        [".orca", ".kaleido", ".base_renderers"],
         [
-            "._orca.to_image",
-            "._orca.write_image",
+            "._kaleido.to_image",
+            "._kaleido.write_image",
+            "._kaleido.full_figure_for_development",
             "._json.to_json",
             "._json.from_json",
             "._json.read_json",

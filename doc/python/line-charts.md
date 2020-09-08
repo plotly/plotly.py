@@ -69,9 +69,36 @@ fig = px.line(df, x="year", y="lifeExp", color="continent",
 fig.show()
 ```
 
+### Sparklines with Plotly Express
+
+Sparklines are scatter plots inside subplots, with gridlines, axis lines, and ticks removed.
+
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, facet_row="company", facet_row_spacing=0.01, height=200, width=200)
+
+# hide and lock down axes
+fig.update_xaxes(visible=False, fixedrange=True)
+fig.update_yaxes(visible=False, fixedrange=True)
+
+# remove facet/subplot labels
+fig.update_layout(annotations=[], overwrite=True)
+
+# strip down the rest of the plot
+fig.update_layout(
+    showlegend=False,
+    plot_bgcolor="white",
+    margin=dict(t=10,l=10,b=10,r=10)
+)
+
+# disable the modebar for such a small plot
+fig.show(config=dict(displayModeBar=False))
+```
+
 ### Line Plot with go.Scatter
 
-If Plotly Express does not provide a good starting point, it is possible to use the more generic `go.Scatter` function from `plotly.graph_objects`. Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/#scatter).
+If Plotly Express does not provide a good starting point, it is possible to use [the more generic `go.Scatter` class from `plotly.graph_objects`](/python/graph-objects/). Whereas `plotly.express` has two functions `scatter` and `line`, `go.Scatter` can be used both for plotting points (makers) or lines, depending on the value of `mode`. The different options of `go.Scatter` are documented in its [reference page](https://plotly.com/python/reference/scatter/).
 
 #### Simple Line Plot
 
@@ -160,7 +187,7 @@ fig.show()
 
 #### Connect Data Gaps
 
-[connectgaps](https://plotly.com/python/reference/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-on-mapbox/#multiple-filled-areas-with-a-scattermapbox-trace), we showed how to take benefit of this feature and illustrate multiple areas in mapbox.
+[connectgaps](https://plotly.com/python/reference/scatter/#scatter-connectgaps) determines if missing values in the provided data are shown as a gap in the graph or not. In [this tutorial](https://plotly.com/python/filled-area-on-mapbox/#multiple-filled-areas-with-a-scattermapbox-trace), we showed how to take benefit of this feature and illustrate multiple areas in mapbox.
 
 ```python
 import plotly.graph_objects as go
@@ -407,4 +434,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatter for more information and chart attribute options!
+See https://plotly.com/python/reference/scatter/ for more information and chart attribute options!

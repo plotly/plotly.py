@@ -10,7 +10,7 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 import itertools
 
-from _plotly_utils.utils import _natural_sort_strings
+from _plotly_utils.utils import _natural_sort_strings, _get_int_type
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
@@ -74,7 +74,7 @@ class BaseFigure(object):
     Base class for all figure types (both widget and non-widget)
     """
 
-    _bracket_re = re.compile("^(.*)\[(\d+)\]$")
+    _bracket_re = re.compile(r"^(.*)\[(\d+)\]$")
 
     _valid_underscore_properties = {
         "error_x": "error-x",
@@ -1636,12 +1636,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             if len(vals) != n:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-            try:
-                import numpy as np
-
-                int_type = (int, np.integer)
-            except ImportError:
-                int_type = (int,)
+            int_type = _get_int_type()
 
             if [r for r in vals if not isinstance(r, int_type)]:
                 BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
@@ -1763,14 +1758,19 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        rows : None or list[int] (default None)
+        rows : None, list[int], or int (default None)
             List of subplot row indexes (starting from 1) for the traces to be
             added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to row number
+
         cols : None or list[int] (default None)
             List of subplot column indexes (starting from 1) for the traces
             to be added. Only valid if figure was created using
             `plotly.tools.make_subplots`
+            If a single integer is passed, all traces will be added to column number
+
+
         secondary_ys: None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
@@ -1808,6 +1808,15 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         # Set trace indexes
         for ind, new_trace in enumerate(data):
             new_trace._trace_ind = ind + len(self.data)
+
+        # Allow integers as inputs to subplots
+        int_type = _get_int_type()
+
+        if isinstance(rows, int_type):
+            rows = [rows] * len(data)
+
+        if isinstance(cols, int_type):
+            cols = [cols] * len(data)
 
         # Validate rows / cols
         n = len(data)
@@ -3014,6 +3023,35 @@ Invalid property path '{key_path_str}' for layout
 
         return pio.to_json(self, *args, **kwargs)
 
+    def full_figure_for_development(self, warn=True, as_dict=False):
+        """
+        Compute default values for all attributes not specified in the input figure and
+        returns the output as a "full" figure. This function calls Plotly.js via Kaleido
+        to populate unspecified attributes. This function is intended for interactive use
+        during development to learn more about how Plotly.js computes default values and is
+        not generally necessary or recommended for production use.
+
+        Parameters
+        ----------
+        fig:
+            Figure object or dict representing a figure
+
+        warn: bool
+            If False, suppress warnings about not using this in production.
+
+        as_dict: bool
+            If True, output is a dict with some keys that go.Figure can't parse.
+            If False, output is a go.Figure with unparseable keys skipped.
+
+        Returns
+        -------
+        plotly.graph_objects.Figure or dict
+            The full figure
+        """
+        import plotly.io as pio
+
+        return pio.full_figure_for_development(self, warn, as_dict)
+
     def write_json(self, *args, **kwargs):
         """
         Convert a figure to JSON and write it to a file or writeable
@@ -3290,6 +3328,12 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
+
         Returns
         -------
         bytes
@@ -3349,6 +3393,11 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being converted to
             an image, False otherwise.
 
+        engine: str
+            Image export engine to use:
+             - "kaleido": Use Kaleido for image export
+             - "orca": Use Orca for image export
+             - "auto" (default): Use Kaleido if installed, otherwise use orca
         Returns
         -------
         None

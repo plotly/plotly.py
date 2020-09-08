@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.7
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,18 +20,41 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.2
+    version: 3.7.7
   plotly:
     description: How to design figures with multiple chart types in python.
     display_as: file_settings
     language: python
     layout: base
     name: Multiple Chart Types
-    order: 16
+    order: 18
     page_type: u-guide
     permalink: python/graphing-multiple-chart-types/
     thumbnail: thumbnail/multiple-chart-type.jpg
 ---
+
+### Chart Types versus Trace Types
+
+Plotly's [figure data structure](/python/figure-structure/) supports defining [subplots](/python/subplots/) of [various types](/python/mixed-subplots/) (e.g. [cartesian](/python/axes/), [polar](/python/polar-chart/), [3-dimensional](/python/3d-charts/), [maps](/python/maps/) etc) with attached traces of [various compatible types](/python/figure-structure/) (e.g. scatter, bar, choropleth, surface etc). This means that **Plotly figures are not constrained to representing a fixed set of "chart types"** such as scatter plots only or bar charts only or line charts only: any subplot can contain multiple traces of different types.
+
+
+### Multiple Trace Types with Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+Plotly Express exposes a number of functions such as `px.scatter()` and `px.choropleth()` which generally speaking only contain traces of the same type, with exceptions made for [trendlines](/python/linear-fits/) and [marginal distribution plots](/python/marginal-plots/).
+
+Figures produced with Plotly Express functions support the `add_trace()` method documented below, just like figures created with [graph objects](/python/graph-objects/) so it is easy to start with a Plotly Express figure containing only traces of a given type, and add traces of another type.
+
+```python
+import plotly.express as px
+
+fruits = ["apples", "oranges", "bananas"]
+fig = px.line(x=fruits, y=[1,3,2], color=px.Constant("This year"),
+             labels=dict(x="Fruit", y="Amount", color="Time Period"))
+fig.add_bar(x=fruits, y=[2,1,3], name="Last year")
+fig.show()
+```
 
 #### Line Chart and a Bar Chart
 

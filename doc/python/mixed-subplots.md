@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.6
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to make mixed subplots in Python with Plotly.
     display_as: multiple_axes
@@ -32,6 +32,13 @@ jupyter:
     permalink: python/mixed-subplots/
     thumbnail: thumbnail/mixed_subplot.JPG
 ---
+
+### Mixed Subplots and Plotly Express
+
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+> *Note*: At this time, Plotly Express does not support creating figures with arbitrary mixed subplots i.e. figures with subplots of different types. Plotly Express only supports [facet plots](/python/facet-plots/) and [marginal distribution subplots](/python/marginal-plots/). To make a figure with mixed subplots, use the [`make_subplots()`](/python/subplots/) function in conjunction with [graph objects](/python/graph-objects/) as documented below.
+
 
 #### Mixed Subplot
 

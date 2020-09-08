@@ -107,7 +107,7 @@ fig = go.Figure(data=go.Scatter3d(
     mode = 'markers',
     marker = dict(
         sizemode = 'diameter',
-        sizeref = 750, # info on sizeref: https://plotly.com/python/reference/#scatter-marker-sizeref
+        sizeref = 750, # info on sizeref: https://plotly.com/python/reference/scatter/#scatter-marker-sizeref
         size = planet_diameter,
         color = planet_colors,
         )
@@ -146,7 +146,7 @@ fig = go.Figure(go.Scatter3d(
     mode = 'markers',
     marker = dict(
         sizemode = 'diameter',
-        sizeref = 750, # info on sizeref: https://plotly.com/python/reference/#scatter-marker-sizeref
+        sizeref = 750, # info on sizeref: https://plotly.com/python/reference/scatter/#scatter-marker-sizeref
         size = planet_diameter,
         color = temperatures,
         colorbar_title = 'Mean<br>Temperature',
@@ -166,4 +166,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatter3d and https://plotly.com/python/reference/#scatter-marker-sizeref <br>for more information and chart attribute options!
+See https://plotly.com/python/reference/scatter3d/ and https://plotly.com/python/reference/scatter/#scatter-marker-sizeref <br>for more information and chart attribute options!

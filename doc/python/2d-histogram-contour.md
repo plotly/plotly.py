@@ -95,7 +95,7 @@ fig.show()
 
 ### 2D Histograms with Graph Objects
 
-To build this kind of plot without using Plotly Express, we can use the `go.Histogram2d` class.
+To build this kind of figure with [graph objects](/python/graph-objects/) without using Plotly Express, we can use the `go.Histogram2d` class.
 
 #### Basic 2D Histogram Contour
 
@@ -249,4 +249,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/#histogram2dcontour for more information and chart attribute options!
+See https://plotly.com/python/reference/histogram2dcontour/ for more information and chart attribute options!

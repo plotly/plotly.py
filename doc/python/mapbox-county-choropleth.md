@@ -159,7 +159,7 @@ fig.show()
 
 ### Choropleth map using plotly.graph_objects and carto base map (no token needed)
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Choroplethmapbox` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmapbox` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 from urllib.request import urlopen
@@ -209,4 +209,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#choroplethmapbox for more information about mapbox and their attribute options.
+See https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.

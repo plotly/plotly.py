@@ -104,7 +104,7 @@ fig.show()
 
 ### Basic Pie Chart with go.Pie
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Pie` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Pie` class from `plotly.graph_objects`](/python/graph-objects/).
 
 In `go.Pie`, data visualized by the sectors of the pie is set in `values`. The sector labels are set in `labels`. The sector colors are set in `marker.colors`.
 
@@ -304,4 +304,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#pie for more information and chart attribute options!
+See https://plotly.com/python/reference/pie/ for more information and chart attribute options!

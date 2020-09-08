@@ -1,5 +1,5 @@
 jupytext
-plotly==4.8.1
+plotly==4.9.0
 jupyter
 notebook
 pandas==1.0.3
@@ -15,3 +15,6 @@ scikit-image
 datashader
 pyarrow
 cufflinks==0.17.3
+kaleido
+scikit-learn
+umap-learn

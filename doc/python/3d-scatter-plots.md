@@ -76,7 +76,7 @@ fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
 
 #### Basic 3D Scatter Plot
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Scatter3D` from `plotly.graph_objs`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Scatter3D` class from `plotly.graph_objects`](/python/graph-objects/).
 Like the [2D scatter plot](https://plotly.com/python/line-and-scatter/) `go.Scatter`, `go.Scatter3d` plots individual data in three-dimensional space.
 
 ```python
@@ -122,4 +122,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/#scatter3d for more information and chart attribute options!
+See https://plotly.com/python/reference/scatter3d/ for more information and chart attribute options!

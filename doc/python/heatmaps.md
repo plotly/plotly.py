@@ -36,7 +36,7 @@ jupyter:
 
 ### Heatmap with `plotly.express` and `px.imshow`
 
-[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array is represented as a heatmap pixel.
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/). With `px.imshow`, each value of the input array or data frame is represented as a heatmap pixel.
 
 For more examples using `px.imshow`, see the [tutorial on displaying image data with plotly](/python/imshow).
 
@@ -46,6 +46,14 @@ import plotly.express as px
 fig = px.imshow([[1, 20, 30],
                  [20, 1, 60],
                  [30, 60, 1]])
+fig.show()
+```
+
+```python
+import plotly.express as px
+
+df = px.data.medals_wide(indexed=True)
+fig = px.imshow(df)
 fig.show()
 ```
 
@@ -67,7 +75,7 @@ fig.show()
 
 ### Basic Heatmap with `plotly.graph_objects`
 
-If Plotly Express does not provide a good starting point, it is also possible to use the more generic `go.Heatmap` function from `plotly.graph_objects`.
+If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Heatmap` class from `plotly.graph_objects`](/python/graph-objects/).
 
 ```python
 import plotly.graph_objects as go
@@ -81,7 +89,7 @@ fig.show()
 
 ### Heatmap with Categorical Axis Labels
 
-In this example we also show how to ignore [hovertext](https://plotly.com/python/hover-text-and-formatting/) when we have [missing values](https://plotly.com/python/missing_values) in the data by setting the [hoverongaps](https://plotly.com/python/reference/#heatmap-hoverongaps) to False.
+In this example we also show how to ignore [hovertext](https://plotly.com/python/hover-text-and-formatting/) when we have [missing values](https://plotly.com/python/missing_values) in the data by setting the [hoverongaps](https://plotly.com/python/reference/heatmap/#heatmap-hoverongaps) to False.
 
 ```python
 import plotly.graph_objects as go
@@ -182,4 +190,4 @@ Arrays of rasterized values build by datashader can be visualized using
 plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
 
 #### Reference
-See https://plotly.com/python/reference/#heatmap for more information and chart attribute options!
+See https://plotly.com/python/reference/heatmap/ for more information and chart attribute options!

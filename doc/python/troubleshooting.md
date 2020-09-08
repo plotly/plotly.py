@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Troubleshooting
-    order: 25
+    order: 27
     page_type: u-guide
     permalink: python/troubleshooting/
     thumbnail: thumbnail/modebar-icons.png
@@ -103,3 +103,13 @@ set NODE_OPTIONS=
 ```
 
 <!-- #endregion -->
+
+
+### Orca Problems
+
+> Note: as of `plotly` version 4.9, we recommend using [`kaleido`](https://github.com/plotly/Kaleido)
+> instead of Orca for [static image export](/python/static-image-export/)
+
+If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded (for instance in the Miniconda folder) with the following command:
+
+`plotly.io.orca.config.executable = '/home/your_name/miniconda3/bin/orca'`

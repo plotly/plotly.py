@@ -15,10 +15,11 @@ from plotly.subplots import (
     _subplot_type_for_trace_type,
 )
 
+NO_COLOR = "px_no_color_constant"
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
-    ["x", "y", "z", "a", "b", "c", "r", "theta", "size"]
+    ["base", "x", "y", "z", "a", "b", "c", "r", "theta", "size", "x_start", "x_end"]
     + ["hover_name", "text", "names", "values", "parents", "wide_cross"]
     + ["ids", "error_x", "error_x_minus", "error_y", "error_y_minus", "error_z"]
     + ["error_z_minus", "lat", "lon", "locations", "animation_group"]
@@ -116,6 +117,18 @@ def get_label(args, column):
         return column
 
 
+def invert_label(args, column):
+    """Invert mapping.
+    Find key corresponding to value column in dict args["labels"].
+    Returns `column` if the value does not exist.
+    """
+    reversed_labels = {value: key for (key, value) in args["labels"].items()}
+    try:
+        return reversed_labels[column]
+    except Exception:
+        return column
+
+
 def _is_continuous(df, col_name):
     return df[col_name].dtype.kind in "ifc"
 
@@ -209,7 +222,6 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     trace_patch = trace_spec.trace_patch.copy() or {}
     fit_results = None
     hover_header = ""
-    custom_data_len = 0
     for attr_name in trace_spec.attrs:
         attr_value = args[attr_name]
         attr_label = get_decorated_label(args, attr_value, attr_name)
@@ -230,7 +242,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 )
             ]
             trace_patch["dimensions"] = [
-                dict(label=get_label(args, name), values=column.values)
+                dict(label=get_label(args, name), values=column)
                 for (name, column) in dims
             ]
             if trace_spec.constructor == go.Splom:
@@ -265,46 +277,68 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     attr_value in ["ols", "lowess"]
                     and args["x"]
                     and args["y"]
-                    and len(trace_data) > 1
+                    and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
                     import statsmodels.api as sm
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
-                    y = sorted_trace_data[args["y"]]
-                    x = sorted_trace_data[args["x"]]
+                    y = sorted_trace_data[args["y"]].values
+                    x = sorted_trace_data[args["x"]].values
 
                     if x.dtype.type == np.datetime64:
                         x = x.astype(int) / 10 ** 9  # convert to unix epoch seconds
+                    elif x.dtype.type == np.object_:
+                        try:
+                            x = x.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'x' ('%s') into a numeric type. "
+                                "If 'x' contains stringified dates, please convert to a datetime column."
+                                % args["x"]
+                            )
+                    if y.dtype.type == np.object_:
+                        try:
+                            y = y.astype(np.float64)
+                        except ValueError:
+                            raise ValueError(
+                                "Could not convert value of 'y' into a numeric type."
+                            )
+
+                    # preserve original values of "x" in case they're dates
+                    trace_patch["x"] = sorted_trace_data[args["x"]][
+                        np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
+                    ]
 
                     if attr_value == "lowess":
                         # missing ='drop' is the default value for lowess but not for OLS (None)
                         # we force it here in case statsmodels change their defaults
                         trendline = sm.nonparametric.lowess(y, x, missing="drop")
-                        trace_patch["x"] = trendline[:, 0]
                         trace_patch["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
                     elif attr_value == "ols":
                         fit_results = sm.OLS(
-                            y.values, sm.add_constant(x.values), missing="drop"
+                            y, sm.add_constant(x), missing="drop"
                         ).fit()
                         trace_patch["y"] = fit_results.predict()
-                        trace_patch["x"] = x[
-                            np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
-                        ]
                         hover_header = "<b>OLS trendline</b><br>"
-                        hover_header += "%s = %g * %s + %g<br>" % (
-                            args["y"],
-                            fit_results.params[1],
-                            args["x"],
-                            fit_results.params[0],
-                        )
+                        if len(fit_results.params) == 2:
+                            hover_header += "%s = %g * %s + %g<br>" % (
+                                args["y"],
+                                fit_results.params[1],
+                                args["x"],
+                                fit_results.params[0],
+                            )
+                        else:
+                            hover_header += "%s = %g<br>" % (
+                                args["y"],
+                                fit_results.params[0],
+                            )
                         hover_header += (
                             "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
                         )
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
-
             elif attr_name.startswith("error"):
                 error_xy = attr_name[:7]
                 arr = "arrayminus" if attr_name.endswith("minus") else "array"
@@ -312,8 +346,9 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     trace_patch[error_xy] = {}
                 trace_patch[error_xy][arr] = trace_data[attr_value]
             elif attr_name == "custom_data":
-                trace_patch["customdata"] = trace_data[attr_value].values
-                custom_data_len = len(attr_value)  # number of custom data columns
+                # here we store a data frame in customdata, and it's serialized
+                # as a list of row lists, which is what we want
+                trace_patch["customdata"] = trace_data[attr_value]
             elif attr_name == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -330,29 +365,23 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     go.Histogram2dContour,
                 ]:
                     hover_is_dict = isinstance(attr_value, dict)
+                    customdata_cols = args.get("custom_data") or []
                     for col in attr_value:
                         if hover_is_dict and not attr_value[col]:
                             continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
-                            position = custom_data_len
-                            custom_data_len += 1
-                            if "customdata" in trace_patch:
-                                trace_patch["customdata"] = np.hstack(
-                                    (
-                                        trace_patch["customdata"],
-                                        trace_data[col].values[:, None],
-                                    )
-                                )
-                            else:
-                                trace_patch["customdata"] = trace_data[col].values[
-                                    :, None
-                                ]
+                            position = len(customdata_cols)
+                            customdata_cols.append(col)
                         attr_label_col = get_decorated_label(args, col, None)
                         mapping_labels[attr_label_col] = "%%{customdata[%d]}" % (
                             position
                         )
+
+                    # here we store a data frame in customdata, and it's serialized
+                    # as a list of row lists, which is what we want
+                    trace_patch["customdata"] = trace_data[customdata_cols]
             elif attr_name == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     trace_patch["z"] = trace_data[attr_value]
@@ -434,12 +463,13 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
         mapping_labels_copy = OrderedDict(mapping_labels)
         if args["hover_data"] and isinstance(args["hover_data"], dict):
             for k, v in mapping_labels.items():
-                if k in args["hover_data"]:
-                    if args["hover_data"][k][0]:
-                        if isinstance(args["hover_data"][k][0], str):
-                            mapping_labels_copy[k] = v.replace(
-                                "}", "%s}" % args["hover_data"][k][0]
-                            )
+                # We need to invert the mapping here
+                k_args = invert_label(args, k)
+                if k_args in args["hover_data"]:
+                    formatter = args["hover_data"][k_args][0]
+                    if formatter:
+                        if isinstance(formatter, str):
+                            mapping_labels_copy[k] = v.replace("}", "%s}" % formatter)
                     else:
                         _ = mapping_labels_copy.pop(k)
         hover_lines = [k + "=" + v for k, v in mapping_labels_copy.items()]
@@ -504,14 +534,18 @@ def configure_cartesian_marginal_axes(args, fig, orders):
 
     # Configure axis ticks on marginal subplots
     if args["marginal_x"]:
-        fig.update_yaxes(showticklabels=False, showline=False, ticks="", row=nrows)
+        fig.update_yaxes(
+            showticklabels=False, showline=False, ticks="", range=None, row=nrows
+        )
         if args["template"].layout.yaxis.showgrid is None:
             fig.update_yaxes(showgrid=args["marginal_x"] == "histogram", row=nrows)
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=True, row=nrows)
 
     if args["marginal_y"]:
-        fig.update_xaxes(showticklabels=False, showline=False, ticks="", col=ncols)
+        fig.update_xaxes(
+            showticklabels=False, showline=False, ticks="", range=None, col=ncols
+        )
         if args["template"].layout.xaxis.showgrid is None:
             fig.update_xaxes(showgrid=args["marginal_y"] == "histogram", col=ncols)
         if args["template"].layout.yaxis.showgrid is None:
@@ -567,7 +601,8 @@ def configure_cartesian_axes(args, fig, orders):
     # Set x-axis titles and axis options in the bottom-most row
     x_title = get_decorated_label(args, args["x"], "x")
     for xaxis in fig.select_xaxes(row=1):
-        xaxis.update(title_text=x_title)
+        if "is_timeline" not in args:
+            xaxis.update(title_text=x_title)
         set_cartesian_axis_opts(args, xaxis, "x", orders)
 
     # Configure axis type across all x-axes
@@ -577,6 +612,9 @@ def configure_cartesian_axes(args, fig, orders):
     # Configure axis type across all y-axes
     if "log_y" in args and args["log_y"]:
         fig.update_yaxes(type="log")
+
+    if "is_timeline" in args:
+        fig.update_xaxes(type="date")
 
     return fig.layout
 
@@ -800,7 +838,7 @@ def make_trace_spec(args, constructor, attrs, trace_patch):
     # Add trendline trace specifications
     if "trendline" in args and args["trendline"]:
         trace_spec = TraceSpec(
-            constructor=go.Scatter,
+            constructor=go.Scattergl if constructor == go.Scattergl else go.Scatter,
             attrs=["trendline"],
             trace_patch=dict(mode="lines"),
             marginal=None,
@@ -982,6 +1020,16 @@ def _escape_col_name(df_input, col_name, extra):
     return col_name
 
 
+def to_unindexed_series(x):
+    """
+    assuming x is list-like or even an existing pd.Series, return a new pd.Series with
+    no index, without extracting the data from an existing Series via numpy, which
+    seems to mangle datetime columns. Stripping the index from existing pd.Series is
+    required to get things to match up right in the new DataFrame we're building
+    """
+    return pd.Series(x).reset_index(drop=True)
+
+
 def process_args_into_dataframe(args, wide_mode, var_name, value_name):
     """
     After this function runs, the `all_attrables` keys of `args` all contain only
@@ -1093,10 +1141,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                                 length,
                             )
                         )
-                    if hasattr(real_argument, "values"):
-                        df_output[col_name] = real_argument.values
-                    else:
-                        df_output[col_name] = np.array(real_argument)
+                    df_output[col_name] = to_unindexed_series(real_argument)
                 elif not df_provided:
                     raise ValueError(
                         "String or int arguments are only possible when a "
@@ -1131,7 +1176,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                     )
                 else:
                     col_name = str(argument)
-                    df_output[col_name] = df_input[argument].values
+                    df_output[col_name] = to_unindexed_series(df_input[argument])
             # ----------------- argument is likely a column / array / list.... -------
             else:
                 if df_provided and hasattr(argument, "name"):
@@ -1160,10 +1205,7 @@ def process_args_into_dataframe(args, wide_mode, var_name, value_name):
                         "length of  previously-processed arguments %s is %d"
                         % (field, len(argument), str(list(df_output.columns)), length)
                     )
-                if hasattr(argument, "values"):
-                    df_output[str(col_name)] = argument.values
-                else:
-                    df_output[str(col_name)] = np.array(argument)
+                df_output[str(col_name)] = to_unindexed_series(argument)
 
             # Finally, update argument with column name now that column exists
             assert col_name is not None, (
@@ -1307,6 +1349,10 @@ def build_dataframe(args, constructor):
                     label=_escape_col_name(df_input, "index", [var_name, value_name])
                 )
 
+    no_color = False
+    if type(args.get("color", None)) == str and args["color"] == NO_COLOR:
+        no_color = True
+        args["color"] = None
     # now that things have been prepped, we do the systematic rewriting of `args`
 
     df_output, wide_id_vars = process_args_into_dataframe(
@@ -1351,9 +1397,11 @@ def build_dataframe(args, constructor):
         del args["wide_cross"]
         dtype = None
         for v in wide_value_vars:
+            v_dtype = df_output[v].dtype.kind
+            v_dtype = "number" if v_dtype in ["i", "f", "u"] else v_dtype
             if dtype is None:
-                dtype = df_output[v].dtype
-            elif dtype != df_output[v].dtype:
+                dtype = v_dtype
+            elif dtype != v_dtype:
                 raise ValueError(
                     "Plotly Express cannot process wide-form data with columns of different type."
                 )
@@ -1377,6 +1425,8 @@ def build_dataframe(args, constructor):
             args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
+            if "line_group" in args:
+                args["line_group"] = args["line_group"] or var_name
         if constructor == go.Bar:
             if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
@@ -1394,7 +1444,8 @@ def build_dataframe(args, constructor):
             args["x" if orient_v else "y"] = value_name
             args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
-
+    if no_color:
+        args["color"] = None
     args["data_frame"] = df_output
     return args
 
@@ -1460,7 +1511,9 @@ def process_dataframe_hierarchy(args):
 
         if args["color"]:
             if args["color"] == args["values"]:
-                aggfunc_color = "sum"
+                new_value_col_name = args["values"] + "_sum"
+                df[new_value_col_name] = df[args["values"]]
+                args["values"] = new_value_col_name
         count_colname = args["values"]
     else:
         # we need a count column for the first groupby and the weighted mean of color
@@ -1479,7 +1532,7 @@ def process_dataframe_hierarchy(args):
         if not _is_continuous(df, args["color"]):
             aggfunc_color = aggfunc_discrete
             discrete_color = True
-        elif not aggfunc_color:
+        else:
 
             def aggfunc_continuous(x):
                 return np.average(x, weights=df.loc[x.index, count_colname])
@@ -1492,8 +1545,9 @@ def process_dataframe_hierarchy(args):
     for col in cols:  # for hover_data, custom_data etc.
         if col not in agg_f:
             agg_f[col] = aggfunc_discrete
+    # Avoid collisions with reserved names - columns in the path have been copied already
+    cols = list(set(cols) - set(["labels", "parent", "id"]))
     # ----------------------------------------------------------------------------
-
     df_all_trees = pd.DataFrame(columns=["labels", "parent", "id"] + cols)
     #  Set column type here (useful for continuous vs discrete colorscale)
     for col in cols:
@@ -1537,8 +1591,36 @@ def process_dataframe_hierarchy(args):
     if args["color"]:
         if not args["hover_data"]:
             args["hover_data"] = [args["color"]]
+        elif isinstance(args["hover_data"], dict):
+            if not args["hover_data"].get(args["color"]):
+                args["hover_data"][args["color"]] = (True, None)
         else:
             args["hover_data"].append(args["color"])
+    return args
+
+
+def process_dataframe_timeline(args):
+    """
+    Massage input for bar traces for px.timeline()
+    """
+    args["is_timeline"] = True
+    if args["x_start"] is None or args["x_end"] is None:
+        raise ValueError("Both x_start and x_end are required")
+
+    try:
+        x_start = pd.to_datetime(args["data_frame"][args["x_start"]])
+        x_end = pd.to_datetime(args["data_frame"][args["x_end"]])
+    except (ValueError, TypeError):
+        raise TypeError(
+            "Both x_start and x_end must refer to data convertible to datetimes."
+        )
+
+    # note that we are not adding any columns to the data frame here, so no risk of overwrite
+    args["data_frame"][args["x_end"]] = (x_end - x_start).astype("timedelta64[ms]")
+    args["x"] = args["x_end"]
+    del args["x_end"]
+    args["base"] = args["x_start"]
+    del args["x_start"]
     return args
 
 
@@ -1744,6 +1826,9 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
     args = build_dataframe(args, constructor)
     if constructor in [go.Treemap, go.Sunburst] and args["path"] is not None:
         args = process_dataframe_hierarchy(args)
+    if constructor == "timeline":
+        constructor = go.Bar
+        args = process_dataframe_timeline(args)
 
     trace_specs, grouped_mappings, sizeref, show_colorbar = infer_config(
         args, constructor, trace_patch, layout_patch
@@ -2003,9 +2088,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
         elif args.get("facet_col_wrap", 0):
-            vertical_spacing = 0.07
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
-            vertical_spacing = 0.03
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
 
         if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2016,7 +2101,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = 0.02
+            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None

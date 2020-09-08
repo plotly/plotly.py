@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to plot date and time in python.
     display_as: financial
@@ -45,10 +45,8 @@ Plotly auto-sets the axis type to a date format when the corresponding data are 
 # Using plotly.express
 import plotly.express as px
 
-import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-
-fig = px.line(df, x='Date', y='AAPL.High')
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
 fig.show()
 ```
 
@@ -60,6 +58,61 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
+fig.show()
+```
+
+### Different Chart Types on Date Axes
+
+Any kind of cartesian chart can be placed on `date` axes, for example this bar chart of relative stock ticker values.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.bar(df, x=df.index, y="GOOG")
+fig.show()
+```
+
+Or this [facetted](/python/facet-plots/) area plot:
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.area(df, facet_col="company", facet_col_wrap=2)
+fig.show()
+```
+
+### Configuring Tick Labels
+
+By default, the tick labels (and optional ticks) are associated with a specific grid-line, and represent an *instant* in time, for example, "midnight on February 1, 2018". Tick labels can be formatted using the `tickformat` attribute (which accepts the [d3 time-format formatting strings](https://github.com/d3/d3-time-format)) to display only the month and year, but they still represent an instant by default, so in the figure below, the text of the label "Feb 2018" spans part of the month of January and part of the month of February. The `dtick` attribute controls the spacing between gridlines, and the `"M1"` setting means "1 month". This attribute also accepts a number of milliseconds, which can be scaled up to days by multiplying by `24*60*60*1000`.
+
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, title="custom tick labels")
+fig.update_xaxes(
+    dtick="M1", 
+    tickformat="%b %Y", 
+    range=["2018-01-01", "2018-12-31"])
+fig.show()
+```
+
+### Moving Tick Labels to the Middle of the Period
+
+_new in 4.10_
+
+By setting the `ticklabelmode` attribute to `"period"` (the default is `"instant"`) we can move the tick labels to the middle of the period they represent. The gridlines remain at the beginning of each month (thanks to `dtick="M1"`) but the labels now span the month they refer to.
+
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, title='custom tick labels with ticklabelmode="period"')
+fig.update_xaxes(
+    dtick="M1", 
+    tickformat="%b %Y", 
+    ticklabelmode="period",
+    range=["2018-01-01", "2018-12-31"])
 fig.show()
 ```
 
@@ -110,11 +163,12 @@ fig.show()
 
 ### Time Series With Range Slider
 
-A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-rangeslider
+A range slider is a small subplot-like area below a plot which allows users to pan and zoom the X-axis while maintaining an overview of the chart. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeslider
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.line(df, x='Date', y='AAPL.High', title='Time Series with Rangeslider')
@@ -125,11 +179,12 @@ fig.show()
 
 ### Time Series with Range Selector Buttons
 
-Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-rangeselector
+Range selector buttons are special controls that work well with time series and range sliders, and allow users to easily set the range of the x-axis. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangeselector
 
 ```python
-import plotly.graph_objects as go
+import plotly.express as px
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.line(df, x='Date', y='AAPL.High', title='Time Series with Range Slider and Selectors')
@@ -151,9 +206,10 @@ fig.show()
 
 ### Customizing Tick Label Formatting by Zoom Level
 
-The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-tickformatstops
+The `tickformatstops` attribute can be used to customize the formatting of tick labels depending on the zoom level. Try zooming in to the chart below and see how the tick label formatting changes. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-tickformatstops
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
@@ -182,11 +238,14 @@ fig.show()
 
 ### Hiding Weekends and Holidays
 
-The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the reference for more options: https://plotly.com/python/reference/#layout-xaxis-rangebreaks
+The `rangebreaks` attribute available on x- and y-axes of type `date` can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the reference for more options: https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-rangebreaks
+
+> Note: a known limitation of this feature is that it does not support `scattergl` traces. When using this feature on plots with more than a few hundred data points with `px.scatter` or `px.line` or `px.area`, you may need to pass in `render_mode="svg"` to ensure that the underlying trace type is `scatter` and not `scattergl`.
 
 ```python
 import plotly.express as px
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15'],
@@ -197,14 +256,60 @@ fig.show()
 ```python
 import plotly.express as px
 import pandas as pd
+
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = px.scatter(df, x='Date', y='AAPL.High', range_x=['2015-12-01', '2016-01-15'],
-                 title="Hide Gaps with rangebreaks")
+                 title="Hide Weekend and Holiday Gaps with rangebreaks")
 fig.update_xaxes(
     rangebreaks=[
         dict(bounds=["sat", "mon"]), #hide weekends
         dict(values=["2015-12-25", "2016-01-01"])  # hide Christmas and New Year's
+    ]
+)
+fig.show()
+```
+
+### Hiding Non-Business Hours
+
+The `rangebreaks` feature described above works for hiding hourly periods as well.
+
+```python
+import plotly.express as px
+import pandas as pd
+import numpy as np
+np.random.seed(1)
+
+work_week_40h = pd.date_range(start='2020-03-01', end='2020-03-07', freq="BH")
+
+df = pd.DataFrame(dict(
+    date = work_week_40h,
+    value = np.cumsum(np.random.rand(40)-0.5)
+))
+
+fig = px.scatter(df, x="date", y="value",
+                 title="Default Display with Gaps")
+fig.show()
+```
+
+```python
+import plotly.express as px
+import pandas as pd
+import numpy as np
+np.random.seed(1)
+
+work_week_40h = pd.date_range(start='2020-03-01', end='2020-03-07', freq="BH")
+
+df = pd.DataFrame(dict(
+    date = work_week_40h,
+    value = np.cumsum(np.random.rand(40)-0.5)
+))
+
+fig = px.scatter(df, x="date", y="value",
+                 title="Hide Non-Business Hour Gaps with rangebreaks")
+fig.update_xaxes(
+    rangebreaks=[
+        dict(bounds=[17, 9], pattern="hour"), #hide hours outside of 9am-5pm
     ]
 )
 fig.show()

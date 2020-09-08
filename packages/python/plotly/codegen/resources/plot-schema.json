@@ -17739,6 +17739,12 @@
                     "editType": "none",
                     "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
                 },
+                "source": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Specifies the data URI of the image to be visualized. The URI consists of \"data:image/[<media subtype>][;base64],<data>\""
+                },
                 "z": {
                     "valType": "data_array",
                     "role": "data",
@@ -17750,13 +17756,13 @@
                     "values": [
                         "rgb",
                         "rgba",
+                        "rgba256",
                         "hsl",
                         "hsla"
                     ],
-                    "dflt": "rgb",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Color model used to map the numerical color components described in `z` into colors."
+                    "description": "Color model used to map the numerical color components described in `z` into colors. If `source` is specified, this attribute will be set to `rgba256` otherwise it defaults to `rgb`."
                 },
                 "zmin": {
                     "valType": "info_array",
@@ -17780,7 +17786,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Array defining the lower bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the `hsla` colormodel, it is [0, 0, 0, 0]."
+                    "description": "Array defining the lower bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0, 0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the `hsla` colormodel, it is [0, 0, 0, 0]."
                 },
                 "zmax": {
                     "valType": "info_array",
@@ -17804,7 +17810,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Array defining the higher bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [255, 255, 255]. For the `rgba` colormodel, it is [255, 255, 255, 1]. For the `hsl` colormodel, it is [360, 100, 100]. For the `hsla` colormodel, it is [360, 100, 100, 1]."
+                    "description": "Array defining the higher bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [255, 255, 255]. For the `rgba` colormodel, it is [255, 255, 255, 1]. For the `rgba256` colormodel, it is [255, 255, 255, 255]. For the `hsl` colormodel, it is [360, 100, 100]. For the `hsla` colormodel, it is [360, 100, 100, 1]."
                 },
                 "x0": {
                     "valType": "any",

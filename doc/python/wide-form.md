@@ -28,7 +28,7 @@ jupyter:
     language: python
     layout: base
     name: Plotly Express Wide-Form Support
-    order: 32
+    order: 34
     page_type: u-guide
     permalink: python/wide-form/
     thumbnail: thumbnail/plotly-express.png
@@ -48,7 +48,7 @@ There are three common conventions for storing column-oriented data, usually in 
 * **wide-form data** has one row per value of one of the first variable, and one column per value of the second variable. This is suitable for storing and displaying 2-dimensional data.
 * **mixed-form data** is a hybrid of long-form and wide-form data, with one row per value of one variable, and some columns representing values of another, and some columns representing more variables.
 
-Every Plotly Express function other than `imshow` can operate on long-form data, and in addition, the following 2D-Cartesian functions can operate on wide-form and mixed-form data: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`.
+Every Plotly Express function can operate on long-form data (other than `px.imshow` which operates only on wide-form input), and in addition, the following 2D-Cartesian functions can operate on wide-form and mixed-form data: `px.scatter`, `px.line`, `px.area`, `px.bar`, `px.histogram`, `px.violin`, `px.box`, `px.strip`, `px.funnel`, `px.density_heatmap` and `px.density_contour`.
 
 By way of example here is the same data, represented in long-form first, and then in wide-form:
 
@@ -155,6 +155,16 @@ import plotly.express as px
 wide_df = px.data.medals_wide(indexed=False)
 
 fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], facet_col="variable", color="nation")
+fig.show()
+```
+
+You can also prevent `color` from getting assigned if you're mapping `variable` to some other argument:
+
+```python
+import plotly.express as px
+wide_df = px.data.medals_wide(indexed=False)
+
+fig = px.bar(wide_df, x="nation", y=["gold", "silver", "bronze"], facet_col="variable", color=px.NO_COLOR)
 fig.show()
 ```
 
