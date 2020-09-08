@@ -68,6 +68,7 @@ specified below.
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
+   + Ensure the version of `plotly.js` matches the one in `plotlywidget`
    + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
@@ -191,6 +192,7 @@ release candidate suffix from the following version strings:
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
+   + Ensure the version of `plotly.js` matches the one in `plotlywidget`
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
@@ -270,18 +272,22 @@ Make "Release title" the same string as the tag.
 
 Copy changelog section for this version as the "Describe this release"
 
-### Upgrade doc requirements and API doc
+### Update documentation site
 
-Files to be updated:
-- `doc/apidoc/conf.py` with new version number
-- `doc/requirements.txt`
-- `binder/requirements.txt`
-
-### Synchronize master and doc-prod branches
-
-doc-prod should already have been merged on a regular basis into master, but
-start doing it first. Then merge master into doc-prod to deploy the doc related
+1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
+    - `README.md`
+    - `doc/python/getting-started.md`
+    - `doc/apidoc/conf.py`
+    - `doc/requirements.txt`
+    - `binder/requirements.txt`
+2. `doc-prod` should already have been merged on a regular basis into `master`, but
+start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
 to features in the release.
+3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
+    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py` fixing any errors that come up 
+    2. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
+    3. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
+    4. Commit and push the changes to `master` in that repo
 
 ### Post announcement
 
