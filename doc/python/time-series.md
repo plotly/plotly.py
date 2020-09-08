@@ -45,10 +45,8 @@ Plotly auto-sets the axis type to a date format when the corresponding data are 
 # Using plotly.express
 import plotly.express as px
 
-import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-
-fig = px.line(df, x='Date', y='AAPL.High')
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
 fig.show()
 ```
 
@@ -60,6 +58,61 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
+fig.show()
+```
+
+### Different Chart Types on Date Axes
+
+Any kind of cartesian chart can be placed on `date` axes, for example this bar chart of relative stock ticker values.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.bar(df, x=df.index, y="GOOG")
+fig.show()
+```
+
+Or this [facetted](/python/facet-plots/) area plot:
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.area(df, facet_col="company", facet_col_wrap=2)
+fig.show()
+```
+
+### Configuring Tick Labels
+
+By default, the tick labels (and optional ticks) are associated with a specific grid-line, and represent an *instant* in time, for example, "midnight on February 1, 2018". Tick labels can be formatted using the `tickformat` attribute (which accepts the [d3 time-format formatting strings](https://github.com/d3/d3-time-format)) to display only the month and year, but they still represent an instant by default, so in the figure below, the text of the label "Feb 2018" spans part of the month of January and part of the month of February. The `dtick` attribute controls the spacing between gridlines, and the `"M1"` setting means "1 month". This attribute also accepts a number of milliseconds, which can be scaled up to days by multiplying by `24*60*60*1000`.
+
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, title="custom tick labels")
+fig.update_xaxes(
+    dtick="M1", 
+    tickformat="%b %Y", 
+    range=["2018-01-01", "2018-12-31"])
+fig.show()
+```
+
+### Moving Tick Labels to the Middle of the Period
+
+_new in 4.10_
+
+By setting the `ticklabelmode` attribute to `"period"` (the default is `"instant"`) we can move the tick labels to the middle of the period they represent. The gridlines remain at the beginning of each month (thanks to `dtick="M1"`) but the labels now span the month they refer to.
+
+```python
+import plotly.express as px
+df = px.data.stocks(indexed=True)
+fig = px.line(df, title='custom tick labels with ticklabelmode="period"')
+fig.update_xaxes(
+    dtick="M1", 
+    tickformat="%b %Y", 
+    ticklabelmode="period",
+    range=["2018-01-01", "2018-12-31"])
 fig.show()
 ```
 
