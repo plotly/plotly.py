@@ -1180,7 +1180,7 @@ class BaseFigure(object):
             if refs[0].subplot_type != "xy":
                 raise ValueError(
                     """
-Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot 
+Cannot add {prop_singular} to subplot at position ({r}, {c}) because subplot
 is of type {subplot_type}.""".format(
                         prop_singular=prop_singular,
                         r=row,
@@ -3489,13 +3489,17 @@ Invalid property path '{key_path_str}' for layout
 
         return index_list[0]
 
-    def _make_paper_spanning_shape(self, direction, shape, none_if_no_trace=True):
+    def _make_axis_spanning_shape(self, direction, shape, none_if_no_trace=True):
         """
-        Convert a shape drawn on a plot or a subplot into one whose yref or
-        xref is 'paper' so that the shape will seem to extend infinitely in that
-        dimension. This is useful for drawing lines or boxes on a plot where one
-        dimension of the shape will not move out of bounds when moving the
-        plot's view.
+        Convert a shape drawn on a plot or a subplot into one whose yref or xref
+        ends with " domain" and has coordinates so that the shape will seem to
+        extend infinitely in that dimension. This is useful for drawing lines or
+        boxes on a plot where one dimension of the shape will not move out of
+        bounds when moving the plot's view.
+        Note that the shape already added to the (sub)plot must have the
+        corresponding axis reference referring to an actual axis (e.g., 'x',
+        'y2' etc. are accepted, but not 'paper'). This will be the case if the
+        shape was added with "add_shape".
         """
         if direction == "vertical":
             # fix y points to top and bottom of subplot
@@ -3512,17 +3516,12 @@ Invalid property path '{key_path_str}' for layout
                 "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
                 % (direction,)
             )
-        # find axis paper "domain" by looking up the axis in the shape
-        axis_num = shape[ref].strip(axis)
-        axis_layout_key = axis_layout_key_template % (axis_num,)
-        domain = self.layout[axis_layout_key]["domain"]
-        if domain is None:
-            # This could occur if the plot was not made with make_subplots
-            domain = [0, 1]
+        # vline and hline span the whole axis
+        domain = [0, 1]
         try:
             shape[axis + "0"], shape[axis + "1"] = domain
         except KeyError as e:
-            raise e("Shape does not support paper spanning.")
+            raise e("Shape does not support axis spanning.")
         if none_if_no_trace:
             # iterate through all the traces and check to see if one with the
             # same xref and yref pair is there, if not, we return None (we don't
@@ -3532,16 +3531,16 @@ Invalid property path '{key_path_str}' for layout
                 for t in [(d["xaxis"], d["yaxis"]) for d in self.data]
             ):
                 return None
-        # set the ref to paper so that it always spans to the edges of the
-        # subplot
-        shape[ref] = "paper"
+        # set the ref to "<axis_id> domain" so that its size is based on the
+        # axis's size
+        shape[ref] += " domain"
         return shape
 
-    def _process_multiple_paper_spanning_shapes(
+    def _process_multiple_axis_spanning_shapes(
         self, shape_args, row, col, direction, exclude_empty_subplots=True, **kwargs
     ):
         """
-        Add a shape or multiple shapes and call _make_paper_spanning_shape on
+        Add a shape or multiple shapes and call _make_axis_spanning_shape on
         all the new shapes.
         """
         # shapes are always added at the end of the tuple of shapes, so we see
@@ -3554,15 +3553,14 @@ Invalid property path '{key_path_str}' for layout
             # self.add_shape succeeded)
             # however, in the case of a single plot, xref and yref are not
             # specified, so we specify them here to the following routines can work
-            # (they need to change xref or yref to paper and change their range
-            # to the domain)
+            # (they need to append " domain" to xref or yref)
             self.layout["shapes"][-1].update(xref="x", yref="y")
         n_shapes_after = len(self.layout["shapes"])
         new_shapes = tuple(
             filter(
                 lambda x: x is not None,
                 [
-                    self._make_paper_spanning_shape(
+                    self._make_axis_spanning_shape(
                         direction,
                         self.layout["shapes"][n],
                         none_if_no_trace=exclude_empty_subplots,
@@ -3594,7 +3592,7 @@ Invalid property path '{key_path_str}' for layout
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
-        self._process_multiple_paper_spanning_shapes(
+        self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
             row,
             col,
@@ -3625,7 +3623,7 @@ Invalid property path '{key_path_str}' for layout
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
-        self._process_multiple_paper_spanning_shapes(
+        self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=0, x1=1, y0=y, y1=y,),
             row,
             col,
@@ -3660,7 +3658,7 @@ Invalid property path '{key_path_str}' for layout
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
-        self._process_multiple_paper_spanning_shapes(
+        self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
             row,
             col,
@@ -3695,7 +3693,7 @@ Invalid property path '{key_path_str}' for layout
             Any named function parameters that can be passed to 'add_shape',
             except for x0, x1, y0, y1 or type.
         """
-        self._process_multiple_paper_spanning_shapes(
+        self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
             row,
             col,
