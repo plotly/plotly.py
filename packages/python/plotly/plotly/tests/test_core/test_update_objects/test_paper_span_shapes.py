@@ -55,8 +55,7 @@ def non_subplot_fig_fixture():
     return fig
 
 
-# Fixture is here for testing custom-sized subplots, but still need to confirm
-# what policy we will take
+# Fixture is here for testing custom-sized subplots
 @pytest.fixture
 def custom_sized_subplots():
     fig = make_subplots(
@@ -91,6 +90,8 @@ def custom_sized_subplots():
 
 def _cmp_partial_dict(a, b):
     ret = True
+    if len(list(b.keys())) == 0:
+        return False
     for k in b.keys():
         try:
             v = a[k]
@@ -104,6 +105,8 @@ def _check_figure_shapes(test_input, expected, fig):
     f, kwargs = test_input
     f(fig, **kwargs)
     ret = True
+    if len(fig.layout.shapes) != len(expected):
+        assert False
     for s, d in zip(fig.layout.shapes, expected):
         ret &= _cmp_partial_dict(s, d)
     assert ret
@@ -123,8 +126,8 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x1": 20,
                     "xref": "x",
                     "y0": 0,
-                    "y1": 0.4,
-                    "yref": "paper",
+                    "y1": 1,
+                    "yref": "y domain",
                 }
             ],
         ),
@@ -136,9 +139,9 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x0": 20,
                     "x1": 20,
                     "xref": "x4",
-                    "y0": 0.5,
-                    "y1": 0.9,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y4 domain",
                 }
             ],
         ),
@@ -148,8 +151,8 @@ def _check_figure_shapes(test_input, expected, fig):
                 {
                     "type": "line",
                     "x0": 0,
-                    "x1": 0.4,
-                    "xref": "paper",
+                    "x1": 1,
+                    "xref": "x domain",
                     "y0": 6,
                     "y1": 6,
                     "yref": "y",
@@ -161,9 +164,9 @@ def _check_figure_shapes(test_input, expected, fig):
             [
                 {
                     "type": "line",
-                    "x0": 0.5,
-                    "x1": 0.9,
-                    "xref": "paper",
+                    "x0": 0,
+                    "x1": 1,
+                    "xref": "x4 domain",
                     "y0": 6,
                     "y1": 6,
                     "yref": "y4",
@@ -179,8 +182,8 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x1": 30,
                     "xref": "x",
                     "y0": 0,
-                    "y1": 0.4,
-                    "yref": "paper",
+                    "y1": 1,
+                    "yref": "y domain",
                 }
             ],
         ),
@@ -192,9 +195,9 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x0": 20,
                     "x1": 30,
                     "xref": "x4",
-                    "y0": 0.5,
-                    "y1": 0.9,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y4 domain",
                 }
             ],
         ),
@@ -204,8 +207,8 @@ def _check_figure_shapes(test_input, expected, fig):
                 {
                     "type": "rect",
                     "x0": 0,
-                    "x1": 0.4,
-                    "xref": "paper",
+                    "x1": 1,
+                    "xref": "x domain",
                     "y0": 6,
                     "y1": 8,
                     "yref": "y",
@@ -217,9 +220,9 @@ def _check_figure_shapes(test_input, expected, fig):
             [
                 {
                     "type": "rect",
-                    "x0": 0.5,
-                    "x1": 0.9,
-                    "xref": "paper",
+                    "x0": 0,
+                    "x1": 1,
+                    "xref": "x4 domain",
                     "y0": 6,
                     "y1": 8,
                     "yref": "y4",
@@ -234,18 +237,18 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x0": 20,
                     "x1": 20,
                     "xref": "x3",
-                    "y0": 0.5,
-                    "y1": 0.9,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y3 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x4",
-                    "y0": 0.5,
-                    "y1": 0.9,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y4 domain",
                 },
             ],
         ),
@@ -258,17 +261,17 @@ def _check_figure_shapes(test_input, expected, fig):
                     "x1": 20,
                     "xref": "x2",
                     "y0": 0,
-                    "y1": 0.4,
-                    "yref": "paper",
+                    "y1": 1,
+                    "yref": "y2 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x4",
-                    "y0": 0.5,
-                    "y1": 0.9,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y4 domain",
                 },
             ],
         ),
@@ -291,18 +294,18 @@ def test_add_span_shape(test_input, expected, subplot_fig_fixture):
                     "x0": 20,
                     "x1": 20,
                     "xref": "x5",
-                    "y0": 0.5,
-                    "y1": 0.7,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y5 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x7",
-                    "y0": 0.75,
-                    "y1": 0.95,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y7 domain",
                 },
             ],
         ),
@@ -317,36 +320,36 @@ def test_add_span_shape(test_input, expected, subplot_fig_fixture):
                     "x0": 20,
                     "x1": 20,
                     "xref": "x2",
-                    "y0": 0.0,
-                    "y1": 0.2,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y2 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x4",
-                    "y0": 0.25,
-                    "y1": 0.45,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y4 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x6",
-                    "y0": 0.5,
-                    "y1": 0.7,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y6 domain",
                 },
                 {
                     "type": "line",
                     "x0": 20,
                     "x1": 20,
                     "xref": "x8",
-                    "y0": 0.75,
-                    "y1": 0.95,
-                    "yref": "paper",
+                    "y0": 0,
+                    "y1": 1,
+                    "yref": "y8 domain",
                 },
             ],
         ),
@@ -358,6 +361,7 @@ def test_add_span_shape_no_empty_plot(
     _check_figure_shapes(test_input, expected, subplot_empty_traces_fig_fixture)
 
 
+# TODO: this fails because it plots nothing
 @pytest.mark.parametrize(
     "test_input,expected",
     # test_input: (function,kwargs)
@@ -370,7 +374,7 @@ def test_add_span_shape_no_empty_plot(
                     "type": "line",
                     "x0": 0,
                     "x1": 1,
-                    "xref": "paper",
+                    "xref": "x domain",
                     "y0": 6,
                     "y1": 6,
                     "yref": "y",
@@ -387,7 +391,7 @@ def test_add_span_shape_no_empty_plot(
                     "xref": "x",
                     "x0": 6,
                     "x1": 6,
-                    "yref": "paper",
+                    "yref": "y domain",
                 }
             ],
         ),
@@ -431,6 +435,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
     assert ret
 
 
+# TODO: This fails
 @pytest.mark.parametrize(
     "test_input,expected",
     # test_input: (function,kwargs)
