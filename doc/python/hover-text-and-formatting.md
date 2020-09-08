@@ -34,7 +34,7 @@ jupyter:
 
 ### Hover Labels
 
-One of the most deceptively-power features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear. 
+One of the most deceptively-power features of interactive visualization using Plotly is the ability for the user to reveal more information about a data point by moving their mouse cursor over the point and having a hover label appear.
 
 There are three hover modes available in Plotly. The default setting is `layout.hovermode='closest'`, wherein a single hover label appears for the point directly underneath the cursor.
 
@@ -51,7 +51,7 @@ fig.update_traces(mode="markers+lines")
 fig.show()
 ```
 
-#### Hovermode `x` or `y` 
+#### Hovermode `x` or `y`
 
 If `layout.hovermode='x'` (or `'y'`), a single hover label appears per trace, for points at the same `x` (or `y`) value as the cursor. If multiple points in a given trace exist at the same coordinate, only one will get a hover label. In the line plot below we have forced markers to appear, to make it clearer what can be hovered over, and we have disabled the built-in Plotly Express `hovertemplate` by setting it to `None`, resulting in a more compact hover label per point:
 
@@ -112,8 +112,8 @@ fig.update_traces(mode="markers+lines")
 
 fig.update_layout(
     hoverlabel=dict(
-        bgcolor="white", 
-        font_size=16, 
+        bgcolor="white",
+        font_size=16,
         font_family="Rockwell"
     )
 )
@@ -143,7 +143,7 @@ fig.show()
 `hover_data` can also be a dictionary. Its keys are existing columns of the `dataframe` argument, or new labels. For an existing column, the values can be
 * `False` to remove the column from the hover data (for example, if one wishes to remove the column of the `x` argument)
 * `True` to add a different column, with default formatting
-* a formatting string starting with `:` for numbers [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `|` for dates in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format), for example `:.3f`, `|%a`.
+* a formatting string starting with `:` for numbers [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `|` for dates in [d3-time-format's syntax](https://github.com/d3/d3-time-format), for example `:.3f`, `|%a`.
 
 It is also possible to pass new data as values of the `hover_data` dict, either as list-like data, or inside a tuple, which first element is one of the possible values described above for existing columns, and the second element correspond to the list-like data, for example `(True, [1, 2, 3])` or `(':.1f', [1.54, 2.345])`.
 
@@ -170,7 +170,7 @@ fig.show()
 ### Customizing hover text with a hovertemplate
 
 To customize the tooltip on your graph you can use the [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) attribute of `graph_objects` tracces, which is a template string used for rendering the information that appear on hoverbox.
-This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
+This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_format), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format). In the example below, the empty `<extra></extra>` tag removes the part of the hover where the trace name is usually displayed in a contrasting color. The `<extra>` tag can be used to display other parts of the hovertemplate, it is not reserved for the trace name.
 
 Note that a hovertemplate customizes the tooltip text, while a [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate) customizes the text that appears on your chart. <br>
 
@@ -228,7 +228,7 @@ df_2007 = px.data.gapminder().query("year==2007")
 fig = px.scatter(df_2007, x="gdpPercap", y="lifeExp", log_x=True, color='continent'
                 )
 print("plotly express hovertemplate:", fig.data[0].hovertemplate)
-fig.update_traces(hovertemplate='GDP: %{x} <br>Life Expectancy: %{y}') # 
+fig.update_traces(hovertemplate='GDP: %{x} <br>Life Expectancy: %{y}') #
 fig.update_traces(hovertemplate=None, selector={'name':'Europe'}) # revert to default hover
 print("user_defined hovertemplate:", fig.data[0].hovertemplate)
 fig.show()
