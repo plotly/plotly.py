@@ -67,12 +67,21 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the anchor for the x position
             xref
                 Sets the images's x coordinate axis. If set to
-                a x axis id (e.g. "x" or "x2"), the `x`
-                position refers to an x data coordinate If set
-                to "paper", the `x` position refers to the
-                distance from the left of plot in normalized
-                coordinates where 0 (1) corresponds to the left
-                (right).
+                a  x  axis id (e.g. * x * or * x 2*), the ` x `
+                position refers to a  x  coordinate. If set to
+                "paper", the ` x ` position refers to the
+                distance from the  left  of the plotting area
+                in normalized coordinates where 0 (1)
+                corresponds to the  left  ( right ). If set to
+                a  x  axis ID followed by "domain" (separated
+                by a space), the position behaves like for
+                "paper", but refers to the distance in
+                fractions of the domain length from the  left
+                of the domain of that axis: e.g., * x 2 domain*
+                refers to the domain of the second  x  axis and
+                a  x  position of 0.5 refers to the point
+                between the  left  and the  right  of the
+                domain of the second  x  axis.
             y
                 Sets the image's y position. When `yref` is set
                 to `paper`, units are sized relative to the
@@ -81,12 +90,21 @@ class ImagesValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 Sets the anchor for the y position.
             yref
                 Sets the images's y coordinate axis. If set to
-                a y axis id (e.g. "y" or "y2"), the `y`
-                position refers to a y data coordinate. If set
-                to "paper", the `y` position refers to the
-                distance from the bottom of the plot in
-                normalized coordinates where 0 (1) corresponds
-                to the bottom (top).
+                a  y  axis id (e.g. * y * or * y 2*), the ` y `
+                position refers to a  y  coordinate. If set to
+                "paper", the ` y ` position refers to the
+                distance from the  bottom  of the plotting area
+                in normalized coordinates where 0 (1)
+                corresponds to the  bottom  ( top ). If set to
+                a  y  axis ID followed by "domain" (separated
+                by a space), the position behaves like for
+                "paper", but refers to the distance in
+                fractions of the domain length from the  bottom
+                of the domain of that axis: e.g., * y 2 domain*
+                refers to the domain of the second  y  axis and
+                a  y  position of 0.5 refers to the point
+                between the  bottom  and the  top  of the
+                domain of the second  y  axis.
 """,
             ),
             **kwargs

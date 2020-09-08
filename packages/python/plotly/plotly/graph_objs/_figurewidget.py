@@ -904,8 +904,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -1057,8 +1056,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `value` and
@@ -1333,8 +1331,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -1716,8 +1713,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -2764,8 +2760,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -3111,8 +3106,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -3471,8 +3465,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -3876,8 +3869,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -4628,8 +4620,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -4970,8 +4961,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -5115,8 +5105,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables
@@ -5366,8 +5355,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -5483,8 +5471,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `label`,
@@ -5750,8 +5737,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -6058,6 +6044,7 @@ class FigureWidget(BaseFigureWidget):
         zmax=None,
         zmid=None,
         zmin=None,
+        zsmooth=None,
         zsrc=None,
         row=None,
         col=None,
@@ -6255,6 +6242,8 @@ class FigureWidget(BaseFigureWidget):
             Sets the lower bound of the color domain. Value should
             have the same units as in `z` and if set, `zmax` must
             be set as well.
+        zsmooth
+            Picks a smoothing algorithm use to smooth `z` data.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -6327,6 +6316,7 @@ class FigureWidget(BaseFigureWidget):
             zmax=zmax,
             zmid=zmid,
             zmin=zmin,
+            zsmooth=zsmooth,
             zsrc=zsrc,
             **kwargs
         )
@@ -6490,8 +6480,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -6907,8 +6896,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -7359,8 +7347,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -7719,8 +7706,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -8228,8 +8214,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -8649,8 +8634,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -9304,8 +9288,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -9705,8 +9688,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -9849,8 +9831,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `label`,
@@ -10609,8 +10590,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -10767,8 +10747,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available.
@@ -11041,8 +11020,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -11163,8 +11141,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available.
@@ -11417,8 +11394,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -11532,8 +11508,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `a`, `b` and
@@ -11782,8 +11757,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -11923,8 +11897,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `lat`, `lon`,
@@ -12169,8 +12142,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -12280,8 +12252,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available.
@@ -12538,8 +12509,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -12666,8 +12636,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `lat`, `lon`
@@ -12903,8 +12872,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -13033,8 +13001,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `r`, `theta`
@@ -13286,8 +13253,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -13416,8 +13382,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `r`, `theta`
@@ -13685,8 +13650,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -13813,8 +13777,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `a`, `b`, `c`
@@ -14016,8 +13979,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -14351,8 +14313,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -14676,8 +14637,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -14808,8 +14768,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables
@@ -15075,8 +15034,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -15586,8 +15544,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -15710,8 +15667,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables
@@ -15943,8 +15899,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -16405,8 +16360,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -16777,8 +16731,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. The variables
             available in `hovertemplate` are the ones emitted as
             event data described at this link
@@ -16929,8 +16882,7 @@ class FigureWidget(BaseFigureWidget):
             details on the formatting syntax. Dates are formatted
             using d3-time-format's syntax %{variable|d3-time-
             format}, for example "Day: %{2019-01-01|%A}".
-            https://github.com/d3/d3-3.x-api-
-            reference/blob/master/Time-Formatting.md#format for
+            https://github.com/d3/d3-time-format#locale_format for
             details on the date formatting syntax. Every attributes
             that can be specified per-point (the ones that are
             `arrayOk: true`) are available. variables `initial`,
@@ -18334,12 +18286,19 @@ class FigureWidget(BaseFigureWidget):
             `x` value is `xclick` rather than the annotation's `x`
             value.
         xref
-            Sets the annotation's x coordinate axis. If set to an x
-            axis id (e.g. "x" or "x2"), the `x` position refers to
-            an x coordinate If set to "paper", the `x` position
-            refers to the distance from the left side of the
-            plotting area in normalized coordinates where 0 (1)
-            corresponds to the left (right) side.
+            Sets the annotation's x coordinate axis. If set to a  x
+            axis id (e.g. * x * or * x 2*), the ` x ` position
+            refers to a  x  coordinate. If set to "paper", the ` x
+            ` position refers to the distance from the  left  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  left  ( right ). If set to a  x
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            left  of the domain of that axis: e.g., * x 2 domain*
+            refers to the domain of the second  x  axis and a  x
+            position of 0.5 refers to the point between the  left
+            and the  right  of the domain of the second  x  axis.
         xshift
             Shifts the position of the whole annotation and arrow
             to the right (positive) or left (negative) by this many
@@ -18369,12 +18328,19 @@ class FigureWidget(BaseFigureWidget):
             `y` value is `yclick` rather than the annotation's `y`
             value.
         yref
-            Sets the annotation's y coordinate axis. If set to an y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            an y coordinate If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top).
+            Sets the annotation's y coordinate axis. If set to a  y
+            axis id (e.g. * y * or * y 2*), the ` y ` position
+            refers to a  y  coordinate. If set to "paper", the ` y
+            ` position refers to the distance from the  bottom  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  bottom  ( top ). If set to a  y
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            bottom  of the domain of that axis: e.g., * y 2 domain*
+            refers to the domain of the second  y  axis and a  y
+            position of 0.5 refers to the point between the  bottom
+            and the  top  of the domain of the second  y  axis.
         yshift
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
@@ -18670,12 +18636,19 @@ class FigureWidget(BaseFigureWidget):
         xanchor
             Sets the anchor for the x position
         xref
-            Sets the images's x coordinate axis. If set to a x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
-            data coordinate If set to "paper", the `x` position
-            refers to the distance from the left of plot in
-            normalized coordinates where 0 (1) corresponds to the
-            left (right).
+            Sets the images's x coordinate axis. If set to a  x
+            axis id (e.g. * x * or * x 2*), the ` x ` position
+            refers to a  x  coordinate. If set to "paper", the ` x
+            ` position refers to the distance from the  left  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  left  ( right ). If set to a  x
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            left  of the domain of that axis: e.g., * x 2 domain*
+            refers to the domain of the second  x  axis and a  x
+            position of 0.5 refers to the point between the  left
+            and the  right  of the domain of the second  x  axis.
         y
             Sets the image's y position. When `yref` is set to
             `paper`, units are sized relative to the plot height.
@@ -18683,12 +18656,19 @@ class FigureWidget(BaseFigureWidget):
         yanchor
             Sets the anchor for the y position.
         yref
-            Sets the images's y coordinate axis. If set to a y axis
-            id (e.g. "y" or "y2"), the `y` position refers to a y
-            data coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plot in
-            normalized coordinates where 0 (1) corresponds to the
-            bottom (top).
+            Sets the images's y coordinate axis. If set to a  y
+            axis id (e.g. * y * or * y 2*), the ` y ` position
+            refers to a  y  coordinate. If set to "paper", the ` y
+            ` position refers to the distance from the  bottom  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  bottom  ( top ). If set to a  y
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            bottom  of the domain of that axis: e.g., * y 2 domain*
+            refers to the domain of the second  y  axis and a  y
+            position of 0.5 refers to the point between the  bottom
+            and the  top  of the domain of the second  y  axis.
         row
             Subplot row for image. If 'all', addresses all rows in
             the specified column(s).
@@ -18993,19 +18973,23 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `xsizemode` not
             set to "pixel".
         xref
-            Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
-            coordinate. If set to "paper", the `x` position refers
-            to the distance from the left side of the plotting area
-            in normalized coordinates where 0 (1) corresponds to
-            the left (right) side. If set to an x axis id followed
-            by "domain" (separated by a space), the position
-            behaves like for "paper", but refers to the distance
-            from the left of the domain of that axis: e.g., *x2
-            domain* refers to the domain of the second x axis. If
-            the axis `type` is "log", then you must take the log of
-            your desired range. If the axis `type` is "date", then
-            you must convert the date to unix time in milliseconds.
+            Sets the shape's x coordinate axis. If set to a  x
+            axis id (e.g. * x * or * x 2*), the ` x ` position
+            refers to a  x  coordinate. If set to "paper", the ` x
+            ` position refers to the distance from the  left  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  left  ( right ). If set to a  x
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            left  of the domain of that axis: e.g., * x 2 domain*
+            refers to the domain of the second  x  axis and a  x
+            position of 0.5 refers to the point between the  left
+            and the  right  of the domain of the second  x  axis.
+            If the axis `type` is "log", then you must take the log
+            of your desired range. If the axis `type` is "date",
+            then you must convert the date to unix time in
+            milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -19030,19 +19014,19 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a y
-            axis id (e.g. "y" or "y2"), the `y` position refers to
-            a y coordinate If set to "paper", the `y` position
-            refers to the distance from the bottom of the plotting
-            area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top). If set to a y axis id followed by
-            "domain" (separated by a space), the position behaves
-            like for "paper", but refers to the distance in
-            fractions of the domain length from the bottom of the
-            domain of that axis: e.g., *y2 domain* refers to the
-            domain of the second y axis and a y position of 0.5
-            refers to the point between the bottom and the top of
-            the domain of the second y axis.
+            Sets the annotation's y coordinate axis. If set to a  y
+            axis id (e.g. * y * or * y 2*), the ` y ` position
+            refers to a  y  coordinate. If set to "paper", the ` y
+            ` position refers to the distance from the  bottom  of
+            the plotting area in normalized coordinates where 0 (1)
+            corresponds to the  bottom  ( top ). If set to a  y
+            axis ID followed by "domain" (separated by a space),
+            the position behaves like for "paper", but refers to
+            the distance in fractions of the domain length from the
+            bottom  of the domain of that axis: e.g., * y 2 domain*
+            refers to the domain of the second  y  axis and a  y
+            position of 0.5 refers to the point between the  bottom
+            and the  top  of the domain of the second  y  axis.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
