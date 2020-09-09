@@ -3577,7 +3577,15 @@ Invalid property path '{key_path_str}' for layout
             # want to draw a shape if there is no trace)
             if not any(
                 t == (shape["xref"], shape["yref"])
-                for t in [(d["xaxis"], d["yaxis"]) for d in self.data]
+                for t in [
+                    # if a trace exists but has no xaxis or yaxis keys, then it
+                    # is plotted with xaxis 'x' and yaxis 'y'
+                    (
+                        "x" if d["xaxis"] is None else d["xaxis"],
+                        "y" if d["yaxis"] is None else d["yaxis"],
+                    )
+                    for d in self.data
+                ]
             ):
                 return None
         # set the ref to "<axis_id> domain" so that its size is based on the
