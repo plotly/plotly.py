@@ -419,7 +419,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
     # look up domains in fig
     corrects = []
     for d, ax in expected:
-        dom = fig["layout"][ax]["domain"]
+        dom = [0, 1]
         if ax[: len("xaxis")] == "xaxis":
             d["x0"], d["x1"] = dom
         elif ax[: len("yaxis")] == "yaxis":
@@ -429,6 +429,10 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
         corrects.append(d)
     f, kwargs = test_input
     f(fig, **kwargs)
+    if len(fig.layout.shapes) == 0:
+        assert False
+    if len(fig.layout.shapes) != len(corrects):
+        assert False
     ret = True
     for s, d in zip(fig.layout.shapes, corrects):
         ret &= _cmp_partial_dict(s, d)
@@ -450,7 +454,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
                         "x0": 1.5,
                         "x1": 1.5,
                         "xref": "x2",
-                        "yref": "paper",
+                        "yref": "y2 domain",
                     },
                     "yaxis2",
                 ),
@@ -460,7 +464,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
                         "x0": 1.5,
                         "x1": 1.5,
                         "xref": "x6",
-                        "yref": "paper",
+                        "yref": "y6 domain",
                     },
                     "yaxis6",
                 ),
@@ -475,7 +479,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
                         "yref": "y5",
                         "y0": 1.5,
                         "y1": 1.5,
-                        "xref": "paper",
+                        "xref": "x5 domain",
                     },
                     "xaxis5",
                 ),
@@ -485,7 +489,7 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
                         "yref": "y6",
                         "y0": 1.5,
                         "y1": 1.5,
-                        "xref": "paper",
+                        "xref": "x6 domain",
                     },
                     "xaxis6",
                 ),
