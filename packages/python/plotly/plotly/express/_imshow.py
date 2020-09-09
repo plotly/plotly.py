@@ -189,8 +189,13 @@ def imshow(
         their lengths must match the lengths of the second and first dimensions of the
         img argument. They are auto-populated if the input is an xarray.
 
-    facet_col: int, optional (default None)
-        axis number along which the image array is slices to create a facetted plot.
+    animation_frame: int or str, optional (default None)
+        axis number along which the image array is sliced to create an animation plot.
+        If `img` is an xarray, `animation_frame` can be the name of one the dimensions.
+
+    facet_col: int or str, optional (default None)
+        axis number along which the image array is sliced to create a facetted plot.
+        If `img` is an xarray, `facet_col` can be the name of one the dimensions.
 
     facet_col_wrap: int
         Maximum number of facet columns. Wraps the column variable at this width,
@@ -307,12 +312,6 @@ def imshow(
     slices = range(nslices)
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        # if binary_string:
-        #    raise ValueError(
-        #        "It is not possible to use binary image strings for xarrays."
-        #        "Please pass your data as a numpy array instead using"
-        #        "`img.values`"
-        #    )
         dims = list(img.dims)
         if slice_through:
             slice_index = facet_col if facet_col is not None else animation_frame
