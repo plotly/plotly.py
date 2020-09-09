@@ -298,7 +298,7 @@ examples on how to use plotly and datashader.
 
 _introduced in plotly 4.7_
 
-It can be useful to add shapes to an image trace, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm. 
+It can be useful to add shapes to an image trace, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm.
 
 In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
@@ -306,7 +306,7 @@ In order to enable shape drawing, you need to
 
 The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
 
-Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
 ```python
 import plotly.express as px
@@ -400,8 +400,5 @@ fig.show()
 ```
 
 #### Reference
-<<<<<<< HEAD
-See https://plotly.com/python/reference/#image for more information and chart attribute options!
-=======
+
 See https://plotly.com/python/reference/image/ for more information and chart attribute options!
->>>>>>> doc-prod
