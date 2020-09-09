@@ -11,14 +11,8 @@ releases and forum announcements to do :)
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
 `plotlywidget`/`jupyterlab-plotly` with matching versions.
 
-Note: it's easier to lock all three versions together, even if it means we occasionally
-push no-change versions to NPM/PyPI/Conda.
-
-### Create a release branch
-
-After all of the functionality for the release has been merged into master,
-create a branch named `release_X.Y.Z`. This branch will become the
-final version
+> Note: it's easier to lock all three versions together, even if it means we occasionally
+> push no-change versions to NPM/PyPI/Conda.
 
 ### Finalize changelog
 
@@ -33,28 +27,119 @@ been updated, include this as the first `Updated` entry. Call out any
 noteable changes as sub-bullets (new trace types in particular), and provide
 a link to the plotly.js CHANGELOG.
 
-As the first entry in the changelog, include a `JupyterLab Versions` section.
-Here, document the versions of `plotlywidget`,
-`@jupyter-widgets/jupyterlab-manager`, `jupyterlab`, and
-`@jupyterlab/plotly-extension` that are known to be compatible with this
-version of `plotly.py`.
+### Finalize versions
 
-Note: Use the official (not release candidate) versions in the CHANGELOG.
+Manually update the versions to `X.Y.Z` in the files
+specified below.
 
-### Update README.md installation instructions
+ - `plotly/_widget_version.py`:
+   + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
+ - `packages/javascript/plotlywidget/package.json`
+   + Update `"version"` to `X.Y.Z`
+   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
+ - `packages/javascript/jupyterlab-plotly/package.json`
+   + **Ensure the version of `plotly.js` matches the one in `plotlywidget`**
+   + Update `"version"` to `X.Y.Z`
+   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
+   + Run `rm -rf node_modules && npm install && npm run build`
+ - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
+ - Ensure that the diff in `package-lock.json` seems sane
+ - Commit and push.
 
-Update the installation instructions in the README to the new versions of all
-of the dependencies. Use the release candidate versions, this way we can point
-people to the README of the `release_X.Y.Z` as the instructions for trying out
-the release candidate.
+### Tag the release
 
-Note that the conda installation instructions must include
-"-c plotly/label/test" rather than "-c plotly" in order to install the
-release candidate version.
+Make sure tests pass CI checks, then tag this commit as `vX.Y.Z` (e.g. `v3.1.1`) and push the tag.
 
-Update the `doc/python/getting-started.md` file with the same version numbers.
+```bash
+(plotly_dev) $ git checkout master
+(plotly_dev) $ git stash
+(plotly_dev) $ git pull origin master
+(plotly_dev) $ git tag vX.Y.Z
+(plotly_dev) $ git push origin vX.Y.Z
+```
 
-Commit Changelog, README and getting-started updates.
+### Publishing to PyPI
+
+Build and publish the final version to PyPI
+
+```bash
+(plotly_dev) $ cd packages/python/plotly
+(plotly_dev) $ rm -rf dist
+(plotly_dev) $ python setup.py sdist bdist_wheel
+(plotly_dev) $ rm -f dist/*dirty*
+(plotly_dev) $ twine upload dist/plotly-X.Y.Z*
+```
+
+Note: this will intentionally fail if your current git tree is dirty, because we want the tag
+to reflect what is being released, and the version number comes from the tag and the dirty-state.
+
+After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
+```bash
+$ pip install plotly --upgrade
+```
+
+And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
+
+### Publish JS Extensions to NPM
+
+Finally, publish the final version of the extensions to NPM with:
+
+```bash
+cd packages/javascript/jupyterlab-plotly
+npm run build && npm publish --access public
+cd packages/javascript/plotlywidget
+npm run build && npm publish --access public
+```
+
+### Publishing to the plotly conda channel
+
+To publish package to the plotly anaconda channel you'll need to have the
+anaconda or miniconda distribution installed, and you'll need to have the
+`anaconda-client` package installed.
+
+```bash
+(plotly_dev) $ conda config --set anaconda_upload no
+(plotly_dev) $ conda build recipe/
+```
+
+Then upload artifacts to the anaconda channel by running the upload command that `conda`
+provides, which looks something like this:
+
+```
+$ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
+```
+
+### Add GitHub Release entry
+
+1. Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
+2. Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
+3. Copy the changelog section for this version as the "Describe this release"
+
+### Update documentation site
+
+1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
+    - `README.md`
+    - `doc/python/getting-started.md`
+    - `doc/apidoc/conf.py`
+    - `doc/requirements.txt`
+    - `binder/requirements.txt`
+2. `doc-prod` should already have been merged on a regular basis into `master`, but
+start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
+to features in the release.
+3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
+    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py` fixing any errors that come up
+    2. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
+    3. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
+    4. Commit and push the changes to `master` in that repo
+
+### Notify Stakeholders
+
+* Post an announcement to the Plotly Python forum, with links to the README installation instructions and to the CHANGELOG.
+* Follow up on issues resolved in this release or forum posts with better answers as of this release
+
+## Release *Candidate* process - `plotly` package
+
 
 ### Bump to release candidate version
 
@@ -68,7 +153,7 @@ specified below.
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
  - `packages/javascript/jupyterlab-plotly/package.json`
-   + Ensure the version of `plotly.js` matches the one in `plotlywidget`
+   + **Ensure the version of `plotly.js` matches the one in `plotlywidget`**
    + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
@@ -105,7 +190,7 @@ And, you'll need to be a maintainer on PyPI. Then, from inside the repository:
 (plotly_dev) $ git stash
 (plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ rm dist/*dirty*
+(plotly_dev) $ rm -f dist/*dirty*
 (plotly_dev) $ twine upload dist/plotly-X.Y.Zrc1*
 ```
 
@@ -168,131 +253,6 @@ requests that are resolved in this version to try out the release candidate.
 If problems are found in the release candidate, fix them on the release
 branch and then publish another release candidate with the candidate number
 incremented.
-
-### Finalize CHANGELOG and README
-
-Update CHANGELOG with release date and update README with final versions.
-
-In the conda installation instructions, be sure to change the
-"-c plotly/label/test" argument to "-c plotly"
-
-Update the doc/python/getting-started.md file with the same version numbers.
-
-Commit Changelog, README and getting-started updates.
-
-### Finalize versions
-
-When no problems are identified in the release candidate, remove the
-release candidate suffix from the following version strings:
-
- - `plotly/_widget_version.py`:
-   + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
- - `packages/javascript/plotlywidget/package.json`
-   + Update `"version"` to `X.Y.Z`
-   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
- - `packages/javascript/jupyterlab-plotly/package.json`
-   + Ensure the version of `plotly.js` matches the one in `plotlywidget`
-   + Update `"version"` to `X.Y.Z`
-   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
- - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
- - Ensure that the diff in `package-lock.json` seems sane
- - Commit and push to the release branch.
-
-### Merge release into master
-
-Make sure the integration tests are passing on the release branch, then merge
-it into master on GitHub.
-
-Make sure tests also pass on master, then update your local master,
-tag this merge commit as `vX.Y.Z` (e.g. `v3.1.1`)
-
-push the tag.
-
-```bash
-(plotly_dev) $ git checkout master
-(plotly_dev) $ git stash
-(plotly_dev) $ git pull origin master
-(plotly_dev) $ git tag vX.Y.Z
-(plotly_dev) $ git push origin vX.Y.Z
-```
-
-### Publishing to PyPI
-
-Publish the final version to PyPI
-
-```bash
-(plotly_dev) $ cd packages/python/plotly
-(plotly_dev) $ rm -rf dist
-(plotly_dev) $ python setup.py sdist bdist_wheel
-(plotly_dev) $ rm dist/*dirty*
-(plotly_dev) $ twine upload dist/plotly-X.Y.Z*
-```
-
-Note: this will intentionally fail if your current git tree is dirty, because we want the tag
-to reflect what is being released, and the version number comes from the tag and the dirty-state.
-
-After it has uploaded, move to another environment and double+triple check that you are able to upgrade ok:
-```bash
-$ pip install plotly --upgrade
-```
-
-And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
-
-### Publish JS Extensions to NPM
-
-Finally, publish the final version of the extensions to NPM with:
-
-```bash
-cd packages/javascript/jupyterlab-plotly
-npm run build && npm publish --access public
-cd packages/javascript/plotlywidget
-npm run build && npm publish --access public
-```
-
-### Publishing to the plotly conda channel
-
-Follow the anaconda upload instructions as described for the release candidate
-above, except:
-
- - Do not include the `--label test` argument when uploading
-
-```
-$ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
-```
-
-### Add GitHub Release entry
-
-Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
-
-Enter the vX.Y.Z tag
-
-Make "Release title" the same string as the tag.
-
-Copy changelog section for this version as the "Describe this release"
-
-### Update documentation site
-
-1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
-    - `README.md`
-    - `doc/python/getting-started.md`
-    - `doc/apidoc/conf.py`
-    - `doc/requirements.txt`
-    - `binder/requirements.txt`
-2. `doc-prod` should already have been merged on a regular basis into `master`, but
-start by doing it first if not. Then merge `master` into `doc-prod` to deploy the doc related
-to features in the release.
-3. in a clone of the [`graphing-library-docs` repo](https://github.com/plotly/graphing-library-docs):
-    1. bump the version of Plotly.js with `cd _data && python get_plotschema.py` fixing any errors that come up 
-    2. rebuild the Algolia `schema` index with `ALGOLIA_API_KEY=<key> make update_ref_search`
-    3. Rebuild the Algolia `python` index with `ALGOLIA_API_KEY=<key> make update_python_search`
-    4. Commit and push the changes to `master` in that repo
-
-### Post announcement
-
-Post an announcement to the Plotly Python forum, with links to the
-README installation instructions and to the CHANGELOG.
 
 ## Release process - `plotly-geo` package
 
