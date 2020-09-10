@@ -279,21 +279,15 @@ def imshow(
     labels = labels.copy()
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        if binary_string:
-            raise ValueError(
-                "It is not possible to use binary image strings for xarrays."
-                "Please pass your data as a numpy array instead using"
-                "`img.values`"
-            )
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
             if np.issubdtype(img.coords[ax].dtype, np.datetime64):
                 img.coords[ax] = img.coords[ax].astype(str)
         if x is None:
-            x = img.coords[x_label]
+            x = img.coords[x_label].values
         if y is None:
-            y = img.coords[y_label]
+            y = img.coords[y_label].values
         if aspect is None:
             aspect = "auto"
         if labels.get("x", None) is None:
@@ -405,11 +399,15 @@ def imshow(
             )
         x0, y0, dx, dy = (None,) * 4
         if x is not None:
-            x0 = x[0]
-            dx = x[1] - x[0]
+            x = np.asanyarray(x)
+            if np.issubdtype(x.dtype, np.number):
+                x0 = x[0]
+                dx = x[1] - x[0]
         if y is not None:
-            y0 = y[0]
-            dy = y[1] - y[0]
+            y = np.asanyarray(y)
+            if np.issubdtype(y.dtype, np.number):
+                y0 = y[0]
+                dy = y[1] - y[0]
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
@@ -438,10 +436,21 @@ def imshow(
             trace = go.Image(source=img_str, x0=x0, y0=y0, dx=dx, dy=dy)
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel, x0=x0, y0=y0, dx=dx, dy=dy)
+            trace = go.Image(
+                z=img,
+                zmin=zmin,
+                zmax=zmax,
+                colormodel=colormodel,
+                x0=x0,
+                y0=y0,
+                dx=dx,
+                dy=dy,
+            )
         layout = {}
-        if origin == "lower":
+        if origin == "lower" or (dy is not None and dy < 0):
             layout["yaxis"] = dict(autorange=True)
+        if dx is not None and dx < 0:
+            layout["xaxis"] = dict(autorange="reversed")
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "

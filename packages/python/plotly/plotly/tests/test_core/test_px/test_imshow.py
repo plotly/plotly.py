@@ -205,6 +205,16 @@ def test_imshow_labels_and_ranges():
         fig = px.imshow([[1, 2], [3, 4], [5, 6]], x=["a"])
 
 
+def test_imshow_ranges_image_trace():
+    fig = px.imshow(img_rgb, x=[1, 11, 21])
+    assert fig.data[0].dx == 10
+    assert fig.data[0].x0 == 1
+    fig = px.imshow(img_rgb, x=[21, 11, 1])
+    assert fig.data[0].dx == -10
+    assert fig.data[0].x0 == 21
+    assert fig.layout.xaxis.autorange == "reversed"
+
+
 def test_imshow_dataframe():
     df = px.data.medals_wide(indexed=False)
     fig = px.imshow(df)
