@@ -122,7 +122,6 @@ $ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 ### Update documentation site
 
 1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
-    - `README.md`
     - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`
