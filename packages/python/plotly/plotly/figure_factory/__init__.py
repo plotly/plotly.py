@@ -29,11 +29,15 @@ from plotly.figure_factory._violin import create_violin
 
 if optional_imports.get_module("pandas") is not None:
     from plotly.figure_factory._county_choropleth import create_choropleth
+    from plotly.figure_factory._ecdf import create_ecdf
     from plotly.figure_factory._hexbin_mapbox import create_hexbin_mapbox
 else:
 
     def create_choropleth(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_choropleth`")
+
+    def create_ecdf(*args, **kwargs):
+        raise ImportError("Please install pandas to use `create_ecdf`")
 
     def create_hexbin_mapbox(*args, **kwargs):
         raise ImportError("Please install pandas to use `create_hexbin_mapbox`")
