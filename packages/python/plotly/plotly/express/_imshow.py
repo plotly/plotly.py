@@ -403,6 +403,13 @@ def imshow(
                 _vectorize_zvalue(zmin, mode="min"),
                 _vectorize_zvalue(zmax, mode="max"),
             )
+        x0, y0, dx, dy = (None,) * 4
+        if x is not None:
+            x0 = x[0]
+            dx = x[1] - x[0]
+        if y is not None:
+            y0 = y[0]
+            dy = y[1] - y[0]
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
@@ -428,10 +435,10 @@ def imshow(
                 compression=binary_compression_level,
                 ext=binary_format,
             )
-            trace = go.Image(source=img_str)
+            trace = go.Image(source=img_str, x0=x0, y0=y0, dx=dx, dy=dy)
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)
+            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel, x0=x0, y0=y0, dx=dx, dy=dy)
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
