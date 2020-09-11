@@ -35,7 +35,7 @@ jupyter:
 
 ### Filled Area Chart
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape. 
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -325,6 +325,83 @@ fig.add_shape(
             ),
             fillcolor="PaleTurquoise",
         )
+
+fig.show()
+```
+
+#### A rectangle placed relative to axes
+
+```python
+import plotly.graph_objects as go
+
+# Make an empty plot for demonstration purposes
+fig = go.Figure()
+xaxisrange = [0, 3]
+yaxisrange = [1, 4]
+fig.add_trace(go.Scatter(x=[], y=[], mode="markers"))
+fig.update_layout(
+    dict(
+        xaxis=dict(range=xaxisrange),
+        yaxis=dict(range=yaxisrange),
+    )
+)
+
+# Add a shape whose x and y coordinates refer to the domains of the x and y axes
+fig.add_shape(
+    type="rect",
+    xref="x domain",
+    yref="y domain",
+    x0=0.8,
+    x1=0.9,
+    y0=0.8,
+    y1=0.9,
+)
+
+# Add an annotation whose x and y coordinates also refer to the domains of the x
+# and y axes
+fig.add_annotation(
+    text="A box in the the corner",
+    xref="x domain",
+    yref="y domain",
+    x=0.85,
+    y=0.85,
+    axref="x domain",
+    ayref="y domain",
+    ax=0.5,
+    ay=0.5,
+    arrowhead=2,
+)
+
+# Make two buttons, one that shrinks the domains, and one that returns them to full size.
+fig.update_layout(
+    updatemenus=[
+        dict(
+            buttons=[
+                dict(
+                    args=[
+                        dict(
+                            yaxis=dict(domain=[0.25, 0.75], range=yaxisrange),
+                            xaxis=dict(domain=[0.1, 0.6], range=xaxisrange),
+                        )
+                    ],
+                    label="Shrink y-axis",
+                    method="relayout",
+                ),
+                dict(
+                    args=[
+                        dict(
+                            yaxis=dict(domain=[0, 1], range=yaxisrange),
+                            xaxis=dict(domain=[0, 1], range=xaxisrange),
+                        )
+                    ],
+                    label="Full y-axis",
+                    method="relayout",
+                ),
+            ],
+            type="buttons",
+        )
+    ]
+)
 
 fig.show()
 ```
@@ -724,14 +801,14 @@ You can create layout shapes programatically, but you can also draw shapes manua
 
 This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
 
-Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can 
+Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 - drag and resize it for lines, rectangles and circles/ellipses
 - drag and move individual vertices for closed paths
 - move individual vertices for open paths.
 
-An activated shape is deleted by cliking on the `eraseshape` button.
+An activated shape is deleted by clicking on the `eraseshape` button.
 
-Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
 ```python
 import plotly.graph_objects as go
