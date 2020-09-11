@@ -34,7 +34,7 @@ class Image(_BaseLayoutHierarchyType):
         Specifies whether images are drawn below or above traces. When
         `xref` and `yref` are both set to `paper`, image is drawn below
         the entire plot area.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['below', 'above']
@@ -61,7 +61,7 @@ class Image(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -82,7 +82,7 @@ class Image(_BaseLayoutHierarchyType):
     def opacity(self):
         """
         Sets the opacity of the image.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -104,7 +104,7 @@ class Image(_BaseLayoutHierarchyType):
         Sets the image container size horizontally. The image will be
         sized based on the `position` value. When `xref` is set to
         `paper`, units are sized relative to the plot width.
-    
+
         The 'sizex' property is a number and may be specified as:
           - An int or float
 
@@ -126,7 +126,7 @@ class Image(_BaseLayoutHierarchyType):
         Sets the image container size vertically. The image will be
         sized based on the `position` value. When `yref` is set to
         `paper`, units are sized relative to the plot height.
-    
+
         The 'sizey' property is a number and may be specified as:
           - An int or float
 
@@ -146,7 +146,7 @@ class Image(_BaseLayoutHierarchyType):
     def sizing(self):
         """
         Specifies which dimension of the image to constrain.
-    
+
         The 'sizing' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['fill', 'contain', 'stretch']
@@ -169,7 +169,7 @@ class Image(_BaseLayoutHierarchyType):
         Specifies the URL of the image to be used. The URL must be
         accessible from the domain where the plot code is run, and can
         be either relative or absolute.
-    
+
         The 'source' property is an image URI that may be specified as:
           - A remote image URI string
             (e.g. 'http://www.somewhere.com/image.png')
@@ -202,7 +202,7 @@ class Image(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -223,7 +223,7 @@ class Image(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this image is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -245,7 +245,7 @@ class Image(_BaseLayoutHierarchyType):
         Sets the image's x position. When `xref` is set to `paper`,
         units are sized relative to the plot height. See `xref` for
         more info
-    
+
         The 'x' property accepts values of any type
 
         Returns
@@ -264,7 +264,7 @@ class Image(_BaseLayoutHierarchyType):
     def xanchor(self):
         """
         Sets the anchor for the x position
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'center', 'right']
@@ -296,7 +296,7 @@ class Image(_BaseLayoutHierarchyType):
         domain of the second  x  axis and a  x  position of 0.5 refers
         to the point between the  left  and the  right  of the domain
         of the second  x  axis.
-    
+
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -321,7 +321,7 @@ class Image(_BaseLayoutHierarchyType):
         Sets the image's y position. When `yref` is set to `paper`,
         units are sized relative to the plot height. See `yref` for
         more info
-    
+
         The 'y' property accepts values of any type
 
         Returns
@@ -340,7 +340,7 @@ class Image(_BaseLayoutHierarchyType):
     def yanchor(self):
         """
         Sets the anchor for the y position.
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'middle', 'bottom']
@@ -372,7 +372,7 @@ class Image(_BaseLayoutHierarchyType):
         domain of the second  y  axis and a  y  position of 0.5 refers
         to the point between the  bottom  and the  top  of the domain
         of the second  y  axis.
-    
+
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -501,7 +501,7 @@ class Image(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Image object
-        
+
         Parameters
         ----------
         arg

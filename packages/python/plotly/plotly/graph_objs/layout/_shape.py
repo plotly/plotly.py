@@ -40,7 +40,7 @@ class Shape(_BaseLayoutHierarchyType):
         Determines whether the shape could be activated for edit or
         not. Has no effect when the older editable shapes mode is
         enabled via `config.editable` or `config.edits.shapePosition`.
-    
+
         The 'editable' property must be specified as a bool
         (either True, or False)
 
@@ -61,7 +61,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the color filling the shape's interior. Only applies to
         closed shapes.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -123,7 +123,7 @@ class Shape(_BaseLayoutHierarchyType):
         interior. For more info please visit
         https://developer.mozilla.org/en-
         US/docs/Web/SVG/Attribute/fill-rule
-    
+
         The 'fillrule' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['evenodd', 'nonzero']
@@ -144,7 +144,7 @@ class Shape(_BaseLayoutHierarchyType):
     def layer(self):
         """
         Specifies whether shapes are drawn below or above traces.
-    
+
         The 'layer' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['below', 'above']
@@ -169,9 +169,9 @@ class Shape(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.shape.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the line color.
                 dash
@@ -204,7 +204,7 @@ class Shape(_BaseLayoutHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -225,7 +225,7 @@ class Shape(_BaseLayoutHierarchyType):
     def opacity(self):
         """
         Sets the opacity of the shape.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -263,7 +263,7 @@ class Shape(_BaseLayoutHierarchyType):
         components of path strings, we can't use either to separate
         date from time parts. Therefore we'll use underscore for this
         purpose: 2015-02-21_13:45:56.789
-    
+
         The 'path' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -291,7 +291,7 @@ class Shape(_BaseLayoutHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -320,7 +320,7 @@ class Shape(_BaseLayoutHierarchyType):
         (`x1`,`y0`), (`x1`,`y1`), (`x0`,`y1`), (`x0`,`y0`) with respect
         to the axes' sizing mode. If "path", draw a custom SVG path
         using `path`. with respect to the axes' sizing mode.
-    
+
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['circle', 'rect', 'path', 'line']
@@ -341,7 +341,7 @@ class Shape(_BaseLayoutHierarchyType):
     def visible(self):
         """
         Determines whether or not this shape is visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -362,7 +362,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's starting x position. See `type` and
         `xsizemode` for more info.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -382,7 +382,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's end x position. See `type` and `xsizemode` for
         more info.
-    
+
         The 'x1' property accepts values of any type
 
         Returns
@@ -405,7 +405,7 @@ class Shape(_BaseLayoutHierarchyType):
         and x coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
         when `xsizemode` not set to "pixel".
-    
+
         The 'xanchor' property accepts values of any type
 
         Returns
@@ -438,7 +438,7 @@ class Shape(_BaseLayoutHierarchyType):
         must take the log of your desired range. If the axis `type` is
         "date", then you must convert the date to unix time in
         milliseconds.
-    
+
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -468,7 +468,7 @@ class Shape(_BaseLayoutHierarchyType):
         `x0`, `x1` and x coordinates within `path` are pixels relative
         to `xanchor`. This way, the shape can have a fixed width while
         maintaining a position relative to data or plot fraction.
-    
+
         The 'xsizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['scaled', 'pixel']
@@ -490,7 +490,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's starting y position. See `type` and
         `ysizemode` for more info.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -510,7 +510,7 @@ class Shape(_BaseLayoutHierarchyType):
         """
         Sets the shape's end y position. See `type` and `ysizemode` for
         more info.
-    
+
         The 'y1' property accepts values of any type
 
         Returns
@@ -533,7 +533,7 @@ class Shape(_BaseLayoutHierarchyType):
         and y coordinates within `path` are relative to. E.g. useful to
         attach a pixel sized shape to a certain data value. No effect
         when `ysizemode` not set to "pixel".
-    
+
         The 'yanchor' property accepts values of any type
 
         Returns
@@ -563,7 +563,7 @@ class Shape(_BaseLayoutHierarchyType):
         domain of the second  y  axis and a  y  position of 0.5 refers
         to the point between the  bottom  and the  top  of the domain
         of the second  y  axis.
-    
+
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
@@ -593,7 +593,7 @@ class Shape(_BaseLayoutHierarchyType):
         `y0`, `y1` and y coordinates within `path` are pixels relative
         to `yanchor`. This way, the shape can have a fixed height while
         maintaining a position relative to data or plot fraction.
-    
+
         The 'ysizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['scaled', 'pixel']
@@ -799,7 +799,7 @@ class Shape(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Shape object
-        
+
         Parameters
         ----------
         arg

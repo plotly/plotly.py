@@ -7,7 +7,7 @@ class Figure(BaseFigure):
     ):
         """
         Create a new :class:Figure instance
-        
+
         Parameters
         ----------
         data
@@ -34,21 +34,21 @@ class Figure(BaseFigure):
                              'scatterternary', 'splom', 'streamtube',
                              'sunburst', 'surface', 'table', 'treemap',
                              'violin', 'volume', 'waterfall']
-        
+
                 - All remaining properties are passed to the constructor of
                   the specified trace type
-        
+
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
-            
+
         layout
             The 'layout' property is an instance of Layout
             that may be specified as:
               - An instance of :class:`plotly.graph_objs.Layout`
               - A dict of string/value properties that will be passed
                 to the Layout constructor
-        
+
                 Supported dict properties:
-                    
+
                     activeshape
                         :class:`plotly.graph_objects.layout.Activeshape
                         ` instance or dict with compatible properties
@@ -536,16 +536,16 @@ class Figure(BaseFigure):
                     yaxis
                         :class:`plotly.graph_objects.layout.YAxis`
                         instance or dict with compatible properties
-            
+
         frames
             The 'frames' property is a tuple of instances of
             Frame that may be specified as:
               - A list or tuple of instances of plotly.graph_objs.Frame
               - A list or tuple of dicts of string/value properties that
                 will be passed to the Frame constructor
-        
+
                 Supported dict properties:
-                    
+
                     baseframe
                         The name of the frame into which this frame's
                         properties are merged before applying. This is
@@ -569,7 +569,7 @@ class Figure(BaseFigure):
                     traces
                         A list of trace indices that identify the
                         respective traces in the data attribute
-            
+
         skip_invalid: bool
             If True, invalid properties in the figure specification will be
             skipped silently. If False (default) invalid properties in the
@@ -613,7 +613,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Area trace
-        
+
         Parameters
         ----------
         customdata
@@ -835,7 +835,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Bar trace
-        
+
         The data visualized by the span of the bars is set in `y` if
         `orientation` is set th "v" (the default) and the labels are
         set in `x`. By setting `orientation` to "h", the roles are
@@ -1282,7 +1282,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Barpolar trace
-        
+
         The data visualized by the radial span of the bars is set in
         `r`
 
@@ -1620,7 +1620,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Box trace
-        
+
         Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The
         second quartile (Q2, i.e. the median) is marked by a line
         inside the box. The fences grow outward from the boxes' edges,
@@ -2137,7 +2137,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Candlestick trace
-        
+
         The candlestick is a style of financial chart describing open,
         high, low and close for a given `x` coordinate (most likely
         time). The boxes represent the spread between the `open` and
@@ -2416,7 +2416,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Carpet trace
-        
+
         The data describing carpet axis layout is set in `y` and
         (optionally) also `x`. If only `y` is present, `x` the plot is
         interpreted as a cheater plot and is filled in using the `y`
@@ -2676,7 +2676,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Choropleth trace
-        
+
         The data that describes the choropleth value-to-color mapping
         is set in `z`. The geographic locations corresponding to each
         value in `z` are set in `locations`.
@@ -3024,7 +3024,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Choroplethmapbox trace
-        
+
         GeoJSON features to be filled are set in `geojson` The data
         that describes the choropleth value-to-color mapping is set in
         `locations` and `z`.
@@ -3376,7 +3376,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Cone trace
-        
+
         Use cone traces to visualize vector fields.  Specify a vector
         field using 6 1D arrays, 3 position arrays `x`, `y` and `z` and
         3 vector component arrays `u`, `v`, `w`. The cones are drawn
@@ -3773,7 +3773,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Contour trace
-        
+
         The data from which contour lines are computed is set in `z`.
         Data in `z` must be a 2D list of numbers. Say that `z` has N
         rows and M columns, then by default, these N rows correspond to
@@ -4196,7 +4196,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Contourcarpet trace
-        
+
         Plots contours on either the first carpet axis or the carpet
         axis with a matching `carpet` attribute. Data `z` is
         interpreted as matching that of the corresponding carpet axis.
@@ -4548,7 +4548,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Densitymapbox trace
-        
+
         Draws a bivariate kernel density estimation with a Gaussian
         kernel from `lon` and `lat` coordinates and optional `z` values
         using a colorscale.
@@ -4901,7 +4901,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Funnel trace
-        
+
         Visualize stages in a process using length-encoded bars. This
         trace can be used to show data in either a part-to-whole
         representation wherein each item appears in a single stage, or
@@ -5306,7 +5306,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Funnelarea trace
-        
+
         Visualize stages in a process using area-encoded trapezoids.
         This trace can be used to show data in a part-to-whole
         representation similar to a "pie" trace, wherein each item
@@ -5644,7 +5644,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Heatmap trace
-        
+
         The data that describes the heatmap value-to-color mapping is
         set in `z`. Data in `z` can either be a 2D list of values
         (ragged or not) or a 1D array of values. In the case where `z`
@@ -6053,7 +6053,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Heatmapgl trace
-        
+
         WebGL version of the heatmap trace type.
 
         Parameters
@@ -6381,7 +6381,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Histogram trace
-        
+
         The sample data from which statistics are computed is set in
         `x` for vertically spanning histograms and in `y` for
         horizontally spanning histograms. Binning options are set
@@ -6785,7 +6785,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Histogram2d trace
-        
+
         The sample data from which statistics are computed is set in
         `x` and `y` (where `x` and `y` represent marginal
         distributions, binning is set in `xbins` and `ybins` in this
@@ -7228,7 +7228,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Histogram2dContour trace
-        
+
         The sample data from which statistics are computed is set in
         `x` and `y` (where `x` and `y` represent marginal
         distributions, binning is set in `xbins` and `ybins` in this
@@ -7638,7 +7638,6 @@ class Figure(BaseFigure):
         metasrc=None,
         name=None,
         opacity=None,
-        source=None,
         stream=None,
         text=None,
         textsrc=None,
@@ -7660,7 +7659,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Image trace
-        
+
         Display an image, i.e. data on a 2D regular raster. By default,
         when an image is displayed in a subplot, its y axis will be
         reversed (ie. `autorange: 'reversed'`), constrained to the
@@ -7672,9 +7671,7 @@ class Figure(BaseFigure):
         ----------
         colormodel
             Color model used to map the numerical color components
-            described in `z` into colors. If `source` is specified,
-            this attribute will be set to `rgba256` otherwise it
-            defaults to `rgb`.
+            described in `z` into colors.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -7757,10 +7754,6 @@ class Figure(BaseFigure):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
-        source
-            Specifies the data URI of the image to be visualized.
-            The URI consists of "data:image/[<media
-            subtype>][;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -7818,8 +7811,7 @@ class Figure(BaseFigure):
             component. Note that the default value will depend on
             the colormodel. For the `rgb` colormodel, it is [255,
             255, 255]. For the `rgba` colormodel, it is [255, 255,
-            255, 1]. For the `rgba256` colormodel, it is [255, 255,
-            255, 255]. For the `hsl` colormodel, it is [360, 100,
+            255, 1]. For the `hsl` colormodel, it is [360, 100,
             100]. For the `hsla` colormodel, it is [360, 100, 100,
             1].
         zmin
@@ -7827,8 +7819,7 @@ class Figure(BaseFigure):
             component. Note that the default value will depend on
             the colormodel. For the `rgb` colormodel, it is [0, 0,
             0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For
-            the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
-            `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
+            the `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
@@ -7879,7 +7870,6 @@ class Figure(BaseFigure):
             metasrc=metasrc,
             name=name,
             opacity=opacity,
-            source=source,
             stream=stream,
             text=text,
             textsrc=textsrc,
@@ -7925,7 +7915,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Indicator trace
-        
+
         An indicator is used to visualize a single `value` along with
         some contextual information such as `steps` or a `threshold`,
         using a combination of three visual elements: a number, a
@@ -8127,7 +8117,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Isosurface trace
-        
+
         Draws isosurfaces between iso-min and iso-max values with
         coordinates given by four 1-dimensional arrays containing the
         `value`, `x`, `y` and `z` of every vertex of a uniform or non-
@@ -8519,7 +8509,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Mesh3d trace
-        
+
         Draws sets of triangles with coordinates given by three
         1-dimensional arrays in `x`, `y`, `z` and (1) a sets of `i`,
         `j`, `k` indices (2) Delaunay triangulation or (3) the Alpha-
@@ -8975,7 +8965,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Ohlc trace
-        
+
         The ohlc (short for Open-High-Low-Close) is a style of
         financial chart describing open, high, low and close for a
         given `x` coordinate (most likely time). The tip of the lines
@@ -9241,7 +9231,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Parcats trace
-        
+
         Parallel categories diagram for multidimensional categorical
         data.
 
@@ -9443,7 +9433,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Parcoords trace
-        
+
         Parallel coordinates for multidimensional exploratory data
         analysis. The samples are specified in `dimensions`. The colors
         are set in `line.color`.
@@ -9647,7 +9637,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Pie trace
-        
+
         A data visualized by the sectors of the pie is set in `values`.
         The sector labels are set in `labels`. The sector colors are
         set in `marker.colors`
@@ -10010,7 +10000,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Pointcloud trace
-        
+
         The data visualized as a point cloud set in `x` and `y` using
         the WebGl plotting engine.
 
@@ -10266,7 +10256,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Sankey trace
-        
+
         Sankey plots for network flow data analysis. The nodes are
         specified in `nodes` and the links between sources and targets
         in `links`. The colors are set in `nodes[i].color` and
@@ -10497,7 +10487,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scatter trace
-        
+
         The scatter trace type encompasses line charts, scatter charts,
         text charts, and bubble charts. The data visualized as scatter
         point or lines is set in `x` and `y`. Text (appearing either on
@@ -10978,7 +10968,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scatter3d trace
-        
+
         The data visualized as scatter point or lines in 3D dimension
         is set in `x`, `y`, `z`. Text (appearing either on the chart or
         on hover only) is via `text`. Bubble charts are achieved by
@@ -11330,7 +11320,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scattercarpet trace
-        
+
         Plots a scatter trace on either the first carpet axis or the
         carpet axis with a matching `carpet` attribute.
 
@@ -11698,7 +11688,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scattergeo trace
-        
+
         The data visualized as scatter point or lines on a geographic
         map is provided either by longitude/latitude pairs in `lon` and
         `lat` respectively or by geographic location IDs or names in
@@ -12074,7 +12064,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scattergl trace
-        
+
         The data visualized as scatter point or lines is set in `x` and
         `y` using the WebGL plotting engine. Bubble charts are achieved
         by setting `marker.size` and/or `marker.color` to a numerical
@@ -12464,7 +12454,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scattermapbox trace
-        
+
         The data visualized as scatter point, lines or marker symbols
         on a Mapbox GL geographic map is provided by longitude/latitude
         pairs in `lon` and `lat`.
@@ -12805,7 +12795,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scatterpolar trace
-        
+
         The scatterpolar trace type encompasses line charts, scatter
         charts, text charts, and bubble charts in polar coordinates.
         The data visualized as scatter point or lines is set in `r`
@@ -13187,7 +13177,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scatterpolargl trace
-        
+
         The scatterpolargl trace type encompasses line charts, scatter
         charts, and bubble charts in polar coordinates using the WebGL
         plotting engine. The data visualized as scatter point or lines
@@ -13566,7 +13556,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Scatterternary trace
-        
+
         Provides similar functionality to the "scatter" type but on a
         ternary phase diagram. The data is provided by at least two
         arrays out of `a`, `b`, `c` triplets.
@@ -13936,7 +13926,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Splom trace
-        
+
         Splom traces generate scatter plot matrix visualizations. Each
         splom `dimensions` items correspond to a generated axis. Values
         for each of those dimensions are set in `dimensions[i].values`.
@@ -14233,7 +14223,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Streamtube trace
-        
+
         Use a streamtube trace to visualize flow in a vector field.
         Specify a vector field using 6 1D arrays of equal length, 3
         position arrays `x`, `y` and `z` and 3 vector component arrays
@@ -14596,7 +14586,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Sunburst trace
-        
+
         Visualize hierarchal data spanning outward radially from root
         to leaves. The sunburst sectors are determined by the entries
         in "labels" or "ids" and in "parents".
@@ -14943,7 +14933,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Surface trace
-        
+
         The data the describes the coordinates of the surface is set in
         `z`. Data in `z` should be a 2D list. Coordinates in `x` and
         `y` can either be 1D lists or 2D lists (e.g. to graph
@@ -15301,7 +15291,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Table trace
-        
+
         Table view for detailed data viewing. The data are arranged in
         a grid of rows and columns. Most styling can be specified for
         columns, rows or individual cells. Table is using a column-
@@ -15502,7 +15492,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Treemap trace
-        
+
         Visualize hierarchal data from leaves (and/or outer branches)
         towards root with rectangles. The treemap sectors are
         determined by the entries in "labels" or "ids" and in
@@ -15849,7 +15839,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Violin trace
-        
+
         In vertical (horizontal) violin plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
         violin per distinct x (y) value is drawn If no `x` (`y`) list
@@ -16273,7 +16263,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Volume trace
-        
+
         Draws volume trace between iso-min and iso-max values with
         coordinates given by four 1-dimensional arrays containing the
         `value`, `x`, `y` and `z` of every vertex of a uniform or non-
@@ -16675,7 +16665,7 @@ class Figure(BaseFigure):
     ):
         """
         Add a new Waterfall trace
-        
+
         Draws waterfall trace which is useful graph to displays the
         contribution of various elements (either positive or negative)
         in a bar chart. The data visualized by the span of the bars is
@@ -17087,7 +17077,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all coloraxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17119,7 +17109,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17187,7 +17177,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all geo objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17219,7 +17209,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17287,7 +17277,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all mapbox objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17319,7 +17309,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17387,7 +17377,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all polar objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17419,7 +17409,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17487,7 +17477,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all scene objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17519,7 +17509,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17587,7 +17577,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all ternary objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17619,7 +17609,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17687,7 +17677,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all xaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17719,7 +17709,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17780,8 +17770,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -17801,7 +17791,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17823,8 +17813,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -17854,7 +17844,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17881,8 +17871,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18106,7 +18096,7 @@ class Figure(BaseFigure):
     ):
         """
         Create and add a new annotation to the figure's layout
-        
+
         Parameters
         ----------
         arg
@@ -18591,7 +18581,7 @@ class Figure(BaseFigure):
     ):
         """
         Create and add a new image to the figure's layout
-        
+
         Parameters
         ----------
         arg
@@ -18887,7 +18877,7 @@ class Figure(BaseFigure):
     ):
         """
         Create and add a new shape to the figure's layout
-        
+
         Parameters
         ----------
         arg

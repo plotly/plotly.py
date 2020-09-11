@@ -12,10 +12,7 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 """
             colormodel
                 Color model used to map the numerical color
-                components described in `z` into colors. If
-                `source` is specified, this attribute will be
-                set to `rgba256` otherwise it defaults to
-                `rgb`.
+                components described in `z` into colors.
             customdata
                 Assigns extra data each datum. This may be
                 useful when listening to hover, click and
@@ -108,10 +105,6 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 the legend item and on hover.
             opacity
                 Sets the opacity of the trace.
-            source
-                Specifies the data URI of the image to be
-                visualized. The URI consists of
-                "data:image/[<media subtype>][;base64],<data>"
             stream
                 :class:`plotly.graph_objects.image.Stream`
                 instance or dict with compatible properties
@@ -178,19 +171,17 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 depend on the colormodel. For the `rgb`
                 colormodel, it is [255, 255, 255]. For the
                 `rgba` colormodel, it is [255, 255, 255, 1].
-                For the `rgba256` colormodel, it is [255, 255,
-                255, 255]. For the `hsl` colormodel, it is
-                [360, 100, 100]. For the `hsla` colormodel, it
-                is [360, 100, 100, 1].
+                For the `hsl` colormodel, it is [360, 100,
+                100]. For the `hsla` colormodel, it is [360,
+                100, 100, 1].
             zmin
                 Array defining the lower bound for each color
                 component. Note that the default value will
                 depend on the colormodel. For the `rgb`
                 colormodel, it is [0, 0, 0]. For the `rgba`
-                colormodel, it is [0, 0, 0, 0]. For the
-                `rgba256` colormodel, it is [0, 0, 0, 0]. For
-                the `hsl` colormodel, it is [0, 0, 0]. For the
-                `hsla` colormodel, it is [0, 0, 0, 0].
+                colormodel, it is [0, 0, 0, 0]. For the `hsl`
+                colormodel, it is [0, 0, 0]. For the `hsla`
+                colormodel, it is [0, 0, 0, 0].
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

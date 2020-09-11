@@ -15,7 +15,6 @@ if sys.version_info < (3, 7):
     from ._textsrc import TextsrcValidator
     from ._text import TextValidator
     from ._stream import StreamValidator
-    from ._source import SourceValidator
     from ._opacity import OpacityValidator
     from ._name import NameValidator
     from ._metasrc import MetasrcValidator
@@ -55,7 +54,6 @@ else:
             "._textsrc.TextsrcValidator",
             "._text.TextValidator",
             "._stream.StreamValidator",
-            "._source.SourceValidator",
             "._opacity.OpacityValidator",
             "._name.NameValidator",
             "._metasrc.MetasrcValidator",

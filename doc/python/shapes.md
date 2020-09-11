@@ -718,7 +718,7 @@ fig.add_trace(go.Bar(x=[11,13,15], y=[8,11,20]), row=2, col=2)
 # Add shapes
 fig.update_layout(
     shapes=[
-        dict(type="line", xref="x1", yref="y1",
+        dict(type="line", xref="x", yref="y",
             x0=3, y0=0.5, x1=5, y1=0.8, line_width=3),
         dict(type="rect", xref="x2", yref='y2',
              x0=4, y0=2, x1=5, y1=6),
@@ -826,7 +826,7 @@ fig.add_annotation(
 # shape defined programatically
 fig.add_shape(editable=True,
               x0=-1, x1=0, y0=2, y1=3,
-              xref='x1', yref='y1')
+              xref='x', yref='y')
 # define dragmode and add modebar buttons
 fig.update_layout(dragmode='drawrect')
 fig.show(config={'modeBarButtonsToAdd':['drawline',
@@ -863,7 +863,7 @@ fig.add_shape(line_color='yellow',
               opacity=0.4,
               editable=True,
               x0=0, x1=1, y0=2, y1=3,
-              xref='x1', yref='y1'
+              xref='x', yref='y'
 )
 fig.update_layout(dragmode='drawrect',
                   # style of new shapes

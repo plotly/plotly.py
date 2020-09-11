@@ -16,7 +16,7 @@ class Line(_BaseTraceHierarchyType):
     def color(self):
         """
         Sets the line color.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -78,7 +78,7 @@ class Line(_BaseTraceHierarchyType):
         ("solid", "dot", "dash", "longdash", "dashdot", or
         "longdashdot") or a dash length list in px (eg
         "5px,10px,2px,2px").
-    
+
         The 'dash' property is an enumeration that may be specified as:
           - One of the following dash styles:
                 ['solid', 'dot', 'dash', 'longdash', 'dashdot', 'longdashdot']
@@ -103,7 +103,7 @@ class Line(_BaseTraceHierarchyType):
         Determines the line shape. With "spline" the lines are drawn
         using spline interpolation. The other available values
         correspond to step-wise line shapes.
-    
+
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['linear', 'spline']
@@ -126,7 +126,7 @@ class Line(_BaseTraceHierarchyType):
         Has an effect only if `shape` is set to "spline" Sets the
         amount of smoothing. 0 corresponds to no smoothing (equivalent
         to a "linear" shape).
-    
+
         The 'smoothing' property is a number and may be specified as:
           - An int or float in the interval [0, 1.3]
 
@@ -146,7 +146,7 @@ class Line(_BaseTraceHierarchyType):
     def width(self):
         """
         Sets the line width (in px).
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -196,7 +196,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-        
+
         Parameters
         ----------
         arg

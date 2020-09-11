@@ -76,7 +76,7 @@ class Volume(_BaseTraceType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -100,9 +100,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Caps`
           - A dict of string/value properties that will be passed
             to the Caps constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     :class:`plotly.graph_objects.volume.caps.X`
                     instance or dict with compatible properties
@@ -132,7 +132,7 @@ class Volume(_BaseTraceType):
         respect to the input data (here `value`) or the bounds set in
         `cmin` and `cmax`  Defaults to `false` when `cmin` and `cmax`
         are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -153,7 +153,7 @@ class Volume(_BaseTraceType):
         """
         Sets the upper bound of the color domain. Value should have the
         same units as `value` and if set, `cmin` must be set as well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -175,7 +175,7 @@ class Volume(_BaseTraceType):
         Sets the mid-point of the color domain by scaling `cmin` and/or
         `cmax` to be equidistant to this point. Value should have the
         same units as `value`. Has no effect when `cauto` is `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -196,7 +196,7 @@ class Volume(_BaseTraceType):
         """
         Sets the lower bound of the color domain. Value should have the
         same units as `value` and if set, `cmax` must be set as well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -221,7 +221,7 @@ class Volume(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -247,9 +247,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -486,14 +486,14 @@ class Volume(_BaseTraceType):
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
         ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
         ridis,Cividis.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1), 
+            normalized color level value (starting at 0 and ending at 1),
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -533,9 +533,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Contour`
           - A dict of string/value properties that will be passed
             to the Contour constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the contour lines.
                 show
@@ -563,7 +563,7 @@ class Volume(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -584,7 +584,7 @@ class Volume(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -606,7 +606,7 @@ class Volume(_BaseTraceType):
         Determines whether or not normal smoothing is applied to the
         meshes, creating meshes with an angular, low-poly look via flat
         reflections.
-    
+
         The 'flatshading' property must be specified as a bool
         (either True, or False)
 
@@ -628,7 +628,7 @@ class Volume(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -653,7 +653,7 @@ class Volume(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -677,9 +677,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -750,7 +750,7 @@ class Volume(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -773,7 +773,7 @@ class Volume(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -793,7 +793,7 @@ class Volume(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -816,7 +816,7 @@ class Volume(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -838,7 +838,7 @@ class Volume(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -858,7 +858,7 @@ class Volume(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -878,7 +878,7 @@ class Volume(_BaseTraceType):
     def isomax(self):
         """
         Sets the maximum boundary for iso-surface plot.
-    
+
         The 'isomax' property is a number and may be specified as:
           - An int or float
 
@@ -898,7 +898,7 @@ class Volume(_BaseTraceType):
     def isomin(self):
         """
         Sets the minimum boundary for iso-surface plot.
-    
+
         The 'isomin' property is a number and may be specified as:
           - An int or float
 
@@ -920,7 +920,7 @@ class Volume(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -945,9 +945,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
-    
+
             Supported dict properties:
-                
+
                 ambient
                     Ambient light increases overall color
                     visibility but can wash out the image.
@@ -993,9 +993,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     Numeric vector, representing the X coordinate
                     for each vertex.
@@ -1031,7 +1031,7 @@ class Volume(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1050,7 +1050,7 @@ class Volume(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1071,7 +1071,7 @@ class Volume(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1097,7 +1097,7 @@ class Volume(_BaseTraceType):
         an overlay of multiple transparent surfaces may not perfectly
         be sorted in depth by the webgl API. This behavior may be
         improved in the near future and is subject to change.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1125,7 +1125,7 @@ class Volume(_BaseTraceType):
         Alternatively, `opacityscale` may be a palette name string of
         the following list: 'min', 'max', 'extremes' and 'uniform'. The
         default is 'uniform'.
-    
+
         The 'opacityscale' property accepts values of any type
 
         Returns
@@ -1146,7 +1146,7 @@ class Volume(_BaseTraceType):
         Reverses the color mapping if true. If true, `cmin` will
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -1169,7 +1169,7 @@ class Volume(_BaseTraceType):
         a 3D scene. If "scene" (the default value), the (x,y,z)
         coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
-    
+
         The 'scene' property is an identifier of a particular
         subplot, of type 'scene', that may be specified as the string 'scene'
         optionally followed by an integer >= 1
@@ -1192,7 +1192,7 @@ class Volume(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1213,7 +1213,7 @@ class Volume(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -1237,9 +1237,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Slices`
           - A dict of string/value properties that will be passed
             to the Slices constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     :class:`plotly.graph_objects.volume.slices.X`
                     instance or dict with compatible properties
@@ -1270,9 +1270,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Spaceframe`
           - A dict of string/value properties that will be passed
             to the Spaceframe constructor
-    
+
             Supported dict properties:
-                
+
                 fill
                     Sets the fill ratio of the `spaceframe`
                     elements. The default fill value is 1 meaning
@@ -1305,9 +1305,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1338,9 +1338,9 @@ class Volume(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.volume.Surface`
           - A dict of string/value properties that will be passed
             to the Surface constructor
-    
+
             Supported dict properties:
-                
+
                 count
                     Sets the number of iso-surfaces between minimum
                     and maximum iso-values. By default this value
@@ -1386,7 +1386,7 @@ class Volume(_BaseTraceType):
         Sets the text elements associated with the vertices. If trace
         `hoverinfo` contains a "text" flag and "hovertext" is not set,
         these elements will be seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1408,7 +1408,7 @@ class Volume(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1429,7 +1429,7 @@ class Volume(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1464,7 +1464,7 @@ class Volume(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1483,7 +1483,7 @@ class Volume(_BaseTraceType):
     def value(self):
         """
         Sets the 4th dimension (value) of the vertices.
-    
+
         The 'value' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1503,7 +1503,7 @@ class Volume(_BaseTraceType):
     def valuesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  value .
-    
+
         The 'valuesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1525,7 +1525,7 @@ class Volume(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1546,7 +1546,7 @@ class Volume(_BaseTraceType):
     def x(self):
         """
         Sets the X coordinates of the vertices on X axis.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1566,7 +1566,7 @@ class Volume(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1586,7 +1586,7 @@ class Volume(_BaseTraceType):
     def y(self):
         """
         Sets the Y coordinates of the vertices on Y axis.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1606,7 +1606,7 @@ class Volume(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1626,7 +1626,7 @@ class Volume(_BaseTraceType):
     def z(self):
         """
         Sets the Z coordinates of the vertices on Z axis.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1646,7 +1646,7 @@ class Volume(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1981,7 +1981,7 @@ class Volume(_BaseTraceType):
     ):
         """
         Construct a new Volume object
-        
+
         Draws volume trace between iso-min and iso-max values with
         coordinates given by four 1-dimensional arrays containing the
         `value`, `x`, `y` and `z` of every vertex of a uniform or non-

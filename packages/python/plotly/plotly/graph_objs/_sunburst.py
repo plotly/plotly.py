@@ -64,7 +64,7 @@ class Sunburst(_BaseTraceType):
         corresponding to the root and the branches sectors are taken to
         be the extra part not part of the sum of the values at their
         leaves.
-    
+
         The 'branchvalues' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['remainder', 'total']
@@ -87,7 +87,7 @@ class Sunburst(_BaseTraceType):
         Determines default for `values` when it is not provided, by
         inferring a 1 for each of the "leaves" and/or "branches",
         otherwise 0.
-    
+
         The 'count' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['branches', 'leaves'] joined with '+' characters
@@ -112,7 +112,7 @@ class Sunburst(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -133,7 +133,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -157,9 +157,9 @@ class Sunburst(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sunburst.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this sunburst trace
@@ -192,7 +192,7 @@ class Sunburst(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'name', 'current path', 'percent root', 'percent entry', 'percent parent'] joined with '+' characters
@@ -217,7 +217,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -241,9 +241,9 @@ class Sunburst(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sunburst.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -316,7 +316,7 @@ class Sunburst(_BaseTraceType):
         displayed in the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -339,7 +339,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -363,7 +363,7 @@ class Sunburst(_BaseTraceType):
         an array of string, the items are mapped in order of this
         trace's sectors. To be seen, trace `hoverinfo` must contain a
         "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -386,7 +386,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -408,7 +408,7 @@ class Sunburst(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -428,7 +428,7 @@ class Sunburst(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -448,17 +448,17 @@ class Sunburst(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `textinfo` lying inside the sector.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sunburst.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -483,7 +483,7 @@ class Sunburst(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -511,7 +511,7 @@ class Sunburst(_BaseTraceType):
         that goal. The "radial" option orients text along the radius of
         the sector. The "tangential" option orients text perpendicular
         to the radius of the sector.
-    
+
         The 'insidetextorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['horizontal', 'radial', 'tangential', 'auto']
@@ -532,7 +532,7 @@ class Sunburst(_BaseTraceType):
     def labels(self):
         """
         Sets the labels of each of the sectors.
-    
+
         The 'labels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -552,7 +552,7 @@ class Sunburst(_BaseTraceType):
     def labelssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  labels .
-    
+
         The 'labelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -576,9 +576,9 @@ class Sunburst(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sunburst.Leaf`
           - A dict of string/value properties that will be passed
             to the Leaf constructor
-    
+
             Supported dict properties:
-                
+
                 opacity
                     Sets the opacity of the leaves. With colorscale
                     it is defaulted to 1; otherwise it is defaulted
@@ -603,7 +603,7 @@ class Sunburst(_BaseTraceType):
         `level` to `''` to start from the root node in the hierarchy.
         Must be an "id" if `ids` is filled in, otherwise plotly
         attempts to find a matching item in `labels`.
-    
+
         The 'level' property accepts values of any type
 
         Returns
@@ -626,9 +626,9 @@ class Sunburst(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sunburst.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -734,7 +734,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the number of rendered sectors from any given `level`. Set
         `maxdepth` to "-1" to render all the levels in the hierarchy.
-    
+
         The 'maxdepth' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
 
@@ -763,7 +763,7 @@ class Sunburst(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -782,7 +782,7 @@ class Sunburst(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -803,7 +803,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -824,7 +824,7 @@ class Sunburst(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -848,17 +848,17 @@ class Sunburst(_BaseTraceType):
         the center of a sunburst graph. Please note that if a hierarchy
         has multiple root nodes, this option won't have any effect and
         `insidetextfont` would be used.
-    
+
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sunburst.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -883,7 +883,7 @@ class Sunburst(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -909,7 +909,7 @@ class Sunburst(_BaseTraceType):
         to be "ids" themselves. When `ids` is not set, plotly attempts
         to find matching items in `labels`, but beware they must be
         unique.
-    
+
         The 'parents' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -929,7 +929,7 @@ class Sunburst(_BaseTraceType):
     def parentssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  parents .
-    
+
         The 'parentssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -953,9 +953,9 @@ class Sunburst(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.sunburst.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -986,7 +986,7 @@ class Sunburst(_BaseTraceType):
         on the chart. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1006,17 +1006,17 @@ class Sunburst(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `textinfo`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.sunburst.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1041,7 +1041,7 @@ class Sunburst(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -1062,7 +1062,7 @@ class Sunburst(_BaseTraceType):
     def textinfo(self):
         """
         Determines which trace information appear on the graph.
-    
+
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'current path', 'percent root', 'percent entry', 'percent parent'] joined with '+' characters
@@ -1085,7 +1085,7 @@ class Sunburst(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1119,7 +1119,7 @@ class Sunburst(_BaseTraceType):
         are `arrayOk: true`) are available. variables `currentPath`,
         `root`, `entry`, `percentRoot`, `percentEntry`,
         `percentParent`, `label` and `value`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1142,7 +1142,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         texttemplate .
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1163,7 +1163,7 @@ class Sunburst(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1198,7 +1198,7 @@ class Sunburst(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1218,7 +1218,7 @@ class Sunburst(_BaseTraceType):
         """
         Sets the values associated with each of the sectors. Use with
         `branchvalues` to determine how the values are summed.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1238,7 +1238,7 @@ class Sunburst(_BaseTraceType):
     def valuessrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  values .
-    
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1260,7 +1260,7 @@ class Sunburst(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1554,7 +1554,7 @@ class Sunburst(_BaseTraceType):
     ):
         """
         Construct a new Sunburst object
-        
+
         Visualize hierarchal data spanning outward radially from root
         to leaves. The sunburst sectors are determined by the entries
         in "labels" or "ids" and in "parents".

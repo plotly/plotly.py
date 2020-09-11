@@ -70,7 +70,7 @@ class Histogram(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same alignmentgroup. This controls whether bars
         compute their positional range dependently or independently.
-    
+
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -94,7 +94,7 @@ class Histogram(_BaseTraceType):
         separately and `autobinx` is not needed. However, we accept
         `autobinx: true` or `false` and will update `xbins` accordingly
         before deleting `autobinx` from the trace.
-    
+
         The 'autobinx' property must be specified as a bool
         (either True, or False)
 
@@ -117,7 +117,7 @@ class Histogram(_BaseTraceType):
         separately and `autobiny` is not needed. However, we accept
         `autobiny: true` or `false` and will update `ybins` accordingly
         before deleting `autobiny` from the trace.
-    
+
         The 'autobiny' property must be specified as a bool
         (either True, or False)
 
@@ -143,7 +143,7 @@ class Histogram(_BaseTraceType):
         traces under `barmode` "overlay" and on different axes (of the
         same axis type) can have compatible bin settings. Note that
         histogram and histogram2d* trace can share the same `bingroup`
-    
+
         The 'bingroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -168,9 +168,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Cumulative`
           - A dict of string/value properties that will be passed
             to the Cumulative constructor
-    
+
             Supported dict properties:
-                
+
                 currentbin
                     Only applies if cumulative is enabled. Sets
                     whether the current bin is included, excluded,
@@ -217,7 +217,7 @@ class Histogram(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -238,7 +238,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -262,9 +262,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.ErrorX`
           - A dict of string/value properties that will be passed
             to the ErrorX constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -283,7 +283,7 @@ class Histogram(_BaseTraceType):
                 color
                     Sets the stoke color of the error bars.
                 copy_ystyle
-    
+
                 symmetric
                     Determines whether or not the error bars have
                     the same length in both direction (top/bottom
@@ -292,9 +292,9 @@ class Histogram(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -343,9 +343,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.ErrorY`
           - A dict of string/value properties that will be passed
             to the ErrorY constructor
-    
+
             Supported dict properties:
-                
+
                 array
                     Sets the data corresponding the length of each
                     error bar. Values are plotted relative to the
@@ -371,9 +371,9 @@ class Histogram(_BaseTraceType):
                 thickness
                     Sets the thickness (in px) of the error bars.
                 traceref
-    
+
                 tracerefminus
-    
+
                 type
                     Determines the rule used to generate the error
                     bars. If *constant`, the bar lengths are of a
@@ -423,7 +423,7 @@ class Histogram(_BaseTraceType):
         "max", the histogram values are computed using the sum, the
         average, the minimum or the maximum of the values lying inside
         each bin respectively.
-    
+
         The 'histfunc' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['count', 'sum', 'avg', 'min', 'max']
@@ -456,7 +456,7 @@ class Histogram(_BaseTraceType):
         *probability density*, the area of each bar corresponds to the
         probability that an event will fall into the corresponding bin
         (here, the sum of all bin AREAS equals 1).
-    
+
         The 'histnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['', 'percent', 'probability', 'density', 'probability
@@ -480,7 +480,7 @@ class Histogram(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -505,7 +505,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -529,9 +529,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -603,7 +603,7 @@ class Histogram(_BaseTraceType):
         the secondary box, for example
         "<extra>{fullData.name}</extra>". To hide the secondary box
         completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -626,7 +626,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -646,7 +646,7 @@ class Histogram(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -669,7 +669,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -691,7 +691,7 @@ class Histogram(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -711,7 +711,7 @@ class Histogram(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -733,7 +733,7 @@ class Histogram(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -758,9 +758,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -883,7 +883,7 @@ class Histogram(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -902,7 +902,7 @@ class Histogram(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -923,7 +923,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -947,7 +947,7 @@ class Histogram(_BaseTraceType):
         be used in an algorithm that will decide the optimal bin size
         such that the histogram best visualizes the distribution of the
         data. Ignored if `xbins.size` is provided.
-    
+
         The 'nbinsx' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -971,7 +971,7 @@ class Histogram(_BaseTraceType):
         be used in an algorithm that will decide the optimal bin size
         such that the histogram best visualizes the distribution of the
         data. Ignored if `ybins.size` is provided.
-    
+
         The 'nbinsy' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -994,7 +994,7 @@ class Histogram(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same offsetgroup where bars of the same position
         coordinate will line up.
-    
+
         The 'offsetgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1015,7 +1015,7 @@ class Histogram(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1036,7 +1036,7 @@ class Histogram(_BaseTraceType):
         """
         Sets the orientation of the bars. With "v" ("h"), the value of
         the each bar spans along the vertical (horizontal).
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -1061,9 +1061,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.histogram.selected
                     .Marker` instance or dict with compatible
@@ -1094,7 +1094,7 @@ class Histogram(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1114,7 +1114,7 @@ class Histogram(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1138,9 +1138,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1170,7 +1170,7 @@ class Histogram(_BaseTraceType):
         string, the same string appears over all bars. If an array of
         string, the items are mapped in order to the this trace's
         coordinates.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1192,7 +1192,7 @@ class Histogram(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1213,7 +1213,7 @@ class Histogram(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1248,7 +1248,7 @@ class Histogram(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1271,9 +1271,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.histogram.unselect
                     ed.Marker` instance or dict with compatible
@@ -1301,7 +1301,7 @@ class Histogram(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1322,7 +1322,7 @@ class Histogram(_BaseTraceType):
     def x(self):
         """
         Sets the sample data to be binned on the x axis.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1345,7 +1345,7 @@ class Histogram(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1371,9 +1371,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.XBins`
           - A dict of string/value properties that will be passed
             to the XBins constructor
-    
+
             Supported dict properties:
-                
+
                 end
                     Sets the end value for the x axis bins. The
                     last bin may not end exactly at this value, we
@@ -1435,7 +1435,7 @@ class Histogram(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-    
+
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['gregorian', 'chinese', 'coptic', 'discworld',
@@ -1459,7 +1459,7 @@ class Histogram(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1479,7 +1479,7 @@ class Histogram(_BaseTraceType):
     def y(self):
         """
         Sets the sample data to be binned on the y axis.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1502,7 +1502,7 @@ class Histogram(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1528,9 +1528,9 @@ class Histogram(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram.YBins`
           - A dict of string/value properties that will be passed
             to the YBins constructor
-    
+
             Supported dict properties:
-                
+
                 end
                     Sets the end value for the y axis bins. The
                     last bin may not end exactly at this value, we
@@ -1592,7 +1592,7 @@ class Histogram(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-    
+
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['gregorian', 'chinese', 'coptic', 'discworld',
@@ -1616,7 +1616,7 @@ class Histogram(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1949,7 +1949,7 @@ class Histogram(_BaseTraceType):
     ):
         """
         Construct a new Histogram object
-        
+
         The sample data from which statistics are computed is set in
         `x` for vertically spanning histograms and in `y` for
         horizontally spanning histograms. Binning options are set
