@@ -107,7 +107,7 @@ fig.show()
 
 Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
 
-In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`. 
+In the following example, we pass a lambda function to `for_each_annotation` in order to change the figure subplot titles from `smoker=No` and `smoker=Yes` to just `No` and `Yes`.
 
 ```python
 import plotly.express as px
@@ -117,9 +117,23 @@ fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
 fig.show()
 ```
 
+### Controlling Facet Ordering
+
+By default, Plotly Express lays out categorical data in the order in which it appears in the underlying data. Every 2-d cartesian Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](/python/categorical-axes/), but beyond that can also control [the order in which discrete colors appear in the legend](/python/discrete-color/), and the order in which facets are laid out.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.bar(df, x="day", y="total_bill", color="smoker", barmode="group", facet_col="sex",
+             category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
+                              "smoker": ["Yes", "No"],
+                              "sex": ["Male", "Female"]})
+fig.show()
+```
+
 ### Controlling Facet Spacing
 
-The `facet_row_spacing` and `facet_col_spacing` arguments can be used to control the spacing between rows and columns. These values are specified in fractions of the plotting area in paper coordinates and not in pixels, so they will grow or shrink with the `width` and `height` of the figure. 
+The `facet_row_spacing` and `facet_col_spacing` arguments can be used to control the spacing between rows and columns. These values are specified in fractions of the plotting area in paper coordinates and not in pixels, so they will grow or shrink with the `width` and `height` of the figure.
 
 The defaults work well with 1-4 rows or columns at the default figure size with the default font size, but need to be reduced to around 0.01 for very large figures or figures with many rows or columns. Conversely, if activating tick labels on all facets, the spacing will need to be increased.
 
@@ -140,7 +154,7 @@ fig.show()
 
 ### Synchronizing axes in subplots with `matches`
 
-Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly. 
+Using `facet_col` from `plotly.express` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `make_subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly.
 
 Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
 
