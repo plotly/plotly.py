@@ -22,8 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to adjust axes properties in python. Includes examples of linear
-      and logarithmic axes, axes titles, styling and coloring axes and grid lines,
+    description: How to adjust axes properties in Python: axes titles, styling and coloring axes and grid lines, ticks, tick labels
       and more.
     display_as: file_settings
     language: python
@@ -34,7 +33,9 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/). Other kinds of axes are described in other tutorials:
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/).
+
+Other kinds of subplots and axes are described in other tutorials:
 
 - [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/layout/scene/)
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
@@ -43,123 +44,50 @@ This tutorial explain how to set the properties of 2-dimensional Cartesian axes,
 - [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/layout/mapbox/)
 - [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
-**See also** the tutorials on [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
+**See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
 
-The different types of Cartesian axes are
+### Axis Types
 
-- 'linear'
-- 'log' (see the [example below](#logarithmic-axes))
-- 'date' (see the [tutorial on timeseries](/python/time-series/))
-- 'category' (see for example [Bar Charts](/python/bar-charts/))
-- 'multicategory' (see the [example below](<#subcategory-(multicategory)-axes>))
+The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
-#### Logarithmic Axes
+- `'linear'` as described in this page
+- `'log'` (see the [log plot tutorial](/python/log-plots/))
+- `'date'` (see the [tutorial on timeseries](/python/time-series/))
+- `'category'` (see the [categorical axes tutorial](/python/categorical-axes/))
+- `'multicategory'` (see the [categorical axes tutorial](/python/categorical-axes/))
 
-The `type` axis property can be set to `'log'` to arrange axis ticks in log-scale.
+The axis type is auto-detected by looking at data from the first [trace](/python/figure-structure/) linked to this axis:
 
-Here is an example of updating the x and y axes of a figure to be in log scale.
+* First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
+* `multicategory` is just a shape test: is the array nested?
+* `date` and `category`: require **more than twice as many distinct date or category strings** as distinct numbers or numeric strings in order to choose that axis type.
+	* Both of these test an evenly-spaced sample of at most 1000 values
+	* Small detail: the `category` test sorts every value into either number or category, whereas for dates, 2- and 4-digit integers count as both dates and numbers.
 
-```python
-import plotly.express as px
-import numpy as np
-
-x = np.arange(10)
-
-fig = px.scatter(x=x, y=x**3,
-                log_x=True, log_y=True)
-
-fig.show()
-```
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(data=[
-    go.Scatter(
-        x=[1, 10, 20, 30, 40, 50, 60, 70, 80],
-        y=[80, 70, 60, 50, 40, 30, 20, 10, 1]
-    ),
-    go.Scatter(
-        x=[1, 10, 20, 30, 40, 50, 60, 70, 80],
-        y=[1, 10, 20, 30, 40, 50, 60, 70, 80]
-    )
-])
-
-fig.update_xaxes(type="log")
-fig.update_yaxes(type="log")
-
-fig.show()
-```
 
 ### Forcing an axis to be categorical
 
-If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, with the exception of string of numbers, in which case the axis is linear. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
+If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, *except if enough of these strings contain numbers* as detailed above, in which case the axis is automatically set to `linear`. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
 
 ```python
 import plotly.express as px
 fig = px.bar(x=[1, 2, 4, 10], y =[8, 6, 11, 5])
-fig.update_layout(xaxis_type='category',
-                  title_text='Bar chart with categorical axes')
+fig.update_xaxes(type='category')
 fig.show()
 ```
 
-#### Subcategory (Multicategory) Axes
 
-A two-level categorical axis can be created by specifying a trace's `x` or `y` property as a 2-dimensional lists. The first sublist represents the outer categorical value while the second sublist represents the inner categorical value.
-
-Here is an example that creates a figure with 4 horizontal `box` traces with a 2-level categorical y-axis.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Box(
-  x = [2, 3, 1, 5],
-  y = [['First', 'First', 'First', 'First'],
-       ["A", "A", "A", "A"]],
-  name = "A",
-  orientation = "h"
-))
-
-fig.add_trace(go.Box(
-  x = [8, 3, 6, 5],
-  y = [['First', 'First', 'First', 'First'],
-       ["B", "B", "B", "B"]],
-  name = "B",
-  orientation = "h"
-))
-
-fig.add_trace(go.Box(
-  x = [2, 3, 2, 5],
-  y = [['Second', 'Second', 'Second', 'Second'],
-       ["C", "C", "C", "C"]],
-  name = "C",
-  orientation = "h"
-))
-
-fig.add_trace(go.Box(
-  x = [7.5, 3, 6, 4],
-  y = [['Second', 'Second', 'Second', 'Second'],
-       ["D", "D", "D", "D"]],
-  name = "D",
-  orientation = "h"
-))
-
-fig.update_layout(title_text="Multi-category axis",)
-
-fig.show()
-```
-
-#### Toggling Axes Lines, Ticks, Labels, and Autorange
+#### General Axis properties
 
 The different groups of Cartesian axes properties are
 
-- tick values (locations of tick marks) and tick labels. Tick labels are placed at tick values.
+- tick values (locations of tick marks) and tick labels. Tick labels and grid lines are placed at tick values.
 - lines: grid lines (passing through tick values), axis lines, zero lines
 - title of the axis
 - range of the axis
 - domain of the axis
+
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/pythone/categorical-axes/) and [axes of type `date`](/python/time-series/).
 
 #### Tick Placement, Color, and Style
 
