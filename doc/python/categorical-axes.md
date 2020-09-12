@@ -26,7 +26,7 @@ jupyter:
     display_as: basic
     language: python
     layout: base
-    name: Bar Charts
+    name: Categorical Axes
     order: 16
     page_type: example_index
     permalink: python/categorical-axes/
