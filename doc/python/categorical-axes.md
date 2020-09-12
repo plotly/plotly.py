@@ -129,7 +129,7 @@ fig.add_trace(go.Bar(x=x, y=[1, 4, 9, 16], name='Ottawa'))
 fig.add_trace(go.Bar(x=x, y=[6, 8, 4.5, 8], name='Toronto'))
 
 fig.update_layout(barmode='stack')
-fig.update_xaxes(categoryorder='array', categoryarray:['d','a','c','b'])
+fig.update_xaxes(categoryorder='array', categoryarray= ['d','a','c','b'])
 fig.show()
 ```
 ### Gridlines, Ticks and Tick Labels
