@@ -29,7 +29,7 @@ jupyter:
     name: Bar Charts
     order: 16
     page_type: example_index
-    permalink: python/bar-charts/
+    permalink: python/categorical-axes/
     thumbnail: thumbnail/bar.jpg
 ---
 
