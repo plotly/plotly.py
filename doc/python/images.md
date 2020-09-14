@@ -309,7 +309,7 @@ fig.show(config={'doubleClick': 'reset'})
 
 _introduced in plotly 4.7_
 
-It can be useful to add shapes to a layout image, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm. 
+It can be useful to add shapes to a layout image, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm.
 
 In order to enable shape drawing, you need to
 - define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
@@ -317,7 +317,7 @@ In order to enable shape drawing, you need to
 
 The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](/python/shapes#drawing-shapes-on-cartesian-plots).
 
-Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
 ```python
 import plotly.graph_objects as go
@@ -339,7 +339,7 @@ fig.add_layout_image(
 )
 fig.update_xaxes(showgrid=False, range=(0, img_width))
 fig.update_yaxes(showgrid=False, scaleanchor='x', range=(img_height, 0))
-# Line shape added programatically 
+# Line shape added programatically
 fig.add_shape(
     type='line', xref='x', yref='y',
     x0=650, x1=1080, y0=380, y1=180, line_color='cyan'
@@ -358,6 +358,9 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
                                         'eraseshape'
                                        ]})
 ```
+
+
+### Images Placed Relative to the Axes
 
 #### Reference
 See https://plotly.com/python/reference/layout/images/ for more information and chart attribute options!

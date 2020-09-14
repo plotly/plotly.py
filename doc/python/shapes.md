@@ -329,78 +329,30 @@ fig.add_shape(
 fig.show()
 ```
 
-#### A rectangle placed relative to axes
+#### A Rectangle Placed Relative to the Axes' Position and Length
+
+The following code places a rectangle that starts at 60% and ends at 70% along
+the x-axis, starting from the left, and starts at 80% and ends at 90% along the
+y-axis, starting from the bottom.
 
 ```python
 import plotly.graph_objects as go
+import plotly.express as px
 
-# Make an empty plot for demonstration purposes
-fig = go.Figure()
-xaxisrange = [0, 3]
-yaxisrange = [1, 4]
-fig.add_trace(go.Scatter(x=[], y=[], mode="markers"))
-fig.update_layout(
-    dict(
-        xaxis=dict(range=xaxisrange),
-        yaxis=dict(range=yaxisrange),
-    )
-)
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
 
 # Add a shape whose x and y coordinates refer to the domains of the x and y axes
 fig.add_shape(
     type="rect",
     xref="x domain",
     yref="y domain",
-    x0=0.8,
-    x1=0.9,
+    x0=0.6,
+    x1=0.7,
     y0=0.8,
     y1=0.9,
-)
-
-# Add an annotation whose x and y coordinates also refer to the domains of the x
-# and y axes
-fig.add_annotation(
-    text="A box in the the corner",
-    xref="x domain",
-    yref="y domain",
-    x=0.85,
-    y=0.85,
-    axref="x domain",
-    ayref="y domain",
-    ax=0.5,
-    ay=0.5,
-    arrowhead=2,
-)
-
-# Make two buttons, one that shrinks the domains, and one that returns them to full size.
-fig.update_layout(
-    updatemenus=[
-        dict(
-            buttons=[
-                dict(
-                    args=[
-                        dict(
-                            yaxis=dict(domain=[0.25, 0.75], range=yaxisrange),
-                            xaxis=dict(domain=[0.1, 0.6], range=xaxisrange),
-                        )
-                    ],
-                    label="Shrink y-axis",
-                    method="relayout",
-                ),
-                dict(
-                    args=[
-                        dict(
-                            yaxis=dict(domain=[0, 1], range=yaxisrange),
-                            xaxis=dict(domain=[0, 1], range=xaxisrange),
-                        )
-                    ],
-                    label="Full y-axis",
-                    method="relayout",
-                ),
-            ],
-            type="buttons",
-        )
-    ]
 )
 
 fig.show()
@@ -881,3 +833,31 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 
 ### Reference
 See https://plotly.com/python/reference/layout/shapes/ for more information and chart attribute options!
+
+<!-- #region -->
+### What About Dash?
+
+[Dash](https://dash.plot.ly/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash at https://dash.plot.ly/installation.
+
+Everywhere in this page that you see `fig.show()`, you can display the same figure in a Dash application by passing it to the `figure` argument of the [`Graph` component](https://dash.plot.ly/dash-core-components/graph) from the built-in `dash_core_components` package like this:
+
+```python
+import plotly.graph_objects as go # or plotly.express as px
+fig = go.Figure() # or any Plotly Express function e.g. px.bar(...)
+# fig.add_trace( ... )
+# fig.update_layout( ... )
+
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+
+app = dash.Dash()
+app.layout = html.Div([
+    dcc.Graph(figure=fig)
+])
+
+app.run_server(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter
+```
+<!-- #endregion -->
