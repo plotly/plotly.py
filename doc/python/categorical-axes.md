@@ -36,7 +36,7 @@ jupyter:
 
 This page shows examples of how to configure [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots) to visualize categorical (i.e. qualitative, nominal or ordinal data as opposed to continuous numerical data). Such axes are a natural fit for bar charts, waterfall charts, funnel charts, heatmaps, violin charts and box plots, but can also be used with scatter plots and line charts. [Configuring gridlines, ticks, tick labels and axis titles](/python/axes/) on logarithmic axes is done the same was as with [linear axes](/python/axes/).
 
-### Axis Type and Auto-Detection
+### 2-D Cartesian Axis Type and Auto-Detection
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
