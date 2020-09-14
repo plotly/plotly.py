@@ -144,18 +144,17 @@ fig.add_trace(go.Scattergeo(
         )
     )))
 
-flight_paths = []
 lons = []
 lats = []
 import numpy as np
 lons = np.empty(3 * len(df_flight_paths))
 lons[::3] = df_flight_paths['start_lon']
 lons[1::3] = df_flight_paths['end_lon']
-lons[::3] = None
+lons[2::3] = None
 lats = np.empty(3 * len(df_flight_paths))
 lats[::3] = df_flight_paths['start_lat']
 lats[1::3] = df_flight_paths['end_lat']
-lats[::3] = None
+lats[2::3] = None
 
 fig.add_trace(
     go.Scattergeo(
