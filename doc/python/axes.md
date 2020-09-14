@@ -46,7 +46,7 @@ Other kinds of subplots and axes are described in other tutorials:
 
 **See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
 
-### Axis Types
+### 2-D Cartesian Axis Types and Auto-Detection
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
