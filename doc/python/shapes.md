@@ -53,7 +53,7 @@ fig = go.Figure(go.Scatter(x=[0,1,2,0,None,3,3,5,5,3], y=[0,2,0,0,None,0.5,1.5,1
 fig.show()
 ```
 
-#### Vertical and Horizontal Lines Positioned Relative to the Axes
+#### Vertical and Horizontal Lines Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -118,7 +118,7 @@ fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Lines Positioned Relative to the Plot & to the Axes
+#### Lines Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -227,7 +227,7 @@ fig.update_shapes(dict(
 fig.show()
 ```
 
-#### Rectangles Positioned Relative to the Axes
+#### Rectangles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -274,7 +274,7 @@ fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Rectangle Positioned Relative to the Plot & to the Axes
+#### Rectangle Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -329,8 +329,11 @@ fig.add_shape(
 fig.show()
 ```
 
-#### A Rectangle Placed Relative to the Axes' Position and Length
+#### A Rectangle Placed Relative to the Axis Position and Length
 
+A shape can be placed relative to an axis's position on the plot by adding the
+string `' domain'` to the axis reference in the `xref` or `yref` attributes for
+shapes.
 The following code places a rectangle that starts at 60% and ends at 70% along
 the x-axis, starting from the left, and starts at 80% and ends at 90% along the
 y-axis, starting from the bottom.
@@ -418,7 +421,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Circles Positioned Relative to the Axes
+#### Circles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
