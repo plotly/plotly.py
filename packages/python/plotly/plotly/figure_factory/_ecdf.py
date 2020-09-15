@@ -90,7 +90,7 @@ def create_ecdf(
         "hv", "vh", "hvh", and "vhv".
 
     Example 1: Normal distribution ECDFs grouped and colored by category
-    '''
+
     >>> import pandas as pd
     >>> import plotly.figure_factory as ff
     >>> import numpy as np
@@ -106,13 +106,12 @@ def create_ecdf(
     ...         ),
     ...     }
     ... )
-
     >>> fig = ff.create_ecdf(df, x="value", color="category")
     >>> fig.show()
-    '''
+
 
     Example 2: Animated, weighted ECDF
-    '''
+    
     >>> import plotly.express as px
     >>> import plotly.figure_factory as ff
 
@@ -128,9 +127,7 @@ def create_ecdf(
     ...     range_y=[-100_000_000, 5_000_000_000],
     ...     weight="pop",
     ... )
-
     >>> fig.show()
-    '''
     """
     col_dict = dict(
         x=x,
