@@ -919,9 +919,6 @@ var FigureView = widgets.DOMWidgetView.extend({
             pointsObject["trace_indexes"][flatPointIndex] = pointObjects[p]["curveNumber"];
           }
         }
-        pointsObject["point_indexes"].sort(function(a, b) {
-          return a - b;
-        });
       } else {
         for (var p = 0; p < numPoints; p++) {
           pointsObject["trace_indexes"][p] = pointObjects[p]["curveNumber"];
