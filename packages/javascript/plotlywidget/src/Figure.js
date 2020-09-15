@@ -437,16 +437,14 @@ var FigureModel = widgets.DOMWidgetModel.extend(
      *
      * This should only happed on FigureModel initialization
      */
-    do_data: function () {
-    },
+    do_data: function () {},
 
     /**
      * Log changes to the _layout trait
      *
      * This should only happed on FigureModel initialization
      */
-    do_layout: function () {
-    },
+    do_layout: function () {},
 
     /**
      * Handle addTraces message
@@ -602,7 +600,7 @@ var FigureModel = widgets.DOMWidgetModel.extend(
   {
     serializers: _.extend(
       {
-        _data: {deserialize: py2js_deserializer, serialize: js2py_serializer},
+        _data: { deserialize: py2js_deserializer, serialize: js2py_serializer },
         _layout: {
           deserialize: py2js_deserializer,
           serialize: js2py_serializer,
@@ -709,7 +707,7 @@ var FigureView = widgets.DOMWidgetView.extend({
     // MathJax configuration
     // ---------------------
     if (window.MathJax) {
-      MathJax.Hub.Config({SVG: {font: "STIX-Web"}});
+      MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
     }
 
     // Get message ids
@@ -771,7 +769,7 @@ var FigureView = widgets.DOMWidgetView.extend({
         // Emit event indicating that the widget has finished
         // rendering
         var event = new CustomEvent("plotlywidget-after-render", {
-          detail: {element: that.el, viewID: that.viewID},
+          detail: { element: that.el, viewID: that.viewID },
         });
 
         // Dispatch/Trigger/Fire the event
@@ -1180,8 +1178,7 @@ var FigureView = widgets.DOMWidgetView.extend({
    * Stub for future handling of plotly_doubleclick
    * @param data
    */
-  handle_plotly_doubleclick: function (data) {
-  },
+  handle_plotly_doubleclick: function (data) {},
 
   /**
    * Handle Plotly.addTraces request
