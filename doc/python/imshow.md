@@ -415,7 +415,7 @@ from skimage import io
 from skimage.data import image_fetcher
 path = image_fetcher.fetch('data/cells.tif')
 data = io.imread(path)
-img = data[25:40]
+img = data[20:45:2]
 fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5, height=700)
 fig.show()
 ```
@@ -463,6 +463,21 @@ import xarray as xr
 # Load xarray from dataset included in the xarray tutorial
 ds = xr.tutorial.open_dataset('air_temperature').air[:20]
 fig = px.imshow(ds, animation_frame='time', zmin=220, zmax=300, color_continuous_scale='RdBu_r')
+fig.show()
+```
+
+### Combining animations and facets
+
+It is possible to view 4-dimensional datasets (for example, 3-D images evolving with time) using a combination of `animation_frame` and `facet_col`.
+
+```python
+import plotly.express as px
+from skimage import io
+from skimage.data import image_fetcher
+path = image_fetcher.fetch('data/cells.tif')
+data = io.imread(path)
+data = data.reshape((15, 4, 256, 256))[5:]
+fig = px.imshow(data, animation_frame=0, facet_col=1, binary_string=True)
 fig.show()
 ```
 
