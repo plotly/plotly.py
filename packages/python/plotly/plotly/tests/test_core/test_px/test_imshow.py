@@ -362,6 +362,13 @@ def test_animation_frame_grayscale(animation_frame, binary_string):
 def test_animation_frame_rgb(animation_frame, binary_string):
     img = np.random.randint(255, size=(10, 9, 8, 3)).astype(np.uint8)
     fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
-    print(binary_string)
     nslices = img.shape[animation_frame]
     assert len(fig.frames) == nslices
+
+
+def test_animation_and_facet():
+    img = np.random.randint(255, size=(10, 9, 8, 7)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=0, facet_col=1, binary_string=True)
+    nslices = img.shape[0]
+    assert len(fig.frames) == nslices
+    assert len(fig.data) == img.shape[1]
