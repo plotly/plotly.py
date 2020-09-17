@@ -395,6 +395,12 @@ def imshow(
         args["animation_frame"] = (  # TODO
             "slice" if labels.get("slice") is None else labels["slice"]
         )
+    iterables = ()
+    if slice_through:
+        if animation_frame is not None:
+            iterables += (range(nslices_animation),)
+        if facet_col is not None:
+            iterables += (range(nslices_facet),)
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
@@ -451,12 +457,6 @@ def imshow(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
-        iterables = ()
-        if slice_through:
-            if animation_frame is not None:
-                iterables += (range(nslices_animation),)
-            if facet_col is not None:
-                iterables += (range(nslices_facet),)
         traces = [
             go.Heatmap(x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i))
             for i, index_tup in enumerate(itertools.product(*iterables))
@@ -488,12 +488,6 @@ def imshow(
                 _vectorize_zvalue(zmin, mode="min"),
                 _vectorize_zvalue(zmax, mode="max"),
             )
-        iterables = ()
-        if slice_through:
-            if animation_frame is not None:
-                iterables += (range(nslices_animation),)
-            if facet_col is not None:
-                iterables += (range(nslices_facet),)
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
