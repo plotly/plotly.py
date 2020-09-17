@@ -523,7 +523,7 @@ def imshow(
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
-            "An image of shape %s was provided"
+            "An image of shape %s was provided."
             "Alternatively, 3-D single or multichannel datasets can be"
             "visualized using the `facet_col` or `animation_frame` arguments."
             % str(img.shape)
