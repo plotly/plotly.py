@@ -314,8 +314,9 @@ def imshow(
             animation_frame = img.dims.index(animation_frame)
         nslices_animation = img.shape[animation_frame]
         animation_slices = range(nslices_animation)
-    slice_through = (facet_col is not None) or (animation_frame is not None)
-    double_slice_through = (facet_col is not None) and (animation_frame is not None)
+    slice_dimensions = (facet_col is not None) + (
+        animation_frame is not None
+    )  # 0, 1, or 2
     facet_label = None
     animation_label = None
     # ----- Define x and y, set labels if img is an xarray -------------------
@@ -344,10 +345,10 @@ def imshow(
             labels["x"] = x_label
         if labels.get("y", None) is None:
             labels["y"] = y_label
-        if labels.get("animation_slice", None) is None:
-            labels["animation_slice"] = animation_label
-        if labels.get("facet_slice", None) is None:
-            labels["facet_slice"] = facet_label
+        if labels.get("animation", None) is None:
+            labels["animation"] = animation_label
+        if labels.get("facet", None) is None:
+            labels["facet"] = facet_label
         if labels.get("color", None) is None:
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
@@ -382,32 +383,27 @@ def imshow(
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
+    # Reshape array so that animation dimension comes first, then facets, then images
     if facet_col is not None:
         img = np.moveaxis(img, facet_col, 0)
-        print(img.shape)
         if animation_frame is not None and animation_frame < facet_col:
             animation_frame += 1
         facet_col = True
     if animation_frame is not None:
         img = np.moveaxis(img, animation_frame, 0)
-        print(img.shape)
         animation_frame = True
-        args["animation_frame"] = (  # TODO
-            "slice" if labels.get("slice") is None else labels["slice"]
+        args["animation_frame"] = (
+            "slice" if labels.get("animation") is None else labels["animation"]
         )
     iterables = ()
-    if slice_through:
-        if animation_frame is not None:
-            iterables += (range(nslices_animation),)
-        if facet_col is not None:
-            iterables += (range(nslices_facet),)
+    if animation_frame is not None:
+        iterables += (range(nslices_animation),)
+    if facet_col is not None:
+        iterables += (range(nslices_facet),)
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
-        if slice_through:
-            binary_string = img.ndim >= 4 and not is_dataframe
-        else:
-            binary_string = img.ndim >= 3 and not is_dataframe
+        binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
@@ -419,11 +415,7 @@ def imshow(
 
     # -------- Contrast rescaling: either minmax or infer ------------------
     if contrast_rescaling is None:
-        contrast_rescaling = (
-            "minmax"
-            if (img.ndim == 2 or (img.ndim == 3 and slice_through))
-            else "infer"
-        )
+        contrast_rescaling = "minmax" if img.ndim == (2 + slice_dimensions) else "infer"
 
     # We try to set zmin and zmax only if necessary, because traces have good defaults
     if contrast_rescaling == "minmax":
@@ -439,19 +431,15 @@ def imshow(
         if zmin is None and zmax is not None:
             zmin = 0
 
-        # For 2d data, use Heatmap trace, unless binary_string is True
-    if (
-        img.ndim == 2
-        or (img.ndim == 3 and slice_through)
-        or (img.ndim == 4 and double_slice_through)
-    ) and not binary_string:
-        y_index = 1 if slice_through else 0
+    # For 2d data, use Heatmap trace, unless binary_string is True
+    if img.ndim == 2 + slice_dimensions and not binary_string:
+        y_index = slice_dimensions
         if y is not None and img.shape[y_index] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
                 + "dimension of the img matrix."
             )
-        x_index = 2 if slice_through else 1
+        x_index = slice_dimensions + 1
         if x is not None and img.shape[x_index] != len(x):
             raise ValueError(
                 "The length of the x vector must match the length of the second "
@@ -480,7 +468,8 @@ def imshow(
 
     # For 2D+RGB data, use Image trace
     elif (
-        img.ndim >= 3 and (img.shape[-1] in [3, 4] or slice_through and binary_string)
+        img.ndim >= 3
+        and (img.shape[-1] in [3, 4] or slice_dimensions and binary_string)
     ) or (img.ndim == 2 and binary_string):
         rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
@@ -492,11 +481,7 @@ def imshow(
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
                 rescale_image = False
-            elif (
-                img.ndim == 2
-                or (img.ndim == 3 and slice_through)
-                or (img.ndim == 4 and double_slice_through)
-            ):
+            elif img.ndim == 2 + slice_dimensions:  # single-channel image
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
@@ -547,9 +532,7 @@ def imshow(
     # Now build figure
     col_labels = []
     if facet_col is not None:
-        slice_label = "slice" if labels.get("slice") is None else labels["slice"]
-        if facet_slices is None:
-            facet_slices = range(nslices_facet)
+        slice_label = "slice" if labels.get("facet") is None else labels["facet"]
         col_labels = ["%s = %d" % (slice_label, i) for i in facet_slices]
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     layout_patch = dict()
@@ -566,12 +549,12 @@ def imshow(
         if (facet_col and index < nrows * ncols) or index == 0:
             fig.add_trace(trace, row=nrows - index // ncols, col=index % ncols + 1)
     if animation_frame is not None:
-        for i in range(nslices_animation):
+        for i, index in zip(range(nslices_animation), animation_slices):
             frame_list.append(
                 dict(
                     data=traces[nslices_facet * i : nslices_facet * (i + 1)],
                     layout=layout,
-                    name=str(i),
+                    name=str(index),
                 )
             )
     if animation_frame:
@@ -607,5 +590,5 @@ def imshow(
     if labels["y"]:
         fig.update_yaxes(title_text=labels["y"])
     configure_animation_controls(args, go.Image, fig)
-    # fig.update_layout(template=args["template"], overwrite=True)
+    fig.update_layout(template=args["template"], overwrite=True)
     return fig
