@@ -434,7 +434,11 @@ def imshow(
             zmin = 0
 
         # For 2d data, use Heatmap trace, unless binary_string is True
-    if (img.ndim == 2 or (img.ndim == 3 and slice_through)) and not binary_string:
+    if (
+        img.ndim == 2
+        or (img.ndim == 3 and slice_through)
+        or (img.ndim == 4 and double_slice_through)
+    ) and not binary_string:
         y_index = 1 if slice_through else 0
         if y is not None and img.shape[y_index] != len(y):
             raise ValueError(
@@ -447,20 +451,16 @@ def imshow(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
+        iterables = ()
         if slice_through:
-            iterables = ()
             if animation_frame is not None:
                 iterables += (range(nslices_animation),)
             if facet_col is not None:
                 iterables += (range(nslices_facet),)
-            traces = [
-                go.Heatmap(
-                    x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i)
-                )
-                for i, index_tup in enumerate(itertools.product(*iterables))
-            ]
-        else:
-            traces = [go.Heatmap(x=x, y=y, z=img, coloraxis="coloraxis1")]
+        traces = [
+            go.Heatmap(x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i))
+            for i, index_tup in enumerate(itertools.product(*iterables))
+        ]
         autorange = True if origin == "lower" else "reversed"
         layout = dict(yaxis=dict(autorange=autorange))
         if aspect == "equal":
@@ -488,8 +488,8 @@ def imshow(
                 _vectorize_zvalue(zmin, mode="min"),
                 _vectorize_zvalue(zmax, mode="max"),
             )
+        iterables = ()
         if slice_through:
-            iterables = ()
             if animation_frame is not None:
                 iterables += (range(nslices_animation),)
             if facet_col is not None:
@@ -518,42 +518,26 @@ def imshow(
                     ],
                     axis=-1,
                 )
-            if slice_through:
-                tuples = [index_tup for index_tup in itertools.product(*iterables)]
-                img_str = [
-                    _array_to_b64str(
-                        img_rescaled[index_tup],
-                        backend=binary_backend,
-                        compression=binary_compression_level,
-                        ext=binary_format,
-                    )
-                    for index_tup in itertools.product(*iterables)
-                ]
+            img_str = [
+                _array_to_b64str(
+                    img_rescaled[index_tup],
+                    backend=binary_backend,
+                    compression=binary_compression_level,
+                    ext=binary_format,
+                )
+                for index_tup in itertools.product(*iterables)
+            ]
 
-            else:
-                img_str = [
-                    _array_to_b64str(
-                        img_rescaled,
-                        backend=binary_backend,
-                        compression=binary_compression_level,
-                        ext=binary_format,
-                    )
-                ]
             traces = [
                 go.Image(source=img_str_slice, name=str(i))
                 for i, img_str_slice in enumerate(img_str)
             ]
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            if slice_through:
-                traces = [
-                    go.Image(
-                        z=img[index_tup], zmin=zmin, zmax=zmax, colormodel=colormodel
-                    )
-                    for index_tup in itertools.product(*iterables)
-                ]
-            else:
-                traces = [go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)]
+            traces = [
+                go.Image(z=img[index_tup], zmin=zmin, zmax=zmax, colormodel=colormodel)
+                for index_tup in itertools.product(*iterables)
+            ]
         layout = {}
         if origin == "lower":
             layout["yaxis"] = dict(autorange=True)
