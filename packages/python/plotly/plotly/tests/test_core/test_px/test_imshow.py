@@ -366,9 +366,10 @@ def test_animation_frame_rgb(animation_frame, binary_string):
     assert len(fig.frames) == nslices
 
 
-def test_animation_and_facet():
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_and_facet(binary_string):
     img = np.random.randint(255, size=(10, 9, 8, 7)).astype(np.uint8)
-    fig = px.imshow(img, animation_frame=0, facet_col=1, binary_string=True)
+    fig = px.imshow(img, animation_frame=0, facet_col=1, binary_string=binary_string)
     nslices = img.shape[0]
     assert len(fig.frames) == nslices
     assert len(fig.data) == img.shape[1]
