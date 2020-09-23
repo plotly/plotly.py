@@ -30,7 +30,9 @@ jupyter:
     order: 3
     page_type: example_index
     permalink: python/histograms/
-    redirect_from: /python/histogram-tutorial/
+    redirect_from: 
+      - /python/histogram-tutorial/
+      - /python/histogram/
     thumbnail: thumbnail/histogram.jpg
 ---
 
