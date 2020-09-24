@@ -1199,6 +1199,16 @@ because subplot does not have a secondary y-axis"""
             else:
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            # in case the user specified they wanted an axis to refer to the
+            # domain of that axis and not the data, append ' domain' to the
+            # computed axis accordingly
+            def _add_domain(ax_letter, new_axref):
+                axref = ax_letter + "ref"
+                if axref in new_obj._props.keys() and "domain" in new_obj[axref]:
+                    new_axref += " domain"
+                return new_axref
+
+            xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
