@@ -199,4 +199,4 @@ fig.show()
 
 ### Reference
 
-See [https://plotly.com/python/reference/sankey](https://plotly/.com/python/reference/sankey/) for more information and options!
+See [https://plotly.com/python/reference/sankey](https://plotly.com/python/reference/sankey/) for more information and options!
