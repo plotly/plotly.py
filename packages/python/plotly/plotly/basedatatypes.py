@@ -3604,7 +3604,14 @@ Invalid property path '{key_path_str}' for layout
         return shape
 
     def _process_multiple_axis_spanning_shapes(
-        self, shape_args, row, col, direction, exclude_empty_subplots=True, **kwargs
+        self,
+        shape_args,
+        row,
+        col,
+        direction,
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
     ):
         """
         Add a shape or multiple shapes and call _make_axis_spanning_shape on
@@ -3619,7 +3626,7 @@ Invalid property path '{key_path_str}' for layout
             # this was called intending to add to a single plot (and
             # self.add_shape succeeded)
             # however, in the case of a single plot, xref and yref are not
-            # specified, so we specify them here to the following routines can work
+            # specified, so we specify them here so the following routines can work
             # (they need to append " domain" to xref or yref)
             self.layout["shapes"][-1].update(xref="x", yref="y")
         n_shapes_after = len(self.layout["shapes"])
@@ -3638,7 +3645,15 @@ Invalid property path '{key_path_str}' for layout
         )
         self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
 
-    def add_vline(self, x, row=None, col=None, exclude_empty_subplots=True, **kwargs):
+    def add_vline(
+        self,
+        x,
+        row=None,
+        col=None,
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
+    ):
         """
         Add a vertical line to a plot or subplot that extends infinitely in the
         y-dimension.
@@ -3665,6 +3680,7 @@ Invalid property path '{key_path_str}' for layout
             col,
             "vertical",
             exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
             **kwargs
         )
         return self
