@@ -1,64 +1,9 @@
-import plotly.graph_objects as go
 from numpy import argmax, argmin, mean
 
 
-def compute_anchors_for_line(position, vertical):
-    xanchor = None
-    yanchor = None
-    if vertical:
-        if position in ["n", "top", "sw", "bottom left", "se", "bottom right"]:
-            yanchor = "bottom"
-        if position in ["nw", "top left", "ne", "top right", "s", "bottom"]:
-            yanchor = "top"
-        if position in ["w", "left", "e", "right"]:
-            yanchor = "middle"
-        if position in ["ne", "top right", "e", "right", "se", "bottom right"]:
-            xanchor = "left"
-        if position in ["sw", "bottom left", "w", "left", "nw", "top left"]:
-            xanchor = "right"
-        if position in ["n", "top", "s", "bottom"]:
-            xanchor = "center"
-    else:
-        if position in ["nw", "top left", "n", "top", "ne", "top right"]:
-            yanchor = "bottom"
-        if position in ["se", "bottom right", "s", "bottom", "sw", "bottom left"]:
-            yanchor = "top"
-        if position in ["w", "left", "e", "right"]:
-            yanchor = "middle"
-        if position in ["e", "right", "sw", "bottom left", "nw", "top left"]:
-            xanchor = "left"
-        if position in ["ne", "top right", "se", "bottom right", "w", "left"]:
-            xanchor = "right"
-        if position in ["n", "top", "s", "bottom"]:
-            xanchor = "center"
-    return xanchor, yanchor
-
-
-def compute_coord_for_line(position, vertical):
-    # If vertical, this is y value, otherwise, this is x value
-    if vertical:
-        if position in ["nw", "top left", "n", "top", "ne", "top right"]:
-            return 1
-        if position in ["w", "left", "e", "right"]:
-            return 0.5
-        if position in ["sw", "bottom left", "s", "bottom", "se", "bottom right"]:
-            return 0
-    else:
-        if position in [
-            "nw",
-            "top left",
-            "sw",
-            "bottom left",
-            "w",
-            "left",
-            "nw",
-            "top left",
-        ]:
-            return 0
-        if position in ["n", "top", "s", "bottom"]:
-            return 0.5
-        if position in ["ne", "top right", "e", "right", "se", "bottom right"]:
-            return 1
+def _df_anno(xanchor, yanchor, x, y):
+    """ Default annotation parameters """
+    return dict(xanchor=xanchor, yanchor=yanchor, x=x, y=y, showarrow=False)
 
 
 def annotation_params_for_line(shape_type, shape_args, position):
@@ -89,45 +34,42 @@ def annotation_params_for_line(shape_type, shape_args, position):
     aaX = argmax(X)
     aiX = argmin(X)
 
-    def _d(xanchor, yanchor, x, y):
-        return dict(xanchor=xanchor, yanchor=yanchor, x=x, y=y)
-
     if shape_type == "vline":
         if position == "top left":
-            return _d(R, T, X[aaY], aY)
+            return _df_anno(R, T, X[aaY], aY)
         if position == "top right":
-            return _d(L, T, X[aaY], aY)
+            return _df_anno(L, T, X[aaY], aY)
         if position == "top":
-            return _d(C, B, X[aaY], aY)
+            return _df_anno(C, B, X[aaY], aY)
         if position == "bottom left":
-            return _d(R, B, X[aiY], iY)
+            return _df_anno(R, B, X[aiY], iY)
         if position == "bottom right":
-            return _d(L, B, X[aiY], iY)
+            return _df_anno(L, B, X[aiY], iY)
         if position == "bottom":
-            return _d(C, T, X[aiY], iY)
+            return _df_anno(C, T, X[aiY], iY)
         if position == "left":
-            return _d(R, M, eX, eY)
+            return _df_anno(R, M, eX, eY)
         if position == "right":
-            return _d(L, M, eX, eY)
-        return _d(L, T, X[aaY], aY)
+            return _df_anno(L, M, eX, eY)
+        return _df_anno(L, T, X[aaY], aY)
     if shape_type == "hline":
         if position == "top left":
-            return _d(L, B, iX, Y[aiX])
+            return _df_anno(L, B, iX, Y[aiX])
         if position == "top right":
-            return _d(R, B, aX, Y[aaX])
+            return _df_anno(R, B, aX, Y[aaX])
         if position == "top":
-            return _d(C, B, mX, mY)
+            return _df_anno(C, B, mX, mY)
         if position == "bottom left":
-            return _d(L, T, iX, Y[aiX])
+            return _df_anno(L, T, iX, Y[aiX])
         if position == "bottom right":
-            return _d(R, T, aX, Y[aaX])
+            return _df_anno(R, T, aX, Y[aaX])
         if position == "bottom":
-            return _d(C, T, mX, mY)
+            return _df_anno(C, T, mX, mY)
         if position == "left":
-            return _d(R, M, iX, Y[aiX])
+            return _df_anno(R, M, iX, Y[aiX])
         if position == "right":
-            return _d(L, M, aX, Y[aaX])
-        return _d(R, B, aX, Y[aaX])
+            return _df_anno(L, M, aX, Y[aaX])
+        return _df_anno(R, B, aX, Y[aaX])
 
 
 def annotation_params_for_rect(shape_type, shape_args, position):
@@ -136,46 +78,43 @@ def annotation_params_for_rect(shape_type, shape_args, position):
     y0 = shape_args["y0"]
     y1 = shape_args["y1"]
 
-    def _d(xanchor, yanchor, x, y):
-        return dict(xanchor=xanchor, yanchor=yanchor, x=x, y=y)
-
     if position == "inside top left":
-        return _d("left", "top", min([x0, x1]), max([y0, y1]))
+        return _df_anno("left", "top", min([x0, x1]), max([y0, y1]))
     if position == "inside top right":
-        return _d("right", "top", max([x0, x1]), max([y0, y1]))
+        return _df_anno("right", "top", max([x0, x1]), max([y0, y1]))
     if position == "inside top":
-        return _d("center", "top", mean([x0, x1]), max([y0, y1]))
+        return _df_anno("center", "top", mean([x0, x1]), max([y0, y1]))
     if position == "inside bottom left":
-        return _d("left", "bottom", min([x0, x1]), min([y0, y1]))
+        return _df_anno("left", "bottom", min([x0, x1]), min([y0, y1]))
     if position == "inside bottom right":
-        return _d("right", "bottom", max([x0, x1]), min([y0, y1]))
+        return _df_anno("right", "bottom", max([x0, x1]), min([y0, y1]))
     if position == "inside bottom":
-        return _d("center", "bottom", mean([x0, x1]), min([y0, y1]))
+        return _df_anno("center", "bottom", mean([x0, x1]), min([y0, y1]))
     if position == "inside left":
-        return _d("left", "middle", min([x0, x1]), mean([y0, y1]))
+        return _df_anno("left", "middle", min([x0, x1]), mean([y0, y1]))
     if position == "inside right":
-        return _d("right", "middle", max([x0, x1]), mean([y0, y1]))
+        return _df_anno("right", "middle", max([x0, x1]), mean([y0, y1]))
     if position == "inside":
         # TODO: Do we want this?
-        return _d("center", "middle", mean([x0, x1]), mean([y0, y1]))
+        return _df_anno("center", "middle", mean([x0, x1]), mean([y0, y1]))
     if position == "outside top left":
-        return _d("right", "bottom", min([x0, x1]), max([y0, y1]))
+        return _df_anno("right", "bottom", min([x0, x1]), max([y0, y1]))
     if position == "outside top right":
-        return _d("left", "bottom", max([x0, x1]), max([y0, y1]))
+        return _df_anno("left", "bottom", max([x0, x1]), max([y0, y1]))
     if position == "outside top":
-        return _d("center", "bottom", mean([x0, x1]), max([y0, y1]))
+        return _df_anno("center", "bottom", mean([x0, x1]), max([y0, y1]))
     if position == "outside bottom left":
-        return _d("right", "top", min([x0, x1]), min([y0, y1]))
+        return _df_anno("right", "top", min([x0, x1]), min([y0, y1]))
     if position == "outside bottom right":
-        return _d("left", "top", max([x0, x1]), min([y0, y1]))
+        return _df_anno("left", "top", max([x0, x1]), min([y0, y1]))
     if position == "outside bottom":
-        return _d("center", "top", mean([x0, x1]), min([y0, y1]))
+        return _df_anno("center", "top", mean([x0, x1]), min([y0, y1]))
     if position == "outside left":
-        return _d("right", "middle", min([x0, x1]), mean([y0, y1]))
+        return _df_anno("right", "middle", min([x0, x1]), mean([y0, y1]))
     if position == "outside right":
-        return _d("left", "middle", max([x0, x1]), mean([y0, y1]))
+        return _df_anno("left", "middle", max([x0, x1]), mean([y0, y1]))
     # default is inside top right
-    return _d("right", "top", max([x0, x1]), max([y0, y1]))
+    return _df_anno("right", "top", max([x0, x1]), max([y0, y1]))
 
 
 def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
@@ -197,17 +136,61 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     shape_type). Note that the xref and yref properties will in general get
     overwritten if the result of this function is passed to an add_annotation
     called with the row and col parameters specified.
+
+    Returns an annotation populated with fields based on the
+    annotation_position, annotation_ prefixed kwargs or the original annotation
+    passed in to this function.
     """
     # Force to go.layout.Annotation, no matter if it is that already, a dict or None
-    annotation = go.layout.Annotation(annotation)
+    # TODO: We can't import go.layout.Annotation so we initialize this as a
+    # dict. This strategy is inferior to initializing as a go.layout.Annotation
+    # because there's no checking if a key is valid. Eventually it'd be better
+    # to use go.layout.Annotation.
+    if annotation is None:
+        annotation = dict()
     # set properties based on annotation_ prefixed kwargs
     prefix = "annotation_"
     len_prefix = len(prefix)
     annotation_keys = filter(lambda k: k.startswith(prefix), kwargs.keys())
     for k in annotation_keys:
+        if k == "annotation_position":
+            # don't set so that Annotation constructor doesn't complain
+            continue
         subk = k[len_prefix:]
         annotation[subk] = kwargs[k]
     # set x, y, xanchor, yanchor based on shape_type and position
     annotation_position = None
     if "annotation_position" in kwargs.keys():
         annotation_position = kwargs["annotation_position"]
+    if shape_type.endswith("line"):
+        shape_dict = annotation_params_for_line(
+            shape_type, shape_args, annotation_position
+        )
+    elif shape_type.endswith("rect"):
+        shape_dict = annotation_params_for_rect(
+            shape_type, shape_args, annotation_position
+        )
+    for k in shape_dict.keys():
+        # only set property derived from annotation_position if it hasn't already been set
+        # see above: this would be better as a go.layout.Annotation then the key
+        # would be checked for validity here (otherwise it is checked later,
+        # which I guess is ok too)
+        if (k not in annotation) or (annotation[k] is None):
+            annotation[k] = shape_dict[k]
+    return annotation
+
+
+def split_dict_by_key_prefix(d, prefix):
+    """
+    Returns two dictionaries, one containing all the items whose keys do not
+    start with a prefix and another containing all the items whose keys do start
+    with the prefix. Note that the prefix is not removed from the keys.
+    """
+    no_prefix = dict()
+    with_prefix = dict()
+    for k in d.keys():
+        if k.startswith(prefix):
+            with_prefix[k] = d[k]
+        else:
+            no_prefix[k] = d[k]
+    return (no_prefix, with_prefix)

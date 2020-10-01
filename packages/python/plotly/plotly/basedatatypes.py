@@ -13,6 +13,8 @@ import itertools
 from _plotly_utils.utils import _natural_sort_strings, _get_int_type
 from .optional_imports import get_module
 
+from . import shapeannotation
+
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
@@ -3548,7 +3550,9 @@ Invalid property path '{key_path_str}' for layout
 
         return index_list[0]
 
-    def _make_axis_spanning_shape(self, direction, shape, none_if_no_trace=True):
+    def _make_axis_spanning_layout_object(
+        self, direction, shape, none_if_no_trace=True
+    ):
         """
         Convert a shape drawn on a plot or a subplot into one whose yref or xref
         ends with " domain" and has coordinates so that the shape will seem to
@@ -3559,6 +3563,7 @@ Invalid property path '{key_path_str}' for layout
         corresponding axis reference referring to an actual axis (e.g., 'x',
         'y2' etc. are accepted, but not 'paper'). This will be the case if the
         shape was added with "add_shape".
+        Shape must have the x0, x1, y0, y1 fields already initialized.
         """
         if direction == "vertical":
             # fix y points to top and bottom of subplot
@@ -3575,12 +3580,6 @@ Invalid property path '{key_path_str}' for layout
                 "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
                 % (direction,)
             )
-        # vline and hline span the whole axis
-        domain = [0, 1]
-        try:
-            shape[axis + "0"], shape[axis + "1"] = domain
-        except KeyError as e:
-            raise e("Shape does not support axis spanning.")
         if none_if_no_trace:
             # iterate through all the traces and check to see if one with the
             # same xref and yref pair is there, if not, we return None (we don't
@@ -3608,42 +3607,69 @@ Invalid property path '{key_path_str}' for layout
         shape_args,
         row,
         col,
-        direction,
+        shape_type,
         exclude_empty_subplots=True,
         annotation=None,
         **kwargs
     ):
         """
-        Add a shape or multiple shapes and call _make_axis_spanning_shape on
+        Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
         all the new shapes.
         """
+        if shape_type in ["vline", "vrect"]:
+            direction = "vertical"
+        elif shape_type in ["hline", "hrect"]:
+            direction = "horizontal"
+        else:
+            raise ValueError(
+                "Bad shape_type %s, needs to be one of 'vline', 'hline', 'vrect', 'hrect'"
+                % (shape_type,)
+            )
+
+        n_shapes_before = len(self.layout["shapes"])
+        n_annotations_before = len(self.layout["annotations"])
         # shapes are always added at the end of the tuple of shapes, so we see
         # how long the tuple is before the call and after the call, and adjust
         # the new shapes that were added at the end
-        n_shapes_before = len(self.layout["shapes"])
-        self.add_shape(row=row, col=col, **_combine_dicts([shape_args, kwargs]))
-        if row == None and col == None:
-            # this was called intending to add to a single plot (and
-            # self.add_shape succeeded)
-            # however, in the case of a single plot, xref and yref are not
-            # specified, so we specify them here so the following routines can work
-            # (they need to append " domain" to xref or yref)
-            self.layout["shapes"][-1].update(xref="x", yref="y")
-        n_shapes_after = len(self.layout["shapes"])
-        new_shapes = tuple(
-            filter(
-                lambda x: x is not None,
-                [
-                    self._make_axis_spanning_shape(
-                        direction,
-                        self.layout["shapes"][n],
-                        none_if_no_trace=exclude_empty_subplots,
-                    )
-                    for n in range(n_shapes_before, n_shapes_after)
-                ],
-            )
+        # extract annotation prefixed kwargs
+        # annotation with extra parameters based on the annotation_position
+        # argument and other annotation_ prefixed kwargs
+        shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+            kwargs, "annotation_"
         )
-        self.layout["shapes"] = self.layout["shapes"][:n_shapes_before] + new_shapes
+        augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+            annotation, shape_type, shape_args, annotation_kwargs
+        )
+        self.add_shape(row=row, col=col, **_combine_dicts([shape_args, shape_kwargs]))
+        self.add_annotation(augmented_annotation, row=row, col=col)
+        # update xref and yref for the new shapes and annotations
+        for layout_obj, n_layout_objs_before in zip(
+            ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
+        ):
+            if row == None and col == None:
+                # this was called intending to add to a single plot (and
+                # self.add_{layout_obj} succeeded)
+                # however, in the case of a single plot, xref and yref are not
+                # specified, so we specify them here so the following routines can work
+                # (they need to append " domain" to xref or yref)
+                self.layout[layout_obj][-1].update(xref="x", yref="y")
+            n_layout_objs_after = len(self.layout[layout_obj])
+            new_layout_objs = tuple(
+                filter(
+                    lambda x: x is not None,
+                    [
+                        self._make_axis_spanning_layout_object(
+                            direction,
+                            self.layout[layout_obj][n],
+                            none_if_no_trace=exclude_empty_subplots,
+                        )
+                        for n in range(n_layout_objs_before, n_layout_objs_after)
+                    ],
+                )
+            )
+            self.layout[layout_obj] = (
+                self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
+            )
 
     def add_vline(
         self,
@@ -3678,7 +3704,7 @@ Invalid property path '{key_path_str}' for layout
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
             row,
             col,
-            "vertical",
+            "vline",
             exclude_empty_subplots=exclude_empty_subplots,
             annotation=annotation,
             **kwargs
@@ -3710,7 +3736,7 @@ Invalid property path '{key_path_str}' for layout
             dict(type="line", x0=0, x1=1, y0=y, y1=y,),
             row,
             col,
-            "horizontal",
+            "hline",
             exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
@@ -3745,7 +3771,7 @@ Invalid property path '{key_path_str}' for layout
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
             row,
             col,
-            "vertical",
+            "vrect",
             exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
@@ -3780,7 +3806,7 @@ Invalid property path '{key_path_str}' for layout
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
             row,
             col,
-            "horizontal",
+            "hrect",
             exclude_empty_subplots=exclude_empty_subplots,
             **kwargs
         )
