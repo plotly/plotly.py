@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.11.0] - 2020-10-01
+
+### Updated
+
+- Updated Plotly.js to version 1.56.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.56.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+
 ## [4.10.0] - 2020-09-10
 
 ### Added

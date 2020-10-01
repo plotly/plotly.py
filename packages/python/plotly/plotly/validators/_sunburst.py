@@ -172,6 +172,9 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             parentssrc
                 Sets the source reference on Chart Studio Cloud
                 for  parents .
+            sort
+                Determines whether or not the sectors are
+                reordered from largest to smallest.
             stream
                 :class:`plotly.graph_objects.sunburst.Stream`
                 instance or dict with compatible properties

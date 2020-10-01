@@ -49,6 +49,9 @@ class Heatmap(_BaseTraceType):
         "xaxis",
         "xcalendar",
         "xgap",
+        "xperiod",
+        "xperiod0",
+        "xperiodalignment",
         "xsrc",
         "xtype",
         "y",
@@ -56,6 +59,9 @@ class Heatmap(_BaseTraceType):
         "yaxis",
         "ycalendar",
         "ygap",
+        "yperiod",
+        "yperiod0",
+        "yperiodalignment",
         "ysrc",
         "ytype",
         "z",
@@ -185,6 +191,10 @@ class Heatmap(_BaseTraceType):
                     (i.e. the measure in the color variation
                     direction) is set in units of plot "fraction"
                     or in *pixels. Use `len` to set the value.
+                minexponent
+                    Hide SI prefix for 10^n if |n| is below this
+                    number. This only has an effect when
+                    `tickformat` is "SI" or "B".
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks
@@ -1242,6 +1252,73 @@ class Heatmap(_BaseTraceType):
     def xgap(self, val):
         self["xgap"] = val
 
+    # xperiod
+    # -------
+    @property
+    def xperiod(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the period
+        positioning in milliseconds or "M<n>" on the x axis. Special
+        values in the form of "M<n>" could be used to declare the
+        number of months. In this case `n` must be a positive integer.
+    
+        The 'xperiod' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["xperiod"]
+
+    @xperiod.setter
+    def xperiod(self, val):
+        self["xperiod"] = val
+
+    # xperiod0
+    # --------
+    @property
+    def xperiod0(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the base for
+        period positioning in milliseconds or date string on the x0
+        axis. When `x0period` is round number of weeks, the `x0period0`
+        by default would be on a Sunday i.e. 2000-01-02, otherwise it
+        would be at 2000-01-01.
+    
+        The 'xperiod0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["xperiod0"]
+
+    @xperiod0.setter
+    def xperiod0(self, val):
+        self["xperiod0"] = val
+
+    # xperiodalignment
+    # ----------------
+    @property
+    def xperiodalignment(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the
+        alignment of data points on the x axis.
+    
+        The 'xperiodalignment' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['start', 'middle', 'end']
+
+        Returns
+        -------
+        Any
+        """
+        return self["xperiodalignment"]
+
+    @xperiodalignment.setter
+    def xperiodalignment(self, val):
+        self["xperiodalignment"] = val
+
     # xsrc
     # ----
     @property
@@ -1395,6 +1472,73 @@ class Heatmap(_BaseTraceType):
     @ygap.setter
     def ygap(self, val):
         self["ygap"] = val
+
+    # yperiod
+    # -------
+    @property
+    def yperiod(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the period
+        positioning in milliseconds or "M<n>" on the y axis. Special
+        values in the form of "M<n>" could be used to declare the
+        number of months. In this case `n` must be a positive integer.
+    
+        The 'yperiod' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["yperiod"]
+
+    @yperiod.setter
+    def yperiod(self, val):
+        self["yperiod"] = val
+
+    # yperiod0
+    # --------
+    @property
+    def yperiod0(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the base for
+        period positioning in milliseconds or date string on the y0
+        axis. When `y0period` is round number of weeks, the `y0period0`
+        by default would be on a Sunday i.e. 2000-01-02, otherwise it
+        would be at 2000-01-01.
+    
+        The 'yperiod0' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["yperiod0"]
+
+    @yperiod0.setter
+    def yperiod0(self, val):
+        self["yperiod0"] = val
+
+    # yperiodalignment
+    # ----------------
+    @property
+    def yperiodalignment(self):
+        """
+        Only relevant when the axis `type` is "date". Sets the
+        alignment of data points on the y axis.
+    
+        The 'yperiodalignment' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['start', 'middle', 'end']
+
+        Returns
+        -------
+        Any
+        """
+        return self["yperiodalignment"]
+
+    @yperiodalignment.setter
+    def yperiodalignment(self, val):
+        self["yperiodalignment"] = val
 
     # ysrc
     # ----
@@ -1808,6 +1952,22 @@ class Heatmap(_BaseTraceType):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1832,6 +1992,22 @@ class Heatmap(_BaseTraceType):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1915,6 +2091,9 @@ class Heatmap(_BaseTraceType):
         xaxis=None,
         xcalendar=None,
         xgap=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         xtype=None,
         y=None,
@@ -1922,6 +2101,9 @@ class Heatmap(_BaseTraceType):
         yaxis=None,
         ycalendar=None,
         ygap=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         ytype=None,
         z=None,
@@ -2145,6 +2327,22 @@ class Heatmap(_BaseTraceType):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2169,6 +2367,22 @@ class Heatmap(_BaseTraceType):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2398,6 +2612,18 @@ an instance of :class:`plotly.graph_objs.Heatmap`"""
         _v = xgap if xgap is not None else _v
         if _v is not None:
             self["xgap"] = _v
+        _v = arg.pop("xperiod", None)
+        _v = xperiod if xperiod is not None else _v
+        if _v is not None:
+            self["xperiod"] = _v
+        _v = arg.pop("xperiod0", None)
+        _v = xperiod0 if xperiod0 is not None else _v
+        if _v is not None:
+            self["xperiod0"] = _v
+        _v = arg.pop("xperiodalignment", None)
+        _v = xperiodalignment if xperiodalignment is not None else _v
+        if _v is not None:
+            self["xperiodalignment"] = _v
         _v = arg.pop("xsrc", None)
         _v = xsrc if xsrc is not None else _v
         if _v is not None:
@@ -2426,6 +2652,18 @@ an instance of :class:`plotly.graph_objs.Heatmap`"""
         _v = ygap if ygap is not None else _v
         if _v is not None:
             self["ygap"] = _v
+        _v = arg.pop("yperiod", None)
+        _v = yperiod if yperiod is not None else _v
+        if _v is not None:
+            self["yperiod"] = _v
+        _v = arg.pop("yperiod0", None)
+        _v = yperiod0 if yperiod0 is not None else _v
+        if _v is not None:
+            self["yperiod0"] = _v
+        _v = arg.pop("yperiodalignment", None)
+        _v = yperiodalignment if yperiodalignment is not None else _v
+        if _v is not None:
+            self["yperiodalignment"] = _v
         _v = arg.pop("ysrc", None)
         _v = ysrc if ysrc is not None else _v
         if _v is not None:
