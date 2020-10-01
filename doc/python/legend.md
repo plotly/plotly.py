@@ -57,6 +57,46 @@ fig = px.scatter(df, x="total_bill", y="tip", color="sex", symbol="smoker", face
 fig.show()
 ```
 
+### Legend Order
+
+By default, Plotly Express lays out legend items in the order in which values appear in the underlying data. Every Plotly Express function also includes a `category_orders` keyword argument which can be used to control [the order in which categorical axes are drawn](/python/categorical-axes/), but beyond that can also control the order in which legend items appear, and [the order in which facets are laid out](/python/facet-plots/).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.bar(df, x="day", y="total_bill", color="smoker", barmode="group", facet_col="sex",
+             category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
+                              "smoker": ["Yes", "No"],
+                              "sex": ["Male", "Female"]})
+fig.show()
+```
+
+When using stacked bars, the bars are stacked from the bottom in the same order as they appear in the legend, so it can make sense to set `layout.legend.traceorder` to `"reversed"` to get the legend and stacks to match:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.bar(df, x="day", y="total_bill", color="smoker", barmode="stack", facet_col="sex",
+             category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
+                              "smoker": ["Yes", "No"],
+                              "sex": ["Male", "Female"]})
+fig.update_layout(legend_traceorder="reversed")
+fig.show()
+```
+
+When using [`plotly.graph_objects`](/python/graph-objects/) rather than Plotly Express, legend items will appear in the order that traces appear in the `data`:
+
+```python
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Bar(name="first", x=["a", "b"], y=[1,2]))
+fig.add_trace(go.Bar(name="second", x=["a", "b"], y=[2,1]))
+fig.add_trace(go.Bar(name="third", x=["a", "b"], y=[1,2]))
+fig.add_trace(go.Bar(name="fourth", x=["a", "b"], y=[2,1]))
+fig.show()
+```
+
 #### Showing and Hiding the Legend
 
 By default the legend is displayed on Plotly charts with multiple traces, and this can be explicitly set with the `layout.showlegend` attribute:
