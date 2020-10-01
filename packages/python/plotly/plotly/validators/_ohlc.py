@@ -169,6 +169,25 @@ class OhlcValidator(_plotly_utils.basevalidators.CompoundValidator):
             xcalendar
                 Sets the calendar system to use with `x` date
                 data.
+            xperiod
+                Only relevant when the axis `type` is "date".
+                Sets the period positioning in milliseconds or
+                "M<n>" on the x axis. Special values in the
+                form of "M<n>" could be used to declare the
+                number of months. In this case `n` must be a
+                positive integer.
+            xperiod0
+                Only relevant when the axis `type` is "date".
+                Sets the base for period positioning in
+                milliseconds or date string on the x0 axis.
+                When `x0period` is round number of weeks, the
+                `x0period0` by default would be on a Sunday
+                i.e. 2000-01-02, otherwise it would be at
+                2000-01-01.
+            xperiodalignment
+                Only relevant when the axis `type` is "date".
+                Sets the alignment of data points on the x
+                axis.
             xsrc
                 Sets the source reference on Chart Studio Cloud
                 for  x .

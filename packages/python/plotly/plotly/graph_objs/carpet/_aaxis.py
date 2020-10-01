@@ -30,6 +30,7 @@ class Aaxis(_BaseTraceHierarchyType):
         "labelsuffix",
         "linecolor",
         "linewidth",
+        "minexponent",
         "minorgridcolor",
         "minorgridcount",
         "minorgridwidth",
@@ -673,6 +674,26 @@ class Aaxis(_BaseTraceHierarchyType):
     @linewidth.setter
     def linewidth(self, val):
         self["linewidth"] = val
+
+    # minexponent
+    # -----------
+    @property
+    def minexponent(self):
+        """
+        Hide SI prefix for 10^n if |n| is below this number
+    
+        The 'minexponent' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minexponent"]
+
+    @minexponent.setter
+    def minexponent(self, val):
+        self["minexponent"] = val
 
     # minorgridcolor
     # --------------
@@ -1677,6 +1698,8 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number
         minorgridcolor
             Sets the color of the grid lines.
         minorgridcount
@@ -1835,6 +1858,7 @@ class Aaxis(_BaseTraceHierarchyType):
         labelsuffix=None,
         linecolor=None,
         linewidth=None,
+        minexponent=None,
         minorgridcolor=None,
         minorgridcount=None,
         minorgridwidth=None,
@@ -1948,6 +1972,8 @@ class Aaxis(_BaseTraceHierarchyType):
             Sets the axis line color.
         linewidth
             Sets the width (in px) of the axis line.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number
         minorgridcolor
             Sets the color of the grid lines.
         minorgridcount
@@ -2193,6 +2219,10 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
         _v = linewidth if linewidth is not None else _v
         if _v is not None:
             self["linewidth"] = _v
+        _v = arg.pop("minexponent", None)
+        _v = minexponent if minexponent is not None else _v
+        if _v is not None:
+            self["minexponent"] = _v
         _v = arg.pop("minorgridcolor", None)
         _v = minorgridcolor if minorgridcolor is not None else _v
         if _v is not None:

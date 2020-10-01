@@ -32,6 +32,7 @@ if sys.version_info < (3, 7):
     from ._rotation import RotationValidator
     from ._period import PeriodValidator
     from ._nticks import NticksValidator
+    from ._minexponent import MinexponentValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
@@ -83,6 +84,7 @@ else:
             "._rotation.RotationValidator",
             "._period.PeriodValidator",
             "._nticks.NticksValidator",
+            "._minexponent.MinexponentValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",

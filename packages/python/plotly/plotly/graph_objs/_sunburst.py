@@ -38,6 +38,7 @@ class Sunburst(_BaseTraceType):
         "outsidetextfont",
         "parents",
         "parentssrc",
+        "sort",
         "stream",
         "text",
         "textfont",
@@ -943,6 +944,27 @@ class Sunburst(_BaseTraceType):
     def parentssrc(self, val):
         self["parentssrc"] = val
 
+    # sort
+    # ----
+    @property
+    def sort(self):
+        """
+        Determines whether or not the sectors are reordered from
+        largest to smallest.
+    
+        The 'sort' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
     # stream
     # ------
     @property
@@ -1434,6 +1456,9 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -1538,6 +1563,7 @@ class Sunburst(_BaseTraceType):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -1712,6 +1738,9 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -1932,6 +1961,10 @@ an instance of :class:`plotly.graph_objs.Sunburst`"""
         _v = parentssrc if parentssrc is not None else _v
         if _v is not None:
             self["parentssrc"] = _v
+        _v = arg.pop("sort", None)
+        _v = sort if sort is not None else _v
+        if _v is not None:
+            self["sort"] = _v
         _v = arg.pop("stream", None)
         _v = stream if stream is not None else _v
         if _v is not None:

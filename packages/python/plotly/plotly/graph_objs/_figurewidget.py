@@ -820,11 +820,17 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -1113,6 +1119,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1129,6 +1151,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1217,11 +1255,17 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -1601,11 +1645,17 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -1961,6 +2011,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1978,6 +2044,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2071,11 +2153,17 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -2120,6 +2208,9 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         yaxis=None,
         row=None,
@@ -2288,6 +2379,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2359,6 +2466,9 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
             **kwargs
@@ -3733,12 +3843,18 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         xtype=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         ytype=None,
         z=None,
@@ -3971,6 +4087,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -3993,6 +4125,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -4099,12 +4247,18 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             xtype=xtype,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             ytype=ytype,
             z=z,
@@ -4865,10 +5019,16 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         x0=None,
         xaxis=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -5130,6 +5290,22 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -5144,6 +5320,22 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -5221,10 +5413,16 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -5592,6 +5790,9 @@ class FigureWidget(BaseFigureWidget):
         xaxis=None,
         xcalendar=None,
         xgap=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         xtype=None,
         y=None,
@@ -5599,6 +5800,9 @@ class FigureWidget(BaseFigureWidget):
         yaxis=None,
         ycalendar=None,
         ygap=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         ytype=None,
         z=None,
@@ -5822,6 +6026,22 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -5846,6 +6066,22 @@ class FigureWidget(BaseFigureWidget):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -5950,6 +6186,9 @@ class FigureWidget(BaseFigureWidget):
             xaxis=xaxis,
             xcalendar=xcalendar,
             xgap=xgap,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             xtype=xtype,
             y=y,
@@ -5957,6 +6196,9 @@ class FigureWidget(BaseFigureWidget):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ygap=ygap,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             ytype=ytype,
             z=z,
@@ -8920,6 +9162,9 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         yaxis=None,
         row=None,
@@ -9087,6 +9332,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -9158,6 +9419,9 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
             **kwargs
@@ -10426,11 +10690,17 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -10752,6 +11022,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -10768,6 +11054,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -10852,11 +11154,17 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -11995,11 +12303,17 @@ class FigureWidget(BaseFigureWidget):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -12246,6 +12560,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -12262,6 +12592,22 @@ class FigureWidget(BaseFigureWidget):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -12336,11 +12682,17 @@ class FigureWidget(BaseFigureWidget):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -14498,6 +14850,7 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -14671,6 +15024,9 @@ class FigureWidget(BaseFigureWidget):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -14786,6 +15142,7 @@ class FigureWidget(BaseFigureWidget):
             outsidetextfont=outsidetextfont,
             parents=parents,
             parentssrc=parentssrc,
+            sort=sort,
             stream=stream,
             text=text,
             textfont=textfont,
@@ -15396,6 +15753,7 @@ class FigureWidget(BaseFigureWidget):
         parents=None,
         parentssrc=None,
         pathbar=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -15562,6 +15920,9 @@ class FigureWidget(BaseFigureWidget):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.treemap.Stream` instance
             or dict with compatible properties
@@ -15681,6 +16042,7 @@ class FigureWidget(BaseFigureWidget):
             parents=parents,
             parentssrc=parentssrc,
             pathbar=pathbar,
+            sort=sort,
             stream=stream,
             text=text,
             textfont=textfont,
@@ -16571,10 +16933,16 @@ class FigureWidget(BaseFigureWidget):
         x=None,
         x0=None,
         xaxis=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -16854,6 +17222,22 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -16868,6 +17252,22 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -16952,10 +17352,16 @@ class FigureWidget(BaseFigureWidget):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
