@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,11 +20,10 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
-    description: How to adjust axes properties in python. Includes examples of linear
-      and logarithmic axes, axes titles, styling and coloring axes and grid lines,
-      and more.
+    description: How to adjust axes properties in Python - axes titles, styling and
+      coloring axes and grid lines, ticks, tick labels and more.
     display_as: file_settings
     language: python
     layout: base
@@ -34,7 +33,9 @@ jupyter:
     thumbnail: thumbnail/axes.png
 ---
 
-This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/). Other kinds of axes are described in other tutorials:
+This tutorial explain how to set the properties of [2-dimensional Cartesian axes](/python/figure-structure/#2d-cartesian-trace-types-and-subplots), namely [`go.layout.XAxis`](/python/reference/layout/xaxis/) and [`go.layout.YAxis`](python/reference/layout/xaxis/).
+
+Other kinds of subplots and axes are described in other tutorials:
 
 - [3D axes](/python/3d-axes) The axis object is [`go.layout.Scene`](/python/reference/layout/scene/)
 - [Polar axes](/python/polar-chart/). The axis object is [`go.layout.Polar`](/python/reference/layout/polar/)
@@ -43,123 +44,141 @@ This tutorial explain how to set the properties of 2-dimensional Cartesian axes,
 - [Mapbox axes](/python/mapbox-layers/). The axis object is [`go.layout.Mapbox`](/python/reference/layout/mapbox/)
 - [Color axes](/python/colorscales/). The axis object is [`go.layout.Coloraxis`](/python/reference/layout/coloraxis/).
 
-**See also** the tutorials on [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
+**See also** the tutorials on [facet plots](/python/facet-plots/), [subplots](/python/subplots) and [multiple axes](/python/multiple-axes/).
 
-The different types of Cartesian axes are
+### 2-D Cartesian Axis Types and Auto-Detection
 
-- 'linear'
-- 'log' (see the [example below](#logarithmic-axes))
-- 'date' (see the [tutorial on timeseries](/python/time-series/))
-- 'category' (see for example [Bar Charts](/python/bar-charts/))
-- 'multicategory' (see the [example below](<#subcategory-(multicategory)-axes>))
+The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
-#### Logarithmic Axes
+- `'linear'` as described in this page
+- `'log'` (see the [log plot tutorial](/python/log-plots/))
+- `'date'` (see the [tutorial on timeseries](/python/time-series/))
+- `'category'` (see the [categorical axes tutorial](/python/categorical-axes/))
+- `'multicategory'` (see the [categorical axes tutorial](/python/categorical-axes/))
 
-The `type` axis property can be set to `'log'` to arrange axis ticks in log-scale.
+The axis type is auto-detected by looking at data from the first [trace](/python/figure-structure/) linked to this axis:
 
-Here is an example of updating the x and y axes of a figure to be in log scale.
+* First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
+* `multicategory` is just a shape test: is the array nested?
+* `date` and `category`: require **more than twice as many distinct date or category strings** as distinct numbers or numeric strings in order to choose that axis type.
+	* Both of these test an evenly-spaced sample of at most 1000 values
+	* Small detail: the `category` test sorts every value into either number or category, whereas for dates, 2- and 4-digit integers count as both dates and numbers.
 
-```python
-import plotly.express as px
-import numpy as np
-
-x = np.arange(10)
-
-fig = px.scatter(x=x, y=x**3,
-                log_x=True, log_y=True)
-
-fig.show()
-```
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(data=[
-    go.Scatter(
-        x=[1, 10, 20, 30, 40, 50, 60, 70, 80],
-        y=[80, 70, 60, 50, 40, 30, 20, 10, 1]
-    ),
-    go.Scatter(
-        x=[1, 10, 20, 30, 40, 50, 60, 70, 80],
-        y=[1, 10, 20, 30, 40, 50, 60, 70, 80]
-    )
-])
-
-fig.update_xaxes(type="log")
-fig.update_yaxes(type="log")
-
-fig.show()
-```
 
 ### Forcing an axis to be categorical
 
-If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, with the exception of string of numbers, in which case the axis is linear. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
+If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, *except if enough of these strings contain numbers* as detailed above, in which case the axis is automatically set to `linear`. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
 
 ```python
 import plotly.express as px
 fig = px.bar(x=[1, 2, 4, 10], y =[8, 6, 11, 5])
-fig.update_layout(xaxis_type='category',
-                  title_text='Bar chart with categorical axes')
+fig.update_xaxes(type='category')
 fig.show()
 ```
 
-#### Subcategory (Multicategory) Axes
 
-A two-level categorical axis can be created by specifying a trace's `x` or `y` property as a 2-dimensional lists. The first sublist represents the outer categorical value while the second sublist represents the inner categorical value.
+#### General Axis properties
 
-Here is an example that creates a figure with 4 horizontal `box` traces with a 2-level categorical y-axis.
+The different groups of Cartesian axes properties are
+
+- title of the axis
+- tick values (locations of tick marks) and tick labels. Tick labels and grid lines are placed at tick values.
+- lines: grid lines (passing through tick values), axis lines, zero lines
+- range of the axis
+- domain of the axis
+
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](/pythone/categorical-axes/) and [axes of type `date`](/python/time-series/).
+
+
+#### Set and Style Axes Title Labels
+
+##### Set axis title text with Plotly Express
+
+Axis titles are automatically set to the column names when [using Plotly Express with a data frame as input](/python/px-arguments/).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex")
+fig.show()
+```
+
+Axis titles (and [legend titles](/python/legend/)) can also be overridden using the `labels` argument of Plotly Express functions:
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color="sex",
+    labels=dict(total_bill="Total Bill ($)", tip="Tip ($)", sex="Payer Gender")
+)
+fig.show()
+```
+
+The PX `labels` argument can also be used without a data frame argument:
+
+
+```python
+import plotly.express as px
+fig = px.bar(df, x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
+    labels=dict(x="Fruit", y="Amount", color="Place")
+)
+fig.show()
+```
+
+##### Set axis title text with Graph Objects
+
+Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `update_xaxes` and `update_yaxes`, with magic underscore notation, to set the axis titles.
+
+```python
+import plotly.express as px
+
+fig = px.line(y=[1, 0])
+
+fig.update_xaxes(title_text='Time')
+fig.update_yaxes(title_text='Value A')
+
+fig.show()
+```
+
+### Set axis title position
+
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
 
 ```python
 import plotly.graph_objects as go
 
-fig = go.Figure()
+fig = go.Figure(go.Scatter(
+    mode = "lines+markers",
+    y = [4, 1, 3],
+    x = ["December", "January", "February"]))
 
-fig.add_trace(go.Box(
-  x = [2, 3, 1, 5],
-  y = [['First', 'First', 'First', 'First'],
-       ["A", "A", "A", "A"]],
-  name = "A",
-  orientation = "h"
-))
+fig.update_xaxes(
+        tickangle = 90,
+        title_text = "Month",
+        title_font = {"size": 20},
+        title_standoff = 25)
 
-fig.add_trace(go.Box(
-  x = [8, 3, 6, 5],
-  y = [['First', 'First', 'First', 'First'],
-       ["B", "B", "B", "B"]],
-  name = "B",
-  orientation = "h"
-))
-
-fig.add_trace(go.Box(
-  x = [2, 3, 2, 5],
-  y = [['Second', 'Second', 'Second', 'Second'],
-       ["C", "C", "C", "C"]],
-  name = "C",
-  orientation = "h"
-))
-
-fig.add_trace(go.Box(
-  x = [7.5, 3, 6, 4],
-  y = [['Second', 'Second', 'Second', 'Second'],
-       ["D", "D", "D", "D"]],
-  name = "D",
-  orientation = "h"
-))
-
-fig.update_layout(title_text="Multi-category axis",)
+fig.update_yaxes(
+        title_text = "Temperature",
+        title_standoff = 25)
 
 fig.show()
 ```
 
-#### Toggling Axes Lines, Ticks, Labels, and Autorange
+##### Set axis title font
 
-The different groups of Cartesian axes properties are
+Here is an example that configures the font family, size, and color for the axis titles in a figure created using Plotly Express.
 
-- tick values (locations of tick marks) and tick labels. Tick labels are placed at tick values.
-- lines: grid lines (passing through tick values), axis lines, zero lines
-- title of the axis
-- range of the axis
-- domain of the axis
+```python
+import plotly.express as px
+df = px.data.iris()
+
+fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
+fig.update_xaxes(title_font=dict(size=18, family='Courier', color='crimson'))
+fig.update_yaxes(title_font=dict(size=18, family='Courier', color='crimson'))
+
+fig.show()
+```
 
 #### Tick Placement, Color, and Style
 
@@ -334,7 +353,8 @@ Here is an example of setting `showgrid` to `False` in the graph object figure c
 import plotly.express as px
 
 fig = px.line(y=[1, 0])
-fig.update_layout(xaxis_showgrid=False, yaxis_showgrid=False)
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
 fig.show()
 ```
 
@@ -347,43 +367,8 @@ import plotly.express as px
 
 fig = px.line(y=[1, 0])
 
-fig.update_layout(
-    xaxis=dict(showgrid=False, zeroline=False),
-    yaxis=dict(showgrid=False, zeroline=False),
-)
-fig.show()
-```
-
-##### Toggle grid and zerolines with update axis methods
-
-Axis properties can be also updated for figures after they are constructed using the `update_xaxes` and `update_yaxes` graph object figure methods.
-
-Here is an example that disables the x and y axis grid and zero lines using `update_xaxes` and `update_yaxes`.
-
-```python
-import plotly.express as px
-
-fig = px.line(y=[1, 0])
 fig.update_xaxes(showgrid=False, zeroline=False)
 fig.update_yaxes(showgrid=False, zeroline=False)
-
-fig.show()
-```
-
-##### Toggle grid and zerolines for figure created with Plotly Express
-
-An advantage of using the `update_xaxis` and `update_yaxis` methods is that these updates will (by default) apply to all axes in the figure. This is especially useful when customizing figures created using Plotly Express, figure factories, or `make_subplots`.
-
-Here is an example of disabling all grid and zero lines in a faceted figure created by Plotly Express.
-
-```python
-import plotly.express as px
-df = px.data.iris()
-
-fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_xaxes(showgrid=False, zeroline=False)
-fig.update_yaxes(showgrid=False, zeroline=False)
-
 fig.show()
 ```
 
@@ -457,63 +442,6 @@ fig.update_yaxes(zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
 fig.show()
 ```
 
-#### Set and Style Axes Title Labels
-
-##### Set axis title text
-
-Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `update_xaxes` and `update_yaxes`, with magic underscore notation, to set the axis titles.
-
-```python
-import plotly.express as px
-
-fig = px.line(y=[1, 0])
-
-fig.update_xaxes(title_text='Time')
-fig.update_yaxes(title_text='Value A')
-
-fig.show()
-```
-
-### Set axis title position
-
-This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/python/setting-graph-size/#automatically-adjust-margins) is `True` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure(go.Scatter(
-    mode = "lines+markers",
-    y = [4, 1, 3],
-    x = ["December", "January", "February"]))
-
-fig.update_layout(
-    xaxis = dict(
-        tickangle = 90,
-        title_text = "Month",
-        title_font = {"size": 20},
-        title_standoff = 25),
-    yaxis = dict(
-        title_text = "Temperature",
-        title_standoff = 25))
-
-fig.show()
-```
-
-##### Set axis title font
-
-Here is an example that configures the font family, size, and color for the axis titles in a figure created using Plotly Express.
-
-```python
-import plotly.express as px
-df = px.data.iris()
-
-fig = px.scatter(df, x="sepal_width", y="sepal_length", facet_col="species")
-fig.update_xaxes(title_font=dict(size=18, family='Courier', color='crimson'))
-fig.update_yaxes(title_font=dict(size=18, family='Courier', color='crimson'))
-
-fig.show()
-```
-
 #### Setting the Range of Axes Manually
 
 The visible x and y axis range can be configured manually by setting the `range` axis property to a list of two values, the lower and upper boundary.
@@ -564,12 +492,12 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     width = 800,
     height = 500,
-    title = "fixed-ratio axes",
-    yaxis = dict(
-      scaleanchor = "x",
-      scaleratio = 1,
-    )
+    title = "fixed-ratio axes"
 )
+fig.update_yaxes(
+    scaleanchor = "x",
+    scaleratio = 1,
+  )
 
 fig.show()
 ```
@@ -588,15 +516,15 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     width = 800,
     height = 500,
-    title = "fixed-ratio axes with compressed axes",
-    xaxis = dict(
-      range=[-1,4],  # sets the range of xaxis
-      constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
-    ),
-    yaxis = dict(
-      scaleanchor = "x",
-      scaleratio = 1,
-    ),
+    title = "fixed-ratio axes with compressed axes"
+)
+fig.update_xaxes(
+    range=[-1,4],  # sets the range of xaxis
+    constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
+)
+fig.update_yaxes(
+    scaleanchor = "x",
+    scaleratio = 1
 )
 fig.show()
 ```
@@ -618,16 +546,17 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     width = 800,
     height = 500,
-    title = "fixed-ratio axes",
-    yaxis = dict(
-      scaleanchor = "x",
-      scaleratio = 1,
-    ),
-    xaxis = dict(
-        range=(-0.5, 3.5),
-        constrain='domain'
-    )
+    title = "fixed-ratio axes"
 )
+fig.update_xaxes(
+    scaleanchor = "x",
+    scaleratio = 1,
+)
+fig.update_yaxes(
+    range=(-0.5, 3.5),
+    constrain='domain'
+)
+
 
 fig.show()
 ```
@@ -649,15 +578,15 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     width = 800,
     height = 500,
-    title = "fixed-ratio axes with compressed axes",
-    xaxis = dict(
-      range=[-1,4],  # sets the range of xaxis
-      constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
-    ),
-    yaxis = dict(
-      scaleanchor = "x",
-      scaleratio = 1,
-    ),
+    title = "fixed-ratio axes with compressed axes"
+)
+fig.update_xaxes(
+    range=[-1,4],  # sets the range of xaxis
+    constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
+)
+fig.update_yaxes(
+    scaleanchor = "x",
+    scaleratio = 1,
 )
 
 fig.show()
