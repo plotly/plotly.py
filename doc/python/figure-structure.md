@@ -118,7 +118,7 @@ The following trace types are compatible with 2d-cartesian subplots via the `xax
 * scatter-like trace types: [`scatter`](/python/line-and-scatter/) and [`scattergl`](/python/webgl-vs-svg/), which can be used to draw [scatter plots](/python/line-and-scatter/), [line plots and curves](/python/line-charts/), [time-series plots](/python/time-series/), [bubble charts](/python/bubble-charts/), [dot plots](/python/dot-plots/) and [filled areas](/python/filled-area-plots/) and also support [error bars](/python/error-bars/)
 * [`bar`](/python/bar-charts/), [`funnel`](/python/funnel-charts/), [`waterfall`](/python/waterfall-charts/): bar-like trace types which can also be used to draw [timelines and Gantt charts](/python/gantt/)
 * [`histogram`](/python/histograms/): an *aggregating* bar-like trace type
-* [`box`](/python/box-plots/) and `violin`: 1-dimensional distribution-like trace types
+* [`box`](/python/box-plots/) and [`violin`](/python/box-plots/): 1-dimensional distribution-like trace types
 * [`histogram2d`](/python/2D-Histogram/) and [`histogram2dcontour`](/python/2d-histogram-contour/): 2-dimensional distribution-like density trace types
 * [`image`](/python/imshow/), [`heatmap`](/python/heatmaps/) and [`contour`](/python/contour-plots/): matrix trace types
 * [`ohlc`](/python/ohlc-charts/) and [`candlestick`](/python/candlestick-charts/): stock-like trace types

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.4
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.0
+    version: 3.7.7
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -112,6 +112,7 @@ fig.show()
 ```python
 # Change the default stacking
 import plotly.express as px
+df = px.data.tips()
 fig = px.bar(df, x="sex", y="total_bill",
              color='smoker', barmode='group',
              height=400)
@@ -124,6 +125,7 @@ Use the keyword arguments `facet_row` (resp. `facet_col`) to create facetted sub
 
 ```python
 import plotly.express as px
+df = px.data.tips()
 fig = px.bar(df, x="sex", y="total_bill", color="smoker", barmode="group",
              facet_row="time", facet_col="day",
              category_orders={"day": ["Thur", "Fri", "Sat", "Sun"],
