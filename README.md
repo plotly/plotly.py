@@ -50,7 +50,7 @@ See the [Python documentation](https://plot.ly/python/) for more examples.
 
 Read about what's new in [plotly.py v4](https://medium.com/plotly/plotly-py-4-0-is-here-offline-only-express-first-displayable-anywhere-fc444e5659ee)
 
-## Overview
+## Overview of plotly.py
 
 [plotly.py](https://plot.ly/python) is an interactive, open-source, and browser-based graphing library for Python :sparkles:
 
