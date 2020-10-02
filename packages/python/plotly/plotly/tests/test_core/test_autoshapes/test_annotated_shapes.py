@@ -3,6 +3,17 @@ from plotly.subplots import make_subplots
 from itertools import product
 import os
 
+# Stuff to test:
+# Adding without row and column on single plot works.
+# Adding without row and column on multi-facted plot works.
+# Test each position is what we expect? Is this necessary? It's very tedious.
+#   - Is this cheating? We generate a figure like we do below, store the figure.
+#   In the test we generate the figure and make sure the relevant fields are the
+#   same as the stored figure? This is like plotly.js image tests.
+# Test that you can override values computed from the annotation position.
+# Test that you can add an annotation using annotation=go.layout.Annotation(...)
+# or annotation=dict(...) directly.
+
 visualize = os.environ.get("VISUALIZE", 0)
 
 line_positions = [

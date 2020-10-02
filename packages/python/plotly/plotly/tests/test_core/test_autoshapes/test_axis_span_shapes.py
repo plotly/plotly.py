@@ -3,6 +3,7 @@ from plotly.subplots import make_subplots
 from plotly.basedatatypes import _indexing_combinations, _unzip_pairs
 import plotly.express as px
 import pytest
+from common import _cmp_partial_dict, _check_figure_layout_objects
 
 
 @pytest.fixture
@@ -86,30 +87,6 @@ def custom_sized_subplots():
 # test that the addressing works correctly? this is already tested for in add_shape...
 # make sure all the methods work for subplots and single plot
 # test edge-cases of _make_paper_spanning_shape: bad direction, bad shape (e.g., a path)
-
-
-def _cmp_partial_dict(a, b):
-    ret = True
-    if len(list(b.keys())) == 0:
-        return False
-    for k in b.keys():
-        try:
-            v = a[k]
-            ret &= v == b[k]
-        except KeyError:
-            return False
-    return ret
-
-
-def _check_figure_shapes(test_input, expected, fig):
-    f, kwargs = test_input
-    f(fig, **kwargs)
-    ret = True
-    if len(fig.layout.shapes) != len(expected):
-        assert False
-    for s, d in zip(fig.layout.shapes, expected):
-        ret &= _cmp_partial_dict(s, d)
-    assert ret
 
 
 @pytest.mark.parametrize(
@@ -278,7 +255,7 @@ def _check_figure_shapes(test_input, expected, fig):
     ],
 )
 def test_add_span_shape(test_input, expected, subplot_fig_fixture):
-    _check_figure_shapes(test_input, expected, subplot_fig_fixture)
+    _check_figure_layout_objects(test_input, expected, subplot_fig_fixture)
 
 
 @pytest.mark.parametrize(
@@ -358,10 +335,9 @@ def test_add_span_shape(test_input, expected, subplot_fig_fixture):
 def test_add_span_shape_no_empty_plot(
     test_input, expected, subplot_empty_traces_fig_fixture
 ):
-    _check_figure_shapes(test_input, expected, subplot_empty_traces_fig_fixture)
+    _check_figure_layout_objects(test_input, expected, subplot_empty_traces_fig_fixture)
 
 
-# TODO: this fails because it plots nothing
 @pytest.mark.parametrize(
     "test_input,expected",
     # test_input: (function,kwargs)
@@ -398,7 +374,7 @@ def test_add_span_shape_no_empty_plot(
     ],
 )
 def test_non_subplot_add_span_shape(test_input, expected, non_subplot_fig_fixture):
-    _check_figure_shapes(test_input, expected, non_subplot_fig_fixture)
+    _check_figure_layout_objects(test_input, expected, non_subplot_fig_fixture)
 
 
 @pytest.mark.parametrize(
@@ -439,7 +415,6 @@ def _check_figure_shapes_custom_sized(test_input, expected, fig):
     assert ret
 
 
-# TODO: This fails
 @pytest.mark.parametrize(
     "test_input,expected",
     # test_input: (function,kwargs)
