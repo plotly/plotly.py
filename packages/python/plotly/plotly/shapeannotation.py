@@ -25,12 +25,12 @@ def annotation_params_for_line(shape_type, shape_args, position):
     M = "middle"
     aY = max(Y)
     iY = min(Y)
-    mY = mean(Y)
+    eY = mean(Y)
     aaY = argmax(Y)
     aiY = argmin(Y)
     aX = max(X)
     iX = min(X)
-    mX = mean(X)
+    eX = mean(X)
     aaX = argmax(X)
     aiX = argmin(X)
 
@@ -58,13 +58,13 @@ def annotation_params_for_line(shape_type, shape_args, position):
         if position == "top right":
             return _df_anno(R, B, aX, Y[aaX])
         if position == "top":
-            return _df_anno(C, B, mX, mY)
+            return _df_anno(C, B, eX, eY)
         if position == "bottom left":
             return _df_anno(L, T, iX, Y[aiX])
         if position == "bottom right":
             return _df_anno(R, T, aX, Y[aaX])
         if position == "bottom":
-            return _df_anno(C, T, mX, mY)
+            return _df_anno(C, T, eX, eY)
         if position == "left":
             return _df_anno(R, M, iX, Y[aiX])
         if position == "right":
@@ -98,15 +98,35 @@ def annotation_params_for_rect(shape_type, shape_args, position):
         # TODO: Do we want this?
         return _df_anno("center", "middle", mean([x0, x1]), mean([y0, y1]))
     if position == "outside top left":
-        return _df_anno("right", "bottom", min([x0, x1]), max([y0, y1]))
+        return _df_anno(
+            "right" if shape_type == "vrect" else "left",
+            "bottom" if shape_type == "hrect" else "top",
+            min([x0, x1]),
+            max([y0, y1]),
+        )
     if position == "outside top right":
-        return _df_anno("left", "bottom", max([x0, x1]), max([y0, y1]))
+        return _df_anno(
+            "left" if shape_type == "vrect" else "right",
+            "bottom" if shape_type == "hrect" else "top",
+            max([x0, x1]),
+            max([y0, y1]),
+        )
     if position == "outside top":
         return _df_anno("center", "bottom", mean([x0, x1]), max([y0, y1]))
     if position == "outside bottom left":
-        return _df_anno("right", "top", min([x0, x1]), min([y0, y1]))
+        return _df_anno(
+            "right" if shape_type == "vrect" else "left",
+            "top" if shape_type == "hrect" else "bottom",
+            min([x0, x1]),
+            min([y0, y1]),
+        )
     if position == "outside bottom right":
-        return _df_anno("left", "top", max([x0, x1]), min([y0, y1]))
+        return _df_anno(
+            "left" if shape_type == "vrect" else "right",
+            "top" if shape_type == "hrect" else "bottom",
+            max([x0, x1]),
+            min([y0, y1]),
+        )
     if position == "outside bottom":
         return _df_anno("center", "top", mean([x0, x1]), min([y0, y1]))
     if position == "outside left":
@@ -141,11 +161,8 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     annotation_position, annotation_ prefixed kwargs or the original annotation
     passed in to this function.
     """
-    # Force to go.layout.Annotation, no matter if it is that already, a dict or None
-    # TODO: We can't import go.layout.Annotation so we initialize this as a
-    # dict. This strategy is inferior to initializing as a go.layout.Annotation
-    # because there's no checking if a key is valid. Eventually it'd be better
-    # to use go.layout.Annotation.
+    # TODO: Would it be better if annotation were initialized to an instace of
+    # go.layout.Annotation ?
     if annotation is None:
         annotation = dict()
     # set properties based on annotation_ prefixed kwargs
