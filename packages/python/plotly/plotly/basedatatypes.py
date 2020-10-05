@@ -3647,14 +3647,16 @@ Invalid property path '{key_path_str}' for layout
         for layout_obj, n_layout_objs_before in zip(
             ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
         ):
-            if row == None and col == None:
+            n_layout_objs_after = len(self.layout[layout_obj])
+            if (n_layout_objs_after > n_layout_objs_before) and (
+                row == None and col == None
+            ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
                 # however, in the case of a single plot, xref and yref are not
                 # specified, so we specify them here so the following routines can work
                 # (they need to append " domain" to xref or yref)
                 self.layout[layout_obj][-1].update(xref="x", yref="y")
-            n_layout_objs_after = len(self.layout[layout_obj])
             new_layout_objs = tuple(
                 filter(
                     lambda x: x is not None,
