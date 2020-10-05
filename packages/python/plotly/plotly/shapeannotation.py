@@ -72,11 +72,21 @@ def annotation_params_for_line(shape_type, shape_args, position):
         return _df_anno(R, B, aX, Y[aaX])
 
 
+def _add_inside_to_position(pos):
+    if pos is not None and (
+        not (pos.startswith("inside") or pos.startswith("outside"))
+    ):
+        pos = "inside " + pos
+    return pos
+
+
 def annotation_params_for_rect(shape_type, shape_args, position):
     x0 = shape_args["x0"]
     x1 = shape_args["x1"]
     y0 = shape_args["y0"]
     y1 = shape_args["y1"]
+
+    position = _add_inside_to_position(position)
 
     if position == "inside top left":
         return _df_anno("left", "top", min([x0, x1]), max([y0, y1]))
