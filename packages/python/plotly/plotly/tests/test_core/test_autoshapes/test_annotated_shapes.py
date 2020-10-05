@@ -52,6 +52,13 @@ def multi_plot_fixture():
     return fig
 
 
+# Make sure adding a shape without specifying an annotation doesn't add any annotations
+def test_add_shape_no_annotation(multi_plot_fixture):
+    multi_plot_fixture.add_hline(y=2, row="all", col="all")
+    assert len(multi_plot_fixture.layout.annotations) == 0
+    assert len(multi_plot_fixture.layout.shapes) == 4
+
+
 # Adding without row and column on single plot works.
 def test_add_annotated_shape_single_plot(single_plot_fixture):
     single_plot_fixture.add_hline(y=1, annotation_text="A")

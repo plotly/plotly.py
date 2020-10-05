@@ -171,14 +171,18 @@ def axis_spanning_shape_annotation(annotation, shape_type, shape_args, kwargs):
     annotation_position, annotation_ prefixed kwargs or the original annotation
     passed in to this function.
     """
-    # TODO: Would it be better if annotation were initialized to an instace of
-    # go.layout.Annotation ?
-    if annotation is None:
-        annotation = dict()
     # set properties based on annotation_ prefixed kwargs
     prefix = "annotation_"
     len_prefix = len(prefix)
-    annotation_keys = filter(lambda k: k.startswith(prefix), kwargs.keys())
+    annotation_keys = list(filter(lambda k: k.startswith(prefix), kwargs.keys()))
+    # If no annotation or annotation-key is specified, return None as we don't
+    # want an annotation in this case
+    if annotation is None and len(annotation_keys) == 0:
+        return None
+    # TODO: Would it be better if annotation were initialized to an instance of
+    # go.layout.Annotation ?
+    if annotation is None:
+        annotation = dict()
     for k in annotation_keys:
         if k == "annotation_position":
             # don't set so that Annotation constructor doesn't complain

@@ -3641,7 +3641,8 @@ Invalid property path '{key_path_str}' for layout
             annotation, shape_type, shape_args, annotation_kwargs
         )
         self.add_shape(row=row, col=col, **_combine_dicts([shape_args, shape_kwargs]))
-        self.add_annotation(augmented_annotation, row=row, col=col)
+        if augmented_annotation is not None:
+            self.add_annotation(augmented_annotation, row=row, col=col)
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
             ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
