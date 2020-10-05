@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.express.box &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotly.express.strip" href="plotly.express.strip.html" />
+    <link rel="prev" title="plotly.express.violin" href="plotly.express.violin.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.express</span></code>.box</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="plotly.express.violin.html" title="Previous Chapter: plotly.express.violin"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.express.violin</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.express.strip.html" title="Next Chapter: plotly.express.strip"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.express.strip &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-express-box">
+<h1><a class="reference internal" href="plotly.express.html#module-plotly.express" title="plotly.express"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.express</span></code></a>.box<a class="headerlink" href="#plotly-express-box" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="plotly.express.box">
+<code class="sig-prename descclassname">plotly.express.</code><code class="sig-name descname">box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data_frame</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">color</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">facet_row</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">facet_col</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">facet_col_wrap</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">facet_row_spacing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">facet_col_spacing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hover_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hover_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">custom_data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">animation_frame</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">animation_group</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">category_orders</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">labels</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">color_discrete_sequence</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">color_discrete_map</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">orientation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">log_x</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">log_y</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">range_x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">range_y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">points</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">notched</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.express.box" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>In a box plot, rows of <code class="docutils literal notranslate"><span class="pre">data_frame</span></code> are grouped together into a
+box-and-whisker mark to visualize their distribution.</p>
+<p>Each box spans from quartile 1 (Q1) to quartile 3 (Q3). The second
+quartile (Q2) is marked by a line inside the box. By default, the
+whiskers correspond to the box’ edges +/- 1.5 times the interquartile
+range (IQR: Q3-Q1), see “points” for other options.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_frame</strong> (<em>DataFrame</em><em> or </em><em>array-like</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – This argument needs to be passed for column names (and not keyword
+names) to be used. Array-like and dict are tranformed internally to a
+pandas DataFrame. Optional: if missing, a DataFrame gets constructed
+under the hood using the other arguments.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+position marks along the x axis in cartesian coordinates. Either <code class="docutils literal notranslate"><span class="pre">x</span></code> or
+<code class="docutils literal notranslate"><span class="pre">y</span></code> can optionally be a list of column references or array_likes,  in
+which case the data will be treated as if it were ‘wide’ rather than
+‘long’.</p></li>
+<li><p><strong>y</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+position marks along the y axis in cartesian coordinates. Either <code class="docutils literal notranslate"><span class="pre">x</span></code> or
+<code class="docutils literal notranslate"><span class="pre">y</span></code> can optionally be a list of column references or array_likes,  in
+which case the data will be treated as if it were ‘wide’ rather than
+‘long’.</p></li>
+<li><p><strong>color</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+assign color to marks.</p></li>
+<li><p><strong>facet_row</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+assign marks to facetted subplots in the vertical direction.</p></li>
+<li><p><strong>facet_col</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+assign marks to facetted subplots in the horizontal direction.</p></li>
+<li><p><strong>facet_col_wrap</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Maximum number of facet columns. Wraps the column variable at this
+width, so that the column facets span multiple rows. Ignored if 0, and
+forced to 0 if <code class="docutils literal notranslate"><span class="pre">facet_row</span></code> or a <code class="docutils literal notranslate"><span class="pre">marginal</span></code> is set.</p></li>
+<li><p><strong>facet_row_spacing</strong> (<em>float between 0 and 1</em>) – Spacing between facet rows, in paper units. Default is 0.03 or 0.0.7
+when facet_col_wrap is used.</p></li>
+<li><p><strong>facet_col_spacing</strong> (<em>float between 0 and 1</em>) – Spacing between facet columns, in paper units Default is 0.02.</p></li>
+<li><p><strong>hover_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like appear in bold
+in the hover tooltip.</p></li>
+<li><p><strong>hover_data</strong> (<em>list of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, or </em><em>Series</em><em> or </em><em>array-like</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Either a list of names of columns in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or pandas Series, or
+array_like objects or a dict with column names as keys, with values
+True (for default formatting) False (in order to remove this column
+from hover information), or a formatting string, for example ‘:.3f’ or
+‘<a href="#id1"><span class="problematic" id="id2">|</span></a>%a’ or list-like data to appear in the hover tooltip or tuples with a
+bool or formatting string as first element, and list-like data to
+appear in hover as second element Values from these columns appear as
+extra data in the hover tooltip.</p></li>
+<li><p><strong>custom_data</strong> (<em>list of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, or </em><em>Series</em><em> or </em><em>array-like</em>) – Either names of columns in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or pandas Series, or
+array_like objects Values from these columns are extra data, to be used
+in widgets or Dash callbacks for example. This data is not user-visible
+but is included in events emitted by the figure (lasso selection etc.)</p></li>
+<li><p><strong>animation_frame</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+assign marks to animation frames.</p></li>
+<li><p><strong>animation_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Series</em><em> or </em><em>array-like</em>) – Either a name of a column in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code>, or a pandas Series or
+array_like object. Values from this column or array_like are used to
+provide object-constancy across animation frames: rows with matching
+<a href="#id3"><span class="problematic" id="id4">`</span></a>animation_group`s will be treated as if they describe the same object
+in each frame.</p></li>
+<li><p><strong>category_orders</strong> (dict with str keys and list of str values (default <code class="docutils literal notranslate"><span class="pre">{}</span></code>)) – By default, in Python 3.6+, the order of categorical values in axes,
+legends and facets depends on the order in which these values are first
+encountered in <code class="docutils literal notranslate"><span class="pre">data_frame</span></code> (and no order is guaranteed by default in
+Python below 3.6). This parameter is used to force a specific ordering
+of values per column. The keys of this dict should correspond to column
+names, and the values should be lists of strings corresponding to the
+specific display order desired.</p></li>
+<li><p><strong>labels</strong> (dict with str keys and str values (default <code class="docutils literal notranslate"><span class="pre">{}</span></code>)) – By default, column names are used in the figure for axis titles, legend
+entries and hovers. This parameter allows this to be overridden. The
+keys of this dict should correspond to column names, and the values
+should correspond to the desired label to be displayed.</p></li>
+<li><p><strong>color_discrete_sequence</strong> (<em>list of str</em>) – Strings should define valid CSS-colors. When <code class="docutils literal notranslate"><span class="pre">color</span></code> is set and the
+values in the corresponding column are not numeric, values in that
+column are assigned colors by cycling through <code class="docutils literal notranslate"><span class="pre">color_discrete_sequence</span></code>
+in the order described in <code class="docutils literal notranslate"><span class="pre">category_orders</span></code>, unless the value of
+<code class="docutils literal notranslate"><span class="pre">color</span></code> is a key in <code class="docutils literal notranslate"><span class="pre">color_discrete_map</span></code>. Various useful color
+sequences are available in the <code class="docutils literal notranslate"><span class="pre">plotly.express.colors</span></code> submodules,
+specifically <code class="docutils literal notranslate"><span class="pre">plotly.express.colors.qualitative</span></code>.</p></li>
+<li><p><strong>color_discrete_map</strong> (dict with str keys and str values (default <code class="docutils literal notranslate"><span class="pre">{}</span></code>)) – String values should define valid CSS-colors Used to override
+<code class="docutils literal notranslate"><span class="pre">color_discrete_sequence</span></code> to assign a specific colors to marks
+corresponding with specific values. Keys in <code class="docutils literal notranslate"><span class="pre">color_discrete_map</span></code> should
+be values in the column denoted by <code class="docutils literal notranslate"><span class="pre">color</span></code>. Alternatively, if the
+values of <code class="docutils literal notranslate"><span class="pre">color</span></code> are valid colors, the string <code class="docutils literal notranslate"><span class="pre">'identity'</span></code> may be
+passed to cause them to be used directly.</p></li>
+<li><p><strong>orientation</strong> (str, one of <code class="docutils literal notranslate"><span class="pre">'h'</span></code> for horizontal or <code class="docutils literal notranslate"><span class="pre">'v'</span></code> for vertical.) – (default <code class="docutils literal notranslate"><span class="pre">'v'</span></code> if <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are provided and both continous or both
+categorical,  otherwise <code class="docutils literal notranslate"><span class="pre">'v'`(</span></code>‘h’<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">if</span> <span class="pre">`x`(`y</span></code>) is categorical and
+<code class="docutils literal notranslate"><span class="pre">y`(`x</span></code>) is continuous,  otherwise <code class="docutils literal notranslate"><span class="pre">'v'`(</span></code>‘h’<code class="docutils literal notranslate"><span class="pre">)</span> <span class="pre">if</span> <span class="pre">only</span> <span class="pre">`x`(`y</span></code>) is
+provided)</p></li>
+<li><p><strong>boxmode</strong> (str (default <code class="docutils literal notranslate"><span class="pre">'group'</span></code>)) – One of <code class="docutils literal notranslate"><span class="pre">'group'</span></code> or <code class="docutils literal notranslate"><span class="pre">'overlay'</span></code> In <code class="docutils literal notranslate"><span class="pre">'overlay'</span></code> mode, boxes are on drawn
+top of one another. In <code class="docutils literal notranslate"><span class="pre">'group'</span></code> mode, baxes are placed beside each
+other.</p></li>
+<li><p><strong>log_x</strong> (boolean (default <code class="docutils literal notranslate"><span class="pre">False</span></code>)) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the x-axis is log-scaled in cartesian coordinates.</p></li>
+<li><p><strong>log_y</strong> (boolean (default <code class="docutils literal notranslate"><span class="pre">False</span></code>)) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the y-axis is log-scaled in cartesian coordinates.</p></li>
+<li><p><strong>range_x</strong> (<em>list of two numbers</em>) – If provided, overrides auto-scaling on the x-axis in cartesian
+coordinates.</p></li>
+<li><p><strong>range_y</strong> (<em>list of two numbers</em>) – If provided, overrides auto-scaling on the y-axis in cartesian
+coordinates.</p></li>
+<li><p><strong>points</strong> (str or boolean (default <code class="docutils literal notranslate"><span class="pre">'outliers'</span></code>)) – One of <code class="docutils literal notranslate"><span class="pre">'outliers'</span></code>, <code class="docutils literal notranslate"><span class="pre">'suspectedoutliers'</span></code>, <code class="docutils literal notranslate"><span class="pre">'all'</span></code>, or <code class="docutils literal notranslate"><span class="pre">False</span></code>. If
+<code class="docutils literal notranslate"><span class="pre">'outliers'</span></code>, only the sample points lying outside the whiskers are
+shown. If <code class="docutils literal notranslate"><span class="pre">'suspectedoutliers'</span></code>, all outlier points are shown and those
+less than 4*Q1-3*Q3 or greater than 4*Q3-3*Q1 are highlighted with the
+marker’s <code class="docutils literal notranslate"><span class="pre">'outliercolor'</span></code>. If <code class="docutils literal notranslate"><span class="pre">'outliers'</span></code>, only the sample points
+lying outside the whiskers are shown. If <code class="docutils literal notranslate"><span class="pre">'all'</span></code>, all sample points are
+shown. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, no sample points are shown and the whiskers extend
+to the full range of the sample.</p></li>
+<li><p><strong>notched</strong> (boolean (default <code class="docutils literal notranslate"><span class="pre">False</span></code>)) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, boxes are drawn with notches.</p></li>
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The figure title.</p></li>
+<li><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name (must be a key in plotly.io.templates) or
+definition.</p></li>
+<li><p><strong>width</strong> (int (default <code class="docutils literal notranslate"><span class="pre">None</span></code>)) – The figure width in pixels.</p></li>
+<li><p><strong>height</strong> (int (default <code class="docutils literal notranslate"><span class="pre">None</span></code>)) – The figure height in pixels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>plotly.graph_objects.Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

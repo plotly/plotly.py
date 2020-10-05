@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.express.imshow &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotly.express.data package" href="plotly.express.data.html" />
+    <link rel="prev" title="plotly.express.density_mapbox" href="plotly.express.density_mapbox.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.express</span></code>.imshow</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="plotly.express.density_mapbox.html" title="Previous Chapter: plotly.express.density_mapbox"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.expres...</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.express.data.html" title="Next Chapter: plotly.express.data package"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.expres... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-express-imshow">
+<h1><a class="reference internal" href="plotly.express.html#module-plotly.express" title="plotly.express"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.express</span></code></a>.imshow<a class="headerlink" href="#plotly-express-imshow" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="plotly.express.imshow">
+<code class="sig-prename descclassname">plotly.express.</code><code class="sig-name descname">imshow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img</span></em>, <em class="sig-param"><span class="n">zmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">labels</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">color_continuous_scale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">color_continuous_midpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">range_color</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">aspect</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">contrast_rescaling</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">binary_string</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">binary_backend</span><span class="o">=</span><span class="default_value">'auto'</span></em>, <em class="sig-param"><span class="n">binary_compression_level</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">binary_format</span><span class="o">=</span><span class="default_value">'png'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.express.imshow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display an image, i.e. data on a 2D regular raster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>array-like image</em><em>, or </em><em>xarray</em>) – <p>The image data. Supported array shapes are</p>
+<ul>
+<li><p>(M, N): an image with scalar data. The data is visualized
+using a colormap.</p></li>
+<li><p>(M, N, 3): an image with RGB values.</p></li>
+<li><p>(M, N, 4): an image with RGBA values, i.e. including transparency.</p></li>
+</ul>
+</p></li>
+<li><p><strong>zmin</strong> (<em>scalar</em><em> or </em><em>iterable</em><em>, </em><em>optional</em>) – zmin and zmax define the scalar range that the colormap covers. By default,
+zmin and zmax correspond to the min and max values of the datatype for integer
+datatypes (ie [0-255] for uint8 images, [0, 65535] for uint16 images, etc.). For
+a multichannel image of floats, the max of the image is computed and zmax is the
+smallest power of 256 (1, 255, 65535) greater than this max value,
+with a 5% tolerance. For a single-channel image, the max of the image is used.
+Overridden by range_color.</p></li>
+<li><p><strong>zmax</strong> (<em>scalar</em><em> or </em><em>iterable</em><em>, </em><em>optional</em>) – zmin and zmax define the scalar range that the colormap covers. By default,
+zmin and zmax correspond to the min and max values of the datatype for integer
+datatypes (ie [0-255] for uint8 images, [0, 65535] for uint16 images, etc.). For
+a multichannel image of floats, the max of the image is computed and zmax is the
+smallest power of 256 (1, 255, 65535) greater than this max value,
+with a 5% tolerance. For a single-channel image, the max of the image is used.
+Overridden by range_color.</p></li>
+<li><p><strong>origin</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>'upper'</em><em> or </em><em>'lower'</em><em> (</em><em>default 'upper'</em><em>)</em>) – position of the [0, 0] pixel of the image array, in the upper left or lower left
+corner. The convention ‘upper’ is typically used for matrices and images.</p></li>
+<li><p><strong>labels</strong> (dict with str keys and str values (default <code class="docutils literal notranslate"><span class="pre">{}</span></code>)) – Sets names used in the figure for axis titles (keys <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>),
+colorbar title and hoverlabel (key <code class="docutils literal notranslate"><span class="pre">color</span></code>). The values should correspond
+to the desired label to be displayed. If <code class="docutils literal notranslate"><span class="pre">img</span></code> is an xarray, dimension
+names are used for axis titles, and long name for the colorbar title
+(unless overridden in <code class="docutils literal notranslate"><span class="pre">labels</span></code>). Possible keys are: x, y, and color.</p></li>
+<li><p><strong>x</strong> (<em>list-like</em><em>, </em><em>optional</em>) – x and y are used to label the axes of single-channel heatmap visualizations and
+their lengths must match the lengths of the second and first dimensions of the
+img argument. They are auto-populated if the input is an xarray.</p></li>
+<li><p><strong>y</strong> (<em>list-like</em><em>, </em><em>optional</em>) – x and y are used to label the axes of single-channel heatmap visualizations and
+their lengths must match the lengths of the second and first dimensions of the
+img argument. They are auto-populated if the input is an xarray.</p></li>
+<li><p><strong>color_continuous_scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><em>list of str</em>) – colormap used to map scalar data to colors (for a 2D image). This parameter is
+not used for RGB or RGBA images. If a string is provided, it should be the name
+of a known color scale, and if a list is provided, it should be a list of CSS-
+compatible colors.</p></li>
+<li><p><strong>color_continuous_midpoint</strong> (<em>number</em>) – If set, computes the bounds of the continuous color scale to have the desired
+midpoint. Overridden by range_color or zmin and zmax.</p></li>
+<li><p><strong>range_color</strong> (<em>list of two numbers</em>) – If provided, overrides auto-scaling on the continuous color scale, including
+overriding <code class="docutils literal notranslate"><span class="pre">color_continuous_midpoint</span></code>. Also overrides zmin and zmax. Used only
+for single-channel images.</p></li>
+<li><p><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The figure title.</p></li>
+<li><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p></li>
+<li><p><strong>width</strong> (<em>number</em>) – The figure width in pixels.</p></li>
+<li><p><strong>height</strong> (<em>number</em>) – The figure height in pixels.</p></li>
+<li><p><strong>aspect</strong> (<em>'equal'</em><em>, </em><em>'auto'</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – <ul>
+<li><p>‘equal’: Ensures an aspect ratio of 1 or pixels (square pixels)</p></li>
+<li><p>’auto’: The axes is kept fixed and the aspect ratio of pixels is
+adjusted so that the data fit in the axes. In general, this will
+result in non-square pixels.</p></li>
+<li><p>if None, ‘equal’ is used for numpy arrays and ‘auto’ for xarrays
+(which have typically heterogeneous coordinates)</p></li>
+</ul>
+</p></li>
+<li><p><strong>contrast_rescaling</strong> (<em>'minmax'</em><em>, </em><em>'infer'</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a>) – how to determine data values corresponding to the bounds of the color
+range, when zmin or zmax are not passed. If <code class="docutils literal notranslate"><span class="pre">minmax</span></code>, the min and max
+values of the image are used. If <code class="docutils literal notranslate"><span class="pre">infer</span></code>, a heuristic based on the image
+data type is used.</p></li>
+<li><p><strong>binary_string</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>default None</em>) – if True, the image data are first rescaled and encoded as uint8 and
+then passed to plotly.js as a b64 PNG string. If False, data are passed
+unchanged as a numerical array. Setting to True may lead to performance
+gains, at the cost of a loss of precision depending on the original data
+type. If None, use_binary_string is set to True for multichannel (eg) RGB
+arrays, and to False for single-channel (2D) arrays. 2D arrays are
+represented as grayscale and with no colorbar if use_binary_string is
+True.</p></li>
+<li><p><strong>binary_backend</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>'auto'</em><em> (</em><em>default</em><em>)</em><em>, </em><em>'pil'</em><em> or </em><em>'pypng'</em>) – Third-party package for the transformation of numpy arrays to
+png b64 strings. If ‘auto’, Pillow is used if installed,  otherwise
+pypng.</p></li>
+<li><p><strong>binary_compression_level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>between 0 and 9</em><em> (</em><em>default 4</em><em>)</em>) – png compression level to be passed to the backend when transforming an
+array to a png b64 string. Increasing <code class="docutils literal notranslate"><span class="pre">binary_compression</span></code> decreases the
+size of the png string, but the compression step takes more time. For most
+images it is not worth using levels greater than 5, but it’s possible to
+test <code class="docutils literal notranslate"><span class="pre">len(fig.data[0].source)</span></code> and to time the execution of <code class="docutils literal notranslate"><span class="pre">imshow</span></code> to
+tune the level of compression. 0 means no compression (not recommended).</p></li>
+<li><p><strong>binary_format</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em>, </em><em>'png'</em><em> (</em><em>default</em><em>) or </em><em>'jpg'</em>) – compression format used to generate b64 string. ‘png’ is recommended
+since it uses lossless compression, but ‘jpg’ (lossy) compression can
+result if smaller binary strings for natural images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">plotly.graph_objects.Image()</span></code></dt><dd><p>image trace</p>
+</dd>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">plotly.graph_objects.Heatmap()</span></code></dt><dd><p>heatmap trace</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>In order to update and customize the returned figure, use
+<code class="docutils literal notranslate"><span class="pre">go.Figure.update_traces</span></code> or <code class="docutils literal notranslate"><span class="pre">go.Figure.update_layout</span></code>.</p>
+<p>If an xarray is passed, dimensions names and coordinates are used for
+axes labels and ticks.</p>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

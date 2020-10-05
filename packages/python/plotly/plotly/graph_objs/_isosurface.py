@@ -301,6 +301,10 @@ class Isosurface(_BaseTraceType):
                     (i.e. the measure in the color variation
                     direction) is set in units of plot "fraction"
                     or in *pixels. Use `len` to set the value.
+                minexponent
+                    Hide SI prefix for 10^n if |n| is below this
+                    number. This only has an effect when
+                    `tickformat` is "SI" or "B".
                 nticks
                     Specifies the maximum number of ticks for the
                     particular axis. The actual number of ticks

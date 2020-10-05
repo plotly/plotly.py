@@ -822,11 +822,17 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -1115,6 +1121,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1131,6 +1153,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -1221,11 +1259,17 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -1607,11 +1651,17 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -1967,6 +2017,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -1984,6 +2050,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -2079,11 +2161,17 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -2128,6 +2216,9 @@ class Figure(BaseFigure):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         yaxis=None,
         row=None,
@@ -2296,6 +2387,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -2369,6 +2476,9 @@ class Figure(BaseFigure):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
             **kwargs
@@ -3751,12 +3861,18 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         xtype=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         ytype=None,
         z=None,
@@ -3989,6 +4105,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -4011,6 +4143,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -4119,12 +4267,18 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             xtype=xtype,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             ytype=ytype,
             z=z,
@@ -4889,10 +5043,16 @@ class Figure(BaseFigure):
         x=None,
         x0=None,
         xaxis=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -5154,6 +5314,22 @@ class Figure(BaseFigure):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -5168,6 +5344,22 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -5247,10 +5439,16 @@ class Figure(BaseFigure):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -5620,6 +5818,9 @@ class Figure(BaseFigure):
         xaxis=None,
         xcalendar=None,
         xgap=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         xtype=None,
         y=None,
@@ -5627,6 +5828,9 @@ class Figure(BaseFigure):
         yaxis=None,
         ycalendar=None,
         ygap=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         ytype=None,
         z=None,
@@ -5850,6 +6054,22 @@ class Figure(BaseFigure):
             Sets the calendar system to use with `x` date data.
         xgap
             Sets the horizontal gap (in pixels) between bricks.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -5874,6 +6094,22 @@ class Figure(BaseFigure):
             Sets the calendar system to use with `y` date data.
         ygap
             Sets the vertical gap (in pixels) between bricks.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -5980,6 +6216,9 @@ class Figure(BaseFigure):
             xaxis=xaxis,
             xcalendar=xcalendar,
             xgap=xgap,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             xtype=xtype,
             y=y,
@@ -5987,6 +6226,9 @@ class Figure(BaseFigure):
             yaxis=yaxis,
             ycalendar=ycalendar,
             ygap=ygap,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             ytype=ytype,
             z=z,
@@ -7638,6 +7880,7 @@ class Figure(BaseFigure):
         metasrc=None,
         name=None,
         opacity=None,
+        source=None,
         stream=None,
         text=None,
         textsrc=None,
@@ -7671,7 +7914,9 @@ class Figure(BaseFigure):
         ----------
         colormodel
             Color model used to map the numerical color components
-            described in `z` into colors.
+            described in `z` into colors. If `source` is specified,
+            this attribute will be set to `rgba256` otherwise it
+            defaults to `rgb`.
         customdata
             Assigns extra data each datum. This may be useful when
             listening to hover, click and selection events. Note
@@ -7754,6 +7999,10 @@ class Figure(BaseFigure):
             legend item and on hover.
         opacity
             Sets the opacity of the trace.
+        source
+            Specifies the data URI of the image to be visualized.
+            The URI consists of "data:image/[<media
+            subtype>][;base64],<data>"
         stream
             :class:`plotly.graph_objects.image.Stream` instance or
             dict with compatible properties
@@ -7811,7 +8060,8 @@ class Figure(BaseFigure):
             component. Note that the default value will depend on
             the colormodel. For the `rgb` colormodel, it is [255,
             255, 255]. For the `rgba` colormodel, it is [255, 255,
-            255, 1]. For the `hsl` colormodel, it is [360, 100,
+            255, 1]. For the `rgba256` colormodel, it is [255, 255,
+            255, 255]. For the `hsl` colormodel, it is [360, 100,
             100]. For the `hsla` colormodel, it is [360, 100, 100,
             1].
         zmin
@@ -7819,7 +8069,8 @@ class Figure(BaseFigure):
             component. Note that the default value will depend on
             the colormodel. For the `rgb` colormodel, it is [0, 0,
             0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For
-            the `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
+            the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
+            `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
@@ -7870,6 +8121,7 @@ class Figure(BaseFigure):
             metasrc=metasrc,
             name=name,
             opacity=opacity,
+            source=source,
             stream=stream,
             text=text,
             textsrc=textsrc,
@@ -8956,6 +9208,9 @@ class Figure(BaseFigure):
         x=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         yaxis=None,
         row=None,
@@ -9123,6 +9378,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -9196,6 +9467,9 @@ class Figure(BaseFigure):
             x=x,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             yaxis=yaxis,
             **kwargs
@@ -10474,11 +10748,17 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -10800,6 +11080,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -10816,6 +11112,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -10902,11 +11214,17 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -12051,11 +12369,17 @@ class Figure(BaseFigure):
         x0=None,
         xaxis=None,
         xcalendar=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
         ycalendar=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -12302,6 +12626,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.xaxis2`, and so on.
         xcalendar
             Sets the calendar system to use with `x` date data.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -12318,6 +12658,22 @@ class Figure(BaseFigure):
             coordinates refer to `layout.yaxis2`, and so on.
         ycalendar
             Sets the calendar system to use with `y` date data.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -12394,11 +12750,17 @@ class Figure(BaseFigure):
             x0=x0,
             xaxis=xaxis,
             xcalendar=xcalendar,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
             ycalendar=ycalendar,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -14568,6 +14930,7 @@ class Figure(BaseFigure):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -14741,6 +15104,9 @@ class Figure(BaseFigure):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -14858,6 +15224,7 @@ class Figure(BaseFigure):
             outsidetextfont=outsidetextfont,
             parents=parents,
             parentssrc=parentssrc,
+            sort=sort,
             stream=stream,
             text=text,
             textfont=textfont,
@@ -15472,6 +15839,7 @@ class Figure(BaseFigure):
         parents=None,
         parentssrc=None,
         pathbar=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -15638,6 +16006,9 @@ class Figure(BaseFigure):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.treemap.Stream` instance
             or dict with compatible properties
@@ -15759,6 +16130,7 @@ class Figure(BaseFigure):
             parents=parents,
             parentssrc=parentssrc,
             pathbar=pathbar,
+            sort=sort,
             stream=stream,
             text=text,
             textfont=textfont,
@@ -16653,10 +17025,16 @@ class Figure(BaseFigure):
         x=None,
         x0=None,
         xaxis=None,
+        xperiod=None,
+        xperiod0=None,
+        xperiodalignment=None,
         xsrc=None,
         y=None,
         y0=None,
         yaxis=None,
+        yperiod=None,
+        yperiod0=None,
+        yperiodalignment=None,
         ysrc=None,
         row=None,
         col=None,
@@ -16936,6 +17314,22 @@ class Figure(BaseFigure):
             a 2D cartesian x axis. If "x" (the default value), the
             x coordinates refer to `layout.xaxis`. If "x2", the x
             coordinates refer to `layout.xaxis2`, and so on.
+        xperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the x
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        xperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the x0 axis. When `x0period` is round number
+            of weeks, the `x0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        xperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the x axis.
         xsrc
             Sets the source reference on Chart Studio Cloud for  x
             .
@@ -16950,6 +17344,22 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
+        yperiod
+            Only relevant when the axis `type` is "date". Sets the
+            period positioning in milliseconds or "M<n>" on the y
+            axis. Special values in the form of "M<n>" could be
+            used to declare the number of months. In this case `n`
+            must be a positive integer.
+        yperiod0
+            Only relevant when the axis `type` is "date". Sets the
+            base for period positioning in milliseconds or date
+            string on the y0 axis. When `y0period` is round number
+            of weeks, the `y0period0` by default would be on a
+            Sunday i.e. 2000-01-02, otherwise it would be at
+            2000-01-01.
+        yperiodalignment
+            Only relevant when the axis `type` is "date". Sets the
+            alignment of data points on the y axis.
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
@@ -17036,10 +17446,16 @@ class Figure(BaseFigure):
             x=x,
             x0=x0,
             xaxis=xaxis,
+            xperiod=xperiod,
+            xperiod0=xperiod0,
+            xperiodalignment=xperiodalignment,
             xsrc=xsrc,
             y=y,
             y0=y0,
             yaxis=yaxis,
+            yperiod=yperiod,
+            yperiod0=yperiod0,
+            yperiodalignment=yperiodalignment,
             ysrc=ysrc,
             **kwargs
         )
@@ -18124,32 +18540,68 @@ class Figure(BaseFigure):
             Sets the x component of the arrow tail about the arrow
             head. If `axref` is `pixel`, a positive (negative)
             component corresponds to an arrow pointing from right
-            to left (left to right). If `axref` is an axis, this is
-            an absolute value on that axis, like `x`, NOT a
-            relative value.
+            to left (left to right). If `axref` is not `pixel` and
+            is exactly the same as `xref`, this is an absolute
+            value on that axis, like `x`, specified in the same
+            coordinates as `xref`.
         axref
-            Indicates in what terms the tail of the annotation
-            (ax,ay)  is specified. If `pixel`, `ax` is a relative
-            offset in pixels  from `x`. If set to an x axis id
-            (e.g. "x" or "x2"), `ax` is  specified in the same
-            terms as that axis. This is useful  for trendline
-            annotations which should continue to indicate  the
-            correct trend when zoomed.
+            Indicates in what coordinates the tail of the
+            annotation (ax,ay) is specified. If set to a ax axis id
+            (e.g. "ax" or "ax2"), the `ax` position refers to a ax
+            coordinate. If set to "paper", the `ax` position refers
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a ax axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *ax2 domain* refers to the
+            domain of the second ax  axis and a ax position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second ax axis. In order for absolute
+            positioning of the arrow to work, "axref" must be
+            exactly the same as "xref", otherwise "axref" will
+            revert to "pixel" (explained next). For relative
+            positioning, "axref" can be set to "pixel", in which
+            case the "ax" value is specified in pixels relative to
+            "x". Absolute positioning is useful for trendline
+            annotations which should continue to indicate the
+            correct trend when zoomed. Relative positioning is
+            useful for specifying the text offset for an annotated
+            point.
         ay
             Sets the y component of the arrow tail about the arrow
             head. If `ayref` is `pixel`, a positive (negative)
             component corresponds to an arrow pointing from bottom
-            to top (top to bottom). If `ayref` is an axis, this is
-            an absolute value on that axis, like `y`, NOT a
-            relative value.
+            to top (top to bottom). If `ayref` is not `pixel` and
+            is exactly the same as `yref`, this is an absolute
+            value on that axis, like `y`, specified in the same
+            coordinates as `yref`.
         ayref
-            Indicates in what terms the tail of the annotation
-            (ax,ay)  is specified. If `pixel`, `ay` is a relative
-            offset in pixels  from `y`. If set to a y axis id (e.g.
-            "y" or "y2"), `ay` is  specified in the same terms as
-            that axis. This is useful  for trendline annotations
-            which should continue to indicate  the correct trend
-            when zoomed.
+            Indicates in what coordinates the tail of the
+            annotation (ax,ay) is specified. If set to a ay axis id
+            (e.g. "ay" or "ay2"), the `ay` position refers to a ay
+            coordinate. If set to "paper", the `ay` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a ay axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *ay2 domain* refers to the
+            domain of the second ay  axis and a ay position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second ay axis. In order for absolute
+            positioning of the arrow to work, "ayref" must be
+            exactly the same as "yref", otherwise "ayref" will
+            revert to "pixel" (explained next). For relative
+            positioning, "ayref" can be set to "pixel", in which
+            case the "ay" value is specified in pixels relative to
+            "y". Absolute positioning is useful for trendline
+            annotations which should continue to indicate the
+            correct trend when zoomed. Relative positioning is
+            useful for specifying the text offset for an annotated
+            point.
         bgcolor
             Sets the background color of the annotation.
         bordercolor
@@ -18286,19 +18738,19 @@ class Figure(BaseFigure):
             `x` value is `xclick` rather than the annotation's `x`
             value.
         xref
-            Sets the annotation's x coordinate axis. If set to a  x
-            axis id (e.g. * x * or * x 2*), the ` x ` position
-            refers to a  x  coordinate. If set to "paper", the ` x
-            ` position refers to the distance from the  left  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  left  ( right ). If set to a  x
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            left  of the domain of that axis: e.g., * x 2 domain*
-            refers to the domain of the second  x  axis and a  x
-            position of 0.5 refers to the point between the  left
-            and the  right  of the domain of the second  x  axis.
+            Sets the annotation's x coordinate axis. If set to a x
+            axis id (e.g. "x" or "x2"), the `x` position refers to
+            a x coordinate. If set to "paper", the `x` position
+            refers to the distance from the left of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
         xshift
             Shifts the position of the whole annotation and arrow
             to the right (positive) or left (negative) by this many
@@ -18328,19 +18780,19 @@ class Figure(BaseFigure):
             `y` value is `yclick` rather than the annotation's `y`
             value.
         yref
-            Sets the annotation's y coordinate axis. If set to a  y
-            axis id (e.g. * y * or * y 2*), the ` y ` position
-            refers to a  y  coordinate. If set to "paper", the ` y
-            ` position refers to the distance from the  bottom  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  bottom  ( top ). If set to a  y
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            bottom  of the domain of that axis: e.g., * y 2 domain*
-            refers to the domain of the second  y  axis and a  y
-            position of 0.5 refers to the point between the  bottom
-            and the  top  of the domain of the second  y  axis.
+            Sets the annotation's y coordinate axis. If set to a y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            a y coordinate. If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         yshift
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
@@ -18605,12 +19057,14 @@ class Figure(BaseFigure):
             Sets the image container size horizontally. The image
             will be sized based on the `position` value. When
             `xref` is set to `paper`, units are sized relative to
-            the plot width.
+            the plot width. When `xref` ends with ` domain`, units
+            are sized relative to the axis width.
         sizey
             Sets the image container size vertically. The image
             will be sized based on the `position` value. When
             `yref` is set to `paper`, units are sized relative to
-            the plot height.
+            the plot height. When `yref` ends with ` domain`, units
+            are sized relative to the axis height.
         sizing
             Specifies which dimension of the image to constrain.
         source
@@ -18636,19 +19090,19 @@ class Figure(BaseFigure):
         xanchor
             Sets the anchor for the x position
         xref
-            Sets the images's x coordinate axis. If set to a  x
-            axis id (e.g. * x * or * x 2*), the ` x ` position
-            refers to a  x  coordinate. If set to "paper", the ` x
-            ` position refers to the distance from the  left  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  left  ( right ). If set to a  x
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            left  of the domain of that axis: e.g., * x 2 domain*
-            refers to the domain of the second  x  axis and a  x
-            position of 0.5 refers to the point between the  left
-            and the  right  of the domain of the second  x  axis.
+            Sets the images's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
         y
             Sets the image's y position. When `yref` is set to
             `paper`, units are sized relative to the plot height.
@@ -18656,19 +19110,19 @@ class Figure(BaseFigure):
         yanchor
             Sets the anchor for the y position.
         yref
-            Sets the images's y coordinate axis. If set to a  y
-            axis id (e.g. * y * or * y 2*), the ` y ` position
-            refers to a  y  coordinate. If set to "paper", the ` y
-            ` position refers to the distance from the  bottom  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  bottom  ( top ). If set to a  y
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            bottom  of the domain of that axis: e.g., * y 2 domain*
-            refers to the domain of the second  y  axis and a  y
-            position of 0.5 refers to the point between the  bottom
-            and the  top  of the domain of the second  y  axis.
+            Sets the images's y coordinate axis. If set to a y axis
+            id (e.g. "y" or "y2"), the `y` position refers to a y
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         row
             Subplot row for image. If 'all', addresses all rows in
             the specified column(s).
@@ -18973,23 +19427,22 @@ class Figure(BaseFigure):
             to a certain data value. No effect when `xsizemode` not
             set to "pixel".
         xref
-            Sets the shape's x coordinate axis. If set to a  x
-            axis id (e.g. * x * or * x 2*), the ` x ` position
-            refers to a  x  coordinate. If set to "paper", the ` x
-            ` position refers to the distance from the  left  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  left  ( right ). If set to a  x
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            left  of the domain of that axis: e.g., * x 2 domain*
-            refers to the domain of the second  x  axis and a  x
-            position of 0.5 refers to the point between the  left
-            and the  right  of the domain of the second  x  axis.
-            If the axis `type` is "log", then you must take the log
-            of your desired range. If the axis `type` is "date",
-            then you must convert the date to unix time in
-            milliseconds.
+            Sets the shape's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", then you must
+            convert the date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -19014,19 +19467,19 @@ class Figure(BaseFigure):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to a  y
-            axis id (e.g. * y * or * y 2*), the ` y ` position
-            refers to a  y  coordinate. If set to "paper", the ` y
-            ` position refers to the distance from the  bottom  of
-            the plotting area in normalized coordinates where 0 (1)
-            corresponds to the  bottom  ( top ). If set to a  y
-            axis ID followed by "domain" (separated by a space),
-            the position behaves like for "paper", but refers to
-            the distance in fractions of the domain length from the
-            bottom  of the domain of that axis: e.g., * y 2 domain*
-            refers to the domain of the second  y  axis and a  y
-            position of 0.5 refers to the point between the  bottom
-            and the  top  of the domain of the second  y  axis.
+            Sets the annotation's y coordinate axis. If set to a y
+            axis id (e.g. "y" or "y2"), the `y` position refers to
+            a y coordinate. If set to "paper", the `y` position
+            refers to the distance from the bottom of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`

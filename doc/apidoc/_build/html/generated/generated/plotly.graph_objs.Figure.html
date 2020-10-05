@@ -1,0 +1,1121 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.graph_objects.Figure &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="plotly.graph_objects.Figure.show" href="plotly.graph_objects.Figure.show.html" />
+    <link rel="prev" title="plotly.graph_objects.Figure" href="../plotly.graph_objects.Figure.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">plotly.graph_objects.Figure</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="../plotly.graph_objects.Figure.html" title="Previous Chapter: plotly.graph_objects.Figure"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.graph_...</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.graph_objects.Figure.show.html" title="Next Chapter: plotly.graph_objects.Figure.show"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.graph_... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-graph-objs-figure">
+<h1>plotly.graph_objects.Figure<a class="headerlink" href="#plotly-graph-objs-figure" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="plotly.graph_objects.Figure">
+<em class="property">class </em><code class="sig-prename descclassname">plotly.graph_objects.</code><code class="sig-name descname">Figure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">layout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">frames</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip_invalid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Figure" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="plotly.graph_objects.Figure.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">layout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">frames</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">skip_invalid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Figure.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new :class:Figure instance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – <p>The ‘data’ property is a tuple of trace instances
+that may be specified as:</p>
+<blockquote>
+<div><ul>
+<li><p>A list or tuple of trace instances
+(e.g. [Scatter(…), Bar(…)])</p></li>
+<li><p>A single trace instance
+(e.g. Scatter(…), Bar(…), etc.)</p></li>
+<li><p>A list or tuple of dicts of string/value properties where:
+- The ‘type’ property specifies the trace type</p>
+<blockquote>
+<div><dl class="simple">
+<dt>One of: [‘area’, ‘bar’, ‘barpolar’, ‘box’,</dt><dd><p>’candlestick’, ‘carpet’, ‘choropleth’,
+‘choroplethmapbox’, ‘cone’, ‘contour’,
+‘contourcarpet’, ‘densitymapbox’, ‘funnel’,
+‘funnelarea’, ‘heatmap’, ‘heatmapgl’,
+‘histogram’, ‘histogram2d’,
+‘histogram2dcontour’, ‘image’, ‘indicator’,
+‘isosurface’, ‘mesh3d’, ‘ohlc’, ‘parcats’,
+‘parcoords’, ‘pie’, ‘pointcloud’, ‘sankey’,
+‘scatter’, ‘scatter3d’, ‘scattercarpet’,
+‘scattergeo’, ‘scattergl’, ‘scattermapbox’,
+‘scatterpolar’, ‘scatterpolargl’,
+‘scatterternary’, ‘splom’, ‘streamtube’,
+‘sunburst’, ‘surface’, ‘table’, ‘treemap’,
+‘violin’, ‘volume’, ‘waterfall’]</p>
+</dd>
+</dl>
+</div></blockquote>
+<ul class="simple">
+<li><p>All remaining properties are passed to the constructor of
+the specified trace type</p></li>
+</ul>
+<p>(e.g. [{‘type’: ‘scatter’, …}, {‘type’: ‘bar, …}])</p>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>layout</strong> – <p>The ‘layout’ property is an instance of Layout
+that may be specified as:</p>
+<blockquote>
+<div><ul>
+<li><p>An instance of <a class="reference internal" href="../plotly.graph_objects.Layout.html#plotly.graph_objects.Layout" title="plotly.graph_objects.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.Layout</span></code></a></p></li>
+<li><p>A dict of string/value properties that will be passed
+to the Layout constructor</p>
+<p>Supported dict properties:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>activeshape</dt><dd><p>:class:<a href="#id1"><span class="problematic" id="id2">`</span></a>plotly.graph_objects.layout.Activeshape
+` instance or dict with compatible properties</p>
+</dd>
+<dt>angularaxis</dt><dd><p>:class:<a href="#id3"><span class="problematic" id="id4">`</span></a>plotly.graph_objects.layout.AngularAxis
+` instance or dict with compatible properties</p>
+</dd>
+<dt>annotations</dt><dd><p>A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Annotation</span></code>
+instances or dicts with compatible properties</p>
+</dd>
+<dt>annotationdefaults</dt><dd><p>When used in a template (as
+layout.template.layout.annotationdefaults),
+sets the default property values to use for
+elements of layout.annotations</p>
+</dd>
+<dt>autosize</dt><dd><p>Determines whether or not a layout width or
+height that has been left undefined by the user
+is initialized on each relayout. Note that,
+regardless of this attribute, an undefined
+layout width or height is always initialized on
+the first call to plot.</p>
+</dd>
+<dt>bargap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p>
+</dd>
+<dt>bargroupgap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+the same location coordinate.</p>
+</dd>
+<dt>barmode</dt><dd><p>Determines how bars at the same location
+coordinate are displayed on the graph. With
+“stack”, the bars are stacked on top of one
+another With “relative”, the bars are stacked
+on top of one another, with negative values
+below the axis, positive values above With
+“group”, the bars are plotted next to one
+another centered around the shared location.
+With “overlay”, the bars are plotted over one
+another, you might need to an “opacity” to see
+multiple bars.</p>
+</dd>
+<dt>barnorm</dt><dd><p>Sets the normalization for bar traces on the
+graph. With “fraction”, the value of each bar
+is divided by the sum of all values at that
+location coordinate. “percent” is the same but
+multiplied by 100 to show percentages.</p>
+</dd>
+<dt>boxgap</dt><dd><p>Sets the gap (in plot fraction) between boxes
+of adjacent location coordinates. Has no effect
+on traces that have “width” set.</p>
+</dd>
+<dt>boxgroupgap</dt><dd><p>Sets the gap (in plot fraction) between boxes
+of the same location coordinate. Has no effect
+on traces that have “width” set.</p>
+</dd>
+<dt>boxmode</dt><dd><p>Determines how boxes at the same location
+coordinate are displayed on the graph. If
+“group”, the boxes are plotted next to one
+another centered around the shared location. If
+“overlay”, the boxes are plotted over one
+another, you might need to set “opacity” to see
+them multiple boxes. Has no effect on traces
+that have “width” set.</p>
+</dd>
+<dt>calendar</dt><dd><p>Sets the default calendar system to use for
+interpreting and displaying dates throughout
+the plot.</p>
+</dd>
+<dt>clickmode</dt><dd><p>Determines the mode of single click
+interactions. “event” is the default value and
+emits the <code class="docutils literal notranslate"><span class="pre">plotly_click</span></code> event. In addition
+this mode emits the <code class="docutils literal notranslate"><span class="pre">plotly_selected</span></code> event in
+drag modes “lasso” and “select”, but with no
+event data attached (kept for compatibility
+reasons). The “select” flag enables selecting
+single data points via click. This mode also
+supports persistent selections, meaning that
+pressing Shift while clicking, adds to /
+subtracts from an existing selection. “select”
+with <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>: “x” can be confusing,
+consider explicitly setting <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>:
+“closest” when using this feature. Selection
+events are sent accordingly as long as “event”
+flag is set as well. When the “event” flag is
+missing, <code class="docutils literal notranslate"><span class="pre">plotly_click</span></code> and <code class="docutils literal notranslate"><span class="pre">plotly_selected</span></code>
+events are not fired.</p>
+</dd>
+<dt>coloraxis</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Coloraxis</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>colorscale</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Colorscale</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>colorway</dt><dd><p>Sets the default trace colors.</p>
+</dd>
+<dt>datarevision</dt><dd><p>If provided, a changed value tells
+<code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> that one or more data arrays has
+changed. This way you can modify arrays in-
+place rather than making a complete new copy
+for an incremental change. If NOT provided,
+<code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> assumes that data arrays are
+being treated as immutable, thus any data array
+with a different identity from its predecessor
+contains new data.</p>
+</dd>
+<dt>direction</dt><dd><p>Legacy polar charts are deprecated! Please
+switch to “polar” subplots. Sets the direction
+corresponding to positive angles in legacy
+polar charts.</p>
+</dd>
+<dt>dragmode</dt><dd><p>Determines the mode of drag interactions.
+“select” and “lasso” apply only to scatter
+traces with markers or text. “orbit” and
+“turntable” apply only to 3D scenes.</p>
+</dd>
+<dt>editrevision</dt><dd><p>Controls persistence of user-driven changes in
+<code class="docutils literal notranslate"><span class="pre">editable:</span> <span class="pre">true</span></code> configuration, other than
+trace names and axis titles. Defaults to
+<code class="docutils literal notranslate"><span class="pre">layout.uirevision</span></code>.</p>
+</dd>
+<dt>extendfunnelareacolors</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the funnelarea slice colors (whether
+given by <code class="docutils literal notranslate"><span class="pre">funnelareacolorway</span></code> or inherited from
+<code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will be extended to three times its
+original length by first repeating every color
+20% lighter then each color 20% darker. This is
+intended to reduce the likelihood of reusing
+the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided
+in the trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never
+extended.</p>
+</dd>
+<dt>extendpiecolors</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the pie slice colors (whether given
+by <code class="docutils literal notranslate"><span class="pre">piecolorway</span></code> or inherited from <code class="docutils literal notranslate"><span class="pre">colorway</span></code>)
+will be extended to three times its original
+length by first repeating every color 20%
+lighter then each color 20% darker. This is
+intended to reduce the likelihood of reusing
+the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided
+in the trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never
+extended.</p>
+</dd>
+<dt>extendsunburstcolors</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the sunburst slice colors (whether
+given by <code class="docutils literal notranslate"><span class="pre">sunburstcolorway</span></code> or inherited from
+<code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will be extended to three times its
+original length by first repeating every color
+20% lighter then each color 20% darker. This is
+intended to reduce the likelihood of reusing
+the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided
+in the trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never
+extended.</p>
+</dd>
+<dt>extendtreemapcolors</dt><dd><p>If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the treemap slice colors (whether
+given by <code class="docutils literal notranslate"><span class="pre">treemapcolorway</span></code> or inherited from
+<code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will be extended to three times its
+original length by first repeating every color
+20% lighter then each color 20% darker. This is
+intended to reduce the likelihood of reusing
+the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided
+in the trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never
+extended.</p>
+</dd>
+<dt>font</dt><dd><p>Sets the global font. Note that fonts used in
+traces and other layout components inherit from
+the global font.</p>
+</dd>
+<dt>funnelareacolorway</dt><dd><p>Sets the default funnelarea slice colors.
+Defaults to the main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace
+colors. If you specify a new list here it can
+still be extended with lighter and darker
+colors, see <code class="docutils literal notranslate"><span class="pre">extendfunnelareacolors</span></code>.</p>
+</dd>
+<dt>funnelgap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p>
+</dd>
+<dt>funnelgroupgap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+the same location coordinate.</p>
+</dd>
+<dt>funnelmode</dt><dd><p>Determines how bars at the same location
+coordinate are displayed on the graph. With
+“stack”, the bars are stacked on top of one
+another With “group”, the bars are plotted next
+to one another centered around the shared
+location. With “overlay”, the bars are plotted
+over one another, you might need to an
+“opacity” to see multiple bars.</p>
+</dd>
+<dt>geo</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Geo</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>grid</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Grid</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>height</dt><dd><p>Sets the plot’s height (in px).</p>
+</dd>
+<dt>hiddenlabels</dt><dd><p>hiddenlabels is the funnelarea &amp; pie chart
+analog of visible:’legendonly’ but it can
+contain many labels, and can simultaneously
+hide slices from several pies/funnelarea charts</p>
+</dd>
+<dt>hiddenlabelssrc</dt><dd><p>Sets the source reference on Chart Studio Cloud
+for  hiddenlabels .</p>
+</dd>
+<dt>hidesources</dt><dd><p>Determines whether or not a text link citing
+the data source is placed at the bottom-right
+cored of the figure. Has only an effect only on
+graphs that have been generated via forked
+graphs from the Chart Studio Cloud (at
+<a class="reference external" href="https://chart-studio.plotly.com">https://chart-studio.plotly.com</a> or on-premise).</p>
+</dd>
+<dt>hoverdistance</dt><dd><p>Sets the default distance (in pixels) to look
+for data to add hover labels (-1 means no
+cutoff, 0 means no looking for data). This is
+only a real distance for hovering on point-like
+objects, like scatter points. For area-like
+objects (bars, scatter fills, etc) hovering is
+on inside the area and off outside, but these
+objects will not supersede hover on point-like
+objects in case of conflict.</p>
+</dd>
+<dt>hoverlabel</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Hoverlabel</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>hovermode</dt><dd><p>Determines the mode of hover interactions. If
+“closest”, a single hoverlabel will appear for
+the “closest” point within the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code>.
+If “x” (or “y”), multiple hoverlabels will
+appear for multiple points at the “closest” x-
+(or y-) coordinate within the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code>,
+with the caveat that no more than one
+hoverlabel will appear per trace. If <em>x
+unified</em> (or <em>y unified</em>), a single hoverlabel
+will appear multiple points at the closest x-
+(or y-) coordinate within the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code>
+with the caveat that no more than one
+hoverlabel will appear per trace. In this mode,
+spikelines are enabled by default perpendicular
+to the specified axis. If false, hover
+interactions are disabled. If <code class="docutils literal notranslate"><span class="pre">clickmode</span></code>
+includes the “select” flag, <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>
+defaults to “closest”. If <code class="docutils literal notranslate"><span class="pre">clickmode</span></code> lacks the
+“select” flag, it defaults to “x” or “y”
+(depending on the trace’s <code class="docutils literal notranslate"><span class="pre">orientation</span></code> value)
+for plots based on cartesian coordinates. For
+anything else the default value is “closest”.</p>
+</dd>
+<dt>images</dt><dd><p>A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Image</span></code>
+instances or dicts with compatible properties</p>
+</dd>
+<dt>imagedefaults</dt><dd><p>When used in a template (as
+layout.template.layout.imagedefaults), sets the
+default property values to use for elements of
+layout.images</p>
+</dd>
+<dt>legend</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Legend</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>mapbox</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Mapbox</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>margin</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Margin</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>meta</dt><dd><p>Assigns extra meta information that can be used
+in various <code class="docutils literal notranslate"><span class="pre">text</span></code> attributes. Attributes such
+as the graph, axis and colorbar <code class="docutils literal notranslate"><span class="pre">title.text</span></code>,
+annotation <code class="docutils literal notranslate"><span class="pre">text</span></code> <code class="docutils literal notranslate"><span class="pre">trace.name</span></code> in legend items,
+<code class="docutils literal notranslate"><span class="pre">rangeselector</span></code>, <code class="docutils literal notranslate"><span class="pre">updatemenus</span></code> and <code class="docutils literal notranslate"><span class="pre">sliders</span></code>
+<code class="docutils literal notranslate"><span class="pre">label</span></code> text all support <code class="docutils literal notranslate"><span class="pre">meta</span></code>. One can access
+<code class="docutils literal notranslate"><span class="pre">meta</span></code> fields using template strings:
+<code class="docutils literal notranslate"><span class="pre">%{meta[i]}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of the
+<code class="docutils literal notranslate"><span class="pre">meta</span></code> item in question. <code class="docutils literal notranslate"><span class="pre">meta</span></code> can also be an
+object for example <code class="docutils literal notranslate"><span class="pre">{key:</span> <span class="pre">value}</span></code> which can be
+accessed %{meta[key]}.</p>
+</dd>
+<dt>metasrc</dt><dd><p>Sets the source reference on Chart Studio Cloud
+for  meta .</p>
+</dd>
+<dt>modebar</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Modebar</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>newshape</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Newshape</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>orientation</dt><dd><p>Legacy polar charts are deprecated! Please
+switch to “polar” subplots. Rotates the entire
+polar by the given angle in legacy polar
+charts.</p>
+</dd>
+<dt>paper_bgcolor</dt><dd><p>Sets the background color of the paper where
+the graph is drawn.</p>
+</dd>
+<dt>piecolorway</dt><dd><p>Sets the default pie slice colors. Defaults to
+the main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors. If
+you specify a new list here it can still be
+extended with lighter and darker colors, see
+<code class="docutils literal notranslate"><span class="pre">extendpiecolors</span></code>.</p>
+</dd>
+<dt>plot_bgcolor</dt><dd><p>Sets the background color of the plotting area
+in-between x and y axes.</p>
+</dd>
+<dt>polar</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Polar</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>radialaxis</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.RadialAxis</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>scene</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Scene</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>selectdirection</dt><dd><p>When <code class="docutils literal notranslate"><span class="pre">dragmode</span></code> is set to “select”, this limits
+the selection of the drag to horizontal,
+vertical or diagonal. “h” only allows
+horizontal selection, “v” only vertical, “d”
+only diagonal and “any” sets no limit.</p>
+</dd>
+<dt>selectionrevision</dt><dd><p>Controls persistence of user-driven changes in
+selected points from all traces.</p>
+</dd>
+<dt>separators</dt><dd><p>Sets the decimal and thousand separators. For
+example, <a href="#id5"><span class="problematic" id="id6">*</span></a>. * puts a ‘.’ before decimals and a
+space between thousands. In English locales,
+dflt is “.,” but other locales may alter this
+default.</p>
+</dd>
+<dt>shapes</dt><dd><p>A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Shape</span></code>
+instances or dicts with compatible properties</p>
+</dd>
+<dt>shapedefaults</dt><dd><p>When used in a template (as
+layout.template.layout.shapedefaults), sets the
+default property values to use for elements of
+layout.shapes</p>
+</dd>
+<dt>showlegend</dt><dd><p>Determines whether or not a legend is drawn.
+Default is <code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a trace to show
+and any of these: a) Two or more traces would
+by default be shown in the legend. b) One pie
+trace is shown in the legend. c) One trace is
+explicitly given with <code class="docutils literal notranslate"><span class="pre">showlegend:</span> <span class="pre">true</span></code>.</p>
+</dd>
+<dt>sliders</dt><dd><p>A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Slider</span></code>
+instances or dicts with compatible properties</p>
+</dd>
+<dt>sliderdefaults</dt><dd><p>When used in a template (as
+layout.template.layout.sliderdefaults), sets
+the default property values to use for elements
+of layout.sliders</p>
+</dd>
+<dt>spikedistance</dt><dd><p>Sets the default distance (in pixels) to look
+for data to draw spikelines to (-1 means no
+cutoff, 0 means no looking for data). As with
+hoverdistance, distance does not apply to area-
+like objects. In addition, some objects can be
+hovered on but will not generate spikelines,
+such as scatter fills.</p>
+</dd>
+<dt>sunburstcolorway</dt><dd><p>Sets the default sunburst slice colors.
+Defaults to the main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace
+colors. If you specify a new list here it can
+still be extended with lighter and darker
+colors, see <code class="docutils literal notranslate"><span class="pre">extendsunburstcolors</span></code>.</p>
+</dd>
+<dt>template</dt><dd><p>Default attributes to be applied to the plot.
+This should be a dict with format: <code class="docutils literal notranslate"><span class="pre">{'layout':</span>
+<span class="pre">layoutTemplate,</span> <span class="pre">'data':</span> <span class="pre">{trace_type:</span>
+<span class="pre">[traceTemplate,</span> <span class="pre">...],</span> <span class="pre">...}}</span></code> where
+<code class="docutils literal notranslate"><span class="pre">layoutTemplate</span></code> is a dict matching the
+structure of <code class="docutils literal notranslate"><span class="pre">figure.layout</span></code> and
+<code class="docutils literal notranslate"><span class="pre">traceTemplate</span></code> is a dict matching the
+structure of the trace with type <code class="docutils literal notranslate"><span class="pre">trace_type</span></code>
+(e.g. ‘scatter’). Alternatively, this may be
+specified as an instance of
+plotly.graph_objects.layout.Template.  Trace
+templates are applied cyclically to traces of
+each type. Container arrays (eg <code class="docutils literal notranslate"><span class="pre">annotations</span></code>)
+have special handling: An object ending in
+<code class="docutils literal notranslate"><span class="pre">defaults</span></code> (eg <code class="docutils literal notranslate"><span class="pre">annotationdefaults</span></code>) is applied
+to each array item. But if an item has a
+<code class="docutils literal notranslate"><span class="pre">templateitemname</span></code> key we look in the template
+array for an item with matching <code class="docutils literal notranslate"><span class="pre">name</span></code> and
+apply that instead. If no matching <code class="docutils literal notranslate"><span class="pre">name</span></code> is
+found we mark the item invisible. Any named
+template item not referenced is appended to the
+end of the array, so this can be used to add a
+watermark annotation or a logo image, for
+example. To omit one of these items on the
+plot, make an item with matching
+<code class="docutils literal notranslate"><span class="pre">templateitemname</span></code> and <code class="docutils literal notranslate"><span class="pre">visible:</span> <span class="pre">false</span></code>.</p>
+</dd>
+<dt>ternary</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Ternary</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>title</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Title</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>titlefont</dt><dd><p>Deprecated: Please use layout.title.font
+instead. Sets the title font. Note that the
+title’s font used to be customized by the now
+deprecated <code class="docutils literal notranslate"><span class="pre">titlefont</span></code> attribute.</p>
+</dd>
+<dt>transition</dt><dd><p>Sets transition options used during
+Plotly.react updates.</p>
+</dd>
+<dt>treemapcolorway</dt><dd><p>Sets the default treemap slice colors. Defaults
+to the main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors.
+If you specify a new list here it can still be
+extended with lighter and darker colors, see
+<code class="docutils literal notranslate"><span class="pre">extendtreemapcolors</span></code>.</p>
+</dd>
+<dt>uirevision</dt><dd><p>Used to allow user interactions with the plot
+to persist after <code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> calls that are
+unaware of these interactions. If <code class="docutils literal notranslate"><span class="pre">uirevision</span></code>
+is omitted, or if it is given and it changed
+from the previous <code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> call, the
+exact new figure is used. If <code class="docutils literal notranslate"><span class="pre">uirevision</span></code> is
+truthy and did NOT change, any attribute that
+has been affected by user interactions and did
+not receive a different value in the new figure
+will keep the interaction value.
+<code class="docutils literal notranslate"><span class="pre">layout.uirevision</span></code> attribute serves as the
+default for <code class="docutils literal notranslate"><span class="pre">uirevision</span></code> attributes in various
+sub-containers. For finer control you can set
+these sub-attributes directly. For example, if
+your app separately controls the data on the x
+and y axes you might set
+<code class="docutils literal notranslate"><span class="pre">xaxis.uirevision=*time*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">yaxis.uirevision=*cost*</span></code>. Then if only the y
+data is changed, you can update
+<code class="docutils literal notranslate"><span class="pre">yaxis.uirevision=*quantity*</span></code> and the y axis
+range will reset but the x axis range will
+retain any user-driven zoom.</p>
+</dd>
+<dt>uniformtext</dt><dd><p>:class:<a href="#id7"><span class="problematic" id="id8">`</span></a>plotly.graph_objects.layout.Uniformtext
+` instance or dict with compatible properties</p>
+</dd>
+<dt>updatemenus</dt><dd><p>A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Updatemenu</span></code>
+instances or dicts with compatible properties</p>
+</dd>
+<dt>updatemenudefaults</dt><dd><p>When used in a template (as
+layout.template.layout.updatemenudefaults),
+sets the default property values to use for
+elements of layout.updatemenus</p>
+</dd>
+<dt>violingap</dt><dd><p>Sets the gap (in plot fraction) between violins
+of adjacent location coordinates. Has no effect
+on traces that have “width” set.</p>
+</dd>
+<dt>violingroupgap</dt><dd><p>Sets the gap (in plot fraction) between violins
+of the same location coordinate. Has no effect
+on traces that have “width” set.</p>
+</dd>
+<dt>violinmode</dt><dd><p>Determines how violins at the same location
+coordinate are displayed on the graph. If
+“group”, the violins are plotted next to one
+another centered around the shared location. If
+“overlay”, the violins are plotted over one
+another, you might need to set “opacity” to see
+them multiple violins. Has no effect on traces
+that have “width” set.</p>
+</dd>
+<dt>waterfallgap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p>
+</dd>
+<dt>waterfallgroupgap</dt><dd><p>Sets the gap (in plot fraction) between bars of
+the same location coordinate.</p>
+</dd>
+<dt>waterfallmode</dt><dd><p>Determines how bars at the same location
+coordinate are displayed on the graph. With
+“group”, the bars are plotted next to one
+another centered around the shared location.
+With “overlay”, the bars are plotted over one
+another, you might need to an “opacity” to see
+multiple bars.</p>
+</dd>
+<dt>width</dt><dd><p>Sets the plot’s width (in px).</p>
+</dd>
+<dt>xaxis</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.XAxis</span></code>
+instance or dict with compatible properties</p>
+</dd>
+<dt>yaxis</dt><dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.YAxis</span></code>
+instance or dict with compatible properties</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>frames</strong> – <p>The ‘frames’ property is a tuple of instances of
+Frame that may be specified as:</p>
+<blockquote>
+<div><ul>
+<li><p>A list or tuple of instances of plotly.graph_objects.Frame</p></li>
+<li><p>A list or tuple of dicts of string/value properties that
+will be passed to the Frame constructor</p>
+<p>Supported dict properties:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>baseframe</dt><dd><p>The name of the frame into which this frame’s
+properties are merged before applying. This is
+used to unify properties and avoid needing to
+specify the same values for the same properties
+in multiple frames.</p>
+</dd>
+<dt>data</dt><dd><p>A list of traces this frame modifies. The
+format is identical to the normal trace
+definition.</p>
+</dd>
+<dt>group</dt><dd><p>An identifier that specifies the group to which
+the frame belongs, used by animate to select a
+subset of frames.</p>
+</dd>
+<dt>layout</dt><dd><p>Layout properties which this frame modifies.
+The format is identical to the normal layout
+definition.</p>
+</dd>
+<dt>name</dt><dd><p>A label by which to identify the frame</p>
+</dd>
+<dt>traces</dt><dd><p>A list of trace indices that identify the
+respective traces in the data attribute</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>skip_invalid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, invalid properties in the figure specification will be
+skipped silently. If False (default) invalid properties in the
+figure specification will result in a ValueError</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.8)"><strong>ValueError</strong></a> – if a property in the specification of data, layout, or frames
+    is invalid AND skip_invalid is False</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.__init__" title="plotly.graph_objects.Figure.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([data, layout, frames, skip_invalid])</p></td>
+<td><p>Create a new :class:Figure instance</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_annotation" title="plotly.graph_objects.Figure.add_annotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_annotation</span></code></a>([arg, align, arrowcolor, …])</p></td>
+<td><p>Create and add a new annotation to the figure’s layout</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_area" title="plotly.graph_objects.Figure.add_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_area</span></code></a>([customdata, customdatasrc, …])</p></td>
+<td><p>Add a new Area trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_bar" title="plotly.graph_objects.Figure.add_bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_bar</span></code></a>([alignmentgroup, base, basesrc, …])</p></td>
+<td><p>Add a new Bar trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_barpolar" title="plotly.graph_objects.Figure.add_barpolar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_barpolar</span></code></a>([base, basesrc, customdata, …])</p></td>
+<td><p>Add a new Barpolar trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_box" title="plotly.graph_objects.Figure.add_box"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_box</span></code></a>([alignmentgroup, boxmean, …])</p></td>
+<td><p>Add a new Box trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_candlestick" title="plotly.graph_objects.Figure.add_candlestick"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_candlestick</span></code></a>([close, closesrc, …])</p></td>
+<td><p>Add a new Candlestick trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_carpet" title="plotly.graph_objects.Figure.add_carpet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_carpet</span></code></a>([a, a0, aaxis, asrc, b, b0, …])</p></td>
+<td><p>Add a new Carpet trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_choropleth" title="plotly.graph_objects.Figure.add_choropleth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_choropleth</span></code></a>([autocolorscale, coloraxis, …])</p></td>
+<td><p>Add a new Choropleth trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_choroplethmapbox" title="plotly.graph_objects.Figure.add_choroplethmapbox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_choroplethmapbox</span></code></a>([autocolorscale, …])</p></td>
+<td><p>Add a new Choroplethmapbox trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_cone" title="plotly.graph_objects.Figure.add_cone"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_cone</span></code></a>([anchor, autocolorscale, cauto, …])</p></td>
+<td><p>Add a new Cone trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_contour" title="plotly.graph_objects.Figure.add_contour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_contour</span></code></a>([autocolorscale, autocontour, …])</p></td>
+<td><p>Add a new Contour trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_contourcarpet" title="plotly.graph_objects.Figure.add_contourcarpet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_contourcarpet</span></code></a>([a, a0, asrc, atype, …])</p></td>
+<td><p>Add a new Contourcarpet trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_densitymapbox" title="plotly.graph_objects.Figure.add_densitymapbox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_densitymapbox</span></code></a>([autocolorscale, below, …])</p></td>
+<td><p>Add a new Densitymapbox trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_funnel" title="plotly.graph_objects.Figure.add_funnel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_funnel</span></code></a>([alignmentgroup, cliponaxis, …])</p></td>
+<td><p>Add a new Funnel trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_funnelarea" title="plotly.graph_objects.Figure.add_funnelarea"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_funnelarea</span></code></a>([aspectratio, baseratio, …])</p></td>
+<td><p>Add a new Funnelarea trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_heatmap" title="plotly.graph_objects.Figure.add_heatmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_heatmap</span></code></a>([autocolorscale, coloraxis, …])</p></td>
+<td><p>Add a new Heatmap trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_heatmapgl" title="plotly.graph_objects.Figure.add_heatmapgl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_heatmapgl</span></code></a>([autocolorscale, coloraxis, …])</p></td>
+<td><p>Add a new Heatmapgl trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_histogram" title="plotly.graph_objects.Figure.add_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_histogram</span></code></a>([alignmentgroup, autobinx, …])</p></td>
+<td><p>Add a new Histogram trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_histogram2d" title="plotly.graph_objects.Figure.add_histogram2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_histogram2d</span></code></a>([autobinx, autobiny, …])</p></td>
+<td><p>Add a new Histogram2d trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_histogram2dcontour" title="plotly.graph_objects.Figure.add_histogram2dcontour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_histogram2dcontour</span></code></a>([autobinx, autobiny, …])</p></td>
+<td><p>Add a new Histogram2dContour trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_hline" title="plotly.graph_objects.Figure.add_hline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_hline</span></code></a>(y[, row, col, exclude_empty_subplots])</p></td>
+<td><p>Add a horizontal line to a plot or subplot that extends infinitely in the x-dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_hrect" title="plotly.graph_objects.Figure.add_hrect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_hrect</span></code></a>(y0, y1[, row, col, …])</p></td>
+<td><p>Add a rectangle to a plot or subplot that extends infinitely in the x-dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_image" title="plotly.graph_objects.Figure.add_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_image</span></code></a>([colormodel, customdata, …])</p></td>
+<td><p>Add a new Image trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_indicator" title="plotly.graph_objects.Figure.add_indicator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_indicator</span></code></a>([align, customdata, …])</p></td>
+<td><p>Add a new Indicator trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_isosurface" title="plotly.graph_objects.Figure.add_isosurface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_isosurface</span></code></a>([autocolorscale, caps, …])</p></td>
+<td><p>Add a new Isosurface trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_layout_image" title="plotly.graph_objects.Figure.add_layout_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_layout_image</span></code></a>([arg, layer, name, …])</p></td>
+<td><p>Create and add a new image to the figure’s layout</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_mesh3d" title="plotly.graph_objects.Figure.add_mesh3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_mesh3d</span></code></a>([alphahull, autocolorscale, …])</p></td>
+<td><p>Add a new Mesh3d trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_ohlc" title="plotly.graph_objects.Figure.add_ohlc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_ohlc</span></code></a>([close, closesrc, customdata, …])</p></td>
+<td><p>Add a new Ohlc trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_parcats" title="plotly.graph_objects.Figure.add_parcats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_parcats</span></code></a>([arrangement, bundlecolors, …])</p></td>
+<td><p>Add a new Parcats trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_parcoords" title="plotly.graph_objects.Figure.add_parcoords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_parcoords</span></code></a>([customdata, customdatasrc, …])</p></td>
+<td><p>Add a new Parcoords trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_pie" title="plotly.graph_objects.Figure.add_pie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_pie</span></code></a>([automargin, customdata, …])</p></td>
+<td><p>Add a new Pie trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_pointcloud" title="plotly.graph_objects.Figure.add_pointcloud"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_pointcloud</span></code></a>([customdata, customdatasrc, …])</p></td>
+<td><p>Add a new Pointcloud trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_sankey" title="plotly.graph_objects.Figure.add_sankey"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_sankey</span></code></a>([arrangement, customdata, …])</p></td>
+<td><p>Add a new Sankey trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scatter" title="plotly.graph_objects.Figure.add_scatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scatter</span></code></a>([cliponaxis, connectgaps, …])</p></td>
+<td><p>Add a new Scatter trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scatter3d" title="plotly.graph_objects.Figure.add_scatter3d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scatter3d</span></code></a>([connectgaps, customdata, …])</p></td>
+<td><p>Add a new Scatter3d trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scattercarpet" title="plotly.graph_objects.Figure.add_scattercarpet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scattercarpet</span></code></a>([a, asrc, b, bsrc, …])</p></td>
+<td><p>Add a new Scattercarpet trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scattergeo" title="plotly.graph_objects.Figure.add_scattergeo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scattergeo</span></code></a>([connectgaps, customdata, …])</p></td>
+<td><p>Add a new Scattergeo trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scattergl" title="plotly.graph_objects.Figure.add_scattergl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scattergl</span></code></a>([connectgaps, customdata, …])</p></td>
+<td><p>Add a new Scattergl trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scattermapbox" title="plotly.graph_objects.Figure.add_scattermapbox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scattermapbox</span></code></a>([below, connectgaps, …])</p></td>
+<td><p>Add a new Scattermapbox trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scatterpolar" title="plotly.graph_objects.Figure.add_scatterpolar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scatterpolar</span></code></a>([cliponaxis, connectgaps, …])</p></td>
+<td><p>Add a new Scatterpolar trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scatterpolargl" title="plotly.graph_objects.Figure.add_scatterpolargl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scatterpolargl</span></code></a>([connectgaps, …])</p></td>
+<td><p>Add a new Scatterpolargl trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_scatterternary" title="plotly.graph_objects.Figure.add_scatterternary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_scatterternary</span></code></a>([a, asrc, b, bsrc, c, …])</p></td>
+<td><p>Add a new Scatterternary trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_shape" title="plotly.graph_objects.Figure.add_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_shape</span></code></a>([arg, editable, fillcolor, …])</p></td>
+<td><p>Create and add a new shape to the figure’s layout</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_splom" title="plotly.graph_objects.Figure.add_splom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_splom</span></code></a>([customdata, customdatasrc, …])</p></td>
+<td><p>Add a new Splom trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_streamtube" title="plotly.graph_objects.Figure.add_streamtube"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_streamtube</span></code></a>([autocolorscale, cauto, …])</p></td>
+<td><p>Add a new Streamtube trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_sunburst" title="plotly.graph_objects.Figure.add_sunburst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_sunburst</span></code></a>([branchvalues, count, …])</p></td>
+<td><p>Add a new Sunburst trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_surface" title="plotly.graph_objects.Figure.add_surface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_surface</span></code></a>([autocolorscale, cauto, cmax, …])</p></td>
+<td><p>Add a new Surface trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_table" title="plotly.graph_objects.Figure.add_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_table</span></code></a>([cells, columnorder, …])</p></td>
+<td><p>Add a new Table trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_trace" title="plotly.graph_objects.Figure.add_trace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_trace</span></code></a>(trace[, row, col, secondary_y])</p></td>
+<td><p>Add a trace to the figure</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_traces" title="plotly.graph_objects.Figure.add_traces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_traces</span></code></a>(data[, rows, cols, secondary_ys])</p></td>
+<td><p>Add traces to the figure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_treemap" title="plotly.graph_objects.Figure.add_treemap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_treemap</span></code></a>([branchvalues, count, …])</p></td>
+<td><p>Add a new Treemap trace</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_violin" title="plotly.graph_objects.Figure.add_violin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_violin</span></code></a>([alignmentgroup, bandwidth, box, …])</p></td>
+<td><p>Add a new Violin trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_vline" title="plotly.graph_objects.Figure.add_vline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_vline</span></code></a>(x[, row, col, exclude_empty_subplots])</p></td>
+<td><p>Add a vertical line to a plot or subplot that extends infinitely in the y-dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_volume" title="plotly.graph_objects.Figure.add_volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_volume</span></code></a>([autocolorscale, caps, cauto, …])</p></td>
+<td><p>Add a new Volume trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_vrect" title="plotly.graph_objects.Figure.add_vrect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_vrect</span></code></a>(x0, x1[, row, col, …])</p></td>
+<td><p>Add a rectangle to a plot or subplot that extends infinitely in the y-dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.add_waterfall" title="plotly.graph_objects.Figure.add_waterfall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_waterfall</span></code></a>([alignmentgroup, base, …])</p></td>
+<td><p>Add a new Waterfall trace</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.append_trace" title="plotly.graph_objects.Figure.append_trace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">append_trace</span></code></a>(trace, row, col)</p></td>
+<td><p>Add a trace to the figure bound to axes at the specified row, col index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.batch_animate" title="plotly.graph_objects.Figure.batch_animate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_animate</span></code></a>([duration, easing])</p></td>
+<td><p>Context manager to animate trace / layout updates</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.batch_update" title="plotly.graph_objects.Figure.batch_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">batch_update</span></code></a>()</p></td>
+<td><p>A context manager that batches up trace and layout assignment operations into a singe plotly_update message that is executed when the context exits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_annotation" title="plotly.graph_objects.Figure.for_each_annotation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_annotation</span></code></a>(fn[, selector, row, …])</p></td>
+<td><p>Apply a function to all annotations that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_coloraxis" title="plotly.graph_objects.Figure.for_each_coloraxis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_coloraxis</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all coloraxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_geo" title="plotly.graph_objects.Figure.for_each_geo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_geo</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all geo objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_layout_image" title="plotly.graph_objects.Figure.for_each_layout_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_layout_image</span></code></a>(fn[, selector, row, …])</p></td>
+<td><p>Apply a function to all images that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_mapbox" title="plotly.graph_objects.Figure.for_each_mapbox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_mapbox</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all mapbox objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_polar" title="plotly.graph_objects.Figure.for_each_polar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_polar</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all polar objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_scene" title="plotly.graph_objects.Figure.for_each_scene"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_scene</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all scene objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_shape" title="plotly.graph_objects.Figure.for_each_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_shape</span></code></a>(fn[, selector, row, col, …])</p></td>
+<td><p>Apply a function to all shapes that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_ternary" title="plotly.graph_objects.Figure.for_each_ternary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_ternary</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all ternary objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_trace" title="plotly.graph_objects.Figure.for_each_trace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_trace</span></code></a>(fn[, selector, row, col, …])</p></td>
+<td><p>Apply a function to all traces that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_xaxis" title="plotly.graph_objects.Figure.for_each_xaxis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_xaxis</span></code></a>(fn[, selector, row, col])</p></td>
+<td><p>Apply a function to all xaxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.for_each_yaxis" title="plotly.graph_objects.Figure.for_each_yaxis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">for_each_yaxis</span></code></a>(fn[, selector, row, col, …])</p></td>
+<td><p>Apply a function to all yaxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.full_figure_for_development" title="plotly.graph_objects.Figure.full_figure_for_development"><code class="xref py py-obj docutils literal notranslate"><span class="pre">full_figure_for_development</span></code></a>([warn, as_dict])</p></td>
+<td><p>Compute default values for all attributes not specified in the input figure and returns the output as a “full” figure.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.get_subplot" title="plotly.graph_objects.Figure.get_subplot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_subplot</span></code></a>(row, col[, secondary_y])</p></td>
+<td><p>Return an object representing the subplot at the specified row and column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.plotly_relayout" title="plotly.graph_objects.Figure.plotly_relayout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotly_relayout</span></code></a>(relayout_data, **kwargs)</p></td>
+<td><p>Perform a Plotly relayout operation on the figure’s layout</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.plotly_restyle" title="plotly.graph_objects.Figure.plotly_restyle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotly_restyle</span></code></a>(restyle_data[, trace_indexes])</p></td>
+<td><p>Perform a Plotly restyle operation on the figure’s traces</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.plotly_update" title="plotly.graph_objects.Figure.plotly_update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotly_update</span></code></a>([restyle_data, relayout_data, …])</p></td>
+<td><p>Perform a Plotly update operation on the figure.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.pop" title="plotly.graph_objects.Figure.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(key, *args)</p></td>
+<td><p>Remove the value associated with the specified key and return it</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.print_grid" title="plotly.graph_objects.Figure.print_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_grid</span></code></a>()</p></td>
+<td><p>Print a visual layout of the figure’s axes arrangement.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_annotations" title="plotly.graph_objects.Figure.select_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_annotations</span></code></a>([selector, row, col, …])</p></td>
+<td><p>Select annotations from a particular subplot cell and/or annotations that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_coloraxes" title="plotly.graph_objects.Figure.select_coloraxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_coloraxes</span></code></a>([selector, row, col])</p></td>
+<td><p>Select coloraxis subplot objects from a particular subplot cell and/or coloraxis subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_geos" title="plotly.graph_objects.Figure.select_geos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_geos</span></code></a>([selector, row, col])</p></td>
+<td><p>Select geo subplot objects from a particular subplot cell and/or geo subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_layout_images" title="plotly.graph_objects.Figure.select_layout_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_layout_images</span></code></a>([selector, row, col, …])</p></td>
+<td><p>Select images from a particular subplot cell and/or images that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_mapboxes" title="plotly.graph_objects.Figure.select_mapboxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_mapboxes</span></code></a>([selector, row, col])</p></td>
+<td><p>Select mapbox subplot objects from a particular subplot cell and/or mapbox subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_polars" title="plotly.graph_objects.Figure.select_polars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_polars</span></code></a>([selector, row, col])</p></td>
+<td><p>Select polar subplot objects from a particular subplot cell and/or polar subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_scenes" title="plotly.graph_objects.Figure.select_scenes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_scenes</span></code></a>([selector, row, col])</p></td>
+<td><p>Select scene subplot objects from a particular subplot cell and/or scene subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_shapes" title="plotly.graph_objects.Figure.select_shapes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_shapes</span></code></a>([selector, row, col, secondary_y])</p></td>
+<td><p>Select shapes from a particular subplot cell and/or shapes that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_ternaries" title="plotly.graph_objects.Figure.select_ternaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_ternaries</span></code></a>([selector, row, col])</p></td>
+<td><p>Select ternary subplot objects from a particular subplot cell and/or ternary subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_traces" title="plotly.graph_objects.Figure.select_traces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_traces</span></code></a>([selector, row, col, secondary_y])</p></td>
+<td><p>Select traces from a particular subplot cell and/or traces that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_xaxes" title="plotly.graph_objects.Figure.select_xaxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_xaxes</span></code></a>([selector, row, col])</p></td>
+<td><p>Select xaxis subplot objects from a particular subplot cell and/or xaxis subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.select_yaxes" title="plotly.graph_objects.Figure.select_yaxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_yaxes</span></code></a>([selector, row, col, secondary_y])</p></td>
+<td><p>Select yaxis subplot objects from a particular subplot cell and/or yaxis subplot objects that satisfy custom selection criteria.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.show" title="plotly.graph_objects.Figure.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Show a figure using either the default renderer(s) or the renderer(s) specified by the renderer argument</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_dict" title="plotly.graph_objects.Figure.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<td><p>Convert figure to a dictionary</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_html" title="plotly.graph_objects.Figure.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert a figure to an HTML string representation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_image" title="plotly.graph_objects.Figure.to_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_image</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert a figure to a static image bytes string</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_json" title="plotly.graph_objects.Figure.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert a figure to a JSON string representation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_ordered_dict</span></code>([skip_uid])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.to_plotly_json" title="plotly.graph_objects.Figure.to_plotly_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plotly_json</span></code></a>()</p></td>
+<td><p>Convert figure to a JSON representation as a Python dict</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update" title="plotly.graph_objects.Figure.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>([dict1, overwrite])</p></td>
+<td><p>Update the properties of the figure with a dict and/or with keyword arguments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_annotations" title="plotly.graph_objects.Figure.update_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_annotations</span></code></a>([patch, selector, row, …])</p></td>
+<td><p>Perform a property update operation on all annotations that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_coloraxes" title="plotly.graph_objects.Figure.update_coloraxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_coloraxes</span></code></a>([patch, selector, …])</p></td>
+<td><p>Perform a property update operation on all coloraxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_geos" title="plotly.graph_objects.Figure.update_geos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_geos</span></code></a>([patch, selector, overwrite, …])</p></td>
+<td><p>Perform a property update operation on all geo objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_layout" title="plotly.graph_objects.Figure.update_layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_layout</span></code></a>([dict1, overwrite])</p></td>
+<td><p>Update the properties of the figure’s layout with a dict and/or with keyword arguments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_layout_images" title="plotly.graph_objects.Figure.update_layout_images"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_layout_images</span></code></a>([patch, selector, row, …])</p></td>
+<td><p>Perform a property update operation on all images that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_mapboxes" title="plotly.graph_objects.Figure.update_mapboxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_mapboxes</span></code></a>([patch, selector, …])</p></td>
+<td><p>Perform a property update operation on all mapbox objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_polars" title="plotly.graph_objects.Figure.update_polars"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_polars</span></code></a>([patch, selector, overwrite, …])</p></td>
+<td><p>Perform a property update operation on all polar objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_scenes" title="plotly.graph_objects.Figure.update_scenes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_scenes</span></code></a>([patch, selector, overwrite, …])</p></td>
+<td><p>Perform a property update operation on all scene objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_shapes" title="plotly.graph_objects.Figure.update_shapes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_shapes</span></code></a>([patch, selector, row, col, …])</p></td>
+<td><p>Perform a property update operation on all shapes that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_ternaries" title="plotly.graph_objects.Figure.update_ternaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_ternaries</span></code></a>([patch, selector, …])</p></td>
+<td><p>Perform a property update operation on all ternary objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_traces" title="plotly.graph_objects.Figure.update_traces"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_traces</span></code></a>([patch, selector, row, col, …])</p></td>
+<td><p>Perform a property update operation on all traces that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_xaxes" title="plotly.graph_objects.Figure.update_xaxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_xaxes</span></code></a>([patch, selector, overwrite, …])</p></td>
+<td><p>Perform a property update operation on all xaxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.update_yaxes" title="plotly.graph_objects.Figure.update_yaxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_yaxes</span></code></a>([patch, selector, overwrite, …])</p></td>
+<td><p>Perform a property update operation on all yaxis objects that satisfy the specified selection criteria</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.write_html" title="plotly.graph_objects.Figure.write_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_html</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Write a figure to an HTML file representation</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.write_image" title="plotly.graph_objects.Figure.write_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_image</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert a figure to a static image and write it to a file or writeable object</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.write_json" title="plotly.graph_objects.Figure.write_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_json</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Convert a figure to JSON and write it to a file or writeable object</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.data" title="plotly.graph_objects.Figure.data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data</span></code></a></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> property is a tuple of the figure’s trace objects</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.frames" title="plotly.graph_objects.Figure.frames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frames</span></code></a></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">frames</span></code> property is a tuple of the figure’s frame objects</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../plotly.graph_objects.Figure.html#plotly.graph_objects.Figure.layout" title="plotly.graph_objects.Figure.layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layout</span></code></a></p></td>
+<td><p>The <code class="docutils literal notranslate"><span class="pre">layout</span></code> property of the figure</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

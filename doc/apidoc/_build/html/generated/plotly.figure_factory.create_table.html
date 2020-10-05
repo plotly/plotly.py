@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.figure_factory.create_table &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotly.figure_factory.create_ternary_contour" href="plotly.figure_factory.create_ternary_contour.html" />
+    <link rel="prev" title="plotly.figure_factory.create_streamline" href="plotly.figure_factory.create_streamline.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>.create_table</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="plotly.figure_factory.create_streamline.html" title="Previous Chapter: plotly.figure_factory.create_streamline"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.figure...</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.figure_factory.create_ternary_contour.html" title="Next Chapter: plotly.figure_factory.create_ternary_contour"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.figure... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-figure-factory-create-table">
+<h1><a class="reference internal" href="plotly.figure_factory.html#module-plotly.figure_factory" title="plotly.figure_factory"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code></a>.create_table<a class="headerlink" href="#plotly-figure-factory-create-table" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="plotly.figure_factory.create_table">
+<code class="sig-prename descclassname">plotly.figure_factory.</code><code class="sig-name descname">create_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_text</span></em>, <em class="sig-param"><span class="n">colorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">index</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">index_title</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">annotation_offset</span><span class="o">=</span><span class="default_value">0.45</span></em>, <em class="sig-param"><span class="n">height_constant</span><span class="o">=</span><span class="default_value">30</span></em>, <em class="sig-param"><span class="n">hoverinfo</span><span class="o">=</span><span class="default_value">'none'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.figure_factory.create_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that creates data tables.</p>
+<p>See also the plotly.graph_objects trace
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.Table</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>| list</strong><strong>[</strong><strong>list</strong><strong>]</strong><strong>) </strong><strong>text</strong> (<em>(</em><em>pandas.Dataframe</em>) – data for table.</p></li>
+<li><p><strong>colorscale</strong> (<em>(</em><em>str|list</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>]</em><em>)</em>) – Colorscale for table where the
+color at value 0 is the header color, .5 is the first table color
+and 1 is the second table color. (Set .5 and 1 to avoid the striped
+table effect). Default=[[0, ‘#66b2ff’], [.5, ‘#d9d9d9’],
+[1, ‘#ffffff’]]</p></li>
+<li><p><strong>font_colors</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>)</em>) – Color for fonts in table. Can be a single
+color, three colors, or a color for each row in the table.
+Default=[‘#000000’] (black text for the entire table)</p></li>
+<li><p><strong>height_constant</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>)</em>) – Constant multiplied by # of rows to
+create table height. Default=30.</p></li>
+<li><p><strong>index</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>)</em>) – Create (header-colored) index column index from
+Pandas dataframe or list[0] for each list in text. Default=False.</p></li>
+<li><p><strong>index_title</strong> (<em>(</em><em>string</em><em>)</em>) – Title for index column. Default=’’.</p></li>
+<li><p><strong>kwargs</strong> – kwargs passed through plotly.graph_objects.Heatmap.
+These kwargs describe other attributes about the annotated Heatmap
+trace such as the colorscale. For more information on valid kwargs
+call help(plotly.graph_objects.Heatmap)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Example 1: Simple Plotly Table</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plotly.figure_factory</span> <span class="kn">import</span> <span class="n">create_table</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Population&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">282200000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;Canada&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">27790000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">309000000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;Canada&#39;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">34000000</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">create_table</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example 2: Table with Custom Coloring</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plotly.figure_factory</span> <span class="kn">import</span> <span class="n">create_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">text</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Country&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Population&#39;</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">282200000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;Canada&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">27790000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;US&#39;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">309000000</span><span class="p">],</span>
+<span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;Canada&#39;</span><span class="p">,</span> <span class="mi">2010</span><span class="p">,</span> <span class="mi">34000000</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">create_table</span><span class="p">(</span><span class="n">text</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">colorscale</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;#000000&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                 <span class="p">[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;#80beff&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;#cce5ff&#39;</span><span class="p">]],</span>
+<span class="gp">... </span>                     <span class="n">font_colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#ffffff&#39;</span><span class="p">,</span> <span class="s1">&#39;#000000&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="s1">&#39;#000000&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Example 3: Simple Plotly Table with Pandas</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plotly.figure_factory</span> <span class="kn">import</span> <span class="n">create_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;http://www.stat.ubc.ca/~jenny/notOcto/STAT545A/examples/gapminder/data/gapminderDataFiveYear.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;      &#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df_p</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">25</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_simple</span> <span class="o">=</span> <span class="n">create_table</span><span class="p">(</span><span class="n">df_p</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table_simple</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="clearer"></div></div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

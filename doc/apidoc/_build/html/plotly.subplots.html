@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.subplots: helper function for laying out multi-plot figures &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="plotly.subplots.make_subplots" href="generated/plotly.subplots.make_subplots.html" />
+    <link rel="prev" title="plotly.graph_objects.Contourcarpet" href="generated/plotly.graph_objects.Contourcarpet.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html"><span><img src="_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="generated/plotly.graph_objects.Contourcarpet.html" title="Previous Chapter: plotly.graph_objects.Contourcarpet"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.graph_...</span>
+    </a>
+  </li>
+  <li>
+    <a href="generated/plotly.subplots.make_subplots.html" title="Next Chapter: plotly.subplots.make_subplots"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.subplo... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-subplots-helper-function-for-laying-out-multi-plot-figures">
+<span id="subplots"></span><h1><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures<a class="headerlink" href="#plotly-subplots-helper-function-for-laying-out-multi-plot-figures" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#plotly.subplots.make_subplots" title="plotly.subplots.make_subplots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_subplots</span></code></a>([rows, cols, shared_xaxes, …])</p></td>
+<td><p>Return an instance of plotly.graph_objects.Figure with predefined subplots configured in ‘layout’.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="plotly.subplots.make_subplots">
+<code class="sig-prename descclassname">plotly.subplots.</code><code class="sig-name descname">make_subplots</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rows</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">cols</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">shared_xaxes</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">shared_yaxes</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">start_cell</span><span class="o">=</span><span class="default_value">'top-left'</span></em>, <em class="sig-param"><span class="n">print_grid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">horizontal_spacing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vertical_spacing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">subplot_titles</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">column_widths</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">row_heights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">specs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">insets</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">column_titles</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">row_titles</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x_title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y_title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.subplots.make_subplots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an instance of plotly.graph_objects.Figure with predefined subplots
+configured in ‘layout’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rows</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> (</em><em>default 1</em><em>)</em>) – Number of rows in the subplot grid. Must be greater than zero.</p></li>
+<li><p><strong>cols</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> (</em><em>default 1</em><em>)</em>) – Number of columns in the subplot grid. Must be greater than zero.</p></li>
+<li><p><strong>shared_xaxes</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> (</em><em>default False</em><em>)</em>) – <p>Assign shared (linked) x-axes for 2D cartesian subplots</p>
+<blockquote>
+<div><ul>
+<li><p>True or ‘columns’: Share axes among subplots in the same column</p></li>
+<li><p>’rows’: Share axes among subplots in the same row</p></li>
+<li><p>’all’: Share axes across all subplots in the grid.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>shared_yaxes</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> (</em><em>default False</em><em>)</em>) – <p>Assign shared (linked) y-axes for 2D cartesian subplots</p>
+<blockquote>
+<div><ul>
+<li><p>’columns’: Share axes among subplots in the same column</p></li>
+<li><p>True or ‘rows’: Share axes among subplots in the same row</p></li>
+<li><p>’all’: Share axes across all subplots in the grid.</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>start_cell</strong> (<em>'bottom-left'</em><em> or </em><em>'top-left'</em><em> (</em><em>default 'top-left'</em><em>)</em>) – <p>Choose the starting cell in the subplot grid used to set the
+domains_grid of the subplots.</p>
+<blockquote>
+<div><ul>
+<li><dl class="simple">
+<dt>’top-left’: Subplots are numbered with (1, 1) in the top</dt><dd><p>left corner</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>’bottom-left’: Subplots are numbererd with (1, 1) in the bottom</dt><dd><p>left corner</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>print_grid</strong> (<em>boolean</em><em> (</em><em>default True</em><em>)</em><em>:</em>) – If True, prints a string representation of the plot grid.  Grid may
+also be printed using the <code class="docutils literal notranslate"><span class="pre">Figure.print_grid()</span></code> method on the
+resulting figure.</p></li>
+<li><p><strong>horizontal_spacing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> (</em><em>default 0.2 / cols</em><em>)</em>) – <p>Space between subplot columns in normalized plot coordinates. Must be
+a float between 0 and 1.</p>
+<p>Applies to all columns (use ‘specs’ subplot-dependents spacing)</p>
+</p></li>
+<li><p><strong>vertical_spacing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> (</em><em>default 0.3 / rows</em><em>)</em>) – <p>Space between subplot rows in normalized plot coordinates. Must be
+a float between 0 and 1.</p>
+<p>Applies to all rows (use ‘specs’ subplot-dependents spacing)</p>
+</p></li>
+<li><p><strong>subplot_titles</strong> (<em>list of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – <p>Title of each subplot as a list in row-major ordering.</p>
+<p>Empty strings (“”) can be included in the list if no subplot title
+is desired in that space so that the titles are properly indexed.</p>
+</p></li>
+<li><p><strong>specs</strong> (<em>list of lists of dict</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – <p>Per subplot specifications of subplot type, row/column spanning, and
+spacing.</p>
+<p>ex1: specs=[[{}, {}], [{‘colspan’: 2}, None]]</p>
+<p>ex2: specs=[[{‘rowspan’: 2}, {}], [None, {}]]</p>
+<ul>
+<li><p>Indices of the outer list correspond to subplot grid rows
+starting from the top, if start_cell=’top-left’,
+or bottom, if start_cell=’bottom-left’.
+The number of rows in ‘specs’ must be equal to ‘rows’.</p></li>
+<li><p>Indices of the inner lists correspond to subplot grid columns
+starting from the left. The number of columns in ‘specs’
+must be equal to ‘cols’.</p></li>
+<li><p>Each item in the ‘specs’ list corresponds to one subplot
+in a subplot grid. (N.B. The subplot grid has exactly ‘rows’
+times ‘cols’ cells.)</p></li>
+<li><p>Use None for a blank a subplot cell (or to move past a col/row span).</p></li>
+<li><p>Note that specs[0][0] has the specs of the ‘start_cell’ subplot.</p></li>
+<li><dl>
+<dt>Each item in ‘specs’ is a dictionary.</dt><dd><p>The available keys are:
+* type (string, default ‘xy’): Subplot type. One of</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>’xy’: 2D Cartesian subplot type for scatter, bar, etc.</p></li>
+<li><p>’scene’: 3D Cartesian subplot for scatter3d, cone, etc.</p></li>
+<li><p>’polar’: Polar subplot for scatterpolar, barpolar, etc.</p></li>
+<li><p>’ternary’: Ternary subplot for scatterternary</p></li>
+<li><p>’mapbox’: Mapbox subplot for scattermapbox</p></li>
+<li><dl class="simple">
+<dt>’domain’: Subplot type for traces that are individually</dt><dd><p>positioned. pie, parcoords, parcats, etc.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>trace type: A trace type which will be used to determine</dt><dd><p>the appropriate subplot type for that trace</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>secondary_y (bool, default False): If True, create a secondary</dt><dd><p>y-axis positioned on the right side of the subplot. Only valid
+if type=’xy’.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>colspan (int, default 1): number of subplot columns</dt><dd><p>for this subplot to span.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>rowspan (int, default 1): number of subplot rows</dt><dd><p>for this subplot to span.</p>
+</dd>
+</dl>
+</li>
+<li><p>l (float, default 0.0): padding left of cell</p></li>
+<li><p>r (float, default 0.0): padding right of cell</p></li>
+<li><p>t (float, default 0.0): padding right of cell</p></li>
+<li><p>b (float, default 0.0): padding bottom of cell</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Note: Use ‘horizontal_spacing’ and ‘vertical_spacing’ to adjust
+the spacing in between the subplots.</p></li>
+</ul>
+</p></li>
+<li><p><strong>insets</strong> (<em>list of dict</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em><em>:</em>) – <p>Inset specifications.  Insets are subplots that overlay grid subplots</p>
+<ul>
+<li><dl class="simple">
+<dt>Each item in ‘insets’ is a dictionary.</dt><dd><p>The available keys are:</p>
+<ul>
+<li><dl class="simple">
+<dt>cell (tuple, default=(1,1)): (row, col) index of the</dt><dd><p>subplot cell to overlay inset axes onto.</p>
+</dd>
+</dl>
+</li>
+<li><p>type (string, default ‘xy’): Subplot type</p></li>
+<li><dl class="simple">
+<dt>l (float, default=0.0): padding left of inset</dt><dd><p>in fraction of cell width</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>w (float or ‘to_end’, default=’to_end’) inset width</dt><dd><p>in fraction of cell width (‘to_end’: to cell right edge)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>b (float, default=0.0): padding bottom of inset</dt><dd><p>in fraction of cell height</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>h (float or ‘to_end’, default=’to_end’) inset height</dt><dd><p>in fraction of cell height (‘to_end’: to cell top edge)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>column_widths</strong> (<em>list of numbers</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – <p>list of length <code class="docutils literal notranslate"><span class="pre">cols</span></code> of the relative widths of each column of suplots.
+Values are normalized internally and used to distribute overall width
+of the figure (excluding padding) among the columns.</p>
+<p>For backward compatibility, may also be specified using the
+<code class="docutils literal notranslate"><span class="pre">column_width</span></code> keyword argument.</p>
+</p></li>
+<li><p><strong>row_heights</strong> (<em>list of numbers</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – <p>list of length <code class="docutils literal notranslate"><span class="pre">rows</span></code> of the relative heights of each row of subplots.
+If start_cell=’top-left’ then row heights are applied top to bottom.
+Otherwise, if start_cell=’bottom-left’ then row heights are applied
+bottom to top.</p>
+<p>For backward compatibility, may also be specified using the
+<code class="docutils literal notranslate"><span class="pre">row_width</span></code> kwarg. If specified as <code class="docutils literal notranslate"><span class="pre">row_width</span></code>, then the width values
+are applied from bottom to top regardless of the value of start_cell.
+This matches the legacy behavior of the <code class="docutils literal notranslate"><span class="pre">row_width</span></code> argument.</p>
+</p></li>
+<li><p><strong>column_titles</strong> (<em>list of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – list of length <code class="docutils literal notranslate"><span class="pre">cols</span></code> of titles to place above the top subplot in
+each column.</p></li>
+<li><p><strong>row_titles</strong> (<em>list of str</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – list of length <code class="docutils literal notranslate"><span class="pre">rows</span></code> of titles to place on the right side of each
+row of subplots. If start_cell=’top-left’ then row titles are
+applied top to bottom. Otherwise, if start_cell=’bottom-left’ then
+row titles are applied bottom to top.</p></li>
+<li><p><strong>x_title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – Title to place below the bottom row of subplots,
+centered horizontally</p></li>
+<li><p><strong>y_title</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)"><em>None</em></a><em> (</em><em>default None</em><em>)</em>) – Title to place to the left of the left column of subplots,
+centered vertically</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Example 1:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Stack two subplots vertically, and add a scatter trace to each</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">plotly.subplots</span> <span class="kn">import</span> <span class="n">make_subplots</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the format of your plot grid:
+[ (1,1) xaxis1,yaxis1 ]
+[ (2,1) xaxis2,yaxis2 ]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+<p>or see Figure.append_trace</p>
+<p>Example 2:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Stack a scatter plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the format of your plot grid:
+[ (1,1) xaxis1,yaxis1 ]
+[ (2,1) xaxis2,yaxis2 ]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+<p>Example 3:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># irregular subplot layout (more examples below under &#39;specs&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">specs</span><span class="o">=</span><span class="p">[[{},</span> <span class="p">{}],</span>
+<span class="gp">... </span>                    <span class="p">[{</span><span class="s1">&#39;colspan&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="kc">None</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>This is the format of your plot grid:
+[ (1,1) xaxis1,yaxis1 ]  [ (1,2) xaxis2,yaxis2 ]
+[ (2,1) xaxis3,yaxis3           -              ]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+<p>Example 4:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># insets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">insets</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;cell&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;l&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}])</span>
+</pre></div>
+</div>
+<p>This is the format of your plot grid:
+[ (1,1) xaxis1,yaxis1 ]</p>
+<p>With insets:
+[ xaxis2,yaxis2 ] over [ (1,1) xaxis1,yaxis1 ]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">xaxis</span><span class="o">=</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="n">yaxis</span><span class="o">=</span><span class="s1">&#39;y2&#39;</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+<p>Example 5:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># include subplot titles</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">subplot_titles</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;Plot 1&#39;</span><span class="p">,</span><span class="s1">&#39;Plot 2&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This is the format of your plot grid:
+[ (1,1) x1,y1 ]
+[ (2,1) x2,y2 ]</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+<p>Example 6:</p>
+<p>Subplot with mixed subplot types</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">specs</span><span class="o">=</span><span class="p">[[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;xy&#39;</span><span class="p">},</span>    <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;polar&#39;</span><span class="p">}],</span>
+<span class="gp">... </span>                           <span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;scene&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ternary&#39;</span><span class="p">}]])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">add_traces</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>     <span class="n">go</span><span class="o">.</span><span class="n">Scatterpolar</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">theta</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">]),</span>
+<span class="gp">... </span>     <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+<span class="gp">... </span>     <span class="n">go</span><span class="o">.</span><span class="n">Scatterternary</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+<span class="gp">... </span>                       <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+<span class="gp">... </span>                       <span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])],</span>
+<span class="gp">... </span>    <span class="n">rows</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> 
+<span class="go">Figure(...)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

@@ -481,6 +481,56 @@
                     "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
+                },
                 "stackgroup": {
                     "valType": "string",
                     "role": "info",
@@ -1811,6 +1861,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -2791,6 +2849,56 @@
                     "anim": true,
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
+                },
                 "text": {
                     "valType": "string",
                     "role": "info",
@@ -3601,6 +3709,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -4571,6 +4687,56 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Sets the y coordinate step for multi-box traces set using q1/median/q3."
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
                 },
                 "name": {
                     "valType": "string",
@@ -5908,6 +6074,74 @@
                         "ytype": "scaled"
                     }
                 },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer.",
+                    "impliedEdits": {
+                        "xtype": "scaled"
+                    }
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer.",
+                    "impliedEdits": {
+                        "ytype": "scaled"
+                    }
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01.",
+                    "impliedEdits": {
+                        "xtype": "scaled"
+                    }
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01.",
+                    "impliedEdits": {
+                        "ytype": "scaled"
+                    }
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis.",
+                    "impliedEdits": {
+                        "xtype": "scaled"
+                    }
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis.",
+                    "impliedEdits": {
+                        "ytype": "scaled"
+                    }
+                },
                 "text": {
                     "valType": "data_array",
                     "editType": "calc",
@@ -6454,6 +6688,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -7705,6 +7947,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -9229,6 +9479,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -10529,6 +10787,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -11075,6 +11341,68 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Sets the y coordinate step. See `y0` for more info.",
+                    "impliedEdits": {
+                        "ytype": "scaled"
+                    }
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer.",
+                    "impliedEdits": {
+                        "xtype": "scaled"
+                    }
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer.",
+                    "impliedEdits": {
+                        "ytype": "scaled"
+                    }
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis.",
+                    "impliedEdits": {
+                        "xtype": "scaled"
+                    }
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis.",
                     "impliedEdits": {
                         "ytype": "scaled"
                     }
@@ -11790,6 +12118,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -13551,6 +13887,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -15488,6 +15832,56 @@
                     "editType": "calc",
                     "description": "Sets the y coordinate step. See `y0` for more info."
                 },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
+                },
                 "hovertext": {
                     "valType": "string",
                     "role": "info",
@@ -16330,6 +16724,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -16945,6 +17347,56 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Sets the y coordinate step. See `y0` for more info."
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
                 },
                 "hovertext": {
                     "valType": "string",
@@ -17739,6 +18191,12 @@
                     "editType": "none",
                     "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
                 },
+                "source": {
+                    "valType": "string",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Specifies the data URI of the image to be visualized. The URI consists of \"data:image/[<media subtype>][;base64],<data>\""
+                },
                 "z": {
                     "valType": "data_array",
                     "role": "data",
@@ -17750,13 +18208,13 @@
                     "values": [
                         "rgb",
                         "rgba",
+                        "rgba256",
                         "hsl",
                         "hsla"
                     ],
-                    "dflt": "rgb",
                     "role": "info",
                     "editType": "calc",
-                    "description": "Color model used to map the numerical color components described in `z` into colors."
+                    "description": "Color model used to map the numerical color components described in `z` into colors. If `source` is specified, this attribute will be set to `rgba256` otherwise it defaults to `rgb`."
                 },
                 "zmin": {
                     "valType": "info_array",
@@ -17780,7 +18238,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Array defining the lower bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the `hsla` colormodel, it is [0, 0, 0, 0]."
+                    "description": "Array defining the lower bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [0, 0, 0]. For the `rgba` colormodel, it is [0, 0, 0, 0]. For the `rgba256` colormodel, it is [0, 0, 0, 0]. For the `hsl` colormodel, it is [0, 0, 0]. For the `hsla` colormodel, it is [0, 0, 0, 0]."
                 },
                 "zmax": {
                     "valType": "info_array",
@@ -17804,7 +18262,7 @@
                     ],
                     "role": "info",
                     "editType": "calc",
-                    "description": "Array defining the higher bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [255, 255, 255]. For the `rgba` colormodel, it is [255, 255, 255, 1]. For the `hsl` colormodel, it is [360, 100, 100]. For the `hsla` colormodel, it is [360, 100, 100, 1]."
+                    "description": "Array defining the higher bound for each color component. Note that the default value will depend on the colormodel. For the `rgb` colormodel, it is [255, 255, 255]. For the `rgba` colormodel, it is [255, 255, 255, 1]. For the `rgba256` colormodel, it is [255, 255, 255, 255]. For the `hsl` colormodel, it is [360, 100, 100]. For the `hsla` colormodel, it is [360, 100, 100, 1]."
                 },
                 "x0": {
                     "valType": "any",
@@ -19565,6 +20023,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -19928,6 +20394,13 @@
                         "description": "Sets the source reference on Chart Studio Cloud for  color .",
                         "editType": "none"
                     }
+                },
+                "sort": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not the sectors are reordered from largest to smallest."
                 },
                 "domain": {
                     "x": {
@@ -20918,6 +21391,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -21362,6 +21843,13 @@
                     "role": "style",
                     "editType": "plot",
                     "description": "Sets the positions of the `text` elements."
+                },
+                "sort": {
+                    "valType": "boolean",
+                    "role": "style",
+                    "dflt": true,
+                    "editType": "calc",
+                    "description": "Determines whether or not the sectors are reordered from largest to smallest."
                 },
                 "domain": {
                     "x": {
@@ -23121,6 +23609,14 @@
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -23694,6 +24190,14 @@
                             "role": "style",
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -25284,6 +25788,14 @@
                         "role": "style",
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -26963,6 +27475,14 @@
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -28261,6 +28781,14 @@
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -29391,6 +29919,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -30606,6 +31142,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -31712,6 +32256,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -33371,6 +33923,14 @@
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -34772,6 +35332,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -35246,6 +35814,56 @@
                     "role": "info",
                     "editType": "calc",
                     "description": "Sets the y coordinate step. See `y0` for more info."
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "yperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the y axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "yperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the y0 axis. When `y0period` is round number of weeks, the `y0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
+                },
+                "yperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the y axis."
                 },
                 "text": {
                     "valType": "string",
@@ -35840,6 +36458,14 @@
                             "role": "style",
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -37902,6 +38528,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -40053,6 +40687,14 @@
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -41136,6 +41778,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -42082,6 +42732,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -43086,6 +43744,14 @@
                             "role": "style",
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -44294,6 +44960,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -45229,6 +45903,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",
@@ -47096,6 +47778,14 @@
                             "editType": "plot",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "plot",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -48376,6 +49066,14 @@
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number"
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -48943,6 +49641,14 @@
                         "role": "style",
                         "editType": "calc",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "calc",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number"
                     },
                     "separatethousands": {
                         "valType": "boolean",
@@ -50832,6 +51538,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -52111,6 +52825,14 @@
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "showexponent": {
                         "valType": "enumerated",
                         "values": [
@@ -52441,6 +53163,31 @@
                     "role": "info",
                     "editType": "none",
                     "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
                 },
                 "x": {
                     "valType": "data_array",
@@ -52966,6 +53713,31 @@
                     "role": "info",
                     "editType": "none",
                     "description": "Controls persistence of some user-driven changes to the trace: `constraintrange` in `parcoords` traces, as well as some `editable: true` modifications such as `name` and `colorbar.title`. Defaults to `layout.uirevision`. Note that other user-driven trace attribute changes are controlled by `layout` attributes: `trace.visible` is controlled by `layout.legend.uirevision`, `selectedpoints` is controlled by `layout.selectionrevision`, and `colorbar.(x|y)` (accessible with `config: {editable: true}`) is controlled by `layout.editrevision`. Trace changes are tracked by `uid`, which only falls back on trace index if no `uid` is provided. So if your app can add/remove traces before the end of the `data` array, such that the same trace has a different index, you can still preserve user-driven changes if you give each trace a `uid` that stays with it as it moves."
+                },
+                "xperiod": {
+                    "valType": "any",
+                    "dflt": 0,
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the period positioning in milliseconds or *M<n>* on the x axis. Special values in the form of *M<n>* could be used to declare the number of months. In this case `n` must be a positive integer."
+                },
+                "xperiod0": {
+                    "valType": "any",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the base for period positioning in milliseconds or date string on the x0 axis. When `x0period` is round number of weeks, the `x0period0` by default would be on a Sunday i.e. 2000-01-02, otherwise it would be at 2000-01-01."
+                },
+                "xperiodalignment": {
+                    "valType": "enumerated",
+                    "values": [
+                        "start",
+                        "middle",
+                        "end"
+                    ],
+                    "dflt": "middle",
+                    "role": "style",
+                    "editType": "calc",
+                    "description": "Only relevant when the axis `type` is *date*. Sets the alignment of data points on the x axis."
                 },
                 "x": {
                     "valType": "data_array",
@@ -54855,6 +55627,14 @@
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                         },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                        },
                         "showexponent": {
                             "valType": "enumerated",
                             "values": [
@@ -56123,6 +56903,14 @@
                             "role": "style",
                             "editType": "calc",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "calc",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -58040,6 +58828,14 @@
                             "role": "style",
                             "editType": "colorbars",
                             "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                        },
+                        "minexponent": {
+                            "valType": "number",
+                            "dflt": 3,
+                            "min": 0,
+                            "role": "style",
+                            "editType": "colorbars",
+                            "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                         },
                         "showexponent": {
                             "valType": "enumerated",
@@ -60702,6 +61498,14 @@
                     "editType": "ticks",
                     "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                 },
+                "minexponent": {
+                    "valType": "number",
+                    "dflt": 3,
+                    "min": 0,
+                    "role": "style",
+                    "editType": "ticks",
+                    "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                },
                 "separatethousands": {
                     "valType": "boolean",
                     "dflt": false,
@@ -61890,6 +62694,14 @@
                     "editType": "ticks",
                     "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                 },
+                "minexponent": {
+                    "valType": "number",
+                    "dflt": 3,
+                    "min": 0,
+                    "role": "style",
+                    "editType": "ticks",
+                    "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                },
                 "separatethousands": {
                     "valType": "boolean",
                     "dflt": false,
@@ -62530,6 +63342,14 @@
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -62949,6 +63769,14 @@
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -63367,6 +64195,14 @@
                         "role": "style",
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "separatethousands": {
                         "valType": "boolean",
@@ -64211,6 +65047,14 @@
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -64822,6 +65666,14 @@
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -65432,6 +66284,14 @@
                         "role": "style",
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "separatethousands": {
                         "valType": "boolean",
@@ -67439,6 +68299,14 @@
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
                     },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
+                    },
                     "separatethousands": {
                         "valType": "boolean",
                         "dflt": false,
@@ -67901,6 +68769,14 @@
                         "role": "style",
                         "editType": "plot",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "plot",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "separatethousands": {
                         "valType": "boolean",
@@ -68704,13 +69580,13 @@
                             "valType": "any",
                             "role": "info",
                             "editType": "calc+arraydraw",
-                            "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from right to left (left to right). If `axref` is an axis, this is an absolute value on that axis, like `x`, NOT a relative value."
+                            "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative) component corresponds to an arrow pointing from right to left (left to right). If `axref` is not `pixel` and is exactly the same as `xref`, this is an absolute value on that axis, like `x`, specified in the same coordinates as `xref`."
                         },
                         "ay": {
                             "valType": "any",
                             "role": "info",
                             "editType": "calc+arraydraw",
-                            "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is an axis, this is an absolute value on that axis, like `y`, NOT a relative value."
+                            "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is not `pixel` and is exactly the same as `yref`, this is an absolute value on that axis, like `y`, specified in the same coordinates as `yref`."
                         },
                         "axref": {
                             "valType": "enumerated",
@@ -68721,7 +69597,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ax` is a relative offset in pixels  from `x`. If set to an x axis id (e.g. *x* or *x2*), `ax` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed."
+                            "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ax axis id (e.g. *ax* or *ax2*), the `ax` position refers to a ax coordinate. If set to *paper*, the `ax` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a ax axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *ax2 domain* refers to the domain of the second ax  axis and a ax position of 0.5 refers to the point between the left and the right of the domain of the second ax axis. In order for absolute positioning of the arrow to work, *axref* must be exactly the same as *xref*, otherwise *axref* will revert to *pixel* (explained next). For relative positioning, *axref* can be set to *pixel*, in which case the *ax* value is specified in pixels relative to *x*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point."
                         },
                         "ayref": {
                             "valType": "enumerated",
@@ -68732,7 +69608,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ay` is a relative offset in pixels  from `y`. If set to a y axis id (e.g. *y* or *y2*), `ay` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed."
+                            "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ay axis id (e.g. *ay* or *ay2*), the `ay` position refers to a ay coordinate. If set to *paper*, the `ay` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a ay axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *ay2 domain* refers to the domain of the second ay  axis and a ay position of 0.5 refers to the point between the bottom and the top of the domain of the second ay axis. In order for absolute positioning of the arrow to work, *ayref* must be exactly the same as *yref*, otherwise *ayref* will revert to *pixel* (explained next). For relative positioning, *ayref* can be set to *pixel*, in which case the *ay* value is specified in pixels relative to *y*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point."
                         },
                         "xref": {
                             "valType": "enumerated",
@@ -68742,7 +69618,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's x coordinate axis. If set to a  x  axis id (e.g. * x * or * x 2*), the ` x ` position refers to a  x  coordinate. If set to *paper*, the ` x ` position refers to the distance from the  left  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  left  ( right ). If set to a  x  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  left  of the domain of that axis: e.g., * x 2 domain* refers to the domain of the second  x  axis and a  x  position of 0.5 refers to the point between the  left  and the  right  of the domain of the second  x  axis."
+                            "description": "Sets the annotation's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis."
                         },
                         "x": {
                             "valType": "any",
@@ -68778,7 +69654,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's y coordinate axis. If set to a  y  axis id (e.g. * y * or * y 2*), the ` y ` position refers to a  y  coordinate. If set to *paper*, the ` y ` position refers to the distance from the  bottom  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  bottom  ( top ). If set to a  y  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  bottom  of the domain of that axis: e.g., * y 2 domain* refers to the domain of the second  y  axis and a  y  position of 0.5 refers to the point between the  bottom  and the  top  of the domain of the second  y  axis."
+                            "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "y": {
                             "valType": "any",
@@ -68949,7 +69825,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the shape's x coordinate axis. If set to a  x  axis id (e.g. * x * or * x 2*), the ` x ` position refers to a  x  coordinate. If set to *paper*, the ` x ` position refers to the distance from the  left  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  left  ( right ). If set to a  x  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  left  of the domain of that axis: e.g., * x 2 domain* refers to the domain of the second  x  axis and a  x  position of 0.5 refers to the point between the  left  and the  right  of the domain of the second  x  axis. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
+                            "description": "Sets the shape's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
                         },
                         "xsizemode": {
                             "valType": "enumerated",
@@ -68988,7 +69864,7 @@
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's y coordinate axis. If set to a  y  axis id (e.g. * y * or * y 2*), the ` y ` position refers to a  y  coordinate. If set to *paper*, the ` y ` position refers to the distance from the  bottom  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  bottom  ( top ). If set to a  y  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  bottom  of the domain of that axis: e.g., * y 2 domain* refers to the domain of the second  y  axis and a  y  position of 0.5 refers to the point between the  bottom  and the  top  of the domain of the second  y  axis."
+                            "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "ysizemode": {
                             "valType": "enumerated",
@@ -69144,14 +70020,14 @@
                             "role": "info",
                             "dflt": 0,
                             "editType": "arraydraw",
-                            "description": "Sets the image container size horizontally. The image will be sized based on the `position` value. When `xref` is set to `paper`, units are sized relative to the plot width."
+                            "description": "Sets the image container size horizontally. The image will be sized based on the `position` value. When `xref` is set to `paper`, units are sized relative to the plot width. When `xref` ends with ` domain`, units are sized relative to the axis width."
                         },
                         "sizey": {
                             "valType": "number",
                             "role": "info",
                             "dflt": 0,
                             "editType": "arraydraw",
-                            "description": "Sets the image container size vertically. The image will be sized based on the `position` value. When `yref` is set to `paper`, units are sized relative to the plot height."
+                            "description": "Sets the image container size vertically. The image will be sized based on the `position` value. When `yref` is set to `paper`, units are sized relative to the plot height. When `yref` ends with ` domain`, units are sized relative to the axis height."
                         },
                         "sizing": {
                             "valType": "enumerated",
@@ -69221,7 +70097,7 @@
                             "dflt": "paper",
                             "role": "info",
                             "editType": "arraydraw",
-                            "description": "Sets the images's x coordinate axis. If set to a  x  axis id (e.g. * x * or * x 2*), the ` x ` position refers to a  x  coordinate. If set to *paper*, the ` x ` position refers to the distance from the  left  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  left  ( right ). If set to a  x  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  left  of the domain of that axis: e.g., * x 2 domain* refers to the domain of the second  x  axis and a  x  position of 0.5 refers to the point between the  left  and the  right  of the domain of the second  x  axis."
+                            "description": "Sets the images's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis."
                         },
                         "yref": {
                             "valType": "enumerated",
@@ -69232,7 +70108,7 @@
                             "dflt": "paper",
                             "role": "info",
                             "editType": "arraydraw",
-                            "description": "Sets the images's y coordinate axis. If set to a  y  axis id (e.g. * y * or * y 2*), the ` y ` position refers to a  y  coordinate. If set to *paper*, the ` y ` position refers to the distance from the  bottom  of the plotting area in normalized coordinates where *0* (*1*) corresponds to the  bottom  ( top ). If set to a  y  axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the  bottom  of the domain of that axis: e.g., * y 2 domain* refers to the domain of the second  y  axis and a  y  position of 0.5 refers to the point between the  bottom  and the  top  of the domain of the second  y  axis."
+                            "description": "Sets the images's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "editType": "arraydraw",
                         "name": {
@@ -70501,6 +71377,14 @@
                         "role": "style",
                         "editType": "colorbars",
                         "description": "Determines a formatting rule for the tick exponents. For example, consider the number 1,000,000,000. If *none*, it appears as 1,000,000,000. If *e*, 1e+9. If *E*, 1E+9. If *power*, 1x10^9 (with 9 in a super script). If *SI*, 1G. If *B*, 1B."
+                    },
+                    "minexponent": {
+                        "valType": "number",
+                        "dflt": 3,
+                        "min": 0,
+                        "role": "style",
+                        "editType": "colorbars",
+                        "description": "Hide SI prefix for 10^n if |n| is below this number. This only has an effect when `tickformat` is *SI* or *B*."
                     },
                     "showexponent": {
                         "valType": "enumerated",

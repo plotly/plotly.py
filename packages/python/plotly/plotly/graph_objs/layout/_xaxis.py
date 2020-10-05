@@ -32,6 +32,7 @@ class XAxis(_BaseLayoutHierarchyType):
         "linecolor",
         "linewidth",
         "matches",
+        "minexponent",
         "mirror",
         "nticks",
         "overlaying",
@@ -809,6 +810,27 @@ class XAxis(_BaseLayoutHierarchyType):
     @matches.setter
     def matches(self, val):
         self["matches"] = val
+
+    # minexponent
+    # -----------
+    @property
+    def minexponent(self):
+        """
+        Hide SI prefix for 10^n if |n| is below this number. This only
+        has an effect when `tickformat` is "SI" or "B".
+
+        The 'minexponent' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minexponent"]
+
+    @minexponent.setter
+    def minexponent(self, val):
+        self["minexponent"] = val
 
     # mirror
     # ------
@@ -2562,6 +2584,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number.
+            This only has an effect when `tickformat` is "SI" or
+            "B".
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -2847,6 +2873,7 @@ class XAxis(_BaseLayoutHierarchyType):
         linecolor=None,
         linewidth=None,
         matches=None,
+        minexponent=None,
         mirror=None,
         nticks=None,
         overlaying=None,
@@ -3047,6 +3074,10 @@ class XAxis(_BaseLayoutHierarchyType):
             both a `scaleanchor` and a `matches` constraint is
             currently forbidden. Moreover, note that matching axes
             must have the same `type`.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number.
+            This only has an effect when `tickformat` is "SI" or
+            "B".
         mirror
             Determines if the axis lines or/and ticks are mirrored
             to the opposite side of the plotting area. If True, the
@@ -3428,6 +3459,10 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = matches if matches is not None else _v
         if _v is not None:
             self["matches"] = _v
+        _v = arg.pop("minexponent", None)
+        _v = minexponent if minexponent is not None else _v
+        if _v is not None:
+            self["minexponent"] = _v
         _v = arg.pop("mirror", None)
         _v = mirror if mirror is not None else _v
         if _v is not None:

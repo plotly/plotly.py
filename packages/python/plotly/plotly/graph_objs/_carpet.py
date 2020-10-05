@@ -172,6 +172,9 @@ class Carpet(_BaseTraceType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                minexponent
+                    Hide SI prefix for 10^n if |n| is below this
+                    number
                 minorgridcolor
                     Sets the color of the grid lines.
                 minorgridcount
@@ -469,6 +472,9 @@ class Carpet(_BaseTraceType):
                     Sets the axis line color.
                 linewidth
                     Sets the width (in px) of the axis line.
+                minexponent
+                    Hide SI prefix for 10^n if |n| is below this
+                    number
                 minorgridcolor
                     Sets the color of the grid lines.
                 minorgridcount

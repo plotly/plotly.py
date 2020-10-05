@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.graph_objects.Layout &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotly.graph_objects.Scatter" href="plotly.graph_objects.Scatter.html" />
+    <link rel="prev" title="plotly.graph_objects.Figure.update_layout" href="generated/plotly.graph_objects.Figure.update_layout.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>.Layout</a></li>
+<li><a class="reference internal" href="#id3"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>.layout</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="generated/plotly.graph_objects.Figure.update_layout.html" title="Previous Chapter: plotly.graph_objects.Figure.update_layout"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.graph_...</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.graph_objects.Scatter.html" title="Next Chapter: plotly.graph_objects.Scatter"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.graph_... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-graph-objs-layout">
+<h1><a class="reference internal" href="plotly.graph_objects.html#module-plotly.graph_objects" title="plotly.graph_objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code></a>.Layout<a class="headerlink" href="#plotly-graph-objs-layout" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="plotly.graph_objects.Layout">
+<em class="property">class </em><code class="sig-prename descclassname">plotly.graph_objects.</code><code class="sig-name descname">Layout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">activeshape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">angularaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annotations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annotationdefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autosize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bargap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bargroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">barmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">barnorm</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calendar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">clickmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">coloraxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datarevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">direction</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dragmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">editrevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendfunnelareacolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendpiecolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendsunburstcolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendtreemapcolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelareacolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">geo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">grid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hiddenlabels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hiddenlabelssrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidesources</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverdistance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverlabel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovermode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">images</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">imagedefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mapbox</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modebar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">newshape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">orientation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">paper_bgcolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">piecolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plot_bgcolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">polar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">radialaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scene</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">selectdirection</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">selectionrevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">separators</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shapes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shapedefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showlegend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sliders</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sliderdefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spikedistance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sunburstcolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ternary</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">titlefont</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">transition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">treemapcolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uirevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uniformtext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updatemenus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updatemenudefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violingap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violingroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violinmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Layout" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="plotly.graph_objects.Layout.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">activeshape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">angularaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annotations</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">annotationdefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autosize</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bargap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bargroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">barmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">barnorm</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">boxmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">calendar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">clickmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">coloraxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datarevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">direction</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dragmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">editrevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendfunnelareacolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendpiecolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendsunburstcolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">extendtreemapcolors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelareacolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">funnelmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">geo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">grid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">height</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hiddenlabels</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hiddenlabelssrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hidesources</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverdistance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverlabel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovermode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">images</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">imagedefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mapbox</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">margin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">modebar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">newshape</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">orientation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">paper_bgcolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">piecolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">plot_bgcolor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">polar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">radialaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scene</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">selectdirection</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">selectionrevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">separators</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shapes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">shapedefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showlegend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sliders</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sliderdefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spikedistance</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sunburstcolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ternary</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">title</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">titlefont</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">transition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">treemapcolorway</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uirevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uniformtext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updatemenus</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">updatemenudefaults</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violingap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violingroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">violinmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallgroupgap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">waterfallmode</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">width</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yaxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Layout.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new Layout object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> – dict of properties compatible with this constructor or
+an instance of <a class="reference internal" href="#plotly.graph_objects.Layout" title="plotly.graph_objects.Layout"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.Layout</span></code></a></p></li>
+<li><p><strong>activeshape</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Activeshape</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>angularaxis</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.AngularAxis</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>annotations</strong> – A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Annotation</span></code>
+instances or dicts with compatible properties</p></li>
+<li><p><strong>annotationdefaults</strong> – When used in a template (as
+layout.template.layout.annotationdefaults), sets the
+default property values to use for elements of
+layout.annotations</p></li>
+<li><p><strong>autosize</strong> – Determines whether or not a layout width or height that
+has been left undefined by the user is initialized on
+each relayout. Note that, regardless of this attribute,
+an undefined layout width or height is always
+initialized on the first call to plot.</p></li>
+<li><p><strong>bargap</strong> – Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p></li>
+<li><p><strong>bargroupgap</strong> – Sets the gap (in plot fraction) between bars of the
+same location coordinate.</p></li>
+<li><p><strong>barmode</strong> – Determines how bars at the same location coordinate are
+displayed on the graph. With “stack”, the bars are
+stacked on top of one another With “relative”, the bars
+are stacked on top of one another, with negative values
+below the axis, positive values above With “group”, the
+bars are plotted next to one another centered around
+the shared location. With “overlay”, the bars are
+plotted over one another, you might need to an
+“opacity” to see multiple bars.</p></li>
+<li><p><strong>barnorm</strong> – Sets the normalization for bar traces on the graph.
+With “fraction”, the value of each bar is divided by
+the sum of all values at that location coordinate.
+“percent” is the same but multiplied by 100 to show
+percentages.</p></li>
+<li><p><strong>boxgap</strong> – Sets the gap (in plot fraction) between boxes of
+adjacent location coordinates. Has no effect on traces
+that have “width” set.</p></li>
+<li><p><strong>boxgroupgap</strong> – Sets the gap (in plot fraction) between boxes of the
+same location coordinate. Has no effect on traces that
+have “width” set.</p></li>
+<li><p><strong>boxmode</strong> – Determines how boxes at the same location coordinate
+are displayed on the graph. If “group”, the boxes are
+plotted next to one another centered around the shared
+location. If “overlay”, the boxes are plotted over one
+another, you might need to set “opacity” to see them
+multiple boxes. Has no effect on traces that have
+“width” set.</p></li>
+<li><p><strong>calendar</strong> – Sets the default calendar system to use for
+interpreting and displaying dates throughout the plot.</p></li>
+<li><p><strong>clickmode</strong> – Determines the mode of single click interactions.
+“event” is the default value and emits the
+<code class="docutils literal notranslate"><span class="pre">plotly_click</span></code> event. In addition this mode emits the
+<code class="docutils literal notranslate"><span class="pre">plotly_selected</span></code> event in drag modes “lasso” and
+“select”, but with no event data attached (kept for
+compatibility reasons). The “select” flag enables
+selecting single data points via click. This mode also
+supports persistent selections, meaning that pressing
+Shift while clicking, adds to / subtracts from an
+existing selection. “select” with <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>: “x” can
+be confusing, consider explicitly setting <code class="docutils literal notranslate"><span class="pre">hovermode</span></code>:
+“closest” when using this feature. Selection events are
+sent accordingly as long as “event” flag is set as
+well. When the “event” flag is missing, <code class="docutils literal notranslate"><span class="pre">plotly_click</span></code>
+and <code class="docutils literal notranslate"><span class="pre">plotly_selected</span></code> events are not fired.</p></li>
+<li><p><strong>coloraxis</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Coloraxis</span></code> instance
+or dict with compatible properties</p></li>
+<li><p><strong>colorscale</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Colorscale</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>colorway</strong> – Sets the default trace colors.</p></li>
+<li><p><strong>datarevision</strong> – If provided, a changed value tells <code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> that
+one or more data arrays has changed. This way you can
+modify arrays in-place rather than making a complete
+new copy for an incremental change. If NOT provided,
+<code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> assumes that data arrays are being
+treated as immutable, thus any data array with a
+different identity from its predecessor contains new
+data.</p></li>
+<li><p><strong>direction</strong> – Legacy polar charts are deprecated! Please switch to
+“polar” subplots. Sets the direction corresponding to
+positive angles in legacy polar charts.</p></li>
+<li><p><strong>dragmode</strong> – Determines the mode of drag interactions. “select” and
+“lasso” apply only to scatter traces with markers or
+text. “orbit” and “turntable” apply only to 3D scenes.</p></li>
+<li><p><strong>editrevision</strong> – Controls persistence of user-driven changes in
+<code class="docutils literal notranslate"><span class="pre">editable:</span> <span class="pre">true</span></code> configuration, other than trace names
+and axis titles. Defaults to <code class="docutils literal notranslate"><span class="pre">layout.uirevision</span></code>.</p></li>
+<li><p><strong>extendfunnelareacolors</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the funnelarea slice colors (whether given
+by <code class="docutils literal notranslate"><span class="pre">funnelareacolorway</span></code> or inherited from <code class="docutils literal notranslate"><span class="pre">colorway</span></code>)
+will be extended to three times its original length by
+first repeating every color 20% lighter then each color
+20% darker. This is intended to reduce the likelihood
+of reusing the same color when you have many slices,
+but you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided in
+the trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never extended.</p></li>
+<li><p><strong>extendpiecolors</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the pie slice colors (whether given by
+<code class="docutils literal notranslate"><span class="pre">piecolorway</span></code> or inherited from <code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will be
+extended to three times its original length by first
+repeating every color 20% lighter then each color 20%
+darker. This is intended to reduce the likelihood of
+reusing the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided in the
+trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never extended.</p></li>
+<li><p><strong>extendsunburstcolors</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the sunburst slice colors (whether given by
+<code class="docutils literal notranslate"><span class="pre">sunburstcolorway</span></code> or inherited from <code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will
+be extended to three times its original length by first
+repeating every color 20% lighter then each color 20%
+darker. This is intended to reduce the likelihood of
+reusing the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided in the
+trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never extended.</p></li>
+<li><p><strong>extendtreemapcolors</strong> – If <code class="docutils literal notranslate"><span class="pre">true</span></code>, the treemap slice colors (whether given by
+<code class="docutils literal notranslate"><span class="pre">treemapcolorway</span></code> or inherited from <code class="docutils literal notranslate"><span class="pre">colorway</span></code>) will be
+extended to three times its original length by first
+repeating every color 20% lighter then each color 20%
+darker. This is intended to reduce the likelihood of
+reusing the same color when you have many slices, but
+you can set <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable. Colors provided in the
+trace, using <code class="docutils literal notranslate"><span class="pre">marker.colors</span></code>, are never extended.</p></li>
+<li><p><strong>font</strong> – Sets the global font. Note that fonts used in traces
+and other layout components inherit from the global
+font.</p></li>
+<li><p><strong>funnelareacolorway</strong> – Sets the default funnelarea slice colors. Defaults to
+the main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors. If you
+specify a new list here it can still be extended with
+lighter and darker colors, see
+<code class="docutils literal notranslate"><span class="pre">extendfunnelareacolors</span></code>.</p></li>
+<li><p><strong>funnelgap</strong> – Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p></li>
+<li><p><strong>funnelgroupgap</strong> – Sets the gap (in plot fraction) between bars of the
+same location coordinate.</p></li>
+<li><p><strong>funnelmode</strong> – Determines how bars at the same location coordinate are
+displayed on the graph. With “stack”, the bars are
+stacked on top of one another With “group”, the bars
+are plotted next to one another centered around the
+shared location. With “overlay”, the bars are plotted
+over one another, you might need to an “opacity” to see
+multiple bars.</p></li>
+<li><p><strong>geo</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Geo</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>grid</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Grid</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>height</strong> – Sets the plot’s height (in px).</p></li>
+<li><p><strong>hiddenlabels</strong> – hiddenlabels is the funnelarea &amp; pie chart analog of
+visible:’legendonly’ but it can contain many labels,
+and can simultaneously hide slices from several
+pies/funnelarea charts</p></li>
+<li><p><strong>hiddenlabelssrc</strong> – Sets the source reference on Chart Studio Cloud for
+hiddenlabels .</p></li>
+<li><p><strong>hidesources</strong> – Determines whether or not a text link citing the data
+source is placed at the bottom-right cored of the
+figure. Has only an effect only on graphs that have
+been generated via forked graphs from the Chart Studio
+Cloud (at <a class="reference external" href="https://chart-studio.plotly.com">https://chart-studio.plotly.com</a> or on-
+premise).</p></li>
+<li><p><strong>hoverdistance</strong> – Sets the default distance (in pixels) to look for data
+to add hover labels (-1 means no cutoff, 0 means no
+looking for data). This is only a real distance for
+hovering on point-like objects, like scatter points.
+For area-like objects (bars, scatter fills, etc)
+hovering is on inside the area and off outside, but
+these objects will not supersede hover on point-like
+objects in case of conflict.</p></li>
+<li><p><strong>hoverlabel</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Hoverlabel</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>hovermode</strong> – Determines the mode of hover interactions. If
+“closest”, a single hoverlabel will appear for the
+“closest” point within the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code>. If “x” (or
+“y”), multiple hoverlabels will appear for multiple
+points at the “closest” x- (or y-) coordinate within
+the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code>, with the caveat that no more than
+one hoverlabel will appear per trace. If <em>x unified</em>
+(or <em>y unified</em>), a single hoverlabel will appear
+multiple points at the closest x- (or y-) coordinate
+within the <code class="docutils literal notranslate"><span class="pre">hoverdistance</span></code> with the caveat that no more
+than one hoverlabel will appear per trace. In this
+mode, spikelines are enabled by default perpendicular
+to the specified axis. If false, hover interactions are
+disabled. If <code class="docutils literal notranslate"><span class="pre">clickmode</span></code> includes the “select” flag,
+<code class="docutils literal notranslate"><span class="pre">hovermode</span></code> defaults to “closest”. If <code class="docutils literal notranslate"><span class="pre">clickmode</span></code> lacks
+the “select” flag, it defaults to “x” or “y” (depending
+on the trace’s <code class="docutils literal notranslate"><span class="pre">orientation</span></code> value) for plots based on
+cartesian coordinates. For anything else the default
+value is “closest”.</p></li>
+<li><p><strong>images</strong> – A tuple of <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Image</span></code>
+instances or dicts with compatible properties</p></li>
+<li><p><strong>imagedefaults</strong> – When used in a template (as
+layout.template.layout.imagedefaults), sets the default
+property values to use for elements of layout.images</p></li>
+<li><p><strong>legend</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Legend</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>mapbox</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Mapbox</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>margin</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Margin</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>meta</strong> – Assigns extra meta information that can be used in
+various <code class="docutils literal notranslate"><span class="pre">text</span></code> attributes. Attributes such as the
+graph, axis and colorbar <code class="docutils literal notranslate"><span class="pre">title.text</span></code>, annotation
+<code class="docutils literal notranslate"><span class="pre">text</span></code> <code class="docutils literal notranslate"><span class="pre">trace.name</span></code> in legend items, <code class="docutils literal notranslate"><span class="pre">rangeselector</span></code>,
+<code class="docutils literal notranslate"><span class="pre">updatemenus</span></code> and <code class="docutils literal notranslate"><span class="pre">sliders</span></code> <code class="docutils literal notranslate"><span class="pre">label</span></code> text all support
+<code class="docutils literal notranslate"><span class="pre">meta</span></code>. One can access <code class="docutils literal notranslate"><span class="pre">meta</span></code> fields using template
+strings: <code class="docutils literal notranslate"><span class="pre">%{meta[i]}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index of the
+<code class="docutils literal notranslate"><span class="pre">meta</span></code> item in question. <code class="docutils literal notranslate"><span class="pre">meta</span></code> can also be an object
+for example <code class="docutils literal notranslate"><span class="pre">{key:</span> <span class="pre">value}</span></code> which can be accessed
+%{meta[key]}.</p></li>
+<li><p><strong>metasrc</strong> – Sets the source reference on Chart Studio Cloud for
+meta .</p></li>
+<li><p><strong>modebar</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Modebar</span></code> instance
+or dict with compatible properties</p></li>
+<li><p><strong>newshape</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Newshape</span></code> instance
+or dict with compatible properties</p></li>
+<li><p><strong>orientation</strong> – Legacy polar charts are deprecated! Please switch to
+“polar” subplots. Rotates the entire polar by the given
+angle in legacy polar charts.</p></li>
+<li><p><strong>paper_bgcolor</strong> – Sets the background color of the paper where the graph
+is drawn.</p></li>
+<li><p><strong>piecolorway</strong> – Sets the default pie slice colors. Defaults to the main
+<code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors. If you specify a new
+list here it can still be extended with lighter and
+darker colors, see <code class="docutils literal notranslate"><span class="pre">extendpiecolors</span></code>.</p></li>
+<li><p><strong>plot_bgcolor</strong> – Sets the background color of the plotting area in-
+between x and y axes.</p></li>
+<li><p><strong>polar</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Polar</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>radialaxis</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.RadialAxis</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>scene</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Scene</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>selectdirection</strong> – When <code class="docutils literal notranslate"><span class="pre">dragmode</span></code> is set to “select”, this limits the
+selection of the drag to horizontal, vertical or
+diagonal. “h” only allows horizontal selection, “v”
+only vertical, “d” only diagonal and “any” sets no
+limit.</p></li>
+<li><p><strong>selectionrevision</strong> – Controls persistence of user-driven changes in selected
+points from all traces.</p></li>
+<li><p><strong>separators</strong> – Sets the decimal and thousand separators. For example,
+<a href="#id1"><span class="problematic" id="id2">*</span></a>. * puts a ‘.’ before decimals and a space between
+thousands. In English locales, dflt is “.,” but other
+locales may alter this default.</p></li>
+<li><p><strong>shapes</strong> – A tuple of <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Shape</span></code>
+instances or dicts with compatible properties</p></li>
+<li><p><strong>shapedefaults</strong> – When used in a template (as
+layout.template.layout.shapedefaults), sets the default
+property values to use for elements of layout.shapes</p></li>
+<li><p><strong>showlegend</strong> – Determines whether or not a legend is drawn. Default is
+<code class="docutils literal notranslate"><span class="pre">true</span></code> if there is a trace to show and any of these: a)
+Two or more traces would by default be shown in the
+legend. b) One pie trace is shown in the legend. c) One
+trace is explicitly given with <code class="docutils literal notranslate"><span class="pre">showlegend:</span> <span class="pre">true</span></code>.</p></li>
+<li><p><strong>sliders</strong> – A tuple of <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Slider</span></code>
+instances or dicts with compatible properties</p></li>
+<li><p><strong>sliderdefaults</strong> – When used in a template (as
+layout.template.layout.sliderdefaults), sets the
+default property values to use for elements of
+layout.sliders</p></li>
+<li><p><strong>spikedistance</strong> – Sets the default distance (in pixels) to look for data
+to draw spikelines to (-1 means no cutoff, 0 means no
+looking for data). As with hoverdistance, distance does
+not apply to area-like objects. In addition, some
+objects can be hovered on but will not generate
+spikelines, such as scatter fills.</p></li>
+<li><p><strong>sunburstcolorway</strong> – Sets the default sunburst slice colors. Defaults to the
+main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors. If you specify a
+new list here it can still be extended with lighter and
+darker colors, see <code class="docutils literal notranslate"><span class="pre">extendsunburstcolors</span></code>.</p></li>
+<li><p><strong>template</strong> – Default attributes to be applied to the plot. This
+should be a dict with format: <code class="docutils literal notranslate"><span class="pre">{'layout':</span>
+<span class="pre">layoutTemplate,</span> <span class="pre">'data':</span> <span class="pre">{trace_type:</span> <span class="pre">[traceTemplate,</span>
+<span class="pre">...],</span> <span class="pre">...}}</span></code> where <code class="docutils literal notranslate"><span class="pre">layoutTemplate</span></code> is a dict matching
+the structure of <code class="docutils literal notranslate"><span class="pre">figure.layout</span></code> and <code class="docutils literal notranslate"><span class="pre">traceTemplate</span></code> is
+a dict matching the structure of the trace with type
+<code class="docutils literal notranslate"><span class="pre">trace_type</span></code> (e.g. ‘scatter’). Alternatively, this may
+be specified as an instance of
+plotly.graph_objects.layout.Template.  Trace templates are
+applied cyclically to traces of each type. Container
+arrays (eg <code class="docutils literal notranslate"><span class="pre">annotations</span></code>) have special handling: An
+object ending in <code class="docutils literal notranslate"><span class="pre">defaults</span></code> (eg <code class="docutils literal notranslate"><span class="pre">annotationdefaults</span></code>)
+is applied to each array item. But if an item has a
+<code class="docutils literal notranslate"><span class="pre">templateitemname</span></code> key we look in the template array
+for an item with matching <code class="docutils literal notranslate"><span class="pre">name</span></code> and apply that
+instead. If no matching <code class="docutils literal notranslate"><span class="pre">name</span></code> is found we mark the
+item invisible. Any named template item not referenced
+is appended to the end of the array, so this can be
+used to add a watermark annotation or a logo image, for
+example. To omit one of these items on the plot, make
+an item with matching <code class="docutils literal notranslate"><span class="pre">templateitemname</span></code> and <code class="docutils literal notranslate"><span class="pre">visible:</span>
+<span class="pre">false</span></code>.</p></li>
+<li><p><strong>ternary</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Ternary</span></code> instance
+or dict with compatible properties</p></li>
+<li><p><strong>title</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Title</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>titlefont</strong> – Deprecated: Please use layout.title.font instead. Sets
+the title font. Note that the title’s font used to be
+customized by the now deprecated <code class="docutils literal notranslate"><span class="pre">titlefont</span></code> attribute.</p></li>
+<li><p><strong>transition</strong> – Sets transition options used during Plotly.react
+updates.</p></li>
+<li><p><strong>treemapcolorway</strong> – Sets the default treemap slice colors. Defaults to the
+main <code class="docutils literal notranslate"><span class="pre">colorway</span></code> used for trace colors. If you specify a
+new list here it can still be extended with lighter and
+darker colors, see <code class="docutils literal notranslate"><span class="pre">extendtreemapcolors</span></code>.</p></li>
+<li><p><strong>uirevision</strong> – Used to allow user interactions with the plot to
+persist after <code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> calls that are unaware of
+these interactions. If <code class="docutils literal notranslate"><span class="pre">uirevision</span></code> is omitted, or if
+it is given and it changed from the previous
+<code class="docutils literal notranslate"><span class="pre">Plotly.react</span></code> call, the exact new figure is used. If
+<code class="docutils literal notranslate"><span class="pre">uirevision</span></code> is truthy and did NOT change, any
+attribute that has been affected by user interactions
+and did not receive a different value in the new figure
+will keep the interaction value. <code class="docutils literal notranslate"><span class="pre">layout.uirevision</span></code>
+attribute serves as the default for <code class="docutils literal notranslate"><span class="pre">uirevision</span></code>
+attributes in various sub-containers. For finer control
+you can set these sub-attributes directly. For example,
+if your app separately controls the data on the x and y
+axes you might set <code class="docutils literal notranslate"><span class="pre">xaxis.uirevision=*time*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">yaxis.uirevision=*cost*</span></code>. Then if only the y data is
+changed, you can update <code class="docutils literal notranslate"><span class="pre">yaxis.uirevision=*quantity*</span></code>
+and the y axis range will reset but the x axis range
+will retain any user-driven zoom.</p></li>
+<li><p><strong>uniformtext</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Uniformtext</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>updatemenus</strong> – A tuple of
+<code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.Updatemenu</span></code>
+instances or dicts with compatible properties</p></li>
+<li><p><strong>updatemenudefaults</strong> – When used in a template (as
+layout.template.layout.updatemenudefaults), sets the
+default property values to use for elements of
+layout.updatemenus</p></li>
+<li><p><strong>violingap</strong> – Sets the gap (in plot fraction) between violins of
+adjacent location coordinates. Has no effect on traces
+that have “width” set.</p></li>
+<li><p><strong>violingroupgap</strong> – Sets the gap (in plot fraction) between violins of the
+same location coordinate. Has no effect on traces that
+have “width” set.</p></li>
+<li><p><strong>violinmode</strong> – Determines how violins at the same location coordinate
+are displayed on the graph. If “group”, the violins are
+plotted next to one another centered around the shared
+location. If “overlay”, the violins are plotted over
+one another, you might need to set “opacity” to see
+them multiple violins. Has no effect on traces that
+have “width” set.</p></li>
+<li><p><strong>waterfallgap</strong> – Sets the gap (in plot fraction) between bars of
+adjacent location coordinates.</p></li>
+<li><p><strong>waterfallgroupgap</strong> – Sets the gap (in plot fraction) between bars of the
+same location coordinate.</p></li>
+<li><p><strong>waterfallmode</strong> – Determines how bars at the same location coordinate are
+displayed on the graph. With “group”, the bars are
+plotted next to one another centered around the shared
+location. With “overlay”, the bars are plotted over one
+another, you might need to an “opacity” to see multiple
+bars.</p></li>
+<li><p><strong>width</strong> – Sets the plot’s width (in px).</p></li>
+<li><p><strong>xaxis</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.XAxis</span></code> instance or
+dict with compatible properties</p></li>
+<li><p><strong>yaxis</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.layout.YAxis</span></code> instance or
+dict with compatible properties</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#plotly.graph_objects.Layout" title="plotly.graph_objects.Layout">Layout</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id3">
+<h1><a class="reference internal" href="plotly.graph_objects.html#module-plotly.graph_objects" title="plotly.graph_objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code></a>.layout<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="plotly.graph_objects.layout.html#module-plotly.graph_objects.layout" title="plotly.graph_objects.layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotly.graph_objects.layout</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-plotly.graph_objects.layout"></span><div class="clearer"></div></div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

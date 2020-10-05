@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.graph_objects.Isosurface &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="plotly.graph_objects.Scattergeo" href="plotly.graph_objects.Scattergeo.html" />
+    <link rel="prev" title="plotly.graph_objects.Volume" href="plotly.graph_objects.Volume.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>.Isosurface</a></li>
+<li><a class="reference internal" href="#id1"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>.isosurface</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="plotly.graph_objects.Volume.html" title="Previous Chapter: plotly.graph_objects.Volume"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; plotly.graph_...</span>
+    </a>
+  </li>
+  <li>
+    <a href="plotly.graph_objects.Scattergeo.html" title="Next Chapter: plotly.graph_objects.Scattergeo"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">plotly.graph_... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="plotly-graph-objs-isosurface">
+<h1><a class="reference internal" href="plotly.graph_objects.html#module-plotly.graph_objects" title="plotly.graph_objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code></a>.Isosurface<a class="headerlink" href="#plotly-graph-objs-isosurface" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="plotly.graph_objects.Isosurface">
+<em class="property">class </em><code class="sig-prename descclassname">plotly.graph_objects.</code><code class="sig-name descname">Isosurface</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autocolorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">caps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cauto</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">coloraxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorbar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">contour</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">customdata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">customdatasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">flatshading</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverinfo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverinfosrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverlabel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertemplate</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertemplatesrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertextsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ids</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idssrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isomax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isomin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legendgroup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lighting</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lightposition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">opacity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reversescale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scene</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showlegend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">slices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spaceframe</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stream</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">surface</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">text</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">textsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uirevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">valuesrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">visible</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ysrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">z</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Isosurface" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="plotly.graph_objects.Isosurface.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autocolorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">caps</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cauto</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cmin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">coloraxis</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorbar</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colorscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">contour</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">customdata</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">customdatasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">flatshading</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverinfo</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverinfosrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hoverlabel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertemplate</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertemplatesrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hovertextsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ids</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">idssrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isomax</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">isomin</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">legendgroup</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lighting</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lightposition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">meta</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metasrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">opacity</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reversescale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scene</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showlegend</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">showscale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">slices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">spaceframe</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stream</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">surface</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">text</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">textsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">uirevision</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">value</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">valuesrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">visible</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ysrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">z</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zsrc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.graph_objects.Isosurface.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a new Isosurface object</p>
+<p>Draws isosurfaces between iso-min and iso-max values with
+coordinates given by four 1-dimensional arrays containing the
+<code class="docutils literal notranslate"><span class="pre">value</span></code>, <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">z</span></code> of every vertex of a uniform or non-
+uniform 3-D grid. Horizontal or vertical slices, caps as well
+as spaceframe between iso-min and iso-max values could also be
+drawn using this trace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arg</strong> – dict of properties compatible with this constructor or
+an instance of <a class="reference internal" href="#plotly.graph_objects.Isosurface" title="plotly.graph_objects.Isosurface"><code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.Isosurface</span></code></a></p></li>
+<li><p><strong>autocolorscale</strong> – Determines whether the colorscale is a default palette
+(<code class="docutils literal notranslate"><span class="pre">autocolorscale:</span> <span class="pre">true</span></code>) or the palette determined by
+<code class="docutils literal notranslate"><span class="pre">colorscale</span></code>. In case <code class="docutils literal notranslate"><span class="pre">colorscale</span></code> is unspecified or
+<code class="docutils literal notranslate"><span class="pre">autocolorscale</span></code> is true, the default  palette will be
+chosen according to whether numbers in the <code class="docutils literal notranslate"><span class="pre">color</span></code>
+array are all positive, all negative or mixed.</p></li>
+<li><p><strong>caps</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Caps</span></code> instance
+or dict with compatible properties</p></li>
+<li><p><strong>cauto</strong> – Determines whether or not the color domain is computed
+with respect to the input data (here <code class="docutils literal notranslate"><span class="pre">value</span></code>) or the
+bounds set in <code class="docutils literal notranslate"><span class="pre">cmin</span></code> and <code class="docutils literal notranslate"><span class="pre">cmax</span></code>  Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>
+when <code class="docutils literal notranslate"><span class="pre">cmin</span></code> and <code class="docutils literal notranslate"><span class="pre">cmax</span></code> are set by the user.</p></li>
+<li><p><strong>cmax</strong> – Sets the upper bound of the color domain. Value should
+have the same units as <code class="docutils literal notranslate"><span class="pre">value</span></code> and if set, <code class="docutils literal notranslate"><span class="pre">cmin</span></code> must
+be set as well.</p></li>
+<li><p><strong>cmid</strong> – Sets the mid-point of the color domain by scaling
+<code class="docutils literal notranslate"><span class="pre">cmin</span></code> and/or <code class="docutils literal notranslate"><span class="pre">cmax</span></code> to be equidistant to this point.
+Value should have the same units as <code class="docutils literal notranslate"><span class="pre">value</span></code>. Has no
+effect when <code class="docutils literal notranslate"><span class="pre">cauto</span></code> is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><strong>cmin</strong> – Sets the lower bound of the color domain. Value should
+have the same units as <code class="docutils literal notranslate"><span class="pre">value</span></code> and if set, <code class="docutils literal notranslate"><span class="pre">cmax</span></code> must
+be set as well.</p></li>
+<li><p><strong>coloraxis</strong> – Sets a reference to a shared color axis. References to
+these shared color axes are “coloraxis”, “coloraxis2”,
+“coloraxis3”, etc. Settings for these shared color axes
+are set in the layout, under <code class="docutils literal notranslate"><span class="pre">layout.coloraxis</span></code>,
+<code class="docutils literal notranslate"><span class="pre">layout.coloraxis2</span></code>, etc. Note that multiple color
+scales can be linked to the same color axis.</p></li>
+<li><p><strong>colorbar</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.ColorBar</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>colorscale</strong> – Sets the colorscale. The colorscale must be an array
+containing arrays mapping a normalized value to an rgb,
+rgba, hex, hsl, hsv, or named color string. At minimum,
+a mapping for the lowest (0) and highest (1) values are
+required. For example, <code class="docutils literal notranslate"><span class="pre">[[0,</span> <span class="pre">'rgb(0,0,255)'],</span> <span class="pre">[1,</span>
+<span class="pre">'rgb(255,0,0)']]</span></code>. To control the bounds of the
+colorscale in color space, use`cmin` and <code class="docutils literal notranslate"><span class="pre">cmax</span></code>.
+Alternatively, <code class="docutils literal notranslate"><span class="pre">colorscale</span></code> may be a palette name
+string of the following list: Greys,YlGnBu,Greens,YlOrR
+d,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet,H
+ot,Blackbody,Earth,Electric,Viridis,Cividis.</p></li>
+<li><p><strong>contour</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Contour</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>customdata</strong> – Assigns extra data each datum. This may be useful when
+listening to hover, click and selection events. Note
+that, “scatter” traces also appends customdata items in
+the markers DOM elements</p></li>
+<li><p><strong>customdatasrc</strong> – Sets the source reference on Chart Studio Cloud for
+customdata .</p></li>
+<li><p><strong>flatshading</strong> – Determines whether or not normal smoothing is applied
+to the meshes, creating meshes with an angular, low-
+poly look via flat reflections.</p></li>
+<li><p><strong>hoverinfo</strong> – Determines which trace information appear on hover. If
+<code class="docutils literal notranslate"><span class="pre">none</span></code> or <code class="docutils literal notranslate"><span class="pre">skip</span></code> are set, no information is displayed
+upon hovering. But, if <code class="docutils literal notranslate"><span class="pre">none</span></code> is set, click and hover
+events are still fired.</p></li>
+<li><p><strong>hoverinfosrc</strong> – Sets the source reference on Chart Studio Cloud for
+hoverinfo .</p></li>
+<li><p><strong>hoverlabel</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Hoverlabel</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>hovertemplate</strong> – Template string used for rendering the information that
+appear on hover box. Note that this will override
+<code class="docutils literal notranslate"><span class="pre">hoverinfo</span></code>. Variables are inserted using %{variable},
+for example “y: %{y}”. Numbers are formatted using
+d3-format’s syntax %{variable:d3-format}, for example
+“Price: %{y:$.2f}”. https://github.com/d3/d3-3.x-api-
+reference/blob/master/Formatting.md#d3_format for
+details on the formatting syntax. Dates are formatted
+using d3-time-format’s syntax %{variable|d3-time-
+format}, for example “Day: %{2019-01-01|%A}”.
+https://github.com/d3/d3-time-format#locale_format for
+details on the date formatting syntax. The variables
+available in <code class="docutils literal notranslate"><span class="pre">hovertemplate</span></code> are the ones emitted as
+event data described at this link
+<a class="reference external" href="https://plotly.com/javascript/plotlyjs-events/#event">https://plotly.com/javascript/plotlyjs-events/#event</a>-
+data. Additionally, every attributes that can be
+specified per-point (the ones that are <code class="docutils literal notranslate"><span class="pre">arrayOk:</span> <span class="pre">true</span></code>)
+are available.  Anything contained in tag <code class="docutils literal notranslate"><span class="pre">&lt;extra&gt;</span></code> is
+displayed in the secondary box, for example
+“&lt;extra&gt;{fullData.name}&lt;/extra&gt;”. To hide the secondary
+box completely, use an empty tag <code class="docutils literal notranslate"><span class="pre">&lt;extra&gt;&lt;/extra&gt;</span></code>.</p></li>
+<li><p><strong>hovertemplatesrc</strong> – Sets the source reference on Chart Studio Cloud for
+hovertemplate .</p></li>
+<li><p><strong>hovertext</strong> – Same as <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p></li>
+<li><p><strong>hovertextsrc</strong> – Sets the source reference on Chart Studio Cloud for
+hovertext .</p></li>
+<li><p><strong>ids</strong> – Assigns id labels to each datum. These ids for object
+constancy of data points during animation. Should be an
+array of strings, not numbers or any other type.</p></li>
+<li><p><strong>idssrc</strong> – Sets the source reference on Chart Studio Cloud for
+ids .</p></li>
+<li><p><strong>isomax</strong> – Sets the maximum boundary for iso-surface plot.</p></li>
+<li><p><strong>isomin</strong> – Sets the minimum boundary for iso-surface plot.</p></li>
+<li><p><strong>legendgroup</strong> – Sets the legend group for this trace. Traces part of
+the same legend group hide/show at the same time when
+toggling legend items.</p></li>
+<li><p><strong>lighting</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Lighting</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>lightposition</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Lightposition</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>meta</strong> – Assigns extra meta information associated with this
+trace that can be used in various text attributes.
+Attributes such as trace <code class="docutils literal notranslate"><span class="pre">name</span></code>, graph, axis and
+colorbar <code class="docutils literal notranslate"><span class="pre">title.text</span></code>, annotation <code class="docutils literal notranslate"><span class="pre">text</span></code>
+<code class="docutils literal notranslate"><span class="pre">rangeselector</span></code>, <code class="docutils literal notranslate"><span class="pre">updatemenues</span></code> and <code class="docutils literal notranslate"><span class="pre">sliders</span></code> <code class="docutils literal notranslate"><span class="pre">label</span></code>
+text all support <code class="docutils literal notranslate"><span class="pre">meta</span></code>. To access the trace <code class="docutils literal notranslate"><span class="pre">meta</span></code>
+values in an attribute in the same trace, simply use
+<code class="docutils literal notranslate"><span class="pre">%{meta[i]}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code> is the index or key of the
+<code class="docutils literal notranslate"><span class="pre">meta</span></code> item in question. To access trace <code class="docutils literal notranslate"><span class="pre">meta</span></code> in
+layout attributes, use <code class="docutils literal notranslate"><span class="pre">%{data[n[.meta[i]}</span></code> where <code class="docutils literal notranslate"><span class="pre">i</span></code>
+is the index or key of the <code class="docutils literal notranslate"><span class="pre">meta</span></code> and <code class="docutils literal notranslate"><span class="pre">n</span></code> is the trace
+index.</p></li>
+<li><p><strong>metasrc</strong> – Sets the source reference on Chart Studio Cloud for
+meta .</p></li>
+<li><p><strong>name</strong> – Sets the trace name. The trace name appear as the
+legend item and on hover.</p></li>
+<li><p><strong>opacity</strong> – Sets the opacity of the surface. Please note that in
+the case of using high <code class="docutils literal notranslate"><span class="pre">opacity</span></code> values for example a
+value greater than or equal to 0.5 on two surfaces (and
+0.25 with four surfaces), an overlay of multiple
+transparent surfaces may not perfectly be sorted in
+depth by the webgl API. This behavior may be improved
+in the near future and is subject to change.</p></li>
+<li><p><strong>reversescale</strong> – Reverses the color mapping if true. If true, <code class="docutils literal notranslate"><span class="pre">cmin</span></code>
+will correspond to the last color in the array and
+<code class="docutils literal notranslate"><span class="pre">cmax</span></code> will correspond to the first color.</p></li>
+<li><p><strong>scene</strong> – Sets a reference between this trace’s 3D coordinate
+system and a 3D scene. If “scene” (the default value),
+the (x,y,z) coordinates refer to <code class="docutils literal notranslate"><span class="pre">layout.scene</span></code>. If
+“scene2”, the (x,y,z) coordinates refer to
+<code class="docutils literal notranslate"><span class="pre">layout.scene2</span></code>, and so on.</p></li>
+<li><p><strong>showlegend</strong> – Determines whether or not an item corresponding to this
+trace is shown in the legend.</p></li>
+<li><p><strong>showscale</strong> – Determines whether or not a colorbar is displayed for
+this trace.</p></li>
+<li><p><strong>slices</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Slices</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>spaceframe</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Spaceframe</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>stream</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Stream</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>surface</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface.Surface</span></code>
+instance or dict with compatible properties</p></li>
+<li><p><strong>text</strong> – Sets the text elements associated with the vertices. If
+trace <code class="docutils literal notranslate"><span class="pre">hoverinfo</span></code> contains a “text” flag and
+“hovertext” is not set, these elements will be seen in
+the hover labels.</p></li>
+<li><p><strong>textsrc</strong> – Sets the source reference on Chart Studio Cloud for
+text .</p></li>
+<li><p><strong>uid</strong> – Assign an id to this trace, Use this to provide object
+constancy between traces during animations and
+transitions.</p></li>
+<li><p><strong>uirevision</strong> – Controls persistence of some user-driven changes to the
+trace: <code class="docutils literal notranslate"><span class="pre">constraintrange</span></code> in <code class="docutils literal notranslate"><span class="pre">parcoords</span></code> traces, as well
+as some <code class="docutils literal notranslate"><span class="pre">editable:</span> <span class="pre">true</span></code> modifications such as <code class="docutils literal notranslate"><span class="pre">name</span></code>
+and <code class="docutils literal notranslate"><span class="pre">colorbar.title</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">layout.uirevision</span></code>.
+Note that other user-driven trace attribute changes are
+controlled by <code class="docutils literal notranslate"><span class="pre">layout</span></code> attributes: <code class="docutils literal notranslate"><span class="pre">trace.visible</span></code> is
+controlled by <code class="docutils literal notranslate"><span class="pre">layout.legend.uirevision</span></code>,
+<code class="docutils literal notranslate"><span class="pre">selectedpoints</span></code> is controlled by
+<code class="docutils literal notranslate"><span class="pre">layout.selectionrevision</span></code>, and <code class="docutils literal notranslate"><span class="pre">colorbar.(x|y)</span></code>
+(accessible with <code class="docutils literal notranslate"><span class="pre">config:</span> <span class="pre">{editable:</span> <span class="pre">true}</span></code>) is
+controlled by <code class="docutils literal notranslate"><span class="pre">layout.editrevision</span></code>. Trace changes are
+tracked by <code class="docutils literal notranslate"><span class="pre">uid</span></code>, which only falls back on trace index
+if no <code class="docutils literal notranslate"><span class="pre">uid</span></code> is provided. So if your app can add/remove
+traces before the end of the <code class="docutils literal notranslate"><span class="pre">data</span></code> array, such that
+the same trace has a different index, you can still
+preserve user-driven changes if you give each trace a
+<code class="docutils literal notranslate"><span class="pre">uid</span></code> that stays with it as it moves.</p></li>
+<li><p><strong>value</strong> – Sets the 4th dimension (value) of the vertices.</p></li>
+<li><p><strong>valuesrc</strong> – Sets the source reference on Chart Studio Cloud for
+value .</p></li>
+<li><p><strong>visible</strong> – Determines whether or not this trace is visible. If
+“legendonly”, the trace is not drawn, but can appear as
+a legend item (provided that the legend itself is
+visible).</p></li>
+<li><p><strong>x</strong> – Sets the X coordinates of the vertices on X axis.</p></li>
+<li><p><strong>xsrc</strong> – Sets the source reference on Chart Studio Cloud for  x
+.</p></li>
+<li><p><strong>y</strong> – Sets the Y coordinates of the vertices on Y axis.</p></li>
+<li><p><strong>ysrc</strong> – Sets the source reference on Chart Studio Cloud for  y
+.</p></li>
+<li><p><strong>z</strong> – Sets the Z coordinates of the vertices on Z axis.</p></li>
+<li><p><strong>zsrc</strong> – Sets the source reference on Chart Studio Cloud for  z
+.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#plotly.graph_objects.Isosurface" title="plotly.graph_objects.Isosurface">Isosurface</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h1><a class="reference internal" href="plotly.graph_objects.html#module-plotly.graph_objects" title="plotly.graph_objects"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code></a>.isosurface<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="plotly.graph_objects.isosurface.html#module-plotly.graph_objects.isosurface" title="plotly.graph_objects.isosurface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotly.graph_objects.isosurface</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-plotly.graph_objects.isosurface"></span><div class="clearer"></div></div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>

@@ -37,6 +37,7 @@ class Treemap(_BaseTraceType):
         "parents",
         "parentssrc",
         "pathbar",
+        "sort",
         "stream",
         "text",
         "textfont",
@@ -942,6 +943,27 @@ class Treemap(_BaseTraceType):
     def pathbar(self, val):
         self["pathbar"] = val
 
+    # sort
+    # ----
+    @property
+    def sort(self):
+        """
+        Determines whether or not the sectors are reordered from
+        largest to smallest.
+
+        The 'sort' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
     # stream
     # ------
     @property
@@ -1495,6 +1517,9 @@ class Treemap(_BaseTraceType):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.treemap.Stream` instance
             or dict with compatible properties
@@ -1603,6 +1628,7 @@ class Treemap(_BaseTraceType):
         parents=None,
         parentssrc=None,
         pathbar=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -1770,6 +1796,9 @@ class Treemap(_BaseTraceType):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.treemap.Stream` instance
             or dict with compatible properties
@@ -1991,6 +2020,10 @@ an instance of :class:`plotly.graph_objs.Treemap`"""
         _v = pathbar if pathbar is not None else _v
         if _v is not None:
             self["pathbar"] = _v
+        _v = arg.pop("sort", None)
+        _v = sort if sort is not None else _v
+        if _v is not None:
+            self["sort"] = _v
         _v = arg.pop("stream", None)
         _v = stream if stream is not None else _v
         if _v is not None:

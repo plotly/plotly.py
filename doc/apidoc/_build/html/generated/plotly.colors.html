@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>plotly.colors package &#8212;  4.9.0 documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plotly-style.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/logo.png"></span>
+          </a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.express.html"><code class="docutils literal notranslate"><span class="pre">plotly.express</span></code>: high-level interface for data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.graph_objects.html"><code class="docutils literal notranslate"><span class="pre">plotly.graph_objects</span></code>: low-level interface to figures, traces and layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.subplots.html"><code class="docutils literal notranslate"><span class="pre">plotly.subplots</span></code>: helper function for laying out multi-plot figures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.figure_factory.html"><code class="docutils literal notranslate"><span class="pre">plotly.figure_factory</span></code>: helper methods for building specific complex charts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotly.io.html"><code class="docutils literal notranslate"><span class="pre">plotly.io</span></code>: low-level interface for displaying, reading and writing figures</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">plotly.colors package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.carto">plotly.colors.carto module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.cmocean">plotly.colors.cmocean module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.colorbrewer">plotly.colors.colorbrewer module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.cyclical">plotly.colors.cyclical module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.diverging">plotly.colors.diverging module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.qualitative">plotly.colors.qualitative module</a></li>
+<li><a class="reference internal" href="#module-plotly.colors.sequential">plotly.colors.sequential module</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="module-plotly.colors">
+<span id="plotly-colors-package"></span><h1>plotly.colors package<a class="headerlink" href="#module-plotly.colors" title="Permalink to this headline">¶</a></h1>
+<p>For a list of colors available in <code class="docutils literal notranslate"><span class="pre">plotly.colors</span></code>, please see</p>
+<ul class="simple">
+<li><p>the <a class="reference external" href="https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express">tutorial on discrete color sequences</a></p></li>
+<li><p>the <a class="reference external" href="https://plotly.com/python/builtin-colorscales/">list of built-in continuous color scales</a></p></li>
+<li><p>the <a class="reference external" href="https://plotly.com/python/colorscales/">tutorial on continuous colors</a></p></li>
+</ul>
+<p>Color scales and sequences are available within the following namespaces</p>
+<ul class="simple">
+<li><p>cyclical</p></li>
+<li><p>diverging</p></li>
+<li><p>qualitative</p></li>
+<li><p>sequential</p></li>
+</ul>
+<dl class="py function">
+<dt id="plotly.colors.color_parser">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">color_parser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em>, <em class="sig-param"><span class="n">function</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.color_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes color(s) and a function and applies the function on the color(s)</p>
+<p>In particular, this function identifies whether the given color object
+is an iterable or not and applies the given color-parsing function to
+the color or iterable of colors. If given an iterable, it will only be
+able to work with it if all items in the iterable are of the same type
+- rgb string, hex string or tuple</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.colorscale_to_colors">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">colorscale_to_colors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colorscale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.colorscale_to_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the colors from colorscale as a list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.colorscale_to_scale">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">colorscale_to_scale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colorscale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.colorscale_to_scale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the interpolation scale values from colorscale as a list</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.convert_colors_to_same_type">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">convert_colors_to_same_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'rgb'</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">return_default_colors</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">num_of_defualt_colors</span><span class="o">=</span><span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.convert_colors_to_same_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts color(s) to the specified color type</p>
+<p>Takes a single color or an iterable of colors, as well as a list of scale
+values, and outputs a 2-pair of the list of color(s) converted all to an
+rgb or tuple color type, aswell as the scale as the second element. If
+colors is a Plotly Scale name, then ‘scale’ will be forced to the scale
+from the respective colorscale and the colors in that colorscale will also
+be coverted to the selected colortype. If colors is None, then there is an
+option to return portion of the DEFAULT_PLOTLY_COLORS</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>colors</strong> (<em>(</em><em>str|tuple|list</em><em>)</em>) – either a plotly scale name, an rgb or hex
+color, a color tuple or a list/tuple of colors</p></li>
+<li><p><strong>scale</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>)</em>) – see docs for validate_scale_values()</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>:rtype (tuple) (colors_list, scale) if scale is None in the function call,</dt><dd><p>then scale will remain None in the returned tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.convert_colorscale_to_rgb">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">convert_colorscale_to_rgb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colorscale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.convert_colorscale_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the colors in a colorscale to rgb colors</p>
+<p>A colorscale is an array of arrays, each with a numeric value as the
+first item and a color as the second. This function specifically is
+converting a colorscale with tuple colors (each coordinate between 0
+and 1) into a colorscale with the colors transformed into rgb colors</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.convert_dict_colors_to_same_type">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">convert_dict_colors_to_same_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors_dict</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'rgb'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.convert_dict_colors_to_same_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a colors in a dictioanry of colors to the specified color type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>colors_dict</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em>)</em>) – a dictioanry whose values are single colors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.convert_to_RGB_255">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">convert_to_RGB_255</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.convert_to_RGB_255" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies each element of a triplet by 255</p>
+<p>Each coordinate of the color tuple is rounded to the nearest float and
+then is turned into an integer. If a number is of the form x.5, then
+if x is odd, the number rounds up to (x+1). Otherwise, it rounds down
+to just x. This is the way rounding works in Python 3 and in current
+statistical analysis to avoid rounding bias</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rgb_components</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>)</em>) – grabs the three R, G and B values to be
+returned as computed in the function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.find_intermediate_color">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">find_intermediate_color</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lowcolor</span></em>, <em class="sig-param"><span class="n">highcolor</span></em>, <em class="sig-param"><span class="n">intermed</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'tuple'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.find_intermediate_color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the color at a given distance between two colors</p>
+<p>This function takes two color tuples, where each element is between 0
+and 1, along with a value 0 &lt; intermed &lt; 1 and returns a color that is
+intermed-percent from lowcolor to highcolor. If colortype is set to ‘rgb’,
+the function will automatically convert the rgb type to a tuple, find the
+intermediate color and return it as an rgb color.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.hex_to_rgb">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">hex_to_rgb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.hex_to_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates rgb values from a hex color code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>(</em><em>string</em><em>)</em>) – Hex color string</p>
+</dd>
+<dt class="field-even">Rtype (tuple) (r_value, g_value, b_value)</dt>
+<dd class="field-even"><p>tuple of rgb values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.label_rgb">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">label_rgb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.label_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes tuple (a, b, c) and returns an rgb color ‘rgb(a, b, c)’</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.make_colorscale">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">make_colorscale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em>, <em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.make_colorscale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a colorscale from a list of colors and a scale</p>
+<p>Takes a list of colors and scales and constructs a colorscale based
+on the colors in sequential order. If ‘scale’ is left empty, a linear-
+interpolated colorscale will be generated. If ‘scale’ is a specificed
+list, it must be the same legnth as colors and must contain all floats
+For documentation regarding to the form of the output, see
+<a class="reference external" href="https://plot.ly/python/reference/#mesh3d-colorscale">https://plot.ly/python/reference/#mesh3d-colorscale</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>colors</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>)</em>) – a list of single colors</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.n_colors">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">n_colors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lowcolor</span></em>, <em class="sig-param"><span class="n">highcolor</span></em>, <em class="sig-param"><span class="n">n_colors</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'tuple'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.n_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits a low and high color into a list of n_colors colors in it</p>
+<p>Accepts two color tuples and returns a list of n_colors colors
+which form the intermediate colors between lowcolor and highcolor
+from linearly interpolating through RGB space. If colortype is ‘rgb’
+the function will return a list of colors in the same form.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.named_colorscales">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">named_colorscales</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.named_colorscales" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns lowercased names of built-in continuous colorscales.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.unconvert_from_RGB_255">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">unconvert_from_RGB_255</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.unconvert_from_RGB_255" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a tuple where each element gets divided by 255</p>
+<p>Takes a (list of) color tuple(s) where each element is between 0 and
+255. Returns the same tuples where each tuple element is normalized to
+a value between 0 and 1</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.unlabel_rgb">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">unlabel_rgb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.unlabel_rgb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes rgb color(s) ‘rgb(a, b, c)’ and returns tuple(s) (a, b, c)</p>
+<p>This function takes either an ‘rgb(a, b, c)’ color or a list of
+such colors and returns the color tuples in tuple(s) (a, b, c)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.validate_colors">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">validate_colors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'tuple'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.validate_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates color(s) and returns a list of color(s) of a specified type</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.validate_colors_dict">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">validate_colors_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colors</span></em>, <em class="sig-param"><span class="n">colortype</span><span class="o">=</span><span class="default_value">'tuple'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.validate_colors_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates dictioanry of color(s)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.validate_colorscale">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">validate_colorscale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">colorscale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.validate_colorscale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate the structure, scale values and colors of colorscale.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.validate_scale_values">
+<code class="sig-prename descclassname">plotly.colors.</code><code class="sig-name descname">validate_scale_values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.validate_scale_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates scale values from a colorscale</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>scale</strong> (<em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a><em>)</em>) – a strictly increasing list of floats that begins
+with 0 and ends with 1. Its usage derives from a colorscale which is
+a list of two-lists (a list with two elements) of the form
+[value, color] which are used to determine how interpolation weighting
+works between the colors in the colorscale. Therefore scale is just
+the extraction of these values from the two-lists in order</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-plotly.colors.carto">
+<span id="plotly-colors-carto-module"></span><h2>plotly.colors.carto module<a class="headerlink" href="#module-plotly.colors.carto" title="Permalink to this headline">¶</a></h2>
+<p>Color sequences and scales from CARTO’s CartoColors</p>
+<p>Learn more at <a class="reference external" href="https://github.com/CartoDB/CartoColor">https://github.com/CartoDB/CartoColor</a></p>
+<p>CARTOColors are made available under a Creative Commons Attribution license: <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/us/">https://creativecommons.org/licenses/by/3.0/us/</a></p>
+</div>
+<div class="section" id="module-plotly.colors.cmocean">
+<span id="plotly-colors-cmocean-module"></span><h2>plotly.colors.cmocean module<a class="headerlink" href="#module-plotly.colors.cmocean" title="Permalink to this headline">¶</a></h2>
+<p>Color scales from the cmocean project</p>
+<p>Learn more at <a class="reference external" href="https://matplotlib.org/cmocean/">https://matplotlib.org/cmocean/</a></p>
+<p>cmocean is made available under an MIT license: <a class="reference external" href="https://github.com/matplotlib/cmocean/blob/master/LICENSE.txt">https://github.com/matplotlib/cmocean/blob/master/LICENSE.txt</a></p>
+</div>
+<div class="section" id="module-plotly.colors.colorbrewer">
+<span id="plotly-colors-colorbrewer-module"></span><h2>plotly.colors.colorbrewer module<a class="headerlink" href="#module-plotly.colors.colorbrewer" title="Permalink to this headline">¶</a></h2>
+<p>Color scales and sequences from the colorbrewer 2 project</p>
+<p>Learn more at <a class="reference external" href="http://colorbrewer2.org">http://colorbrewer2.org</a></p>
+<p>colorbrewer is made available under an Apache license: <a class="reference external" href="http://colorbrewer2.org/export/LICENSE.txt">http://colorbrewer2.org/export/LICENSE.txt</a></p>
+</div>
+<div class="section" id="module-plotly.colors.cyclical">
+<span id="plotly-colors-cyclical-module"></span><h2>plotly.colors.cyclical module<a class="headerlink" href="#module-plotly.colors.cyclical" title="Permalink to this headline">¶</a></h2>
+<p>Cyclical color scales are appropriate for continuous data that has a natural cyclical structure, such as temporal data (hour of day, day of week, day of year, seasons) or
+complex numbers or other phase data.</p>
+<dl class="py function">
+<dt id="plotly.colors.cyclical.swatches">
+<code class="sig-prename descclassname">plotly.colors.cyclical.</code><code class="sig-name descname">swatches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.cyclical.swatches" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong> – A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object. This figure demonstrates the color scales and
+sequences in this module, as stacked bar charts.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="plotly.colors.cyclical.swatches_cyclical">
+<code class="sig-prename descclassname">plotly.colors.cyclical.</code><code class="sig-name descname">swatches_cyclical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.cyclical.swatches_cyclical" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong> – A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object. This figure demonstrates the color scales and
+sequences in this module, as polar bar charts.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-plotly.colors.diverging">
+<span id="plotly-colors-diverging-module"></span><h2>plotly.colors.diverging module<a class="headerlink" href="#module-plotly.colors.diverging" title="Permalink to this headline">¶</a></h2>
+<p>Diverging color scales are appropriate for continuous data that has a natural midpoint other otherwise informative special value, such as 0 altitude, or the boiling point
+of a liquid. The color scales in this module are mostly meant to be passed in as the <code class="docutils literal notranslate"><span class="pre">color_continuous_scale</span></code> argument to various functions, and to be used with the <code class="docutils literal notranslate"><span class="pre">color_continuous_midpoint</span></code> argument.</p>
+<dl class="py function">
+<dt id="plotly.colors.diverging.swatches">
+<code class="sig-prename descclassname">plotly.colors.diverging.</code><code class="sig-name descname">swatches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.diverging.swatches" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong> – A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object. This figure demonstrates the color scales and
+sequences in this module, as stacked bar charts.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-plotly.colors.qualitative">
+<span id="plotly-colors-qualitative-module"></span><h2>plotly.colors.qualitative module<a class="headerlink" href="#module-plotly.colors.qualitative" title="Permalink to this headline">¶</a></h2>
+<p>Qualitative color sequences are appropriate for data that has no natural ordering, such as categories, colors, names, countries etc. The color sequences in this module are mostly meant to be passed in as the <code class="docutils literal notranslate"><span class="pre">color_discrete_sequence</span></code> argument to various functions.</p>
+<dl class="py function">
+<dt id="plotly.colors.qualitative.swatches">
+<code class="sig-prename descclassname">plotly.colors.qualitative.</code><code class="sig-name descname">swatches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.qualitative.swatches" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong> – A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object. This figure demonstrates the color scales and
+sequences in this module, as stacked bar charts.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-plotly.colors.sequential">
+<span id="plotly-colors-sequential-module"></span><h2>plotly.colors.sequential module<a class="headerlink" href="#module-plotly.colors.sequential" title="Permalink to this headline">¶</a></h2>
+<p>Sequential color scales are appropriate for most continuous data, but in some cases it can be helpful to use a <code class="docutils literal notranslate"><span class="pre">plotly.colors.diverging</span></code> or <code class="docutils literal notranslate"><span class="pre">plotly.colors.cyclical</span></code> scale instead. The color scales in this module are mostly meant to be passed in as the <code class="docutils literal notranslate"><span class="pre">color_continuous_scale</span></code> argument to various functions.</p>
+<dl class="py function">
+<dt id="plotly.colors.sequential.swatches">
+<code class="sig-prename descclassname">plotly.colors.sequential.</code><code class="sig-name descname">swatches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#plotly.colors.sequential.swatches" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em> or </em><em>plotly.graph_objects.layout.Template instance</em>) – The figure template name or definition.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>fig</strong> – A <code class="docutils literal notranslate"><span class="pre">Figure</span></code> object. This figure demonstrates the color scales and
+sequences in this module, as stacked bar charts.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>graph_objects.Figure containing the displayed image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39373211-1']);
+      _gaq.push(['_setDomainName', 'none']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </body>
+</html>
