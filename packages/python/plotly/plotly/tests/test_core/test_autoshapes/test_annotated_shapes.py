@@ -346,7 +346,9 @@ def draw_all_annotation_positions(testing=False):
     fig.update_layout(title="Annotated hline, vline, hrect, vrect")
 
     # Get JSON representation of annotations
-    annotations_json = json.dumps(json.loads(fig.to_json())["layout"]["annotations"])
+    annotations_json = json.dumps(
+        json.loads(fig.to_json())["layout"]["annotations"], sort_keys=True
+    )
 
     # compute path to where to write JSON annotations (this computes a path to a
     # file in the same directory as this test script)
