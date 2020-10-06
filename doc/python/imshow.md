@@ -401,4 +401,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/image/ for more information and chart attribute options!
+See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/image/ for more information and chart attribute options!
