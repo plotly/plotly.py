@@ -502,4 +502,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/box/ for more information and chart attribute options!
+See [function reference for `px.box()`](https://plotly.com/python-api-reference/generated/plotly.express.box) or https://plotly.com/python/reference/box/ for more information and chart attribute options!
