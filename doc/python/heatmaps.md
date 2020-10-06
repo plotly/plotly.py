@@ -190,4 +190,4 @@ Arrays of rasterized values build by datashader can be visualized using
 plotly's heatmaps, as shown in the [plotly and datashader tutorial](/python/datashader/).
 
 #### Reference
-See https://plotly.com/python/reference/heatmap/ for more information and chart attribute options!
+See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/heatmap/ for more information and chart attribute options!
