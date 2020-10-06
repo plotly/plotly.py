@@ -1091,7 +1091,7 @@ Searched for executable '{executable}' on the following path:
     # Check if we should run with Xvfb
     # --------------------------------
     xvfb_args = [
-        "--auto-servernum",
+        "--auto-display",
         "--server-args",
         "-screen 0 640x480x24 +extension RANDR +extension GLX",
         executable,
