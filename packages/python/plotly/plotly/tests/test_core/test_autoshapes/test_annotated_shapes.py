@@ -80,14 +80,25 @@ def test_add_annotated_shape_multi_plot(multi_plot_fixture):
     multi_plot_fixture.add_vline(x=2, annotation_text="B")
     multi_plot_fixture.add_hrect(y0=3, y1=4, annotation_text="C")
     multi_plot_fixture.add_vrect(x0=5, x1=6, annotation_text="D")
-    ret = len(multi_plot_fixture.layout.annotations) == 4
+    ax_nums = ["", "2", "3", "4"]
+    ret = len(multi_plot_fixture.layout.annotations) == 16
     for sh, d in zip(
         multi_plot_fixture.layout.annotations,
         [
-            {"text": "A", "xref": "x domain", "yref": "y"},
-            {"text": "B", "xref": "x", "yref": "y domain"},
-            {"text": "C", "xref": "x domain", "yref": "y"},
-            {"text": "D", "xref": "x", "yref": "y domain"},
+            {"text": "A", "xref": "x%s domain" % (n,), "yref": "y%s" % (n,)}
+            for n in ax_nums
+        ]
+        + [
+            {"text": "B", "xref": "x%s" % (n,), "yref": "y%s domain" % (n,)}
+            for n in ax_nums
+        ]
+        + [
+            {"text": "C", "xref": "x%s domain" % (n,), "yref": "y%s" % (n,)}
+            for n in ax_nums
+        ]
+        + [
+            {"text": "D", "xref": "x%s" % (n,), "yref": "y%s domain" % (n,)}
+            for n in ax_nums
         ],
     ):
         ret &= _cmp_partial_dict(sh, d)

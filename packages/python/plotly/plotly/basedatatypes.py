@@ -3625,7 +3625,10 @@ Invalid property path '{key_path_str}' for layout
                 "Bad shape_type %s, needs to be one of 'vline', 'hline', 'vrect', 'hrect'"
                 % (shape_type,)
             )
-
+        if (row is not None or col is not None) and (not self._has_subplots()):
+            # this has no subplots to address, so we force row and col to be None
+            row = None
+            col = None
         n_shapes_before = len(self.layout["shapes"])
         n_annotations_before = len(self.layout["annotations"])
         # shapes are always added at the end of the tuple of shapes, so we see
@@ -3677,8 +3680,8 @@ Invalid property path '{key_path_str}' for layout
     def add_vline(
         self,
         x,
-        row=None,
-        col=None,
+        row="all",
+        col="all",
         exclude_empty_subplots=True,
         annotation=None,
         **kwargs
@@ -3714,7 +3717,7 @@ Invalid property path '{key_path_str}' for layout
         )
         return self
 
-    def add_hline(self, y, row=None, col=None, exclude_empty_subplots=True, **kwargs):
+    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
         """
         Add a horizontal line to a plot or subplot that extends infinitely in the
         x-dimension.
@@ -3746,7 +3749,7 @@ Invalid property path '{key_path_str}' for layout
         return self
 
     def add_vrect(
-        self, x0, x1, row=None, col=None, exclude_empty_subplots=True, **kwargs
+        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
     ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
@@ -3781,7 +3784,7 @@ Invalid property path '{key_path_str}' for layout
         return self
 
     def add_hrect(
-        self, y0, y1, row=None, col=None, exclude_empty_subplots=True, **kwargs
+        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
     ):
         """
         Add a rectangle to a plot or subplot that extends infinitely in the
@@ -3814,6 +3817,11 @@ Invalid property path '{key_path_str}' for layout
             **kwargs
         )
         return self
+
+    def _has_subplots(self):
+        """ Returns True if figure contains subplots, otherwise it contains a
+        single plot and so this returns False. """
+        return self._grid_ref is not None
 
 
 class BasePlotlyType(object):
