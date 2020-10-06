@@ -380,4 +380,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/sunburst/ for more information and chart attribute options!
+See [function reference for `px.sunburst()`](https://plotly.com/python-api-reference/generated/plotly.express.sunburst) or https://plotly.com/python/reference/sunburst/ for more information and chart attribute options!
