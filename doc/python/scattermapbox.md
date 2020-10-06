@@ -228,4 +228,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scattermapbox/ for more information and options!
+See [function reference for `px.(scatter_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_mapbox) or https://plotly.com/python/reference/scattermapbox/ for more information and options!
