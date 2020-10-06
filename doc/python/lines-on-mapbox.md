@@ -90,4 +90,5 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scattermapbox/ for more information about mapbox and their attribute options.
+See [function reference for `px.(line_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.line_mapbox) or 
+https://plotly.com/python/reference/scattermapbox/ for more information about mapbox and their attribute options.
