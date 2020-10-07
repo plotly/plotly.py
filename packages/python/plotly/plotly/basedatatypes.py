@@ -3910,6 +3910,19 @@ class BasePlotlyType(object):
 
             return res
 
+    def _walk_magic_underscore_tree(self, prop):
+        """
+        prop is a tuple of property names as returned by BaseFigure._str_to_dict_path
+        returns a tuple
+             - the first item is a boolean which is True if the property
+               described by the prop tuple is in self or False otherwise
+             - the second item is an Exception object if the property name
+               lookup failed containing the path up to where the property name
+               lookup failed, otherwise None. Callers can choose whether or not
+               to raise this exception, depending on the context.
+        """
+        pass
+
     def __contains__(self, prop):
         """
         Determine whether object contains a property or nested property
