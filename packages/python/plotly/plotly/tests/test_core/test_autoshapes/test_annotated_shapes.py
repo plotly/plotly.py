@@ -105,6 +105,46 @@ def test_add_annotated_shape_multi_plot(multi_plot_fixture):
     assert ret
 
 
+# Test that supplying a bad annotation position throws an error
+def test_bad_annotation_position(multi_plot_fixture):
+    bad_pos = "russula delica"
+    with pytest.raises(
+        ValueError, match='Invalid annotation position "%s"' % (bad_pos,)
+    ):
+        multi_plot_fixture.add_vline(
+            x=3, annotation_text="Bad position", annotation_position=bad_pos
+        )
+
+
+# Test that position descriptions can be given in arbitrary order
+def test_position_order(multi_plot_fixture):
+    multi_plot_fixture.add_hrect(
+        y0=3,
+        y1=6,
+        row=1,
+        col=2,
+        annotation_text="Position order",
+        annotation_position="left bottom outside",
+    )
+    ret = len(multi_plot_fixture.layout.annotations) == 1
+    for sh, d in zip(
+        multi_plot_fixture.layout.annotations,
+        [
+            dict(
+                text="Position order",
+                x=0,
+                y=3,
+                xanchor="left",
+                yanchor="top",
+                xref="x2 domain",
+                yref="y2",
+            )
+        ],
+    ):
+        ret &= _cmp_partial_dict(sh, d)
+    assert ret
+
+
 # Test that you can override values computed from the annotation position.
 def test_annotation_position_override(multi_plot_fixture):
     multi_plot_fixture.add_hline(
