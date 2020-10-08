@@ -136,7 +136,7 @@ Please check out our [Troubleshooting guide](https://plotly.com/python/troublesh
 ### Static Image Export
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
-using the either the [`kaleido`](https://github.com/plotly/Kaleido)
+using either the [`kaleido`](https://github.com/plotly/Kaleido)
 package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
 command line utility (legacy as of `plotly` version 4.9).
 
