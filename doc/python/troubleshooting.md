@@ -45,8 +45,9 @@ Most `import` problems or `AttributeError`s can be traced back to having multipl
 
 ```bash
 $ conda uninstall plotly
-$ pip remove plotly
+$ pip uninstall plotly
 ```
+
 
 ### Jupyter Notebook Classic Problems
 
