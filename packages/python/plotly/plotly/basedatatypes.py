@@ -71,6 +71,89 @@ def _is_select_subplot_coordinates_arg(*args):
     return any((a == "all") or (type(a) == type(list())) for a in args)
 
 
+def _axis_spanning_shapes_docstr(shape_type):
+    docstr = ""
+    if shape_type == "hline":
+        docstr = """
+Add a horizontal line to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y: float or int
+    A number representing the y coordinate of the horizontal line."""
+    elif shape_type == "vline":
+        docstr = """
+Add a vertical line to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x: float or int
+    A number representing the x coordinate of the vertical line."""
+    elif shape_type == "hrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y0: float or int
+    A number representing the y coordinate of one side of the rectangle.
+y1: float or int
+    A number representing the y coordinate of the other side of the rectangle."""
+    elif shape_type == "vrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x0: float or int
+    A number representing the x coordinate of one side of the rectangle.
+x1: float or int
+    A number representing the x coordinate of the other side of the rectangle."""
+    docstr += """
+row: None, int or 'all'
+    Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+col: None, int or 'all'
+    Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+    it is interpreted as describing an annotation. The annotation is
+    placed relative to the shape based on annotation_position (see
+    below) unless its x or y value has been specified for the annotation
+    passed here. xref and yref are always the same as for the added
+    shape and cannot be overridden."""
+    if shape_type in ["hline", "vline"]:
+        docstr += """
+annotation_position: a string containing optionally ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the line. Example positions are "bottom left", "right top",
+    "right", "bottom". If an annotation is added but annotation_position is
+    not specified, this defaults to "top right"."""
+    elif shape_type in ["hrect", "vrect"]:
+        docstr += """
+annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the rectangle. Example positions are "outside top left", "inside
+    bottom", "right", "inside left", "inside" ("outside" is not supported). If
+    an annotation is added but annotation_position is not specified this
+    defaults to "inside top right"."""
+    docstr += """
+annotation_*: any parameters to go.layout.Annotation can be passed as
+    keywords by prefixing them with "annotation_". For example, to specify the
+    annotation text "example" you can pass annotation_text="example" as a
+    keyword argument.
+**kwargs:
+    Any named function parameters that can be passed to 'add_shape',
+    except for x0, x1, y0, y1 or type."""
+    return docstr
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -3686,26 +3769,6 @@ Invalid property path '{key_path_str}' for layout
         annotation=None,
         **kwargs
     ):
-        """
-        Add a vertical line to a plot or subplot that extends infinitely in the
-        y-dimension.
-
-        Parameters
-        ----------
-        x: float or int
-            A number representing the x coordinate of the vertical line.
-        row: None, int or 'all'
-            Subplot row for shape. If 'all', addresses all rows in
-            the specified column(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        col: None, int or 'all'
-            Subplot col for shape. If 'all', addresses all columns in
-            the specified row(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        **kwargs:
-            Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, y1 or type.
-        """
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=x, x1=x, y0=0, y1=1),
             row,
@@ -3717,27 +3780,9 @@ Invalid property path '{key_path_str}' for layout
         )
         return self
 
-    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
-        """
-        Add a horizontal line to a plot or subplot that extends infinitely in the
-        x-dimension.
+    add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
 
-        Parameters
-        ----------
-        y: float or int
-            A number representing the y coordinate of the horizontal line.
-        row: None, int or 'all'
-            Subplot row for shape. If 'all', addresses all rows in
-            the specified column(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        col: None, int or 'all'
-            Subplot col for shape. If 'all', addresses all columns in
-            the specified row(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        **kwargs:
-            Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, y1 or type.
-        """
+    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
         self._process_multiple_axis_spanning_shapes(
             dict(type="line", x0=0, x1=1, y0=y, y1=y,),
             row,
@@ -3748,31 +3793,11 @@ Invalid property path '{key_path_str}' for layout
         )
         return self
 
+    add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
+
     def add_vrect(
         self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
     ):
-        """
-        Add a rectangle to a plot or subplot that extends infinitely in the
-        y-dimension.
-
-        Parameters
-        ----------
-        x0: float or int
-            A number representing the x coordinate of one side of the rectangle.
-        x1: float or int
-            A number representing the x coordinate of the other side of the rectangle.
-        row: None, int or 'all'
-            Subplot row for shape. If 'all', addresses all rows in
-            the specified column(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        col: None, int or 'all'
-            Subplot col for shape. If 'all', addresses all columns in
-            the specified row(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        **kwargs:
-            Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, y1 or type.
-        """
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
             row,
@@ -3783,31 +3808,11 @@ Invalid property path '{key_path_str}' for layout
         )
         return self
 
+    add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
+
     def add_hrect(
         self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
     ):
-        """
-        Add a rectangle to a plot or subplot that extends infinitely in the
-        x-dimension.
-
-        Parameters
-        ----------
-        y0: float or int
-            A number representing the y coordinate of one side of the rectangle.
-        y1: float or int
-            A number representing the y coordinate of the other side of the rectangle.
-        row: None, int or 'all'
-            Subplot row for shape. If 'all', addresses all rows in
-            the specified column(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        col: None, int or 'all'
-            Subplot col for shape. If 'all', addresses all columns in
-            the specified row(s). If both row and col are None, addresses the
-            first subplot if subplots exist, or the only plot.
-        **kwargs:
-            Any named function parameters that can be passed to 'add_shape',
-            except for x0, x1, y0, y1 or type.
-        """
         self._process_multiple_axis_spanning_shapes(
             dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
             row,
@@ -3817,6 +3822,8 @@ Invalid property path '{key_path_str}' for layout
             **kwargs
         )
         return self
+
+    add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
 
     def _has_subplots(self):
         """ Returns True if figure contains subplots, otherwise it contains a

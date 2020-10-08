@@ -1,3 +1,37 @@
+---
+jupyter:
+  jupytext:
+    notebook_metadata_filter: all
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.2'
+      jupytext_version: 1.3.0
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+  language_info:
+    codemirror_mode:
+      name: ipython
+      version: 3
+    file_extension: .py
+    mimetype: text/x-python
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
+    version: 3.7.3
+  plotly:
+    description: How to add annotated horizontal and vertical lines in Python.
+    display_as: file_settings
+    language: python
+    layout: base
+    name: Shapes
+    order: 37
+    permalink: python/horizontal-vertical-shapes/
+    thumbnail: thumbnail/horizontal-vertical-shapes.jpg
+---
+
 ### Horizontal and Vertical Lines and Boxes (Autoshapes) in Plotly.py
 
 Horizontal and vertical lines and rectangles (autoshapes) that span an entire
@@ -31,7 +65,7 @@ fig.show()
 
 #### Adding Autoshapes to Multiple Facets / Subplots
 
-The same line or box can be added to mulitple facets by using the `'all'`
+The same line or box can be added to multiple facets by using the `'all'`
 keyword in the `row` and `col` arguments like with `Figure.add_shape`. For
 example
 ```python
@@ -47,9 +81,36 @@ fig.add_hline(y=6, row="all", col=2, line_color="yellow")
 fig.add_vrect(x0=20, x1=40, row=1, col="all", line_color="green")
 fig.show()
 ```
+The default `row` and `col` values are `"all"` so
+`fig.add_vline(x=30, line_color="purple")` is equivalent
+to `fig.add_vline(x=30, row="all", col="all", line_color="purple")` in the above
+example.
 
 #### Adding Text Annotations to Autoshapes
 
+Text can be added to an autoshape using the `annotation` keyword. Using the
+above example:
+```python
+import plotly.express as px
+import plotly.graph_objects as go
 
-
-
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", facet_row="smoker", facet_col="sex")
+# Add annotations anchored to the top right corner of the resulting lines
+fig.add_vline(x=30, line_color="purple", annotation=go.layout.Annotation(text="A"))
+# Another way to add annotations when we are only interested in specifying text
+fig.add_hline(y=6, row="all", col=2, line_color="yellow", annotation_text="B")
+# Specify the position of the resulting annotations
+fig.add_vrect(
+    x0=20,
+    x1=40,
+    row=1,
+    col="all",
+    line_color="green",
+    annotation_text="C",
+    annotation_position="bottom inside left",
+)
+fig.show()
+```
+Call `help` on any of the autoshape functions in the Python interpreter to learn
+more (e.g., `help(fig.add_vline)`).
