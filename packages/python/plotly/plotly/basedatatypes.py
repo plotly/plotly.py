@@ -10,12 +10,48 @@ from contextlib import contextmanager
 from copy import deepcopy, copy
 
 from _plotly_utils.utils import _natural_sort_strings, _get_int_type
+import _plotly_utils
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
+
+
+def _make_prop_err_msg(path, err_pos):
+    """
+    Returns a string like
+    path.to[1].some_property
+               ^
+    where "some" is the first bad property
+    here path would be "path_to_some_property" and err_pos would be 8
+    """
+    s = "%s\n" % (path,)
+    s += "".join(" " for _ in len(err_pos))
+    s += "^\n"
+    return s
+
+
+def _walk_prop_tree(obj, prop, path_string):
+    """
+    obj is the object in which the first property is looked up
+    prop is a tuple of property names as returned by BaseFigure._str_to_dict_path
+    returns a tuple
+         - the first item is a boolean which is True if the property
+           described by the prop tuple is in self or False otherwise
+         - the second item is an Exception object if the property name
+           lookup failed containing the path up to where the property name
+           lookup failed, otherwise None. Callers can choose whether or not
+           to raise this exception, depending on the context.
+    """
+    valid_path = ""
+    while len(prop):
+        p = prop[0]
+        try:
+            obj = obj[p]
+        except KeyError as e:
+            pass
 
 
 class BaseFigure(object):
@@ -1335,9 +1371,62 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         return list(trace_indexes)
 
     @staticmethod
+    def _str_to_dict_path_full(key_path_str):
+        """
+        Convert a key path string into a tuple of key path elements and also
+        return a tuple of indices marking the beginning of each element in the
+        string.
+
+        Parameters
+        ----------
+        key_path_str : str
+            Key path string, where nested keys are joined on '.' characters
+            and array indexes are specified using brackets
+            (e.g. 'foo.bar[1]')
+        Returns
+        -------
+        tuple[str | int]
+        tuple [int]
+        """
+        key_path2 = _plotly_utils.utils.split_multichar([key_path_str], list(".[]"))
+        # Split out underscore
+        # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+        key_path3 = []
+        underscore_props = BaseFigure._valid_underscore_properties
+
+        def _make_hyphen_key(key):
+            if "_" in key[1:]:
+                # For valid properties that contain underscores (error_x)
+                # replace the underscores with hyphens to protect them
+                # from being split up
+                for under_prop, hyphen_prop in underscore_props.items():
+                    key = key.replace(under_prop, hyphen_prop)
+            return key
+
+        def _make_underscore_key(key):
+            return key.replace("-", "_")
+
+        key_path2b = map(_make_hyphen_key, key_path2)
+        key_path2c = _plotly_utils.utils.split_multichar(key_path2b, list("_"))
+        key_path2d = list(map(_make_underscore_key, key_path2c))
+        elem_idcs = tuple(_plotly_utils.utils.split_string_positions(list(key_path2d)))
+        # remove empty strings
+        key_path3 = list(filter(len, key_path2d))
+
+        # Convert elements to ints if possible.
+        # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
+        for i in range(len(key_path3)):
+            try:
+                key_path3[i] = int(key_path3[i])
+            except ValueError as _:
+                pass
+
+        return (tuple(key_path3), elem_idcs)
+
+    @staticmethod
     def _str_to_dict_path(key_path_str):
         """
-        Convert a key path string into a tuple of key path elements
+        Convert a key path string into a tuple of key path elements.
 
         Parameters
         ----------
@@ -1361,53 +1450,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             # Nothing to do
             return key_path_str
         else:
-            # Split string on periods.
-            # e.g. 'foo.bar_baz[1]' -> ['foo', 'bar_baz[1]']
-            key_path = key_path_str.split(".")
-
-            # Split out bracket indexes.
-            # e.g. ['foo', 'bar_baz[1]'] -> ['foo', 'bar_baz', '1']
-            key_path2 = []
-            for key in key_path:
-                match = BaseFigure._bracket_re.match(key)
-                if match:
-                    key_path2.extend(match.groups())
-                else:
-                    key_path2.append(key)
-
-            # Split out underscore
-            # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
-            key_path3 = []
-            underscore_props = BaseFigure._valid_underscore_properties
-            for key in key_path2:
-                if "_" in key[1:]:
-                    # For valid properties that contain underscores (error_x)
-                    # replace the underscores with hyphens to protect them
-                    # from being split up
-                    for under_prop, hyphen_prop in underscore_props.items():
-                        key = key.replace(under_prop, hyphen_prop)
-
-                    # Split key on underscores
-                    key = key.split("_")
-
-                    # Replace hyphens with underscores to restore properties
-                    # that include underscores
-                    for i in range(len(key)):
-                        key[i] = key[i].replace("-", "_")
-
-                    key_path3.extend(key)
-                else:
-                    key_path3.append(key)
-
-            # Convert elements to ints if possible.
-            # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path3)):
-                try:
-                    key_path3[i] = int(key_path3[i])
-                except ValueError as _:
-                    pass
-
-            return tuple(key_path3)
+            ret = BaseFigure._str_to_dict_path_full(key_path_str)[0]
+            return ret
 
     @staticmethod
     def _set_in(d, key_path_str, v):
@@ -3909,19 +3953,6 @@ class BasePlotlyType(object):
                 res = res[p]
 
             return res
-
-    def _walk_magic_underscore_tree(self, prop):
-        """
-        prop is a tuple of property names as returned by BaseFigure._str_to_dict_path
-        returns a tuple
-             - the first item is a boolean which is True if the property
-               described by the prop tuple is in self or False otherwise
-             - the second item is an Exception object if the property name
-               lookup failed containing the path up to where the property name
-               lookup failed, otherwise None. Callers can choose whether or not
-               to raise this exception, depending on the context.
-        """
-        pass
 
     def __contains__(self, prop):
         """
