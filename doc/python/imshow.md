@@ -204,7 +204,7 @@ fig.show()
 
 ### Defining the data range covered by the color range with zmin and zmax
 
-The data range and color range are mapped together using the parameters `zmin` and `zmax` of `px.imshow` or `go.Image`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case on single-channel data.
+The data range and color range are mapped together using the parameters `zmin` and `zmax` of `px.imshow` or `go.Image`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case of single-channel data.
 
 For `go.Image`, `zmin` and `zmax` need to be given for all channels, whereas it is also possible to pass a scalar value (used for all channels) to `px.imshow`.
 
