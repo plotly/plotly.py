@@ -1,4 +1,5 @@
 import plotly.graph_objects as go
+from _plotly_utils.exceptions import PlotlyKeyError
 import pytest
 
 
@@ -10,10 +11,6 @@ def some_fig():
     fig.add_shape(type="rect", x0=10, x1=20, y0=30, y1=40)
     fig.add_trace(go.Scatter(x=[1, 2, 3], y=[4, 5, 6]))
     return fig
-
-
-# (Unfortunately I couldn't get the match argument of pytest.raises to work
-# for multiline regexes so we do the test with assert
 
 
 def test_raises_on_bad_index(some_fig):
@@ -37,7 +34,7 @@ def test_raises_on_bad_dot_property(some_fig):
     # go.Figure
     try:
         x2000 = some_fig["layout.shapes[1].x2000"]
-    except IndexError as e:
+    except PlotlyKeyError as e:
         assert (
             e.args[0].find(
                 """Bad property path:
@@ -47,10 +44,13 @@ layout.shapes[1].x2000
             >= 0
         )
 
+
+def test_raises_on_bad_ancestor_dot_property(some_fig):
+
     # Check . property lookup errors but not on the last part of the path
     try:
         x2000 = some_fig["layout.shapa[1].x2000"]
-    except IndexError as e:
+    except PlotlyKeyError as e:
         assert (
             e.args[0].find(
                 """Bad property path:
@@ -67,7 +67,7 @@ def test_raises_on_bad_indexed_underscore_property(some_fig):
     # for the last good property it found in the path
     try:
         some_fig["data[0].line_colr"] = "blue"
-    except ValueError as e:
+    except PlotlyKeyError as e:
         assert (
             (
                 e.args[0].find(
