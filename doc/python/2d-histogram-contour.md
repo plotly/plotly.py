@@ -76,7 +76,7 @@ Plotly Express density contours can be [continuously-colored](/python/colorscale
 import plotly.express as px
 df = px.data.tips()
 
-fig = px.density_contour(df, x="total_bill", y="tip")
+fig = px.density_contourfff(df, x="total_bill", y="tip")
 fig.update_traces(contours_coloring="fill", contours_showlabels = True)
 fig.show()
 ```

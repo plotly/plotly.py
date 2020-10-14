@@ -40,7 +40,7 @@ $(HTML_DIR)/2019-07-03-%.html: $(IPYNB_DIR)/%.ipynb
 	@jupyter nbconvert $< --to html --template nb.tpl \
 			--ExecutePreprocessor.timeout=600\
 	  	--output-dir $(HTML_DIR) --output 2019-07-03-$*.html \
-	  	--execute > $(FAIL_DIR)/$* 2>&1  && rm -f $(FAIL_DIR)/$*
+	  	--execute 2>&1 | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g" > $(FAIL_DIR)/$*   && rm -f $(FAIL_DIR)/$*
 
 
 $(REDIR_DIR)/2019-07-03-redirect-next-%.html: $(IPYNB_DIR)/%.ipynb
