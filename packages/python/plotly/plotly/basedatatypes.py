@@ -3638,7 +3638,7 @@ class BasePlotlyType(object):
             elif not self._validate:
                 # Set extra property as-is
                 self[k] = v
-            else:
+            elif not self._skip_invalid:
                 raise err
         # No need to call _raise_on_invalid_property_error here,
         # because we have it set up so that the singular case of calling
