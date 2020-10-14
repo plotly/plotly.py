@@ -395,11 +395,11 @@ class BaseFigure(object):
                 self[k] = v
             elif not skip_invalid:
                 type_err = TypeError("invalid Figure property: {}".format(k))
-                type_err.args[
-                    0
-                ] += """
-%s""" % (
-                    err.args[0],
+                type_err.args = (
+                    type_err.args[0]
+                    + """
+%s"""
+                    % (err.args[0],),
                 )
                 raise type_err
 
@@ -3416,17 +3416,18 @@ Invalid property path '{key_path_str}' for layout
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             if isinstance(plotly_obj, BaseLayoutType):
                 for key in update_obj:
-                    if key not in plotly_obj:
+                    err = _check_path_in_prop_tree(plotly_obj, key)
+                    if err is not None:
+                        # try _subplot_re_match
                         match = plotly_obj._subplot_re_match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
-
-            # Handle invalid properties
-            # -------------------------
-            invalid_props = [k for k in update_obj if k not in plotly_obj]
-
-            plotly_obj._raise_on_invalid_property_error(*invalid_props)
+                        else:
+                            # If no match, raise the error, which should already
+                            # contain the _raise_on_invalid_property_error
+                            # generated message
+                            raise err
 
             # Convert update_obj to dict
             # --------------------------
@@ -3964,7 +3965,7 @@ class BasePlotlyType(object):
             # Unwrap scalar tuple
             prop = prop[0]
             if prop not in self._valid_props:
-                raise KeyError(prop)
+                self._raise_on_invalid_property_error(prop)
 
             validator = self._get_validator(prop)
 

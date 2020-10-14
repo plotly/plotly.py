@@ -34,7 +34,7 @@ def test_raises_on_bad_dot_property(some_fig):
     # go.Figure
     try:
         x2000 = some_fig["layout.shapes[1].x2000"]
-    except PlotlyKeyError as e:
+    except ValueError as e:
         assert (
             e.args[0].find(
                 """Bad property path:
@@ -50,7 +50,7 @@ def test_raises_on_bad_ancestor_dot_property(some_fig):
     # Check . property lookup errors but not on the last part of the path
     try:
         x2000 = some_fig["layout.shapa[1].x2000"]
-    except PlotlyKeyError as e:
+    except ValueError as e:
         assert (
             e.args[0].find(
                 """Bad property path:
@@ -67,7 +67,7 @@ def test_raises_on_bad_indexed_underscore_property(some_fig):
     # for the last good property it found in the path
     try:
         some_fig["data[0].line_colr"] = "blue"
-    except PlotlyKeyError as e:
+    except ValueError as e:
         assert (
             (
                 e.args[0].find(
@@ -102,7 +102,7 @@ line_colr
             )
             and (
                 e.args[0].find(
-                    """Invalid property specified for object of type plotly.graph_objs.layout.shape.Line: 'colr'"""
+                    "Invalid property specified for object of type plotly.graph_objs.scatter.Line: 'colr'"
                 )
                 >= 0
             )
@@ -113,7 +113,7 @@ line_colr
     # the path
     try:
         fig2 = go.Figure(layout_title_txt="two")
-    except ValueError as e:
+    except TypeError as e:
         assert (
             (
                 e.args[0].find(
