@@ -3,13 +3,26 @@ import json as _json
 import sys
 import re
 from functools import reduce
-from numpy import cumsum
 
 from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
 PY36_OR_LATER = sys.version_info >= (3, 6)
+
+
+def cumsum(x):
+    """
+    Custom cumsum to avoid a numpy import.
+    """
+
+    def _reducer(a, x):
+        if len(a) == 0:
+            return [x]
+        return a + [a[-1] + x]
+
+    ret = reduce(_reducer, x, [])
+    return ret
 
 
 class PlotlyJSONEncoder(_json.JSONEncoder):
