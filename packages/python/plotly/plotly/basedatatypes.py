@@ -3428,6 +3428,14 @@ Invalid property path '{key_path_str}' for layout
                             # contain the _raise_on_invalid_property_error
                             # generated message
                             raise err
+            # _check_path_in_prop_tree in must be called again in the case that
+            # _check_path_in_prop_tree returned an exception above but match was
+            # still not None. I'm not sure why it's written this way but this is
+            # the most consistent with what existed before.
+            for key in update_obj:
+                err = _check_path_in_prop_tree(plotly_obj, key)
+                if err is not None:
+                    raise err
 
             # Convert update_obj to dict
             # --------------------------
