@@ -19,7 +19,7 @@ class Y(_BaseTraceHierarchyType):
         the `slices` is 1 meaning that they are entirely shaded. On the
         other hand Applying a `fill` ratio less than one would allow
         the creation of openings parallel to the edges.
-    
+
         The 'fill' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -41,7 +41,7 @@ class Y(_BaseTraceHierarchyType):
         Specifies the location(s) of slices on the axis. When not
         specified slices would be created for all points of the axis y
         except start and end.
-    
+
         The 'locations' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -62,7 +62,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for  locations
         .
-    
+
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -83,7 +83,7 @@ class Y(_BaseTraceHierarchyType):
         """
         Determines whether or not slice planes about the y dimension
         are drawn.
-    
+
         The 'show' property must be specified as a bool
         (either True, or False)
 
@@ -131,7 +131,7 @@ class Y(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Y object
-        
+
         Parameters
         ----------
         arg

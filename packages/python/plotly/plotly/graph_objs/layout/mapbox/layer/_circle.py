@@ -17,7 +17,7 @@ class Circle(_BaseLayoutHierarchyType):
         """
         Sets the circle radius (mapbox.layer.paint.circle-radius). Has
         an effect only when `type` is set to "circle".
-    
+
         The 'radius' property is a number and may be specified as:
           - An int or float
 
@@ -45,7 +45,7 @@ class Circle(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, radius=None, **kwargs):
         """
         Construct a new Circle object
-        
+
         Parameters
         ----------
         arg

@@ -67,7 +67,7 @@ class Contourcarpet(_BaseTraceType):
     def a(self):
         """
         Sets the x coordinates.
-    
+
         The 'a' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -89,7 +89,7 @@ class Contourcarpet(_BaseTraceType):
         Alternate to `x`. Builds a linear space of x coordinates. Use
         with `dx` where `x0` is the starting coordinate and `dx` the
         step.
-    
+
         The 'a0' property accepts values of any type
 
         Returns
@@ -108,7 +108,7 @@ class Contourcarpet(_BaseTraceType):
     def asrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  a .
-    
+
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -131,7 +131,7 @@ class Contourcarpet(_BaseTraceType):
         default behavior when `x` is provided). If "scaled", the
         heatmap's x coordinates are given by "x0" and "dx" (the default
         behavior when `x` is not provided).
-    
+
         The 'atype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -157,7 +157,7 @@ class Contourcarpet(_BaseTraceType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -180,7 +180,7 @@ class Contourcarpet(_BaseTraceType):
         picked by an algorithm. If True, the number of contour levels
         can be set in `ncontours`. If False, set the contour level
         attributes in `contours`.
-    
+
         The 'autocontour' property must be specified as a bool
         (either True, or False)
 
@@ -200,7 +200,7 @@ class Contourcarpet(_BaseTraceType):
     def b(self):
         """
         Sets the y coordinates.
-    
+
         The 'b' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -222,7 +222,7 @@ class Contourcarpet(_BaseTraceType):
         Alternate to `y`. Builds a linear space of y coordinates. Use
         with `dy` where `y0` is the starting coordinate and `dy` the
         step.
-    
+
         The 'b0' property accepts values of any type
 
         Returns
@@ -241,7 +241,7 @@ class Contourcarpet(_BaseTraceType):
     def bsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  b .
-    
+
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -264,7 +264,7 @@ class Contourcarpet(_BaseTraceType):
         default behavior when `y` is provided) If "scaled", the
         heatmap's y coordinates are given by "y0" and "dy" (the default
         behavior when `y` is not provided)
-    
+
         The 'btype' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['array', 'scaled']
@@ -286,7 +286,7 @@ class Contourcarpet(_BaseTraceType):
         """
         The `carpet` of the carpet axes on which this contour trace
         lies
-    
+
         The 'carpet' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -312,7 +312,7 @@ class Contourcarpet(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -338,9 +338,9 @@ class Contourcarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.contourcarpet.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -578,14 +578,14 @@ class Contourcarpet(_BaseTraceType):
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
         ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
         ridis,Cividis.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1), 
+            normalized color level value (starting at 0 and ending at 1),
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -625,9 +625,9 @@ class Contourcarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.contourcarpet.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
-    
+
             Supported dict properties:
-                
+
                 coloring
                     Determines the coloring method showing the
                     contour values. If "fill", coloring is done
@@ -709,7 +709,7 @@ class Contourcarpet(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -730,7 +730,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -750,7 +750,7 @@ class Contourcarpet(_BaseTraceType):
     def da(self):
         """
         Sets the x coordinate step. See `x0` for more info.
-    
+
         The 'da' property is a number and may be specified as:
           - An int or float
 
@@ -770,7 +770,7 @@ class Contourcarpet(_BaseTraceType):
     def db(self):
         """
         Sets the y coordinate step. See `y0` for more info.
-    
+
         The 'db' property is a number and may be specified as:
           - An int or float
 
@@ -792,7 +792,7 @@ class Contourcarpet(_BaseTraceType):
         Sets the fill color if `contours.type` is "constraint".
         Defaults to a half-transparent variant of the line color,
         marker color, or marker line color, whichever is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -853,7 +853,7 @@ class Contourcarpet(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -874,7 +874,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -896,7 +896,7 @@ class Contourcarpet(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -916,7 +916,7 @@ class Contourcarpet(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -938,7 +938,7 @@ class Contourcarpet(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -963,9 +963,9 @@ class Contourcarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.contourcarpet.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of the contour level. Has no
                     effect if `contours.coloring` is set to
@@ -1009,7 +1009,7 @@ class Contourcarpet(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -1028,7 +1028,7 @@ class Contourcarpet(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1049,7 +1049,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1073,7 +1073,7 @@ class Contourcarpet(_BaseTraceType):
         contours will be chosen automatically to be less than or equal
         to the value of `ncontours`. Has an effect only if
         `autocontour` is True or if `contours.size` is missing.
-    
+
         The 'ncontours' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -1094,7 +1094,7 @@ class Contourcarpet(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1116,7 +1116,7 @@ class Contourcarpet(_BaseTraceType):
         Reverses the color mapping if true. If true, `zmin` will
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -1137,7 +1137,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1158,7 +1158,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -1182,9 +1182,9 @@ class Contourcarpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.contourcarpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1211,7 +1211,7 @@ class Contourcarpet(_BaseTraceType):
     def text(self):
         """
         Sets the text elements associated with each z value.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1231,7 +1231,7 @@ class Contourcarpet(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1251,7 +1251,7 @@ class Contourcarpet(_BaseTraceType):
     def transpose(self):
         """
         Transposes the z data.
-    
+
         The 'transpose' property must be specified as a bool
         (either True, or False)
 
@@ -1272,7 +1272,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1307,7 +1307,7 @@ class Contourcarpet(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1328,7 +1328,7 @@ class Contourcarpet(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1352,7 +1352,7 @@ class Contourcarpet(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1377,7 +1377,7 @@ class Contourcarpet(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1399,7 +1399,7 @@ class Contourcarpet(_BaseTraceType):
     def z(self):
         """
         Sets the z data.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1422,7 +1422,7 @@ class Contourcarpet(_BaseTraceType):
         respect to the input data (here in `z`) or the bounds set in
         `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
         are set by the user.
-    
+
         The 'zauto' property must be specified as a bool
         (either True, or False)
 
@@ -1443,7 +1443,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the upper bound of the color domain. Value should have the
         same units as in `z` and if set, `zmin` must be set as well.
-    
+
         The 'zmax' property is a number and may be specified as:
           - An int or float
 
@@ -1465,7 +1465,7 @@ class Contourcarpet(_BaseTraceType):
         Sets the mid-point of the color domain by scaling `zmin` and/or
         `zmax` to be equidistant to this point. Value should have the
         same units as in `z`. Has no effect when `zauto` is `false`.
-    
+
         The 'zmid' property is a number and may be specified as:
           - An int or float
 
@@ -1486,7 +1486,7 @@ class Contourcarpet(_BaseTraceType):
         """
         Sets the lower bound of the color domain. Value should have the
         same units as in `z` and if set, `zmax` must be set as well.
-    
+
         The 'zmin' property is a number and may be specified as:
           - An int or float
 
@@ -1506,7 +1506,7 @@ class Contourcarpet(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1802,7 +1802,7 @@ class Contourcarpet(_BaseTraceType):
     ):
         """
         Construct a new Contourcarpet object
-        
+
         Plots contours on either the first carpet axis or the carpet
         axis with a matching `carpet` attribute. Data `z` is
         interpreted as matching that of the corresponding carpet axis.

@@ -73,7 +73,7 @@ class Violin(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same alignmentgroup. This controls whether bars
         compute their positional range dependently or independently.
-    
+
         The 'alignmentgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -96,7 +96,7 @@ class Violin(_BaseTraceType):
         Sets the bandwidth used to compute the kernel density estimate.
         By default, the bandwidth is determined by Silverman's rule of
         thumb.
-    
+
         The 'bandwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -120,9 +120,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Box`
           - A dict of string/value properties that will be passed
             to the Box constructor
-    
+
             Supported dict properties:
-                
+
                 fillcolor
                     Sets the inner box plot fill color.
                 line
@@ -155,7 +155,7 @@ class Violin(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -176,7 +176,7 @@ class Violin(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -198,7 +198,7 @@ class Violin(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-    
+
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -259,7 +259,7 @@ class Violin(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -284,7 +284,7 @@ class Violin(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -308,9 +308,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -365,7 +365,7 @@ class Violin(_BaseTraceType):
         Do the hover effects highlight individual violins or sample
         points or the kernel density estimate or any combination of
         them?
-    
+
         The 'hoveron' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['violins', 'points', 'kde'] joined with '+' characters
@@ -406,7 +406,7 @@ class Violin(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -429,7 +429,7 @@ class Violin(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -449,7 +449,7 @@ class Violin(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -472,7 +472,7 @@ class Violin(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -494,7 +494,7 @@ class Violin(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -514,7 +514,7 @@ class Violin(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -537,7 +537,7 @@ class Violin(_BaseTraceType):
         sample points align along the distribution axis. If 1, the
         sample points are drawn in a random jitter of width equal to
         the width of the violins.
-    
+
         The 'jitter' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -559,7 +559,7 @@ class Violin(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -584,9 +584,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the color of line bounding the violin(s).
                 width
@@ -613,9 +613,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets themarkercolor. It accepts either a
                     specific color or an array of numbers that are
@@ -659,9 +659,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Meanline`
           - A dict of string/value properties that will be passed
             to the Meanline constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Sets the mean line color.
                 visible
@@ -699,7 +699,7 @@ class Violin(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -718,7 +718,7 @@ class Violin(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -744,7 +744,7 @@ class Violin(_BaseTraceType):
         Note that the trace name is also used as a default value for
         attribute `scalegroup` (please see its description for
         details).
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -767,7 +767,7 @@ class Violin(_BaseTraceType):
         Set several traces linked to the same position axis or matching
         axes to the same offsetgroup where bars of the same position
         coordinate will line up.
-    
+
         The 'offsetgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -788,7 +788,7 @@ class Violin(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -809,7 +809,7 @@ class Violin(_BaseTraceType):
         """
         Sets the orientation of the violin(s). If "v" ("h"), the
         distribution is visualized along the vertical (horizontal).
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -834,7 +834,7 @@ class Violin(_BaseTraceType):
         the violins. Positive (negative) values correspond to positions
         to the right (left) for vertical violins and above (below) for
         horizontal violins.
-    
+
         The 'pointpos' property is a number and may be specified as:
           - An int or float in the interval [-2, 2]
 
@@ -861,7 +861,7 @@ class Violin(_BaseTraceType):
         with no sample points. Defaults to "suspectedoutliers" when
         `marker.outliercolor` or `marker.line.outliercolor` is set,
         otherwise defaults to "outliers".
-    
+
         The 'points' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'outliers', 'suspectedoutliers', False]
@@ -887,7 +887,7 @@ class Violin(_BaseTraceType):
         a violin's `width` is undefined, `scalegroup` will default to
         the trace's name. In this case, violins with the same names
         will be linked together
-    
+
         The 'scalegroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -911,7 +911,7 @@ class Violin(_BaseTraceType):
         determined."width" means each violin has the same (max)
         width*count* means the violins are scaled by the number of
         sample points makingup each violin.
-    
+
         The 'scalemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['width', 'count']
@@ -936,9 +936,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.violin.selected.Ma
                     rker` instance or dict with compatible
@@ -965,7 +965,7 @@ class Violin(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-    
+
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -985,7 +985,7 @@ class Violin(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1008,7 +1008,7 @@ class Violin(_BaseTraceType):
         function making up one half of a violin is plotted. Useful when
         comparing two violin traces under "overlay" mode, where one
         trace has `side` set to "positive" and the other to "negative".
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['both', 'positive', 'negative']
@@ -1028,19 +1028,19 @@ class Violin(_BaseTraceType):
     @property
     def span(self):
         """
-        Sets the span in data space for which the density function will
-        be computed. Has an effect only when `spanmode` is set to
-        "manual".
-    
-        The 'span' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'span[0]' property accepts values of any type
-    (1) The 'span[1]' property accepts values of any type
+            Sets the span in data space for which the density function will
+            be computed. Has an effect only when `spanmode` is set to
+            "manual".
 
-        Returns
-        -------
-        list
+            The 'span' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'span[0]' property accepts values of any type
+        (1) The 'span[1]' property accepts values of any type
+
+            Returns
+            -------
+            list
         """
         return self["span"]
 
@@ -1060,7 +1060,7 @@ class Violin(_BaseTraceType):
         span goes from the sample's minimum to its maximum value. For
         custom span settings, use mode "manual" and fill in the `span`
         attribute.
-    
+
         The 'spanmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['soft', 'hard', 'manual']
@@ -1085,9 +1085,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1118,7 +1118,7 @@ class Violin(_BaseTraceType):
         points. If an array of string, the items are mapped in order to
         the this trace's (x,y) coordinates. To be seen, trace
         `hoverinfo` must contain a "text" flag.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1140,7 +1140,7 @@ class Violin(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1161,7 +1161,7 @@ class Violin(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1196,7 +1196,7 @@ class Violin(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1219,9 +1219,9 @@ class Violin(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.violin.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-    
+
             Supported dict properties:
-                
+
                 marker
                     :class:`plotly.graph_objects.violin.unselected.
                     Marker` instance or dict with compatible
@@ -1245,7 +1245,7 @@ class Violin(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1268,7 +1268,7 @@ class Violin(_BaseTraceType):
         Sets the width of the violin in data coordinates. If 0 (default
         value) the width is automatically selected based on the
         positions of other violin traces in the same subplot.
-    
+
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1289,7 +1289,7 @@ class Violin(_BaseTraceType):
         """
         Sets the x sample data or coordinates. See overview for more
         info.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1311,7 +1311,7 @@ class Violin(_BaseTraceType):
         Sets the x coordinate for single-box traces or the starting
         coordinate for multi-box traces set using q1/median/q3. See
         overview for more info.
-    
+
         The 'x0' property accepts values of any type
 
         Returns
@@ -1333,7 +1333,7 @@ class Violin(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1355,7 +1355,7 @@ class Violin(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1376,7 +1376,7 @@ class Violin(_BaseTraceType):
         """
         Sets the y sample data or coordinates. See overview for more
         info.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1398,7 +1398,7 @@ class Violin(_BaseTraceType):
         Sets the y coordinate for single-box traces or the starting
         coordinate for multi-box traces set using q1/median/q3. See
         overview for more info.
-    
+
         The 'y0' property accepts values of any type
 
         Returns
@@ -1420,7 +1420,7 @@ class Violin(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1442,7 +1442,7 @@ class Violin(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1797,7 +1797,7 @@ class Violin(_BaseTraceType):
     ):
         """
         Construct a new Violin object
-        
+
         In vertical (horizontal) violin plots, statistics are computed
         using `y` (`x`) values. By supplying an `x` (`y`) array, one
         violin per distinct x (y) value is drawn If no `x` (`y`) list

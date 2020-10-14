@@ -29,7 +29,7 @@ class Marker(_BaseTraceHierarchyType):
         color or an array of numbers that are mapped to the colorscale
         relative to the max and min values of the array or relative to
         `marker.cmin` and `marker.cmax` if set.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -89,7 +89,7 @@ class Marker(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  color .
-    
+
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -110,7 +110,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Area traces are deprecated! Please switch to the "barpolar"
         trace type. Sets the marker opacity.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -131,7 +131,7 @@ class Marker(_BaseTraceHierarchyType):
     def opacitysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  opacity .
-    
+
         The 'opacitysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -152,7 +152,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Area traces are deprecated! Please switch to the "barpolar"
         trace type. Sets the marker size (in px).
-    
+
         The 'size' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -173,7 +173,7 @@ class Marker(_BaseTraceHierarchyType):
     def sizesrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  size .
-    
+
         The 'sizesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -198,7 +198,7 @@ class Marker(_BaseTraceHierarchyType):
         equivalent to appending "-dot" to a symbol name. Adding 300 is
         equivalent to appending "-open-dot" or "dot-open" to a symbol
         name.
-    
+
         The 'symbol' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [0, '0', 'circle', 100, '100', 'circle-open', 200, '200',
@@ -306,7 +306,7 @@ class Marker(_BaseTraceHierarchyType):
     def symbolsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  symbol .
-    
+
         The 'symbolsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -374,7 +374,7 @@ class Marker(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Marker object
-        
+
         Parameters
         ----------
         arg

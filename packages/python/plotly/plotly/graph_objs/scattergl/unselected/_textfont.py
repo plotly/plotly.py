@@ -17,7 +17,7 @@ class Textfont(_BaseTraceHierarchyType):
         """
         Sets the text font color of unselected points, applied only
         when a selection exists.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -83,7 +83,7 @@ class Textfont(_BaseTraceHierarchyType):
     def __init__(self, arg=None, color=None, **kwargs):
         """
         Construct a new Textfont object
-        
+
         Parameters
         ----------
         arg

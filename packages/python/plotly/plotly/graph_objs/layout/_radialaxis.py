@@ -27,20 +27,20 @@ class RadialAxis(_BaseLayoutHierarchyType):
     @property
     def domain(self):
         """
-        Polar chart subplots are not supported yet. This key has
-        currently no effect.
-    
-        The 'domain' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'domain[0]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
-    (1) The 'domain[1]' property is a number and may be specified as:
-          - An int or float in the interval [0, 1]
+            Polar chart subplots are not supported yet. This key has
+            currently no effect.
 
-        Returns
-        -------
-        list
+            The 'domain' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'domain[0]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+        (1) The 'domain[1]' property is a number and may be specified as:
+              - An int or float in the interval [0, 1]
+
+            Returns
+            -------
+            list
         """
         return self["domain"]
 
@@ -55,7 +55,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots.
-    
+
         The 'endpadding' property is a number and may be specified as:
           - An int or float
 
@@ -77,7 +77,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the orientation (an angle with respect to the
         origin) of the radial axis.
-    
+
         The 'orientation' property is a number and may be specified as:
           - An int or float
 
@@ -96,20 +96,20 @@ class RadialAxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Legacy polar charts are deprecated! Please switch to "polar"
-        subplots. Defines the start and end point of this radial axis.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            Legacy polar charts are deprecated! Please switch to "polar"
+            subplots. Defines the start and end point of this radial axis.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -125,7 +125,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Determines whether or not the line bounding this
         radial axis will be shown on the figure.
-    
+
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -147,7 +147,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Determines whether or not the radial axis ticks will
         feature tick labels.
-    
+
         The 'showticklabels' property must be specified as a bool
         (either True, or False)
 
@@ -168,7 +168,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the color of the tick lines on this radial axis.
-    
+
         The 'tickcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -229,7 +229,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the length of the tick lines on this radial
         axis.
-    
+
         The 'ticklen' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -251,7 +251,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the orientation (from the paper perspective) of
         the radial axis tick labels.
-    
+
         The 'tickorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['horizontal', 'vertical']
@@ -274,7 +274,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the length of the tick lines on this radial
         axis.
-    
+
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -296,7 +296,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
         """
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Determines whether or not this axis will be visible.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -377,7 +377,7 @@ class RadialAxis(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new RadialAxis object
-        
+
         Parameters
         ----------
         arg

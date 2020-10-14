@@ -71,7 +71,7 @@ class Cone(_BaseTraceType):
         Sets the cones' anchor with respect to their x/y/z positions.
         Note that "cm" denote the cone's center of mass which
         corresponds to 1/4 from the tail to tip.
-    
+
         The 'anchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['tip', 'tail', 'cm', 'center']
@@ -97,7 +97,7 @@ class Cone(_BaseTraceType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-    
+
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -120,7 +120,7 @@ class Cone(_BaseTraceType):
         respect to the input data (here u/v/w norm) or the bounds set
         in `cmin` and `cmax`  Defaults to `false` when `cmin` and
         `cmax` are set by the user.
-    
+
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -142,7 +142,7 @@ class Cone(_BaseTraceType):
         Sets the upper bound of the color domain. Value should have the
         same units as u/v/w norm and if set, `cmin` must be set as
         well.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -165,7 +165,7 @@ class Cone(_BaseTraceType):
         `cmax` to be equidistant to this point. Value should have the
         same units as u/v/w norm. Has no effect when `cauto` is
         `false`.
-    
+
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -187,7 +187,7 @@ class Cone(_BaseTraceType):
         Sets the lower bound of the color domain. Value should have the
         same units as u/v/w norm and if set, `cmax` must be set as
         well.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -212,7 +212,7 @@ class Cone(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-    
+
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -238,9 +238,9 @@ class Cone(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.cone.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-    
+
             Supported dict properties:
-                
+
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -474,14 +474,14 @@ class Cone(_BaseTraceType):
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
         ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
         ridis,Cividis.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1), 
+            normalized color level value (starting at 0 and ending at 1),
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -520,7 +520,7 @@ class Cone(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -541,7 +541,7 @@ class Cone(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -563,7 +563,7 @@ class Cone(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'u', 'v', 'w', 'norm', 'text', 'name'] joined with '+' characters
@@ -588,7 +588,7 @@ class Cone(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -612,9 +612,9 @@ class Cone(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.cone.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -686,7 +686,7 @@ class Cone(_BaseTraceType):
         secondary box, for example "<extra>{fullData.name}</extra>". To
         hide the secondary box completely, use an empty tag
         `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -709,7 +709,7 @@ class Cone(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -729,7 +729,7 @@ class Cone(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -752,7 +752,7 @@ class Cone(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -774,7 +774,7 @@ class Cone(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -794,7 +794,7 @@ class Cone(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -816,7 +816,7 @@ class Cone(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -841,9 +841,9 @@ class Cone(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.cone.Lighting`
           - A dict of string/value properties that will be passed
             to the Lighting constructor
-    
+
             Supported dict properties:
-                
+
                 ambient
                     Ambient light increases overall color
                     visibility but can wash out the image.
@@ -889,9 +889,9 @@ class Cone(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.cone.Lightposition`
           - A dict of string/value properties that will be passed
             to the Lightposition constructor
-    
+
             Supported dict properties:
-                
+
                 x
                     Numeric vector, representing the X coordinate
                     for each vertex.
@@ -927,7 +927,7 @@ class Cone(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -946,7 +946,7 @@ class Cone(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -967,7 +967,7 @@ class Cone(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -993,7 +993,7 @@ class Cone(_BaseTraceType):
         an overlay of multiple transparent surfaces may not perfectly
         be sorted in depth by the webgl API. This behavior may be
         improved in the near future and is subject to change.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1015,7 +1015,7 @@ class Cone(_BaseTraceType):
         Reverses the color mapping if true. If true, `cmin` will
         correspond to the last color in the array and `cmax` will
         correspond to the first color.
-    
+
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -1038,7 +1038,7 @@ class Cone(_BaseTraceType):
         a 3D scene. If "scene" (the default value), the (x,y,z)
         coordinates refer to `layout.scene`. If "scene2", the (x,y,z)
         coordinates refer to `layout.scene2`, and so on.
-    
+
         The 'scene' property is an identifier of a particular
         subplot, of type 'scene', that may be specified as the string 'scene'
         optionally followed by an integer >= 1
@@ -1061,7 +1061,7 @@ class Cone(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1082,7 +1082,7 @@ class Cone(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-    
+
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -1105,7 +1105,7 @@ class Cone(_BaseTraceType):
         unitless) scalar (normalized by the max u/v/w norm in the
         vector field) or as "absolute" value (in the same units as the
         vector field).
-    
+
         The 'sizemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['scaled', 'absolute']
@@ -1135,7 +1135,7 @@ class Cone(_BaseTraceType):
         With `sizemode` set to "absolute", `sizeref` has the same units
         as the u/v/w vector field, its the default value is half the
         sample's maximum vector norm.
-    
+
         The 'sizeref' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1159,9 +1159,9 @@ class Cone(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.cone.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1190,7 +1190,7 @@ class Cone(_BaseTraceType):
         Sets the text elements associated with the cones. If trace
         `hoverinfo` contains a "text" flag and "hovertext" is not set,
         these elements will be seen in the hover labels.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1212,7 +1212,7 @@ class Cone(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1232,7 +1232,7 @@ class Cone(_BaseTraceType):
     def u(self):
         """
         Sets the x components of the vector field.
-    
+
         The 'u' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1253,7 +1253,7 @@ class Cone(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1288,7 +1288,7 @@ class Cone(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1307,7 +1307,7 @@ class Cone(_BaseTraceType):
     def usrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  u .
-    
+
         The 'usrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1327,7 +1327,7 @@ class Cone(_BaseTraceType):
     def v(self):
         """
         Sets the y components of the vector field.
-    
+
         The 'v' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1349,7 +1349,7 @@ class Cone(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1370,7 +1370,7 @@ class Cone(_BaseTraceType):
     def vsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  v .
-    
+
         The 'vsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1390,7 +1390,7 @@ class Cone(_BaseTraceType):
     def w(self):
         """
         Sets the z components of the vector field.
-    
+
         The 'w' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1410,7 +1410,7 @@ class Cone(_BaseTraceType):
     def wsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  w .
-    
+
         The 'wsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1431,7 +1431,7 @@ class Cone(_BaseTraceType):
         """
         Sets the x coordinates of the vector field and of the displayed
         cones.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1451,7 +1451,7 @@ class Cone(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1472,7 +1472,7 @@ class Cone(_BaseTraceType):
         """
         Sets the y coordinates of the vector field and of the displayed
         cones.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1492,7 +1492,7 @@ class Cone(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1513,7 +1513,7 @@ class Cone(_BaseTraceType):
         """
         Sets the z coordinates of the vector field and of the displayed
         cones.
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1533,7 +1533,7 @@ class Cone(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1867,7 +1867,7 @@ class Cone(_BaseTraceType):
     ):
         """
         Construct a new Cone object
-        
+
         Use cone traces to visualize vector fields.  Specify a vector
         field using 6 1D arrays, 3 position arrays `x`, `y` and `z` and
         3 vector component arrays `u`, `v`, `w`. The cones are drawn

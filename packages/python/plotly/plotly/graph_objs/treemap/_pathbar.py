@@ -17,7 +17,7 @@ class Pathbar(_BaseTraceHierarchyType):
         """
         Determines which shape is used for edges between `barpath`
         labels.
-    
+
         The 'edgeshape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['>', '<', '|', '\\']
@@ -41,7 +41,7 @@ class Pathbar(_BaseTraceHierarchyType):
         """
         Determines on which side of the the treemap the `pathbar`
         should be presented.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'bottom']
@@ -62,17 +62,17 @@ class Pathbar(_BaseTraceHierarchyType):
     def textfont(self):
         """
         Sets the font used inside `pathbar`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.treemap.pathbar.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -97,7 +97,7 @@ class Pathbar(_BaseTraceHierarchyType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -120,7 +120,7 @@ class Pathbar(_BaseTraceHierarchyType):
         Sets the thickness of `pathbar` (in px). If not specified the
         `pathbar.textfont.size` is used with 3 pixles extra padding on
         each side.
-    
+
         The 'thickness' property is a number and may be specified as:
           - An int or float in the interval [12, inf]
 
@@ -141,7 +141,7 @@ class Pathbar(_BaseTraceHierarchyType):
         """
         Determines if the path bar is drawn i.e. outside the trace
         `domain` and with one pixel gap.
-    
+
         The 'visible' property must be specified as a bool
         (either True, or False)
 
@@ -189,7 +189,7 @@ class Pathbar(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Pathbar object
-        
+
         Parameters
         ----------
         arg
