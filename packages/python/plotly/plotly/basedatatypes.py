@@ -3957,6 +3957,7 @@ class BasePlotlyType(object):
         # ----------------
         if prop and prop[0] in self._mapped_properties:
             prop = self._mapped_properties[prop[0]] + prop[1:]
+            orig_prop = _remake_path_from_tuple(prop)
 
         # Handle scalar case
         # ------------------
