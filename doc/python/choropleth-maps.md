@@ -166,7 +166,7 @@ fig.show()
 
 ### Using GeoPandas Data Frames
 
-`px.choropleth` accepts the `geometry` of a GeoPandas data frame as the input to `geojson`.
+`px.choropleth` accepts the `geometry` of a GeoPandas data frame as the input to `geojson` if the `geometry` contains polygons.
 
 ```python
 import plotly.express as px
