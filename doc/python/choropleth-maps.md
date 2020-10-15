@@ -166,23 +166,19 @@ fig.show()
 
 ### Using GeoPandas Data Frames
 
-`px.choropleth` accepts the `geometry` of a GeoPandas data frame as the input to `geojson` if the `geometry` contains polygons.
+`px.choropleth` accepts the `geometry` of a [GeoPandas](https://geopandas.org/) data frame as the input to `geojson` if the `geometry` contains polygons.
 
 ```python
 import plotly.express as px
 import geopandas as gpd
-import wget
 
-# download and load a zipped shapefile into a GeoDataFrame
-wget.download("https://plotly.github.io/datasets/nyc_boroughs.zip")
-geo_df = gpd.read_file("zip://nyc_boroughs.zip")
+geo_df = gpd.read_file(gpd.datasets.get_path('nybb')).to_crs("EPSG:4326")
 
-
-fig = px.choropleth(geo_df, 
+fig = px.choropleth(geo_df,
                    geojson=geo_df.geometry,
-                   locations=geo_df.index, 
-                   color='shape_leng',
-                   hover_name="boro_name")
+                   locations=geo_df.index,
+                   color='Shape_Leng',
+                   hover_name="BoroName")
 fig.update_geos(fitbounds="locations", visible=False)
 fig.show()
 ```
