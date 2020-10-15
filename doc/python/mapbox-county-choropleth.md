@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
@@ -136,6 +136,30 @@ fig = px.choropleth_mapbox(df, geojson=geojson, color="Bergeron",
                            center={"lat": 45.5517, "lon": -73.7073},
                            mapbox_style="carto-positron", zoom=9)
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
+### Using GeoPandas Data Frames
+
+`px.choropleth_mapbox` accepts the `geometry` of a GeoPandas data frame as the input to `geojson`.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+import wget
+
+# download and load a zipped shapefile into a GeoDataFrame
+wget.download("https://plotly.github.io/datasets/nyc_boroughs.zip")
+geo_df = gpd.read_file("zip://nyc_boroughs.zip")
+
+fig = px.choropleth_mapbox(geo_df, 
+                           geojson=geo_df.geometry,
+                           locations=geo_df.index, 
+                           color='shape_leng',
+                           hover_name="boro_name",
+                           center={"lat": 40.71, "lon": -74.00},
+                           mapbox_style="open-street-map",
+                           zoom=8)
 fig.show()
 ```
 
