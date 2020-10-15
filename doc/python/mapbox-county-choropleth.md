@@ -139,9 +139,27 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
+### Discrete Colors
+
+In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
+
+```python
+import plotly.express as px
+
+df = px.data.election()
+geojson = px.data.election_geojson()
+
+fig = px.choropleth_mapbox(df, geojson=geojson, color="winner",
+                           locations="district", featureidkey="properties.district",
+                           center={"lat": 45.5517, "lon": -73.7073},
+                           mapbox_style="carto-positron", zoom=9)
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig.show()
+```
+
 ### Using GeoPandas Data Frames
 
-`px.choropleth_mapbox` accepts the `geometry` of a GeoPandas data frame as the input to `geojson`.
+`px.choropleth_mapbox` accepts the `geometry` of a GeoPandas data frame as the input to `geojson` if the `geometry` contains polygons.
 
 ```python
 import plotly.express as px
@@ -160,24 +178,6 @@ fig = px.choropleth_mapbox(geo_df,
                            center={"lat": 40.71, "lon": -74.00},
                            mapbox_style="open-street-map",
                            zoom=8)
-fig.show()
-```
-
-### Discrete Colors
-
-In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
-
-```python
-import plotly.express as px
-
-df = px.data.election()
-geojson = px.data.election_geojson()
-
-fig = px.choropleth_mapbox(df, geojson=geojson, color="winner",
-                           locations="district", featureidkey="properties.district",
-                           center={"lat": 45.5517, "lon": -73.7073},
-                           mapbox_style="carto-positron", zoom=9)
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
