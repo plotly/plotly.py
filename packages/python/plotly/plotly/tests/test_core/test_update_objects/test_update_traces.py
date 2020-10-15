@@ -225,6 +225,43 @@ class TestSelectForEachUpdateTraces(TestCase):
         # Valid row/col and valid selector but the intersection is empty
         self.assert_select_traces([], selector={"type": "markers"}, row=3, col=1)
 
+    def test_select_with_function(self):
+        def _check_trace_key(k, v):
+            def f(t):
+                try:
+                    return t[k] == v
+                except LookupError:
+                    return False
+
+            return f
+
+        # (1, 1)
+        self.assert_select_traces(
+            [0], selector=_check_trace_key("mode", "markers"), row=1, col=1
+        )
+        self.assert_select_traces(
+            [1], selector=_check_trace_key("type", "bar"), row=1, col=1
+        )
+
+        # (2, 1)
+        self.assert_select_traces(
+            [2, 9], selector=_check_trace_key("mode", "lines"), row=2, col=1
+        )
+
+        # (1, 2)
+        self.assert_select_traces(
+            [4], selector=_check_trace_key("marker.color", "green"), row=1, col=2
+        )
+
+        # Valid row/col and valid selector but the intersection is empty
+        self.assert_select_traces(
+            [], selector=_check_trace_key("type", "markers"), row=3, col=1
+        )
+
+    def test_select_traces_type_error(self):
+        with self.assertRaises(TypeError):
+            self.assert_select_traces([0], selector=123, row=1, col=1)
+
     def test_for_each_trace_lowercase_names(self):
         # Names are all uppercase to start
         original_names = [t.name for t in self.fig.data]

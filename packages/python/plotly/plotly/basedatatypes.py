@@ -804,10 +804,19 @@ class BaseFigure(object):
                     continue
 
             # Filter by selector
-            if not self._selector_matches(trace, selector):
-                continue
-
-            yield trace
+            # If selector is a dict, call self._selector_matches
+            if type(selector) == type(dict()):
+                trace_matches = self._selector_matches(trace, selector)
+            # If selector is a function, call it with the trace as the argument
+            elif type(selector) == type(lambda x: True):
+                trace_matches = selector(trace)
+            else:
+                raise TypeError(
+                    "selector must be dict or a function "
+                    "accepting a trace returning a boolean."
+                )
+            if trace_matches:
+                yield trace
 
     @staticmethod
     def _selector_matches(obj, selector):
