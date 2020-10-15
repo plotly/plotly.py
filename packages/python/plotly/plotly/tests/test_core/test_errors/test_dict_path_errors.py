@@ -3,6 +3,11 @@ from _plotly_utils.exceptions import PlotlyKeyError
 import pytest
 
 
+def error_substr(s, r):
+    """ remove a part of the error message we don't want to compare """
+    return s.replace(r, "")
+
+
 @pytest.fixture
 def some_fig():
     fig = go.Figure()
@@ -66,8 +71,30 @@ def test_raises_on_bad_indexed_underscore_property(some_fig):
     # finds bad part when using the path as a key to figure and throws the error
     # for the last good property it found in the path
     try:
+        # get the error without using a path-like key, we compare with this error
+        some_fig.data[0].line["colr"] = "blue"
+    except ValueError as e_correct:
+        # remove "Bad property path:
+        e_correct_substr = error_substr(
+            e_correct.args[0],
+            """
+Bad property path:
+colr
+^""",
+        )
+    # if the string starts with "Bad property path:" then this test cannot work
+    # this way.
+    assert len(e_correct_substr) > 0
+    try:
         some_fig["data[0].line_colr"] = "blue"
     except ValueError as e:
+        e_substr = error_substr(
+            e.args[0],
+            """
+Bad property path:
+data[0].line_colr
+             ^""",
+        )
         assert (
             (
                 e.args[0].find(
@@ -77,20 +104,33 @@ data[0].line_colr
                 )
                 >= 0
             )
-            and (
-                e.args[0].find(
-                    """Invalid property specified for object of type plotly.graph_objs.scatter.Line: 'colr'"""
-                )
-                >= 0
-            )
+            and (e_substr == e_correct_substr)
         )
 
+    try:
+        # get the error without using a path-like key
+        some_fig.add_trace(go.Scatter(x=[1, 2], y=[3, 4], line=dict(colr="blue")))
+    except ValueError as e_correct:
+        e_correct_substr = error_substr(
+            e_correct.args[0],
+            """
+Bad property path:
+colr
+^""",
+        )
     # finds bad part when using the path as a keyword argument to a subclass of
     # BasePlotlyType and throws the error for the last good property found in
     # the path
     try:
         some_fig.add_trace(go.Scatter(x=[1, 2], y=[3, 4], line_colr="blue"))
     except ValueError as e:
+        e_substr = error_substr(
+            e.args[0],
+            """
+Bad property path:
+line_colr
+     ^""",
+        )
         assert (
             (
                 e.args[0].find(
@@ -100,20 +140,42 @@ line_colr
                 )
                 >= 0
             )
-            and (
-                e.args[0].find(
-                    "Invalid property specified for object of type plotly.graph_objs.scatter.Line: 'colr'"
-                )
-                >= 0
-            )
+            and (e_substr == e_correct_substr)
         )
 
     # finds bad part when using the path as a keyword argument to a subclass of
     # BaseFigure and throws the error for the last good property found in
     # the path
     try:
+        fig2 = go.Figure(layout=dict(title=dict(txt="two")))
+    except ValueError as e_correct:
+        e_correct_substr = error_substr(
+            e_correct.args[0],
+            """
+Bad property path:
+txt
+^""",
+        )
+
+    try:
         fig2 = go.Figure(layout_title_txt="two")
     except TypeError as e:
+        # when the Figure constructor sees the same ValueError above, a
+        # TypeError is raised and adds an error message in front of the same
+        # ValueError thrown above
+        e_substr = error_substr(
+            e.args[0],
+            """
+Bad property path:
+layout_title_txt
+             ^""",
+        )
+        # also remove the invalid Figure property string added by the Figure constructor
+        e_substr = error_substr(
+            e_substr,
+            """invalid Figure property: layout_title_txt
+""",
+        )
         assert (
             (
                 e.args[0].find(
@@ -123,19 +185,31 @@ layout_title_txt
                 )
                 >= 0
             )
-            and (
-                e.args[0].find(
-                    """Invalid property specified for object of type plotly.graph_objs.layout.Title: 'txt'"""
-                )
-                >= 0
-            )
+            and (e_substr == e_correct_substr)
         )
 
     # this is like the above test for subclasses of BasePlotlyType but makes sure it
     # works when the bad part is not the last part in the path
     try:
+        some_fig.update_layout(geo=dict(ltaxis=dict(showgrid=True)))
+    except ValueError as e_correct:
+        e_correct_substr = error_substr(
+            e_correct.args[0],
+            """
+Bad property path:
+ltaxis
+^""",
+        )
+    try:
         some_fig.update_layout(geo_ltaxis_showgrid=True)
     except ValueError as e:
+        e_substr = error_substr(
+            e.args[0],
+            """
+Bad property path:
+geo_ltaxis_showgrid
+    ^       """,
+        )
         assert (
             (
                 e.args[0].find(
@@ -145,10 +219,5 @@ geo_ltaxis_showgrid
                 )
                 >= 0
             )
-            and (
-                e.args[0].find(
-                    """Invalid property specified for object of type plotly.graph_objs.layout.Geo: 'ltaxis'"""
-                )
-                >= 0
-            )
+            and (e_substr == e_correct_substr)
         )
