@@ -35,7 +35,7 @@ jupyter:
 
 ### Filled Area Chart
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape. 
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -53,7 +53,7 @@ fig = go.Figure(go.Scatter(x=[0,1,2,0,None,3,3,5,5,3], y=[0,2,0,0,None,0.5,1.5,1
 fig.show()
 ```
 
-#### Vertical and Horizontal Lines Positioned Relative to the Axes
+#### Vertical and Horizontal Lines Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -118,7 +118,7 @@ fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Lines Positioned Relative to the Plot & to the Axes
+#### Lines Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -227,7 +227,7 @@ fig.update_shapes(dict(
 fig.show()
 ```
 
-#### Rectangles Positioned Relative to the Axes
+#### Rectangles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -274,7 +274,7 @@ fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Rectangle Positioned Relative to the Plot & to the Axes
+#### Rectangle Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -325,6 +325,38 @@ fig.add_shape(
             ),
             fillcolor="PaleTurquoise",
         )
+
+fig.show()
+```
+
+#### A Rectangle Placed Relative to the Axis Position and Length
+
+A shape can be placed relative to an axis's position on the plot by adding the
+string `' domain'` to the axis reference in the `xref` or `yref` attributes for
+shapes.
+The following code places a rectangle that starts at 60% and ends at 70% along
+the x-axis, starting from the left, and starts at 80% and ends at 90% along the
+y-axis, starting from the bottom.
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
+
+# Add a shape whose x and y coordinates refer to the domains of the x and y axes
+fig.add_shape(
+    type="rect",
+    xref="x domain",
+    yref="y domain",
+    x0=0.6,
+    x1=0.7,
+    y0=0.8,
+    y1=0.9,
+)
 
 fig.show()
 ```
@@ -389,7 +421,7 @@ fig.update_layout(
 fig.show()
 ```
 
-#### Circles Positioned Relative to the Axes
+#### Circles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -641,7 +673,7 @@ fig.add_trace(go.Bar(x=[11,13,15], y=[8,11,20]), row=2, col=2)
 # Add shapes
 fig.update_layout(
     shapes=[
-        dict(type="line", xref="x1", yref="y1",
+        dict(type="line", xref="x", yref="y",
             x0=3, y0=0.5, x1=5, y1=0.8, line_width=3),
         dict(type="rect", xref="x2", yref='y2',
              x0=4, y0=2, x1=5, y1=6),
@@ -651,6 +683,33 @@ fig.update_layout(
              x0=5, y0=12, x1=10, y1=18)])
 fig.show()
 ```
+
+#### Adding Shapes to Subplots
+The same shape can be added to mulitple facets by using the `'all'`
+keyword in the `row` and `col` arguments. For example
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", facet_row="smoker", facet_col="sex")
+# Adds a rectangle to all facets
+fig.add_shape(
+    dict(type="rect", x0=25, x1=35, y0=4, y1=6, line_color="purple"),
+    row="all",
+    col="all",
+)
+# Adds a line to all the rows of the second column
+fig.add_shape(
+    dict(type="line", x0=20, x1=25, y0=5, y1=6, line_color="yellow"), row="all", col=2
+)
+
+# Adds a circle to all the columns of the first row
+fig.add_shape(
+    dict(type="circle", x0=10, y0=2, x1=20, y1=7), row=1, col="all", line_color="green"
+)
+fig.show()
+```
+
 
 #### SVG Paths
 
@@ -724,14 +783,14 @@ You can create layout shapes programatically, but you can also draw shapes manua
 
 This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
 
-Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can 
+Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 - drag and resize it for lines, rectangles and circles/ellipses
 - drag and move individual vertices for closed paths
 - move individual vertices for open paths.
 
-An activated shape is deleted by cliking on the `eraseshape` button.
+An activated shape is deleted by clicking on the `eraseshape` button.
 
-Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
 ```python
 import plotly.graph_objects as go
@@ -749,7 +808,7 @@ fig.add_annotation(
 # shape defined programatically
 fig.add_shape(editable=True,
               x0=-1, x1=0, y0=2, y1=3,
-              xref='x1', yref='y1')
+              xref='x', yref='y')
 # define dragmode and add modebar buttons
 fig.update_layout(dragmode='drawrect')
 fig.show(config={'modeBarButtonsToAdd':['drawline',
@@ -786,7 +845,7 @@ fig.add_shape(line_color='yellow',
               opacity=0.4,
               editable=True,
               x0=0, x1=1, y0=2, y1=3,
-              xref='x1', yref='y1'
+              xref='x', yref='y'
 )
 fig.update_layout(dragmode='drawrect',
                   # style of new shapes
@@ -804,3 +863,31 @@ fig.show(config={'modeBarButtonsToAdd':['drawline',
 
 ### Reference
 See https://plotly.com/python/reference/layout/shapes/ for more information and chart attribute options!
+
+<!-- #region -->
+### What About Dash?
+
+[Dash](https://dash.plot.ly/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash at https://dash.plot.ly/installation.
+
+Everywhere in this page that you see `fig.show()`, you can display the same figure in a Dash application by passing it to the `figure` argument of the [`Graph` component](https://dash.plot.ly/dash-core-components/graph) from the built-in `dash_core_components` package like this:
+
+```python
+import plotly.graph_objects as go # or plotly.express as px
+fig = go.Figure() # or any Plotly Express function e.g. px.bar(...)
+# fig.add_trace( ... )
+# fig.update_layout( ... )
+
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+
+app = dash.Dash()
+app.layout = html.Div([
+    dcc.Graph(figure=fig)
+])
+
+app.run_server(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter
+```
+<!-- #endregion -->
