@@ -172,6 +172,10 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             parentssrc
                 Sets the source reference on Chart Studio Cloud
                 for  parents .
+            rotation
+                Rotates the whole diagram counterclockwise by
+                some angle. By default the first slice starts
+                at 3 o'clock.
             sort
                 Determines whether or not the sectors are
                 reordered from largest to smallest.
