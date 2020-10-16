@@ -640,7 +640,7 @@ The row_titles argument to make_subplots must be a list or tuple
     # Check to see that number of rows and columns does not conflict with
     # requested vertical_spacing and horizontal_spacing
     def _check_row_col_spacing(n, spacing):
-        if (n > 1) and (spacing > (1 / (n - 1))):
+        if (n > 1) and (spacing > (1.0 / (n - 1))):
             return False
         return True
 

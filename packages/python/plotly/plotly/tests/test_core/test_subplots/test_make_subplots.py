@@ -116,7 +116,7 @@ class TestMakeSubplots(TestCase):
 
     def test_bad_row_spacing(self):
         with self.assertRaises(ValueError) as cm:
-            tls.make_subplots(rows=3, vertical_spacing=1 / 2 + 1e-6)
+            tls.make_subplots(rows=3, vertical_spacing=1.0 / 2.0 + 1e-6)
             assert (
                 cm.exception.args[0]
                 == "Vertical spacing must be less than or equal to 1 / (rows - 1)."
@@ -124,7 +124,7 @@ class TestMakeSubplots(TestCase):
 
     def test_bad_col_spacing(self):
         with self.assertRaises(ValueError) as cm:
-            tls.make_subplots(cols=3, horizontal_spacing=1 / 2 + 1e-6)
+            tls.make_subplots(cols=3, horizontal_spacing=1.0 / 2.0 + 1e-6)
             assert (
                 cm.exception.args[0]
                 == "Horizontal spacing must be less than or equal to 1 / (cols - 1)."
