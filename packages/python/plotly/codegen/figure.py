@@ -144,16 +144,18 @@ class {fig_classname}({base_classname}):\n"""
 
         doc_extras = [
             (
-                "row : int or None (default)",
+                "row : 'all', int or None (default)",
                 "Subplot row index (starting from 1) for the trace to be "
                 "added. Only valid if figure was created using "
-                "`plotly.tools.make_subplots`",
+                "`plotly.tools.make_subplots`."
+                "If 'all', addresses all rows in the specified column(s).",
             ),
             (
-                "col : int or None (default)",
+                "col : 'all', int or None (default)",
                 "Subplot col index (starting from 1) for the trace to be "
                 "added. Only valid if figure was created using "
-                "`plotly.tools.make_subplots`",
+                "`plotly.tools.make_subplots`."
+                "If 'all', addresses all columns in the specified row(s).",
             ),
         ]
 
@@ -550,8 +552,14 @@ class {fig_classname}({base_classname}):\n"""
             )
         ]
         append_extras = [
-            ("row", f"Subplot row for {singular_name}"),
-            ("col", f"Subplot column for {singular_name}"),
+            (
+                "row",
+                f"Subplot row for {singular_name}. If 'all', addresses all rows in the specified column(s).",
+            ),
+            (
+                "col",
+                f"Subplot column for {singular_name}. If 'all', addresses all columns in the specified row(s).",
+            ),
             ("secondary_y", f"Whether to add {singular_name} to secondary y-axis"),
         ]
         add_docstring(

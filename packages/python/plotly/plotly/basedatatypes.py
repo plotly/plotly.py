@@ -8,14 +8,150 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
+import itertools
 
 from _plotly_utils.utils import _natural_sort_strings, _get_int_type
 from .optional_imports import get_module
+
+from . import shapeannotation
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
+
+
+def _unzip_pairs(pairs):
+    pairs = list(pairs)
+    return ([t[0] for t in pairs], [t[1] for t in pairs])
+
+
+def _combine_dicts(dicts):
+    all_args = dict()
+    for d in dicts:
+        for k in d:
+            all_args[k] = d[k]
+    return all_args
+
+
+def _indexing_combinations(dims, alls, product=False):
+    """
+    Gives indexing tuples specified by the coordinates in dims.
+    If a member of dims is 'all' then it is replaced by the corresponding member
+    in alls.
+    If product is True, then the cartesian product of all the indices is
+    returned, otherwise the zip (that means index lists of mis-matched length
+    will yield a list of tuples whose length is the length of the shortest
+    list).
+    """
+    if len(dims) == 0:
+        # this is because list(itertools.product(*[])) returns [()] which has non-zero
+        # length!
+        return []
+    if len(dims) != len(alls):
+        raise ValueError(
+            "Must have corresponding values in alls for each value of dims. Got dims=%s and alls=%s."
+            % (str(dims), str(alls))
+        )
+    r = []
+    for d, a in zip(dims, alls):
+        if d == "all":
+            d = a
+        elif type(d) != type(list()):
+            d = [d]
+        r.append(d)
+    if product:
+        return itertools.product(*r)
+    else:
+        return zip(*r)
+
+
+def _is_select_subplot_coordinates_arg(*args):
+    """ Returns true if any args are lists or the string 'all' """
+    return any((a == "all") or (type(a) == type(list())) for a in args)
+
+
+def _axis_spanning_shapes_docstr(shape_type):
+    docstr = ""
+    if shape_type == "hline":
+        docstr = """
+Add a horizontal line to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y: float or int
+    A number representing the y coordinate of the horizontal line."""
+    elif shape_type == "vline":
+        docstr = """
+Add a vertical line to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x: float or int
+    A number representing the x coordinate of the vertical line."""
+    elif shape_type == "hrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y0: float or int
+    A number representing the y coordinate of one side of the rectangle.
+y1: float or int
+    A number representing the y coordinate of the other side of the rectangle."""
+    elif shape_type == "vrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x0: float or int
+    A number representing the x coordinate of one side of the rectangle.
+x1: float or int
+    A number representing the x coordinate of the other side of the rectangle."""
+    docstr += """
+row: None, int or 'all'
+    Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+col: None, int or 'all'
+    Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+    it is interpreted as describing an annotation. The annotation is
+    placed relative to the shape based on annotation_position (see
+    below) unless its x or y value has been specified for the annotation
+    passed here. xref and yref are always the same as for the added
+    shape and cannot be overridden."""
+    if shape_type in ["hline", "vline"]:
+        docstr += """
+annotation_position: a string containing optionally ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the line. Example positions are "bottom left", "right top",
+    "right", "bottom". If an annotation is added but annotation_position is
+    not specified, this defaults to "top right"."""
+    elif shape_type in ["hrect", "vrect"]:
+        docstr += """
+annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the rectangle. Example positions are "outside top left", "inside
+    bottom", "right", "inside left", "inside" ("outside" is not supported). If
+    an annotation is added but annotation_position is not specified this
+    defaults to "inside top right"."""
+    docstr += """
+annotation_*: any parameters to go.layout.Annotation can be passed as
+    keywords by prefixing them with "annotation_". For example, to specify the
+    annotation text "example" you can pass annotation_text="example" as a
+    keyword argument.
+**kwargs:
+    Any named function parameters that can be passed to 'add_shape',
+    except for x0, x1, y0, y1 or type."""
+    return docstr
 
 
 class BaseFigure(object):
@@ -1091,11 +1227,36 @@ class BaseFigure(object):
                 "row and col must be specified together"
             )
 
+        # Address multiple subplots
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO product argument could be added
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
+                self._add_annotation_like(
+                    prop_singular,
+                    prop_plural,
+                    new_obj,
+                    row=r,
+                    col=c,
+                    secondary_y=secondary_y,
+                )
+            return self
+
         # Get grid_ref if specific row or column requested
         if row is not None:
             grid_ref = self._validate_get_grid_ref()
+            if row > len(grid_ref):
+                raise IndexError(
+                    "row index %d out-of-bounds, row index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref))
+                )
+            if col > len(grid_ref[row - 1]):
+                raise IndexError(
+                    "column index %d out-of-bounds, "
+                    "column index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref[row - 1]))
+                )
             refs = grid_ref[row - 1][col - 1]
-
             if not refs:
                 raise ValueError(
                     "No subplot found at position ({r}, {c})".format(r=row, c=col)
@@ -1123,6 +1284,16 @@ because subplot does not have a secondary y-axis"""
             else:
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            # in case the user specified they wanted an axis to refer to the
+            # domain of that axis and not the data, append ' domain' to the
+            # computed axis accordingly
+            def _add_domain(ax_letter, new_axref):
+                axref = ax_letter + "ref"
+                if axref in new_obj._props.keys() and "domain" in new_obj[axref]:
+                    new_axref += " domain"
+                return new_axref
+
+            xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
@@ -1585,14 +1756,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        row : int or None (default None)
-            Subplot row index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
-        col : int or None (default None)
-            Subplot col index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -1644,6 +1817,14 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 "Received col parameter but not row.\n"
                 "row and col must be specified together"
             )
+
+        # Address multiple subplots
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO add product argument
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
+                self.add_trace(trace, row=r, col=c, secondary_y=secondary_y)
+            return self
 
         return self.add_traces(
             data=[trace],
@@ -1862,6 +2043,47 @@ Please use the add_trace method with the row and col parameters.
                 "to create the figure with a subplot grid."
             )
         return grid_ref
+
+    def _get_subplot_rows_columns(self):
+        """
+        Returns a pair of lists, the first containing all the row indices and
+        the second all the column indices.
+        """
+        # currently, this just iterates over all the rows and columns (because
+        # self._grid_ref is currently always rectangular)
+        grid_ref = self._validate_get_grid_ref()
+        nrows = len(grid_ref)
+        ncols = len(grid_ref[0])
+        return (range(1, nrows + 1), range(1, ncols + 1))
+
+    def _get_subplot_coordinates(self):
+        """
+        Returns an iterator over (row,col) pairs representing all the possible
+        subplot coordinates.
+        """
+        return itertools.product(*self._get_subplot_rows_columns())
+
+    def _select_subplot_coordinates(self, rows, cols, product=False):
+        """
+        Allows selecting all or a subset of the subplots.
+        If any of rows or columns is 'all', product is set to True. This is
+        probably the expected behaviour, so that rows=1,cols='all' selects all
+        the columns in row 1 (otherwise it would just select the subplot in the
+        first row and first column).
+        """
+        product |= any([s == "all" for s in [rows, cols]])
+        # TODO: If grid_ref ever becomes non-rectangular, then t should be the
+        # set-intersection of the result of _indexing_combinations and
+        # _get_subplot_coordinates, because some coordinates given by
+        # the _indexing_combinations function might be invalid.
+        t = _indexing_combinations(
+            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
+        )
+        t = list(t)
+        # remove rows and cols where the subplot is "None"
+        grid_ref = self._validate_get_grid_ref()
+        t = list(filter(lambda u: grid_ref[u[0] - 1][u[1] - 1] is not None, t))
+        return t
 
     def get_subplot(self, row, col, secondary_y=False):
         """
@@ -3410,6 +3632,203 @@ Invalid property path '{key_path_str}' for layout
             raise ValueError("Invalid value")
 
         return index_list[0]
+
+    def _make_axis_spanning_layout_object(
+        self, direction, shape, none_if_no_trace=True
+    ):
+        """
+        Convert a shape drawn on a plot or a subplot into one whose yref or xref
+        ends with " domain" and has coordinates so that the shape will seem to
+        extend infinitely in that dimension. This is useful for drawing lines or
+        boxes on a plot where one dimension of the shape will not move out of
+        bounds when moving the plot's view.
+        Note that the shape already added to the (sub)plot must have the
+        corresponding axis reference referring to an actual axis (e.g., 'x',
+        'y2' etc. are accepted, but not 'paper'). This will be the case if the
+        shape was added with "add_shape".
+        Shape must have the x0, x1, y0, y1 fields already initialized.
+        """
+        if direction == "vertical":
+            # fix y points to top and bottom of subplot
+            axis = "y"
+            ref = "yref"
+            axis_layout_key_template = "yaxis%s"
+        elif direction == "horizontal":
+            # fix x points to left and right of subplot
+            axis = "x"
+            ref = "xref"
+            axis_layout_key_template = "xaxis%s"
+        else:
+            raise ValueError(
+                "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
+                % (direction,)
+            )
+        if none_if_no_trace:
+            # iterate through all the traces and check to see if one with the
+            # same xref and yref pair is there, if not, we return None (we don't
+            # want to draw a shape if there is no trace)
+            if not any(
+                t == (shape["xref"], shape["yref"])
+                for t in [
+                    # if a trace exists but has no xaxis or yaxis keys, then it
+                    # is plotted with xaxis 'x' and yaxis 'y'
+                    (
+                        "x" if d["xaxis"] is None else d["xaxis"],
+                        "y" if d["yaxis"] is None else d["yaxis"],
+                    )
+                    for d in self.data
+                ]
+            ):
+                return None
+        # set the ref to "<axis_id> domain" so that its size is based on the
+        # axis's size
+        shape[ref] += " domain"
+        return shape
+
+    def _process_multiple_axis_spanning_shapes(
+        self,
+        shape_args,
+        row,
+        col,
+        shape_type,
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
+    ):
+        """
+        Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
+        all the new shapes.
+        """
+        if shape_type in ["vline", "vrect"]:
+            direction = "vertical"
+        elif shape_type in ["hline", "hrect"]:
+            direction = "horizontal"
+        else:
+            raise ValueError(
+                "Bad shape_type %s, needs to be one of 'vline', 'hline', 'vrect', 'hrect'"
+                % (shape_type,)
+            )
+        if (row is not None or col is not None) and (not self._has_subplots()):
+            # this has no subplots to address, so we force row and col to be None
+            row = None
+            col = None
+        n_shapes_before = len(self.layout["shapes"])
+        n_annotations_before = len(self.layout["annotations"])
+        # shapes are always added at the end of the tuple of shapes, so we see
+        # how long the tuple is before the call and after the call, and adjust
+        # the new shapes that were added at the end
+        # extract annotation prefixed kwargs
+        # annotation with extra parameters based on the annotation_position
+        # argument and other annotation_ prefixed kwargs
+        shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+            kwargs, "annotation_"
+        )
+        augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+            annotation, shape_type, shape_args, annotation_kwargs
+        )
+        self.add_shape(row=row, col=col, **_combine_dicts([shape_args, shape_kwargs]))
+        if augmented_annotation is not None:
+            self.add_annotation(augmented_annotation, row=row, col=col)
+        # update xref and yref for the new shapes and annotations
+        for layout_obj, n_layout_objs_before in zip(
+            ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
+        ):
+            n_layout_objs_after = len(self.layout[layout_obj])
+            if (n_layout_objs_after > n_layout_objs_before) and (
+                row == None and col == None
+            ):
+                # this was called intending to add to a single plot (and
+                # self.add_{layout_obj} succeeded)
+                # however, in the case of a single plot, xref and yref are not
+                # specified, so we specify them here so the following routines can work
+                # (they need to append " domain" to xref or yref)
+                self.layout[layout_obj][-1].update(xref="x", yref="y")
+            new_layout_objs = tuple(
+                filter(
+                    lambda x: x is not None,
+                    [
+                        self._make_axis_spanning_layout_object(
+                            direction,
+                            self.layout[layout_obj][n],
+                            none_if_no_trace=exclude_empty_subplots,
+                        )
+                        for n in range(n_layout_objs_before, n_layout_objs_after)
+                    ],
+                )
+            )
+            self.layout[layout_obj] = (
+                self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
+            )
+
+    def add_vline(
+        self,
+        x,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="line", x0=x, x1=x, y0=0, y1=1),
+            row,
+            col,
+            "vline",
+            exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
+            **kwargs
+        )
+        return self
+
+    add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
+
+    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="line", x0=0, x1=1, y0=y, y1=y,),
+            row,
+            col,
+            "hline",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
+
+    def add_vrect(
+        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
+            row,
+            col,
+            "vrect",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
+
+    def add_hrect(
+        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
+            row,
+            col,
+            "hrect",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
+
+    def _has_subplots(self):
+        """ Returns True if figure contains subplots, otherwise it contains a
+        single plot and so this returns False. """
+        return self._grid_ref is not None
 
 
 class BasePlotlyType(object):
