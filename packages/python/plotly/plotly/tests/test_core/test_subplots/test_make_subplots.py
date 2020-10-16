@@ -114,6 +114,19 @@ class TestMakeSubplots(TestCase):
         with self.assertRaises(Exception):
             tls.make_subplots(rows=2, cols=2, row_heights=[1])
 
+    def test_bad_row_spacing(self):
+        with self.assertRaisesRegex(
+            ValueError, "Vertical spacing must be less than or equal to 1 / (rows - 1)."
+        ):
+            tls.make_subplots(rows=3, vertical_spacing=1 / 2 + 1e-6)
+
+    def test_bad_col_spacing(self):
+        with self.assertRaisesRegex(
+            ValueError,
+            "Horizontal spacing must be less than or equal to 1 / (cols - 1).",
+        ):
+            tls.make_subplots(cols=3, horizontal_spacing=1 / 2 + 1e-6)
+
     def test_single_plot(self):
         expected = Figure(
             data=Data(),

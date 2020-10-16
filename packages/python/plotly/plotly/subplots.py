@@ -637,6 +637,21 @@ The row_titles argument to make_subplots must be a list or tuple
 
     max_subplot_ids = _get_initial_max_subplot_ids()
 
+    # Check to see that number of rows and columns does not conflict with
+    # requested vertical_spacing and horizontal_spacing
+    def _check_row_col_spacing(n, spacing):
+        if (n > 1) and (spacing > (1 / (n - 1))):
+            return False
+        return True
+
+    if not _check_row_col_spacing(rows, vertical_spacing):
+        raise ValueError(
+            "Vertical spacing must be less than or equal to 1 / (rows - 1)."
+        )
+    if not _check_row_col_spacing(cols, horizontal_spacing):
+        raise ValueError(
+            "Horizontal spacing must be less than or equal to 1 / (cols - 1)."
+        )
     # Loop through specs -- (r, c) <-> (row, col)
     for r, spec_row in enumerate(specs):
         for c, spec in enumerate(spec_row):
@@ -1350,9 +1365,9 @@ for the specs argument to plotly.subplots.make_subplots for more information.
             raise ValueError(
                 """\
 Trace type '{typ}' is not compatible with subplot type '{subplot_type}'
-at grid position ({row}, {col}) 
+at grid position ({row}, {col})
 
-See the docstring for the specs argument to plotly.subplots.make_subplots 
+See the docstring for the specs argument to plotly.subplots.make_subplots
 for more information on subplot types""".format(
                     typ=trace.type,
                     subplot_type=subplot_refs[0].subplot_type,
