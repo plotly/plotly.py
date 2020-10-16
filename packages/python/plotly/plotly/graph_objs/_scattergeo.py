@@ -66,7 +66,7 @@ class Scattergeo(_BaseTraceType):
         """
         Determines whether or not gaps (i.e. {nan} or missing values)
         in the provided data arrays are connected.
-
+    
         The 'connectgaps' property must be specified as a bool
         (either True, or False)
 
@@ -89,7 +89,7 @@ class Scattergeo(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -110,7 +110,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -133,7 +133,7 @@ class Scattergeo(_BaseTraceType):
         the items included in the `locations` array. Only has an effect
         when `geojson` is set. Support nested property, for example
         "properties.name".
-
+    
         The 'featureidkey' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -156,7 +156,7 @@ class Scattergeo(_BaseTraceType):
         Sets the area to fill with a solid color. Use with `fillcolor`
         if not "none". "toself" connects the endpoints of the trace (or
         each segment of the trace if it has gaps) into a closed shape.
-
+    
         The 'fill' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'toself']
@@ -179,7 +179,7 @@ class Scattergeo(_BaseTraceType):
         Sets the fill color. Defaults to a half-transparent variant of
         the line color, marker color, or marker line color, whichever
         is available.
-
+    
         The 'fillcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -241,7 +241,7 @@ class Scattergeo(_BaseTraceType):
         and a geographic map. If "geo" (the default value), the
         geospatial coordinates refer to `layout.geo`. If "geo2", the
         geospatial coordinates refer to `layout.geo2`, and so on.
-
+    
         The 'geo' property is an identifier of a particular
         subplot, of type 'geo', that may be specified as the string 'geo'
         optionally followed by an integer >= 1
@@ -268,7 +268,7 @@ class Scattergeo(_BaseTraceType):
         string. Note that we only accept GeoJSONs of type
         "FeatureCollection" or "Feature" with geometries of type
         "Polygon" or "MultiPolygon".
-
+    
         The 'geojson' property accepts values of any type
 
         Returns
@@ -289,7 +289,7 @@ class Scattergeo(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lon', 'lat', 'location', 'text', 'name'] joined with '+' characters
@@ -314,7 +314,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -338,9 +338,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -411,7 +411,7 @@ class Scattergeo(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-
+    
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -434,7 +434,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-
+    
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -459,7 +459,7 @@ class Scattergeo(_BaseTraceType):
         items are mapped in order to the this trace's (lon,lat) or
         `locations` coordinates. To be seen, trace `hoverinfo` must
         contain a "text" flag.
-
+    
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -482,7 +482,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-
+    
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -504,7 +504,7 @@ class Scattergeo(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -524,7 +524,7 @@ class Scattergeo(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -544,7 +544,7 @@ class Scattergeo(_BaseTraceType):
     def lat(self):
         """
         Sets the latitude coordinates (in degrees North).
-
+    
         The 'lat' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -564,7 +564,7 @@ class Scattergeo(_BaseTraceType):
     def latsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  lat .
-
+    
         The 'latsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -586,7 +586,7 @@ class Scattergeo(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-
+    
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -611,9 +611,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the line color.
                 dash
@@ -644,7 +644,7 @@ class Scattergeo(_BaseTraceType):
         states", *country names* correspond to features on the base map
         and value "geojson-id" corresponds to features from a custom
         GeoJSON linked to the `geojson` attribute.
-
+    
         The 'locationmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['ISO-3', 'USA-states', 'country names', 'geojson-id']
@@ -667,7 +667,7 @@ class Scattergeo(_BaseTraceType):
         Sets the coordinates via location IDs or names. Coordinates
         correspond to the centroid of each location given. See
         `locationmode` for more info.
-
+    
         The 'locations' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -688,7 +688,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  locations
         .
-
+    
         The 'locationssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -708,7 +708,7 @@ class Scattergeo(_BaseTraceType):
     def lon(self):
         """
         Sets the longitude coordinates (in degrees East).
-
+    
         The 'lon' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -728,7 +728,7 @@ class Scattergeo(_BaseTraceType):
     def lonsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  lon .
-
+    
         The 'lonsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -752,9 +752,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -909,7 +909,7 @@ class Scattergeo(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -928,7 +928,7 @@ class Scattergeo(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -953,7 +953,7 @@ class Scattergeo(_BaseTraceType):
         hover. If there are less than 20 points and the trace is not
         stacked then the default is "lines+markers". Otherwise,
         "lines".
-
+    
         The 'mode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['lines', 'markers', 'text'] joined with '+' characters
@@ -977,7 +977,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -998,7 +998,7 @@ class Scattergeo(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1022,9 +1022,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-
+    
             Supported dict properties:
-
+                
                 marker
                     :class:`plotly.graph_objects.scattergeo.selecte
                     d.Marker` instance or dict with compatible
@@ -1055,7 +1055,7 @@ class Scattergeo(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-
+    
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -1075,7 +1075,7 @@ class Scattergeo(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1099,9 +1099,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1134,7 +1134,7 @@ class Scattergeo(_BaseTraceType):
         coordinates. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
-
+    
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1156,17 +1156,17 @@ class Scattergeo(_BaseTraceType):
     def textfont(self):
         """
         Sets the text font.
-
+    
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.scattergeo.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1191,7 +1191,7 @@ class Scattergeo(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-
+    
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -1213,7 +1213,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-
+    
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -1238,7 +1238,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         textposition .
-
+    
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1258,7 +1258,7 @@ class Scattergeo(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-
+    
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1291,7 +1291,7 @@ class Scattergeo(_BaseTraceType):
         Every attributes that can be specified per-point (the ones that
         are `arrayOk: true`) are available. variables `lat`, `lon`,
         `location` and `text`.
-
+    
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1314,7 +1314,7 @@ class Scattergeo(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         texttemplate .
-
+    
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1335,7 +1335,7 @@ class Scattergeo(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1370,7 +1370,7 @@ class Scattergeo(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1393,9 +1393,9 @@ class Scattergeo(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.scattergeo.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-
+    
             Supported dict properties:
-
+                
                 marker
                     :class:`plotly.graph_objects.scattergeo.unselec
                     ted.Marker` instance or dict with compatible
@@ -1423,7 +1423,7 @@ class Scattergeo(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1744,7 +1744,7 @@ class Scattergeo(_BaseTraceType):
     ):
         """
         Construct a new Scattergeo object
-
+        
         The data visualized as scatter point or lines on a geographic
         map is provided either by longitude/latitude pairs in `lon` and
         `lat` respectively or by geographic location IDs or names in

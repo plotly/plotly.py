@@ -17,14 +17,14 @@ class Colorscale(_BaseLayoutHierarchyType):
         """
         Sets the default diverging colorscale. Note that
         `autocolorscale` must be true for this attribute to work.
-
+    
         The 'diverging' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1),
+            normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -62,14 +62,14 @@ class Colorscale(_BaseLayoutHierarchyType):
         Sets the default sequential colorscale for positive values.
         Note that `autocolorscale` must be true for this attribute to
         work.
-
+    
         The 'sequential' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1),
+            normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -107,14 +107,14 @@ class Colorscale(_BaseLayoutHierarchyType):
         Sets the default sequential colorscale for negative values.
         Note that `autocolorscale` must be true for this attribute to
         work.
-
+    
         The 'sequentialminus' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1),
+            normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -168,7 +168,7 @@ class Colorscale(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Colorscale object
-
+        
         Parameters
         ----------
         arg

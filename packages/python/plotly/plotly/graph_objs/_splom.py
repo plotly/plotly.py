@@ -55,7 +55,7 @@ class Splom(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -76,7 +76,7 @@ class Splom(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -100,9 +100,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Diagonal`
           - A dict of string/value properties that will be passed
             to the Diagonal constructor
-
+    
             Supported dict properties:
-
+                
                 visible
                     Determines whether or not subplots on the
                     diagonal are displayed.
@@ -127,9 +127,9 @@ class Splom(_BaseTraceType):
           - A list or tuple of instances of plotly.graph_objs.splom.Dimension
           - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
-
+    
             Supported dict properties:
-
+                
                 axis
                     :class:`plotly.graph_objects.splom.dimension.Ax
                     is` instance or dict with compatible properties
@@ -186,13 +186,13 @@ class Splom(_BaseTraceType):
         When used in a template (as
         layout.template.data.splom.dimensiondefaults), sets the default
         property values to use for elements of splom.dimensions
-
+    
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.splom.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -213,7 +213,7 @@ class Splom(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -238,7 +238,7 @@ class Splom(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -262,9 +262,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -335,7 +335,7 @@ class Splom(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-
+    
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -358,7 +358,7 @@ class Splom(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-
+    
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -378,7 +378,7 @@ class Splom(_BaseTraceType):
     def hovertext(self):
         """
         Same as `text`.
-
+    
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -401,7 +401,7 @@ class Splom(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-
+    
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -423,7 +423,7 @@ class Splom(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -443,7 +443,7 @@ class Splom(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -465,7 +465,7 @@ class Splom(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-
+    
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -490,9 +490,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -642,7 +642,7 @@ class Splom(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -661,7 +661,7 @@ class Splom(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -682,7 +682,7 @@ class Splom(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -703,7 +703,7 @@ class Splom(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -727,9 +727,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Selected`
           - A dict of string/value properties that will be passed
             to the Selected constructor
-
+    
             Supported dict properties:
-
+                
                 marker
                     :class:`plotly.graph_objects.splom.selected.Mar
                     ker` instance or dict with compatible
@@ -756,7 +756,7 @@ class Splom(_BaseTraceType):
         turned on for all points, whereas, any other non-array values
         means no selection all where the `selected` and `unselected`
         styles have no effect.
-
+    
         The 'selectedpoints' property accepts values of any type
 
         Returns
@@ -776,7 +776,7 @@ class Splom(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -797,7 +797,7 @@ class Splom(_BaseTraceType):
         """
         Determines whether or not subplots on the lower half from the
         diagonal are displayed.
-
+    
         The 'showlowerhalf' property must be specified as a bool
         (either True, or False)
 
@@ -818,7 +818,7 @@ class Splom(_BaseTraceType):
         """
         Determines whether or not subplots on the upper half from the
         diagonal are displayed.
-
+    
         The 'showupperhalf' property must be specified as a bool
         (either True, or False)
 
@@ -842,9 +842,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -874,7 +874,7 @@ class Splom(_BaseTraceType):
         hover. If a single string, the same string appears over all the
         data points. If an array of string, the items are mapped in
         order to the this trace's (x,y) coordinates.
-
+    
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -896,7 +896,7 @@ class Splom(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-
+    
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -917,7 +917,7 @@ class Splom(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -952,7 +952,7 @@ class Splom(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -975,9 +975,9 @@ class Splom(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.splom.Unselected`
           - A dict of string/value properties that will be passed
             to the Unselected constructor
-
+    
             Supported dict properties:
-
+                
                 marker
                     :class:`plotly.graph_objects.splom.unselected.M
                     arker` instance or dict with compatible
@@ -1001,7 +1001,7 @@ class Splom(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1027,7 +1027,7 @@ class Splom(_BaseTraceType):
         where `diagonal.visible` is false and `showupperhalf` or
         `showlowerhalf` is false, this splom trace will generate one
         less x-axis and one less y-axis.
-
+    
         The 'xaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'xaxes[i]' property is an identifier of a particular
@@ -1056,7 +1056,7 @@ class Splom(_BaseTraceType):
         where `diagonal.visible` is false and `showupperhalf` or
         `showlowerhalf` is false, this splom trace will generate one
         less x-axis and one less y-axis.
-
+    
         The 'yaxes' property is an info array that may be specified as:
         * a list of elements where:
           The 'yaxes[i]' property is an identifier of a particular
@@ -1301,7 +1301,7 @@ class Splom(_BaseTraceType):
     ):
         """
         Construct a new Splom object
-
+        
         Splom traces generate scatter plot matrix visualizations. Each
         splom `dimensions` items correspond to a generated axis. Values
         for each of those dimensions are set in `dimensions[i].values`.

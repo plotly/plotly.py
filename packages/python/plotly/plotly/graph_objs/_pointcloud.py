@@ -55,7 +55,7 @@ class Pointcloud(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -76,7 +76,7 @@ class Pointcloud(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -98,7 +98,7 @@ class Pointcloud(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -123,7 +123,7 @@ class Pointcloud(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -147,9 +147,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -204,7 +204,7 @@ class Pointcloud(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -224,7 +224,7 @@ class Pointcloud(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -250,7 +250,7 @@ class Pointcloud(_BaseTraceType):
         create one large `indices` typed array that is guaranteed to be
         at least as long as the largest number of points during use,
         and reuse it on each `Plotly.restyle()` call.
-
+    
         The 'indices' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -270,7 +270,7 @@ class Pointcloud(_BaseTraceType):
     def indicessrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  indices .
-
+    
         The 'indicessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -292,7 +292,7 @@ class Pointcloud(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-
+    
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -317,9 +317,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 blend
                     Determines if colors are blended together for a
                     translucency effect in case `opacity` is
@@ -377,7 +377,7 @@ class Pointcloud(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -396,7 +396,7 @@ class Pointcloud(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -417,7 +417,7 @@ class Pointcloud(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -438,7 +438,7 @@ class Pointcloud(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -459,7 +459,7 @@ class Pointcloud(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -483,9 +483,9 @@ class Pointcloud(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pointcloud.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -517,7 +517,7 @@ class Pointcloud(_BaseTraceType):
         trace's (x,y) coordinates. If trace `hoverinfo` contains a
         "text" flag and "hovertext" is not set, these elements will be
         seen in the hover labels.
-
+    
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -539,7 +539,7 @@ class Pointcloud(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-
+    
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -560,7 +560,7 @@ class Pointcloud(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -595,7 +595,7 @@ class Pointcloud(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -616,7 +616,7 @@ class Pointcloud(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -637,7 +637,7 @@ class Pointcloud(_BaseTraceType):
     def x(self):
         """
         Sets the x coordinates.
-
+    
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -660,7 +660,7 @@ class Pointcloud(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-
+    
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -684,7 +684,7 @@ class Pointcloud(_BaseTraceType):
         Specify `xbounds` in the shape of `[xMin, xMax] to avoid
         looping through the `xy` typed array. Use it in conjunction
         with `xy` and `ybounds` for the performance benefits.
-
+    
         The 'xbounds' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -704,7 +704,7 @@ class Pointcloud(_BaseTraceType):
     def xboundssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  xbounds .
-
+    
         The 'xboundssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -724,7 +724,7 @@ class Pointcloud(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-
+    
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -747,7 +747,7 @@ class Pointcloud(_BaseTraceType):
         supplied, it must be a typed `Float32Array` array that
         represents points such that `xy[i * 2] = x[i]` and `xy[i * 2 +
         1] = y[i]`
-
+    
         The 'xy' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -767,7 +767,7 @@ class Pointcloud(_BaseTraceType):
     def xysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  xy .
-
+    
         The 'xysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -787,7 +787,7 @@ class Pointcloud(_BaseTraceType):
     def y(self):
         """
         Sets the y coordinates.
-
+    
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -810,7 +810,7 @@ class Pointcloud(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-
+    
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -834,7 +834,7 @@ class Pointcloud(_BaseTraceType):
         Specify `ybounds` in the shape of `[yMin, yMax] to avoid
         looping through the `xy` typed array. Use it in conjunction
         with `xy` and `xbounds` for the performance benefits.
-
+    
         The 'ybounds' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -854,7 +854,7 @@ class Pointcloud(_BaseTraceType):
     def yboundssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ybounds .
-
+    
         The 'yboundssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -874,7 +874,7 @@ class Pointcloud(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-
+    
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1096,7 +1096,7 @@ class Pointcloud(_BaseTraceType):
     ):
         """
         Construct a new Pointcloud object
-
+        
         The data visualized as a point cloud set in `x` and `y` using
         the WebGl plotting engine.
 

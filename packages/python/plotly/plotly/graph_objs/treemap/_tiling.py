@@ -17,7 +17,7 @@ class Tiling(_BaseTraceHierarchyType):
         """
         Determines if the positions obtained from solver are flipped on
         each axis.
-
+    
         The 'flip' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y'] joined with '+' characters
@@ -40,7 +40,7 @@ class Tiling(_BaseTraceHierarchyType):
         """
         Determines d3 treemap solver. For more info please refer to
         https://github.com/d3/d3-hierarchy#treemap-tiling
-
+    
         The 'packing' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['squarify', 'binary', 'dice', 'slice', 'slice-dice',
@@ -62,7 +62,7 @@ class Tiling(_BaseTraceHierarchyType):
     def pad(self):
         """
         Sets the inner padding (in px).
-
+    
         The 'pad' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -92,7 +92,7 @@ class Tiling(_BaseTraceHierarchyType):
         1:2. When using "squarify", unlike d3 which uses the Golden
         Ratio i.e. 1.618034, Plotly applies 1 to increase squares in
         treemap layouts.
-
+    
         The 'squarifyratio' property is a number and may be specified as:
           - An int or float in the interval [1, inf]
 
@@ -140,7 +140,7 @@ class Tiling(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Tiling object
-
+        
         Parameters
         ----------
         arg

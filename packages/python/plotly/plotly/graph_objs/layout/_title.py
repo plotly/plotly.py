@@ -27,17 +27,17 @@ class Title(_BaseLayoutHierarchyType):
         """
         Sets the title font. Note that the title's font used to be
         customized by the now deprecated `titlefont` attribute.
-
+    
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -78,15 +78,15 @@ class Title(_BaseLayoutHierarchyType):
         must be set to "left". The same rule applies if
         `xanchor`/`yanchor` is determined automatically. Padding is
         muted if the respective anchor value is "middle*/*center".
-
+    
         The 'pad' property is an instance of Pad
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.title.Pad`
           - A dict of string/value properties that will be passed
             to the Pad constructor
-
+    
             Supported dict properties:
-
+                
                 b
                     The amount of padding (in px) along the bottom
                     of the component.
@@ -118,7 +118,7 @@ class Title(_BaseLayoutHierarchyType):
         Sets the plot's title. Note that before the existence of
         `title.text`, the title's contents used to be defined as the
         `title` attribute itself. This behavior has been deprecated.
-
+    
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -140,7 +140,7 @@ class Title(_BaseLayoutHierarchyType):
         """
         Sets the x position with respect to `xref` in normalized
         coordinates from 0 (left) to 1 (right).
-
+    
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -165,7 +165,7 @@ class Title(_BaseLayoutHierarchyType):
         title's center is at x. "auto" divides `xref` by three and
         calculates the `xanchor` value automatically based on the value
         of `x`.
-
+    
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'left', 'center', 'right']
@@ -188,7 +188,7 @@ class Title(_BaseLayoutHierarchyType):
         Sets the container `x` refers to. "container" spans the entire
         `width` of the plot. "paper" refers to the width of the
         plotting area only.
-
+    
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['container', 'paper']
@@ -212,7 +212,7 @@ class Title(_BaseLayoutHierarchyType):
         coordinates from 0 (bottom) to 1 (top). "auto" places the
         baseline of the title onto the vertical center of the top
         margin.
-
+    
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -237,7 +237,7 @@ class Title(_BaseLayoutHierarchyType):
         means that the title's midline is at y. "auto" divides `yref`
         by three and calculates the `yanchor` value automatically based
         on the value of `y`.
-
+    
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'top', 'middle', 'bottom']
@@ -260,7 +260,7 @@ class Title(_BaseLayoutHierarchyType):
         Sets the container `y` refers to. "container" spans the entire
         `height` of the plot. "paper" refers to the height of the
         plotting area only.
-
+    
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['container', 'paper']
@@ -345,7 +345,7 @@ class Title(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Title object
-
+        
         Parameters
         ----------
         arg

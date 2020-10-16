@@ -75,6 +75,7 @@ class Layout(_BaseLayoutType):
         "coloraxis",
         "colorscale",
         "colorway",
+        "computed",
         "datarevision",
         "direction",
         "dragmode",
@@ -154,9 +155,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Activeshape`
           - A dict of string/value properties that will be passed
             to the Activeshape constructor
-
+    
             Supported dict properties:
-
+                
                 fillcolor
                     Sets the color filling the active shape'
                     interior.
@@ -183,9 +184,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.AngularAxis`
           - A dict of string/value properties that will be passed
             to the AngularAxis constructor
-
+    
             Supported dict properties:
-
+                
                 domain
                     Polar chart subplots are not supported yet.
                     This key has currently no effect.
@@ -248,9 +249,9 @@ class Layout(_BaseLayoutType):
           - A list or tuple of instances of plotly.graph_objs.layout.Annotation
           - A list or tuple of dicts of string/value properties that
             will be passed to the Annotation constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
@@ -588,13 +589,13 @@ class Layout(_BaseLayoutType):
         When used in a template (as
         layout.template.layout.annotationdefaults), sets the default
         property values to use for elements of layout.annotations
-
+    
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -617,7 +618,7 @@ class Layout(_BaseLayoutType):
         relayout. Note that, regardless of this attribute, an undefined
         layout width or height is always initialized on the first call
         to plot.
-
+    
         The 'autosize' property must be specified as a bool
         (either True, or False)
 
@@ -638,7 +639,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of adjacent
         location coordinates.
-
+    
         The 'bargap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -659,7 +660,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of the same
         location coordinate.
-
+    
         The 'bargroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -686,7 +687,7 @@ class Layout(_BaseLayoutType):
         another centered around the shared location. With "overlay",
         the bars are plotted over one another, you might need to an
         "opacity" to see multiple bars.
-
+    
         The 'barmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['stack', 'group', 'overlay', 'relative']
@@ -710,7 +711,7 @@ class Layout(_BaseLayoutType):
         "fraction", the value of each bar is divided by the sum of all
         values at that location coordinate. "percent" is the same but
         multiplied by 100 to show percentages.
-
+    
         The 'barnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['', 'fraction', 'percent']
@@ -733,7 +734,7 @@ class Layout(_BaseLayoutType):
         Sets the gap (in plot fraction) between boxes of adjacent
         location coordinates. Has no effect on traces that have "width"
         set.
-
+    
         The 'boxgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -755,7 +756,7 @@ class Layout(_BaseLayoutType):
         Sets the gap (in plot fraction) between boxes of the same
         location coordinate. Has no effect on traces that have "width"
         set.
-
+    
         The 'boxgroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -780,7 +781,7 @@ class Layout(_BaseLayoutType):
         "overlay", the boxes are plotted over one another, you might
         need to set "opacity" to see them multiple boxes. Has no effect
         on traces that have "width" set.
-
+    
         The 'boxmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['group', 'overlay']
@@ -802,7 +803,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the default calendar system to use for interpreting and
         displaying dates throughout the plot.
-
+    
         The 'calendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['gregorian', 'chinese', 'coptic', 'discworld',
@@ -838,7 +839,7 @@ class Layout(_BaseLayoutType):
         feature. Selection events are sent accordingly as long as
         "event" flag is set as well. When the "event" flag is missing,
         `plotly_click` and `plotly_selected` events are not fired.
-
+    
         The 'clickmode' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['event', 'select'] joined with '+' characters
@@ -865,9 +866,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Coloraxis`
           - A dict of string/value properties that will be passed
             to the Coloraxis constructor
-
+    
             Supported dict properties:
-
+                
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -946,9 +947,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Colorscale`
           - A dict of string/value properties that will be passed
             to the Colorscale constructor
-
+    
             Supported dict properties:
-
+                
                 diverging
                     Sets the default diverging colorscale. Note
                     that `autocolorscale` must be true for this
@@ -978,7 +979,7 @@ class Layout(_BaseLayoutType):
     def colorway(self):
         """
         Sets the default trace colors.
-
+    
         The 'colorway' property is a colorlist that may be specified
         as a tuple, list, one-dimensional numpy array, or pandas Series of valid
         color strings
@@ -993,6 +994,27 @@ class Layout(_BaseLayoutType):
     def colorway(self, val):
         self["colorway"] = val
 
+    # computed
+    # --------
+    @property
+    def computed(self):
+        """
+        Placeholder for exporting automargin-impacting values namely
+        `margin.t`, `margin.b`, `margin.l` and `margin.r` in "full-
+        json" mode.
+    
+        The 'computed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["computed"]
+
+    @computed.setter
+    def computed(self, val):
+        self["computed"] = val
+
     # datarevision
     # ------------
     @property
@@ -1005,7 +1027,7 @@ class Layout(_BaseLayoutType):
         that data arrays are being treated as immutable, thus any data
         array with a different identity from its predecessor contains
         new data.
-
+    
         The 'datarevision' property accepts values of any type
 
         Returns
@@ -1026,7 +1048,7 @@ class Layout(_BaseLayoutType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Sets the direction corresponding to positive angles
         in legacy polar charts.
-
+    
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['clockwise', 'counterclockwise']
@@ -1049,7 +1071,7 @@ class Layout(_BaseLayoutType):
         Determines the mode of drag interactions. "select" and "lasso"
         apply only to scatter traces with markers or text. "orbit" and
         "turntable" apply only to 3D scenes.
-
+    
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['zoom', 'pan', 'select', 'lasso', 'drawclosedpath',
@@ -1074,7 +1096,7 @@ class Layout(_BaseLayoutType):
         Controls persistence of user-driven changes in `editable: true`
         configuration, other than trace names and axis titles. Defaults
         to `layout.uirevision`.
-
+    
         The 'editrevision' property accepts values of any type
 
         Returns
@@ -1100,7 +1122,7 @@ class Layout(_BaseLayoutType):
         when you have many slices, but you can set `false` to disable.
         Colors provided in the trace, using `marker.colors`, are never
         extended.
-
+    
         The 'extendfunnelareacolors' property must be specified as a bool
         (either True, or False)
 
@@ -1126,7 +1148,7 @@ class Layout(_BaseLayoutType):
         likelihood of reusing the same color when you have many slices,
         but you can set `false` to disable. Colors provided in the
         trace, using `marker.colors`, are never extended.
-
+    
         The 'extendpiecolors' property must be specified as a bool
         (either True, or False)
 
@@ -1153,7 +1175,7 @@ class Layout(_BaseLayoutType):
         when you have many slices, but you can set `false` to disable.
         Colors provided in the trace, using `marker.colors`, are never
         extended.
-
+    
         The 'extendsunburstcolors' property must be specified as a bool
         (either True, or False)
 
@@ -1180,7 +1202,7 @@ class Layout(_BaseLayoutType):
         when you have many slices, but you can set `false` to disable.
         Colors provided in the trace, using `marker.colors`, are never
         extended.
-
+    
         The 'extendtreemapcolors' property must be specified as a bool
         (either True, or False)
 
@@ -1201,17 +1223,17 @@ class Layout(_BaseLayoutType):
         """
         Sets the global font. Note that fonts used in traces and other
         layout components inherit from the global font.
-
+    
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1250,7 +1272,7 @@ class Layout(_BaseLayoutType):
         `colorway` used for trace colors. If you specify a new list
         here it can still be extended with lighter and darker colors,
         see `extendfunnelareacolors`.
-
+    
         The 'funnelareacolorway' property is a colorlist that may be specified
         as a tuple, list, one-dimensional numpy array, or pandas Series of valid
         color strings
@@ -1272,7 +1294,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of adjacent
         location coordinates.
-
+    
         The 'funnelgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1293,7 +1315,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of the same
         location coordinate.
-
+    
         The 'funnelgroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1318,7 +1340,7 @@ class Layout(_BaseLayoutType):
         one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
         need to an "opacity" to see multiple bars.
-
+    
         The 'funnelmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['stack', 'group', 'overlay']
@@ -1343,9 +1365,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Geo`
           - A dict of string/value properties that will be passed
             to the Geo constructor
-
+    
             Supported dict properties:
-
+                
                 bgcolor
                     Set the background color of the map
                 center
@@ -1465,9 +1487,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Grid`
           - A dict of string/value properties that will be passed
             to the Grid constructor
-
+    
             Supported dict properties:
-
+                
                 columns
                     The number of columns in the grid. If you
                     provide a 2D `subplots` array, the length of
@@ -1564,7 +1586,7 @@ class Layout(_BaseLayoutType):
     def height(self):
         """
         Sets the plot's height (in px).
-
+    
         The 'height' property is a number and may be specified as:
           - An int or float in the interval [10, inf]
 
@@ -1586,7 +1608,7 @@ class Layout(_BaseLayoutType):
         hiddenlabels is the funnelarea & pie chart analog of
         visible:'legendonly' but it can contain many labels, and can
         simultaneously hide slices from several pies/funnelarea charts
-
+    
         The 'hiddenlabels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1607,7 +1629,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the source reference on Chart Studio Cloud for
         hiddenlabels .
-
+    
         The 'hiddenlabelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1631,7 +1653,7 @@ class Layout(_BaseLayoutType):
         effect only on graphs that have been generated via forked
         graphs from the Chart Studio Cloud (at https://chart-
         studio.plotly.com or on-premise).
-
+    
         The 'hidesources' property must be specified as a bool
         (either True, or False)
 
@@ -1657,7 +1679,7 @@ class Layout(_BaseLayoutType):
         scatter fills, etc) hovering is on inside the area and off
         outside, but these objects will not supersede hover on point-
         like objects in case of conflict.
-
+    
         The 'hoverdistance' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
@@ -1682,9 +1704,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -1742,7 +1764,7 @@ class Layout(_BaseLayoutType):
         (depending on the trace's `orientation` value) for plots based
         on cartesian coordinates. For anything else the default value
         is "closest".
-
+    
         The 'hovermode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['x', 'y', 'closest', False, 'x unified', 'y unified']
@@ -1767,9 +1789,9 @@ class Layout(_BaseLayoutType):
           - A list or tuple of instances of plotly.graph_objs.layout.Image
           - A list or tuple of dicts of string/value properties that
             will be passed to the Image constructor
-
+    
             Supported dict properties:
-
+                
                 layer
                     Specifies whether images are drawn below or
                     above traces. When `xref` and `yref` are both
@@ -1886,13 +1908,13 @@ class Layout(_BaseLayoutType):
         When used in a template (as
         layout.template.layout.imagedefaults), sets the default
         property values to use for elements of layout.images
-
+    
         The 'imagedefaults' property is an instance of Image
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Image`
           - A dict of string/value properties that will be passed
             to the Image constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -1915,9 +1937,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Legend`
           - A dict of string/value properties that will be passed
             to the Legend constructor
-
+    
             Supported dict properties:
-
+                
                 bgcolor
                     Sets the legend background color. Defaults to
                     `layout.paper_bgcolor`.
@@ -2024,9 +2046,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Mapbox`
           - A dict of string/value properties that will be passed
             to the Mapbox constructor
-
+    
             Supported dict properties:
-
+                
                 accesstoken
                     Sets the mapbox access token to be used for
                     this mapbox map. Alternatively, the mapbox
@@ -2114,9 +2136,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Margin`
           - A dict of string/value properties that will be passed
             to the Margin constructor
-
+    
             Supported dict properties:
-
+                
                 autoexpand
                     Turns on/off margin expansion computations.
                     Legends, colorbars, updatemenus, sliders, axis
@@ -2157,7 +2179,7 @@ class Layout(_BaseLayoutType):
         template strings: `%{meta[i]}` where `i` is the index of the
         `meta` item in question. `meta` can also be an object for
         example `{key: value}` which can be accessed %{meta[key]}.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -2176,7 +2198,7 @@ class Layout(_BaseLayoutType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2200,9 +2222,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Modebar`
           - A dict of string/value properties that will be passed
             to the Modebar constructor
-
+    
             Supported dict properties:
-
+                
                 activecolor
                     Sets the color of the active or hovered on
                     icons in the modebar.
@@ -2239,9 +2261,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Newshape`
           - A dict of string/value properties that will be passed
             to the Newshape constructor
-
+    
             Supported dict properties:
-
+                
                 drawdirection
                     When `dragmode` is set to "drawrect",
                     "drawline" or "drawcircle" this limits the drag
@@ -2288,7 +2310,7 @@ class Layout(_BaseLayoutType):
         Legacy polar charts are deprecated! Please switch to "polar"
         subplots. Rotates the entire polar by the given angle in legacy
         polar charts.
-
+    
         The 'orientation' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -2311,7 +2333,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the background color of the paper where the graph is
         drawn.
-
+    
         The 'paper_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -2373,7 +2395,7 @@ class Layout(_BaseLayoutType):
         `colorway` used for trace colors. If you specify a new list
         here it can still be extended with lighter and darker colors,
         see `extendpiecolors`.
-
+    
         The 'piecolorway' property is a colorlist that may be specified
         as a tuple, list, one-dimensional numpy array, or pandas Series of valid
         color strings
@@ -2395,7 +2417,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the background color of the plotting area in-between x and
         y axes.
-
+    
         The 'plot_bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -2458,9 +2480,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Polar`
           - A dict of string/value properties that will be passed
             to the Polar constructor
-
+    
             Supported dict properties:
-
+                
                 angularaxis
                     :class:`plotly.graph_objects.layout.polar.Angul
                     arAxis` instance or dict with compatible
@@ -2530,9 +2552,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.RadialAxis`
           - A dict of string/value properties that will be passed
             to the RadialAxis constructor
-
+    
             Supported dict properties:
-
+                
                 domain
                     Polar chart subplots are not supported yet.
                     This key has currently no effect.
@@ -2600,9 +2622,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Scene`
           - A dict of string/value properties that will be passed
             to the Scene constructor
-
+    
             Supported dict properties:
-
+                
                 annotations
                     A tuple of :class:`plotly.graph_objects.layout.
                     scene.Annotation` instances or dicts with
@@ -2628,7 +2650,7 @@ class Layout(_BaseLayoutType):
                 aspectratio
                     Sets this scene's axis aspectratio.
                 bgcolor
-
+    
                 camera
                     :class:`plotly.graph_objects.layout.scene.Camer
                     a` instance or dict with compatible properties
@@ -2674,7 +2696,7 @@ class Layout(_BaseLayoutType):
         of the drag to horizontal, vertical or diagonal. "h" only
         allows horizontal selection, "v" only vertical, "d" only
         diagonal and "any" sets no limit.
-
+    
         The 'selectdirection' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['h', 'v', 'd', 'any']
@@ -2696,7 +2718,7 @@ class Layout(_BaseLayoutType):
         """
         Controls persistence of user-driven changes in selected points
         from all traces.
-
+    
         The 'selectionrevision' property accepts values of any type
 
         Returns
@@ -2718,7 +2740,7 @@ class Layout(_BaseLayoutType):
         puts a '.' before decimals and a space between thousands. In
         English locales, dflt is ".," but other locales may alter this
         default.
-
+    
         The 'separators' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -2743,9 +2765,9 @@ class Layout(_BaseLayoutType):
           - A list or tuple of instances of plotly.graph_objs.layout.Shape
           - A list or tuple of dicts of string/value properties that
             will be passed to the Shape constructor
-
+    
             Supported dict properties:
-
+                
                 editable
                     Determines whether the shape could be activated
                     for edit or not. Has no effect when the older
@@ -2939,13 +2961,13 @@ class Layout(_BaseLayoutType):
         When used in a template (as
         layout.template.layout.shapedefaults), sets the default
         property values to use for elements of layout.shapes
-
+    
         The 'shapedefaults' property is an instance of Shape
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Shape`
           - A dict of string/value properties that will be passed
             to the Shape constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -2968,7 +2990,7 @@ class Layout(_BaseLayoutType):
         traces would by default be shown in the legend. b) One pie
         trace is shown in the legend. c) One trace is explicitly given
         with `showlegend: true`.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -2992,9 +3014,9 @@ class Layout(_BaseLayoutType):
           - A list or tuple of instances of plotly.graph_objs.layout.Slider
           - A list or tuple of dicts of string/value properties that
             will be passed to the Slider constructor
-
+    
             Supported dict properties:
-
+                
                 active
                     Determines which button (by index starting from
                     0) is considered active.
@@ -3108,13 +3130,13 @@ class Layout(_BaseLayoutType):
         When used in a template (as
         layout.template.layout.sliderdefaults), sets the default
         property values to use for elements of layout.sliders
-
+    
         The 'sliderdefaults' property is an instance of Slider
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Slider`
           - A dict of string/value properties that will be passed
             to the Slider constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -3137,7 +3159,7 @@ class Layout(_BaseLayoutType):
         data). As with hoverdistance, distance does not apply to area-
         like objects. In addition, some objects can be hovered on but
         will not generate spikelines, such as scatter fills.
-
+    
         The 'spikedistance' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
@@ -3161,7 +3183,7 @@ class Layout(_BaseLayoutType):
         `colorway` used for trace colors. If you specify a new list
         here it can still be extended with lighter and darker colors,
         see `extendsunburstcolors`.
-
+    
         The 'sunburstcolorway' property is a colorlist that may be specified
         as a tuple, list, one-dimensional numpy array, or pandas Series of valid
         color strings
@@ -3200,32 +3222,32 @@ class Layout(_BaseLayoutType):
         annotation or a logo image, for example. To omit one of these
         items on the plot, make an item with matching
         `templateitemname` and `visible: false`.
-
+    
         The 'template' property is an instance of Template
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Template`
           - A dict of string/value properties that will be passed
             to the Template constructor
-
+    
             Supported dict properties:
-
+                
                 data
                     :class:`plotly.graph_objects.layout.template.Da
                     ta` instance or dict with compatible properties
                 layout
                     :class:`plotly.graph_objects.Layout` instance
                     or dict with compatible properties
-
+    
           - The name of a registered template where current registered templates
             are stored in the plotly.io.templates configuration object. The names
             of all registered templates can be retrieved with:
                 >>> import plotly.io as pio
                 >>> list(pio.templates)  # doctest: +ELLIPSIS
                 ['ggplot2', 'seaborn', 'simple_white', 'plotly', 'plotly_white', ...]
-
+    
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
-            template is computed by merging together the collection of registered
+            template is computed by merging together the collection of registered 
             templates
 
         Returns
@@ -3248,9 +3270,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Ternary`
           - A dict of string/value properties that will be passed
             to the Ternary constructor
-
+    
             Supported dict properties:
-
+                
                 aaxis
                     :class:`plotly.graph_objects.layout.ternary.Aax
                     is` instance or dict with compatible properties
@@ -3295,9 +3317,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
+    
             Supported dict properties:
-
+                
                 font
                     Sets the title font. Note that the title's font
                     used to be customized by the now deprecated
@@ -3369,17 +3391,17 @@ class Layout(_BaseLayoutType):
         Deprecated: Please use layout.title.font instead. Sets the
         title font. Note that the title's font used to be customized by
         the now deprecated `titlefont` attribute.
-
+    
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -3401,7 +3423,7 @@ class Layout(_BaseLayoutType):
 
         Returns
         -------
-
+        
         """
         return self["titlefont"]
 
@@ -3415,15 +3437,15 @@ class Layout(_BaseLayoutType):
     def transition(self):
         """
         Sets transition options used during Plotly.react updates.
-
+    
         The 'transition' property is an instance of Transition
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Transition`
           - A dict of string/value properties that will be passed
             to the Transition constructor
-
+    
             Supported dict properties:
-
+                
                 duration
                     The duration of the transition, in
                     milliseconds. If equal to zero, updates are
@@ -3454,7 +3476,7 @@ class Layout(_BaseLayoutType):
         `colorway` used for trace colors. If you specify a new list
         here it can still be extended with lighter and darker colors,
         see `extendtreemapcolors`.
-
+    
         The 'treemapcolorway' property is a colorlist that may be specified
         as a tuple, list, one-dimensional numpy array, or pandas Series of valid
         color strings
@@ -3490,7 +3512,7 @@ class Layout(_BaseLayoutType):
         you can update `yaxis.uirevision=*quantity*` and the y axis
         range will reset but the x axis range will retain any user-
         driven zoom.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -3513,9 +3535,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.Uniformtext`
           - A dict of string/value properties that will be passed
             to the Uniformtext constructor
-
+    
             Supported dict properties:
-
+                
                 minsize
                     Sets the minimum text size between traces of
                     the same type.
@@ -3551,9 +3573,9 @@ class Layout(_BaseLayoutType):
           - A list or tuple of instances of plotly.graph_objs.layout.Updatemenu
           - A list or tuple of dicts of string/value properties that
             will be passed to the Updatemenu constructor
-
+    
             Supported dict properties:
-
+                
                 active
                     Determines which button (by index starting from
                     0) is considered active.
@@ -3652,13 +3674,13 @@ class Layout(_BaseLayoutType):
         When used in a template (as
         layout.template.layout.updatemenudefaults), sets the default
         property values to use for elements of layout.updatemenus
-
+    
         The 'updatemenudefaults' property is an instance of Updatemenu
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.Updatemenu`
           - A dict of string/value properties that will be passed
             to the Updatemenu constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -3679,7 +3701,7 @@ class Layout(_BaseLayoutType):
         Sets the gap (in plot fraction) between violins of adjacent
         location coordinates. Has no effect on traces that have "width"
         set.
-
+    
         The 'violingap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -3701,7 +3723,7 @@ class Layout(_BaseLayoutType):
         Sets the gap (in plot fraction) between violins of the same
         location coordinate. Has no effect on traces that have "width"
         set.
-
+    
         The 'violingroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -3726,7 +3748,7 @@ class Layout(_BaseLayoutType):
         "overlay", the violins are plotted over one another, you might
         need to set "opacity" to see them multiple violins. Has no
         effect on traces that have "width" set.
-
+    
         The 'violinmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['group', 'overlay']
@@ -3748,7 +3770,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of adjacent
         location coordinates.
-
+    
         The 'waterfallgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -3769,7 +3791,7 @@ class Layout(_BaseLayoutType):
         """
         Sets the gap (in plot fraction) between bars of the same
         location coordinate.
-
+    
         The 'waterfallgroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -3793,7 +3815,7 @@ class Layout(_BaseLayoutType):
         to one another centered around the shared location. With
         "overlay", the bars are plotted over one another, you might
         need to an "opacity" to see multiple bars.
-
+    
         The 'waterfallmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['group', 'overlay']
@@ -3814,7 +3836,7 @@ class Layout(_BaseLayoutType):
     def width(self):
         """
         Sets the plot's width (in px).
-
+    
         The 'width' property is a number and may be specified as:
           - An int or float in the interval [10, inf]
 
@@ -3838,9 +3860,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
-
+    
             Supported dict properties:
-
+                
                 anchor
                     If set to an opposite-letter axis id (e.g.
                     `x2`, `y`), this axis is bound to the
@@ -4300,9 +4322,9 @@ class Layout(_BaseLayoutType):
           - An instance of :class:`plotly.graph_objs.layout.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
-
+    
             Supported dict properties:
-
+                
                 anchor
                     If set to an opposite-letter axis id (e.g.
                     `x2`, `y`), this axis is bound to the
@@ -4835,6 +4857,10 @@ class Layout(_BaseLayoutType):
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
+        computed
+            Placeholder for exporting automargin-impacting values
+            namely `margin.t`, `margin.b`, `margin.l` and
+            `margin.r` in "full-json" mode.
         datarevision
             If provided, a changed value tells `Plotly.react` that
             one or more data arrays has changed. This way you can
@@ -5211,6 +5237,7 @@ class Layout(_BaseLayoutType):
         coloraxis=None,
         colorscale=None,
         colorway=None,
+        computed=None,
         datarevision=None,
         direction=None,
         dragmode=None,
@@ -5282,7 +5309,7 @@ class Layout(_BaseLayoutType):
     ):
         """
         Construct a new Layout object
-
+        
         Parameters
         ----------
         arg
@@ -5374,6 +5401,10 @@ class Layout(_BaseLayoutType):
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
+        computed
+            Placeholder for exporting automargin-impacting values
+            namely `margin.t`, `margin.b`, `margin.l` and
+            `margin.r` in "full-json" mode.
         datarevision
             If provided, a changed value tells `Plotly.react` that
             one or more data arrays has changed. This way you can
@@ -5757,6 +5788,7 @@ class Layout(_BaseLayoutType):
             "coloraxis",
             "colorscale",
             "colorway",
+            "computed",
             "datarevision",
             "direction",
             "dragmode",
@@ -5917,6 +5949,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = colorway if colorway is not None else _v
         if _v is not None:
             self["colorway"] = _v
+        _v = arg.pop("computed", None)
+        _v = computed if computed is not None else _v
+        if _v is not None:
+            self["computed"] = _v
         _v = arg.pop("datarevision", None)
         _v = datarevision if datarevision is not None else _v
         if _v is not None:

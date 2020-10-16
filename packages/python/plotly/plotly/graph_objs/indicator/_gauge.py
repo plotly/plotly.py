@@ -30,9 +30,9 @@ class Gauge(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Axis`
           - A dict of string/value properties that will be passed
             to the Axis constructor
-
+    
             Supported dict properties:
-
+                
                 dtick
                     Sets the step in-between ticks on this axis.
                     Use with `tick0`. Must be a positive number, or
@@ -203,15 +203,15 @@ class Gauge(_BaseTraceHierarchyType):
     def bar(self):
         """
         Set the appearance of the gauge's value
-
+    
         The 'bar' property is an instance of Bar
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Bar`
           - A dict of string/value properties that will be passed
             to the Bar constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the background color of the arc.
                 line
@@ -238,7 +238,7 @@ class Gauge(_BaseTraceHierarchyType):
     def bgcolor(self):
         """
         Sets the gauge background color.
-
+    
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -297,7 +297,7 @@ class Gauge(_BaseTraceHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the gauge.
-
+    
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -356,7 +356,7 @@ class Gauge(_BaseTraceHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) of the border enclosing the gauge.
-
+    
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -376,7 +376,7 @@ class Gauge(_BaseTraceHierarchyType):
     def shape(self):
         """
         Set the shape of the gauge
-
+    
         The 'shape' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['angular', 'bullet']
@@ -401,9 +401,9 @@ class Gauge(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.indicator.gauge.Step
           - A list or tuple of dicts of string/value properties that
             will be passed to the Step constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the background color of the arc.
                 line
@@ -456,13 +456,13 @@ class Gauge(_BaseTraceHierarchyType):
         layout.template.data.indicator.gauge.stepdefaults), sets the
         default property values to use for elements of
         indicator.gauge.steps
-
+    
         The 'stepdefaults' property is an instance of Step
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Step`
           - A dict of string/value properties that will be passed
             to the Step constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -485,9 +485,9 @@ class Gauge(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.indicator.gauge.Threshold`
           - A dict of string/value properties that will be passed
             to the Threshold constructor
-
+    
             Supported dict properties:
-
+                
                 line
                     :class:`plotly.graph_objects.indicator.gauge.th
                     reshold.Line` instance or dict with compatible
@@ -557,7 +557,7 @@ class Gauge(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Gauge object
-
+        
         The gauge of the Indicator plot.
 
         Parameters

@@ -20,9 +20,9 @@ class Selected(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.splom.selected.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the marker color of selected points.
                 opacity
@@ -53,7 +53,7 @@ class Selected(_BaseTraceHierarchyType):
     def __init__(self, arg=None, marker=None, **kwargs):
         """
         Construct a new Selected object
-
+        
         Parameters
         ----------
         arg

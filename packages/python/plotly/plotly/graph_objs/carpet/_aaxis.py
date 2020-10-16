@@ -73,7 +73,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def arraydtick(self):
         """
         The stride between grid lines along the axis
-
+    
         The 'arraydtick' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -94,7 +94,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def arraytick0(self):
         """
         The starting index of grid lines along the axis
-
+    
         The 'arraytick0' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -117,7 +117,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not the range of this axis is computed in
         relation to the input data. See `rangemode` for more info. If
         `range` is provided, then `autorange` is set to False.
-
+    
         The 'autorange' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'reversed']
@@ -140,7 +140,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the order in which categories on this axis appear. Only
         has an effect if `categoryorder` is set to "array". Used with
         `categoryorder`.
-
+    
         The 'categoryarray' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -161,7 +161,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         categoryarray .
-
+    
         The 'categoryarraysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -191,7 +191,7 @@ class Aaxis(_BaseTraceHierarchyType):
         for that attribute will be identical to the "trace" mode. The
         unspecified categories will follow the categories in
         `categoryarray`.
-
+    
         The 'categoryorder' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'category ascending', 'category descending',
@@ -235,7 +235,7 @@ class Aaxis(_BaseTraceHierarchyType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-
+    
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -294,7 +294,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def dtick(self):
         """
         The stride between grid lines along the axis
-
+    
         The 'dtick' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -316,7 +316,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not a line is drawn at along the final
         value of this axis. If True, the end line is drawn on top of
         the grid lines.
-
+    
         The 'endline' property must be specified as a bool
         (either True, or False)
 
@@ -336,7 +336,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def endlinecolor(self):
         """
         Sets the line color of the end line.
-
+    
         The 'endlinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -395,7 +395,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def endlinewidth(self):
         """
         Sets the width (in px) of the end line.
-
+    
         The 'endlinewidth' property is a number and may be specified as:
           - An int or float
 
@@ -419,7 +419,7 @@ class Aaxis(_BaseTraceHierarchyType):
         appears as 1,000,000,000. If "e", 1e+9. If "E", 1E+9. If
         "power", 1x10^9 (with 9 in a super script). If "SI", 1G. If
         "B", 1B.
-
+    
         The 'exponentformat' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['none', 'e', 'E', 'power', 'SI', 'B']
@@ -441,7 +441,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Determines whether or not this axis is zoom-able. If true, then
         zoom is disabled.
-
+    
         The 'fixedrange' property must be specified as a bool
         (either True, or False)
 
@@ -461,7 +461,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def gridcolor(self):
         """
         Sets the axis line color.
-
+    
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -520,7 +520,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def gridwidth(self):
         """
         Sets the width (in px) of the axis line.
-
+    
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -540,7 +540,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def labelpadding(self):
         """
         Extra padding between label and the axis
-
+    
         The 'labelpadding' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
 
@@ -560,7 +560,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def labelprefix(self):
         """
         Sets a axis label prefix.
-
+    
         The 'labelprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -581,7 +581,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def labelsuffix(self):
         """
         Sets a axis label suffix.
-
+    
         The 'labelsuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -602,7 +602,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def linecolor(self):
         """
         Sets the axis line color.
-
+    
         The 'linecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -661,7 +661,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def linewidth(self):
         """
         Sets the width (in px) of the axis line.
-
+    
         The 'linewidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -681,7 +681,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def minexponent(self):
         """
         Hide SI prefix for 10^n if |n| is below this number
-
+    
         The 'minexponent' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -701,7 +701,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def minorgridcolor(self):
         """
         Sets the color of the grid lines.
-
+    
         The 'minorgridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -760,7 +760,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def minorgridcount(self):
         """
         Sets the number of minor grid ticks per major grid tick
-
+    
         The 'minorgridcount' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -781,7 +781,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def minorgridwidth(self):
         """
         Sets the width (in px) of the grid lines.
-
+    
         The 'minorgridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -804,7 +804,7 @@ class Aaxis(_BaseTraceHierarchyType):
         The actual number of ticks will be chosen automatically to be
         less than or equal to `nticks`. Has an effect only if
         `tickmode` is set to "auto".
-
+    
         The 'nticks' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -824,24 +824,24 @@ class Aaxis(_BaseTraceHierarchyType):
     @property
     def range(self):
         """
-            Sets the range of this axis. If the axis `type` is "log", then
-            you must take the log of your desired range (e.g. to set the
-            range from 1 to 100, set the range from 0 to 2). If the axis
-            `type` is "date", it should be date strings, like date data,
-            though Date objects and unix milliseconds will be accepted and
-            converted to strings. If the axis `type` is "category", it
-            should be numbers, using the scale where each category is
-            assigned a serial number from zero in the order it appears.
+        Sets the range of this axis. If the axis `type` is "log", then
+        you must take the log of your desired range (e.g. to set the
+        range from 1 to 100, set the range from 0 to 2). If the axis
+        `type` is "date", it should be date strings, like date data,
+        though Date objects and unix milliseconds will be accepted and
+        converted to strings. If the axis `type` is "category", it
+        should be numbers, using the scale where each category is
+        assigned a serial number from zero in the order it appears.
+    
+        The 'range' property is an info array that may be specified as:
+    
+        * a list or tuple of 2 elements where:
+    (0) The 'range[0]' property accepts values of any type
+    (1) The 'range[1]' property accepts values of any type
 
-            The 'range' property is an info array that may be specified as:
-
-            * a list or tuple of 2 elements where:
-        (0) The 'range[0]' property accepts values of any type
-        (1) The 'range[1]' property accepts values of any type
-
-            Returns
-            -------
-            list
+        Returns
+        -------
+        list
         """
         return self["range"]
 
@@ -858,7 +858,7 @@ class Aaxis(_BaseTraceHierarchyType):
         of the input data. If *tozero*`, the range extends to 0,
         regardless of the input data If "nonnegative", the range is
         non-negative, regardless of the input data.
-
+    
         The 'rangemode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['normal', 'tozero', 'nonnegative']
@@ -879,7 +879,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def separatethousands(self):
         """
         If "true", even 4-digit integers are separated
-
+    
         The 'separatethousands' property must be specified as a bool
         (either True, or False)
 
@@ -902,7 +902,7 @@ class Aaxis(_BaseTraceHierarchyType):
         If "first", only the exponent of the first tick is shown. If
         "last", only the exponent of the last tick is shown. If "none",
         no exponents appear.
-
+    
         The 'showexponent' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -924,7 +924,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Determines whether or not grid lines are drawn. If True, the
         grid lines are drawn at every tick mark.
-
+    
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -944,7 +944,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def showline(self):
         """
         Determines whether or not a line bounding this axis is drawn.
-
+    
         The 'showline' property must be specified as a bool
         (either True, or False)
 
@@ -965,7 +965,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Determines whether axis labels are drawn on the low side, the
         high side, both, or neither side of the axis.
-
+    
         The 'showticklabels' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['start', 'end', 'both', 'none']
@@ -989,7 +989,7 @@ class Aaxis(_BaseTraceHierarchyType):
         "first", only the first tick is displayed with a prefix. If
         "last", only the last tick is displayed with a suffix. If
         "none", tick prefixes are hidden.
-
+    
         The 'showtickprefix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -1010,7 +1010,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def showticksuffix(self):
         """
         Same as `showtickprefix` but for tick suffixes.
-
+    
         The 'showticksuffix' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['all', 'first', 'last', 'none']
@@ -1051,7 +1051,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Determines whether or not a line is drawn at along the starting
         value of this axis. If True, the start line is drawn on top of
         the grid lines.
-
+    
         The 'startline' property must be specified as a bool
         (either True, or False)
 
@@ -1071,7 +1071,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def startlinecolor(self):
         """
         Sets the line color of the start line.
-
+    
         The 'startlinecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -1130,7 +1130,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def startlinewidth(self):
         """
         Sets the width (in px) of the start line.
-
+    
         The 'startlinewidth' property is a number and may be specified as:
           - An int or float
 
@@ -1150,7 +1150,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def tick0(self):
         """
         The starting index of grid lines along the axis
-
+    
         The 'tick0' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -1172,7 +1172,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the angle of the tick labels with respect to the
         horizontal. For example, a `tickangle` of -90 draws the tick
         labels vertically.
-
+    
         The 'tickangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -1194,17 +1194,17 @@ class Aaxis(_BaseTraceHierarchyType):
     def tickfont(self):
         """
         Sets the tick font.
-
+    
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.carpet.aaxis.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1247,7 +1247,7 @@ class Aaxis(_BaseTraceHierarchyType):
         fractional seconds with n digits. For example, *2016-10-13
         09:15:23.456* with tickformat "%H~%M~%S.%2f" would display
         "09~15~23.46"
-
+    
         The 'tickformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1272,9 +1272,9 @@ class Aaxis(_BaseTraceHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.carpet.aaxis.Tickformatstop
           - A list or tuple of dicts of string/value properties that
             will be passed to the Tickformatstop constructor
-
+    
             Supported dict properties:
-
+                
                 dtickrange
                     range [*min*, *max*], where "min", "max" -
                     dtick values which describe some zoom level, it
@@ -1328,13 +1328,13 @@ class Aaxis(_BaseTraceHierarchyType):
         layout.template.data.carpet.aaxis.tickformatstopdefaults), sets
         the default property values to use for elements of
         carpet.aaxis.tickformatstops
-
+    
         The 'tickformatstopdefaults' property is an instance of Tickformatstop
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.carpet.aaxis.Tickformatstop`
           - A dict of string/value properties that will be passed
             to the Tickformatstop constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -1372,7 +1372,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def tickprefix(self):
         """
         Sets a tick label prefix.
-
+    
         The 'tickprefix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1393,7 +1393,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def ticksuffix(self):
         """
         Sets a tick label suffix.
-
+    
         The 'ticksuffix' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1416,7 +1416,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the text displayed at the ticks position via `tickvals`.
         Only has an effect if `tickmode` is set to "array". Used with
         `tickvals`.
-
+    
         The 'ticktext' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1436,7 +1436,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def ticktextsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ticktext .
-
+    
         The 'ticktextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1457,7 +1457,7 @@ class Aaxis(_BaseTraceHierarchyType):
         """
         Sets the values at which ticks on this axis appear. Only has an
         effect if `tickmode` is set to "array". Used with `ticktext`.
-
+    
         The 'tickvals' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1477,7 +1477,7 @@ class Aaxis(_BaseTraceHierarchyType):
     def tickvalssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  tickvals .
-
+    
         The 'tickvalssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1501,9 +1501,9 @@ class Aaxis(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.carpet.aaxis.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-
+    
             Supported dict properties:
-
+                
                 font
                     Sets this axis' title font. Note that the
                     title's font used to be set by the now
@@ -1538,17 +1538,17 @@ class Aaxis(_BaseTraceHierarchyType):
         Deprecated: Please use carpet.aaxis.title.font instead. Sets
         this axis' title font. Note that the title's font used to be
         set by the now deprecated `titlefont` attribute.
-
+    
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.carpet.aaxis.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -1570,7 +1570,7 @@ class Aaxis(_BaseTraceHierarchyType):
 
         Returns
         -------
-
+        
         """
         return self["titlefont"]
 
@@ -1587,13 +1587,13 @@ class Aaxis(_BaseTraceHierarchyType):
         additional amount by which to offset the title from the tick
         labels, given in pixels. Note that this used to be set by the
         now deprecated `titleoffset` attribute.
-
+    
         The 'offset' property is a number and may be specified as:
           - An int or float
 
         Returns
         -------
-
+        
         """
         return self["titleoffset"]
 
@@ -1609,7 +1609,7 @@ class Aaxis(_BaseTraceHierarchyType):
         Sets the axis type. By default, plotly attempts to determined
         the axis type by looking into the data of the traces that
         referenced the axis in question.
-
+    
         The 'type' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['-', 'linear', 'date', 'category']
@@ -1897,7 +1897,7 @@ class Aaxis(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Aaxis object
-
+        
         Parameters
         ----------
         arg

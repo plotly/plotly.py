@@ -41,7 +41,7 @@ class Parcoords(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -62,7 +62,7 @@ class Parcoords(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -83,15 +83,15 @@ class Parcoords(_BaseTraceType):
         """
         The dimensions (variables) of the parallel coordinates chart.
         2..60 dimensions are supported.
-
+    
         The 'dimensions' property is a tuple of instances of
         Dimension that may be specified as:
           - A list or tuple of instances of plotly.graph_objs.parcoords.Dimension
           - A list or tuple of dicts of string/value properties that
             will be passed to the Dimension constructor
-
+    
             Supported dict properties:
-
+                
                 constraintrange
                     The domain range to which the filter on the
                     dimension is constrained. Must be an array of
@@ -188,13 +188,13 @@ class Parcoords(_BaseTraceType):
         layout.template.data.parcoords.dimensiondefaults), sets the
         default property values to use for elements of
         parcoords.dimensions
-
+    
         The 'dimensiondefaults' property is an instance of Dimension
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcoords.Dimension`
           - A dict of string/value properties that will be passed
             to the Dimension constructor
-
+    
             Supported dict properties:
 
         Returns
@@ -217,9 +217,9 @@ class Parcoords(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcoords.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-
+    
             Supported dict properties:
-
+                
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this parcoords
@@ -252,7 +252,7 @@ class Parcoords(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -272,7 +272,7 @@ class Parcoords(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -295,7 +295,7 @@ class Parcoords(_BaseTraceType):
         For example, a `tickangle` of -90 draws the labels vertically.
         Tilted labels with "labelangle" may be positioned better inside
         margins when `labelposition` is set to "bottom".
-
+    
         The 'labelangle' property is a angle (in degrees) that may be
         specified as a number between -180 and 180. Numeric values outside this
         range are converted to the equivalent value
@@ -317,17 +317,17 @@ class Parcoords(_BaseTraceType):
     def labelfont(self):
         """
         Sets the font for the `dimension` labels.
-
+    
         The 'labelfont' property is an instance of Labelfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcoords.Labelfont`
           - A dict of string/value properties that will be passed
             to the Labelfont constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -366,7 +366,7 @@ class Parcoords(_BaseTraceType):
         above, next to the title "bottom" positions labels below the
         graph Tilted labels with "labelangle" may be positioned better
         inside margins when `labelposition` is set to "bottom".
-
+    
         The 'labelside' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'bottom']
@@ -391,9 +391,9 @@ class Parcoords(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcoords.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
+    
             Supported dict properties:
-
+                
                 autocolorscale
                     Determines whether the colorscale is a default
                     palette (`autocolorscale: true`) or the palette
@@ -506,7 +506,7 @@ class Parcoords(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -525,7 +525,7 @@ class Parcoords(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -546,7 +546,7 @@ class Parcoords(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -567,17 +567,17 @@ class Parcoords(_BaseTraceType):
     def rangefont(self):
         """
         Sets the font for the `dimension` range values.
-
+    
         The 'rangefont' property is an instance of Rangefont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcoords.Rangefont`
           - A dict of string/value properties that will be passed
             to the Rangefont constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -617,9 +617,9 @@ class Parcoords(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.parcoords.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -646,17 +646,17 @@ class Parcoords(_BaseTraceType):
     def tickfont(self):
         """
         Sets the font for the `dimension` tick values.
-
+    
         The 'tickfont' property is an instance of Tickfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.parcoords.Tickfont`
           - A dict of string/value properties that will be passed
             to the Tickfont constructor
-
+    
             Supported dict properties:
-
+                
                 color
-
+    
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -693,7 +693,7 @@ class Parcoords(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -728,7 +728,7 @@ class Parcoords(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -749,7 +749,7 @@ class Parcoords(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -900,7 +900,7 @@ class Parcoords(_BaseTraceType):
     ):
         """
         Construct a new Parcoords object
-
+        
         Parallel coordinates for multidimensional exploratory data
         analysis. The samples are specified in `dimensions`. The colors
         are set in `line.color`.

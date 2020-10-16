@@ -77,7 +77,7 @@ class Histogram2dContour(_BaseTraceType):
         separately and `autobinx` is not needed. However, we accept
         `autobinx: true` or `false` and will update `xbins` accordingly
         before deleting `autobinx` from the trace.
-
+    
         The 'autobinx' property must be specified as a bool
         (either True, or False)
 
@@ -100,7 +100,7 @@ class Histogram2dContour(_BaseTraceType):
         separately and `autobiny` is not needed. However, we accept
         `autobiny: true` or `false` and will update `ybins` accordingly
         before deleting `autobiny` from the trace.
-
+    
         The 'autobiny' property must be specified as a bool
         (either True, or False)
 
@@ -125,7 +125,7 @@ class Histogram2dContour(_BaseTraceType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-
+    
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -148,7 +148,7 @@ class Histogram2dContour(_BaseTraceType):
         picked by an algorithm. If True, the number of contour levels
         can be set in `ncontours`. If False, set the contour level
         attributes in `contours`.
-
+    
         The 'autocontour' property must be specified as a bool
         (either True, or False)
 
@@ -170,7 +170,7 @@ class Histogram2dContour(_BaseTraceType):
         Set the `xbingroup` and `ybingroup` default prefix For example,
         setting a `bingroup` of 1 on two histogram2d traces will make
         them their x-bins and y-bins match separately.
-
+    
         The 'bingroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -196,7 +196,7 @@ class Histogram2dContour(_BaseTraceType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-
+    
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -222,9 +222,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-
+    
             Supported dict properties:
-
+                
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -466,14 +466,14 @@ class Histogram2dContour(_BaseTraceType):
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
         ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
         ridis,Cividis.
-
+    
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1),
+            normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -513,9 +513,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.Contours`
           - A dict of string/value properties that will be passed
             to the Contours constructor
-
+    
             Supported dict properties:
-
+                
                 coloring
                     Determines the coloring method showing the
                     contour values. If "fill", coloring is done
@@ -599,7 +599,7 @@ class Histogram2dContour(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-
+    
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -620,7 +620,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-
+    
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -645,7 +645,7 @@ class Histogram2dContour(_BaseTraceType):
         "max", the histogram values are computed using the sum, the
         average, the minimum or the maximum of the values lying inside
         each bin respectively.
-
+    
         The 'histfunc' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['count', 'sum', 'avg', 'min', 'max']
@@ -678,7 +678,7 @@ class Histogram2dContour(_BaseTraceType):
         *probability density*, the area of each bar corresponds to the
         probability that an event will fall into the corresponding bin
         (here, the sum of all bin AREAS equals 1).
-
+    
         The 'histnorm' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['', 'percent', 'probability', 'density', 'probability
@@ -702,7 +702,7 @@ class Histogram2dContour(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-
+    
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -727,7 +727,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-
+    
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -751,9 +751,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-
+    
             Supported dict properties:
-
+                
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -825,7 +825,7 @@ class Histogram2dContour(_BaseTraceType):
         secondary box, for example "<extra>{fullData.name}</extra>". To
         hide the secondary box completely, use an empty tag
         `<extra></extra>`.
-
+    
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -848,7 +848,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-
+    
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -870,7 +870,7 @@ class Histogram2dContour(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-
+    
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -890,7 +890,7 @@ class Histogram2dContour(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-
+    
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -912,7 +912,7 @@ class Histogram2dContour(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-
+    
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -937,9 +937,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the color of the contour level. Has no
                     effect if `contours.coloring` is set to
@@ -975,9 +975,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the aggregation data.
                 colorsrc
@@ -1009,7 +1009,7 @@ class Histogram2dContour(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-
+    
         The 'meta' property accepts values of any type
 
         Returns
@@ -1028,7 +1028,7 @@ class Histogram2dContour(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-
+    
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1049,7 +1049,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-
+    
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1073,7 +1073,7 @@ class Histogram2dContour(_BaseTraceType):
         be used in an algorithm that will decide the optimal bin size
         such that the histogram best visualizes the distribution of the
         data. Ignored if `xbins.size` is provided.
-
+    
         The 'nbinsx' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -1097,7 +1097,7 @@ class Histogram2dContour(_BaseTraceType):
         be used in an algorithm that will decide the optimal bin size
         such that the histogram best visualizes the distribution of the
         data. Ignored if `ybins.size` is provided.
-
+    
         The 'nbinsy' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [0, 9223372036854775807]
@@ -1121,7 +1121,7 @@ class Histogram2dContour(_BaseTraceType):
         contours will be chosen automatically to be less than or equal
         to the value of `ncontours`. Has an effect only if
         `autocontour` is True or if `contours.size` is missing.
-
+    
         The 'ncontours' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [1, 9223372036854775807]
@@ -1142,7 +1142,7 @@ class Histogram2dContour(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-
+    
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1164,7 +1164,7 @@ class Histogram2dContour(_BaseTraceType):
         Reverses the color mapping if true. If true, `zmin` will
         correspond to the last color in the array and `zmax` will
         correspond to the first color.
-
+    
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -1185,7 +1185,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-
+    
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -1206,7 +1206,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Determines whether or not a colorbar is displayed for this
         trace.
-
+    
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -1230,9 +1230,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-
+    
             Supported dict properties:
-
+                
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1260,7 +1260,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-
+    
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1295,7 +1295,7 @@ class Histogram2dContour(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1316,7 +1316,7 @@ class Histogram2dContour(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-
+    
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1337,7 +1337,7 @@ class Histogram2dContour(_BaseTraceType):
     def x(self):
         """
         Sets the sample data to be binned on the x axis.
-
+    
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1360,7 +1360,7 @@ class Histogram2dContour(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-
+    
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1386,7 +1386,7 @@ class Histogram2dContour(_BaseTraceType):
         histogram2dcontour traces  (on axes of the same axis type) can
         have compatible x-bin settings. Note that the same `xbingroup`
         value can be used to set (1D) histogram `bingroup`
-
+    
         The 'xbingroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1411,9 +1411,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.XBins`
           - A dict of string/value properties that will be passed
             to the XBins constructor
-
+    
             Supported dict properties:
-
+                
                 end
                     Sets the end value for the x axis bins. The
                     last bin may not end exactly at this value, we
@@ -1465,7 +1465,7 @@ class Histogram2dContour(_BaseTraceType):
     def xcalendar(self):
         """
         Sets the calendar system to use with `x` date data.
-
+    
         The 'xcalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['gregorian', 'chinese', 'coptic', 'discworld',
@@ -1489,7 +1489,7 @@ class Histogram2dContour(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-
+    
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1509,7 +1509,7 @@ class Histogram2dContour(_BaseTraceType):
     def y(self):
         """
         Sets the sample data to be binned on the y axis.
-
+    
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1532,7 +1532,7 @@ class Histogram2dContour(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-
+    
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1558,7 +1558,7 @@ class Histogram2dContour(_BaseTraceType):
         histogram2dcontour traces  (on axes of the same axis type) can
         have compatible y-bin settings. Note that the same `ybingroup`
         value can be used to set (1D) histogram `bingroup`
-
+    
         The 'ybingroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1583,9 +1583,9 @@ class Histogram2dContour(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.histogram2dcontour.YBins`
           - A dict of string/value properties that will be passed
             to the YBins constructor
-
+    
             Supported dict properties:
-
+                
                 end
                     Sets the end value for the y axis bins. The
                     last bin may not end exactly at this value, we
@@ -1637,7 +1637,7 @@ class Histogram2dContour(_BaseTraceType):
     def ycalendar(self):
         """
         Sets the calendar system to use with `y` date data.
-
+    
         The 'ycalendar' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['gregorian', 'chinese', 'coptic', 'discworld',
@@ -1661,7 +1661,7 @@ class Histogram2dContour(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-
+    
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1681,7 +1681,7 @@ class Histogram2dContour(_BaseTraceType):
     def z(self):
         """
         Sets the aggregation data.
-
+    
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1704,7 +1704,7 @@ class Histogram2dContour(_BaseTraceType):
         respect to the input data (here in `z`) or the bounds set in
         `zmin` and `zmax`  Defaults to `false` when `zmin` and `zmax`
         are set by the user.
-
+    
         The 'zauto' property must be specified as a bool
         (either True, or False)
 
@@ -1727,7 +1727,7 @@ class Histogram2dContour(_BaseTraceType):
         languages which are very similar to those in Python. See:
         https://github.com/d3/d3-3.x-api-
         reference/blob/master/Formatting.md#d3_format
-
+    
         The 'zhoverformat' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1749,7 +1749,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the upper bound of the color domain. Value should have the
         same units as in `z` and if set, `zmin` must be set as well.
-
+    
         The 'zmax' property is a number and may be specified as:
           - An int or float
 
@@ -1771,7 +1771,7 @@ class Histogram2dContour(_BaseTraceType):
         Sets the mid-point of the color domain by scaling `zmin` and/or
         `zmax` to be equidistant to this point. Value should have the
         same units as in `z`. Has no effect when `zauto` is `false`.
-
+    
         The 'zmid' property is a number and may be specified as:
           - An int or float
 
@@ -1792,7 +1792,7 @@ class Histogram2dContour(_BaseTraceType):
         """
         Sets the lower bound of the color domain. Value should have the
         same units as in `z` and if set, `zmax` must be set as well.
-
+    
         The 'zmin' property is a number and may be specified as:
           - An int or float
 
@@ -1812,7 +1812,7 @@ class Histogram2dContour(_BaseTraceType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-
+    
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -2194,7 +2194,7 @@ class Histogram2dContour(_BaseTraceType):
     ):
         """
         Construct a new Histogram2dContour object
-
+        
         The sample data from which statistics are computed is set in
         `x` and `y` (where `x` and `y` represent marginal
         distributions, binning is set in `xbins` and `ybins` in this

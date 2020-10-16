@@ -17,7 +17,7 @@ class Marker(_BaseTraceHierarchyType):
         """
         Sets the color of each sector. If not specified, the default
         trace color set is used to pick the sector colors.
-
+    
         The 'colors' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -37,7 +37,7 @@ class Marker(_BaseTraceHierarchyType):
     def colorssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  colors .
-
+    
         The 'colorssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -61,9 +61,9 @@ class Marker(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.funnelarea.marker.Line`
           - A dict of string/value properties that will be passed
             to the Line constructor
-
+    
             Supported dict properties:
-
+                
                 color
                     Sets the color of the line enclosing each
                     sector. Defaults to the `paper_bgcolor` value.
@@ -107,7 +107,7 @@ class Marker(_BaseTraceHierarchyType):
     def __init__(self, arg=None, colors=None, colorssrc=None, line=None, **kwargs):
         """
         Construct a new Marker object
-
+        
         Parameters
         ----------
         arg

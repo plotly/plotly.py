@@ -17,7 +17,7 @@ class Modebar(_BaseLayoutHierarchyType):
         """
         Sets the color of the active or hovered on icons in the
         modebar.
-
+    
         The 'activecolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -76,7 +76,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the modebar.
-
+    
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -135,7 +135,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def color(self):
         """
         Sets the color of the icons in the modebar.
-
+    
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -194,7 +194,7 @@ class Modebar(_BaseLayoutHierarchyType):
     def orientation(self):
         """
         Sets the orientation of the modebar.
-
+    
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -218,7 +218,7 @@ class Modebar(_BaseLayoutHierarchyType):
         modebar, including `hovermode`, `dragmode`, and `showspikes` at
         both the root level and inside subplots. Defaults to
         `layout.uirevision`.
-
+    
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -264,7 +264,7 @@ class Modebar(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Modebar object
-
+        
         Parameters
         ----------
         arg

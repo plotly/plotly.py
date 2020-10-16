@@ -35,7 +35,7 @@ class Line(_BaseTraceHierarchyType):
         `autocolorscale` is true, the default  palette will be chosen
         according to whether numbers in the `color` array are all
         positive, all negative or mixed.
-
+    
         The 'autocolorscale' property must be specified as a bool
         (either True, or False)
 
@@ -59,7 +59,7 @@ class Line(_BaseTraceHierarchyType):
         set in `line.cmin` and `line.cmax`  Has an effect only if in
         `line.color`is set to a numerical array. Defaults to `false`
         when `line.cmin` and `line.cmax` are set by the user.
-
+    
         The 'cauto' property must be specified as a bool
         (either True, or False)
 
@@ -82,7 +82,7 @@ class Line(_BaseTraceHierarchyType):
         in `line.color`is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmin` must
         be set as well.
-
+    
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -106,7 +106,7 @@ class Line(_BaseTraceHierarchyType):
         effect only if in `line.color`is set to a numerical array.
         Value should have the same units as in `line.color`. Has no
         effect when `line.cauto` is `false`.
-
+    
         The 'cmid' property is a number and may be specified as:
           - An int or float
 
@@ -129,7 +129,7 @@ class Line(_BaseTraceHierarchyType):
         in `line.color`is set to a numerical array. Value should have
         the same units as in `line.color` and if set, `line.cmax` must
         be set as well.
-
+    
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -152,7 +152,7 @@ class Line(_BaseTraceHierarchyType):
         array of numbers that are mapped to the colorscale relative to
         the max and min values of the array or relative to `line.cmin`
         and `line.cmax` if set.
-
+    
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -219,7 +219,7 @@ class Line(_BaseTraceHierarchyType):
         layout, under `layout.coloraxis`, `layout.coloraxis2`, etc.
         Note that multiple color scales can be linked to the same color
         axis.
-
+    
         The 'coloraxis' property is an identifier of a particular
         subplot, of type 'coloraxis', that may be specified as the string 'coloraxis'
         optionally followed by an integer >= 1
@@ -245,9 +245,9 @@ class Line(_BaseTraceHierarchyType):
           - An instance of :class:`plotly.graph_objs.parcoords.line.ColorBar`
           - A dict of string/value properties that will be passed
             to the ColorBar constructor
-
+    
             Supported dict properties:
-
+                
                 bgcolor
                     Sets the color of padded area.
                 bordercolor
@@ -490,14 +490,14 @@ class Line(_BaseTraceHierarchyType):
         be a palette name string of the following list: Greys,YlGnBu,Gr
         eens,YlOrRd,Bluered,RdBu,Reds,Blues,Picnic,Rainbow,Portland,Jet
         ,Hot,Blackbody,Earth,Electric,Viridis,Cividis.
-
+    
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1),
+            normalized color level value (starting at 0 and ending at 1), 
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -533,7 +533,7 @@ class Line(_BaseTraceHierarchyType):
     def colorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  color .
-
+    
         The 'colorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -556,7 +556,7 @@ class Line(_BaseTraceHierarchyType):
         `line.color`is set to a numerical array. If true, `line.cmin`
         will correspond to the last color in the array and `line.cmax`
         will correspond to the first color.
-
+    
         The 'reversescale' property must be specified as a bool
         (either True, or False)
 
@@ -578,7 +578,7 @@ class Line(_BaseTraceHierarchyType):
         Determines whether or not a colorbar is displayed for this
         trace. Has an effect only if in `line.color`is set to a
         numerical array.
-
+    
         The 'showscale' property must be specified as a bool
         (either True, or False)
 
@@ -694,7 +694,7 @@ class Line(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Line object
-
+        
         Parameters
         ----------
         arg
