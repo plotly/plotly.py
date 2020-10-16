@@ -1,4 +1,18 @@
-from numpy import argmax, argmin, mean
+# some functions defined here to avoid numpy import
+
+
+def _mean(x):
+    if len(x) == 0:
+        raise ValueError("x must have positive length")
+    return sum(x) / len(x)
+
+
+def _argmin(x):
+    return sorted(enumerate(x), key=lambda t: t[1])[0][0]
+
+
+def _argmax(x):
+    return sorted(enumerate(x), key=lambda t: t[1], reverse=True)[0][0]
 
 
 def _df_anno(xanchor, yanchor, x, y):
@@ -41,14 +55,14 @@ def annotation_params_for_line(shape_type, shape_args, position):
     M = "middle"
     aY = max(Y)
     iY = min(Y)
-    eY = mean(Y)
-    aaY = argmax(Y)
-    aiY = argmin(Y)
+    eY = _mean(Y)
+    aaY = _argmax(Y)
+    aiY = _argmin(Y)
     aX = max(X)
     iX = min(X)
-    eX = mean(X)
-    aaX = argmax(X)
-    aiX = argmin(X)
+    eX = _mean(X)
+    aaX = _argmax(X)
+    aiX = _argmin(X)
     position, pos_str = _prepare_position(position)
     if shape_type == "vline":
         if position == set(["top", "left"]):
@@ -99,20 +113,20 @@ def annotation_params_for_rect(shape_type, shape_args, position):
     if position == set(["inside", "top", "right"]):
         return _df_anno("right", "top", max([x0, x1]), max([y0, y1]))
     if position == set(["inside", "top"]):
-        return _df_anno("center", "top", mean([x0, x1]), max([y0, y1]))
+        return _df_anno("center", "top", _mean([x0, x1]), max([y0, y1]))
     if position == set(["inside", "bottom", "left"]):
         return _df_anno("left", "bottom", min([x0, x1]), min([y0, y1]))
     if position == set(["inside", "bottom", "right"]):
         return _df_anno("right", "bottom", max([x0, x1]), min([y0, y1]))
     if position == set(["inside", "bottom"]):
-        return _df_anno("center", "bottom", mean([x0, x1]), min([y0, y1]))
+        return _df_anno("center", "bottom", _mean([x0, x1]), min([y0, y1]))
     if position == set(["inside", "left"]):
-        return _df_anno("left", "middle", min([x0, x1]), mean([y0, y1]))
+        return _df_anno("left", "middle", min([x0, x1]), _mean([y0, y1]))
     if position == set(["inside", "right"]):
-        return _df_anno("right", "middle", max([x0, x1]), mean([y0, y1]))
+        return _df_anno("right", "middle", max([x0, x1]), _mean([y0, y1]))
     if position == set(["inside"]):
         # TODO: Do we want this?
-        return _df_anno("center", "middle", mean([x0, x1]), mean([y0, y1]))
+        return _df_anno("center", "middle", _mean([x0, x1]), _mean([y0, y1]))
     if position == set(["outside", "top", "left"]):
         return _df_anno(
             "right" if shape_type == "vrect" else "left",
@@ -128,7 +142,7 @@ def annotation_params_for_rect(shape_type, shape_args, position):
             max([y0, y1]),
         )
     if position == set(["outside", "top"]):
-        return _df_anno("center", "bottom", mean([x0, x1]), max([y0, y1]))
+        return _df_anno("center", "bottom", _mean([x0, x1]), max([y0, y1]))
     if position == set(["outside", "bottom", "left"]):
         return _df_anno(
             "right" if shape_type == "vrect" else "left",
@@ -144,11 +158,11 @@ def annotation_params_for_rect(shape_type, shape_args, position):
             min([y0, y1]),
         )
     if position == set(["outside", "bottom"]):
-        return _df_anno("center", "top", mean([x0, x1]), min([y0, y1]))
+        return _df_anno("center", "top", _mean([x0, x1]), min([y0, y1]))
     if position == set(["outside", "left"]):
-        return _df_anno("right", "middle", min([x0, x1]), mean([y0, y1]))
+        return _df_anno("right", "middle", min([x0, x1]), _mean([y0, y1]))
     if position == set(["outside", "right"]):
-        return _df_anno("left", "middle", max([x0, x1]), mean([y0, y1]))
+        return _df_anno("left", "middle", max([x0, x1]), _mean([y0, y1]))
     raise ValueError("Invalid annotation position %s" % (pos_str,))
 
 
