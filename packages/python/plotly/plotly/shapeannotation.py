@@ -4,7 +4,7 @@
 def _mean(x):
     if len(x) == 0:
         raise ValueError("x must have positive length")
-    return sum(x) / len(x)
+    return float(sum(x)) / len(x)
 
 
 def _argmin(x):
