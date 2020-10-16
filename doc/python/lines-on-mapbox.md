@@ -94,8 +94,8 @@ for feature, name in zip(geo_df.geometry, geo_df.name):
         lons = np.append(lons, None)
         names = np.append(names, None)
 
-fig = px.line_mapbox(lat=lats, lon=lons, hover_name=names, 
-                     mapbox_style="stamen-terrain", zoom=0)
+fig = px.line_mapbox(lat=lats, lon=lons, hover_name=names,
+                     mapbox_style="stamen-terrain", zoom=1)
 fig.show()
 ```
 
