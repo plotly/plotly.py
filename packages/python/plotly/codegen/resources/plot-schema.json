@@ -20395,6 +20395,13 @@
                         "editType": "none"
                     }
                 },
+                "rotation": {
+                    "valType": "angle",
+                    "role": "style",
+                    "dflt": 0,
+                    "editType": "plot",
+                    "description": "Rotates the whole diagram counterclockwise by some angle. By default the first slice starts at 3 o'clock."
+                },
                 "sort": {
                     "valType": "boolean",
                     "role": "style",
@@ -60266,6 +60273,12 @@
                 },
                 "editType": "plot",
                 "role": "object"
+            },
+            "computed": {
+                "valType": "any",
+                "role": "info",
+                "editType": "none",
+                "description": "Placeholder for exporting automargin-impacting values namely `margin.t`, `margin.b`, `margin.l` and `margin.r` in *full-json* mode."
             },
             "paper_bgcolor": {
                 "valType": "color",
