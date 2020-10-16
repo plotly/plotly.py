@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.7
   plotly:
     description: How to make scatter plots on maps in Python. Scatter plots on maps
       highlight geographic areas and can be colored by value.
@@ -63,6 +63,24 @@ fig = px.scatter_geo(df, locations="iso_alpha",
                      hover_name="country", # column added to hover information
                      size="pop", # size of markers
                      projection="natural earth")
+fig.show()
+```
+
+### Basic Example with GeoPandas
+
+`px.scatter_geo` can work well with [GeoPandas](https://geopandas.org/) dataframes whose `geometry` is of type `Point`.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+
+px.set_mapbox_access_token(open(".mapbox_token").read())
+fig = px.scatter_geo(geo_df,
+                    lat=geo_df.geometry.y,
+                    lon=geo_df.geometry.x,
+                    hover_name="name")
 fig.show()
 ```
 
