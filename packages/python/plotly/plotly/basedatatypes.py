@@ -814,7 +814,7 @@ class BaseFigure(object):
         if selector is None:
             return True
         # If selector is a dict, compare the fields
-        if type(selector) == type(dict()):
+        if (type(selector) == type(dict())) or isinstance(selector, BasePlotlyType):
             # This returns True if selector is an empty dict
             for k in selector:
                 if k not in obj:
