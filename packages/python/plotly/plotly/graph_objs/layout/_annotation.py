@@ -349,7 +349,6 @@ class Annotation(_BaseLayoutHierarchyType):
         positioning is useful for specifying the text offset for an
         annotated point.
 
->>>>>>> master
         The 'ayref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['pixel']
