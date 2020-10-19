@@ -19,10 +19,10 @@ NO_COLOR = "px_no_color_constant"
 
 # If facet_row_spacing not specified, the spacing is computed as this
 # FACET_COL_SPACE_FRACTION / nrows
-FACET_ROW_SPACE_FRACTION = 0.1
+FACET_ROW_SPACE_FRACTION = 0.06
 # If facet_col_spacing not specified, the spacing is computed as this
 # FACET_COL_SPACE_FRACTION / ncols
-FACET_COL_SPACE_FRACTION = 0.1
+FACET_COL_SPACE_FRACTION = 0.04
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -2085,8 +2085,8 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
     row_heights = [1.0] * nrows
 
     # Build column_widths/row_heights
-    default_xy_vertical_spacing = FACET_ROW_SPACE_FRACTION / nrows
-    default_xy_horizontal_spacing = FACET_COL_SPACE_FRACTION / ncols
+    default_xy_vertical_spacing = FACET_ROW_SPACE_FRACTION / float(nrows)
+    default_xy_horizontal_spacing = FACET_COL_SPACE_FRACTION / float(ncols)
     if subplot_type == "xy":
         if bool(args.get("marginal_x", False)):
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
