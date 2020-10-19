@@ -31,6 +31,10 @@
     </tr>
 </table>
 
+## Data Science Workspaces
+
+Our recommended IDE for Plotly’s Python graphing library is Dash Enterprise’s [Data Science Workspaces](https://plotly.com/dash/workspaces/), which has both Jupyter notebook and Python code file support.
+
 ## Quickstart
 
 `pip install plotly==4.11.0`

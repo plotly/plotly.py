@@ -104,6 +104,10 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instance or dict with compatible properties
             colorway
                 Sets the default trace colors.
+            computed
+                Placeholder for exporting automargin-impacting
+                values namely `margin.t`, `margin.b`,
+                `margin.l` and `margin.r` in "full-json" mode.
             datarevision
                 If provided, a changed value tells
                 `Plotly.react` that one or more data arrays has

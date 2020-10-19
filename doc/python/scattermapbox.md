@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.2
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to make scatter plots on Mapbox maps in Python.
     display_as: maps
@@ -49,6 +49,25 @@ px.set_mapbox_access_token(open(".mapbox_token").read())
 df = px.data.carshare()
 fig = px.scatter_mapbox(df, lat="centroid_lat", lon="centroid_lon",     color="peak_hour", size="car_hours",
                   color_continuous_scale=px.colors.cyclical.IceFire, size_max=15, zoom=10)
+fig.show()
+```
+
+### Basic Example with GeoPandas
+
+`px.scatter_mapbox` can work well with [GeoPandas](https://geopandas.org/) dataframes whose `geometry` is of type `Point`.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+
+px.set_mapbox_access_token(open(".mapbox_token").read())
+fig = px.scatter_mapbox(geo_df,
+                        lat=geo_df.geometry.y,
+                        lon=geo_df.geometry.x,
+                        hover_name="name",
+                        zoom=1)
 fig.show()
 ```
 
