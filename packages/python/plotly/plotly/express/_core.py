@@ -17,6 +17,13 @@ from plotly.subplots import (
 
 NO_COLOR = "px_no_color_constant"
 
+# If facet_row_spacing not specified, the spacing is computed as this
+# FACET_COL_SPACE_FRACTION / nrows
+FACET_ROW_SPACE_FRACTION = 0.1
+# If facet_col_spacing not specified, the spacing is computed as this
+# FACET_COL_SPACE_FRACTION / ncols
+FACET_COL_SPACE_FRACTION = 0.1
+
 # Declare all supported attributes, across all plot types
 direct_attrables = (
     ["base", "x", "y", "z", "a", "b", "c", "r", "theta", "size", "x_start", "x_end"]
@@ -2078,6 +2085,8 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
     row_heights = [1.0] * nrows
 
     # Build column_widths/row_heights
+    default_xy_vertical_spacing = FACET_ROW_SPACE_FRACTION / nrows
+    default_xy_horizontal_spacing = FACET_COL_SPACE_FRACTION / ncols
     if subplot_type == "xy":
         if bool(args.get("marginal_x", False)):
             if args["marginal_x"] == "histogram" or ("color" in args and args["color"]):
@@ -2090,7 +2099,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         elif args.get("facet_col_wrap", 0):
             vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
-            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
+            vertical_spacing = (
+                args.get("facet_row_spacing", None) or default_xy_vertical_spacing
+            )
 
         if bool(args.get("marginal_y", False)):
             if args["marginal_y"] == "histogram" or ("color" in args and args["color"]):
@@ -2101,7 +2112,9 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             column_widths = [main_size] * (ncols - 1) + [1 - main_size]
             horizontal_spacing = 0.005
         else:
-            horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
+            horizontal_spacing = (
+                args.get("facet_col_spacing", None) or default_xy_horizontal_spacing
+            )
     else:
         # Other subplot types:
         #   'scene', 'geo', 'polar', 'ternary', 'mapbox', 'domain', None
