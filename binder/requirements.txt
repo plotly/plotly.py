@@ -18,3 +18,4 @@ cufflinks==0.17.3
 kaleido
 scikit-learn
 umap-learn
+wget

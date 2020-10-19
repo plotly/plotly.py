@@ -9,7 +9,11 @@ class MatchesValidator(_plotly_utils.basevalidators.EnumeratedValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             role=kwargs.pop("role", "info"),
             values=kwargs.pop(
-                "values", ["/^x([2-9]|[1-9][0-9]+)?$/", "/^y([2-9]|[1-9][0-9]+)?$/"]
+                "values",
+                [
+                    "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                    "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
+                ],
             ),
             **kwargs
         )
