@@ -87,6 +87,8 @@ fig.show()
 
 By default, the tick labels (and optional ticks) are associated with a specific grid-line, and represent an *instant* in time, for example, "00:00 on February 1, 2018". Tick labels can be formatted using the `tickformat` attribute (which accepts the [d3 time-format formatting strings](https://github.com/d3/d3-time-format)) to display only the month and year, but they still represent an instant by default, so in the figure below, the text of the label "Feb 2018" spans part of the month of January and part of the month of February. The `dtick` attribute controls the spacing between gridlines, and the `"M1"` setting means "1 month". This attribute also accepts a number of milliseconds, which can be scaled up to days by multiplying by `24*60*60*1000`.
 
+Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
+
 Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the acutal date, as below.
 
 ```python
@@ -97,8 +99,7 @@ fig = px.line(df, x="date", y=df.columns,
               title='custom tick labels')
 fig.update_xaxes(
     dtick="M1",
-    tickformat="%b %Y",
-    range=["2018-01-01", "2018-12-31"])
+    tickformat="%b\n%Y")
 fig.show()
 ```
 
@@ -116,9 +117,8 @@ fig = px.line(df, x="date", y=df.columns,
               title='custom tick labels with ticklabelmode="period"')
 fig.update_xaxes(
     dtick="M1",
-    tickformat="%b %Y",
-    ticklabelmode="period",
-    range=["2018-01-01", "2018-12-31"])
+    tickformat="%b\n%Y",
+    ticklabelmode="period")
 fig.show()
 ```
 

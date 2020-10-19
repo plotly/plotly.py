@@ -51,7 +51,7 @@ The following types of plots are still difficult to create with Graph Objects or
 Deprecated "legacy" Figure Factories include:
 
   * [County Choropleth Maps](/python/county-choropleth/), deprecated by regular [Choropleth maps with GeoJSON input](/python/choropleth-maps/)
-  * [Distplots](/python/distplot/), mostly deprecated by [`px.histogram`](/python/histograms/)
+  * [Distplots](/python/distplot/), mostly deprecated by [`px.histogram`](/python/histograms/) except for KDE plots, which `px.histogram` doesn't support yet
   * [Gantt Charts](/python/gantt/), deprecated by [`px.timeline`](/python/gantt/)
 
 #### Reference

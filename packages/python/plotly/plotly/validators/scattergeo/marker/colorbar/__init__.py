@@ -35,6 +35,7 @@ if sys.version_info < (3, 7):
     from ._outlinewidth import OutlinewidthValidator
     from ._outlinecolor import OutlinecolorValidator
     from ._nticks import NticksValidator
+    from ._minexponent import MinexponentValidator
     from ._lenmode import LenmodeValidator
     from ._len import LenValidator
     from ._exponentformat import ExponentformatValidator
@@ -83,6 +84,7 @@ else:
             "._outlinewidth.OutlinewidthValidator",
             "._outlinecolor.OutlinecolorValidator",
             "._nticks.NticksValidator",
+            "._minexponent.MinexponentValidator",
             "._lenmode.LenmodeValidator",
             "._len.LenValidator",
             "._exponentformat.ExponentformatValidator",

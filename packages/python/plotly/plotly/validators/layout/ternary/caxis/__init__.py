@@ -28,6 +28,7 @@ if sys.version_info < (3, 7):
     from ._showexponent import ShowexponentValidator
     from ._separatethousands import SeparatethousandsValidator
     from ._nticks import NticksValidator
+    from ._minexponent import MinexponentValidator
     from ._min import MinValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
@@ -72,6 +73,7 @@ else:
             "._showexponent.ShowexponentValidator",
             "._separatethousands.SeparatethousandsValidator",
             "._nticks.NticksValidator",
+            "._minexponent.MinexponentValidator",
             "._min.MinValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",

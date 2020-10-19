@@ -477,7 +477,9 @@ class EnumeratedValidator(BaseValidator):
         #
         # To be cautious, we only perform this conversion for enumerated
         # values that match the anchor-style regex
-        match = re.match(r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\$", regex_str)
+        match = re.match(
+            r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\( domain\)\?\$", regex_str
+        )
 
         if match:
             anchor_char = match.group(1)
