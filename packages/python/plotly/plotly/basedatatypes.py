@@ -9,13 +9,138 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 
-from _plotly_utils.utils import _natural_sort_strings, _get_int_type
+from _plotly_utils.utils import (
+    _natural_sort_strings,
+    _get_int_type,
+    split_multichar,
+    split_string_positions,
+    display_string_positions,
+)
+from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
+
+
+def _str_to_dict_path_full(key_path_str):
+    """
+    Convert a key path string into a tuple of key path elements and also
+    return a tuple of indices marking the beginning of each element in the
+    string.
+
+    Parameters
+    ----------
+    key_path_str : str
+        Key path string, where nested keys are joined on '.' characters
+        and array indexes are specified using brackets
+        (e.g. 'foo.bar[1]')
+    Returns
+    -------
+    tuple[str | int]
+    tuple [int]
+    """
+    key_path2 = split_multichar([key_path_str], list(".[]"))
+    # Split out underscore
+    # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+    key_path3 = []
+    underscore_props = BaseFigure._valid_underscore_properties
+
+    def _make_hyphen_key(key):
+        if "_" in key[1:]:
+            # For valid properties that contain underscores (error_x)
+            # replace the underscores with hyphens to protect them
+            # from being split up
+            for under_prop, hyphen_prop in underscore_props.items():
+                key = key.replace(under_prop, hyphen_prop)
+        return key
+
+    def _make_underscore_key(key):
+        return key.replace("-", "_")
+
+    key_path2b = map(_make_hyphen_key, key_path2)
+    key_path2c = split_multichar(key_path2b, list("_"))
+    key_path2d = list(map(_make_underscore_key, key_path2c))
+    all_elem_idcs = tuple(split_string_positions(list(key_path2d)))
+    # remove empty strings, and indices pointing to them
+    key_elem_pairs = list(filter(lambda t: len(t[1]), enumerate(key_path2d)))
+    key_path3 = [x for _, x in key_elem_pairs]
+    elem_idcs = [all_elem_idcs[i] for i, _ in key_elem_pairs]
+
+    # Convert elements to ints if possible.
+    # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
+    for i in range(len(key_path3)):
+        try:
+            key_path3[i] = int(key_path3[i])
+        except ValueError as _:
+            pass
+
+    return (tuple(key_path3), elem_idcs)
+
+
+def _remake_path_from_tuple(props):
+    """
+    try to remake a path using the properties in props
+    """
+    if len(props) == 0:
+        return ""
+
+    def _add_square_brackets_to_number(n):
+        if type(n) == type(int()):
+            return "[%d]" % (n,)
+        return n
+
+    def _prepend_dot_if_not_number(s):
+        if not s.startswith("["):
+            return "." + s
+        return s
+
+    props_all_str = list(map(_add_square_brackets_to_number, props))
+    props_w_underscore = props_all_str[:1] + list(
+        map(_prepend_dot_if_not_number, props_all_str[1:])
+    )
+    return "".join(props_w_underscore)
+
+
+def _check_path_in_prop_tree(obj, path):
+    """
+    obj:  the object in which the first property is looked up
+    path: the path that will be split into properties to be looked up
+          path can also be a tuple. In this case, it is combined using . and []
+          because it is impossible to reconstruct the string fully in order to
+          give a decent error message.
+    returns
+          an Exception object or None. The caller can raise this
+          exception to see where the lookup error occurred.
+    """
+    if type(path) == type(tuple()):
+        path = _remake_path_from_tuple(path)
+    prop, prop_idcs = _str_to_dict_path_full(path)
+    for i, p in enumerate(prop):
+        try:
+            obj = obj[p]
+        except (ValueError, KeyError, IndexError) as e:
+            arg = (
+                e.args[0]
+                + """
+Bad property path:
+%s"""
+                % (path,)
+            )
+            arg += """
+%s""" % (
+                display_string_positions(prop_idcs, i),
+            )
+            # Make KeyError more pretty by changing it to a PlotlyKeyError,
+            # because the Python interpreter has a special way of printing
+            # KeyError
+            if type(e) == type(KeyError()):
+                e = PlotlyKeyError()
+            e.args = (arg,)
+            return e
+    return None
 
 
 class BaseFigure(object):
@@ -265,10 +390,18 @@ class BaseFigure(object):
         # Process kwargs
         # --------------
         for k, v in kwargs.items():
-            if k in self:
+            err = _check_path_in_prop_tree(self, k)
+            if err is None:
                 self[k] = v
             elif not skip_invalid:
-                raise TypeError("invalid Figure property: {}".format(k))
+                type_err = TypeError("invalid Figure property: {}".format(k))
+                type_err.args = (
+                    type_err.args[0]
+                    + """
+%s"""
+                    % (err.args[0],),
+                )
+                raise type_err
 
     # Magic Methods
     # -------------
@@ -315,6 +448,9 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
+            err = _check_path_in_prop_tree(self, orig_prop)
+            if err is not None:
+                raise err
             res = self
             for p in prop[:-1]:
                 res = res[p]
@@ -370,6 +506,9 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
+            err = _check_path_in_prop_tree(self, orig_prop)
+            if err is not None:
+                raise err
             res = self
             for p in prop:
                 res = res[p]
@@ -1337,7 +1476,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
     @staticmethod
     def _str_to_dict_path(key_path_str):
         """
-        Convert a key path string into a tuple of key path elements
+        Convert a key path string into a tuple of key path elements.
 
         Parameters
         ----------
@@ -1361,53 +1500,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             # Nothing to do
             return key_path_str
         else:
-            # Split string on periods.
-            # e.g. 'foo.bar_baz[1]' -> ['foo', 'bar_baz[1]']
-            key_path = key_path_str.split(".")
-
-            # Split out bracket indexes.
-            # e.g. ['foo', 'bar_baz[1]'] -> ['foo', 'bar_baz', '1']
-            key_path2 = []
-            for key in key_path:
-                match = BaseFigure._bracket_re.match(key)
-                if match:
-                    key_path2.extend(match.groups())
-                else:
-                    key_path2.append(key)
-
-            # Split out underscore
-            # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
-            key_path3 = []
-            underscore_props = BaseFigure._valid_underscore_properties
-            for key in key_path2:
-                if "_" in key[1:]:
-                    # For valid properties that contain underscores (error_x)
-                    # replace the underscores with hyphens to protect them
-                    # from being split up
-                    for under_prop, hyphen_prop in underscore_props.items():
-                        key = key.replace(under_prop, hyphen_prop)
-
-                    # Split key on underscores
-                    key = key.split("_")
-
-                    # Replace hyphens with underscores to restore properties
-                    # that include underscores
-                    for i in range(len(key)):
-                        key[i] = key[i].replace("-", "_")
-
-                    key_path3.extend(key)
-                else:
-                    key_path3.append(key)
-
-            # Convert elements to ints if possible.
-            # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path3)):
-                try:
-                    key_path3[i] = int(key_path3[i])
-                except ValueError as _:
-                    pass
-
-            return tuple(key_path3)
+            ret = _str_to_dict_path_full(key_path_str)[0]
+            return ret
 
     @staticmethod
     def _set_in(d, key_path_str, v):
@@ -3320,19 +3414,20 @@ Invalid property path '{key_path_str}' for layout
             # -------------------------------
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
-            if isinstance(plotly_obj, BaseLayoutType):
-                for key in update_obj:
-                    if key not in plotly_obj:
+            for key in update_obj:
+                err = _check_path_in_prop_tree(plotly_obj, key)
+                if err is not None:
+                    if isinstance(plotly_obj, BaseLayoutType):
+                        # try _subplot_re_match
                         match = plotly_obj._subplot_re_match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
-
-            # Handle invalid properties
-            # -------------------------
-            invalid_props = [k for k in update_obj if k not in plotly_obj]
-
-            plotly_obj._raise_on_invalid_property_error(*invalid_props)
+                            continue
+                    # If no match, raise the error, which should already
+                    # contain the _raise_on_invalid_property_error
+                    # generated message
+                    raise err
 
             # Convert update_obj to dict
             # --------------------------
@@ -3536,17 +3631,20 @@ class BasePlotlyType(object):
         """
         invalid_kwargs = {}
         for k, v in kwargs.items():
-            if k in self:
+            err = _check_path_in_prop_tree(self, k)
+            if err is None:
                 # e.g. underscore kwargs like marker_line_color
                 self[k] = v
             elif not self._validate:
                 # Set extra property as-is
                 self[k] = v
-            else:
-                invalid_kwargs[k] = v
-
-        if invalid_kwargs and not self._skip_invalid:
-            self._raise_on_invalid_property_error(*invalid_kwargs.keys())
+            elif not self._skip_invalid:
+                raise err
+        # No need to call _raise_on_invalid_property_error here,
+        # because we have it set up so that the singular case of calling
+        # __setitem__ will raise this. If _check_path_in_prop_tree
+        # raised that in its travels, it will already be in the error
+        # message.
 
     @property
     def plotly_name(self):
@@ -3852,12 +3950,14 @@ class BasePlotlyType(object):
         # Normalize prop
         # --------------
         # Convert into a property tuple
+        orig_prop = prop
         prop = BaseFigure._str_to_dict_path(prop)
 
         # Handle remapping
         # ----------------
         if prop and prop[0] in self._mapped_properties:
             prop = self._mapped_properties[prop[0]] + prop[1:]
+            orig_prop = _remake_path_from_tuple(prop)
 
         # Handle scalar case
         # ------------------
@@ -3866,7 +3966,7 @@ class BasePlotlyType(object):
             # Unwrap scalar tuple
             prop = prop[0]
             if prop not in self._valid_props:
-                raise KeyError(prop)
+                self._raise_on_invalid_property_error(prop)
 
             validator = self._get_validator(prop)
 
@@ -3904,6 +4004,9 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
+            err = _check_path_in_prop_tree(self, orig_prop)
+            if err is not None:
+                raise err
             res = self
             for p in prop:
                 res = res[p]
@@ -3932,6 +4035,9 @@ class BasePlotlyType(object):
         -------
         bool
         """
+        # TODO: We don't want to throw an error in __contains__ because any code that
+        # relies on it returning False will have to be changed (it will have to
+        # have a try except block...).
         prop = BaseFigure._str_to_dict_path(prop)
 
         # Handle remapping
@@ -4047,6 +4153,9 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
+            err = _check_path_in_prop_tree(self, orig_prop)
+            if err is not None:
+                raise err
             res = self
             for p in prop[:-1]:
                 res = res[p]
