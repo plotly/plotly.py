@@ -318,10 +318,11 @@ def split_string_positions(ss):
     )
 
 
-def display_string_positions(p, i=None):
+def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True):
     """
-    Return a string that is whitespace except at p[i] which is replaced with ^.
-    If i is None then all the indices of the string in p are replaced with ^.
+    Return a string that is whitespace except at p[i] which is replaced with char.
+    If i is None then all the indices of the string in p are replaced with char.
+
     Example:
 
         >>> ss = ["a.string[0].with_separators"]
@@ -334,13 +335,30 @@ def display_string_positions(p, i=None):
         'a.string[0].with_separators'
         >>> display_string_positions(ss_pos,4)
         '            ^'
+        >>> display_string_positions(ss_pos,4,offset=1,length=3,char="~",trim=False)
+        '             ~~~      '
+        >>> display_string_positions(ss_pos_)
+        '^ ^      ^ ^^    ^'
     :param (list) p: A list of integers.
     :param (integer|None) i: Optional index of p to display.
+    :param (integer) offset: Allows adding a number of spaces to the replacement.
+    :param (integer) length: Allows adding a replacement that is the char
+                             repeated length times.
+    :param (str) char: allows customizing the replacement character.
+    :param (boolean) trim: trims the remaining whitespace if True.
     """
-    s = [" " for _ in range(max(p) + 1)]
+    s = [" " for _ in range(max(p) + 1 + offset + length)]
+    maxaddr = 0
     if i is None:
         for p_ in p:
-            s[p_] = "^"
+            for l in range(length):
+                maxaddr = p_ + offset + l
+                s[maxaddr] = char
     else:
-        s[p[i]] = "^"
-    return "".join(s)
+        for l in range(length):
+            maxaddr = p[i] + offset + l
+            s[maxaddr] = char
+    ret = "".join(s)
+    if trim:
+        ret = ret[: maxaddr + 1]
+    return ret
