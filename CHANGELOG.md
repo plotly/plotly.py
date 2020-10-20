@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.12.0] - unreleased
 
+### Added
+
+- Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
+
 ### Updated
 
 - Updated Plotly.js to version 1.57.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
