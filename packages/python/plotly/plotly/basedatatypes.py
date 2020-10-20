@@ -838,7 +838,7 @@ class BaseFigure(object):
         else:
             raise TypeError(
                 "selector must be dict or a function "
-                "accepting a trace returning a boolean."
+                "accepting a graph object returning a boolean."
             )
 
     def for_each_trace(self, fn, selector=None, row=None, col=None, secondary_y=None):
