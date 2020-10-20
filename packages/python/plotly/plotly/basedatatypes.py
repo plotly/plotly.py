@@ -119,20 +119,37 @@ def _check_path_in_prop_tree(obj, path):
         path = _remake_path_from_tuple(path)
     prop, prop_idcs = _str_to_dict_path_full(path)
     for i, p in enumerate(prop):
+        arg = ""
         try:
             obj = obj[p]
-        except (ValueError, KeyError, IndexError) as e:
-            arg = (
-                e.args[0]
-                + """
-Bad property path:
-%s"""
-                % (path,)
-            )
-            arg += """
+        except (ValueError, KeyError, IndexError, TypeError) as e:
+            arg = e.args[0]
+            if obj is None:
+                # If obj doesn't support subscripting, state that and show the
+                # (valid) property that gives the object that doesn't support
+                # it.
+                # In case i is 0, the best we can do is indicate the first
+                # property in the string as having caused the error
+                disp_i = max(i - 1, 0)
+                arg += """
+Property does not support subscripting:
+%s
 %s""" % (
-                display_string_positions(prop_idcs, i),
-            )
+                    path,
+                    display_string_positions(
+                        prop_idcs, disp_i, length=len(prop[disp_i]), char="~"
+                    ),
+                )
+            else:
+                # State that the property for which subscripting was attempted
+                # is bad and indicate the start of the bad property.
+                arg += """
+Bad property path:
+%s
+%s""" % (
+                    path,
+                    display_string_positions(prop_idcs, i, length=1, char="^"),
+                )
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing
             # KeyError
