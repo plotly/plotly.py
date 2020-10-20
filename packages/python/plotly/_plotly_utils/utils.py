@@ -337,7 +337,7 @@ def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True)
         '            ^'
         >>> display_string_positions(ss_pos,4,offset=1,length=3,char="~",trim=False)
         '             ~~~      '
-        >>> display_string_positions(ss_pos_)
+        >>> display_string_positions(ss_pos)
         '^ ^      ^ ^^    ^'
     :param (list) p: A list of integers.
     :param (integer|None) i: Optional index of p to display.

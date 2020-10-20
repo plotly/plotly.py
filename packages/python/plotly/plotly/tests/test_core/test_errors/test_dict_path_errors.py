@@ -77,6 +77,14 @@ layout.shapa[1].x2000
 
 def test_raises_on_bad_indexed_underscore_property(some_fig):
 
+    # The way these tests work is first the error is raised without using
+    # underscores to get the Exception we expect, then the string showing the
+    # bad property path is removed (because it will not match the string
+    # returned when the same error is thrown using underscores).
+    # Then the error is thrown using underscores and the Exceptions are
+    # compared, but we adjust the expected bad property error because it will be
+    # different when underscores are used.
+
     # finds bad part when using the path as a key to figure and throws the error
     # for the last good property it found in the path
     raised = False
@@ -243,7 +251,7 @@ ltaxis
             """
 Bad property path:
 geo_ltaxis_showgrid
-    ^       """,
+    ^""",
         )
         assert (
             (
@@ -251,6 +259,86 @@ geo_ltaxis_showgrid
                     """Bad property path:
 geo_ltaxis_showgrid
     ^"""
+                )
+                >= 0
+            )
+            and (e_substr == e_correct_substr)
+        )
+    assert raised
+
+
+def test_describes_subscripting_error(some_fig):
+    # This test works like test_raises_on_bad_indexed_underscore_property but
+    # removes the error raised because the property does not support
+    # subscripting.
+    # Note that, to raise the error, we try to access the value rather than
+    # assign something to it. We have to do this, because Plotly.py tries to
+    # access the value to see if it is valid, so the error raised has to do with
+    # subscripting and not assignment (even though we are trying to assign it a
+    # value).
+    raised = False
+    try:
+        # some_fig.update_traces(text_yo="hey") but without using underscores
+        some_fig.data[0].text["yo"]
+    except TypeError as e:
+        raised = True
+        e_correct_substr = e.args[0]
+    assert raised
+    raised = False
+    try:
+        some_fig.update_traces(text_yo="hey")
+    except TypeError as e:
+        raised = True
+        e_substr = error_substr(
+            e.args[0],
+            """
+Property does not support subscripting:
+text_yo
+~~~~""",
+        )
+        assert (
+            (
+                e.args[0].find(
+                    """
+Property does not support subscripting:
+text_yo
+~~~~"""
+                )
+                >= 0
+            )
+            and (e_substr == e_correct_substr)
+        )
+    assert raised
+
+    # Same as previous test but tests deeper path
+    raised = False
+    try:
+        # go.Figure(go.Scatter()).update_traces(textfont_family_yo="hey") but
+        # without using underscores
+        some_fig.data[0].textfont.family["yo"]
+    except TypeError as e:
+        raised = True
+        e_correct_substr = e.args[0]
+    assert raised
+    raised = False
+    try:
+        go.Figure(go.Scatter()).update_traces(textfont_family_yo="hey")
+    except TypeError as e:
+        raised = True
+        e_substr = error_substr(
+            e.args[0],
+            """
+Property does not support subscripting:
+textfont_family_yo
+         ~~~~~~""",
+        )
+        assert (
+            (
+                e.args[0].find(
+                    """
+Property does not support subscripting:
+textfont_family_yo
+         ~~~~~~"""
                 )
                 >= 0
             )
