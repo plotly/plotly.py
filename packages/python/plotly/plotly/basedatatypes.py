@@ -813,24 +813,33 @@ class BaseFigure(object):
     def _selector_matches(obj, selector):
         if selector is None:
             return True
+        # If selector is a dict, compare the fields
+        if (type(selector) == type(dict())) or isinstance(selector, BasePlotlyType):
+            # This returns True if selector is an empty dict
+            for k in selector:
+                if k not in obj:
+                    return False
 
-        for k in selector:
-            if k not in obj:
-                return False
+                obj_val = obj[k]
+                selector_val = selector[k]
 
-            obj_val = obj[k]
-            selector_val = selector[k]
+                if isinstance(obj_val, BasePlotlyType):
+                    obj_val = obj_val.to_plotly_json()
 
-            if isinstance(obj_val, BasePlotlyType):
-                obj_val = obj_val.to_plotly_json()
+                if isinstance(selector_val, BasePlotlyType):
+                    selector_val = selector_val.to_plotly_json()
 
-            if isinstance(selector_val, BasePlotlyType):
-                selector_val = selector_val.to_plotly_json()
-
-            if obj_val != selector_val:
-                return False
-
-        return True
+                if obj_val != selector_val:
+                    return False
+            return True
+        # If selector is a function, call it with the obj as the argument
+        elif type(selector) == type(lambda x: True):
+            return selector(obj)
+        else:
+            raise TypeError(
+                "selector must be dict or a function "
+                "accepting a graph object returning a boolean."
+            )
 
     def for_each_trace(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """

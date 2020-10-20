@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.12.0] - unreleased
 
+### Added
+
+- For all `go.Figure` functions accepting a selector argument (e.g., `select_traces`), this argument can now also be a function which is passed each relevant graph object (in the case of `select_traces`, it is passed every trace in the figure). For graph objects where this function returns true, the graph object is included in the selection.
+
 ### Updated
 
 - Updated Plotly.js to version 1.57.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
