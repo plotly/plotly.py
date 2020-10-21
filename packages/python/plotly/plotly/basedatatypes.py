@@ -21,11 +21,6 @@ from . import shapeannotation
 Undefined = object()
 
 
-def _unzip_pairs(pairs):
-    pairs = list(pairs)
-    return ([t[0] for t in pairs], [t[1] for t in pairs])
-
-
 def _combine_dicts(dicts):
     all_args = dict()
     for d in dicts:
