@@ -109,6 +109,9 @@ x0: float or int
 x1: float or int
     A number representing the x coordinate of the other side of the rectangle."""
     docstr += """
+exclude_empty_subplots: Boolean
+    If True (default) do not place the shape on subplots that have no data
+    plotted on them.
 row: None, int or 'all'
     Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
     the specified column(s). If both row and col are None, addresses the
@@ -1747,7 +1750,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-    def add_trace(self, trace, row=None, col=None, secondary_y=None):
+    def add_trace(
+        self, trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False
+    ):
         """
         Add a trace to the figure
 
@@ -1787,6 +1792,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 make_subplots. See the make_subplots docstring for more info.
               * The trace argument is a 2D cartesian trace
                 (scatter, bar, etc.)
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
         Returns
         -------
         BaseFigure
@@ -1832,7 +1840,13 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             # TODO add product argument
             rows_cols = self._select_subplot_coordinates(row, col)
             for r, c in rows_cols:
-                self.add_trace(trace, row=r, col=c, secondary_y=secondary_y)
+                self.add_trace(
+                    trace,
+                    row=r,
+                    col=c,
+                    secondary_y=secondary_y,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                )
             return self
 
         return self.add_traces(
@@ -1840,9 +1854,17 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             rows=[row] if row is not None else None,
             cols=[col] if col is not None else None,
             secondary_ys=[secondary_y] if secondary_y is not None else None,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
-    def add_traces(self, data, rows=None, cols=None, secondary_ys=None):
+    def add_traces(
+        self,
+        data,
+        rows=None,
+        cols=None,
+        secondary_ys=None,
+        exclude_empty_subplots=False,
+    ):
         """
         Add traces to the figure
 
@@ -1878,6 +1900,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         secondary_ys: None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
+
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
 
         Returns
         -------
@@ -1954,6 +1980,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         if rows is not None:
             for trace, row, col, secondary_y in zip(data, rows, cols, secondary_ys):
                 self._set_trace_grid_position(trace, row, col, secondary_y)
+
+        if exclude_empty_subplots:
+            data = list(
+                filter(
+                    lambda trace: self._subplot_contains_trace(
+                        trace["xaxis"], trace["yaxis"]
+                    ),
+                    data,
+                )
+            )
 
         # Make deep copy of trace data (Optimize later if needed)
         new_traces_data = [deepcopy(trace._props) for trace in data]
@@ -3748,9 +3784,7 @@ Invalid property path '{key_path_str}' for layout
                     lambda x: x is not None,
                     [
                         self._make_axis_spanning_layout_object(
-                            direction,
-                            self.layout[layout_obj][n],
-                            none_if_no_trace=exclude_empty_subplots,
+                            direction, self.layout[layout_obj][n],
                         )
                         for n in range(n_layout_objs_before, n_layout_objs_after)
                     ],
