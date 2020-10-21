@@ -183,7 +183,7 @@ def test_notebook_connected_show(fig1, name, connected):
     pio.renderers.default = name
 
     # Show
-    with mock.patch("IPython.display.display_html") as mock_display_html:
+    with mock.patch("IPython.display.HTML") as mock_display_html:
         with mock.patch("IPython.display.display") as mock_display:
             pio.show(fig1)
 
