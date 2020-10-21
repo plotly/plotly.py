@@ -34,11 +34,16 @@ jupyter:
 
 ### Horizontal and Vertical Lines and Boxes (Autoshapes) in Plotly.py
 
+*introduced in plotly 4.12*
+
 Horizontal and vertical lines and rectangles (autoshapes) that span an entire
 plot can be added via the `add_hline`, `add_vline`, `add_hrect`, and `add_vrect`
-methods of `plotly.graph_objects.Figure`. These shapes are fixed to the
-endpoints of one axis, regardless of the range of the plot, and fixed to data
-coordinates on the other axis. For example
+methods of `plotly.graph_objects.Figure`. Shapes added with these methods are
+added as [layout shapes](/python/shapes) (as shown when doing `print(fig)`, for
+example). These shapes are fixed to the endpoints of one axis, regardless of the
+range of the plot, and fixed to data coordinates on the other axis. The
+following shows some possibilities, try panning and zooming the resulting figure
+to see how the shapes stick to some axes:
 
 
 ```python
@@ -59,7 +64,7 @@ fig.add_vrect(x0=5.5, x1=6.5, line_color="purple")
 # Add a horizontal rectangle that spans the entire x axis
 # intersecting the y axis at 2.5 and 4
 fig.add_hrect(y0=2.5, y1=4, line_color="orange")
-# (try dragging the plot around)
+# (try panning and zooming the plot)
 fig.show()
 ```
 
@@ -88,8 +93,8 @@ example.
 
 #### Adding Text Annotations to Autoshapes
 
-Text can be added to an autoshape using the `annotation` keyword. Using the
-above example:
+Text [annotations](/python/text-and-annotations) can be added to an autoshape
+using the `annotation` keyword. Using the above example:
 ```python
 import plotly.express as px
 import plotly.graph_objects as go
