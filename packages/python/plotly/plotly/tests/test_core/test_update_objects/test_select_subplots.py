@@ -1,7 +1,8 @@
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-from plotly.basedatatypes import _indexing_combinations, _unzip_pairs
+from plotly.basedatatypes import _indexing_combinations
 import pytest
+from itertools import product
 
 NROWS = 4
 NCOLS = 5
@@ -154,29 +155,17 @@ def _sort_row_col_lists(rows, cols):
 @pytest.mark.parametrize(
     "test_input,expected",
     [
-        (
-            ("all", [2, 4, 5], False),
-            _unzip_pairs([(r, c) for r in range(1, NROWS + 1) for c in [2, 4, 5]]),
-        ),
-        (
-            ([1, 3], "all", False),
-            _unzip_pairs([(r, c) for r in [1, 3] for c in range(1, NCOLS + 1)]),
-        ),
-        (
-            ([1, 3], "all", True),
-            _unzip_pairs([(r, c) for r in [1, 3] for c in range(1, NCOLS + 1)]),
-        ),
-        (([1, 3], [2, 4, 5], False), _unzip_pairs([(1, 2), (3, 4)])),
-        (
-            ([1, 3], [2, 4, 5], True),
-            _unzip_pairs([(r, c) for r in [1, 3] for c in [2, 4, 5]]),
-        ),
+        (("all", [2, 4, 5], False), zip(*product(range(1, NROWS + 1), [2, 4, 5])),),
+        (([1, 3], "all", False), zip(*product([1, 3], range(1, NCOLS + 1))),),
+        (([1, 3], "all", True), zip(*product([1, 3], range(1, NCOLS + 1))),),
+        (([1, 3], [2, 4, 5], False), [(1, 3), (2, 4)]),
+        (([1, 3], [2, 4, 5], True), zip(*product([1, 3], [2, 4, 5])),),
     ],
 )
 def test_select_subplot_coordinates(subplot_fig_fixture, test_input, expected):
     rows, cols, product = test_input
     er, ec = _sort_row_col_lists(*expected)
     t = subplot_fig_fixture._select_subplot_coordinates(rows, cols, product=product)
-    r, c = _unzip_pairs(t)
+    r, c = zip(*t)
     r, c = _sort_row_col_lists(r, c)
     assert (r == er) and (c == ec)
