@@ -541,7 +541,7 @@ class {fig_classname}({base_classname}):\n"""
             buffer,
             node.child_datatypes,
             prepend_extras=["arg"],
-            append_extras=["row", "col", "secondary_y"],
+            append_extras=["row", "col", "secondary_y", "exclude_empty_subplots"],
         )
 
         prepend_extras = [
@@ -561,6 +561,10 @@ class {fig_classname}({base_classname}):\n"""
                 f"Subplot column for {singular_name}. If 'all', addresses all columns in the specified row(s).",
             ),
             ("secondary_y", f"Whether to add {singular_name} to secondary y-axis"),
+            (
+                "exclude_empty_subplots",
+                f"If True, {singular_name} will not be added to subplots without traces.",
+            ),
         ]
         add_docstring(
             buffer,
@@ -597,6 +601,7 @@ class {fig_classname}({base_classname}):\n"""
             row=row,
             col=col,
             secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )"""
         )
 
