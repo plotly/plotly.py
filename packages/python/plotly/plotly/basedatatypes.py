@@ -1208,7 +1208,14 @@ class BaseFigure(object):
             yield obj
 
     def _add_annotation_like(
-        self, prop_singular, prop_plural, new_obj, row=None, col=None, secondary_y=None
+        self,
+        prop_singular,
+        prop_plural,
+        new_obj,
+        row=None,
+        col=None,
+        secondary_y=None,
+        exclude_empty_subplots=False,
     ):
         # Make sure we have both row and col or neither
         if row is not None and col is None:
@@ -1234,6 +1241,7 @@ class BaseFigure(object):
                     row=r,
                     col=c,
                     secondary_y=secondary_y,
+                    exclude_empty_subplots=exclude_empty_subplots,
                 )
             return self
 
@@ -1279,6 +1287,12 @@ because subplot does not have a secondary y-axis"""
             else:
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            # if exclude_empty_subplots is True, check to see if subplot is
+            # empty and return if it is
+            if exclude_empty_subplots and (
+                not self._subplot_contains_trace(xref, yref)
+            ):
+                return self
             # in case the user specified they wanted an axis to refer to the
             # domain of that axis and not the data, append ' domain' to the
             # computed axis accordingly
@@ -3628,9 +3642,7 @@ Invalid property path '{key_path_str}' for layout
 
         return index_list[0]
 
-    def _make_axis_spanning_layout_object(
-        self, direction, shape, none_if_no_trace=True
-    ):
+    def _make_axis_spanning_layout_object(self, direction, shape):
         """
         Convert a shape drawn on a plot or a subplot into one whose yref or xref
         ends with " domain" and has coordinates so that the shape will seem to
@@ -3658,23 +3670,6 @@ Invalid property path '{key_path_str}' for layout
                 "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
                 % (direction,)
             )
-        if none_if_no_trace:
-            # iterate through all the traces and check to see if one with the
-            # same xref and yref pair is there, if not, we return None (we don't
-            # want to draw a shape if there is no trace)
-            if not any(
-                t == (shape["xref"], shape["yref"])
-                for t in [
-                    # if a trace exists but has no xaxis or yaxis keys, then it
-                    # is plotted with xaxis 'x' and yaxis 'y'
-                    (
-                        "x" if d["xaxis"] is None else d["xaxis"],
-                        "y" if d["yaxis"] is None else d["yaxis"],
-                    )
-                    for d in self.data
-                ]
-            ):
-                return None
         # set the ref to "<axis_id> domain" so that its size is based on the
         # axis's size
         shape[ref] += " domain"
@@ -3721,9 +3716,19 @@ Invalid property path '{key_path_str}' for layout
         augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
             annotation, shape_type, shape_args, annotation_kwargs
         )
-        self.add_shape(row=row, col=col, **_combine_dicts([shape_args, shape_kwargs]))
+        self.add_shape(
+            row=row,
+            col=col,
+            **_combine_dicts([shape_args, shape_kwargs]),
+            exclude_empty_subplots=exclude_empty_subplots
+        )
         if augmented_annotation is not None:
-            self.add_annotation(augmented_annotation, row=row, col=col)
+            self.add_annotation(
+                augmented_annotation,
+                row=row,
+                col=col,
+                exclude_empty_subplots=exclude_empty_subplots,
+            )
         # update xref and yref for the new shapes and annotations
         for layout_obj, n_layout_objs_before in zip(
             ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
@@ -3824,6 +3829,20 @@ Invalid property path '{key_path_str}' for layout
         """ Returns True if figure contains subplots, otherwise it contains a
         single plot and so this returns False. """
         return self._grid_ref is not None
+
+    def _subplot_contains_trace(self, xref, yref):
+        return any(
+            t == (xref, yref)
+            for t in [
+                # if a trace exists but has no xaxis or yaxis keys, then it
+                # is plotted with xaxis 'x' and yaxis 'y'
+                (
+                    "x" if d["xaxis"] is None else d["xaxis"],
+                    "y" if d["yaxis"] is None else d["yaxis"],
+                )
+                for d in self.data
+            ]
+        )
 
 
 class BasePlotlyType(object):
