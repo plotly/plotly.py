@@ -267,3 +267,57 @@ class TestSelectForEachUpdateAnnotations(TestCase):
     def test_image_attributes(self):
         self.fig.add_layout_image(name="my name", x=1, y=2)
         self.fig.update_layout_images(opacity=0.1)
+
+
+def test_exclude_empty_subplots():
+    for k, fun, d in [
+        (
+            "shapes",
+            go.Figure.add_shape,
+            dict(type="rect", x0=1.5, x1=2.5, y0=3.5, y1=4.5),
+        ),
+        ("annotations", go.Figure.add_annotation, dict(x=1, y=2, text="A")),
+        (
+            "images",
+            go.Figure.add_layout_image,
+            dict(x=3, y=4, sizex=2, sizey=3, source="test"),
+        ),
+    ]:
+        # make a figure where not all the subplots are populated
+        fig = make_subplots(2, 2)
+        fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+        fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+        # add a thing to all subplots but make sure it only goes on the
+        # plots without data
+        fun(fig, d, row="all", col="all", exclude_empty_subplots=True)
+        assert len(fig.layout[k]) == 2
+        assert fig.layout[k][0]["xref"] == "x" and fig.layout[k][0]["yref"] == "y"
+        assert fig.layout[k][1]["xref"] == "x4" and fig.layout[k][1]["yref"] == "y4"
+
+
+def test_no_exclude_empty_subplots():
+    for k, fun, d in [
+        (
+            "shapes",
+            go.Figure.add_shape,
+            dict(type="rect", x0=1.5, x1=2.5, y0=3.5, y1=4.5),
+        ),
+        ("annotations", go.Figure.add_annotation, dict(x=1, y=2, text="A")),
+        (
+            "images",
+            go.Figure.add_layout_image,
+            dict(x=3, y=4, sizex=2, sizey=3, source="test"),
+        ),
+    ]:
+        # make a figure where not all the subplots are populated
+        fig = make_subplots(2, 2)
+        fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+        fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+        # add a thing to all subplots and make sure it even goes on the
+        # plots without data
+        fun(fig, d, row="all", col="all", exclude_empty_subplots=False)
+        assert len(fig.layout[k]) == 4
+        assert fig.layout[k][0]["xref"] == "x" and fig.layout[k][0]["yref"] == "y"
+        assert fig.layout[k][1]["xref"] == "x2" and fig.layout[k][1]["yref"] == "y2"
+        assert fig.layout[k][2]["xref"] == "x3" and fig.layout[k][2]["yref"] == "y3"
+        assert fig.layout[k][3]["xref"] == "x4" and fig.layout[k][3]["yref"] == "y4"
