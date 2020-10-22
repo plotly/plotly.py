@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
-- Updated Plotly.js to version 1.57.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- Updated Plotly.js to version 1.57.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.1/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 
 ## [4.11.0] - 2020-10-01
 
