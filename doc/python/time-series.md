@@ -122,6 +122,74 @@ fig.update_xaxes(
 fig.show()
 ```
 
+### Summarizing Time-series Data with Histograms
+
+Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.histogram(df, x="Date", y="AAPL.Close", histfunc="avg", title="Histogram on Date Axes")
+fig.update_traces(xbins_size="M1")
+fig.update_xaxes(showgrid=True, ticklabelmode="period", dtick="M1", tickformat="%b\n%Y")
+fig.update_layout(bargap=0.1)
+fig.add_trace(go.Scatter(mode="markers", x=df["Date"], y=df["AAPL.Close"], name="daily"))
+fig.show()
+```
+
+### Displaying Period Data
+
+_new in 4.11_
+
+If your data coded "January 1" or "January 31" in fact refers to data collected throughout the month of January, for example, you can configure your traces to display their marks at the start end, or middle of the month with the `xperiod` and `xperiodalignment` attributes. In the example below, the raw data is all coded with an X value of the 10th of the month, but is binned into monthly periods with `xperiod="M1"` and then displayed at the start, middle and end of the period.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    date=["2020-01-10", "2020-02-10", "2020-03-10", "2020-04-10", "2020-05-10", "2020-06-10"],
+    value=[1,2,3,1,2,3]
+))
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    name="Raw Data",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    marker_symbol="star"
+))
+fig.add_trace(go.Scatter(
+    name="Start-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="start"
+))
+fig.add_trace(go.Scatter(
+    name="Middle-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.add_trace(go.Scatter(
+    name="End-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="end"
+))
+fig.add_trace(go.Bar(
+    name="Middle-aligned",
+    x=df["date"], y=df["value"], 
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.update_xaxes(showgrid=True, ticklabelmode="period")
+fig.show()
+```
+
 ### Time Series Plot with Custom Date Range
 
 The data range can be set manually using either `datetime.datetime` objects, or date strings.
