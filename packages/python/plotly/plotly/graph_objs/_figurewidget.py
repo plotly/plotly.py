@@ -721,14 +721,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -1174,14 +1176,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -1520,14 +1524,16 @@ class FigureWidget(BaseFigureWidget):
         widthsrc
             Sets the source reference on Chart Studio Cloud for
             width .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -2067,14 +2073,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2407,14 +2415,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2664,14 +2674,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -3008,14 +3020,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3351,14 +3365,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3731,14 +3747,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -4182,14 +4200,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4554,14 +4574,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4910,14 +4932,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -5343,14 +5367,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -5691,14 +5717,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -6125,14 +6153,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6463,14 +6493,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6853,14 +6885,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7288,14 +7322,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7740,14 +7776,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8041,14 +8079,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8232,14 +8272,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -8578,14 +8620,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9044,14 +9088,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9360,14 +9406,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -9592,14 +9640,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9764,14 +9814,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10110,14 +10162,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10384,14 +10438,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -10595,14 +10651,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11077,14 +11135,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -11458,14 +11518,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11816,14 +11878,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12193,14 +12257,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -12615,14 +12681,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12972,14 +13040,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13347,14 +13417,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13726,14 +13798,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14107,14 +14181,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14400,14 +14476,16 @@ class FigureWidget(BaseFigureWidget):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14754,14 +14832,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15105,14 +15185,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15483,14 +15565,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15691,14 +15775,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -16007,14 +16093,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -16410,14 +16498,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -16812,14 +16902,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -17280,14 +17372,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -18423,6 +18517,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -18712,11 +18807,16 @@ class FigureWidget(BaseFigureWidget):
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
         row
-            Subplot row for annotation
+            Subplot row for annotation. If 'all', addresses all
+            rows in the specified column(s).
         col
-            Subplot column for annotation
+            Subplot column for annotation. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add annotation to secondary y-axis
+        exclude_empty_subplots
+            If True, annotation will not be added to subplots
+            without traces.
 
         Returns
         -------
@@ -18778,6 +18878,7 @@ class FigureWidget(BaseFigureWidget):
             row=row,
             col=col,
             secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_layout_images(self, selector=None, row=None, col=None, secondary_y=None):
@@ -18942,6 +19043,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -19037,11 +19139,16 @@ class FigureWidget(BaseFigureWidget):
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         row
-            Subplot row for image
+            Subplot row for image. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for image
+            Subplot column for image. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add image to secondary y-axis
+        exclude_empty_subplots
+            If True, image will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -19069,7 +19176,13 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "image",
+            "images",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
@@ -19238,6 +19351,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -19403,11 +19517,16 @@ class FigureWidget(BaseFigureWidget):
             maintaining a position relative to data or plot
             fraction.
         row
-            Subplot row for shape
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for shape
+            Subplot column for shape. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add shape to secondary y-axis
+        exclude_empty_subplots
+            If True, shape will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -19441,5 +19560,11 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "shape",
+            "shapes",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
