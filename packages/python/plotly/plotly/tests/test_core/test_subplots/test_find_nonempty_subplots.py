@@ -55,6 +55,7 @@ def test_choose_correct_non_empty_subplots():
     all_subplots = get_non_empty_subplots(fig, "all")
     selectors = all_combos(["traces", "shapes", "annotations", "images"])
     subplot_combos = all_combos(all_subplots)
+    assert len(selectors) == len(subplot_combos)
     for s, spc in zip(selectors, subplot_combos):
         sps = tuple(get_non_empty_subplots(fig, s))
         assert sps == spc
