@@ -1302,7 +1302,7 @@ because subplot does not have a secondary y-axis"""
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
-                not self._subplot_contains_trace(xref, yref)
+                not self._subplot_not_empty(xref, yref, selector=exclude_empty_subplots)
             ):
                 return self
             # in case the user specified they wanted an axis to refer to the
@@ -1993,8 +1993,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         if exclude_empty_subplots:
             data = list(
                 filter(
-                    lambda trace: self._subplot_contains_trace(
-                        trace["xaxis"], trace["yaxis"]
+                    lambda trace: self._subplot_not_empty(
+                        trace["xaxis"], trace["yaxis"], exclude_empty_subplots
                     ),
                     data,
                 )
@@ -3873,19 +3873,56 @@ Invalid property path '{key_path_str}' for layout
         single plot and so this returns False. """
         return self._grid_ref is not None
 
-    def _subplot_contains_trace(self, xref, yref):
-        return any(
-            t == (xref, yref)
-            for t in [
-                # if a trace exists but has no xaxis or yaxis keys, then it
-                # is plotted with xaxis 'x' and yaxis 'y'
-                (
-                    "x" if d["xaxis"] is None else d["xaxis"],
-                    "y" if d["yaxis"] is None else d["yaxis"],
+    def _subplot_not_empty(self, xref, yref, selector="all"):
+        """
+        xref: string representing the axis. Objects in the plot will be checked
+              for this xref (for layout objects) or xaxis (for traces) to
+              determine if they lie in a certain subplot.
+        yref: string representing the axis. Objects in the plot will be checked
+              for this yref (for layout objects) or yaxis (for traces) to
+              determine if they lie in a certain subplot.
+        selector: can be "all" or an iterable containing some combination of
+                  "traces", "shapes", "annotations", "images". Only the presence
+                  of objects specified in selector will be checked. So if
+                  ["traces","shapes"] is passed then a plot we be considered
+                  non-empty if it contains traces or shapes. If
+                  bool(selector) returns False, no checking is performed and
+                  this function returns True. If selector is True, it is
+                  converted to "all".
+        """
+        if not selector:
+            # If nothing to select was specified then a subplot is always deemed non-empty
+            return True
+        if selector == True:
+            selector = "all"
+        if selector == "all":
+            selector = ["traces", "shapes", "annotations", "images"]
+        ret = False
+        for s in selector:
+            if s == "traces":
+                obj = self.data
+                xaxiskw = "xaxis"
+                yaxiskw = "yaxis"
+            elif s in ["shapes", "annotations", "images"]:
+                obj = self.layout[s]
+                xaxiskw = "xref"
+                yaxiskw = "yref"
+            else:
+                obj = None
+            if obj:
+                ret |= any(
+                    t == (xref, yref)
+                    for t in [
+                        # if a object exists but has no xaxis or yaxis keys, then it
+                        # is plotted with xaxis/xref 'x' and yaxis/yref 'y'
+                        (
+                            "x" if d[xaxiskw] is None else d[xaxiskw],
+                            "y" if d[yaxiskw] is None else d[yaxiskw],
+                        )
+                        for d in obj
+                    ]
                 )
-                for d in self.data
-            ]
-        )
+        return ret
 
 
 class BasePlotlyType(object):
