@@ -1302,7 +1302,9 @@ because subplot does not have a secondary y-axis"""
             # if exclude_empty_subplots is True, check to see if subplot is
             # empty and return if it is
             if exclude_empty_subplots and (
-                not self._subplot_not_empty(xref, yref, selector=exclude_empty_subplots)
+                not self._subplot_not_empty(
+                    xref, yref, selector=bool(exclude_empty_subplots)
+                )
             ):
                 return self
             # in case the user specified they wanted an axis to refer to the
@@ -1994,7 +1996,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             data = list(
                 filter(
                     lambda trace: self._subplot_not_empty(
-                        trace["xaxis"], trace["yaxis"], exclude_empty_subplots
+                        trace["xaxis"], trace["yaxis"], bool(exclude_empty_subplots)
                     ),
                     data,
                 )
