@@ -3755,8 +3755,8 @@ Invalid property path '{key_path_str}' for layout
         self.add_shape(
             row=row,
             col=col,
-            **_combine_dicts([shape_args, shape_kwargs]),
-            exclude_empty_subplots=exclude_empty_subplots
+            exclude_empty_subplots=exclude_empty_subplots,
+            **_combine_dicts([shape_args, shape_kwargs])
         )
         if augmented_annotation is not None:
             self.add_annotation(
