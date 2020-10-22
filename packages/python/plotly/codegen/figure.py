@@ -144,16 +144,18 @@ class {fig_classname}({base_classname}):\n"""
 
         doc_extras = [
             (
-                "row : int or None (default)",
+                "row : 'all', int or None (default)",
                 "Subplot row index (starting from 1) for the trace to be "
                 "added. Only valid if figure was created using "
-                "`plotly.tools.make_subplots`",
+                "`plotly.tools.make_subplots`."
+                "If 'all', addresses all rows in the specified column(s).",
             ),
             (
-                "col : int or None (default)",
+                "col : 'all', int or None (default)",
                 "Subplot col index (starting from 1) for the trace to be "
                 "added. Only valid if figure was created using "
-                "`plotly.tools.make_subplots`",
+                "`plotly.tools.make_subplots`."
+                "If 'all', addresses all columns in the specified row(s).",
             ),
         ]
 
@@ -539,7 +541,7 @@ class {fig_classname}({base_classname}):\n"""
             buffer,
             node.child_datatypes,
             prepend_extras=["arg"],
-            append_extras=["row", "col", "secondary_y"],
+            append_extras=["row", "col", "secondary_y", "exclude_empty_subplots"],
         )
 
         prepend_extras = [
@@ -550,9 +552,19 @@ class {fig_classname}({base_classname}):\n"""
             )
         ]
         append_extras = [
-            ("row", f"Subplot row for {singular_name}"),
-            ("col", f"Subplot column for {singular_name}"),
+            (
+                "row",
+                f"Subplot row for {singular_name}. If 'all', addresses all rows in the specified column(s).",
+            ),
+            (
+                "col",
+                f"Subplot column for {singular_name}. If 'all', addresses all columns in the specified row(s).",
+            ),
             ("secondary_y", f"Whether to add {singular_name} to secondary y-axis"),
+            (
+                "exclude_empty_subplots",
+                f"If True, {singular_name} will not be added to subplots without traces.",
+            ),
         ]
         add_docstring(
             buffer,
@@ -589,6 +601,7 @@ class {fig_classname}({base_classname}):\n"""
             row=row,
             col=col,
             secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )"""
         )
 
