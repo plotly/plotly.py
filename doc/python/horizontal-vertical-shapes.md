@@ -26,13 +26,13 @@ jupyter:
     display_as: file_settings
     language: python
     layout: base
-    name: Shapes
+    name: Horizontal and Vertical Lines and Rectangles
     order: 37
     permalink: python/horizontal-vertical-shapes/
     thumbnail: thumbnail/horizontal-vertical-shapes.jpg
 ---
 
-### Horizontal and Vertical Lines and Boxes (Autoshapes) in Plotly.py
+### Horizontal and Vertical Lines and Rectangles (Autoshapes)
 
 *introduced in plotly 4.12*
 
