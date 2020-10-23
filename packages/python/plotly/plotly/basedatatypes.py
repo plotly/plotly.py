@@ -118,8 +118,10 @@ def _check_path_in_prop_tree(obj, path):
     if type(path) == type(tuple()):
         path = _remake_path_from_tuple(path)
     prop, prop_idcs = _str_to_dict_path_full(path)
+    prev_objs = []
     for i, p in enumerate(prop):
         arg = ""
+        prev_objs.append(obj)
         try:
             obj = obj[p]
         except (ValueError, KeyError, IndexError, TypeError) as e:
@@ -127,11 +129,23 @@ def _check_path_in_prop_tree(obj, path):
             if obj is None:
                 # If obj doesn't support subscripting, state that and show the
                 # (valid) property that gives the object that doesn't support
-                # it.
+                # subscripting.
+                if i > 0:
+                    validator = prev_objs[i - 1]._get_validator(prop[i - 1])
+                    arg += """
+
+Invalid value received for the '{plotly_name}' property of {parent_name}
+
+{description}""".format(
+                        parent_name=validator.parent_name,
+                        plotly_name=validator.plotly_name,
+                        description=validator.description(),
+                    )
                 # In case i is 0, the best we can do is indicate the first
                 # property in the string as having caused the error
                 disp_i = max(i - 1, 0)
                 arg += """
+
 Property does not support subscripting:
 %s
 %s""" % (
