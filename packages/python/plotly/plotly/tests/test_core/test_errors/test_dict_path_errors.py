@@ -289,9 +289,18 @@ def test_describes_subscripting_error(some_fig):
         some_fig.update_traces(text_yo="hey")
     except TypeError as e:
         raised = True
+        print(e.args[0])
         e_substr = error_substr(
             e.args[0],
             """
+
+Invalid value received for the 'text' property of scatter
+
+    The 'text' property is a string and must be specified as:
+      - A string
+      - A number that will be converted to a string
+      - A tuple, list, or one-dimensional numpy array of the above
+
 Property does not support subscripting:
 text_yo
 ~~~~""",
@@ -328,6 +337,13 @@ text_yo
         e_substr = error_substr(
             e.args[0],
             """
+
+Invalid value received for the 'family' property of scatter.textfont
+
+    The 'family' property is a string and must be specified as:
+      - A non-empty string
+      - A tuple, list, or one-dimensional numpy array of the above
+
 Property does not support subscripting:
 textfont_family_yo
          ~~~~~~""",
@@ -345,3 +361,6 @@ textfont_family_yo
             and (e_substr == e_correct_substr)
         )
     assert raised
+
+
+test_describes_subscripting_error(some_fig())
