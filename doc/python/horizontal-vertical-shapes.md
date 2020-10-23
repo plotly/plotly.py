@@ -29,7 +29,7 @@ jupyter:
     name: Horizontal and Vertical Lines and Rectangles
     order: 37
     permalink: python/horizontal-vertical-shapes/
-    thumbnail: thumbnail/horizontal-vertical-shapes.jpg
+    thumbnail: thumbnail/shape.jpg
 ---
 
 ### Horizontal and Vertical Lines and Rectangles (Autoshapes)
