@@ -361,6 +361,3 @@ textfont_family_yo
             and (e_substr == e_correct_substr)
         )
     assert raised
-
-
-test_describes_subscripting_error(some_fig())
