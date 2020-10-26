@@ -29,3 +29,4 @@ cufflinks==0.17.3
 kaleido
 umap-learn
 wget
+nbconvert==5.5.0
