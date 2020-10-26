@@ -406,7 +406,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" != "doc-prod" ]; then
               pip uninstall -y plotly
               cd ../packages/python/plotly
-              pip install -e .
+              python3 setup.py install
               cd ../../../doc
             fi
             echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
