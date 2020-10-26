@@ -313,7 +313,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
                 if (
-                    attr_value in ["ols", "lowess"]
+                    attr_value[0] in ["ols", "lowess", "ma", "ewm"]
                     and args["x"]
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
@@ -345,19 +345,36 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             )
 
                     # preserve original values of "x" in case they're dates
-                    trace_patch["x"] = sorted_trace_data[args["x"]][
-                        np.logical_not(np.logical_or(np.isnan(y), np.isnan(x)))
-                    ]
+                    non_missing = np.logical_not(
+                        np.logical_or(np.isnan(y), np.isnan(x))
+                    )
+                    trace_patch["x"] = sorted_trace_data[args["x"]][non_missing]
 
-                    if attr_value == "lowess":
+                    if attr_value[0] == "lowess":
+                        alpha = attr_value[1] or 0.6666666
                         # missing ='drop' is the default value for lowess but not for OLS (None)
                         # we force it here in case statsmodels change their defaults
-                        trendline = sm.nonparametric.lowess(y, x, missing="drop")
+                        trendline = sm.nonparametric.lowess(
+                            y, x, missing="drop", frac=alpha
+                        )
                         trace_patch["y"] = trendline[:, 1]
                         hover_header = "<b>LOWESS trendline</b><br><br>"
-                    elif attr_value == "ols":
+                    elif attr_value[0] == "ma":
+                        trace_patch["y"] = (
+                            pd.Series(y[non_missing])
+                            .rolling(window=attr_value[1] or 3)
+                            .mean()
+                        )
+                    elif attr_value[0] == "ewm":
+                        trace_patch["y"] = (
+                            pd.Series(y[non_missing])
+                            .ewm(alpha=attr_value[1] or 0.5)
+                            .mean()
+                        )
+                    elif attr_value[0] == "ols":
+                        add_constant = attr_value[1] is not False
                         fit_results = sm.OLS(
-                            y, sm.add_constant(x), missing="drop"
+                            y, sm.add_constant(x) if add_constant else x, missing="drop"
                         ).fit()
                         trace_patch["y"] = fit_results.predict()
                         hover_header = "<b>OLS trendline</b><br>"
@@ -367,6 +384,12 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                                 fit_results.params[1],
                                 args["x"],
                                 fit_results.params[0],
+                            )
+                        elif not add_constant:
+                            hover_header += "%s = %g* %s<br>" % (
+                                args["y"],
+                                fit_results.params[0],
+                                args["x"],
                             )
                         else:
                             hover_header += "%s = %g<br>" % (
@@ -1826,6 +1849,10 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         or args.get("facet_row") is not None
     ):
         args["facet_col_wrap"] = 0
+
+    if args.get("trendline", None) is not None:
+        if isinstance(args["trendline"], str):
+            args["trendline"] = (args["trendline"], None)
 
     # Compute applicable grouping attributes
     for k in group_attrables:
