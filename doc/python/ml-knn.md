@@ -1,12 +1,13 @@
 ---
 jupyter:
+  celltoolbar: Tags
   jupytext:
     notebook_metadata_filter: all
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.1'
+      jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +21,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: Visualize scikit-learn's k-Nearest Neighbors (kNN) classification
       in Python with Plotly.
@@ -83,6 +84,63 @@ fig.update_traces(
     marker_color="lightyellow"
 )
 fig.show()
+```
+
+<!-- #region -->
+## Testing iframe
+
+```python
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import dash_daq as daq
+from dash.dependencies import Input, Output, State
+import plotly.express as px
+import plotly.graph_objects as go
+
+# Define the initial figure
+df = px.data.iris()
+initial_figure = px.scatter(
+    df, x="sepal_length", y="sepal_width", color="species", title="Playing with Fonts")
+initial_figure.update_layout(
+    font_family="Courier New",
+    title_font_family="Times New Roman")
+
+picker_style = {'float': 'left', 'margin': 'auto'}
+
+# Build the app
+app = dash.Dash(__name__)
+server = app.server
+
+app.layout = html.Div([
+    dcc.Graph(id="bar-chart", figure=initial_figure),
+    daq.ColorPicker(id='font', label='Font Color', 
+                    style=picker_style, value=dict(hex='#119DFF')),
+    daq.ColorPicker(id='title', label='Title Color', 
+                    style=picker_style, value=dict(hex='#2A0203')),
+])
+
+@app.callback(Output("bar-chart", 'figure'), 
+              [Input("font", 'value'),
+               Input("title", 'value')],
+              [State('bar-chart', 'figure')])
+def update_bar_chart(font_color, title_color, fig_json):
+    # Reconstruct the figure using the JSON specifications
+    fig = go.Figure(fig_json)
+    fig.update_layout(
+        font_color=font_color['hex'],
+        title_font_color=title_color['hex'])
+
+    return fig
+
+if __name__ == "__main__":
+    app.run_server(debug=True)
+```
+<!-- #endregion -->
+
+```python tags=["hide-output"]
+from IPython.display import IFrame
+IFrame('https://dash-playground.plotly.host/python-docs-dash-snippets/figure-labels', width='100%', height=1000)
 ```
 
 ### Visualize predictions on test split with [`plotly.express`](https://plotly.com/python/plotly-express/)
