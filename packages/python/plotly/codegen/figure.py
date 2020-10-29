@@ -256,12 +256,16 @@ class {fig_classname}({base_classname}):\n"""
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             {singular_name} objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all {singular_name} objects are selected.
+            (the default), all {singular_name} objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            {singular_name} and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
@@ -288,12 +292,16 @@ class {fig_classname}({base_classname}):\n"""
         ----------
         fn:
             Function that inputs a single {singular_name} object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             {singular_name} objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all {singular_name} objects are selected.
+            (the default), all {singular_name} objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            {singular_name} and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of {singular_name} objects to select.
             To select {singular_name} objects by row and column, the Figure
@@ -327,12 +335,16 @@ class {fig_classname}({base_classname}):\n"""
         patch: dict
             Dictionary of property updates to be applied to all
             {singular_name} objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             {singular_name} objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all {singular_name} objects are selected.
+            (the default), all {singular_name} objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            {singular_name} and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -383,12 +395,15 @@ class {fig_classname}({base_classname}):\n"""
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all {plural_name} are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each {singular_name} and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been
@@ -428,12 +443,15 @@ class {fig_classname}({base_classname}):\n"""
         ----------
         fn:
             Function that inputs a single {singular_name} object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all {plural_name} are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each {singular_name} and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been
@@ -486,12 +504,15 @@ class {fig_classname}({base_classname}):\n"""
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all {plural_name} that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all {plural_name} are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each {singular_name} and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been

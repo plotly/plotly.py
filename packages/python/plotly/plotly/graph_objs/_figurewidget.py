@@ -17478,12 +17478,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17507,12 +17511,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single coloraxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17540,12 +17548,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             coloraxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17578,12 +17590,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17607,12 +17623,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single geo object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17640,12 +17660,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             geo objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17678,12 +17702,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17707,12 +17735,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single mapbox object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17740,12 +17772,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             mapbox objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17778,12 +17814,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17807,12 +17847,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single polar object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17840,12 +17884,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             polar objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17878,12 +17926,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17907,12 +17959,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single scene object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17940,12 +17996,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             scene objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17978,12 +18038,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -18007,12 +18071,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single ternary object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -18040,12 +18108,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             ternary objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18078,12 +18150,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -18107,12 +18183,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single xaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -18140,12 +18220,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             xaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18178,12 +18262,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18221,12 +18309,16 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single yaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18275,12 +18367,16 @@ class FigureWidget(BaseFigureWidget):
         patch: dict
             Dictionary of property updates to be applied to all
             yaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18326,12 +18422,15 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18371,12 +18470,15 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single annotation object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18423,12 +18525,15 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all annotations that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18888,12 +18993,15 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18933,12 +19041,15 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single image object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18981,12 +19092,15 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all images that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -19192,12 +19306,15 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19235,12 +19352,15 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single shape object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19283,12 +19403,15 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all shapes that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
