@@ -33,5 +33,6 @@ below :-).
 - [ ] For a new feature, I have added documentation examples in an existing or
   new tutorial notebook (please see the doc checklist as well).
 - [ ] I have added a CHANGELOG entry if fixing/changing/adding anything substantial.
+- [ ] For a new feature or a change in behaviour, I have updated the relevant docstrings in the code to describe the feature or behaviour (please see the doc checklist as well).
 
 -->
