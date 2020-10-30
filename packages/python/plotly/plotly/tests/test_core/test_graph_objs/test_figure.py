@@ -215,5 +215,10 @@ class FigureTest(TestCaseNoTemplate):
         )
         assert fig1.layout == fig1_sp.layout
         # Test that calling on a figure that already has subplots throws an error.
-        with self.assertRaisesRegex(ValueError, "^This figure already has subplots\.$"):
+        raised = False
+        try:
             fig1.set_subplots(2, 3)
+        except ValueError as e:
+            assert e.args[0] == "This figure already has subplots."
+            raised = True
+        assert raised
