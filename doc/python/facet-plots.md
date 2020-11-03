@@ -93,7 +93,7 @@ import plotly.express as px
 df = px.data.stocks(indexed=True)
 fig = px.line(df, facet_col="company", facet_col_wrap=2)
 fig.add_hline(y=1, line_dash="dot",
-              annotation_text="Jan 1, 2018 baseline", 
+              annotation_text="Jan 1, 2018 baseline",
               annotation_position="bottom right")
 
 fig.add_vrect(x0="2018-09-24", x1="2018-12-18", col=1,
@@ -110,7 +110,7 @@ The `.add_trace()` method can be used to add a copy of the same trace to each fa
 ```python
 import plotly.express as px
 df = px.data.tips()
-fig = px.scatter(df, x="total_bill", y="tip", color='sex', 
+fig = px.scatter(df, x="total_bill", y="tip", color='sex',
                  facet_col="day", facet_row="time")
 
 import statsmodels.api as sm
@@ -119,7 +119,7 @@ df = df.sort_values(by="total_bill")
 model = sm.OLS(df["tip"], sm.add_constant(df["total_bill"])).fit()
 
 #create the trace to be added to all facets
-trace = go.Scatter(x=df_sorted["total_bill"], y=model.predict(), 
+trace = go.Scatter(x=df["total_bill"], y=model.predict(),
                    line_color="black", name="overall OLS")
 
 # give it a legend group and hide it from the legend
