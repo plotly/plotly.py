@@ -125,7 +125,7 @@ trace = go.Scatter(x=df["total_bill"], y=model.predict(),
 # give it a legend group and hide it from the legend
 trace.update(legendgroup="trendline", showlegend=False)
 
-# add it to all rows/cols, but no to empty subplots
+# add it to all rows/cols, but not to empty subplots
 fig.add_trace(trace, row="all", col="all", exclude_empty_subplots=True)
 
 # set only the last trace added to appear in the legend
