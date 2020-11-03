@@ -49,11 +49,18 @@ def extract_axis_titles(fig):
     return (r_titles, c_titles)
 
 
-def px_simple_combine(fig0, fig1):
+def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
     """
     Combines two figures by just using the layout of the first figure and
     appending the data of the second figure.
     """
+    if fig1_secondary_y and (
+        ("px" not in fig0._aux.keys()) or ("px" not in fig0._aux.keys())
+    ):
+        raise ValueError(
+            "To place fig1's traces on secondary y-axes, both figures must have "
+            "been made with Plotly Express."
+        )
     grid_ref_shape = fig_grid_ref_shape(fig0)
     if grid_ref_shape != fig_grid_ref_shape(fig1):
         raise ValueError(
@@ -61,26 +68,32 @@ def px_simple_combine(fig0, fig1):
         )
     # reflow the colors
     colorway = fig0.layout.template.layout.colorway
-    fig = make_subplots(*fig_grid_ref_shape(fig0))
+    specs = None
+    if fig1_secondary_y:
+        specs = [
+            [dict(secondary_y=True) for __ in range(grid_ref_shape[1])]
+            for _ in range(grid_ref_shape[0])
+        ]
+    fig = make_subplots(*fig_grid_ref_shape(fig0), specs=specs)
     for r, c in multi_index(*fig_grid_ref_shape(fig)):
-        for (tr, title), color in zip(
+        for (tr, f), color in zip(
             chain(
                 *[
-                    zip(
-                        f.select_traces(row=r + 1, col=c + 1),
-                        cycle([f.layout.title.text]),
-                    )
+                    zip(f.select_traces(row=r + 1, col=c + 1), cycle([f]),)
                     for f in [fig0, fig1]
                 ]
             ),
             cycle(colorway),
         ):
+            title = f.layout.title.text
             set_main_trace_color(tr, color)
             # use figure title to differentiate the legend items
             tr["name"] = "%s %s" % (title, tr["name"])
             # TODO: argument to group legend items?
             tr["legendgroup"] = None
-            fig.add_trace(tr, row=r + 1, col=c + 1)
+            fig.add_trace(
+                tr, row=r + 1, col=c + 1, secondary_y=(fig1_secondary_y and (f == fig1))
+            )
     fig.update_layout(fig0.layout)
     # title will be wrong
     fig.layout.title = None
