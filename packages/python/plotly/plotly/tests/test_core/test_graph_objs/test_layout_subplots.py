@@ -39,7 +39,7 @@ class TestLayoutSubplots(TestCase):
             self.layout.xaxis2
 
     def test_initial_access_subplot2(self):
-        with pytest.raises(ValueError):
+        with pytest.raises(KeyError):
             self.layout["xaxis2"]
 
     def test_assign_subplots(self):
