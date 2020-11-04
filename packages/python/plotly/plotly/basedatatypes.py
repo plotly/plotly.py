@@ -857,12 +857,15 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -984,12 +987,15 @@ class BaseFigure(object):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -1038,12 +1044,15 @@ class BaseFigure(object):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
