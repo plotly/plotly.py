@@ -76,6 +76,7 @@ def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
         ]
     fig = make_subplots(*fig_grid_ref_shape(fig0), specs=specs)
     for r, c in multi_index(*fig_grid_ref_shape(fig)):
+        print("row,col", r + 1, c + 1)
         for (tr, f), color in zip(
             chain(
                 *[
@@ -94,7 +95,9 @@ def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
             fig.add_trace(
                 tr, row=r + 1, col=c + 1, secondary_y=(fig1_secondary_y and (f == fig1))
             )
-    fig.update_layout(fig0.layout)
+    # TODO: How to preserve axis sizes when adding secondary y?
+    # TODO: How to put annotations on the correct subplot when using secondary y?
+    # fig.update_layout(fig0.layout)
     # title will be wrong
     fig.layout.title = None
     # preserve bar mode
@@ -151,59 +154,6 @@ def get_first_set_barmode(figs):
     return barmode
 
 
-def px_combine_secondary_y(fig0, fig1):
-    """
-    Combines two figures that have the same faceting but whose y axes refer
-    to different data by referencing the second figure's y-data to secondary
-    y-axes.
-    """
-    if not all(check_figs_trace_types_xy([fig0, fig1])):
-        raise ValueError('Only subplots containing "xy" trace types may be combined')
-    grid_ref_shape = fig_grid_ref_shape(fig0)
-    if grid_ref_shape != fig_grid_ref_shape(fig1):
-        raise ValueError(
-            "Only two figures with the same subplot geometry can be combined."
-        )
-    if fig0.layout.annotations != fig1.layout.annotations:
-        raise ValueError(
-            "Only two figures created with Plotly Express with "
-            "identical faceting can be combined."
-        )
-    specs = [
-        [dict(secondary_y=True) for __ in range(grid_ref_shape[1])]
-        for _ in range(grid_ref_shape[0])
-    ]
-    fig = make_subplots(*grid_ref_shape, specs=specs, start_cell="bottom-left")
-    fig0_ax_titles = extract_axis_titles(fig0)
-    fig1_ax_titles = extract_axis_titles(fig1)
-    # set primary y
-    for r, c in multi_index(*grid_ref_shape):
-        for tr in fig0.select_traces(row=r + 1, col=c + 1):
-            fig.add_trace(tr, row=r + 1, col=c + 1)
-        if r == 0:
-            t = fig0_ax_titles[1][c]
-            fig.update_xaxes(title=t, row=r + 1, col=c + 1)
-        if c == 0:
-            t = fig0_ax_titles[0][r]
-            fig.update_yaxes(
-                selector=lambda ax: ax["side"] != "right", title=t, row=r + 1, col=c + 1
-            )
-    # set secondary y
-    for r, c in multi_index(*grid_ref_shape):
-        for tr in fig1.select_traces(row=r + 1, col=c + 1):
-            # TODO: How to set meaningful color regardless of trace type?
-            tr["marker_color"] = "red"
-            fig.add_trace(tr, row=r + 1, col=c + 1, secondary_y=True)
-        t = fig1_ax_titles[0][r]
-        # TODO: How to best set the secondary y's title standoff?
-        t["standoff"] = 0
-        fig.update_yaxes(
-            selector=lambda ax: ax["side"] == "right", title=t, row=r + 1, col=c + 1
-        )
-    fig.update_layout(annotations=fig0.layout.annotations)
-    return fig
-
-
 df = test_data.aug_tips()
 
 
@@ -218,25 +168,6 @@ def simple_combine_example():
     return fig
 
 
-def secondary_y_combine_example():
-    fig0 = px.scatter(df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker")
-    fig1 = px.scatter(
-        df,
-        x="total_bill",
-        y="calories_consumed",
-        facet_row="sex",
-        facet_col="smoker",
-        trendline="ols",
-    )
-    fig1.update_traces(marker_size=3)
-    fig = px_combine_secondary_y(fig0, fig1)
-    fig.update_layout(title="Figure combination with secondary y-axis")
-    return fig
-
-
 if __name__ == "__main__":
     fig_simple = simple_combine_example()
-    fig_secondary_y = secondary_y_combine_example()
     fig_simple.show()
-    fig_secondary_y.show()
-    fig_secondary_y.write_json("/tmp/fig.json")
