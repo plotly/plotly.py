@@ -489,7 +489,7 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
-            err = _check_path_in_prop_tree(self, orig_prop)
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=ValueError)
             if err is not None:
                 raise err
             res = self
@@ -3456,7 +3456,7 @@ Invalid property path '{key_path_str}' for layout
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
             for key in update_obj:
-                err = _check_path_in_prop_tree(plotly_obj, key)
+                err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
                 if err is not None:
                     if isinstance(plotly_obj, BaseLayoutType):
                         # try _subplot_re_match
@@ -3672,7 +3672,7 @@ class BasePlotlyType(object):
         """
         invalid_kwargs = {}
         for k, v in kwargs.items():
-            err = _check_path_in_prop_tree(self, k)
+            err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
             if err is None:
                 # e.g. underscore kwargs like marker_line_color
                 self[k] = v
@@ -4007,7 +4007,9 @@ class BasePlotlyType(object):
             # Unwrap scalar tuple
             prop = prop[0]
             if prop not in self._valid_props:
-                self._raise_on_invalid_property_error(prop)
+                self._raise_on_invalid_property_error(_error_to_raise=PlotlyKeyError)(
+                    prop
+                )
 
             validator = self._get_validator(prop)
 
@@ -4145,7 +4147,7 @@ class BasePlotlyType(object):
 
             if self._validate:
                 if prop not in self._valid_props:
-                    self._raise_on_invalid_property_error(prop)
+                    self._raise_on_invalid_property_error()(prop)
 
                 # ### Get validator for this property ###
                 validator = self._get_validator(prop)
@@ -4219,7 +4221,7 @@ class BasePlotlyType(object):
             super(BasePlotlyType, self).__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
-            self._raise_on_invalid_property_error(prop)
+            self._raise_on_invalid_property_error()(prop)
 
     def __iter__(self):
         """
@@ -4328,10 +4330,11 @@ class BasePlotlyType(object):
 
         return repr_str
 
-    def _raise_on_invalid_property_error(self, *args):
+    def _raise_on_invalid_property_error(self, _error_to_raise=None):
         """
-        Raise informative exception when invalid property names are
-        encountered
+        Returns a function that raises informative exception when invalid
+        property names are encountered. The _error_to_raise argument allows
+        specifying the exception to raise, which is ValueError if None.
 
         Parameters
         ----------
@@ -4341,37 +4344,45 @@ class BasePlotlyType(object):
 
         Raises
         ------
-        PlotlyKeyError
-            Always
+        ValueError by default, or _error_to_raise if not None
         """
-        invalid_props = args
-        if invalid_props:
-            if len(invalid_props) == 1:
-                prop_str = "property"
-                invalid_str = repr(invalid_props[0])
-            else:
-                prop_str = "properties"
-                invalid_str = repr(invalid_props)
+        if _error_to_raise is None:
+            _error_to_raise = ValueError
 
-            module_root = "plotly.graph_objs."
-            if self._parent_path_str:
-                full_obj_name = (
-                    module_root + self._parent_path_str + "." + self.__class__.__name__
-                )
-            else:
-                full_obj_name = module_root + self.__class__.__name__
+        def _ret(*args):
+            invalid_props = args
+            if invalid_props:
+                if len(invalid_props) == 1:
+                    prop_str = "property"
+                    invalid_str = repr(invalid_props[0])
+                else:
+                    prop_str = "properties"
+                    invalid_str = repr(invalid_props)
 
-            raise ValueError(
-                "Invalid {prop_str} specified for object of type "
-                "{full_obj_name}: {invalid_str}\n\n"
-                "    Valid properties:\n"
-                "{prop_descriptions}".format(
-                    prop_str=prop_str,
-                    full_obj_name=full_obj_name,
-                    invalid_str=invalid_str,
-                    prop_descriptions=self._prop_descriptions,
+                module_root = "plotly.graph_objs."
+                if self._parent_path_str:
+                    full_obj_name = (
+                        module_root
+                        + self._parent_path_str
+                        + "."
+                        + self.__class__.__name__
+                    )
+                else:
+                    full_obj_name = module_root + self.__class__.__name__
+
+                raise _error_to_raise(
+                    "Invalid {prop_str} specified for object of type "
+                    "{full_obj_name}: {invalid_str}\n\n"
+                    "    Valid properties:\n"
+                    "{prop_descriptions}".format(
+                        prop_str=prop_str,
+                        full_obj_name=full_obj_name,
+                        invalid_str=invalid_str,
+                        prop_descriptions=self._prop_descriptions,
+                    )
                 )
-            )
+
+        return _ret
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
