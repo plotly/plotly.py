@@ -4066,9 +4066,6 @@ class BasePlotlyType(object):
         -------
         bool
         """
-        # TODO: We don't want to throw an error in __contains__ because any code that
-        # relies on it returning False will have to be changed (it will have to
-        # have a try except block...).
         prop = BaseFigure._str_to_dict_path(prop)
 
         # Handle remapping
