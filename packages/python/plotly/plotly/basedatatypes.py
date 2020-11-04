@@ -104,13 +104,21 @@ def _remake_path_from_tuple(props):
     return "".join(props_w_underscore)
 
 
-def _check_path_in_prop_tree(obj, path):
+def _check_path_in_prop_tree(obj, path, error_cast=None):
     """
-    obj:  the object in which the first property is looked up
-    path: the path that will be split into properties to be looked up
-          path can also be a tuple. In this case, it is combined using . and []
-          because it is impossible to reconstruct the string fully in order to
-          give a decent error message.
+    obj:        the object in which the first property is looked up
+    path:       the path that will be split into properties to be looked up
+                path can also be a tuple. In this case, it is combined using .
+                and [] because it is impossible to reconstruct the string fully
+                in order to give a decent error message.
+    error_cast: this function walks down the property tree by looking up values
+                in objects. So this will throw exceptions that are thrown by
+                __getitem__, but in some cases we are checking the path for a
+                different reason and would prefer throwing a more relevant
+                exception (e.g., __getitem__ throws KeyError but __setitem__
+                throws ValueError for subclasses of BasePlotlyType and
+                BaseFigure). So the resulting error can be "casted" to the
+                passed in type, if not None.
     returns
           an Exception object or None. The caller can raise this
           exception to see where the lookup error occurred.
@@ -169,6 +177,8 @@ Bad property path:
             # KeyError
             if type(e) == type(KeyError()):
                 e = PlotlyKeyError()
+            if error_cast is not None:
+                e = error_cast()
             e.args = (arg,)
             return e
     return None
@@ -537,7 +547,7 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
-            err = _check_path_in_prop_tree(self, orig_prop)
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=PlotlyKeyError)
             if err is not None:
                 raise err
             res = self
@@ -4035,7 +4045,7 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
-            err = _check_path_in_prop_tree(self, orig_prop)
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=PlotlyKeyError)
             if err is not None:
                 raise err
             res = self
@@ -4351,7 +4361,7 @@ class BasePlotlyType(object):
             else:
                 full_obj_name = module_root + self.__class__.__name__
 
-            raise PlotlyKeyError(
+            raise ValueError(
                 "Invalid {prop_str} specified for object of type "
                 "{full_obj_name}: {invalid_str}\n\n"
                 "    Valid properties:\n"
