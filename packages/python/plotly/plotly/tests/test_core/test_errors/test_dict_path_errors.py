@@ -23,7 +23,7 @@ def test_raises_on_bad_index(some_fig):
     raised = False
     try:
         x0 = some_fig["layout.shapes[2].x0"]
-    except IndexError as e:
+    except KeyError as e:
         raised = True
         assert (
             e.args[0].find(
@@ -91,7 +91,7 @@ def test_raises_on_bad_indexed_underscore_property(some_fig):
     try:
         # get the error without using a path-like key, we compare with this error
         some_fig.data[0].line["colr"] = "blue"
-    except KeyError as e_correct:
+    except ValueError as e_correct:
         raised = True
         # remove "Bad property path:
         e_correct_substr = error_substr(
@@ -109,7 +109,7 @@ colr
     raised = False
     try:
         some_fig["data[0].line_colr"] = "blue"
-    except KeyError as e:
+    except ValueError as e:
         raised = True
         e_substr = error_substr(
             e.args[0],
@@ -135,7 +135,7 @@ data[0].line_colr
     try:
         # get the error without using a path-like key
         some_fig.add_trace(go.Scatter(x=[1, 2], y=[3, 4], line=dict(colr="blue")))
-    except KeyError as e_correct:
+    except ValueError as e_correct:
         raised = True
         e_correct_substr = error_substr(
             e_correct.args[0],
@@ -152,7 +152,7 @@ colr
     # the path
     try:
         some_fig.add_trace(go.Scatter(x=[1, 2], y=[3, 4], line_colr="blue"))
-    except KeyError as e:
+    except ValueError as e:
         raised = True
         e_substr = error_substr(
             e.args[0],
@@ -180,7 +180,7 @@ line_colr
     # the path
     try:
         fig2 = go.Figure(layout=dict(title=dict(txt="two")))
-    except KeyError as e_correct:
+    except ValueError as e_correct:
         raised = True
         e_correct_substr = error_substr(
             e_correct.args[0],
@@ -196,9 +196,9 @@ txt
         fig2 = go.Figure(layout_title_txt="two")
     except TypeError as e:
         raised = True
-        # when the Figure constructor sees the same KeyError above, a
-        # TypeError is raised and adds an error message in front of the same
-        # KeyError thrown above
+        # when the Figure constructor sees the same ValueError above, a
+        # ValueError is raised and adds an error message in front of the same
+        # ValueError thrown above
         e_substr = error_substr(
             e.args[0],
             """
@@ -230,7 +230,7 @@ layout_title_txt
     # works when the bad part is not the last part in the path
     try:
         some_fig.update_layout(geo=dict(ltaxis=dict(showgrid=True)))
-    except KeyError as e_correct:
+    except ValueError as e_correct:
         raised = True
         e_correct_substr = error_substr(
             e_correct.args[0],
@@ -244,7 +244,7 @@ ltaxis
     raised = False
     try:
         some_fig.update_layout(geo_ltaxis_showgrid=True)
-    except KeyError as e:
+    except ValueError as e:
         raised = True
         e_substr = error_substr(
             e.args[0],
@@ -287,7 +287,7 @@ def test_describes_subscripting_error(some_fig):
     raised = False
     try:
         some_fig.update_traces(text_yo="hey")
-    except TypeError as e:
+    except ValueError as e:
         raised = True
         print(e.args[0])
         e_substr = error_substr(
@@ -332,7 +332,7 @@ text_yo
     raised = False
     try:
         go.Figure(go.Scatter()).update_traces(textfont_family_yo="hey")
-    except TypeError as e:
+    except ValueError as e:
         raised = True
         e_substr = error_substr(
             e.args[0],
