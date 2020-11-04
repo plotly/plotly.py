@@ -4331,7 +4331,7 @@ class BasePlotlyType(object):
 
         Raises
         ------
-        ValueError
+        PlotlyKeyError
             Always
         """
         invalid_props = args
@@ -4351,7 +4351,7 @@ class BasePlotlyType(object):
             else:
                 full_obj_name = module_root + self.__class__.__name__
 
-            raise ValueError(
+            raise PlotlyKeyError(
                 "Invalid {prop_str} specified for object of type "
                 "{full_obj_name}: {invalid_str}\n\n"
                 "    Valid properties:\n"
