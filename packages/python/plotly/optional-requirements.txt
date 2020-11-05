@@ -25,7 +25,7 @@ psutil
 
 ## code formatting
 pre-commit
-black==19.10b0
+black
 
 ## codegen dependencies ##
 inflect

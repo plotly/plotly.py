@@ -721,14 +721,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -1174,14 +1176,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -1520,14 +1524,16 @@ class Figure(BaseFigure):
         widthsrc
             Sets the source reference on Chart Studio Cloud for
             width .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -2067,14 +2073,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2407,14 +2415,16 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2664,14 +2674,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -3008,14 +3020,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3351,14 +3365,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3731,14 +3747,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -4182,14 +4200,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4554,14 +4574,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4910,14 +4932,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -5343,14 +5367,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -5691,14 +5717,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -6125,14 +6153,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6463,14 +6493,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6853,14 +6885,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7288,14 +7322,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7740,14 +7776,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8041,14 +8079,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8232,14 +8272,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -8578,14 +8620,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9044,14 +9088,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9360,14 +9406,16 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -9592,14 +9640,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9764,14 +9814,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10110,14 +10162,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10384,14 +10438,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -10595,14 +10651,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11077,14 +11135,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -11458,14 +11518,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11816,14 +11878,16 @@ class Figure(BaseFigure):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12193,14 +12257,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -12615,14 +12681,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12972,14 +13040,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13347,14 +13417,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13726,14 +13798,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14107,14 +14181,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14400,14 +14476,16 @@ class Figure(BaseFigure):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14754,14 +14832,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15105,14 +15185,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15483,14 +15565,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15691,14 +15775,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -16007,14 +16093,16 @@ class Figure(BaseFigure):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -16410,14 +16498,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -16812,14 +16902,16 @@ class Figure(BaseFigure):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -17280,14 +17372,16 @@ class Figure(BaseFigure):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -17384,12 +17478,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17413,12 +17511,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single coloraxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17446,12 +17548,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             coloraxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17484,12 +17590,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17513,12 +17623,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single geo object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17546,12 +17660,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             geo objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17584,12 +17702,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17613,12 +17735,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single mapbox object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17646,12 +17772,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             mapbox objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17684,12 +17814,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17713,12 +17847,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single polar object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17746,12 +17884,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             polar objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17784,12 +17926,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17813,12 +17959,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single scene object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17846,12 +17996,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             scene objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17884,12 +18038,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -17913,12 +18071,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single ternary object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -17946,12 +18108,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             ternary objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17984,12 +18150,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -18013,12 +18183,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single xaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -18046,12 +18220,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             xaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18084,12 +18262,16 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18127,12 +18309,16 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single yaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18181,12 +18367,16 @@ class Figure(BaseFigure):
         patch: dict
             Dictionary of property updates to be applied to all
             yaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18232,12 +18422,15 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18277,12 +18470,15 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single annotation object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18329,12 +18525,15 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all annotations that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18423,6 +18622,7 @@ class Figure(BaseFigure):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -18712,11 +18912,16 @@ class Figure(BaseFigure):
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
         row
-            Subplot row for annotation
+            Subplot row for annotation. If 'all', addresses all
+            rows in the specified column(s).
         col
-            Subplot column for annotation
+            Subplot column for annotation. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add annotation to secondary y-axis
+        exclude_empty_subplots
+            If True, annotation will not be added to subplots
+            without traces.
 
         Returns
         -------
@@ -18778,6 +18983,7 @@ class Figure(BaseFigure):
             row=row,
             col=col,
             secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_layout_images(self, selector=None, row=None, col=None, secondary_y=None):
@@ -18787,12 +18993,15 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18832,12 +19041,15 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single image object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18880,12 +19092,15 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all images that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18942,6 +19157,7 @@ class Figure(BaseFigure):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -19037,11 +19253,16 @@ class Figure(BaseFigure):
             refers to the point between the bottom and the top of
             the domain of the second y axis.
         row
-            Subplot row for image
+            Subplot row for image. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for image
+            Subplot column for image. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add image to secondary y-axis
+        exclude_empty_subplots
+            If True, image will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -19069,7 +19290,13 @@ class Figure(BaseFigure):
             **kwargs
         )
         return self._add_annotation_like(
-            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "image",
+            "images",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
@@ -19079,12 +19306,15 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19122,12 +19352,15 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single shape object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19170,12 +19403,15 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all shapes that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19238,6 +19474,7 @@ class Figure(BaseFigure):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -19403,11 +19640,16 @@ class Figure(BaseFigure):
             maintaining a position relative to data or plot
             fraction.
         row
-            Subplot row for shape
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for shape
+            Subplot column for shape. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add shape to secondary y-axis
+        exclude_empty_subplots
+            If True, shape will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -19441,5 +19683,11 @@ class Figure(BaseFigure):
             **kwargs
         )
         return self._add_annotation_like(
-            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "shape",
+            "shapes",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
