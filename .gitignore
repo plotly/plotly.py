@@ -46,4 +46,5 @@ temp-plot.html
 doc/python/.ipynb_checkpoints
 doc/python/.mapbox_token
 doc/.ipynb_checkpoints
+tags
 doc/check-or-enforce-order.py
