@@ -375,13 +375,16 @@ def test_described_subscript_error_on_type_error(some_fig):
         some_fig["layout_template_layout_plot_bgcolor"] = 1
     except ValueError as e:
         raised = True
-        e_correct_substr = error_substr(
-            e.args[0],
-            """
-    Invalid value of type 'builtins.int' received for the 'plot_bgcolor' property of layout
-        Received value: 1
-""",
-        )
+        # Trim off the beginning of the error string because it is related to
+        # trying to assign a number to something expecting a string, whereas
+        # below the error will be due to trying to subscript something that
+        # doesn't support it. But the list of valid properties should be shown
+        # for both errors and this is what we extract.
+        # Trimmed like this because this string is different in Python2 than
+        # Python3
+        e_correct_substr = e.args[0]
+        start_at = e_correct_substr.find("    The 'plot_bgcolor'")
+        e_correct_substr = e_correct_substr[start_at:]
         e_correct_substr += """
 
 Property does not support subscripting:
@@ -399,6 +402,7 @@ template_layout_plot_bgcolor_x
             """string indices must be integers
 
 Invalid value received for the 'plot_bgcolor' property of layout
+
 """,
         )
         assert e_substr == e_correct_substr
