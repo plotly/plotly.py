@@ -361,3 +361,61 @@ textfont_family_yo
             and (e_substr == e_correct_substr)
         )
     assert raised
+
+
+def test_described_subscript_error_on_type_error(some_fig):
+    # The above tests for subscripting errors did not test for when we attempt
+    # to subscript an object that is not None, such as a string or a number.
+    # These do that.
+    raised = False
+    try:
+        # Trying to address with a key an object that doesn't support it (as we
+        # do below) reports an error listing what are valid assignments to the
+        # object, like when we try and assign a number to something that expects as string.
+        some_fig["layout_template_layout_plot_bgcolor"] = 1
+    except ValueError as e:
+        raised = True
+        e_correct_substr = error_substr(
+            e.args[0],
+            """
+    Invalid value of type 'builtins.int' received for the 'plot_bgcolor' property of layout
+        Received value: 1
+""",
+        )
+        e_correct_substr += """
+
+Property does not support subscripting:
+template_layout_plot_bgcolor_x
+                ~~~~~~~~~~~~"""
+    assert raised
+    raised = False
+    try:
+        some_fig.update_layout(template_layout_plot_bgcolor_x=1)
+    except ValueError as e:
+        raised = True
+        print(e.args[0])
+        e_substr = error_substr(
+            e.args[0],
+            """string indices must be integers
+
+Invalid value received for the 'plot_bgcolor' property of layout
+""",
+        )
+        assert e_substr == e_correct_substr
+    assert raised
+
+
+def test_subscript_error_exception_types(some_fig):
+    # Assert that these raise the expected error types
+    # when width is None
+    with pytest.raises(ValueError):
+        some_fig.update_layout(width_yo=100)
+    with pytest.raises(KeyError):
+        yo = some_fig["layout_width_yo"]
+
+    some_fig.update_layout(width=100)
+    # when width is specified
+    with pytest.raises(ValueError):
+        some_fig.update_layout(width_yo=100)
+    with pytest.raises(KeyError):
+        yo = some_fig["layout_width_yo"]

@@ -137,7 +137,7 @@ def _check_path_in_prop_tree(obj, path, error_cast=None):
             obj = obj[p]
         except (ValueError, KeyError, IndexError, TypeError) as e:
             arg = e.args[0]
-            if obj is None:
+            if issubclass(e.__class__, TypeError):
                 # If obj doesn't support subscripting, state that and show the
                 # (valid) property that gives the object that doesn't support
                 # subscripting.
