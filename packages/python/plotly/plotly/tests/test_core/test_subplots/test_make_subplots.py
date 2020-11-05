@@ -1924,3 +1924,13 @@ class TestMakeSubplots(TestCase):
         expected.update_traces(uid=None)
 
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_if_passed_figure(self):
+        # assert it returns the same figure it was passed
+        fig = Figure()
+        figsp = subplots.make_subplots(2, 2, figure=fig)
+        assert id(fig) == id(figsp)
+        # assert the layout is the same when it returns its own figure
+        fig2sp = subplots.make_subplots(2, 2)
+        assert id(fig2sp) != id(figsp)
+        assert fig2sp.layout == figsp.layout
