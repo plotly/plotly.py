@@ -85,6 +85,8 @@ fig.show()
 
 ### Adding Lines and Rectangles to Facet Plots
 
+*introduced in plotly 4.12*
+
 It is possible to add [labelled horizontal and vertical lines and rectangles](/python/horizontal-vertical-shapes/) to facet plots using `.add_hline()`, `.add_vline()`, `.add_hrect()` or `.add_vrect()`. The default `row` and `col` values are `"all"` but this can be overridden, as with the rectangle below, which only appears in the first column.
 
 ```python
@@ -104,6 +106,8 @@ fig.show()
 ```
 
 ### Adding the Same Trace to All Facets
+
+*introduced in plotly 4.12*
 
 The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace.
 
