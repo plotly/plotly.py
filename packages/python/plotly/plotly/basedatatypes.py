@@ -4193,7 +4193,7 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
-            err = _check_path_in_prop_tree(self, orig_prop)
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=ValueError)
             if err is not None:
                 raise err
             res = self
