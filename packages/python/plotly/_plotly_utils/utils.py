@@ -40,10 +40,11 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         Note that setting invalid separators will cause a failure at this step.
 
         """
-
         # this will raise errors in a normal-expected way
+        self.unsafe = False
         encoded_o = super(PlotlyJSONEncoder, self).encode(o)
-
+        if self.unsafe:
+            return encoded_o
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
@@ -95,6 +96,12 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         Therefore, we only anticipate either unknown iterables or values here.
 
         """
+        numpy = get_module("numpy", should_load=False)
+        if numpy:
+            if isinstance(obj, numpy.ndarray):
+                if numpy.all(numpy.isfinite(obj)):
+                    self.unsafe = True
+
         # TODO: The ordering if these methods is *very* important. Is this OK?
         encoding_methods = (
             self.encode_as_plotly,
