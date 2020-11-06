@@ -98,7 +98,9 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         """
         numpy = get_module("numpy", should_load=False)
         if numpy:
-            if isinstance(obj, numpy.ndarray):
+            if isinstance(obj, numpy.ndarray) and numpy.issubdtype(
+                obj.dtype, numpy.number
+            ):
                 if numpy.all(numpy.isfinite(obj)):
                     self.unsafe = True
 
