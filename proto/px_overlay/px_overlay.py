@@ -10,6 +10,7 @@ import test_data
 import json
 from itertools import product, cycle, chain
 from functools import reduce
+import re
 
 
 def multi_index(*kwargs):
@@ -47,6 +48,118 @@ def extract_axis_titles(fig):
         fig_subplot_axes(fig, 1, c + 1)[0]["title"] for c in range(grid_ref_shape[1])
     ]
     return (r_titles, c_titles)
+
+
+def make_subplots_all_secondary_y(rows, cols):
+    """
+    Get subplots like make_subplots but all also have secondary y-axes.
+    """
+    grid_ref_shape = [rows, cols]
+    specs = [
+        [dict(secondary_y=True) for __ in range(grid_ref_shape[1])]
+        for _ in range(grid_ref_shape[0])
+    ]
+    fig = make_subplots(*grid_ref_shape, specs=specs)
+    return fig
+
+
+def parse_axis_ref(ax):
+    """ Find the axis letter, optional number, and domain of axis. """
+    # TODO: can this be obtained via codegen?
+    pat = re.compile("([xy])(axis)?([0-9]*)( domain)?")
+    matches = pat.match(ax)
+    if matches is None:
+        raise ValueError('Axis "%s" cannot be parsed.' % (ax,))
+    return (matches[1], matches[3], matches[4])
+
+
+def norm_axis_ref(ax):
+    """ normalize ax so it is in the format: yaxis, yaxis2, xaxis7 etc. """
+    al, an, _ = parse_axis_ref(ax)
+    return al + "axis" + an
+
+
+def axis_pair_to_row_col(fig, axpair):
+    """
+    returns the row and column of the subplot having the axis pair and whether it is a
+    secondary y
+    """
+    if "paper" in axpair:
+        raise ValueError('Cannot find row and column of "paper" axis reference.')
+    naxpair = tuple([norm_axis_ref(ax) for ax in axpair])
+    nrows, ncols = fig_grid_ref_shape(fig)
+    row = None
+    col = None
+    for r, c in multi_index(nrows, ncols):
+        for sp in fig._grid_ref[r][c]:
+            if naxpair == sp.layout_keys:
+                row = r + 1
+                col = c + 1
+    if row is None or col is None:
+        raise ValueError("Could not find subplot containing axes (%s,%s)." % nax)
+    secondary_y = False
+    yax = naxpair[1]
+    if fig.layout[yax]["side"] == "right":
+        secondary_y = True
+    return (row, col, secondary_y)
+
+
+def find_subplot_axes(fig, row, col, secondary_y=False):
+    """
+    Returns 2-tuple containing (xaxis,yaxis) at specified row, col and secondary y-axis. 
+    """
+    nrows, ncols = fig_grid_ref_shape(fig)
+    try:
+        sps = fig._grid_ref[row - 1][col - 1]
+    except IndexError:
+        raise IndexError(
+            "Figure does not have a subplot at the requested row or column."
+        )
+
+    def _check_is_secondary_y(sp):
+        xax, yax = sp.layout_keys
+        # TODO: It may not be totally accurate to assume if an y-axis' "side" is
+        # "right" than it is a secondary y axis...
+        return fig.layout[yax]["side"] == "right"
+
+    # find the secondary y axis
+    err_msg = (
+        "Could not find a y-axis " "at the subplot in the requested row or column."
+    )
+    filter_fun = lambda sp: not _check_is_secondary_y(sp)
+    if secondary_y:
+        err_msg = (
+            "Could not find a secondary y-axis "
+            "at the subplot in the requested row or column."
+        )
+        filter_fun = _check_is_secondary_y
+    try:
+        sp = list(filter(filter_fun, sps))[0]
+    except (IndexError, TypeError):
+        # Catch IndexError if the list is empty, catch TypeError if sps isn't
+        # iterable (e.g., is None)
+        raise IndexError(err_msg)
+    return sp.layout_keys
+
+
+def map_axis_pair(old_fig, new_fig, axpair, make_axis_ref=True):
+    """
+    Find the axes on the new figure that will give the same subplot and
+    possibly secondary y axis as on the old figure. This can only
+    work if the axis pair is ("paper","paper") or the axis pair corresponds to a
+    subplot on the old figure the new figure has corresponding rows,
+    columns and secondary y-axes.
+    if make_axis_ref is True, axis is removed from the resulting strings, e.g., xaxis2 -> x2
+    """
+    if axpair == ("paper", "paper"):
+        return ax
+    row, col, secondary_y = axis_pair_to_row_col(old_fig, axpair)
+    newaxpair = find_subplot_axes(new_fig, row, col, secondary_y)
+    axpair_extras = [" domain" if ax.endswith("domain") else "" for ax in axpair]
+    newaxpair = tuple(ax + extra for ax, extra in zip(newaxpair, axpair_extras))
+    if make_axis_ref:
+        newaxpair = tuple(ax.replace("axis", "") for ax in newaxpair)
+    return newaxpair
 
 
 def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
