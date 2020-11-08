@@ -156,4 +156,3 @@ def _swatches_cyclical(module_names, module_contents, template=None):
         title="plotly.colors." + module_names.split(".")[-1], template=args["template"]
     )
     return fig
-
