@@ -34,14 +34,16 @@ def _len_dict_item(item):
     know the length of the resulting string when printing we might need to
     convert to a string before calling len on it.
     """
-    if type(item) == type(str()):
-        return len(item)
-    elif type(item) == type(int()):
-        return len("%d" % (item,))
-    else:
-        raise ValueError(
-            "Cannot find string length of an item that is neither a string nor an integer."
-        )
+    try:
+        l = len(item)
+    except TypeError:
+        try:
+            l = len("%d" % (item,))
+        except TypeError:
+            raise ValueError(
+                "Cannot find string length of an item that is not string-like nor an integer."
+            )
+    return l
 
 
 def _str_to_dict_path_full(key_path_str):
