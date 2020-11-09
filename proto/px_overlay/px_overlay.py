@@ -1,7 +1,7 @@
-# Prototype for px.combine
+# Prototype for px.overlay
 # Combine 2 figures containing subplots
 # Run as
-# python px_combine.py
+# python px_overlay.py
 
 import plotly.express as px
 import plotly.graph_objects as go
@@ -111,7 +111,9 @@ def find_subplot_axes(fig, row, col, secondary_y=False):
     nrows, ncols = fig_grid_ref_shape(fig)
     try:
         sps = fig._grid_ref[row - 1][col - 1]
-    except IndexError:
+    except (IndexError, TypeError):
+        # IndexError if fig has _grid_ref but not requested row or column,
+        # TypeError if fig has no _grid_ref (it is None)
         raise IndexError(
             "Figure does not have a subplot at the requested row or column."
         )
@@ -142,7 +144,15 @@ def find_subplot_axes(fig, row, col, secondary_y=False):
     return sp.layout_keys
 
 
-def map_axis_pair(old_fig, new_fig, axpair, make_axis_ref=True):
+def map_axis_pair(
+    old_fig,
+    new_fig,
+    axpair,
+    new_row=None,
+    new_col=None,
+    new_secondary_y=None,
+    make_axis_ref=True,
+):
     """
     Find the axes on the new figure that will give the same subplot and
     possibly secondary y axis as on the old figure. This can only
@@ -151,9 +161,14 @@ def map_axis_pair(old_fig, new_fig, axpair, make_axis_ref=True):
     columns and secondary y-axes.
     if make_axis_ref is True, axis is removed from the resulting strings, e.g., xaxis2 -> x2
     """
+    if None in axpair:
+        raise ValueError("Cannot map axis whose value is None.")
     if axpair == ("paper", "paper"):
-        return ax
+        return axpair
     row, col, secondary_y = axis_pair_to_row_col(old_fig, axpair)
+    row = new_row if new_row is not None else row
+    col = new_col if new_col is not None else col
+    secondary_y = new_secondary_y if new_secondary_y is not None else secondary_y
     newaxpair = find_subplot_axes(new_fig, row, col, secondary_y)
     axpair_extras = [" domain" if ax.endswith("domain") else "" for ax in axpair]
     newaxpair = tuple(ax + extra for ax, extra in zip(newaxpair, axpair_extras))
@@ -162,7 +177,27 @@ def map_axis_pair(old_fig, new_fig, axpair, make_axis_ref=True):
     return newaxpair
 
 
-def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
+def map_annotation_like_obj_axis(oldfig, newfig, an, force_secondary_y=False):
+    """
+    Take an annotation-like object with xref and yref referring to axes in oldfig
+    and map them to axes in newfig. This makes it possible to map an annotation
+    to the same subplot row, column or secondary y in a new plot even if they do
+    not have matching subplots.
+    If force_secondary_y is True, attempt is made to map the annotation to a
+    secondary y axis in the new figure.
+    Returns the new annotation. Note that it has not been added to newfig, the
+    caller must then do this if it wants it added to newfig.
+    """
+    oldaxpair = tuple([an[ref] for ref in ["xref", "yref"]])
+    newaxpair = map_axis_pair(
+        oldfig, newfig, oldaxpair, new_secondary_y=force_secondary_y
+    )
+    newan = an.__class__(an)
+    newan["xref"], newan["yref"] = newaxpair
+    return newan
+
+
+def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
     """
     Combines two figures by just using the layout of the first figure and
     appending the data of the second figure.
@@ -177,7 +212,7 @@ def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
     grid_ref_shape = fig_grid_ref_shape(fig0)
     if grid_ref_shape != fig_grid_ref_shape(fig1):
         raise ValueError(
-            "Only two figures with the same subplot geometry can be combined."
+            "Only two figures with the same subplot geometry can be overlayd."
         )
     # reflow the colors
     colorway = fig0.layout.template.layout.colorway
@@ -209,7 +244,28 @@ def px_simple_combine(fig0, fig1, fig1_secondary_y=False):
                 tr, row=r + 1, col=c + 1, secondary_y=(fig1_secondary_y and (f == fig1))
             )
     # TODO: How to preserve axis sizes when adding secondary y?
-    # TODO: How to put annotations on the correct subplot when using secondary y?
+
+    # Map the axes of the annotation-like objects to the new figure. Map the
+    # fig1 objects to the secondary-y if requested.
+    selectors = product(
+        [fig0, fig1],
+        [
+            go.Figure.select_annotations,
+            go.Figure.select_shapes,
+            go.Figure.select_layout_images,
+        ],
+    )
+    adders = product(
+        [(fig, False), (fig, fig1_secondary_y)],
+        [go.Figure.add_annotation, go.Figure.add_shape, go.Figure.add_layout_image],
+    )
+    for (oldfig, selector), ((newfig, secy), adder) in zip(selectors, adders):
+        for ann in selector(oldfig):
+            newann = map_annotation_like_obj_axis(
+                oldfig, newfig, ann, force_secondary_y=secy
+            )
+            adder(newfig, newann)
+
     # fig.update_layout(fig0.layout)
     # title will be wrong
     fig.layout.title = None
@@ -270,17 +326,17 @@ def get_first_set_barmode(figs):
 df = test_data.aug_tips()
 
 
-def simple_combine_example():
+def simple_overlay_example():
     fig0 = px.scatter(df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker")
     fig1 = px.histogram(
         df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker"
     )
     fig1.update_traces(marker_color="red")
-    fig = px_simple_combine(fig0, fig1)
+    fig = px_simple_overlay(fig0, fig1)
     fig.update_layout(title="Simple figure combination")
     return fig
 
 
 if __name__ == "__main__":
-    fig_simple = simple_combine_example()
+    fig_simple = simple_overlay_example()
     fig_simple.show()
