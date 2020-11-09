@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: How to make Bar Charts in Python with Plotly.
     display_as: basic
@@ -117,6 +117,23 @@ fig = px.bar(df, x="sex", y="total_bill",
              color='smoker', barmode='group',
              height=400)
 fig.show()
+```
+
+#### Bar Charts in Dash
+
+With [Dash](https://plotly.com/dash/), you can easily add a dropdown menu to select a subset of your dataframe (e.g. a certain day of the week).
+
+Dash is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. To run the app below, simply:
+1. Copy & paste the code below into a file named `app.py`
+2. Install the dependencies with `pip install dash plotly`
+3. Navigate to the file and run `python app.py`
+
+[Get started now](https://dash.plotly.com/installation) and learn how you can effortlessly [style](https://plotly.com/dash/design-kit/) and [deploy](https://plotly.com/dash/app-manager/) apps like this with [Dash Enterprise](https://plotly.com/dash/).
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'bar-charts', width='100%', height=630)
 ```
 
 #### Facetted subplots

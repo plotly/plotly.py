@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.7
+    version: 3.7.6
   plotly:
     description: How to make line charts in Python with Plotly. Examples on creating
       and styling line charts in Python with Plotly.
@@ -67,6 +67,23 @@ df = px.data.gapminder().query("continent != 'Asia'") # remove Asia for visibili
 fig = px.line(df, x="year", y="lifeExp", color="continent",
               line_group="country", hover_name="country")
 fig.show()
+```
+
+### Line Plots in Dash
+
+You can build an app to interactively select a group of continents using [Dash](https://plotly.com/dash/).
+
+Dash is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. To run the app below, simply:
+1. Copy & paste the code below into a file named `app.py`
+2. Install the dependencies with `pip install dash plotly`
+3. Navigate to the file and run `python app.py`
+
+[Get started now](https://dash.plotly.com/installation) and learn how you can effortlessly [style](https://plotly.com/dash/design-kit/) and [deploy](https://plotly.com/dash/app-manager/) apps like this with [Dash Enterprise](https://plotly.com/dash/).
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'line-charts', width='100%', height=630)
 ```
 
 ### Sparklines with Plotly Express

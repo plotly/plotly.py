@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.6
   plotly:
     description: Getting Started with Plotly for Python.
     has_thumbnail: false
@@ -30,8 +30,8 @@ jupyter:
     page_type: u-guide
     permalink: python/getting-started/
     redirect_from:
-      - python/getting_started/
-      - /python/pytables/
+    - python/getting_started/
+    - /python/pytables/
 ---
 
 <!-- #region -->
@@ -121,10 +121,25 @@ fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
 
-<!-- #region -->
-
 See [_Displaying Figures in Python_](/python/renderers/) for more information on the renderers framework, and see [_Plotly FigureWidget Overview_](/python/figurewidget/) for more information on using `FigureWidget`.
 
+
+#### Using Plotly in Dash
+
+[Dash](https://plotly.com/dash/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. For example, in the app below, you can change the color of your bars. To run it, simply:
+1. Copy & paste the code below into a file named `app.py`
+2. Install the dependencies with `pip install dash plotly`
+3. Navigate to the file and run `python app.py`
+
+[Get started now](https://dash.plotly.com/installation) and learn how you can effortlessly [style](https://plotly.com/dash/design-kit/) and [deploy](https://plotly.com/dash/app-manager/) apps like this with [Dash Enterprise](https://plotly.com/dash/).
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'getting-started', width='100%', height=630)
+```
+
+<!-- #region -->
 #### JupyterLab Support (Python 3.5+)
 
 For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install the `jupyterlab` and `ipywidgets`
@@ -157,7 +172,6 @@ $ jupyter lab
 ```
 
 and display plotly figures inline using the `plotly_mimetype` renderer...
-
 <!-- #endregion -->
 
 ```python
