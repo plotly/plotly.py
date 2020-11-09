@@ -82,7 +82,10 @@ def _swatches_continuous(module_names, module_contents, template=None):
                 orientation="h",
                 y=[name] * n,
                 x=[1] * n,
+                customdata=[(x + 1) / n for x in range(n)],
                 marker=dict(color=list(range(n)), colorscale=name, line_width=0),
+                hovertemplate="%{customdata}",
+                name=name,
             )
             for name, colors in reversed(sequences)
         ],
