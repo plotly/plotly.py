@@ -362,3 +362,41 @@ def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True)
     if trim:
         ret = ret[: maxaddr + 1]
     return ret
+
+
+def chomp_empty_strings(strings, c):
+    """
+    Given a list of strings, some of which are the empty string "", replace the
+    empty strings with "_" and combine them with the closest non-empty string on
+    the left or "" if it is the first string.
+    Examples:
+    for c="_"
+    ['hey', '', 'why', '', '', 'whoa', '', ''] -> ['hey_', 'why__', 'whoa__']
+    ['', 'hi', '', "I'm", 'bob', '', ''] -> ['_', 'hi_', "I'm", 'bob__']
+    ['hi', "i'm", 'a', 'good', 'string'] -> ['hi', "i'm", 'a', 'good', 'string']
+    Some special cases are:
+    [] -> []
+    [''] -> ['']
+    ['', ''] -> ['_']
+    ['', '', '', ''] -> ['___']
+    """
+    if not len(strings):
+        return strings
+    if sum(map(len, strings)) == 0:
+        return [c * (len(strings) - 1)]
+
+    class _Chomper:
+        def __init__(self, c):
+            self.c = c
+
+        def __call__(self, x, y):
+            # x is list up to now
+            # y is next item in list
+            # x should be [""] initially, and then empty strings filtered out at the
+            # end
+            if len(y) == 0:
+                return x[:-1] + [x[-1] + self.c]
+            else:
+                return x + [y]
+
+    return list(filter(len, reduce(_Chomper(c), strings, [""])))

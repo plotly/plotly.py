@@ -9,6 +9,7 @@ import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
 import itertools
+from functools import reduce
 
 from _plotly_utils.utils import (
     _natural_sort_strings,
@@ -16,6 +17,7 @@ from _plotly_utils.utils import (
     split_multichar,
     split_string_positions,
     display_string_positions,
+    chomp_empty_strings,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -63,40 +65,69 @@ def _str_to_dict_path_full(key_path_str):
     tuple[str | int]
     tuple [int]
     """
-    key_path2 = split_multichar([key_path_str], list(".[]"))
-    # Split out underscore
-    # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
-    key_path3 = []
-    underscore_props = BaseFigure._valid_underscore_properties
+    # skip all the parsing if the string is empty
+    if len(key_path_str):
+        # split string on ".[]" and filter out empty strings
+        key_path2 = split_multichar([key_path_str], list(".[]"))
+        # Split out underscore
+        # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+        key_path3 = []
+        underscore_props = BaseFigure._valid_underscore_properties
 
-    def _make_hyphen_key(key):
-        if "_" in key[1:]:
-            # For valid properties that contain underscores (error_x)
-            # replace the underscores with hyphens to protect them
-            # from being split up
-            for under_prop, hyphen_prop in underscore_props.items():
-                key = key.replace(under_prop, hyphen_prop)
-        return key
+        def _make_hyphen_key(key):
+            if "_" in key[1:]:
+                # For valid properties that contain underscores (error_x)
+                # replace the underscores with hyphens to protect them
+                # from being split up
+                for under_prop, hyphen_prop in underscore_props.items():
+                    key = key.replace(under_prop, hyphen_prop)
+            return key
 
-    def _make_underscore_key(key):
-        return key.replace("-", "_")
+        def _make_underscore_key(key):
+            return key.replace("-", "_")
 
-    key_path2b = map(_make_hyphen_key, key_path2)
-    key_path2c = split_multichar(key_path2b, list("_"))
-    key_path2d = list(map(_make_underscore_key, key_path2c))
-    all_elem_idcs = tuple(split_string_positions(list(key_path2d)))
-    # remove empty strings, and indices pointing to them
-    key_elem_pairs = list(filter(lambda t: len(t[1]), enumerate(key_path2d)))
-    key_path3 = [x for _, x in key_elem_pairs]
-    elem_idcs = [all_elem_idcs[i] for i, _ in key_elem_pairs]
+        key_path2b = list(map(_make_hyphen_key, key_path2))
+        # Here we want to split up each non-empty string in the list at
+        # underscores and recombine the strings using chomp_empty_strings so
+        # that leading, trailing and multiple _ will be preserved
+        def _split_and_chomp(s):
+            if not len(s):
+                return s
+            s_split = split_multichar([s], list("_"))
+            # handle key paths like "a_path_", "_another_path", or
+            # "yet__another_path" by joining extra "_" to the string to the left or
+            # the empty string if at the beginning
+            s_chomped = chomp_empty_strings(s_split, "_")
+            return s_chomped
 
-    # Convert elements to ints if possible.
-    # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-    for i in range(len(key_path3)):
-        try:
-            key_path3[i] = int(key_path3[i])
-        except ValueError as _:
-            pass
+        # after running _split_and_chomp on key_path2b, it will be a list
+        # containing strings and lists of strings; concatenate the sublists with
+        # the list ("lift" the items out of the sublists)
+        key_path2c = list(
+            reduce(
+                lambda x, y: x + y if type(y) == type(list()) else x + [y],
+                map(_split_and_chomp, key_path2b),
+                [],
+            )
+        )
+
+        key_path2d = list(map(_make_underscore_key, key_path2c))
+        all_elem_idcs = tuple(split_string_positions(list(key_path2d)))
+        # remove empty strings, and indices pointing to them
+        key_elem_pairs = list(filter(lambda t: len(t[1]), enumerate(key_path2d)))
+        key_path3 = [x for _, x in key_elem_pairs]
+        elem_idcs = [all_elem_idcs[i] for i, _ in key_elem_pairs]
+
+        # Convert elements to ints if possible.
+        # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
+        for i in range(len(key_path3)):
+            try:
+                key_path3[i] = int(key_path3[i])
+            except ValueError as _:
+                pass
+    else:
+        key_path3 = []
+        elem_idcs = []
 
     return (tuple(key_path3), elem_idcs)
 
