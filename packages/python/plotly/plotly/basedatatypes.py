@@ -28,6 +28,22 @@ from . import shapeannotation
 Undefined = object()
 
 
+def _len_dict_item(item):
+    """
+    Because a parsed dict path is a tuple containings strings or integers, to
+    know the length of the resulting string when printing we might need to
+    convert to a string before calling len on it.
+    """
+    if type(item) == type(str()):
+        return len(item)
+    elif type(item) == type(int()):
+        return len("%d" % (item,))
+    else:
+        raise ValueError(
+            "Cannot find string length of an item that is neither a string nor an integer."
+        )
+
+
 def _str_to_dict_path_full(key_path_str):
     """
     Convert a key path string into a tuple of key path elements and also
@@ -162,7 +178,7 @@ Property does not support subscripting:
 %s""" % (
                     path,
                     display_string_positions(
-                        prop_idcs, disp_i, length=len(prop[disp_i]), char="~"
+                        prop_idcs, disp_i, length=_len_dict_item(prop[disp_i]), char="^"
                     ),
                 )
             else:
@@ -173,7 +189,9 @@ Bad property path:
 %s
 %s""" % (
                     path,
-                    display_string_positions(prop_idcs, i, length=1, char="^"),
+                    display_string_positions(
+                        prop_idcs, i, length=_len_dict_item(prop[i]), char="^"
+                    ),
                 )
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing

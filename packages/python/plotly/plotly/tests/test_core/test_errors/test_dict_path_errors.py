@@ -49,7 +49,7 @@ def test_raises_on_bad_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapes[1].x2000
-                 ^"""
+                 ^^^^^"""
             )
             >= 0
         )
@@ -68,7 +68,7 @@ def test_raises_on_bad_ancestor_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapa[1].x2000
-       ^"""
+       ^^^^^"""
             )
             >= 0
         )
@@ -99,7 +99,7 @@ def test_raises_on_bad_indexed_underscore_property(some_fig):
             """
 Bad property path:
 colr
-^""",
+^^^^""",
         )
     # if the string starts with "Bad property path:" then this test cannot work
     # this way.
@@ -116,14 +116,14 @@ colr
             """
 Bad property path:
 data[0].line_colr
-             ^""",
+             ^^^^""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 data[0].line_colr
-             ^"""
+             ^^^^"""
                 )
                 >= 0
             )
@@ -142,7 +142,7 @@ data[0].line_colr
             """
 Bad property path:
 colr
-^""",
+^^^^""",
         )
     assert raised
 
@@ -159,14 +159,14 @@ colr
             """
 Bad property path:
 line_colr
-     ^""",
+     ^^^^""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 line_colr
-     ^"""
+     ^^^^"""
                 )
                 >= 0
             )
@@ -187,7 +187,7 @@ line_colr
             """
 Bad property path:
 txt
-^""",
+^^^""",
         )
     assert raised
 
@@ -204,7 +204,7 @@ txt
             """
 Bad property path:
 layout_title_txt
-             ^""",
+             ^^^""",
         )
         # also remove the invalid Figure property string added by the Figure constructor
         e_substr = error_substr(
@@ -217,7 +217,7 @@ layout_title_txt
                 e.args[0].find(
                     """Bad property path:
 layout_title_txt
-             ^"""
+             ^^^"""
                 )
                 >= 0
             )
@@ -237,7 +237,7 @@ layout_title_txt
             """
 Bad property path:
 ltaxis
-^""",
+^^^^^^""",
         )
     assert raised
 
@@ -251,14 +251,14 @@ ltaxis
             """
 Bad property path:
 geo_ltaxis_showgrid
-    ^""",
+    ^^^^^^""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 geo_ltaxis_showgrid
-    ^"""
+    ^^^^^^"""
                 )
                 >= 0
             )
@@ -303,7 +303,7 @@ Invalid value received for the 'text' property of scatter
 
 Property does not support subscripting:
 text_yo
-~~~~""",
+^^^^""",
         )
         assert (
             (
@@ -311,7 +311,7 @@ text_yo
                     """
 Property does not support subscripting:
 text_yo
-~~~~"""
+^^^^"""
                 )
                 >= 0
             )
@@ -346,7 +346,7 @@ Invalid value received for the 'family' property of scatter.textfont
 
 Property does not support subscripting:
 textfont_family_yo
-         ~~~~~~""",
+         ^^^^^^""",
         )
         assert (
             (
@@ -354,7 +354,7 @@ textfont_family_yo
                     """
 Property does not support subscripting:
 textfont_family_yo
-         ~~~~~~"""
+         ^^^^^^"""
                 )
                 >= 0
             )
@@ -389,7 +389,7 @@ def test_described_subscript_error_on_type_error(some_fig):
 
 Property does not support subscripting:
 template_layout_plot_bgcolor_x
-                ~~~~~~~~~~~~"""
+                ^^^^^^^^^^^^"""
     assert raised
     raised = False
     try:
