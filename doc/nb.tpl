@@ -12,7 +12,7 @@
 {%- endblock header-%}
 
 {% block input_group %}
-    {%- if not cell.metadata.get('hide_code', True) -%}
+    {%- if not cell.metadata.get('hide_code', False) -%}
         {{ super() }}
     {%- endif -%}
 {% endblock input_group %}
