@@ -16,17 +16,17 @@ class Title(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets this legend's title font.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.legend.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -66,7 +66,7 @@ class Title(_BaseLayoutHierarchyType):
         Defaulted to "left" with `orientation` is "v". The *top left*
         options could be used to expand legend area in both x and y
         sides.
-    
+
         The 'side' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'left', 'top left']
@@ -87,7 +87,7 @@ class Title(_BaseLayoutHierarchyType):
     def text(self):
         """
         Sets the title of the legend.
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -122,7 +122,7 @@ class Title(_BaseLayoutHierarchyType):
     def __init__(self, arg=None, font=None, side=None, text=None, **kwargs):
         """
         Construct a new Title object
-        
+
         Parameters
         ----------
         arg

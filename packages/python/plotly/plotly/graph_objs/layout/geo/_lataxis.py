@@ -16,7 +16,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def dtick(self):
         """
         Sets the graticule's longitude/latitude tick step.
-    
+
         The 'dtick' property is a number and may be specified as:
           - An int or float
 
@@ -36,7 +36,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def gridcolor(self):
         """
         Sets the graticule's stroke color.
-    
+
         The 'gridcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -95,7 +95,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def gridwidth(self):
         """
         Sets the graticule's stroke width (in px).
-    
+
         The 'gridwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -114,20 +114,20 @@ class Lataxis(_BaseLayoutHierarchyType):
     @property
     def range(self):
         """
-        Sets the range of this axis (in degrees), sets the map's
-        clipped coordinates.
-    
-        The 'range' property is an info array that may be specified as:
-    
-        * a list or tuple of 2 elements where:
-    (0) The 'range[0]' property is a number and may be specified as:
-          - An int or float
-    (1) The 'range[1]' property is a number and may be specified as:
-          - An int or float
+            Sets the range of this axis (in degrees), sets the map's
+            clipped coordinates.
 
-        Returns
-        -------
-        list
+            The 'range' property is an info array that may be specified as:
+
+            * a list or tuple of 2 elements where:
+        (0) The 'range[0]' property is a number and may be specified as:
+              - An int or float
+        (1) The 'range[1]' property is a number and may be specified as:
+              - An int or float
+
+            Returns
+            -------
+            list
         """
         return self["range"]
 
@@ -141,7 +141,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def showgrid(self):
         """
         Sets whether or not graticule are shown on the map.
-    
+
         The 'showgrid' property must be specified as a bool
         (either True, or False)
 
@@ -161,7 +161,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     def tick0(self):
         """
         Sets the graticule's starting tick longitude/latitude.
-    
+
         The 'tick0' property is a number and may be specified as:
           - An int or float
 
@@ -208,7 +208,7 @@ class Lataxis(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Lataxis object
-        
+
         Parameters
         ----------
         arg

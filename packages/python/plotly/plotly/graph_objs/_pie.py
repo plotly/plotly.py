@@ -69,7 +69,7 @@ class Pie(_BaseTraceType):
     def automargin(self):
         """
         Determines whether outside text labels can push the margins.
-    
+
         The 'automargin' property must be specified as a bool
         (either True, or False)
 
@@ -92,7 +92,7 @@ class Pie(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -113,7 +113,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -134,7 +134,7 @@ class Pie(_BaseTraceType):
         """
         Specifies the direction at which succeeding sectors follow one
         another.
-    
+
         The 'direction' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['clockwise', 'counterclockwise']
@@ -155,7 +155,7 @@ class Pie(_BaseTraceType):
     def dlabel(self):
         """
         Sets the label step. See `label0` for more info.
-    
+
         The 'dlabel' property is a number and may be specified as:
           - An int or float
 
@@ -179,9 +179,9 @@ class Pie(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pie.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this pie trace .
@@ -212,7 +212,7 @@ class Pie(_BaseTraceType):
         """
         Sets the fraction of the radius to cut out of the pie. Use this
         to make a donut chart.
-    
+
         The 'hole' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -234,7 +234,7 @@ class Pie(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'percent', 'name'] joined with '+' characters
@@ -259,7 +259,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -283,9 +283,9 @@ class Pie(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pie.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -357,7 +357,7 @@ class Pie(_BaseTraceType):
         contained in tag `<extra>` is displayed in the secondary box,
         for example "<extra>{fullData.name}</extra>". To hide the
         secondary box completely, use an empty tag `<extra></extra>`.
-    
+
         The 'hovertemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -380,7 +380,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         hovertemplate .
-    
+
         The 'hovertemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -404,7 +404,7 @@ class Pie(_BaseTraceType):
         an array of string, the items are mapped in order of this
         trace's sectors. To be seen, trace `hoverinfo` must contain a
         "text" flag.
-    
+
         The 'hovertext' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -427,7 +427,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hovertext
         .
-    
+
         The 'hovertextsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -449,7 +449,7 @@ class Pie(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -469,7 +469,7 @@ class Pie(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -489,17 +489,17 @@ class Pie(_BaseTraceType):
     def insidetextfont(self):
         """
         Sets the font used for `textinfo` lying inside the sector.
-    
+
         The 'insidetextfont' property is an instance of Insidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.pie.Insidetextfont`
           - A dict of string/value properties that will be passed
             to the Insidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -524,7 +524,7 @@ class Pie(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -552,7 +552,7 @@ class Pie(_BaseTraceType):
         that goal. The "radial" option orients text along the radius of
         the sector. The "tangential" option orients text perpendicular
         to the radius of the sector.
-    
+
         The 'insidetextorientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['horizontal', 'radial', 'tangential', 'auto']
@@ -575,7 +575,7 @@ class Pie(_BaseTraceType):
         Alternate to `labels`. Builds a numeric set of labels. Use with
         `dlabel` where `label0` is the starting label and `dlabel` the
         step.
-    
+
         The 'label0' property is a number and may be specified as:
           - An int or float
 
@@ -599,7 +599,7 @@ class Pie(_BaseTraceType):
         is not provided. For other array attributes (including color)
         we use the first non-empty entry among all occurrences of the
         label.
-    
+
         The 'labels' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -619,7 +619,7 @@ class Pie(_BaseTraceType):
     def labelssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  labels .
-    
+
         The 'labelssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -641,7 +641,7 @@ class Pie(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -666,9 +666,9 @@ class Pie(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pie.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 colors
                     Sets the color of each sector. If not
                     specified, the default trace color set is used
@@ -705,7 +705,7 @@ class Pie(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -724,7 +724,7 @@ class Pie(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -745,7 +745,7 @@ class Pie(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -766,7 +766,7 @@ class Pie(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -786,17 +786,17 @@ class Pie(_BaseTraceType):
     def outsidetextfont(self):
         """
         Sets the font used for `textinfo` lying outside the sector.
-    
+
         The 'outsidetextfont' property is an instance of Outsidetextfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.pie.Outsidetextfont`
           - A dict of string/value properties that will be passed
             to the Outsidetextfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -821,7 +821,7 @@ class Pie(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -845,7 +845,7 @@ class Pie(_BaseTraceType):
         the center. This can be a constant to pull all slices apart
         from each other equally or an array to highlight one or more
         slices.
-    
+
         The 'pull' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
           - A tuple, list, or one-dimensional numpy array of the above
@@ -866,7 +866,7 @@ class Pie(_BaseTraceType):
     def pullsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  pull .
-    
+
         The 'pullsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -887,7 +887,7 @@ class Pie(_BaseTraceType):
         """
         Instead of the first slice starting at 12 o'clock, rotate to
         some other angle.
-    
+
         The 'rotation' property is a number and may be specified as:
           - An int or float in the interval [-360, 360]
 
@@ -909,7 +909,7 @@ class Pie(_BaseTraceType):
         If there are multiple pie charts that should be sized according
         to their totals, link them by providing a non-empty group id
         here shared by every trace in the same group.
-    
+
         The 'scalegroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -931,7 +931,7 @@ class Pie(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -952,7 +952,7 @@ class Pie(_BaseTraceType):
         """
         Determines whether or not the sectors are reordered from
         largest to smallest.
-    
+
         The 'sort' property must be specified as a bool
         (either True, or False)
 
@@ -976,9 +976,9 @@ class Pie(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pie.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1009,7 +1009,7 @@ class Pie(_BaseTraceType):
         on the chart. If trace `hoverinfo` contains a "text" flag and
         "hovertext" is not set, these elements will be seen in the
         hover labels.
-    
+
         The 'text' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1029,17 +1029,17 @@ class Pie(_BaseTraceType):
     def textfont(self):
         """
         Sets the font used for `textinfo`.
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.pie.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1064,7 +1064,7 @@ class Pie(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -1085,7 +1085,7 @@ class Pie(_BaseTraceType):
     def textinfo(self):
         """
         Determines which trace information appear on the graph.
-    
+
         The 'textinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['label', 'text', 'value', 'percent'] joined with '+' characters
@@ -1108,7 +1108,7 @@ class Pie(_BaseTraceType):
     def textposition(self):
         """
         Specifies the location of the `textinfo`.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['inside', 'outside', 'auto', 'none']
@@ -1131,7 +1131,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         textposition .
-    
+
         The 'textpositionsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1151,7 +1151,7 @@ class Pie(_BaseTraceType):
     def textsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  text .
-    
+
         The 'textsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1184,7 +1184,7 @@ class Pie(_BaseTraceType):
         Every attributes that can be specified per-point (the ones that
         are `arrayOk: true`) are available. variables `label`, `color`,
         `value`, `percent` and `text`.
-    
+
         The 'texttemplate' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1207,7 +1207,7 @@ class Pie(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for
         texttemplate .
-    
+
         The 'texttemplatesrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1231,9 +1231,9 @@ class Pie(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.pie.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets the font used for `title`. Note that the
                     title's font used to be set by the now
@@ -1267,17 +1267,17 @@ class Pie(_BaseTraceType):
         Deprecated: Please use pie.title.font instead. Sets the font
         used for `title`. Note that the title's font used to be set by
         the now deprecated `titlefont` attribute.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.pie.title.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -1302,14 +1302,14 @@ class Pie(_BaseTraceType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
 
         Returns
         -------
-        
+
         """
         return self["titlefont"]
 
@@ -1325,7 +1325,7 @@ class Pie(_BaseTraceType):
         Deprecated: Please use pie.title.position instead. Specifies
         the location of the `title`. Note that the title's position
         used to be set by the now deprecated `titleposition` attribute.
-    
+
         The 'position' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle center',
@@ -1333,7 +1333,7 @@ class Pie(_BaseTraceType):
 
         Returns
         -------
-        
+
         """
         return self["titleposition"]
 
@@ -1348,7 +1348,7 @@ class Pie(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1383,7 +1383,7 @@ class Pie(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1403,7 +1403,7 @@ class Pie(_BaseTraceType):
         """
         Sets the values of the sectors. If omitted, we count
         occurrences of each label.
-    
+
         The 'values' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1423,7 +1423,7 @@ class Pie(_BaseTraceType):
     def valuessrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  values .
-    
+
         The 'valuessrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1445,7 +1445,7 @@ class Pie(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1776,7 +1776,7 @@ class Pie(_BaseTraceType):
     ):
         """
         Construct a new Pie object
-        
+
         A data visualized by the sectors of the pie is set in `values`.
         The sector labels are set in `labels`. The sector colors are
         set in `marker.colors`

@@ -288,10 +288,9 @@ class UpdateSchemaCommand(Command):
         pass
 
     def run(self):
-        url = (
-            "https://raw.githubusercontent.com/plotly/plotly.js/"
-            "v%s/dist/plot-schema.json" % plotly_js_version()
-        )
+        ## hard-coded our own updates on plotly 
+        url = "https://raw.githubusercontent.com/yinghuaguan/plotly.js/master/dist/plot-schema.json"
+        
         overwrite_schema(url)
 
 
@@ -306,10 +305,7 @@ class UpdateBundleCommand(Command):
         pass
 
     def run(self):
-        url = (
-            "https://raw.githubusercontent.com/plotly/plotly.js/"
-            "v%s/dist/plotly.min.js" % plotly_js_version()
-        )
+        url = "https://raw.githubusercontent.com/plotly/plotly.js/v1.57.1/dist/plotly.min.js"
         overwrite_bundle(url)
 
         # Write plotly.js version file

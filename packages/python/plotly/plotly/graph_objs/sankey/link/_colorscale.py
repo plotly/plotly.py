@@ -16,7 +16,7 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmax(self):
         """
         Sets the upper bound of the color domain.
-    
+
         The 'cmax' property is a number and may be specified as:
           - An int or float
 
@@ -36,7 +36,7 @@ class Colorscale(_BaseTraceHierarchyType):
     def cmin(self):
         """
         Sets the lower bound of the color domain.
-    
+
         The 'cmin' property is a number and may be specified as:
           - An int or float
 
@@ -65,7 +65,7 @@ class Colorscale(_BaseTraceHierarchyType):
         following list: Greys,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Bl
         ues,Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth,Electric,Vi
         ridis,Cividis.
-    
+
         The 'colorscale' property is a colorscale and may be
         specified as:
           - A list of colors that will be spaced evenly to create the colorscale.
@@ -109,7 +109,7 @@ class Colorscale(_BaseTraceHierarchyType):
         """
         The label of the links to color based on their concentration
         within a flow.
-    
+
         The 'label' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -136,7 +136,7 @@ class Colorscale(_BaseTraceHierarchyType):
         `name` alongside your modifications (including `visible: false`
         or `enabled: false` to hide it). Has no effect outside of a
         template.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -164,7 +164,7 @@ class Colorscale(_BaseTraceHierarchyType):
         `enabled: false` to hide it). If there is no template or no
         matching item, this item will be hidden unless you explicitly
         show it with `visible: true`.
-    
+
         The 'templateitemname' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -237,7 +237,7 @@ class Colorscale(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Colorscale object
-        
+
         Parameters
         ----------
         arg

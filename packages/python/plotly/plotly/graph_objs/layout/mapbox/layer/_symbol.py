@@ -17,7 +17,7 @@ class Symbol(_BaseLayoutHierarchyType):
         """
         Sets the symbol icon image (mapbox.layer.layout.icon-image).
         Full list: https://www.mapbox.com/maki-icons/
-    
+
         The 'icon' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -39,7 +39,7 @@ class Symbol(_BaseLayoutHierarchyType):
         """
         Sets the symbol icon size (mapbox.layer.layout.icon-size). Has
         an effect only when `type` is set to "symbol".
-    
+
         The 'iconsize' property is a number and may be specified as:
           - An int or float
 
@@ -64,7 +64,7 @@ class Symbol(_BaseLayoutHierarchyType):
         `placement` is "line", the label is placed along the line of
         the geometry If `placement` is "line-center", the label is
         placed on the center of the geometry
-    
+
         The 'placement' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['point', 'line', 'line-center']
@@ -85,7 +85,7 @@ class Symbol(_BaseLayoutHierarchyType):
     def text(self):
         """
         Sets the symbol text (mapbox.layer.layout.text-field).
-    
+
         The 'text' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -108,17 +108,17 @@ class Symbol(_BaseLayoutHierarchyType):
         Sets the icon text font (color=mapbox.layer.paint.text-color,
         size=mapbox.layer.layout.text-size). Has an effect only when
         `type` is set to "symbol".
-    
+
         The 'textfont' property is an instance of Textfont
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.mapbox.layer.symbol.Textfont`
           - A dict of string/value properties that will be passed
             to the Textfont constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -155,7 +155,7 @@ class Symbol(_BaseLayoutHierarchyType):
         """
         Sets the positions of the `text` elements with respects to the
         (x,y) coordinates.
-    
+
         The 'textposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top left', 'top center', 'top right', 'middle left',
@@ -216,7 +216,7 @@ class Symbol(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Symbol object
-        
+
         Parameters
         ----------
         arg

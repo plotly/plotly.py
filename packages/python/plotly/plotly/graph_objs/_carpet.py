@@ -50,7 +50,7 @@ class Carpet(_BaseTraceType):
     def a(self):
         """
         An array containing values of the first parameter value
-    
+
         The 'a' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -72,7 +72,7 @@ class Carpet(_BaseTraceType):
         Alternate to `a`. Builds a linear space of a coordinates. Use
         with `da` where `a0` is the starting coordinate and `da` the
         step.
-    
+
         The 'a0' property is a number and may be specified as:
           - An int or float
 
@@ -96,9 +96,9 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Aaxis`
           - A dict of string/value properties that will be passed
             to the Aaxis constructor
-    
+
             Supported dict properties:
-                
+
                 arraydtick
                     The stride between grid lines along the axis
                 arraytick0
@@ -108,6 +108,13 @@ class Carpet(_BaseTraceType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
@@ -131,7 +138,7 @@ class Carpet(_BaseTraceType):
                     "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 cheatertype
-    
+
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -234,7 +241,7 @@ class Carpet(_BaseTraceType):
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 smoothing
-    
+
                 startline
                     Determines whether or not a line is drawn at
                     along the starting value of this axis. If True,
@@ -273,7 +280,7 @@ class Carpet(_BaseTraceType):
                     the default property values to use for elements
                     of carpet.aaxis.tickformatstops
                 tickmode
-    
+
                 tickprefix
                     Sets a tick label prefix.
                 ticksuffix
@@ -330,7 +337,7 @@ class Carpet(_BaseTraceType):
     def asrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  a .
-    
+
         The 'asrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -350,7 +357,7 @@ class Carpet(_BaseTraceType):
     def b(self):
         """
         A two dimensional array of y coordinates at each carpet point.
-    
+
         The 'b' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -372,7 +379,7 @@ class Carpet(_BaseTraceType):
         Alternate to `b`. Builds a linear space of a coordinates. Use
         with `db` where `b0` is the starting coordinate and `db` the
         step.
-    
+
         The 'b0' property is a number and may be specified as:
           - An int or float
 
@@ -396,9 +403,9 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Baxis`
           - A dict of string/value properties that will be passed
             to the Baxis constructor
-    
+
             Supported dict properties:
-                
+
                 arraydtick
                     The stride between grid lines along the axis
                 arraytick0
@@ -408,6 +415,13 @@ class Carpet(_BaseTraceType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 categoryarray
                     Sets the order in which categories on this axis
                     appear. Only has an effect if `categoryorder`
@@ -431,7 +445,7 @@ class Carpet(_BaseTraceType):
                     "trace" mode. The unspecified categories will
                     follow the categories in `categoryarray`.
                 cheatertype
-    
+
                 color
                     Sets default for all colors associated with
                     this axis all at once: line, font, tick, and
@@ -534,7 +548,7 @@ class Carpet(_BaseTraceType):
                 showticksuffix
                     Same as `showtickprefix` but for tick suffixes.
                 smoothing
-    
+
                 startline
                     Determines whether or not a line is drawn at
                     along the starting value of this axis. If True,
@@ -573,7 +587,7 @@ class Carpet(_BaseTraceType):
                     the default property values to use for elements
                     of carpet.baxis.tickformatstops
                 tickmode
-    
+
                 tickprefix
                     Sets a tick label prefix.
                 ticksuffix
@@ -630,7 +644,7 @@ class Carpet(_BaseTraceType):
     def bsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  b .
-    
+
         The 'bsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -652,7 +666,7 @@ class Carpet(_BaseTraceType):
         An identifier for this carpet, so that `scattercarpet` and
         `contourcarpet` traces can specify a carpet plot on which they
         lie
-    
+
         The 'carpet' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -674,7 +688,7 @@ class Carpet(_BaseTraceType):
         """
         The shift applied to each successive row of data in creating a
         cheater plot. Only used if `x` is been ommitted.
-    
+
         The 'cheaterslope' property is a number and may be specified as:
           - An int or float
 
@@ -697,7 +711,7 @@ class Carpet(_BaseTraceType):
         once: line, font, tick, and grid colors. Grid color is
         lightened by blending this with the plot background Individual
         pieces can override this.
-    
+
         The 'color' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -759,7 +773,7 @@ class Carpet(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -780,7 +794,7 @@ class Carpet(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -800,7 +814,7 @@ class Carpet(_BaseTraceType):
     def da(self):
         """
         Sets the a coordinate step. See `a0` for more info.
-    
+
         The 'da' property is a number and may be specified as:
           - An int or float
 
@@ -820,7 +834,7 @@ class Carpet(_BaseTraceType):
     def db(self):
         """
         Sets the b coordinate step. See `b0` for more info.
-    
+
         The 'db' property is a number and may be specified as:
           - An int or float
 
@@ -840,17 +854,17 @@ class Carpet(_BaseTraceType):
     def font(self):
         """
         The default font used for axis & tick labels on this carpet
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.carpet.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -888,7 +902,7 @@ class Carpet(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -908,7 +922,7 @@ class Carpet(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -937,7 +951,7 @@ class Carpet(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -956,7 +970,7 @@ class Carpet(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -977,7 +991,7 @@ class Carpet(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -998,7 +1012,7 @@ class Carpet(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -1022,9 +1036,9 @@ class Carpet(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.carpet.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -1052,7 +1066,7 @@ class Carpet(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -1087,7 +1101,7 @@ class Carpet(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -1108,7 +1122,7 @@ class Carpet(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -1131,7 +1145,7 @@ class Carpet(_BaseTraceType):
         A two dimensional array of x coordinates at each carpet point.
         If ommitted, the plot is a cheater plot and the xaxis is hidden
         by default.
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1154,7 +1168,7 @@ class Carpet(_BaseTraceType):
         cartesian x axis. If "x" (the default value), the x coordinates
         refer to `layout.xaxis`. If "x2", the x coordinates refer to
         `layout.xaxis2`, and so on.
-    
+
         The 'xaxis' property is an identifier of a particular
         subplot, of type 'x', that may be specified as the string 'x'
         optionally followed by an integer >= 1
@@ -1176,7 +1190,7 @@ class Carpet(_BaseTraceType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1196,7 +1210,7 @@ class Carpet(_BaseTraceType):
     def y(self):
         """
         A two dimensional array of y coordinates at each carpet point.
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -1219,7 +1233,7 @@ class Carpet(_BaseTraceType):
         cartesian y axis. If "y" (the default value), the y coordinates
         refer to `layout.yaxis`. If "y2", the y coordinates refer to
         `layout.yaxis2`, and so on.
-    
+
         The 'yaxis' property is an identifier of a particular
         subplot, of type 'y', that may be specified as the string 'y'
         optionally followed by an integer >= 1
@@ -1241,7 +1255,7 @@ class Carpet(_BaseTraceType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -1441,7 +1455,7 @@ class Carpet(_BaseTraceType):
     ):
         """
         Construct a new Carpet object
-        
+
         The data describing carpet axis layout is set in `y` and
         (optionally) also `x`. If only `y` is present, `x` the plot is
         interpreted as a cheater plot and is filled in using the `y`

@@ -43,7 +43,7 @@ class Area(_BaseTraceType):
         listening to hover, click and selection events. Note that,
         "scatter" traces also appends customdata items in the markers
         DOM elements
-    
+
         The 'customdata' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -64,7 +64,7 @@ class Area(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  customdata
         .
-    
+
         The 'customdatasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -86,7 +86,7 @@ class Area(_BaseTraceType):
         Determines which trace information appear on hover. If `none`
         or `skip` are set, no information is displayed upon hovering.
         But, if `none` is set, click and hover events are still fired.
-    
+
         The 'hoverinfo' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['x', 'y', 'z', 'text', 'name'] joined with '+' characters
@@ -111,7 +111,7 @@ class Area(_BaseTraceType):
         """
         Sets the source reference on Chart Studio Cloud for  hoverinfo
         .
-    
+
         The 'hoverinfosrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -135,9 +135,9 @@ class Area(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.area.Hoverlabel`
           - A dict of string/value properties that will be passed
             to the Hoverlabel constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the text
                     content within hover label box. Has an effect
@@ -192,7 +192,7 @@ class Area(_BaseTraceType):
         Assigns id labels to each datum. These ids for object constancy
         of data points during animation. Should be an array of strings,
         not numbers or any other type.
-    
+
         The 'ids' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -212,7 +212,7 @@ class Area(_BaseTraceType):
     def idssrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  ids .
-    
+
         The 'idssrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -234,7 +234,7 @@ class Area(_BaseTraceType):
         Sets the legend group for this trace. Traces part of the same
         legend group hide/show at the same time when toggling legend
         items.
-    
+
         The 'legendgroup' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -259,9 +259,9 @@ class Area(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.area.Marker`
           - A dict of string/value properties that will be passed
             to the Marker constructor
-    
+
             Supported dict properties:
-                
+
                 color
                     Area traces are deprecated! Please switch to
                     the "barpolar" trace type. Sets themarkercolor.
@@ -324,7 +324,7 @@ class Area(_BaseTraceType):
         access trace `meta` in layout attributes, use
         `%{data[n[.meta[i]}` where `i` is the index or key of the
         `meta` and `n` is the trace index.
-    
+
         The 'meta' property accepts values of any type
 
         Returns
@@ -343,7 +343,7 @@ class Area(_BaseTraceType):
     def metasrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  meta .
-    
+
         The 'metasrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -364,7 +364,7 @@ class Area(_BaseTraceType):
         """
         Sets the trace name. The trace name appear as the legend item
         and on hover.
-    
+
         The 'name' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -385,7 +385,7 @@ class Area(_BaseTraceType):
     def opacity(self):
         """
         Sets the opacity of the trace.
-    
+
         The 'opacity' property is a number and may be specified as:
           - An int or float in the interval [0, 1]
 
@@ -407,7 +407,7 @@ class Area(_BaseTraceType):
         Area traces are deprecated! Please switch to the "barpolar"
         trace type. Sets the radial coordinates for legacy polar chart
         only.
-    
+
         The 'r' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -427,7 +427,7 @@ class Area(_BaseTraceType):
     def rsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  r .
-    
+
         The 'rsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -448,7 +448,7 @@ class Area(_BaseTraceType):
         """
         Determines whether or not an item corresponding to this trace
         is shown in the legend.
-    
+
         The 'showlegend' property must be specified as a bool
         (either True, or False)
 
@@ -472,9 +472,9 @@ class Area(_BaseTraceType):
           - An instance of :class:`plotly.graph_objs.area.Stream`
           - A dict of string/value properties that will be passed
             to the Stream constructor
-    
+
             Supported dict properties:
-                
+
                 maxpoints
                     Sets the maximum number of points to keep on
                     the plots from an incoming stream. If
@@ -503,7 +503,7 @@ class Area(_BaseTraceType):
         Area traces are deprecated! Please switch to the "barpolar"
         trace type. Sets the angular coordinates for legacy polar chart
         only.
-    
+
         The 't' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -523,7 +523,7 @@ class Area(_BaseTraceType):
     def tsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  t .
-    
+
         The 'tsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -544,7 +544,7 @@ class Area(_BaseTraceType):
         """
         Assign an id to this trace, Use this to provide object
         constancy between traces during animations and transitions.
-    
+
         The 'uid' property is a string and must be specified as:
           - A string
           - A number that will be converted to a string
@@ -579,7 +579,7 @@ class Area(_BaseTraceType):
         `data` array, such that the same trace has a different index,
         you can still preserve user-driven changes if you give each
         trace a `uid` that stays with it as it moves.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -600,7 +600,7 @@ class Area(_BaseTraceType):
         Determines whether or not this trace is visible. If
         "legendonly", the trace is not drawn, but can appear as a
         legend item (provided that the legend itself is visible).
-    
+
         The 'visible' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 [True, False, 'legendonly']
@@ -758,7 +758,7 @@ class Area(_BaseTraceType):
     ):
         """
         Construct a new Area object
-        
+
         Parameters
         ----------
         arg

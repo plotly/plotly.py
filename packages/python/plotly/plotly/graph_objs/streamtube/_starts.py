@@ -17,7 +17,7 @@ class Starts(_BaseTraceHierarchyType):
         """
         Sets the x components of the starting position of the
         streamtubes
-    
+
         The 'x' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -37,7 +37,7 @@ class Starts(_BaseTraceHierarchyType):
     def xsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  x .
-    
+
         The 'xsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -58,7 +58,7 @@ class Starts(_BaseTraceHierarchyType):
         """
         Sets the y components of the starting position of the
         streamtubes
-    
+
         The 'y' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -78,7 +78,7 @@ class Starts(_BaseTraceHierarchyType):
     def ysrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  y .
-    
+
         The 'ysrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -99,7 +99,7 @@ class Starts(_BaseTraceHierarchyType):
         """
         Sets the z components of the starting position of the
         streamtubes
-    
+
         The 'z' property is an array that may be specified as a tuple,
         list, numpy array, or pandas Series
 
@@ -119,7 +119,7 @@ class Starts(_BaseTraceHierarchyType):
     def zsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  z .
-    
+
         The 'zsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -171,7 +171,7 @@ class Starts(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Starts object
-        
+
         Parameters
         ----------
         arg

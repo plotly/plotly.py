@@ -16,6 +16,7 @@ class Legend(_BaseLayoutHierarchyType):
         "itemclick",
         "itemdoubleclick",
         "itemsizing",
+        "itemwidth",
         "orientation",
         "title",
         "tracegroupgap",
@@ -35,7 +36,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Sets the legend background color. Defaults to
         `layout.paper_bgcolor`.
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -94,7 +95,7 @@ class Legend(_BaseLayoutHierarchyType):
     def bordercolor(self):
         """
         Sets the color of the border enclosing the legend.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -153,7 +154,7 @@ class Legend(_BaseLayoutHierarchyType):
     def borderwidth(self):
         """
         Sets the width (in px) of the border enclosing the legend.
-    
+
         The 'borderwidth' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -173,17 +174,17 @@ class Legend(_BaseLayoutHierarchyType):
     def font(self):
         """
         Sets the font used to text the legend items.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.legend.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 family
                     HTML font family - the typeface that will be
                     applied by the web browser. The web browser
@@ -222,7 +223,7 @@ class Legend(_BaseLayoutHierarchyType):
         the visibility of the item clicked on the graph. "toggleothers"
         makes the clicked item the sole visible item on the graph.
         False disable legend item click interactions.
-    
+
         The 'itemclick' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['toggle', 'toggleothers', False]
@@ -246,7 +247,7 @@ class Legend(_BaseLayoutHierarchyType):
         toggles the visibility of the item clicked on the graph.
         "toggleothers" makes the clicked item the sole visible item on
         the graph. False disable legend item double-click interactions.
-    
+
         The 'itemdoubleclick' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['toggle', 'toggleothers', False]
@@ -269,7 +270,7 @@ class Legend(_BaseLayoutHierarchyType):
         Determines if the legend items symbols scale with their
         corresponding "trace" attributes or remain "constant"
         independent of the symbol size on the graph.
-    
+
         The 'itemsizing' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['trace', 'constant']
@@ -284,13 +285,34 @@ class Legend(_BaseLayoutHierarchyType):
     def itemsizing(self, val):
         self["itemsizing"] = val
 
+    # itemwidth
+    # ---------
+    @property
+    def itemwidth(self):
+        """
+        Sets the width (in px) of the legend item symbols (the part
+        other than the title.text).
+
+        The 'itemwidth' property is a number and may be specified as:
+          - An int or float in the interval [30, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["itemwidth"]
+
+    @itemwidth.setter
+    def itemwidth(self, val):
+        self["itemwidth"] = val
+
     # orientation
     # -----------
     @property
     def orientation(self):
         """
         Sets the orientation of the legend.
-    
+
         The 'orientation' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['v', 'h']
@@ -315,9 +337,9 @@ class Legend(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.legend.Title`
           - A dict of string/value properties that will be passed
             to the Title constructor
-    
+
             Supported dict properties:
-                
+
                 font
                     Sets this legend's title font.
                 side
@@ -347,7 +369,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Sets the amount of vertical space (in px) between legend
         groups.
-    
+
         The 'tracegroupgap' property is a number and may be specified as:
           - An int or float in the interval [0, inf]
 
@@ -373,7 +395,7 @@ class Legend(_BaseLayoutHierarchyType):
         displayed in groups (when a trace `legendgroup` is provided).
         if "grouped+reversed", the items are displayed in the opposite
         order as "grouped".
-    
+
         The 'traceorder' property is a flaglist and may be specified
         as a string containing:
           - Any combination of ['reversed', 'grouped'] joined with '+' characters
@@ -397,7 +419,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Controls persistence of legend-driven changes in trace and pie
         label visibility. Defaults to `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -417,7 +439,7 @@ class Legend(_BaseLayoutHierarchyType):
         """
         Sets the vertical alignment of the symbols with respect to
         their associated text.
-    
+
         The 'valign' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['top', 'middle', 'bottom']
@@ -440,7 +462,7 @@ class Legend(_BaseLayoutHierarchyType):
         Sets the x position (in normalized coordinates) of the legend.
         Defaults to 1.02 for vertical legends and defaults to 0 for
         horizontal legends.
-    
+
         The 'x' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -465,7 +487,7 @@ class Legend(_BaseLayoutHierarchyType):
         values greater than or equal to 2/3, anchors legends to the
         left for `x` values less than or equal to 1/3 and anchors
         legends with respect to their center otherwise.
-    
+
         The 'xanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'left', 'center', 'right']
@@ -490,7 +512,7 @@ class Legend(_BaseLayoutHierarchyType):
         horizontal legends on graphs w/o range sliders and defaults to
         1.1 for horizontal legends on graph with one or multiple range
         sliders.
-    
+
         The 'y' property is a number and may be specified as:
           - An int or float in the interval [-2, 3]
 
@@ -515,7 +537,7 @@ class Legend(_BaseLayoutHierarchyType):
         values less than or equal to 1/3, anchors legends to at their
         top for `y` values greater than or equal to 2/3 and anchors
         legends with respect to their middle otherwise.
-    
+
         The 'yanchor' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'top', 'middle', 'bottom']
@@ -561,6 +583,9 @@ class Legend(_BaseLayoutHierarchyType):
             Determines if the legend items symbols scale with their
             corresponding "trace" attributes or remain "constant"
             independent of the symbol size on the graph.
+        itemwidth
+            Sets the width (in px) of the legend item symbols (the
+            part other than the title.text).
         orientation
             Sets the orientation of the legend.
         title
@@ -623,6 +648,7 @@ class Legend(_BaseLayoutHierarchyType):
         itemclick=None,
         itemdoubleclick=None,
         itemsizing=None,
+        itemwidth=None,
         orientation=None,
         title=None,
         tracegroupgap=None,
@@ -637,7 +663,7 @@ class Legend(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Legend object
-        
+
         Parameters
         ----------
         arg
@@ -669,6 +695,9 @@ class Legend(_BaseLayoutHierarchyType):
             Determines if the legend items symbols scale with their
             corresponding "trace" attributes or remain "constant"
             independent of the symbol size on the graph.
+        itemwidth
+            Sets the width (in px) of the legend item symbols (the
+            part other than the title.text).
         orientation
             Sets the orientation of the legend.
         title
@@ -781,6 +810,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = itemsizing if itemsizing is not None else _v
         if _v is not None:
             self["itemsizing"] = _v
+        _v = arg.pop("itemwidth", None)
+        _v = itemwidth if itemwidth is not None else _v
+        if _v is not None:
+            self["itemwidth"] = _v
         _v = arg.pop("orientation", None)
         _v = orientation if orientation is not None else _v
         if _v is not None:

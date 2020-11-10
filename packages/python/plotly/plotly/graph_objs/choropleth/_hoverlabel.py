@@ -28,7 +28,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         Sets the horizontal alignment of the text content within hover
         label box. Has an effect only if the hover label text spans
         more two or more lines
-    
+
         The 'align' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['left', 'right', 'auto']
@@ -50,7 +50,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def alignsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  align .
-    
+
         The 'alignsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -70,7 +70,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def bgcolor(self):
         """
         Sets the background color of the hover labels for this trace
-    
+
         The 'bgcolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -130,7 +130,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def bgcolorsrc(self):
         """
         Sets the source reference on Chart Studio Cloud for  bgcolor .
-    
+
         The 'bgcolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -150,7 +150,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def bordercolor(self):
         """
         Sets the border color of the hover labels for this trace.
-    
+
         The 'bordercolor' property is a color and may be specified as:
           - A hex string (e.g. '#ff0000')
           - An rgb/rgba string (e.g. 'rgb(255,0,0)')
@@ -211,7 +211,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for
         bordercolor .
-    
+
         The 'bordercolorsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -231,17 +231,17 @@ class Hoverlabel(_BaseTraceHierarchyType):
     def font(self):
         """
         Sets the font used in hover labels.
-    
+
         The 'font' property is an instance of Font
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.choropleth.hoverlabel.Font`
           - A dict of string/value properties that will be passed
             to the Font constructor
-    
+
             Supported dict properties:
-                
+
                 color
-    
+
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .
@@ -266,7 +266,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
                     Sets the source reference on Chart Studio Cloud
                     for  family .
                 size
-    
+
                 sizesrc
                     Sets the source reference on Chart Studio Cloud
                     for  size .
@@ -292,7 +292,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         and an integer >3 will show the whole name if it is less than
         that many characters, but if it is longer, will truncate to
         `namelength - 3` characters and add an ellipsis.
-    
+
         The 'namelength' property is a integer and may be specified as:
           - An int (or float that will be cast to an int)
             in the interval [-1, 9223372036854775807]
@@ -315,7 +315,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
         """
         Sets the source reference on Chart Studio Cloud for  namelength
         .
-    
+
         The 'namelengthsrc' property must be specified as a string or
         as a plotly.grid_objs.Column object
 
@@ -384,7 +384,7 @@ class Hoverlabel(_BaseTraceHierarchyType):
     ):
         """
         Construct a new Hoverlabel object
-        
+
         Parameters
         ----------
         arg

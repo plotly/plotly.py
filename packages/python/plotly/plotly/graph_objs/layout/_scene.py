@@ -34,9 +34,9 @@ class Scene(_BaseLayoutHierarchyType):
           - A list or tuple of instances of plotly.graph_objs.layout.scene.Annotation
           - A list or tuple of dicts of string/value properties that
             will be passed to the Annotation constructor
-    
+
             Supported dict properties:
-                
+
                 align
                     Sets the horizontal alignment of the `text`
                     within the box. Has an effect only if `text`
@@ -233,13 +233,13 @@ class Scene(_BaseLayoutHierarchyType):
         layout.template.layout.scene.annotationdefaults), sets the
         default property values to use for elements of
         layout.scene.annotations
-    
+
         The 'annotationdefaults' property is an instance of Annotation
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.Annotation`
           - A dict of string/value properties that will be passed
             to the Annotation constructor
-    
+
             Supported dict properties:
 
         Returns
@@ -265,7 +265,7 @@ class Scene(_BaseLayoutHierarchyType):
         this scene's axes are drawn using the results of "data" except
         when one axis is more than four times the size of the two
         others, where in that case the results of "cube" are used.
-    
+
         The 'aspectmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['auto', 'cube', 'data', 'manual']
@@ -286,19 +286,19 @@ class Scene(_BaseLayoutHierarchyType):
     def aspectratio(self):
         """
         Sets this scene's axis aspectratio.
-    
+
         The 'aspectratio' property is an instance of Aspectratio
         that may be specified as:
           - An instance of :class:`plotly.graph_objs.layout.scene.Aspectratio`
           - A dict of string/value properties that will be passed
             to the Aspectratio constructor
-    
+
             Supported dict properties:
-                
+
                 x
-    
+
                 y
-    
+
                 z
 
         Returns
@@ -378,9 +378,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.Camera`
           - A dict of string/value properties that will be passed
             to the Camera constructor
-    
+
             Supported dict properties:
-                
+
                 center
                     Sets the (x,y,z) components of the 'center'
                     camera vector This vector determines the
@@ -422,9 +422,9 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.Domain`
           - A dict of string/value properties that will be passed
             to the Domain constructor
-    
+
             Supported dict properties:
-                
+
                 column
                     If there is a layout grid, use the domain for
                     this column in the grid for this scene subplot
@@ -455,7 +455,7 @@ class Scene(_BaseLayoutHierarchyType):
     def dragmode(self):
         """
         Determines the mode of drag interactions for this scene.
-    
+
         The 'dragmode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['orbit', 'turntable', 'zoom', 'pan', False]
@@ -476,7 +476,7 @@ class Scene(_BaseLayoutHierarchyType):
     def hovermode(self):
         """
         Determines the mode of hover interactions for this scene.
-    
+
         The 'hovermode' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['closest', False]
@@ -498,7 +498,7 @@ class Scene(_BaseLayoutHierarchyType):
         """
         Controls persistence of user-driven changes in camera
         attributes. Defaults to `layout.uirevision`.
-    
+
         The 'uirevision' property accepts values of any type
 
         Returns
@@ -521,14 +521,21 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.XAxis`
           - A dict of string/value properties that will be passed
             to the XAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar
@@ -836,14 +843,21 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.YAxis`
           - A dict of string/value properties that will be passed
             to the YAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar
@@ -1151,14 +1165,21 @@ class Scene(_BaseLayoutHierarchyType):
           - An instance of :class:`plotly.graph_objs.layout.scene.ZAxis`
           - A dict of string/value properties that will be passed
             to the ZAxis constructor
-    
+
             Supported dict properties:
-                
+
                 autorange
                     Determines whether or not the range of this
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar
@@ -1531,7 +1552,7 @@ class Scene(_BaseLayoutHierarchyType):
     ):
         """
         Construct a new Scene object
-        
+
         Parameters
         ----------
         arg
