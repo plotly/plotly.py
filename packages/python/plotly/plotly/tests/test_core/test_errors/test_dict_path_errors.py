@@ -49,10 +49,9 @@ def test_raises_on_bad_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapes[1].x2000
-                 ^^^^^
-Did you mean "x0"?"""
+                 ^^^^^"""
             )
-            >= 0
+            and (e.args[0].find("""Did you mean "x0"?""") >= 0) >= 0
         )
     assert raised
 
@@ -69,10 +68,9 @@ def test_raises_on_bad_ancestor_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapa[1].x2000
-       ^^^^^
-Did you mean "shapes"?"""
+       ^^^^^"""
             )
-            >= 0
+            and (e.args[0].find("""Did you mean "shapes"?""") >= 0) >= 0
         )
     assert raised
 
@@ -118,19 +116,18 @@ colr
             """
 Bad property path:
 data[0].line_colr
-             ^^^^
-Did you mean "color"?""",
+             ^^^^""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 data[0].line_colr
-             ^^^^
-Did you mean "color"?"""
+             ^^^^"""
                 )
                 >= 0
             )
+            and (e.args[0].find("""Did you mean "color"?""") >= 0)
             and (e_substr == e_correct_substr)
         )
     assert raised
@@ -170,10 +167,9 @@ line_colr
                 e.args[0].find(
                     """Bad property path:
 line_colr
-     ^^^^
-Did you mean "color"?"""
+     ^^^^"""
                 )
-                >= 0
+                and (e.args[0].find("""Did you mean "color"?""") >= 0) >= 0
             )
             and (e_substr == e_correct_substr)
         )
@@ -192,8 +188,7 @@ Did you mean "color"?"""
             """
 Bad property path:
 txt
-^^^
-Did you mean "text"?""",
+^^^""",
         )
     assert raised
 
@@ -210,8 +205,7 @@ Did you mean "text"?""",
             """
 Bad property path:
 layout_title_txt
-             ^^^
-Did you mean "text"?""",
+             ^^^""",
         )
         # also remove the invalid Figure property string added by the Figure constructor
         e_substr = error_substr(
@@ -224,11 +218,11 @@ Did you mean "text"?""",
                 e.args[0].find(
                     """Bad property path:
 layout_title_txt
-             ^^^
-Did you mean "text"?""",
+             ^^^""",
                 )
                 >= 0
             )
+            and (e.args[0].find("""Did you mean "text"?""") >= 0)
             and (e_substr == e_correct_substr)
         )
     assert raised
@@ -245,8 +239,7 @@ Did you mean "text"?""",
             """
 Bad property path:
 ltaxis
-^^^^^^
-Did you mean "lataxis"?""",
+^^^^^^""",
         )
     assert raised
 
@@ -260,19 +253,18 @@ Did you mean "lataxis"?""",
             """
 Bad property path:
 geo_ltaxis_showgrid
-    ^^^^^^
-Did you mean "lataxis"?""",
+    ^^^^^^""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 geo_ltaxis_showgrid
-    ^^^^^^
-Did you mean "lataxis"?"""
+    ^^^^^^"""
                 )
                 >= 0
             )
+            and (e.args[0].find("""Did you mean "lataxis"?""") >= 0)
             and (e_substr == e_correct_substr)
         )
     assert raised
@@ -494,6 +486,7 @@ def test_leading_underscore_errors(some_fig):
             ("bogus", "_hey_yall"),
             ("^^^^^", "^^^^"),
             ('Did you mean "boxgap"', 'Did you mean "geo"'),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
         ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
@@ -537,7 +530,8 @@ def test_embedded_underscore_errors(some_fig):
         [
             ("bogusey", "_family"),
             ("bogusey", "_family"),
-            ('Did you mean "size"?', 'Did you mean "family"?'),
+            ('Did you mean "color"?', 'Did you mean "family"?'),
+            ('Did you mean "color"?', 'Did you mean "family"?'),
         ],
     )
     # no need to replace ^^^^^ because bogus and font_ are same length
@@ -560,6 +554,7 @@ def test_solo_underscore_errors(some_fig):
             ("bogus", "_"),
             ("^^^^^", "^"),
             ('Did you mean "boxgap"', 'Did you mean "geo"'),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
         ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
@@ -580,6 +575,7 @@ def test_repeated_underscore_errors(some_fig):
             ("bogus", "__"),
             ("bogus", "__"),
             ("^^^^^", "^^"),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
             ('Did you mean "boxgap"', 'Did you mean "geo"'),
         ],
     )
@@ -645,7 +641,8 @@ def test_repeated_underscore_errors_dots_and_subscripts(some_fig):
         [
             ("bogusey", "_family"),
             ("bogusey", "_family"),
-            ('Did you mean "size"?', 'Did you mean "family"?'),
+            ('Did you mean "color"?', 'Did you mean "family"?'),
+            ('Did you mean "color"?', 'Did you mean "family"?'),
         ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])

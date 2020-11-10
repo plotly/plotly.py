@@ -238,17 +238,6 @@ Bad property path:
                         prop_idcs, i, length=_len_dict_item(prop[i]), char="^"
                     ),
                 )
-                guessed_prop = None
-                # If obj has _valid_props then we can try and guess what key was intended
-                try:
-                    guessed_prop = find_closest_string(prop[i], obj._valid_props)
-                except Exception:
-                    pass
-                if guessed_prop is not None:
-                    arg += """
-Did you mean "%s"?""" % (
-                        guessed_prop,
-                    )
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing
             # KeyError
@@ -4968,15 +4957,29 @@ class BasePlotlyType(object):
                 else:
                     full_obj_name = module_root + self.__class__.__name__
 
+                guessed_prop = None
+                if len(invalid_props) == 1:
+                    try:
+                        guessed_prop = find_closest_string(
+                            invalid_props[0], self._valid_props
+                        )
+                    except Exception:
+                        pass
+                guessed_prop_suggestion = ""
+                if guessed_prop is not None:
+                    guessed_prop_suggestion = 'Did you mean "%s"?' % (guessed_prop,)
                 raise _error_to_raise(
                     "Invalid {prop_str} specified for object of type "
-                    "{full_obj_name}: {invalid_str}\n\n"
-                    "    Valid properties:\n"
-                    "{prop_descriptions}".format(
+                    "{full_obj_name}: {invalid_str}\n"
+                    "\n{guessed_prop_suggestion}\n"
+                    "\n    Valid properties:\n"
+                    "{prop_descriptions}"
+                    "\n{guessed_prop_suggestion}\n".format(
                         prop_str=prop_str,
                         full_obj_name=full_obj_name,
                         invalid_str=invalid_str,
                         prop_descriptions=self._prop_descriptions,
+                        guessed_prop_suggestion=guessed_prop_suggestion,
                     )
                 )
 

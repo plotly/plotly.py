@@ -433,6 +433,8 @@ def levenshtein(s1, s2):
 
 def find_closest_string(string, strings):
     def _key(s):
-        return levenshtein(s, string)
+        # sort by levenshtein distance and lexographically to maintain a stable
+        # sort for different keys with the same levenshtein distance
+        return (levenshtein(s, string), s)
 
     return sorted(strings, key=_key)[0]
