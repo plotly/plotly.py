@@ -49,7 +49,8 @@ def test_raises_on_bad_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapes[1].x2000
-                 ^^^^^"""
+                 ^^^^^
+Did you mean "x0"?"""
             )
             >= 0
         )
@@ -68,7 +69,8 @@ def test_raises_on_bad_ancestor_dot_property(some_fig):
             e.args[0].find(
                 """Bad property path:
 layout.shapa[1].x2000
-       ^^^^^"""
+       ^^^^^
+Did you mean "shapes"?"""
             )
             >= 0
         )

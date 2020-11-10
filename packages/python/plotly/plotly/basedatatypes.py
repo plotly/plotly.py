@@ -18,6 +18,7 @@ from _plotly_utils.utils import (
     split_string_positions,
     display_string_positions,
     chomp_empty_strings,
+    find_closest_string,
 )
 from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
@@ -95,9 +96,9 @@ def _str_to_dict_path_full(key_path_str):
                 return s
             s_split = split_multichar([s], list("_"))
             # handle key paths like "a_path_", "_another_path", or
-            # "yet__another_path" by joining extra "_" to the string to the left or
-            # the empty string if at the beginning
-            s_chomped = chomp_empty_strings(s_split, "_")
+            # "yet__another_path" by joining extra "_" to the string to the right or
+            # the empty string if at the end
+            s_chomped = chomp_empty_strings(s_split, "_", reverse=True)
             return s_chomped
 
         # after running _split_and_chomp on key_path2b, it will be a list
@@ -204,14 +205,25 @@ Invalid value received for the '{plotly_name}' property of {parent_name}
                 # In case i is 0, the best we can do is indicate the first
                 # property in the string as having caused the error
                 disp_i = max(i - 1, 0)
+                dict_item_len = _len_dict_item(prop[disp_i])
+                # if the path has trailing underscores, the prop string will start with "_"
+                trailing_underscores = ""
+                if prop[i][0] == "_":
+                    trailing_underscores = " and path has trailing underscores"
+                # if the path has trailing underscores and the display index is
+                # one less than the prop index (see above), then we can also
+                # indicate the offending underscores
+                if (trailing_underscores != "") and (disp_i != i):
+                    dict_item_len += _len_dict_item(prop[i])
                 arg += """
 
-Property does not support subscripting:
+Property does not support subscripting%s:
 %s
 %s""" % (
+                    trailing_underscores,
                     path,
                     display_string_positions(
-                        prop_idcs, disp_i, length=_len_dict_item(prop[disp_i]), char="^"
+                        prop_idcs, disp_i, length=dict_item_len, char="^"
                     ),
                 )
             else:
@@ -226,6 +238,17 @@ Bad property path:
                         prop_idcs, i, length=_len_dict_item(prop[i]), char="^"
                     ),
                 )
+                guessed_prop = None
+                # If obj has _valid_props then we can try and guess what key was intended
+                try:
+                    guessed_prop = find_closest_string(prop[i], obj._valid_props)
+                except Exception:
+                    pass
+                if guessed_prop is not None:
+                    arg += """
+Did you mean "%s"?""" % (
+                        guessed_prop,
+                    )
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing
             # KeyError
