@@ -364,10 +364,10 @@ def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True)
     return ret
 
 
-def chomp_empty_strings(strings, c):
+def chomp_empty_strings(strings, c, reverse=False):
     """
     Given a list of strings, some of which are the empty string "", replace the
-    empty strings with "_" and combine them with the closest non-empty string on
+    empty strings with c and combine them with the closest non-empty string on
     the left or "" if it is the first string.
     Examples:
     for c="_"
@@ -379,7 +379,15 @@ def chomp_empty_strings(strings, c):
     [''] -> ['']
     ['', ''] -> ['_']
     ['', '', '', ''] -> ['___']
+    If reverse is true, empty strings are combined with closest non-empty string
+    on the right or "" if it is the last string.
     """
+
+    def _rev(l):
+        return [s[::-1] for s in l][::-1]
+
+    if reverse:
+        return _rev(chomp_empty_strings(_rev(strings), c))
     if not len(strings):
         return strings
     if sum(map(len, strings)) == 0:
@@ -400,3 +408,31 @@ def chomp_empty_strings(strings, c):
                 return x + [y]
 
     return list(filter(len, reduce(_Chomper(c), strings, [""])))
+
+
+# taken from
+# https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Python
+def levenshtein(s1, s2):
+    if len(s1) < len(s2):
+        return levenshtein(s2, s1)  # len(s1) >= len(s2)
+    if len(s2) == 0:
+        return len(s1)
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            # j+1 instead of j since previous_row and current_row are one character longer
+            # than s2
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+    return previous_row[-1]
+
+
+def find_closest_string(string, strings):
+    def _key(s):
+        return levenshtein(s, string)
+
+    return sorted(strings, key=_key)[0]
