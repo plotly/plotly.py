@@ -118,14 +118,16 @@ colr
             """
 Bad property path:
 data[0].line_colr
-             ^^^^""",
+             ^^^^
+Did you mean "color"?""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 data[0].line_colr
-             ^^^^"""
+             ^^^^
+Did you mean "color"?"""
                 )
                 >= 0
             )
@@ -168,7 +170,8 @@ line_colr
                 e.args[0].find(
                     """Bad property path:
 line_colr
-     ^^^^"""
+     ^^^^
+Did you mean "color"?"""
                 )
                 >= 0
             )
@@ -189,7 +192,8 @@ line_colr
             """
 Bad property path:
 txt
-^^^""",
+^^^
+Did you mean "text"?""",
         )
     assert raised
 
@@ -206,7 +210,8 @@ txt
             """
 Bad property path:
 layout_title_txt
-             ^^^""",
+             ^^^
+Did you mean "text"?""",
         )
         # also remove the invalid Figure property string added by the Figure constructor
         e_substr = error_substr(
@@ -219,7 +224,8 @@ layout_title_txt
                 e.args[0].find(
                     """Bad property path:
 layout_title_txt
-             ^^^"""
+             ^^^
+Did you mean "text"?""",
                 )
                 >= 0
             )
@@ -239,7 +245,8 @@ layout_title_txt
             """
 Bad property path:
 ltaxis
-^^^^^^""",
+^^^^^^
+Did you mean "lataxis"?""",
         )
     assert raised
 
@@ -253,14 +260,16 @@ ltaxis
             """
 Bad property path:
 geo_ltaxis_showgrid
-    ^^^^^^""",
+    ^^^^^^
+Did you mean "lataxis"?""",
         )
         assert (
             (
                 e.args[0].find(
                     """Bad property path:
 geo_ltaxis_showgrid
-    ^^^^^^"""
+    ^^^^^^
+Did you mean "lataxis"?"""
                 )
                 >= 0
             )
@@ -458,6 +467,10 @@ def check_error_string(call, exception, correct_str, subs):
         msg = e.args[0]
         for pat, rep in subs:
             msg = msg.replace(pat, rep, 1)
+        print("MSG")
+        print(msg)
+        print("CORRECT")
+        print(correct_str)
         assert msg == correct_str
     assert raised
 
@@ -473,7 +486,15 @@ def test_leading_underscore_errors(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "_"), ("bogus", "_hey_yall"), ("^^^^^", "^")],
+        # change last boxgap to geo because bogus is closest to boxgap but _hey
+        # closest to geo, but remember that boxgap is in the list of valid keys
+        # displayed by the error string
+        [
+            ("bogus", "_hey"),
+            ("bogus", "_hey_yall"),
+            ("^^^^^", "^^^^"),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
+        ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
 
@@ -481,7 +502,7 @@ def test_leading_underscore_errors(some_fig):
 def test_trailing_underscore_errors(some_fig):
     # get error string but alter it to form the final expected string
     def _raise_bad_property_path_form():
-        some_fig.update_layout(title_bogus="hi")
+        some_fig.update_layout(title_text_bogus="hi")
 
     def _raise_bad_property_path_real():
         some_fig.update_layout(title_text_="hi")
@@ -489,7 +510,14 @@ def test_trailing_underscore_errors(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "text_"), ("title_bogus", "title_text_")],
+        [
+            (
+                "Property does not support subscripting",
+                "Property does not support subscripting and path has trailing underscores",
+            ),
+            ("text_bogus", "text_"),
+            ("^^^^", "^^^^^"),
+        ],
     )
     # no need to replace ^^^^^ because bogus and text_ are same length
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
@@ -498,7 +526,7 @@ def test_trailing_underscore_errors(some_fig):
 def test_embedded_underscore_errors(some_fig):
     # get error string but alter it to form the final expected string
     def _raise_bad_property_path_form():
-        some_fig.update_layout(title_bogus_family="hi")
+        some_fig.update_layout(title_font_bogusey="hi")
 
     def _raise_bad_property_path_real():
         some_fig.update_layout(title_font__family="hi")
@@ -506,7 +534,11 @@ def test_embedded_underscore_errors(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "font_"), ("title_bogus_family", "title_font__family")],
+        [
+            ("bogusey", "_family"),
+            ("bogusey", "_family"),
+            ('Did you mean "size"?', 'Did you mean "family"?'),
+        ],
     )
     # no need to replace ^^^^^ because bogus and font_ are same length
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
@@ -523,7 +555,12 @@ def test_solo_underscore_errors(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "_"), ("bogus", "_"), ("^^^^^", "^")],
+        [
+            ("bogus", "_"),
+            ("bogus", "_"),
+            ("^^^^^", "^"),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
+        ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
 
@@ -539,7 +576,12 @@ def test_repeated_underscore_errors(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "__"), ("bogus", "__"), ("^^^^^", "^^")],
+        [
+            ("bogus", "__"),
+            ("bogus", "__"),
+            ("^^^^^", "^^"),
+            ('Did you mean "boxgap"', 'Did you mean "geo"'),
+        ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
 
@@ -557,7 +599,7 @@ def test_leading_underscore_errors_dots_and_subscripts(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "_"), ("bogus", "_font"), ("^^^^^", "^")],
+        [("bogus", "_font"), ("bogus", "_font"), ("^^^^^", "^^^^^")],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
 
@@ -567,7 +609,7 @@ def test_trailing_underscore_errors_dots_and_subscripts(some_fig):
     some_fig.add_annotation(text="hi")
 
     def _raise_bad_property_path_form():
-        some_fig["layout.annotations[0].font_bogusey"] = "hi"
+        some_fig["layout.annotations[0].font_family_bogus"] = "hi"
 
     def _raise_bad_property_path_real():
         some_fig["layout.annotations[0].font_family_"] = "hi"
@@ -575,7 +617,14 @@ def test_trailing_underscore_errors_dots_and_subscripts(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogusey", "family_"), ("bogusey", "family_")],
+        [
+            (
+                "Property does not support subscripting",
+                "Property does not support subscripting and path has trailing underscores",
+            ),
+            ("family_bogus", "family_"),
+            ("^^^^^^", "^^^^^^^"),
+        ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
 
@@ -585,7 +634,7 @@ def test_repeated_underscore_errors_dots_and_subscripts(some_fig):
     some_fig.add_annotation(text="hi")
 
     def _raise_bad_property_path_form():
-        some_fig["layout.annotations[0].bogus_family"] = "hi"
+        some_fig["layout.annotations[0].font_bogusey"] = "hi"
 
     def _raise_bad_property_path_real():
         some_fig["layout.annotations[0].font__family"] = "hi"
@@ -593,6 +642,10 @@ def test_repeated_underscore_errors_dots_and_subscripts(some_fig):
     correct_err_str = form_error_string(
         _raise_bad_property_path_form,
         ValueError,
-        [("bogus", "font_"), ("bogus", "font_")],
+        [
+            ("bogusey", "_family"),
+            ("bogusey", "_family"),
+            ('Did you mean "size"?', 'Did you mean "family"?'),
+        ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
