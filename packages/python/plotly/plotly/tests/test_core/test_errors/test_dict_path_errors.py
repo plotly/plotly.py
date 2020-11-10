@@ -423,3 +423,174 @@ def test_subscript_error_exception_types(some_fig):
         some_fig.update_layout(width_yo=100)
     with pytest.raises(KeyError):
         yo = some_fig["layout_width_yo"]
+
+
+def form_error_string(call, exception, subs):
+    """
+    call is a function that raises exception.
+    exception is an exception class, e.g., KeyError.
+    subs is a list of replacements to be performed on the exception string. Each
+    replacement is only performed once on the exception string so the
+    replacement of multiple occurences of a pattern is specified by repeating a
+    (pattern,relacement) pair in the list.
+    returns modified exception string 
+    """
+    raised = False
+    try:
+        call()
+    except exception as e:
+        raised = True
+        msg = e.args[0]
+        for pat, rep in subs:
+            msg = msg.replace(pat, rep, 1)
+    assert raised
+    return msg
+
+
+def check_error_string(call, exception, correct_str, subs):
+    raised = False
+    try:
+        call()
+    except exception as e:
+        raised = True
+        msg = e.args[0]
+        for pat, rep in subs:
+            msg = msg.replace(pat, rep, 1)
+        assert msg == correct_str
+    assert raised
+
+
+def test_leading_underscore_errors(some_fig):
+    # get error string but alter it to form the final expected string
+    def _raise_bad_property_path_form():
+        some_fig.update_layout(bogus=7)
+
+    def _raise_bad_property_path_real():
+        some_fig.update_layout(_hey_yall=7)
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "_"), ("bogus", "_hey_yall"), ("^^^^^", "^")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_trailing_underscore_errors(some_fig):
+    # get error string but alter it to form the final expected string
+    def _raise_bad_property_path_form():
+        some_fig.update_layout(title_bogus="hi")
+
+    def _raise_bad_property_path_real():
+        some_fig.update_layout(title_text_="hi")
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "text_"), ("title_bogus", "title_text_")],
+    )
+    # no need to replace ^^^^^ because bogus and text_ are same length
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_embedded_underscore_errors(some_fig):
+    # get error string but alter it to form the final expected string
+    def _raise_bad_property_path_form():
+        some_fig.update_layout(title_bogus_family="hi")
+
+    def _raise_bad_property_path_real():
+        some_fig.update_layout(title_font__family="hi")
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "font_"), ("title_bogus_family", "title_font__family")],
+    )
+    # no need to replace ^^^^^ because bogus and font_ are same length
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_solo_underscore_errors(some_fig):
+    # get error string but alter it to form the final expected string
+    def _raise_bad_property_path_form():
+        some_fig.update_layout(bogus="hi")
+
+    def _raise_bad_property_path_real():
+        some_fig.update_layout(_="hi")
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "_"), ("bogus", "_"), ("^^^^^", "^")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_repeated_underscore_errors(some_fig):
+    # get error string but alter it to form the final expected string
+    def _raise_bad_property_path_form():
+        some_fig.update_layout(bogus="hi")
+
+    def _raise_bad_property_path_real():
+        some_fig.update_layout(__="hi")
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "__"), ("bogus", "__"), ("^^^^^", "^^")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_leading_underscore_errors_dots_and_subscripts(some_fig):
+    # get error string but alter it to form the final expected string
+    some_fig.add_annotation(text="hi")
+
+    def _raise_bad_property_path_form():
+        some_fig["layout.annotations[0].bogus_family"] = "hi"
+
+    def _raise_bad_property_path_real():
+        some_fig["layout.annotations[0]._font_family"] = "hi"
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "_"), ("bogus", "_font"), ("^^^^^", "^")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_trailing_underscore_errors_dots_and_subscripts(some_fig):
+    # get error string but alter it to form the final expected string
+    some_fig.add_annotation(text="hi")
+
+    def _raise_bad_property_path_form():
+        some_fig["layout.annotations[0].font_bogusey"] = "hi"
+
+    def _raise_bad_property_path_real():
+        some_fig["layout.annotations[0].font_family_"] = "hi"
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogusey", "family_"), ("bogusey", "family_")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_repeated_underscore_errors_dots_and_subscripts(some_fig):
+    # get error string but alter it to form the final expected string
+    some_fig.add_annotation(text="hi")
+
+    def _raise_bad_property_path_form():
+        some_fig["layout.annotations[0].bogus_family"] = "hi"
+
+    def _raise_bad_property_path_real():
+        some_fig["layout.annotations[0].font__family"] = "hi"
+
+    correct_err_str = form_error_string(
+        _raise_bad_property_path_form,
+        ValueError,
+        [("bogus", "font_"), ("bogus", "font_")],
+    )
+    check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
