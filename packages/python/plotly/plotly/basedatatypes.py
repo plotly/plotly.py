@@ -3150,6 +3150,18 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being shown,
             False otherwise.
 
+        width: int or float
+            An integer or float that determines the number of pixels wide the
+            plot is. The default is set in plotly.js.
+
+        height: int or float
+            An integer or float that determines the number of pixels wide the
+            plot is. The default is set in plotly.js.
+
+        config: dict
+            A dict of parameters to configure the figure. The defaults are set
+            in plotly.js.
+
         Returns
         -------
         None
