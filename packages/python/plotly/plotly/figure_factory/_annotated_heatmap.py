@@ -264,9 +264,9 @@ class _AnnotatedHeatmap(object):
 
     def get_z_min_max(self):
         """
-        Get the mid value of z matrix
+        Get the min and max value of z matrix
 
-        :rtype (float) z_avg: average val from z matrix
+        :rtype (tuple): min and max val from z matrix
         """
         if np and isinstance(self.z, np.ndarray):
             z_min = np.nanmin(self.z)
