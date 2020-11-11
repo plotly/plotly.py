@@ -382,6 +382,12 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
     return docstr
 
 
+def _generator(i):
+    """ "cast" an iterator to a generator """
+    while True:
+        yield next(i)
+
+
 class BaseFigure(object):
     """
     Base class for all figure types (both widget and non-widget)
@@ -1186,7 +1192,7 @@ class BaseFigure(object):
         if filter_by_subplot:
             funcs.append(_filter_by_subplot_ref)
 
-        return self._filter_by_selector(self.data, funcs, selector)
+        return _generator(self._filter_by_selector(self.data, funcs, selector))
 
     @staticmethod
     def _selector_matches(obj, selector):
@@ -1439,7 +1445,7 @@ class BaseFigure(object):
             _natural_sort_strings(list(self.layout)),
         )
         layout_objs = [self.layout[k] for k in layout_keys]
-        return self._filter_by_selector(layout_objs, [], selector)
+        return _generator(self._filter_by_selector(layout_objs, [], selector))
 
     def _select_annotations_like(
         self, prop, selector=None, row=None, col=None, secondary_y=None
@@ -1486,7 +1492,7 @@ class BaseFigure(object):
 
         funcs = [_filter_row, _filter_col, _filter_sec_y]
 
-        return self._filter_by_selector(self.layout[prop], funcs, selector)
+        return _generator(self._filter_by_selector(self.layout[prop], funcs, selector))
 
     def _add_annotation_like(
         self,

@@ -89,3 +89,8 @@ def test_function_selector_could_not_match():
         return d["x"] == 1 and d["y"] == 3 and d["text"] == "pat metheny"
 
     assert BaseFigure._selector_matches(obj, _sel) == False
+
+
+def test_string_selector_matches_type_key():
+    assert BaseFigure._selector_matches(dict(type="bar"), "bar")
+    assert BaseFigure._selector_matches(dict(type="scatter"), "bar") == False
