@@ -260,7 +260,7 @@ class TestSelectForEachUpdateTraces(TestCase):
 
     def test_select_traces_type_error(self):
         with self.assertRaises(TypeError):
-            self.assert_select_traces([0], selector=123, row=1, col=1)
+            self.assert_select_traces([0], selector=123.456, row=1, col=1)
 
     def test_for_each_trace_lowercase_names(self):
         # Names are all uppercase to start
