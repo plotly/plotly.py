@@ -104,7 +104,14 @@ def create_annotated_heatmap(
     colorscale_validator = ColorscaleValidator()
     colorscale = colorscale_validator.validate_coerce(colorscale)
     annotations = _AnnotatedHeatmap(
-        z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
+        z,
+        x,
+        y,
+        annotation_text,
+        colorscale,
+        font_colors,
+        reversescale,
+        **kwargs
     ).make_annotations(**kwargs)
 
     if x or y:
@@ -120,7 +127,9 @@ def create_annotated_heatmap(
         )
         layout = dict(
             annotations=annotations,
-            xaxis=dict(ticks="", dtick=1, side="top", gridcolor="rgb(0, 0, 0)"),
+            xaxis=dict(
+                ticks="", dtick=1, side="top", gridcolor="rgb(0, 0, 0)"
+            ),
             yaxis=dict(ticks="", dtick=1, ticksuffix="  "),
         )
     else:
@@ -135,7 +144,10 @@ def create_annotated_heatmap(
         layout = dict(
             annotations=annotations,
             xaxis=dict(
-                ticks="", side="top", gridcolor="rgb(0, 0, 0)", showticklabels=False
+                ticks="",
+                side="top",
+                gridcolor="rgb(0, 0, 0)",
+                showticklabels=False,
             ),
             yaxis=dict(ticks="", ticksuffix="  ", showticklabels=False),
         )
@@ -168,7 +180,15 @@ class _AnnotatedHeatmap(object):
     """
 
     def __init__(
-        self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
+        self,
+        z,
+        x,
+        y,
+        annotation_text,
+        colorscale,
+        font_colors,
+        reversescale,
+        **kwargs
     ):
 
         self.z = z
@@ -242,7 +262,9 @@ class _AnnotatedHeatmap(object):
         elif isinstance(self.colorscale, list):
 
             min_col = to_rgb_color_list(self.colorscale[0][1], [255, 255, 255])
-            max_col = to_rgb_color_list(self.colorscale[-1][1], [255, 255, 255])
+            max_col = to_rgb_color_list(
+                self.colorscale[-1][1], [255, 255, 255]
+            )
 
             # swap min/max colors if reverse scale
             if self.reversescale:
@@ -274,7 +296,7 @@ class _AnnotatedHeatmap(object):
         else:
             z_min = min([v for row in self.z for v in row])
             z_max = max([v for row in self.z for v in row])
-        return z_min , z_max
+        return z_min, z_max
 
     def make_annotations(self, zmin=None, zmid=None, zmax=None):
         """
@@ -291,9 +313,15 @@ class _AnnotatedHeatmap(object):
         if min_text_color == max_text_color:
             # diverging colorscale
             mid_text_color = "#000000"
-            get_font_color = lambda val:mid_text_color if (zmin+zmid)/2<val<(zmid+zmax)/2 else min_text_color
+            get_font_color = (
+                lambda val: mid_text_color
+                if (zmin + zmid) / 2 < val < (zmid + zmax) / 2
+                else min_text_color
+            )
         else:
-            get_font_color = lambda val:min_text_color if val < zmid else max_text_color
+            get_font_color = (
+                lambda val: min_text_color if val < zmid else max_text_color
+            )
         annotations = []
         for n, row in enumerate(self.z):
             for m, val in enumerate(row):
