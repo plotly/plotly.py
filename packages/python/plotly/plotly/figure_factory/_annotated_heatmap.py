@@ -104,14 +104,7 @@ def create_annotated_heatmap(
     colorscale_validator = ColorscaleValidator()
     colorscale = colorscale_validator.validate_coerce(colorscale)
     annotations = _AnnotatedHeatmap(
-        z,
-        x,
-        y,
-        annotation_text,
-        colorscale,
-        font_colors,
-        reversescale,
-        **kwargs
+        z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ).make_annotations(**kwargs)
 
     if x or y:
@@ -127,9 +120,7 @@ def create_annotated_heatmap(
         )
         layout = dict(
             annotations=annotations,
-            xaxis=dict(
-                ticks="", dtick=1, side="top", gridcolor="rgb(0, 0, 0)"
-            ),
+            xaxis=dict(ticks="", dtick=1, side="top", gridcolor="rgb(0, 0, 0)"),
             yaxis=dict(ticks="", dtick=1, ticksuffix="  "),
         )
     else:
@@ -144,10 +135,7 @@ def create_annotated_heatmap(
         layout = dict(
             annotations=annotations,
             xaxis=dict(
-                ticks="",
-                side="top",
-                gridcolor="rgb(0, 0, 0)",
-                showticklabels=False,
+                ticks="", side="top", gridcolor="rgb(0, 0, 0)", showticklabels=False,
             ),
             yaxis=dict(ticks="", ticksuffix="  ", showticklabels=False),
         )
@@ -180,15 +168,7 @@ class _AnnotatedHeatmap(object):
     """
 
     def __init__(
-        self,
-        z,
-        x,
-        y,
-        annotation_text,
-        colorscale,
-        font_colors,
-        reversescale,
-        **kwargs
+        self, z, x, y, annotation_text, colorscale, font_colors, reversescale, **kwargs
     ):
 
         self.z = z
@@ -262,9 +242,7 @@ class _AnnotatedHeatmap(object):
         elif isinstance(self.colorscale, list):
 
             min_col = to_rgb_color_list(self.colorscale[0][1], [255, 255, 255])
-            max_col = to_rgb_color_list(
-                self.colorscale[-1][1], [255, 255, 255]
-            )
+            max_col = to_rgb_color_list(self.colorscale[-1][1], [255, 255, 255])
 
             # swap min/max colors if reverse scale
             if self.reversescale:
