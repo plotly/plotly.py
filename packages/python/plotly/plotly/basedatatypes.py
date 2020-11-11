@@ -1421,37 +1421,25 @@ class BaseFigure(object):
         else:
             container_to_row_col = None
 
-        # Natural sort keys so that xaxis20 is after xaxis3
-        layout_keys = _natural_sort_strings(list(self.layout))
-
-        for k in layout_keys:
-            if k.startswith(prefix) and self.layout[k] is not None:
-
-                # Filter by row/col
-                if (
-                    row is not None
-                    and container_to_row_col.get(k, (None, None, None))[0] != row
-                ):
-                    # row specified and this is not a match
-                    continue
-                elif (
-                    col is not None
-                    and container_to_row_col.get(k, (None, None, None))[1] != col
-                ):
-                    # col specified and this is not a match
-                    continue
-                elif (
-                    secondary_y is not None
-                    and container_to_row_col.get(k, (None, None, None))[2]
-                    != secondary_y
-                ):
-                    continue
-
-                # Filter by selector
-                if not self._selector_matches(self.layout[k], selector):
-                    continue
-
-                yield self.layout[k]
+        layout_keys_filters = [
+            lambda k: k.startswith(prefix) and self.layout[k] is not None,
+            lambda k: row is None
+            or container_to_row_col.get(k, (None, None, None))[0] == row,
+            lambda k: col is None
+            or container_to_row_col.get(k, (None, None, None))[1] == col,
+            lambda k: (
+                secondary_y is None
+                or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
+            ),
+        ]
+        layout_keys = reduce(
+            lambda last, f: filter(f, last),
+            layout_keys_filters,
+            # Natural sort keys so that xaxis20 is after xaxis3
+            _natural_sort_strings(list(self.layout)),
+        )
+        layout_objs = [self.layout[k] for k in layout_keys]
+        return self._filter_by_selector(layout_objs, [], selector)
 
     def _select_annotations_like(
         self, prop, selector=None, row=None, col=None, secondary_y=None
