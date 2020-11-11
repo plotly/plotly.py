@@ -1194,6 +1194,10 @@ class BaseFigure(object):
     def _selector_matches(obj, selector):
         if selector is None:
             return True
+        # If selector is a string then put it at the 'type' key of a dictionary
+        # to select objects where "type":selector
+        if type(selector) == type(str()):
+            selector = dict(type=selector)
         # If selector is a dict, compare the fields
         if (type(selector) == type(dict())) or isinstance(selector, BasePlotlyType):
             # This returns True if selector is an empty dict
@@ -1450,27 +1454,46 @@ class BaseFigure(object):
                             yref_to_row[yref] = r + 1
                             yref_to_secondary_y[yref] = is_secondary_y
 
-        for obj in self.layout[prop]:
-            # Filter by row
-            if col is not None and xref_to_col.get(obj.xref, None) != col:
-                continue
+        # filter down (select) which graph objects, by applying the filters
+        # successively
+        def _filter_row(obj):
+            """ Filter objects in rows by column """
+            return (col is None) or (xref_to_col.get(obj.xref, None) == col)
 
-            # Filter by col
-            if row is not None and yref_to_row.get(obj.yref, None) != row:
-                continue
+        def _filter_col(obj):
+            """ Filter objects in columns by row """
+            return (row is None) or (yref_to_row.get(obj.yref, None) == row)
 
-            # Filter by secondary y
-            if (
-                secondary_y is not None
-                and yref_to_secondary_y.get(obj.yref, None) != secondary_y
-            ):
-                continue
+        def _filter_sec_y(obj):
+            """ Filter objects on secondary y axes """
+            return (secondary_y is None) or (
+                yref_to_secondary_y.get(obj.yref, None) == secondary_y
+            )
 
-            # Filter by selector
-            if not self._selector_matches(obj, selector):
-                continue
+        def _filter_selector_matches(obj):
+            """ Filter objects for which selector matches """
+            return self._selector_matches(obj, selector)
 
-            yield obj
+        funcs = [_filter_row, _filter_col, _filter_sec_y]
+        # If selector is not an int, we use the _filter_selector_matches to
+        # filter out items
+        if type(selector) != type(int()):
+            # append selector as filter function
+            funcs += [_filter_selector_matches]
+
+        def _reducer(last, f):
+            # takes list of objects that has been filtered down up to now (last)
+            # and applies the next filter function (f) to filter it down further.
+            return filter(lambda o: f(o), last)
+
+        # filtered_objs is a sequence of objects filtered by the above functions
+        filtered_objs = reduce(_reducer, funcs, self.layout[prop])
+        # If selector is an integer, use it as an index into the sequence of
+        # filtered objects. Note in this case we do not call _filter_selector_matches.
+        if type(selector) == type(int()):
+            # wrap in iter because this function should always return an iterator
+            return iter([list(filtered_objs)[selector]])
+        return filtered_objs
 
     def _add_annotation_like(
         self,
