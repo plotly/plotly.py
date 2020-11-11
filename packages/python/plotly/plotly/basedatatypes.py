@@ -1177,18 +1177,16 @@ class BaseFigure(object):
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
         from plotly.subplots import _get_subplot_ref_for_trace
 
-        for trace in self.data:
-            # Filter by subplot
-            if filter_by_subplot:
-                trace_subplot_ref = _get_subplot_ref_for_trace(trace)
-                if trace_subplot_ref not in grid_subplot_refs:
-                    continue
+        # functions for filtering
+        def _filter_by_subplot_ref(trace):
+            trace_subplot_ref = _get_subplot_ref_for_trace(trace)
+            return trace_subplot_ref in grid_subplot_refs
 
-            # Filter by selector
-            if not self._selector_matches(trace, selector):
-                continue
+        funcs = []
+        if filter_by_subplot:
+            funcs.append(_filter_by_subplot_ref)
 
-            yield trace
+        return self._filter_by_selector(self.data, funcs, selector)
 
     @staticmethod
     def _selector_matches(obj, selector):
@@ -1214,8 +1212,8 @@ class BaseFigure(object):
                 if isinstance(selector_val, BasePlotlyType):
                     selector_val = selector_val.to_plotly_json()
 
-                if obj_val != selector_val:
-                    return False
+                return obj_val == selector_val
+
             return True
         # If selector is a function, call it with the obj as the argument
         elif type(selector) == type(lambda x: True):
@@ -1225,6 +1223,34 @@ class BaseFigure(object):
                 "selector must be dict or a function "
                 "accepting a graph object returning a boolean."
             )
+
+    def _filter_by_selector(self, objects, funcs, selector):
+        """
+        objects is a sequence of objects, funcs a list of functions that
+        return True if the object should be included in the selection and False
+        otherwise and selector is an argument to the self._selector_matches
+        function.
+        If selector is an integer, the resulting sequence obtained after
+        sucessively filtering by each function in funcs is indexed by this
+        integer.
+        Otherwise selector is used as the selector argument to
+        self._selector_matches which is used to filter down the sequence.
+        The function returns the sequence (an iterator).
+        """
+
+        # if selector is not an int, we call it on each trace to test it for selection
+        if type(selector) != type(int()):
+            funcs.append(lambda obj: self._selector_matches(obj, selector))
+
+        def _filt(last, f):
+            return filter(f, last)
+
+        filtered_objects = reduce(_filt, funcs, objects)
+
+        if type(selector) == type(int()):
+            return iter([list(filtered_objects)[selector]])
+
+        return filtered_objects
 
     def for_each_trace(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
@@ -1470,30 +1496,9 @@ class BaseFigure(object):
                 yref_to_secondary_y.get(obj.yref, None) == secondary_y
             )
 
-        def _filter_selector_matches(obj):
-            """ Filter objects for which selector matches """
-            return self._selector_matches(obj, selector)
-
         funcs = [_filter_row, _filter_col, _filter_sec_y]
-        # If selector is not an int, we use the _filter_selector_matches to
-        # filter out items
-        if type(selector) != type(int()):
-            # append selector as filter function
-            funcs += [_filter_selector_matches]
 
-        def _reducer(last, f):
-            # takes list of objects that has been filtered down up to now (last)
-            # and applies the next filter function (f) to filter it down further.
-            return filter(lambda o: f(o), last)
-
-        # filtered_objs is a sequence of objects filtered by the above functions
-        filtered_objs = reduce(_reducer, funcs, self.layout[prop])
-        # If selector is an integer, use it as an index into the sequence of
-        # filtered objects. Note in this case we do not call _filter_selector_matches.
-        if type(selector) == type(int()):
-            # wrap in iter because this function should always return an iterator
-            return iter([list(filtered_objs)[selector]])
-        return filtered_objs
+        return self._filter_by_selector(self.layout[prop], funcs, selector)
 
     def _add_annotation_like(
         self,
