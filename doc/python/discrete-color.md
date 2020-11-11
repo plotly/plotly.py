@@ -107,7 +107,7 @@ To run the app below, run `pip install dash`, click "Download" to get the code a
 
 Get started now with [the official docs](https://dash.plotly.com/installation) and learn how you can effortlessly [style](https://plotly.com/dash/design-kit/) and [deploy](https://plotly.com/dash/app-manager/) apps like this with [Dash Enterprise](https://plotly.com/dash/).
 
-```python
+```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'discrete-color', width='100%', height=630)
@@ -117,7 +117,7 @@ IFrame(snippet_url + 'discrete-color', width='100%', height=630)
 
 By default, Plotly Express will use the color sequence from the active [template](/python/templates/)'s `layout.colorway` attribute, and the default active template is `plotly` which uses the `plotly` color sequence. You can choose any of the following built-in qualitative color sequences from the `px.colors.qualitative` module, however, or define your own.
 
-```python hide_code=true
+```python
 import plotly.express as px
 
 fig = px.colors.qualitative.swatches()
