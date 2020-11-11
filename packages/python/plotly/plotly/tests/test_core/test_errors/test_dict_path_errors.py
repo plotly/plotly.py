@@ -646,3 +646,13 @@ def test_repeated_underscore_errors_dots_and_subscripts(some_fig):
         ],
     )
     check_error_string(_raise_bad_property_path_real, ValueError, correct_err_str, [])
+
+
+def test_single_prop_path_key_guess(some_fig):
+    raised = False
+    try:
+        some_fig.layout.shapes[0]["typ"] = "sandwich"
+    except ValueError as e:
+        raised = True
+        assert e.args[0].find('Did you mean "type"?') >= 0
+    assert raised
