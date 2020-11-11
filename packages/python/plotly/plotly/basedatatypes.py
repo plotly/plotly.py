@@ -24,6 +24,7 @@ from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
 
 from . import shapeannotation
+from . import subplots
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
@@ -4133,6 +4134,22 @@ Invalid property path '{key_path_str}' for layout
                     ]
                 )
         return ret
+
+    def set_subplots(self, rows=None, cols=None, **make_subplots_args):
+        """
+        Add subplots to this figure. If the figure already contains subplots,
+        then this throws an error. Accepts any keyword arguments that
+        plotly.subplots.make_subplots accepts.
+        """
+        # rows, cols provided so that this can be called like
+        # fig.set_subplots(2,3), say
+        if rows is not None:
+            make_subplots_args["rows"] = rows
+        if cols is not None:
+            make_subplots_args["cols"] = cols
+        if self._has_subplots():
+            raise ValueError("This figure already has subplots.")
+        return subplots.make_subplots(figure=self, **make_subplots_args)
 
 
 class BasePlotlyType(object):
