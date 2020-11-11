@@ -2,9 +2,11 @@ from __future__ import absolute_import
 from unittest import TestCase
 import inspect
 import copy
+import pytest
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+from functools import reduce
 
 
 class TestSelectForEachUpdateTraces(TestCase):
@@ -414,3 +416,60 @@ class TestSelectForEachUpdateTraces(TestCase):
                 {"type": "bar", "marker": {"line": {"width": 10}}},
             ],
         )
+
+
+@pytest.fixture
+def select_traces_fixture():
+    fig = make_subplots(2, 3)
+    for n in range(3):
+        fig.add_trace(go.Scatter(x=[1, 2], y=[3, n]), row=2, col=3)
+    for n, ty in zip(range(3), [go.Scatter, go.Bar, go.Bar]):
+        fig.add_trace(ty(x=[1, 2], y=[3, 10 * n]), row=1, col=3)
+    return fig
+
+
+def test_select_traces_integer(select_traces_fixture):
+    fig = select_traces_fixture
+    # check we can index last trace selected
+    tr = list(fig.select_traces(selector=-1))[0]
+    assert tr.y[1] == 20
+    # check we can index last trace selected in a row and column
+    tr = list(fig.select_traces(selector=-1, row=2, col=3))[0]
+    assert tr.y[1] == 2
+    # check that indexing out of bounds raises IndexError
+    with pytest.raises(IndexError):
+        tr = list(fig.select_traces(selector=6))[0]
+
+
+def test_select_traces_string(select_traces_fixture):
+    fig = select_traces_fixture
+    # check we can select traces by type simply by passing a string to selector
+    trs = list(fig.select_traces(selector="bar"))
+    assert len(trs) == 2 and reduce(
+        lambda last, cur: last
+        and (cur[0]["type"] == "bar")
+        and (cur[0]["y"][1] == cur[1]),
+        zip(trs, [10, 20]),
+        True,
+    )
+    # check we can select traces by type regardless of the subplots they are on
+    trs = list(fig.select_traces(selector="scatter"))
+    assert len(trs) == 4 and reduce(
+        lambda last, cur: last
+        and (cur[0]["type"] == "scatter")
+        and (cur[0]["y"][1] == cur[1]),
+        zip(trs, [0, 1, 2, 0]),
+        True,
+    )
+    # check that we can select traces by type but only on a specific subplot
+    trs = list(fig.select_traces(row=2, col=3, selector="scatter"))
+    assert len(trs) == 3 and reduce(
+        lambda last, cur: last
+        and (cur[0]["type"] == "scatter")
+        and (cur[0]["y"][1] == cur[1]),
+        zip(trs, [0, 1, 2]),
+        True,
+    )
+    # check that if selector matches no trace types then no traces are returned
+    trs = list(fig.select_traces(selector="bogus"))
+    assert len(trs) == 0
