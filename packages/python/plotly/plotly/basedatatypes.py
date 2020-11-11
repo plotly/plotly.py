@@ -1212,8 +1212,8 @@ class BaseFigure(object):
                 if isinstance(selector_val, BasePlotlyType):
                     selector_val = selector_val.to_plotly_json()
 
-                return obj_val == selector_val
-
+                if obj_val != selector_val:
+                    return False
             return True
         # If selector is a function, call it with the obj as the argument
         elif type(selector) == type(lambda x: True):
