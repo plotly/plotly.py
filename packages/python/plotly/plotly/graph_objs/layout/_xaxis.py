@@ -12,7 +12,6 @@ class XAxis(_BaseLayoutHierarchyType):
         "anchor",
         "automargin",
         "autorange",
-        "autotypenumbers",
         "calendar",
         "categoryarray",
         "categoryarraysrc",
@@ -159,30 +158,6 @@ class XAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
-
-    # autotypenumbers
-    # ---------------
-    @property
-    def autotypenumbers(self):
-        """
-        Using "strict" a numeric string in trace data is not converted
-        to a number. Using *convert types* a numeric string in trace
-        data may be treated as a number during automatic axis `type`
-        detection. Defaults to layout.autotypenumbers.
-
-        The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
-
-        Returns
-        -------
-        Any
-        """
-        return self["autotypenumbers"]
-
-    @autotypenumbers.setter
-    def autotypenumbers(self, val):
-        self["autotypenumbers"] = val
 
     # calendar
     # --------
@@ -2486,12 +2461,6 @@ class XAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. Defaults to
-            layout.autotypenumbers.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -2884,7 +2853,6 @@ class XAxis(_BaseLayoutHierarchyType):
         anchor=None,
         automargin=None,
         autorange=None,
-        autotypenumbers=None,
         calendar=None,
         categoryarray=None,
         categoryarraysrc=None,
@@ -2983,12 +2951,6 @@ class XAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. Defaults to
-            layout.autotypenumbers.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -3417,10 +3379,6 @@ an instance of :class:`plotly.graph_objs.layout.XAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
-        _v = arg.pop("autotypenumbers", None)
-        _v = autotypenumbers if autotypenumbers is not None else _v
-        if _v is not None:
-            self["autotypenumbers"] = _v
         _v = arg.pop("calendar", None)
         _v = calendar if calendar is not None else _v
         if _v is not None:

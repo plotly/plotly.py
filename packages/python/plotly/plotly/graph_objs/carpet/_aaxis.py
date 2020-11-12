@@ -12,7 +12,6 @@ class Aaxis(_BaseTraceHierarchyType):
         "arraydtick",
         "arraytick0",
         "autorange",
-        "autotypenumbers",
         "categoryarray",
         "categoryarraysrc",
         "categoryorder",
@@ -132,30 +131,6 @@ class Aaxis(_BaseTraceHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
-
-    # autotypenumbers
-    # ---------------
-    @property
-    def autotypenumbers(self):
-        """
-        Using "strict" a numeric string in trace data is not converted
-        to a number. Using *convert types* a numeric string in trace
-        data may be treated as a number during automatic axis `type`
-        detection. Defaults to layout.autotypenumbers.
-
-        The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
-
-        Returns
-        -------
-        Any
-        """
-        return self["autotypenumbers"]
-
-    @autotypenumbers.setter
-    def autotypenumbers(self, val):
-        self["autotypenumbers"] = val
 
     # categoryarray
     # -------------
@@ -1663,12 +1638,6 @@ class Aaxis(_BaseTraceHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. Defaults to
-            layout.autotypenumbers.
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
@@ -1871,7 +1840,6 @@ class Aaxis(_BaseTraceHierarchyType):
         arraydtick=None,
         arraytick0=None,
         autorange=None,
-        autotypenumbers=None,
         categoryarray=None,
         categoryarraysrc=None,
         categoryorder=None,
@@ -1944,12 +1912,6 @@ class Aaxis(_BaseTraceHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. Defaults to
-            layout.autotypenumbers.
         categoryarray
             Sets the order in which categories on this axis appear.
             Only has an effect if `categoryorder` is set to
@@ -2185,10 +2147,6 @@ an instance of :class:`plotly.graph_objs.carpet.Aaxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
-        _v = arg.pop("autotypenumbers", None)
-        _v = autotypenumbers if autotypenumbers is not None else _v
-        if _v is not None:
-            self["autotypenumbers"] = _v
         _v = arg.pop("categoryarray", None)
         _v = categoryarray if categoryarray is not None else _v
         if _v is not None:

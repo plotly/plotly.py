@@ -71,14 +71,6 @@ class FigureWidget(BaseFigureWidget):
                         regardless of this attribute, an undefined
                         layout width or height is always initialized on
                         the first call to plot.
-                    autotypenumbers
-                        Using "strict" a numeric string in trace data
-                        is not converted to a number. Using *convert
-                        types* a numeric string in trace data may be
-                        treated as a number during automatic axis
-                        `type` detection. This is the default value;
-                        however it could be overridden for individual
-                        axes.
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.
@@ -14942,7 +14934,6 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
-        root=None,
         rotation=None,
         sort=None,
         stream=None,
@@ -15118,9 +15109,6 @@ class FigureWidget(BaseFigureWidget):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
-        root
-            :class:`plotly.graph_objects.sunburst.Root` instance or
-            dict with compatible properties
         rotation
             Rotates the whole diagram counterclockwise by some
             angle. By default the first slice starts at 3 o'clock.
@@ -15244,7 +15232,6 @@ class FigureWidget(BaseFigureWidget):
             outsidetextfont=outsidetextfont,
             parents=parents,
             parentssrc=parentssrc,
-            root=root,
             rotation=rotation,
             sort=sort,
             stream=stream,
@@ -15861,7 +15848,6 @@ class FigureWidget(BaseFigureWidget):
         parents=None,
         parentssrc=None,
         pathbar=None,
-        root=None,
         sort=None,
         stream=None,
         text=None,
@@ -16029,9 +16015,6 @@ class FigureWidget(BaseFigureWidget):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
-        root
-            :class:`plotly.graph_objects.treemap.Root` instance or
-            dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -16156,7 +16139,6 @@ class FigureWidget(BaseFigureWidget):
             parents=parents,
             parentssrc=parentssrc,
             pathbar=pathbar,
-            root=root,
             sort=sort,
             stream=stream,
             text=text,

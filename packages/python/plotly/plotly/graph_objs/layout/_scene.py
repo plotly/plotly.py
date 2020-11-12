@@ -529,13 +529,6 @@ class Scene(_BaseLayoutHierarchyType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar
@@ -851,13 +844,6 @@ class Scene(_BaseLayoutHierarchyType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar
@@ -1173,13 +1159,6 @@ class Scene(_BaseLayoutHierarchyType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
                 backgroundcolor
                     Sets the background color of this axis' wall.
                 calendar

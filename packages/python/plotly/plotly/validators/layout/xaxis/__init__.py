@@ -75,7 +75,6 @@ if sys.version_info < (3, 7):
     from ._categoryarraysrc import CategoryarraysrcValidator
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
-    from ._autotypenumbers import AutotypenumbersValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -160,7 +159,6 @@ else:
             "._categoryarraysrc.CategoryarraysrcValidator",
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
-            "._autotypenumbers.AutotypenumbersValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",

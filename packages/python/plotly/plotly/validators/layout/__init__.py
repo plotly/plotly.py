@@ -80,7 +80,6 @@ if sys.version_info < (3, 7):
     from ._barmode import BarmodeValidator
     from ._bargroupgap import BargroupgapValidator
     from ._bargap import BargapValidator
-    from ._autotypenumbers import AutotypenumbersValidator
     from ._autosize import AutosizeValidator
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
@@ -172,7 +171,6 @@ else:
             "._barmode.BarmodeValidator",
             "._bargroupgap.BargroupgapValidator",
             "._bargap.BargapValidator",
-            "._autotypenumbers.AutotypenumbersValidator",
             "._autosize.AutosizeValidator",
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",

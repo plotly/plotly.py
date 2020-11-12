@@ -25,13 +25,15 @@ npm_path = os.pathsep.join(
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
-    path = os.path.join(
-        project_root, "packages", "javascript", "plotlywidget", "package.json"
-    )
-    with open(path, "rt") as f:
-        package_json = json.load(f)
-        version = package_json["dependencies"]["plotly.js"]
-        version = version.replace("^", "")
+    # path = os.path.join(
+    #     project_root, "packages", "javascript", "plotlywidget", "package.json"
+    # )
+    # with open(path, "rt") as f:
+    #     package_json = json.load(f)
+    #     version = package_json["dependencies"]["plotly.js"]
+    #     version = version.replace("^", "")
+
+    version = '1.57.2'
 
     return version
 
@@ -305,7 +307,7 @@ class UpdateBundleCommand(Command):
         pass
 
     def run(self):
-        url = "https://raw.githubusercontent.com/plotly/plotly.js/v1.57.1/dist/plotly.min.js"
+        url = "https://raw.githubusercontent.com/yinghuaguan/plotly.js/master/dist/plotly.min.js"
         overwrite_bundle(url)
 
         # Write plotly.js version file

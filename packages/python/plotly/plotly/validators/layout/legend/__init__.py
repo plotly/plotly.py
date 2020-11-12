@@ -11,7 +11,6 @@ if sys.version_info < (3, 7):
     from ._tracegroupgap import TracegroupgapValidator
     from ._title import TitleValidator
     from ._orientation import OrientationValidator
-    from ._itemwidth import ItemwidthValidator
     from ._itemsizing import ItemsizingValidator
     from ._itemdoubleclick import ItemdoubleclickValidator
     from ._itemclick import ItemclickValidator
@@ -36,7 +35,6 @@ else:
             "._tracegroupgap.TracegroupgapValidator",
             "._title.TitleValidator",
             "._orientation.OrientationValidator",
-            "._itemwidth.ItemwidthValidator",
             "._itemsizing.ItemsizingValidator",
             "._itemdoubleclick.ItemdoubleclickValidator",
             "._itemclick.ItemclickValidator",

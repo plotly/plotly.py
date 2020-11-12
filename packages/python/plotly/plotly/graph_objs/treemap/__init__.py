@@ -7,7 +7,6 @@ if sys.version_info < (3, 7):
     from ._marker import Marker
     from ._outsidetextfont import Outsidetextfont
     from ._pathbar import Pathbar
-    from ._root import Root
     from ._stream import Stream
     from ._textfont import Textfont
     from ._tiling import Tiling
@@ -27,7 +26,6 @@ else:
             "._marker.Marker",
             "._outsidetextfont.Outsidetextfont",
             "._pathbar.Pathbar",
-            "._root.Root",
             "._stream.Stream",
             "._textfont.Textfont",
             "._tiling.Tiling",

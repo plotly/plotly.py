@@ -63,7 +63,6 @@ class Layout(_BaseLayoutType):
         "annotationdefaults",
         "annotations",
         "autosize",
-        "autotypenumbers",
         "bargap",
         "bargroupgap",
         "barmode",
@@ -632,31 +631,6 @@ class Layout(_BaseLayoutType):
     @autosize.setter
     def autosize(self, val):
         self["autosize"] = val
-
-    # autotypenumbers
-    # ---------------
-    @property
-    def autotypenumbers(self):
-        """
-        Using "strict" a numeric string in trace data is not converted
-        to a number. Using *convert types* a numeric string in trace
-        data may be treated as a number during automatic axis `type`
-        detection. This is the default value; however it could be
-        overridden for individual axes.
-
-        The 'autotypenumbers' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['convert types', 'strict']
-
-        Returns
-        -------
-        Any
-        """
-        return self["autotypenumbers"]
-
-    @autotypenumbers.setter
-    def autotypenumbers(self, val):
-        self["autotypenumbers"] = val
 
     # bargap
     # ------
@@ -1996,9 +1970,6 @@ class Layout(_BaseLayoutType):
                     with their corresponding "trace" attributes or
                     remain "constant" independent of the symbol
                     size on the graph.
-                itemwidth
-                    Sets the width (in px) of the legend item
-                    symbols (the part other than the title.text).
                 orientation
                     Sets the orientation of the legend.
                 title
@@ -3906,13 +3877,6 @@ class Layout(_BaseLayoutType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -4375,13 +4339,6 @@ class Layout(_BaseLayoutType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
-                autotypenumbers
-                    Using "strict" a numeric string in trace data
-                    is not converted to a number. Using *convert
-                    types* a numeric string in trace data may be
-                    treated as a number during automatic axis
-                    `type` detection. Defaults to
-                    layout.autotypenumbers.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -4835,13 +4792,6 @@ class Layout(_BaseLayoutType):
             each relayout. Note that, regardless of this attribute,
             an undefined layout width or height is always
             initialized on the first call to plot.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. This is the default
-            value; however it could be overridden for individual
-            axes.
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5275,7 +5225,6 @@ class Layout(_BaseLayoutType):
         annotations=None,
         annotationdefaults=None,
         autosize=None,
-        autotypenumbers=None,
         bargap=None,
         bargroupgap=None,
         barmode=None,
@@ -5387,13 +5336,6 @@ class Layout(_BaseLayoutType):
             each relayout. Note that, regardless of this attribute,
             an undefined layout width or height is always
             initialized on the first call to plot.
-        autotypenumbers
-            Using "strict" a numeric string in trace data is not
-            converted to a number. Using *convert types* a numeric
-            string in trace data may be treated as a number during
-            automatic axis `type` detection. This is the default
-            value; however it could be overridden for individual
-            axes.
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5834,7 +5776,6 @@ class Layout(_BaseLayoutType):
             "annotationdefaults",
             "annotations",
             "autosize",
-            "autotypenumbers",
             "bargap",
             "bargroupgap",
             "barmode",
@@ -5960,10 +5901,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = autosize if autosize is not None else _v
         if _v is not None:
             self["autosize"] = _v
-        _v = arg.pop("autotypenumbers", None)
-        _v = autotypenumbers if autotypenumbers is not None else _v
-        if _v is not None:
-            self["autotypenumbers"] = _v
         _v = arg.pop("bargap", None)
         _v = bargap if bargap is not None else _v
         if _v is not None:

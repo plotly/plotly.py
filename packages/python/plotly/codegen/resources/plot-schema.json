@@ -20409,17 +20409,6 @@
                     "editType": "calc",
                     "description": "Determines whether or not the sectors are reordered from largest to smallest."
                 },
-                "root": {
-                    "color": {
-                        "valType": "color",
-                        "editType": "calc",
-                        "role": "style",
-                        "dflt": "rgba(0,0,0,0)",
-                        "description": "sets the color of the root node for a sunburst or a treemap trace. this has no effect when a colorscale is used to set the markers."
-                    },
-                    "editType": "calc",
-                    "role": "object"
-                },
                 "domain": {
                     "x": {
                         "valType": "info_array",
@@ -21868,17 +21857,6 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not the sectors are reordered from largest to smallest."
-                },
-                "root": {
-                    "color": {
-                        "valType": "color",
-                        "editType": "calc",
-                        "role": "style",
-                        "dflt": "rgba(0,0,0,0)",
-                        "description": "sets the color of the root node for a sunburst or a treemap trace. this has no effect when a colorscale is used to set the markers."
-                    },
-                    "editType": "calc",
-                    "role": "object"
                 },
                 "domain": {
                     "x": {
@@ -48896,17 +48874,6 @@
                         "editType": "calc",
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
-                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -49482,17 +49449,6 @@
                         "role": "info",
                         "editType": "calc",
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
-                    },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "autorange": {
                         "valType": "enumerated",
@@ -60338,17 +60294,6 @@
                 "editType": "layoutstyle",
                 "description": "Sets the background color of the plotting area in-between x and y axes."
             },
-            "autotypenumbers": {
-                "valType": "enumerated",
-                "values": [
-                    "convert types",
-                    "strict"
-                ],
-                "dflt": "convert types",
-                "role": "info",
-                "editType": "calc",
-                "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. This is the default value; however it could be overridden for individual axes."
-            },
             "separators": {
                 "valType": "string",
                 "role": "style",
@@ -61085,17 +61030,6 @@
                     "editType": "calc",
                     "_noTemplating": true,
                     "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
-                },
-                "autotypenumbers": {
-                    "valType": "enumerated",
-                    "values": [
-                        "convert types",
-                        "strict"
-                    ],
-                    "dflt": "convert types",
-                    "role": "info",
-                    "editType": "calc",
-                    "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                 },
                 "autorange": {
                     "valType": "enumerated",
@@ -62292,17 +62226,6 @@
                     "editType": "calc",
                     "_noTemplating": true,
                     "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
-                },
-                "autotypenumbers": {
-                    "valType": "enumerated",
-                    "values": [
-                        "convert types",
-                        "strict"
-                    ],
-                    "dflt": "convert types",
-                    "role": "info",
-                    "editType": "calc",
-                    "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                 },
                 "autorange": {
                     "valType": "enumerated",
@@ -64882,17 +64805,6 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "plot",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
-                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -65512,17 +65424,6 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "plot",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
-                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -66141,17 +66042,6 @@
                         "editType": "plot",
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
-                    },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "plot",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "autorange": {
                         "valType": "enumerated",
@@ -68033,17 +67923,6 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
-                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -68613,17 +68492,6 @@
                         "editType": "calc",
                         "_noTemplating": true,
                         "description": "Sets the angular axis type. If *linear*, set `thetaunit` to determine the unit in which axis value are shown. If *category, use `period` to set the number of integer coordinates around polar axis."
-                    },
-                    "autotypenumbers": {
-                        "valType": "enumerated",
-                        "values": [
-                            "convert types",
-                            "strict"
-                        ],
-                        "dflt": "convert types",
-                        "role": "info",
-                        "editType": "calc",
-                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "categoryorder": {
                         "valType": "enumerated",
@@ -69378,14 +69246,6 @@
                     "role": "style",
                     "editType": "legend",
                     "description": "Determines if the legend items symbols scale with their corresponding *trace* attributes or remain *constant* independent of the symbol size on the graph."
-                },
-                "itemwidth": {
-                    "valType": "number",
-                    "min": 30,
-                    "dflt": 30,
-                    "role": "style",
-                    "editType": "legend",
-                    "description": "Sets the width (in px) of the legend item symbols (the part other than the title.text)."
                 },
                 "itemclick": {
                     "valType": "enumerated",

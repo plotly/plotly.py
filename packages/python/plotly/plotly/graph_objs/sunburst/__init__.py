@@ -7,7 +7,6 @@ if sys.version_info < (3, 7):
     from ._leaf import Leaf
     from ._marker import Marker
     from ._outsidetextfont import Outsidetextfont
-    from ._root import Root
     from ._stream import Stream
     from ._textfont import Textfont
     from . import hoverlabel
@@ -25,7 +24,6 @@ else:
             "._leaf.Leaf",
             "._marker.Marker",
             "._outsidetextfont.Outsidetextfont",
-            "._root.Root",
             "._stream.Stream",
             "._textfont.Textfont",
         ],
