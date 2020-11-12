@@ -12,7 +12,7 @@ class YaxesValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                 "items",
                 {
                     "valType": "enumerated",
-                    "values": ["/^y([2-9]|[1-9][0-9]+)?$/", ""],
+                    "values": ["/^y([2-9]|[1-9][0-9]+)?( domain)?$/", ""],
                     "editType": "plot",
                 },
             ),

@@ -1,7 +1,9 @@
 from __future__ import absolute_import
 
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 from plotly.tests.utils import TestCaseNoTemplate
+import pytest
 
 
 class FigureTest(TestCaseNoTemplate):
@@ -199,3 +201,21 @@ class FigureTest(TestCaseNoTemplate):
             fig.to_plotly_json()["data"],
             [{"type": "scatter", "y": [1, 3, 2], "line": {"color": "yellow"}}],
         )
+
+
+def test_set_subplots():
+    # Test that it works the same as make_subplots for a simple call
+    fig0 = go.Figure()
+    fig0_sp = make_subplots(2, 2)
+    fig0.set_subplots(2, 2)
+    assert fig0.layout == fig0_sp.layout
+    # Test that it accepts the same arguments as make_subplots
+    fig1 = go.Figure()
+    fig1.set_subplots(rows=2, cols=2, horizontal_spacing=0.25, vertical_spacing=0.1)
+    fig1_sp = make_subplots(
+        rows=2, cols=2, horizontal_spacing=0.25, vertical_spacing=0.1
+    )
+    assert fig1.layout == fig1_sp.layout
+    # Test that calling on a figure that already has subplots throws an error.
+    with pytest.raises(ValueError, match=r"^This figure already has subplots\.$"):
+        fig1.set_subplots(2, 3)
