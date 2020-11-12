@@ -384,8 +384,8 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
 
 def _generator(i):
     """ "cast" an iterator to a generator """
-    while True:
-        yield next(i)
+    for x in i:
+        yield x
 
 
 class BaseFigure(object):
