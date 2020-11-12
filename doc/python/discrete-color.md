@@ -101,11 +101,9 @@ fig.show()
 
 ### Discrete Colors in Dash
 
-[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. With Dash, you can add radio buttons to control the color mode of your graph.
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
-
-Get started now with [the official docs](https://dash.plotly.com/installation) and learn how you can effortlessly [style](https://plotly.com/dash/design-kit/) and [deploy](https://plotly.com/dash/app-manager/) apps like this with [Dash Enterprise](https://plotly.com/dash/).
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a style="color:red;" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 ```python hide_code=true
 from IPython.display import IFrame
