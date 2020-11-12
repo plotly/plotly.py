@@ -535,7 +535,7 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             raise ValueError("%s spacing must be between 0 and 1." % (name,))
         if dimsize <= 1:
             return
-        max_spacing = 1 / (dimsize - 1)
+        max_spacing = 1.0 / float(dimsize - 1)
         if spacing > max_spacing:
             raise ValueError(
                 "%s spacing cannot be greater than (1 / (%s - 1)) = %f."
