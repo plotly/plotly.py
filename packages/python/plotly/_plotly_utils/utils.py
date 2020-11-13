@@ -43,7 +43,11 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         # this will raise errors in a normal-expected way
         self.hasinfnans = False
         encoded_o = super(PlotlyJSONEncoder, self).encode(o)
-        if not self.hasinfnans:
+        # Brute force guessing whether NaN or Infinity values are in the string
+        # We catch false positive cases (e.g. strings such as titles, labels etc.)
+        # but this is ok since the intention is to skip the decoding / reencoding
+        # step when it's completely safe
+        if not ('Infinity' in encoded_o or 'NaN' in encoded_o):
             return encoded_o
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
@@ -96,21 +100,6 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         Therefore, we only anticipate either unknown iterables or values here.
 
         """
-        numpy = get_module("numpy", should_load=False)
-        # Try to detect any nans of infs by aggressively converting to numpy
-        # (catching any errors resulting from this conversion)
-        # and checking with np.isfinite
-        if numpy:
-            try:
-                obj_as_numpy = numpy.asanyarray(obj)
-                try:
-                    is_finite =  numpy.all(numpy.isfinite(obj_as_numpy))
-                    if not is_finite:
-                        self.hasinfnans = True
-                except TypeError:
-                    pass
-            except:
-                pass
         # TODO: The ordering if these methods is *very* important. Is this OK?
         encoding_methods = (
             self.encode_as_plotly,
