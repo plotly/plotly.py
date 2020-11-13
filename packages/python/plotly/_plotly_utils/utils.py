@@ -41,9 +41,9 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         """
         # this will raise errors in a normal-expected way
-        self.unsafe = False
+        self.hasinfnans = False
         encoded_o = super(PlotlyJSONEncoder, self).encode(o)
-        if self.unsafe:
+        if not self.hasinfnans:
             return encoded_o
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
@@ -97,13 +97,20 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         """
         numpy = get_module("numpy", should_load=False)
+        # Try to detect any nans of infs by aggressively converting to numpy
+        # (catching any errors resulting from this conversion)
+        # and checking with np.isfinite
         if numpy:
-            if isinstance(obj, numpy.ndarray) and numpy.issubdtype(
-                obj.dtype, numpy.number
-            ):
-                if numpy.all(numpy.isfinite(obj)):
-                    self.unsafe = True
-
+            try:
+                obj_as_numpy = numpy.asanyarray(obj)
+                try:
+                    is_finite =  numpy.all(numpy.isfinite(obj_as_numpy))
+                    if not is_finite:
+                        self.hasinfnans = True
+                except TypeError:
+                    pass
+            except:
+                pass
         # TODO: The ordering if these methods is *very* important. Is this OK?
         encoding_methods = (
             self.encode_as_plotly,
