@@ -199,8 +199,16 @@ def map_annotation_like_obj_axis(oldfig, newfig, an, force_secondary_y=False):
 
 def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
     """
-    Combines two figures by just using the layout of the first figure and
-    appending the data of the second figure.
+    Combines two figures by putting all the traces from fig0 and fig1 on a new
+    figure (fig). Then the annotation-like objects are copied to fig (i.e., the
+    titles are not copied).
+    The colors are reassigned so each trace has a unique color until all the
+    colors in the colorway are exhausted and then loops through the colorway to
+    assign additional colors (this is referred to as "reflowing" below).
+    In order to differentiate the traces in the legend, if fig0 or fig1 have
+    titles, they are prepended to the trace name.
+    If fig1_secondary_y is True, then the yaxes from fig1 are placed on
+    secondary y axes in the new figure.
     """
     if fig1_secondary_y and (
         ("px" not in fig0._aux.keys()) or ("px" not in fig0._aux.keys())
@@ -212,9 +220,9 @@ def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
     grid_ref_shape = fig_grid_ref_shape(fig0)
     if grid_ref_shape != fig_grid_ref_shape(fig1):
         raise ValueError(
-            "Only two figures with the same subplot geometry can be overlayd."
+            "Only two figures with the same subplot geometry can be overlayed."
         )
-    # reflow the colors
+    # get colors for reflowing
     colorway = fig0.layout.template.layout.colorway
     specs = None
     if fig1_secondary_y:
@@ -222,7 +230,11 @@ def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
             [dict(secondary_y=True) for __ in range(grid_ref_shape[1])]
             for _ in range(grid_ref_shape[0])
         ]
-    fig = make_subplots(*fig_grid_ref_shape(fig0), specs=specs)
+    # TODO: This needs to detect the start_cell of the input figures rather than
+    # assuming 'bottom-left', which is just the px default start_cell
+    fig = make_subplots(
+        *fig_grid_ref_shape(fig0), specs=specs, start_cell="bottom-left"
+    )
     for r, c in multi_index(*fig_grid_ref_shape(fig)):
         print("row,col", r + 1, c + 1)
         for (tr, f), color in zip(
@@ -232,6 +244,7 @@ def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
                     for f in [fig0, fig1]
                 ]
             ),
+            # reflow the colors
             cycle(colorway),
         ):
             title = f.layout.title.text
@@ -261,6 +274,8 @@ def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
     )
     for (oldfig, selector), ((newfig, secy), adder) in zip(selectors, adders):
         for ann in selector(oldfig):
+            # TODO this function needs to eventually take into consideration the
+            # start_cell arguments of the figures involved in the mapping.
             newann = map_annotation_like_obj_axis(
                 oldfig, newfig, ann, force_secondary_y=secy
             )
@@ -270,12 +285,11 @@ def px_simple_overlay(fig0, fig1, fig1_secondary_y=False):
     # title will be wrong
     fig.layout.title = None
     # preserve bar mode
-    # if both figures have barmode set, the first is taken, otherwise the set one is taken
+    # if both figures have barmode set, the first is taken from the figure that
+    # has bars (so just the one from fig0 if both have bars), otherwise the set
+    # one is taken.
     # TODO argument to force barmode? or the user can just update it after
     fig.layout.barmode = get_first_set_barmode([fig0, fig1])
-    # also include annotations, shapes and layout images from fig1
-    for kw in ["annotations", "shapes", "images"]:
-        fig.layout[kw] += fig1.layout[kw]
     return fig
 
 
@@ -312,21 +326,25 @@ def set_main_trace_color(tr, color):
 
 
 def get_first_set_barmode(figs):
+    """ Get first bar mode from the figure that has it set and has bar traces. """
+
+    def _bar_mode_filter(f):
+        return (
+            any([type(tr) == type(go.Bar()) for tr in f.data])
+            and f.layout.barmode is not None
+        )
+
     barmode = None
     try:
-        barmode = list(
-            filter(lambda x: x is not None, [f.layout.barmode for f in figs])
-        )[0]
+        barmode = [f.layout.barmode for f in filter(_bar_mode_filter, figs)][0]
     except IndexError:
         # if no figure sets barmode, then it is not set
         pass
     return barmode
 
 
-df = test_data.aug_tips()
-
-
 def simple_overlay_example():
+    df = test_data.aug_tips()
     fig0 = px.scatter(df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker")
     fig1 = px.histogram(
         df, x="total_bill", y="tip", facet_row="sex", facet_col="smoker"
