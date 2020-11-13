@@ -1940,22 +1940,29 @@ class TestMakeSubplots(TestCase):
 def test_make_subplots_spacing_error():
     # check exception describing maximum value for horizontal_spacing or
     # vertical_spacing is raised when spacing exceeds that value
-    with pytest.raises(
-        ValueError,
-        match=(
-            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f.$"
-            % ("Vertical", "rows", 0.02)
+    for match in [
+        (
+            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            % ("Vertical", "rows", 1.0 / 50.0)
         ).replace(".", "\."),
-    ):
-        fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
-    with pytest.raises(
-        ValueError,
-        match=(
-            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f.$"
-            % ("Horizontal", "cols", 0.02)
+        "The resulting plot would have 51 rows \(rows=51\)\.$",
+    ]:
+        with pytest.raises(
+            ValueError, match=match,
+        ):
+            fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
+    for match in [
+        (
+            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            % ("Horizontal", "cols", 1.0 / 50.0)
         ).replace(".", "\."),
-    ):
-        fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
+        "The resulting plot would have 51 columns \(cols=51\)\.$",
+    ]:
+        with pytest.raises(
+            ValueError, match=match,
+        ):
+            fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
+    # Check it's not raised when it's not beyond the maximum
     try:
         fig = subplots.make_subplots(51, 1, vertical_spacing=0.0200)
     except ValueError:
