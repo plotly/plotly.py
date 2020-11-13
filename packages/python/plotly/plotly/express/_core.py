@@ -2120,22 +2120,41 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             for j in range(ncols):
                 subplot_labels[i * ncols + j] = col_labels[(nrows - 1 - i) * ncols + j]
 
+    def _spacing_error_translator(e, direction, facet_arg):
+        """
+        Translates the spacing errors thrown by the underlying make_subplots
+        routine into one that describes an argument adjustable through px.
+        """
+        if ("%s spacing" % (direction,)) in e.args[0]:
+            e.args = (
+                e.args[0]
+                + """
+Use the {facet_arg} argument to adjust this spacing.""".format(
+                    facet_arg=facet_arg
+                ),
+            )
+            raise e
+
     # Create figure with subplots
-    fig = make_subplots(
-        rows=nrows,
-        cols=ncols,
-        specs=specs,
-        shared_xaxes="all",
-        shared_yaxes="all",
-        row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
-        column_titles=[] if facet_col_wrap else col_labels,
-        subplot_titles=subplot_labels if facet_col_wrap else [],
-        horizontal_spacing=horizontal_spacing,
-        vertical_spacing=vertical_spacing,
-        row_heights=row_heights,
-        column_widths=column_widths,
-        start_cell="bottom-left",
-    )
+    try:
+        fig = make_subplots(
+            rows=nrows,
+            cols=ncols,
+            specs=specs,
+            shared_xaxes="all",
+            shared_yaxes="all",
+            row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
+            column_titles=[] if facet_col_wrap else col_labels,
+            subplot_titles=subplot_labels if facet_col_wrap else [],
+            horizontal_spacing=horizontal_spacing,
+            vertical_spacing=vertical_spacing,
+            row_heights=row_heights,
+            column_widths=column_widths,
+            start_cell="bottom-left",
+        )
+    except ValueError as e:
+        _spacing_error_translator(e, "Horizontal", "facet_col_spacing")
+        _spacing_error_translator(e, "Vertical", "facet_row_spacing")
 
     # Remove explicit font size of row/col titles so template can take over
     for annot in fig.layout.annotations:
