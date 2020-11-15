@@ -29,7 +29,7 @@ class TestJSONEncoder(TestCase):
         # without inf or nan is faster (because we can avoid decoding
         # and reencoding).
         z = np.random.randn(100, 100)
-        x = np.arange(100.)
+        x = np.arange(100.0)
         fig_1 = go.Figure(go.Heatmap(z=z, x=x))
         t1 = time()
         json_str_1 = _json.dumps(fig_1, cls=PlotlyJSONEncoder)
@@ -40,18 +40,18 @@ class TestJSONEncoder(TestCase):
         t3 = time()
         json_str_2 = _json.dumps(fig_2, cls=PlotlyJSONEncoder)
         t4 = time()
-        assert(t2 - t1 < t4 - t3)
-        assert 'null' in json_str_2
-        assert 'NaN' not in json_str_2
-        assert 'Infinity' not in json_str_2
-        x = np.arange(100.)
+        assert t2 - t1 < t4 - t3
+        assert "null" in json_str_2
+        assert "NaN" not in json_str_2
+        assert "Infinity" not in json_str_2
+        x = np.arange(100.0)
         fig_3 = go.Figure(go.Heatmap(z=z, x=x))
-        fig_3.update_layout(title_text='Infinity')
+        fig_3.update_layout(title_text="Infinity")
         t5 = time()
         json_str_3 = _json.dumps(fig_3, cls=PlotlyJSONEncoder)
         t6 = time()
-        assert(t2 - t1 < t6 - t5)
-        assert 'Infinity' in json_str_3
+        assert t2 - t1 < t6 - t5
+        assert "Infinity" in json_str_3
 
 
 class TestGetByPath(TestCase):
