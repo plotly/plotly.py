@@ -82,6 +82,14 @@ $ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
 
+The installation instructions in our documentation assume that you are running plotly in the default python kernel of jupyterlab. If you have installed [multiple python kernels](https://ipython.readthedocs.io/en/stable/install/kernel_install.html) you must ensure that the plotly jupyter labextension is installed for the default python kernel. That is, if you start jupyterlab from one python environment (the "server kernel") but then select a different python environment to run your notebooks (the "processing kernel"), then the "server kernel" must have the plotly jupyterlab extension installed, and the "processing kernel" must have plotly installed. In addition, the "processing kernel" must also have the [`nbformat`](https://nbformat.readthedocs.io/en/latest/) dependency installed to correctly render figures.
+
+If you forget to install the plotly jupyterlab extension for the "server kernel", then your plotly figures will display as blank spaces, even if the "processing kernel" is correctly installed. If you forget to add the `nbformat` dependency to the "processing kernel", you will receive an error message asking you to install it:
+
+```
+ValueError: Mime type rendering requires nbformat>=4.2.0 but it is not installed
+```
+
 If you run into "out of memory" problems while installing the extensions, try running these commands before running `jupyter labextension install`...
 
 ```bash

@@ -174,7 +174,7 @@ fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
 
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab.
+Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab. Note that our documentation assumes that you will run plotly with the default jupyter kernel. If you are using multiple python kernels and run into problems, refer to the [Troubleshooting guide](/python/troubleshooting/) for help.
 
 <!-- #region -->
 
