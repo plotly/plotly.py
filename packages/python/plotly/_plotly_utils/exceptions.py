@@ -83,3 +83,15 @@ class PlotlyDataTypeError(PlotlyGraphObjectError):
         super(PlotlyDataTypeError, self).__init__(
             message=message, path=path, notes=notes
         )
+
+
+class PlotlyKeyError(KeyError):
+    """
+    KeyErrors are not printed as beautifully as other errors (this is so that
+    {}[''] prints    "KeyError: ''" and not "KeyError:"). So here we use
+    LookupError's __str__ to make a PlotlyKeyError object which will print nicer
+    error messages for KeyErrors.
+    """
+
+    def __str__(self):
+        return LookupError.__str__(self)

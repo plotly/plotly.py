@@ -24,6 +24,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The `add_trace`, `add_shape`, `add_annotation`, `add_layout_image`, `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions accept an argument `exclude_empty_subplots` which if `True`, only adds the object to subplots already containing traces or layout objects. This is useful in conjunction with the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
 - For all `go.Figure` functions accepting a selector argument (e.g., `select_traces`), this argument can now also be a function which is passed each relevant graph object (in the case of `select_traces`, it is passed every trace in the figure). For graph objects where this function returns true, the graph object is included in the selection. ([#2844](https://github.com/plotly/plotly.py/pull/2844))
 
+### Added
+
+- Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
+
 ### Updated
 
 - Updated Plotly.js to version 1.57.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.1/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
