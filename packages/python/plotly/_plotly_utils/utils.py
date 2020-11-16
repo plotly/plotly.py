@@ -41,7 +41,6 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         """
         # this will raise errors in a normal-expected way
-        self.hasinfnans = False
         encoded_o = super(PlotlyJSONEncoder, self).encode(o)
         # Brute force guessing whether NaN or Infinity values are in the string
         # We catch false positive cases (e.g. strings such as titles, labels etc.)
