@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.6
   plotly:
     description: How to make Histograms in Python with Plotly.
     display_as: statistical
@@ -30,9 +30,9 @@ jupyter:
     order: 3
     page_type: example_index
     permalink: python/histograms/
-    redirect_from: 
-      - /python/histogram-tutorial/
-      - /python/histogram/
+    redirect_from:
+    - /python/histogram-tutorial/
+    - /python/histogram/
     thumbnail: thumbnail/histogram.jpg
 ---
 
@@ -69,6 +69,19 @@ import plotly.express as px
 df = px.data.tips()
 fig = px.histogram(df, x="total_bill", nbins=20)
 fig.show()
+```
+
+#### Histograms in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a style="color:red;" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'histograms', width='100%', height=630)
 ```
 
 #### Accessing the counts (y-axis) values
