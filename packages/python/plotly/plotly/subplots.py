@@ -530,12 +530,32 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             )
         )
 
+    def _check_hv_spacing(dimsize, spacing, name, dimvarname, dimname):
+        if spacing < 0 or spacing > 1:
+            raise ValueError("%s spacing must be between 0 and 1." % (name,))
+        if dimsize <= 1:
+            return
+        max_spacing = 1.0 / float(dimsize - 1)
+        if spacing > max_spacing:
+            raise ValueError(
+                """{name} spacing cannot be greater than (1 / ({dimvarname} - 1)) = {max_spacing:f}.
+The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".format(
+                    dimvarname=dimvarname,
+                    name=name,
+                    dimname=dimname,
+                    max_spacing=max_spacing,
+                    dimsize=dimsize,
+                )
+            )
+
     # ### horizontal_spacing ###
     if horizontal_spacing is None:
         if has_secondary_y:
             horizontal_spacing = 0.4 / cols
         else:
             horizontal_spacing = 0.2 / cols
+    # check horizontal_spacing can be satisfied:
+    _check_hv_spacing(cols, horizontal_spacing, "Horizontal", "cols", "columns")
 
     # ### vertical_spacing ###
     if vertical_spacing is None:
@@ -543,6 +563,8 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             vertical_spacing = 0.5 / rows
         else:
             vertical_spacing = 0.3 / rows
+    # check vertical_spacing can be satisfied:
+    _check_hv_spacing(rows, vertical_spacing, "Vertical", "rows", "rows")
 
     # ### subplot titles ###
     if subplot_titles is None:
