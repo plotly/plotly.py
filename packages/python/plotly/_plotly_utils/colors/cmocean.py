@@ -6,7 +6,7 @@ Learn more at https://matplotlib.org/cmocean/
 cmocean is made available under an MIT license: https://github.com/matplotlib/cmocean/blob/master/LICENSE.txt
 """
 
-from ._swatches import _swatches
+from ._swatches import _swatches, _swatches_continuous
 
 
 def swatches(template=None):
@@ -14,6 +14,14 @@ def swatches(template=None):
 
 
 swatches.__doc__ = _swatches.__doc__
+
+
+def swatches_continuous(template=None):
+    return _swatches_continuous(__name__, globals(), template)
+
+
+swatches_continuous.__doc__ = _swatches_continuous.__doc__
+
 
 turbid = [
     "rgb(232, 245, 171)",
@@ -271,6 +279,6 @@ curl = [
 # Prefix variable names with _ so that they will not be added to the swatches
 _contents = dict(globals())
 for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k == "swatches" or _k.endswith("_r"):
+    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
         continue
     globals()[_k + "_r"] = _cols[::-1]

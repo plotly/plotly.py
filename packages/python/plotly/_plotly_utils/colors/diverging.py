@@ -17,12 +17,12 @@ from .colorbrewer import (  # noqa: F401
     RdYlGn,
     Spectral,
 )
-from .cmocean import balance, delta, curl  # noqa: F401
+from .cmocean import balance, delta, curl, oxy  # noqa: F401
 from .carto import Armyrose, Fall, Geyser, Temps, Tealrose, Tropic, Earth  # noqa: F401
 
 from .plotlyjs import Picnic, Portland  # noqa: F401
 
-from ._swatches import _swatches
+from ._swatches import _swatches, _swatches_continuous
 
 
 def swatches(template=None):
@@ -31,10 +31,17 @@ def swatches(template=None):
 
 swatches.__doc__ = _swatches.__doc__
 
+
+def swatches_continuous(template=None):
+    return _swatches_continuous(__name__, globals(), template)
+
+
+swatches_continuous.__doc__ = _swatches_continuous.__doc__
+
 # Prefix variable names with _ so that they will not be added to the swatches
 _contents = dict(globals())
 for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k == "swatches" or _k.endswith("_r"):
+    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
         continue
     globals()[_k + "_r"] = _cols[::-1]
 
