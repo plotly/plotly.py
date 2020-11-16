@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - `go.Figure` now has a `set_subplots` method to set subplots on an already
   existing figure.
+- Added `Turbo` colorscale
 
 
 ## [4.12.1] - UNRELEASED
