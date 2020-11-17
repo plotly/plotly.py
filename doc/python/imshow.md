@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.7.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -401,7 +401,7 @@ fig.show()
 
 ### Exploring 3-D images and timeseries with `facet_col`
 
-*Introduced in plotly 4.11*
+*Introduced in plotly 4.13*
 
 For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axis the image is sliced through to make the facets. With `facet_col_wrap`, one can set the maximum number of columns. For image datasets passed as xarrays, it is also possible to specify the axis by its name (label), thus passing a string to `facet_col`.
 
@@ -416,27 +416,13 @@ from skimage.data import image_fetcher
 path = image_fetcher.fetch('data/cells.tif')
 data = io.imread(path)
 img = data[20:45:2]
-fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5, height=700)
-fig.show()
-```
-
-```python
-import plotly.express as px
-from skimage import io
-from skimage.data import image_fetcher
-path = image_fetcher.fetch('data/cells.tif')
-data = io.imread(path)
-img = data[25:40]
 fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5)
-# To have square facets one needs to unmatch axes
-fig.update_xaxes(matches=None)
-fig.update_yaxes(matches=None)
 fig.show()
 ```
 
 ### Exploring 3-D images and timeseries with `animation_frame`
 
-*Introduced in plotly 4.11*
+*Introduced in plotly 4.13*
 
 For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by sliding through its different planes in an animation. The `animation_frame` argument of `px.imshow` sets the axis along which the 3-D image is sliced in the animation.
 
