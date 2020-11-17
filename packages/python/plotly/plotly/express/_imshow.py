@@ -204,8 +204,10 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    img_is_xarray = False
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
+        img_is_xarray = True
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
@@ -325,26 +327,33 @@ def imshow(
                 _vectorize_zvalue(zmax, mode="max"),
             )
         x0, y0, dx, dy = (None,) * 4
+        error_msg_xarray = (
+                "Non-numerical coordinates were passed with xarray `img`, but "
+                "the Image trace cannot handle it. Please use `binary_string=False` "
+                "for 2D data or pass instead the numpy array `img.values` to `px.imshow`."
+                )
         if x is not None:
             x = np.asanyarray(x)
             if np.issubdtype(x.dtype, np.number):
                 x0 = x[0]
                 dx = x[1] - x[0]
             else:
-                raise ValueError(
+                error_msg = error_msg_xarray if img_is_xarray else (
                     "Only numerical values are accepted for the `x` parameter "
                     "when an Image trace is used."
-                )
+                        )
+                raise ValueError(error_msg)
         if y is not None:
             y = np.asanyarray(y)
             if np.issubdtype(y.dtype, np.number):
                 y0 = y[0]
                 dy = y[1] - y[0]
             else:
-                raise ValueError(
+                error_msg = error_msg_xarray if img_is_xarray else (
                     "Only numerical values are accepted for the `y` parameter "
                     "when an Image trace is used."
-                )
+                        )
+                raise ValueError(error_msg)
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
