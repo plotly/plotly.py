@@ -581,6 +581,26 @@ fig = go.Figure(data=data, layout=layout)
 fig.show()
 ```
 
+#### Setting Subplots on a Figure Directly
+
+_new in 4.13_
+
+Subplots can be added to an already existing figure, provided it doesn't already
+have subplots. `go.Figure.set_subplots` accepts all the same arguments as
+`plotly.subplots.make_subplots`.
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure().set_subplots(2, 3, horizontal_spacing=0.1)
+```
+
+is equivalent to:
+
+```python
+from plotly.subplots import make_subplots
+fig = make_subplots(2, 3, horizontal_spacing=0.1)
+```
+
 #### Reference
 All of the x-axis properties are found here: https://plotly.com/python/reference/XAxis/
 All of the y-axis properties are found here: https://plotly.com/python/reference/YAxis/

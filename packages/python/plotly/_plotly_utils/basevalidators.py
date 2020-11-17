@@ -354,14 +354,14 @@ class BaseValidator(object):
 
 class DataArrayValidator(BaseValidator):
     """
-        "data_array": {
-            "description": "An {array} of data. The value MUST be an
-                            {array}, or we ignore it.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt"
-            ]
-        },
+    "data_array": {
+        "description": "An {array} of data. The value MUST be an
+                        {array}, or we ignore it.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt"
+        ]
+    },
     """
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -394,18 +394,18 @@ class DataArrayValidator(BaseValidator):
 
 class EnumeratedValidator(BaseValidator):
     """
-        "enumerated": {
-            "description": "Enumerated value type. The available values are
-                            listed in `values`.",
-            "requiredOpts": [
-                "values"
-            ],
-            "otherOpts": [
-                "dflt",
-                "coerceNumber",
-                "arrayOk"
-            ]
-        },
+    "enumerated": {
+        "description": "Enumerated value type. The available values are
+                        listed in `values`.",
+        "requiredOpts": [
+            "values"
+        ],
+        "otherOpts": [
+            "dflt",
+            "coerceNumber",
+            "arrayOk"
+        ]
+    },
     """
 
     def __init__(
@@ -477,7 +477,9 @@ class EnumeratedValidator(BaseValidator):
         #
         # To be cautious, we only perform this conversion for enumerated
         # values that match the anchor-style regex
-        match = re.match(r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\$", regex_str)
+        match = re.match(
+            r"\^(\w)\(\[2\-9\]\|\[1\-9\]\[0\-9\]\+\)\?\( domain\)\?\$", regex_str
+        )
 
         if match:
             anchor_char = match.group(1)
@@ -599,13 +601,13 @@ class EnumeratedValidator(BaseValidator):
 
 class BooleanValidator(BaseValidator):
     """
-        "boolean": {
-            "description": "A boolean (true/false) value.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt"
-            ]
-        },
+    "boolean": {
+        "description": "A boolean (true/false) value.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt"
+        ]
+    },
     """
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -662,19 +664,19 @@ class SrcValidator(BaseValidator):
 
 class NumberValidator(BaseValidator):
     """
-        "number": {
-            "description": "A number or a numeric value (e.g. a number
-                            inside a string). When applicable, values
-                            greater (less) than `max` (`min`) are coerced to
-                            the `dflt`.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt",
-                "min",
-                "max",
-                "arrayOk"
-            ]
-        },
+    "number": {
+        "description": "A number or a numeric value (e.g. a number
+                        inside a string). When applicable, values
+                        greater (less) than `max` (`min`) are coerced to
+                        the `dflt`.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt",
+            "min",
+            "max",
+            "arrayOk"
+        ]
+    },
     """
 
     def __init__(
@@ -792,18 +794,18 @@ class NumberValidator(BaseValidator):
 
 class IntegerValidator(BaseValidator):
     """
-        "integer": {
-            "description": "An integer or an integer inside a string. When
-                            applicable, values greater (less) than `max`
-                            (`min`) are coerced to the `dflt`.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt",
-                "min",
-                "max",
-                "arrayOk"
-            ]
-        },
+    "integer": {
+        "description": "An integer or an integer inside a string. When
+                        applicable, values greater (less) than `max`
+                        (`min`) are coerced to the `dflt`.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt",
+            "min",
+            "max",
+            "arrayOk"
+        ]
+    },
     """
 
     def __init__(
@@ -923,18 +925,18 @@ class IntegerValidator(BaseValidator):
 
 class StringValidator(BaseValidator):
     """
-        "string": {
-            "description": "A string value. Numbers are converted to strings
-                            except for attributes with `strict` set to true.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt",
-                "noBlank",
-                "strict",
-                "arrayOk",
-                "values"
-            ]
-        },
+    "string": {
+        "description": "A string value. Numbers are converted to strings
+                        except for attributes with `strict` set to true.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt",
+            "noBlank",
+            "strict",
+            "arrayOk",
+            "values"
+        ]
+    },
     """
 
     def __init__(
@@ -1092,21 +1094,21 @@ class StringValidator(BaseValidator):
 
 class ColorValidator(BaseValidator):
     """
-        "color": {
-            "description": "A string describing color. Supported formats:
-                            - hex (e.g. '#d3d3d3')
-                            - rgb (e.g. 'rgb(255, 0, 0)')
-                            - rgba (e.g. 'rgb(255, 0, 0, 0.5)')
-                            - hsl (e.g. 'hsl(0, 100%, 50%)')
-                            - hsv (e.g. 'hsv(0, 100%, 100%)')
-                            - named colors(full list:
-                              http://www.w3.org/TR/css3-color/#svg-color)",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt",
-                "arrayOk"
-            ]
-        },
+    "color": {
+        "description": "A string describing color. Supported formats:
+                        - hex (e.g. '#d3d3d3')
+                        - rgb (e.g. 'rgb(255, 0, 0)')
+                        - rgba (e.g. 'rgb(255, 0, 0, 0.5)')
+                        - hsl (e.g. 'hsl(0, 100%, 50%)')
+                        - hsv (e.g. 'hsv(0, 100%, 100%)')
+                        - named colors(full list:
+                          http://www.w3.org/TR/css3-color/#svg-color)",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt",
+            "arrayOk"
+        ]
+    },
     """
 
     re_hex = re.compile(r"#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})")
@@ -1443,14 +1445,14 @@ class ColorValidator(BaseValidator):
 
 class ColorlistValidator(BaseValidator):
     """
-        "colorlist": {
-          "description": "A list of colors. Must be an {array} containing
-                          valid colors.",
-          "requiredOpts": [],
-          "otherOpts": [
-            "dflt"
-          ]
-        }
+    "colorlist": {
+      "description": "A list of colors. Must be an {array} containing
+                      valid colors.",
+      "requiredOpts": [],
+      "otherOpts": [
+        "dflt"
+      ]
+    }
     """
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1490,20 +1492,20 @@ class ColorlistValidator(BaseValidator):
 
 class ColorscaleValidator(BaseValidator):
     """
-        "colorscale": {
-            "description": "A Plotly colorscale either picked by a name:
-                            (any of Greys, YlGnBu, Greens, YlOrRd, Bluered,
-                            RdBu, Reds, Blues, Picnic, Rainbow, Portland,
-                            Jet, Hot, Blackbody, Earth, Electric, Viridis)
-                            customized as an {array} of 2-element {arrays}
-                            where the first element is the normalized color
-                            level value (starting at *0* and ending at *1*),
-                            and the second item is a valid color string.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt"
-            ]
-        },
+    "colorscale": {
+        "description": "A Plotly colorscale either picked by a name:
+                        (any of Greys, YlGnBu, Greens, YlOrRd, Bluered,
+                        RdBu, Reds, Blues, Picnic, Rainbow, Portland,
+                        Jet, Hot, Blackbody, Earth, Electric, Viridis)
+                        customized as an {array} of 2-element {arrays}
+                        where the first element is the normalized color
+                        level value (starting at *0* and ending at *1*),
+                        and the second item is a valid color string.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt"
+        ]
+    },
     """
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1558,7 +1560,7 @@ class ColorscaleValidator(BaseValidator):
         Many predefined colorscale lists are included in the sequential, diverging,
         and cyclical modules in the plotly.colors package.
       - A list of 2-element lists where the first element is the
-        normalized color level value (starting at 0 and ending at 1), 
+        normalized color level value (starting at 0 and ending at 1),
         and the second item is a valid color string.
         (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
       - One of the following named colorscales:
@@ -1642,13 +1644,13 @@ class ColorscaleValidator(BaseValidator):
 
 class AngleValidator(BaseValidator):
     """
-        "angle": {
-            "description": "A number (in degree) between -180 and 180.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt"
-            ]
-        },
+    "angle": {
+        "description": "A number (in degree) between -180 and 180.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt"
+        ]
+    },
     """
 
     def __init__(self, plotly_name, parent_name, **kwargs):
@@ -1683,18 +1685,18 @@ class AngleValidator(BaseValidator):
 
 class SubplotidValidator(BaseValidator):
     """
-        "subplotid": {
-            "description": "An id string of a subplot type (given by dflt),
-                            optionally followed by an integer >1. e.g. if
-                            dflt='geo', we can have 'geo', 'geo2', 'geo3',
-                            ...",
-            "requiredOpts": [
-                "dflt"
-            ],
-            "otherOpts": [
-                "regex"
-            ]
-        }
+    "subplotid": {
+        "description": "An id string of a subplot type (given by dflt),
+                        optionally followed by an integer >1. e.g. if
+                        dflt='geo', we can have 'geo', 'geo2', 'geo3',
+                        ...",
+        "requiredOpts": [
+            "dflt"
+        ],
+        "otherOpts": [
+            "regex"
+        ]
+    }
     """
 
     def __init__(self, plotly_name, parent_name, dflt=None, regex=None, **kwargs):
@@ -1754,21 +1756,21 @@ class SubplotidValidator(BaseValidator):
 
 class FlaglistValidator(BaseValidator):
     """
-        "flaglist": {
-            "description": "A string representing a combination of flags
-                            (order does not matter here). Combine any of the
-                            available `flags` with *+*.
-                            (e.g. ('lines+markers')). Values in `extras`
-                            cannot be combined.",
-            "requiredOpts": [
-                "flags"
-            ],
-            "otherOpts": [
-                "dflt",
-                "extras",
-                "arrayOk"
-            ]
-        },
+    "flaglist": {
+        "description": "A string representing a combination of flags
+                        (order does not matter here). Combine any of the
+                        available `flags` with *+*.
+                        (e.g. ('lines+markers')). Values in `extras`
+                        cannot be combined.",
+        "requiredOpts": [
+            "flags"
+        ],
+        "otherOpts": [
+            "dflt",
+            "extras",
+            "arrayOk"
+        ]
+    },
     """
 
     def __init__(
@@ -1875,15 +1877,15 @@ class FlaglistValidator(BaseValidator):
 
 class AnyValidator(BaseValidator):
     """
-        "any": {
-            "description": "Any type.",
-            "requiredOpts": [],
-            "otherOpts": [
-                "dflt",
-                "values",
-                "arrayOk"
-            ]
-        },
+    "any": {
+        "description": "Any type.",
+        "requiredOpts": [],
+        "otherOpts": [
+            "dflt",
+            "values",
+            "arrayOk"
+        ]
+    },
     """
 
     def __init__(self, plotly_name, parent_name, values=None, array_ok=False, **kwargs):
@@ -1915,17 +1917,17 @@ class AnyValidator(BaseValidator):
 
 class InfoArrayValidator(BaseValidator):
     """
-        "info_array": {
-            "description": "An {array} of plot information.",
-            "requiredOpts": [
-                "items"
-            ],
-            "otherOpts": [
-                "dflt",
-                "freeLength",
-                "dimensions"
-            ]
-        }
+    "info_array": {
+        "description": "An {array} of plot information.",
+        "requiredOpts": [
+            "items"
+        ],
+        "otherOpts": [
+            "dflt",
+            "freeLength",
+            "dimensions"
+        ]
+    }
     """
 
     def __init__(
@@ -2705,7 +2707,7 @@ class BaseTemplateValidator(CompoundValidator):
 
       - A string containing multiple registered template names, joined on '+'
         characters (e.g. 'template1+template2'). In this case the resulting
-        template is computed by merging together the collection of registered 
+        template is computed by merging together the collection of registered
         templates"""
 
         return compound_description

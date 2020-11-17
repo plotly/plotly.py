@@ -60,6 +60,7 @@ def make_subplots(
     row_titles=None,
     x_title=None,
     y_title=None,
+    figure=None,
     **kwargs
 ):
     """
@@ -226,7 +227,15 @@ def make_subplots(
 
     y_title: str or None (default None)
         Title to place to the left of the left column of subplots,
-       centered vertically
+        centered vertically
+
+    figure: go.Figure or None (default None)
+        If None, a new go.Figure instance will be created and its axes will be
+        populated with those corresponding to the requested subplot geometry and
+        this new figure will be returned.
+        If a go.Figure instance, the axes will be added to the
+        layout of this figure and this figure will be returned. If the figure
+        already contains axes, they will be overwritten.
 
     Examples
     --------
@@ -521,12 +530,32 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             )
         )
 
+    def _check_hv_spacing(dimsize, spacing, name, dimvarname, dimname):
+        if spacing < 0 or spacing > 1:
+            raise ValueError("%s spacing must be between 0 and 1." % (name,))
+        if dimsize <= 1:
+            return
+        max_spacing = 1.0 / float(dimsize - 1)
+        if spacing > max_spacing:
+            raise ValueError(
+                """{name} spacing cannot be greater than (1 / ({dimvarname} - 1)) = {max_spacing:f}.
+The resulting plot would have {dimsize} {dimname} ({dimvarname}={dimsize}).""".format(
+                    dimvarname=dimvarname,
+                    name=name,
+                    dimname=dimname,
+                    max_spacing=max_spacing,
+                    dimsize=dimsize,
+                )
+            )
+
     # ### horizontal_spacing ###
     if horizontal_spacing is None:
         if has_secondary_y:
             horizontal_spacing = 0.4 / cols
         else:
             horizontal_spacing = 0.2 / cols
+    # check horizontal_spacing can be satisfied:
+    _check_hv_spacing(cols, horizontal_spacing, "Horizontal", "cols", "columns")
 
     # ### vertical_spacing ###
     if vertical_spacing is None:
@@ -534,6 +563,8 @@ The {arg} argument to make_subplots must be one of: {valid_vals}
             vertical_spacing = 0.5 / rows
         else:
             vertical_spacing = 0.3 / rows
+    # check vertical_spacing can be satisfied:
+    _check_hv_spacing(rows, vertical_spacing, "Vertical", "rows", "rows")
 
     # ### subplot titles ###
     if subplot_titles is None:
@@ -809,13 +840,15 @@ The row_titles argument to make_subplots must be a list or tuple
         print(grid_str)
 
     # Build resulting figure
-    fig = go.Figure(layout=layout)
+    if figure is None:
+        figure = go.Figure()
+    figure.update_layout(layout)
 
     # Attach subplot grid info to the figure
-    fig.__dict__["_grid_ref"] = grid_ref
-    fig.__dict__["_grid_str"] = grid_str
+    figure.__dict__["_grid_ref"] = grid_ref
+    figure.__dict__["_grid_str"] = grid_str
 
-    return fig
+    return figure
 
 
 def _configure_shared_axes(layout, grid_ref, specs, x_or_y, shared, row_dir):

@@ -3,6 +3,9 @@ import sys
 if sys.version_info < (3, 7):
     from ._yaxis import YaxisValidator
     from ._xsrc import XsrcValidator
+    from ._xperiodalignment import XperiodalignmentValidator
+    from ._xperiod0 import Xperiod0Validator
+    from ._xperiod import XperiodValidator
     from ._xcalendar import XcalendarValidator
     from ._xaxis import XaxisValidator
     from ._x import XValidator
@@ -49,6 +52,9 @@ else:
         [
             "._yaxis.YaxisValidator",
             "._xsrc.XsrcValidator",
+            "._xperiodalignment.XperiodalignmentValidator",
+            "._xperiod0.Xperiod0Validator",
+            "._xperiod.XperiodValidator",
             "._xcalendar.XcalendarValidator",
             "._xaxis.XaxisValidator",
             "._x.XValidator",

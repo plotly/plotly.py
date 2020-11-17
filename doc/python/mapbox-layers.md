@@ -116,6 +116,7 @@ fig.update_layout(
         {
             "below": 'traces',
             "sourcetype": "raster",
+            "sourceattribution": "United States Geological Survey",
             "source": [
                 "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"
             ]
@@ -147,12 +148,14 @@ fig.update_layout(
         {
             "below": 'traces',
             "sourcetype": "raster",
+            "sourceattribution": "United States Geological Survey",
             "source": [
                 "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"
             ]
         },
         {
             "sourcetype": "raster",
+            "sourceattribution": "Government of Canada",
             "source": ["https://geo.weather.gc.ca/geomet/?"
                        "SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&CRS=EPSG:3857"
                        "&WIDTH=1000&HEIGHT=1000&LAYERS=RADAR_1KM_RDBR&TILED=true&FORMAT=image/png"],

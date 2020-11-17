@@ -2,11 +2,17 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._ysrc import YsrcValidator
+    from ._yperiodalignment import YperiodalignmentValidator
+    from ._yperiod0 import Yperiod0Validator
+    from ._yperiod import YperiodValidator
     from ._ycalendar import YcalendarValidator
     from ._yaxis import YaxisValidator
     from ._y0 import Y0Validator
     from ._y import YValidator
     from ._xsrc import XsrcValidator
+    from ._xperiodalignment import XperiodalignmentValidator
+    from ._xperiod0 import Xperiod0Validator
+    from ._xperiod import XperiodValidator
     from ._xcalendar import XcalendarValidator
     from ._xaxis import XaxisValidator
     from ._x0 import X0Validator
@@ -79,11 +85,17 @@ else:
         [],
         [
             "._ysrc.YsrcValidator",
+            "._yperiodalignment.YperiodalignmentValidator",
+            "._yperiod0.Yperiod0Validator",
+            "._yperiod.YperiodValidator",
             "._ycalendar.YcalendarValidator",
             "._yaxis.YaxisValidator",
             "._y0.Y0Validator",
             "._y.YValidator",
             "._xsrc.XsrcValidator",
+            "._xperiodalignment.XperiodalignmentValidator",
+            "._xperiod0.Xperiod0Validator",
+            "._xperiod.XperiodValidator",
             "._xcalendar.XcalendarValidator",
             "._xaxis.XaxisValidator",
             "._x0.X0Validator",

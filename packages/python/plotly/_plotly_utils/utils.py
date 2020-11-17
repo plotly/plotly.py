@@ -2,12 +2,27 @@ import decimal
 import json as _json
 import sys
 import re
+from functools import reduce
 
 from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
 PY36_OR_LATER = sys.version_info >= (3, 6)
+
+
+def cumsum(x):
+    """
+    Custom cumsum to avoid a numpy import.
+    """
+
+    def _reducer(a, x):
+        if len(a) == 0:
+            return [x]
+        return a + [a[-1] + x]
+
+    ret = reduce(_reducer, x, [])
+    return ret
 
 
 class PlotlyJSONEncoder(_json.JSONEncoder):
@@ -40,10 +55,14 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         Note that setting invalid separators will cause a failure at this step.
 
         """
-
         # this will raise errors in a normal-expected way
         encoded_o = super(PlotlyJSONEncoder, self).encode(o)
-
+        # Brute force guessing whether NaN or Infinity values are in the string
+        # We catch false positive cases (e.g. strings such as titles, labels etc.)
+        # but this is ok since the intention is to skip the decoding / reencoding
+        # step when it's completely safe
+        if not ("NaN" in encoded_o or "Infinity" in encoded_o):
+            return encoded_o
         # now:
         #    1. `loads` to switch Infinity, -Infinity, NaN to None
         #    2. `dumps` again so you get 'null' instead of extended JSON
@@ -256,3 +275,170 @@ def _get_int_type():
     else:
         int_type = (int,)
     return int_type
+
+
+def split_multichar(ss, chars):
+    """
+    Split all the strings in ss at any of the characters in chars.
+    Example:
+
+        >>> ss = ["a.string[0].with_separators"]
+        >>> chars = list(".[]_")
+        >>> split_multichar(ss, chars)
+        ['a', 'string', '0', '', 'with', 'separators']
+
+    :param (list) ss: A list of strings.
+    :param (list) chars: Is a list of chars (note: not a string).
+    """
+    if len(chars) == 0:
+        return ss
+    c = chars.pop()
+    ss = reduce(lambda x, y: x + y, map(lambda x: x.split(c), ss))
+    return split_multichar(ss, chars)
+
+
+def split_string_positions(ss):
+    """
+    Given a list of strings split using split_multichar, return a list of
+    integers representing the indices of the first character of every string in
+    the original string.
+    Example:
+
+        >>> ss = ["a.string[0].with_separators"]
+        >>> chars = list(".[]_")
+        >>> ss_split = split_multichar(ss, chars)
+        >>> ss_split
+        ['a', 'string', '0', '', 'with', 'separators']
+        >>> split_string_positions(ss_split)
+        [0, 2, 9, 11, 12, 17]
+
+    :param (list) ss: A list of strings.
+    """
+    return list(
+        map(
+            lambda t: t[0] + t[1],
+            zip(range(len(ss)), cumsum([0] + list(map(len, ss[:-1])))),
+        )
+    )
+
+
+def display_string_positions(p, i=None, offset=0, length=1, char="^", trim=True):
+    """
+    Return a string that is whitespace except at p[i] which is replaced with char.
+    If i is None then all the indices of the string in p are replaced with char.
+
+    Example:
+
+        >>> ss = ["a.string[0].with_separators"]
+        >>> chars = list(".[]_")
+        >>> ss_split = split_multichar(ss, chars)
+        >>> ss_split
+        ['a', 'string', '0', '', 'with', 'separators']
+        >>> ss_pos = split_string_positions(ss_split)
+        >>> ss[0]
+        'a.string[0].with_separators'
+        >>> display_string_positions(ss_pos,4)
+        '            ^'
+        >>> display_string_positions(ss_pos,4,offset=1,length=3,char="~",trim=False)
+        '             ~~~      '
+        >>> display_string_positions(ss_pos)
+        '^ ^      ^ ^^    ^'
+    :param (list) p: A list of integers.
+    :param (integer|None) i: Optional index of p to display.
+    :param (integer) offset: Allows adding a number of spaces to the replacement.
+    :param (integer) length: Allows adding a replacement that is the char
+                             repeated length times.
+    :param (str) char: allows customizing the replacement character.
+    :param (boolean) trim: trims the remaining whitespace if True.
+    """
+    s = [" " for _ in range(max(p) + 1 + offset + length)]
+    maxaddr = 0
+    if i is None:
+        for p_ in p:
+            for l in range(length):
+                maxaddr = p_ + offset + l
+                s[maxaddr] = char
+    else:
+        for l in range(length):
+            maxaddr = p[i] + offset + l
+            s[maxaddr] = char
+    ret = "".join(s)
+    if trim:
+        ret = ret[: maxaddr + 1]
+    return ret
+
+
+def chomp_empty_strings(strings, c, reverse=False):
+    """
+    Given a list of strings, some of which are the empty string "", replace the
+    empty strings with c and combine them with the closest non-empty string on
+    the left or "" if it is the first string.
+    Examples:
+    for c="_"
+    ['hey', '', 'why', '', '', 'whoa', '', ''] -> ['hey_', 'why__', 'whoa__']
+    ['', 'hi', '', "I'm", 'bob', '', ''] -> ['_', 'hi_', "I'm", 'bob__']
+    ['hi', "i'm", 'a', 'good', 'string'] -> ['hi', "i'm", 'a', 'good', 'string']
+    Some special cases are:
+    [] -> []
+    [''] -> ['']
+    ['', ''] -> ['_']
+    ['', '', '', ''] -> ['___']
+    If reverse is true, empty strings are combined with closest non-empty string
+    on the right or "" if it is the last string.
+    """
+
+    def _rev(l):
+        return [s[::-1] for s in l][::-1]
+
+    if reverse:
+        return _rev(chomp_empty_strings(_rev(strings), c))
+    if not len(strings):
+        return strings
+    if sum(map(len, strings)) == 0:
+        return [c * (len(strings) - 1)]
+
+    class _Chomper:
+        def __init__(self, c):
+            self.c = c
+
+        def __call__(self, x, y):
+            # x is list up to now
+            # y is next item in list
+            # x should be [""] initially, and then empty strings filtered out at the
+            # end
+            if len(y) == 0:
+                return x[:-1] + [x[-1] + self.c]
+            else:
+                return x + [y]
+
+    return list(filter(len, reduce(_Chomper(c), strings, [""])))
+
+
+# taken from
+# https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Python
+def levenshtein(s1, s2):
+    if len(s1) < len(s2):
+        return levenshtein(s2, s1)  # len(s1) >= len(s2)
+    if len(s2) == 0:
+        return len(s1)
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            # j+1 instead of j since previous_row and current_row are one character longer
+            # than s2
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+    return previous_row[-1]
+
+
+def find_closest_string(string, strings):
+    def _key(s):
+        # sort by levenshtein distance and lexographically to maintain a stable
+        # sort for different keys with the same levenshtein distance
+        return (levenshtein(s, string), s)
+
+    return sorted(strings, key=_key)[0]

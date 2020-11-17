@@ -32,6 +32,8 @@ a link to the plotly.js CHANGELOG.
 Manually update the versions to `X.Y.Z` in the files
 specified below.
 
+ - `packages/python/plotly/README.md`
+   + this must be done at this point because the README gets baked into PyPI
  - `plotly/_widget_version.py`:
    + Update `__frontend_version__` to `^X.Y.Z` (Note the `^` prefix)
  - `packages/javascript/plotlywidget/package.json`
@@ -59,6 +61,18 @@ Make sure tests pass CI checks, then tag this commit as `vX.Y.Z` (e.g. `v3.1.1`)
 (plotly_dev) $ git push origin vX.Y.Z
 ```
 
+### Publish JS Extensions to NPM
+
+Build and publish the final version of the extensions to NPM. We do this first because
+once we push to PyPI the README will refer to these versions.
+
+```bash
+cd packages/javascript/jupyterlab-plotly
+npm run build && npm publish --access public
+cd packages/javascript/plotlywidget
+npm run build && npm publish --access public
+```
+
 ### Publishing to PyPI
 
 Build and publish the final version to PyPI
@@ -80,17 +94,6 @@ $ pip install plotly --upgrade
 ```
 
 And ask one of your friends to do it too. Our tests should catch any issues, but you never know.
-
-### Publish JS Extensions to NPM
-
-Finally, publish the final version of the extensions to NPM with:
-
-```bash
-cd packages/javascript/jupyterlab-plotly
-npm run build && npm publish --access public
-cd packages/javascript/plotlywidget
-npm run build && npm publish --access public
-```
 
 ### Publishing to the plotly conda channel
 
@@ -119,7 +122,6 @@ $ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 ### Update documentation site
 
 1. Search for the previous version string in the docs and replace it with the new version string, including but not necessarily limited to the following files:
-    - `README.md`
     - `doc/python/getting-started.md`
     - `doc/apidoc/conf.py`
     - `doc/requirements.txt`

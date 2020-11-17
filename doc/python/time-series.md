@@ -87,6 +87,8 @@ fig.show()
 
 By default, the tick labels (and optional ticks) are associated with a specific grid-line, and represent an *instant* in time, for example, "00:00 on February 1, 2018". Tick labels can be formatted using the `tickformat` attribute (which accepts the [d3 time-format formatting strings](https://github.com/d3/d3-time-format)) to display only the month and year, but they still represent an instant by default, so in the figure below, the text of the label "Feb 2018" spans part of the month of January and part of the month of February. The `dtick` attribute controls the spacing between gridlines, and the `"M1"` setting means "1 month". This attribute also accepts a number of milliseconds, which can be scaled up to days by multiplying by `24*60*60*1000`.
 
+Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
+
 Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the acutal date, as below.
 
 ```python
@@ -97,8 +99,7 @@ fig = px.line(df, x="date", y=df.columns,
               title='custom tick labels')
 fig.update_xaxes(
     dtick="M1",
-    tickformat="%b %Y",
-    range=["2018-01-01", "2018-12-31"])
+    tickformat="%b\n%Y")
 fig.show()
 ```
 
@@ -116,9 +117,76 @@ fig = px.line(df, x="date", y=df.columns,
               title='custom tick labels with ticklabelmode="period"')
 fig.update_xaxes(
     dtick="M1",
-    tickformat="%b %Y",
-    ticklabelmode="period",
-    range=["2018-01-01", "2018-12-31"])
+    tickformat="%b\n%Y",
+    ticklabelmode="period")
+fig.show()
+```
+
+### Summarizing Time-series Data with Histograms
+
+Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.histogram(df, x="Date", y="AAPL.Close", histfunc="avg", title="Histogram on Date Axes")
+fig.update_traces(xbins_size="M1")
+fig.update_xaxes(showgrid=True, ticklabelmode="period", dtick="M1", tickformat="%b\n%Y")
+fig.update_layout(bargap=0.1)
+fig.add_trace(go.Scatter(mode="markers", x=df["Date"], y=df["AAPL.Close"], name="daily"))
+fig.show()
+```
+
+### Displaying Period Data
+
+_new in 4.11_
+
+If your data coded "January 1" or "January 31" in fact refers to data collected throughout the month of January, for example, you can configure your traces to display their marks at the start end, or middle of the month with the `xperiod` and `xperiodalignment` attributes. In the example below, the raw data is all coded with an X value of the 10th of the month, but is binned into monthly periods with `xperiod="M1"` and then displayed at the start, middle and end of the period.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    date=["2020-01-10", "2020-02-10", "2020-03-10", "2020-04-10", "2020-05-10", "2020-06-10"],
+    value=[1,2,3,1,2,3]
+))
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    name="Raw Data",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    marker_symbol="star"
+))
+fig.add_trace(go.Scatter(
+    name="Start-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="start"
+))
+fig.add_trace(go.Scatter(
+    name="Middle-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.add_trace(go.Scatter(
+    name="End-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="end"
+))
+fig.add_trace(go.Bar(
+    name="Middle-aligned",
+    x=df["date"], y=df["value"], 
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.update_xaxes(showgrid=True, ticklabelmode="period")
 fig.show()
 ```
 

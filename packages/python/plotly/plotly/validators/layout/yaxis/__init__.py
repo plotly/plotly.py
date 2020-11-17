@@ -52,6 +52,7 @@ if sys.version_info < (3, 7):
     from ._overlaying import OverlayingValidator
     from ._nticks import NticksValidator
     from ._mirror import MirrorValidator
+    from ._minexponent import MinexponentValidator
     from ._matches import MatchesValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
@@ -133,6 +134,7 @@ else:
             "._overlaying.OverlayingValidator",
             "._nticks.NticksValidator",
             "._mirror.MirrorValidator",
+            "._minexponent.MinexponentValidator",
             "._matches.MatchesValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",

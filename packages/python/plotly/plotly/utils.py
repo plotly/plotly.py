@@ -4,7 +4,7 @@ import textwrap
 from pprint import PrettyPrinter
 
 from _plotly_utils.utils import *
-
+from _plotly_utils.data_utils import *
 
 # Pretty printing
 def _list_repr_elided(v, threshold=200, edgeitems=3, indent=0, width=80):
