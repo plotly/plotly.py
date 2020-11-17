@@ -46,6 +46,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
+- The JSON serialization of plotly figures had been accelerated by handling
+  differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
+  
+### Updated
+
 - Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 - `px.imshow` has a new `binary_string` boolean argument, which passes the
   image data as a b64 binary string when True. Using binary strings allow for
