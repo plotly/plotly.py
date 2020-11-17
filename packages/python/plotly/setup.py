@@ -505,7 +505,7 @@ setup(
         ),
         ("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),
     ],
-    install_requires=["retrying>=1.3.3", "six"],
+    install_requires=["tenacity>=6.2.0", "six"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),
