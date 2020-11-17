@@ -328,20 +328,24 @@ def imshow(
             )
         x0, y0, dx, dy = (None,) * 4
         error_msg_xarray = (
-                "Non-numerical coordinates were passed with xarray `img`, but "
-                "the Image trace cannot handle it. Please use `binary_string=False` "
-                "for 2D data or pass instead the numpy array `img.values` to `px.imshow`."
-                )
+            "Non-numerical coordinates were passed with xarray `img`, but "
+            "the Image trace cannot handle it. Please use `binary_string=False` "
+            "for 2D data or pass instead the numpy array `img.values` to `px.imshow`."
+        )
         if x is not None:
             x = np.asanyarray(x)
             if np.issubdtype(x.dtype, np.number):
                 x0 = x[0]
                 dx = x[1] - x[0]
             else:
-                error_msg = error_msg_xarray if img_is_xarray else (
-                    "Only numerical values are accepted for the `x` parameter "
-                    "when an Image trace is used."
-                        )
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `x` parameter "
+                        "when an Image trace is used."
+                    )
+                )
                 raise ValueError(error_msg)
         if y is not None:
             y = np.asanyarray(y)
@@ -349,10 +353,14 @@ def imshow(
                 y0 = y[0]
                 dy = y[1] - y[0]
             else:
-                error_msg = error_msg_xarray if img_is_xarray else (
-                    "Only numerical values are accepted for the `y` parameter "
-                    "when an Image trace is used."
-                        )
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `y` parameter "
+                        "when an Image trace is used."
+                    )
+                )
                 raise ValueError(error_msg)
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
