@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - `go.Figure` now has a `set_subplots` method to set subplots on an already
   existing figure.
+- Added `Turbo` colorscale
 
 
 ## [4.12.1] - UNRELEASED
@@ -22,6 +23,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Shapes that reference the plot axes in one dimension and the data in another dimension can be added with the new `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions, which also support the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
 - The `add_trace`, `add_shape`, `add_annotation`, `add_layout_image`, `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions accept an argument `exclude_empty_subplots` which if `True`, only adds the object to subplots already containing traces or layout objects. This is useful in conjunction with the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
 - For all `go.Figure` functions accepting a selector argument (e.g., `select_traces`), this argument can now also be a function which is passed each relevant graph object (in the case of `select_traces`, it is passed every trace in the figure). For graph objects where this function returns true, the graph object is included in the selection. ([#2844](https://github.com/plotly/plotly.py/pull/2844))
+
+### Added
+
+- Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
 
 ### Updated
 
@@ -39,6 +44,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Added `plotly.io.full_figure_for_development()` and `plotly.graph_objects.Figure.full_figure_for_development()` ([#2737](https://github.com/plotly/plotly.py/pull/2737))
 
+### Updated
+
+- The JSON serialization of plotly figures had been accelerated by handling
+  differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
+  
 ### Updated
 
 - Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
