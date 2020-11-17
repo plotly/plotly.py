@@ -403,11 +403,21 @@ def imshow(
             if np.issubdtype(x.dtype, np.number):
                 x0 = x[0]
                 dx = x[1] - x[0]
+            else:
+                raise ValueError(
+                    "Only numerical values are accepted for the `x` parameter "
+                    "when an Image trace is used."
+                )
         if y is not None:
             y = np.asanyarray(y)
             if np.issubdtype(y.dtype, np.number):
                 y0 = y[0]
                 dy = y[1] - y[0]
+            else:
+                raise ValueError(
+                    "Only numerical values are accepted for the `y` parameter "
+                    "when an Image trace is used."
+                )
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
