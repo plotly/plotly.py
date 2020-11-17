@@ -10,8 +10,8 @@ except ImportError:
     pil_imported = False
 
 
-def array_to_imagestr(img, backend="pil", compression=4, ext="png"):
-    """Converts a numpy array of uint8 into a base64 png string.
+def image_array_to_data_uri(img, backend="pil", compression=4, ext="png"):
+    """Converts a numpy array of uint8 into a base64 png or jpg string.
 
     Parameters
     ----------

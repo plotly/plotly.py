@@ -4,7 +4,7 @@ from ._core import apply_default_cascade
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
 import numpy as np
-from plotly.utils import array_to_imagestr
+from plotly.utils import image_array_to_data_uri
 
 try:
     import xarray
@@ -349,7 +349,7 @@ def imshow(
                         for ch in range(img.shape[-1])
                     ]
                 )
-            img_str = array_to_imagestr(
+            img_str = image_array_to_data_uri(
                 img_rescaled,
                 backend=binary_backend,
                 compression=binary_compression_level,
