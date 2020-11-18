@@ -89,18 +89,18 @@ class {fig_classname}({base_classname}):\n"""
                  frames=None, skip_invalid=False, **kwargs):
         \"\"\"
         Create a new :class:{fig_classname} instance
-        
+
         Parameters
         ----------
         data
             {data_description}
-            
+
         layout
             {layout_description}
-            
+
         frames
             {frames_description}
-            
+
         skip_invalid: bool
             If True, invalid properties in the figure specification will be
             skipped silently. If False (default) invalid properties in the
@@ -233,8 +233,8 @@ class {fig_classname}({base_classname}):\n"""
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -287,7 +287,7 @@ class {fig_classname}({base_classname}):\n"""
         \"\"\"
         Apply a function to all {singular_name} objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -329,7 +329,7 @@ class {fig_classname}({base_classname}):\n"""
         \"\"\"
         Perform a property update operation on all {singular_name} objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -395,7 +395,7 @@ class {fig_classname}({base_classname}):\n"""
 
         Parameters
         ----------
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -403,7 +403,9 @@ class {fig_classname}({base_classname}):\n"""
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each {singular_name} and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth {singular_name} matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been
@@ -443,7 +445,7 @@ class {fig_classname}({base_classname}):\n"""
         ----------
         fn:
             Function that inputs a single {singular_name} object.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -451,7 +453,9 @@ class {fig_classname}({base_classname}):\n"""
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each {singular_name} and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth {singular_name} matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been
@@ -504,7 +508,7 @@ class {fig_classname}({base_classname}):\n"""
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all {plural_name} that
             satisfy the selection criteria.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -512,7 +516,9 @@ class {fig_classname}({base_classname}):\n"""
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each {singular_name} and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth {singular_name} matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of {plural_name} to select.
             To select {plural_name} by row and column, the Figure must have been

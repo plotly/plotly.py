@@ -7,7 +7,7 @@ class Figure(BaseFigure):
     ):
         """
         Create a new :class:Figure instance
-        
+
         Parameters
         ----------
         data
@@ -39,7 +39,7 @@ class Figure(BaseFigure):
                   the specified trace type
         
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
-            
+
         layout
             The 'layout' property is an instance of Layout
             that may be specified as:
@@ -540,7 +540,7 @@ class Figure(BaseFigure):
                     yaxis
                         :class:`plotly.graph_objects.layout.YAxis`
                         instance or dict with compatible properties
-            
+
         frames
             The 'frames' property is a tuple of instances of
             Frame that may be specified as:
@@ -573,7 +573,7 @@ class Figure(BaseFigure):
                     traces
                         A list of trace indices that identify the
                         respective traces in the data attribute
-            
+
         skip_invalid: bool
             If True, invalid properties in the figure specification will be
             skipped silently. If False (default) invalid properties in the
@@ -17506,7 +17506,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all coloraxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17542,7 +17542,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17618,7 +17618,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all geo objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17654,7 +17654,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17730,7 +17730,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all mapbox objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17766,7 +17766,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17842,7 +17842,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all polar objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17878,7 +17878,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -17954,7 +17954,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all scene objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -17990,7 +17990,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -18066,7 +18066,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all ternary objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -18102,7 +18102,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -18178,7 +18178,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all xaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -18214,7 +18214,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -18283,8 +18283,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18304,7 +18304,7 @@ class Figure(BaseFigure):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
@@ -18330,8 +18330,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18361,7 +18361,7 @@ class Figure(BaseFigure):
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
@@ -18392,8 +18392,8 @@ class Figure(BaseFigure):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18422,7 +18422,7 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -18430,7 +18430,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each annotation and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18470,7 +18472,7 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single annotation object.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -18478,7 +18480,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each annotation and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18525,7 +18529,7 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all annotations that
             satisfy the selection criteria.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -18533,7 +18537,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each annotation and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18993,7 +18999,7 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19001,7 +19007,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each image and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -19041,7 +19049,7 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single image object.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19049,7 +19057,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each image and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -19092,7 +19102,7 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all images that
             satisfy the selection criteria.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19100,7 +19110,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each image and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -19306,7 +19318,7 @@ class Figure(BaseFigure):
 
         Parameters
         ----------
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19314,7 +19326,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each shape and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19352,7 +19366,7 @@ class Figure(BaseFigure):
         ----------
         fn:
             Function that inputs a single shape object.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19360,7 +19374,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each shape and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19403,7 +19419,7 @@ class Figure(BaseFigure):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all shapes that
             satisfy the selection criteria.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -19411,7 +19427,9 @@ class Figure(BaseFigure):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each shape and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
