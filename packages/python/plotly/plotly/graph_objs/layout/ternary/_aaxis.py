@@ -19,6 +19,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         "linecolor",
         "linewidth",
         "min",
+        "minexponent",
         "nticks",
         "separatethousands",
         "showexponent",
@@ -407,6 +408,27 @@ class Aaxis(_BaseLayoutHierarchyType):
     @min.setter
     def min(self, val):
         self["min"] = val
+
+    # minexponent
+    # -----------
+    @property
+    def minexponent(self):
+        """
+        Hide SI prefix for 10^n if |n| is below this number. This only
+        has an effect when `tickformat` is "SI" or "B".
+    
+        The 'minexponent' property is a number and may be specified as:
+          - An int or float in the interval [0, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["minexponent"]
+
+    @minexponent.setter
+    def minexponent(self, val):
+        self["minexponent"] = val
 
     # nticks
     # ------
@@ -1241,6 +1263,10 @@ class Aaxis(_BaseLayoutHierarchyType):
             determined by the sum minus the minimum values of the
             other two axes. The full view corresponds to all the
             minima set to zero.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number.
+            This only has an effect when `tickformat` is "SI" or
+            "B".
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -1372,6 +1398,7 @@ class Aaxis(_BaseLayoutHierarchyType):
         linecolor=None,
         linewidth=None,
         min=None,
+        minexponent=None,
         nticks=None,
         separatethousands=None,
         showexponent=None,
@@ -1478,6 +1505,10 @@ class Aaxis(_BaseLayoutHierarchyType):
             determined by the sum minus the minimum values of the
             other two axes. The full view corresponds to all the
             minima set to zero.
+        minexponent
+            Hide SI prefix for 10^n if |n| is below this number.
+            This only has an effect when `tickformat` is "SI" or
+            "B".
         nticks
             Specifies the maximum number of ticks for the
             particular axis. The actual number of ticks will be
@@ -1666,6 +1697,10 @@ an instance of :class:`plotly.graph_objs.layout.ternary.Aaxis`"""
         _v = min if min is not None else _v
         if _v is not None:
             self["min"] = _v
+        _v = arg.pop("minexponent", None)
+        _v = minexponent if minexponent is not None else _v
+        if _v is not None:
+            self["minexponent"] = _v
         _v = arg.pop("nticks", None)
         _v = nticks if nticks is not None else _v
         if _v is not None:

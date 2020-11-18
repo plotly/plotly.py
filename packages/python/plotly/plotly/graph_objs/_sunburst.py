@@ -38,6 +38,8 @@ class Sunburst(_BaseTraceType):
         "outsidetextfont",
         "parents",
         "parentssrc",
+        "rotation",
+        "sort",
         "stream",
         "text",
         "textfont",
@@ -943,6 +945,50 @@ class Sunburst(_BaseTraceType):
     def parentssrc(self, val):
         self["parentssrc"] = val
 
+    # rotation
+    # --------
+    @property
+    def rotation(self):
+        """
+        Rotates the whole diagram counterclockwise by some angle. By
+        default the first slice starts at 3 o'clock.
+    
+        The 'rotation' property is a angle (in degrees) that may be
+        specified as a number between -180 and 180. Numeric values outside this
+        range are converted to the equivalent value
+        (e.g. 270 is converted to -90).
+
+        Returns
+        -------
+        int|float
+        """
+        return self["rotation"]
+
+    @rotation.setter
+    def rotation(self, val):
+        self["rotation"] = val
+
+    # sort
+    # ----
+    @property
+    def sort(self):
+        """
+        Determines whether or not the sectors are reordered from
+        largest to smallest.
+    
+        The 'sort' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["sort"]
+
+    @sort.setter
+    def sort(self, val):
+        self["sort"] = val
+
     # stream
     # ------
     @property
@@ -1434,6 +1480,12 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        rotation
+            Rotates the whole diagram counterclockwise by some
+            angle. By default the first slice starts at 3 o'clock.
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -1538,6 +1590,8 @@ class Sunburst(_BaseTraceType):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        rotation=None,
+        sort=None,
         stream=None,
         text=None,
         textfont=None,
@@ -1712,6 +1766,12 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        rotation
+            Rotates the whole diagram counterclockwise by some
+            angle. By default the first slice starts at 3 o'clock.
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
         stream
             :class:`plotly.graph_objects.sunburst.Stream` instance
             or dict with compatible properties
@@ -1932,6 +1992,14 @@ an instance of :class:`plotly.graph_objs.Sunburst`"""
         _v = parentssrc if parentssrc is not None else _v
         if _v is not None:
             self["parentssrc"] = _v
+        _v = arg.pop("rotation", None)
+        _v = rotation if rotation is not None else _v
+        if _v is not None:
+            self["rotation"] = _v
+        _v = arg.pop("sort", None)
+        _v = sort if sort is not None else _v
+        if _v is not None:
+            self["sort"] = _v
         _v = arg.pop("stream", None)
         _v = stream if stream is not None else _v
         if _v is not None:

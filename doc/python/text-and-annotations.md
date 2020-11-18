@@ -534,10 +534,78 @@ fig.update_layout(
 fig.show()
 ```
 
+### Adding Annotations Referenced to an Axis
+
+To place annotations relative to the length or height of an axis, the string
+`' domain'` can be added after the axis reference in the `xref` or `yref` fields.
+For example:
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+# Set a custom domain to see how the ' domain' string changes the behaviour
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
+
+fig.add_annotation(
+    xref="x domain",
+    yref="y domain",
+    # The arrow head will be 25% along the x axis, starting from the left
+    x=0.25,
+    # The arrow head will be 40% along the y axis, starting from the bottom
+    y=0.4,
+    text="An annotation referencing the axes",
+    # By default, the text coordinates are specified in pixels and are relative
+    # to the arrow head
+    ax=100,
+    ay=100,
+    arrowhead=2,
+)
+
+fig.show()
+```
+
+### Specifying the Text's Position Absolutely
+
+The text coordinates / dimensions of the arrow can be specified absolutely, as
+long as they use exactly the same coordinate system as the arrowhead. For
+example:
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
+fig.add_annotation(
+    xref="x domain",
+    yref="y",
+    x=0.75,
+    y=1,
+    text="An annotation whose text and arrowhead reference the axes and the data",
+    # If axref is exactly the same as xref, then the text's position is
+    # absolute and specified in the same coordinates as xref.
+    axref="x domain",
+    # The same is the case for yref and ayref, but here the coordinates are data
+    # coordinates
+    ayref="y",
+    ax=0.5,
+    ay=2,
+    arrowhead=2,
+)
+
+fig.show()
+```
+
 ### Customize Displayed Text with a Text Template
 
 To show an arbitrary text in your chart you can use [texttemplate](https://plotly.com/python/reference/pie/#pie-texttemplate), which is a template string used for rendering the information, and will override [textinfo](https://plotly.com/python/reference/treemap/#treemap-textinfo).
-This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Time-Formatting.md#format).
+This template string can include `variables` in %{variable} format, `numbers` in [d3-format's syntax](https://github.com/d3/d3-3.x-api-reference/blob/master/Formatting.md#d3_forma), and `date` in [d3-time-format's syntax](https://github.com/d3/d3-time-format).
 `texttemplate` customizes the text that appears on your plot vs. [hovertemplate](https://plotly.com/python/reference/pie/#pie-hovertemplate) that customizes the tooltip text.
 
 ```python

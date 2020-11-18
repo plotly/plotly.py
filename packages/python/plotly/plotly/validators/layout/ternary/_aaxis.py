@@ -86,6 +86,10 @@ class AaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 maximum is determined by the sum minus the
                 minimum values of the other two axes. The full
                 view corresponds to all the minima set to zero.
+            minexponent
+                Hide SI prefix for 10^n if |n| is below this
+                number. This only has an effect when
+                `tickformat` is "SI" or "B".
             nticks
                 Specifies the maximum number of ticks for the
                 particular axis. The actual number of ticks

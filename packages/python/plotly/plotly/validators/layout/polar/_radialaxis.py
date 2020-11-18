@@ -126,6 +126,10 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the axis line color.
             linewidth
                 Sets the width (in px) of the axis line.
+            minexponent
+                Hide SI prefix for 10^n if |n| is below this
+                number. This only has an effect when
+                `tickformat` is "SI" or "B".
             nticks
                 Specifies the maximum number of ticks for the
                 particular axis. The actual number of ticks

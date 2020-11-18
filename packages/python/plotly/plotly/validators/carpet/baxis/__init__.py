@@ -33,6 +33,7 @@ if sys.version_info < (3, 7):
     from ._minorgridwidth import MinorgridwidthValidator
     from ._minorgridcount import MinorgridcountValidator
     from ._minorgridcolor import MinorgridcolorValidator
+    from ._minexponent import MinexponentValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._labelsuffix import LabelsuffixValidator
@@ -93,6 +94,7 @@ else:
             "._minorgridwidth.MinorgridwidthValidator",
             "._minorgridcount.MinorgridcountValidator",
             "._minorgridcolor.MinorgridcolorValidator",
+            "._minexponent.MinexponentValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._labelsuffix.LabelsuffixValidator",

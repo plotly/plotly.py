@@ -5,6 +5,7 @@ import xarray as xr
 from PIL import Image
 from io import BytesIO
 import base64
+import datetime
 from plotly.express.imshow_utils import rescale_intensity
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
@@ -215,6 +216,37 @@ def test_imshow_labels_and_ranges():
 
     with pytest.raises(ValueError):
         fig = px.imshow([[1, 2], [3, 4], [5, 6]], x=["a"])
+
+    img = np.ones((2, 2), dtype=np.uint8)
+    fig = px.imshow(img, x=["a", "b"])
+    assert fig.data[0].x == ("a", "b")
+
+    with pytest.raises(ValueError):
+        img = np.ones((2, 2, 3), dtype=np.uint8)
+        fig = px.imshow(img, x=["a", "b"])
+
+    img = np.ones((2, 2), dtype=np.uint8)
+    base = datetime.datetime(2000, 1, 1)
+    fig = px.imshow(img, x=[base, base + datetime.timedelta(hours=1)])
+    assert fig.data[0].x == (
+        datetime.datetime(2000, 1, 1, 0, 0),
+        datetime.datetime(2000, 1, 1, 1, 0),
+    )
+
+    with pytest.raises(ValueError):
+        img = np.ones((2, 2, 3), dtype=np.uint8)
+        base = datetime.datetime(2000, 1, 1)
+        fig = px.imshow(img, x=[base, base + datetime.timedelta(hours=1)])
+
+
+def test_imshow_ranges_image_trace():
+    fig = px.imshow(img_rgb, x=[1, 11, 21])
+    assert fig.data[0].dx == 10
+    assert fig.data[0].x0 == 1
+    fig = px.imshow(img_rgb, x=[21, 11, 1])
+    assert fig.data[0].dx == -10
+    assert fig.data[0].x0 == 21
+    assert fig.layout.xaxis.autorange == "reversed"
 
 
 def test_imshow_dataframe():

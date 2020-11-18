@@ -41,6 +41,7 @@ if sys.version_info < (3, 7):
     from ._range import RangeValidator
     from ._nticks import NticksValidator
     from ._mirror import MirrorValidator
+    from ._minexponent import MinexponentValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._hoverformat import HoverformatValidator
@@ -102,6 +103,7 @@ else:
             "._range.RangeValidator",
             "._nticks.NticksValidator",
             "._mirror.MirrorValidator",
+            "._minexponent.MinexponentValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._hoverformat.HoverformatValidator",

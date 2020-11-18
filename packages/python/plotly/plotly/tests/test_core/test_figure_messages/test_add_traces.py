@@ -2,6 +2,7 @@ import sys
 from unittest import TestCase
 
 import plotly.graph_objs as go
+from plotly.subplots import make_subplots
 
 if sys.version_info >= (3, 3):
     from unittest.mock import MagicMock
@@ -93,3 +94,72 @@ class TestAddTracesRowsColsDataTypes(TestCase):
         expected_data_length = 4
 
         self.assertEqual(expected_data_length, len(fig2.data))
+
+
+def test_add_trace_exclude_empty_subplots():
+    # Add traces
+    fig = make_subplots(2, 2)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+    # Add traces with exclude_empty_subplots set to true and make sure this
+    # doesn't add to traces that don't already have data
+    fig.add_trace(
+        go.Scatter(x=[1, 2, 3], y=[0, 1, -1]),
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+    )
+    assert len(fig.data) == 4
+    assert fig.data[2]["xaxis"] == "x" and fig.data[2]["yaxis"] == "y"
+    assert fig.data[3]["xaxis"] == "x4" and fig.data[3]["yaxis"] == "y4"
+
+
+def test_add_trace_no_exclude_empty_subplots():
+    # Add traces
+    fig = make_subplots(2, 2)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+    # Add traces with exclude_empty_subplots set to true and make sure this
+    # even adds to traces that don't already have data
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[0, 1, -1]), row="all", col="all")
+    assert len(fig.data) == 6
+    assert fig.data[2]["xaxis"] == "x" and fig.data[2]["yaxis"] == "y"
+    assert fig.data[3]["xaxis"] == "x2" and fig.data[3]["yaxis"] == "y2"
+    assert fig.data[4]["xaxis"] == "x3" and fig.data[4]["yaxis"] == "y3"
+    assert fig.data[5]["xaxis"] == "x4" and fig.data[5]["yaxis"] == "y4"
+
+
+def test_add_trace_exclude_totally_empty_subplots():
+    # Add traces
+    fig = make_subplots(2, 2)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+    fig.add_shape(dict(type="rect", x0=0, x1=1, y0=0, y1=1), row=1, col=2)
+    # Add traces with exclude_empty_subplots set to true and make sure this
+    # doesn't add to traces that don't already have data or layout objects
+    fig.add_trace(
+        go.Scatter(x=[1, 2, 3], y=[0, 1, -1]),
+        row="all",
+        col="all",
+        exclude_empty_subplots=["anything", "truthy"],
+    )
+    assert len(fig.data) == 5
+    assert fig.data[2]["xaxis"] == "x" and fig.data[2]["yaxis"] == "y"
+    assert fig.data[3]["xaxis"] == "x2" and fig.data[3]["yaxis"] == "y2"
+    assert fig.data[4]["xaxis"] == "x4" and fig.data[4]["yaxis"] == "y4"
+
+
+def test_add_trace_no_exclude_totally_empty_subplots():
+    # Add traces
+    fig = make_subplots(2, 2)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[5, 1, 2]), row=1, col=1)
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[2, 1, -7]), row=2, col=2)
+    fig.add_shape(dict(type="rect", x0=0, x1=1, y0=0, y1=1), row=1, col=2)
+    # Add traces with exclude_empty_subplots set to true and make sure this
+    # even adds to traces that don't already have data or layout objects
+    fig.add_trace(go.Scatter(x=[1, 2, 3], y=[0, 1, -1]), row="all", col="all")
+    assert len(fig.data) == 6
+    assert fig.data[2]["xaxis"] == "x" and fig.data[2]["yaxis"] == "y"
+    assert fig.data[3]["xaxis"] == "x2" and fig.data[3]["yaxis"] == "y2"
+    assert fig.data[4]["xaxis"] == "x3" and fig.data[4]["yaxis"] == "y3"
+    assert fig.data[5]["xaxis"] == "x4" and fig.data[5]["yaxis"] == "y4"

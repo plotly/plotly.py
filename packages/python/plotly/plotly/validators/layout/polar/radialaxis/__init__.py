@@ -33,6 +33,7 @@ if sys.version_info < (3, 7):
     from ._rangemode import RangemodeValidator
     from ._range import RangeValidator
     from ._nticks import NticksValidator
+    from ._minexponent import MinexponentValidator
     from ._linewidth import LinewidthValidator
     from ._linecolor import LinecolorValidator
     from ._layer import LayerValidator
@@ -87,6 +88,7 @@ else:
             "._rangemode.RangemodeValidator",
             "._range.RangeValidator",
             "._nticks.NticksValidator",
+            "._minexponent.MinexponentValidator",
             "._linewidth.LinewidthValidator",
             "._linecolor.LinecolorValidator",
             "._layer.LayerValidator",

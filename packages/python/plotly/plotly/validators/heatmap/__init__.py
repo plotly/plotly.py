@@ -11,6 +11,9 @@ if sys.version_info < (3, 7):
     from ._z import ZValidator
     from ._ytype import YtypeValidator
     from ._ysrc import YsrcValidator
+    from ._yperiodalignment import YperiodalignmentValidator
+    from ._yperiod0 import Yperiod0Validator
+    from ._yperiod import YperiodValidator
     from ._ygap import YgapValidator
     from ._ycalendar import YcalendarValidator
     from ._yaxis import YaxisValidator
@@ -18,6 +21,9 @@ if sys.version_info < (3, 7):
     from ._y import YValidator
     from ._xtype import XtypeValidator
     from ._xsrc import XsrcValidator
+    from ._xperiodalignment import XperiodalignmentValidator
+    from ._xperiod0 import Xperiod0Validator
+    from ._xperiod import XperiodValidator
     from ._xgap import XgapValidator
     from ._xcalendar import XcalendarValidator
     from ._xaxis import XaxisValidator
@@ -74,6 +80,9 @@ else:
             "._z.ZValidator",
             "._ytype.YtypeValidator",
             "._ysrc.YsrcValidator",
+            "._yperiodalignment.YperiodalignmentValidator",
+            "._yperiod0.Yperiod0Validator",
+            "._yperiod.YperiodValidator",
             "._ygap.YgapValidator",
             "._ycalendar.YcalendarValidator",
             "._yaxis.YaxisValidator",
@@ -81,6 +90,9 @@ else:
             "._y.YValidator",
             "._xtype.XtypeValidator",
             "._xsrc.XsrcValidator",
+            "._xperiodalignment.XperiodalignmentValidator",
+            "._xperiod0.Xperiod0Validator",
+            "._xperiod.XperiodValidator",
             "._xgap.XgapValidator",
             "._xcalendar.XcalendarValidator",
             "._xaxis.XaxisValidator",
