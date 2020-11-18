@@ -31,9 +31,13 @@
     </tr>
 </table>
 
+## Data Science Workspaces
+
+Our recommended IDE for Plotly’s Python graphing library is Dash Enterprise’s [Data Science Workspaces](https://plotly.com/dash/workspaces/), which has both Jupyter notebook and Python code file support.
+
 ## Quickstart
 
-`pip install plotly==4.9.0`
+`pip install plotly==4.12.0`
 
 Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
 
@@ -82,13 +86,13 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip...
 
 ```
-pip install plotly==4.9.0
+pip install plotly==4.12.0
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=4.9.0
+conda install -c plotly plotly=4.12.0
 ```
 
 ### Jupyter Notebook Support
@@ -125,10 +129,10 @@ Then run the following commands to install the required JupyterLab extensions (n
 
 ```
 # Basic JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.9.0
+jupyter labextension install jupyterlab-plotly@4.12.0
 
 # OPTIONAL: Jupyter widgets extension for FigureWidget support
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.9.0
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.12.0
 ```
 
 Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.
@@ -136,7 +140,7 @@ Please check out our [Troubleshooting guide](https://plotly.com/python/troublesh
 ### Static Image Export
 
 plotly.py supports [static image export](https://plotly.com/python/static-image-export/),
-using the either the [`kaleido`](https://github.com/plotly/Kaleido)
+using either the [`kaleido`](https://github.com/plotly/Kaleido)
 package (recommended, supported as of `plotly` version 4.9) or the [orca](https://github.com/plotly/orca)
 command line utility (legacy as of `plotly` version 4.9).
 

@@ -164,6 +164,10 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `scaleanchor` and a `matches` constraint is
                 currently forbidden. Moreover, note that
                 matching axes must have the same `type`.
+            minexponent
+                Hide SI prefix for 10^n if |n| is below this
+                number. This only has an effect when
+                `tickformat` is "SI" or "B".
             mirror
                 Determines if the axis lines or/and ticks are
                 mirrored to the opposite side of the plotting

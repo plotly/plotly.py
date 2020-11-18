@@ -26,6 +26,7 @@ if sys.version_info < (3, 7):
     from ._separatethousands import SeparatethousandsValidator
     from ._range import RangeValidator
     from ._nticks import NticksValidator
+    from ._minexponent import MinexponentValidator
     from ._exponentformat import ExponentformatValidator
     from ._dtick import DtickValidator
 else:
@@ -60,6 +61,7 @@ else:
             "._separatethousands.SeparatethousandsValidator",
             "._range.RangeValidator",
             "._nticks.NticksValidator",
+            "._minexponent.MinexponentValidator",
             "._exponentformat.ExponentformatValidator",
             "._dtick.DtickValidator",
         ],

@@ -130,7 +130,7 @@ This renderer is the same as `notebook` renderer, except the plotly.js JavaScrip
 This renderer is a good choice for notebooks that will be shared with [nbviewer](https://nbviewer.jupyter.org/) since users must have an active Internet connection to access nbviewer in the first place.
 
 ###### `kaggle` and `azure`
-These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle kernels](https://www.kaggle.com/docs/kernels) and [Azure Notebooks](https://notebooks.azure.com/).
+These are aliases for `notebook_connected` because this renderer is a good choice for use with [Kaggle kernels](https://www.kaggle.com/docs/notebooks) and [Azure Notebooks](https://notebooks.azure.com/).
 
 ###### `colab`
 This is a custom renderer for use with [Google Colab](https://colab.research.google.com).

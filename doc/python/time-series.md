@@ -45,10 +45,8 @@ Plotly auto-sets the axis type to a date format when the corresponding data are 
 # Using plotly.express
 import plotly.express as px
 
-import pandas as pd
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-
-fig = px.line(df, x='Date', y='AAPL.High')
+df = px.data.stocks()
+fig = px.line(df, x='date', y="GOOG")
 fig.show()
 ```
 
@@ -60,6 +58,135 @@ import pandas as pd
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
 fig = go.Figure([go.Scatter(x=df['Date'], y=df['AAPL.High'])])
+fig.show()
+```
+
+### Different Chart Types on Date Axes
+
+Any kind of cartesian chart can be placed on `date` axes, for example this bar chart of relative stock ticker values.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.bar(df, x=df.index, y="GOOG")
+fig.show()
+```
+
+Or this [facetted](/python/facet-plots/) area plot:
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.area(df, facet_col="company", facet_col_wrap=2)
+fig.show()
+```
+
+### Configuring Tick Labels
+
+By default, the tick labels (and optional ticks) are associated with a specific grid-line, and represent an *instant* in time, for example, "00:00 on February 1, 2018". Tick labels can be formatted using the `tickformat` attribute (which accepts the [d3 time-format formatting strings](https://github.com/d3/d3-time-format)) to display only the month and year, but they still represent an instant by default, so in the figure below, the text of the label "Feb 2018" spans part of the month of January and part of the month of February. The `dtick` attribute controls the spacing between gridlines, and the `"M1"` setting means "1 month". This attribute also accepts a number of milliseconds, which can be scaled up to days by multiplying by `24*60*60*1000`.
+
+Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
+
+Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the acutal date, as below.
+
+```python
+import plotly.express as px
+df = px.data.stocks()
+fig = px.line(df, x="date", y=df.columns,
+              hover_data={"date": "|%B %d, %Y"},
+              title='custom tick labels')
+fig.update_xaxes(
+    dtick="M1",
+    tickformat="%b\n%Y")
+fig.show()
+```
+
+### Moving Tick Labels to the Middle of the Period
+
+_new in 4.10_
+
+By setting the `ticklabelmode` attribute to `"period"` (the default is `"instant"`) we can move the tick labels to the middle of the period they represent. The gridlines remain at the beginning of each month (thanks to `dtick="M1"`) but the labels now span the month they refer to.
+
+```python
+import plotly.express as px
+df = px.data.stocks()
+fig = px.line(df, x="date", y=df.columns,
+              hover_data={"date": "|%B %d, %Y"},
+              title='custom tick labels with ticklabelmode="period"')
+fig.update_xaxes(
+    dtick="M1",
+    tickformat="%b\n%Y",
+    ticklabelmode="period")
+fig.show()
+```
+
+### Summarizing Time-series Data with Histograms
+
+Plotly [histograms](/python/histograms/) are powerful data-aggregation tools which even work on date axes. In the figure below, we pass in daily data and display it as monthly averages by setting `histfunc="avg` and `xbins_size="M1"`.
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig = px.histogram(df, x="Date", y="AAPL.Close", histfunc="avg", title="Histogram on Date Axes")
+fig.update_traces(xbins_size="M1")
+fig.update_xaxes(showgrid=True, ticklabelmode="period", dtick="M1", tickformat="%b\n%Y")
+fig.update_layout(bargap=0.1)
+fig.add_trace(go.Scatter(mode="markers", x=df["Date"], y=df["AAPL.Close"], name="daily"))
+fig.show()
+```
+
+### Displaying Period Data
+
+_new in 4.11_
+
+If your data coded "January 1" or "January 31" in fact refers to data collected throughout the month of January, for example, you can configure your traces to display their marks at the start end, or middle of the month with the `xperiod` and `xperiodalignment` attributes. In the example below, the raw data is all coded with an X value of the 10th of the month, but is binned into monthly periods with `xperiod="M1"` and then displayed at the start, middle and end of the period.
+
+```python
+import plotly.graph_objects as go
+import pandas as pd
+
+df = pd.DataFrame(dict(
+    date=["2020-01-10", "2020-02-10", "2020-03-10", "2020-04-10", "2020-05-10", "2020-06-10"],
+    value=[1,2,3,1,2,3]
+))
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(
+    name="Raw Data",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    marker_symbol="star"
+))
+fig.add_trace(go.Scatter(
+    name="Start-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="start"
+))
+fig.add_trace(go.Scatter(
+    name="Middle-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.add_trace(go.Scatter(
+    name="End-aligned",
+    mode="markers+lines", x=df["date"], y=df["value"],
+    xperiod="M1",
+    xperiodalignment="end"
+))
+fig.add_trace(go.Bar(
+    name="Middle-aligned",
+    x=df["date"], y=df["value"], 
+    xperiod="M1",
+    xperiodalignment="middle"
+))
+fig.update_xaxes(showgrid=True, ticklabelmode="period")
 fig.show()
 ```
 

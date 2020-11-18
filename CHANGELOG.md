@@ -2,7 +2,43 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.10.0] - unreleased
+## [4.13.0] - UNRELEASED
+
+### Added
+
+- `go.Figure` now has a `set_subplots` method to set subplots on an already
+  existing figure.
+- Added `Turbo` colorscale
+
+
+## [4.12.1] - UNRELEASED
+
+
+
+## [4.12.0] - 2020-10-23
+
+### Added
+
+- For `add_trace`, `add_shape`, `add_annotation` and `add_layout_image`, the `row` and/or `col` argument now also accept the string `"all"`. `row="all"` adds the object to all the subplot rows and `col="all"` adds the object to all the subplot columns. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- Shapes that reference the plot axes in one dimension and the data in another dimension can be added with the new `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions, which also support the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- The `add_trace`, `add_shape`, `add_annotation`, `add_layout_image`, `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions accept an argument `exclude_empty_subplots` which if `True`, only adds the object to subplots already containing traces or layout objects. This is useful in conjunction with the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- For all `go.Figure` functions accepting a selector argument (e.g., `select_traces`), this argument can now also be a function which is passed each relevant graph object (in the case of `select_traces`, it is passed every trace in the figure). For graph objects where this function returns true, the graph object is included in the selection. ([#2844](https://github.com/plotly/plotly.py/pull/2844))
+
+### Added
+
+- Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
+
+### Updated
+
+- Updated Plotly.js to version 1.57.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.1/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+
+## [4.11.0] - 2020-10-01
+
+### Updated
+
+- Updated Plotly.js to version 1.56.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.56.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+
+## [4.10.0] - 2020-09-10
 
 ### Added
 
@@ -10,14 +46,30 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Updated
 
+- The JSON serialization of plotly figures had been accelerated by handling
+  differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
+  
+### Updated
+
+- Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
 - `px.imshow` has a new `binary_string` boolean argument, which passes the
   image data as a b64 binary string when True. Using binary strings allow for
   faster image rendering and smaller figure size. Additional optional arguments
   `binary_backend`, `binary_format` and `binary_compression_level` control
   how to generate the b64 string ([#2691](https://github.com/plotly/plotly.py/pull/2691)
 - `px.imshow` has a new `constrast_rescaling` argument in order to choose how
-  to set data values corresponding to the bounds of the color range 
+  to set data values corresponding to the bounds of the color range
   ([#2691](https://github.com/plotly/plotly.py/pull/2691)
+
+### Fixed
+
+- Plotly Express no longer converts datetime columns of input dataframes to UTC ([#2749](https://github.com/plotly/plotly.py/pull/2749))
+- Plotly Express has more complete support for datetimes as additional `hover_data` ([#2749](https://github.com/plotly/plotly.py/pull/2749))
+- Histogram selection behaviour with `FigureWidget` ([#2711](https://github.com/plotly/plotly.py/pull/2711)) with thanks to [@meffmadd](https://github.com/meffmadd)
+- Behaviour of `full_html()` with `html=False` ([#2469](https://github.com/plotly/plotly.py/pull/2469)) with thanks to [@tallamjr](https://github.com/tallamjr)
+- `ff.distplot()` now only computes traces that will be shown ([#2730](https://github.com/plotly/plotly.py/pull/2730)) with thanks to [@akbo](https://github.com/akbo)
+- Pandas backend `.hist()` works with latest version of Pandas ([#2713](https://github.com/plotly/plotly.py/pull/2713)) with thanks to [@Kerybas](https://github.com/Kerybas)
+
 
 ## [4.9.0] - 2020-07-16
 
