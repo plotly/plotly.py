@@ -2,17 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.14.0] - UNRELEASED
+
+
+## [4.13.1] - UNRELEASED
+
+
 ## [4.13.0] - UNRELEASED
 
 ### Added
 
 - `go.Figure` now has a `set_subplots` method to set subplots on an already
-  existing figure.
-- Added `Turbo` colorscale
+  existing figure. [2866](https://github.com/plotly/plotly.py/pull/2866)
+- Added `Turbo` colorscale and fancier swatch display functions
+  [2882](https://github.com/plotly/plotly.py/pull/2882)
 - A utility function `image_array_to_data_uri` has been added in
   `plotly.utils`, in order to transform NumPy arrays to data b64 URIs (which
-  can be passed to the source parameter of `go.Image`, or to layout images). 
+  can be passed to the source parameter of `go.Image`, or to layout images).
   [2879](https://github.com/plotly/plotly.py/pull/2879)
+- the `selector` argument to updater/selector functions now accepts `int`s and `str`s
+  [2894](https://github.com/plotly/plotly.py/pull/2894)
 
 
 ### Updated
@@ -20,6 +29,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - the JSON serialization of plotly figures has been accelerated thanks to a
   different handling of Infinity and NaN values. For example, a figure with a
   1000x1000 Heatmap should now serialize 2x faster. [2880](https://github.com/plotly/plotly.py/pull/2880)
+- Coding mistakes with "magic underscores" now return significantly more ergonomic error
+  messages [2843](https://github.com/plotly/plotly.py/pull/2843)
+- Error messages related to impossible subplot geometries are now much more helpful
+  [2897](https://github.com/plotly/plotly.py/pull/2897)
 
 
 ### Fixed
@@ -28,10 +41,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   an Image trace is used (for RGB data or with `binary_string=True`). However,
   only numerical values are accepted (while the Heatmap trace allows date or
   string values for `x` and `y`). [2761](https://github.com/plotly/plotly.py/pull/2761)
-
-
-## [4.12.1] - UNRELEASED
-
 
 
 ## [4.12.0] - 2020-10-23
@@ -67,7 +76,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - The JSON serialization of plotly figures had been accelerated by handling
   differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
-  
+
 ### Updated
 
 - Updated Plotly.js to version 1.55.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.55.2/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
