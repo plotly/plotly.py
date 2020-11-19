@@ -177,7 +177,7 @@ def _check_path_in_prop_tree(obj, path, error_cast=None):
           an Exception object or None. The caller can raise this
           exception to see where the lookup error occurred.
     """
-    if type(path) == type(tuple()):
+    if isinstance(path, tuple):
         path = _remake_path_from_tuple(path)
     prop, prop_idcs = _str_to_dict_path_full(path)
     prev_objs = []
@@ -242,7 +242,7 @@ Bad property path:
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing
             # KeyError
-            if type(e) == type(KeyError()):
+            if isinstance(e, KeyError):
                 e = PlotlyKeyError()
             if error_cast is not None:
                 e = error_cast()
@@ -282,7 +282,7 @@ def _indexing_combinations(dims, alls, product=False):
     for d, a in zip(dims, alls):
         if d == "all":
             d = a
-        elif type(d) != type(list()):
+        elif not isinstance(d, list):
             d = [d]
         r.append(d)
     if product:
@@ -293,7 +293,7 @@ def _indexing_combinations(dims, alls, product=False):
 
 def _is_select_subplot_coordinates_arg(*args):
     """ Returns true if any args are lists or the string 'all' """
-    return any((a == "all") or (type(a) == type(list())) for a in args)
+    return any((a == "all") or isinstance(a, list) for a in args)
 
 
 def _axis_spanning_shapes_docstr(shape_type):
@@ -1202,10 +1202,10 @@ class BaseFigure(object):
             return True
         # If selector is a string then put it at the 'type' key of a dictionary
         # to select objects where "type":selector
-        if type(selector) == type(str()):
+        if isinstance(selector, six.string_types):
             selector = dict(type=selector)
         # If selector is a dict, compare the fields
-        if (type(selector) == type(dict())) or isinstance(selector, BasePlotlyType):
+        if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
             # This returns True if selector is an empty dict
             for k in selector:
                 if k not in obj:
@@ -1224,7 +1224,7 @@ class BaseFigure(object):
                     return False
             return True
         # If selector is a function, call it with the obj as the argument
-        elif type(selector) == type(lambda x: True):
+        elif six.callable(selector):
             return selector(obj)
         else:
             raise TypeError(
@@ -1247,7 +1247,7 @@ class BaseFigure(object):
         """
 
         # if selector is not an int, we call it on each trace to test it for selection
-        if type(selector) != type(int()):
+        if not isinstance(selector, int):
             funcs.append(lambda obj: self._selector_matches(obj, selector))
 
         def _filt(last, f):
@@ -1255,7 +1255,7 @@ class BaseFigure(object):
 
         filtered_objects = reduce(_filt, funcs, objects)
 
-        if type(selector) == type(int()):
+        if isinstance(selector, int):
             return iter([list(filtered_objects)[selector]])
 
         return filtered_objects
@@ -3941,14 +3941,10 @@ Invalid property path '{key_path_str}' for layout
         """
         if direction == "vertical":
             # fix y points to top and bottom of subplot
-            axis = "y"
             ref = "yref"
-            axis_layout_key_template = "yaxis%s"
         elif direction == "horizontal":
             # fix x points to left and right of subplot
-            axis = "x"
             ref = "xref"
-            axis_layout_key_template = "xaxis%s"
         else:
             raise ValueError(
                 "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
@@ -4019,7 +4015,7 @@ Invalid property path '{key_path_str}' for layout
         ):
             n_layout_objs_after = len(self.layout[layout_obj])
             if (n_layout_objs_after > n_layout_objs_before) and (
-                row == None and col == None
+                row is None and col is None
             ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
@@ -4132,7 +4128,7 @@ Invalid property path '{key_path_str}' for layout
         if not selector:
             # If nothing to select was specified then a subplot is always deemed non-empty
             return True
-        if selector == True:
+        if selector is True:
             selector = "all"
         if selector == "all":
             selector = ["traces", "shapes", "annotations", "images"]
@@ -4302,7 +4298,6 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        invalid_kwargs = {}
         for k, v in kwargs.items():
             err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
             if err is None:
@@ -6277,7 +6272,7 @@ class BaseFrameHierarchyType(BasePlotlyType):
         # -------------------------------------
         try:
             trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
+        except ValueError:
             trace_index = None
 
         # Child is a trace
