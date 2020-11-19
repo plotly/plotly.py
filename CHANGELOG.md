@@ -9,6 +9,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `go.Figure` now has a `set_subplots` method to set subplots on an already
   existing figure.
 - Added `Turbo` colorscale
+- A utility function `image_array_to_data_uri` has been added in
+  `plotly.utils`, in order to transform NumPy arrays to data b64 URIs (which
+  can be passed to the source parameter of `go.Image`, or to layout images). 
+  [2879](https://github.com/plotly/plotly.py/pull/2879)
+
+
+### Updated
+
+- the JSON serialization of plotly figures has been accelerated thanks to a
+  different handling of Infinity and NaN values. For example, a figure with a
+  1000x1000 Heatmap should now serialize 2x faster. [2880](https://github.com/plotly/plotly.py/pull/2880)
+
+
+### Fixed
+
+- the `x` and `y` parameters of `px.imshow` are now used also in the case where
+  an Image trace is used (for RGB data or with `binary_string=True`). However,
+  only numerical values are accepted (while the Heatmap trace allows date or
+  string values for `x` and `y`). [2761](https://github.com/plotly/plotly.py/pull/2761)
 
 
 ## [4.12.1] - UNRELEASED
