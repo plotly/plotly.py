@@ -1,12 +1,10 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
 from ._core import apply_default_cascade
-from io import BytesIO
-import base64
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
-from .png import Writer, from_array
 import numpy as np
+from plotly.utils import image_array_to_data_uri
 
 try:
     import xarray
@@ -14,79 +12,8 @@ try:
     xarray_imported = True
 except ImportError:
     xarray_imported = False
-try:
-    from PIL import Image
-
-    pil_imported = True
-except ImportError:
-    pil_imported = False
 
 _float_types = []
-
-
-def _array_to_b64str(img, backend="pil", compression=4, ext="png"):
-    """Converts a numpy array of uint8 into a base64 png string.
-
-    Parameters
-    ----------
-    img: ndarray of uint8
-        array image
-    backend: str
-        'auto', 'pil' or 'pypng'. If 'auto', Pillow is used if installed,
-        otherwise pypng.
-    compression: int, between 0 and 9
-        compression level to be passed to the backend
-    ext: str, 'png' or 'jpg'
-        compression format used to generate b64 string
-    """
-    # PIL and pypng error messages are quite obscure so we catch invalid compression values
-    if compression < 0 or compression > 9:
-        raise ValueError("compression level must be between 0 and 9.")
-    alpha = False
-    if img.ndim == 2:
-        mode = "L"
-    elif img.ndim == 3 and img.shape[-1] == 3:
-        mode = "RGB"
-    elif img.ndim == 3 and img.shape[-1] == 4:
-        mode = "RGBA"
-        alpha = True
-    else:
-        raise ValueError("Invalid image shape")
-    if backend == "auto":
-        backend = "pil" if pil_imported else "pypng"
-    if ext != "png" and backend != "pil":
-        raise ValueError("jpg binary strings are only available with PIL backend")
-
-    if backend == "pypng":
-        ndim = img.ndim
-        sh = img.shape
-        if ndim == 3:
-            img = img.reshape((sh[0], sh[1] * sh[2]))
-        w = Writer(
-            sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression
-        )
-        img_png = from_array(img, mode=mode)
-        prefix = "data:image/png;base64,"
-        with BytesIO() as stream:
-            w.write(stream, img_png.rows)
-            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
-    else:  # pil
-        if not pil_imported:
-            raise ImportError(
-                "pillow needs to be installed to use `backend='pil'. Please"
-                "install pillow or use `backend='pypng'."
-            )
-        pil_img = Image.fromarray(img)
-        if ext == "jpg" or ext == "jpeg":
-            prefix = "data:image/jpeg;base64,"
-            ext = "jpeg"
-        else:
-            prefix = "data:image/png;base64,"
-            ext = "png"
-        with BytesIO() as stream:
-            pil_img.save(stream, format=ext, compress_level=compression)
-            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
-    return base64_string
 
 
 def _vectorize_zvalue(z, mode="max"):
@@ -277,23 +204,19 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    img_is_xarray = False
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        if binary_string:
-            raise ValueError(
-                "It is not possible to use binary image strings for xarrays."
-                "Please pass your data as a numpy array instead using"
-                "`img.values`"
-            )
+        img_is_xarray = True
         y_label, x_label = img.dims[0], img.dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
             if np.issubdtype(img.coords[ax].dtype, np.datetime64):
                 img.coords[ax] = img.coords[ax].astype(str)
         if x is None:
-            x = img.coords[x_label]
+            x = img.coords[x_label].values
         if y is None:
-            y = img.coords[y_label]
+            y = img.coords[y_label].values
         if aspect is None:
             aspect = "auto"
         if labels.get("x", None) is None:
@@ -403,6 +326,42 @@ def imshow(
                 _vectorize_zvalue(zmin, mode="min"),
                 _vectorize_zvalue(zmax, mode="max"),
             )
+        x0, y0, dx, dy = (None,) * 4
+        error_msg_xarray = (
+            "Non-numerical coordinates were passed with xarray `img`, but "
+            "the Image trace cannot handle it. Please use `binary_string=False` "
+            "for 2D data or pass instead the numpy array `img.values` to `px.imshow`."
+        )
+        if x is not None:
+            x = np.asanyarray(x)
+            if np.issubdtype(x.dtype, np.number):
+                x0 = x[0]
+                dx = x[1] - x[0]
+            else:
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `x` parameter "
+                        "when an Image trace is used."
+                    )
+                )
+                raise ValueError(error_msg)
+        if y is not None:
+            y = np.asanyarray(y)
+            if np.issubdtype(y.dtype, np.number):
+                y0 = y[0]
+                dy = y[1] - y[0]
+            else:
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `y` parameter "
+                        "when an Image trace is used."
+                    )
+                )
+                raise ValueError(error_msg)
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
@@ -422,19 +381,30 @@ def imshow(
                         for ch in range(img.shape[-1])
                     ]
                 )
-            img_str = _array_to_b64str(
+            img_str = image_array_to_data_uri(
                 img_rescaled,
                 backend=binary_backend,
                 compression=binary_compression_level,
                 ext=binary_format,
             )
-            trace = go.Image(source=img_str)
+            trace = go.Image(source=img_str, x0=x0, y0=y0, dx=dx, dy=dy)
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)
+            trace = go.Image(
+                z=img,
+                zmin=zmin,
+                zmax=zmax,
+                colormodel=colormodel,
+                x0=x0,
+                y0=y0,
+                dx=dx,
+                dy=dy,
+            )
         layout = {}
-        if origin == "lower":
+        if origin == "lower" or (dy is not None and dy < 0):
             layout["yaxis"] = dict(autorange=True)
+        if dx is not None and dx < 0:
+            layout["xaxis"] = dict(autorange="reversed")
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "

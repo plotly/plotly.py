@@ -67,6 +67,7 @@ if sys.version_info < (3, 7):
     from ._dragmode import DragmodeValidator
     from ._direction import DirectionValidator
     from ._datarevision import DatarevisionValidator
+    from ._computed import ComputedValidator
     from ._colorway import ColorwayValidator
     from ._colorscale import ColorscaleValidator
     from ._coloraxis import ColoraxisValidator
@@ -157,6 +158,7 @@ else:
             "._dragmode.DragmodeValidator",
             "._direction.DirectionValidator",
             "._datarevision.DatarevisionValidator",
+            "._computed.ComputedValidator",
             "._colorway.ColorwayValidator",
             "._colorscale.ColorscaleValidator",
             "._coloraxis.ColoraxisValidator",

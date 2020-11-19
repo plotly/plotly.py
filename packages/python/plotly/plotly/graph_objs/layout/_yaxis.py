@@ -100,7 +100,8 @@ class YAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -795,7 +796,8 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'matches' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -893,7 +895,8 @@ class YAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1109,7 +1112,8 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'scaleanchor' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------

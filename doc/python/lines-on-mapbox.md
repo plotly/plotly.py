@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to draw a line on Map in Python with Plotly.
     display_as: maps
@@ -54,6 +54,48 @@ fig = px.line_mapbox(us_cities, lat="lat", lon="lon", color="State", zoom=3, hei
 fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=4, mapbox_center_lat = 41,
     margin={"r":0,"t":0,"l":0,"b":0})
 
+fig.show()
+```
+
+### Lines on Mapbox maps from GeoPandas
+
+Given a GeoPandas geo-data frame with `linestring` or `multilinestring` features, one can extra point data and use `px.line_mapbox()`.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+import shapely.geometry
+import numpy as np
+import wget
+
+# download a zipped shapefile
+wget.download("https://plotly.github.io/datasets/ne_50m_rivers_lake_centerlines.zip")
+
+# open a zipped shapefile with the zip:// pseudo-protocol
+geo_df = gpd.read_file("zip://ne_50m_rivers_lake_centerlines.zip")
+
+lats = []
+lons = []
+names = []
+
+for feature, name in zip(geo_df.geometry, geo_df.name):
+    if isinstance(feature, shapely.geometry.linestring.LineString):
+        linestrings = [feature]
+    elif isinstance(feature, shapely.geometry.multilinestring.MultiLineString):
+        linestrings = feature.geoms
+    else:
+        continue
+    for linestring in linestrings:
+        x, y = linestring.xy
+        lats = np.append(lats, y)
+        lons = np.append(lons, x)
+        names = np.append(names, [name]*len(y))
+        lats = np.append(lats, None)
+        lons = np.append(lons, None)
+        names = np.append(names, None)
+
+fig = px.line_mapbox(lat=lats, lon=lons, hover_name=names,
+                     mapbox_style="stamen-terrain", zoom=1)
 fig.show()
 ```
 

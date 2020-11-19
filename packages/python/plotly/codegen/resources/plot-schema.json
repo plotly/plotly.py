@@ -20395,6 +20395,13 @@
                         "editType": "none"
                     }
                 },
+                "rotation": {
+                    "valType": "angle",
+                    "role": "style",
+                    "dflt": 0,
+                    "editType": "plot",
+                    "description": "Rotates the whole diagram counterclockwise by some angle. By default the first slice starts at 3 o'clock."
+                },
                 "sort": {
                     "valType": "boolean",
                     "role": "style",
@@ -39324,7 +39331,7 @@
                     "editType": "calc",
                     "items": {
                         "valType": "subplotid",
-                        "regex": "/^x([2-9]|[1-9][0-9]+)?$/",
+                        "regex": "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
                         "editType": "plot"
                     },
                     "description": "Sets the list of x axes corresponding to dimensions of this splom trace. By default, a splom will match the first N xaxes where N is the number of input dimensions. Note that, in case where `diagonal.visible` is false and `showupperhalf` or `showlowerhalf` is false, this splom trace will generate one less x-axis and one less y-axis."
@@ -39336,7 +39343,7 @@
                     "editType": "calc",
                     "items": {
                         "valType": "subplotid",
-                        "regex": "/^y([2-9]|[1-9][0-9]+)?$/",
+                        "regex": "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
                         "editType": "plot"
                     },
                     "description": "Sets the list of y axes corresponding to dimensions of this splom trace. By default, a splom will match the first N yaxes where N is the number of input dimensions. Note that, in case where `diagonal.visible` is false and `showupperhalf` or `showlowerhalf` is false, this splom trace will generate one less x-axis and one less y-axis."
@@ -60267,6 +60274,12 @@
                 "editType": "plot",
                 "role": "object"
             },
+            "computed": {
+                "valType": "any",
+                "role": "info",
+                "editType": "none",
+                "description": "Placeholder for exporting automargin-impacting values namely `margin.t`, `margin.b`, `margin.l` and `margin.r` in *full-json* mode."
+            },
             "paper_bgcolor": {
                 "valType": "color",
                 "role": "style",
@@ -60790,7 +60803,7 @@
                     "items": {
                         "valType": "enumerated",
                         "values": [
-                            "/^x([2-9]|[1-9][0-9]+)?$/",
+                            "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
                             ""
                         ],
                         "editType": "plot"
@@ -60805,7 +60818,7 @@
                     "items": {
                         "valType": "enumerated",
                         "values": [
-                            "/^y([2-9]|[1-9][0-9]+)?$/",
+                            "/^y([2-9]|[1-9][0-9]+)?( domain)?$/",
                             ""
                         ],
                         "editType": "plot"
@@ -61081,8 +61094,8 @@
                 "scaleanchor": {
                     "valType": "enumerated",
                     "values": [
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -61124,8 +61137,8 @@
                 "matches": {
                     "valType": "enumerated",
                     "values": [
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "calc",
@@ -61666,8 +61679,8 @@
                     "valType": "enumerated",
                     "values": [
                         "free",
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -61689,8 +61702,8 @@
                     "valType": "enumerated",
                     "values": [
                         "free",
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -62277,8 +62290,8 @@
                 "scaleanchor": {
                     "valType": "enumerated",
                     "values": [
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -62320,8 +62333,8 @@
                 "matches": {
                     "valType": "enumerated",
                     "values": [
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "calc",
@@ -62862,8 +62875,8 @@
                     "valType": "enumerated",
                     "values": [
                         "free",
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -62885,8 +62898,8 @@
                     "valType": "enumerated",
                     "values": [
                         "free",
-                        "/^x([2-9]|[1-9][0-9]+)?$/",
-                        "/^y([2-9]|[1-9][0-9]+)?$/"
+                        "/^x([2-9]|[1-9][0-9]+)?( domain)?$/",
+                        "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                     ],
                     "role": "info",
                     "editType": "plot",
@@ -69580,45 +69593,45 @@
                             "valType": "any",
                             "role": "info",
                             "editType": "calc+arraydraw",
-                            "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from right to left (left to right). If `axref` is an axis, this is an absolute value on that axis, like `x`, NOT a relative value."
+                            "description": "Sets the x component of the arrow tail about the arrow head. If `axref` is `pixel`, a positive (negative) component corresponds to an arrow pointing from right to left (left to right). If `axref` is not `pixel` and is exactly the same as `xref`, this is an absolute value on that axis, like `x`, specified in the same coordinates as `xref`."
                         },
                         "ay": {
                             "valType": "any",
                             "role": "info",
                             "editType": "calc+arraydraw",
-                            "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative)  component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is an axis, this is an absolute value on that axis, like `y`, NOT a relative value."
+                            "description": "Sets the y component of the arrow tail about the arrow head. If `ayref` is `pixel`, a positive (negative) component corresponds to an arrow pointing from bottom to top (top to bottom). If `ayref` is not `pixel` and is exactly the same as `yref`, this is an absolute value on that axis, like `y`, specified in the same coordinates as `yref`."
                         },
                         "axref": {
                             "valType": "enumerated",
                             "dflt": "pixel",
                             "values": [
                                 "pixel",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ax` is a relative offset in pixels  from `x`. If set to an x axis id (e.g. *x* or *x2*), `ax` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed."
+                            "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ax axis id (e.g. *ax* or *ax2*), the `ax` position refers to a ax coordinate. If set to *paper*, the `ax` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a ax axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *ax2 domain* refers to the domain of the second ax  axis and a ax position of 0.5 refers to the point between the left and the right of the domain of the second ax axis. In order for absolute positioning of the arrow to work, *axref* must be exactly the same as *xref*, otherwise *axref* will revert to *pixel* (explained next). For relative positioning, *axref* can be set to *pixel*, in which case the *ax* value is specified in pixels relative to *x*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point."
                         },
                         "ayref": {
                             "valType": "enumerated",
                             "dflt": "pixel",
                             "values": [
                                 "pixel",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Indicates in what terms the tail of the annotation (ax,ay)  is specified. If `pixel`, `ay` is a relative offset in pixels  from `y`. If set to a y axis id (e.g. *y* or *y2*), `ay` is  specified in the same terms as that axis. This is useful  for trendline annotations which should continue to indicate  the correct trend when zoomed."
+                            "description": "Indicates in what coordinates the tail of the annotation (ax,ay) is specified. If set to a ay axis id (e.g. *ay* or *ay2*), the `ay` position refers to a ay coordinate. If set to *paper*, the `ay` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a ay axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *ay2 domain* refers to the domain of the second ay  axis and a ay position of 0.5 refers to the point between the bottom and the top of the domain of the second ay axis. In order for absolute positioning of the arrow to work, *ayref* must be exactly the same as *yref*, otherwise *ayref* will revert to *pixel* (explained next). For relative positioning, *ayref* can be set to *pixel*, in which case the *ay* value is specified in pixels relative to *y*. Absolute positioning is useful for trendline annotations which should continue to indicate the correct trend when zoomed. Relative positioning is useful for specifying the text offset for an annotated point."
                         },
                         "xref": {
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where 0 (1) corresponds to the left (right) side."
+                            "description": "Sets the annotation's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis."
                         },
                         "x": {
                             "valType": "any",
@@ -69650,11 +69663,11 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where 0 (1) corresponds to the bottom (top)."
+                            "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "y": {
                             "valType": "any",
@@ -69821,11 +69834,11 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the shape's x coordinate axis. If set to an x axis id (e.g. *x* or *x2*), the `x` position refers to an x coordinate. If set to *paper*, the `x` position refers to the distance from the left side of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right) side. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
+                            "description": "Sets the shape's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis. If the axis `type` is *log*, then you must take the log of your desired range. If the axis `type` is *date*, then you must convert the date to unix time in milliseconds."
                         },
                         "xsizemode": {
                             "valType": "enumerated",
@@ -69860,11 +69873,11 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "role": "info",
                             "editType": "calc",
-                            "description": "Sets the annotation's y coordinate axis. If set to an y axis id (e.g. *y* or *y2*), the `y` position refers to an y coordinate If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top)."
+                            "description": "Sets the annotation's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "ysizemode": {
                             "valType": "enumerated",
@@ -70020,14 +70033,14 @@
                             "role": "info",
                             "dflt": 0,
                             "editType": "arraydraw",
-                            "description": "Sets the image container size horizontally. The image will be sized based on the `position` value. When `xref` is set to `paper`, units are sized relative to the plot width."
+                            "description": "Sets the image container size horizontally. The image will be sized based on the `position` value. When `xref` is set to `paper`, units are sized relative to the plot width. When `xref` ends with ` domain`, units are sized relative to the axis width."
                         },
                         "sizey": {
                             "valType": "number",
                             "role": "info",
                             "dflt": 0,
                             "editType": "arraydraw",
-                            "description": "Sets the image container size vertically. The image will be sized based on the `position` value. When `yref` is set to `paper`, units are sized relative to the plot height."
+                            "description": "Sets the image container size vertically. The image will be sized based on the `position` value. When `yref` is set to `paper`, units are sized relative to the plot height. When `yref` ends with ` domain`, units are sized relative to the axis height."
                         },
                         "sizing": {
                             "valType": "enumerated",
@@ -70092,23 +70105,23 @@
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^x([2-9]|[1-9][0-9]+)?$/"
+                                "/^x([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "dflt": "paper",
                             "role": "info",
                             "editType": "arraydraw",
-                            "description": "Sets the images's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to an x data coordinate If set to *paper*, the `x` position refers to the distance from the left of plot in normalized coordinates where *0* (*1*) corresponds to the left (right)."
+                            "description": "Sets the images's x coordinate axis. If set to a x axis id (e.g. *x* or *x2*), the `x` position refers to a x coordinate. If set to *paper*, the `x` position refers to the distance from the left of the plotting area in normalized coordinates where *0* (*1*) corresponds to the left (right). If set to a x axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the left of the domain of that axis: e.g., *x2 domain* refers to the domain of the second x  axis and a x position of 0.5 refers to the point between the left and the right of the domain of the second x axis."
                         },
                         "yref": {
                             "valType": "enumerated",
                             "values": [
                                 "paper",
-                                "/^y([2-9]|[1-9][0-9]+)?$/"
+                                "/^y([2-9]|[1-9][0-9]+)?( domain)?$/"
                             ],
                             "dflt": "paper",
                             "role": "info",
                             "editType": "arraydraw",
-                            "description": "Sets the images's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y data coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plot in normalized coordinates where *0* (*1*) corresponds to the bottom (top)."
+                            "description": "Sets the images's y coordinate axis. If set to a y axis id (e.g. *y* or *y2*), the `y` position refers to a y coordinate. If set to *paper*, the `y` position refers to the distance from the bottom of the plotting area in normalized coordinates where *0* (*1*) corresponds to the bottom (top). If set to a y axis ID followed by *domain* (separated by a space), the position behaves like for *paper*, but refers to the distance in fractions of the domain length from the bottom of the domain of that axis: e.g., *y2 domain* refers to the domain of the second y  axis and a y position of 0.5 refers to the point between the bottom and the top of the domain of the second y axis."
                         },
                         "editType": "arraydraw",
                         "name": {

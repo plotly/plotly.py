@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
@@ -164,7 +164,25 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-<!-- #region -->
+### Using GeoPandas Data Frames
+
+`px.choropleth` accepts the `geometry` of a [GeoPandas](https://geopandas.org/) data frame as the input to `geojson` if the `geometry` contains polygons.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+geo_df = gpd.read_file(gpd.datasets.get_path('nybb')).to_crs("EPSG:4326")
+
+fig = px.choropleth(geo_df,
+                   geojson=geo_df.geometry,
+                   locations=geo_df.index,
+                   color='Shape_Leng',
+                   hover_name="BoroName")
+fig.update_geos(fitbounds="locations", visible=False)
+fig.show()
+```
+
 
 ### Using Built-in Country and State Geometries
 
@@ -179,7 +197,6 @@ Plotly comes with two built-in geometries which do not require an external GeoJS
 
 To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
-<!-- #endregion -->
 
 ```python
 import plotly.express as px
