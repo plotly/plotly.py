@@ -440,6 +440,15 @@ jobs:
               git push --force git@github.com:plotly/plotly.py-docs.git master:built
               rm -rf .git
               cd ../..
+              cd build/ipynb
+              git init
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
+              git add *
+              git commit -m "build of https://github.com/plotly/plotly.py/commit/${CIRCLE_SHA1}"
+              git push --force git@github.com:plotly/plotly.py-docs.git master:built_ipynb
+              rm -rf .git
+              cd ../..
             fi
             tar -zcf build/html.tgz build/html
             rm -rf build/html build/ipynb

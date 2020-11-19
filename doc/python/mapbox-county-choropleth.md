@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
@@ -157,6 +157,27 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
+### Using GeoPandas Data Frames
+
+`px.choropleth_mapbox` accepts the `geometry` of a [GeoPandas](https://geopandas.org/) data frame as the input to `geojson` if the `geometry` contains polygons.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+geo_df = gpd.read_file(gpd.datasets.get_path('nybb')).to_crs("EPSG:4326")
+
+fig = px.choropleth_mapbox(geo_df,
+                           geojson=geo_df.geometry,
+                           locations=geo_df.index,
+                           color='Shape_Leng',
+                           hover_name="BoroName",
+                           center={"lat": 40.71, "lon": -74.00},
+                           mapbox_style="open-street-map",
+                           zoom=8)
+fig.show()
+```
+
 ### Choropleth map using plotly.graph_objects and carto base map (no token needed)
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmapbox` class from `plotly.graph_objects`](/python/graph-objects/).
@@ -210,3 +231,4 @@ fig.show()
 #### Reference
 
 See [function reference for `px.(choropleth_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.
+
