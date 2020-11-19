@@ -5,6 +5,7 @@ from unittest import TestCase
 
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
+import pytest
 
 
 class TestSelectForEachUpdateAnnotations(TestCase):
@@ -348,3 +349,26 @@ def test_no_exclude_empty_subplots():
         assert fig.layout[k][1]["xref"] == "x2" and fig.layout[k][1]["yref"] == "y2"
         assert fig.layout[k][2]["xref"] == "x3" and fig.layout[k][2]["yref"] == "y3"
         assert fig.layout[k][3]["xref"] == "x4" and fig.layout[k][3]["yref"] == "y4"
+
+
+@pytest.fixture
+def select_annotations_integer():
+    fig = make_subplots(2, 3)
+    fig.add_annotation(row=1, col=2, text="B")
+    fig.add_annotation(row=2, col=2, text="A")
+    fig.add_annotation(row=2, col=2, text="B")
+    fig.add_annotation(row=2, col=2, text="AB")
+    fig.add_annotation(text="hello")
+    return fig
+
+
+def test_select_annotations_integer(select_annotations_integer):
+    fig = select_annotations_integer
+    anns = list(fig.select_annotations(selector=-1))
+    assert (len(anns) == 1) and (anns[0]["text"] == "hello")
+    anns = list(fig.select_annotations(row=2, col=2, selector=-1))
+    assert (len(anns) == 1) and anns[0]["text"] == "AB"
+    anns = list(fig.select_annotations(row=1, col=2, selector=-1))
+    assert (len(anns) == 1) and anns[0]["text"] == "B"
+    with pytest.raises(IndexError):
+        fig.select_annotations(row=2, col=2, selector=3)

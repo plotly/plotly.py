@@ -177,7 +177,7 @@ def _check_path_in_prop_tree(obj, path, error_cast=None):
           an Exception object or None. The caller can raise this
           exception to see where the lookup error occurred.
     """
-    if type(path) == type(tuple()):
+    if isinstance(path, tuple):
         path = _remake_path_from_tuple(path)
     prop, prop_idcs = _str_to_dict_path_full(path)
     prev_objs = []
@@ -242,7 +242,7 @@ Bad property path:
             # Make KeyError more pretty by changing it to a PlotlyKeyError,
             # because the Python interpreter has a special way of printing
             # KeyError
-            if type(e) == type(KeyError()):
+            if isinstance(e, KeyError):
                 e = PlotlyKeyError()
             if error_cast is not None:
                 e = error_cast()
@@ -282,7 +282,7 @@ def _indexing_combinations(dims, alls, product=False):
     for d, a in zip(dims, alls):
         if d == "all":
             d = a
-        elif type(d) != type(list()):
+        elif not isinstance(d, list):
             d = [d]
         r.append(d)
     if product:
@@ -293,7 +293,7 @@ def _indexing_combinations(dims, alls, product=False):
 
 def _is_select_subplot_coordinates_arg(*args):
     """ Returns true if any args are lists or the string 'all' """
-    return any((a == "all") or (type(a) == type(list())) for a in args)
+    return any((a == "all") or isinstance(a, list) for a in args)
 
 
 def _axis_spanning_shapes_docstr(shape_type):
@@ -380,6 +380,12 @@ annotation_*: any parameters to go.layout.Annotation can be passed as
     Any named function parameters that can be passed to 'add_shape',
     except for x0, x1, y0, y1 or type."""
     return docstr
+
+
+def _generator(i):
+    """ "cast" an iterator to a generator """
+    for x in i:
+        yield x
 
 
 class BaseFigure(object):
@@ -1101,7 +1107,7 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1109,7 +1115,9 @@ class BaseFigure(object):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each trace and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -1177,25 +1185,27 @@ class BaseFigure(object):
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
         from plotly.subplots import _get_subplot_ref_for_trace
 
-        for trace in self.data:
-            # Filter by subplot
-            if filter_by_subplot:
-                trace_subplot_ref = _get_subplot_ref_for_trace(trace)
-                if trace_subplot_ref not in grid_subplot_refs:
-                    continue
+        # functions for filtering
+        def _filter_by_subplot_ref(trace):
+            trace_subplot_ref = _get_subplot_ref_for_trace(trace)
+            return trace_subplot_ref in grid_subplot_refs
 
-            # Filter by selector
-            if not self._selector_matches(trace, selector):
-                continue
+        funcs = []
+        if filter_by_subplot:
+            funcs.append(_filter_by_subplot_ref)
 
-            yield trace
+        return _generator(self._filter_by_selector(self.data, funcs, selector))
 
     @staticmethod
     def _selector_matches(obj, selector):
         if selector is None:
             return True
+        # If selector is a string then put it at the 'type' key of a dictionary
+        # to select objects where "type":selector
+        if isinstance(selector, six.string_types):
+            selector = dict(type=selector)
         # If selector is a dict, compare the fields
-        if (type(selector) == type(dict())) or isinstance(selector, BasePlotlyType):
+        if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
             # This returns True if selector is an empty dict
             for k in selector:
                 if k not in obj:
@@ -1214,13 +1224,41 @@ class BaseFigure(object):
                     return False
             return True
         # If selector is a function, call it with the obj as the argument
-        elif type(selector) == type(lambda x: True):
+        elif six.callable(selector):
             return selector(obj)
         else:
             raise TypeError(
                 "selector must be dict or a function "
                 "accepting a graph object returning a boolean."
             )
+
+    def _filter_by_selector(self, objects, funcs, selector):
+        """
+        objects is a sequence of objects, funcs a list of functions that
+        return True if the object should be included in the selection and False
+        otherwise and selector is an argument to the self._selector_matches
+        function.
+        If selector is an integer, the resulting sequence obtained after
+        sucessively filtering by each function in funcs is indexed by this
+        integer.
+        Otherwise selector is used as the selector argument to
+        self._selector_matches which is used to filter down the sequence.
+        The function returns the sequence (an iterator).
+        """
+
+        # if selector is not an int, we call it on each trace to test it for selection
+        if not isinstance(selector, int):
+            funcs.append(lambda obj: self._selector_matches(obj, selector))
+
+        def _filt(last, f):
+            return filter(f, last)
+
+        filtered_objects = reduce(_filt, funcs, objects)
+
+        if isinstance(selector, int):
+            return iter([list(filtered_objects)[selector]])
+
+        return filtered_objects
 
     def for_each_trace(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
@@ -1231,7 +1269,7 @@ class BaseFigure(object):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1239,7 +1277,9 @@ class BaseFigure(object):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each trace and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -1288,7 +1328,7 @@ class BaseFigure(object):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict, function, or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
@@ -1296,7 +1336,9 @@ class BaseFigure(object):
             selected. If a function, it must be a function accepting a single
             argument and returning a boolean. The function will be called on
             each trace and those for which the function returned True
-            will be in the selection.
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -1391,37 +1433,25 @@ class BaseFigure(object):
         else:
             container_to_row_col = None
 
-        # Natural sort keys so that xaxis20 is after xaxis3
-        layout_keys = _natural_sort_strings(list(self.layout))
-
-        for k in layout_keys:
-            if k.startswith(prefix) and self.layout[k] is not None:
-
-                # Filter by row/col
-                if (
-                    row is not None
-                    and container_to_row_col.get(k, (None, None, None))[0] != row
-                ):
-                    # row specified and this is not a match
-                    continue
-                elif (
-                    col is not None
-                    and container_to_row_col.get(k, (None, None, None))[1] != col
-                ):
-                    # col specified and this is not a match
-                    continue
-                elif (
-                    secondary_y is not None
-                    and container_to_row_col.get(k, (None, None, None))[2]
-                    != secondary_y
-                ):
-                    continue
-
-                # Filter by selector
-                if not self._selector_matches(self.layout[k], selector):
-                    continue
-
-                yield self.layout[k]
+        layout_keys_filters = [
+            lambda k: k.startswith(prefix) and self.layout[k] is not None,
+            lambda k: row is None
+            or container_to_row_col.get(k, (None, None, None))[0] == row,
+            lambda k: col is None
+            or container_to_row_col.get(k, (None, None, None))[1] == col,
+            lambda k: (
+                secondary_y is None
+                or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
+            ),
+        ]
+        layout_keys = reduce(
+            lambda last, f: filter(f, last),
+            layout_keys_filters,
+            # Natural sort keys so that xaxis20 is after xaxis3
+            _natural_sort_strings(list(self.layout)),
+        )
+        layout_objs = [self.layout[k] for k in layout_keys]
+        return _generator(self._filter_by_selector(layout_objs, [], selector))
 
     def _select_annotations_like(
         self, prop, selector=None, row=None, col=None, secondary_y=None
@@ -1450,27 +1480,25 @@ class BaseFigure(object):
                             yref_to_row[yref] = r + 1
                             yref_to_secondary_y[yref] = is_secondary_y
 
-        for obj in self.layout[prop]:
-            # Filter by row
-            if col is not None and xref_to_col.get(obj.xref, None) != col:
-                continue
+        # filter down (select) which graph objects, by applying the filters
+        # successively
+        def _filter_row(obj):
+            """ Filter objects in rows by column """
+            return (col is None) or (xref_to_col.get(obj.xref, None) == col)
 
-            # Filter by col
-            if row is not None and yref_to_row.get(obj.yref, None) != row:
-                continue
+        def _filter_col(obj):
+            """ Filter objects in columns by row """
+            return (row is None) or (yref_to_row.get(obj.yref, None) == row)
 
-            # Filter by secondary y
-            if (
-                secondary_y is not None
-                and yref_to_secondary_y.get(obj.yref, None) != secondary_y
-            ):
-                continue
+        def _filter_sec_y(obj):
+            """ Filter objects on secondary y axes """
+            return (secondary_y is None) or (
+                yref_to_secondary_y.get(obj.yref, None) == secondary_y
+            )
 
-            # Filter by selector
-            if not self._selector_matches(obj, selector):
-                continue
+        funcs = [_filter_row, _filter_col, _filter_sec_y]
 
-            yield obj
+        return _generator(self._filter_by_selector(self.layout[prop], funcs, selector))
 
     def _add_annotation_like(
         self,
@@ -3913,14 +3941,10 @@ Invalid property path '{key_path_str}' for layout
         """
         if direction == "vertical":
             # fix y points to top and bottom of subplot
-            axis = "y"
             ref = "yref"
-            axis_layout_key_template = "yaxis%s"
         elif direction == "horizontal":
             # fix x points to left and right of subplot
-            axis = "x"
             ref = "xref"
-            axis_layout_key_template = "xaxis%s"
         else:
             raise ValueError(
                 "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
@@ -3991,7 +4015,7 @@ Invalid property path '{key_path_str}' for layout
         ):
             n_layout_objs_after = len(self.layout[layout_obj])
             if (n_layout_objs_after > n_layout_objs_before) and (
-                row == None and col == None
+                row is None and col is None
             ):
                 # this was called intending to add to a single plot (and
                 # self.add_{layout_obj} succeeded)
@@ -4104,7 +4128,7 @@ Invalid property path '{key_path_str}' for layout
         if not selector:
             # If nothing to select was specified then a subplot is always deemed non-empty
             return True
-        if selector == True:
+        if selector is True:
             selector = "all"
         if selector == "all":
             selector = ["traces", "shapes", "annotations", "images"]
@@ -4274,7 +4298,6 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        invalid_kwargs = {}
         for k, v in kwargs.items():
             err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
             if err is None:
@@ -6249,7 +6272,7 @@ class BaseFrameHierarchyType(BasePlotlyType):
         # -------------------------------------
         try:
             trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
+        except ValueError:
             trace_index = None
 
         # Child is a trace
