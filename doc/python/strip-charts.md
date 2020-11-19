@@ -58,3 +58,7 @@ df = px.data.tips()
 fig = px.strip(df, x="total_bill", y="time", color="sex", facet_col="day")
 fig.show()
 ```
+
+#### Reference
+
+See [function reference for `px.strip()`](https://plotly.com/python-api-reference/generated/plotly.express.strip) for more information and chart attribute options!

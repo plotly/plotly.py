@@ -230,4 +230,5 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.
+See [function reference for `px.(choropleth_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.
+
