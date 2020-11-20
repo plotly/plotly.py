@@ -108,7 +108,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a style="color:red;" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
 ```python hide_code=true
@@ -171,7 +171,7 @@ fig = go.Figure(data=[go.Sankey(
       label = ["A1", "A2", "B1", "B2", "C1", "C2"],
       customdata = ["Long name A1", "Long name A2", "Long name B1", "Long name B2",
                     "Long name C1", "Long name C2"],
-      hovertemplate='Node %{customdata} has total value %{value}<extra></extra>',  
+      hovertemplate='Node %{customdata} has total value %{value}<extra></extra>',
       color = "blue"
     ),
     link = dict(
@@ -181,7 +181,7 @@ fig = go.Figure(data=[go.Sankey(
       customdata = ["q","r","s","t","u","v"],
       hovertemplate='Link from node %{source.customdata}<br />'+
         'to node%{target.customdata}<br />has value %{value}'+
-        '<br />and data %{customdata}<extra></extra>',  
+        '<br />and data %{customdata}<extra></extra>',
   ))])
 
 fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)
