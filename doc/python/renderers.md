@@ -158,7 +158,7 @@ This renderer may be useful when working with notebooks than contain lots of lar
 The `plotly_mimetype` renderer creates a specification of the figure (called a MIME-type bundle), and requests that the current user interface displays it. User interfaces that support this renderer include [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/) (requires the [`jupyterlab-plotly`](https://www.npmjs.com/package/jupyterlab-plotly) extension), [nteract](https://nteract.io/), and the Visual Studio Code [notebook interface](https://code.visualstudio.com/docs/python/jupyter-support).
 
 ###### `jupyterlab`, `nteract`, and `vscode`
-These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface.
+These are aliases for `plotly_mimetype` since this renderer is a good choice when working in JupyterLab, nteract, and the Visual Studio Code notebook interface. Note that in VSCode Notebooks, the version of Plotly.js that is used to render is provided by the [vscode-python extension](https://code.visualstudio.com/docs/languages/python) and often trails the latest version by several weeks, so the latest features of `plotly` may not be available in VSCode right away. The situation is similar for Nteract.
 
 ##### Static Image Renderers
 A set of renderers is provided for displaying figures as static images.  These renderers all rely on the [orca](https://github.com/plotly/orca) static image export utility. See the [Static Image Export](https://plot.ly/python/static-image-export/) page for more information on getting set up with [orca].
