@@ -48,6 +48,10 @@ $ conda uninstall plotly
 $ pip remove plotly
 ```
 
+### Dash Problems
+
+If you are encountering problems using `plotly` with [Dash](https://dash.plotly.com/) please first ensure that you have upgraded `dash` to the latest version, which will automatically upgrade `dash-core-components` to the latest version, ensuring that Dash is using an up-to-date version of the Plotly.js rendering engine for `plotly`. If this does not resolve your issue, please visit our [Dash Community Forum](https://community.plotly.com/) and we will be glad to help you out.
+
 ### Jupyter Notebook Classic Problems
 
 The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
@@ -65,24 +69,30 @@ As a last resort, you can "Restart & Clear Output" from the Kernel menu and reru
 
 ### JupyterLab Problems
 
-In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1.x and not 0.x.
+In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There are two extensions: `jupyterlab-plotly` for rendering figures with `fig.show()` and `plotlywidget` for the `FigureWidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1.x and 2.x but not 0.x.
 
-If you are having problems in JupyterLab, a good first step is to check that you have the extensions installed by running uninstall/reinstall the extensions.
-
-To list your current extensions, run the following command in a terminal shell:
+To list your current extensions, run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
 
 ```bash
 $ jupyter labextension list
 ```
 
-To uninstall your Plotly extensions, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
+Depending on your setup, it's possible for the command above to list the correct extensions but for them not to be loaded in the JupyterLab front-end you have loaded in your browser. To check if this is the problem, you can [look at the active extension list through your browser via the JupyterLab Extension Manager](https://jupyterlab.readthedocs.io/en/stable/user/extensions.html#using-the-extension-manager). This is important notably when you have per-kernel environments, or when you are using a centrally-hosted installation of JupyterLab. In such situations, `jupyter labextension list` may indicate that the extension is installed in a given environment, but it doesn't get loaded in your browser because JupyterLab is launched from a different environment.
+
+If you have the correct version of the extensions installed and active in your active JupyterLab sessions and are still seeing problems, the issue may clear up if you rebuild JupyterLab. This shouldn't be required in principle but many users have resolved their issues this way. To rebuild JupyterLab, shut down JupyterLab and run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
+
+```bash
+$ jupyter lab build
+```
+
+To uninstall your Plotly extensions prior to reinstalling them, run the following commands in a terminal shell before reinstalling them by following the instructions in the [Getting Started guide](/python/getting-started):
 
 ```bash
 $ jupyter labextension uninstall jupyterlab-plotly
 $ jupyter labextension uninstall plotlywidget
 ```
 
-If you run into "out of memory" problems while installing the extensions, try running these commands before running `jupyter labextension install`...
+If you run into "out of memory" problems while installing the extensions or building JupyterLab, try running these commands before running `jupyter labextension install`...
 
 ```bash
 # Avoid "JavaScript heap out of memory" errors during extension installation
@@ -104,6 +114,11 @@ set NODE_OPTIONS=
 
 <!-- #endregion -->
 
+### VSCode Notebook, Nteract and Streamlit Problems
+
+Plotly figures render in VSCode using a Plotly.js version bundled with the [vscode-python extension](https://code.visualstudio.com/docs/languages/python), and unfortunately it's often a little out of date compared to the latest version of the `plotly` module, so the very latest features may not work until the following release of the vscode-python extension. In any case, regularly upgrading your vscode-python extension to the latest version will ensure you have access to the greatest number of recent features.
+
+The situation is similar for environments like Nteract and Streamlit: in these environments you will need a version of these projects that bundles a version Plotly.js that supports the features in the version of `plotly` that you are running.
 
 ### Orca Problems
 
