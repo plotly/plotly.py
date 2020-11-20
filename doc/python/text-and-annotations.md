@@ -107,7 +107,7 @@ fig.show()
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
-Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a style="color:red;" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
 
 
 ```python hide_code=true
@@ -215,7 +215,7 @@ fig.update_layout(
             text="Point 1",
             xanchor="left",
             xshift=10,
-            opacity=0.7), 
+            opacity=0.7),
         dict(
             x="2017-02-10",
             y="B",
@@ -231,7 +231,7 @@ fig.update_layout(
             arrowcolor="black",
             arrowsize=3,
             arrowwidth=1,
-            arrowhead=1), 
+            arrowhead=1),
         dict(
             x="2017-03-20",
             y="C",
