@@ -83,6 +83,60 @@ fig = px.histogram(df, x="total_bill", y="tip", color="sex", facet_row="time", f
 fig.show()
 ```
 
+### Adding Lines and Rectangles to Facet Plots
+
+*introduced in plotly 4.12*
+
+It is possible to add [labelled horizontal and vertical lines and rectangles](/python/horizontal-vertical-shapes/) to facet plots using `.add_hline()`, `.add_vline()`, `.add_hrect()` or `.add_vrect()`. The default `row` and `col` values are `"all"` but this can be overridden, as with the rectangle below, which only appears in the first column.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)
+fig = px.line(df, facet_col="company", facet_col_wrap=2)
+fig.add_hline(y=1, line_dash="dot",
+              annotation_text="Jan 1, 2018 baseline",
+              annotation_position="bottom right")
+
+fig.add_vrect(x0="2018-09-24", x1="2018-12-18", col=1,
+              annotation_text="decline", annotation_position="top left",
+              fillcolor="green", opacity=0.25, line_width=0)
+fig.show()
+
+```
+
+### Adding the Same Trace to All Facets
+
+*introduced in plotly 4.12*
+
+The `.add_trace()` method can be used to add a copy of the same trace to each facet, for example an overall linear regression line as below. The `legendgroup`/`showlegend` pattern below is recommended to avoid having a separate legend item for each copy of the trace.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", color='sex',
+                 facet_col="day", facet_row="time")
+
+import statsmodels.api as sm
+import plotly.graph_objects as go
+df = df.sort_values(by="total_bill")
+model = sm.OLS(df["tip"], sm.add_constant(df["total_bill"])).fit()
+
+#create the trace to be added to all facets
+trace = go.Scatter(x=df["total_bill"], y=model.predict(),
+                   line_color="black", name="overall OLS")
+
+# give it a legend group and hide it from the legend
+trace.update(legendgroup="trendline", showlegend=False)
+
+# add it to all rows/cols, but not to empty subplots
+fig.add_trace(trace, row="all", col="all", exclude_empty_subplots=True)
+
+# set only the last trace added to appear in the legend
+fig.data[-1].update(showlegend=True)
+fig.show()
+```
+
 ### Facets With Independent Axes
 
 By default, facet axes are linked together: zooming inside one of the facets will also zoom in the other facets. You can disable this behaviour when you use `facet_row` only, by disabling `matches` on the Y axes, or when using `facet_col` only, by disabling `matches` on the X axes. It is not recommended to use this approach when using `facet_row` and `facet_col` together, as in this case it becomes very hard to understand the labelling of axes and grid lines.
@@ -103,7 +157,7 @@ fig.update_xaxes(matches=None)
 fig.show()
 ```
 
-### Customize Subplot Figure Titles
+### Customizing Subplot Figure Titles
 
 Since subplot figure titles are [annotations](https://plotly.com/python/text-and-annotations/#simple-annotation), you can use the `for_each_annotation` function to customize them, for example to remove the equal-sign (`=`).
 
