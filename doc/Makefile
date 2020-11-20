@@ -23,15 +23,15 @@ all: $(HTML_FILES) $(V3_REDIR_FILES) $(NEXT_REDIR_FILES)
 
 $(IPYNB_DIR)/.mapbox_token: $(MD_DIR)/.mapbox_token
 	@mkdir -p $(IPYNB_DIR)
-	cd $(IPYNB_DIR) && ln -s ../../$<
+	@echo "[symlink]    .mapbox_token"
+	@cd $(IPYNB_DIR) && ln -s ../../$<
 
 $(IPYNB_FILES): $(IPYNB_DIR)/.mapbox_token
 
 $(IPYNB_DIR)/%.ipynb: $(MD_DIR)/%.md
 	@mkdir -p $(IPYNB_DIR)
 	@echo "[jupytext]   $<"
-	@cat what_about_dash.md >> $<
-	@jupytext $< --to notebook --quiet --output $@
+	@cat $< what_about_dash.md | jupytext  --to notebook --quiet --output $@
 
 $(HTML_DIR)/2019-07-03-%.html: $(IPYNB_DIR)/%.ipynb
 	@mkdir -p $(HTML_DIR)
