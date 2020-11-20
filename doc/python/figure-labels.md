@@ -123,7 +123,7 @@ fig.add_trace(go.Scatter(
 fig.update_layout(
     title="Plot Title",
     xaxis_title="X Axis Title",
-    yaxis_title="X Axis Title",
+    yaxis_title="Y Axis Title",
     legend_title="Legend Title",
     font=dict(
         family="Courier New, monospace",
