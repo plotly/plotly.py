@@ -10,8 +10,8 @@ numpy==1.16.0
 plotly-geo
 python-igraph
 geopandas==0.8.1
-pyshp
-shapely
+pyshp==2.1.2
+shapely==1.7.1
 psutil
 requests
 networkx
