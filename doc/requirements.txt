@@ -9,7 +9,7 @@ patsy==0.5.1
 numpy==1.16.0
 plotly-geo
 python-igraph
-geopandas
+geopandas==0.8.1
 pyshp
 shapely
 psutil
