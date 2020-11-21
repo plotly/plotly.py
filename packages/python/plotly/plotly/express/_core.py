@@ -1750,6 +1750,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if "line_shape" in args:
         trace_patch["line"] = dict(shape=args["line_shape"])
 
+    if "geojson" in args:
+        trace_patch["featureidkey"] = args["featureidkey"]
+        trace_patch["geojson"] = (
+            args["geojson"]
+            if not hasattr(args["geojson"], "__geo_interface__")  # for geopandas
+            else args["geojson"].__geo_interface__
+        )
+
     # Compute marginal attribute
     if "marginal" in args:
         position = "marginal_x" if args["orientation"] == "v" else "marginal_y"
@@ -2062,20 +2070,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
 def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
-    specs = [[{}] * ncols for _ in range(nrows)]
-    for frame in frame_list:
-        for trace in frame["data"]:
-            row0 = trace._subplot_row - 1
-            col0 = trace._subplot_col - 1
-            if isinstance(trace, go.Splom):
-                # Splom not compatible with make_subplots, treat as domain
-                specs[row0][col0] = {"type": "domain"}
-            else:
-                specs[row0][col0] = {"type": trace.type}
+    specs = [[dict(type=subplot_type or "domain")] * ncols for _ in range(nrows)]
 
     # Default row/column widths uniform
     column_widths = [1.0] * ncols
     row_heights = [1.0] * nrows
+    facet_col_wrap = args.get("facet_col_wrap", 0)
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
@@ -2087,7 +2087,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
-        elif args.get("facet_col_wrap", 0):
+        elif facet_col_wrap:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.03
@@ -2108,10 +2108,12 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
-        vertical_spacing = 0.1
-        horizontal_spacing = 0.1
+        if facet_col_wrap:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
+        else:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
+        horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
 
-    facet_col_wrap = args.get("facet_col_wrap", 0)
     if facet_col_wrap:
         subplot_labels = [None] * nrows * ncols
         while len(col_labels) < nrows * ncols:
