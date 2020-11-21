@@ -1094,8 +1094,6 @@ def scatter_mapbox(
     hover_data=None,
     custom_data=None,
     size=None,
-    geojson=None,
-    featureidkey=None,
     animation_frame=None,
     animation_group=None,
     category_orders={},
