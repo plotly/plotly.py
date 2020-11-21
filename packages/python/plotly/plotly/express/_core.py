@@ -616,33 +616,27 @@ def configure_cartesian_axes(args, fig, orders):
     if "is_timeline" in args:
         fig.update_xaxes(type="date")
 
-    return fig.layout
-
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update_layout(
-        ternary=dict(
-            aaxis=dict(title_text=get_label(args, args["a"])),
-            baxis=dict(title_text=get_label(args, args["b"])),
-            caxis=dict(title_text=get_label(args, args["c"])),
-        )
+    fig.update_ternaries(
+        aaxis=dict(title_text=get_label(args, args["a"])),
+        baxis=dict(title_text=get_label(args, args["b"])),
+        caxis=dict(title_text=get_label(args, args["c"])),
     )
 
 
 def configure_polar_axes(args, fig, orders):
-    layout = dict(
-        polar=dict(
-            angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
-            radialaxis=dict(),
-        )
+    patch = dict(
+        angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
+        radialaxis=dict(),
     )
 
     for var, axis in [("r", "radialaxis"), ("theta", "angularaxis")]:
         if args[var] in orders:
-            layout["polar"][axis]["categoryorder"] = "array"
-            layout["polar"][axis]["categoryarray"] = orders[args[var]]
+            patch[axis]["categoryorder"] = "array"
+            patch[axis]["categoryarray"] = orders[args[var]]
 
-    radialaxis = layout["polar"]["radialaxis"]
+    radialaxis = patch["radialaxis"]
     if args["log_r"]:
         radialaxis["type"] = "log"
         if args["range_r"]:
@@ -652,21 +646,19 @@ def configure_polar_axes(args, fig, orders):
             radialaxis["range"] = args["range_r"]
 
     if args["range_theta"]:
-        layout["polar"]["sector"] = args["range_theta"]
-    fig.update(layout=layout)
+        patch["sector"] = args["range_theta"]
+    fig.update_polars(patch)
 
 
 def configure_3d_axes(args, fig, orders):
-    layout = dict(
-        scene=dict(
-            xaxis=dict(title_text=get_label(args, args["x"])),
-            yaxis=dict(title_text=get_label(args, args["y"])),
-            zaxis=dict(title_text=get_label(args, args["z"])),
-        )
+    patch = dict(
+        xaxis=dict(title_text=get_label(args, args["x"])),
+        yaxis=dict(title_text=get_label(args, args["y"])),
+        zaxis=dict(title_text=get_label(args, args["z"])),
     )
 
     for letter in ["x", "y", "z"]:
-        axis = layout["scene"][letter + "axis"]
+        axis = patch[letter + "axis"]
         if args["log_" + letter]:
             axis["type"] = "log"
             if args["range_" + letter]:
@@ -677,7 +669,7 @@ def configure_3d_axes(args, fig, orders):
         if args[letter] in orders:
             axis["categoryorder"] = "array"
             axis["categoryarray"] = orders[args[letter]]
-    fig.update(layout=layout)
+    fig.update_scenes(patch)
 
 
 def configure_mapbox(args, fig, orders):
@@ -687,23 +679,19 @@ def configure_mapbox(args, fig, orders):
             lat=args["data_frame"][args["lat"]].mean(),
             lon=args["data_frame"][args["lon"]].mean(),
         )
-    fig.update_layout(
-        mapbox=dict(
-            accesstoken=MAPBOX_TOKEN,
-            center=center,
-            zoom=args["zoom"],
-            style=args["mapbox_style"],
-        )
+    fig.update_mapboxes(
+        accesstoken=MAPBOX_TOKEN,
+        center=center,
+        zoom=args["zoom"],
+        style=args["mapbox_style"],
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update_layout(
-        geo=dict(
-            center=args["center"],
-            scope=args["scope"],
-            projection=dict(type=args["projection"]),
-        )
+    fig.update_geos(
+        center=args["center"],
+        scope=args["scope"],
+        projection=dict(type=args["projection"]),
     )
 
 

@@ -96,9 +96,10 @@ df = df.melt(id_vars="district", value_vars=["Coderre", "Bergeron", "Joly"],
 geojson = px.data.election_geojson()
 
 fig = px.choropleth(df, geojson=geojson, color="votes", facet_col="candidate",
-                    locations="district", featureidkey="properties.district"
+                    locations="district", featureidkey="properties.district",
+                    projection="mercator"
                    )
-fig.update_geos(fitbounds="locations", visible=False, projection_type="mercator")
+fig.update_geos(fitbounds="locations", visible=False)
 fig.show()
 ```
 
