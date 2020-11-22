@@ -165,16 +165,18 @@ fig.show()
 import plotly.express as px
 import geopandas as gpd
 
-geo_df = gpd.read_file(gpd.datasets.get_path('nybb')).to_crs("EPSG:4326")
+df = px.data.election()
+geo_df = gpd.GeoDataFrame.from_features(
+    px.data.election_geojson()["features"]
+).merge(df, on="district").set_index("district")
 
 fig = px.choropleth_mapbox(geo_df,
                            geojson=geo_df.geometry,
                            locations=geo_df.index,
-                           color='Shape_Leng',
-                           hover_name="BoroName",
-                           center={"lat": 40.71, "lon": -74.00},
+                           color="Joly",
+                           center={"lat": 45.5517, "lon": -73.7073},
                            mapbox_style="open-street-map",
-                           zoom=8)
+                           zoom=8.5)
 fig.show()
 ```
 
