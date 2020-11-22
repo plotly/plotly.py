@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.13.0] - UNRELEASED
 
 ### Added
-- `px.choropleth`, `px.scatter_geo` and `px.line_geo` now support faceting [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `px.choropleth`, `px.scatter_geo` and `px.line_geo` now support faceting as well as `fitbounds` and `basemap_visible` [2923](https://github.com/plotly/plotly.py/pull/2923)
 - `px.scatter_geo` and `px.line_geo` now support `geojson`/`featureidkey` input [2923](https://github.com/plotly/plotly.py/pull/2923)
 - `px.scatter_geo` now supports `symbol` [2923](https://github.com/plotly/plotly.py/pull/2923)
 - `go.Figure` now has a `set_subplots` method to set subplots on an already

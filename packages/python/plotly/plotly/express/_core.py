@@ -691,6 +691,8 @@ def configure_geo(args, fig, orders):
     fig.update_geos(
         center=args["center"],
         scope=args["scope"],
+        fitbounds=args["fitbounds"],
+        visible=args["basemap_visible"],
         projection=dict(type=args["projection"]),
     )
 
