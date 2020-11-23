@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.6.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.6
+    version: 3.7.7
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
@@ -184,13 +184,16 @@ fig.show()
 import plotly.express as px
 import geopandas as gpd
 
-geo_df = gpd.read_file(gpd.datasets.get_path('nybb')).to_crs("EPSG:4326")
+df = px.data.election()
+geo_df = gpd.GeoDataFrame.from_features(
+    px.data.election_geojson()["features"]
+).merge(df, on="district").set_index("district")
 
 fig = px.choropleth(geo_df,
                    geojson=geo_df.geometry,
                    locations=geo_df.index,
-                   color='Shape_Leng',
-                   hover_name="BoroName")
+                   color="Joly",
+                   projection="mercator")
 fig.update_geos(fitbounds="locations", visible=False)
 fig.show()
 ```
