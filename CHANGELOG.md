@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.13.1] - UNRELEASED
 
 
-## [4.13.0] - UNRELEASED
+## [4.13.0] - 2020-11-23
 
 ### Added
 - `px.choropleth`, `px.scatter_geo` and `px.line_geo` now support faceting as well as `fitbounds` and `basemap_visible` [2923](https://github.com/plotly/plotly.py/pull/2923)
