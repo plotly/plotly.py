@@ -174,7 +174,7 @@ fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
 
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab.
+Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
 
 <!-- #region -->
 
