@@ -323,8 +323,7 @@ class HtmlRenderer(MimetypeRenderer):
                     win_config=_window_plotly_config,
                     mathjax_config=_mathjax_config,
                 )
-
-            ipython_display.display_html(script, raw=True)
+            ipython_display.display(ipython_display.HTML(script))
 
     def to_mimebundle(self, fig_dict):
 

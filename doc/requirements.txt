@@ -1,10 +1,10 @@
 plotly==4.12.0
 jupytext==1.1.1
 jupyter
-notebook
+notebook==6.1.0
+scipy==1.3.1
 pandas==1.0.3
 statsmodels==0.11.1
-scipy==1.3.1
 patsy==0.5.1
 numpy==1.16.0
 plotly-geo
@@ -29,3 +29,4 @@ cufflinks==0.17.3
 kaleido
 umap-learn
 wget
+nbconvert==5.5.0
