@@ -83,6 +83,26 @@ fig = px.histogram(df, x="total_bill", y="tip", color="sex", facet_row="time", f
 fig.show()
 ```
 
+### Choropleth Column Facets
+
+*new in version 4.13*
+
+```python
+import plotly.express as px
+
+df = px.data.election()
+df = df.melt(id_vars="district", value_vars=["Coderre", "Bergeron", "Joly"],
+            var_name="candidate", value_name="votes")
+geojson = px.data.election_geojson()
+
+fig = px.choropleth(df, geojson=geojson, color="votes", facet_col="candidate",
+                    locations="district", featureidkey="properties.district",
+                    projection="mercator"
+                   )
+fig.update_geos(fitbounds="locations", visible=False)
+fig.show()
+```
+
 ### Adding Lines and Rectangles to Facet Plots
 
 *introduced in plotly 4.12*
@@ -133,7 +153,8 @@ trace.update(legendgroup="trendline", showlegend=False)
 fig.add_trace(trace, row="all", col="all", exclude_empty_subplots=True)
 
 # set only the last trace added to appear in the legend
-fig.data[-1].update(showlegend=True)
+# `selector=-1` introduced in plotly v4.13
+fig.update_traces(selector=-1, showlegend=True)
 fig.show()
 ```
 

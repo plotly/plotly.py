@@ -940,6 +940,11 @@ def choropleth(
     geojson=None,
     featureidkey=None,
     color=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -955,6 +960,8 @@ def choropleth(
     projection=None,
     scope=None,
     center=None,
+    fitbounds=None,
+    basemap_visible=None,
     title=None,
     template=None,
     width=None,
@@ -967,13 +974,7 @@ def choropleth(
     return make_figure(
         args=locals(),
         constructor=go.Choropleth,
-        trace_patch=dict(
-            locationmode=locationmode,
-            featureidkey=featureidkey,
-            geojson=geojson
-            if not hasattr(geojson, "__geo_interface__")  # for geopandas
-            else geojson.__geo_interface__,
-        ),
+        trace_patch=dict(locationmode=locationmode),
     )
 
 
@@ -986,8 +987,16 @@ def scatter_geo(
     lon=None,
     locations=None,
     locationmode=None,
+    geojson=None,
+    featureidkey=None,
     color=None,
     text=None,
+    symbol=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1001,11 +1010,15 @@ def scatter_geo(
     color_continuous_scale=None,
     range_color=None,
     color_continuous_midpoint=None,
+    symbol_sequence=None,
+    symbol_map={},
     opacity=None,
     size_max=None,
     projection=None,
     scope=None,
     center=None,
+    fitbounds=None,
+    basemap_visible=None,
     title=None,
     template=None,
     width=None,
@@ -1031,9 +1044,16 @@ def line_geo(
     lon=None,
     locations=None,
     locationmode=None,
+    geojson=None,
+    featureidkey=None,
     color=None,
     line_dash=None,
     text=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
     hover_name=None,
     hover_data=None,
     custom_data=None,
@@ -1049,6 +1069,8 @@ def line_geo(
     projection=None,
     scope=None,
     center=None,
+    fitbounds=None,
+    basemap_visible=None,
     title=None,
     template=None,
     width=None,
@@ -1138,16 +1160,7 @@ def choropleth_mapbox(
     In a Mapbox choropleth map, each row of `data_frame` is represented by a
     colored region on a Mapbox map.
     """
-    return make_figure(
-        args=locals(),
-        constructor=go.Choroplethmapbox,
-        trace_patch=dict(
-            featureidkey=featureidkey,
-            geojson=geojson
-            if not hasattr(geojson, "__geo_interface__")  # for geopandas
-            else geojson.__geo_interface__,
-        ),
-    )
+    return make_figure(args=locals(), constructor=go.Choroplethmapbox)
 
 
 choropleth_mapbox.__doc__ = make_docstring(choropleth_mapbox)

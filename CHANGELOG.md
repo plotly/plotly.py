@@ -11,7 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [4.13.0] - UNRELEASED
 
 ### Added
-
+- `px.choropleth`, `px.scatter_geo` and `px.line_geo` now support faceting as well as `fitbounds` and `basemap_visible` [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `px.scatter_geo` and `px.line_geo` now support `geojson`/`featureidkey` input [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `px.scatter_geo` now supports `symbol` [2923](https://github.com/plotly/plotly.py/pull/2923)
 - `go.Figure` now has a `set_subplots` method to set subplots on an already
   existing figure. [2866](https://github.com/plotly/plotly.py/pull/2866)
 - Added `Turbo` colorscale and fancier swatch display functions
@@ -37,6 +39,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- `px.scatter_geo` support for `text` is fixed [2923](https://github.com/plotly/plotly.py/pull/2923)
 - the `x` and `y` parameters of `px.imshow` are now used also in the case where
   an Image trace is used (for RGB data or with `binary_string=True`). However,
   only numerical values are accepted (while the Heatmap trace allows date or
