@@ -616,33 +616,27 @@ def configure_cartesian_axes(args, fig, orders):
     if "is_timeline" in args:
         fig.update_xaxes(type="date")
 
-    return fig.layout
-
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update_layout(
-        ternary=dict(
-            aaxis=dict(title_text=get_label(args, args["a"])),
-            baxis=dict(title_text=get_label(args, args["b"])),
-            caxis=dict(title_text=get_label(args, args["c"])),
-        )
+    fig.update_ternaries(
+        aaxis=dict(title_text=get_label(args, args["a"])),
+        baxis=dict(title_text=get_label(args, args["b"])),
+        caxis=dict(title_text=get_label(args, args["c"])),
     )
 
 
 def configure_polar_axes(args, fig, orders):
-    layout = dict(
-        polar=dict(
-            angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
-            radialaxis=dict(),
-        )
+    patch = dict(
+        angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
+        radialaxis=dict(),
     )
 
     for var, axis in [("r", "radialaxis"), ("theta", "angularaxis")]:
         if args[var] in orders:
-            layout["polar"][axis]["categoryorder"] = "array"
-            layout["polar"][axis]["categoryarray"] = orders[args[var]]
+            patch[axis]["categoryorder"] = "array"
+            patch[axis]["categoryarray"] = orders[args[var]]
 
-    radialaxis = layout["polar"]["radialaxis"]
+    radialaxis = patch["radialaxis"]
     if args["log_r"]:
         radialaxis["type"] = "log"
         if args["range_r"]:
@@ -652,21 +646,19 @@ def configure_polar_axes(args, fig, orders):
             radialaxis["range"] = args["range_r"]
 
     if args["range_theta"]:
-        layout["polar"]["sector"] = args["range_theta"]
-    fig.update(layout=layout)
+        patch["sector"] = args["range_theta"]
+    fig.update_polars(patch)
 
 
 def configure_3d_axes(args, fig, orders):
-    layout = dict(
-        scene=dict(
-            xaxis=dict(title_text=get_label(args, args["x"])),
-            yaxis=dict(title_text=get_label(args, args["y"])),
-            zaxis=dict(title_text=get_label(args, args["z"])),
-        )
+    patch = dict(
+        xaxis=dict(title_text=get_label(args, args["x"])),
+        yaxis=dict(title_text=get_label(args, args["y"])),
+        zaxis=dict(title_text=get_label(args, args["z"])),
     )
 
     for letter in ["x", "y", "z"]:
-        axis = layout["scene"][letter + "axis"]
+        axis = patch[letter + "axis"]
         if args["log_" + letter]:
             axis["type"] = "log"
             if args["range_" + letter]:
@@ -677,7 +669,7 @@ def configure_3d_axes(args, fig, orders):
         if args[letter] in orders:
             axis["categoryorder"] = "array"
             axis["categoryarray"] = orders[args[letter]]
-    fig.update(layout=layout)
+    fig.update_scenes(patch)
 
 
 def configure_mapbox(args, fig, orders):
@@ -687,23 +679,21 @@ def configure_mapbox(args, fig, orders):
             lat=args["data_frame"][args["lat"]].mean(),
             lon=args["data_frame"][args["lon"]].mean(),
         )
-    fig.update_layout(
-        mapbox=dict(
-            accesstoken=MAPBOX_TOKEN,
-            center=center,
-            zoom=args["zoom"],
-            style=args["mapbox_style"],
-        )
+    fig.update_mapboxes(
+        accesstoken=MAPBOX_TOKEN,
+        center=center,
+        zoom=args["zoom"],
+        style=args["mapbox_style"],
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update_layout(
-        geo=dict(
-            center=args["center"],
-            scope=args["scope"],
-            projection=dict(type=args["projection"]),
-        )
+    fig.update_geos(
+        center=args["center"],
+        scope=args["scope"],
+        fitbounds=args["fitbounds"],
+        visible=args["basemap_visible"],
+        projection=dict(type=args["projection"]),
     )
 
 
@@ -1750,6 +1740,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if "line_shape" in args:
         trace_patch["line"] = dict(shape=args["line_shape"])
 
+    if "geojson" in args:
+        trace_patch["featureidkey"] = args["featureidkey"]
+        trace_patch["geojson"] = (
+            args["geojson"]
+            if not hasattr(args["geojson"], "__geo_interface__")  # for geopandas
+            else args["geojson"].__geo_interface__
+        )
+
     # Compute marginal attribute
     if "marginal" in args:
         position = "marginal_x" if args["orientation"] == "v" else "marginal_y"
@@ -2062,20 +2060,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
 def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
-    specs = [[{}] * ncols for _ in range(nrows)]
-    for frame in frame_list:
-        for trace in frame["data"]:
-            row0 = trace._subplot_row - 1
-            col0 = trace._subplot_col - 1
-            if isinstance(trace, go.Splom):
-                # Splom not compatible with make_subplots, treat as domain
-                specs[row0][col0] = {"type": "domain"}
-            else:
-                specs[row0][col0] = {"type": trace.type}
+    specs = [[dict(type=subplot_type or "domain")] * ncols for _ in range(nrows)]
 
     # Default row/column widths uniform
     column_widths = [1.0] * ncols
     row_heights = [1.0] * nrows
+    facet_col_wrap = args.get("facet_col_wrap", 0)
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
@@ -2087,7 +2077,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
-        elif args.get("facet_col_wrap", 0):
+        elif facet_col_wrap:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.03
@@ -2108,10 +2098,12 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
-        vertical_spacing = 0.1
-        horizontal_spacing = 0.1
+        if facet_col_wrap:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
+        else:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
+        horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
 
-    facet_col_wrap = args.get("facet_col_wrap", 0)
     if facet_col_wrap:
         subplot_labels = [None] * nrows * ncols
         while len(col_labels) < nrows * ncols:
