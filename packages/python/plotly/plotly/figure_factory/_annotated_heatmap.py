@@ -196,14 +196,14 @@ class _AnnotatedHeatmap(object):
             self.zmin = min([v for row in self.z for v in row])
             self.zmax = max([v for row in self.z for v in row])
 
-        if "zmin" in kwargs:
+        if kwargs.get("zmin", None) is not None:
             self.zmin = kwargs["zmin"]
-        if "zmax" in kwargs:
+        if kwargs.get("zmax", None) is not None:
             self.zmax = kwargs["zmax"]
 
         self.zmid = (self.zmax + self.zmin) / 2
 
-        if "zmid" in kwargs:
+        if kwargs.get("zmid", None) is not None:
             self.zmin = kwargs["zmid"]
 
     def get_text_color(self):
