@@ -64,6 +64,8 @@ def imshow(
     animation_frame=None,
     facet_col=None,
     facet_col_wrap=None,
+    facet_col_spacing=None,
+    facet_row_spacing=None,
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -129,6 +131,13 @@ def imshow(
         Maximum number of facet columns. Wraps the column variable at this width,
         so that the column facets span multiple rows.
         Ignored if `facet_col` is None.
+
+    facet_col_spacing: float between 0 and 1
+        Spacing between facet columns, in paper units. Default is 0.02.
+
+    facet_row_spacing: float between 0 and 1
+        Spacing between facet rows created when ``facet_col_wrap`` is used, in
+        paper units. Default is 0.0.7.
 
     color_continuous_scale : str or list of str
         colormap used to map scalar data to colors (for a 2D image). This parameter is
