@@ -522,14 +522,13 @@ def imshow(
         slice_label = "slice" if labels.get("facet") is None else labels["facet"]
         col_labels = ["%s = %d" % (slice_label, i) for i in facet_slices]
     fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
-    layout_patch = dict()
     for attr_name in ["height", "width"]:
         if args[attr_name]:
-            layout_patch[attr_name] = args[attr_name]
+            layout[attr_name] = args[attr_name]
     if args["title"]:
-        layout_patch["title_text"] = args["title"]
+        layout["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
-        layout_patch["margin"] = {"t": 60}
+        layout["margin"] = {"t": 60}
 
     frame_list = []
     for index, trace in enumerate(traces):
@@ -547,7 +546,6 @@ def imshow(
     if animation_frame:
         fig.frames = frame_list
     fig.update_layout(layout)
-    fig.update_layout(layout_patch)
     # Hover name, z or color
     if binary_string and rescale_image and not np.all(img == img_rescaled):
         # we rescaled the image, hence z is not displayed in hover since it does
