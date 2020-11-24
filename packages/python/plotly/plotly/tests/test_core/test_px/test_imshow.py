@@ -183,9 +183,7 @@ def test_imshow_xarray():
 
 
 def test_imshow_labels_and_ranges():
-    fig = px.imshow(
-        [[1, 2], [3, 4], [5, 6]],
-    )
+    fig = px.imshow([[1, 2], [3, 4], [5, 6]],)
     assert fig.layout.xaxis.title.text is None
     assert fig.layout.yaxis.title.text is None
     assert fig.layout.coloraxis.colorbar.title.text is None
