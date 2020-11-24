@@ -54,6 +54,7 @@ def _infer_zmax_from_type(img):
 
 def imshow(
     img,
+    colormodel=None,
     zmin=None,
     zmax=None,
     origin=None,
@@ -87,6 +88,11 @@ def imshow(
           using a colormap.
         - (M, N, 3): an image with RGB values.
         - (M, N, 4): an image with RGBA values, i.e. including transparency.
+
+    colormodel: str, 'rgb' or 'hsl' (default 'rgb')
+        colormodel used to map the numerical color components into colors.
+        It enables automatic change from rgb/hsl to rgba/hsla depending on
+        img dimensions.
 
     zmin, zmax : scalar or iterable, optional
         zmin and zmax define the scalar range that the colormap covers. By default,
@@ -389,7 +395,12 @@ def imshow(
             )
             trace = go.Image(source=img_str, x0=x0, y0=y0, dx=dx, dy=dy)
         else:
-            colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
+            # change colormodel from hsl/rgba to hsla/rgba depending on dimensions
+            if colormodel == "hsl":
+                if img.shape[-1] == 4:
+                    colormodel = "hsla"
+            else:
+                colormodel = "rgb" if img.shape[-1] == 3 else "rgba"
             trace = go.Image(
                 z=img,
                 zmin=zmin,
