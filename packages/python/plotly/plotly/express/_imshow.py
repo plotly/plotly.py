@@ -331,7 +331,9 @@ def imshow(
         img = np.moveaxis(img, animation_frame, 0)
         animation_frame = True
         args["animation_frame"] = (
-            "slice" if labels.get("animation") is None else labels["animation"]
+            "animation_frame"
+            if labels.get("animation_frame") is None
+            else labels["animation_frame"]
         )
     iterables = ()
     if animation_frame is not None:
@@ -509,8 +511,8 @@ def imshow(
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
             "An image of shape %s was provided."
-            "Alternatively, 3-D single or multichannel datasets can be"
-            "visualized using the `facet_col` or `animation_frame` arguments."
+            "Alternatively, 3- or 4-D single or multichannel datasets can be"
+            "visualized using the `facet_col` or/and `animation_frame` arguments."
             % str(img.shape)
         )
 
