@@ -432,7 +432,7 @@ img_sequence = [filters.gaussian(img, sigma=sigma) for sigma in sigmas]
 fig = px.imshow(np.array(img_sequence), facet_col=0, binary_string=True,
                 labels={'facet_col':'sigma'})
 # Set facet titles
-for sigma in sigmas:
+for i, sigma in enumerate(sigmas):
     fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma 
 fig.show()
 ```
