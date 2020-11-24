@@ -204,7 +204,7 @@ class _AnnotatedHeatmap(object):
         self.zmid = (self.zmax + self.zmin) / 2
 
         if kwargs.get("zmid", None) is not None:
-            self.zmin = kwargs["zmid"]
+            self.zmid = kwargs["zmid"]
 
     def get_text_color(self):
         """
