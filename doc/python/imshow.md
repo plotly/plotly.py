@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.7.1
+      jupytext_version: 1.3.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -399,9 +399,9 @@ for compression_level in range(0, 9):
 fig.show()
 ```
 
-### Exploring 3-D images and timeseries with `facet_col`
+### Exploring 3-D images, timeseries and sequences of images with `facet_col`
 
-*Introduced in plotly 4.13*
+*Introduced in plotly 4.14*
 
 For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axis the image is sliced through to make the facets. With `facet_col_wrap`, one can set the maximum number of columns. For image datasets passed as xarrays, it is also possible to specify the axis by its name (label), thus passing a string to `facet_col`.
 
@@ -420,9 +420,30 @@ fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5)
 fig.show()
 ```
 
+Facets can also be used to represent several images of equal shape, like in the example below where different values of the blurring parameter of a Gaussian filter are compared.
+
+```python
+import plotly.express as px
+import numpy as np
+from skimage import data, filters, img_as_float
+img = data.camera()
+sigmas = [1, 2, 4]
+img_sequence = [filters.gaussian(img, sigma=sigma) for sigma in sigmas]
+fig = px.imshow(np.array(img_sequence), facet_col=0, binary_string=True,
+                labels={'facet_col':'sigma'})
+# Set facet titles
+for sigma in sigmas:
+    fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma 
+fig.show()
+```
+
+```python
+print(fig)
+```
+
 ### Exploring 3-D images and timeseries with `animation_frame`
 
-*Introduced in plotly 4.13*
+*Introduced in plotly 4.14*
 
 For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by sliding through its different planes in an animation. The `animation_frame` argument of `px.imshow` sets the axis along which the 3-D image is sliced in the animation.
 
@@ -439,7 +460,7 @@ fig.show()
 
 ### Animations of xarray datasets
 
-*Introduced in plotly 4.11*
+*Introduced in plotly 4.14*
 
 For xarray datasets, one can pass either an axis number or an axis name to `animation_frame`. Axis names and coordinates are automatically used for the labels, ticks and animation controls of the figure.
 
