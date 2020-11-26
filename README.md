@@ -204,13 +204,13 @@ The `chart-studio` package can be used to upload plotly figures to Plotly's Char
 Studio Cloud or On-Prem service. This package can be installed using pip...
 
 ```
-pip install chart-studio==1.0.0
+pip install chart-studio==1.1.0
 ```
 
 or conda
 
 ```
-conda install -c plotly chart-studio=1.0.0
+conda install -c plotly chart-studio=1.1.0
 ```
 
 ## Migration
