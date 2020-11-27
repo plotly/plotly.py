@@ -283,10 +283,10 @@ def imshow(
             labels["x"] = x_label
         if labels.get("y", None) is None:
             labels["y"] = y_label
-        if labels.get("animation", None) is None:
-            labels["animation"] = animation_label
-        if labels.get("facet", None) is None:
-            labels["facet"] = facet_label
+        if labels.get("animation_frame", None) is None:
+            labels["animation_frame"] = animation_label
+        if labels.get("facet_col", None) is None:
+            labels["facet_col"] = facet_label
         if labels.get("color", None) is None:
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
