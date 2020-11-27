@@ -346,3 +346,25 @@ def test_imshow_hovertemplate(binary_string):
             fig.data[0].hovertemplate
             == "x: %{x}<br>y: %{y}<br>color: %{z}<extra></extra>"
         )
+
+
+@pytest.mark.parametrize("colormodel", ["rgb", "hsl"])
+def test_imshow_colormodel(colormodel):
+    img_no_alpha = np.array(
+        [[[147, 50, 47], [147, 50, 47]], [[147, 50, 47], [147, 50, 47]]], dtype=np.uint8
+    )
+    img_alpha = np.array(
+        [
+            [[147, 50, 47, 0.1], [147, 50, 47, 0.2]],
+            [[147, 50, 47, 0.3], [147, 50, 47, 1]],
+        ],
+        dtype=np.uint8,
+    )
+    for img in [img_no_alpha, img_alpha]:
+        fig = px.imshow(img, colormodel=colormodel)
+        if img.shape[2] == 3:
+            assert decode_image_string(fig.data[0].source).shape[2] == 3
+            assert np.all(img_no_alpha == decode_image_string(fig.data[0].source))
+        else:
+            assert decode_image_string(fig.data[0].source).shape[2] == 4
+            assert np.all(img_alpha == decode_image_string(fig.data[0].source))
