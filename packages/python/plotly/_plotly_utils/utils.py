@@ -235,7 +235,9 @@ class NotEncodable(Exception):
 def b64_encode_numpy(obj):
     # Convert 1D numpy arrays with numeric types to memoryviews with
     # datatype and shape metadata.
-    if obj.dtype.kind in ["u", "i", "f"]:
+    dtype = obj.dtype
+    if (dtype.kind in ["u", "i", "f"] and
+            str(dtype) != "int64" and str(dtype) != "uint64"):
         # We have a numpy array that is compatible with JavaScript typed
         # arrays
         buffer = base64.b64encode(memoryview(
@@ -243,7 +245,7 @@ def b64_encode_numpy(obj):
         ).decode("utf-8")
         return {
             "bvals": buffer,
-            "dtype": str(obj.dtype),
+            "dtype": str(dtype),
             "shape": obj.shape
         }
     else:
