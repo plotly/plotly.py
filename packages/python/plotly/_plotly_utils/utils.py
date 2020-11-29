@@ -3,12 +3,15 @@ import json as _json
 import sys
 import re
 from functools import reduce
+import base64
 
 from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
+from _plotly_future_ import _future_flags
 
 
 PY36_OR_LATER = sys.version_info >= (3, 6)
+b64_encoding = "b64_encoding" in _future_flags
 
 
 def cumsum(x):
@@ -182,7 +185,9 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
         if not numpy:
             raise NotEncodable
 
-        if obj is numpy.ma.core.masked:
+        if isinstance(obj, numpy.ndarray) and b64_encoding:
+            return b64_encode_numpy(obj)
+        elif obj is numpy.ma.core.masked:
             return float("nan")
         else:
             raise NotEncodable
@@ -225,6 +230,25 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
 class NotEncodable(Exception):
     pass
+
+
+def b64_encode_numpy(obj):
+    # Convert 1D numpy arrays with numeric types to memoryviews with
+    # datatype and shape metadata.
+    if obj.dtype.kind in ["u", "i", "f"]:
+        # We have a numpy array that is compatible with JavaScript typed
+        # arrays
+        buffer = base64.b64encode(memoryview(
+            obj.ravel(order="C"))
+        ).decode("utf-8")
+        return {
+            "bvals": buffer,
+            "dtype": str(obj.dtype),
+            "shape": obj.shape
+        }
+    else:
+        # Convert all other numpy arrays to lists
+        return obj.tolist()
 
 
 def iso_to_plotly_time_string(iso_string):
