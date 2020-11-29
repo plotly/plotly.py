@@ -236,18 +236,15 @@ def b64_encode_numpy(obj):
     # Convert 1D numpy arrays with numeric types to memoryviews with
     # datatype and shape metadata.
     dtype = obj.dtype
-    if (dtype.kind in ["u", "i", "f"] and
-            str(dtype) != "int64" and str(dtype) != "uint64"):
+    if (
+        dtype.kind in ["u", "i", "f"]
+        and str(dtype) != "int64"
+        and str(dtype) != "uint64"
+    ):
         # We have a numpy array that is compatible with JavaScript typed
         # arrays
-        buffer = base64.b64encode(memoryview(
-            obj.ravel(order="C"))
-        ).decode("utf-8")
-        return {
-            "bvals": buffer,
-            "dtype": str(dtype),
-            "shape": obj.shape
-        }
+        buffer = base64.b64encode(memoryview(obj.ravel(order="C"))).decode("utf-8")
+        return {"bvals": buffer, "dtype": str(dtype), "shape": obj.shape}
     else:
         # Convert all other numpy arrays to lists
         return obj.tolist()
