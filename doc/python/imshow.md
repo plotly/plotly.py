@@ -437,10 +437,6 @@ for i, sigma in enumerate(sigmas):
 fig.show()
 ```
 
-```python
-print(fig)
-```
-
 ### Exploring 3-D images and timeseries with `animation_frame`
 
 *Introduced in plotly 4.14*
@@ -454,7 +450,7 @@ from skimage.data import image_fetcher
 path = image_fetcher.fetch('data/cells.tif')
 data = io.imread(path)
 img = data[25:40]
-fig = px.imshow(img, animation_frame=0, binary_string=True)
+fig = px.imshow(img, animation_frame=0, binary_string=True, labels=dict(animation_frame="yo"))
 fig.show()
 ```
 
