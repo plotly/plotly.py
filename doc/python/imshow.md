@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: How to display image data in Python with Plotly.
     display_as: scientific
@@ -71,7 +71,7 @@ import plotly.express as px
 from skimage import data
 img = data.astronaut()
 fig = px.imshow(img, binary_format="jpeg", binary_compression_level=0)
-fig.show("notebook")
+fig.show()
 ```
 
 ### Display single-channel 2D data as a heatmap
@@ -433,7 +433,7 @@ fig = px.imshow(np.array(img_sequence), facet_col=0, binary_string=True,
                 labels={'facet_col':'sigma'})
 # Set facet titles
 for i, sigma in enumerate(sigmas):
-    fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma 
+    fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma
 fig.show()
 ```
 
