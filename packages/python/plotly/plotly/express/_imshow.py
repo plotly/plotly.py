@@ -573,9 +573,9 @@ def imshow(
         )
     fig.update_traces(hovertemplate=hovertemplate)
     if labels["x"]:
-        fig.update_xaxes(title_text=labels["x"])
+        fig.update_xaxes(title_text=labels["x"], row=1)
     if labels["y"]:
-        fig.update_yaxes(title_text=labels["y"])
+        fig.update_yaxes(title_text=labels["y"], col=1)
     configure_animation_controls(args, go.Image, fig)
     fig.update_layout(template=args["template"], overwrite=True)
     return fig
