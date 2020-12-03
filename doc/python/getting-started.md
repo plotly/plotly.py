@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: "1.1"
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.7
   plotly:
     description: Getting Started with Plotly for Python.
     has_thumbnail: false
@@ -30,8 +30,8 @@ jupyter:
     page_type: u-guide
     permalink: python/getting-started/
     redirect_from:
-      - python/getting_started/
-      - /python/pytables/
+    - python/getting_started/
+    - /python/pytables/
 ---
 
 <!-- #region -->
@@ -78,6 +78,19 @@ This package contains everything you need to write figures to standalone HTML fi
 import plotly.graph_objects as go
 fig = go.Figure(data=go.Bar(y=[2, 3, 1]))
 fig.write_html('first_figure.html', auto_open=True)
+```
+
+### Plotly chart in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'getting-started', width='100%', height=630)
 ```
 
 <!-- #region -->
@@ -174,7 +187,7 @@ fig = go.FigureWidget(data=go.Bar(y=[2, 3, 1]))
 fig
 ```
 
-Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab.
+Please check out our [Troubleshooting guide](/python/troubleshooting/) if you run into any problems with JupyterLab, particularly if you are using multiple python environments inside Jupyter.
 
 <!-- #region -->
 
