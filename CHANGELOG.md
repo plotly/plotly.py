@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - `px.imshow` now supports `facet_col` and `animation_frame` arguments for visualizing 3-d and 4-d images [2746](https://github.com/plotly/plotly.py/pull/2746)
 
+### Fixed
+
+- axes will now auto-type numeric strings as categorical data rather than linear [2951](https://github.com/plotly/plotly.py/pull/2951)
+
 ### Updated
 
 - Updated Plotly.js to version 1.58.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
