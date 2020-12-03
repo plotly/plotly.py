@@ -286,6 +286,8 @@ class Coloraxis(_BaseLayoutHierarchyType):
                     sets the default property values to use for
                     elements of
                     layout.coloraxis.colorbar.tickformatstops
+                ticklabelposition
+                    Determines where tick labels are drawn.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -407,13 +409,14 @@ class Coloraxis(_BaseLayoutHierarchyType):
                  'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
                  'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
                  'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
-                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
-                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
-                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
-                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
-                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
-                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+                 'orrd', 'oryel', 'oxy', 'peach', 'phase', 'picnic', 'pinkyl',
+                 'piyg', 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn',
+                 'puor', 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu',
+                 'rdgy', 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar',
+                 'spectral', 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn',
+                 'tealrose', 'tempo', 'temps', 'thermal', 'tropic', 'turbid',
+                 'turbo', 'twilight', 'viridis', 'ylgn', 'ylgnbu', 'ylorbr',
+                 'ylorrd'].
             Appending '_r' to a named colorscale reverses it.
 
         Returns

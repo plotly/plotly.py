@@ -38,6 +38,7 @@ class Sunburst(_BaseTraceType):
         "outsidetextfont",
         "parents",
         "parentssrc",
+        "root",
         "rotation",
         "sort",
         "stream",
@@ -945,6 +946,34 @@ class Sunburst(_BaseTraceType):
     def parentssrc(self, val):
         self["parentssrc"] = val
 
+    # root
+    # ----
+    @property
+    def root(self):
+        """
+        The 'root' property is an instance of Root
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.sunburst.Root`
+          - A dict of string/value properties that will be passed
+            to the Root constructor
+    
+            Supported dict properties:
+                
+                color
+                    sets the color of the root node for a sunburst
+                    or a treemap trace. this has no effect when a
+                    colorscale is used to set the markers.
+
+        Returns
+        -------
+        plotly.graph_objs.sunburst.Root
+        """
+        return self["root"]
+
+    @root.setter
+    def root(self, val):
+        self["root"] = val
+
     # rotation
     # --------
     @property
@@ -1480,6 +1509,9 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        root
+            :class:`plotly.graph_objects.sunburst.Root` instance or
+            dict with compatible properties
         rotation
             Rotates the whole diagram counterclockwise by some
             angle. By default the first slice starts at 3 o'clock.
@@ -1590,6 +1622,7 @@ class Sunburst(_BaseTraceType):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        root=None,
         rotation=None,
         sort=None,
         stream=None,
@@ -1766,6 +1799,9 @@ class Sunburst(_BaseTraceType):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        root
+            :class:`plotly.graph_objects.sunburst.Root` instance or
+            dict with compatible properties
         rotation
             Rotates the whole diagram counterclockwise by some
             angle. By default the first slice starts at 3 o'clock.
@@ -1992,6 +2028,10 @@ an instance of :class:`plotly.graph_objs.Sunburst`"""
         _v = parentssrc if parentssrc is not None else _v
         if _v is not None:
             self["parentssrc"] = _v
+        _v = arg.pop("root", None)
+        _v = root if root is not None else _v
+        if _v is not None:
+            self["root"] = _v
         _v = arg.pop("rotation", None)
         _v = rotation if rotation is not None else _v
         if _v is not None:

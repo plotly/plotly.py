@@ -10,6 +10,7 @@ class ZAxis(_BaseLayoutHierarchyType):
     _path_str = "layout.scene.zaxis"
     _valid_props = {
         "autorange",
+        "autotypenumbers",
         "backgroundcolor",
         "calendar",
         "categoryarray",
@@ -89,6 +90,30 @@ class ZAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autotypenumbers
+    # ---------------
+    @property
+    def autotypenumbers(self):
+        """
+        Using "strict" a numeric string in trace data is not converted
+        to a number. Using *convert types* a numeric string in trace
+        data may be treated as a number during automatic axis `type`
+        detection. Defaults to layout.autotypenumbers.
+    
+        The 'autotypenumbers' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['convert types', 'strict']
+
+        Returns
+        -------
+        Any
+        """
+        return self["autotypenumbers"]
+
+    @autotypenumbers.setter
+    def autotypenumbers(self, val):
+        self["autotypenumbers"] = val
 
     # backgroundcolor
     # ---------------
@@ -1729,6 +1754,12 @@ class ZAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. Defaults to
+            layout.autotypenumbers.
         backgroundcolor
             Sets the background color of this axis' wall.
         calendar
@@ -1993,6 +2024,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         self,
         arg=None,
         autorange=None,
+        autotypenumbers=None,
         backgroundcolor=None,
         calendar=None,
         categoryarray=None,
@@ -2064,6 +2096,12 @@ class ZAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. Defaults to
+            layout.autotypenumbers.
         backgroundcolor
             Sets the background color of this axis' wall.
         calendar
@@ -2358,6 +2396,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autotypenumbers", None)
+        _v = autotypenumbers if autotypenumbers is not None else _v
+        if _v is not None:
+            self["autotypenumbers"] = _v
         _v = arg.pop("backgroundcolor", None)
         _v = backgroundcolor if backgroundcolor is not None else _v
         if _v is not None:
