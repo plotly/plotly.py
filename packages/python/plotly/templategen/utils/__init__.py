@@ -65,6 +65,9 @@ def initialize_template(
     # -------------------
     template = go.layout.Template()
 
+    # pythonic autotyping of numeric strings
+    template.layout.autotypenumbers = "strict"
+
     # trace cycle color
     template.layout.colorway = colorway
 
