@@ -172,6 +172,9 @@ class SunburstValidator(_plotly_utils.basevalidators.CompoundValidator):
             parentssrc
                 Sets the source reference on Chart Studio Cloud
                 for  parents .
+            root
+                :class:`plotly.graph_objects.sunburst.Root`
+                instance or dict with compatible properties
             rotation
                 Rotates the whole diagram counterclockwise by
                 some angle. By default the first slice starts

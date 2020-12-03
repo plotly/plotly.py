@@ -147,6 +147,8 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 a.mesh3d.colorbar.tickformatstopdefaults), sets
                 the default property values to use for elements
                 of mesh3d.colorbar.tickformatstops
+            ticklabelposition
+                Determines where tick labels are drawn.
             ticklen
                 Sets the tick length (in px).
             tickmode

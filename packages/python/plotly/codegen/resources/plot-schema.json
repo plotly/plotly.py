@@ -1680,6 +1680,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -3528,6 +3543,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -6508,6 +6538,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -7766,6 +7811,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -9298,6 +9358,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -10605,6 +10680,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -11937,6 +12027,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -13706,6 +13811,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -16542,6 +16662,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -19842,6 +19977,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -20408,6 +20558,17 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not the sectors are reordered from largest to smallest."
+                },
+                "root": {
+                    "color": {
+                        "valType": "color",
+                        "editType": "calc",
+                        "role": "style",
+                        "dflt": "rgba(0,0,0,0)",
+                        "description": "sets the color of the root node for a sunburst or a treemap trace. this has no effect when a colorscale is used to set the markers."
+                    },
+                    "editType": "calc",
+                    "role": "object"
                 },
                 "domain": {
                     "x": {
@@ -21217,6 +21378,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -21857,6 +22033,17 @@
                     "dflt": true,
                     "editType": "calc",
                     "description": "Determines whether or not the sectors are reordered from largest to smallest."
+                },
+                "root": {
+                    "color": {
+                        "valType": "color",
+                        "editType": "calc",
+                        "role": "style",
+                        "dflt": "rgba(0,0,0,0)",
+                        "description": "sets the color of the root node for a sunburst or a treemap trace. this has no effect when a colorscale is used to set the markers."
+                    },
+                    "editType": "calc",
+                    "role": "object"
                 },
                 "domain": {
                     "x": {
@@ -23435,6 +23622,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -24016,6 +24218,21 @@
                             "editType": "calc",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -25614,6 +25831,21 @@
                         "editType": "calc",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "calc"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -27301,6 +27533,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "calc"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -28607,6 +28854,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "calc"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -29745,6 +30007,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -30968,6 +31245,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -32082,6 +32374,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -33749,6 +34056,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -35158,6 +35480,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -36284,6 +36621,21 @@
                             "editType": "calc",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -38354,6 +38706,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -40513,6 +40880,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "calc"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -41604,6 +41986,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -42558,6 +42955,21 @@
                             "editType": "colorbars",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -43570,6 +43982,21 @@
                             "editType": "calc",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -44786,6 +45213,21 @@
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
                     },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
+                    },
                     "ticklen": {
                         "valType": "number",
                         "min": 0,
@@ -45729,6 +46171,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -48874,6 +49331,17 @@
                         "editType": "calc",
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -49449,6 +49917,17 @@
                         "role": "info",
                         "editType": "calc",
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
+                    },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "autorange": {
                         "valType": "enumerated",
@@ -51364,6 +51843,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -52650,6 +53144,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",
@@ -55453,6 +55962,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -56729,6 +57253,21 @@
                             "editType": "calc",
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
+                        },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "calc"
                         },
                         "ticklen": {
                             "valType": "number",
@@ -58655,6 +59194,21 @@
                             "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                             "dflt": ""
                         },
+                        "ticklabelposition": {
+                            "valType": "enumerated",
+                            "values": [
+                                "outside",
+                                "inside",
+                                "outside top",
+                                "inside top",
+                                "outside bottom",
+                                "inside bottom"
+                            ],
+                            "dflt": "outside",
+                            "role": "info",
+                            "description": "Determines where tick labels are drawn.",
+                            "editType": "colorbars"
+                        },
                         "ticklen": {
                             "valType": "number",
                             "min": 0,
@@ -60294,6 +60848,17 @@
                 "editType": "layoutstyle",
                 "description": "Sets the background color of the plotting area in-between x and y axes."
             },
+            "autotypenumbers": {
+                "valType": "enumerated",
+                "values": [
+                    "convert types",
+                    "strict"
+                ],
+                "dflt": "convert types",
+                "role": "info",
+                "editType": "calc",
+                "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. This is the default value; however it could be overridden for individual axes."
+            },
             "separators": {
                 "valType": "string",
                 "role": "style",
@@ -61031,6 +61596,17 @@
                     "_noTemplating": true,
                     "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                 },
+                "autotypenumbers": {
+                    "valType": "enumerated",
+                    "values": [
+                        "convert types",
+                        "strict"
+                    ],
+                    "dflt": "convert types",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                },
                 "autorange": {
                     "valType": "enumerated",
                     "values": [
@@ -61115,10 +61691,9 @@
                         "range",
                         "domain"
                     ],
-                    "dflt": "range",
                     "role": "info",
                     "editType": "plot",
-                    "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines how that happens: by increasing the *range* (default), or by decreasing the *domain*."
+                    "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines how that happens: by increasing the *range*, or by decreasing the *domain*. Default is *domain* for axes containing image traces, *range* otherwise."
                 },
                 "constraintoward": {
                     "valType": "enumerated",
@@ -61300,6 +61875,25 @@
                     "role": "info",
                     "editType": "ticks",
                     "description": "Determines where tick labels are drawn with respect to their corresponding ticks and grid lines. Only has an effect for axes of `type` *date* When set to *period*, tick labels are drawn in the middle of the period between ticks."
+                },
+                "ticklabelposition": {
+                    "valType": "enumerated",
+                    "values": [
+                        "outside",
+                        "inside",
+                        "outside top",
+                        "inside top",
+                        "outside left",
+                        "inside left",
+                        "outside right",
+                        "inside right",
+                        "outside bottom",
+                        "inside bottom"
+                    ],
+                    "dflt": "outside",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Determines where tick labels are drawn with respect to the axis Please note that top or bottom has no effect on x axes or when `ticklabelmode` is set to *period*. Similarly left or right has no effect on y axes or when `ticklabelmode` is set to *period*. Has no effect on *multicategory* axes or when `tickson` is set to *boundaries*."
                 },
                 "mirror": {
                     "valType": "enumerated",
@@ -62227,6 +62821,17 @@
                     "_noTemplating": true,
                     "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                 },
+                "autotypenumbers": {
+                    "valType": "enumerated",
+                    "values": [
+                        "convert types",
+                        "strict"
+                    ],
+                    "dflt": "convert types",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                },
                 "autorange": {
                     "valType": "enumerated",
                     "values": [
@@ -62311,10 +62916,9 @@
                         "range",
                         "domain"
                     ],
-                    "dflt": "range",
                     "role": "info",
                     "editType": "plot",
-                    "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines how that happens: by increasing the *range* (default), or by decreasing the *domain*."
+                    "description": "If this axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), determines how that happens: by increasing the *range*, or by decreasing the *domain*. Default is *domain* for axes containing image traces, *range* otherwise."
                 },
                 "constraintoward": {
                     "valType": "enumerated",
@@ -62496,6 +63100,25 @@
                     "role": "info",
                     "editType": "ticks",
                     "description": "Determines where tick labels are drawn with respect to their corresponding ticks and grid lines. Only has an effect for axes of `type` *date* When set to *period*, tick labels are drawn in the middle of the period between ticks."
+                },
+                "ticklabelposition": {
+                    "valType": "enumerated",
+                    "values": [
+                        "outside",
+                        "inside",
+                        "outside top",
+                        "inside top",
+                        "outside left",
+                        "inside left",
+                        "outside right",
+                        "inside right",
+                        "outside bottom",
+                        "inside bottom"
+                    ],
+                    "dflt": "outside",
+                    "role": "info",
+                    "editType": "calc",
+                    "description": "Determines where tick labels are drawn with respect to the axis Please note that top or bottom has no effect on x axes or when `ticklabelmode` is set to *period*. Similarly left or right has no effect on y axes or when `ticklabelmode` is set to *period*. Has no effect on *multicategory* axes or when `tickson` is set to *boundaries*."
                 },
                 "mirror": {
                     "valType": "enumerated",
@@ -64805,6 +65428,17 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "plot",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -65424,6 +66058,17 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "plot",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -66042,6 +66687,17 @@
                         "editType": "plot",
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
+                    },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "plot",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "autorange": {
                         "valType": "enumerated",
@@ -67923,6 +68579,17 @@
                         "_noTemplating": true,
                         "description": "Sets the axis type. By default, plotly attempts to determined the axis type by looking into the data of the traces that referenced the axis in question."
                     },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
+                    },
                     "autorange": {
                         "valType": "enumerated",
                         "values": [
@@ -68492,6 +69159,17 @@
                         "editType": "calc",
                         "_noTemplating": true,
                         "description": "Sets the angular axis type. If *linear*, set `thetaunit` to determine the unit in which axis value are shown. If *category, use `period` to set the number of integer coordinates around polar axis."
+                    },
+                    "autotypenumbers": {
+                        "valType": "enumerated",
+                        "values": [
+                            "convert types",
+                            "strict"
+                        ],
+                        "dflt": "convert types",
+                        "role": "info",
+                        "editType": "calc",
+                        "description": "Using *strict* a numeric string in trace data is not converted to a number. Using *convert types* a numeric string in trace data may be treated as a number during automatic axis `type` detection. Defaults to layout.autotypenumbers."
                     },
                     "categoryorder": {
                         "valType": "enumerated",
@@ -69246,6 +69924,14 @@
                     "role": "style",
                     "editType": "legend",
                     "description": "Determines if the legend items symbols scale with their corresponding *trace* attributes or remain *constant* independent of the symbol size on the graph."
+                },
+                "itemwidth": {
+                    "valType": "number",
+                    "min": 30,
+                    "dflt": 30,
+                    "role": "style",
+                    "editType": "legend",
+                    "description": "Sets the width (in px) of the legend item symbols (the part other than the title.text)."
                 },
                 "itemclick": {
                     "valType": "enumerated",
@@ -71209,6 +71895,21 @@
                         "editType": "colorbars",
                         "description": "Determines whether ticks are drawn or not. If **, this axis' ticks are not drawn. If *outside* (*inside*), this axis' are drawn outside (inside) the axis lines.",
                         "dflt": ""
+                    },
+                    "ticklabelposition": {
+                        "valType": "enumerated",
+                        "values": [
+                            "outside",
+                            "inside",
+                            "outside top",
+                            "inside top",
+                            "outside bottom",
+                            "inside bottom"
+                        ],
+                        "dflt": "outside",
+                        "role": "info",
+                        "description": "Determines where tick labels are drawn.",
+                        "editType": "colorbars"
                     },
                     "ticklen": {
                         "valType": "number",

@@ -52,6 +52,7 @@ if sys.version_info < (3, 7):
     from ._categoryorder import CategoryorderValidator
     from ._categoryarraysrc import CategoryarraysrcValidator
     from ._categoryarray import CategoryarrayValidator
+    from ._autotypenumbers import AutotypenumbersValidator
     from ._autorange import AutorangeValidator
     from ._arraytick0 import Arraytick0Validator
     from ._arraydtick import ArraydtickValidator
@@ -113,6 +114,7 @@ else:
             "._categoryorder.CategoryorderValidator",
             "._categoryarraysrc.CategoryarraysrcValidator",
             "._categoryarray.CategoryarrayValidator",
+            "._autotypenumbers.AutotypenumbersValidator",
             "._autorange.AutorangeValidator",
             "._arraytick0.Arraytick0Validator",
             "._arraydtick.ArraydtickValidator",

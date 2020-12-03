@@ -161,6 +161,9 @@ class TreemapValidator(_plotly_utils.basevalidators.CompoundValidator):
             pathbar
                 :class:`plotly.graph_objects.treemap.Pathbar`
                 instance or dict with compatible properties
+            root
+                :class:`plotly.graph_objects.treemap.Root`
+                instance or dict with compatible properties
             sort
                 Determines whether or not the sectors are
                 reordered from largest to smallest.

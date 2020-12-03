@@ -16,6 +16,7 @@ class Legend(_BaseLayoutHierarchyType):
         "itemclick",
         "itemdoubleclick",
         "itemsizing",
+        "itemwidth",
         "orientation",
         "title",
         "tracegroupgap",
@@ -283,6 +284,27 @@ class Legend(_BaseLayoutHierarchyType):
     @itemsizing.setter
     def itemsizing(self, val):
         self["itemsizing"] = val
+
+    # itemwidth
+    # ---------
+    @property
+    def itemwidth(self):
+        """
+        Sets the width (in px) of the legend item symbols (the part
+        other than the title.text).
+    
+        The 'itemwidth' property is a number and may be specified as:
+          - An int or float in the interval [30, inf]
+
+        Returns
+        -------
+        int|float
+        """
+        return self["itemwidth"]
+
+    @itemwidth.setter
+    def itemwidth(self, val):
+        self["itemwidth"] = val
 
     # orientation
     # -----------
@@ -561,6 +583,9 @@ class Legend(_BaseLayoutHierarchyType):
             Determines if the legend items symbols scale with their
             corresponding "trace" attributes or remain "constant"
             independent of the symbol size on the graph.
+        itemwidth
+            Sets the width (in px) of the legend item symbols (the
+            part other than the title.text).
         orientation
             Sets the orientation of the legend.
         title
@@ -623,6 +648,7 @@ class Legend(_BaseLayoutHierarchyType):
         itemclick=None,
         itemdoubleclick=None,
         itemsizing=None,
+        itemwidth=None,
         orientation=None,
         title=None,
         tracegroupgap=None,
@@ -669,6 +695,9 @@ class Legend(_BaseLayoutHierarchyType):
             Determines if the legend items symbols scale with their
             corresponding "trace" attributes or remain "constant"
             independent of the symbol size on the graph.
+        itemwidth
+            Sets the width (in px) of the legend item symbols (the
+            part other than the title.text).
         orientation
             Sets the orientation of the legend.
         title
@@ -781,6 +810,10 @@ an instance of :class:`plotly.graph_objs.layout.Legend`"""
         _v = itemsizing if itemsizing is not None else _v
         if _v is not None:
             self["itemsizing"] = _v
+        _v = arg.pop("itemwidth", None)
+        _v = itemwidth if itemwidth is not None else _v
+        if _v is not None:
+            self["itemwidth"] = _v
         _v = arg.pop("orientation", None)
         _v = orientation if orientation is not None else _v
         if _v is not None:

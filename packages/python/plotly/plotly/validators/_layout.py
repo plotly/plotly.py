@@ -32,6 +32,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 regardless of this attribute, an undefined
                 layout width or height is always initialized on
                 the first call to plot.
+            autotypenumbers
+                Using "strict" a numeric string in trace data
+                is not converted to a number. Using *convert
+                types* a numeric string in trace data may be
+                treated as a number during automatic axis
+                `type` detection. This is the default value;
+                however it could be overridden for individual
+                axes.
             bargap
                 Sets the gap (in plot fraction) between bars of
                 adjacent location coordinates.
