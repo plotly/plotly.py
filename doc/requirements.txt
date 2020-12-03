@@ -28,4 +28,5 @@ pyarrow
 cufflinks==0.17.3
 kaleido
 umap-learn
+pooch
 wget
