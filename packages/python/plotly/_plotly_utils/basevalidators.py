@@ -177,12 +177,14 @@ def is_homogeneous_array(v):
     ):
         return True
     if is_numpy_convertable(v):
-        v_numpy = np.array(v)
-        # v is essentially a scalar and so shouldn't count as an array
-        if v_numpy.shape == ():
-            return False
-        else:
-            return True
+        np = get_module("numpy", should_load=True)
+        if np:
+            v_numpy = np.array(v)
+            # v is essentially a scalar and so shouldn't count as an array
+            if v_numpy.shape == ():
+                return False
+            else:
+                return True
     return False
 
 
