@@ -3273,7 +3273,7 @@ Invalid property path '{key_path_str}' for layout
 
     # Exports
     # -------
-    def to_dict(self):
+    def to_dict(self, clone=True):
         """
         Convert figure to a dictionary
 
@@ -3286,23 +3286,33 @@ Invalid property path '{key_path_str}' for layout
         """
         # Handle data
         # -----------
-        data = deepcopy(self._data)
+        if clone:
+            data = deepcopy(self._data)
+        else:
+            data = self._data
 
         # Handle layout
         # -------------
-        layout = deepcopy(self._layout)
+        if clone:
+            layout = deepcopy(self._layout)
+        else:
+            layout = self._layout
 
         # Handle frames
         # -------------
         # Frame key is only added if there are any frames
         res = {"data": data, "layout": layout}
-        frames = deepcopy([frame._props for frame in self._frame_objs])
+        if clone:
+            frames = deepcopy([frame._props for frame in self._frame_objs])
+        else:
+            frames = [frame._props for frame in self._frame_objs]
+
         if frames:
             res["frames"] = frames
 
         return res
 
-    def to_plotly_json(self):
+    def to_plotly_json(self, clone=True):
         """
         Convert figure to a JSON representation as a Python dict
 
@@ -3310,7 +3320,7 @@ Invalid property path '{key_path_str}' for layout
         -------
         dict
         """
-        return self.to_dict()
+        return self.to_dict(clone=clone)
 
     @staticmethod
     def _to_ordered_dict(d, skip_uid=False):
@@ -5524,7 +5534,7 @@ on_change callbacks are not supported in this case.
         # -----------------
         self._change_callbacks[arg_tuples].append(callback)
 
-    def to_plotly_json(self):
+    def to_plotly_json(self, clone=False):
         """
         Return plotly JSON representation of object as a Python dict
 
@@ -5532,7 +5542,10 @@ on_change callbacks are not supported in this case.
         -------
         dict
         """
-        return deepcopy(self._props if self._props is not None else {})
+        if clone:
+            return deepcopy(self._props if self._props is not None else {})
+        else:
+            return self._props if self._props is not None else {}
 
     @staticmethod
     def _vals_equal(v1, v2):
