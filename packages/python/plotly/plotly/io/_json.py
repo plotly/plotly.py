@@ -52,7 +52,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
 
     # Validate figure
     # ---------------
-    fig_dict = validate_coerce_fig_to_dict(fig, validate)
+    fig_dict = validate_coerce_fig_to_dict(fig, validate, clone=False)
 
     # Remove trace uid
     # ----------------
@@ -88,7 +88,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
 
         if engine == "json":
             cleaned = clean_to_json_compatible(
-                fig, numpy_allowed=False,
+                fig_dict, numpy_allowed=False,
                 non_finite_allowed=False,
                 datetime_allowed=False,
                 modules=modules,
@@ -125,7 +125,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
             opts |= orjson.OPT_INDENT_2
 
         cleaned = clean_to_json_compatible(
-            fig, numpy_allowed=True,
+            fig_dict, numpy_allowed=True,
             non_finite_allowed=True,
             datetime_allowed=True,
             modules=modules,

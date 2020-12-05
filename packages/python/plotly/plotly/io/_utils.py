@@ -4,11 +4,11 @@ import plotly
 import plotly.graph_objs as go
 
 
-def validate_coerce_fig_to_dict(fig, validate):
+def validate_coerce_fig_to_dict(fig, validate, clone=True):
     from plotly.basedatatypes import BaseFigure
 
     if isinstance(fig, BaseFigure):
-        fig_dict = fig.to_dict()
+        fig_dict = fig.to_dict(clone=clone)
     elif isinstance(fig, dict):
         if validate:
             # This will raise an exception if fig is not a valid plotly figure
