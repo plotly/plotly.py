@@ -11,6 +11,39 @@ from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
 
+# Orca configuration class
+# ------------------------
+class JsonConfig(object):
+    _valid_encoders = ("legacy", "json", "orjson", "auto")
+
+    def __init__(self):
+        self._default_encoder = "auto"
+
+    @property
+    def default_encoder(self):
+        return self._default_encoder
+
+    @default_encoder.setter
+    def default_encoder(self, val):
+        if val not in JsonConfig._valid_encoders:
+            raise ValueError(
+                "Supported JSON encoders include {valid}\n"
+                "    Received {val}".format(valid=JsonConfig._valid_encoders, val=val)
+            )
+
+        if val == "orjson":
+            orjson = get_module("orjson")
+            if orjson is None:
+                raise ValueError(
+                    "The orjson encoder requires the orjson package"
+                )
+
+        self._default_encoder = val
+
+
+config = JsonConfig()
+
+
 def coerce_to_strict(const):
     """
     This is used to ultimately *encode* into strict JSON, see `encode`
@@ -23,7 +56,7 @@ def coerce_to_strict(const):
         return const
 
 
-def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
+def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     Convert a figure to a JSON string representation
 
@@ -43,6 +76,14 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
     remove_uids: bool (default True)
         True if trace UIDs should be omitted from the JSON representation
 
+    engine: str (default None)
+        The JSON encoding engine to use. One of:
+          - "json" for a rewritten encoder based on the built-in Python json module
+          - "orjson" for a fast encoder the requires the orjson package
+          - "legacy" for the legacy JSON encoder.
+        If not specified, the default encoder is set to the current value of
+        plotly.io.json.config.default_encoder.
+
     Returns
     -------
     str
@@ -61,6 +102,9 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
             trace.pop("uid", None)
 
     # Determine json engine
+    if engine is None:
+        engine = config.default_encoder
+
     if engine == "auto":
         if orjson is not None:
             engine = "orjson"
@@ -133,7 +177,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine="auto"):
         return orjson.dumps(cleaned, option=opts).decode("utf8")
 
 
-def write_json(fig, file, validate=True, pretty=False, remove_uids=True):
+def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     Convert a figure to JSON and write it to a file or writeable
     object
@@ -154,6 +198,13 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True):
     remove_uids: bool (default True)
         True if trace UIDs should be omitted from the JSON representation
 
+    engine: str (default None)
+        The JSON encoding engine to use. One of:
+          - "json" for a rewritten encoder based on the built-in Python json module
+          - "orjson" for a fast encoder the requires the orjson package
+          - "legacy" for the legacy JSON encoder.
+        If not specified, the default encoder is set to the current value of
+        plotly.io.json.config.default_encoder.
     Returns
     -------
     None
@@ -162,7 +213,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True):
     # Get JSON string
     # ---------------
     # Pass through validate argument and let to_json handle validation logic
-    json_str = to_json(fig, validate=validate, pretty=pretty, remove_uids=remove_uids)
+    json_str = to_json(fig, validate=validate, pretty=pretty, remove_uids=remove_uids, engine=engine)
 
     # Check if file is a string
     # -------------------------
