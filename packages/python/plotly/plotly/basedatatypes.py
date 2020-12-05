@@ -5534,7 +5534,7 @@ on_change callbacks are not supported in this case.
         # -----------------
         self._change_callbacks[arg_tuples].append(callback)
 
-    def to_plotly_json(self, clone=False):
+    def to_plotly_json(self, clone=True):
         """
         Return plotly JSON representation of object as a Python dict
 
