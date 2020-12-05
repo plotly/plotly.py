@@ -17,14 +17,14 @@ class JsonConfig(object):
     _valid_encoders = ("legacy", "json", "orjson", "auto")
 
     def __init__(self):
-        self._default_encoder = "auto"
+        self._default_engine = "auto"
 
     @property
-    def default_encoder(self):
-        return self._default_encoder
+    def default_engine(self):
+        return self._default_engine
 
-    @default_encoder.setter
-    def default_encoder(self, val):
+    @default_engine.setter
+    def default_engine(self, val):
         if val not in JsonConfig._valid_encoders:
             raise ValueError(
                 "Supported JSON encoders include {valid}\n"
@@ -38,7 +38,7 @@ class JsonConfig(object):
                     "The orjson encoder requires the orjson package"
                 )
 
-        self._default_encoder = val
+        self._default_engine = val
 
 
 config = JsonConfig()
@@ -103,7 +103,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 
     # Determine json engine
     if engine is None:
-        engine = config.default_encoder
+        engine = config.default_engine
 
     if engine == "auto":
         if orjson is not None:
