@@ -3423,6 +3423,14 @@ Invalid property path '{key_path_str}' for layout
         remove_uids: bool (default True)
             True if trace UIDs should be omitted from the JSON representation
 
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for a rewritten encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+              - "legacy" for the legacy JSON encoder.
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
+
         Returns
         -------
         str
@@ -3478,6 +3486,14 @@ Invalid property path '{key_path_str}' for layout
 
         remove_uids: bool (default True)
             True if trace UIDs should be omitted from the JSON representation
+
+        engine: str (default None)
+            The JSON encoding engine to use. One of:
+              - "json" for a rewritten encoder based on the built-in Python json module
+              - "orjson" for a fast encoder the requires the orjson package
+              - "legacy" for the legacy JSON encoder.
+            If not specified, the default encoder is set to the current value of
+            plotly.io.json.config.default_encoder.
 
         Returns
         -------
