@@ -34,9 +34,7 @@ class JsonConfig(object):
         if val == "orjson":
             orjson = get_module("orjson")
             if orjson is None:
-                raise ValueError(
-                    "The orjson encoder requires the orjson package"
-                )
+                raise ValueError("The orjson encoder requires the orjson package")
 
         self._default_engine = val
 
@@ -113,10 +111,12 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
     elif engine not in ["orjson", "json", "legacy"]:
         raise ValueError("Invalid json engine: %s" % engine)
 
-    modules = {"sage_all": get_module("sage.all", should_load=False),
-               "np": get_module("numpy", should_load=False),
-               "pd": get_module("pandas", should_load=False),
-               "image": get_module("PIL.Image", should_load=False)}
+    modules = {
+        "sage_all": get_module("sage.all", should_load=False),
+        "np": get_module("numpy", should_load=False),
+        "pd": get_module("pandas", should_load=False),
+        "image": get_module("PIL.Image", should_load=False),
+    }
 
     orjson = get_module("orjson", should_load=True)
 
@@ -132,7 +132,8 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 
         if engine == "json":
             cleaned = clean_to_json_compatible(
-                fig_dict, numpy_allowed=False,
+                fig_dict,
+                numpy_allowed=False,
                 non_finite_allowed=False,
                 datetime_allowed=False,
                 modules=modules,
@@ -158,18 +159,21 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
                 return json.dumps(new_o, **opts)
         else:
             from _plotly_utils.utils import PlotlyJSONEncoder
+
             return json.dumps(fig_dict, cls=PlotlyJSONEncoder, **opts)
     elif engine == "orjson":
-        opts = (orjson.OPT_SORT_KEYS
-                | orjson.OPT_SERIALIZE_NUMPY
-                | orjson.OPT_OMIT_MICROSECONDS
-                )
+        opts = (
+            orjson.OPT_SORT_KEYS
+            | orjson.OPT_SERIALIZE_NUMPY
+            | orjson.OPT_OMIT_MICROSECONDS
+        )
 
         if pretty:
             opts |= orjson.OPT_INDENT_2
 
         cleaned = clean_to_json_compatible(
-            fig_dict, numpy_allowed=True,
+            fig_dict,
+            numpy_allowed=True,
             non_finite_allowed=True,
             datetime_allowed=True,
             modules=modules,
@@ -213,7 +217,9 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
     # Get JSON string
     # ---------------
     # Pass through validate argument and let to_json handle validation logic
-    json_str = to_json(fig, validate=validate, pretty=pretty, remove_uids=remove_uids, engine=engine)
+    json_str = to_json(
+        fig, validate=validate, pretty=pretty, remove_uids=remove_uids, engine=engine
+    )
 
     # Check if file is a string
     # -------------------------
@@ -359,7 +365,11 @@ def clean_to_json_compatible(obj, **kwargs):
     if np is not None:
         if obj is np.ma.core.masked:
             return float("nan")
-        elif numpy_allowed and isinstance(obj, np.ndarray) and obj.dtype.kind in ("b", "i", "u", "f"):
+        elif (
+            numpy_allowed
+            and isinstance(obj, np.ndarray)
+            and obj.dtype.kind in ("b", "i", "u", "f")
+        ):
             return obj
 
     # pandas
@@ -371,7 +381,6 @@ def clean_to_json_compatible(obj, **kwargs):
                 return obj.values
             elif datetime_allowed and obj.dtype.kind == "M":
                 return obj.dt.to_pydatetime().tolist()
-
 
     # datetime and date
     if not datetime_allowed:
