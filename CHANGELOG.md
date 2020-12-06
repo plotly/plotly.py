@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - `px.imshow` now supports `facet_col` and `animation_frame` arguments for visualizing 3-d and 4-d images [2746](https://github.com/plotly/plotly.py/pull/2746)
+- `px.defaults` now supports `color_discrete_map`, `symbol_map`, `line_dash_map`, `labels` and `category_orders` as well as a `.reset()` method [2957](https://github.com/plotly/plotly.py/pull/2957)
 
 ### Fixed
 

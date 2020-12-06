@@ -80,110 +80,132 @@ def test_labels():
 
 
 def test_px_templates():
-    import plotly.io as pio
-    import plotly.graph_objects as go
+    try:
+        import plotly.io as pio
+        import plotly.graph_objects as go
 
-    tips = px.data.tips()
+        tips = px.data.tips()
 
-    # use the normal defaults
-    fig = px.scatter()
-    assert fig.layout.template == pio.templates[pio.templates.default]
+        # use the normal defaults
+        fig = px.scatter()
+        assert fig.layout.template == pio.templates[pio.templates.default]
 
-    # respect changes to defaults
-    pio.templates.default = "seaborn"
-    fig = px.scatter()
-    assert fig.layout.template == pio.templates["seaborn"]
+        # respect changes to defaults
+        pio.templates.default = "seaborn"
+        fig = px.scatter()
+        assert fig.layout.template == pio.templates["seaborn"]
 
-    # special px-level defaults over pio defaults
-    pio.templates.default = "seaborn"
-    px.defaults.template = "ggplot2"
-    fig = px.scatter()
-    assert fig.layout.template == pio.templates["ggplot2"]
+        # special px-level defaults over pio defaults
+        pio.templates.default = "seaborn"
+        px.defaults.template = "ggplot2"
+        fig = px.scatter()
+        assert fig.layout.template == pio.templates["ggplot2"]
 
-    # accept names in args over pio and px defaults
-    fig = px.scatter(template="seaborn")
-    assert fig.layout.template == pio.templates["seaborn"]
+        # accept names in args over pio and px defaults
+        fig = px.scatter(template="seaborn")
+        assert fig.layout.template == pio.templates["seaborn"]
 
-    # accept objects in args
-    fig = px.scatter(template={})
-    assert fig.layout.template == go.layout.Template(data_scatter=[{}])
+        # accept objects in args
+        fig = px.scatter(template={})
+        assert fig.layout.template == go.layout.Template(data_scatter=[{}])
 
-    # read colorway from the template
-    fig = px.scatter(
-        tips,
-        x="total_bill",
-        y="tip",
-        color="sex",
-        template=dict(layout_colorway=["red", "blue"]),
-    )
-    assert fig.data[0].marker.color == "red"
-    assert fig.data[1].marker.color == "blue"
+        # read colorway from the template
+        fig = px.scatter(
+            tips,
+            x="total_bill",
+            y="tip",
+            color="sex",
+            template=dict(layout_colorway=["red", "blue"]),
+        )
+        assert fig.data[0].marker.color == "red"
+        assert fig.data[1].marker.color == "blue"
 
-    # default colorway fallback
-    fig = px.scatter(tips, x="total_bill", y="tip", color="sex", template=dict())
-    assert fig.data[0].marker.color == px.colors.qualitative.D3[0]
-    assert fig.data[1].marker.color == px.colors.qualitative.D3[1]
+        # default colorway fallback
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex", template=dict())
+        assert fig.data[0].marker.color == px.colors.qualitative.D3[0]
+        assert fig.data[1].marker.color == px.colors.qualitative.D3[1]
 
-    # pio default template colorway fallback
-    pio.templates.default = "seaborn"
-    px.defaults.template = None
-    fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
-    assert fig.data[0].marker.color == pio.templates["seaborn"].layout.colorway[0]
-    assert fig.data[1].marker.color == pio.templates["seaborn"].layout.colorway[1]
+        # pio default template colorway fallback
+        pio.templates.default = "seaborn"
+        px.defaults.template = None
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
+        assert fig.data[0].marker.color == pio.templates["seaborn"].layout.colorway[0]
+        assert fig.data[1].marker.color == pio.templates["seaborn"].layout.colorway[1]
 
-    # pio default template colorway fallback
-    pio.templates.default = "seaborn"
-    px.defaults.template = "ggplot2"
-    fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
-    assert fig.data[0].marker.color == pio.templates["ggplot2"].layout.colorway[0]
-    assert fig.data[1].marker.color == pio.templates["ggplot2"].layout.colorway[1]
+        # pio default template colorway fallback
+        pio.templates.default = "seaborn"
+        px.defaults.template = "ggplot2"
+        fig = px.scatter(tips, x="total_bill", y="tip", color="sex")
+        assert fig.data[0].marker.color == pio.templates["ggplot2"].layout.colorway[0]
+        assert fig.data[1].marker.color == pio.templates["ggplot2"].layout.colorway[1]
 
-    # don't overwrite top margin when set in template
-    fig = px.scatter(title="yo")
-    assert fig.layout.margin.t is None
+        # don't overwrite top margin when set in template
+        fig = px.scatter(title="yo")
+        assert fig.layout.margin.t is None
 
-    fig = px.scatter()
-    assert fig.layout.margin.t == 60
+        fig = px.scatter()
+        assert fig.layout.margin.t == 60
 
-    fig = px.scatter(template=dict(layout_margin_t=2))
-    assert fig.layout.margin.t is None
+        fig = px.scatter(template=dict(layout_margin_t=2))
+        assert fig.layout.margin.t is None
 
-    # don't force histogram gridlines when set in template
-    pio.templates.default = "none"
-    px.defaults.template = None
-    fig = px.scatter(
-        tips, x="total_bill", y="tip", marginal_x="histogram", marginal_y="histogram"
-    )
-    assert fig.layout.xaxis2.showgrid
-    assert fig.layout.xaxis3.showgrid
-    assert fig.layout.yaxis2.showgrid
-    assert fig.layout.yaxis3.showgrid
+        # don't force histogram gridlines when set in template
+        pio.templates.default = "none"
+        px.defaults.template = None
+        fig = px.scatter(
+            tips,
+            x="total_bill",
+            y="tip",
+            marginal_x="histogram",
+            marginal_y="histogram",
+        )
+        assert fig.layout.xaxis2.showgrid
+        assert fig.layout.xaxis3.showgrid
+        assert fig.layout.yaxis2.showgrid
+        assert fig.layout.yaxis3.showgrid
 
-    fig = px.scatter(
-        tips,
-        x="total_bill",
-        y="tip",
-        marginal_x="histogram",
-        marginal_y="histogram",
-        template=dict(layout_yaxis_showgrid=False),
-    )
-    assert fig.layout.xaxis2.showgrid
-    assert fig.layout.xaxis3.showgrid
-    assert fig.layout.yaxis2.showgrid is None
-    assert fig.layout.yaxis3.showgrid is None
+        fig = px.scatter(
+            tips,
+            x="total_bill",
+            y="tip",
+            marginal_x="histogram",
+            marginal_y="histogram",
+            template=dict(layout_yaxis_showgrid=False),
+        )
+        assert fig.layout.xaxis2.showgrid
+        assert fig.layout.xaxis3.showgrid
+        assert fig.layout.yaxis2.showgrid is None
+        assert fig.layout.yaxis3.showgrid is None
 
-    fig = px.scatter(
-        tips,
-        x="total_bill",
-        y="tip",
-        marginal_x="histogram",
-        marginal_y="histogram",
-        template=dict(layout_xaxis_showgrid=False),
-    )
-    assert fig.layout.xaxis2.showgrid is None
-    assert fig.layout.xaxis3.showgrid is None
-    assert fig.layout.yaxis2.showgrid
-    assert fig.layout.yaxis3.showgrid
+        fig = px.scatter(
+            tips,
+            x="total_bill",
+            y="tip",
+            marginal_x="histogram",
+            marginal_y="histogram",
+            template=dict(layout_xaxis_showgrid=False),
+        )
+        assert fig.layout.xaxis2.showgrid is None
+        assert fig.layout.xaxis3.showgrid is None
+        assert fig.layout.yaxis2.showgrid
+        assert fig.layout.yaxis3.showgrid
+    finally:
+        # reset defaults to prevent all other tests from failing if this one does
+        px.defaults.reset()
+
+
+def test_px_defaults():
+    px.defaults.labels = dict(x="hey x")
+    px.defaults.category_orders = dict(color=["b", "a"])
+    px.defaults.color_discrete_map = dict(b="red")
+    fig = px.scatter(x=[1, 2], y=[1, 2], color=["a", "b"])
+    try:
+        assert fig.data[0].name == "b"
+        assert fig.data[0].marker.color == "red"
+        assert fig.layout.xaxis.title.text == "hey x"
+    finally:
+        # reset defaults to prevent all other tests from failing if this one does
+        px.defaults.reset()
 
 
 def assert_orderings(days_order, days_check, times_order, times_check):
