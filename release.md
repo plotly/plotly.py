@@ -32,6 +32,8 @@ a link to the plotly.js CHANGELOG.
 Manually update the versions to `X.Y.Z` in the files
 specified below.
 
+ - `CHANGELOG.md`
+   + update the release date
  - `packages/python/plotly/README.md`
    + this must be done at this point because the README gets baked into PyPI
  - `plotly/_widget_version.py`:
@@ -47,7 +49,7 @@ specified below.
    + Run `rm -rf node_modules && npm install && npm run build`
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
  - Ensure that the diff in `package-lock.json` seems sane
- - Commit and push.
+ - Commit and push. (NOTE: once pushed, the Github readme refers to the new versions, so don't stop here!)
 
 ### Tag the release
 
