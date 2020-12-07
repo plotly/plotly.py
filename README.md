@@ -156,7 +156,7 @@ $ pip install -U kaleido
 or conda.
 
 ```
-$ conda install -c plotly python-kaleido
+$ conda install -c conda-forge python-kaleido
 ```
 
 #### Orca
