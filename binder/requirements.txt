@@ -1,5 +1,5 @@
 jupytext
-plotly==4.13.0
+plotly==4.14.0
 jupyter
 notebook
 pandas==1.0.3
