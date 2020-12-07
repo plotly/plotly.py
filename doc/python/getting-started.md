@@ -59,13 +59,13 @@ We also encourage you to join the [Plotly Community Forum](http://community.plot
 `plotly` may be installed using pip...
 
 ```
-$ pip install plotly==4.13.0
+$ pip install plotly==4.14.0
 ```
 
 or conda.
 
 ```
-$ conda install -c plotly plotly=4.13.0
+$ conda install -c plotly plotly=4.14.0
 ```
 
 This package contains everything you need to write figures to standalone HTML files.
@@ -157,10 +157,10 @@ Then run the following commands to install the required JupyterLab extensions (n
 
 ```
 # JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.13.0
+jupyter labextension install jupyterlab-plotly@4.14.0
 
 # OPTIONAL: Jupyter widgets extension
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.13.0
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.0
 ```
 
 These packages contain everything you need to run JupyterLab...
