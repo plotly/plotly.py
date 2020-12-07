@@ -11,11 +11,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- axes will now auto-type numeric strings as categorical data rather than linear [2951](https://github.com/plotly/plotly.py/pull/2951)
+- axes will now auto-type numeric strings as categorical data rather than linear in the default templates [2951](https://github.com/plotly/plotly.py/pull/2951)
 
 ### Updated
 
-- Updated Plotly.js to version 1.58.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- Updated Plotly.js to version 1.58.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - a new `ticklabelposition` attribute to enable positioning tick labels inside the plotting area
+  - better support for `scaleanchor` and `matches` on cartesian axes for matched square subplots
+  - a new `autotypenumbers` attribute which is now set to `strict` in the default templates
+  - various fixes relating to `automargins` for small figures
 
 
 ## [4.13.0] - 2020-11-23
