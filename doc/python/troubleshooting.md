@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.6
   plotly:
     description: How to troubleshoot import and rendering problems in Plotly with
       Python.
@@ -52,6 +52,16 @@ $ pip remove plotly
 
 If you are encountering problems using `plotly` with [Dash](https://dash.plotly.com/) please first ensure that you have upgraded `dash` to the latest version, which will automatically upgrade `dash-core-components` to the latest version, ensuring that Dash is using an up-to-date version of the Plotly.js rendering engine for `plotly`. If this does not resolve your issue, please visit our [Dash Community Forum](https://community.plotly.com/) and we will be glad to help you out.
 
+This is an example of a `plotly` graph correctly rendering inside `dash`:
+<!-- #endregion -->
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'troubleshooting', width='100%', height=630)
+```
+
+<!-- #region -->
 ### Jupyter Notebook Classic Problems
 
 The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
@@ -111,7 +121,6 @@ unset NODE_OPTIONS
 # (Windows)
 set NODE_OPTIONS=
 ```
-
 <!-- #endregion -->
 
 ### VSCode Notebook, Nteract and Streamlit Problems
