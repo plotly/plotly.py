@@ -1451,7 +1451,10 @@ Install using conda:
                 orca_state["shutdown_timer"] = t
 
 
-@tenacity.retry(wait=tenacity.wait.wait_random(min=5, max=10), stop=tenacity.stop.stop_after_delay(60000))
+@tenacity.retry(
+    wait=tenacity.wait.wait_random(min=5, max=10),
+    stop=tenacity.stop.stop_after_delay(60000),
+)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process

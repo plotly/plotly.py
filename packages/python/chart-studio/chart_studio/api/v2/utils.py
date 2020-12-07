@@ -3,7 +3,7 @@ from __future__ import absolute_import
 import requests
 import json as _json
 from requests.exceptions import RequestException
-from retrying import retry
+import tenacity
 
 import _plotly_utils.exceptions
 from chart_studio import config, exceptions
@@ -129,11 +129,10 @@ def should_retry(exception):
     return False
 
 
-@retry(
-    wait_exponential_multiplier=1000,
-    wait_exponential_max=16000,
-    stop_max_delay=180000,
-    retry_on_exception=should_retry,
+@tenacity.retry(
+    wait=tenacity.wait.wait_exponential(multiplier=1000, max=16000),
+    stop=tenacity.stop.stop_after_delay(180000),
+    retry=tenacity.retry.retry_if_exception(should_retry),
 )
 def request(method, url, **kwargs):
     """
