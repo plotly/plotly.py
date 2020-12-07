@@ -45,21 +45,34 @@ class PxDefaults(object):
         "width",
         "height",
         "color_discrete_sequence",
+        "color_discrete_map",
         "color_continuous_scale",
         "symbol_sequence",
+        "symbol_map",
         "line_dash_sequence",
+        "line_dash_map",
         "size_max",
+        "category_orders",
+        "labels",
     ]
 
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.template = None
         self.width = None
         self.height = None
         self.color_discrete_sequence = None
+        self.color_discrete_map = {}
         self.color_continuous_scale = None
         self.symbol_sequence = None
+        self.symbol_map = {}
         self.line_dash_sequence = None
+        self.line_dash_map = {}
         self.size_max = 20
+        self.category_orders = {}
+        self.labels = {}
 
 
 defaults = PxDefaults()
@@ -848,11 +861,7 @@ def one_group(x):
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
 
-    for param in (
-        ["color_discrete_sequence", "color_continuous_scale"]
-        + ["symbol_sequence", "line_dash_sequence", "template"]
-        + ["width", "height", "size_max"]
-    ):
+    for param in defaults.__slots__:
         if param in args and args[param] is None:
             args[param] = getattr(defaults, param)
 
