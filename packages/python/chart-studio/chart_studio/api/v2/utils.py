@@ -130,9 +130,9 @@ def should_retry(exception):
 
 
 @tenacity.retry(
-    wait=tenacity.wait.wait_exponential(multiplier=1000, max=16000),
-    stop=tenacity.stop.stop_after_delay(180000),
-    retry=tenacity.retry.retry_if_exception(should_retry),
+    wait=tenacity.wait_exponential(multiplier=1000, max=16000),
+    stop=tenacity.stop_after_delay(180000),
+    retry=tenacity.retry_if_exception(should_retry),
 )
 def request(method, url, **kwargs):
     """
