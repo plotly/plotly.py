@@ -2,6 +2,7 @@ import copy
 from numbers import Number as Num
 from unittest import TestCase
 import plotly.io as pio
+from plotly.offline import get_plotlyjs_version
 
 
 class TestCaseNoTemplate(TestCase):
@@ -95,3 +96,10 @@ def is_num_list(item):
     except TypeError:
         return False
     return True
+
+
+def plotly_cdn_url(cdn_ver=get_plotlyjs_version()):
+    """Return plotly CDN url for use in assertions."""
+    return "https://cdn.plot.ly/plotly-{cdn_ver}.min.js".format(
+        cdn_ver=cdn_ver
+    )
