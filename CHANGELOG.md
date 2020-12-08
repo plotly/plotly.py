@@ -7,9 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Fixed
-- Plotly.js cdn url will now be versioned by default for:
-`include_plotlyjs='cdn'` a new `include_plotlyjs='cdn-latest'` option
-has the original behaviour. Prevents likelihood of htmls generated with older `plotly.js` versions breaking with version bumps. [2961](https://github.com/plotly/plotly.py/pull/2961)
+- Plotly.js cdn url will now be versioned by default for: 
+  `include_plotlyjs='cdn'` a new `include_plotlyjs='cdn-latest'` option 
+  has the original behaviour. Prevents likelihood of htmls generated with older 
+  `plotly.js` versions breaking with version bumps. 
+  [2961](https://github.com/plotly/plotly.py/pull/2961)
 
 ### Updated
 
