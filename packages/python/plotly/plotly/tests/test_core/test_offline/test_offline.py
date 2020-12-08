@@ -12,7 +12,7 @@ import json as _json
 
 import plotly
 import plotly.io as pio
-from plotly.tests.utils import plotly_cdn_url
+from plotly.io._utils import plotly_cdn_url
 
 import json
 
