@@ -5,8 +5,8 @@ import webbrowser
 
 import six
 
-from plotly.io._utils import validate_coerce_fig_to_dict
-from plotly.offline.offline import _get_jconfig, get_plotlyjs, get_plotlyjs_version
+from plotly.io._utils import validate_coerce_fig_to_dict, plotly_cdn_url
+from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly import utils
 
 
@@ -273,14 +273,14 @@ def to_html(
         require_end = "});"
 
     elif include_plotlyjs == "cdn" or include_plotlyjs == "cdn-latest":
-        cdn_ver = get_plotlyjs_version()
+        cdn_url = plotly_cdn_url()
         if include_plotlyjs == "cdn-latest":
-            cdn_ver = "latest"
+            cdn_url = plotly_cdn_url(cdn_ver="latest")
         load_plotlyjs = """\
         {win_config}
-        <script src="https://cdn.plot.ly/plotly-{cdn_ver}.min.js"></script>\
+        <script src="{cdn_url}"></script>\
     """.format(
-            win_config=_window_plotly_config, cdn_ver=cdn_ver
+            win_config=_window_plotly_config, cdn_url=cdn_url
         )
 
     elif include_plotlyjs == "directory":

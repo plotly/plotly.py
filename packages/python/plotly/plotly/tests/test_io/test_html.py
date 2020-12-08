@@ -6,7 +6,7 @@ import numpy as np
 
 import plotly.graph_objs as go
 import plotly.io as pio
-from plotly.tests.utils import plotly_cdn_url
+from plotly.io._utils import plotly_cdn_url
 
 
 if sys.version_info >= (3, 3):

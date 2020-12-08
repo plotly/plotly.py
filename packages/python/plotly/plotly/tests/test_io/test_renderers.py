@@ -11,7 +11,7 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.io as pio
 from plotly.offline import get_plotlyjs
-from plotly.tests.utils import plotly_cdn_url
+from plotly.io._utils import plotly_cdn_url
 
 if sys.version_info >= (3, 3):
     import unittest.mock as mock
@@ -135,8 +135,8 @@ def assert_not_full_html(html):
     assert not html.startswith("<html")
 
 
-def assert_connected(html):
-    assert plotly_cdn_url() in html
+def assert_html_renderer_connected(html):
+    assert plotly_cdn_url().rstrip(".js") in html
 
 
 def assert_offline(html):
@@ -167,7 +167,7 @@ def test_colab_renderer_show(fig1):
     # Check html contents
     html = mock_arg1["text/html"]
     assert_full_html(html)
-    assert_connected(html)
+    assert_html_renderer_connected(html)
     assert_not_requirejs(html)
 
     # check kwargs
@@ -196,7 +196,7 @@ def test_notebook_connected_show(fig1, name, connected):
     # Check init display contents
     bundle_display_html = mock_arg1_html
     if connected:
-        assert_connected(bundle_display_html)
+        assert_html_renderer_connected(bundle_display_html)
     else:
         assert_offline(bundle_display_html)
 
