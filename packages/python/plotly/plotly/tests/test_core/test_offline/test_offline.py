@@ -12,6 +12,8 @@ import json as _json
 
 import plotly
 import plotly.io as pio
+from plotly.tests.utils import plotly_cdn_url
+
 import json
 
 packages_root = os.path.dirname(
@@ -39,7 +41,7 @@ plotly_config_script = """\
 <script type="text/javascript">\
 window.PlotlyConfig = {MathJaxConfig: 'local'};</script>"""
 
-cdn_script = '<script src="https://cdn.plot.ly/plotly-latest.min.js">' "</script>"
+cdn_script = '<script src="{cdn_url}"></script>'.format(cdn_url=plotly_cdn_url())
 
 directory_script = '<script src="plotly.min.js"></script>'
 
