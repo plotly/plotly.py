@@ -22,13 +22,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.14.1] - 2020-12-09
 
-### Added
-
-### Fixed
-
 ### Updated
 
-- Updated Plotly.js to version 1.58.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+- Updated Plotly.js to version 1.58.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
   - fixes for new `ticklabelposition` attribute
   - fixes for a regression related to treemaps in the previous version
 
