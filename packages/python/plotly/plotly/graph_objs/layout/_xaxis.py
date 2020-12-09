@@ -1978,7 +1978,9 @@ class XAxis(_BaseLayoutHierarchyType):
         `ticklabelmode` is set to "period". Similarly left or right has
         no effect on y axes or when `ticklabelmode` is set to "period".
         Has no effect on "multicategory" axes or when `tickson` is set
-        to "boundaries".
+        to "boundaries". When used on axes linked by `matches` or
+        `scaleanchor`, no extra padding for inside labels would be
+        added by autorange, so that the scales could match.
     
         The 'ticklabelposition' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -2843,7 +2845,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Similarly left or right has no effect on y axes or when
             `ticklabelmode` is set to "period". Has no effect on
             "multicategory" axes or when `tickson` is set to
-            "boundaries".
+            "boundaries". When used on axes linked by `matches` or
+            `scaleanchor`, no extra padding for inside labels would
+            be added by autorange, so that the scales could match.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -3351,7 +3355,9 @@ class XAxis(_BaseLayoutHierarchyType):
             Similarly left or right has no effect on y axes or when
             `ticklabelmode` is set to "period". Has no effect on
             "multicategory" axes or when `tickson` is set to
-            "boundaries".
+            "boundaries". When used on axes linked by `matches` or
+            `scaleanchor`, no extra padding for inside labels would
+            be added by autorange, so that the scales could match.
         ticklen
             Sets the tick length (in px).
         tickmode

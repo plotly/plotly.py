@@ -4270,7 +4270,10 @@ class Layout(_BaseLayoutType):
                     left or right has no effect on y axes or when
                     `ticklabelmode` is set to "period". Has no
                     effect on "multicategory" axes or when
-                    `tickson` is set to "boundaries".
+                    `tickson` is set to "boundaries". When used on
+                    axes linked by `matches` or `scaleanchor`, no
+                    extra padding for inside labels would be added
+                    by autorange, so that the scales could match.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -4742,7 +4745,10 @@ class Layout(_BaseLayoutType):
                     left or right has no effect on y axes or when
                     `ticklabelmode` is set to "period". Has no
                     effect on "multicategory" axes or when
-                    `tickson` is set to "boundaries".
+                    `tickson` is set to "boundaries". When used on
+                    axes linked by `matches` or `scaleanchor`, no
+                    extra padding for inside labels would be added
+                    by autorange, so that the scales could match.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
