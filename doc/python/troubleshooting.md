@@ -58,7 +58,7 @@ This is an example of a `plotly` graph correctly rendering inside `dash`:
 ```python hide_code=true
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
-IFrame(snippet_url + 'troubleshooting', width='100%', height=630)
+IFrame(snippet_url + 'renderers', width='100%', height=630)
 ```
 
 <!-- #region -->
