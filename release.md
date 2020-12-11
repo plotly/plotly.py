@@ -140,6 +140,8 @@ to features in the release.
 ### Notify Stakeholders
 
 * Post an announcement to the Plotly Python forum, with links to the README installation instructions and to the CHANGELOG.
+* Update the previous announcement to point to this one
+* Update the Github Release entry and CHANGELOG entry to have the nice title and a link to the announcement
 * Follow up on issues resolved in this release or forum posts with better answers as of this release
 
 ## Release *Candidate* process - `plotly` package
