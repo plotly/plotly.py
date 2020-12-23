@@ -280,7 +280,7 @@ pytest  packages/python/plotly/plotly/tests/test_core/
 pytest plotly/tests/test_plotly/test_plot.py
 ```
 
-or for a specfic test function
+or for a specific test function
 
 ```bash
 pytest plotly/tests/test_plotly/test_plot.py::test_function
