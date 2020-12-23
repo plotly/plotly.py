@@ -149,16 +149,22 @@ def _is_continuous(df, col_name):
 def get_decorated_label(args, column, role):
     label = get_label(args, column)
     if "histfunc" in args and (
-        (role == "x" and "orientation" in args and args["orientation"] == "h")
+        (role == "z")
+        or (role == "x" and "orientation" in args and args["orientation"] == "h")
         or (role == "y" and "orientation" in args and args["orientation"] == "v")
-        or (role == "z")
     ):
         if label:
-            return "%s of %s" % (args["histfunc"] or "count", label)
+            label = "%s of %s" % (args["histfunc"] or "count", label)
         else:
-            return "count"
-    else:
-        return label
+            label = "count"
+
+        if "histnorm" in args and args["histnorm"] is not None:
+            label = "%s of %s" % (args["histnorm"], label)
+
+        if "barnorm" in args and args["barnorm"] is not None:
+            label = "%s (normalized as %s)" % (label, args["barnorm"])
+
+    return label
 
 
 def make_mapping(args, variable):
