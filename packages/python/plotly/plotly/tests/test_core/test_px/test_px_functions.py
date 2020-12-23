@@ -267,7 +267,7 @@ def test_sunburst_treemap_column_parent():
     df = pd.DataFrame(dict(id=vendors, sectors=sectors, parent=regions, values=values,))
     path = ["parent", "sectors", "id"]
     # One column of the path is a reserved name - this is ok and should not raise
-    fig = px.sunburst(df, path=path, values="values")
+    px.sunburst(df, path=path, values="values")
 
 
 def test_sunburst_treemap_with_path_non_rectangular():
@@ -377,6 +377,31 @@ def test_parcats_dimensions_max():
         df, dimensions=["sex", "smoker", "day", "size"], dimensions_max_cardinality=4
     )
     assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
+
+
+def test_histfunc_hoverlabels():
+    df = px.data.tips()
+    fig = px.histogram(df, x="total_bill")
+    label = "count"
+    assert fig.layout.yaxis.title.text == label
+    assert label + "=" in fig.data[0].hovertemplate
+
+    fig = px.histogram(df, x="total_bill", y="tip")
+    label = "sum of tip"
+    assert fig.layout.yaxis.title.text == label
+    assert label + "=" in fig.data[0].hovertemplate
+
+    fig = px.histogram(
+        df,
+        x="total_bill",
+        y="tip",
+        histfunc="min",
+        histnorm="probability",
+        barnorm="percent",
+    )
+    label = "probability of min of tip (normalized as percent)"
+    assert fig.layout.yaxis.title.text == label
+    assert label + "=" in fig.data[0].hovertemplate
 
 
 def test_timeline():

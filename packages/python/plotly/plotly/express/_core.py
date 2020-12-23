@@ -149,16 +149,22 @@ def _is_continuous(df, col_name):
 def get_decorated_label(args, column, role):
     label = get_label(args, column)
     if "histfunc" in args and (
-        (role == "x" and "orientation" in args and args["orientation"] == "h")
+        (role == "z")
+        or (role == "x" and "orientation" in args and args["orientation"] == "h")
         or (role == "y" and "orientation" in args and args["orientation"] == "v")
-        or (role == "z")
     ):
         if label:
-            return "%s of %s" % (args["histfunc"] or "count", label)
+            label = "%s of %s" % (args["histfunc"] or "count", label)
         else:
-            return "count"
-    else:
-        return label
+            label = "count"
+
+        if "histnorm" in args and args["histnorm"] is not None:
+            label = "%s of %s" % (args["histnorm"], label)
+
+        if "barnorm" in args and args["barnorm"] is not None:
+            label = "%s (normalized as %s)" % (label, args["barnorm"])
+
+    return label
 
 
 def make_mapping(args, variable):
@@ -264,14 +270,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 mapping_labels["%{xaxis.title.text}"] = "%{x}"
                 mapping_labels["%{yaxis.title.text}"] = "%{y}"
 
-        elif (
-            attr_value is not None
-            or (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"])
-            or (
-                trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
-                and attr_name == "z"
-            )
-        ):
+        elif attr_value is not None:
             if attr_name == "size":
                 if "marker" not in trace_patch:
                     trace_patch["marker"] = dict()
@@ -464,13 +463,15 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 else:
                     trace_patch[attr_name] = trace_data[attr_value]
             else:
-                if attr_value:
-                    trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data[attr_value]
                 mapping_labels[attr_label] = "%%{%s}" % attr_name
-    if trace_spec.constructor not in [
-        go.Parcoords,
-        go.Parcats,
-    ]:
+        elif (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"]) or (
+            trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
+            and attr_name == "z"
+        ):
+            # ensure that stuff like "count" gets into the hoverlabel
+            mapping_labels[attr_label] = "%%{%s}" % attr_name
+    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         # Modify mapping_labels according to hover_data keys
         # if hover_data is a dict
         mapping_labels_copy = OrderedDict(mapping_labels)
