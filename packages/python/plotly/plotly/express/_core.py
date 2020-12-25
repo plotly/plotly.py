@@ -266,10 +266,19 @@ def ols(options, x, y, x_label, y_label, non_missing):
     import statsmodels.api as sm
 
     add_constant = options.get("add_constant", True)
-    fit_results = sm.OLS(
-        y, sm.add_constant(x) if add_constant else x, missing="drop"
-    ).fit()
+    log_x = options.get("log_x", False)
+    log_y = options.get("log_y", False)
+
+    if log_y:
+        y = np.log(y)
+    if log_x:
+        x = np.log(x)
+    if add_constant:
+        x = sm.add_constant(x)
+    fit_results = sm.OLS(y, x, missing="drop").fit()
     y_out = fit_results.predict()
+    if log_y:
+        y_out = np.exp(y_out)
     hover_header = "<b>OLS trendline</b><br>"
     if len(fit_results.params) == 2:
         hover_header += "%s = %g * %s + %g<br>" % (
