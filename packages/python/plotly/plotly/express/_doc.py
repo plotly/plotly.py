@@ -406,6 +406,10 @@ docs = dict(
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
     ],
+    trendline_options=[
+        "dict",
+        "Options passed to the function named in the `trendline` argument.",
+    ],
     trendline_color_override=[
         "str",
         "Valid CSS color.",

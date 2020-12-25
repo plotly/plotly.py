@@ -239,6 +239,56 @@ def make_mapping(args, variable):
     )
 
 
+def lowess(options, x, y, x_label, y_label, non_missing):
+    import statsmodels.api as sm
+
+    frac = options.get("frac", 0.6666666)
+    # missing ='drop' is the default value for lowess but not for OLS (None)
+    # we force it here in case statsmodels change their defaults
+    y_out = sm.nonparametric.lowess(y, x, missing="drop", frac=frac)[:, 1]
+    hover_header = "<b>LOWESS trendline</b><br><br>"
+    return y_out, hover_header, None
+
+
+def ma(options, x, y, x_label, y_label, non_missing):
+    y_out = pd.Series(y, index=x).rolling(**options).mean()[non_missing]
+    hover_header = "<b>Moving Average trendline</b><br><br>"
+    return y_out, hover_header, None
+
+
+def ewm(options, x, y, x_label, y_label, non_missing):
+    y_out = pd.Series(y, index=x).ewm(**options).mean()[non_missing]
+    hover_header = "<b>EWM trendline</b><br><br>"
+    return y_out, hover_header, None
+
+
+def ols(options, x, y, x_label, y_label, non_missing):
+    import statsmodels.api as sm
+
+    add_constant = options.get("add_constant", True)
+    fit_results = sm.OLS(
+        y, sm.add_constant(x) if add_constant else x, missing="drop"
+    ).fit()
+    y_out = fit_results.predict()
+    hover_header = "<b>OLS trendline</b><br>"
+    if len(fit_results.params) == 2:
+        hover_header += "%s = %g * %s + %g<br>" % (
+            y_label,
+            fit_results.params[1],
+            x_label,
+            fit_results.params[0],
+        )
+    elif not add_constant:
+        hover_header += "%s = %g* %s<br>" % (y_label, fit_results.params[0], x_label,)
+    else:
+        hover_header += "%s = %g<br>" % (y_label, fit_results.params[0],)
+    hover_header += "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
+    return y_out, hover_header, fit_results
+
+
+trendline_functions = dict(lowess=lowess, ma=ma, ewm=ewm, ols=ols)
+
+
 def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
     """Populates a dict with arguments to update trace
 
@@ -313,12 +363,11 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
                 if (
-                    attr_value[0] in ["ols", "lowess", "ma", "ewm"]
+                    attr_value in trendline_functions
                     and args["x"]
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
-                    import statsmodels.api as sm
 
                     # sorting is bad but trace_specs with "trendline" have no other attrs
                     sorted_trace_data = trace_data.sort_values(by=args["x"])
@@ -349,56 +398,19 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                         np.logical_or(np.isnan(y), np.isnan(x))
                     )
                     trace_patch["x"] = sorted_trace_data[args["x"]][non_missing]
-
-                    if attr_value[0] == "lowess":
-                        alpha = attr_value[1] or 0.6666666
-                        # missing ='drop' is the default value for lowess but not for OLS (None)
-                        # we force it here in case statsmodels change their defaults
-                        trendline = sm.nonparametric.lowess(
-                            y, x, missing="drop", frac=alpha
-                        )
-                        trace_patch["y"] = trendline[:, 1]
-                        hover_header = "<b>LOWESS trendline</b><br><br>"
-                    elif attr_value[0] == "ma":
-                        trace_patch["y"] = (
-                            pd.Series(y[non_missing])
-                            .rolling(window=attr_value[1] or 3)
-                            .mean()
-                        )
-                    elif attr_value[0] == "ewm":
-                        trace_patch["y"] = (
-                            pd.Series(y[non_missing])
-                            .ewm(alpha=attr_value[1] or 0.5)
-                            .mean()
-                        )
-                    elif attr_value[0] == "ols":
-                        add_constant = attr_value[1] is not False
-                        fit_results = sm.OLS(
-                            y, sm.add_constant(x) if add_constant else x, missing="drop"
-                        ).fit()
-                        trace_patch["y"] = fit_results.predict()
-                        hover_header = "<b>OLS trendline</b><br>"
-                        if len(fit_results.params) == 2:
-                            hover_header += "%s = %g * %s + %g<br>" % (
-                                args["y"],
-                                fit_results.params[1],
-                                args["x"],
-                                fit_results.params[0],
-                            )
-                        elif not add_constant:
-                            hover_header += "%s = %g* %s<br>" % (
-                                args["y"],
-                                fit_results.params[0],
-                                args["x"],
-                            )
-                        else:
-                            hover_header += "%s = %g<br>" % (
-                                args["y"],
-                                fit_results.params[0],
-                            )
-                        hover_header += (
-                            "R<sup>2</sup>=%f<br><br>" % fit_results.rsquared
-                        )
+                    trendline_function = trendline_functions[attr_value]
+                    y_out, hover_header, fit_results = trendline_function(
+                        args["trendline_options"],
+                        x,
+                        y,
+                        args["x"],
+                        args["y"],
+                        non_missing,
+                    )
+                    assert len(y_out) == len(
+                        trace_patch["x"]
+                    ), "missing-data-handling failure in trendline code"
+                    trace_patch["y"] = y_out
                     mapping_labels[get_label(args, args["x"])] = "%{x}"
                     mapping_labels[get_label(args, args["y"])] = "%{y} <b>(trend)</b>"
             elif attr_name.startswith("error"):
@@ -1850,9 +1862,8 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     ):
         args["facet_col_wrap"] = 0
 
-    if args.get("trendline", None) is not None:
-        if isinstance(args["trendline"], str):
-            args["trendline"] = (args["trendline"], None)
+    if "trendline_options" in args and args["trendline_options"] is None:
+        args["trendline_options"] = dict()
 
     # Compute applicable grouping attributes
     for k in group_attrables:
