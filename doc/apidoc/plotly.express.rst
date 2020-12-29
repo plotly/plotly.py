@@ -60,3 +60,4 @@ plotly's high-level API for rapid figure generation. ::
 
    generated/plotly.express.data.rst
    generated/plotly.express.colors.rst
+   generated/plotly.express.trendline_functions.rst
