@@ -60,7 +60,7 @@ from ._core import (  # noqa: F401
 
 from ._special_inputs import IdentityMap, Constant, Range  # noqa: F401
 
-from . import data, colors  # noqa: F401
+from . import data, colors, trendline_functions  # noqa: F401
 
 __all__ = [
     "scatter",
