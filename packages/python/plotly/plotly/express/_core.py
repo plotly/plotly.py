@@ -2,7 +2,7 @@ import plotly.graph_objs as go
 import plotly.io as pio
 from collections import namedtuple, OrderedDict
 from ._special_inputs import IdentityMap, Constant, Range
-from .trendline_functions import ols, lowess, ma, ewm
+from .trendline_functions import ols, lowess, ma, ewma
 
 from _plotly_utils.basevalidators import ColorscaleValidator
 from plotly.colors import qualitative, sequential
@@ -313,7 +313,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if trace_spec.constructor == go.Histogram:
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
-                trendline_functions = dict(lowess=lowess, ma=ma, ewm=ewm, ols=ols)
+                trendline_functions = dict(lowess=lowess, ma=ma, ewma=ewma, ols=ols)
                 if (
                     attr_value in trendline_functions
                     and args["x"]
@@ -353,6 +353,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     trendline_function = trendline_functions[attr_value]
                     y_out, hover_header, fit_results = trendline_function(
                         args["trendline_options"],
+                        sorted_trace_data[args["x"]],
                         x,
                         y,
                         args["x"],
