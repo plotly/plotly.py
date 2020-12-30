@@ -100,6 +100,7 @@ __all__ = [
     "imshow",
     "data",
     "colors",
+    "trendline_functions",
     "set_mapbox_access_token",
     "get_trendline_results",
     "IdentityMap",
