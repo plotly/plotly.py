@@ -9,7 +9,6 @@ from datetime import datetime
     "mode,options",
     [
         ("ols", None),
-        ("ols", dict(log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
         ("ma", dict(window=2)),
@@ -47,7 +46,6 @@ def test_trendline_results_passthrough(mode, options):
     "mode,options",
     [
         ("ols", None),
-        ("ols", dict(add_constant=False, log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
         ("ma", dict(window=2)),
@@ -101,7 +99,6 @@ def test_trendline_enough_values(mode, options):
     "mode,options",
     [
         ("ols", None),
-        ("ols", dict(add_constant=False, log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
         ("ma", dict(window=2)),
@@ -172,7 +169,6 @@ def test_ols_trendline_slopes():
     "mode,options",
     [
         ("ols", None),
-        ("ols", dict(add_constant=False, log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
         ("ma", dict(window=2)),
