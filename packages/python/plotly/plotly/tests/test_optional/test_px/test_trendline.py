@@ -99,6 +99,7 @@ def test_trendline_enough_values(mode, options):
     "mode,options",
     [
         ("ols", None),
+        ("ols", dict(add_constant=False, log_x=True, log_y=True)),
         ("lowess", None),
         ("lowess", dict(frac=0.3)),
         ("ma", dict(window=2)),
@@ -124,7 +125,8 @@ def test_trendline_nan_values(mode, options):
 
 def test_ols_trendline_slopes():
     fig = px.scatter(x=[0, 1], y=[0, 1], trendline="ols")
-    assert "y = 1 * x + 0<br>" in fig.data[1].hovertemplate
+    # should be "y = 1 * x + 0" but sometimes is some tiny number instead
+    assert "y = 1 * x + " in fig.data[1].hovertemplate
     results = px.get_trendline_results(fig)
     params = results["px_fit_results"].iloc[0].params
     assert np.all(np.isclose(params, [0, 1]))

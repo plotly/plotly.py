@@ -17,6 +17,7 @@ from plotly.subplots import (
 )
 
 NO_COLOR = "px_no_color_constant"
+trendline_functions = dict(lowess=lowess, ma=ma, ewma=ewma, ols=ols)
 
 # Declare all supported attributes, across all plot types
 direct_attrables = (
@@ -313,10 +314,8 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 if trace_spec.constructor == go.Histogram:
                     mapping_labels["count"] = "%{x}"
             elif attr_name == "trendline":
-                trendline_functions = dict(lowess=lowess, ma=ma, ewma=ewma, ols=ols)
                 if (
-                    attr_value in trendline_functions
-                    and args["x"]
+                    args["x"]
                     and args["y"]
                     and len(trace_data[[args["x"], args["y"]]].dropna()) > 1
                 ):
@@ -1814,6 +1813,13 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         or args.get("facet_row") is not None
     ):
         args["facet_col_wrap"] = 0
+
+    if "trendline" in args and args["trendline"] is not None:
+        if args["trendline"] not in trendline_functions:
+            raise ValueError(
+                "Value '%s' for `trendline` must be one of %s"
+                % (args["trendline"], trendline_functions.keys())
+            )
 
     if "trendline_options" in args and args["trendline_options"] is None:
         args["trendline_options"] = dict()
