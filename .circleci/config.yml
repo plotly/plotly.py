@@ -65,7 +65,7 @@ jobs:
 
   python-3.8-core:
     docker:
-      - image: circleci/python:3.8-stretch-node-browsers
+      - image: circleci/python:3.8.7
         environment:
           PLOTLY_TOX_PYTHON_38: python3.8
 
@@ -162,7 +162,7 @@ jobs:
 
   python-3.8-optional:
     docker:
-      - image: circleci/python:3.8-stretch-node-browsers
+      - image: circleci/python:3.8.7
         environment:
           PLOTLY_TOX_PYTHON_38: python3.8
 
