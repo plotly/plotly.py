@@ -1,12 +1,15 @@
+import pytest
 import plotly.io.json as pio
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
-import pytest
 import json
 import datetime
 import sys
 from pytz import timezone
+from _plotly_utils.optional_imports import get_module
+
+orjson = get_module("orjson")
 
 eastern = timezone("US/Eastern")
 
@@ -61,6 +64,12 @@ def check_roundtrip(value, engine, pretty):
 
 
 # Fixtures
+if orjson is not None:
+    engines = ["json", "orjson", "legacy", "auto"]
+else:
+    engines = ["json", "legacy", "auto"]
+
+
 @pytest.fixture(scope="module", params=["json", "orjson", "legacy", "auto"])
 def engine(request):
     return request.param
