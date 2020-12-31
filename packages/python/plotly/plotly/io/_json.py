@@ -32,11 +32,15 @@ class JsonConfig(object):
             )
 
         if val == "orjson":
-            orjson = get_module("orjson")
-            if orjson is None:
-                raise ValueError("The orjson engine requires the orjson package")
+            self.validate_orjson()
 
         self._default_engine = val
+
+    @classmethod
+    def validate_orjson(cls):
+        orjson = get_module("orjson")
+        if orjson is None:
+            raise ValueError("The orjson engine requires the orjson package")
 
 
 config = JsonConfig()
@@ -106,8 +110,6 @@ def to_plotly_json(plotly_object, pretty=False, engine=None):
         "image": get_module("PIL.Image", should_load=False),
     }
 
-    orjson = get_module("orjson", should_load=True)
-
     # Dump to a JSON string and return
     # --------------------------------
     if engine in ("json", "legacy"):
@@ -148,6 +150,7 @@ def to_plotly_json(plotly_object, pretty=False, engine=None):
 
             return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
     elif engine == "orjson":
+        JsonConfig.validate_orjson()
         opts = orjson.OPT_SORT_KEYS | orjson.OPT_SERIALIZE_NUMPY
 
         if pretty:
@@ -287,6 +290,8 @@ def from_plotly_json(value, engine=None):
     -------
     dict
     """
+    orjson = get_module("orjson", should_load=True)
+
     # Validate value
     # --------------
     if not isinstance(value, (string_types, bytes)):
@@ -297,8 +302,6 @@ from_plotly_json requires a string or bytes argument but received value of type 
                 typ=type(value), value=value
             )
         )
-
-    orjson = get_module("orjson", should_load=True)
 
     # Determine json engine
     if engine is None:
@@ -313,6 +316,7 @@ from_plotly_json requires a string or bytes argument but received value of type 
         raise ValueError("Invalid json engine: %s" % engine)
 
     if engine == "orjson":
+        JsonConfig.validate_orjson()
         # orjson handles bytes input natively
         value_dict = orjson.loads(value)
     else:
