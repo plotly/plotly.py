@@ -1,13 +1,15 @@
 import uuid
-import json
 import os
 import webbrowser
 
 import six
 
+from _plotly_utils.optional_imports import get_module
 from plotly.io._utils import validate_coerce_fig_to_dict
 from plotly.offline.offline import _get_jconfig, get_plotlyjs
 from plotly import utils
+
+_json = get_module("json")
 
 
 # Build script to set global PlotlyConfig object. This must execute before
@@ -134,15 +136,15 @@ def to_html(
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    jdata = json.dumps(
+    jdata = _json.dumps(
         fig_dict.get("data", []), cls=utils.PlotlyJSONEncoder, sort_keys=True
     )
-    jlayout = json.dumps(
+    jlayout = _json.dumps(
         fig_dict.get("layout", {}), cls=utils.PlotlyJSONEncoder, sort_keys=True
     )
 
     if fig_dict.get("frames", None):
-        jframes = json.dumps(fig_dict.get("frames", []), cls=utils.PlotlyJSONEncoder)
+        jframes = _json.dumps(fig_dict.get("frames", []), cls=utils.PlotlyJSONEncoder)
     else:
         jframes = None
 
@@ -218,7 +220,7 @@ def to_html(
 
         if auto_play:
             if animation_opts:
-                animation_opts_arg = ", " + json.dumps(animation_opts)
+                animation_opts_arg = ", " + _json.dumps(animation_opts)
             else:
                 animation_opts_arg = ""
             then_animate = """.then(function(){{
@@ -228,7 +230,7 @@ def to_html(
             )
 
     # Serialize config dict to JSON
-    jconfig = json.dumps(config)
+    jconfig = _json.dumps(config)
 
     script = """\
                 if (document.getElementById("{id}")) {{\
