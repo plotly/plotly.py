@@ -10,9 +10,17 @@ def ols(options, x_raw, x, y, x_label, y_label, non_missing):
     log_y = options.get("log_y", False)
 
     if log_y:
+        if np.any(y == 0):
+            raise ValueError(
+                "Can't do OLS trendline with `log_y=True` when `y` contains zeros."
+            )
         y = np.log(y)
         y_label = "log(%s)" % y_label
     if log_x:
+        if np.any(x == 0):
+            raise ValueError(
+                "Can't do OLS trendline with `log_x=True` when `x` contains zeros."
+            )
         x = np.log(x)
         x_label = "log(%s)" % x_label
     if add_constant:
