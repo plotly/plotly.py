@@ -202,7 +202,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
     """
     # Validate figure
     # ---------------
-    fig_dict = validate_coerce_fig_to_dict(fig, validate, clone=False)
+    fig_dict = validate_coerce_fig_to_dict(fig, validate)
 
     # Remove trace uid
     # ----------------
@@ -455,9 +455,6 @@ def clean_to_json_compatible(obj, **kwargs):
 
     # Plotly
     try:
-        obj = obj.to_plotly_json(clone=False)
-    except (TypeError, NameError, ValueError):
-        # Try without clone for backward compatibility
         obj = obj.to_plotly_json()
     except AttributeError:
         pass
