@@ -3,10 +3,10 @@ from __future__ import absolute_import
 from six import string_types
 import json
 import decimal
+import os
 
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
-from _plotly_utils.utils import iso_to_plotly_time_string
 from _plotly_utils.optional_imports import get_module
 from _plotly_utils.basevalidators import ImageUriValidator
 
@@ -14,10 +14,10 @@ from _plotly_utils.basevalidators import ImageUriValidator
 # Orca configuration class
 # ------------------------
 class JsonConfig(object):
-    _valid_encoders = ("legacy", "json", "orjson", "auto")
+    _valid_engines = ("legacy", "json", "orjson", "auto")
 
     def __init__(self):
-        self._default_engine = "auto"
+        self._default_engine = "legacy"
 
     @property
     def default_engine(self):
@@ -25,16 +25,16 @@ class JsonConfig(object):
 
     @default_engine.setter
     def default_engine(self, val):
-        if val not in JsonConfig._valid_encoders:
+        if val not in JsonConfig._valid_engines:
             raise ValueError(
-                "Supported JSON encoders include {valid}\n"
-                "    Received {val}".format(valid=JsonConfig._valid_encoders, val=val)
+                "Supported JSON engines include {valid}\n"
+                "    Received {val}".format(valid=JsonConfig._valid_engines, val=val)
             )
 
         if val == "orjson":
             orjson = get_module("orjson")
             if orjson is None:
-                raise ValueError("The orjson encoder requires the orjson package")
+                raise ValueError("The orjson engine requires the orjson package")
 
         self._default_engine = val
 
@@ -54,50 +54,38 @@ def coerce_to_strict(const):
         return const
 
 
-def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
+def to_plotly_json(plotly_object, pretty=False, engine=None):
     """
-    Convert a figure to a JSON string representation
+    Convert a plotly/Dash object to a JSON string representation
 
     Parameters
     ----------
-    fig:
-        Figure object or dict representing a figure
-
-    validate: bool (default True)
-        True if the figure should be validated before being converted to
-        JSON, False otherwise.
+    plotly_object:
+        A plotly/Dash object represented as a dict, graph_object, or Dash component
 
     pretty: bool (default False)
         True if JSON representation should be pretty-printed, False if
         representation should be as compact as possible.
 
-    remove_uids: bool (default True)
-        True if trace UIDs should be omitted from the JSON representation
-
     engine: str (default None)
         The JSON encoding engine to use. One of:
-          - "json" for a rewritten encoder based on the built-in Python json module
-          - "orjson" for a fast encoder the requires the orjson package
-          - "legacy" for the legacy JSON encoder.
-        If not specified, the default encoder is set to the current value of
-        plotly.io.json.config.default_encoder.
+          - "json" for an engine based on the built-in Python json module
+          - "orjson" for a faster engine that requires the orjson package
+          - "legacy" for the legacy JSON engine.
+          - "auto" for the "orjson" engine if available, otherwise "json"
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
 
     Returns
     -------
     str
-        Representation of figure as a JSON string
+        Representation of input object as a JSON string
+
+    See Also
+    --------
+    to_json : Convert a plotly Figure to JSON with validation
     """
     orjson = get_module("orjson", should_load=True)
-
-    # Validate figure
-    # ---------------
-    fig_dict = validate_coerce_fig_to_dict(fig, validate, clone=False)
-
-    # Remove trace uid
-    # ----------------
-    if remove_uids:
-        for trace in fig_dict.get("data", []):
-            trace.pop("uid", None)
 
     # Determine json engine
     if engine is None:
@@ -132,9 +120,8 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 
         if engine == "json":
             cleaned = clean_to_json_compatible(
-                fig_dict,
+                plotly_object,
                 numpy_allowed=False,
-                non_finite_allowed=False,
                 datetime_allowed=False,
                 modules=modules,
             )
@@ -149,7 +136,6 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
             try:
                 new_o = json.loads(encoded_o, parse_constant=coerce_to_strict)
             except ValueError:
-
                 # invalid separators will fail here. raise a helpful exception
                 raise ValueError(
                     "Encoding into strict JSON failed. Did you set the separators "
@@ -160,25 +146,68 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         else:
             from _plotly_utils.utils import PlotlyJSONEncoder
 
-            return json.dumps(fig_dict, cls=PlotlyJSONEncoder, **opts)
+            return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
     elif engine == "orjson":
-        opts = (
-            orjson.OPT_SORT_KEYS
-            | orjson.OPT_SERIALIZE_NUMPY
-            | orjson.OPT_OMIT_MICROSECONDS
-        )
+        opts = orjson.OPT_SORT_KEYS | orjson.OPT_SERIALIZE_NUMPY
 
         if pretty:
             opts |= orjson.OPT_INDENT_2
 
         cleaned = clean_to_json_compatible(
-            fig_dict,
-            numpy_allowed=True,
-            non_finite_allowed=True,
-            datetime_allowed=True,
-            modules=modules,
+            plotly_object, numpy_allowed=True, datetime_allowed=True, modules=modules,
         )
         return orjson.dumps(cleaned, option=opts).decode("utf8")
+
+
+def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
+    """
+    Convert a figure to a JSON string representation
+
+    Parameters
+    ----------
+    fig:
+        Figure object or dict representing a figure
+
+    validate: bool (default True)
+        True if the figure should be validated before being converted to
+        JSON, False otherwise.
+
+    pretty: bool (default False)
+        True if JSON representation should be pretty-printed, False if
+        representation should be as compact as possible.
+
+    remove_uids: bool (default True)
+        True if trace UIDs should be omitted from the JSON representation
+
+    engine: str (default None)
+        The JSON encoding engine to use. One of:
+          - "json" for an engine based on the built-in Python json module
+          - "orjson" for a faster engine that requires the orjson package
+          - "legacy" for the legacy JSON engine.
+          - "auto" for the "orjson" engine if available, otherwise "json"
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
+
+    Returns
+    -------
+    str
+        Representation of figure as a JSON string
+
+    See Also
+    --------
+    to_plotly_json : Convert an arbitrary plotly graph_object or Dash component to JSON
+    """
+    # Validate figure
+    # ---------------
+    fig_dict = validate_coerce_fig_to_dict(fig, validate, clone=False)
+
+    # Remove trace uid
+    # ----------------
+    if remove_uids:
+        for trace in fig_dict.get("data", []):
+            trace.pop("uid", None)
+
+    return to_plotly_json(fig_dict, pretty=pretty, engine=engine)
 
 
 def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=None):
@@ -204,11 +233,12 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
 
     engine: str (default None)
         The JSON encoding engine to use. One of:
-          - "json" for a rewritten encoder based on the built-in Python json module
-          - "orjson" for a fast encoder the requires the orjson package
-          - "legacy" for the legacy JSON encoder.
-        If not specified, the default encoder is set to the current value of
-        plotly.io.json.config.default_encoder.
+          - "json" for an engine based on the built-in Python json module
+          - "orjson" for a faster engine that requires the orjson package
+          - "legacy" for the legacy JSON engine.
+          - "auto" for the "orjson" engine if available, otherwise "json"
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
     Returns
     -------
     None
@@ -234,7 +264,67 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         file.write(json_str)
 
 
-def from_json(value, output_type="Figure", skip_invalid=False):
+def from_plotly_json(value, engine=None):
+    """
+    Parse JSON string using the specified JSON engine
+
+    Parameters
+    ----------
+    value: str
+        A JSON string
+
+    engine: str (default None)
+        The JSON decoding engine to use. One of:
+          - if "json" or "legacy", parse JSON using built in json module
+          - if "orjson", parse using the faster orjson module, requires the orjson
+            package
+          - if "auto" use orjson module if available, otherwise use the json module
+
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
+
+    Returns
+    -------
+    dict
+    """
+    # Validate value
+    # --------------
+    if not isinstance(value, (string_types, bytes)):
+        raise ValueError(
+            """
+from_plotly_json requires a string or bytes argument but received value of type {typ}
+    Received value: {value}""".format(
+                typ=type(value), value=value
+            )
+        )
+
+    orjson = get_module("orjson", should_load=True)
+
+    # Determine json engine
+    if engine is None:
+        engine = config.default_engine
+
+    if engine == "auto":
+        if orjson is not None:
+            engine = "orjson"
+        else:
+            engine = "json"
+    elif engine not in ["orjson", "json", "legacy"]:
+        raise ValueError("Invalid json engine: %s" % engine)
+
+    if engine == "orjson":
+        # orjson handles bytes input natively
+        value_dict = orjson.loads(value)
+    else:
+        # decode bytes to str for built-in json module
+        if isinstance(value, bytes):
+            value = value.decode("utf-8")
+        value_dict = json.loads(value)
+
+    return value_dict
+
+
+def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
     """
     Construct a figure from a JSON string
 
@@ -251,6 +341,16 @@ def from_json(value, output_type="Figure", skip_invalid=False):
         False if invalid figure properties should result in an exception.
         True if invalid figure properties should be silently ignored.
 
+    engine: str (default None)
+        The JSON decoding engine to use. One of:
+          - if "json" or "legacy", parse JSON using built in json module
+          - if "orjson", parse using the faster orjson module, requires the orjson
+            package
+          - if "auto" use orjson module if available, otherwise use the json module
+
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
+
     Raises
     ------
     ValueError
@@ -262,20 +362,9 @@ def from_json(value, output_type="Figure", skip_invalid=False):
     Figure or FigureWidget
     """
 
-    # Validate value
-    # --------------
-    if not isinstance(value, string_types):
-        raise ValueError(
-            """
-from_json requires a string argument but received value of type {typ}
-    Received value: {value}""".format(
-                typ=type(value), value=value
-            )
-        )
-
     # Decode JSON
     # -----------
-    fig_dict = json.loads(value)
+    fig_dict = from_plotly_json(value, engine=engine)
 
     # Validate coerce output type
     # ---------------------------
@@ -287,7 +376,7 @@ from_json requires a string argument but received value of type {typ}
     return fig
 
 
-def read_json(file, output_type="Figure", skip_invalid=False):
+def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     """
     Construct a figure from the JSON contents of a local file or readable
     Python object
@@ -305,6 +394,16 @@ def read_json(file, output_type="Figure", skip_invalid=False):
     skip_invalid: bool (default False)
         False if invalid figure properties should result in an exception.
         True if invalid figure properties should be silently ignored.
+
+    engine: str (default None)
+        The JSON decoding engine to use. One of:
+          - if "json" or "legacy", parse JSON using built in json module
+          - if "orjson", parse using the faster orjson module, requires the orjson
+            package
+          - if "auto" use orjson module if available, otherwise use the json module
+
+        If not specified, the default engine is set to the current value of
+        plotly.io.json.config.default_engine.
 
     Returns
     -------
@@ -327,16 +426,21 @@ def read_json(file, output_type="Figure", skip_invalid=False):
 
     # Construct and return figure
     # ---------------------------
-    return from_json(json_str, skip_invalid=skip_invalid, output_type=output_type)
+    return from_json(
+        json_str, skip_invalid=skip_invalid, output_type=output_type, engine=engine
+    )
 
 
 def clean_to_json_compatible(obj, **kwargs):
     # Try handling value as a scalar value that we have a conversion for.
     # Return immediately if we know we've hit a primitive value
 
+    # Bail out fast for simple scalar types
+    if isinstance(obj, (int, float, string_types)):
+        return obj
+
     # unpack kwargs
     numpy_allowed = kwargs.get("numpy_allowed", False)
-    non_finite_allowed = kwargs.get("non_finite_allowed", False)
     datetime_allowed = kwargs.get("datetime_allowed", False)
 
     modules = kwargs.get("modules", {})
@@ -376,23 +480,44 @@ def clean_to_json_compatible(obj, **kwargs):
     if pd is not None:
         if obj is pd.NaT:
             return None
-        elif isinstance(obj, pd.Series):
+        elif isinstance(obj, (pd.Series, pd.DatetimeIndex)):
             if numpy_allowed and obj.dtype.kind in ("b", "i", "u", "f"):
                 return obj.values
-            elif datetime_allowed and obj.dtype.kind == "M":
-                return obj.dt.to_pydatetime().tolist()
+            elif obj.dtype.kind == "M":
+                if isinstance(obj, pd.Series):
+                    dt_values = obj.dt.to_pydatetime().tolist()
+                else:  # DatetimeIndex
+                    dt_values = obj.to_pydatetime().tolist()
+
+                if not datetime_allowed:
+                    # Note: We don't need to handle dropping timezones here because
+                    # numpy's datetime64 doesn't support them and pandas's tolist()
+                    # doesn't preserve them.
+                    for i in range(len(dt_values)):
+                        dt_values[i] = dt_values[i].isoformat()
+
+                return dt_values
 
     # datetime and date
     if not datetime_allowed:
         try:
-            # Is this cleanup still needed?
-            return iso_to_plotly_time_string(obj.isoformat())
+            # Need to drop timezone for scalar datetimes
+            return obj.replace(tzinfo=None).isoformat()
+        except (TypeError, AttributeError):
+            pass
+
+        if np and isinstance(obj, np.datetime64):
+            return str(obj)
+    else:
+        try:
+            # Need to drop timezone for scalar datetimes. Don't need to convert
+            # to string since engine can do that
+            return obj.replace(tzinfo=None)
         except AttributeError:
             pass
 
-    # Try .tolist() convertible
+    # Try .tolist() convertible, do not recurse inside
     try:
-        # obj = obj.tolist()
         return obj.tolist()
     except AttributeError:
         pass
