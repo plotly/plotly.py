@@ -270,8 +270,8 @@ def from_plotly_json(value, engine=None):
 
     Parameters
     ----------
-    value: str
-        A JSON string
+    value: str or bytes
+        A JSON string or bytes object
 
     engine: str (default None)
         The JSON decoding engine to use. One of:
@@ -330,8 +330,8 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
 
     Parameters
     ----------
-    value: str
-        String containing the JSON representation of a figure
+    value: str or bytes
+        String or bytes object containing the JSON representation of a figure
 
     output_type: type or str (default 'Figure')
         The output figure type or type name.
