@@ -70,7 +70,7 @@ else:
     engines = ["json", "legacy", "auto"]
 
 
-@pytest.fixture(scope="module", params=["json", "orjson", "legacy", "auto"])
+@pytest.fixture(scope="module", params=engines)
 def engine(request):
     return request.param
 
