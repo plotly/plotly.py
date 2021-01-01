@@ -3,16 +3,20 @@ import numpy as np
 
 
 def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Ordinary Least Squares trendline function
+    """Ordinary Least Squares (OLS) trendline function
 
     Requires `statsmodels` to be installed.
 
+    This trendline function causes fit results to be stored within the figure,
+    accessible via the `plotly.express.get_trendline_results` function. The fit results
+    are the output of the `statsmodels.api.OLS` function.
+
     Valid keys for the `trendline_options` dict are:
 
-    `add_constant` (`bool`, default `True`): if `False`, the trendline passes through
+    - `add_constant` (`bool`, default `True`): if `False`, the trendline passes through
     the origin but if `True` a y-intercept is fitted.
 
-    `log_x` and `log_y` (`bool`, default `False`): if `True` the OLS is computed with
+    - `log_x` and `log_y` (`bool`, default `False`): if `True` the OLS is computed with
     respect to the base 10 logarithm of the input. Note that this means no zeros can
     be present in the input.
     """
@@ -60,13 +64,14 @@ def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Locally Weighted Scatterplot Smoothing trendline function
+    """LOcally WEighted Scatterplot Smoothing (LOWESS) trendline function
 
     Requires `statsmodels` to be installed.
 
     Valid keys for the `trendline_options` dict are:
 
-    `frac` (`float`, default `0.6666666`): the `frac` parameter from `statsmodels.api.nonparametric.lowess`
+    - `frac` (`float`, default `0.6666666`): the `frac` parameter from the
+    `statsmodels.api.nonparametric.lowess` function
     """
     import statsmodels.api as sm
 
@@ -77,9 +82,12 @@ def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def ma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Moving Average trendline function
+    """Moving Average (MA) trendline function
 
-    The `trendline_options` dict is passed as keyword arguments into the `pandas.Series.rolling` function.
+    Requires `pandas` to be installed.
+
+    The `trendline_options` dict is passed as keyword arguments into the
+    `pandas.Series.rolling` function.
     """
     y_out = pd.Series(y, index=x_raw).rolling(**trendline_options).mean()[non_missing]
     hover_header = "<b>MA trendline</b><br><br>"
@@ -87,9 +95,12 @@ def ma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
 
 
 def ewma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
-    """Exponentially Weighted Moving Average trendline function
+    """Exponentially Weighted Moving Average (EWMA) trendline function
 
-    The `trendline_options` dict is passed as keyword arguments into the `pandas.Series.ewma` function.
+    Requires `pandas` to be installed.
+
+    The `trendline_options` dict is passed as keyword arguments into the
+    `pandas.Series.ewma` function.
     """
     y_out = pd.Series(y, index=x_raw).ewm(**trendline_options).mean()[non_missing]
     hover_header = "<b>EWMA trendline</b><br><br>"
