@@ -402,18 +402,23 @@ docs = dict(
     ],
     trendline=[
         "str",
-        "One of `'ols'` or `'lowess'`.",
+        "One of `'ols'`, `'lowess'`, `'ma'` or `'ewma'`.",
         "If `'ols'`, an Ordinary Least Squares regression line will be drawn for each discrete-color/symbol group.",
         "If `'lowess`', a Locally Weighted Scatterplot Smoothing line will be drawn for each discrete-color/symbol group.",
+        "If `'ma`', a Moving Average line will be drawn for each discrete-color/symbol group.",
+        "If `'ewma`', an Exponentially Weighted Moving Average line will be drawn for each discrete-color/symbol group.",
+        "See the docstrings for the functions in `plotly.express.trendline_functions` for more details on these functions and how",
+        "to configure them with the `trendline_options` argument.",
     ],
     trendline_options=[
         "dict",
-        "Options passed to the function named in the `trendline` argument.",
+        "Options passed as the first argument to the function from `plotly.express.trendline_functions` ",
+        "named in the `trendline` argument.",
     ],
     trendline_color_override=[
         "str",
         "Valid CSS color.",
-        "If provided, and if `trendline` is set, all trendlines will be drawn in this color.",
+        "If provided, and if `trendline` is set, all trendlines will be drawn in this color rather than in the same color as the traces from which they draw their inputs.",
     ],
     render_mode=[
         "str",

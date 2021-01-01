@@ -2,33 +2,47 @@ import pandas as pd
 import numpy as np
 
 
-def ols(options, x_raw, x, y, x_label, y_label, non_missing):
+def ols(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Ordinary Least Squares trendline function
+
+    Requires `statsmodels` to be installed.
+
+    Valid keys for the `trendline_options` dict are:
+
+    `add_constant` (`bool`, default `True`): if `False`, the trendline passes through
+    the origin but if `True` a y-intercept is fitted.
+
+    `log_x` and `log_y` (`bool`, default `False`): if `True` the OLS is computed with
+    respect to the base 10 logarithm of the input. Note that this means no zeros can
+    be present in the input.
+    """
+
     import statsmodels.api as sm
 
-    add_constant = options.get("add_constant", True)
-    log_x = options.get("log_x", False)
-    log_y = options.get("log_y", False)
+    add_constant = trendline_options.get("add_constant", True)
+    log_x = trendline_options.get("log_x", False)
+    log_y = trendline_options.get("log_y", False)
 
     if log_y:
         if np.any(y == 0):
             raise ValueError(
                 "Can't do OLS trendline with `log_y=True` when `y` contains zeros."
             )
-        y = np.log(y)
-        y_label = "log(%s)" % y_label
+        y = np.log10(y)
+        y_label = "log10(%s)" % y_label
     if log_x:
         if np.any(x == 0):
             raise ValueError(
                 "Can't do OLS trendline with `log_x=True` when `x` contains zeros."
             )
-        x = np.log(x)
-        x_label = "log(%s)" % x_label
+        x = np.log10(x)
+        x_label = "log10(%s)" % x_label
     if add_constant:
         x = sm.add_constant(x)
     fit_results = sm.OLS(y, x, missing="drop").fit()
     y_out = fit_results.predict()
     if log_y:
-        y_out = np.exp(y_out)
+        y_out = np.power(10, y_out)
     hover_header = "<b>OLS trendline</b><br>"
     if len(fit_results.params) == 2:
         hover_header += "%s = %g * %s + %g<br>" % (
@@ -45,22 +59,38 @@ def ols(options, x_raw, x, y, x_label, y_label, non_missing):
     return y_out, hover_header, fit_results
 
 
-def lowess(options, x_raw, x, y, x_label, y_label, non_missing):
+def lowess(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Locally Weighted Scatterplot Smoothing trendline function
+
+    Requires `statsmodels` to be installed.
+
+    Valid keys for the `trendline_options` dict are:
+
+    `frac` (`float`, default `0.6666666`): the `frac` parameter from `statsmodels.api.nonparametric.lowess`
+    """
     import statsmodels.api as sm
 
-    frac = options.get("frac", 0.6666666)
+    frac = trendline_options.get("frac", 0.6666666)
     y_out = sm.nonparametric.lowess(y, x, missing="drop", frac=frac)[:, 1]
     hover_header = "<b>LOWESS trendline</b><br><br>"
     return y_out, hover_header, None
 
 
-def ma(options, x_raw, x, y, x_label, y_label, non_missing):
-    y_out = pd.Series(y, index=x_raw).rolling(**options).mean()[non_missing]
+def ma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Moving Average trendline function
+
+    The `trendline_options` dict is passed as keyword arguments into the `pandas.Series.rolling` function.
+    """
+    y_out = pd.Series(y, index=x_raw).rolling(**trendline_options).mean()[non_missing]
     hover_header = "<b>MA trendline</b><br><br>"
     return y_out, hover_header, None
 
 
-def ewma(options, x_raw, x, y, x_label, y_label, non_missing):
-    y_out = pd.Series(y, index=x_raw).ewm(**options).mean()[non_missing]
+def ewma(trendline_options, x_raw, x, y, x_label, y_label, non_missing):
+    """Exponentially Weighted Moving Average trendline function
+
+    The `trendline_options` dict is passed as keyword arguments into the `pandas.Series.ewma` function.
+    """
+    y_out = pd.Series(y, index=x_raw).ewm(**trendline_options).mean()[non_missing]
     hover_header = "<b>EWMA trendline</b><br><br>"
     return y_out, hover_header, None
