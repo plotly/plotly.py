@@ -4,6 +4,6 @@ from ._json import (
     from_json,
     read_json,
     config,
-    to_plotly_json,
-    from_plotly_json,
+    to_json_plotly,
+    from_json_plotly,
 )
