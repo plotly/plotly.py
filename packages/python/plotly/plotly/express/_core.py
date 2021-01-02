@@ -45,21 +45,34 @@ class PxDefaults(object):
         "width",
         "height",
         "color_discrete_sequence",
+        "color_discrete_map",
         "color_continuous_scale",
         "symbol_sequence",
+        "symbol_map",
         "line_dash_sequence",
+        "line_dash_map",
         "size_max",
+        "category_orders",
+        "labels",
     ]
 
     def __init__(self):
+        self.reset()
+
+    def reset(self):
         self.template = None
         self.width = None
         self.height = None
         self.color_discrete_sequence = None
+        self.color_discrete_map = {}
         self.color_continuous_scale = None
         self.symbol_sequence = None
+        self.symbol_map = {}
         self.line_dash_sequence = None
+        self.line_dash_map = {}
         self.size_max = 20
+        self.category_orders = {}
+        self.labels = {}
 
 
 defaults = PxDefaults()
@@ -136,16 +149,22 @@ def _is_continuous(df, col_name):
 def get_decorated_label(args, column, role):
     label = get_label(args, column)
     if "histfunc" in args and (
-        (role == "x" and "orientation" in args and args["orientation"] == "h")
+        (role == "z")
+        or (role == "x" and "orientation" in args and args["orientation"] == "h")
         or (role == "y" and "orientation" in args and args["orientation"] == "v")
-        or (role == "z")
     ):
         if label:
-            return "%s of %s" % (args["histfunc"] or "count", label)
+            label = "%s of %s" % (args["histfunc"] or "count", label)
         else:
-            return "count"
-    else:
-        return label
+            label = "count"
+
+        if "histnorm" in args and args["histnorm"] is not None:
+            label = "%s of %s" % (args["histnorm"], label)
+
+        if "barnorm" in args and args["barnorm"] is not None:
+            label = "%s (normalized as %s)" % (label, args["barnorm"])
+
+    return label
 
 
 def make_mapping(args, variable):
@@ -251,14 +270,7 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 mapping_labels["%{xaxis.title.text}"] = "%{x}"
                 mapping_labels["%{yaxis.title.text}"] = "%{y}"
 
-        elif (
-            attr_value is not None
-            or (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"])
-            or (
-                trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
-                and attr_name == "z"
-            )
-        ):
+        elif attr_value is not None:
             if attr_name == "size":
                 if "marker" not in trace_patch:
                     trace_patch["marker"] = dict()
@@ -451,13 +463,15 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                 else:
                     trace_patch[attr_name] = trace_data[attr_value]
             else:
-                if attr_value:
-                    trace_patch[attr_name] = trace_data[attr_value]
+                trace_patch[attr_name] = trace_data[attr_value]
                 mapping_labels[attr_label] = "%%{%s}" % attr_name
-    if trace_spec.constructor not in [
-        go.Parcoords,
-        go.Parcats,
-    ]:
+        elif (trace_spec.constructor == go.Histogram and attr_name in ["x", "y"]) or (
+            trace_spec.constructor in [go.Histogram2d, go.Histogram2dContour]
+            and attr_name == "z"
+        ):
+            # ensure that stuff like "count" gets into the hoverlabel
+            mapping_labels[attr_label] = "%%{%s}" % attr_name
+    if trace_spec.constructor not in [go.Parcoords, go.Parcats]:
         # Modify mapping_labels according to hover_data keys
         # if hover_data is a dict
         mapping_labels_copy = OrderedDict(mapping_labels)
@@ -616,33 +630,27 @@ def configure_cartesian_axes(args, fig, orders):
     if "is_timeline" in args:
         fig.update_xaxes(type="date")
 
-    return fig.layout
-
 
 def configure_ternary_axes(args, fig, orders):
-    fig.update_layout(
-        ternary=dict(
-            aaxis=dict(title_text=get_label(args, args["a"])),
-            baxis=dict(title_text=get_label(args, args["b"])),
-            caxis=dict(title_text=get_label(args, args["c"])),
-        )
+    fig.update_ternaries(
+        aaxis=dict(title_text=get_label(args, args["a"])),
+        baxis=dict(title_text=get_label(args, args["b"])),
+        caxis=dict(title_text=get_label(args, args["c"])),
     )
 
 
 def configure_polar_axes(args, fig, orders):
-    layout = dict(
-        polar=dict(
-            angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
-            radialaxis=dict(),
-        )
+    patch = dict(
+        angularaxis=dict(direction=args["direction"], rotation=args["start_angle"]),
+        radialaxis=dict(),
     )
 
     for var, axis in [("r", "radialaxis"), ("theta", "angularaxis")]:
         if args[var] in orders:
-            layout["polar"][axis]["categoryorder"] = "array"
-            layout["polar"][axis]["categoryarray"] = orders[args[var]]
+            patch[axis]["categoryorder"] = "array"
+            patch[axis]["categoryarray"] = orders[args[var]]
 
-    radialaxis = layout["polar"]["radialaxis"]
+    radialaxis = patch["radialaxis"]
     if args["log_r"]:
         radialaxis["type"] = "log"
         if args["range_r"]:
@@ -652,21 +660,19 @@ def configure_polar_axes(args, fig, orders):
             radialaxis["range"] = args["range_r"]
 
     if args["range_theta"]:
-        layout["polar"]["sector"] = args["range_theta"]
-    fig.update(layout=layout)
+        patch["sector"] = args["range_theta"]
+    fig.update_polars(patch)
 
 
 def configure_3d_axes(args, fig, orders):
-    layout = dict(
-        scene=dict(
-            xaxis=dict(title_text=get_label(args, args["x"])),
-            yaxis=dict(title_text=get_label(args, args["y"])),
-            zaxis=dict(title_text=get_label(args, args["z"])),
-        )
+    patch = dict(
+        xaxis=dict(title_text=get_label(args, args["x"])),
+        yaxis=dict(title_text=get_label(args, args["y"])),
+        zaxis=dict(title_text=get_label(args, args["z"])),
     )
 
     for letter in ["x", "y", "z"]:
-        axis = layout["scene"][letter + "axis"]
+        axis = patch[letter + "axis"]
         if args["log_" + letter]:
             axis["type"] = "log"
             if args["range_" + letter]:
@@ -677,7 +683,7 @@ def configure_3d_axes(args, fig, orders):
         if args[letter] in orders:
             axis["categoryorder"] = "array"
             axis["categoryarray"] = orders[args[letter]]
-    fig.update(layout=layout)
+    fig.update_scenes(patch)
 
 
 def configure_mapbox(args, fig, orders):
@@ -687,23 +693,21 @@ def configure_mapbox(args, fig, orders):
             lat=args["data_frame"][args["lat"]].mean(),
             lon=args["data_frame"][args["lon"]].mean(),
         )
-    fig.update_layout(
-        mapbox=dict(
-            accesstoken=MAPBOX_TOKEN,
-            center=center,
-            zoom=args["zoom"],
-            style=args["mapbox_style"],
-        )
+    fig.update_mapboxes(
+        accesstoken=MAPBOX_TOKEN,
+        center=center,
+        zoom=args["zoom"],
+        style=args["mapbox_style"],
     )
 
 
 def configure_geo(args, fig, orders):
-    fig.update_layout(
-        geo=dict(
-            center=args["center"],
-            scope=args["scope"],
-            projection=dict(type=args["projection"]),
-        )
+    fig.update_geos(
+        center=args["center"],
+        scope=args["scope"],
+        fitbounds=args["fitbounds"],
+        visible=args["basemap_visible"],
+        projection=dict(type=args["projection"]),
     )
 
 
@@ -858,11 +862,7 @@ def one_group(x):
 def apply_default_cascade(args):
     # first we apply px.defaults to unspecified args
 
-    for param in (
-        ["color_discrete_sequence", "color_continuous_scale"]
-        + ["symbol_sequence", "line_dash_sequence", "template"]
-        + ["width", "height", "size_max"]
-    ):
+    for param in defaults.__slots__:
         if param in args and args[param] is None:
             args[param] = getattr(defaults, param)
 
@@ -1750,6 +1750,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if "line_shape" in args:
         trace_patch["line"] = dict(shape=args["line_shape"])
 
+    if "geojson" in args:
+        trace_patch["featureidkey"] = args["featureidkey"]
+        trace_patch["geojson"] = (
+            args["geojson"]
+            if not hasattr(args["geojson"], "__geo_interface__")  # for geopandas
+            else args["geojson"].__geo_interface__
+        )
+
     # Compute marginal attribute
     if "marginal" in args:
         position = "marginal_x" if args["orientation"] == "v" else "marginal_y"
@@ -2062,20 +2070,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
 def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_labels):
     # Build subplot specs
-    specs = [[{}] * ncols for _ in range(nrows)]
-    for frame in frame_list:
-        for trace in frame["data"]:
-            row0 = trace._subplot_row - 1
-            col0 = trace._subplot_col - 1
-            if isinstance(trace, go.Splom):
-                # Splom not compatible with make_subplots, treat as domain
-                specs[row0][col0] = {"type": "domain"}
-            else:
-                specs[row0][col0] = {"type": trace.type}
+    specs = [[dict(type=subplot_type or "domain")] * ncols for _ in range(nrows)]
 
     # Default row/column widths uniform
     column_widths = [1.0] * ncols
     row_heights = [1.0] * nrows
+    facet_col_wrap = args.get("facet_col_wrap", 0)
 
     # Build column_widths/row_heights
     if subplot_type == "xy":
@@ -2087,7 +2087,7 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
 
             row_heights = [main_size] * (nrows - 1) + [1 - main_size]
             vertical_spacing = 0.01
-        elif args.get("facet_col_wrap", 0):
+        elif facet_col_wrap:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.07
         else:
             vertical_spacing = args.get("facet_row_spacing", None) or 0.03
@@ -2108,10 +2108,12 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
         #
         # We can customize subplot spacing per type once we enable faceting
         # for all plot types
-        vertical_spacing = 0.1
-        horizontal_spacing = 0.1
+        if facet_col_wrap:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.07
+        else:
+            vertical_spacing = args.get("facet_row_spacing", None) or 0.03
+        horizontal_spacing = args.get("facet_col_spacing", None) or 0.02
 
-    facet_col_wrap = args.get("facet_col_wrap", 0)
     if facet_col_wrap:
         subplot_labels = [None] * nrows * ncols
         while len(col_labels) < nrows * ncols:
@@ -2120,22 +2122,41 @@ def init_figure(args, subplot_type, frame_list, nrows, ncols, col_labels, row_la
             for j in range(ncols):
                 subplot_labels[i * ncols + j] = col_labels[(nrows - 1 - i) * ncols + j]
 
+    def _spacing_error_translator(e, direction, facet_arg):
+        """
+        Translates the spacing errors thrown by the underlying make_subplots
+        routine into one that describes an argument adjustable through px.
+        """
+        if ("%s spacing" % (direction,)) in e.args[0]:
+            e.args = (
+                e.args[0]
+                + """
+Use the {facet_arg} argument to adjust this spacing.""".format(
+                    facet_arg=facet_arg
+                ),
+            )
+            raise e
+
     # Create figure with subplots
-    fig = make_subplots(
-        rows=nrows,
-        cols=ncols,
-        specs=specs,
-        shared_xaxes="all",
-        shared_yaxes="all",
-        row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
-        column_titles=[] if facet_col_wrap else col_labels,
-        subplot_titles=subplot_labels if facet_col_wrap else [],
-        horizontal_spacing=horizontal_spacing,
-        vertical_spacing=vertical_spacing,
-        row_heights=row_heights,
-        column_widths=column_widths,
-        start_cell="bottom-left",
-    )
+    try:
+        fig = make_subplots(
+            rows=nrows,
+            cols=ncols,
+            specs=specs,
+            shared_xaxes="all",
+            shared_yaxes="all",
+            row_titles=[] if facet_col_wrap else list(reversed(row_labels)),
+            column_titles=[] if facet_col_wrap else col_labels,
+            subplot_titles=subplot_labels if facet_col_wrap else [],
+            horizontal_spacing=horizontal_spacing,
+            vertical_spacing=vertical_spacing,
+            row_heights=row_heights,
+            column_widths=column_widths,
+            start_cell="bottom-left",
+        )
+    except ValueError as e:
+        _spacing_error_translator(e, "Horizontal", "facet_col_spacing")
+        _spacing_error_translator(e, "Vertical", "facet_row_spacing")
 
     # Remove explicit font size of row/col titles so template can take over
     for annot in fig.layout.annotations:

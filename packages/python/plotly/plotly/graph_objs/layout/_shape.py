@@ -423,20 +423,26 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def xref(self):
         """
-        Sets the shape's x coordinate axis. If set to an x axis id
-        (e.g. "x" or "x2"), the `x` position refers to an x coordinate.
-        If set to "paper", the `x` position refers to the distance from
-        the left side of the plotting area in normalized coordinates
-        where 0 (1) corresponds to the left (right) side. If the axis
-        `type` is "log", then you must take the log of your desired
-        range. If the axis `type` is "date", then you must convert the
-        date to unix time in milliseconds.
+        Sets the shape's x coordinate axis. If set to a x axis id (e.g.
+        "x" or "x2"), the `x` position refers to a x coordinate. If set
+        to "paper", the `x` position refers to the distance from the
+        left of the plotting area in normalized coordinates where 0 (1)
+        corresponds to the left (right). If set to a x axis ID followed
+        by "domain" (separated by a space), the position behaves like
+        for "paper", but refers to the distance in fractions of the
+        domain length from the left of the domain of that axis: e.g.,
+        *x2 domain* refers to the domain of the second x  axis and a x
+        position of 0.5 refers to the point between the left and the
+        right of the domain of the second x axis. If the axis `type` is
+        "log", then you must take the log of your desired range. If the
+        axis `type` is "date", then you must convert the date to unix
+        time in milliseconds.
     
         The 'xref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -544,17 +550,23 @@ class Shape(_BaseLayoutHierarchyType):
     @property
     def yref(self):
         """
-        Sets the annotation's y coordinate axis. If set to an y axis id
-        (e.g. "y" or "y2"), the `y` position refers to an y coordinate
+        Sets the annotation's y coordinate axis. If set to a y axis id
+        (e.g. "y" or "y2"), the `y` position refers to a y coordinate.
         If set to "paper", the `y` position refers to the distance from
         the bottom of the plotting area in normalized coordinates where
-        0 (1) corresponds to the bottom (top).
+        0 (1) corresponds to the bottom (top). If set to a y axis ID
+        followed by "domain" (separated by a space), the position
+        behaves like for "paper", but refers to the distance in
+        fractions of the domain length from the bottom of the domain of
+        that axis: e.g., *y2 domain* refers to the domain of the second
+        y  axis and a y position of 0.5 refers to the point between the
+        bottom and the top of the domain of the second y axis.
     
         The 'yref' property is an enumeration that may be specified as:
           - One of the following enumeration values:
                 ['paper']
           - A string that matches one of the following regular expressions:
-                ['^y([2-9]|[1-9][0-9]+)?$']
+                ['^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -690,15 +702,22 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `xsizemode` not
             set to "pixel".
         xref
-            Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
+            Sets the shape's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to a x
             coordinate. If set to "paper", the `x` position refers
-            to the distance from the left side of the plotting area
-            in normalized coordinates where 0 (1) corresponds to
-            the left (right) side. If the axis `type` is "log",
-            then you must take the log of your desired range. If
-            the axis `type` is "date", then you must convert the
-            date to unix time in milliseconds.
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", then you must
+            convert the date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -723,12 +742,19 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to an y
+            Sets the annotation's y coordinate axis. If set to a y
             axis id (e.g. "y" or "y2"), the `y` position refers to
-            an y coordinate If set to "paper", the `y` position
+            a y coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top).
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -867,15 +893,22 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `xsizemode` not
             set to "pixel".
         xref
-            Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
+            Sets the shape's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to a x
             coordinate. If set to "paper", the `x` position refers
-            to the distance from the left side of the plotting area
-            in normalized coordinates where 0 (1) corresponds to
-            the left (right) side. If the axis `type` is "log",
-            then you must take the log of your desired range. If
-            the axis `type` is "date", then you must convert the
-            date to unix time in milliseconds.
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", then you must
+            convert the date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -900,12 +933,19 @@ class Shape(_BaseLayoutHierarchyType):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to an y
+            Sets the annotation's y coordinate axis. If set to a y
             axis id (e.g. "y" or "y2"), the `y` position refers to
-            an y coordinate If set to "paper", the `y` position
+            a y coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top).
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`

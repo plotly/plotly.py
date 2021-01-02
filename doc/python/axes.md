@@ -60,18 +60,17 @@ The axis type is auto-detected by looking at data from the first [trace](/python
 
 * First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
 * `multicategory` is just a shape test: is the array nested?
-* `date` and `category`: require **more than twice as many distinct date or category strings** as distinct numbers or numeric strings in order to choose that axis type.
+* `date` and `category`: require **more than twice as many distinct date or category strings as distinct numbers** in order to choose that axis type.
 	* Both of these test an evenly-spaced sample of at most 1000 values
-	* Small detail: the `category` test sorts every value into either number or category, whereas for dates, 2- and 4-digit integers count as both dates and numbers.
 
 
 ### Forcing an axis to be categorical
 
-If you pass string values for the `x` or `y` parameter, plotly will automatically set the corresponding axis type to `category`, *except if enough of these strings contain numbers* as detailed above, in which case the axis is automatically set to `linear`. It is however possible to force the axis type by setting explicitely `xaxis_type` to be `category`.
+It is possible to force the axis type by setting explicitely `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
 
 ```python
 import plotly.express as px
-fig = px.bar(x=[1, 2, 4, 10], y =[8, 6, 11, 5])
+fig = px.bar(x=["a", "a", "b", 3], y = [1,2,3,4])
 fig.update_xaxes(type='category')
 fig.show()
 ```
@@ -122,6 +121,32 @@ import plotly.express as px
 fig = px.bar(df, x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
     labels=dict(x="Fruit", y="Amount", color="Place")
 )
+fig.show()
+```
+
+##### Rotating tick labels in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'axes', width='100%', height=630)
+```
+
+#### Moving Tick Labels Inside the Plot
+
+The `ticklabelposition` attribute moves tick labels inside the plotting area, and modifies the auto-range behaviour to accomodate the labels.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.bar(df, x=df.index, y="GOOG")
+fig.update_yaxes(ticklabelposition="inside top", title=None)
 fig.show()
 ```
 

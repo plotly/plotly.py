@@ -63,6 +63,7 @@ class Layout(_BaseLayoutType):
         "annotationdefaults",
         "annotations",
         "autosize",
+        "autotypenumbers",
         "bargap",
         "bargroupgap",
         "barmode",
@@ -75,6 +76,7 @@ class Layout(_BaseLayoutType):
         "coloraxis",
         "colorscale",
         "colorway",
+        "computed",
         "datarevision",
         "direction",
         "dragmode",
@@ -274,37 +276,78 @@ class Layout(_BaseLayoutType):
                 ax
                     Sets the x component of the arrow tail about
                     the arrow head. If `axref` is `pixel`, a
-                    positive (negative)  component corresponds to
-                    an arrow pointing from right to left (left to
-                    right). If `axref` is an axis, this is an
-                    absolute value on that axis, like `x`, NOT a
-                    relative value.
+                    positive (negative) component corresponds to an
+                    arrow pointing from right to left (left to
+                    right). If `axref` is not `pixel` and is
+                    exactly the same as `xref`, this is an absolute
+                    value on that axis, like `x`, specified in the
+                    same coordinates as `xref`.
                 axref
-                    Indicates in what terms the tail of the
-                    annotation (ax,ay)  is specified. If `pixel`,
-                    `ax` is a relative offset in pixels  from `x`.
-                    If set to an x axis id (e.g. "x" or "x2"), `ax`
-                    is  specified in the same terms as that axis.
-                    This is useful  for trendline annotations which
-                    should continue to indicate  the correct trend
-                    when zoomed.
+                    Indicates in what coordinates the tail of the
+                    annotation (ax,ay) is specified. If set to a ax
+                    axis id (e.g. "ax" or "ax2"), the `ax` position
+                    refers to a ax coordinate. If set to "paper",
+                    the `ax` position refers to the distance from
+                    the left of the plotting area in normalized
+                    coordinates where 0 (1) corresponds to the left
+                    (right). If set to a ax axis ID followed by
+                    "domain" (separated by a space), the position
+                    behaves like for "paper", but refers to the
+                    distance in fractions of the domain length from
+                    the left of the domain of that axis: e.g., *ax2
+                    domain* refers to the domain of the second ax
+                    axis and a ax position of 0.5 refers to the
+                    point between the left and the right of the
+                    domain of the second ax axis. In order for
+                    absolute positioning of the arrow to work,
+                    "axref" must be exactly the same as "xref",
+                    otherwise "axref" will revert to "pixel"
+                    (explained next). For relative positioning,
+                    "axref" can be set to "pixel", in which case
+                    the "ax" value is specified in pixels relative
+                    to "x". Absolute positioning is useful for
+                    trendline annotations which should continue to
+                    indicate the correct trend when zoomed.
+                    Relative positioning is useful for specifying
+                    the text offset for an annotated point.
                 ay
                     Sets the y component of the arrow tail about
                     the arrow head. If `ayref` is `pixel`, a
-                    positive (negative)  component corresponds to
-                    an arrow pointing from bottom to top (top to
-                    bottom). If `ayref` is an axis, this is an
-                    absolute value on that axis, like `y`, NOT a
-                    relative value.
+                    positive (negative) component corresponds to an
+                    arrow pointing from bottom to top (top to
+                    bottom). If `ayref` is not `pixel` and is
+                    exactly the same as `yref`, this is an absolute
+                    value on that axis, like `y`, specified in the
+                    same coordinates as `yref`.
                 ayref
-                    Indicates in what terms the tail of the
-                    annotation (ax,ay)  is specified. If `pixel`,
-                    `ay` is a relative offset in pixels  from `y`.
-                    If set to a y axis id (e.g. "y" or "y2"), `ay`
-                    is  specified in the same terms as that axis.
-                    This is useful  for trendline annotations which
-                    should continue to indicate  the correct trend
-                    when zoomed.
+                    Indicates in what coordinates the tail of the
+                    annotation (ax,ay) is specified. If set to a ay
+                    axis id (e.g. "ay" or "ay2"), the `ay` position
+                    refers to a ay coordinate. If set to "paper",
+                    the `ay` position refers to the distance from
+                    the bottom of the plotting area in normalized
+                    coordinates where 0 (1) corresponds to the
+                    bottom (top). If set to a ay axis ID followed
+                    by "domain" (separated by a space), the
+                    position behaves like for "paper", but refers
+                    to the distance in fractions of the domain
+                    length from the bottom of the domain of that
+                    axis: e.g., *ay2 domain* refers to the domain
+                    of the second ay  axis and a ay position of 0.5
+                    refers to the point between the bottom and the
+                    top of the domain of the second ay axis. In
+                    order for absolute positioning of the arrow to
+                    work, "ayref" must be exactly the same as
+                    "yref", otherwise "ayref" will revert to
+                    "pixel" (explained next). For relative
+                    positioning, "ayref" can be set to "pixel", in
+                    which case the "ay" value is specified in
+                    pixels relative to "y". Absolute positioning is
+                    useful for trendline annotations which should
+                    continue to indicate the correct trend when
+                    zoomed. Relative positioning is useful for
+                    specifying the text offset for an annotated
+                    point.
                 bgcolor
                     Sets the background color of the annotation.
                 bordercolor
@@ -462,12 +505,20 @@ class Layout(_BaseLayoutType):
                     the annotation's `x` value.
                 xref
                     Sets the annotation's x coordinate axis. If set
-                    to an x axis id (e.g. "x" or "x2"), the `x`
-                    position refers to an x coordinate If set to
+                    to a x axis id (e.g. "x" or "x2"), the `x`
+                    position refers to a x coordinate. If set to
                     "paper", the `x` position refers to the
-                    distance from the left side of the plotting
-                    area in normalized coordinates where 0 (1)
-                    corresponds to the left (right) side.
+                    distance from the left of the plotting area in
+                    normalized coordinates where 0 (1) corresponds
+                    to the left (right). If set to a x axis ID
+                    followed by "domain" (separated by a space),
+                    the position behaves like for "paper", but
+                    refers to the distance in fractions of the
+                    domain length from the left of the domain of
+                    that axis: e.g., *x2 domain* refers to the
+                    domain of the second x  axis and a x position
+                    of 0.5 refers to the point between the left and
+                    the right of the domain of the second x axis.
                 xshift
                     Shifts the position of the whole annotation and
                     arrow to the right (positive) or left
@@ -502,12 +553,20 @@ class Layout(_BaseLayoutType):
                     the annotation's `y` value.
                 yref
                     Sets the annotation's y coordinate axis. If set
-                    to an y axis id (e.g. "y" or "y2"), the `y`
-                    position refers to an y coordinate If set to
+                    to a y axis id (e.g. "y" or "y2"), the `y`
+                    position refers to a y coordinate. If set to
                     "paper", the `y` position refers to the
                     distance from the bottom of the plotting area
                     in normalized coordinates where 0 (1)
-                    corresponds to the bottom (top).
+                    corresponds to the bottom (top). If set to a y
+                    axis ID followed by "domain" (separated by a
+                    space), the position behaves like for "paper",
+                    but refers to the distance in fractions of the
+                    domain length from the bottom of the domain of
+                    that axis: e.g., *y2 domain* refers to the
+                    domain of the second y  axis and a y position
+                    of 0.5 refers to the point between the bottom
+                    and the top of the domain of the second y axis.
                 yshift
                     Shifts the position of the whole annotation and
                     arrow up (positive) or down (negative) by this
@@ -573,6 +632,31 @@ class Layout(_BaseLayoutType):
     @autosize.setter
     def autosize(self, val):
         self["autosize"] = val
+
+    # autotypenumbers
+    # ---------------
+    @property
+    def autotypenumbers(self):
+        """
+        Using "strict" a numeric string in trace data is not converted
+        to a number. Using *convert types* a numeric string in trace
+        data may be treated as a number during automatic axis `type`
+        detection. This is the default value; however it could be
+        overridden for individual axes.
+    
+        The 'autotypenumbers' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['convert types', 'strict']
+
+        Returns
+        -------
+        Any
+        """
+        return self["autotypenumbers"]
+
+    @autotypenumbers.setter
+    def autotypenumbers(self, val):
+        self["autotypenumbers"] = val
 
     # bargap
     # ------
@@ -935,6 +1019,27 @@ class Layout(_BaseLayoutType):
     @colorway.setter
     def colorway(self, val):
         self["colorway"] = val
+
+    # computed
+    # --------
+    @property
+    def computed(self):
+        """
+        Placeholder for exporting automargin-impacting values namely
+        `margin.t`, `margin.b`, `margin.l` and `margin.r` in "full-
+        json" mode.
+    
+        The 'computed' property accepts values of any type
+
+        Returns
+        -------
+        Any
+        """
+        return self["computed"]
+
+    @computed.setter
+    def computed(self, val):
+        self["computed"] = val
 
     # datarevision
     # ------------
@@ -1734,12 +1839,16 @@ class Layout(_BaseLayoutType):
                     Sets the image container size horizontally. The
                     image will be sized based on the `position`
                     value. When `xref` is set to `paper`, units are
-                    sized relative to the plot width.
+                    sized relative to the plot width. When `xref`
+                    ends with ` domain`, units are sized relative
+                    to the axis width.
                 sizey
                     Sets the image container size vertically. The
                     image will be sized based on the `position`
                     value. When `yref` is set to `paper`, units are
-                    sized relative to the plot height.
+                    sized relative to the plot height. When `yref`
+                    ends with ` domain`, units are sized relative
+                    to the axis height.
                 sizing
                     Specifies which dimension of the image to
                     constrain.
@@ -1771,11 +1880,19 @@ class Layout(_BaseLayoutType):
                 xref
                     Sets the images's x coordinate axis. If set to
                     a x axis id (e.g. "x" or "x2"), the `x`
-                    position refers to an x data coordinate If set
-                    to "paper", the `x` position refers to the
-                    distance from the left of plot in normalized
-                    coordinates where 0 (1) corresponds to the left
-                    (right).
+                    position refers to a x coordinate. If set to
+                    "paper", the `x` position refers to the
+                    distance from the left of the plotting area in
+                    normalized coordinates where 0 (1) corresponds
+                    to the left (right). If set to a x axis ID
+                    followed by "domain" (separated by a space),
+                    the position behaves like for "paper", but
+                    refers to the distance in fractions of the
+                    domain length from the left of the domain of
+                    that axis: e.g., *x2 domain* refers to the
+                    domain of the second x  axis and a x position
+                    of 0.5 refers to the point between the left and
+                    the right of the domain of the second x axis.
                 y
                     Sets the image's y position. When `yref` is set
                     to `paper`, units are sized relative to the
@@ -1785,11 +1902,19 @@ class Layout(_BaseLayoutType):
                 yref
                     Sets the images's y coordinate axis. If set to
                     a y axis id (e.g. "y" or "y2"), the `y`
-                    position refers to a y data coordinate. If set
-                    to "paper", the `y` position refers to the
-                    distance from the bottom of the plot in
-                    normalized coordinates where 0 (1) corresponds
-                    to the bottom (top).
+                    position refers to a y coordinate. If set to
+                    "paper", the `y` position refers to the
+                    distance from the bottom of the plotting area
+                    in normalized coordinates where 0 (1)
+                    corresponds to the bottom (top). If set to a y
+                    axis ID followed by "domain" (separated by a
+                    space), the position behaves like for "paper",
+                    but refers to the distance in fractions of the
+                    domain length from the bottom of the domain of
+                    that axis: e.g., *y2 domain* refers to the
+                    domain of the second y  axis and a y position
+                    of 0.5 refers to the point between the bottom
+                    and the top of the domain of the second y axis.
 
         Returns
         -------
@@ -1871,6 +1996,9 @@ class Layout(_BaseLayoutType):
                     with their corresponding "trace" attributes or
                     remain "constant" independent of the symbol
                     size on the graph.
+                itemwidth
+                    Sets the width (in px) of the legend item
+                    symbols (the part other than the title.text).
                 orientation
                     Sets the orientation of the legend.
                 title
@@ -2770,17 +2898,25 @@ class Layout(_BaseLayoutType):
                     certain data value. No effect when `xsizemode`
                     not set to "pixel".
                 xref
-                    Sets the shape's x coordinate axis. If set to
-                    an x axis id (e.g. "x" or "x2"), the `x`
-                    position refers to an x coordinate. If set to
-                    "paper", the `x` position refers to the
-                    distance from the left side of the plotting
-                    area in normalized coordinates where 0 (1)
-                    corresponds to the left (right) side. If the
-                    axis `type` is "log", then you must take the
-                    log of your desired range. If the axis `type`
-                    is "date", then you must convert the date to
-                    unix time in milliseconds.
+                    Sets the shape's x coordinate axis. If set to a
+                    x axis id (e.g. "x" or "x2"), the `x` position
+                    refers to a x coordinate. If set to "paper",
+                    the `x` position refers to the distance from
+                    the left of the plotting area in normalized
+                    coordinates where 0 (1) corresponds to the left
+                    (right). If set to a x axis ID followed by
+                    "domain" (separated by a space), the position
+                    behaves like for "paper", but refers to the
+                    distance in fractions of the domain length from
+                    the left of the domain of that axis: e.g., *x2
+                    domain* refers to the domain of the second x
+                    axis and a x position of 0.5 refers to the
+                    point between the left and the right of the
+                    domain of the second x axis. If the axis `type`
+                    is "log", then you must take the log of your
+                    desired range. If the axis `type` is "date",
+                    then you must convert the date to unix time in
+                    milliseconds.
                 xsizemode
                     Sets the shapes's sizing mode along the x axis.
                     If set to "scaled", `x0`, `x1` and x
@@ -2809,12 +2945,20 @@ class Layout(_BaseLayoutType):
                     not set to "pixel".
                 yref
                     Sets the annotation's y coordinate axis. If set
-                    to an y axis id (e.g. "y" or "y2"), the `y`
-                    position refers to an y coordinate If set to
+                    to a y axis id (e.g. "y" or "y2"), the `y`
+                    position refers to a y coordinate. If set to
                     "paper", the `y` position refers to the
                     distance from the bottom of the plotting area
                     in normalized coordinates where 0 (1)
-                    corresponds to the bottom (top).
+                    corresponds to the bottom (top). If set to a y
+                    axis ID followed by "domain" (separated by a
+                    space), the position behaves like for "paper",
+                    but refers to the distance in fractions of the
+                    domain length from the bottom of the domain of
+                    that axis: e.g., *y2 domain* refers to the
+                    domain of the second y  axis and a y position
+                    of 0.5 refers to the point between the bottom
+                    and the top of the domain of the second y axis.
                 ysizemode
                     Sets the shapes's sizing mode along the y axis.
                     If set to "scaled", `y0`, `y1` and y
@@ -3132,7 +3276,7 @@ class Layout(_BaseLayoutType):
     
           - A string containing multiple registered template names, joined on '+'
             characters (e.g. 'template1+template2'). In this case the resulting
-            template is computed by merging together the collection of registered 
+            template is computed by merging together the collection of registered
             templates
 
         Returns
@@ -3762,6 +3906,13 @@ class Layout(_BaseLayoutType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -3805,8 +3956,10 @@ class Layout(_BaseLayoutType):
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines how that
-                    happens: by increasing the "range" (default),
-                    or by decreasing the "domain".
+                    happens: by increasing the "range", or by
+                    decreasing the "domain". Default is "domain"
+                    for axes containing image traces, "range"
+                    otherwise.
                 constraintoward
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
@@ -4109,6 +4262,18 @@ class Layout(_BaseLayoutType):
                     "date" When set to "period", tick labels are
                     drawn in the middle of the period between
                     ticks.
+                ticklabelposition
+                    Determines where tick labels are drawn with
+                    respect to the axis Please note that top or
+                    bottom has no effect on x axes or when
+                    `ticklabelmode` is set to "period". Similarly
+                    left or right has no effect on y axes or when
+                    `ticklabelmode` is set to "period". Has no
+                    effect on "multicategory" axes or when
+                    `tickson` is set to "boundaries". When used on
+                    axes linked by `matches` or `scaleanchor`, no
+                    extra padding for inside labels would be added
+                    by autorange, so that the scales could match.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -4224,6 +4389,13 @@ class Layout(_BaseLayoutType):
                     axis is computed in relation to the input data.
                     See `rangemode` for more info. If `range` is
                     provided, then `autorange` is set to False.
+                autotypenumbers
+                    Using "strict" a numeric string in trace data
+                    is not converted to a number. Using *convert
+                    types* a numeric string in trace data may be
+                    treated as a number during automatic axis
+                    `type` detection. Defaults to
+                    layout.autotypenumbers.
                 calendar
                     Sets the calendar system to use for `range` and
                     `tick0` if this is a date axis. This does not
@@ -4267,8 +4439,10 @@ class Layout(_BaseLayoutType):
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
                     those of the other axis), determines how that
-                    happens: by increasing the "range" (default),
-                    or by decreasing the "domain".
+                    happens: by increasing the "range", or by
+                    decreasing the "domain". Default is "domain"
+                    for axes containing image traces, "range"
+                    otherwise.
                 constraintoward
                     If this axis needs to be compressed (either due
                     to its own `scaleanchor` and `scaleratio` or
@@ -4563,6 +4737,18 @@ class Layout(_BaseLayoutType):
                     "date" When set to "period", tick labels are
                     drawn in the middle of the period between
                     ticks.
+                ticklabelposition
+                    Determines where tick labels are drawn with
+                    respect to the axis Please note that top or
+                    bottom has no effect on x axes or when
+                    `ticklabelmode` is set to "period". Similarly
+                    left or right has no effect on y axes or when
+                    `ticklabelmode` is set to "period". Has no
+                    effect on "multicategory" axes or when
+                    `tickson` is set to "boundaries". When used on
+                    axes linked by `matches` or `scaleanchor`, no
+                    extra padding for inside labels would be added
+                    by autorange, so that the scales could match.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -4677,6 +4863,13 @@ class Layout(_BaseLayoutType):
             each relayout. Note that, regardless of this attribute,
             an undefined layout width or height is always
             initialized on the first call to plot.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. This is the default
+            value; however it could be overridden for individual
+            axes.
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -4742,6 +4935,10 @@ class Layout(_BaseLayoutType):
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
+        computed
+            Placeholder for exporting automargin-impacting values
+            namely `margin.t`, `margin.b`, `margin.l` and
+            `margin.r` in "full-json" mode.
         datarevision
             If provided, a changed value tells `Plotly.react` that
             one or more data arrays has changed. This way you can
@@ -5106,6 +5303,7 @@ class Layout(_BaseLayoutType):
         annotations=None,
         annotationdefaults=None,
         autosize=None,
+        autotypenumbers=None,
         bargap=None,
         bargroupgap=None,
         barmode=None,
@@ -5118,6 +5316,7 @@ class Layout(_BaseLayoutType):
         coloraxis=None,
         colorscale=None,
         colorway=None,
+        computed=None,
         datarevision=None,
         direction=None,
         dragmode=None,
@@ -5216,6 +5415,13 @@ class Layout(_BaseLayoutType):
             each relayout. Note that, regardless of this attribute,
             an undefined layout width or height is always
             initialized on the first call to plot.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. This is the default
+            value; however it could be overridden for individual
+            axes.
         bargap
             Sets the gap (in plot fraction) between bars of
             adjacent location coordinates.
@@ -5281,6 +5487,10 @@ class Layout(_BaseLayoutType):
             instance or dict with compatible properties
         colorway
             Sets the default trace colors.
+        computed
+            Placeholder for exporting automargin-impacting values
+            namely `margin.t`, `margin.b`, `margin.l` and
+            `margin.r` in "full-json" mode.
         datarevision
             If provided, a changed value tells `Plotly.react` that
             one or more data arrays has changed. This way you can
@@ -5652,6 +5862,7 @@ class Layout(_BaseLayoutType):
             "annotationdefaults",
             "annotations",
             "autosize",
+            "autotypenumbers",
             "bargap",
             "bargroupgap",
             "barmode",
@@ -5664,6 +5875,7 @@ class Layout(_BaseLayoutType):
             "coloraxis",
             "colorscale",
             "colorway",
+            "computed",
             "datarevision",
             "direction",
             "dragmode",
@@ -5776,6 +5988,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = autosize if autosize is not None else _v
         if _v is not None:
             self["autosize"] = _v
+        _v = arg.pop("autotypenumbers", None)
+        _v = autotypenumbers if autotypenumbers is not None else _v
+        if _v is not None:
+            self["autotypenumbers"] = _v
         _v = arg.pop("bargap", None)
         _v = bargap if bargap is not None else _v
         if _v is not None:
@@ -5824,6 +6040,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = colorway if colorway is not None else _v
         if _v is not None:
             self["colorway"] = _v
+        _v = arg.pop("computed", None)
+        _v = computed if computed is not None else _v
+        if _v is not None:
+            self["computed"] = _v
         _v = arg.pop("datarevision", None)
         _v = datarevision if datarevision is not None else _v
         if _v is not None:

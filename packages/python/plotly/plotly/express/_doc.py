@@ -475,9 +475,11 @@ docs = dict(
         "If `True`, an extra line segment is drawn between the first and last point.",
     ],
     line_shape=["str (default `'linear'`)", "One of `'linear'` or `'spline'`."],
+    fitbounds=["str (default `False`).", "One of `False`, `locations` or `geojson`."],
+    basemap_visible=["bool", "Force the basemap visibility."],
     scope=[
         "str (default `'world'`).",
-        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, or `'south america'`)"
+        "One of `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, or `'south america'`"
         "Default is `'world'` unless `projection` is set to `'albers usa'`, which forces `'usa'`.",
     ],
     projection=[

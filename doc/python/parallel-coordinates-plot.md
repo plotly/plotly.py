@@ -173,4 +173,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/parcoords/ for more information and chart attribute options!
+See [function reference for `px.(parallel_coordinates)`](https://plotly.com/python-api-reference/generated/plotly.express.parallel_coordinates) or https://plotly.com/python/reference/parcoords/ for more information and chart attribute options!

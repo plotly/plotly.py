@@ -55,6 +55,7 @@ if sys.version_info < (3, 7):
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
     from ._backgroundcolor import BackgroundcolorValidator
+    from ._autotypenumbers import AutotypenumbersValidator
     from ._autorange import AutorangeValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -117,6 +118,7 @@ else:
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
             "._backgroundcolor.BackgroundcolorValidator",
+            "._autotypenumbers.AutotypenumbersValidator",
             "._autorange.AutorangeValidator",
         ],
     )

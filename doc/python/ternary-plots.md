@@ -126,4 +126,4 @@ fig.show()
 ```
 
 #### Reference
-See https://plotly.com/python/reference/scatterternary/ for more information and chart attribute options!
+See [function reference for `px.(scatter_ternary)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_ternary) or https://plotly.com/python/reference/scatterternary/ for more information and chart attribute options!

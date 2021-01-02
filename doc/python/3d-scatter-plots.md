@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.1'
-      jupytext_version: 1.1.1
+      format_version: '1.2'
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.6
   plotly:
     description: How to make 3D scatter plots in Python with Plotly.
     display_as: 3d_charts
@@ -70,6 +70,19 @@ fig = px.scatter_3d(df, x='sepal_length', y='sepal_width', z='petal_width',
 
 # tight layout
 fig.update_layout(margin=dict(l=0, r=0, b=0, t=0))
+```
+
+#### 3d scatter plots in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + '3d-scatter-plots', width='100%', height=630)
 ```
 
 ### 3D Scatter Plot with go.Scatter3d
@@ -122,4 +135,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/scatter3d/ for more information and chart attribute options!
+See [function reference for `px.scatter_3d()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_3d) or https://plotly.com/python/reference/scatter3d/ for more information and chart attribute options!

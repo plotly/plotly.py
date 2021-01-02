@@ -40,6 +40,9 @@ class LegendValidator(_plotly_utils.basevalidators.CompoundValidator):
                 with their corresponding "trace" attributes or
                 remain "constant" independent of the symbol
                 size on the graph.
+            itemwidth
+                Sets the width (in px) of the legend item
+                symbols (the part other than the title.text).
             orientation
                 Sets the orientation of the legend.
             title

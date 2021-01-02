@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make a Mapbox Choropleth Map of US Counties in Python with
       Plotly.
@@ -157,6 +157,29 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
+### Using GeoPandas Data Frames
+
+`px.choropleth_mapbox` accepts the `geometry` of a [GeoPandas](https://geopandas.org/) data frame as the input to `geojson` if the `geometry` contains polygons.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+df = px.data.election()
+geo_df = gpd.GeoDataFrame.from_features(
+    px.data.election_geojson()["features"]
+).merge(df, on="district").set_index("district")
+
+fig = px.choropleth_mapbox(geo_df,
+                           geojson=geo_df.geometry,
+                           locations=geo_df.index,
+                           color="Joly",
+                           center={"lat": 45.5517, "lon": -73.7073},
+                           mapbox_style="open-street-map",
+                           zoom=8.5)
+fig.show()
+```
+
 ### Choropleth map using plotly.graph_objects and carto base map (no token needed)
 
 If Plotly Express does not provide a good starting point, it is also possible to use [the more generic `go.Choroplethmapbox` class from `plotly.graph_objects`](/python/graph-objects/).
@@ -209,4 +232,5 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.
+See [function reference for `px.(choropleth_mapbox)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth_mapbox) or https://plotly.com/python/reference/choroplethmapbox/ for more information about mapbox and their attribute options.
+

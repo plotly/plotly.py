@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: How to style markers in Python with Plotly.
     display_as: file_settings
@@ -106,6 +106,19 @@ fig.show()
 ```
 
 Fully opaque, the default setting, is useful for non-overlapping markers. When many points overlap it can be hard to observe density.
+
+
+### Control Marker Border with Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'marker-style', width='100%', height=630)
+```
 
 ### Opacity
 
@@ -309,7 +322,7 @@ fig.show()
 
 The `marker_symbol` attribute allows you to choose from a wide array of symbols to represent markers in your figures.
 
-The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`. 
+The basic symbols are: `circle`, `square`, `diamond`, `cross`, `x`, `triangle`, `pentagon`, `hexagram`, `star`, `diamond`, `hourglass`, `bowtie`, `asterisk`, `hash`, `y`, and `line`.
 
 Each basic symbol is also represented by a number. Adding 100 to that number is equivalent to appending the suffix "-open" to a symbol name. Adding 200 is equivalent to appending "-dot" to a symbol name. Adding 300 is equivalent to appending "-open-dot" or "dot-open" to a symbol name.
 
@@ -328,13 +341,13 @@ for i in range(0,len(raw_symbols),3):
     symbols.append(raw_symbols[i])
     namestems.append(name.replace("-open", "").replace("-dot", ""))
     namevariants.append(name[len(namestems[-1]):])
-    
+
 fig = go.Figure(go.Scatter(mode="markers", x=namevariants, y=namestems, marker_symbol=symbols,
-                           marker_line_color="midnightblue", marker_color="lightskyblue", 
-                           marker_line_width=2, marker_size=15, 
+                           marker_line_color="midnightblue", marker_color="lightskyblue",
+                           marker_line_width=2, marker_size=15,
                            hovertemplate="name: %{y}%{x}<br>number: %{marker.symbol}<extra></extra>"))
 fig.update_layout(title="Mouse over symbols for name & number!",
-                  xaxis_range=[-1,4], yaxis_range=[len(set(namestems)),-1], 
+                  xaxis_range=[-1,4], yaxis_range=[len(set(namestems)),-1],
                   margin=dict(b=0,r=0), xaxis_side="top", height=1400, width=400)
 fig.show()
 ```

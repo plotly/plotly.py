@@ -290,3 +290,6 @@ fig.update_layout(title=title,
 
 fig.show()
 ```
+#### Reference
+
+See [function reference for `px.scatter_matrix()`](https://plotly.com/python-api-reference/generated/plotly.express.scatter_matrix) or https://plotly.com/python/reference/splom/ for more information and chart attribute options!

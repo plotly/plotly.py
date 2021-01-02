@@ -19,6 +19,7 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
+    from ._ticklabelposition import TicklabelpositionValidator
     from ._ticklabelmode import TicklabelmodeValidator
     from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
@@ -73,6 +74,7 @@ if sys.version_info < (3, 7):
     from ._categoryarraysrc import CategoryarraysrcValidator
     from ._categoryarray import CategoryarrayValidator
     from ._calendar import CalendarValidator
+    from ._autotypenumbers import AutotypenumbersValidator
     from ._autorange import AutorangeValidator
     from ._automargin import AutomarginValidator
     from ._anchor import AnchorValidator
@@ -101,6 +103,7 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
+            "._ticklabelposition.TicklabelpositionValidator",
             "._ticklabelmode.TicklabelmodeValidator",
             "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
@@ -155,6 +158,7 @@ else:
             "._categoryarraysrc.CategoryarraysrcValidator",
             "._categoryarray.CategoryarrayValidator",
             "._calendar.CalendarValidator",
+            "._autotypenumbers.AutotypenumbersValidator",
             "._autorange.AutorangeValidator",
             "._automargin.AutomarginValidator",
             "._anchor.AnchorValidator",

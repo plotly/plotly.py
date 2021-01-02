@@ -33,37 +33,78 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
             ax
                 Sets the x component of the arrow tail about
                 the arrow head. If `axref` is `pixel`, a
-                positive (negative)  component corresponds to
-                an arrow pointing from right to left (left to
-                right). If `axref` is an axis, this is an
-                absolute value on that axis, like `x`, NOT a
-                relative value.
+                positive (negative) component corresponds to an
+                arrow pointing from right to left (left to
+                right). If `axref` is not `pixel` and is
+                exactly the same as `xref`, this is an absolute
+                value on that axis, like `x`, specified in the
+                same coordinates as `xref`.
             axref
-                Indicates in what terms the tail of the
-                annotation (ax,ay)  is specified. If `pixel`,
-                `ax` is a relative offset in pixels  from `x`.
-                If set to an x axis id (e.g. "x" or "x2"), `ax`
-                is  specified in the same terms as that axis.
-                This is useful  for trendline annotations which
-                should continue to indicate  the correct trend
-                when zoomed.
+                Indicates in what coordinates the tail of the
+                annotation (ax,ay) is specified. If set to a ax
+                axis id (e.g. "ax" or "ax2"), the `ax` position
+                refers to a ax coordinate. If set to "paper",
+                the `ax` position refers to the distance from
+                the left of the plotting area in normalized
+                coordinates where 0 (1) corresponds to the left
+                (right). If set to a ax axis ID followed by
+                "domain" (separated by a space), the position
+                behaves like for "paper", but refers to the
+                distance in fractions of the domain length from
+                the left of the domain of that axis: e.g., *ax2
+                domain* refers to the domain of the second ax
+                axis and a ax position of 0.5 refers to the
+                point between the left and the right of the
+                domain of the second ax axis. In order for
+                absolute positioning of the arrow to work,
+                "axref" must be exactly the same as "xref",
+                otherwise "axref" will revert to "pixel"
+                (explained next). For relative positioning,
+                "axref" can be set to "pixel", in which case
+                the "ax" value is specified in pixels relative
+                to "x". Absolute positioning is useful for
+                trendline annotations which should continue to
+                indicate the correct trend when zoomed.
+                Relative positioning is useful for specifying
+                the text offset for an annotated point.
             ay
                 Sets the y component of the arrow tail about
                 the arrow head. If `ayref` is `pixel`, a
-                positive (negative)  component corresponds to
-                an arrow pointing from bottom to top (top to
-                bottom). If `ayref` is an axis, this is an
-                absolute value on that axis, like `y`, NOT a
-                relative value.
+                positive (negative) component corresponds to an
+                arrow pointing from bottom to top (top to
+                bottom). If `ayref` is not `pixel` and is
+                exactly the same as `yref`, this is an absolute
+                value on that axis, like `y`, specified in the
+                same coordinates as `yref`.
             ayref
-                Indicates in what terms the tail of the
-                annotation (ax,ay)  is specified. If `pixel`,
-                `ay` is a relative offset in pixels  from `y`.
-                If set to a y axis id (e.g. "y" or "y2"), `ay`
-                is  specified in the same terms as that axis.
-                This is useful  for trendline annotations which
-                should continue to indicate  the correct trend
-                when zoomed.
+                Indicates in what coordinates the tail of the
+                annotation (ax,ay) is specified. If set to a ay
+                axis id (e.g. "ay" or "ay2"), the `ay` position
+                refers to a ay coordinate. If set to "paper",
+                the `ay` position refers to the distance from
+                the bottom of the plotting area in normalized
+                coordinates where 0 (1) corresponds to the
+                bottom (top). If set to a ay axis ID followed
+                by "domain" (separated by a space), the
+                position behaves like for "paper", but refers
+                to the distance in fractions of the domain
+                length from the bottom of the domain of that
+                axis: e.g., *ay2 domain* refers to the domain
+                of the second ay  axis and a ay position of 0.5
+                refers to the point between the bottom and the
+                top of the domain of the second ay axis. In
+                order for absolute positioning of the arrow to
+                work, "ayref" must be exactly the same as
+                "yref", otherwise "ayref" will revert to
+                "pixel" (explained next). For relative
+                positioning, "ayref" can be set to "pixel", in
+                which case the "ay" value is specified in
+                pixels relative to "y". Absolute positioning is
+                useful for trendline annotations which should
+                continue to indicate the correct trend when
+                zoomed. Relative positioning is useful for
+                specifying the text offset for an annotated
+                point.
             bgcolor
                 Sets the background color of the annotation.
             bordercolor
@@ -221,12 +262,20 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 the annotation's `x` value.
             xref
                 Sets the annotation's x coordinate axis. If set
-                to an x axis id (e.g. "x" or "x2"), the `x`
-                position refers to an x coordinate If set to
+                to a x axis id (e.g. "x" or "x2"), the `x`
+                position refers to a x coordinate. If set to
                 "paper", the `x` position refers to the
-                distance from the left side of the plotting
-                area in normalized coordinates where 0 (1)
-                corresponds to the left (right) side.
+                distance from the left of the plotting area in
+                normalized coordinates where 0 (1) corresponds
+                to the left (right). If set to a x axis ID
+                followed by "domain" (separated by a space),
+                the position behaves like for "paper", but
+                refers to the distance in fractions of the
+                domain length from the left of the domain of
+                that axis: e.g., *x2 domain* refers to the
+                domain of the second x  axis and a x position
+                of 0.5 refers to the point between the left and
+                the right of the domain of the second x axis.
             xshift
                 Shifts the position of the whole annotation and
                 arrow to the right (positive) or left
@@ -261,12 +310,20 @@ class AnnotationsValidator(_plotly_utils.basevalidators.CompoundArrayValidator):
                 the annotation's `y` value.
             yref
                 Sets the annotation's y coordinate axis. If set
-                to an y axis id (e.g. "y" or "y2"), the `y`
-                position refers to an y coordinate If set to
+                to a y axis id (e.g. "y" or "y2"), the `y`
+                position refers to a y coordinate. If set to
                 "paper", the `y` position refers to the
                 distance from the bottom of the plotting area
                 in normalized coordinates where 0 (1)
-                corresponds to the bottom (top).
+                corresponds to the bottom (top). If set to a y
+                axis ID followed by "domain" (separated by a
+                space), the position behaves like for "paper",
+                but refers to the distance in fractions of the
+                domain length from the bottom of the domain of
+                that axis: e.g., *y2 domain* refers to the
+                domain of the second y  axis and a y position
+                of 0.5 refers to the point between the bottom
+                and the top of the domain of the second y axis.
             yshift
                 Shifts the position of the whole annotation and
                 arrow up (positive) or down (negative) by this

@@ -37,6 +37,7 @@ class Treemap(_BaseTraceType):
         "parents",
         "parentssrc",
         "pathbar",
+        "root",
         "sort",
         "stream",
         "text",
@@ -943,6 +944,34 @@ class Treemap(_BaseTraceType):
     def pathbar(self, val):
         self["pathbar"] = val
 
+    # root
+    # ----
+    @property
+    def root(self):
+        """
+        The 'root' property is an instance of Root
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.treemap.Root`
+          - A dict of string/value properties that will be passed
+            to the Root constructor
+    
+            Supported dict properties:
+                
+                color
+                    sets the color of the root node for a sunburst
+                    or a treemap trace. this has no effect when a
+                    colorscale is used to set the markers.
+
+        Returns
+        -------
+        plotly.graph_objs.treemap.Root
+        """
+        return self["root"]
+
+    @root.setter
+    def root(self, val):
+        self["root"] = val
+
     # sort
     # ----
     @property
@@ -1517,6 +1546,9 @@ class Treemap(_BaseTraceType):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        root
+            :class:`plotly.graph_objects.treemap.Root` instance or
+            dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -1628,6 +1660,7 @@ class Treemap(_BaseTraceType):
         parents=None,
         parentssrc=None,
         pathbar=None,
+        root=None,
         sort=None,
         stream=None,
         text=None,
@@ -1796,6 +1829,9 @@ class Treemap(_BaseTraceType):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        root
+            :class:`plotly.graph_objects.treemap.Root` instance or
+            dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -2020,6 +2056,10 @@ an instance of :class:`plotly.graph_objs.Treemap`"""
         _v = pathbar if pathbar is not None else _v
         if _v is not None:
             self["pathbar"] = _v
+        _v = arg.pop("root", None)
+        _v = root if root is not None else _v
+        if _v is not None:
+            self["root"] = _v
         _v = arg.pop("sort", None)
         _v = sort if sort is not None else _v
         if _v is not None:

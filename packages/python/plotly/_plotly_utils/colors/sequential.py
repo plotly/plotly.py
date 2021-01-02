@@ -5,7 +5,7 @@ can be helpful to use a `plotly.colors.diverging` or \
 mostly meant to be passed in as the `color_continuous_scale` argument to various functions.
 """
 
-from ._swatches import _swatches
+from ._swatches import _swatches, _swatches_continuous
 
 
 def swatches(template=None):
@@ -13,6 +13,13 @@ def swatches(template=None):
 
 
 swatches.__doc__ = _swatches.__doc__
+
+
+def swatches_continuous(template=None):
+    return _swatches_continuous(__name__, globals(), template)
+
+
+swatches_continuous.__doc__ = _swatches_continuous.__doc__
 
 Plotly3 = [
     "#0508b8",
@@ -91,7 +98,23 @@ Plasma = [
     "#fdca26",
     "#f0f921",
 ]
-
+Turbo = [
+    "#30123b",
+    "#4145ab",
+    "#4675ed",
+    "#39a2fc",
+    "#1bcfd4",
+    "#24eca6",
+    "#61fc6c",
+    "#a4fc3b",
+    "#d1e834",
+    "#f3c63a",
+    "#fe9b2d",
+    "#f36315",
+    "#d93806",
+    "#b11901",
+    "#7a0402",
+]
 from .plotlyjs import Blackbody, Bluered, Electric, Hot, Jet, Rainbow  # noqa: F401
 
 from .colorbrewer import (  # noqa: F401
@@ -159,7 +182,7 @@ from .carto import (  # noqa: F401
 # Prefix variable names with _ so that they will not be added to the swatches
 _contents = dict(globals())
 for _k, _cols in _contents.items():
-    if _k.startswith("_") or _k == "swatches" or _k.endswith("_r"):
+    if _k.startswith("_") or _k.startswith("swatches") or _k.endswith("_r"):
         continue
     globals()[_k + "_r"] = _cols[::-1]
 

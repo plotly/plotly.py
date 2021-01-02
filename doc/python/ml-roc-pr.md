@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.4.2
+      format_version: '1.1'
+      jupytext_version: 1.1.1
   kernelspec:
     display_name: Python 3
     language: python
@@ -142,12 +142,14 @@ df.loc[samples.index, 'species'] = samples.values
 # Define the inputs and outputs
 X = df.drop(columns=['species', 'species_id'])
 y = df['species']
-y_onehot = pd.get_dummies(y, columns=model.classes_)
 
 # Fit the model
 model = LogisticRegression(max_iter=200)
 model.fit(X, y)
 y_scores = model.predict_proba(X)
+
+# One hot encode the labels in order to plot them
+y_onehot = pd.get_dummies(y, columns=model.classes_)
 
 # Create an empty figure, and iteratively add new lines
 # every time we compute a new class

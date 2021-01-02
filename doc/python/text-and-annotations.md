@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.6
   plotly:
     description: How to add text labels and annotations to plots in python.
     display_as: file_settings
@@ -32,7 +32,20 @@ jupyter:
     thumbnail: thumbnail/text-and-annotations.png
 ---
 
-### Text scatter plot with Plotly Express
+### Adding Text to Figures
+
+As a general rule, there are two ways to add text labels to figures:
+1. Certain trace types, notably in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc), support a `text` attribute, and can be displayed with or without markers.
+2. Standalone text annotations can be added to figures using `fig.add_annotation()`, with or without arrows, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d or 3d cartesian subplots i.e. in data coordinates.
+
+The differences between these two approaches are that:
+* Traces can optionally support hover labels and can appear in legends.
+* Text annotations can be positioned absolutely or relative to data coordinates in 2d/3d cartesian subplots only.
+* Traces cannot be positioned absolutely but can be positioned relative to data coordinates in any subplot type.
+* Traces also be used to [draw shapes](/python/shapes/), although there is a [shape equivalent to text annotations](/python/shapes/).
+
+
+### Text on scatter plots with Plotly Express
 
 Here is an example that creates a scatter plot with text labels using Plotly Express.
 
@@ -53,7 +66,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adding Text to Data in Line and Scatter Plots
+### Text on scatter plots with Graph Objects
 
 ```python
 import plotly.graph_objects as go
@@ -88,6 +101,19 @@ fig.add_trace(go.Scatter(
 ))
 
 fig.show()
+```
+
+### Text positioning in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'text-and-annotations', width='100%', height=630)
 ```
 
 ### Controlling text fontsize with uniformtext
@@ -127,65 +153,9 @@ fig.update_traces(textposition='inside', textfont_size=14)
 fig.show()
 ```
 
-### Adding Hover Text to Data in Line and Scatter Plots
+### Text Annotations
 
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2],
-    y=[1, 3, 2],
-    mode="markers",
-    hovertext=["Text A", "Text B", "Text C"]
-))
-
-fig.update_layout(title_text="Hover over the points to see the text")
-
-fig.show()
-```
-
-### Simple Annotation
-
-Annotations can be added to a figure using `fig.update_layout(annotations=[...])` or `fig.add_annotation`.
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 1, 3, 2, 4, 3, 4, 6, 5]
-))
-
-fig.add_trace(go.Scatter(
-    x=[0, 1, 2, 3, 4, 5, 6, 7, 8],
-    y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
-))
-
-fig.update_layout(
-    showlegend=False,
-    annotations=[
-        dict(
-            x=2,
-            y=5,
-            xref="x",
-            yref="y",
-            text="dict Text",
-            showarrow=True,
-            arrowhead=7,
-            ax=0,
-            ay=-40
-        )
-    ]
-)
-
-fig.show()
-```
-
-### Multiple Annotations
+Annotations can be added to a figure using `fig.add_annotation()`.
 
 ```python
 import plotly.graph_objects as go
@@ -203,22 +173,14 @@ fig.add_trace(go.Scatter(
     y=[0, 4, 5, 1, 2, 2, 3, 4, 2]
 ))
 
-fig.add_annotation(
-            x=2,
-            y=5,
-            text="dict Text")
-fig.add_annotation(
-            x=4,
-            y=4,
-            text="dict Text 2")
-fig.update_annotations(dict(
-            xref="x",
-            yref="y",
+fig.add_annotation(x=2, y=5,
+            text="Text annotation with arrow",
             showarrow=True,
-            arrowhead=7,
-            ax=0,
-            ay=-40
-))
+            arrowhead=1)
+fig.add_annotation(x=4, y=4,
+            text="Text annotation without arrow",
+            showarrow=False,
+            yshift=10)
 
 fig.update_layout(showlegend=False)
 
@@ -240,45 +202,12 @@ fig.add_trace(go.Scatter3d(
 ))
 
 fig.update_layout(
-    xaxis=dict(title_text="x"),
-    yaxis=dict(title_text="y"),
     scene=dict(
-        aspectratio=dict(
-            x=1,
-            y=1,
-            z=1
-        ),
-        camera=dict(
-            center=dict(
-                x=0,
-                y=0,
-                z=0
-            ),
-            eye=dict(
-                x=1.96903462608,
-                y=-1.09022831971,
-                z=0.405345349304
-            ),
-            up=dict(
-                x=0,
-                y=0,
-                z=1
-            )
-        ),
-        dragmode="turntable",
-        xaxis=dict(
-            title_text="",
-            type="date"
-        ),
-        yaxis=dict(
-            title_text="",
-            type="category"
-        ),
-        zaxis=dict(
-            title_text="",
-            type="log"
-        ),
-        annotations=[dict(
+        xaxis=dict(type="date"),
+        yaxis=dict(type="category"),
+        zaxis=dict(type="log"),
+        annotations=[
+        dict(
             showarrow=False,
             x="2017-01-01",
             y="A",
@@ -286,8 +215,8 @@ fig.update_layout(
             text="Point 1",
             xanchor="left",
             xshift=10,
-            opacity=0.7
-        ), dict(
+            opacity=0.7),
+        dict(
             x="2017-02-10",
             y="B",
             z=4,
@@ -302,8 +231,8 @@ fig.update_layout(
             arrowcolor="black",
             arrowsize=3,
             arrowwidth=1,
-            arrowhead=1
-        ), dict(
+            arrowhead=1),
+        dict(
             x="2017-03-20",
             y="C",
             z=5,
@@ -407,23 +336,6 @@ fig.update_layout(showlegend=False)
 fig.show()
 ```
 
-### Disabling Hover Text
-
-```python
-import plotly.graph_objects as go
-
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3, ],
-    y=[10, 30, 15],
-    name="first trace",
-    hoverinfo="none"
-))
-
-fig.show()
-```
-
 ### Text Font as an Array - Styling Each Text Element
 
 ```python
@@ -479,56 +391,83 @@ fig.update_layout(
 fig.show()
 ```
 
-### Adding Annotations with xref and yref as Paper
+### Positioning Text Annotations Absolutely
+
+By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be intepreted in [paper coordinates](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
+
+Try panning or zooming in the following figure:
 
 ```python
+import plotly.express as px
+
+fig = px.scatter(x=[1, 2, 3], y=[1, 2, 3], title="Try panning or zooming!")
+
+fig.add_annotation(text="Absolutely-positioned annotation",
+                  xref="paper", yref="paper",
+                  x=0.3, y=0.3, showarrow=False)
+
+fig.show()
+```
+
+### Adding Annotations Referenced to an Axis
+
+To place annotations relative to the length or height of an axis, the string
+`' domain'` can be added after the axis reference in the `xref` or `yref` fields.
+For example:
+
+```python
+import plotly.express as px
 import plotly.graph_objects as go
 
-fig = go.Figure()
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
 
-fig.add_trace(go.Scatter(
-    x=[1, 2, 3],
-    y=[1, 2, 3],
-    name="y",
-))
+# Set a custom domain to see how the ' domain' string changes the behaviour
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
 
-fig.update_layout(
-    annotations=[
-        dict(
-            x=0.5,
-            y=-0.15,
-            showarrow=False,
-            text="Custom x-axis title",
-            xref="paper",
-            yref="paper"
-        ),
-        dict(
-            x=-0.07,
-            y=0.5,
-            showarrow=False,
-            text="Custom y-axis title",
-            textangle=-90,
-            xref="paper",
-            yref="paper"
-        )
-    ],
-    autosize=True,
-    margin=dict(
-        b=100
-    ),
-    title_text="Plot Title",
-    xaxis=dict(
-        autorange=False,
-        range=[-0.05674507980728292, -0.0527310420933204],
-        type="linear"
-    ),
-    yaxis=dict(
-        autorange=False,
-        range=[1.2876210047544652, 1.2977732997811402],
-        type="linear"
-    ),
-    height=550,
-    width=1137
+fig.add_annotation(
+    xref="x domain",
+    yref="y domain",
+    # The arrow head will be 25% along the x axis, starting from the left
+    x=0.25,
+    # The arrow head will be 40% along the y axis, starting from the bottom
+    y=0.4,
+    text="An annotation referencing the axes",
+    arrowhead=2,
+)
+
+fig.show()
+```
+
+### Specifying the Text's Position Absolutely
+
+The text coordinates / dimensions of the arrow can be specified absolutely, as
+long as they use exactly the same coordinate system as the arrowhead. For
+example:
+
+```python
+import plotly.express as px
+import plotly.graph_objects as go
+
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
+fig.add_annotation(
+    xref="x domain",
+    yref="y",
+    x=0.75,
+    y=1,
+    text="An annotation whose text and arrowhead reference the axes and the data",
+    # If axref is exactly the same as xref, then the text's position is
+    # absolute and specified in the same coordinates as xref.
+    axref="x domain",
+    # The same is the case for yref and ayref, but here the coordinates are data
+    # coordinates
+    ayref="y",
+    ax=0.5,
+    ay=2,
+    arrowhead=2,
 )
 
 fig.show()

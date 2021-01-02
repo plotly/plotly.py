@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 from unittest import TestCase
+import pytest
 from plotly.graph_objs import (
     Annotation,
     Annotations,
@@ -1924,3 +1925,90 @@ class TestMakeSubplots(TestCase):
         expected.update_traces(uid=None)
 
         self.assertEqual(fig.to_plotly_json(), expected.to_plotly_json())
+
+    def test_if_passed_figure(self):
+        # assert it returns the same figure it was passed
+        fig = Figure()
+        figsp = subplots.make_subplots(2, 2, figure=fig)
+        assert id(fig) == id(figsp)
+        # assert the layout is the same when it returns its own figure
+        fig2sp = subplots.make_subplots(2, 2)
+        assert id(fig2sp) != id(figsp)
+        assert fig2sp.layout == figsp.layout
+
+
+def test_make_subplots_spacing_error():
+    # check exception describing maximum value for horizontal_spacing or
+    # vertical_spacing is raised when spacing exceeds that value
+    for match in [
+        (
+            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            % ("Vertical", "rows", 1.0 / 50.0)
+        ).replace(".", "\."),
+        "The resulting plot would have 51 rows \(rows=51\)\.$",
+    ]:
+        with pytest.raises(
+            ValueError, match=match,
+        ):
+            fig = subplots.make_subplots(51, 1, vertical_spacing=0.0201)
+    for match in [
+        (
+            "^%s spacing cannot be greater than \(1 / \(%s - 1\)\) = %f."
+            % ("Horizontal", "cols", 1.0 / 50.0)
+        ).replace(".", "\."),
+        "The resulting plot would have 51 columns \(cols=51\)\.$",
+    ]:
+        with pytest.raises(
+            ValueError, match=match,
+        ):
+            fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0201)
+    # Check it's not raised when it's not beyond the maximum
+    try:
+        fig = subplots.make_subplots(51, 1, vertical_spacing=0.0200)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    try:
+        fig = subplots.make_subplots(1, 51, horizontal_spacing=0.0200)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
+    try:
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=0)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    try:
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=1)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
+    try:
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=0)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    # make sure any value between 0 and 1 works for horizontal_spacing if cols is 1
+    try:
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=1)
+    except ValueError:
+        # This shouldn't happen so we assert False to force failure
+        assert False
+    with pytest.raises(
+        ValueError, match="^Horizontal spacing must be between 0 and 1\.$"
+    ):
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=-0.01)
+    with pytest.raises(
+        ValueError, match="^Horizontal spacing must be between 0 and 1\.$"
+    ):
+        fig = subplots.make_subplots(1, 1, horizontal_spacing=1.01)
+    with pytest.raises(
+        ValueError, match="^Vertical spacing must be between 0 and 1\.$"
+    ):
+        fig = subplots.make_subplots(1, 1, vertical_spacing=-0.01)
+    with pytest.raises(
+        ValueError, match="^Vertical spacing must be between 0 and 1\.$"
+    ):
+        fig = subplots.make_subplots(1, 1, vertical_spacing=1.01)

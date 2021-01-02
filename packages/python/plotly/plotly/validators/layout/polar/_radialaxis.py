@@ -22,6 +22,13 @@ class RadialaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis is computed in relation to the input data.
                 See `rangemode` for more info. If `range` is
                 provided, then `autorange` is set to False.
+            autotypenumbers
+                Using "strict" a numeric string in trace data
+                is not converted to a number. Using *convert
+                types* a numeric string in trace data may be
+                treated as a number during automatic axis
+                `type` detection. Defaults to
+                layout.autotypenumbers.
             calendar
                 Sets the calendar system to use for `range` and
                 `tick0` if this is a date axis. This does not

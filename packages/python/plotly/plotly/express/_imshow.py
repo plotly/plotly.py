@@ -1,12 +1,11 @@
 import plotly.graph_objs as go
 from _plotly_utils.basevalidators import ColorscaleValidator
-from ._core import apply_default_cascade
-from io import BytesIO
-import base64
+from ._core import apply_default_cascade, init_figure, configure_animation_controls
 from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
 import pandas as pd
-from .png import Writer, from_array
 import numpy as np
+import itertools
+from plotly.utils import image_array_to_data_uri
 
 try:
     import xarray
@@ -14,79 +13,8 @@ try:
     xarray_imported = True
 except ImportError:
     xarray_imported = False
-try:
-    from PIL import Image
-
-    pil_imported = True
-except ImportError:
-    pil_imported = False
 
 _float_types = []
-
-
-def _array_to_b64str(img, backend="pil", compression=4, ext="png"):
-    """Converts a numpy array of uint8 into a base64 png string.
-
-    Parameters
-    ----------
-    img: ndarray of uint8
-        array image
-    backend: str
-        'auto', 'pil' or 'pypng'. If 'auto', Pillow is used if installed,
-        otherwise pypng.
-    compression: int, between 0 and 9
-        compression level to be passed to the backend
-    ext: str, 'png' or 'jpg'
-        compression format used to generate b64 string
-    """
-    # PIL and pypng error messages are quite obscure so we catch invalid compression values
-    if compression < 0 or compression > 9:
-        raise ValueError("compression level must be between 0 and 9.")
-    alpha = False
-    if img.ndim == 2:
-        mode = "L"
-    elif img.ndim == 3 and img.shape[-1] == 3:
-        mode = "RGB"
-    elif img.ndim == 3 and img.shape[-1] == 4:
-        mode = "RGBA"
-        alpha = True
-    else:
-        raise ValueError("Invalid image shape")
-    if backend == "auto":
-        backend = "pil" if pil_imported else "pypng"
-    if ext != "png" and backend != "pil":
-        raise ValueError("jpg binary strings are only available with PIL backend")
-
-    if backend == "pypng":
-        ndim = img.ndim
-        sh = img.shape
-        if ndim == 3:
-            img = img.reshape((sh[0], sh[1] * sh[2]))
-        w = Writer(
-            sh[1], sh[0], greyscale=(ndim == 2), alpha=alpha, compression=compression
-        )
-        img_png = from_array(img, mode=mode)
-        prefix = "data:image/png;base64,"
-        with BytesIO() as stream:
-            w.write(stream, img_png.rows)
-            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
-    else:  # pil
-        if not pil_imported:
-            raise ImportError(
-                "pillow needs to be installed to use `backend='pil'. Please"
-                "install pillow or use `backend='pypng'."
-            )
-        pil_img = Image.fromarray(img)
-        if ext == "jpg" or ext == "jpeg":
-            prefix = "data:image/jpeg;base64,"
-            ext = "jpeg"
-        else:
-            prefix = "data:image/png;base64,"
-            ext = "png"
-        with BytesIO() as stream:
-            pil_img.save(stream, format=ext, compress_level=compression)
-            base64_string = prefix + base64.b64encode(stream.getvalue()).decode("utf-8")
-    return base64_string
 
 
 def _vectorize_zvalue(z, mode="max"):
@@ -133,6 +61,11 @@ def imshow(
     labels={},
     x=None,
     y=None,
+    animation_frame=None,
+    facet_col=None,
+    facet_col_wrap=None,
+    facet_col_spacing=None,
+    facet_row_spacing=None,
     color_continuous_scale=None,
     color_continuous_midpoint=None,
     range_color=None,
@@ -185,6 +118,26 @@ def imshow(
         x and y are used to label the axes of single-channel heatmap visualizations and
         their lengths must match the lengths of the second and first dimensions of the
         img argument. They are auto-populated if the input is an xarray.
+
+    animation_frame: int or str, optional (default None)
+        axis number along which the image array is sliced to create an animation plot.
+        If `img` is an xarray, `animation_frame` can be the name of one the dimensions.
+
+    facet_col: int or str, optional (default None)
+        axis number along which the image array is sliced to create a facetted plot.
+        If `img` is an xarray, `facet_col` can be the name of one the dimensions.
+
+    facet_col_wrap: int
+        Maximum number of facet columns. Wraps the column variable at this width,
+        so that the column facets span multiple rows.
+        Ignored if `facet_col` is None.
+
+    facet_col_spacing: float between 0 and 1
+        Spacing between facet columns, in paper units. Default is 0.02.
+
+    facet_row_spacing: float between 0 and 1
+        Spacing between facet rows created when ``facet_col_wrap`` is used, in
+        paper units. Default is 0.0.7.
 
     color_continuous_scale : str or list of str
         colormap used to map scalar data to colors (for a 2D image). This parameter is
@@ -277,29 +230,63 @@ def imshow(
     args = locals()
     apply_default_cascade(args)
     labels = labels.copy()
+    nslices_facet = 1
+    if facet_col is not None:
+        if isinstance(facet_col, str):
+            facet_col = img.dims.index(facet_col)
+        nslices_facet = img.shape[facet_col]
+        facet_slices = range(nslices_facet)
+        ncols = int(facet_col_wrap) if facet_col_wrap is not None else nslices_facet
+        nrows = (
+            nslices_facet // ncols + 1
+            if nslices_facet % ncols
+            else nslices_facet // ncols
+        )
+    else:
+        nrows = 1
+        ncols = 1
+    if animation_frame is not None:
+        if isinstance(animation_frame, str):
+            animation_frame = img.dims.index(animation_frame)
+        nslices_animation = img.shape[animation_frame]
+        animation_slices = range(nslices_animation)
+    slice_dimensions = (facet_col is not None) + (
+        animation_frame is not None
+    )  # 0, 1, or 2
+    facet_label = None
+    animation_label = None
+    img_is_xarray = False
     # ----- Define x and y, set labels if img is an xarray -------------------
     if xarray_imported and isinstance(img, xarray.DataArray):
-        if binary_string:
-            raise ValueError(
-                "It is not possible to use binary image strings for xarrays."
-                "Please pass your data as a numpy array instead using"
-                "`img.values`"
-            )
-        y_label, x_label = img.dims[0], img.dims[1]
+        dims = list(img.dims)
+        img_is_xarray = True
+        if facet_col is not None:
+            facet_slices = img.coords[img.dims[facet_col]].values
+            _ = dims.pop(facet_col)
+            facet_label = img.dims[facet_col]
+        if animation_frame is not None:
+            animation_slices = img.coords[img.dims[animation_frame]].values
+            _ = dims.pop(animation_frame)
+            animation_label = img.dims[animation_frame]
+        y_label, x_label = dims[0], dims[1]
         # np.datetime64 is not handled correctly by go.Heatmap
         for ax in [x_label, y_label]:
             if np.issubdtype(img.coords[ax].dtype, np.datetime64):
                 img.coords[ax] = img.coords[ax].astype(str)
         if x is None:
-            x = img.coords[x_label]
+            x = img.coords[x_label].values
         if y is None:
-            y = img.coords[y_label]
+            y = img.coords[y_label].values
         if aspect is None:
             aspect = "auto"
         if labels.get("x", None) is None:
             labels["x"] = x_label
         if labels.get("y", None) is None:
             labels["y"] = y_label
+        if labels.get("animation_frame", None) is None:
+            labels["animation_frame"] = animation_label
+        if labels.get("facet_col", None) is None:
+            labels["facet_col"] = facet_label
         if labels.get("color", None) is None:
             labels["color"] = xarray.plot.utils.label_from_attrs(img)
             labels["color"] = labels["color"].replace("\n", "<br>")
@@ -334,10 +321,29 @@ def imshow(
 
     # --------------- Starting from here img is always a numpy array --------
     img = np.asanyarray(img)
+    # Reshape array so that animation dimension comes first, then facets, then images
+    if facet_col is not None:
+        img = np.moveaxis(img, facet_col, 0)
+        if animation_frame is not None and animation_frame < facet_col:
+            animation_frame += 1
+        facet_col = True
+    if animation_frame is not None:
+        img = np.moveaxis(img, animation_frame, 0)
+        animation_frame = True
+        args["animation_frame"] = (
+            "animation_frame"
+            if labels.get("animation_frame") is None
+            else labels["animation_frame"]
+        )
+    iterables = ()
+    if animation_frame is not None:
+        iterables += (range(nslices_animation),)
+    if facet_col is not None:
+        iterables += (range(nslices_facet),)
 
     # Default behaviour of binary_string: True for RGB images, False for 2D
     if binary_string is None:
-        binary_string = img.ndim >= 3 and not is_dataframe
+        binary_string = img.ndim >= (3 + slice_dimensions) and not is_dataframe
 
     # Cast bools to uint8 (also one byte)
     if img.dtype == np.bool:
@@ -349,7 +355,7 @@ def imshow(
 
     # -------- Contrast rescaling: either minmax or infer ------------------
     if contrast_rescaling is None:
-        contrast_rescaling = "minmax" if img.ndim == 2 else "infer"
+        contrast_rescaling = "minmax" if img.ndim == (2 + slice_dimensions) else "infer"
 
     # We try to set zmin and zmax only if necessary, because traces have good defaults
     if contrast_rescaling == "minmax":
@@ -365,19 +371,24 @@ def imshow(
         if zmin is None and zmax is not None:
             zmin = 0
 
-        # For 2d data, use Heatmap trace, unless binary_string is True
-    if img.ndim == 2 and not binary_string:
-        if y is not None and img.shape[0] != len(y):
+    # For 2d data, use Heatmap trace, unless binary_string is True
+    if img.ndim == 2 + slice_dimensions and not binary_string:
+        y_index = slice_dimensions
+        if y is not None and img.shape[y_index] != len(y):
             raise ValueError(
                 "The length of the y vector must match the length of the first "
                 + "dimension of the img matrix."
             )
-        if x is not None and img.shape[1] != len(x):
+        x_index = slice_dimensions + 1
+        if x is not None and img.shape[x_index] != len(x):
             raise ValueError(
                 "The length of the x vector must match the length of the second "
                 + "dimension of the img matrix."
             )
-        trace = go.Heatmap(x=x, y=y, z=img, coloraxis="coloraxis1")
+        traces = [
+            go.Heatmap(x=x, y=y, z=img[index_tup], coloraxis="coloraxis1", name=str(i))
+            for i, index_tup in enumerate(itertools.product(*iterables))
+        ]
         autorange = True if origin == "lower" else "reversed"
         layout = dict(yaxis=dict(autorange=autorange))
         if aspect == "equal":
@@ -396,23 +407,62 @@ def imshow(
             layout["coloraxis1"]["colorbar"] = dict(title_text=labels["color"])
 
     # For 2D+RGB data, use Image trace
-    elif img.ndim == 3 and img.shape[-1] in [3, 4] or (img.ndim == 2 and binary_string):
+    elif (
+        img.ndim >= 3
+        and (img.shape[-1] in [3, 4] or slice_dimensions and binary_string)
+    ) or (img.ndim == 2 and binary_string):
         rescale_image = True  # to check whether image has been modified
         if zmin is not None and zmax is not None:
             zmin, zmax = (
                 _vectorize_zvalue(zmin, mode="min"),
                 _vectorize_zvalue(zmax, mode="max"),
             )
+        x0, y0, dx, dy = (None,) * 4
+        error_msg_xarray = (
+            "Non-numerical coordinates were passed with xarray `img`, but "
+            "the Image trace cannot handle it. Please use `binary_string=False` "
+            "for 2D data or pass instead the numpy array `img.values` to `px.imshow`."
+        )
+        if x is not None:
+            x = np.asanyarray(x)
+            if np.issubdtype(x.dtype, np.number):
+                x0 = x[0]
+                dx = x[1] - x[0]
+            else:
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `x` parameter "
+                        "when an Image trace is used."
+                    )
+                )
+                raise ValueError(error_msg)
+        if y is not None:
+            y = np.asanyarray(y)
+            if np.issubdtype(y.dtype, np.number):
+                y0 = y[0]
+                dy = y[1] - y[0]
+            else:
+                error_msg = (
+                    error_msg_xarray
+                    if img_is_xarray
+                    else (
+                        "Only numerical values are accepted for the `y` parameter "
+                        "when an Image trace is used."
+                    )
+                )
+                raise ValueError(error_msg)
         if binary_string:
             if zmin is None and zmax is None:  # no rescaling, faster
                 img_rescaled = img
                 rescale_image = False
-            elif img.ndim == 2:
+            elif img.ndim == 2 + slice_dimensions:  # single-channel image
                 img_rescaled = rescale_intensity(
                     img, in_range=(zmin[0], zmax[0]), out_range=np.uint8
                 )
             else:
-                img_rescaled = np.dstack(
+                img_rescaled = np.stack(
                     [
                         rescale_intensity(
                             img[..., ch],
@@ -420,37 +470,84 @@ def imshow(
                             out_range=np.uint8,
                         )
                         for ch in range(img.shape[-1])
-                    ]
+                    ],
+                    axis=-1,
                 )
-            img_str = _array_to_b64str(
-                img_rescaled,
-                backend=binary_backend,
-                compression=binary_compression_level,
-                ext=binary_format,
-            )
-            trace = go.Image(source=img_str)
+            img_str = [
+                image_array_to_data_uri(
+                    img_rescaled[index_tup],
+                    backend=binary_backend,
+                    compression=binary_compression_level,
+                    ext=binary_format,
+                )
+                for index_tup in itertools.product(*iterables)
+            ]
+
+            traces = [
+                go.Image(source=img_str_slice, name=str(i), x0=x0, y0=y0, dx=dx, dy=dy)
+                for i, img_str_slice in enumerate(img_str)
+            ]
         else:
             colormodel = "rgb" if img.shape[-1] == 3 else "rgba256"
-            trace = go.Image(z=img, zmin=zmin, zmax=zmax, colormodel=colormodel)
+            traces = [
+                go.Image(
+                    z=img[index_tup],
+                    zmin=zmin,
+                    zmax=zmax,
+                    colormodel=colormodel,
+                    x0=x0,
+                    y0=y0,
+                    dx=dx,
+                    dy=dy,
+                )
+                for index_tup in itertools.product(*iterables)
+            ]
         layout = {}
-        if origin == "lower":
+        if origin == "lower" or (dy is not None and dy < 0):
             layout["yaxis"] = dict(autorange=True)
+        if dx is not None and dx < 0:
+            layout["xaxis"] = dict(autorange="reversed")
     else:
         raise ValueError(
             "px.imshow only accepts 2D single-channel, RGB or RGBA images. "
-            "An image of shape %s was provided" % str(img.shape)
+            "An image of shape %s was provided."
+            "Alternatively, 3- or 4-D single or multichannel datasets can be"
+            "visualized using the `facet_col` or/and `animation_frame` arguments."
+            % str(img.shape)
         )
 
-    layout_patch = dict()
+    # Now build figure
+    col_labels = []
+    if facet_col is not None:
+        slice_label = (
+            "facet_col" if labels.get("facet_col") is None else labels["facet_col"]
+        )
+        col_labels = ["%s=%d" % (slice_label, i) for i in facet_slices]
+    fig = init_figure(args, "xy", [], nrows, ncols, col_labels, [])
     for attr_name in ["height", "width"]:
         if args[attr_name]:
-            layout_patch[attr_name] = args[attr_name]
+            layout[attr_name] = args[attr_name]
     if args["title"]:
-        layout_patch["title_text"] = args["title"]
+        layout["title_text"] = args["title"]
     elif args["template"].layout.margin.t is None:
-        layout_patch["margin"] = {"t": 60}
-    fig = go.Figure(data=trace, layout=layout)
-    fig.update_layout(layout_patch)
+        layout["margin"] = {"t": 60}
+
+    frame_list = []
+    for index, trace in enumerate(traces):
+        if (facet_col and index < nrows * ncols) or index == 0:
+            fig.add_trace(trace, row=nrows - index // ncols, col=index % ncols + 1)
+    if animation_frame is not None:
+        for i, index in zip(range(nslices_animation), animation_slices):
+            frame_list.append(
+                dict(
+                    data=traces[nslices_facet * i : nslices_facet * (i + 1)],
+                    layout=layout,
+                    name=str(index),
+                )
+            )
+    if animation_frame:
+        fig.frames = frame_list
+    fig.update_layout(layout)
     # Hover name, z or color
     if binary_string and rescale_image and not np.all(img == img_rescaled):
         # we rescaled the image, hence z is not displayed in hover since it does
@@ -476,8 +573,9 @@ def imshow(
         )
     fig.update_traces(hovertemplate=hovertemplate)
     if labels["x"]:
-        fig.update_xaxes(title_text=labels["x"])
+        fig.update_xaxes(title_text=labels["x"], row=1)
     if labels["y"]:
-        fig.update_yaxes(title_text=labels["y"])
+        fig.update_yaxes(title_text=labels["y"], col=1)
+    configure_animation_controls(args, go.Image, fig)
     fig.update_layout(template=args["template"], overwrite=True)
     return fig

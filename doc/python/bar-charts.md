@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -83,6 +83,19 @@ fig.show()
 
 ```python
 wide_df
+```
+
+### Bar chart in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'bar-charts', width='100%', height=630)
 ```
 
 ### Customize bar chart with Plotly Express
@@ -287,6 +300,56 @@ fig = go.Figure(data=[go.Bar(
 fig.show()
 ```
 
+Bar charts with custom widths can be used to make mekko charts (also known as marimekko charts, mosaic plots, or variwide charts).
+
+```python
+import plotly.graph_objects as go
+import numpy as np
+
+labels = ["apples","oranges","pears","bananas"]
+widths = np.array([10,20,20,50])
+
+data = {
+    "South": [50,80,60,70],
+    "North": [50,20,40,30]
+}
+
+fig = go.Figure()
+for key in data:
+    fig.add_trace(go.Bar(
+        name=key,
+        y=data[key],
+        x=np.cumsum(widths)-widths,
+        width=widths,
+        offset=0,
+        customdata=np.transpose([labels, widths*data[key]]),
+        texttemplate="%{y} x %{width} =<br>%{customdata[1]}",
+        textposition="inside",
+        textangle=0,
+        textfont_color="white",
+        hovertemplate="<br>".join([
+            "label: %{customdata[0]}",
+            "width: %{width}",
+            "height: %{y}",
+            "area: %{customdata[1]}",
+        ])
+    ))
+
+fig.update_xaxes( 
+    tickvals=np.cumsum(widths)-widths/2, 
+    ticktext= ["%s<br>%d" % (l, w) for l, w in zip(labels, widths)]
+)
+
+fig.update_xaxes(range=[0,100])
+fig.update_yaxes(range=[0,100])
+
+fig.update_layout(
+    title_text="Marimekko Chart",
+    barmode="stack",
+    uniformtext=dict(mode="hide", minsize=10),
+)
+```
+
 ### Customizing Individual Bar Base
 
 ```python
@@ -444,4 +507,4 @@ fig.show()
 
 ### Reference
 
-See https://plotly.com/python/reference/bar/ for more information and chart attribute options!
+See [function reference for `px.bar()`](https://plotly.com/python-api-reference/generated/plotly.express.bar) or https://plotly.com/python/reference/bar/ for more information and chart attribute options!

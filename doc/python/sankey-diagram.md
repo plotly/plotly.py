@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.6.0
   kernel_info:
     name: python2
   kernelspec:
@@ -22,7 +22,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.6
   plotly:
     description: How to make Sankey Diagrams in Python with Plotly.
     display_as: basic
@@ -53,7 +53,7 @@ fig = go.Figure(data=[go.Sankey(
       color = "blue"
     ),
     link = dict(
-      source = [0, 1, 0, 2, 3, 3], # indices correspond to labels, eg A1, A2, A2, B1, ...
+      source = [0, 1, 0, 2, 3, 3], # indices correspond to labels, eg A1, A2, A1, B1, ...
       target = [2, 3, 3, 4, 4, 5],
       value = [8, 4, 2, 8, 4, 2]
   ))])
@@ -102,6 +102,19 @@ fig = go.Figure(data=[go.Sankey(
 fig.update_layout(title_text="Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>",
                   font_size=10)
 fig.show()
+```
+
+### Sankey Diagram in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'sankey-diagram', width='100%', height=630)
 ```
 
 ### Style Sankey Diagram
@@ -158,7 +171,7 @@ fig = go.Figure(data=[go.Sankey(
       label = ["A1", "A2", "B1", "B2", "C1", "C2"],
       customdata = ["Long name A1", "Long name A2", "Long name B1", "Long name B2",
                     "Long name C1", "Long name C2"],
-      hovertemplate='Node %{customdata} has total value %{value}<extra></extra>',  
+      hovertemplate='Node %{customdata} has total value %{value}<extra></extra>',
       color = "blue"
     ),
     link = dict(
@@ -168,7 +181,7 @@ fig = go.Figure(data=[go.Sankey(
       customdata = ["q","r","s","t","u","v"],
       hovertemplate='Link from node %{source.customdata}<br />'+
         'to node%{target.customdata}<br />has value %{value}'+
-        '<br />and data %{customdata}<extra></extra>',  
+        '<br />and data %{customdata}<extra></extra>',
   ))])
 
 fig.update_layout(title_text="Basic Sankey Diagram", font_size=10)

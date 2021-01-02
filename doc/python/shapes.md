@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.0
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.3
+    version: 3.7.6
   plotly:
     description: How to make SVG shapes in python. Examples of lines, circle, rectangle,
       and path.
@@ -33,9 +33,25 @@ jupyter:
     thumbnail: thumbnail/shape.jpg
 ---
 
-### Filled Area Chart
+### Adding Lines and Polygons to Figures
 
-There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape. 
+As a general rule, there are two ways to add shapes (lines or polygons) to figures:
+1. Trace types in the `scatter` family (e.g. `scatter`, `scatter3d`, `scattergeo` etc) can be drawn with `mode="lines"` and optionally support a `fill="self"` attribute, and so can be used to draw open or closed shapes on figures.
+2. Standalone lines, ellipses and rectangles can be added to figures using `fig.add_shape()`, and they can be positioned absolutely within the figure, or they can be positioned relative to the axes of 2d cartesian subplots i.e. in data coordinates.
+
+*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](/python/horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+
+The differences between these two approaches are that:
+* Traces can optionally support hover labels and can appear in legends.
+* Shapes can be positioned absolutely or relative to data coordinates in 2d cartesian subplots only.
+* Traces cannot be positioned absolutely but can be positioned relative to date coordinates in any subplot type.
+* Traces also support [optional text](/python/text-and-annotations/), although there is a [textual equivalent to shapes in text annotations](/python/text-and-annotations/).
+
+
+
+### Shape-drawing with Scatter traces
+
+There are two ways to draw filled shapes: scatter traces and [layout.shapes](https://plotly.com/python/reference/layout/shapes/#layout-shapes-items-shape-type) which is mostly useful for the 2d subplots, and defines the shape type to be drawn, and can be rectangle, circle, line, or path (a custom SVG path). You also can use [scatterpolar](https://plotly.com/python/polar-chart/#categorical-polar-chart), scattergeo, [scattermapbox](https://plotly.com/python/filled-area-on-mapbox/#filled-scattermapbox-trace) to draw filled shapes on any kind of subplots. To set an area to be filled with a solid color, you need to define [Scatter.fill="toself"](https://plotly.com/python/reference/scatter/#scatter-fill) that connects the endpoints of the trace into a closed shape. If `mode=line` (default value), then you need to repeat the initial point of a shape at the of the sequence to have a closed shape.
 
 ```python
 import plotly.graph_objects as go
@@ -53,7 +69,20 @@ fig = go.Figure(go.Scatter(x=[0,1,2,0,None,3,3,5,5,3], y=[0,2,0,0,None,0.5,1.5,1
 fig.show()
 ```
 
-#### Vertical and Horizontal Lines Positioned Relative to the Axes
+#### Shapes in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'shapes', width='100%', height=630)
+```
+
+#### Vertical and Horizontal Lines Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -75,50 +104,31 @@ fig.update_xaxes(range=[0, 7])
 fig.update_yaxes(range=[0, 2.5])
 
 # Add shapes
-fig.add_shape(
-        # Line Vertical
-        dict(
-            type="line",
-            x0=1,
-            y0=0,
-            x1=1,
-            y1=2,
-            line=dict(
-                color="RoyalBlue",
-                width=3
-            )
-))
-fig.add_shape(
-        # Line Horizontal
-            type="line",
-            x0=2,
-            y0=2,
-            x1=5,
-            y1=2,
-            line=dict(
-                color="LightSeaGreen",
-                width=4,
-                dash="dashdot",
-            ),
+fig.add_shape(type="line",
+    x0=1, y0=0, x1=1, y1=2,
+    line=dict(color="RoyalBlue",width=3)
+)
+fig.add_shape(type="line",
+    x0=2, y0=2, x1=5, y1=2,
+    line=dict(
+        color="LightSeaGreen",
+        width=4,
+        dash="dashdot",
     )
-fig.add_shape(
-        # Line Diagonal
-            type="line",
-            x0=4,
-            y0=0,
-            x1=6,
-            y1=2,
-            line=dict(
-                color="MediumPurple",
-                width=4,
-                dash="dot",
-            )
+)
+fig.add_shape(type="line",
+    x0=4, y0=0, x1=6, y1=2,
+    line=dict(
+        color="MediumPurple",
+        width=4,
+        dash="dot",
+    )
 )
 fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Lines Positioned Relative to the Plot & to the Axes
+#### Lines Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -127,8 +137,7 @@ fig = go.Figure()
 
 # Create scatter trace of text labels
 fig.add_trace(go.Scatter(
-    x=[2, 6],
-    y=[1, 1],
+    x=[2, 6], y=[1, 1],
     text=["Line positioned relative to the plot",
           "Line positioned relative to the axes"],
     mode="text",
@@ -138,96 +147,28 @@ fig.add_trace(go.Scatter(
 fig.update_xaxes(range=[0, 8])
 fig.update_yaxes(range=[0, 2])
 
-# Add shapes
-fig.add_shape(
-        # Line reference to the axes
-            type="line",
-            xref="x",
-            yref="y",
-            x0=4,
-            y0=0,
-            x1=8,
-            y1=1,
-            line=dict(
-                color="LightSeaGreen",
-                width=3,
-            ),
-        )
-fig.add_shape(
-            type="line",
-            xref="paper",
-            yref="paper",
-            x0=0,
-            y0=0,
-            x1=0.5,
-            y1=0.5,
-            line=dict(
-                color="DarkOrange",
-                width=3,
-            ),
-        )
-
-fig.show()
-```
-
-#### Creating Tangent Lines with Shapes
-
-```python
-import plotly.graph_objects as go
-
-import numpy as np
-
-# Generate data
-x0 = np.linspace(1, 3, 200)
-y0 = x0 * np.sin(np.power(x0, 2)) + 1
-
-# Create figure with scatter trace
-fig = go.Figure()
-
-fig.add_trace(go.Scatter(
-    x=x0,
-    y=y0,
-))
-
-# Set title text
-fig.update_layout(
-    title_text="$f(x)=x\\sin(x^2)+1\\\\ f\'(x)=\\sin(x^2)+2x^2\\cos(x^2)$"
+fig.add_shape(type="line",
+    xref="x", yref="y",
+    x0=4, y0=0, x1=8, y1=1,
+    line=dict(
+        color="LightSeaGreen",
+        width=3,
+    ),
+)
+fig.add_shape(type="line",
+    xref="paper", yref="paper",
+    x0=0, y0=0, x1=0.5,
+    y1=0.5,
+    line=dict(
+        color="DarkOrange",
+        width=3,
+    ),
 )
 
-# Add tangent line shapes
-fig.add_shape(
-            type="line",
-            x0=1,
-            y0=2.30756,
-            x1=1.75,
-            y1=2.30756,
-        )
-fig.add_shape(
-            type="line",
-            x0=2.5,
-            y0=3.80796,
-            x1=3.05,
-            y1=3.80796,
-        )
-fig.add_shape(
-            type="line",
-            x0=1.90,
-            y0=-1.1827,
-            x1=2.50,
-            y1=-1.1827,
-        )
-fig.update_shapes(dict(
-    xref="x",
-    yref="y",
-    opacity=0.7,
-    line=dict(
-        color="Crimson",
-        width=2.5,
-        )))
 fig.show()
 ```
 
-#### Rectangles Positioned Relative to the Axes
+#### Rectangles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -246,35 +187,23 @@ fig.update_xaxes(range=[0, 7], showgrid=False)
 fig.update_yaxes(range=[0, 3.5])
 
 # Add shapes
-fig.add_shape(
-        # unfilled Rectangle
-            type="rect",
-            x0=1,
-            y0=1,
-            x1=2,
-            y1=3,
-            line=dict(
-                color="RoyalBlue",
-            ),
-        )
-fig.add_shape(
-        # filled Rectangle
-            type="rect",
-            x0=3,
-            y0=1,
-            x1=6,
-            y1=2,
-            line=dict(
-                color="RoyalBlue",
-                width=2,
-            ),
-            fillcolor="LightSkyBlue",
-        )
+fig.add_shape(type="rect",
+    x0=1, y0=1, x1=2, y1=3,
+    line=dict(color="RoyalBlue"),
+)
+fig.add_shape(type="rect",
+    x0=3, y0=1, x1=6, y1=2,
+    line=dict(
+        color="RoyalBlue",
+        width=2,
+    ),
+    fillcolor="LightSkyBlue",
+)
 fig.update_shapes(dict(xref='x', yref='y'))
 fig.show()
 ```
 
-#### Rectangle Positioned Relative to the Plot & to the Axes
+#### Rectangle Positioned Relative to the Plot & to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -291,45 +220,65 @@ fig.add_trace(go.Scatter(
 ))
 
 # Set axes properties
-fig.update_xaxes(range=[0, 4], showgrid=False)
+fig.update_xaxes(range=[0, 4])
 fig.update_yaxes(range=[0, 4])
 
 # Add shapes
-fig.add_shape(
-        # Rectangle reference to the axes
-            type="rect",
-            xref="x",
-            yref="y",
-            x0=2.5,
-            y0=0,
-            x1=3.5,
-            y1=2,
-            line=dict(
-                color="RoyalBlue",
-                width=3,
-            ),
-            fillcolor="LightSkyBlue",
-        )
-fig.add_shape(
-        # Rectangle reference to the plot
-            type="rect",
-            xref="paper",
-            yref="paper",
-            x0=0.25,
-            y0=0,
-            x1=0.5,
-            y1=0.5,
-            line=dict(
-                color="LightSeaGreen",
-                width=3,
-            ),
-            fillcolor="PaleTurquoise",
-        )
+fig.add_shape(type="rect",
+    xref="x", yref="y",
+    x0=2.5, y0=0,
+    x1=3.5, y1=2,
+    line=dict(
+        color="RoyalBlue",
+        width=3,
+    ),
+    fillcolor="LightSkyBlue",
+)
+fig.add_shape(type="rect",
+    xref="paper", yref="paper",
+    x0=0.25, y0=0,
+    x1=0.5, y1=0.5,
+    line=dict(
+        color="LightSeaGreen",
+        width=3,
+    ),
+    fillcolor="PaleTurquoise",
+)
+
+fig.show()
+```
+
+#### A Rectangle Placed Relative to the Axis Position and Length
+
+A shape can be placed relative to an axis's position on the plot by adding the
+string `' domain'` to the axis reference in the `xref` or `yref` attributes for
+shapes.
+The following code places a rectangle that starts at 60% and ends at 70% along
+the x-axis, starting from the left, and starts at 80% and ends at 90% along the
+y-axis, starting from the bottom.
+
+```python
+import plotly.graph_objects as go
+import plotly.express as px
+
+df = px.data.wind()
+fig = px.scatter(df, y="frequency")
+
+fig.update_layout(xaxis=dict(domain=[0, 0.5]), yaxis=dict(domain=[0.25, 0.75]))
+
+# Add a shape whose x and y coordinates refer to the domains of the x and y axes
+fig.add_shape(type="rect",
+    xref="x domain", yref="y domain",
+    x0=0.6, x1=0.7, y0=0.8, y1=0.9,
+)
 
 fig.show()
 ```
 
 #### Highlighting Time Series Regions with Rectangle Shapes
+
+*Note:* there are [special methods `add_hline`, `add_vline`, `add_hrect` and `add_vrect` for the common cases of wanting to draw horizontal or vertical lines or rectangles](/python/horizontal-vertical-shapes/) that are fixed to data coordinates in one axis and absolutely positioned in another.
+
 
 ```python
 import plotly.graph_objects as go
@@ -351,45 +300,22 @@ fig.add_trace(go.Scatter(
 ))
 
 # Add shape regions
-fig.update_layout(
-    shapes=[
-        # 1st highlight during Feb 4 - Feb 6
-        dict(
-            type="rect",
-            # x-reference is assigned to the x-values
-            xref="x",
-            # y-reference is assigned to the plot paper [0,1]
-            yref="paper",
-            x0="2015-02-04",
-            y0=0,
-            x1="2015-02-06",
-            y1=1,
-            fillcolor="LightSalmon",
-            opacity=0.5,
-            layer="below",
-            line_width=0,
-        ),
-        # 2nd highlight during Feb 20 - Feb 23
-        dict(
-            type="rect",
-            xref="x",
-            yref="paper",
-            x0="2015-02-20",
-            y0=0,
-            x1="2015-02-22",
-            y1=1,
-            fillcolor="LightSalmon",
-            opacity=0.5,
-            layer="below",
-            line_width=0,
-        )
-    ]
+fig.add_vrect(
+    x0="2015-02-04", x1="2015-02-06",
+    fillcolor="LightSalmon", opacity=0.5,
+    layer="below", line_width=0,
+),
+
+fig.add_vrect(
+    x0="2015-02-20", x1="2015-02-22",
+    fillcolor="LightSalmon", opacity=0.5,
+    layer="below", line_width=0,
 )
 
 fig.show()
 ```
 
-#### Circles Positioned Relative to the Axes
+#### Circles Positioned Relative to the Axis Data
 
 ```python
 import plotly.graph_objects as go
@@ -410,32 +336,16 @@ fig.update_xaxes(range=[0, 4.5], zeroline=False)
 fig.update_yaxes(range=[0, 4.5])
 
 # Add circles
-fig.update_layout(
-    shapes=[
-        # unfilled circle
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            x0=1,
-            y0=1,
-            x1=3,
-            y1=3,
-            line_color="LightSeaGreen",
-        ),
-        # filled circle
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            fillcolor="PaleTurquoise",
-            x0=3,
-            y0=3,
-            x1=4,
-            y1=4,
-            line_color="LightSeaGreen",
-        ),
-    ]
+fig.add_shape(type="circle",
+    xref="x", yref="y",
+    x0=1, y0=1, x1=3, y1=3,
+    line_color="LightSeaGreen",
+)
+fig.add_shape(type="circle",
+    xref="x", yref="y",
+    fillcolor="PaleTurquoise",
+    x0=3, y0=3, x1=4, y1=4,
+    line_color="LightSeaGreen",
 )
 
 # Set figure size
@@ -459,90 +369,32 @@ y0 = np.random.normal(2, 0.45, 300)
 x1 = np.random.normal(6, 0.4, 200)
 y1 = np.random.normal(6, 0.4, 200)
 
-x2 = np.random.normal(4, 0.3, 200)
-y2 = np.random.normal(4, 0.3, 200)
-
 # Create figure
 fig = go.Figure()
 
 # Add scatter traces
-fig.add_trace(go.Scatter(
-    x=x0,
-    y=y0,
-    mode="markers",
-))
-
-fig.add_trace(go.Scatter(
-    x=x1,
-    y=y1,
-    mode="markers"
-))
-
-fig.add_trace(go.Scatter(
-    x=x2,
-    y=y2,
-    mode="markers"
-))
-
-fig.add_trace(go.Scatter(
-    x=x1,
-    y=y0,
-    mode="markers"
-))
+fig.add_trace(go.Scatter(x=x0, y=y0, mode="markers"))
+fig.add_trace(go.Scatter(x=x1, y=y1, mode="markers"))
 
 # Add shapes
-fig.update_layout(
-    shapes=[
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            x0=min(x0),
-            y0=min(y0),
-            x1=max(x0),
-            y1=max(y0),
-            opacity=0.2,
-            fillcolor="blue",
-            line_color="blue",
-        ),
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            x0=min(x1),
-            y0=min(y1),
-            x1=max(x1),
-            y1=max(y1),
-            opacity=0.2,
-            fillcolor="orange",
-            line_color="orange",
-        ),
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            x0=min(x2),
-            y0=min(y2),
-            x1=max(x2),
-            y1=max(y2),
-            opacity=0.2,
-            fillcolor="green",
-            line_color="green",
-        ),
-        dict(
-            type="circle",
-            xref="x",
-            yref="y",
-            x0=min(x1),
-            y0=min(y0),
-            x1=max(x1),
-            y1=max(y0),
-            opacity=0.2,
-            fillcolor="red",
-            line_color="red",
-        ),
-    ],
+fig.add_shape(type="circle",
+    xref="x", yref="y",
+    x0=min(x0), y0=min(y0),
+    x1=max(x0), y1=max(y0),
+    opacity=0.2,
+    fillcolor="blue",
+    line_color="blue",
 )
+
+fig.add_shape(type="circle",
+    xref="x", yref="y",
+    x0=min(x1), y0=min(y1),
+    x1=max(x1), y1=max(y1),
+    opacity=0.2,
+    fillcolor="orange",
+    line_color="orange",
+)
+
 
 # Hide legend
 fig.update_layout(showlegend=False)
@@ -584,39 +436,19 @@ fig.update_yaxes(
 )
 
 # Add circles
-fig.add_shape(
-            type="circle",
-            fillcolor="blue",
-            x0=0,
-            y0=0,
-            x1=2,
-            y1=2,
-            line_color="blue"
-        )
-fig.add_shape(
-            type="circle",
-            fillcolor="gray",
-            x0=1.5,
-            y0=0,
-            x1=3.5,
-            y1=2,
-            line_color="gray"
-        )
-fig.update_shapes(dict(
-    opacity=0.3,
-    xref="x",
-    yref="y",
-    layer="below"
-))
-# Update figure dimensions
+fig.add_shape(type="circle",
+    line_color="blue", fillcolor="blue",
+    x0=0, y0=0, x1=2, y1=2
+)
+fig.add_shape(type="circle",
+    line_color="gray", fillcolor="gray",
+    x0=1.5, y0=0, x1=3.5, y1=2
+)
+fig.update_shapes(opacity=0.3, xref="x", yref="y")
+
 fig.update_layout(
-    margin=dict(
-        l=20,
-        r=20,
-        b=100
-    ),
-    height=600,
-    width=800,
+    margin=dict(l=20, r=20, b=100),
+    height=600, width=800,
     plot_bgcolor="white"
 )
 
@@ -641,7 +473,7 @@ fig.add_trace(go.Bar(x=[11,13,15], y=[8,11,20]), row=2, col=2)
 # Add shapes
 fig.update_layout(
     shapes=[
-        dict(type="line", xref="x1", yref="y1",
+        dict(type="line", xref="x", yref="y",
             x0=3, y0=0.5, x1=5, y1=0.8, line_width=3),
         dict(type="rect", xref="x2", yref='y2',
              x0=4, y0=2, x1=5, y1=6),
@@ -651,6 +483,33 @@ fig.update_layout(
              x0=5, y0=12, x1=10, y1=18)])
 fig.show()
 ```
+
+#### Adding the Same Shapes to Multiple Subplots
+The same shape can be added to mulitple facets by using the `'all'`
+keyword in the `row` and `col` arguments. For example
+```python
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.scatter(df, x="total_bill", y="tip", facet_row="smoker", facet_col="sex")
+# Adds a rectangle to all facets
+fig.add_shape(
+    dict(type="rect", x0=25, x1=35, y0=4, y1=6, line_color="purple"),
+    row="all",
+    col="all",
+)
+# Adds a line to all the rows of the second column
+fig.add_shape(
+    dict(type="line", x0=20, x1=25, y0=5, y1=6, line_color="yellow"), row="all", col=2
+)
+
+# Adds a circle to all the columns of the first row
+fig.add_shape(
+    dict(type="circle", x0=10, y0=2, x1=20, y1=7), row=1, col="all", line_color="green"
+)
+fig.show()
+```
+
 
 #### SVG Paths
 
@@ -716,7 +575,7 @@ fig.update_layout(
 fig.show()
 ```
 
-### Drawing shapes on Cartesian plots
+### Drawing shapes with a Mouse on Cartesian plots
 
 _introduced in plotly 4.7_
 
@@ -724,14 +583,14 @@ You can create layout shapes programatically, but you can also draw shapes manua
 
 This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
 
-Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can 
+Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 - drag and resize it for lines, rectangles and circles/ellipses
 - drag and move individual vertices for closed paths
 - move individual vertices for open paths.
 
-An activated shape is deleted by cliking on the `eraseshape` button.
+An activated shape is deleted by clicking on the `eraseshape` button.
 
-Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing). 
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dash.plotly.com/interactive-graphing).
 
 ```python
 import plotly.graph_objects as go
@@ -749,7 +608,7 @@ fig.add_annotation(
 # shape defined programatically
 fig.add_shape(editable=True,
               x0=-1, x1=0, y0=2, y1=3,
-              xref='x1', yref='y1')
+              xref='x', yref='y')
 # define dragmode and add modebar buttons
 fig.update_layout(dragmode='drawrect')
 fig.show(config={'modeBarButtonsToAdd':['drawline',
@@ -786,7 +645,7 @@ fig.add_shape(line_color='yellow',
               opacity=0.4,
               editable=True,
               x0=0, x1=1, y0=2, y1=3,
-              xref='x1', yref='y1'
+              xref='x', yref='y'
 )
 fig.update_layout(dragmode='drawrect',
                   # style of new shapes

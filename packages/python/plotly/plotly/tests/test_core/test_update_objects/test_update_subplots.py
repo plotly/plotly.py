@@ -152,6 +152,10 @@ class TestSelectForEachUpdateSubplots(TestCase):
             "xaxis", "xaxes", [], selector={"title.text": "C"}, test_no_grid=True
         )
 
+        self.assert_select_subplots(
+            "xaxis", "xaxes", [4], selector=-1, test_no_grid=True
+        )
+
         # yaxis
         self.assert_select_subplots(
             "yaxis", "yaxes", [1, 3], selector={"title.text": "A"}, test_no_grid=True
@@ -163,6 +167,14 @@ class TestSelectForEachUpdateSubplots(TestCase):
 
         self.assert_select_subplots(
             "yaxis", "yaxes", [], selector={"title.text": "C"}, test_no_grid=True
+        )
+
+        self.assert_select_subplots(
+            "yaxis", "yaxes", [5], selector=-1, test_no_grid=True
+        )
+
+        self.assert_select_subplots(
+            "yaxis", "yaxes", [2], selector=1, test_no_grid=True
         )
 
         # scene
@@ -190,6 +202,10 @@ class TestSelectForEachUpdateSubplots(TestCase):
             test_no_grid=True,
         )
 
+        self.assert_select_subplots(
+            "scene", "scenes", [1], selector=0, test_no_grid=True
+        )
+
         # polar
         self.assert_select_subplots(
             "polar",
@@ -215,6 +231,10 @@ class TestSelectForEachUpdateSubplots(TestCase):
             test_no_grid=True,
         )
 
+        self.assert_select_subplots(
+            "polar", "polars", [2], selector=-1, test_no_grid=True
+        )
+
         # ternary
         self.assert_select_subplots(
             "ternary",
@@ -238,6 +258,10 @@ class TestSelectForEachUpdateSubplots(TestCase):
             [],
             selector={"aaxis.bogus.text": "A"},
             test_no_grid=True,
+        )
+
+        self.assert_select_subplots(
+            "ternary", "ternaries", [1], selector=-1, test_no_grid=True
         )
 
         # No 'geo' or 'mapbox' subplots initialized, but the first subplot
@@ -272,6 +296,8 @@ class TestSelectForEachUpdateSubplots(TestCase):
             "xaxis", "xaxes", [3, 4], col=1, selector={"title.text": "B"}
         )
 
+        self.assert_select_subplots("xaxis", "xaxes", [4], col=1, selector=-1)
+
         self.assert_select_subplots(
             "xaxis", "xaxes", [3], row=2, selector={"title.text": "B"}
         )
@@ -285,6 +311,10 @@ class TestSelectForEachUpdateSubplots(TestCase):
             "yaxis", "yaxes", [1, 3], col=1, selector={"title.text": "A"}
         )
 
+        self.assert_select_subplots("yaxis", "yaxes", [5], col=1, selector=-1)
+
+        self.assert_select_subplots("yaxis", "yaxes", [1], col=1, selector=0)
+
         self.assert_select_subplots(
             "yaxis", "yaxes", [4], col=1, selector={"title.text": "B"}
         )
@@ -293,6 +323,8 @@ class TestSelectForEachUpdateSubplots(TestCase):
         self.assert_select_subplots(
             "polar", "polars", [1, 2], row=2, selector={"angularaxis.rotation": 45}
         )
+
+        self.assert_select_subplots("polar", "polars", [2], row=2, selector=-1)
 
         self.assert_select_subplots(
             "polar", "polars", [1], col=2, selector={"angularaxis.rotation": 45}

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.3.1
+      jupytext_version: 1.4.2
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.6.8
+    version: 3.7.7
   plotly:
     description: How to make choropleth maps in Python with Plotly.
     display_as: maps
@@ -143,6 +143,18 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
+### Choropleth maps in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'choropleth-maps', width='100%', height=630)
+```
+
 ### Discrete Colors
 
 In addition to [continuous colors](/python/colorscales/), we can [discretely-color](/python/discrete-color/) our choropleth maps by setting `color` to a non-numerical column, like the name of the winner of an election.
@@ -164,7 +176,28 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 ```
 
-<!-- #region -->
+### Using GeoPandas Data Frames
+
+`px.choropleth` accepts the `geometry` of a [GeoPandas](https://geopandas.org/) data frame as the input to `geojson` if the `geometry` contains polygons.
+
+```python
+import plotly.express as px
+import geopandas as gpd
+
+df = px.data.election()
+geo_df = gpd.GeoDataFrame.from_features(
+    px.data.election_geojson()["features"]
+).merge(df, on="district").set_index("district")
+
+fig = px.choropleth(geo_df,
+                   geojson=geo_df.geometry,
+                   locations=geo_df.index,
+                   color="Joly",
+                   projection="mercator")
+fig.update_geos(fitbounds="locations", visible=False)
+fig.show()
+```
+
 
 ### Using Built-in Country and State Geometries
 
@@ -179,7 +212,6 @@ Plotly comes with two built-in geometries which do not require an external GeoJS
 
 To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
 
-<!-- #endregion -->
 
 ```python
 import plotly.express as px
@@ -347,4 +379,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/choropleth/ for more information and chart attribute options!
+See [function reference for `px.(choropleth)`](https://plotly.com/python-api-reference/generated/plotly.express.choropleth) or https://plotly.com/python/reference/choropleth/ for more information and chart attribute options!
