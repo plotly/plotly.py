@@ -51,15 +51,15 @@ def build_test_dict_string(value_string, pretty=False):
 
 
 def check_roundtrip(value, engine, pretty):
-    encoded = pio.to_plotly_json(value, engine=engine, pretty=pretty)
-    decoded = pio.from_plotly_json(encoded, engine=engine)
-    reencoded = pio.to_plotly_json(decoded, engine=engine, pretty=pretty)
+    encoded = pio.to_json_plotly(value, engine=engine, pretty=pretty)
+    decoded = pio.from_json_plotly(encoded, engine=engine)
+    reencoded = pio.to_json_plotly(decoded, engine=engine, pretty=pretty)
     assert encoded == reencoded
 
     # Check from_plotly_json with bytes on Python 3
     if sys.version_info.major == 3:
         encoded_bytes = encoded.encode("utf8")
-        decoded_from_bytes = pio.from_plotly_json(encoded_bytes, engine=engine)
+        decoded_from_bytes = pio.from_json_plotly(encoded_bytes, engine=engine)
         assert decoded == decoded_from_bytes
 
 
@@ -124,7 +124,7 @@ def datetime_array(request, datetime_value):
 # Encoding tests
 def test_graph_object_input(engine, pretty):
     scatter = go.Scatter(x=[1, 2, 3], y=np.array([4, 5, 6]))
-    result = pio.to_plotly_json(scatter, engine=engine)
+    result = pio.to_json_plotly(scatter, engine=engine)
     expected = """{"type":"scatter","x":[1,2,3],"y":[4,5,6]}"""
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
@@ -132,7 +132,7 @@ def test_graph_object_input(engine, pretty):
 
 def test_numeric_numpy_encoding(numeric_numpy_array, engine, pretty):
     value = build_test_dict(numeric_numpy_array)
-    result = pio.to_plotly_json(value, engine=engine, pretty=pretty)
+    result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
 
     array_str = to_json_test(numeric_numpy_array.tolist())
     expected = build_test_dict_string(array_str, pretty=pretty)
@@ -142,7 +142,7 @@ def test_numeric_numpy_encoding(numeric_numpy_array, engine, pretty):
 
 def test_object_numpy_encoding(object_numpy_array, engine, pretty):
     value = build_test_dict(object_numpy_array)
-    result = pio.to_plotly_json(value, engine=engine, pretty=pretty)
+    result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
 
     array_str = to_json_test(object_numpy_array.tolist())
     expected = build_test_dict_string(array_str)
@@ -155,7 +155,7 @@ def test_datetime(datetime_value, engine, pretty):
         pytest.skip("legacy encoder doesn't strip timezone from scalar datetimes")
 
     value = build_test_dict(datetime_value)
-    result = pio.to_plotly_json(value, engine=engine, pretty=pretty)
+    result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
     expected = build_test_dict_string('"{}"'.format(isoformat_test(datetime_value)))
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
@@ -163,7 +163,7 @@ def test_datetime(datetime_value, engine, pretty):
 
 def test_datetime_arrays(datetime_array, engine, pretty):
     value = build_test_dict(datetime_array)
-    result = pio.to_plotly_json(value, engine=engine)
+    result = pio.to_json_plotly(value, engine=engine)
 
     if isinstance(datetime_array, pd.Series):
         dt_values = [d.isoformat() for d in datetime_array.dt.to_pydatetime().tolist()]

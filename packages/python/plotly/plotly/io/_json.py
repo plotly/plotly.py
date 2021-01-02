@@ -58,7 +58,7 @@ def coerce_to_strict(const):
         return const
 
 
-def to_plotly_json(plotly_object, pretty=False, engine=None):
+def to_json_plotly(plotly_object, pretty=False, engine=None):
     """
     Convert a plotly/Dash object to a JSON string representation
 
@@ -198,7 +198,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
 
     See Also
     --------
-    to_plotly_json : Convert an arbitrary plotly graph_object or Dash component to JSON
+    to_json_plotly : Convert an arbitrary plotly graph_object or Dash component to JSON
     """
     # Validate figure
     # ---------------
@@ -210,7 +210,7 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         for trace in fig_dict.get("data", []):
             trace.pop("uid", None)
 
-    return to_plotly_json(fig_dict, pretty=pretty, engine=engine)
+    return to_json_plotly(fig_dict, pretty=pretty, engine=engine)
 
 
 def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=None):
@@ -267,7 +267,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         file.write(json_str)
 
 
-def from_plotly_json(value, engine=None):
+def from_json_plotly(value, engine=None):
     """
     Parse JSON string using the specified JSON engine
 
@@ -289,6 +289,10 @@ def from_plotly_json(value, engine=None):
     Returns
     -------
     dict
+
+    See Also
+    --------
+    from_json_plotly : Parse JSON with plotly conventions into a dict
     """
     orjson = get_module("orjson", should_load=True)
 
@@ -297,7 +301,7 @@ def from_plotly_json(value, engine=None):
     if not isinstance(value, (string_types, bytes)):
         raise ValueError(
             """
-from_plotly_json requires a string or bytes argument but received value of type {typ}
+from_json_plotly requires a string or bytes argument but received value of type {typ}
     Received value: {value}""".format(
                 typ=type(value), value=value
             )
@@ -368,7 +372,7 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
 
     # Decode JSON
     # -----------
-    fig_dict = from_plotly_json(value, engine=engine)
+    fig_dict = from_json_plotly(value, engine=engine)
 
     # Validate coerce output type
     # ---------------------------
