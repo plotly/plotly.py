@@ -34,6 +34,7 @@ class ColorBar(_BaseTraceHierarchyType):
         "tickformat",
         "tickformatstopdefaults",
         "tickformatstops",
+        "ticklabelposition",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -847,6 +848,28 @@ class ColorBar(_BaseTraceHierarchyType):
     def tickformatstopdefaults(self, val):
         self["tickformatstopdefaults"] = val
 
+    # ticklabelposition
+    # -----------------
+    @property
+    def ticklabelposition(self):
+        """
+        Determines where tick labels are drawn.
+    
+        The 'ticklabelposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['outside', 'inside', 'outside top', 'inside top',
+                'outside bottom', 'inside bottom']
+
+        Returns
+        -------
+        Any
+        """
+        return self["ticklabelposition"]
+
+    @ticklabelposition.setter
+    def ticklabelposition(self, val):
+        self["ticklabelposition"] = val
+
     # ticklen
     # -------
     @property
@@ -1429,6 +1452,8 @@ class ColorBar(_BaseTraceHierarchyType):
             rpolargl.marker.colorbar.tickformatstopdefaults), sets
             the default property values to use for elements of
             scatterpolargl.marker.colorbar.tickformatstops
+        ticklabelposition
+            Determines where tick labels are drawn.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1535,6 +1560,7 @@ class ColorBar(_BaseTraceHierarchyType):
         tickformat=None,
         tickformatstops=None,
         tickformatstopdefaults=None,
+        ticklabelposition=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -1688,6 +1714,8 @@ class ColorBar(_BaseTraceHierarchyType):
             rpolargl.marker.colorbar.tickformatstopdefaults), sets
             the default property values to use for elements of
             scatterpolargl.marker.colorbar.tickformatstops
+        ticklabelposition
+            Determines where tick labels are drawn.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1893,6 +1921,10 @@ an instance of :class:`plotly.graph_objs.scatterpolargl.marker.ColorBar`"""
         _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
         if _v is not None:
             self["tickformatstopdefaults"] = _v
+        _v = arg.pop("ticklabelposition", None)
+        _v = ticklabelposition if ticklabelposition is not None else _v
+        if _v is not None:
+            self["ticklabelposition"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

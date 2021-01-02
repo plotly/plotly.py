@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: How to make subplots in with Plotly's Python graphing library. Examples
       of stacked, custom-sized, gridded, and annotated subplots.
@@ -39,14 +39,14 @@ jupyter:
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-Plotly Express does not support arbitrary subplot capabilities, instead it supports [faceting by a given data dimension](/python/facet-plots/), and it also supports [marginal charts to display distribution information](/python/marginal-plots/). 
+Plotly Express does not support arbitrary subplot capabilities, instead it supports [faceting by a given data dimension](/python/facet-plots/), and it also supports [marginal charts to display distribution information](/python/marginal-plots/).
 
 This page documents the usage of the lower-level `plotly.subplots` module and the `make_subplots` function it exposes to construct figures with arbitrary subplots. **Plotly Express faceting uses `make_subplots` internally** so adding traces to Plotly Express facets works just as documented here, with `fig.add_trace(..., row=<R>, col=<C>)`.
 
 
 #### Simple Subplot
 
-Figures with subplots are created using the `make_subplots` function from the `plotly.subplots` module. 
+Figures with subplots are created using the `make_subplots` function from the `plotly.subplots` module.
 
 Here is an example of creating a figure that includes two `scatter` traces which are side-by-side since there are 2 columns and 1 row in the subplot layout.
 
@@ -211,6 +211,19 @@ fig.add_trace(go.Scatter(x=[20, 30, 40], y=[50, 60, 70]),
 fig.show()
 ```
 
+#### Subplots in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'subplots', width='100%', height=630)
+```
+
 #### Customizing Subplot Axes
 After a figure with subplots is created using the `make_subplots` function, its axis properties (title, font, range, grid style, etc.) can be customized using the `update_xaxes` and `update_yaxes` graph object figure methods.  By default, these methods apply to all of the x axes or y axes in the figure. The `row` and `col` arguments can be used to control which axes are targeted by the update.
 
@@ -258,8 +271,8 @@ Here is an example that creates a figure with 3 vertically stacked subplots with
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
-fig = make_subplots(rows=3, cols=1, 
-                    shared_xaxes=True, 
+fig = make_subplots(rows=3, cols=1,
+                    shared_xaxes=True,
                     vertical_spacing=0.02)
 
 fig.add_trace(go.Scatter(x=[0, 1, 2], y=[10, 11, 12]),
@@ -417,7 +430,7 @@ fig.add_trace(go.Barpolar(theta=[0, 45, 90], r=[2, 3, 1]),
 fig.add_trace(go.Pie(values=[2, 3, 1]),
               row=2, col=1)
 
-fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], 
+fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0],
                            z=[0.5, 1, 2], mode="lines"),
               row=2, col=2)
 
@@ -449,7 +462,7 @@ fig.add_trace(go.Barpolar(theta=[0, 45, 90], r=[2, 3, 1]),
 fig.add_trace(go.Pie(values=[2, 3, 1]),
               row=2, col=1)
 
-fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0], 
+fig.add_trace(go.Scatter3d(x=[2, 3, 1], y=[0, 0, 0],
                            z=[0.5, 1, 2], mode="lines"),
               row=2, col=2)
 
@@ -579,6 +592,26 @@ layout = go.Layout(
 )
 fig = go.Figure(data=data, layout=layout)
 fig.show()
+```
+
+#### Setting Subplots on a Figure Directly
+
+_new in 4.13_
+
+Subplots can be added to an already existing figure, provided it doesn't already
+have subplots. `go.Figure.set_subplots` accepts all the same arguments as
+`plotly.subplots.make_subplots`.
+
+```python
+import plotly.graph_objects as go
+fig = go.Figure().set_subplots(2, 3, horizontal_spacing=0.1)
+```
+
+is equivalent to:
+
+```python
+from plotly.subplots import make_subplots
+fig = make_subplots(2, 3, horizontal_spacing=0.1)
 ```
 
 #### Reference

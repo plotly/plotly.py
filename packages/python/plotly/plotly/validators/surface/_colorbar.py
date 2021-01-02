@@ -147,6 +147,8 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 a.surface.colorbar.tickformatstopdefaults),
                 sets the default property values to use for
                 elements of surface.colorbar.tickformatstops
+            ticklabelposition
+                Determines where tick labels are drawn.
             ticklen
                 Sets the tick length (in px).
             tickmode

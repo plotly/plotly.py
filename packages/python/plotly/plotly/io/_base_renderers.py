@@ -861,14 +861,14 @@ class SphinxGalleryOrcaRenderer(ExternalRenderer):
         filename_html = filename_root + ".html"
         filename_png = filename_root + ".png"
         figure = return_figure_from_figure_or_data(fig_dict, True)
-        _ = write_html(fig_dict, file=filename_html)
+        _ = write_html(fig_dict, file=filename_html, include_plotlyjs="cdn")
         try:
             write_image(figure, filename_png)
         except (ValueError, ImportError):
             raise ImportError(
                 "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
-                "See https://plotly.com/python/static-image-export/ for instructions on"
-                "how to install orca. Alternatively, you can use the `sphinx-gallery`"
-                "renderer (note that png thumbnails can only be generated with"
+                "See https://plotly.com/python/static-image-export/ for instructions on "
+                "how to install orca. Alternatively, you can use the `sphinx-gallery` "
+                "renderer (note that png thumbnails can only be generated with "
                 "the `sphinx-gallery-orca` renderer)."
             )

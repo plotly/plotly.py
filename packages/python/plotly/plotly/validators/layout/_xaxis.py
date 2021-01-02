@@ -24,6 +24,13 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 axis is computed in relation to the input data.
                 See `rangemode` for more info. If `range` is
                 provided, then `autorange` is set to False.
+            autotypenumbers
+                Using "strict" a numeric string in trace data
+                is not converted to a number. Using *convert
+                types* a numeric string in trace data may be
+                treated as a number during automatic axis
+                `type` detection. Defaults to
+                layout.autotypenumbers.
             calendar
                 Sets the calendar system to use for `range` and
                 `tick0` if this is a date axis. This does not
@@ -67,8 +74,10 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 If this axis needs to be compressed (either due
                 to its own `scaleanchor` and `scaleratio` or
                 those of the other axis), determines how that
-                happens: by increasing the "range" (default),
-                or by decreasing the "domain".
+                happens: by increasing the "range", or by
+                decreasing the "domain". Default is "domain"
+                for axes containing image traces, "range"
+                otherwise.
             constraintoward
                 If this axis needs to be compressed (either due
                 to its own `scaleanchor` and `scaleratio` or
@@ -371,6 +380,18 @@ class XaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "date" When set to "period", tick labels are
                 drawn in the middle of the period between
                 ticks.
+            ticklabelposition
+                Determines where tick labels are drawn with
+                respect to the axis Please note that top or
+                bottom has no effect on x axes or when
+                `ticklabelmode` is set to "period". Similarly
+                left or right has no effect on y axes or when
+                `ticklabelmode` is set to "period". Has no
+                effect on "multicategory" axes or when
+                `tickson` is set to "boundaries". When used on
+                axes linked by `matches` or `scaleanchor`, no
+                extra padding for inside labels would be added
+                by autorange, so that the scales could match.
             ticklen
                 Sets the tick length (in px).
             tickmode

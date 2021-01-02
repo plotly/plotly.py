@@ -5,6 +5,7 @@ import xarray as xr
 from PIL import Image
 from io import BytesIO
 import base64
+import datetime
 from plotly.express.imshow_utils import rescale_intensity
 
 img_rgb = np.array([[[255, 0, 0], [0, 255, 0], [0, 0, 255]]], dtype=np.uint8)
@@ -171,14 +172,26 @@ def test_zmin_zmax_range_color_source():
     assert fig1 == fig2
 
 
-def test_imshow_xarray():
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_imshow_xarray(binary_string):
     img = np.random.random((20, 30))
     da = xr.DataArray(img, dims=["dim_rows", "dim_cols"])
-    fig = px.imshow(da)
+    fig = px.imshow(da, binary_string=binary_string)
     # Dimensions are used for axis labels and coordinates
     assert fig.layout.xaxis.title.text == "dim_cols"
     assert fig.layout.yaxis.title.text == "dim_rows"
-    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
+    if not binary_string:
+        assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_cols"]))
+
+
+def test_imshow_xarray_slicethrough():
+    img = np.random.random((8, 9, 10))
+    da = xr.DataArray(img, dims=["dim_0", "dim_1", "dim_2"])
+    fig = px.imshow(da, animation_frame="dim_0")
+    # Dimensions are used for axis labels and coordinates
+    assert fig.layout.xaxis.title.text == "dim_2"
+    assert fig.layout.yaxis.title.text == "dim_1"
+    assert np.all(np.array(fig.data[0].x) == np.array(da.coords["dim_2"]))
 
 
 def test_imshow_labels_and_ranges():
@@ -203,6 +216,37 @@ def test_imshow_labels_and_ranges():
 
     with pytest.raises(ValueError):
         fig = px.imshow([[1, 2], [3, 4], [5, 6]], x=["a"])
+
+    img = np.ones((2, 2), dtype=np.uint8)
+    fig = px.imshow(img, x=["a", "b"])
+    assert fig.data[0].x == ("a", "b")
+
+    with pytest.raises(ValueError):
+        img = np.ones((2, 2, 3), dtype=np.uint8)
+        fig = px.imshow(img, x=["a", "b"])
+
+    img = np.ones((2, 2), dtype=np.uint8)
+    base = datetime.datetime(2000, 1, 1)
+    fig = px.imshow(img, x=[base, base + datetime.timedelta(hours=1)])
+    assert fig.data[0].x == (
+        datetime.datetime(2000, 1, 1, 0, 0),
+        datetime.datetime(2000, 1, 1, 1, 0),
+    )
+
+    with pytest.raises(ValueError):
+        img = np.ones((2, 2, 3), dtype=np.uint8)
+        base = datetime.datetime(2000, 1, 1)
+        fig = px.imshow(img, x=[base, base + datetime.timedelta(hours=1)])
+
+
+def test_imshow_ranges_image_trace():
+    fig = px.imshow(img_rgb, x=[1, 11, 21])
+    assert fig.data[0].dx == 10
+    assert fig.data[0].x0 == 1
+    fig = px.imshow(img_rgb, x=[21, 11, 1])
+    assert fig.data[0].dx == -10
+    assert fig.data[0].x0 == 21
+    assert fig.layout.xaxis.autorange == "reversed"
 
 
 def test_imshow_dataframe():
@@ -314,3 +358,50 @@ def test_imshow_hovertemplate(binary_string):
             fig.data[0].hovertemplate
             == "x: %{x}<br>y: %{y}<br>color: %{z}<extra></extra>"
         )
+
+
+@pytest.mark.parametrize("facet_col", [0, 1, 2, -1])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_facet_col(facet_col, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8))
+    facet_col_wrap = 3
+    fig = px.imshow(
+        img,
+        facet_col=facet_col,
+        facet_col_wrap=facet_col_wrap,
+        binary_string=binary_string,
+    )
+    nslices = img.shape[facet_col]
+    ncols = int(facet_col_wrap)
+    nrows = nslices // ncols + 1 if nslices % ncols else nslices // ncols
+    nmax = ncols * nrows
+    assert "yaxis%d" % nmax in fig.layout
+    assert "yaxis%d" % (nmax + 1) not in fig.layout
+    assert len(fig.data) == nslices
+
+
+@pytest.mark.parametrize("animation_frame", [0, 1, 2, -1])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_frame_grayscale(animation_frame, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    nslices = img.shape[animation_frame]
+    assert len(fig.frames) == nslices
+
+
+@pytest.mark.parametrize("animation_frame", [0, 1, 2])
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_frame_rgb(animation_frame, binary_string):
+    img = np.random.randint(255, size=(10, 9, 8, 3)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=animation_frame, binary_string=binary_string,)
+    nslices = img.shape[animation_frame]
+    assert len(fig.frames) == nslices
+
+
+@pytest.mark.parametrize("binary_string", [False, True])
+def test_animation_and_facet(binary_string):
+    img = np.random.randint(255, size=(10, 9, 8, 7)).astype(np.uint8)
+    fig = px.imshow(img, animation_frame=0, facet_col=1, binary_string=binary_string)
+    nslices = img.shape[0]
+    assert len(fig.frames) == nslices
+    assert len(fig.data) == img.shape[1]

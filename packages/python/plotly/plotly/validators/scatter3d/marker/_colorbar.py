@@ -150,6 +150,8 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 lts), sets the default property values to use
                 for elements of
                 scatter3d.marker.colorbar.tickformatstops
+            ticklabelposition
+                Determines where tick labels are drawn.
             ticklen
                 Sets the tick length (in px).
             tickmode

@@ -67,6 +67,7 @@ if sys.version_info < (3, 7):
     from ._dragmode import DragmodeValidator
     from ._direction import DirectionValidator
     from ._datarevision import DatarevisionValidator
+    from ._computed import ComputedValidator
     from ._colorway import ColorwayValidator
     from ._colorscale import ColorscaleValidator
     from ._coloraxis import ColoraxisValidator
@@ -79,6 +80,7 @@ if sys.version_info < (3, 7):
     from ._barmode import BarmodeValidator
     from ._bargroupgap import BargroupgapValidator
     from ._bargap import BargapValidator
+    from ._autotypenumbers import AutotypenumbersValidator
     from ._autosize import AutosizeValidator
     from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
@@ -157,6 +159,7 @@ else:
             "._dragmode.DragmodeValidator",
             "._direction.DirectionValidator",
             "._datarevision.DatarevisionValidator",
+            "._computed.ComputedValidator",
             "._colorway.ColorwayValidator",
             "._colorscale.ColorscaleValidator",
             "._coloraxis.ColoraxisValidator",
@@ -169,6 +172,7 @@ else:
             "._barmode.BarmodeValidator",
             "._bargroupgap.BargroupgapValidator",
             "._bargap.BargapValidator",
+            "._autotypenumbers.AutotypenumbersValidator",
             "._autosize.AutosizeValidator",
             "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",

@@ -2,6 +2,108 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.15.0] - UNRELEASED
+
+### Added
+
+### Fixed
+
+### Updated
+
+
+## [4.14.2] - UNRELEASED
+
+### Added
+
+### Fixed
+
+### Updated
+
+
+## [4.14.1] - 2020-12-09
+
+### Updated
+
+- Updated Plotly.js to version 1.58.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - fixes for new `ticklabelposition` attribute
+  - fixes for a regression related to treemaps in the previous version
+
+
+## [4.14.0] - 2020-12-07
+
+### Added
+
+- `px.imshow` now supports `facet_col` and `animation_frame` arguments for visualizing 3-d and 4-d images [2746](https://github.com/plotly/plotly.py/pull/2746)
+- `px.defaults` now supports `color_discrete_map`, `symbol_map`, `line_dash_map`, `labels` and `category_orders` as well as a `.reset()` method [2957](https://github.com/plotly/plotly.py/pull/2957)
+
+### Fixed
+
+- axes will now auto-type numeric strings as categorical data rather than linear in the default templates [2951](https://github.com/plotly/plotly.py/pull/2951)
+
+### Updated
+
+- Updated Plotly.js to version 1.58.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - a new `ticklabelposition` attribute to enable positioning tick labels inside the plotting area
+  - better support for `scaleanchor` and `matches` on cartesian axes for matched square subplots
+  - a new `autotypenumbers` attribute which is now set to `strict` in the default templates
+  - various fixes relating to `automargins` for small figures
+
+
+## [4.13.0] - 2020-11-23
+
+### Added
+- `px.choropleth`, `px.scatter_geo` and `px.line_geo` now support faceting as well as `fitbounds` and `basemap_visible` [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `px.scatter_geo` and `px.line_geo` now support `geojson`/`featureidkey` input [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `px.scatter_geo` now supports `symbol` [2923](https://github.com/plotly/plotly.py/pull/2923)
+- `go.Figure` now has a `set_subplots` method to set subplots on an already
+  existing figure. [2866](https://github.com/plotly/plotly.py/pull/2866)
+- Added `Turbo` colorscale and fancier swatch display functions
+  [2882](https://github.com/plotly/plotly.py/pull/2882)
+- A utility function `image_array_to_data_uri` has been added in
+  `plotly.utils`, in order to transform NumPy arrays to data b64 URIs (which
+  can be passed to the source parameter of `go.Image`, or to layout images).
+  [2879](https://github.com/plotly/plotly.py/pull/2879)
+- the `selector` argument to updater/selector functions now accepts `int`s and `str`s
+  [2894](https://github.com/plotly/plotly.py/pull/2894)
+
+
+### Updated
+
+- the JSON serialization of plotly figures has been accelerated thanks to a
+  different handling of Infinity and NaN values. For example, a figure with a
+  1000x1000 Heatmap should now serialize 2x faster. [2880](https://github.com/plotly/plotly.py/pull/2880)
+- Coding mistakes with "magic underscores" now return significantly more ergonomic error
+  messages [2843](https://github.com/plotly/plotly.py/pull/2843)
+- Error messages related to impossible subplot geometries are now much more helpful
+  [2897](https://github.com/plotly/plotly.py/pull/2897)
+
+
+### Fixed
+
+- `px.scatter_geo` support for `text` is fixed [2923](https://github.com/plotly/plotly.py/pull/2923)
+- the `x` and `y` parameters of `px.imshow` are now used also in the case where
+  an Image trace is used (for RGB data or with `binary_string=True`). However,
+  only numerical values are accepted (while the Heatmap trace allows date or
+  string values for `x` and `y`). [2761](https://github.com/plotly/plotly.py/pull/2761)
+
+
+## [4.12.0] - 2020-10-23
+
+### Added
+
+- For `add_trace`, `add_shape`, `add_annotation` and `add_layout_image`, the `row` and/or `col` argument now also accept the string `"all"`. `row="all"` adds the object to all the subplot rows and `col="all"` adds the object to all the subplot columns. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- Shapes that reference the plot axes in one dimension and the data in another dimension can be added with the new `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions, which also support the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- The `add_trace`, `add_shape`, `add_annotation`, `add_layout_image`, `add_hline`, `add_vline`, `add_hrect`, `add_vrect` functions accept an argument `exclude_empty_subplots` which if `True`, only adds the object to subplots already containing traces or layout objects. This is useful in conjunction with the `row="all"` and `col="all"` arguments. ([#2840](https://github.com/plotly/plotly.py/pull/2840))
+- For all `go.Figure` functions accepting a selector argument (e.g., `select_traces`), this argument can now also be a function which is passed each relevant graph object (in the case of `select_traces`, it is passed every trace in the figure). For graph objects where this function returns true, the graph object is included in the selection. ([#2844](https://github.com/plotly/plotly.py/pull/2844))
+
+### Added
+
+- Better magic underscore error messages. For example, `some_fig.update_layout(geo_ltaxis_showgrid=True)` shows `Bad property path:\ngeo_ltaxis_showgrid\n   ^` and lists the valid properties for `geo`.
+
+### Updated
+
+- Updated Plotly.js to version 1.57.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.57.1/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+
 ## [4.11.0] - 2020-10-01
 
 ### Updated
@@ -13,6 +115,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - Added `plotly.io.full_figure_for_development()` and `plotly.graph_objects.Figure.full_figure_for_development()` ([#2737](https://github.com/plotly/plotly.py/pull/2737))
+
+### Updated
+
+- The JSON serialization of plotly figures had been accelerated by handling
+  differently figures with and without NaN and Inf values ([#2880](https://github.com/plotly/plotly.py/pull/2880)).
 
 ### Updated
 

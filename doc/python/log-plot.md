@@ -95,4 +95,4 @@ fig.show()
 
 #### Reference
 
-See https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type for more information and chart attribute options!
+See [function reference for `px.(scatter)`](https://plotly.com/python-api-reference/generated/plotly.express.scatter) or https://plotly.com/python/reference/layout/xaxis/#layout-xaxis-type for more information and chart attribute options!

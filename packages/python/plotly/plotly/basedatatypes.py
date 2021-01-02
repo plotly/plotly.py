@@ -8,14 +8,384 @@ from six import string_types
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy, copy
+import itertools
+from functools import reduce
 
-from _plotly_utils.utils import _natural_sort_strings, _get_int_type
+from _plotly_utils.utils import (
+    _natural_sort_strings,
+    _get_int_type,
+    split_multichar,
+    split_string_positions,
+    display_string_positions,
+    chomp_empty_strings,
+    find_closest_string,
+)
+from _plotly_utils.exceptions import PlotlyKeyError
 from .optional_imports import get_module
+
+from . import shapeannotation
+from . import subplots
 
 # Create Undefined sentinel value
 #   - Setting a property to None removes any existing value
 #   - Setting a property to Undefined leaves existing value unmodified
 Undefined = object()
+
+
+def _len_dict_item(item):
+    """
+    Because a parsed dict path is a tuple containings strings or integers, to
+    know the length of the resulting string when printing we might need to
+    convert to a string before calling len on it.
+    """
+    try:
+        l = len(item)
+    except TypeError:
+        try:
+            l = len("%d" % (item,))
+        except TypeError:
+            raise ValueError(
+                "Cannot find string length of an item that is not string-like nor an integer."
+            )
+    return l
+
+
+def _str_to_dict_path_full(key_path_str):
+    """
+    Convert a key path string into a tuple of key path elements and also
+    return a tuple of indices marking the beginning of each element in the
+    string.
+
+    Parameters
+    ----------
+    key_path_str : str
+        Key path string, where nested keys are joined on '.' characters
+        and array indexes are specified using brackets
+        (e.g. 'foo.bar[1]')
+    Returns
+    -------
+    tuple[str | int]
+    tuple [int]
+    """
+    # skip all the parsing if the string is empty
+    if len(key_path_str):
+        # split string on ".[]" and filter out empty strings
+        key_path2 = split_multichar([key_path_str], list(".[]"))
+        # Split out underscore
+        # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
+        key_path3 = []
+        underscore_props = BaseFigure._valid_underscore_properties
+
+        def _make_hyphen_key(key):
+            if "_" in key[1:]:
+                # For valid properties that contain underscores (error_x)
+                # replace the underscores with hyphens to protect them
+                # from being split up
+                for under_prop, hyphen_prop in underscore_props.items():
+                    key = key.replace(under_prop, hyphen_prop)
+            return key
+
+        def _make_underscore_key(key):
+            return key.replace("-", "_")
+
+        key_path2b = list(map(_make_hyphen_key, key_path2))
+        # Here we want to split up each non-empty string in the list at
+        # underscores and recombine the strings using chomp_empty_strings so
+        # that leading, trailing and multiple _ will be preserved
+        def _split_and_chomp(s):
+            if not len(s):
+                return s
+            s_split = split_multichar([s], list("_"))
+            # handle key paths like "a_path_", "_another_path", or
+            # "yet__another_path" by joining extra "_" to the string to the right or
+            # the empty string if at the end
+            s_chomped = chomp_empty_strings(s_split, "_", reverse=True)
+            return s_chomped
+
+        # after running _split_and_chomp on key_path2b, it will be a list
+        # containing strings and lists of strings; concatenate the sublists with
+        # the list ("lift" the items out of the sublists)
+        key_path2c = list(
+            reduce(
+                lambda x, y: x + y if type(y) == type(list()) else x + [y],
+                map(_split_and_chomp, key_path2b),
+                [],
+            )
+        )
+
+        key_path2d = list(map(_make_underscore_key, key_path2c))
+        all_elem_idcs = tuple(split_string_positions(list(key_path2d)))
+        # remove empty strings, and indices pointing to them
+        key_elem_pairs = list(filter(lambda t: len(t[1]), enumerate(key_path2d)))
+        key_path3 = [x for _, x in key_elem_pairs]
+        elem_idcs = [all_elem_idcs[i] for i, _ in key_elem_pairs]
+
+        # Convert elements to ints if possible.
+        # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
+        for i in range(len(key_path3)):
+            try:
+                key_path3[i] = int(key_path3[i])
+            except ValueError as _:
+                pass
+    else:
+        key_path3 = []
+        elem_idcs = []
+
+    return (tuple(key_path3), elem_idcs)
+
+
+def _remake_path_from_tuple(props):
+    """
+    try to remake a path using the properties in props
+    """
+    if len(props) == 0:
+        return ""
+
+    def _add_square_brackets_to_number(n):
+        if type(n) == type(int()):
+            return "[%d]" % (n,)
+        return n
+
+    def _prepend_dot_if_not_number(s):
+        if not s.startswith("["):
+            return "." + s
+        return s
+
+    props_all_str = list(map(_add_square_brackets_to_number, props))
+    props_w_underscore = props_all_str[:1] + list(
+        map(_prepend_dot_if_not_number, props_all_str[1:])
+    )
+    return "".join(props_w_underscore)
+
+
+def _check_path_in_prop_tree(obj, path, error_cast=None):
+    """
+    obj:        the object in which the first property is looked up
+    path:       the path that will be split into properties to be looked up
+                path can also be a tuple. In this case, it is combined using .
+                and [] because it is impossible to reconstruct the string fully
+                in order to give a decent error message.
+    error_cast: this function walks down the property tree by looking up values
+                in objects. So this will throw exceptions that are thrown by
+                __getitem__, but in some cases we are checking the path for a
+                different reason and would prefer throwing a more relevant
+                exception (e.g., __getitem__ throws KeyError but __setitem__
+                throws ValueError for subclasses of BasePlotlyType and
+                BaseFigure). So the resulting error can be "casted" to the
+                passed in type, if not None.
+    returns
+          an Exception object or None. The caller can raise this
+          exception to see where the lookup error occurred.
+    """
+    if isinstance(path, tuple):
+        path = _remake_path_from_tuple(path)
+    prop, prop_idcs = _str_to_dict_path_full(path)
+    prev_objs = []
+    for i, p in enumerate(prop):
+        arg = ""
+        prev_objs.append(obj)
+        try:
+            obj = obj[p]
+        except (ValueError, KeyError, IndexError, TypeError) as e:
+            arg = e.args[0]
+            if issubclass(e.__class__, TypeError):
+                # If obj doesn't support subscripting, state that and show the
+                # (valid) property that gives the object that doesn't support
+                # subscripting.
+                if i > 0:
+                    validator = prev_objs[i - 1]._get_validator(prop[i - 1])
+                    arg += """
+
+Invalid value received for the '{plotly_name}' property of {parent_name}
+
+{description}""".format(
+                        parent_name=validator.parent_name,
+                        plotly_name=validator.plotly_name,
+                        description=validator.description(),
+                    )
+                # In case i is 0, the best we can do is indicate the first
+                # property in the string as having caused the error
+                disp_i = max(i - 1, 0)
+                dict_item_len = _len_dict_item(prop[disp_i])
+                # if the path has trailing underscores, the prop string will start with "_"
+                trailing_underscores = ""
+                if prop[i][0] == "_":
+                    trailing_underscores = " and path has trailing underscores"
+                # if the path has trailing underscores and the display index is
+                # one less than the prop index (see above), then we can also
+                # indicate the offending underscores
+                if (trailing_underscores != "") and (disp_i != i):
+                    dict_item_len += _len_dict_item(prop[i])
+                arg += """
+
+Property does not support subscripting%s:
+%s
+%s""" % (
+                    trailing_underscores,
+                    path,
+                    display_string_positions(
+                        prop_idcs, disp_i, length=dict_item_len, char="^"
+                    ),
+                )
+            else:
+                # State that the property for which subscripting was attempted
+                # is bad and indicate the start of the bad property.
+                arg += """
+Bad property path:
+%s
+%s""" % (
+                    path,
+                    display_string_positions(
+                        prop_idcs, i, length=_len_dict_item(prop[i]), char="^"
+                    ),
+                )
+            # Make KeyError more pretty by changing it to a PlotlyKeyError,
+            # because the Python interpreter has a special way of printing
+            # KeyError
+            if isinstance(e, KeyError):
+                e = PlotlyKeyError()
+            if error_cast is not None:
+                e = error_cast()
+            e.args = (arg,)
+            return e
+    return None
+
+
+def _combine_dicts(dicts):
+    all_args = dict()
+    for d in dicts:
+        for k in d:
+            all_args[k] = d[k]
+    return all_args
+
+
+def _indexing_combinations(dims, alls, product=False):
+    """
+    Gives indexing tuples specified by the coordinates in dims.
+    If a member of dims is 'all' then it is replaced by the corresponding member
+    in alls.
+    If product is True, then the cartesian product of all the indices is
+    returned, otherwise the zip (that means index lists of mis-matched length
+    will yield a list of tuples whose length is the length of the shortest
+    list).
+    """
+    if len(dims) == 0:
+        # this is because list(itertools.product(*[])) returns [()] which has non-zero
+        # length!
+        return []
+    if len(dims) != len(alls):
+        raise ValueError(
+            "Must have corresponding values in alls for each value of dims. Got dims=%s and alls=%s."
+            % (str(dims), str(alls))
+        )
+    r = []
+    for d, a in zip(dims, alls):
+        if d == "all":
+            d = a
+        elif not isinstance(d, list):
+            d = [d]
+        r.append(d)
+    if product:
+        return itertools.product(*r)
+    else:
+        return zip(*r)
+
+
+def _is_select_subplot_coordinates_arg(*args):
+    """ Returns true if any args are lists or the string 'all' """
+    return any((a == "all") or isinstance(a, list) for a in args)
+
+
+def _axis_spanning_shapes_docstr(shape_type):
+    docstr = ""
+    if shape_type == "hline":
+        docstr = """
+Add a horizontal line to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y: float or int
+    A number representing the y coordinate of the horizontal line."""
+    elif shape_type == "vline":
+        docstr = """
+Add a vertical line to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x: float or int
+    A number representing the x coordinate of the vertical line."""
+    elif shape_type == "hrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+x-dimension.
+
+Parameters
+----------
+y0: float or int
+    A number representing the y coordinate of one side of the rectangle.
+y1: float or int
+    A number representing the y coordinate of the other side of the rectangle."""
+    elif shape_type == "vrect":
+        docstr = """
+Add a rectangle to a plot or subplot that extends infinitely in the
+y-dimension.
+
+Parameters
+----------
+x0: float or int
+    A number representing the x coordinate of one side of the rectangle.
+x1: float or int
+    A number representing the x coordinate of the other side of the rectangle."""
+    docstr += """
+exclude_empty_subplots: Boolean
+    If True (default) do not place the shape on subplots that have no data
+    plotted on them.
+row: None, int or 'all'
+    Subplot row for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+col: None, int or 'all'
+    Subplot column for shape indexed starting at 1. If 'all', addresses all rows in
+    the specified column(s). If both row and col are None, addresses the
+    first subplot if subplots exist, or the only plot. By default is "all".
+annotation: dict or plotly.graph_objects.layout.Annotation. If dict(),
+    it is interpreted as describing an annotation. The annotation is
+    placed relative to the shape based on annotation_position (see
+    below) unless its x or y value has been specified for the annotation
+    passed here. xref and yref are always the same as for the added
+    shape and cannot be overridden."""
+    if shape_type in ["hline", "vline"]:
+        docstr += """
+annotation_position: a string containing optionally ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the line. Example positions are "bottom left", "right top",
+    "right", "bottom". If an annotation is added but annotation_position is
+    not specified, this defaults to "top right"."""
+    elif shape_type in ["hrect", "vrect"]:
+        docstr += """
+annotation_position: a string containing optionally ["inside", "outside"], ["top", "bottom"]
+    and ["left", "right"] specifying where the text should be anchored
+    to on the rectangle. Example positions are "outside top left", "inside
+    bottom", "right", "inside left", "inside" ("outside" is not supported). If
+    an annotation is added but annotation_position is not specified this
+    defaults to "inside top right"."""
+    docstr += """
+annotation_*: any parameters to go.layout.Annotation can be passed as
+    keywords by prefixing them with "annotation_". For example, to specify the
+    annotation text "example" you can pass annotation_text="example" as a
+    keyword argument.
+**kwargs:
+    Any named function parameters that can be passed to 'add_shape',
+    except for x0, x1, y0, y1 or type."""
+    return docstr
+
+
+def _generator(i):
+    """ "cast" an iterator to a generator """
+    for x in i:
+        yield x
 
 
 class BaseFigure(object):
@@ -265,10 +635,18 @@ class BaseFigure(object):
         # Process kwargs
         # --------------
         for k, v in kwargs.items():
-            if k in self:
+            err = _check_path_in_prop_tree(self, k)
+            if err is None:
                 self[k] = v
             elif not skip_invalid:
-                raise TypeError("invalid Figure property: {}".format(k))
+                type_err = TypeError("invalid Figure property: {}".format(k))
+                type_err.args = (
+                    type_err.args[0]
+                    + """
+%s"""
+                    % (err.args[0],),
+                )
+                raise type_err
 
     # Magic Methods
     # -------------
@@ -315,6 +693,9 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=ValueError)
+            if err is not None:
+                raise err
             res = self
             for p in prop[:-1]:
                 res = res[p]
@@ -370,6 +751,9 @@ class BaseFigure(object):
         # ----------------------
         # e.g. ('foo', 1)
         else:
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=PlotlyKeyError)
+            if err is not None:
+                raise err
             res = self
             for p in prop:
                 res = res[p]
@@ -723,12 +1107,17 @@ class BaseFigure(object):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -796,41 +1185,80 @@ class BaseFigure(object):
     def _perform_select_traces(self, filter_by_subplot, grid_subplot_refs, selector):
         from plotly.subplots import _get_subplot_ref_for_trace
 
-        for trace in self.data:
-            # Filter by subplot
-            if filter_by_subplot:
-                trace_subplot_ref = _get_subplot_ref_for_trace(trace)
-                if trace_subplot_ref not in grid_subplot_refs:
-                    continue
+        # functions for filtering
+        def _filter_by_subplot_ref(trace):
+            trace_subplot_ref = _get_subplot_ref_for_trace(trace)
+            return trace_subplot_ref in grid_subplot_refs
 
-            # Filter by selector
-            if not self._selector_matches(trace, selector):
-                continue
+        funcs = []
+        if filter_by_subplot:
+            funcs.append(_filter_by_subplot_ref)
 
-            yield trace
+        return _generator(self._filter_by_selector(self.data, funcs, selector))
 
     @staticmethod
     def _selector_matches(obj, selector):
         if selector is None:
             return True
+        # If selector is a string then put it at the 'type' key of a dictionary
+        # to select objects where "type":selector
+        if isinstance(selector, six.string_types):
+            selector = dict(type=selector)
+        # If selector is a dict, compare the fields
+        if isinstance(selector, dict) or isinstance(selector, BasePlotlyType):
+            # This returns True if selector is an empty dict
+            for k in selector:
+                if k not in obj:
+                    return False
 
-        for k in selector:
-            if k not in obj:
-                return False
+                obj_val = obj[k]
+                selector_val = selector[k]
 
-            obj_val = obj[k]
-            selector_val = selector[k]
+                if isinstance(obj_val, BasePlotlyType):
+                    obj_val = obj_val.to_plotly_json()
 
-            if isinstance(obj_val, BasePlotlyType):
-                obj_val = obj_val.to_plotly_json()
+                if isinstance(selector_val, BasePlotlyType):
+                    selector_val = selector_val.to_plotly_json()
 
-            if isinstance(selector_val, BasePlotlyType):
-                selector_val = selector_val.to_plotly_json()
+                if obj_val != selector_val:
+                    return False
+            return True
+        # If selector is a function, call it with the obj as the argument
+        elif six.callable(selector):
+            return selector(obj)
+        else:
+            raise TypeError(
+                "selector must be dict or a function "
+                "accepting a graph object returning a boolean."
+            )
 
-            if obj_val != selector_val:
-                return False
+    def _filter_by_selector(self, objects, funcs, selector):
+        """
+        objects is a sequence of objects, funcs a list of functions that
+        return True if the object should be included in the selection and False
+        otherwise and selector is an argument to the self._selector_matches
+        function.
+        If selector is an integer, the resulting sequence obtained after
+        sucessively filtering by each function in funcs is indexed by this
+        integer.
+        Otherwise selector is used as the selector argument to
+        self._selector_matches which is used to filter down the sequence.
+        The function returns the sequence (an iterator).
+        """
 
-        return True
+        # if selector is not an int, we call it on each trace to test it for selection
+        if not isinstance(selector, int):
+            funcs.append(lambda obj: self._selector_matches(obj, selector))
+
+        def _filt(last, f):
+            return filter(f, last)
+
+        filtered_objects = reduce(_filt, funcs, objects)
+
+        if isinstance(selector, int):
+            return iter([list(filtered_objects)[selector]])
+
+        return filtered_objects
 
     def for_each_trace(self, fn, selector=None, row=None, col=None, secondary_y=None):
         """
@@ -841,12 +1269,17 @@ class BaseFigure(object):
         ----------
         fn:
             Function that inputs a single trace object.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -895,12 +1328,17 @@ class BaseFigure(object):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all traces that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all traces are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each trace and those for which the function returned True
+            will be in the selection. If an int N, the Nth trace matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of traces to select.
             To select traces by row and column, the Figure must have been
@@ -995,37 +1433,25 @@ class BaseFigure(object):
         else:
             container_to_row_col = None
 
-        # Natural sort keys so that xaxis20 is after xaxis3
-        layout_keys = _natural_sort_strings(list(self.layout))
-
-        for k in layout_keys:
-            if k.startswith(prefix) and self.layout[k] is not None:
-
-                # Filter by row/col
-                if (
-                    row is not None
-                    and container_to_row_col.get(k, (None, None, None))[0] != row
-                ):
-                    # row specified and this is not a match
-                    continue
-                elif (
-                    col is not None
-                    and container_to_row_col.get(k, (None, None, None))[1] != col
-                ):
-                    # col specified and this is not a match
-                    continue
-                elif (
-                    secondary_y is not None
-                    and container_to_row_col.get(k, (None, None, None))[2]
-                    != secondary_y
-                ):
-                    continue
-
-                # Filter by selector
-                if not self._selector_matches(self.layout[k], selector):
-                    continue
-
-                yield self.layout[k]
+        layout_keys_filters = [
+            lambda k: k.startswith(prefix) and self.layout[k] is not None,
+            lambda k: row is None
+            or container_to_row_col.get(k, (None, None, None))[0] == row,
+            lambda k: col is None
+            or container_to_row_col.get(k, (None, None, None))[1] == col,
+            lambda k: (
+                secondary_y is None
+                or container_to_row_col.get(k, (None, None, None))[2] == secondary_y
+            ),
+        ]
+        layout_keys = reduce(
+            lambda last, f: filter(f, last),
+            layout_keys_filters,
+            # Natural sort keys so that xaxis20 is after xaxis3
+            _natural_sort_strings(list(self.layout)),
+        )
+        layout_objs = [self.layout[k] for k in layout_keys]
+        return _generator(self._filter_by_selector(layout_objs, [], selector))
 
     def _select_annotations_like(
         self, prop, selector=None, row=None, col=None, secondary_y=None
@@ -1054,30 +1480,35 @@ class BaseFigure(object):
                             yref_to_row[yref] = r + 1
                             yref_to_secondary_y[yref] = is_secondary_y
 
-        for obj in self.layout[prop]:
-            # Filter by row
-            if col is not None and xref_to_col.get(obj.xref, None) != col:
-                continue
+        # filter down (select) which graph objects, by applying the filters
+        # successively
+        def _filter_row(obj):
+            """ Filter objects in rows by column """
+            return (col is None) or (xref_to_col.get(obj.xref, None) == col)
 
-            # Filter by col
-            if row is not None and yref_to_row.get(obj.yref, None) != row:
-                continue
+        def _filter_col(obj):
+            """ Filter objects in columns by row """
+            return (row is None) or (yref_to_row.get(obj.yref, None) == row)
 
-            # Filter by secondary y
-            if (
-                secondary_y is not None
-                and yref_to_secondary_y.get(obj.yref, None) != secondary_y
-            ):
-                continue
+        def _filter_sec_y(obj):
+            """ Filter objects on secondary y axes """
+            return (secondary_y is None) or (
+                yref_to_secondary_y.get(obj.yref, None) == secondary_y
+            )
 
-            # Filter by selector
-            if not self._selector_matches(obj, selector):
-                continue
+        funcs = [_filter_row, _filter_col, _filter_sec_y]
 
-            yield obj
+        return _generator(self._filter_by_selector(self.layout[prop], funcs, selector))
 
     def _add_annotation_like(
-        self, prop_singular, prop_plural, new_obj, row=None, col=None, secondary_y=None
+        self,
+        prop_singular,
+        prop_plural,
+        new_obj,
+        row=None,
+        col=None,
+        secondary_y=None,
+        exclude_empty_subplots=False,
     ):
         # Make sure we have both row and col or neither
         if row is not None and col is None:
@@ -1091,11 +1522,37 @@ class BaseFigure(object):
                 "row and col must be specified together"
             )
 
+        # Address multiple subplots
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO product argument could be added
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
+                self._add_annotation_like(
+                    prop_singular,
+                    prop_plural,
+                    new_obj,
+                    row=r,
+                    col=c,
+                    secondary_y=secondary_y,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                )
+            return self
+
         # Get grid_ref if specific row or column requested
         if row is not None:
             grid_ref = self._validate_get_grid_ref()
+            if row > len(grid_ref):
+                raise IndexError(
+                    "row index %d out-of-bounds, row index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref))
+                )
+            if col > len(grid_ref[row - 1]):
+                raise IndexError(
+                    "column index %d out-of-bounds, "
+                    "column index must be between 1 and %d, inclusive."
+                    % (row, len(grid_ref[row - 1]))
+                )
             refs = grid_ref[row - 1][col - 1]
-
             if not refs:
                 raise ValueError(
                     "No subplot found at position ({r}, {c})".format(r=row, c=col)
@@ -1123,6 +1580,24 @@ because subplot does not have a secondary y-axis"""
             else:
                 xaxis, yaxis = refs[0].layout_keys
             xref, yref = xaxis.replace("axis", ""), yaxis.replace("axis", "")
+            # if exclude_empty_subplots is True, check to see if subplot is
+            # empty and return if it is
+            if exclude_empty_subplots and (
+                not self._subplot_not_empty(
+                    xref, yref, selector=bool(exclude_empty_subplots)
+                )
+            ):
+                return self
+            # in case the user specified they wanted an axis to refer to the
+            # domain of that axis and not the data, append ' domain' to the
+            # computed axis accordingly
+            def _add_domain(ax_letter, new_axref):
+                axref = ax_letter + "ref"
+                if axref in new_obj._props.keys() and "domain" in new_obj[axref]:
+                    new_axref += " domain"
+                return new_axref
+
+            xref, yref = map(lambda t: _add_domain(*t), zip(["x", "y"], [xref, yref]))
             new_obj.update(xref=xref, yref=yref)
 
         self.layout[prop_plural] += (new_obj,)
@@ -1337,7 +1812,7 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
     @staticmethod
     def _str_to_dict_path(key_path_str):
         """
-        Convert a key path string into a tuple of key path elements
+        Convert a key path string into a tuple of key path elements.
 
         Parameters
         ----------
@@ -1361,53 +1836,8 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
             # Nothing to do
             return key_path_str
         else:
-            # Split string on periods.
-            # e.g. 'foo.bar_baz[1]' -> ['foo', 'bar_baz[1]']
-            key_path = key_path_str.split(".")
-
-            # Split out bracket indexes.
-            # e.g. ['foo', 'bar_baz[1]'] -> ['foo', 'bar_baz', '1']
-            key_path2 = []
-            for key in key_path:
-                match = BaseFigure._bracket_re.match(key)
-                if match:
-                    key_path2.extend(match.groups())
-                else:
-                    key_path2.append(key)
-
-            # Split out underscore
-            # e.g. ['foo', 'bar_baz', '1'] -> ['foo', 'bar', 'baz', '1']
-            key_path3 = []
-            underscore_props = BaseFigure._valid_underscore_properties
-            for key in key_path2:
-                if "_" in key[1:]:
-                    # For valid properties that contain underscores (error_x)
-                    # replace the underscores with hyphens to protect them
-                    # from being split up
-                    for under_prop, hyphen_prop in underscore_props.items():
-                        key = key.replace(under_prop, hyphen_prop)
-
-                    # Split key on underscores
-                    key = key.split("_")
-
-                    # Replace hyphens with underscores to restore properties
-                    # that include underscores
-                    for i in range(len(key)):
-                        key[i] = key[i].replace("-", "_")
-
-                    key_path3.extend(key)
-                else:
-                    key_path3.append(key)
-
-            # Convert elements to ints if possible.
-            # e.g. ['foo', 'bar', '0'] -> ['foo', 'bar', 0]
-            for i in range(len(key_path3)):
-                try:
-                    key_path3[i] = int(key_path3[i])
-                except ValueError as _:
-                    pass
-
-            return tuple(key_path3)
+            ret = _str_to_dict_path_full(key_path_str)[0]
+            return ret
 
     @staticmethod
     def _set_in(d, key_path_str, v):
@@ -1567,7 +1997,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         else:
             BaseFigure._raise_invalid_rows_cols(name=name, n=n, invalid=vals)
 
-    def add_trace(self, trace, row=None, col=None, secondary_y=None):
+    def add_trace(
+        self, trace, row=None, col=None, secondary_y=None, exclude_empty_subplots=False
+    ):
         """
         Add a trace to the figure
 
@@ -1585,14 +2017,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                   - All remaining properties are passed to the constructor
                     of the specified trace type.
 
-        row : int or None (default None)
-            Subplot row index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
-        col : int or None (default None)
-            Subplot col index (starting from 1) for the trace to be added.
-            Only valid if figure was created using
-            `plotly.subplots.make_subplots`
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.
+            If 'all', addresses all columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -1605,6 +2039,9 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 make_subplots. See the make_subplots docstring for more info.
               * The trace argument is a 2D cartesian trace
                 (scatter, bar, etc.)
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
         Returns
         -------
         BaseFigure
@@ -1645,14 +2082,36 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
                 "row and col must be specified together"
             )
 
+        # Address multiple subplots
+        if row is not None and _is_select_subplot_coordinates_arg(row, col):
+            # TODO add product argument
+            rows_cols = self._select_subplot_coordinates(row, col)
+            for r, c in rows_cols:
+                self.add_trace(
+                    trace,
+                    row=r,
+                    col=c,
+                    secondary_y=secondary_y,
+                    exclude_empty_subplots=exclude_empty_subplots,
+                )
+            return self
+
         return self.add_traces(
             data=[trace],
             rows=[row] if row is not None else None,
             cols=[col] if col is not None else None,
             secondary_ys=[secondary_y] if secondary_y is not None else None,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
-    def add_traces(self, data, rows=None, cols=None, secondary_ys=None):
+    def add_traces(
+        self,
+        data,
+        rows=None,
+        cols=None,
+        secondary_ys=None,
+        exclude_empty_subplots=False,
+    ):
         """
         Add traces to the figure
 
@@ -1688,6 +2147,10 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         secondary_ys: None or list[boolean] (default None)
             List of secondary_y booleans for traces to be added. See the
             docstring for `add_trace` for more info.
+
+        exclude_empty_subplots: boolean
+            If True, the trace will not be added to subplots that don't already
+            have traces.
 
         Returns
         -------
@@ -1764,6 +2227,16 @@ Invalid property path '{key_path_str}' for trace class {trace_class}
         if rows is not None:
             for trace, row, col, secondary_y in zip(data, rows, cols, secondary_ys):
                 self._set_trace_grid_position(trace, row, col, secondary_y)
+
+        if exclude_empty_subplots:
+            data = list(
+                filter(
+                    lambda trace: self._subplot_not_empty(
+                        trace["xaxis"], trace["yaxis"], bool(exclude_empty_subplots)
+                    ),
+                    data,
+                )
+            )
 
         # Make deep copy of trace data (Optimize later if needed)
         new_traces_data = [deepcopy(trace._props) for trace in data]
@@ -1862,6 +2335,47 @@ Please use the add_trace method with the row and col parameters.
                 "to create the figure with a subplot grid."
             )
         return grid_ref
+
+    def _get_subplot_rows_columns(self):
+        """
+        Returns a pair of lists, the first containing all the row indices and
+        the second all the column indices.
+        """
+        # currently, this just iterates over all the rows and columns (because
+        # self._grid_ref is currently always rectangular)
+        grid_ref = self._validate_get_grid_ref()
+        nrows = len(grid_ref)
+        ncols = len(grid_ref[0])
+        return (range(1, nrows + 1), range(1, ncols + 1))
+
+    def _get_subplot_coordinates(self):
+        """
+        Returns an iterator over (row,col) pairs representing all the possible
+        subplot coordinates.
+        """
+        return itertools.product(*self._get_subplot_rows_columns())
+
+    def _select_subplot_coordinates(self, rows, cols, product=False):
+        """
+        Allows selecting all or a subset of the subplots.
+        If any of rows or columns is 'all', product is set to True. This is
+        probably the expected behaviour, so that rows=1,cols='all' selects all
+        the columns in row 1 (otherwise it would just select the subplot in the
+        first row and first column).
+        """
+        product |= any([s == "all" for s in [rows, cols]])
+        # TODO: If grid_ref ever becomes non-rectangular, then t should be the
+        # set-intersection of the result of _indexing_combinations and
+        # _get_subplot_coordinates, because some coordinates given by
+        # the _indexing_combinations function might be invalid.
+        t = _indexing_combinations(
+            [rows, cols], list(self._get_subplot_rows_columns()), product=product,
+        )
+        t = list(t)
+        # remove rows and cols where the subplot is "None"
+        grid_ref = self._validate_get_grid_ref()
+        t = list(filter(lambda u: grid_ref[u[0] - 1][u[1] - 1] is not None, t))
+        return t
 
     def get_subplot(self, row, col, secondary_y=False):
         """
@@ -2862,6 +3376,18 @@ Invalid property path '{key_path_str}' for layout
             True if the figure should be validated before being shown,
             False otherwise.
 
+        width: int or float
+            An integer or float that determines the number of pixels wide the
+            plot is. The default is set in plotly.js.
+
+        height: int or float
+            An integer or float that determines the number of pixels wide the
+            plot is. The default is set in plotly.js.
+
+        config: dict
+            A dict of parameters to configure the figure. The defaults are set
+            in plotly.js.
+
         Returns
         -------
         None
@@ -3320,19 +3846,20 @@ Invalid property path '{key_path_str}' for layout
             # -------------------------------
             # This should be valid even if xaxis2 hasn't been initialized:
             # >>> layout.update(xaxis2={'title': 'xaxis 2'})
-            if isinstance(plotly_obj, BaseLayoutType):
-                for key in update_obj:
-                    if key not in plotly_obj:
+            for key in update_obj:
+                err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)
+                if err is not None:
+                    if isinstance(plotly_obj, BaseLayoutType):
+                        # try _subplot_re_match
                         match = plotly_obj._subplot_re_match(key)
                         if match:
                             # We need to create a subplotid object
                             plotly_obj[key] = {}
-
-            # Handle invalid properties
-            # -------------------------
-            invalid_props = [k for k in update_obj if k not in plotly_obj]
-
-            plotly_obj._raise_on_invalid_property_error(*invalid_props)
+                            continue
+                    # If no match, raise the error, which should already
+                    # contain the _raise_on_invalid_property_error
+                    # generated message
+                    raise err
 
             # Convert update_obj to dict
             # --------------------------
@@ -3410,6 +3937,255 @@ Invalid property path '{key_path_str}' for layout
             raise ValueError("Invalid value")
 
         return index_list[0]
+
+    def _make_axis_spanning_layout_object(self, direction, shape):
+        """
+        Convert a shape drawn on a plot or a subplot into one whose yref or xref
+        ends with " domain" and has coordinates so that the shape will seem to
+        extend infinitely in that dimension. This is useful for drawing lines or
+        boxes on a plot where one dimension of the shape will not move out of
+        bounds when moving the plot's view.
+        Note that the shape already added to the (sub)plot must have the
+        corresponding axis reference referring to an actual axis (e.g., 'x',
+        'y2' etc. are accepted, but not 'paper'). This will be the case if the
+        shape was added with "add_shape".
+        Shape must have the x0, x1, y0, y1 fields already initialized.
+        """
+        if direction == "vertical":
+            # fix y points to top and bottom of subplot
+            ref = "yref"
+        elif direction == "horizontal":
+            # fix x points to left and right of subplot
+            ref = "xref"
+        else:
+            raise ValueError(
+                "Bad direction: %s. Permissible values are 'vertical' and 'horizontal'."
+                % (direction,)
+            )
+        # set the ref to "<axis_id> domain" so that its size is based on the
+        # axis's size
+        shape[ref] += " domain"
+        return shape
+
+    def _process_multiple_axis_spanning_shapes(
+        self,
+        shape_args,
+        row,
+        col,
+        shape_type,
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
+    ):
+        """
+        Add a shape or multiple shapes and call _make_axis_spanning_layout_object on
+        all the new shapes.
+        """
+        if shape_type in ["vline", "vrect"]:
+            direction = "vertical"
+        elif shape_type in ["hline", "hrect"]:
+            direction = "horizontal"
+        else:
+            raise ValueError(
+                "Bad shape_type %s, needs to be one of 'vline', 'hline', 'vrect', 'hrect'"
+                % (shape_type,)
+            )
+        if (row is not None or col is not None) and (not self._has_subplots()):
+            # this has no subplots to address, so we force row and col to be None
+            row = None
+            col = None
+        n_shapes_before = len(self.layout["shapes"])
+        n_annotations_before = len(self.layout["annotations"])
+        # shapes are always added at the end of the tuple of shapes, so we see
+        # how long the tuple is before the call and after the call, and adjust
+        # the new shapes that were added at the end
+        # extract annotation prefixed kwargs
+        # annotation with extra parameters based on the annotation_position
+        # argument and other annotation_ prefixed kwargs
+        shape_kwargs, annotation_kwargs = shapeannotation.split_dict_by_key_prefix(
+            kwargs, "annotation_"
+        )
+        augmented_annotation = shapeannotation.axis_spanning_shape_annotation(
+            annotation, shape_type, shape_args, annotation_kwargs
+        )
+        self.add_shape(
+            row=row,
+            col=col,
+            exclude_empty_subplots=exclude_empty_subplots,
+            **_combine_dicts([shape_args, shape_kwargs])
+        )
+        if augmented_annotation is not None:
+            self.add_annotation(
+                augmented_annotation,
+                row=row,
+                col=col,
+                exclude_empty_subplots=exclude_empty_subplots,
+            )
+        # update xref and yref for the new shapes and annotations
+        for layout_obj, n_layout_objs_before in zip(
+            ["shapes", "annotations"], [n_shapes_before, n_annotations_before]
+        ):
+            n_layout_objs_after = len(self.layout[layout_obj])
+            if (n_layout_objs_after > n_layout_objs_before) and (
+                row is None and col is None
+            ):
+                # this was called intending to add to a single plot (and
+                # self.add_{layout_obj} succeeded)
+                # however, in the case of a single plot, xref and yref are not
+                # specified, so we specify them here so the following routines can work
+                # (they need to append " domain" to xref or yref)
+                self.layout[layout_obj][-1].update(xref="x", yref="y")
+            new_layout_objs = tuple(
+                filter(
+                    lambda x: x is not None,
+                    [
+                        self._make_axis_spanning_layout_object(
+                            direction, self.layout[layout_obj][n],
+                        )
+                        for n in range(n_layout_objs_before, n_layout_objs_after)
+                    ],
+                )
+            )
+            self.layout[layout_obj] = (
+                self.layout[layout_obj][:n_layout_objs_before] + new_layout_objs
+            )
+
+    def add_vline(
+        self,
+        x,
+        row="all",
+        col="all",
+        exclude_empty_subplots=True,
+        annotation=None,
+        **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="line", x0=x, x1=x, y0=0, y1=1),
+            row,
+            col,
+            "vline",
+            exclude_empty_subplots=exclude_empty_subplots,
+            annotation=annotation,
+            **kwargs
+        )
+        return self
+
+    add_vline.__doc__ = _axis_spanning_shapes_docstr("vline")
+
+    def add_hline(self, y, row="all", col="all", exclude_empty_subplots=True, **kwargs):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="line", x0=0, x1=1, y0=y, y1=y,),
+            row,
+            col,
+            "hline",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_hline.__doc__ = _axis_spanning_shapes_docstr("hline")
+
+    def add_vrect(
+        self, x0, x1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="rect", x0=x0, x1=x1, y0=0, y1=1),
+            row,
+            col,
+            "vrect",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_vrect.__doc__ = _axis_spanning_shapes_docstr("vrect")
+
+    def add_hrect(
+        self, y0, y1, row="all", col="all", exclude_empty_subplots=True, **kwargs
+    ):
+        self._process_multiple_axis_spanning_shapes(
+            dict(type="rect", x0=0, x1=1, y0=y0, y1=y1),
+            row,
+            col,
+            "hrect",
+            exclude_empty_subplots=exclude_empty_subplots,
+            **kwargs
+        )
+        return self
+
+    add_hrect.__doc__ = _axis_spanning_shapes_docstr("hrect")
+
+    def _has_subplots(self):
+        """ Returns True if figure contains subplots, otherwise it contains a
+        single plot and so this returns False. """
+        return self._grid_ref is not None
+
+    def _subplot_not_empty(self, xref, yref, selector="all"):
+        """
+        xref: string representing the axis. Objects in the plot will be checked
+              for this xref (for layout objects) or xaxis (for traces) to
+              determine if they lie in a certain subplot.
+        yref: string representing the axis. Objects in the plot will be checked
+              for this yref (for layout objects) or yaxis (for traces) to
+              determine if they lie in a certain subplot.
+        selector: can be "all" or an iterable containing some combination of
+                  "traces", "shapes", "annotations", "images". Only the presence
+                  of objects specified in selector will be checked. So if
+                  ["traces","shapes"] is passed then a plot we be considered
+                  non-empty if it contains traces or shapes. If
+                  bool(selector) returns False, no checking is performed and
+                  this function returns True. If selector is True, it is
+                  converted to "all".
+        """
+        if not selector:
+            # If nothing to select was specified then a subplot is always deemed non-empty
+            return True
+        if selector is True:
+            selector = "all"
+        if selector == "all":
+            selector = ["traces", "shapes", "annotations", "images"]
+        ret = False
+        for s in selector:
+            if s == "traces":
+                obj = self.data
+                xaxiskw = "xaxis"
+                yaxiskw = "yaxis"
+            elif s in ["shapes", "annotations", "images"]:
+                obj = self.layout[s]
+                xaxiskw = "xref"
+                yaxiskw = "yref"
+            else:
+                obj = None
+            if obj:
+                ret |= any(
+                    t == (xref, yref)
+                    for t in [
+                        # if a object exists but has no xaxis or yaxis keys, then it
+                        # is plotted with xaxis/xref 'x' and yaxis/yref 'y'
+                        (
+                            "x" if d[xaxiskw] is None else d[xaxiskw],
+                            "y" if d[yaxiskw] is None else d[yaxiskw],
+                        )
+                        for d in obj
+                    ]
+                )
+        return ret
+
+    def set_subplots(self, rows=None, cols=None, **make_subplots_args):
+        """
+        Add subplots to this figure. If the figure already contains subplots,
+        then this throws an error. Accepts any keyword arguments that
+        plotly.subplots.make_subplots accepts.
+        """
+        # rows, cols provided so that this can be called like
+        # fig.set_subplots(2,3), say
+        if rows is not None:
+            make_subplots_args["rows"] = rows
+        if cols is not None:
+            make_subplots_args["cols"] = cols
+        if self._has_subplots():
+            raise ValueError("This figure already has subplots.")
+        return subplots.make_subplots(figure=self, **make_subplots_args)
 
 
 class BasePlotlyType(object):
@@ -3534,19 +4310,21 @@ class BasePlotlyType(object):
         """
         Process any extra kwargs that are not predefined as constructor params
         """
-        invalid_kwargs = {}
         for k, v in kwargs.items():
-            if k in self:
+            err = _check_path_in_prop_tree(self, k, error_cast=ValueError)
+            if err is None:
                 # e.g. underscore kwargs like marker_line_color
                 self[k] = v
             elif not self._validate:
                 # Set extra property as-is
                 self[k] = v
-            else:
-                invalid_kwargs[k] = v
-
-        if invalid_kwargs and not self._skip_invalid:
-            self._raise_on_invalid_property_error(*invalid_kwargs.keys())
+            elif not self._skip_invalid:
+                raise err
+        # No need to call _raise_on_invalid_property_error here,
+        # because we have it set up so that the singular case of calling
+        # __setitem__ will raise this. If _check_path_in_prop_tree
+        # raised that in its travels, it will already be in the error
+        # message.
 
     @property
     def plotly_name(self):
@@ -3852,12 +4630,14 @@ class BasePlotlyType(object):
         # Normalize prop
         # --------------
         # Convert into a property tuple
+        orig_prop = prop
         prop = BaseFigure._str_to_dict_path(prop)
 
         # Handle remapping
         # ----------------
         if prop and prop[0] in self._mapped_properties:
             prop = self._mapped_properties[prop[0]] + prop[1:]
+            orig_prop = _remake_path_from_tuple(prop)
 
         # Handle scalar case
         # ------------------
@@ -3866,7 +4646,9 @@ class BasePlotlyType(object):
             # Unwrap scalar tuple
             prop = prop[0]
             if prop not in self._valid_props:
-                raise KeyError(prop)
+                self._raise_on_invalid_property_error(_error_to_raise=PlotlyKeyError)(
+                    prop
+                )
 
             validator = self._get_validator(prop)
 
@@ -3904,6 +4686,9 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=PlotlyKeyError)
+            if err is not None:
+                raise err
             res = self
             for p in prop:
                 res = res[p]
@@ -4001,7 +4786,7 @@ class BasePlotlyType(object):
 
             if self._validate:
                 if prop not in self._valid_props:
-                    self._raise_on_invalid_property_error(prop)
+                    self._raise_on_invalid_property_error()(prop)
 
                 # ### Get validator for this property ###
                 validator = self._get_validator(prop)
@@ -4047,6 +4832,9 @@ class BasePlotlyType(object):
         # ----------------------
         # e.g. ('foo', 1), ()
         else:
+            err = _check_path_in_prop_tree(self, orig_prop, error_cast=ValueError)
+            if err is not None:
+                raise err
             res = self
             for p in prop[:-1]:
                 res = res[p]
@@ -4072,7 +4860,7 @@ class BasePlotlyType(object):
             super(BasePlotlyType, self).__setattr__(prop, value)
         else:
             # Raise error on unknown public properties
-            self._raise_on_invalid_property_error(prop)
+            self._raise_on_invalid_property_error()(prop)
 
     def __iter__(self):
         """
@@ -4181,10 +4969,11 @@ class BasePlotlyType(object):
 
         return repr_str
 
-    def _raise_on_invalid_property_error(self, *args):
+    def _raise_on_invalid_property_error(self, _error_to_raise=None):
         """
-        Raise informative exception when invalid property names are
-        encountered
+        Returns a function that raises informative exception when invalid
+        property names are encountered. The _error_to_raise argument allows
+        specifying the exception to raise, which is ValueError if None.
 
         Parameters
         ----------
@@ -4194,37 +4983,59 @@ class BasePlotlyType(object):
 
         Raises
         ------
-        ValueError
-            Always
+        ValueError by default, or _error_to_raise if not None
         """
-        invalid_props = args
-        if invalid_props:
-            if len(invalid_props) == 1:
-                prop_str = "property"
-                invalid_str = repr(invalid_props[0])
-            else:
-                prop_str = "properties"
-                invalid_str = repr(invalid_props)
+        if _error_to_raise is None:
+            _error_to_raise = ValueError
 
-            module_root = "plotly.graph_objs."
-            if self._parent_path_str:
-                full_obj_name = (
-                    module_root + self._parent_path_str + "." + self.__class__.__name__
-                )
-            else:
-                full_obj_name = module_root + self.__class__.__name__
+        def _ret(*args):
+            invalid_props = args
+            if invalid_props:
+                if len(invalid_props) == 1:
+                    prop_str = "property"
+                    invalid_str = repr(invalid_props[0])
+                else:
+                    prop_str = "properties"
+                    invalid_str = repr(invalid_props)
 
-            raise ValueError(
-                "Invalid {prop_str} specified for object of type "
-                "{full_obj_name}: {invalid_str}\n\n"
-                "    Valid properties:\n"
-                "{prop_descriptions}".format(
-                    prop_str=prop_str,
-                    full_obj_name=full_obj_name,
-                    invalid_str=invalid_str,
-                    prop_descriptions=self._prop_descriptions,
+                module_root = "plotly.graph_objs."
+                if self._parent_path_str:
+                    full_obj_name = (
+                        module_root
+                        + self._parent_path_str
+                        + "."
+                        + self.__class__.__name__
+                    )
+                else:
+                    full_obj_name = module_root + self.__class__.__name__
+
+                guessed_prop = None
+                if len(invalid_props) == 1:
+                    try:
+                        guessed_prop = find_closest_string(
+                            invalid_props[0], self._valid_props
+                        )
+                    except Exception:
+                        pass
+                guessed_prop_suggestion = ""
+                if guessed_prop is not None:
+                    guessed_prop_suggestion = 'Did you mean "%s"?' % (guessed_prop,)
+                raise _error_to_raise(
+                    "Invalid {prop_str} specified for object of type "
+                    "{full_obj_name}: {invalid_str}\n"
+                    "\n{guessed_prop_suggestion}\n"
+                    "\n    Valid properties:\n"
+                    "{prop_descriptions}"
+                    "\n{guessed_prop_suggestion}\n".format(
+                        prop_str=prop_str,
+                        full_obj_name=full_obj_name,
+                        invalid_str=invalid_str,
+                        prop_descriptions=self._prop_descriptions,
+                        guessed_prop_suggestion=guessed_prop_suggestion,
+                    )
                 )
-            )
+
+        return _ret
 
     def update(self, dict1=None, overwrite=False, **kwargs):
         """
@@ -5473,7 +6284,7 @@ class BaseFrameHierarchyType(BasePlotlyType):
         # -------------------------------------
         try:
             trace_index = BaseFigure._index_is(self.data, child)
-        except ValueError as _:
+        except ValueError:
             trace_index = None
 
         # Child is a trace

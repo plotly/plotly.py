@@ -12,6 +12,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "anchor",
         "automargin",
         "autorange",
+        "autotypenumbers",
         "calendar",
         "categoryarray",
         "categoryarraysrc",
@@ -66,6 +67,7 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickformatstopdefaults",
         "tickformatstops",
         "ticklabelmode",
+        "ticklabelposition",
         "ticklen",
         "tickmode",
         "tickprefix",
@@ -100,7 +102,8 @@ class YAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -155,6 +158,30 @@ class YAxis(_BaseLayoutHierarchyType):
     @autorange.setter
     def autorange(self, val):
         self["autorange"] = val
+
+    # autotypenumbers
+    # ---------------
+    @property
+    def autotypenumbers(self):
+        """
+        Using "strict" a numeric string in trace data is not converted
+        to a number. Using *convert types* a numeric string in trace
+        data may be treated as a number during automatic axis `type`
+        detection. Defaults to layout.autotypenumbers.
+    
+        The 'autotypenumbers' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['convert types', 'strict']
+
+        Returns
+        -------
+        Any
+        """
+        return self["autotypenumbers"]
+
+    @autotypenumbers.setter
+    def autotypenumbers(self, val):
+        self["autotypenumbers"] = val
 
     # calendar
     # --------
@@ -335,8 +362,9 @@ class YAxis(_BaseLayoutHierarchyType):
         """
         If this axis needs to be compressed (either due to its own
         `scaleanchor` and `scaleratio` or those of the other axis),
-        determines how that happens: by increasing the "range"
-        (default), or by decreasing the "domain".
+        determines how that happens: by increasing the "range", or by
+        decreasing the "domain". Default is "domain" for axes
+        containing image traces, "range" otherwise.
     
         The 'constrain' property is an enumeration that may be specified as:
           - One of the following enumeration values:
@@ -795,7 +823,8 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'matches' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -893,7 +922,8 @@ class YAxis(_BaseLayoutHierarchyType):
           - One of the following enumeration values:
                 ['free']
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1109,7 +1139,8 @@ class YAxis(_BaseLayoutHierarchyType):
     
         The 'scaleanchor' property is an enumeration that may be specified as:
           - A string that matches one of the following regular expressions:
-                ['^x([2-9]|[1-9][0-9]+)?$', '^y([2-9]|[1-9][0-9]+)?$']
+                ['^x([2-9]|[1-9][0-9]+)?( domain)?$',
+                '^y([2-9]|[1-9][0-9]+)?( domain)?$']
 
         Returns
         -------
@@ -1808,6 +1839,36 @@ class YAxis(_BaseLayoutHierarchyType):
     def ticklabelmode(self, val):
         self["ticklabelmode"] = val
 
+    # ticklabelposition
+    # -----------------
+    @property
+    def ticklabelposition(self):
+        """
+        Determines where tick labels are drawn with respect to the axis
+        Please note that top or bottom has no effect on x axes or when
+        `ticklabelmode` is set to "period". Similarly left or right has
+        no effect on y axes or when `ticklabelmode` is set to "period".
+        Has no effect on "multicategory" axes or when `tickson` is set
+        to "boundaries". When used on axes linked by `matches` or
+        `scaleanchor`, no extra padding for inside labels would be
+        added by autorange, so that the scales could match.
+    
+        The 'ticklabelposition' property is an enumeration that may be specified as:
+          - One of the following enumeration values:
+                ['outside', 'inside', 'outside top', 'inside top',
+                'outside left', 'inside left', 'outside right', 'inside
+                right', 'outside bottom', 'inside bottom']
+
+        Returns
+        -------
+        Any
+        """
+        return self["ticklabelposition"]
+
+    @ticklabelposition.setter
+    def ticklabelposition(self, val):
+        self["ticklabelposition"] = val
+
     # ticklen
     # -------
     @property
@@ -2328,6 +2389,12 @@ class YAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. Defaults to
+            layout.autotypenumbers.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -2366,7 +2433,9 @@ class YAxis(_BaseLayoutHierarchyType):
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines how that happens: by increasing
-            the "range" (default), or by decreasing the "domain".
+            the "range", or by decreasing the "domain". Default is
+            "domain" for axes containing image traces, "range"
+            otherwise.
         constraintoward
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
@@ -2634,6 +2703,16 @@ class YAxis(_BaseLayoutHierarchyType):
             effect for axes of `type` "date" When set to "period",
             tick labels are drawn in the middle of the period
             between ticks.
+        ticklabelposition
+            Determines where tick labels are drawn with respect to
+            the axis Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period".
+            Similarly left or right has no effect on y axes or when
+            `ticklabelmode` is set to "period". Has no effect on
+            "multicategory" axes or when `tickson` is set to
+            "boundaries". When used on axes linked by `matches` or
+            `scaleanchor`, no extra padding for inside labels would
+            be added by autorange, so that the scales could match.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2714,6 +2793,7 @@ class YAxis(_BaseLayoutHierarchyType):
         anchor=None,
         automargin=None,
         autorange=None,
+        autotypenumbers=None,
         calendar=None,
         categoryarray=None,
         categoryarraysrc=None,
@@ -2768,6 +2848,7 @@ class YAxis(_BaseLayoutHierarchyType):
         tickformatstops=None,
         tickformatstopdefaults=None,
         ticklabelmode=None,
+        ticklabelposition=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -2810,6 +2891,12 @@ class YAxis(_BaseLayoutHierarchyType):
             computed in relation to the input data. See `rangemode`
             for more info. If `range` is provided, then `autorange`
             is set to False.
+        autotypenumbers
+            Using "strict" a numeric string in trace data is not
+            converted to a number. Using *convert types* a numeric
+            string in trace data may be treated as a number during
+            automatic axis `type` detection. Defaults to
+            layout.autotypenumbers.
         calendar
             Sets the calendar system to use for `range` and `tick0`
             if this is a date axis. This does not set the calendar
@@ -2848,7 +2935,9 @@ class YAxis(_BaseLayoutHierarchyType):
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
             other axis), determines how that happens: by increasing
-            the "range" (default), or by decreasing the "domain".
+            the "range", or by decreasing the "domain". Default is
+            "domain" for axes containing image traces, "range"
+            otherwise.
         constraintoward
             If this axis needs to be compressed (either due to its
             own `scaleanchor` and `scaleratio` or those of the
@@ -3116,6 +3205,16 @@ class YAxis(_BaseLayoutHierarchyType):
             effect for axes of `type` "date" When set to "period",
             tick labels are drawn in the middle of the period
             between ticks.
+        ticklabelposition
+            Determines where tick labels are drawn with respect to
+            the axis Please note that top or bottom has no effect
+            on x axes or when `ticklabelmode` is set to "period".
+            Similarly left or right has no effect on y axes or when
+            `ticklabelmode` is set to "period". Has no effect on
+            "multicategory" axes or when `tickson` is set to
+            "boundaries". When used on axes linked by `matches` or
+            `scaleanchor`, no extra padding for inside labels would
+            be added by autorange, so that the scales could match.
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -3232,6 +3331,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = autorange if autorange is not None else _v
         if _v is not None:
             self["autorange"] = _v
+        _v = arg.pop("autotypenumbers", None)
+        _v = autotypenumbers if autotypenumbers is not None else _v
+        if _v is not None:
+            self["autotypenumbers"] = _v
         _v = arg.pop("calendar", None)
         _v = calendar if calendar is not None else _v
         if _v is not None:
@@ -3448,6 +3551,10 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = ticklabelmode if ticklabelmode is not None else _v
         if _v is not None:
             self["ticklabelmode"] = _v
+        _v = arg.pop("ticklabelposition", None)
+        _v = ticklabelposition if ticklabelposition is not None else _v
+        if _v is not None:
+            self["ticklabelposition"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

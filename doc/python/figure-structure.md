@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.4.2
+      jupytext_version: 1.6.0
   kernelspec:
     display_name: Python 3
     language: python
@@ -20,7 +20,7 @@ jupyter:
     name: python
     nbconvert_exporter: python
     pygments_lexer: ipython3
-    version: 3.7.7
+    version: 3.7.6
   plotly:
     description: The structure of a figure - data, traces and layout explained.
     display_as: file_settings
@@ -47,6 +47,19 @@ import plotly.express as px
 fig = px.line(x=["a","b","c"], y=[1,3,2], title="sample figure")
 print(fig)
 fig.show()
+```
+
+### Accessing figure structures in Dash
+
+[Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
+
+Get started  with [the official Dash docs](https://dash.plotly.com/installation) and **learn how to effortlessly [style](https://plotly.com/dash/design-kit/) & [deploy](https://plotly.com/dash/app-manager/) apps like this with <a class="plotly-red" href="https://plotly.com/dash/">Dash Enterprise</a>.**
+
+
+```python hide_code=true
+from IPython.display import IFrame
+snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
+IFrame(snippet_url + 'figure-structure', width='100%', height=630)
 ```
 
 ### Figures as Trees of Attributes
@@ -95,17 +108,30 @@ The third of the three top-level attributes of a figure is `frames`, whose value
 
 ### The `config` Object
 
-At [render-time](/python/renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behaviour of the "modebar" and how the figure relates to mouse actions like scrolling etc. The object that contains these options is called the [`config`, and has its own documentation page](/python/configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
+At [render-time](/python/renderers/), it is also possible to control certain figure behaviors which are not considered part of the figure proper i.e. the behavior of the "modebar" and how the figure relates to mouse actions like scrolling etc. The object that contains these options is called the [`config`, and has its own documentation page](/python/configuration-options/). It is exposed in Python as the `config` keyword argument of the `.show()` method on `plotly.graph_objects.Figure` objects.
 
-### Positioning With Paper or Container Coordinates
+### Positioning With Paper, Container Coordinates, or Axis Domain Coordinates
 
 Various figure components configured within the layout of the figure support positioning attributes named `x` or `y`, whose values may be specified in "paper coordinates" (sometimes referred to as "plot fractions" or "normalized coordinates"). Examples include `layout.xaxis.domain` or `layout.legend.x` or `layout.annotation[].x`.
 
 Positioning in paper coordinates is *not* done in absolute pixel terms, but rather in terms relative to a coordinate system defined with an origin `(0,0)` at `(layout.margin.l, layout.margin.b)` and a point `(1,1)` at `(layout.width-layout.margin.r, layout.height-layout.margin.t)` (note: `layout.margin` values are pixel values, as are `layout.width` and `layout.height`). Paper coordinate values less than 0 or greater than 1 are permitted, and refer to areas within the plot margins.
 
+To position an object in "paper" coordinates, the corresponding axis reference
+is set to `"paper"`. For instance a shape's `xref` attribute would be set to
+`"paper"` so that the `x` value of the shape refers to its position in paper
+coordinates.
+
 Note that the contents of the `layout.margin` attribute are by default computed based on the position and dimensions of certain items like the title or legend, and may be made dependent on the position and dimensions of tick labels as well when setting the `layout.xaxis.automargin` attribute to `True`. This has the effect of automatically increasing the margin values and therefore shrinking the physical area defined between the `(0,0)` and `(1,1)` points. Positioning certain items at paper coordinates less than 0 or greater than 1 will also trigger this behavior. The `layout.width` and `layout.height`, however, are taken as givens, so a figure will never grow or shrink based on its contents.
 
 The figure title may be positioned using "container coordinates" which have `(0,0)` and `(1,1)` anchored at the bottom-left and top-right of the figure, respectively, and therefore are independent of the values of layout.margin.
+
+Furthermore, shapes, annotations, and images can be placed relative to an axis's
+domain so that, for instance, an `x` value of `0.5` would place the object
+halfway along the x-axis, regardless of the domain as specified in the
+`layout.xaxis.domain` attribute. This behavior can be specified by adding
+`' domain'` to the axis reference in the axis referencing attribute of the object.
+For example, setting `yref = 'y2 domain'` for a shape will refer to the length
+and position of the axis named `y2`.
 
 ### 2D Cartesian Trace Types and Subplots
 

@@ -301,6 +301,8 @@ class Contour(_BaseTraceType):
                     a.contour.colorbar.tickformatstopdefaults),
                     sets the default property values to use for
                     elements of contour.colorbar.tickformatstops
+                ticklabelposition
+                    Determines where tick labels are drawn.
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -411,7 +413,7 @@ class Contour(_BaseTraceType):
             Many predefined colorscale lists are included in the sequential, diverging,
             and cyclical modules in the plotly.colors package.
           - A list of 2-element lists where the first element is the
-            normalized color level value (starting at 0 and ending at 1), 
+            normalized color level value (starting at 0 and ending at 1),
             and the second item is a valid color string.
             (e.g. [[0, 'green'], [0.5, 'red'], [1.0, 'rgb(0, 0, 255)']])
           - One of the following named colorscales:
@@ -422,13 +424,14 @@ class Contour(_BaseTraceType):
                  'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
                  'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
                  'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
-                 'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
-                 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
-                 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
-                 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
-                 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
-                 'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
-                 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'].
+                 'orrd', 'oryel', 'oxy', 'peach', 'phase', 'picnic', 'pinkyl',
+                 'piyg', 'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn',
+                 'puor', 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu',
+                 'rdgy', 'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar',
+                 'spectral', 'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn',
+                 'tealrose', 'tempo', 'temps', 'thermal', 'tropic', 'turbid',
+                 'turbo', 'twilight', 'viridis', 'ylgn', 'ylgnbu', 'ylorbr',
+                 'ylorrd'].
             Appending '_r' to a named colorscale reverses it.
 
         Returns

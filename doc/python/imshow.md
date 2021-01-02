@@ -71,7 +71,7 @@ import plotly.express as px
 from skimage import data
 img = data.astronaut()
 fig = px.imshow(img, binary_format="jpeg", binary_compression_level=0)
-fig.show("notebook")
+fig.show()
 ```
 
 ### Display single-channel 2D data as a heatmap
@@ -204,7 +204,7 @@ fig.show()
 
 ### Defining the data range covered by the color range with zmin and zmax
 
-The data range and color range are mapped together using the parameters `zmin` and `zmax` of `px.imshow` or `go.Image`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case on single-channel data.
+The data range and color range are mapped together using the parameters `zmin` and `zmax` of `px.imshow` or `go.Image`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`, or to the extreme colors of the colorscale in the case of single-channel data.
 
 For `go.Image`, `zmin` and `zmax` need to be given for all channels, whereas it is also possible to pass a scalar value (used for all channels) to `px.imshow`.
 
@@ -399,6 +399,91 @@ for compression_level in range(0, 9):
 fig.show()
 ```
 
+### Exploring 3-D images, timeseries and sequences of images with `facet_col`
+
+*Introduced in plotly 4.14*
+
+For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by representing its different planes as facets. The `facet_col` argument specifies along which axis the image is sliced through to make the facets. With `facet_col_wrap`, one can set the maximum number of columns. For image datasets passed as xarrays, it is also possible to specify the axis by its name (label), thus passing a string to `facet_col`.
+
+It is recommended to use `binary_string=True` for facetted plots of images in order to keep a small figure size and a short rendering time.
+
+See the [tutorial on facet plots](/python/facet-plots/) for more information on creating and styling facet plots.
+
+```python
+import plotly.express as px
+from skimage import io
+from skimage.data import image_fetcher
+path = image_fetcher.fetch('data/cells.tif')
+data = io.imread(path)
+img = data[20:45:2]
+fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5)
+fig.show()
+```
+
+Facets can also be used to represent several images of equal shape, like in the example below where different values of the blurring parameter of a Gaussian filter are compared.
+
+```python
+import plotly.express as px
+import numpy as np
+from skimage import data, filters, img_as_float
+img = data.camera()
+sigmas = [1, 2, 4]
+img_sequence = [filters.gaussian(img, sigma=sigma) for sigma in sigmas]
+fig = px.imshow(np.array(img_sequence), facet_col=0, binary_string=True,
+                labels={'facet_col':'sigma'})
+# Set facet titles
+for i, sigma in enumerate(sigmas):
+    fig.layout.annotations[i]['text'] = 'sigma = %d' %sigma
+fig.show()
+```
+
+### Exploring 3-D images and timeseries with `animation_frame`
+
+*Introduced in plotly 4.14*
+
+For three-dimensional image datasets, obtained for example by MRI or CT in medical imaging, one can explore the dataset by sliding through its different planes in an animation. The `animation_frame` argument of `px.imshow` sets the axis along which the 3-D image is sliced in the animation.
+
+```python
+import plotly.express as px
+from skimage import io
+from skimage.data import image_fetcher
+path = image_fetcher.fetch('data/cells.tif')
+data = io.imread(path)
+img = data[25:40]
+fig = px.imshow(img, animation_frame=0, binary_string=True, labels=dict(animation_frame="yo"))
+fig.show()
+```
+
+### Animations of xarray datasets
+
+*Introduced in plotly 4.14*
+
+For xarray datasets, one can pass either an axis number or an axis name to `animation_frame`. Axis names and coordinates are automatically used for the labels, ticks and animation controls of the figure.
+
+```python
+import plotly.express as px
+import xarray as xr
+# Load xarray from dataset included in the xarray tutorial
+ds = xr.tutorial.open_dataset('air_temperature').air[:20]
+fig = px.imshow(ds, animation_frame='time', zmin=220, zmax=300, color_continuous_scale='RdBu_r')
+fig.show()
+```
+
+### Combining animations and facets
+
+It is possible to view 4-dimensional datasets (for example, 3-D images evolving with time) using a combination of `animation_frame` and `facet_col`.
+
+```python
+import plotly.express as px
+from skimage import io
+from skimage.data import image_fetcher
+path = image_fetcher.fetch('data/cells.tif')
+data = io.imread(path)
+data = data.reshape((15, 4, 256, 256))[5:]
+fig = px.imshow(data, animation_frame=0, facet_col=1, binary_string=True)
+fig.show()
+```
+
 #### Reference
 
-See https://plotly.com/python/reference/image/ for more information and chart attribute options!
+See [function reference for `px.(imshow)`](https://plotly.com/python-api-reference/generated/plotly.express.imshow) or https://plotly.com/python/reference/image/ for more information and chart attribute options!

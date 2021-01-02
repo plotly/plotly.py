@@ -7,7 +7,7 @@ class FigureWidget(BaseFigureWidget):
     ):
         """
         Create a new :class:FigureWidget instance
-        
+
         Parameters
         ----------
         data
@@ -39,7 +39,7 @@ class FigureWidget(BaseFigureWidget):
                   the specified trace type
         
                 (e.g. [{'type': 'scatter', ...}, {'type': 'bar, ...}])
-            
+
         layout
             The 'layout' property is an instance of Layout
             that may be specified as:
@@ -71,6 +71,14 @@ class FigureWidget(BaseFigureWidget):
                         regardless of this attribute, an undefined
                         layout width or height is always initialized on
                         the first call to plot.
+                    autotypenumbers
+                        Using "strict" a numeric string in trace data
+                        is not converted to a number. Using *convert
+                        types* a numeric string in trace data may be
+                        treated as a number during automatic axis
+                        `type` detection. This is the default value;
+                        however it could be overridden for individual
+                        axes.
                     bargap
                         Sets the gap (in plot fraction) between bars of
                         adjacent location coordinates.
@@ -143,6 +151,10 @@ class FigureWidget(BaseFigureWidget):
                         instance or dict with compatible properties
                     colorway
                         Sets the default trace colors.
+                    computed
+                        Placeholder for exporting automargin-impacting
+                        values namely `margin.t`, `margin.b`,
+                        `margin.l` and `margin.r` in "full-json" mode.
                     datarevision
                         If provided, a changed value tells
                         `Plotly.react` that one or more data arrays has
@@ -536,7 +548,7 @@ class FigureWidget(BaseFigureWidget):
                     yaxis
                         :class:`plotly.graph_objects.layout.YAxis`
                         instance or dict with compatible properties
-            
+
         frames
             The 'frames' property is a tuple of instances of
             Frame that may be specified as:
@@ -569,7 +581,7 @@ class FigureWidget(BaseFigureWidget):
                     traces
                         A list of trace indices that identify the
                         respective traces in the data attribute
-            
+
         skip_invalid: bool
             If True, invalid properties in the figure specification will be
             skipped silently. If False (default) invalid properties in the
@@ -717,14 +729,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -1170,14 +1184,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -1516,14 +1532,16 @@ class FigureWidget(BaseFigureWidget):
         widthsrc
             Sets the source reference on Chart Studio Cloud for
             width .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -2063,14 +2081,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2403,14 +2423,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -2660,14 +2682,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -3004,14 +3028,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3347,14 +3373,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -3727,14 +3755,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -4178,14 +4208,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4550,14 +4582,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -4906,14 +4940,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -5339,14 +5375,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -5687,14 +5725,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -6121,14 +6161,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6459,14 +6501,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -6849,14 +6893,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7284,14 +7330,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -7736,14 +7784,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8037,14 +8087,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -8228,14 +8280,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -8574,14 +8628,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9040,14 +9096,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9356,14 +9414,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -9588,14 +9648,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -9760,14 +9822,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10106,14 +10170,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -10380,14 +10446,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -10591,14 +10659,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11073,14 +11143,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -11454,14 +11526,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -11812,14 +11886,16 @@ class FigureWidget(BaseFigureWidget):
             a 2D cartesian y axis. If "y" (the default value), the
             y coordinates refer to `layout.yaxis`. If "y2", the y
             coordinates refer to `layout.yaxis2`, and so on.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12189,14 +12265,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -12611,14 +12689,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -12968,14 +13048,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13343,14 +13425,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -13722,14 +13806,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14103,14 +14189,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14396,14 +14484,16 @@ class FigureWidget(BaseFigureWidget):
             is false and `showupperhalf` or `showlowerhalf` is
             false, this splom trace will generate one less x-axis
             and one less y-axis.
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14750,14 +14840,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -14850,6 +14942,8 @@ class FigureWidget(BaseFigureWidget):
         outsidetextfont=None,
         parents=None,
         parentssrc=None,
+        root=None,
+        rotation=None,
         sort=None,
         stream=None,
         text=None,
@@ -15024,6 +15118,12 @@ class FigureWidget(BaseFigureWidget):
         parentssrc
             Sets the source reference on Chart Studio Cloud for
             parents .
+        root
+            :class:`plotly.graph_objects.sunburst.Root` instance or
+            dict with compatible properties
+        rotation
+            Rotates the whole diagram counterclockwise by some
+            angle. By default the first slice starts at 3 o'clock.
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -15097,14 +15197,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15142,6 +15244,8 @@ class FigureWidget(BaseFigureWidget):
             outsidetextfont=outsidetextfont,
             parents=parents,
             parentssrc=parentssrc,
+            root=root,
+            rotation=rotation,
             sort=sort,
             stream=stream,
             text=text,
@@ -15474,14 +15578,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15682,14 +15788,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -15753,6 +15861,7 @@ class FigureWidget(BaseFigureWidget):
         parents=None,
         parentssrc=None,
         pathbar=None,
+        root=None,
         sort=None,
         stream=None,
         text=None,
@@ -15920,6 +16029,9 @@ class FigureWidget(BaseFigureWidget):
         pathbar
             :class:`plotly.graph_objects.treemap.Pathbar` instance
             or dict with compatible properties
+        root
+            :class:`plotly.graph_objects.treemap.Root` instance or
+            dict with compatible properties
         sort
             Determines whether or not the sectors are reordered
             from largest to smallest.
@@ -15998,14 +16110,16 @@ class FigureWidget(BaseFigureWidget):
             "legendonly", the trace is not drawn, but can appear as
             a legend item (provided that the legend itself is
             visible).
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -16042,6 +16156,7 @@ class FigureWidget(BaseFigureWidget):
             parents=parents,
             parentssrc=parentssrc,
             pathbar=pathbar,
+            root=root,
             sort=sort,
             stream=stream,
             text=text,
@@ -16401,14 +16516,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -16803,14 +16920,16 @@ class FigureWidget(BaseFigureWidget):
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
 
         Returns
         -------
@@ -17271,14 +17390,16 @@ class FigureWidget(BaseFigureWidget):
         ysrc
             Sets the source reference on Chart Studio Cloud for  y
             .
-        row : int or None (default)
+        row : 'all', int or None (default)
             Subplot row index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
-        col : int or None (default)
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
             Subplot col index (starting from 1) for the trace to be
             added. Only valid if figure was created using
-            `plotly.tools.make_subplots`
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
         secondary_y: boolean or None (default None)
             If True, associate this trace with the secondary y-axis of the
             subplot at the specified row and col. Only valid if all of the
@@ -17375,12 +17496,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17399,17 +17524,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all coloraxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single coloraxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of coloraxis objects to select.
             To select coloraxis objects by row and column, the Figure
@@ -17431,18 +17560,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all coloraxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             coloraxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             coloraxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all coloraxis objects are selected.
+            (the default), all coloraxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            coloraxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17475,12 +17608,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17499,17 +17636,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all geo objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single geo object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of geo objects to select.
             To select geo objects by row and column, the Figure
@@ -17531,18 +17672,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all geo objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             geo objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             geo objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all geo objects are selected.
+            (the default), all geo objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            geo and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17575,12 +17720,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17599,17 +17748,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all mapbox objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single mapbox object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of mapbox objects to select.
             To select mapbox objects by row and column, the Figure
@@ -17631,18 +17784,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all mapbox objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             mapbox objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             mapbox objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all mapbox objects are selected.
+            (the default), all mapbox objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            mapbox and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17675,12 +17832,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17699,17 +17860,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all polar objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single polar object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of polar objects to select.
             To select polar objects by row and column, the Figure
@@ -17731,18 +17896,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all polar objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             polar objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             polar objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all polar objects are selected.
+            (the default), all polar objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            polar and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17775,12 +17944,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17799,17 +17972,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all scene objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single scene object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of scene objects to select.
             To select scene objects by row and column, the Figure
@@ -17831,18 +18008,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all scene objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             scene objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             scene objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all scene objects are selected.
+            (the default), all scene objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            scene and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17875,12 +18056,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -17899,17 +18084,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all ternary objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single ternary object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of ternary objects to select.
             To select ternary objects by row and column, the Figure
@@ -17931,18 +18120,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all ternary objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             ternary objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             ternary objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all ternary objects are selected.
+            (the default), all ternary objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            ternary and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -17975,12 +18168,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -17999,17 +18196,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all xaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single xaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of xaxis objects to select.
             To select xaxis objects by row and column, the Figure
@@ -18031,18 +18232,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all xaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             xaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             xaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all xaxis objects are selected.
+            (the default), all xaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            xaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18075,12 +18280,16 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18092,8 +18301,8 @@ class FigureWidget(BaseFigureWidget):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18113,17 +18322,21 @@ class FigureWidget(BaseFigureWidget):
         """
         Apply a function to all yaxis objects that satisfy the
         specified selection criteria
-        
+
         Parameters
         ----------
         fn:
             Function that inputs a single yaxis object.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         row, col: int or None (default None)
             Subplot row and column index of yaxis objects to select.
             To select yaxis objects by row and column, the Figure
@@ -18135,8 +18348,8 @@ class FigureWidget(BaseFigureWidget):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18166,18 +18379,22 @@ class FigureWidget(BaseFigureWidget):
         """
         Perform a property update operation on all yaxis objects
         that satisfy the specified selection criteria
-        
+
         Parameters
         ----------
         patch: dict
             Dictionary of property updates to be applied to all
             yaxis objects that satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, or None (default None)
             Dict to use as selection criteria.
             yaxis objects will be selected if they contain
             properties corresponding to all of the dictionary's keys, with
             values that exactly match the supplied values. If None
-            (the default), all yaxis objects are selected.
+            (the default), all yaxis objects are selected. If a
+            function, it must be a function accepting a single argument and
+            returning a boolean. The function will be called on each
+            yaxis and those for which the function returned True will
+            be in the selection.
         overwrite: bool
             If True, overwrite existing properties. If False, apply updates
             to existing properties recursively, preserving existing
@@ -18193,8 +18410,8 @@ class FigureWidget(BaseFigureWidget):
             * If False, only select yaxis objects associated with the primary
               y-axis of the subplot.
             * If None (the default), do not filter yaxis objects based on
-              a secondary y-axis condition. 
-            
+              a secondary y-axis condition.
+
             To select yaxis objects by secondary y-axis, the Figure must
             have been created using plotly.subplots.make_subplots. See
             the docstring for the specs argument to make_subplots for more
@@ -18223,12 +18440,17 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18268,12 +18490,17 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single annotation object.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18320,12 +18547,17 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all annotations that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all annotations are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each annotation and those for which the function returned True
+            will be in the selection. If an int N, the Nth annotation matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of annotations to select.
             To select annotations by row and column, the Figure must have been
@@ -18414,6 +18646,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -18446,32 +18679,68 @@ class FigureWidget(BaseFigureWidget):
             Sets the x component of the arrow tail about the arrow
             head. If `axref` is `pixel`, a positive (negative)
             component corresponds to an arrow pointing from right
-            to left (left to right). If `axref` is an axis, this is
-            an absolute value on that axis, like `x`, NOT a
-            relative value.
+            to left (left to right). If `axref` is not `pixel` and
+            is exactly the same as `xref`, this is an absolute
+            value on that axis, like `x`, specified in the same
+            coordinates as `xref`.
         axref
-            Indicates in what terms the tail of the annotation
-            (ax,ay)  is specified. If `pixel`, `ax` is a relative
-            offset in pixels  from `x`. If set to an x axis id
-            (e.g. "x" or "x2"), `ax` is  specified in the same
-            terms as that axis. This is useful  for trendline
-            annotations which should continue to indicate  the
-            correct trend when zoomed.
+            Indicates in what coordinates the tail of the
+            annotation (ax,ay) is specified. If set to a ax axis id
+            (e.g. "ax" or "ax2"), the `ax` position refers to a ax
+            coordinate. If set to "paper", the `ax` position refers
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a ax axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *ax2 domain* refers to the
+            domain of the second ax  axis and a ax position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second ax axis. In order for absolute
+            positioning of the arrow to work, "axref" must be
+            exactly the same as "xref", otherwise "axref" will
+            revert to "pixel" (explained next). For relative
+            positioning, "axref" can be set to "pixel", in which
+            case the "ax" value is specified in pixels relative to
+            "x". Absolute positioning is useful for trendline
+            annotations which should continue to indicate the
+            correct trend when zoomed. Relative positioning is
+            useful for specifying the text offset for an annotated
+            point.
         ay
             Sets the y component of the arrow tail about the arrow
             head. If `ayref` is `pixel`, a positive (negative)
             component corresponds to an arrow pointing from bottom
-            to top (top to bottom). If `ayref` is an axis, this is
-            an absolute value on that axis, like `y`, NOT a
-            relative value.
+            to top (top to bottom). If `ayref` is not `pixel` and
+            is exactly the same as `yref`, this is an absolute
+            value on that axis, like `y`, specified in the same
+            coordinates as `yref`.
         ayref
-            Indicates in what terms the tail of the annotation
-            (ax,ay)  is specified. If `pixel`, `ay` is a relative
-            offset in pixels  from `y`. If set to a y axis id (e.g.
-            "y" or "y2"), `ay` is  specified in the same terms as
-            that axis. This is useful  for trendline annotations
-            which should continue to indicate  the correct trend
-            when zoomed.
+            Indicates in what coordinates the tail of the
+            annotation (ax,ay) is specified. If set to a ay axis id
+            (e.g. "ay" or "ay2"), the `ay` position refers to a ay
+            coordinate. If set to "paper", the `ay` position refers
+            to the distance from the bottom of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            bottom (top). If set to a ay axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *ay2 domain* refers to the
+            domain of the second ay  axis and a ay position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second ay axis. In order for absolute
+            positioning of the arrow to work, "ayref" must be
+            exactly the same as "yref", otherwise "ayref" will
+            revert to "pixel" (explained next). For relative
+            positioning, "ayref" can be set to "pixel", in which
+            case the "ay" value is specified in pixels relative to
+            "y". Absolute positioning is useful for trendline
+            annotations which should continue to indicate the
+            correct trend when zoomed. Relative positioning is
+            useful for specifying the text offset for an annotated
+            point.
         bgcolor
             Sets the background color of the annotation.
         bordercolor
@@ -18608,12 +18877,19 @@ class FigureWidget(BaseFigureWidget):
             `x` value is `xclick` rather than the annotation's `x`
             value.
         xref
-            Sets the annotation's x coordinate axis. If set to an x
+            Sets the annotation's x coordinate axis. If set to a x
             axis id (e.g. "x" or "x2"), the `x` position refers to
-            an x coordinate If set to "paper", the `x` position
-            refers to the distance from the left side of the
-            plotting area in normalized coordinates where 0 (1)
-            corresponds to the left (right) side.
+            a x coordinate. If set to "paper", the `x` position
+            refers to the distance from the left of the plotting
+            area in normalized coordinates where 0 (1) corresponds
+            to the left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
         xshift
             Shifts the position of the whole annotation and arrow
             to the right (positive) or left (negative) by this many
@@ -18643,21 +18919,33 @@ class FigureWidget(BaseFigureWidget):
             `y` value is `yclick` rather than the annotation's `y`
             value.
         yref
-            Sets the annotation's y coordinate axis. If set to an y
+            Sets the annotation's y coordinate axis. If set to a y
             axis id (e.g. "y" or "y2"), the `y` position refers to
-            an y coordinate If set to "paper", the `y` position
+            a y coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top).
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         yshift
             Shifts the position of the whole annotation and arrow
             up (positive) or down (negative) by this many pixels.
         row
-            Subplot row for annotation
+            Subplot row for annotation. If 'all', addresses all
+            rows in the specified column(s).
         col
-            Subplot column for annotation
+            Subplot column for annotation. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add annotation to secondary y-axis
+        exclude_empty_subplots
+            If True, annotation will not be added to subplots
+            without traces.
 
         Returns
         -------
@@ -18719,6 +19007,7 @@ class FigureWidget(BaseFigureWidget):
             row=row,
             col=col,
             secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_layout_images(self, selector=None, row=None, col=None, secondary_y=None):
@@ -18728,12 +19017,17 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18773,12 +19067,17 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single image object.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18821,12 +19120,17 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all images that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all images are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each image and those for which the function returned True
+            will be in the selection. If an int N, the Nth image matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of images to select.
             To select images by row and column, the Figure must have been
@@ -18883,6 +19187,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -18911,12 +19216,14 @@ class FigureWidget(BaseFigureWidget):
             Sets the image container size horizontally. The image
             will be sized based on the `position` value. When
             `xref` is set to `paper`, units are sized relative to
-            the plot width.
+            the plot width. When `xref` ends with ` domain`, units
+            are sized relative to the axis width.
         sizey
             Sets the image container size vertically. The image
             will be sized based on the `position` value. When
             `yref` is set to `paper`, units are sized relative to
-            the plot height.
+            the plot height. When `yref` ends with ` domain`, units
+            are sized relative to the axis height.
         sizing
             Specifies which dimension of the image to constrain.
         source
@@ -18943,11 +19250,18 @@ class FigureWidget(BaseFigureWidget):
             Sets the anchor for the x position
         xref
             Sets the images's x coordinate axis. If set to a x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
-            data coordinate If set to "paper", the `x` position
-            refers to the distance from the left of plot in
+            id (e.g. "x" or "x2"), the `x` position refers to a x
+            coordinate. If set to "paper", the `x` position refers
+            to the distance from the left of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            left (right).
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis.
         y
             Sets the image's y position. When `yref` is set to
             `paper`, units are sized relative to the plot height.
@@ -18957,16 +19271,28 @@ class FigureWidget(BaseFigureWidget):
         yref
             Sets the images's y coordinate axis. If set to a y axis
             id (e.g. "y" or "y2"), the `y` position refers to a y
-            data coordinate. If set to "paper", the `y` position
-            refers to the distance from the bottom of the plot in
+            coordinate. If set to "paper", the `y` position refers
+            to the distance from the bottom of the plotting area in
             normalized coordinates where 0 (1) corresponds to the
-            bottom (top).
+            bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         row
-            Subplot row for image
+            Subplot row for image. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for image
+            Subplot column for image. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add image to secondary y-axis
+        exclude_empty_subplots
+            If True, image will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -18994,7 +19320,13 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "image", "images", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "image",
+            "images",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
 
     def select_shapes(self, selector=None, row=None, col=None, secondary_y=None):
@@ -19004,12 +19336,17 @@ class FigureWidget(BaseFigureWidget):
 
         Parameters
         ----------
-        selector: dict or None (default None)
+        selector: dict, function, int, str, or None (default None)
             Dict to use as selection criteria.
             Annotations will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19047,12 +19384,17 @@ class FigureWidget(BaseFigureWidget):
         ----------
         fn:
             Function that inputs a single shape object.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19095,12 +19437,17 @@ class FigureWidget(BaseFigureWidget):
         patch: dict or None (default None)
             Dictionary of property updates to be applied to all shapes that
             satisfy the selection criteria.
-        selector: dict or None (default None)
+        selector: dict, function, int, str or None (default None)
             Dict to use as selection criteria.
             Traces will be selected if they contain properties corresponding
             to all of the dictionary's keys, with values that exactly match
             the supplied values. If None (the default), all shapes are
-            selected.
+            selected. If a function, it must be a function accepting a single
+            argument and returning a boolean. The function will be called on
+            each shape and those for which the function returned True
+            will be in the selection. If an int N, the Nth shape matching row
+            and col will be selected (N can be negative). If a string S, the selector
+            is equivalent to dict(type=S).
         row, col: int or None (default None)
             Subplot row and column index of shapes to select.
             To select shapes by row and column, the Figure must have been
@@ -19163,6 +19510,7 @@ class FigureWidget(BaseFigureWidget):
         row=None,
         col=None,
         secondary_y=None,
+        exclude_empty_subplots=None,
         **kwargs
     ):
         """
@@ -19263,15 +19611,22 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `xsizemode` not
             set to "pixel".
         xref
-            Sets the shape's x coordinate axis. If set to an x axis
-            id (e.g. "x" or "x2"), the `x` position refers to an x
+            Sets the shape's x coordinate axis. If set to a x axis
+            id (e.g. "x" or "x2"), the `x` position refers to a x
             coordinate. If set to "paper", the `x` position refers
-            to the distance from the left side of the plotting area
-            in normalized coordinates where 0 (1) corresponds to
-            the left (right) side. If the axis `type` is "log",
-            then you must take the log of your desired range. If
-            the axis `type` is "date", then you must convert the
-            date to unix time in milliseconds.
+            to the distance from the left of the plotting area in
+            normalized coordinates where 0 (1) corresponds to the
+            left (right). If set to a x axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the left of the
+            domain of that axis: e.g., *x2 domain* refers to the
+            domain of the second x  axis and a x position of 0.5
+            refers to the point between the left and the right of
+            the domain of the second x axis. If the axis `type` is
+            "log", then you must take the log of your desired
+            range. If the axis `type` is "date", then you must
+            convert the date to unix time in milliseconds.
         xsizemode
             Sets the shapes's sizing mode along the x axis. If set
             to "scaled", `x0`, `x1` and x coordinates within `path`
@@ -19296,12 +19651,19 @@ class FigureWidget(BaseFigureWidget):
             to a certain data value. No effect when `ysizemode` not
             set to "pixel".
         yref
-            Sets the annotation's y coordinate axis. If set to an y
+            Sets the annotation's y coordinate axis. If set to a y
             axis id (e.g. "y" or "y2"), the `y` position refers to
-            an y coordinate If set to "paper", the `y` position
+            a y coordinate. If set to "paper", the `y` position
             refers to the distance from the bottom of the plotting
             area in normalized coordinates where 0 (1) corresponds
-            to the bottom (top).
+            to the bottom (top). If set to a y axis ID followed by
+            "domain" (separated by a space), the position behaves
+            like for "paper", but refers to the distance in
+            fractions of the domain length from the bottom of the
+            domain of that axis: e.g., *y2 domain* refers to the
+            domain of the second y  axis and a y position of 0.5
+            refers to the point between the bottom and the top of
+            the domain of the second y axis.
         ysizemode
             Sets the shapes's sizing mode along the y axis. If set
             to "scaled", `y0`, `y1` and y coordinates within `path`
@@ -19314,11 +19676,16 @@ class FigureWidget(BaseFigureWidget):
             maintaining a position relative to data or plot
             fraction.
         row
-            Subplot row for shape
+            Subplot row for shape. If 'all', addresses all rows in
+            the specified column(s).
         col
-            Subplot column for shape
+            Subplot column for shape. If 'all', addresses all
+            columns in the specified row(s).
         secondary_y
             Whether to add shape to secondary y-axis
+        exclude_empty_subplots
+            If True, shape will not be added to subplots without
+            traces.
 
         Returns
         -------
@@ -19352,5 +19719,11 @@ class FigureWidget(BaseFigureWidget):
             **kwargs
         )
         return self._add_annotation_like(
-            "shape", "shapes", new_obj, row=row, col=col, secondary_y=secondary_y,
+            "shape",
+            "shapes",
+            new_obj,
+            row=row,
+            col=col,
+            secondary_y=secondary_y,
+            exclude_empty_subplots=exclude_empty_subplots,
         )
