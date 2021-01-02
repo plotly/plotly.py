@@ -479,7 +479,7 @@ def clean_to_json_compatible(obj, **kwargs):
             and isinstance(obj, np.ndarray)
             and obj.dtype.kind in ("b", "i", "u", "f")
         ):
-            return obj
+            return np.ascontiguousarray(obj)
 
     # pandas
     if pd is not None:
@@ -487,7 +487,7 @@ def clean_to_json_compatible(obj, **kwargs):
             return None
         elif isinstance(obj, (pd.Series, pd.DatetimeIndex)):
             if numpy_allowed and obj.dtype.kind in ("b", "i", "u", "f"):
-                return obj.values
+                return np.ascontiguousarray(obj.values)
             elif obj.dtype.kind == "M":
                 if isinstance(obj, pd.Series):
                     dt_values = obj.dt.to_pydatetime().tolist()
