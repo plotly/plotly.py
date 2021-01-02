@@ -1,3 +1,13 @@
+"""
+The `trendline_functions` module contains functions which are called by Plotly Express
+when the `trendline` argument is used. Valid values for `trendline` are the names of the
+functions in this module, and the value of the `trendline_options` argument to PX
+functions is passed in as the first argument to these functions when called.
+
+Note that the functions in this module are not meant to be called directly, and are
+exposed as part of the public API for documentation purposes.
+"""
+
 import pandas as pd
 import numpy as np
 
