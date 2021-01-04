@@ -49,6 +49,8 @@ plotly's high-level API for rapid figure generation. ::
     density_heatmap
     density_mapbox
     imshow
+    set_mapbox_access_token
+    get_trendline_results
 
 
 `plotly.express` subpackages
