@@ -3,8 +3,7 @@ from __future__ import absolute_import
 from six import string_types
 import json
 import decimal
-import os
-
+import datetime
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
 from _plotly_utils.optional_imports import get_module
@@ -474,12 +473,19 @@ def clean_to_json_compatible(obj, **kwargs):
     if np is not None:
         if obj is np.ma.core.masked:
             return float("nan")
-        elif (
-            numpy_allowed
-            and isinstance(obj, np.ndarray)
-            and obj.dtype.kind in ("b", "i", "u", "f")
-        ):
-            return np.ascontiguousarray(obj)
+        elif isinstance(obj, np.ndarray):
+            if numpy_allowed and obj.dtype.kind in ("b", "i", "u", "f"):
+                return np.ascontiguousarray(obj)
+            elif obj.dtype.kind == "M":
+                # datetime64 array
+                return np.datetime_as_string(obj).tolist()
+            elif obj.dtype.kind == "U":
+                return obj.tolist()
+            elif obj.dtype.kind == "O":
+                # Treat object array as a lists, continue processing
+                obj = obj.tolist()
+        elif isinstance(obj, np.datetime64):
+            return str(obj)
 
     # pandas
     if pd is not None:
@@ -496,35 +502,29 @@ def clean_to_json_compatible(obj, **kwargs):
 
                 if not datetime_allowed:
                     # Note: We don't need to handle dropping timezones here because
-                    # numpy's datetime64 doesn't support them and pandas's tolist()
-                    # doesn't preserve them.
+                    # numpy's datetime64 doesn't support them and pandas's tz_localize
+                    # above drops them.
                     for i in range(len(dt_values)):
                         dt_values[i] = dt_values[i].isoformat()
 
                 return dt_values
 
     # datetime and date
+    try:
+        # Need to drop timezone for scalar datetimes. Don't need to convert
+        # to string since engine can do that
+        obj = obj.replace(tzinfo=None)
+        obj = obj.to_pydatetime()
+    except(TypeError, AttributeError):
+        pass
+
     if not datetime_allowed:
         try:
-            # Need to drop timezone for scalar datetimes
-            return obj.replace(tzinfo=None).isoformat()
-        except (TypeError, AttributeError):
-            pass
-
-        if np and isinstance(obj, np.datetime64):
-            return str(obj)
-    else:
-        res = None
-        try:
-            # Need to drop timezone for scalar datetimes. Don't need to convert
-            # to string since engine can do that
-            res = obj.replace(tzinfo=None)
-            res = res.to_pydatetime()
+            return obj.isoformat()
         except(TypeError, AttributeError):
             pass
-
-        if res is not None:
-            return res
+    elif isinstance(obj, datetime.datetime):
+        return obj
 
     # Try .tolist() convertible, do not recurse inside
     try:
