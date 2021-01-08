@@ -1458,6 +1458,7 @@ def request_image_with_retrying(**kwargs):
     with retrying logic.
     """
     from requests import post
+    from plotly.io.json import to_json_plotly
 
     if config.server_url:
         server_url = config.server_url
@@ -1467,7 +1468,7 @@ def request_image_with_retrying(**kwargs):
         )
 
     request_params = {k: v for k, v, in kwargs.items() if v is not None}
-    json_str = json.dumps(request_params, cls=_plotly_utils.utils.PlotlyJSONEncoder)
+    json_str = to_json_plotly(request_params)
     response = post(server_url + "/", data=json_str)
 
     if response.status_code == 522:

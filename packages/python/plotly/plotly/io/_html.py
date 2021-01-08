@@ -128,6 +128,7 @@ def to_html(
     str
         Representation of figure as an HTML div string
     """
+    from plotly.io.json import to_json_plotly
 
     # ## Validate figure ##
     fig_dict = validate_coerce_fig_to_dict(fig, validate)
@@ -136,15 +137,11 @@ def to_html(
     plotdivid = str(uuid.uuid4())
 
     # ## Serialize figure ##
-    jdata = _json.dumps(
-        fig_dict.get("data", []), cls=utils.PlotlyJSONEncoder, sort_keys=True
-    )
-    jlayout = _json.dumps(
-        fig_dict.get("layout", {}), cls=utils.PlotlyJSONEncoder, sort_keys=True
-    )
+    jdata = to_json_plotly(fig_dict.get("data", []))
+    jlayout = to_json_plotly(fig_dict.get("layout", {}))
 
     if fig_dict.get("frames", None):
-        jframes = _json.dumps(fig_dict.get("frames", []), cls=utils.PlotlyJSONEncoder)
+        jframes = to_json_plotly(fig_dict.get("frames", []))
     else:
         jframes = None
 
