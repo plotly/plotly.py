@@ -540,13 +540,13 @@ def clean_to_json_compatible(obj, **kwargs):
         # to string since engine can do that
         obj = obj.replace(tzinfo=None)
         obj = obj.to_pydatetime()
-    except(TypeError, AttributeError):
+    except (TypeError, AttributeError):
         pass
 
     if not datetime_allowed:
         try:
             return obj.isoformat()
-        except(TypeError, AttributeError):
+        except (TypeError, AttributeError):
             pass
     elif isinstance(obj, datetime.datetime):
         return obj
