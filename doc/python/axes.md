@@ -124,7 +124,7 @@ fig = px.bar(df, x=["Apples", "Oranges"], y=[10,20], color=["Here", "There"],
 fig.show()
 ```
 
-##### Rotate axes in Dash
+##### Rotating tick labels in Dash
 
 [Dash](https://plotly.com/dash/) is the best way to build analytical apps in Python using Plotly figures. To run the app below, run `pip install dash`, click "Download" to get the code and run `python app.py`.
 
@@ -135,6 +135,19 @@ Get started  with [the official Dash docs](https://dash.plotly.com/installation)
 from IPython.display import IFrame
 snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'axes', width='100%', height=630)
+```
+
+#### Moving Tick Labels Inside the Plot
+
+The `ticklabelposition` attribute moves tick labels inside the plotting area, and modifies the auto-range behaviour to accomodate the labels.
+
+```python
+import plotly.express as px
+
+df = px.data.stocks(indexed=True)-1
+fig = px.bar(df, x=df.index, y="GOOG")
+fig.update_yaxes(ticklabelposition="inside top", title=None)
+fig.show()
 ```
 
 ##### Set axis title text with Graph Objects

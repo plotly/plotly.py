@@ -50,7 +50,7 @@ $ pip install -U kaleido
 
 or conda.
 ```
-$ conda install -c plotly python-kaleido
+$ conda install -c conda-forge python-kaleido
 ```
 
 While Kaleido is now the recommended approach, image export can also be supported by the legacy [orca](https://github.com/plotly/orca) command line utility. See the [Orca Management](/python/orca-management/) section for instructions on installing, configuring, and troubleshooting orca.

@@ -2,19 +2,51 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.14.0] - UNRELEASED
+## [4.15.0] - UNRELEASED
+
+### Added
+
+### Fixed
+
+### Updated
+
+
+## [4.14.2] - UNRELEASED
+
+### Added
+
+### Fixed
+
+### Updated
+
+
+## [4.14.1] - 2020-12-09
+
+### Updated
+
+- Updated Plotly.js to version 1.58.2. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - fixes for new `ticklabelposition` attribute
+  - fixes for a regression related to treemaps in the previous version
+
+
+## [4.14.0] - 2020-12-07
 
 ### Added
 
 - `px.imshow` now supports `facet_col` and `animation_frame` arguments for visualizing 3-d and 4-d images [2746](https://github.com/plotly/plotly.py/pull/2746)
+- `px.defaults` now supports `color_discrete_map`, `symbol_map`, `line_dash_map`, `labels` and `category_orders` as well as a `.reset()` method [2957](https://github.com/plotly/plotly.py/pull/2957)
 
 ### Fixed
 
-- axes will now auto-type numeric strings as categorical data rather than linear [2951](https://github.com/plotly/plotly.py/pull/2951)
+- axes will now auto-type numeric strings as categorical data rather than linear in the default templates [2951](https://github.com/plotly/plotly.py/pull/2951)
 
 ### Updated
 
-- Updated Plotly.js to version 1.58.0. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module.
+- Updated Plotly.js to version 1.58.1. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.0/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - a new `ticklabelposition` attribute to enable positioning tick labels inside the plotting area
+  - better support for `scaleanchor` and `matches` on cartesian axes for matched square subplots
+  - a new `autotypenumbers` attribute which is now set to `strict` in the default templates
+  - various fixes relating to `automargins` for small figures
 
 
 ## [4.13.0] - 2020-11-23
