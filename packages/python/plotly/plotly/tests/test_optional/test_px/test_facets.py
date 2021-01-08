@@ -1,4 +1,3 @@
-import plotly
 import pandas as pd
 import plotly.express as px
 from pytest import approx
@@ -112,25 +111,21 @@ def bad_facet_spacing_df():
 def test_bad_facet_spacing_eror(bad_facet_spacing_df):
     df = bad_facet_spacing_df
     with pytest.raises(
-        ValueError, match="Use the facet_row_spacing argument to adjust this spacing\."
+        ValueError, match="Use the facet_row_spacing argument to adjust this spacing."
     ):
-        fig = px.scatter(
-            df, x="x", y="y", facet_row="category", facet_row_spacing=0.01001
-        )
+        px.scatter(df, x="x", y="y", facet_row="category", facet_row_spacing=0.01001)
     with pytest.raises(
-        ValueError, match="Use the facet_col_spacing argument to adjust this spacing\."
+        ValueError, match="Use the facet_col_spacing argument to adjust this spacing."
     ):
-        fig = px.scatter(
-            df, x="x", y="y", facet_col="category", facet_col_spacing=0.01001
-        )
+        px.scatter(df, x="x", y="y", facet_col="category", facet_col_spacing=0.01001)
     # Check error is not raised when the spacing is OK
     try:
-        fig = px.scatter(df, x="x", y="y", facet_row="category", facet_row_spacing=0.01)
+        px.scatter(df, x="x", y="y", facet_row="category", facet_row_spacing=0.01)
     except ValueError:
         # Error shouldn't be raised, so fail if it is
         assert False
     try:
-        fig = px.scatter(df, x="x", y="y", facet_col="category", facet_col_spacing=0.01)
+        px.scatter(df, x="x", y="y", facet_col="category", facet_col_spacing=0.01)
     except ValueError:
         # Error shouldn't be raised, so fail if it is
         assert False
