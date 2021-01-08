@@ -102,8 +102,10 @@ def object_numpy_array(request):
         datetime.datetime(2003, 7, 12, 8, 34, 22),
         datetime.datetime.now(),
         np.datetime64(datetime.datetime.utcnow()),
+        pd.Timestamp(datetime.datetime.now()),
         eastern.localize(datetime.datetime(2003, 7, 12, 8, 34, 22)),
         eastern.localize(datetime.datetime.now()),
+        pd.Timestamp(datetime.datetime.now(), tzinfo=eastern),
     ],
 )
 def datetime_value(request):
@@ -112,6 +114,7 @@ def datetime_value(request):
 
 @pytest.fixture(
     params=[
+        list,  # plain list of datetime values
         lambda a: pd.DatetimeIndex(a),  # Pandas DatetimeIndex
         lambda a: pd.Series(pd.DatetimeIndex(a)),  # Pandas Datetime Series
         lambda a: pd.DatetimeIndex(a).values,  # Numpy datetime64 array
@@ -162,13 +165,31 @@ def test_datetime(datetime_value, engine, pretty):
 
 
 def test_datetime_arrays(datetime_array, engine, pretty):
+    if engine == "legacy":
+        pytest.skip("legacy encoder doesn't strip timezone from datetimes arrays")
+
     value = build_test_dict(datetime_array)
     result = pio.to_json_plotly(value, engine=engine)
 
-    if isinstance(datetime_array, pd.Series):
-        dt_values = [d.isoformat() for d in datetime_array.dt.to_pydatetime().tolist()]
+    def to_str(v):
+        try:
+            v = v.replace(tzinfo=None)
+        except (TypeError, AttributeError):
+            pass
+
+        try:
+            v = v.isoformat(sep="T")
+        except (TypeError, AttributeError):
+            pass
+
+        return str(v)
+
+    if isinstance(datetime_array, list):
+        dt_values = [to_str(d) for d in datetime_array]
+    elif isinstance(datetime_array, pd.Series):
+        dt_values = [to_str(d) for d in datetime_array.dt.to_pydatetime().tolist()]
     elif isinstance(datetime_array, pd.DatetimeIndex):
-        dt_values = [d.isoformat() for d in datetime_array.to_pydatetime().tolist()]
+        dt_values = [to_str(d) for d in datetime_array.to_pydatetime().tolist()]
     else:  # numpy datetime64 array
         dt_values = datetime_array.tolist()
 
