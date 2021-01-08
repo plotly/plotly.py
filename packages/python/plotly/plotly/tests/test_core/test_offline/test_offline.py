@@ -88,7 +88,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
             return f.read()
 
     def test_default_plot_generates_expected_html(self):
-        layout_json = _json.dumps(fig["layout"], cls=plotly.utils.PlotlyJSONEncoder)
+        layout_json = pio.json.to_json_plotly(fig["layout"])
 
         html = self._read_html(
             plotly.offline.plot(fig, auto_open=False, filename=html_filename)
@@ -98,8 +98,8 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
         # instead just make sure a few of the parts are in here?
         self.assertIn("Plotly.newPlot", html)  # plot command is in there
 
-        x_data = '"x": [1, 2, 3]'
-        y_data = '"y": [10, 20, 30]'
+        x_data = '"x":[1,2,3]'
+        y_data = '"y":[10,20,30]'
 
         self.assertTrue(x_data in html and y_data in html)  # data in there
         self.assertIn(layout_json, html)  # so is layout
