@@ -96,6 +96,11 @@ def object_numpy_array(request):
     return np.array(["a", 1, [2, 3]])
 
 
+@pytest.fixture(scope="module")
+def numpy_unicode_array(request):
+    return np.array(["A", "BB", "CCC"], dtype="U")
+
+
 @pytest.fixture(
     scope="module",
     params=[
@@ -118,6 +123,7 @@ def datetime_value(request):
         lambda a: pd.DatetimeIndex(a),  # Pandas DatetimeIndex
         lambda a: pd.Series(pd.DatetimeIndex(a)),  # Pandas Datetime Series
         lambda a: pd.DatetimeIndex(a).values,  # Numpy datetime64 array
+        lambda a: np.array(a, dtype="object"),  # Numpy object array of datetime
     ]
 )
 def datetime_array(request, datetime_value):
@@ -139,6 +145,16 @@ def test_numeric_numpy_encoding(numeric_numpy_array, engine, pretty):
 
     array_str = to_json_test(numeric_numpy_array.tolist())
     expected = build_test_dict_string(array_str, pretty=pretty)
+    assert result == expected
+    check_roundtrip(result, engine=engine, pretty=pretty)
+
+
+def test_numpy_unicode_encoding(numpy_unicode_array, engine, pretty):
+    value = build_test_dict(numpy_unicode_array)
+    result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
+
+    array_str = to_json_test(numpy_unicode_array.tolist())
+    expected = build_test_dict_string(array_str)
     assert result == expected
     check_roundtrip(result, engine=engine, pretty=pretty)
 
@@ -191,7 +207,7 @@ def test_datetime_arrays(datetime_array, engine, pretty):
     elif isinstance(datetime_array, pd.DatetimeIndex):
         dt_values = [to_str(d) for d in datetime_array.to_pydatetime().tolist()]
     else:  # numpy datetime64 array
-        dt_values = datetime_array.tolist()
+        dt_values = [to_str(d) for d in datetime_array]
 
     array_str = to_json_test(dt_values)
     expected = build_test_dict_string(array_str)
