@@ -490,9 +490,9 @@ def clean_to_json_compatible(obj, **kwargs):
                 return np.ascontiguousarray(obj.values)
             elif obj.dtype.kind == "M":
                 if isinstance(obj, pd.Series):
-                    dt_values = obj.dt.to_pydatetime().tolist()
+                    dt_values = obj.dt.tz_localize(None).dt.to_pydatetime().tolist()
                 else:  # DatetimeIndex
-                    dt_values = obj.to_pydatetime().tolist()
+                    dt_values = obj.tz_localize(None).to_pydatetime().tolist()
 
                 if not datetime_allowed:
                     # Note: We don't need to handle dropping timezones here because
@@ -514,12 +514,17 @@ def clean_to_json_compatible(obj, **kwargs):
         if np and isinstance(obj, np.datetime64):
             return str(obj)
     else:
+        res = None
         try:
             # Need to drop timezone for scalar datetimes. Don't need to convert
             # to string since engine can do that
-            return obj.replace(tzinfo=None)
-        except AttributeError:
+            res = obj.replace(tzinfo=None)
+            res = res.to_pydatetime()
+        except(TypeError, AttributeError):
             pass
+
+        if res is not None:
+            return res
 
     # Try .tolist() convertible, do not recurse inside
     try:
