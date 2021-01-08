@@ -58,6 +58,31 @@ def coerce_to_strict(const):
 
 
 def to_json_plotly(plotly_object, pretty=False, engine=None):
+    # instrucment _to_json_plotly by running it with all 3 engines and comparing results
+    # before returning
+    results = {}
+    result_str = None
+    for engine in ["legacy", "json", "orjson"]:
+        result_str = _to_json_plotly(plotly_object, pretty=pretty, engine=engine)
+        results[engine] = from_json_plotly(result_str, engine=engine)
+
+    # Check matches
+    if results["legacy"] != results["json"]:
+        raise ValueError("""
+{legacy}
+
+{json}""".format(legacy=results["legacy"], json=results["json"]))
+
+    if results["json"] != results["orjson"]:
+        raise ValueError("""
+{json}
+
+{orjson}""".format(json=results["json"], orjson=results["orjson"]))
+
+    return result_str
+
+
+def _to_json_plotly(plotly_object, pretty=False, engine=None):
     """
     Convert a plotly/Dash object to a JSON string representation
 
