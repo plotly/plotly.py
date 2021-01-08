@@ -867,8 +867,8 @@ class SphinxGalleryOrcaRenderer(ExternalRenderer):
         except (ValueError, ImportError):
             raise ImportError(
                 "orca and psutil are required to use the `sphinx-gallery-orca` renderer. "
-                "See https://plotly.com/python/static-image-export/ for instructions on"
-                "how to install orca. Alternatively, you can use the `sphinx-gallery`"
-                "renderer (note that png thumbnails can only be generated with"
+                "See https://plotly.com/python/static-image-export/ for instructions on "
+                "how to install orca. Alternatively, you can use the `sphinx-gallery` "
+                "renderer (note that png thumbnails can only be generated with "
                 "the `sphinx-gallery-orca` renderer)."
             )
