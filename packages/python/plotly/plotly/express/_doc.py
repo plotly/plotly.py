@@ -541,10 +541,17 @@ docs = dict(
         "Sets the number of rendered sectors from any given `level`. Set `maxdepth` to -1 to render all the"
         "levels in the hierarchy.",
     ],
+    norm=["TODO"],
+    complementary=["TODO"],
+    kernel=["TODO"],
+    bw_method=["TODO"],
+    bw_adjust=["TODO"],
 )
 
 
-def make_docstring(fn, override_dict={}, append_dict={}):
+def make_docstring(fn, override_dict=None, append_dict=None):
+    override_dict = {} if override_dict is None else override_dict
+    append_dict = {} if append_dict is None else append_dict
     tw = TextWrapper(width=75, initial_indent="    ", subsequent_indent="    ")
     result = (fn.__doc__ or "") + "\nParameters\n----------\n"
     for param in getfullargspec(fn)[0]:

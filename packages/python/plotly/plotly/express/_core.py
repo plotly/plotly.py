@@ -1285,6 +1285,9 @@ def build_dataframe(args, constructor):
     wide_cross_name = None  # will likely be "index" in wide_mode
     value_name = None  # will likely be "value" in wide_mode
     hist2d_types = [go.Histogram2d, go.Histogram2dContour]
+    hist1d_orientation = (
+        constructor == go.Histogram or "complementary" in args or "kernel" in args
+    )
     if constructor in cartesians:
         if wide_x and wide_y:
             raise ValueError(
@@ -1319,7 +1322,7 @@ def build_dataframe(args, constructor):
                 df_provided and var_name in df_input
             ):
                 var_name = "variable"
-            if constructor == go.Histogram:
+            if hist1d_orientation:
                 wide_orientation = "v" if wide_x else "h"
             else:
                 wide_orientation = "v" if wide_y else "h"
@@ -1333,7 +1336,10 @@ def build_dataframe(args, constructor):
         var_name = _escape_col_name(df_input, var_name, [])
 
     missing_bar_dim = None
-    if constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types:
+    if (
+        constructor in [go.Scatter, go.Bar, go.Funnel] + hist2d_types
+        and not hist1d_orientation
+    ):
         if not wide_mode and (no_x != no_y):
             for ax in ["x", "y"]:
                 if args.get(ax, None) is None:
@@ -1430,14 +1436,22 @@ def build_dataframe(args, constructor):
         df_output[var_name] = df_output[var_name].astype(str)
         orient_v = wide_orientation == "v"
 
-        if constructor in [go.Scatter, go.Funnel] + hist2d_types:
+        if hist1d_orientation:
+            args["x" if orient_v else "y"] = value_name
+            if wide_cross_name is None and constructor == go.Scatter:
+                args["y" if orient_v else "x"] = count_name
+                df_output[count_name] = 1
+            else:
+                args["y" if orient_v else "x"] = wide_cross_name
+            args["color"] = args["color"] or var_name
+        elif constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name
             args["y" if orient_v else "x"] = value_name
             if constructor != go.Histogram2d:
                 args["color"] = args["color"] or var_name
             if "line_group" in args:
                 args["line_group"] = args["line_group"] or var_name
-        if constructor == go.Bar:
+        elif constructor == go.Bar:
             if _is_continuous(df_output, value_name):
                 args["x" if orient_v else "y"] = wide_cross_name
                 args["y" if orient_v else "x"] = value_name
@@ -1447,13 +1461,9 @@ def build_dataframe(args, constructor):
                 args["y" if orient_v else "x"] = count_name
                 df_output[count_name] = 1
                 args["color"] = args["color"] or var_name
-        if constructor in [go.Violin, go.Box]:
+        elif constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
             args["y" if orient_v else "x"] = value_name
-        if constructor == go.Histogram:
-            args["x" if orient_v else "y"] = value_name
-            args["y" if orient_v else "x"] = wide_cross_name
-            args["color"] = args["color"] or var_name
     if no_color:
         args["color"] = None
     args["data_frame"] = df_output
@@ -1943,7 +1953,7 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     if (
                         trace_spec != trace_specs[0]
                         and trace_spec.constructor in [go.Violin, go.Box, go.Histogram]
-                        and m.variable == "symbol"
+                        and m.variable in ["symbol", "dash"]
                     ):
                         pass
                     elif (
@@ -2003,6 +2013,12 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 and trace.line.color
             ):
                 trace.update(marker=dict(color=trace.line.color))
+
+            if "complementary" in args:  # ECDF
+                base = args["x"] if args["orientation"] == "v" else args["y"]
+                var = args["x"] if args["orientation"] == "h" else args["y"]
+                group = group.sort_values(by=base)
+                group[var] = group[var].cumsum()
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref

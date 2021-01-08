@@ -471,6 +471,121 @@ histogram.__doc__ = make_docstring(
 )
 
 
+def ecdf(
+    data_frame=None,
+    x=None,
+    y=None,
+    color=None,
+    line_dash=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
+    hover_name=None,
+    hover_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    line_dash_sequence=None,
+    line_dash_map=None,
+    marginal=None,
+    opacity=None,
+    orientation=None,
+    line_shape=None,
+    norm=None,  # TODO use this
+    complementary=None,  # TODO use this
+    log_x=False,
+    log_y=False,
+    range_x=None,
+    range_y=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a Empirical Cumulative Distribution Function (ECDF) plot, rows of `data_frame`
+    are sorted by the value `x` (or `y` if `orientation` is `'h'`) and their cumulative
+    count (or the cumulative sum of `y` if supplied and `orientation` is `h`) is drawn
+    as a line.
+    """
+    return make_figure(args=locals(), constructor=go.Scatter)
+
+
+ecdf.__doc__ = make_docstring(
+    ecdf,
+    append_dict=dict(
+        x=[
+            "If `orientation` is `'h'`, the cumulative sum of this argument is plotted rather than the cumulative count."
+        ]
+        + _wide_mode_xy_append,
+        y=[
+            "If `orientation` is `'v'`, the cumulative sum of this argument is plotted rather than the cumulative count."
+        ]
+        + _wide_mode_xy_append,
+    ),
+)
+
+
+def kde(
+    data_frame=None,
+    x=None,
+    y=None,
+    color=None,
+    line_dash=None,
+    facet_row=None,
+    facet_col=None,
+    facet_col_wrap=0,
+    facet_row_spacing=None,
+    facet_col_spacing=None,
+    hover_name=None,
+    hover_data=None,
+    animation_frame=None,
+    animation_group=None,
+    category_orders=None,
+    labels=None,
+    color_discrete_sequence=None,
+    color_discrete_map=None,
+    line_dash_sequence=None,
+    line_dash_map=None,
+    marginal=None,
+    opacity=None,
+    orientation=None,
+    norm=None,  # TODO use this
+    kernel=None,  # TODO use this
+    bw_method=None,  # TODO use this
+    bw_adjust=None,  # TODO use this
+    log_x=False,
+    log_y=False,
+    range_x=None,
+    range_y=None,
+    title=None,
+    template=None,
+    width=None,
+    height=None,
+):
+    """
+    In a Kernel Density Estimation (KDE) plot, rows of `data_frame`
+    are used as inputs to a KDE smoothing function which is rendered as a line.
+    """
+    return make_figure(args=locals(), constructor=go.Scatter)
+
+
+kde.__doc__ = make_docstring(
+    kde,
+    append_dict=dict(
+        x=["If `orientation` is `'h'`, this argument is used as KDE weights."]
+        + _wide_mode_xy_append,
+        y=["If `orientation` is `'v'`, this argument is used as KDE weights."]
+        + _wide_mode_xy_append,
+    ),
+)
+
+
 def violin(
     data_frame=None,
     x=None,
