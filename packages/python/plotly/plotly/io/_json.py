@@ -16,7 +16,7 @@ class JsonConfig(object):
     _valid_engines = ("legacy", "json", "orjson", "auto")
 
     def __init__(self):
-        self._default_engine = "legacy"
+        self._default_engine = "auto"
 
     @property
     def default_engine(self):
