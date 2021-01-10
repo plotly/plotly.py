@@ -494,6 +494,7 @@ def ecdf(
     x=None,
     y=None,
     color=None,
+    text=None,
     line_dash=None,
     facet_row=None,
     facet_col=None,
@@ -513,9 +514,9 @@ def ecdf(
     marginal=None,
     opacity=None,
     orientation=None,
-    line_shape=None,
-    norm=None,  # TODO use this
-    complementary=None,  # TODO use this
+    line_shape="hv",
+    norm="probability",
+    complementary=False,
     log_x=False,
     log_y=False,
     range_x=None,
