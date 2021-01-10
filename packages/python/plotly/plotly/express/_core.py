@@ -1465,11 +1465,7 @@ def build_dataframe(args, constructor):
 
         if hist1d_orientation:
             args["x" if orient_v else "y"] = value_name
-            if wide_cross_name is None and constructor == go.Scatter:
-                args["y" if orient_v else "x"] = count_name
-                df_output[count_name] = 1
-            else:
-                args["y" if orient_v else "x"] = wide_cross_name
+            args["y" if orient_v else "x"] = wide_cross_name
             args["color"] = args["color"] or var_name
         elif constructor in [go.Scatter, go.Funnel] + hist2d_types:
             args["x" if orient_v else "y"] = wide_cross_name
@@ -1491,6 +1487,21 @@ def build_dataframe(args, constructor):
         elif constructor in [go.Violin, go.Box]:
             args["x" if orient_v else "y"] = wide_cross_name or var_name
             args["y" if orient_v else "x"] = value_name
+
+    if hist1d_orientation and constructor == go.Scatter:
+        if args["x"] is not None and args["y"] is not None:
+            args["histfunc"] = "sum"
+        elif args["x"] is None:
+            args["histfunc"] = None
+            args["orientation"] = "h"
+            args["x"] = count_name
+            df_output[count_name] = 1
+        else:
+            args["histfunc"] = None
+            args["orientation"] = "v"
+            args["y"] = count_name
+            df_output[count_name] = 1
+
     if no_color:
         args["color"] = None
     args["data_frame"] = df_output
@@ -1788,7 +1799,9 @@ def infer_config(args, constructor, trace_patch, layout_patch):
             trace_patch["opacity"] = args["opacity"]
         else:
             trace_patch["marker"] = dict(opacity=args["opacity"])
-    if "line_group" in args:  # px.line, px.line_*, px.area
+    if (
+        "line_group" in args or "line_dash" in args
+    ):  # px.line, px.line_*, px.area, px.ecdf, px, kde
         modes = set(["lines"])
         if args.get("text") or args.get("symbol") or args.get("markers"):
             modes.add("markers")
@@ -2061,7 +2074,17 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                 base = args["x"] if args["orientation"] == "v" else args["y"]
                 var = args["x"] if args["orientation"] == "h" else args["y"]
                 group = group.sort_values(by=base)
+                group_sum = group[var].sum()
                 group[var] = group[var].cumsum()
+                if args["complementary"]:
+                    group[var] = group_sum - group[var]
+
+                if args["norm"] == "probability":
+                    group[var] = group[var] / group_sum
+                elif args["norm"] == "percent":
+                    group[var] = 100.0 * group[var] / group_sum
+                args["histnorm"] = args["norm"]
+                # TODO norm, including histnorm-like naming
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
