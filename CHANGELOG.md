@@ -2,22 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.15.0] - UNRELEASED
-
-### Added
-
-### Fixed
-
-### Updated
-
 
 ## [4.14.2] - UNRELEASED
 
-### Added
+### Updated
+
+- Updated Plotly.js to version 1.58.4. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.4/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - fixes for rendering 3d plots on recent Safari versions
+  - fixes to inside ticklabels
+  - regression fixes
 
 ### Fixed
-
-### Updated
 
 
 ## [4.14.1] - 2020-12-09

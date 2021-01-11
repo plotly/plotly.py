@@ -687,7 +687,7 @@ class Carpet(_BaseTraceType):
     def cheaterslope(self):
         """
         The shift applied to each successive row of data in creating a
-        cheater plot. Only used if `x` is been ommitted.
+        cheater plot. Only used if `x` is been omitted.
     
         The 'cheaterslope' property is a number and may be specified as:
           - An int or float
@@ -1143,7 +1143,7 @@ class Carpet(_BaseTraceType):
     def x(self):
         """
         A two dimensional array of x coordinates at each carpet point.
-        If ommitted, the plot is a cheater plot and the xaxis is hidden
+        If omitted, the plot is a cheater plot and the xaxis is hidden
         by default.
     
         The 'x' property is an array that may be specified as a tuple,
@@ -1312,7 +1312,7 @@ class Carpet(_BaseTraceType):
         cheaterslope
             The shift applied to each successive row of data in
             creating a cheater plot. Only used if `x` is been
-            ommitted.
+            omitted.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1393,7 +1393,7 @@ class Carpet(_BaseTraceType):
             visible).
         x
             A two dimensional array of x coordinates at each carpet
-            point. If ommitted, the plot is a cheater plot and the
+            point. If omitted, the plot is a cheater plot and the
             xaxis is hidden by default.
         xaxis
             Sets a reference between this trace's x coordinates and
@@ -1500,7 +1500,7 @@ class Carpet(_BaseTraceType):
         cheaterslope
             The shift applied to each successive row of data in
             creating a cheater plot. Only used if `x` is been
-            ommitted.
+            omitted.
         color
             Sets default for all colors associated with this axis
             all at once: line, font, tick, and grid colors. Grid
@@ -1581,7 +1581,7 @@ class Carpet(_BaseTraceType):
             visible).
         x
             A two dimensional array of x coordinates at each carpet
-            point. If ommitted, the plot is a cheater plot and the
+            point. If omitted, the plot is a cheater plot and the
             xaxis is hidden by default.
         xaxis
             Sets a reference between this trace's x coordinates and
