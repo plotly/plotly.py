@@ -38,6 +38,12 @@
     "lodash": "^4.17.4"
   },
   "jupyterlab": {
-    "extension": "src/jupyterlab-plugin.js"
+    "extension": "src/jupyterlab-plugin.js",
+    "sharedPackages": {
+      "@jupyter-widgets/base": {
+        "bundled": false,
+        "singleton": true
+      }
+    }
   }
 }
