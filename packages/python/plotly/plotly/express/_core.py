@@ -153,13 +153,20 @@ def get_decorated_label(args, column, role):
         or (role == "x" and "orientation" in args and args["orientation"] == "h")
         or (role == "y" and "orientation" in args and args["orientation"] == "v")
     ):
-        if label:
-            label = "%s of %s" % (args["histfunc"] or "count", label)
+        histfunc = args["histfunc"] or "count"
+        if histfunc != "count":
+            label = "%s of %s" % (histfunc, label)
         else:
             label = "count"
 
         if "histnorm" in args and args["histnorm"] is not None:
-            label = "%s of %s" % (args["histnorm"], label)
+            if label == "count":
+                label = args["histnorm"]
+            else:
+                histnorm = args["histnorm"]
+                # avoid "probability of sum of thing"
+                histnorm = "fraction" if histnorm == "probability" else histnorm
+                label = "%s of %s" % (histnorm, label)
 
         if "barnorm" in args and args["barnorm"] is not None:
             label = "%s (normalized as %s)" % (label, args["barnorm"])
@@ -923,13 +930,6 @@ def apply_default_cascade(args):
                 "dashdot",
                 "longdashdot",
             ]
-
-    # If both marginals and faceting are specified, faceting wins
-    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
-        args["marginal_y"] = None
-
-    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
-        args["marginal_x"] = None
 
 
 def _check_name_not_reserved(field_name, reserved_names):
@@ -1765,6 +1765,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    # If both marginals and faceting are specified, faceting wins
+    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
+        args["marginal_y"] = None
+
+    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
+        args["marginal_x"] = None
+
+    # facet_col_wrap only works if no marginals or row faceting is used
     if (
         args.get("marginal_x", None) is not None
         or args.get("marginal_y", None) is not None

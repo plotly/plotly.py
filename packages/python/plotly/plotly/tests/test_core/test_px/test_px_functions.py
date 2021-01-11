@@ -380,16 +380,16 @@ def test_parcats_dimensions_max():
 
 
 def test_histfunc_hoverlabels():
+    def check_label(label, fig):
+        assert fig.layout.yaxis.title.text == label
+        assert label + "=" in fig.data[0].hovertemplate
+
     df = px.data.tips()
     fig = px.histogram(df, x="total_bill")
-    label = "count"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
+    check_label("count", fig)
 
     fig = px.histogram(df, x="total_bill", y="tip")
-    label = "sum of tip"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
+    check_label("sum of tip", fig)
 
     fig = px.histogram(
         df,
@@ -399,9 +399,7 @@ def test_histfunc_hoverlabels():
         histnorm="probability",
         barnorm="percent",
     )
-    label = "probability of min of tip (normalized as percent)"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
+    check_label("fraction of min of tip (normalized as percent)", fig)
 
 
 def test_timeline():
