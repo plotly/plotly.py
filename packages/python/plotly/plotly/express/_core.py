@@ -1856,6 +1856,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
     if "trendline_options" in args and args["trendline_options"] is None:
         args["trendline_options"] = dict()
 
+    if "norm" in args:
+        if args.get("norm", None) not in [None, "percent", "probability"]:
+            raise ValueError(
+                "`norm` must be one of None, 'percent' or 'probability'. "
+                + "'%s' was provided." % args["norm"]
+            )
+        args["histnorm"] = args["norm"]
+
     # Compute applicable grouping attributes
     for k in group_attrables:
         if k in args:
@@ -2083,8 +2091,6 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
                     group[var] = group[var] / group_sum
                 elif args["norm"] == "percent":
                     group[var] = 100.0 * group[var] / group_sum
-                args["histnorm"] = args["norm"]
-                # TODO norm, including histnorm-like naming
 
             patch, fit_results = make_trace_kwargs(
                 args, trace_spec, group, mapping_labels.copy(), sizeref
