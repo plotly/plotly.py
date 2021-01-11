@@ -276,7 +276,7 @@ class ErrorY(_BaseTraceHierarchyType):
         *constant`, the bar lengths are of a constant value. Set this
         constant in `value`. If "percent", the bar lengths correspond
         to a percentage of underlying data. Set this percentage in
-        `value`. If "sqrt", the bar lengths correspond to the sqaure of
+        `value`. If "sqrt", the bar lengths correspond to the square of
         the underlying data. If "data", the bar lengths are set with
         data set `array`.
     
@@ -420,7 +420,7 @@ class ErrorY(_BaseTraceHierarchyType):
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
-            lengths correspond to the sqaure of the underlying
+            lengths correspond to the square of the underlying
             data. If "data", the bar lengths are set with data set
             `array`.
         value
@@ -506,7 +506,7 @@ class ErrorY(_BaseTraceHierarchyType):
             Set this constant in `value`. If "percent", the bar
             lengths correspond to a percentage of underlying data.
             Set this percentage in `value`. If "sqrt", the bar
-            lengths correspond to the sqaure of the underlying
+            lengths correspond to the square of the underlying
             data. If "data", the bar lengths are set with data set
             `array`.
         value
