@@ -379,18 +379,73 @@ def test_parcats_dimensions_max():
     assert [d.label for d in fig.data[0].dimensions] == ["sex", "smoker", "day", "size"]
 
 
-def test_histfunc_hoverlabels():
+@pytest.mark.parametrize("histfunc,y", [(None, None), ("count", "tip")])
+def test_histfunc_hoverlabels_univariate(histfunc, y):
+    def check_label(label, fig):
+        assert fig.layout.yaxis.title.text == label
+        assert label + "=" in fig.data[0].hovertemplate
+
     df = px.data.tips()
-    fig = px.histogram(df, x="total_bill")
-    label = "count"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
 
+    # base case, just "count" (note count(tip) is same as count())
+    fig = px.histogram(df, x="total_bill", y=y, histfunc=histfunc)
+    check_label("count", fig)
+
+    # without y, label is just histnorm
+    for histnorm in ["probability", "percent", "density", "probability density"]:
+        fig = px.histogram(
+            df, x="total_bill", y=y, histfunc=histfunc, histnorm=histnorm
+        )
+        check_label(histnorm, fig)
+
+    for histnorm in ["probability", "percent", "density", "probability density"]:
+        for barnorm in ["percent", "fraction"]:
+            fig = px.histogram(
+                df,
+                x="total_bill",
+                y=y,
+                histfunc=histfunc,
+                histnorm=histnorm,
+                barnorm=barnorm,
+            )
+            check_label("%s (normalized as %s)" % (histnorm, barnorm), fig)
+
+
+def test_histfunc_hoverlabels_bivariate():
+    def check_label(label, fig):
+        assert fig.layout.yaxis.title.text == label
+        assert label + "=" in fig.data[0].hovertemplate
+
+    df = px.data.tips()
+
+    # with y, should be same as forcing histfunc to sum
     fig = px.histogram(df, x="total_bill", y="tip")
-    label = "sum of tip"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
+    check_label("sum of tip", fig)
 
+    # change probability to fraction when histfunc is sum
+    fig = px.histogram(df, x="total_bill", y="tip", histnorm="probability")
+    check_label("fraction of sum of tip", fig)
+
+    # percent is percent
+    fig = px.histogram(df, x="total_bill", y="tip", histnorm="percent")
+    check_label("percent of sum of tip", fig)
+
+    # the other two are "weighted by"
+    for histnorm in ["density", "probability density"]:
+        fig = px.histogram(df, x="total_bill", y="tip", histnorm=histnorm)
+        check_label("%s weighted by tip" % histnorm, fig)
+
+    # check a few "normalized by"
+    for histnorm in ["density", "probability density"]:
+        for barnorm in ["fraction", "percent"]:
+            fig = px.histogram(
+                df, x="total_bill", y="tip", histnorm=histnorm, barnorm=barnorm
+            )
+            check_label(
+                "%s weighted by tip (normalized as %s)" % (histnorm, barnorm), fig
+            )
+
+    # these next two are weird but OK...
     fig = px.histogram(
         df,
         x="total_bill",
@@ -399,9 +454,21 @@ def test_histfunc_hoverlabels():
         histnorm="probability",
         barnorm="percent",
     )
-    label = "probability of min of tip (normalized as percent)"
-    assert fig.layout.yaxis.title.text == label
-    assert label + "=" in fig.data[0].hovertemplate
+    check_label("fraction of sum of min of tip (normalized as percent)", fig)
+
+    fig = px.histogram(
+        df,
+        x="total_bill",
+        y="tip",
+        histfunc="avg",
+        histnorm="percent",
+        barnorm="fraction",
+    )
+    check_label("percent of sum of avg of tip (normalized as fraction)", fig)
+
+    # this next one is basically "never do this" but needs a defined behaviour
+    fig = px.histogram(df, x="total_bill", y="tip", histfunc="max", histnorm="density")
+    check_label("density of max of tip", fig)
 
 
 def test_timeline():

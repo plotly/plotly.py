@@ -47,6 +47,53 @@ def test_facets():
     assert fig.layout.yaxis4.domain[0] - fig.layout.yaxis.domain[1] == approx(0.08)
 
 
+def test_facets_with_marginals():
+    df = px.data.tips()
+
+    fig = px.histogram(df, x="total_bill", facet_col="sex", marginal="rug")
+    assert len(fig.data) == 4
+    fig = px.histogram(df, x="total_bill", facet_row="sex", marginal="rug")
+    assert len(fig.data) == 2
+
+    fig = px.histogram(df, y="total_bill", facet_col="sex", marginal="rug")
+    assert len(fig.data) == 2
+    fig = px.histogram(df, y="total_bill", facet_row="sex", marginal="rug")
+    assert len(fig.data) == 4
+
+    fig = px.scatter(df, x="total_bill", y="tip", facet_col="sex", marginal_x="rug")
+    assert len(fig.data) == 4
+    fig = px.scatter(
+        df, x="total_bill", y="tip", facet_col="day", facet_col_wrap=2, marginal_x="rug"
+    )
+    assert len(fig.data) == 8  # ignore the wrap when marginal is used
+    fig = px.scatter(df, x="total_bill", y="tip", facet_col="sex", marginal_y="rug")
+    assert len(fig.data) == 2  # ignore the marginal in the facet direction
+
+    fig = px.scatter(df, x="total_bill", y="tip", facet_row="sex", marginal_x="rug")
+    assert len(fig.data) == 2  # ignore the marginal in the facet direction
+    fig = px.scatter(df, x="total_bill", y="tip", facet_row="sex", marginal_y="rug")
+    assert len(fig.data) == 4
+
+    fig = px.scatter(
+        df, x="total_bill", y="tip", facet_row="sex", marginal_y="rug", marginal_x="rug"
+    )
+    assert len(fig.data) == 4  # ignore the marginal in the facet direction
+    fig = px.scatter(
+        df, x="total_bill", y="tip", facet_col="sex", marginal_y="rug", marginal_x="rug"
+    )
+    assert len(fig.data) == 4  # ignore the marginal in the facet direction
+    fig = px.scatter(
+        df,
+        x="total_bill",
+        y="tip",
+        facet_row="sex",
+        facet_col="sex",
+        marginal_y="rug",
+        marginal_x="rug",
+    )
+    assert len(fig.data) == 2  # ignore all marginals
+
+
 @pytest.fixture
 def bad_facet_spacing_df():
     NROWS = 101
