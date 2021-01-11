@@ -147,7 +147,7 @@ def _is_continuous(df, col_name):
 
 
 def get_decorated_label(args, column, role):
-    label = get_label(args, column)
+    original_label = label = get_label(args, column)
     if "histfunc" in args and (
         (role == "z")
         or (role == "x" and "orientation" in args and args["orientation"] == "h")
@@ -164,9 +164,19 @@ def get_decorated_label(args, column, role):
                 label = args["histnorm"]
             else:
                 histnorm = args["histnorm"]
-                # avoid "probability of sum of thing"
-                histnorm = "fraction" if histnorm == "probability" else histnorm
-                label = "%s of %s" % (histnorm, label)
+                if histfunc == "sum":
+                    if histnorm == "probability":
+                        label = "%s of %s" % ("fraction", label)
+                    elif histnorm == "percent":
+                        label = "%s of %s" % (histnorm, label)
+                    else:
+                        label = "%s weighted by %s" % (histnorm, original_label)
+                elif histnorm == "probability":
+                    label = "%s of sum of %s" % ("fraction", label)
+                elif histnorm == "percent":
+                    label = "%s of sum of %s" % ("percent", label)
+                else:
+                    label = "%s of %s" % (histnorm, label)
 
         if "barnorm" in args and args["barnorm"] is not None:
             label = "%s (normalized as %s)" % (label, args["barnorm"])
