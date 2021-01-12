@@ -39,7 +39,7 @@ Our recommended IDE for Plotly’s Python graphing library is Dash Enterprise’
 
 `pip install plotly==4.14.2`
 
-Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
+Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.5"`):
 
 ```python
 import plotly.graph_objects as go
@@ -98,31 +98,31 @@ conda install -c plotly plotly=4.14.2
 ### Jupyter Notebook Support
 
 For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-pip install "notebook>=5.3" "ipywidgets==7.5"
+pip install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
-or conda.
+or `conda`:
 
 ```
-conda install "notebook>=5.3" "ipywidgets=7.5"
+conda install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
-### JupyterLab Support (Python 3.5+)
+### JupyterLab Support
 
 For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-pip install jupyterlab "ipywidgets==7.5"
+pip install jupyterlab "ipywidgets>=7.5"
 ```
 
-or conda.
+or `conda`:
 
 ```
-conda install jupyterlab "ipywidgets=7.5"
+conda install jupyterlab "ipywidgets>=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
