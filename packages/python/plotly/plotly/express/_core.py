@@ -375,9 +375,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     trace_patch[error_xy] = {}
                 trace_patch[error_xy][arr] = trace_data[attr_value]
             elif attr_name == "custom_data":
-                # here we store a data frame in customdata, and it's serialized
-                # as a list of row lists, which is what we want
-                trace_patch["customdata"] = trace_data[attr_value]
+                if len(attr_value) > 0:
+                    # here we store a data frame in customdata, and it's serialized
+                    # as a list of row lists, which is what we want
+                    trace_patch["customdata"] = trace_data[attr_value]
             elif attr_name == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -398,6 +399,13 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     for col in attr_value:
                         if hover_is_dict and not attr_value[col]:
                             continue
+                        if col in [
+                            args.get("x", None),
+                            args.get("y", None),
+                            args.get("z", None),
+                            args.get("base", None),
+                        ]:
+                            continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -408,9 +416,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             position
                         )
 
-                    # here we store a data frame in customdata, and it's serialized
-                    # as a list of row lists, which is what we want
-                    trace_patch["customdata"] = trace_data[customdata_cols]
+                    if len(customdata_cols) > 0:
+                        # here we store a data frame in customdata, and it's serialized
+                        # as a list of row lists, which is what we want
+                        trace_patch["customdata"] = trace_data[customdata_cols]
             elif attr_name == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     trace_patch["z"] = trace_data[attr_value]

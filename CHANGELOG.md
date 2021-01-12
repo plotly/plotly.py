@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [4.14.3] - UNRELEASED
+
+### Fixed
+
+- `px.timeline()` now allows `hover_data` formatting of start and end times [3018](https://github.com/plotly/plotly.py/pull/3018)
+
+
 ## [4.14.2] - 2021-01-11
 
 ### Updated

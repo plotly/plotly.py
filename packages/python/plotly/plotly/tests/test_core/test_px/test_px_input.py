@@ -309,7 +309,8 @@ def test_pass_df_columns():
         marginal="rug",
         hover_data=tips.columns,
     )
-    assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns)
+    # the "- 2" is because we re-use x and y in the hovertemplate where possible
+    assert fig.data[1].hovertemplate.count("customdata") == len(tips.columns) - 2
     tips_copy = px.data.tips()
     assert tips_copy.columns.equals(tips.columns)
 
