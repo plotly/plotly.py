@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - `px.timeline()` now allows `hover_data` formatting of start and end times [3018](https://github.com/plotly/plotly.py/pull/3018)
-
+- Small change to packaging of `plotlywidget` extension for JupyterLab 3 [3021](https://github.com/plotly/plotly.py/pull/3021)
 
 ## [4.14.2] - 2021-01-11
 
