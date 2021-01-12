@@ -47,21 +47,12 @@ specified below.
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
    + Run `rm -rf node_modules && npm install && npm run build`
+ - This the last good time to install the extensions locally and check that everything works in dev mode
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
  - Ensure that the diff in `package-lock.json` seems sane
- - Commit and push. (NOTE: once pushed, the Github readme refers to the new versions, so don't stop here!)
-
-### Tag the release
-
-Make sure tests pass CI checks, then tag this commit as `vX.Y.Z` (e.g. `v3.1.1`) and push the tag.
-
-```bash
-(plotly_dev) $ git checkout master
-(plotly_dev) $ git stash
-(plotly_dev) $ git pull origin master
-(plotly_dev) $ git tag vX.Y.Z
-(plotly_dev) $ git push origin vX.Y.Z
-```
+ - Commit and tag but *don't push* until after everything is available on NPM/PyPI/Conda (see below):
+   + `git commit -a -m "release vX.Y.Z"`
+   + `git tag vX.Y.Z`
 
 ### Publish JS Extensions to NPM
 
@@ -75,11 +66,14 @@ cd packages/javascript/plotlywidget
 npm run build && npm publish --access public
 ```
 
+Final checks could be done here if desired.
+
 ### Publishing to PyPI
 
-Build and publish the final version to PyPI
+Build and publish the final version to PyPI.
 
 ```bash
+(plotly_dev) $ git status # make sure it's not dirty!
 (plotly_dev) $ cd packages/python/plotly
 (plotly_dev) $ rm -rf dist
 (plotly_dev) $ python setup.py sdist bdist_wheel
@@ -115,7 +109,12 @@ provides, which looks something like this:
 $ anaconda upload /path/to/anaconda3/conda-bld/noarch/plotly-*.tar.bz2
 ```
 
-### Add GitHub Release entry
+### Push the commit and add GitHub Release entry
+
+```bash
+(plotly_dev) $ git push origin master
+(plotly_dev) $ git push origin vX.Y.Z
+```
 
 1. Go to https://github.com/plotly/plotly.py/releases and "Draft a new release"
 2. Enter the `vX.Y.Z` tag you created already above and make "Release title" the same string as the tag.
