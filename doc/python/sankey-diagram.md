@@ -39,7 +39,7 @@ A [Sankey diagram](https://en.wikipedia.org/wiki/Sankey_diagram) is a flow diagr
 
 
 ### Basic Sankey Diagram
-Sankey diagrams visualize the contributions to a flow by defining [source](https://plotly.com/python/reference/sankey/#sankey-link-source) to represent the source node, [target](https://plotly.com/python/reference/sankey/#sankey-link-target) for the target node, [value](https://plotly.com/python/reference/sankey/#sankey-link-value) to set the flow volum, and [label](https://plotly.com/python/reference/sankey/#sankey-node-label) that shows the node name.
+Sankey diagrams visualize the contributions to a flow by defining [source](https://plotly.com/python/reference/sankey/#sankey-link-source) to represent the source node, [target](https://plotly.com/python/reference/sankey/#sankey-link-target) for the target node, [value](https://plotly.com/python/reference/sankey/#sankey-link-value) to set the flow volume, and [label](https://plotly.com/python/reference/sankey/#sankey-node-label) that shows the node name.
 
 ```python
 import plotly.graph_objects as go
