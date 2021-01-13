@@ -919,6 +919,7 @@ class BaseFigure(object):
 
         # instrumentation
         from plotly.io._json import to_json_plotly
+
         to_json_plotly(self)
 
         return self

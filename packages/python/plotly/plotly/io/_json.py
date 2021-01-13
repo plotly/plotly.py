@@ -71,17 +71,25 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
     # Check matches
     if results["legacy"] != results["json"]:
-        raise ValueError("""
+        raise ValueError(
+            """
 {legacy}
 
-{json}""".format(legacy=results["legacy"], json=results["json"]))
+{json}""".format(
+                legacy=results["legacy"], json=results["json"]
+            )
+        )
 
     if "orjson" in results:
         if results["json"] != results["orjson"]:
-            raise ValueError("""
+            raise ValueError(
+                """
     {json}
     
-    {orjson}""".format(json=results["json"], orjson=results["orjson"]))
+    {orjson}""".format(
+                    json=results["json"], orjson=results["orjson"]
+                )
+            )
 
     return result_str
 
