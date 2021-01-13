@@ -83,7 +83,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     
     {orjson}""".format(json=results["json"], orjson=results["orjson"]))
 
-        return result_str
+    return result_str
 
 
 def _to_json_plotly(plotly_object, pretty=False, engine=None):
