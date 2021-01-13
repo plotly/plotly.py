@@ -1,6 +1,6 @@
 {
   "name": "plotlywidget",
-  "version": "4.14.1",
+  "version": "4.14.3",
   "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",
@@ -33,11 +33,17 @@
     "typescript": "~3.1.1"
   },
   "dependencies": {
-    "plotly.js": "^1.58.2",
-    "@jupyter-widgets/base": "^2.0.0 || ^3.0.0",
+    "plotly.js": "^1.58.4",
+    "@jupyter-widgets/base": "^2.0.0 || ^3.0.0 || ^4.0.0",
     "lodash": "^4.17.4"
   },
   "jupyterlab": {
-    "extension": "src/jupyterlab-plugin.js"
+    "extension": "src/jupyterlab-plugin.js",
+    "sharedPackages": {
+      "@jupyter-widgets/base": {
+        "bundled": false,
+        "singleton": true
+      }
+    }
   }
 }

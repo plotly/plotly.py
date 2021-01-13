@@ -2,22 +2,28 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [4.15.0] - UNRELEASED
 
-### Added
-
-### Fixed
-
-### Updated
-
-
-## [4.14.2] - UNRELEASED
-
-### Added
+## [4.14.3] - 2021-01-12
 
 ### Fixed
 
+- `px.timeline()` now allows `hover_data` formatting of start and end times [3018](https://github.com/plotly/plotly.py/pull/3018)
+- Small change to packaging of `plotlywidget` extension for JupyterLab 3 [3021](https://github.com/plotly/plotly.py/pull/3021)
+
+## [4.14.2] - 2021-01-11
+
 ### Updated
+
+- JupyterLab extensions now compatible with JupyterLab 3.x [3016](https://github.com/plotly/plotly.py/pull/3016)
+- Updated Plotly.js to version 1.58.4. See the [plotly.js CHANGELOG](https://github.com/plotly/plotly.js/blob/v1.58.4/CHANGELOG.md) for more information. These changes are reflected in the auto-generated `plotly.graph_objects` module. Notable changes include:
+  - fixes for rendering 3d plots on recent Safari versions
+  - fixes to inside ticklabels
+  - regression fixes
+
+### Fixed
+
+- `px.histogram()` Y-axis labels now take into account `histnorm` and `barnorm` [2989](https://github.com/plotly/plotly.py/pull/2989)
+- `px.histogram()` `marginal` and `facet_*` now work correctly together [3014](https://github.com/plotly/plotly.py/pull/3014)
 
 
 ## [4.14.1] - 2020-12-09
