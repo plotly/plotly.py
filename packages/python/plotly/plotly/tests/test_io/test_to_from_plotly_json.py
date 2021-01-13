@@ -108,9 +108,9 @@ def numpy_unicode_array(request):
         datetime.datetime.now(),
         np.datetime64(datetime.datetime.utcnow()),
         pd.Timestamp(datetime.datetime.now()),
-        # eastern.localize(datetime.datetime(2003, 7, 12, 8, 34, 22)),
-        # eastern.localize(datetime.datetime.now()),
-        # pd.Timestamp(datetime.datetime.now(), tzinfo=eastern),
+        eastern.localize(datetime.datetime(2003, 7, 12, 8, 34, 22)),
+        eastern.localize(datetime.datetime.now()),
+        pd.Timestamp(datetime.datetime.now(), tzinfo=eastern),
     ],
 )
 def datetime_value(request):
