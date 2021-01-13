@@ -47,7 +47,7 @@ class Error_XValidator(_plotly_utils.basevalidators.CompoundValidator):
                 If "percent", the bar lengths correspond to a
                 percentage of underlying data. Set this
                 percentage in `value`. If "sqrt", the bar
-                lengths correspond to the sqaure of the
+                lengths correspond to the square of the
                 underlying data. If "data", the bar lengths are
                 set with data set `array`.
             value

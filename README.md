@@ -37,9 +37,9 @@ Our recommended IDE for Plotly’s Python graphing library is Dash Enterprise’
 
 ## Quickstart
 
-`pip install plotly==4.14.1`
+`pip install plotly==4.14.3`
 
-Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.2"`):
+Inside [Jupyter notebook](https://jupyter.org/install) (installable with `pip install "notebook>=5.3" "ipywidgets>=7.5"`):
 
 ```python
 import plotly.graph_objects as go
@@ -86,53 +86,53 @@ Built on top of [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` is
 plotly.py may be installed using pip...
 
 ```
-pip install plotly==4.14.1
+pip install plotly==4.14.3
 ```
 
 or conda.
 
 ```
-conda install -c plotly plotly=4.14.1
+conda install -c plotly plotly=4.14.3
 ```
 
 ### Jupyter Notebook Support
 
 For use in the Jupyter Notebook, install the `notebook` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-pip install "notebook>=5.3" "ipywidgets==7.5"
+pip install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
-or conda.
+or `conda`:
 
 ```
-conda install "notebook>=5.3" "ipywidgets=7.5"
+conda install "notebook>=5.3" "ipywidgets>=7.5"
 ```
 
-### JupyterLab Support (Python 3.5+)
+### JupyterLab Support
 
 For use in JupyterLab, install the `jupyterlab` and `ipywidgets`
-packages using pip...
+packages using `pip`:
 
 ```
-pip install jupyterlab "ipywidgets==7.5"
+pip install jupyterlab "ipywidgets>=7.5"
 ```
 
-or conda.
+or `conda`:
 
 ```
-conda install jupyterlab "ipywidgets=7.5"
+conda install jupyterlab "ipywidgets>=7.5"
 ```
 
 Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
 # Basic JupyterLab renderer support
-jupyter labextension install jupyterlab-plotly@4.14.1
+jupyter labextension install jupyterlab-plotly@4.14.3
 
 # OPTIONAL: Jupyter widgets extension for FigureWidget support
-jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.1
+jupyter labextension install @jupyter-widgets/jupyterlab-manager plotlywidget@4.14.3
 ```
 
 Please check out our [Troubleshooting guide](https://plotly.com/python/troubleshooting/) if you run into any problems with JupyterLab.

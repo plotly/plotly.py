@@ -147,19 +147,36 @@ def _is_continuous(df, col_name):
 
 
 def get_decorated_label(args, column, role):
-    label = get_label(args, column)
+    original_label = label = get_label(args, column)
     if "histfunc" in args and (
         (role == "z")
         or (role == "x" and "orientation" in args and args["orientation"] == "h")
         or (role == "y" and "orientation" in args and args["orientation"] == "v")
     ):
-        if label:
-            label = "%s of %s" % (args["histfunc"] or "count", label)
+        histfunc = args["histfunc"] or "count"
+        if histfunc != "count":
+            label = "%s of %s" % (histfunc, label)
         else:
             label = "count"
 
         if "histnorm" in args and args["histnorm"] is not None:
-            label = "%s of %s" % (args["histnorm"], label)
+            if label == "count":
+                label = args["histnorm"]
+            else:
+                histnorm = args["histnorm"]
+                if histfunc == "sum":
+                    if histnorm == "probability":
+                        label = "%s of %s" % ("fraction", label)
+                    elif histnorm == "percent":
+                        label = "%s of %s" % (histnorm, label)
+                    else:
+                        label = "%s weighted by %s" % (histnorm, original_label)
+                elif histnorm == "probability":
+                    label = "%s of sum of %s" % ("fraction", label)
+                elif histnorm == "percent":
+                    label = "%s of sum of %s" % ("percent", label)
+                else:
+                    label = "%s of %s" % (histnorm, label)
 
         if "barnorm" in args and args["barnorm"] is not None:
             label = "%s (normalized as %s)" % (label, args["barnorm"])
@@ -358,9 +375,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     trace_patch[error_xy] = {}
                 trace_patch[error_xy][arr] = trace_data[attr_value]
             elif attr_name == "custom_data":
-                # here we store a data frame in customdata, and it's serialized
-                # as a list of row lists, which is what we want
-                trace_patch["customdata"] = trace_data[attr_value]
+                if len(attr_value) > 0:
+                    # here we store a data frame in customdata, and it's serialized
+                    # as a list of row lists, which is what we want
+                    trace_patch["customdata"] = trace_data[attr_value]
             elif attr_name == "hover_name":
                 if trace_spec.constructor not in [
                     go.Histogram,
@@ -381,6 +399,13 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                     for col in attr_value:
                         if hover_is_dict and not attr_value[col]:
                             continue
+                        if col in [
+                            args.get("x", None),
+                            args.get("y", None),
+                            args.get("z", None),
+                            args.get("base", None),
+                        ]:
+                            continue
                         try:
                             position = args["custom_data"].index(col)
                         except (ValueError, AttributeError, KeyError):
@@ -391,9 +416,10 @@ def make_trace_kwargs(args, trace_spec, trace_data, mapping_labels, sizeref):
                             position
                         )
 
-                    # here we store a data frame in customdata, and it's serialized
-                    # as a list of row lists, which is what we want
-                    trace_patch["customdata"] = trace_data[customdata_cols]
+                    if len(customdata_cols) > 0:
+                        # here we store a data frame in customdata, and it's serialized
+                        # as a list of row lists, which is what we want
+                        trace_patch["customdata"] = trace_data[customdata_cols]
             elif attr_name == "color":
                 if trace_spec.constructor in [go.Choropleth, go.Choroplethmapbox]:
                     trace_patch["z"] = trace_data[attr_value]
@@ -923,13 +949,6 @@ def apply_default_cascade(args):
                 "dashdot",
                 "longdashdot",
             ]
-
-    # If both marginals and faceting are specified, faceting wins
-    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
-        args["marginal_y"] = None
-
-    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
-        args["marginal_x"] = None
 
 
 def _check_name_not_reserved(field_name, reserved_names):
@@ -1765,6 +1784,14 @@ def infer_config(args, constructor, trace_patch, layout_patch):
         args[position] = args["marginal"]
         args[other_position] = None
 
+    # If both marginals and faceting are specified, faceting wins
+    if args.get("facet_col", None) is not None and args.get("marginal_y", None):
+        args["marginal_y"] = None
+
+    if args.get("facet_row", None) is not None and args.get("marginal_x", None):
+        args["marginal_x"] = None
+
+    # facet_col_wrap only works if no marginals or row faceting is used
     if (
         args.get("marginal_x", None) is not None
         or args.get("marginal_y", None) is not None

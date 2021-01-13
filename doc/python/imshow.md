@@ -450,7 +450,7 @@ from skimage.data import image_fetcher
 path = image_fetcher.fetch('data/cells.tif')
 data = io.imread(path)
 img = data[25:40]
-fig = px.imshow(img, animation_frame=0, binary_string=True, labels=dict(animation_frame="yo"))
+fig = px.imshow(img, animation_frame=0, binary_string=True, labels=dict(animation_frame="slice"))
 fig.show()
 ```
 
