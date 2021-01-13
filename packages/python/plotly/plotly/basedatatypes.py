@@ -916,6 +916,11 @@ class BaseFigure(object):
                             BaseFigure._perform_update(self[k], v)
                         else:
                             self[k] = v
+
+        # instrumentation
+        from plotly.io._json import to_json_plotly
+        to_json_plotly(self)
+
         return self
 
     def pop(self, key, *args):

@@ -2065,6 +2065,11 @@ def make_figure(args, constructor, trace_patch=None, layout_patch=None):
 
     configure_axes(args, constructor, fig, orders)
     configure_animation_controls(args, constructor, fig)
+
+    # instrumentation
+    from plotly.io._json import to_json_plotly
+    to_json_plotly(fig)
+
     return fig
 
 
