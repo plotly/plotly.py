@@ -32,7 +32,7 @@ def isoformat_test(dt_value):
     if isinstance(dt_value, np.datetime64):
         return str(dt_value)
     elif isinstance(dt_value, datetime.datetime):
-        return dt_value.replace(tzinfo=None).isoformat()
+        return dt_value.isoformat()
     else:
         raise ValueError("Unsupported date type: {}".format(type(dt_value)))
 
@@ -181,18 +181,10 @@ def test_datetime(datetime_value, engine, pretty):
 
 
 def test_datetime_arrays(datetime_array, engine, pretty):
-    if engine == "legacy":
-        pytest.skip("legacy encoder doesn't strip timezone from datetimes arrays")
-
     value = build_test_dict(datetime_array)
     result = pio.to_json_plotly(value, engine=engine)
 
     def to_str(v):
-        try:
-            v = v.replace(tzinfo=None)
-        except (TypeError, AttributeError):
-            pass
-
         try:
             v = v.isoformat(sep="T")
         except (TypeError, AttributeError):
