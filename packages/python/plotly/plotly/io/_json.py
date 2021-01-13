@@ -60,9 +60,12 @@ def coerce_to_strict(const):
 def to_json_plotly(plotly_object, pretty=False, engine=None):
     # instrucment _to_json_plotly by running it with all 3 engines and comparing results
     # before returning
+    orjson = get_module("orjson", should_load=True)
     results = {}
     result_str = None
     for engine in ["legacy", "json", "orjson"]:
+        if orjson is None and engine == "orjson":
+            continue
         result_str = _to_json_plotly(plotly_object, pretty=pretty, engine=engine)
         results[engine] = from_json_plotly(result_str, engine=engine)
 
@@ -73,13 +76,14 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
 
 {json}""".format(legacy=results["legacy"], json=results["json"]))
 
-    if results["json"] != results["orjson"]:
-        raise ValueError("""
-{json}
+    if "orjson" in results:
+        if results["json"] != results["orjson"]:
+            raise ValueError("""
+    {json}
+    
+    {orjson}""".format(json=results["json"], orjson=results["orjson"]))
 
-{orjson}""".format(json=results["json"], orjson=results["orjson"]))
-
-    return result_str
+        return result_str
 
 
 def _to_json_plotly(plotly_object, pretty=False, engine=None):
