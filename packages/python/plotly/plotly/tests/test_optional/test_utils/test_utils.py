@@ -277,6 +277,15 @@ class TestJSONEncoder(TestCase):
         j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
         assert j1 == '["2014-01-01", "2014-01-02"]'
 
+    def test_numpy_datetime64(self):
+        a = pd.date_range("2011-07-11", "2011-07-13", freq="D").values
+        j1 = _json.dumps(a, cls=utils.PlotlyJSONEncoder)
+        assert (
+            j1 == '["2011-07-11T00:00:00.000000000", '
+                  '"2011-07-12T00:00:00.000000000", '
+                  '"2011-07-13T00:00:00.000000000"]'
+        )
+
     def test_pil_image_encoding(self):
         import _plotly_utils
 

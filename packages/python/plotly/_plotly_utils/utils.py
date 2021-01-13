@@ -184,8 +184,13 @@ class PlotlyJSONEncoder(_json.JSONEncoder):
 
         if obj is numpy.ma.core.masked:
             return float("nan")
-        else:
-            raise NotEncodable
+        elif isinstance(obj, numpy.ndarray):
+            try:
+                return numpy.datetime_as_string(obj).tolist()
+            except TypeError:
+                pass
+
+        raise NotEncodable
 
     @staticmethod
     def encode_as_datetime(obj):
