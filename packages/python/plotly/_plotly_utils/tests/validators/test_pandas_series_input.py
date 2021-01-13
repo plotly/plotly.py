@@ -173,7 +173,7 @@ def test_color_validator_categorical(color_validator, color_categorical_pandas):
     np.testing.assert_array_equal(res, np.array(color_categorical_pandas))
 
 
-def test_data_array_validator_dates(data_array_validator, datetime_pandas, dates_array):
+def test_data_array_validator_dates_series(data_array_validator, datetime_pandas, dates_array):
 
     res = data_array_validator.validate_coerce(datetime_pandas)
 
@@ -185,3 +185,18 @@ def test_data_array_validator_dates(data_array_validator, datetime_pandas, dates
 
     # Check values
     np.testing.assert_array_equal(res, dates_array)
+
+
+def test_data_array_validator_dates_dataframe(data_array_validator, datetime_pandas, dates_array):
+
+    df = pd.DataFrame({"d": datetime_pandas})
+    res = data_array_validator.validate_coerce(df)
+
+    # Check type
+    assert isinstance(res, np.ndarray)
+
+    # Check dtype
+    assert res.dtype == "object"
+
+    # Check values
+    np.testing.assert_array_equal(res, dates_array.reshape(len(dates_array), 1))

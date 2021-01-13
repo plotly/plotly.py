@@ -257,6 +257,61 @@ class TestJSONEncoder(TestCase):
         j6 = _json.dumps(ts.index, cls=utils.PlotlyJSONEncoder)
         assert j6 == '["2011-01-01T00:00:00", "2011-01-01T01:00:00"]'
 
+    def test_encode_customdata_datetime_series(self):
+        df = pd.DataFrame(dict(t=pd.to_datetime(["2010-01-01", "2010-01-02"])))
+
+        # 1D customdata
+        fig = Figure(
+            Scatter(x=df["t"], customdata=df["t"]), layout=dict(template="none")
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":["2010-01-01T00:00:00","2010-01-02T00:00:00"]'
+            )
+        )
+
+    def test_encode_customdata_datetime_homogenous_dataframe(self):
+        df = pd.DataFrame(dict(
+            t1=pd.to_datetime(["2010-01-01", "2010-01-02"]),
+            t2=pd.to_datetime(["2011-01-01", "2011-01-02"]),
+        ))
+        # 2D customdata
+        fig = Figure(
+            Scatter(x=df["t1"], customdata=df[["t1", "t2"]]), layout=dict(template="none")
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":'
+                '[["2010-01-01T00:00:00","2011-01-01T00:00:00"],'
+                '["2010-01-02T00:00:00","2011-01-02T00:00:00"]'
+            )
+        )
+
+    def test_encode_customdata_datetime_inhomogenous_dataframe(self):
+        df = pd.DataFrame(dict(
+            t=pd.to_datetime(["2010-01-01", "2010-01-02"]),
+            v=np.arange(2),
+        ))
+        # 2D customdata
+        fig = Figure(
+            Scatter(x=df["t"], customdata=df[["t", "v"]]), layout=dict(template="none")
+        )
+        fig_json = _json.dumps(
+            fig, cls=utils.PlotlyJSONEncoder, separators=(",", ":"), sort_keys=True
+        )
+        self.assertTrue(
+            fig_json.startswith(
+                '{"data":[{"customdata":'
+                '[["2010-01-01T00:00:00",0],["2010-01-02T00:00:00",1]]'
+            )
+        )
+
     def test_numpy_masked_json_encoding(self):
         l = [1, 2, np.ma.core.masked]
         j1 = _json.dumps(l, cls=utils.PlotlyJSONEncoder)
