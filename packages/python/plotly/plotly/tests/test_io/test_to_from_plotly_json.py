@@ -170,9 +170,6 @@ def test_object_numpy_encoding(object_numpy_array, engine, pretty):
 
 
 def test_datetime(datetime_value, engine, pretty):
-    if engine == "legacy":
-        pytest.skip("legacy encoder doesn't strip timezone from scalar datetimes")
-
     value = build_test_dict(datetime_value)
     result = pio.to_json_plotly(value, engine=engine, pretty=pretty)
     expected = build_test_dict_string('"{}"'.format(isoformat_test(datetime_value)))
