@@ -103,6 +103,13 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
             else:
                 # DatetimeIndex
                 v = v.to_pydatetime()
+    elif pd and isinstance(v, pd.DataFrame) and len(set(v.dtypes)) == 1:
+        dtype = v.dtypes.tolist()[0]
+        if dtype.kind in numeric_kinds:
+            v = v.values
+        elif dtype.kind == "M":
+            v = [row.dt.to_pydatetime().tolist() for i, row in v.iterrows()]
+
     if not isinstance(v, np.ndarray):
         # v has its own logic on how to convert itself into a numpy array
         if is_numpy_convertable(v):
@@ -146,7 +153,7 @@ def copy_to_readonly_numpy_array(v, kind=None, force_numeric=False):
         # datatype. This works around cases like np.array([1, 2, '3']) where
         # numpy converts the integers to strings and returns array of dtype
         # '<U21'
-        if new_v.dtype.kind not in ["u", "i", "f", "O"]:
+        if new_v.dtype.kind not in ["u", "i", "f", "O", "M"]:
             new_v = np.array(v, dtype="object")
 
     # Set new array to be read-only
