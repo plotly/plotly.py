@@ -314,7 +314,7 @@ class PlotlyOfflineTestCase(PlotlyOfflineBaseTestCase):
 
         self.assertIn('"bogus": 42', html)
 
-    @pytest.mark.nodev
+    @pytest.mark.skip(reason="this is a test branch")
     def test_plotlyjs_version(self):
         path = os.path.join(packages_root, "javascript", "plotlywidget", "package.json")
         with open(path, "rt") as f:
