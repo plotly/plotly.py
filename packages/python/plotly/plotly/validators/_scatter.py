@@ -203,14 +203,6 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
                 ("h"), the y (x) values of subsequent traces
                 are added. Also affects the default value of
                 `fill`.
-            r
-                r coordinates in scatter traces are
-                deprecated!Please switch to the "scatterpolar"
-                trace type.Sets the radial coordinatesfor
-                legacy polar chart only.
-            rsrc
-                Sets the source reference on Chart Studio Cloud
-                for  r .
             selected
                 :class:`plotly.graph_objects.scatter.Selected`
                 instance or dict with compatible properties
@@ -258,11 +250,6 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             stream
                 :class:`plotly.graph_objects.scatter.Stream`
                 instance or dict with compatible properties
-            t
-                t coordinates in scatter traces are
-                deprecated!Please switch to the "scatterpolar"
-                trace type.Sets the angular coordinatesfor
-                legacy polar chart only.
             text
                 Sets text elements associated with each (x,y)
                 pair. If a single string, the same string
@@ -305,9 +292,6 @@ class ScatterValidator(_plotly_utils.basevalidators.CompoundValidator):
             texttemplatesrc
                 Sets the source reference on Chart Studio Cloud
                 for  texttemplate .
-            tsrc
-                Sets the source reference on Chart Studio Cloud
-                for  t .
             uid
                 Assign an id to this trace, Use this to provide
                 object constancy between traces during

@@ -10,9 +10,6 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             data_docs=kwargs.pop(
                 "data_docs",
                 """
-            area
-                A tuple of :class:`plotly.graph_objects.Area`
-                instances or dicts with compatible properties
             barpolar
                 A tuple of
                 :class:`plotly.graph_objects.Barpolar`
@@ -107,10 +104,6 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
                 instances or dicts with compatible properties
             pie
                 A tuple of :class:`plotly.graph_objects.Pie`
-                instances or dicts with compatible properties
-            pointcloud
-                A tuple of
-                :class:`plotly.graph_objects.Pointcloud`
                 instances or dicts with compatible properties
             sankey
                 A tuple of :class:`plotly.graph_objects.Sankey`

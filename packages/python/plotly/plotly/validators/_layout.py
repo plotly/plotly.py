@@ -13,9 +13,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             activeshape
                 :class:`plotly.graph_objects.layout.Activeshape
                 ` instance or dict with compatible properties
-            angularaxis
-                :class:`plotly.graph_objects.layout.AngularAxis
-                ` instance or dict with compatible properties
             annotations
                 A tuple of
                 :class:`plotly.graph_objects.layout.Annotation`
@@ -126,11 +123,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 being treated as immutable, thus any data array
                 with a different identity from its predecessor
                 contains new data.
-            direction
-                Legacy polar charts are deprecated! Please
-                switch to "polar" subplots. Sets the direction
-                corresponding to positive angles in legacy
-                polar charts.
             dragmode
                 Determines the mode of drag interactions.
                 "select" and "lasso" apply only to scatter
@@ -308,11 +300,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             newshape
                 :class:`plotly.graph_objects.layout.Newshape`
                 instance or dict with compatible properties
-            orientation
-                Legacy polar charts are deprecated! Please
-                switch to "polar" subplots. Rotates the entire
-                polar by the given angle in legacy polar
-                charts.
             paper_bgcolor
                 Sets the background color of the paper where
                 the graph is drawn.
@@ -327,9 +314,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in-between x and y axes.
             polar
                 :class:`plotly.graph_objects.layout.Polar`
-                instance or dict with compatible properties
-            radialaxis
-                :class:`plotly.graph_objects.layout.RadialAxis`
                 instance or dict with compatible properties
             scene
                 :class:`plotly.graph_objects.layout.Scene`

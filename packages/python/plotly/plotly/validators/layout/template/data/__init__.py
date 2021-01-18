@@ -20,7 +20,6 @@ if sys.version_info < (3, 7):
     from ._scattercarpet import ScattercarpetValidator
     from ._scatter3d import Scatter3DValidator
     from ._sankey import SankeyValidator
-    from ._pointcloud import PointcloudValidator
     from ._pie import PieValidator
     from ._parcoords import ParcoordsValidator
     from ._parcats import ParcatsValidator
@@ -47,7 +46,6 @@ if sys.version_info < (3, 7):
     from ._box import BoxValidator
     from ._bar import BarValidator
     from ._barpolar import BarpolarValidator
-    from ._area import AreaValidator
 else:
     from _plotly_utils.importers import relative_import
 
@@ -74,7 +72,6 @@ else:
             "._scattercarpet.ScattercarpetValidator",
             "._scatter3d.Scatter3DValidator",
             "._sankey.SankeyValidator",
-            "._pointcloud.PointcloudValidator",
             "._pie.PieValidator",
             "._parcoords.ParcoordsValidator",
             "._parcats.ParcatsValidator",
@@ -101,6 +98,5 @@ else:
             "._box.BoxValidator",
             "._bar.BarValidator",
             "._barpolar.BarpolarValidator",
-            "._area.AreaValidator",
         ],
     )

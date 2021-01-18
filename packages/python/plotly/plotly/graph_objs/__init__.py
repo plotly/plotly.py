@@ -1,7 +1,6 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._area import Area
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -56,7 +55,6 @@ if sys.version_info < (3, 7):
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
-    from ._pointcloud import Pointcloud
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
@@ -76,7 +74,6 @@ if sys.version_info < (3, 7):
     from ._violin import Violin
     from ._volume import Volume
     from ._waterfall import Waterfall
-    from . import area
     from . import bar
     from . import barpolar
     from . import box
@@ -104,7 +101,6 @@ if sys.version_info < (3, 7):
     from . import parcats
     from . import parcoords
     from . import pie
-    from . import pointcloud
     from . import sankey
     from . import scatter
     from . import scatter3d
@@ -130,7 +126,6 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            ".area",
             ".bar",
             ".barpolar",
             ".box",
@@ -158,7 +153,6 @@ else:
             ".parcats",
             ".parcoords",
             ".pie",
-            ".pointcloud",
             ".sankey",
             ".scatter",
             ".scatter3d",
@@ -180,7 +174,6 @@ else:
             ".waterfall",
         ],
         [
-            "._area.Area",
             "._bar.Bar",
             "._barpolar.Barpolar",
             "._box.Box",
@@ -235,7 +228,6 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
-            "._pointcloud.Pointcloud",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",

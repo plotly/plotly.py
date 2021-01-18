@@ -20,7 +20,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Scatter3d
     from ..graph_objs import Scatter
     from ..graph_objs import Sankey
-    from ..graph_objs import Pointcloud
     from ..graph_objs import Pie
     from ..graph_objs import Parcoords
     from ..graph_objs import Parcats
@@ -47,7 +46,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Box
     from ..graph_objs import Barpolar
     from ..graph_objs import Bar
-    from ..graph_objs import Area
     from ..graph_objs import Layout
     from ..graph_objs import Frame
     from ..graph_objs import Figure
@@ -95,7 +93,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import scatter3d
     from ..graph_objs import scatter
     from ..graph_objs import sankey
-    from ..graph_objs import pointcloud
     from ..graph_objs import pie
     from ..graph_objs import parcoords
     from ..graph_objs import parcats
@@ -122,7 +119,6 @@ if sys.version_info < (3, 7):
     from ..graph_objs import box
     from ..graph_objs import barpolar
     from ..graph_objs import bar
-    from ..graph_objs import area
     from ..graph_objs import layout
 else:
     from _plotly_utils.importers import relative_import
@@ -149,7 +145,6 @@ else:
             "..graph_objs.scatter3d",
             "..graph_objs.scatter",
             "..graph_objs.sankey",
-            "..graph_objs.pointcloud",
             "..graph_objs.pie",
             "..graph_objs.parcoords",
             "..graph_objs.parcats",
@@ -176,7 +171,6 @@ else:
             "..graph_objs.box",
             "..graph_objs.barpolar",
             "..graph_objs.bar",
-            "..graph_objs.area",
             "..graph_objs.layout",
         ],
         [
@@ -199,7 +193,6 @@ else:
             "..graph_objs.Scatter3d",
             "..graph_objs.Scatter",
             "..graph_objs.Sankey",
-            "..graph_objs.Pointcloud",
             "..graph_objs.Pie",
             "..graph_objs.Parcoords",
             "..graph_objs.Parcats",
@@ -226,7 +219,6 @@ else:
             "..graph_objs.Box",
             "..graph_objs.Barpolar",
             "..graph_objs.Bar",
-            "..graph_objs.Area",
             "..graph_objs.Layout",
             "..graph_objs.Frame",
             "..graph_objs.Figure",

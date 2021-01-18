@@ -1,7 +1,6 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._area import Area
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -28,7 +27,6 @@ if sys.version_info < (3, 7):
     from ._parcats import Parcats
     from ._parcoords import Parcoords
     from ._pie import Pie
-    from ._pointcloud import Pointcloud
     from ._sankey import Sankey
     from ._scatter import Scatter
     from ._scatter3d import Scatter3d
@@ -55,7 +53,6 @@ else:
         __name__,
         [],
         [
-            "._area.Area",
             "._bar.Bar",
             "._barpolar.Barpolar",
             "._box.Box",
@@ -82,7 +79,6 @@ else:
             "._parcats.Parcats",
             "._parcoords.Parcoords",
             "._pie.Pie",
-            "._pointcloud.Pointcloud",
             "._sankey.Sankey",
             "._scatter.Scatter",
             "._scatter3d.Scatter3d",

@@ -23,9 +23,6 @@ class Template(_BaseLayoutHierarchyType):
     
             Supported dict properties:
                 
-                area
-                    A tuple of :class:`plotly.graph_objects.Area`
-                    instances or dicts with compatible properties
                 barpolar
                     A tuple of
                     :class:`plotly.graph_objects.Barpolar`
@@ -120,10 +117,6 @@ class Template(_BaseLayoutHierarchyType):
                     instances or dicts with compatible properties
                 pie
                     A tuple of :class:`plotly.graph_objects.Pie`
-                    instances or dicts with compatible properties
-                pointcloud
-                    A tuple of
-                    :class:`plotly.graph_objects.Pointcloud`
                     instances or dicts with compatible properties
                 sankey
                     A tuple of :class:`plotly.graph_objects.Sankey`

@@ -2,6 +2,7 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._zsrc import ZsrcValidator
+    from ._zsmooth import ZsmoothValidator
     from ._zmin import ZminValidator
     from ._zmax import ZmaxValidator
     from ._z import ZValidator
@@ -42,6 +43,7 @@ else:
         [],
         [
             "._zsrc.ZsrcValidator",
+            "._zsmooth.ZsmoothValidator",
             "._zmin.ZminValidator",
             "._zmax.ZmaxValidator",
             "._z.ZValidator",

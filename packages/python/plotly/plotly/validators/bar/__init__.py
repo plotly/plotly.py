@@ -23,7 +23,6 @@ if sys.version_info < (3, 7):
     from ._unselected import UnselectedValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
-    from ._tsrc import TsrcValidator
     from ._texttemplatesrc import TexttemplatesrcValidator
     from ._texttemplate import TexttemplateValidator
     from ._textsrc import TextsrcValidator
@@ -32,13 +31,10 @@ if sys.version_info < (3, 7):
     from ._textfont import TextfontValidator
     from ._textangle import TextangleValidator
     from ._text import TextValidator
-    from ._t import TValidator
     from ._stream import StreamValidator
     from ._showlegend import ShowlegendValidator
     from ._selectedpoints import SelectedpointsValidator
     from ._selected import SelectedValidator
-    from ._rsrc import RsrcValidator
-    from ._r import RValidator
     from ._outsidetextfont import OutsidetextfontValidator
     from ._orientation import OrientationValidator
     from ._opacity import OpacityValidator
@@ -101,7 +97,6 @@ else:
             "._unselected.UnselectedValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
-            "._tsrc.TsrcValidator",
             "._texttemplatesrc.TexttemplatesrcValidator",
             "._texttemplate.TexttemplateValidator",
             "._textsrc.TextsrcValidator",
@@ -110,13 +105,10 @@ else:
             "._textfont.TextfontValidator",
             "._textangle.TextangleValidator",
             "._text.TextValidator",
-            "._t.TValidator",
             "._stream.StreamValidator",
             "._showlegend.ShowlegendValidator",
             "._selectedpoints.SelectedpointsValidator",
             "._selected.SelectedValidator",
-            "._rsrc.RsrcValidator",
-            "._r.RValidator",
             "._outsidetextfont.OutsidetextfontValidator",
             "._orientation.OrientationValidator",
             "._opacity.OpacityValidator",
