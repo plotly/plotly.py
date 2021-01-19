@@ -143,7 +143,7 @@ fig.show()
 
 ### Defining a custom opacity scale
 
-It is also possible to define a custom opacity scale, mapping scalar values to relative opacity values (between 0 and 1, the maximum opacity is given by the opacity keyword). This is useful to make a range of values completely transparent, as in the example below between -0.2 and 0.2.
+It is also possible to define a custom opacity scale, mapping scalar values to relative opacity values (between 0 and 1, the maximum opacity is given by the opacity keyword). This is useful to make a range of values completely transparent, as in the example below between 0.4 and 0.6.
 
 ```python
 import plotly.graph_objects as go
@@ -159,7 +159,7 @@ fig = go.Figure(data=go.Volume(
     isomin=-0.5,
     isomax=0.5,
     opacity=0.1, # max opacity
-    opacityscale=[[-0.5, 1], [-0.2, 0], [0.2, 0], [0.5, 1]],
+    opacityscale=[[0, 1], [0.4, 0], [0.6, 0], [1, 1]],
     surface_count=21,
     colorscale='RdBu'
     ))
