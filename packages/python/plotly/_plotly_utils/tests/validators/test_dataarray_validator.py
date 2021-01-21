@@ -32,8 +32,7 @@ def test_validator_acceptance_simple(val, validator):
 
 
 @pytest.mark.parametrize(
-    "val",
-    [np.array([2, 3, 4]), np.array([[1, 2, 3], [4, 5, 6]])],
+    "val", [np.array([2, 3, 4]), np.array([[1, 2, 3], [4, 5, 6]])],
 )
 def test_validator_acceptance_homogeneous(val, validator):
     coerce_val = validator.validate_coerce(val)
@@ -44,7 +43,11 @@ def test_validator_acceptance_homogeneous(val, validator):
 # Accept object array as list
 @pytest.mark.parametrize(
     "val",
-    [["A", "B", "C"], np.array(["A", "B", "C"], dtype="object"), pd.Series(["a", "b", "c"])]
+    [
+        ["A", "B", "C"],
+        np.array(["A", "B", "C"], dtype="object"),
+        pd.Series(["a", "b", "c"]),
+    ],
 )
 def test_validator_accept_object_array_as_list(val, validator):
     coerce_val = validator.validate_coerce(val)
