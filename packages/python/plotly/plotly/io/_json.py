@@ -192,6 +192,18 @@ def _to_json_plotly(plotly_object, pretty=False, engine=None):
         if pretty:
             opts |= orjson.OPT_INDENT_2
 
+        # Plotly
+        try:
+            plotly_object = plotly_object.to_plotly_json()
+        except AttributeError:
+            pass
+
+        # Try without cleaning
+        try:
+            return orjson.dumps(plotly_object, option=opts).decode("utf8")
+        except TypeError:
+            pass
+
         cleaned = clean_to_json_compatible(
             plotly_object, numpy_allowed=True, datetime_allowed=True, modules=modules,
         )
