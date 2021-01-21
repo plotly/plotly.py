@@ -138,8 +138,7 @@ def test_acceptance_aok_scalars(val, validator_aok):
 def test_acceptance_aok_list(val, validator_aok):
     coerce_val = validator_aok.validate_coerce(val)
     if isinstance(val, np.ndarray):
-        assert isinstance(coerce_val, np.ndarray)
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
+        assert coerce_val == val.tolist()
     elif isinstance(val, list):
         assert validator_aok.present(val) == tuple(val)
     else:
@@ -178,9 +177,7 @@ def test_rejection_aok_values(val, validator_aok_values):
 )
 def test_acceptance_no_blanks_aok(val, validator_no_blanks_aok):
     coerce_val = validator_no_blanks_aok.validate_coerce(val)
-    if isinstance(val, np.ndarray):
-        assert np.array_equal(coerce_val, np.array(val, dtype=coerce_val.dtype))
-    elif isinstance(val, list):
+    if isinstance(val, (list, np.ndarray)):
         assert validator_no_blanks_aok.present(coerce_val) == tuple(val)
     else:
         assert coerce_val == val

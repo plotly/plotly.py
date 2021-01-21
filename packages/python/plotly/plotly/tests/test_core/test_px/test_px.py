@@ -37,8 +37,8 @@ def test_custom_data_scatter():
         hover_data=["petal_length", "petal_width"],
         custom_data=["species_id", "species"],
     )
-    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
-    assert fig.data[0].customdata.shape[1] == 4
+    assert [e[0] for e in fig.data[0].customdata] == iris.species_id.to_list()
+    assert len(fig.data[0].customdata[0]) == 4
     # Hover and custom data, with repeated arguments
     fig = px.scatter(
         iris,
@@ -47,8 +47,8 @@ def test_custom_data_scatter():
         hover_data=["petal_length", "petal_width", "species_id"],
         custom_data=["species_id", "species"],
     )
-    assert np.all(fig.data[0].customdata[:, 0] == iris.species_id)
-    assert fig.data[0].customdata.shape[1] == 4
+    assert [e[0] for e in fig.data[0].customdata] == iris.species_id.tolist()
+    assert len(fig.data[0].customdata[0]) == 4
     assert (
         fig.data[0].hovertemplate
         == "sepal_width=%{x}<br>sepal_length=%{y}<br>petal_length=%{customdata[2]}<br>petal_width=%{customdata[3]}<br>species_id=%{customdata[0]}<extra></extra>"

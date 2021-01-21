@@ -33,12 +33,23 @@ def test_validator_acceptance_simple(val, validator):
 
 @pytest.mark.parametrize(
     "val",
-    [np.array([2, 3, 4]), pd.Series(["a", "b", "c"]), np.array([[1, 2, 3], [4, 5, 6]])],
+    [np.array([2, 3, 4]), np.array([[1, 2, 3], [4, 5, 6]])],
 )
 def test_validator_acceptance_homogeneous(val, validator):
     coerce_val = validator.validate_coerce(val)
     assert isinstance(coerce_val, np.ndarray)
     assert np.array_equal(validator.present(coerce_val), val)
+
+
+# Accept object array as list
+@pytest.mark.parametrize(
+    "val",
+    [["A", "B", "C"], np.array(["A", "B", "C"], dtype="object"), pd.Series(["a", "b", "c"])]
+)
+def test_validator_accept_object_array_as_list(val, validator):
+    coerce_val = validator.validate_coerce(val)
+    assert isinstance(coerce_val, list)
+    assert coerce_val == list(val)
 
 
 # ### Rejection ###

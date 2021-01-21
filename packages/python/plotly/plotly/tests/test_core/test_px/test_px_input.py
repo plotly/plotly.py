@@ -126,7 +126,7 @@ def test_repeated_name():
         hover_data=["petal_length", "petal_width", "species_id"],
         custom_data=["species_id", "species"],
     )
-    assert fig.data[0].customdata.shape[1] == 4
+    assert len(fig.data[0].customdata[0]) == 4
 
 
 def test_arrayattrable_numpy():
