@@ -57,17 +57,48 @@ def coerce_to_strict(const):
         return const
 
 
+def time_engine(engine, plotly_object):
+    import time
+    # time in seconds
+    t_total = 0
+    n_total = 0
+
+    # Call function for at least total of 2 seconds and at least 10 times
+    n_min = 10
+    t_min = 1
+
+    while t_total < t_min or n_total < n_min:
+        t0 = time.perf_counter()
+        _to_json_plotly(plotly_object, engine=engine)
+        t1 = time.perf_counter()
+        n_total += 1
+        t_total += (t1 - t0)
+
+    # return time in ms
+    return 1000 * t_total / n_total
+
+
 def to_json_plotly(plotly_object, pretty=False, engine=None):
+    if engine is not None:
+        return _to_json_plotly(plotly_object, pretty=pretty , engine=engine)
+
     # instrucment _to_json_plotly by running it with all 3 engines and comparing results
-    # before returning
+    # before returnin
+
+    import timeit
+    from IPython import get_ipython
+    ipython = get_ipython()
     orjson = get_module("orjson", should_load=True)
     results = {}
+    timing = {}
     result_str = None
-    for engine in ["legacy", "json", "orjson"]:
+    for engine in ["json", "orjson", "legacy"]:
         if orjson is None and engine == "orjson":
             continue
+
         result_str = _to_json_plotly(plotly_object, pretty=pretty, engine=engine)
         results[engine] = from_json_plotly(result_str, engine=engine)
+        timing[engine] = time_engine(engine, plotly_object)
 
     # Check matches
     if results["legacy"] != results["json"]:
@@ -90,6 +121,19 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
                     json=results["json"], orjson=results["orjson"]
                 )
             )
+
+    # write timing
+    import uuid
+    import pickle
+    import os
+    uid = str(uuid.uuid4())
+    with open("json_timing.csv".format(engine), "at") as f:
+        f.write("{}, {}, {}, {}, {}\n".format(
+            timing["legacy"], timing["json"], timing["orjson"], len(result_str), uid)
+        )
+    os.makedirs("json_object", exist_ok=True)
+    with open("json_object/{uid}.pkl".format(uid=uid), "wb") as f:
+        pickle.dump(plotly_object, f)
 
     return result_str
 
@@ -495,6 +539,20 @@ def clean_to_json_compatible(obj, **kwargs):
     if isinstance(obj, (int, float, string_types)):
         return obj
 
+    # Plotly
+    try:
+        obj = obj.to_plotly_json()
+    except AttributeError:
+        pass
+
+    # And simple lists
+    if isinstance(obj, (list, tuple)):
+        # Must process list recursively even though it may be slow
+        return [clean_to_json_compatible(v, **kwargs) for v in obj]
+    # Recurse into lists and dictionaries
+    if isinstance(obj, dict):
+        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+
     # unpack kwargs
     numpy_allowed = kwargs.get("numpy_allowed", False)
     datetime_allowed = kwargs.get("datetime_allowed", False)
@@ -504,12 +562,6 @@ def clean_to_json_compatible(obj, **kwargs):
     np = modules["np"]
     pd = modules["pd"]
     image = modules["image"]
-
-    # Plotly
-    try:
-        obj = obj.to_plotly_json()
-    except AttributeError:
-        pass
 
     # Sage
     if sage_all is not None:
@@ -531,7 +583,7 @@ def clean_to_json_compatible(obj, **kwargs):
             elif obj.dtype.kind == "U":
                 return obj.tolist()
             elif obj.dtype.kind == "O":
-                # Treat object array as a lists, continue processing
+                # Treat object array as plain list, allow recursive processing below
                 obj = obj.tolist()
         elif isinstance(obj, np.datetime64):
             return str(obj)
@@ -588,12 +640,8 @@ def clean_to_json_compatible(obj, **kwargs):
     if image is not None and isinstance(obj, image.Image):
         return ImageUriValidator.pil_image_to_uri(obj)
 
-    # Recurse into lists and dictionaries
-    if isinstance(obj, dict):
-        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
-    elif isinstance(obj, (list, tuple)):
-        if obj:
-            # Must process list recursively even though it may be slow
-            return [clean_to_json_compatible(v, **kwargs) for v in obj]
+    if isinstance(obj, (list, tuple)) and obj:
+        # Must process list recursively even though it may be slow
+        return [clean_to_json_compatible(v, **kwargs) for v in obj]
 
     return obj

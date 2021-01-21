@@ -917,10 +917,10 @@ class BaseFigure(object):
                         else:
                             self[k] = v
 
-        # instrumentation
-        from plotly.io._json import to_json_plotly
-
-        to_json_plotly(self)
+        # # instrumentation
+        # from plotly.io._json import to_json_plotly
+        #
+        # to_json_plotly(self)
 
         return self
 
