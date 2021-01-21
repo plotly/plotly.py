@@ -25,14 +25,9 @@ class RangeselectorValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the width (in px) of the border enclosing
                 the range selector.
             buttons
-                Sets the specifications for each buttons. By
-                default, a range selector comes with no
-                buttons.
-            buttondefaults
-                When used in a template (as layout.template.lay
-                out.xaxis.rangeselector.buttondefaults), sets
-                the default property values to use for elements
-                of layout.xaxis.rangeselector.buttons
+                :class:`plotly.graph_objects.layout.xaxis.range
+                selector.Buttons` instance or dict with
+                compatible properties
             font
                 Sets the font of the range selector button
                 text.

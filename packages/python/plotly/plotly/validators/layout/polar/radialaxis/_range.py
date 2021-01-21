@@ -26,6 +26,5 @@ class RangeValidator(_plotly_utils.basevalidators.InfoArrayValidator):
                     },
                 ],
             ),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

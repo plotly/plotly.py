@@ -5,7 +5,6 @@ if sys.version_info < (3, 7):
     from ._uirevision import UirevisionValidator
     from ._style import StyleValidator
     from ._pitch import PitchValidator
-    from ._layerdefaults import LayerdefaultsValidator
     from ._layers import LayersValidator
     from ._domain import DomainValidator
     from ._center import CenterValidator
@@ -22,7 +21,6 @@ else:
             "._uirevision.UirevisionValidator",
             "._style.StyleValidator",
             "._pitch.PitchValidator",
-            "._layerdefaults.LayerdefaultsValidator",
             "._layers.LayersValidator",
             "._domain.DomainValidator",
             "._center.CenterValidator",

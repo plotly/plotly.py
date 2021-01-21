@@ -47,7 +47,7 @@ if sys.version_info < (3, 7):
     from ._barpolar import BarpolarValidator
     from ._bar import BarValidator
     from ._layout import LayoutValidator
-    from ._frames import FramesValidator
+    from ._frame import FrameValidator
     from ._data import DataValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -102,7 +102,7 @@ else:
             "._barpolar.BarpolarValidator",
             "._bar.BarValidator",
             "._layout.LayoutValidator",
-            "._frames.FramesValidator",
+            "._frame.FrameValidator",
             "._data.DataValidator",
         ],
     )

@@ -291,14 +291,9 @@ class Sankey(_BaseTraceType):
                     by default, a translucent grey link will be
                     used.
                 colorscales
-                    A tuple of :class:`plotly.graph_objects.sankey.
-                    link.Colorscale` instances or dicts with
-                    compatible properties
-                colorscaledefaults
-                    When used in a template (as layout.template.dat
-                    a.sankey.link.colorscaledefaults), sets the
-                    default property values to use for elements of
-                    sankey.link.colorscales
+                    :class:`plotly.graph_objects.sankey.link.Colors
+                    cales` instance or dict with compatible
+                    properties
                 colorsrc
                     Sets the source reference on Chart Studio Cloud
                     for  color .

@@ -8,6 +8,5 @@ class ColorscaleValidator(_plotly_utils.basevalidators.ColorscaleValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             implied_edits=kwargs.pop("implied_edits", {"autocolorscale": False}),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

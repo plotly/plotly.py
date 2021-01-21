@@ -29,14 +29,8 @@ class MapboxValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.layout.mapbox.Doma
                 in` instance or dict with compatible properties
             layers
-                A tuple of :class:`plotly.graph_objects.layout.
-                mapbox.Layer` instances or dicts with
-                compatible properties
-            layerdefaults
-                When used in a template (as
-                layout.template.layout.mapbox.layerdefaults),
-                sets the default property values to use for
-                elements of layout.mapbox.layers
+                :class:`plotly.graph_objects.layout.mapbox.Laye
+                rs` instance or dict with compatible properties
             pitch
                 Sets the pitch angle of the map (in degrees,
                 where 0 means perpendicular to the surface of

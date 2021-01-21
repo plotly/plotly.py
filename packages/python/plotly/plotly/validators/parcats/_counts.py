@@ -9,6 +9,5 @@ class CountsValidator(_plotly_utils.basevalidators.NumberValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "calc"),
             min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

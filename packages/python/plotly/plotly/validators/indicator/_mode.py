@@ -8,6 +8,5 @@ class ModeValidator(_plotly_utils.basevalidators.FlaglistValidator):
             parent_name=parent_name,
             edit_type=kwargs.pop("edit_type", "calc"),
             flags=kwargs.pop("flags", ["number", "delta", "gauge"]),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

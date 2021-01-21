@@ -20,14 +20,8 @@ class ParcoordsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for  customdata .
             dimensions
-                The dimensions (variables) of the parallel
-                coordinates chart. 2..60 dimensions are
-                supported.
-            dimensiondefaults
-                When used in a template (as layout.template.dat
-                a.parcoords.dimensiondefaults), sets the
-                default property values to use for elements of
-                parcoords.dimensions
+                :class:`plotly.graph_objects.parcoords.Dimensio
+                ns` instance or dict with compatible properties
             domain
                 :class:`plotly.graph_objects.parcoords.Domain`
                 instance or dict with compatible properties

@@ -1,7 +1,7 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._dimension import Dimension
+    from ._dimensions import Dimensions
     from ._domain import Domain
     from ._labelfont import Labelfont
     from ._line import Line
@@ -15,7 +15,7 @@ else:
         __name__,
         [".line"],
         [
-            "._dimension.Dimension",
+            "._dimensions.Dimensions",
             "._domain.Domain",
             "._labelfont.Labelfont",
             "._line.Line",

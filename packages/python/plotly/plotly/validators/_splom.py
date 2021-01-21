@@ -23,14 +23,8 @@ class SplomValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.splom.Diagonal`
                 instance or dict with compatible properties
             dimensions
-                A tuple of
-                :class:`plotly.graph_objects.splom.Dimension`
-                instances or dicts with compatible properties
-            dimensiondefaults
-                When used in a template (as
-                layout.template.data.splom.dimensiondefaults),
-                sets the default property values to use for
-                elements of splom.dimensions
+                :class:`plotly.graph_objects.splom.Dimensions`
+                instance or dict with compatible properties
             hoverinfo
                 Determines which trace information appear on
                 hover. If `none` or `skip` are set, no

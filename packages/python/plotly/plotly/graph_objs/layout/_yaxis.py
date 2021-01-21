@@ -39,7 +39,6 @@ class YAxis(_BaseLayoutHierarchyType):
         "overlaying",
         "position",
         "range",
-        "rangebreakdefaults",
         "rangebreaks",
         "rangemode",
         "scaleanchor",
@@ -64,7 +63,6 @@ class YAxis(_BaseLayoutHierarchyType):
         "tickcolor",
         "tickfont",
         "tickformat",
-        "tickformatstopdefaults",
         "tickformatstops",
         "ticklabelmode",
         "ticklabelposition",
@@ -992,103 +990,23 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def rangebreaks(self):
         """
-        The 'rangebreaks' property is a tuple of instances of
-        Rangebreak that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.yaxis.Rangebreak
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Rangebreak constructor
+        The 'rangebreaks' property is an instance of Rangebreaks
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreaks`
+          - A dict of string/value properties that will be passed
+            to the Rangebreaks constructor
     
             Supported dict properties:
-                
-                bounds
-                    Sets the lower and upper bounds of this axis
-                    rangebreak. Can be used with `pattern`.
-                dvalue
-                    Sets the size of each `values` item. The
-                    default is one day in milliseconds.
-                enabled
-                    Determines whether this axis rangebreak is
-                    enabled or disabled. Please note that
-                    `rangebreaks` only work for "date" axis type.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                pattern
-                    Determines a pattern on the time line that
-                    generates breaks. If *day of week* - days of
-                    the week in English e.g. 'Sunday' or `sun`
-                    (matching is case-insensitive and considers
-                    only the first three characters), as well as
-                    Sunday-based integers between 0 and 6. If
-                    "hour" - hour (24-hour clock) as decimal
-                    numbers between 0 and 24. for more info.
-                    Examples: - { pattern: 'day of week', bounds:
-                    [6, 1] }  or simply { bounds: ['sat', 'mon'] }
-                    breaks from Saturday to Monday (i.e. skips the
-                    weekends). - { pattern: 'hour', bounds: [17, 8]
-                    }   breaks from 5pm to 8am (i.e. skips non-work
-                    hours).
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                values
-                    Sets the coordinate values corresponding to the
-                    rangebreaks. An alternative to `bounds`. Use
-                    `dvalue` to set the size of the values along
-                    the axis.
 
         Returns
         -------
-        tuple[plotly.graph_objs.layout.yaxis.Rangebreak]
+        plotly.graph_objs.layout.yaxis.Rangebreaks
         """
         return self["rangebreaks"]
 
     @rangebreaks.setter
     def rangebreaks(self, val):
         self["rangebreaks"] = val
-
-    # rangebreakdefaults
-    # ------------------
-    @property
-    def rangebreakdefaults(self):
-        """
-        When used in a template (as
-        layout.template.layout.yaxis.rangebreakdefaults), sets the
-        default property values to use for elements of
-        layout.yaxis.rangebreaks
-    
-        The 'rangebreakdefaults' property is an instance of Rangebreak
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.yaxis.Rangebreak`
-          - A dict of string/value properties that will be passed
-            to the Rangebreak constructor
-    
-            Supported dict properties:
-
-        Returns
-        -------
-        plotly.graph_objs.layout.yaxis.Rangebreak
-        """
-        return self["rangebreakdefaults"]
-
-    @rangebreakdefaults.setter
-    def rangebreakdefaults(self, val):
-        self["rangebreakdefaults"] = val
 
     # rangemode
     # ---------
@@ -1735,85 +1653,23 @@ class YAxis(_BaseLayoutHierarchyType):
     @property
     def tickformatstops(self):
         """
-        The 'tickformatstops' property is a tuple of instances of
-        Tickformatstop that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.layout.yaxis.Tickformatstop
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Tickformatstop constructor
+        The 'tickformatstops' property is an instance of Tickformatstops
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.yaxis.Tickformatstops`
+          - A dict of string/value properties that will be passed
+            to the Tickformatstops constructor
     
             Supported dict properties:
-                
-                dtickrange
-                    range [*min*, *max*], where "min", "max" -
-                    dtick values which describe some zoom level, it
-                    is possible to omit "min" or "max" value by
-                    passing "null"
-                enabled
-                    Determines whether or not this stop is used. If
-                    `false`, this stop is ignored even within its
-                    `dtickrange`.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                value
-                    string - dtickformat for described zoom level,
-                    the same as "tickformat"
 
         Returns
         -------
-        tuple[plotly.graph_objs.layout.yaxis.Tickformatstop]
+        plotly.graph_objs.layout.yaxis.Tickformatstops
         """
         return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
         self["tickformatstops"] = val
-
-    # tickformatstopdefaults
-    # ----------------------
-    @property
-    def tickformatstopdefaults(self):
-        """
-        When used in a template (as
-        layout.template.layout.yaxis.tickformatstopdefaults), sets the
-        default property values to use for elements of
-        layout.yaxis.tickformatstops
-    
-        The 'tickformatstopdefaults' property is an instance of Tickformatstop
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.yaxis.Tickformatstop`
-          - A dict of string/value properties that will be passed
-            to the Tickformatstop constructor
-    
-            Supported dict properties:
-
-        Returns
-        -------
-        plotly.graph_objs.layout.yaxis.Tickformatstop
-        """
-        return self["tickformatstopdefaults"]
-
-    @tickformatstopdefaults.setter
-    def tickformatstopdefaults(self, val):
-        self["tickformatstopdefaults"] = val
 
     # ticklabelmode
     # -------------
@@ -2561,14 +2417,8 @@ class YAxis(_BaseLayoutHierarchyType):
             assigned a serial number from zero in the order it
             appears.
         rangebreaks
-            A tuple of
-            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
-            instances or dicts with compatible properties
-        rangebreakdefaults
-            When used in a template (as
-            layout.template.layout.yaxis.rangebreakdefaults), sets
-            the default property values to use for elements of
-            layout.yaxis.rangebreaks
+            :class:`plotly.graph_objects.layout.yaxis.Rangebreaks`
+            instance or dict with compatible properties
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -2689,14 +2539,8 @@ class YAxis(_BaseLayoutHierarchyType):
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
-            ckformatstop` instances or dicts with compatible
-            properties
-        tickformatstopdefaults
-            When used in a template (as
-            layout.template.layout.yaxis.tickformatstopdefaults),
-            sets the default property values to use for elements of
-            layout.yaxis.tickformatstops
+            :class:`plotly.graph_objects.layout.yaxis.Tickformatsto
+            ps` instance or dict with compatible properties
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -2821,7 +2665,6 @@ class YAxis(_BaseLayoutHierarchyType):
         position=None,
         range=None,
         rangebreaks=None,
-        rangebreakdefaults=None,
         rangemode=None,
         scaleanchor=None,
         scaleratio=None,
@@ -2846,7 +2689,6 @@ class YAxis(_BaseLayoutHierarchyType):
         tickfont=None,
         tickformat=None,
         tickformatstops=None,
-        tickformatstopdefaults=None,
         ticklabelmode=None,
         ticklabelposition=None,
         ticklen=None,
@@ -3063,14 +2905,8 @@ class YAxis(_BaseLayoutHierarchyType):
             assigned a serial number from zero in the order it
             appears.
         rangebreaks
-            A tuple of
-            :class:`plotly.graph_objects.layout.yaxis.Rangebreak`
-            instances or dicts with compatible properties
-        rangebreakdefaults
-            When used in a template (as
-            layout.template.layout.yaxis.rangebreakdefaults), sets
-            the default property values to use for elements of
-            layout.yaxis.rangebreaks
+            :class:`plotly.graph_objects.layout.yaxis.Rangebreaks`
+            instance or dict with compatible properties
         rangemode
             If "normal", the range is computed in relation to the
             extrema of the input data. If *tozero*`, the range
@@ -3191,14 +3027,8 @@ class YAxis(_BaseLayoutHierarchyType):
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            A tuple of :class:`plotly.graph_objects.layout.yaxis.Ti
-            ckformatstop` instances or dicts with compatible
-            properties
-        tickformatstopdefaults
-            When used in a template (as
-            layout.template.layout.yaxis.tickformatstopdefaults),
-            sets the default property values to use for elements of
-            layout.yaxis.tickformatstops
+            :class:`plotly.graph_objects.layout.yaxis.Tickformatsto
+            ps` instance or dict with compatible properties
         ticklabelmode
             Determines where tick labels are drawn with respect to
             their corresponding ticks and grid lines. Only has an
@@ -3443,10 +3273,6 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = rangebreaks if rangebreaks is not None else _v
         if _v is not None:
             self["rangebreaks"] = _v
-        _v = arg.pop("rangebreakdefaults", None)
-        _v = rangebreakdefaults if rangebreakdefaults is not None else _v
-        if _v is not None:
-            self["rangebreakdefaults"] = _v
         _v = arg.pop("rangemode", None)
         _v = rangemode if rangemode is not None else _v
         if _v is not None:
@@ -3543,10 +3369,6 @@ an instance of :class:`plotly.graph_objs.layout.YAxis`"""
         _v = tickformatstops if tickformatstops is not None else _v
         if _v is not None:
             self["tickformatstops"] = _v
-        _v = arg.pop("tickformatstopdefaults", None)
-        _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
-        if _v is not None:
-            self["tickformatstopdefaults"] = _v
         _v = arg.pop("ticklabelmode", None)
         _v = ticklabelmode if ticklabelmode is not None else _v
         if _v is not None:

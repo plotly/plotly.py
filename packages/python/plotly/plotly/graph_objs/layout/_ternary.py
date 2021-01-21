@@ -169,14 +169,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.layout.
-                    ternary.aaxis.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.lay
-                    out.ternary.aaxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of layout.ternary.aaxis.tickformatstops
+                    :class:`plotly.graph_objects.layout.ternary.aax
+                    is.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -401,14 +396,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.layout.
-                    ternary.baxis.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.lay
-                    out.ternary.baxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of layout.ternary.baxis.tickformatstops
+                    :class:`plotly.graph_objects.layout.ternary.bax
+                    is.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -692,14 +682,9 @@ class Ternary(_BaseLayoutHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.layout.
-                    ternary.caxis.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.lay
-                    out.ternary.caxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of layout.ternary.caxis.tickformatstops
+                    :class:`plotly.graph_objects.layout.ternary.cax
+                    is.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

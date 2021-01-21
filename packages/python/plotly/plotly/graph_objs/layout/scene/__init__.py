@@ -1,14 +1,13 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._annotation import Annotation
+    from ._annotations import Annotations
     from ._aspectratio import Aspectratio
     from ._camera import Camera
     from ._domain import Domain
     from ._xaxis import XAxis
     from ._yaxis import YAxis
     from ._zaxis import ZAxis
-    from . import annotation
     from . import camera
     from . import xaxis
     from . import yaxis
@@ -18,9 +17,9 @@ else:
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".annotation", ".camera", ".xaxis", ".yaxis", ".zaxis"],
+        [".camera", ".xaxis", ".yaxis", ".zaxis"],
         [
-            "._annotation.Annotation",
+            "._annotations.Annotations",
             "._aspectratio.Aspectratio",
             "._camera.Camera",
             "._domain.Domain",

@@ -17,7 +17,6 @@ if sys.version_info < (3, 7):
     from ._customdatasrc import CustomdatasrcValidator
     from ._customdata import CustomdataValidator
     from ._colorsrc import ColorsrcValidator
-    from ._colorscaledefaults import ColorscaledefaultsValidator
     from ._colorscales import ColorscalesValidator
     from ._color import ColorValidator
 else:
@@ -43,7 +42,6 @@ else:
             "._customdatasrc.CustomdatasrcValidator",
             "._customdata.CustomdataValidator",
             "._colorsrc.ColorsrcValidator",
-            "._colorscaledefaults.ColorscaledefaultsValidator",
             "._colorscales.ColorscalesValidator",
             "._color.ColorValidator",
         ],

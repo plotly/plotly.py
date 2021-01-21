@@ -228,15 +228,9 @@ class Polar(_BaseLayoutHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.layout.
-                    polar.angularaxis.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.lay
-                    out.polar.angularaxis.tickformatstopdefaults),
-                    sets the default property values to use for
-                    elements of
-                    layout.polar.angularaxis.tickformatstops
+                    :class:`plotly.graph_objects.layout.polar.angul
+                    araxis.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -720,15 +714,9 @@ class Polar(_BaseLayoutHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.layout.
-                    polar.radialaxis.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.lay
-                    out.polar.radialaxis.tickformatstopdefaults),
-                    sets the default property values to use for
-                    elements of
-                    layout.polar.radialaxis.tickformatstops
+                    :class:`plotly.graph_objects.layout.polar.radia
+                    laxis.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklen
                     Sets the tick length (in px).
                 tickmode

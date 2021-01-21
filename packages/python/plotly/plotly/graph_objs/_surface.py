@@ -347,14 +347,9 @@ class Surface(_BaseTraceType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.surface
-                    .colorbar.Tickformatstop` instances or dicts
-                    with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.surface.colorbar.tickformatstopdefaults),
-                    sets the default property values to use for
-                    elements of surface.colorbar.tickformatstops
+                    :class:`plotly.graph_objects.surface.colorbar.T
+                    ickformatstops` instance or dict with
+                    compatible properties
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

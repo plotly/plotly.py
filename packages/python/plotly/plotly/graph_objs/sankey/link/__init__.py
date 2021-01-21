@@ -1,7 +1,7 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._colorscale import Colorscale
+    from ._colorscales import Colorscales
     from ._hoverlabel import Hoverlabel
     from ._line import Line
     from . import hoverlabel
@@ -11,5 +11,5 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [".hoverlabel"],
-        ["._colorscale.Colorscale", "._hoverlabel.Hoverlabel", "._line.Line"],
+        ["._colorscales.Colorscales", "._hoverlabel.Hoverlabel", "._line.Line"],
     )

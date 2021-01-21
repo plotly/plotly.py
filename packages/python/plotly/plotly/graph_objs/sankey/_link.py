@@ -10,7 +10,6 @@ class Link(_BaseTraceHierarchyType):
     _path_str = "sankey.link"
     _valid_props = {
         "color",
-        "colorscaledefaults",
         "colorscales",
         "colorsrc",
         "customdata",
@@ -97,94 +96,23 @@ class Link(_BaseTraceHierarchyType):
     @property
     def colorscales(self):
         """
-        The 'colorscales' property is a tuple of instances of
-        Colorscale that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.sankey.link.Colorscale
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Colorscale constructor
+        The 'colorscales' property is an instance of Colorscales
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.sankey.link.Colorscales`
+          - A dict of string/value properties that will be passed
+            to the Colorscales constructor
     
             Supported dict properties:
-                
-                cmax
-                    Sets the upper bound of the color domain.
-                cmin
-                    Sets the lower bound of the color domain.
-                colorscale
-                    Sets the colorscale. The colorscale must be an
-                    array containing arrays mapping a normalized
-                    value to an rgb, rgba, hex, hsl, hsv, or named
-                    color string. At minimum, a mapping for the
-                    lowest (0) and highest (1) values are required.
-                    For example, `[[0, 'rgb(0,0,255)'], [1,
-                    'rgb(255,0,0)']]`. To control the bounds of the
-                    colorscale in color space, use`cmin` and
-                    `cmax`. Alternatively, `colorscale` may be a
-                    palette name string of the following list: Grey
-                    s,YlGnBu,Greens,YlOrRd,Bluered,RdBu,Reds,Blues,
-                    Picnic,Rainbow,Portland,Jet,Hot,Blackbody,Earth
-                    ,Electric,Viridis,Cividis.
-                label
-                    The label of the links to color based on their
-                    concentration within a flow.
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
 
         Returns
         -------
-        tuple[plotly.graph_objs.sankey.link.Colorscale]
+        plotly.graph_objs.sankey.link.Colorscales
         """
         return self["colorscales"]
 
     @colorscales.setter
     def colorscales(self, val):
         self["colorscales"] = val
-
-    # colorscaledefaults
-    # ------------------
-    @property
-    def colorscaledefaults(self):
-        """
-        When used in a template (as
-        layout.template.data.sankey.link.colorscaledefaults), sets the
-        default property values to use for elements of
-        sankey.link.colorscales
-    
-        The 'colorscaledefaults' property is an instance of Colorscale
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.sankey.link.Colorscale`
-          - A dict of string/value properties that will be passed
-            to the Colorscale constructor
-    
-            Supported dict properties:
-
-        Returns
-        -------
-        plotly.graph_objs.sankey.link.Colorscale
-        """
-        return self["colorscaledefaults"]
-
-    @colorscaledefaults.setter
-    def colorscaledefaults(self, val):
-        self["colorscaledefaults"] = val
 
     # colorsrc
     # --------
@@ -601,14 +529,8 @@ class Link(_BaseTraceHierarchyType):
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
         colorscales
-            A tuple of
-            :class:`plotly.graph_objects.sankey.link.Colorscale`
-            instances or dicts with compatible properties
-        colorscaledefaults
-            When used in a template (as
-            layout.template.data.sankey.link.colorscaledefaults),
-            sets the default property values to use for elements of
-            sankey.link.colorscales
+            :class:`plotly.graph_objects.sankey.link.Colorscales`
+            instance or dict with compatible properties
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             color .
@@ -683,7 +605,6 @@ class Link(_BaseTraceHierarchyType):
         arg=None,
         color=None,
         colorscales=None,
-        colorscaledefaults=None,
         colorsrc=None,
         customdata=None,
         customdatasrc=None,
@@ -718,14 +639,8 @@ class Link(_BaseTraceHierarchyType):
             `link.color` is omitted, then by default, a translucent
             grey link will be used.
         colorscales
-            A tuple of
-            :class:`plotly.graph_objects.sankey.link.Colorscale`
-            instances or dicts with compatible properties
-        colorscaledefaults
-            When used in a template (as
-            layout.template.data.sankey.link.colorscaledefaults),
-            sets the default property values to use for elements of
-            sankey.link.colorscales
+            :class:`plotly.graph_objects.sankey.link.Colorscales`
+            instance or dict with compatible properties
         colorsrc
             Sets the source reference on Chart Studio Cloud for
             color .
@@ -835,10 +750,6 @@ an instance of :class:`plotly.graph_objs.sankey.Link`"""
         _v = colorscales if colorscales is not None else _v
         if _v is not None:
             self["colorscales"] = _v
-        _v = arg.pop("colorscaledefaults", None)
-        _v = colorscaledefaults if colorscaledefaults is not None else _v
-        if _v is not None:
-            self["colorscaledefaults"] = _v
         _v = arg.pop("colorsrc", None)
         _v = colorsrc if colorsrc is not None else _v
         if _v is not None:

@@ -390,15 +390,9 @@ class Marker(_BaseTraceHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.scatter
-                    ternary.marker.colorbar.Tickformatstop`
-                    instances or dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.scatterternary.marker.colorbar.tickformatstop
-                    defaults), sets the default property values to
-                    use for elements of
-                    scatterternary.marker.colorbar.tickformatstops
+                    :class:`plotly.graph_objects.scatterternary.mar
+                    ker.colorbar.Tickformatstops` instance or dict
+                    with compatible properties
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

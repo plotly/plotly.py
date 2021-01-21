@@ -273,15 +273,9 @@ class Densitymapbox(_BaseTraceType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.density
-                    mapbox.colorbar.Tickformatstop` instances or
-                    dicts with compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.densitymapbox.colorbar.tickformatstopdefaults
-                    ), sets the default property values to use for
-                    elements of
-                    densitymapbox.colorbar.tickformatstops
+                    :class:`plotly.graph_objects.densitymapbox.colo
+                    rbar.Tickformatstops` instance or dict with
+                    compatible properties
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

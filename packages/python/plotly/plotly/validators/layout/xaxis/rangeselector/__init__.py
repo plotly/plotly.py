@@ -7,7 +7,6 @@ if sys.version_info < (3, 7):
     from ._x import XValidator
     from ._visible import VisibleValidator
     from ._font import FontValidator
-    from ._buttondefaults import ButtondefaultsValidator
     from ._buttons import ButtonsValidator
     from ._borderwidth import BorderwidthValidator
     from ._bordercolor import BordercolorValidator
@@ -26,7 +25,6 @@ else:
             "._x.XValidator",
             "._visible.VisibleValidator",
             "._font.FontValidator",
-            "._buttondefaults.ButtondefaultsValidator",
             "._buttons.ButtonsValidator",
             "._borderwidth.BorderwidthValidator",
             "._bordercolor.BordercolorValidator",

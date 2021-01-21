@@ -17,7 +17,6 @@ if sys.version_info < (3, 7):
     from ._tickprefix import TickprefixValidator
     from ._tickmode import TickmodeValidator
     from ._ticklen import TicklenValidator
-    from ._tickformatstopdefaults import TickformatstopdefaultsValidator
     from ._tickformatstops import TickformatstopsValidator
     from ._tickformat import TickformatValidator
     from ._tickfont import TickfontValidator
@@ -80,7 +79,6 @@ else:
             "._tickprefix.TickprefixValidator",
             "._tickmode.TickmodeValidator",
             "._ticklen.TicklenValidator",
-            "._tickformatstopdefaults.TickformatstopdefaultsValidator",
             "._tickformatstops.TickformatstopsValidator",
             "._tickformat.TickformatValidator",
             "._tickfont.TickfontValidator",

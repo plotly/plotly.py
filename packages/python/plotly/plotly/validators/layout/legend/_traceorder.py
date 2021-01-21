@@ -9,6 +9,5 @@ class TraceorderValidator(_plotly_utils.basevalidators.FlaglistValidator):
             edit_type=kwargs.pop("edit_type", "legend"),
             extras=kwargs.pop("extras", ["normal"]),
             flags=kwargs.pop("flags", ["reversed", "grouped"]),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

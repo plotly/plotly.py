@@ -271,14 +271,9 @@ class Carpet(_BaseTraceType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.carpet.
-                    aaxis.Tickformatstop` instances or dicts with
-                    compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.carpet.aaxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of carpet.aaxis.tickformatstops
+                    :class:`plotly.graph_objects.carpet.aaxis.Tickf
+                    ormatstops` instance or dict with compatible
+                    properties
                 tickmode
     
                 tickprefix
@@ -578,14 +573,9 @@ class Carpet(_BaseTraceType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    A tuple of :class:`plotly.graph_objects.carpet.
-                    baxis.Tickformatstop` instances or dicts with
-                    compatible properties
-                tickformatstopdefaults
-                    When used in a template (as layout.template.dat
-                    a.carpet.baxis.tickformatstopdefaults), sets
-                    the default property values to use for elements
-                    of carpet.baxis.tickformatstops
+                    :class:`plotly.graph_objects.carpet.baxis.Tickf
+                    ormatstops` instance or dict with compatible
+                    properties
                 tickmode
     
                 tickprefix

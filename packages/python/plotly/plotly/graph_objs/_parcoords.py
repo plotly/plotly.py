@@ -11,7 +11,6 @@ class Parcoords(_BaseTraceType):
     _valid_props = {
         "customdata",
         "customdatasrc",
-        "dimensiondefaults",
         "dimensions",
         "domain",
         "ids",
@@ -81,131 +80,23 @@ class Parcoords(_BaseTraceType):
     @property
     def dimensions(self):
         """
-        The dimensions (variables) of the parallel coordinates chart.
-        2..60 dimensions are supported.
-    
-        The 'dimensions' property is a tuple of instances of
-        Dimension that may be specified as:
-          - A list or tuple of instances of plotly.graph_objs.parcoords.Dimension
-          - A list or tuple of dicts of string/value properties that
-            will be passed to the Dimension constructor
+        The 'dimensions' property is an instance of Dimensions
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.parcoords.Dimensions`
+          - A dict of string/value properties that will be passed
+            to the Dimensions constructor
     
             Supported dict properties:
-                
-                constraintrange
-                    The domain range to which the filter on the
-                    dimension is constrained. Must be an array of
-                    `[fromValue, toValue]` with `fromValue <=
-                    toValue`, or if `multiselect` is not disabled,
-                    you may give an array of arrays, where each
-                    inner array is `[fromValue, toValue]`.
-                label
-                    The shown name of the dimension.
-                multiselect
-                    Do we allow multiple selection ranges or just a
-                    single range?
-                name
-                    When used in a template, named items are
-                    created in the output figure in addition to any
-                    items the figure already has in this array. You
-                    can modify these items in the output figure by
-                    making your own item with `templateitemname`
-                    matching this `name` alongside your
-                    modifications (including `visible: false` or
-                    `enabled: false` to hide it). Has no effect
-                    outside of a template.
-                range
-                    The domain range that represents the full,
-                    shown axis extent. Defaults to the `values`
-                    extent. Must be an array of `[fromValue,
-                    toValue]` with finite numbers as elements.
-                templateitemname
-                    Used to refer to a named item in this array in
-                    the template. Named items from the template
-                    will be created even without a matching item in
-                    the input figure, but you can modify one by
-                    making an item with `templateitemname` matching
-                    its `name`, alongside your modifications
-                    (including `visible: false` or `enabled: false`
-                    to hide it). If there is no template or no
-                    matching item, this item will be hidden unless
-                    you explicitly show it with `visible: true`.
-                tickformat
-                    Sets the tick label formatting rule using d3
-                    formatting mini-languages which are very
-                    similar to those in Python. For numbers, see:
-                    https://github.com/d3/d3-3.x-api-
-                    reference/blob/master/Formatting.md#d3_format
-                    And for dates see:
-                    https://github.com/d3/d3-time-
-                    format#locale_format We add one item to d3's
-                    date formatter: "%{n}f" for fractional seconds
-                    with n digits. For example, *2016-10-13
-                    09:15:23.456* with tickformat "%H~%M~%S.%2f"
-                    would display "09~15~23.46"
-                ticktext
-                    Sets the text displayed at the ticks position
-                    via `tickvals`.
-                ticktextsrc
-                    Sets the source reference on Chart Studio Cloud
-                    for  ticktext .
-                tickvals
-                    Sets the values at which ticks on this axis
-                    appear.
-                tickvalssrc
-                    Sets the source reference on Chart Studio Cloud
-                    for  tickvals .
-                values
-                    Dimension values. `values[n]` represents the
-                    value of the `n`th point in the dataset,
-                    therefore the `values` vector for all
-                    dimensions must be the same (longer vectors
-                    will be truncated). Each value must be a finite
-                    number.
-                valuessrc
-                    Sets the source reference on Chart Studio Cloud
-                    for  values .
-                visible
-                    Shows the dimension when set to `true` (the
-                    default). Hides the dimension for `false`.
 
         Returns
         -------
-        tuple[plotly.graph_objs.parcoords.Dimension]
+        plotly.graph_objs.parcoords.Dimensions
         """
         return self["dimensions"]
 
     @dimensions.setter
     def dimensions(self, val):
         self["dimensions"] = val
-
-    # dimensiondefaults
-    # -----------------
-    @property
-    def dimensiondefaults(self):
-        """
-        When used in a template (as
-        layout.template.data.parcoords.dimensiondefaults), sets the
-        default property values to use for elements of
-        parcoords.dimensions
-    
-        The 'dimensiondefaults' property is an instance of Dimension
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcoords.Dimension`
-          - A dict of string/value properties that will be passed
-            to the Dimension constructor
-    
-            Supported dict properties:
-
-        Returns
-        -------
-        plotly.graph_objs.parcoords.Dimension
-        """
-        return self["dimensiondefaults"]
-
-    @dimensiondefaults.setter
-    def dimensiondefaults(self, val):
-        self["dimensiondefaults"] = val
 
     # domain
     # ------
@@ -784,13 +675,8 @@ class Parcoords(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             customdata .
         dimensions
-            The dimensions (variables) of the parallel coordinates
-            chart. 2..60 dimensions are supported.
-        dimensiondefaults
-            When used in a template (as
-            layout.template.data.parcoords.dimensiondefaults), sets
-            the default property values to use for elements of
-            parcoords.dimensions
+            :class:`plotly.graph_objects.parcoords.Dimensions`
+            instance or dict with compatible properties
         domain
             :class:`plotly.graph_objects.parcoords.Domain` instance
             or dict with compatible properties
@@ -879,7 +765,6 @@ class Parcoords(_BaseTraceType):
         customdata=None,
         customdatasrc=None,
         dimensions=None,
-        dimensiondefaults=None,
         domain=None,
         ids=None,
         idssrc=None,
@@ -919,13 +804,8 @@ class Parcoords(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             customdata .
         dimensions
-            The dimensions (variables) of the parallel coordinates
-            chart. 2..60 dimensions are supported.
-        dimensiondefaults
-            When used in a template (as
-            layout.template.data.parcoords.dimensiondefaults), sets
-            the default property values to use for elements of
-            parcoords.dimensions
+            :class:`plotly.graph_objects.parcoords.Dimensions`
+            instance or dict with compatible properties
         domain
             :class:`plotly.graph_objects.parcoords.Domain` instance
             or dict with compatible properties
@@ -1052,10 +932,6 @@ an instance of :class:`plotly.graph_objs.Parcoords`"""
         _v = dimensions if dimensions is not None else _v
         if _v is not None:
             self["dimensions"] = _v
-        _v = arg.pop("dimensiondefaults", None)
-        _v = dimensiondefaults if dimensiondefaults is not None else _v
-        if _v is not None:
-            self["dimensiondefaults"] = _v
         _v = arg.pop("domain", None)
         _v = domain if domain is not None else _v
         if _v is not None:

@@ -139,14 +139,9 @@ class ColorbarValidator(_plotly_utils.basevalidators.CompoundValidator):
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"
                 would display "09~15~23.46"
             tickformatstops
-                A tuple of :class:`plotly.graph_objects.mesh3d.
-                colorbar.Tickformatstop` instances or dicts
-                with compatible properties
-            tickformatstopdefaults
-                When used in a template (as layout.template.dat
-                a.mesh3d.colorbar.tickformatstopdefaults), sets
-                the default property values to use for elements
-                of mesh3d.colorbar.tickformatstops
+                :class:`plotly.graph_objects.mesh3d.colorbar.Ti
+                ckformatstops` instance or dict with compatible
+                properties
             ticklabelposition
                 Determines where tick labels are drawn.
             ticklen

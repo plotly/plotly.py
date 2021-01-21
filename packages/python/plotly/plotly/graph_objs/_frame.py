@@ -204,7 +204,7 @@ class Frame(_BaseFrameHierarchyType):
         -------
         Frame
         """
-        super(Frame, self).__init__("frames")
+        super(Frame, self).__init__("frame")
 
         if "_parent" in kwargs:
             self._parent = kwargs["_parent"]

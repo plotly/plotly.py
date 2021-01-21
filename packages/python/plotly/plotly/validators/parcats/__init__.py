@@ -16,7 +16,6 @@ if sys.version_info < (3, 7):
     from ._hoveron import HoveronValidator
     from ._hoverinfo import HoverinfoValidator
     from ._domain import DomainValidator
-    from ._dimensiondefaults import DimensiondefaultsValidator
     from ._dimensions import DimensionsValidator
     from ._countssrc import CountssrcValidator
     from ._counts import CountsValidator
@@ -44,7 +43,6 @@ else:
             "._hoveron.HoveronValidator",
             "._hoverinfo.HoverinfoValidator",
             "._domain.DomainValidator",
-            "._dimensiondefaults.DimensiondefaultsValidator",
             "._dimensions.DimensionsValidator",
             "._countssrc.CountssrcValidator",
             "._counts.CountsValidator",
