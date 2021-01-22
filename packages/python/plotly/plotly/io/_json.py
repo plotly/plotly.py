@@ -429,6 +429,13 @@ def clean_to_json_compatible(obj, **kwargs):
     if isinstance(obj, (int, float, string_types)):
         return obj
 
+    if isinstance(obj, dict):
+        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        if obj:
+            # Must process list recursively even though it may be slow
+            return [clean_to_json_compatible(v, **kwargs) for v in obj]
+
     # unpack kwargs
     numpy_allowed = kwargs.get("numpy_allowed", False)
     datetime_allowed = kwargs.get("datetime_allowed", False)
@@ -438,12 +445,6 @@ def clean_to_json_compatible(obj, **kwargs):
     np = modules["np"]
     pd = modules["pd"]
     image = modules["image"]
-
-    # Plotly
-    try:
-        obj = obj.to_plotly_json()
-    except AttributeError:
-        pass
 
     # Sage
     if sage_all is not None:
@@ -521,6 +522,12 @@ def clean_to_json_compatible(obj, **kwargs):
     # PIL
     if image is not None and isinstance(obj, image.Image):
         return ImageUriValidator.pil_image_to_uri(obj)
+
+    # Plotly
+    try:
+        obj = obj.to_plotly_json()
+    except AttributeError:
+        pass
 
     # Recurse into lists and dictionaries
     if isinstance(obj, dict):
