@@ -92,7 +92,7 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     results = {}
     timing = {}
     result_str = None
-    for engine in ["json", "orjson", "legacy"]:
+    for engine in ["json", "orjson"]:
         if orjson is None and engine == "orjson":
             continue
 
@@ -101,16 +101,6 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
         timing[engine] = time_engine(engine, plotly_object)
 
     # Check matches
-    if results["legacy"] != results["json"]:
-        raise ValueError(
-            """
-{legacy}
-
-{json}""".format(
-                legacy=results["legacy"], json=results["json"]
-            )
-        )
-
     if "orjson" in results:
         if results["json"] != results["orjson"]:
             raise ValueError(
@@ -128,8 +118,8 @@ def to_json_plotly(plotly_object, pretty=False, engine=None):
     import os
     uid = str(uuid.uuid4())
     with open("json_timing.csv".format(engine), "at") as f:
-        f.write("{}, {}, {}, {}, {}\n".format(
-            timing["legacy"], timing["json"], timing["orjson"], len(result_str), uid)
+        f.write("{}, {}, {}, {}\n".format(
+            timing["json"], timing["orjson"], len(result_str), uid)
         )
     os.makedirs("json_object", exist_ok=True)
     with open("json_object/{uid}.pkl".format(uid=uid), "wb") as f:
