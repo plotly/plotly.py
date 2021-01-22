@@ -3416,9 +3416,8 @@ Invalid property path '{key_path_str}' for layout
 
         engine: str (default None)
             The JSON encoding engine to use. One of:
-              - "json" for a rewritten encoder based on the built-in Python json module
+              - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
-              - "legacy" for the legacy JSON encoder.
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -3480,9 +3479,8 @@ Invalid property path '{key_path_str}' for layout
 
         engine: str (default None)
             The JSON encoding engine to use. One of:
-              - "json" for a rewritten encoder based on the built-in Python json module
+              - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
-              - "legacy" for the legacy JSON encoder.
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
