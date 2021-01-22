@@ -13,7 +13,7 @@ from _plotly_utils.basevalidators import ImageUriValidator
 # Orca configuration class
 # ------------------------
 class JsonConfig(object):
-    _valid_engines = ("legacy", "json", "orjson", "auto")
+    _valid_engines = ("json", "orjson", "auto")
 
     def __init__(self):
         self._default_engine = "auto"
@@ -155,7 +155,6 @@ def _to_json_plotly(plotly_object, pretty=False, engine=None):
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "legacy" for the legacy JSON engine.
           - "auto" for the "orjson" engine if available, otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -180,7 +179,7 @@ def _to_json_plotly(plotly_object, pretty=False, engine=None):
             engine = "orjson"
         else:
             engine = "json"
-    elif engine not in ["orjson", "json", "legacy"]:
+    elif engine not in ["orjson", "json"]:
         raise ValueError("Invalid json engine: %s" % engine)
 
     modules = {
@@ -192,7 +191,7 @@ def _to_json_plotly(plotly_object, pretty=False, engine=None):
 
     # Dump to a JSON string and return
     # --------------------------------
-    if engine in ("json", "legacy"):
+    if engine == "json":
         opts = {"sort_keys": True}
         if pretty:
             opts["indent"] = 2
@@ -200,35 +199,9 @@ def _to_json_plotly(plotly_object, pretty=False, engine=None):
             # Remove all whitespace
             opts["separators"] = (",", ":")
 
-        if engine == "json":
-            cleaned = clean_to_json_compatible(
-                plotly_object,
-                numpy_allowed=False,
-                datetime_allowed=False,
-                modules=modules,
-            )
-            encoded_o = json.dumps(cleaned, **opts)
+        from _plotly_utils.utils import PlotlyJSONEncoder
 
-            if not ("NaN" in encoded_o or "Infinity" in encoded_o):
-                return encoded_o
-
-            # now:
-            #    1. `loads` to switch Infinity, -Infinity, NaN to None
-            #    2. `dumps` again so you get 'null' instead of extended JSON
-            try:
-                new_o = json.loads(encoded_o, parse_constant=coerce_to_strict)
-            except ValueError:
-                # invalid separators will fail here. raise a helpful exception
-                raise ValueError(
-                    "Encoding into strict JSON failed. Did you set the separators "
-                    "valid JSON separators?"
-                )
-            else:
-                return json.dumps(new_o, **opts)
-        else:
-            from _plotly_utils.utils import PlotlyJSONEncoder
-
-            return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
+        return json.dumps(plotly_object, cls=PlotlyJSONEncoder, **opts)
     elif engine == "orjson":
         JsonConfig.validate_orjson()
         opts = orjson.OPT_SORT_KEYS | orjson.OPT_SERIALIZE_NUMPY
@@ -278,7 +251,6 @@ def to_json(fig, validate=True, pretty=False, remove_uids=True, engine=None):
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "legacy" for the legacy JSON engine.
           - "auto" for the "orjson" engine if available, otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -330,7 +302,6 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         The JSON encoding engine to use. One of:
           - "json" for an engine based on the built-in Python json module
           - "orjson" for a faster engine that requires the orjson package
-          - "legacy" for the legacy JSON engine.
           - "auto" for the "orjson" engine if available, otherwise "json"
         If not specified, the default engine is set to the current value of
         plotly.io.json.config.default_engine.
@@ -370,7 +341,7 @@ def from_json_plotly(value, engine=None):
 
     engine: str (default None)
         The JSON decoding engine to use. One of:
-          - if "json" or "legacy", parse JSON using built in json module
+          - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
           - if "auto" use orjson module if available, otherwise use the json module
@@ -408,7 +379,7 @@ from_json_plotly requires a string or bytes argument but received value of type 
             engine = "orjson"
         else:
             engine = "json"
-    elif engine not in ["orjson", "json", "legacy"]:
+    elif engine not in ["orjson", "json"]:
         raise ValueError("Invalid json engine: %s" % engine)
 
     if engine == "orjson":
@@ -443,7 +414,7 @@ def from_json(value, output_type="Figure", skip_invalid=False, engine=None):
 
     engine: str (default None)
         The JSON decoding engine to use. One of:
-          - if "json" or "legacy", parse JSON using built in json module
+          - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
           - if "auto" use orjson module if available, otherwise use the json module
@@ -497,7 +468,7 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
 
     engine: str (default None)
         The JSON decoding engine to use. One of:
-          - if "json" or "legacy", parse JSON using built in json module
+          - if "json", parse JSON using built in json module
           - if "orjson", parse using the faster orjson module, requires the orjson
             package
           - if "auto" use orjson module if available, otherwise use the json module
@@ -539,19 +510,12 @@ def clean_to_json_compatible(obj, **kwargs):
     if isinstance(obj, (int, float, string_types)):
         return obj
 
-    # Plotly
-    try:
-        obj = obj.to_plotly_json()
-    except AttributeError:
-        pass
-
-    # And simple lists
-    if isinstance(obj, (list, tuple)):
-        # Must process list recursively even though it may be slow
-        return [clean_to_json_compatible(v, **kwargs) for v in obj]
-    # Recurse into lists and dictionaries
     if isinstance(obj, dict):
         return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        if obj:
+            # Must process list recursively even though it may be slow
+            return [clean_to_json_compatible(v, **kwargs) for v in obj]
 
     # unpack kwargs
     numpy_allowed = kwargs.get("numpy_allowed", False)
@@ -640,8 +604,18 @@ def clean_to_json_compatible(obj, **kwargs):
     if image is not None and isinstance(obj, image.Image):
         return ImageUriValidator.pil_image_to_uri(obj)
 
-    if isinstance(obj, (list, tuple)) and obj:
-        # Must process list recursively even though it may be slow
-        return [clean_to_json_compatible(v, **kwargs) for v in obj]
+    # Plotly
+    try:
+        obj = obj.to_plotly_json()
+    except AttributeError:
+        pass
+
+    # Recurse into lists and dictionaries
+    if isinstance(obj, dict):
+        return {k: clean_to_json_compatible(v, **kwargs) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        if obj:
+            # Must process list recursively even though it may be slow
+            return [clean_to_json_compatible(v, **kwargs) for v in obj]
 
     return obj

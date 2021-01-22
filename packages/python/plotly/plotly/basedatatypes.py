@@ -3279,7 +3279,7 @@ Invalid property path '{key_path_str}' for layout
 
     # Exports
     # -------
-    def to_dict(self, clone=True):
+    def to_dict(self):
         """
         Convert figure to a dictionary
 
@@ -3292,33 +3292,24 @@ Invalid property path '{key_path_str}' for layout
         """
         # Handle data
         # -----------
-        if clone:
-            data = deepcopy(self._data)
-        else:
-            data = self._data
+        data = deepcopy(self._data)
 
         # Handle layout
         # -------------
-        if clone:
-            layout = deepcopy(self._layout)
-        else:
-            layout = self._layout
+        layout = deepcopy(self._layout)
 
         # Handle frames
         # -------------
         # Frame key is only added if there are any frames
         res = {"data": data, "layout": layout}
-        if clone:
-            frames = deepcopy([frame._props for frame in self._frame_objs])
-        else:
-            frames = [frame._props for frame in self._frame_objs]
+        frames = deepcopy([frame._props for frame in self._frame_objs])
 
         if frames:
             res["frames"] = frames
 
         return res
 
-    def to_plotly_json(self, clone=True):
+    def to_plotly_json(self):
         """
         Convert figure to a JSON representation as a Python dict
 
@@ -3326,7 +3317,7 @@ Invalid property path '{key_path_str}' for layout
         -------
         dict
         """
-        return self.to_dict(clone=clone)
+        return self.to_dict()
 
     @staticmethod
     def _to_ordered_dict(d, skip_uid=False):
@@ -3431,9 +3422,8 @@ Invalid property path '{key_path_str}' for layout
 
         engine: str (default None)
             The JSON encoding engine to use. One of:
-              - "json" for a rewritten encoder based on the built-in Python json module
+              - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
-              - "legacy" for the legacy JSON encoder.
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -3495,9 +3485,8 @@ Invalid property path '{key_path_str}' for layout
 
         engine: str (default None)
             The JSON encoding engine to use. One of:
-              - "json" for a rewritten encoder based on the built-in Python json module
+              - "json" for an encoder based on the built-in Python json module
               - "orjson" for a fast encoder the requires the orjson package
-              - "legacy" for the legacy JSON encoder.
             If not specified, the default encoder is set to the current value of
             plotly.io.json.config.default_encoder.
 
@@ -5556,7 +5545,7 @@ on_change callbacks are not supported in this case.
         # -----------------
         self._change_callbacks[arg_tuples].append(callback)
 
-    def to_plotly_json(self, clone=True):
+    def to_plotly_json(self):
         """
         Return plotly JSON representation of object as a Python dict
 
@@ -5564,10 +5553,7 @@ on_change callbacks are not supported in this case.
         -------
         dict
         """
-        if clone:
-            return deepcopy(self._props if self._props is not None else {})
-        else:
-            return self._props if self._props is not None else {}
+        return deepcopy(self._props if self._props is not None else {})
 
     @staticmethod
     def _vals_equal(v1, v2):

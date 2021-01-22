@@ -89,7 +89,13 @@ def copy_to_readonly_numpy_array_or_list(v, kind=None, force_numeric=False):
 
     # u: unsigned int, i: signed int, f: float
     numeric_kinds = {"u", "i", "f"}
-    kind_default_dtypes = {"u": "uint32", "i": "int32", "f": "float64", "O": "object", "U": "U"}
+    kind_default_dtypes = {
+        "u": "uint32",
+        "i": "int32",
+        "f": "float64",
+        "O": "object",
+        "U": "U",
+    }
 
     # Handle pandas Series and Index objects
     if pd and isinstance(v, (pd.Series, pd.Index)):
@@ -191,7 +197,7 @@ def is_homogeneous_array(v):
             if v_numpy.shape == ():
                 return False
             else:
-                return True # v_numpy.dtype.kind in ["u", "i", "f", "M", "U"]
+                return True  # v_numpy.dtype.kind in ["u", "i", "f", "M", "U"]
     return False
 
 
@@ -1320,7 +1326,11 @@ class ColorValidator(BaseValidator):
             pass
         elif self.array_ok and is_homogeneous_array(v):
             v = copy_to_readonly_numpy_array_or_list(v)
-            if not isinstance(v, list) and self.numbers_allowed() and v.dtype.kind in ["u", "i", "f"]:
+            if (
+                not isinstance(v, list)
+                and self.numbers_allowed()
+                and v.dtype.kind in ["u", "i", "f"]
+            ):
                 # Numbers are allowed and we have an array of numbers.
                 # All good
                 pass

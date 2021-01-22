@@ -65,9 +65,9 @@ def check_roundtrip(value, engine, pretty):
 
 # Fixtures
 if orjson is not None:
-    engines = ["json", "orjson", "legacy", "auto"]
+    engines = ["json", "orjson", "auto"]
 else:
-    engines = ["json", "legacy", "auto"]
+    engines = ["json", "auto"]
 
 
 @pytest.fixture(scope="module", params=engines)
