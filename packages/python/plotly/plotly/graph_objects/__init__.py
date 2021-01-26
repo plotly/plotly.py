@@ -20,6 +20,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import Scatter3d
     from ..graph_objs import Scatter
     from ..graph_objs import Sankey
+    from ..graph_objs import Pointcloud
     from ..graph_objs import Pie
     from ..graph_objs import Parcoords
     from ..graph_objs import Parcats
@@ -93,6 +94,7 @@ if sys.version_info < (3, 7):
     from ..graph_objs import scatter3d
     from ..graph_objs import scatter
     from ..graph_objs import sankey
+    from ..graph_objs import pointcloud
     from ..graph_objs import pie
     from ..graph_objs import parcoords
     from ..graph_objs import parcats
@@ -145,6 +147,7 @@ else:
             "..graph_objs.scatter3d",
             "..graph_objs.scatter",
             "..graph_objs.sankey",
+            "..graph_objs.pointcloud",
             "..graph_objs.pie",
             "..graph_objs.parcoords",
             "..graph_objs.parcats",
@@ -193,6 +196,7 @@ else:
             "..graph_objs.Scatter3d",
             "..graph_objs.Scatter",
             "..graph_objs.Sankey",
+            "..graph_objs.Pointcloud",
             "..graph_objs.Pie",
             "..graph_objs.Parcoords",
             "..graph_objs.Parcats",

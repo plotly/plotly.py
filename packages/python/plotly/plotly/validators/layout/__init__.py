@@ -10,6 +10,7 @@ if sys.version_info < (3, 7):
     from ._violinmode import ViolinmodeValidator
     from ._violingroupgap import ViolingroupgapValidator
     from ._violingap import ViolingapValidator
+    from ._updatemenudefaults import UpdatemenudefaultsValidator
     from ._updatemenus import UpdatemenusValidator
     from ._uniformtext import UniformtextValidator
     from ._uirevision import UirevisionValidator
@@ -20,8 +21,10 @@ if sys.version_info < (3, 7):
     from ._template import TemplateValidator
     from ._sunburstcolorway import SunburstcolorwayValidator
     from ._spikedistance import SpikedistanceValidator
+    from ._sliderdefaults import SliderdefaultsValidator
     from ._sliders import SlidersValidator
     from ._showlegend import ShowlegendValidator
+    from ._shapedefaults import ShapedefaultsValidator
     from ._shapes import ShapesValidator
     from ._separators import SeparatorsValidator
     from ._selectionrevision import SelectionrevisionValidator
@@ -38,6 +41,7 @@ if sys.version_info < (3, 7):
     from ._margin import MarginValidator
     from ._mapbox import MapboxValidator
     from ._legend import LegendValidator
+    from ._imagedefaults import ImagedefaultsValidator
     from ._images import ImagesValidator
     from ._hovermode import HovermodeValidator
     from ._hoverlabel import HoverlabelValidator
@@ -75,6 +79,7 @@ if sys.version_info < (3, 7):
     from ._bargap import BargapValidator
     from ._autotypenumbers import AutotypenumbersValidator
     from ._autosize import AutosizeValidator
+    from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
     from ._activeshape import ActiveshapeValidator
 else:
@@ -93,6 +98,7 @@ else:
             "._violinmode.ViolinmodeValidator",
             "._violingroupgap.ViolingroupgapValidator",
             "._violingap.ViolingapValidator",
+            "._updatemenudefaults.UpdatemenudefaultsValidator",
             "._updatemenus.UpdatemenusValidator",
             "._uniformtext.UniformtextValidator",
             "._uirevision.UirevisionValidator",
@@ -103,8 +109,10 @@ else:
             "._template.TemplateValidator",
             "._sunburstcolorway.SunburstcolorwayValidator",
             "._spikedistance.SpikedistanceValidator",
+            "._sliderdefaults.SliderdefaultsValidator",
             "._sliders.SlidersValidator",
             "._showlegend.ShowlegendValidator",
+            "._shapedefaults.ShapedefaultsValidator",
             "._shapes.ShapesValidator",
             "._separators.SeparatorsValidator",
             "._selectionrevision.SelectionrevisionValidator",
@@ -121,6 +129,7 @@ else:
             "._margin.MarginValidator",
             "._mapbox.MapboxValidator",
             "._legend.LegendValidator",
+            "._imagedefaults.ImagedefaultsValidator",
             "._images.ImagesValidator",
             "._hovermode.HovermodeValidator",
             "._hoverlabel.HoverlabelValidator",
@@ -158,6 +167,7 @@ else:
             "._bargap.BargapValidator",
             "._autotypenumbers.AutotypenumbersValidator",
             "._autosize.AutosizeValidator",
+            "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
             "._activeshape.ActiveshapeValidator",
         ],

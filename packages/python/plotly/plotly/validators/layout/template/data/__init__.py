@@ -20,6 +20,7 @@ if sys.version_info < (3, 7):
     from ._scattercarpet import ScattercarpetValidator
     from ._scatter3d import Scatter3DValidator
     from ._sankey import SankeyValidator
+    from ._pointcloud import PointcloudValidator
     from ._pie import PieValidator
     from ._parcoords import ParcoordsValidator
     from ._parcats import ParcatsValidator
@@ -72,6 +73,7 @@ else:
             "._scattercarpet.ScattercarpetValidator",
             "._scatter3d.Scatter3DValidator",
             "._sankey.SankeyValidator",
+            "._pointcloud.PointcloudValidator",
             "._pie.PieValidator",
             "._parcoords.ParcoordsValidator",
             "._parcats.ParcatsValidator",

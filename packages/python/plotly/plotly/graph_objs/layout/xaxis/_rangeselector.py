@@ -13,6 +13,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         "bgcolor",
         "bordercolor",
         "borderwidth",
+        "buttondefaults",
         "buttons",
         "font",
         "visible",
@@ -225,23 +226,100 @@ class Rangeselector(_BaseLayoutHierarchyType):
     @property
     def buttons(self):
         """
-        The 'buttons' property is an instance of Buttons
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Buttons`
-          - A dict of string/value properties that will be passed
-            to the Buttons constructor
+        Sets the specifications for each buttons. By default, a range
+        selector comes with no buttons.
+    
+        The 'buttons' property is a tuple of instances of
+        Button that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.xaxis.rangeselector.Button
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Button constructor
     
             Supported dict properties:
+                
+                count
+                    Sets the number of steps to take to update the
+                    range. Use with `step` to specify the update
+                    interval.
+                label
+                    Sets the text label to appear on the button.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                step
+                    The unit of measurement that the `count` value
+                    will set the range by.
+                stepmode
+                    Sets the range update mode. If "backward", the
+                    range update shifts the start of range back
+                    "count" times "step" milliseconds. If "todate",
+                    the range update shifts the start of range back
+                    to the first timestamp from "count" times
+                    "step" milliseconds back. For example, with
+                    `step` set to "year" and `count` set to 1 the
+                    range update shifts the start of the range back
+                    to January 01 of the current year. Month and
+                    year "todate" are currently available only for
+                    the built-in (Gregorian) calendar.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                visible
+                    Determines whether or not this button is
+                    visible.
 
         Returns
         -------
-        plotly.graph_objs.layout.xaxis.rangeselector.Buttons
+        tuple[plotly.graph_objs.layout.xaxis.rangeselector.Button]
         """
         return self["buttons"]
 
     @buttons.setter
     def buttons(self, val):
         self["buttons"] = val
+
+    # buttondefaults
+    # --------------
+    @property
+    def buttondefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.xaxis.rangeselector.buttondefaults),
+        sets the default property values to use for elements of
+        layout.xaxis.rangeselector.buttons
+    
+        The 'buttondefaults' property is an instance of Button
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.xaxis.rangeselector.Button`
+          - A dict of string/value properties that will be passed
+            to the Button constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.xaxis.rangeselector.Button
+        """
+        return self["buttondefaults"]
+
+    @buttondefaults.setter
+    def buttondefaults(self, val):
+        self["buttondefaults"] = val
 
     # font
     # ----
@@ -417,8 +495,13 @@ class Rangeselector(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             range selector.
         buttons
-            :class:`plotly.graph_objects.layout.xaxis.rangeselector
-            .Buttons` instance or dict with compatible properties
+            Sets the specifications for each buttons. By default, a
+            range selector comes with no buttons.
+        buttondefaults
+            When used in a template (as layout.template.layout.xaxi
+            s.rangeselector.buttondefaults), sets the default
+            property values to use for elements of
+            layout.xaxis.rangeselector.buttons
         font
             Sets the font of the range selector button text.
         visible
@@ -449,6 +532,7 @@ class Rangeselector(_BaseLayoutHierarchyType):
         bordercolor=None,
         borderwidth=None,
         buttons=None,
+        buttondefaults=None,
         font=None,
         visible=None,
         x=None,
@@ -479,8 +563,13 @@ class Rangeselector(_BaseLayoutHierarchyType):
             Sets the width (in px) of the border enclosing the
             range selector.
         buttons
-            :class:`plotly.graph_objects.layout.xaxis.rangeselector
-            .Buttons` instance or dict with compatible properties
+            Sets the specifications for each buttons. By default, a
+            range selector comes with no buttons.
+        buttondefaults
+            When used in a template (as layout.template.layout.xaxi
+            s.rangeselector.buttondefaults), sets the default
+            property values to use for elements of
+            layout.xaxis.rangeselector.buttons
         font
             Sets the font of the range selector button text.
         visible
@@ -555,6 +644,10 @@ an instance of :class:`plotly.graph_objs.layout.xaxis.Rangeselector`"""
         _v = buttons if buttons is not None else _v
         if _v is not None:
             self["buttons"] = _v
+        _v = arg.pop("buttondefaults", None)
+        _v = buttondefaults if buttondefaults is not None else _v
+        if _v is not None:
+            self["buttondefaults"] = _v
         _v = arg.pop("font", None)
         _v = font if font is not None else _v
         if _v is not None:

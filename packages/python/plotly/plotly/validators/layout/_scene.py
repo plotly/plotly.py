@@ -11,9 +11,14 @@ class SceneValidator(_plotly_utils.basevalidators.CompoundValidator):
                 "data_docs",
                 """
             annotations
-                :class:`plotly.graph_objects.layout.scene.Annot
-                ations` instance or dict with compatible
-                properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                scene.Annotation` instances or dicts with
+                compatible properties
+            annotationdefaults
+                When used in a template (as layout.template.lay
+                out.scene.annotationdefaults), sets the default
+                property values to use for elements of
+                layout.scene.annotations
             aspectmode
                 If "cube", this scene's axes are drawn as a
                 cube, regardless of the axes' ranges. If

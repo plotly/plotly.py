@@ -217,9 +217,14 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 category is assigned a serial number from zero
                 in the order it appears.
             rangebreaks
-                :class:`plotly.graph_objects.layout.yaxis.Range
-                breaks` instance or dict with compatible
-                properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                yaxis.Rangebreak` instances or dicts with
+                compatible properties
+            rangebreakdefaults
+                When used in a template (as layout.template.lay
+                out.yaxis.rangebreakdefaults), sets the default
+                property values to use for elements of
+                layout.yaxis.rangebreaks
             rangemode
                 If "normal", the range is computed in relation
                 to the extrema of the input data. If *tozero*`,
@@ -352,9 +357,14 @@ class YaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"
                 would display "09~15~23.46"
             tickformatstops
-                :class:`plotly.graph_objects.layout.yaxis.Tickf
-                ormatstops` instance or dict with compatible
-                properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                yaxis.Tickformatstop` instances or dicts with
+                compatible properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.lay
+                out.yaxis.tickformatstopdefaults), sets the
+                default property values to use for elements of
+                layout.yaxis.tickformatstops
             ticklabelmode
                 Determines where tick labels are drawn with
                 respect to their corresponding ticks and grid

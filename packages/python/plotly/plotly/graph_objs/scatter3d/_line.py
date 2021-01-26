@@ -379,9 +379,15 @@ class Line(_BaseTraceHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    :class:`plotly.graph_objects.scatter3d.line.col
-                    orbar.Tickformatstops` instance or dict with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.scatter
+                    3d.line.colorbar.Tickformatstop` instances or
+                    dicts with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.scatter3d.line.colorbar.tickformatstopdefault
+                    s), sets the default property values to use for
+                    elements of
+                    scatter3d.line.colorbar.tickformatstops
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

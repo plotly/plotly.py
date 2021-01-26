@@ -268,9 +268,14 @@ class Heatmap(_BaseTraceType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    :class:`plotly.graph_objects.heatmap.colorbar.T
-                    ickformatstops` instance or dict with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.heatmap
+                    .colorbar.Tickformatstop` instances or dicts
+                    with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.heatmap.colorbar.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of heatmap.colorbar.tickformatstops
                 ticklabelposition
                     Determines where tick labels are drawn.
                 ticklen

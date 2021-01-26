@@ -47,6 +47,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         "tickcolor",
         "tickfont",
         "tickformat",
+        "tickformatstopdefaults",
         "tickformatstops",
         "ticklen",
         "tickmode",
@@ -1220,23 +1221,85 @@ class ZAxis(_BaseLayoutHierarchyType):
     @property
     def tickformatstops(self):
         """
-        The 'tickformatstops' property is an instance of Tickformatstops
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickformatstops`
-          - A dict of string/value properties that will be passed
-            to the Tickformatstops constructor
+        The 'tickformatstops' property is a tuple of instances of
+        Tickformatstop that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.layout.scene.zaxis.Tickformatstop
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Tickformatstop constructor
     
             Supported dict properties:
+                
+                dtickrange
+                    range [*min*, *max*], where "min", "max" -
+                    dtick values which describe some zoom level, it
+                    is possible to omit "min" or "max" value by
+                    passing "null"
+                enabled
+                    Determines whether or not this stop is used. If
+                    `false`, this stop is ignored even within its
+                    `dtickrange`.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                value
+                    string - dtickformat for described zoom level,
+                    the same as "tickformat"
 
         Returns
         -------
-        plotly.graph_objs.layout.scene.zaxis.Tickformatstops
+        tuple[plotly.graph_objs.layout.scene.zaxis.Tickformatstop]
         """
         return self["tickformatstops"]
 
     @tickformatstops.setter
     def tickformatstops(self, val):
         self["tickformatstops"] = val
+
+    # tickformatstopdefaults
+    # ----------------------
+    @property
+    def tickformatstopdefaults(self):
+        """
+        When used in a template (as
+        layout.template.layout.scene.zaxis.tickformatstopdefaults),
+        sets the default property values to use for elements of
+        layout.scene.zaxis.tickformatstops
+    
+        The 'tickformatstopdefaults' property is an instance of Tickformatstop
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.layout.scene.zaxis.Tickformatstop`
+          - A dict of string/value properties that will be passed
+            to the Tickformatstop constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.layout.scene.zaxis.Tickformatstop
+        """
+        return self["tickformatstopdefaults"]
+
+    @tickformatstopdefaults.setter
+    def tickformatstopdefaults(self, val):
+        self["tickformatstopdefaults"] = val
 
     # ticklen
     # -------
@@ -1886,8 +1949,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            :class:`plotly.graph_objects.layout.scene.zaxis.Tickfor
-            matstops` instance or dict with compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.za
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
+        tickformatstopdefaults
+            When used in a template (as layout.template.layout.scen
+            e.zaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.zaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -1993,6 +2062,7 @@ class ZAxis(_BaseLayoutHierarchyType):
         tickfont=None,
         tickformat=None,
         tickformatstops=None,
+        tickformatstopdefaults=None,
         ticklen=None,
         tickmode=None,
         tickprefix=None,
@@ -2221,8 +2291,14 @@ class ZAxis(_BaseLayoutHierarchyType):
             digits. For example, *2016-10-13 09:15:23.456* with
             tickformat "%H~%M~%S.%2f" would display "09~15~23.46"
         tickformatstops
-            :class:`plotly.graph_objects.layout.scene.zaxis.Tickfor
-            matstops` instance or dict with compatible properties
+            A tuple of :class:`plotly.graph_objects.layout.scene.za
+            xis.Tickformatstop` instances or dicts with compatible
+            properties
+        tickformatstopdefaults
+            When used in a template (as layout.template.layout.scen
+            e.zaxis.tickformatstopdefaults), sets the default
+            property values to use for elements of
+            layout.scene.zaxis.tickformatstops
         ticklen
             Sets the tick length (in px).
         tickmode
@@ -2472,6 +2548,10 @@ an instance of :class:`plotly.graph_objs.layout.scene.ZAxis`"""
         _v = tickformatstops if tickformatstops is not None else _v
         if _v is not None:
             self["tickformatstops"] = _v
+        _v = arg.pop("tickformatstopdefaults", None)
+        _v = tickformatstopdefaults if tickformatstopdefaults is not None else _v
+        if _v is not None:
+            self["tickformatstopdefaults"] = _v
         _v = arg.pop("ticklen", None)
         _v = ticklen if ticklen is not None else _v
         if _v is not None:

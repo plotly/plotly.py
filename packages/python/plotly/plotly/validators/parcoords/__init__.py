@@ -17,6 +17,7 @@ if sys.version_info < (3, 7):
     from ._idssrc import IdssrcValidator
     from ._ids import IdsValidator
     from ._domain import DomainValidator
+    from ._dimensiondefaults import DimensiondefaultsValidator
     from ._dimensions import DimensionsValidator
     from ._customdatasrc import CustomdatasrcValidator
     from ._customdata import CustomdataValidator
@@ -43,6 +44,7 @@ else:
             "._idssrc.IdssrcValidator",
             "._ids.IdsValidator",
             "._domain.DomainValidator",
+            "._dimensiondefaults.DimensiondefaultsValidator",
             "._dimensions.DimensionsValidator",
             "._customdatasrc.CustomdatasrcValidator",
             "._customdata.CustomdataValidator",

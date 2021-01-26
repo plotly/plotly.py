@@ -12,6 +12,7 @@ class Splom(_BaseTraceType):
         "customdata",
         "customdatasrc",
         "diagonal",
+        "dimensiondefaults",
         "dimensions",
         "hoverinfo",
         "hoverinfosrc",
@@ -121,23 +122,88 @@ class Splom(_BaseTraceType):
     @property
     def dimensions(self):
         """
-        The 'dimensions' property is an instance of Dimensions
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.splom.Dimensions`
-          - A dict of string/value properties that will be passed
-            to the Dimensions constructor
+        The 'dimensions' property is a tuple of instances of
+        Dimension that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.splom.Dimension
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Dimension constructor
     
             Supported dict properties:
+                
+                axis
+                    :class:`plotly.graph_objects.splom.dimension.Ax
+                    is` instance or dict with compatible properties
+                label
+                    Sets the label corresponding to this splom
+                    dimension.
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                values
+                    Sets the dimension values to be plotted.
+                valuessrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  values .
+                visible
+                    Determines whether or not this dimension is
+                    shown on the graph. Note that even visible
+                    false dimension contribute to the default grid
+                    generate by this splom trace.
 
         Returns
         -------
-        plotly.graph_objs.splom.Dimensions
+        tuple[plotly.graph_objs.splom.Dimension]
         """
         return self["dimensions"]
 
     @dimensions.setter
     def dimensions(self, val):
         self["dimensions"] = val
+
+    # dimensiondefaults
+    # -----------------
+    @property
+    def dimensiondefaults(self):
+        """
+        When used in a template (as
+        layout.template.data.splom.dimensiondefaults), sets the default
+        property values to use for elements of splom.dimensions
+    
+        The 'dimensiondefaults' property is an instance of Dimension
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.splom.Dimension`
+          - A dict of string/value properties that will be passed
+            to the Dimension constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.splom.Dimension
+        """
+        return self["dimensiondefaults"]
+
+    @dimensiondefaults.setter
+    def dimensiondefaults(self, val):
+        self["dimensiondefaults"] = val
 
     # hoverinfo
     # ---------
@@ -1031,8 +1097,14 @@ class Splom(_BaseTraceType):
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
         dimensions
-            :class:`plotly.graph_objects.splom.Dimensions` instance
-            or dict with compatible properties
+            A tuple of
+            :class:`plotly.graph_objects.splom.Dimension` instances
+            or dicts with compatible properties
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1195,6 +1267,7 @@ class Splom(_BaseTraceType):
         customdatasrc=None,
         diagonal=None,
         dimensions=None,
+        dimensiondefaults=None,
         hoverinfo=None,
         hoverinfosrc=None,
         hoverlabel=None,
@@ -1254,8 +1327,14 @@ class Splom(_BaseTraceType):
             :class:`plotly.graph_objects.splom.Diagonal` instance
             or dict with compatible properties
         dimensions
-            :class:`plotly.graph_objects.splom.Dimensions` instance
-            or dict with compatible properties
+            A tuple of
+            :class:`plotly.graph_objects.splom.Dimension` instances
+            or dicts with compatible properties
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.splom.dimensiondefaults), sets the
+            default property values to use for elements of
+            splom.dimensions
         hoverinfo
             Determines which trace information appear on hover. If
             `none` or `skip` are set, no information is displayed
@@ -1459,6 +1538,10 @@ an instance of :class:`plotly.graph_objs.Splom`"""
         _v = dimensions if dimensions is not None else _v
         if _v is not None:
             self["dimensions"] = _v
+        _v = arg.pop("dimensiondefaults", None)
+        _v = dimensiondefaults if dimensiondefaults is not None else _v
+        if _v is not None:
+            self["dimensiondefaults"] = _v
         _v = arg.pop("hoverinfo", None)
         _v = hoverinfo if hoverinfo is not None else _v
         if _v is not None:

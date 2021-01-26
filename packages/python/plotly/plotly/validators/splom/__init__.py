@@ -30,6 +30,7 @@ if sys.version_info < (3, 7):
     from ._hoverlabel import HoverlabelValidator
     from ._hoverinfosrc import HoverinfosrcValidator
     from ._hoverinfo import HoverinfoValidator
+    from ._dimensiondefaults import DimensiondefaultsValidator
     from ._dimensions import DimensionsValidator
     from ._diagonal import DiagonalValidator
     from ._customdatasrc import CustomdatasrcValidator
@@ -70,6 +71,7 @@ else:
             "._hoverlabel.HoverlabelValidator",
             "._hoverinfosrc.HoverinfosrcValidator",
             "._hoverinfo.HoverinfoValidator",
+            "._dimensiondefaults.DimensiondefaultsValidator",
             "._dimensions.DimensionsValidator",
             "._diagonal.DiagonalValidator",
             "._customdatasrc.CustomdatasrcValidator",

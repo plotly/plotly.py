@@ -13,6 +13,7 @@ class Parcats(_BaseTraceType):
         "bundlecolors",
         "counts",
         "countssrc",
+        "dimensiondefaults",
         "dimensions",
         "domain",
         "hoverinfo",
@@ -125,23 +126,104 @@ class Parcats(_BaseTraceType):
     @property
     def dimensions(self):
         """
-        The 'dimensions' property is an instance of Dimensions
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.parcats.Dimensions`
-          - A dict of string/value properties that will be passed
-            to the Dimensions constructor
+        The dimensions (variables) of the parallel categories diagram.
+    
+        The 'dimensions' property is a tuple of instances of
+        Dimension that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.parcats.Dimension
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Dimension constructor
     
             Supported dict properties:
+                
+                categoryarray
+                    Sets the order in which categories in this
+                    dimension appear. Only has an effect if
+                    `categoryorder` is set to "array". Used with
+                    `categoryorder`.
+                categoryarraysrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  categoryarray .
+                categoryorder
+                    Specifies the ordering logic for the categories
+                    in the dimension. By default, plotly uses
+                    "trace", which specifies the order that is
+                    present in the data supplied. Set
+                    `categoryorder` to *category ascending* or
+                    *category descending* if order should be
+                    determined by the alphanumerical order of the
+                    category names. Set `categoryorder` to "array"
+                    to derive the ordering from the attribute
+                    `categoryarray`. If a category is not found in
+                    the `categoryarray` array, the sorting behavior
+                    for that attribute will be identical to the
+                    "trace" mode. The unspecified categories will
+                    follow the categories in `categoryarray`.
+                displayindex
+                    The display index of dimension, from left to
+                    right, zero indexed, defaults to dimension
+                    index.
+                label
+                    The shown name of the dimension.
+                ticktext
+                    Sets alternative tick labels for the categories
+                    in this dimension. Only has an effect if
+                    `categoryorder` is set to "array". Should be an
+                    array the same length as `categoryarray` Used
+                    with `categoryorder`.
+                ticktextsrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  ticktext .
+                values
+                    Dimension values. `values[n]` represents the
+                    category value of the `n`th point in the
+                    dataset, therefore the `values` vector for all
+                    dimensions must be the same (longer vectors
+                    will be truncated).
+                valuessrc
+                    Sets the source reference on Chart Studio Cloud
+                    for  values .
+                visible
+                    Shows the dimension when set to `true` (the
+                    default). Hides the dimension for `false`.
 
         Returns
         -------
-        plotly.graph_objs.parcats.Dimensions
+        tuple[plotly.graph_objs.parcats.Dimension]
         """
         return self["dimensions"]
 
     @dimensions.setter
     def dimensions(self, val):
         self["dimensions"] = val
+
+    # dimensiondefaults
+    # -----------------
+    @property
+    def dimensiondefaults(self):
+        """
+        When used in a template (as
+        layout.template.data.parcats.dimensiondefaults), sets the
+        default property values to use for elements of
+        parcats.dimensions
+    
+        The 'dimensiondefaults' property is an instance of Dimension
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.parcats.Dimension`
+          - A dict of string/value properties that will be passed
+            to the Dimension constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.parcats.Dimension
+        """
+        return self["dimensiondefaults"]
+
+    @dimensiondefaults.setter
+    def dimensiondefaults(self, val):
+        self["dimensiondefaults"] = val
 
     # domain
     # ------
@@ -739,8 +821,13 @@ class Parcats(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             counts .
         dimensions
-            :class:`plotly.graph_objects.parcats.Dimensions`
-            instance or dict with compatible properties
+            The dimensions (variables) of the parallel categories
+            diagram.
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.parcats.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcats.dimensions
         domain
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
@@ -851,6 +938,7 @@ class Parcats(_BaseTraceType):
         counts=None,
         countssrc=None,
         dimensions=None,
+        dimensiondefaults=None,
         domain=None,
         hoverinfo=None,
         hoveron=None,
@@ -897,8 +985,13 @@ class Parcats(_BaseTraceType):
             Sets the source reference on Chart Studio Cloud for
             counts .
         dimensions
-            :class:`plotly.graph_objects.parcats.Dimensions`
-            instance or dict with compatible properties
+            The dimensions (variables) of the parallel categories
+            diagram.
+        dimensiondefaults
+            When used in a template (as
+            layout.template.data.parcats.dimensiondefaults), sets
+            the default property values to use for elements of
+            parcats.dimensions
         domain
             :class:`plotly.graph_objects.parcats.Domain` instance
             or dict with compatible properties
@@ -1053,6 +1146,10 @@ an instance of :class:`plotly.graph_objs.Parcats`"""
         _v = dimensions if dimensions is not None else _v
         if _v is not None:
             self["dimensions"] = _v
+        _v = arg.pop("dimensiondefaults", None)
+        _v = dimensiondefaults if dimensiondefaults is not None else _v
+        if _v is not None:
+            self["dimensiondefaults"] = _v
         _v = arg.pop("domain", None)
         _v = domain if domain is not None else _v
         if _v is not None:

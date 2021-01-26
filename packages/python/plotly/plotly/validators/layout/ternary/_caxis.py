@@ -156,9 +156,14 @@ class CaxisValidator(_plotly_utils.basevalidators.CompoundValidator):
                 09:15:23.456* with tickformat "%H~%M~%S.%2f"
                 would display "09~15~23.46"
             tickformatstops
-                :class:`plotly.graph_objects.layout.ternary.cax
-                is.Tickformatstops` instance or dict with
-                compatible properties
+                A tuple of :class:`plotly.graph_objects.layout.
+                ternary.caxis.Tickformatstop` instances or
+                dicts with compatible properties
+            tickformatstopdefaults
+                When used in a template (as layout.template.lay
+                out.ternary.caxis.tickformatstopdefaults), sets
+                the default property values to use for elements
+                of layout.ternary.caxis.tickformatstops
             ticklen
                 Sets the tick length (in px).
             tickmode

@@ -2,6 +2,7 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._threshold import ThresholdValidator
+    from ._stepdefaults import StepdefaultsValidator
     from ._steps import StepsValidator
     from ._shape import ShapeValidator
     from ._borderwidth import BorderwidthValidator
@@ -17,6 +18,7 @@ else:
         [],
         [
             "._threshold.ThresholdValidator",
+            "._stepdefaults.StepdefaultsValidator",
             "._steps.StepsValidator",
             "._shape.ShapeValidator",
             "._borderwidth.BorderwidthValidator",

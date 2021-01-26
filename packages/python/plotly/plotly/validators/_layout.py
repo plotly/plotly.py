@@ -14,8 +14,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.layout.Activeshape
                 ` instance or dict with compatible properties
             annotations
-                :class:`plotly.graph_objects.layout.Annotations
-                ` instance or dict with compatible properties
+                A tuple of
+                :class:`plotly.graph_objects.layout.Annotation`
+                instances or dicts with compatible properties
+            annotationdefaults
+                When used in a template (as
+                layout.template.layout.annotationdefaults),
+                sets the default property values to use for
+                elements of layout.annotations
             autosize
                 Determines whether or not a layout width or
                 height that has been left undefined by the user
@@ -256,8 +262,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 for plots based on cartesian coordinates. For
                 anything else the default value is "closest".
             images
-                :class:`plotly.graph_objects.layout.Images`
-                instance or dict with compatible properties
+                A tuple of
+                :class:`plotly.graph_objects.layout.Image`
+                instances or dicts with compatible properties
+            imagedefaults
+                When used in a template (as
+                layout.template.layout.imagedefaults), sets the
+                default property values to use for elements of
+                layout.images
             legend
                 :class:`plotly.graph_objects.layout.Legend`
                 instance or dict with compatible properties
@@ -322,8 +334,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 dflt is ".," but other locales may alter this
                 default.
             shapes
-                :class:`plotly.graph_objects.layout.Shapes`
-                instance or dict with compatible properties
+                A tuple of
+                :class:`plotly.graph_objects.layout.Shape`
+                instances or dicts with compatible properties
+            shapedefaults
+                When used in a template (as
+                layout.template.layout.shapedefaults), sets the
+                default property values to use for elements of
+                layout.shapes
             showlegend
                 Determines whether or not a legend is drawn.
                 Default is `true` if there is a trace to show
@@ -332,8 +350,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 trace is shown in the legend. c) One trace is
                 explicitly given with `showlegend: true`.
             sliders
-                :class:`plotly.graph_objects.layout.Sliders`
-                instance or dict with compatible properties
+                A tuple of
+                :class:`plotly.graph_objects.layout.Slider`
+                instances or dicts with compatible properties
+            sliderdefaults
+                When used in a template (as
+                layout.template.layout.sliderdefaults), sets
+                the default property values to use for elements
+                of layout.sliders
             spikedistance
                 Sets the default distance (in pixels) to look
                 for data to draw spikelines to (-1 means no
@@ -422,8 +446,14 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 :class:`plotly.graph_objects.layout.Uniformtext
                 ` instance or dict with compatible properties
             updatemenus
-                :class:`plotly.graph_objects.layout.Updatemenus
-                ` instance or dict with compatible properties
+                A tuple of
+                :class:`plotly.graph_objects.layout.Updatemenu`
+                instances or dicts with compatible properties
+            updatemenudefaults
+                When used in a template (as
+                layout.template.layout.updatemenudefaults),
+                sets the default property values to use for
+                elements of layout.updatemenus
             violingap
                 Sets the gap (in plot fraction) between violins
                 of adjacent location coordinates. Has no effect

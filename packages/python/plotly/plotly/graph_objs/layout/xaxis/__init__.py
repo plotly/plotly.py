@@ -1,11 +1,11 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._rangebreaks import Rangebreaks
+    from ._rangebreak import Rangebreak
     from ._rangeselector import Rangeselector
     from ._rangeslider import Rangeslider
     from ._tickfont import Tickfont
-    from ._tickformatstops import Tickformatstops
+    from ._tickformatstop import Tickformatstop
     from ._title import Title
     from . import rangeselector
     from . import rangeslider
@@ -17,11 +17,11 @@ else:
         __name__,
         [".rangeselector", ".rangeslider", ".title"],
         [
-            "._rangebreaks.Rangebreaks",
+            "._rangebreak.Rangebreak",
             "._rangeselector.Rangeselector",
             "._rangeslider.Rangeslider",
             "._tickfont.Tickfont",
-            "._tickformatstops.Tickformatstops",
+            "._tickformatstop.Tickformatstop",
             "._title.Title",
         ],
     )

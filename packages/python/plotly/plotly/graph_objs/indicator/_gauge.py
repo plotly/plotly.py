@@ -15,6 +15,7 @@ class Gauge(_BaseTraceHierarchyType):
         "bordercolor",
         "borderwidth",
         "shape",
+        "stepdefaults",
         "steps",
         "threshold",
     }
@@ -132,9 +133,15 @@ class Gauge(_BaseTraceHierarchyType):
                     09:15:23.456* with tickformat "%H~%M~%S.%2f"
                     would display "09~15~23.46"
                 tickformatstops
-                    :class:`plotly.graph_objects.indicator.gauge.ax
-                    is.Tickformatstops` instance or dict with
-                    compatible properties
+                    A tuple of :class:`plotly.graph_objects.indicat
+                    or.gauge.axis.Tickformatstop` instances or
+                    dicts with compatible properties
+                tickformatstopdefaults
+                    When used in a template (as layout.template.dat
+                    a.indicator.gauge.axis.tickformatstopdefaults),
+                    sets the default property values to use for
+                    elements of
+                    indicator.gauge.axis.tickformatstops
                 ticklen
                     Sets the tick length (in px).
                 tickmode
@@ -389,23 +396,84 @@ class Gauge(_BaseTraceHierarchyType):
     @property
     def steps(self):
         """
-        The 'steps' property is an instance of Steps
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.indicator.gauge.Steps`
-          - A dict of string/value properties that will be passed
-            to the Steps constructor
+        The 'steps' property is a tuple of instances of
+        Step that may be specified as:
+          - A list or tuple of instances of plotly.graph_objs.indicator.gauge.Step
+          - A list or tuple of dicts of string/value properties that
+            will be passed to the Step constructor
     
             Supported dict properties:
+                
+                color
+                    Sets the background color of the arc.
+                line
+                    :class:`plotly.graph_objects.indicator.gauge.st
+                    ep.Line` instance or dict with compatible
+                    properties
+                name
+                    When used in a template, named items are
+                    created in the output figure in addition to any
+                    items the figure already has in this array. You
+                    can modify these items in the output figure by
+                    making your own item with `templateitemname`
+                    matching this `name` alongside your
+                    modifications (including `visible: false` or
+                    `enabled: false` to hide it). Has no effect
+                    outside of a template.
+                range
+                    Sets the range of this axis.
+                templateitemname
+                    Used to refer to a named item in this array in
+                    the template. Named items from the template
+                    will be created even without a matching item in
+                    the input figure, but you can modify one by
+                    making an item with `templateitemname` matching
+                    its `name`, alongside your modifications
+                    (including `visible: false` or `enabled: false`
+                    to hide it). If there is no template or no
+                    matching item, this item will be hidden unless
+                    you explicitly show it with `visible: true`.
+                thickness
+                    Sets the thickness of the bar as a fraction of
+                    the total thickness of the gauge.
 
         Returns
         -------
-        plotly.graph_objs.indicator.gauge.Steps
+        tuple[plotly.graph_objs.indicator.gauge.Step]
         """
         return self["steps"]
 
     @steps.setter
     def steps(self, val):
         self["steps"] = val
+
+    # stepdefaults
+    # ------------
+    @property
+    def stepdefaults(self):
+        """
+        When used in a template (as
+        layout.template.data.indicator.gauge.stepdefaults), sets the
+        default property values to use for elements of
+        indicator.gauge.steps
+    
+        The 'stepdefaults' property is an instance of Step
+        that may be specified as:
+          - An instance of :class:`plotly.graph_objs.indicator.gauge.Step`
+          - A dict of string/value properties that will be passed
+            to the Step constructor
+    
+            Supported dict properties:
+
+        Returns
+        -------
+        plotly.graph_objs.indicator.gauge.Step
+        """
+        return self["stepdefaults"]
+
+    @stepdefaults.setter
+    def stepdefaults(self, val):
+        self["stepdefaults"] = val
 
     # threshold
     # ---------
@@ -460,8 +528,14 @@ class Gauge(_BaseTraceHierarchyType):
         shape
             Set the shape of the gauge
         steps
-            :class:`plotly.graph_objects.indicator.gauge.Steps`
-            instance or dict with compatible properties
+            A tuple of
+            :class:`plotly.graph_objects.indicator.gauge.Step`
+            instances or dicts with compatible properties
+        stepdefaults
+            When used in a template (as
+            layout.template.data.indicator.gauge.stepdefaults),
+            sets the default property values to use for elements of
+            indicator.gauge.steps
         threshold
             :class:`plotly.graph_objects.indicator.gauge.Threshold`
             instance or dict with compatible properties
@@ -477,6 +551,7 @@ class Gauge(_BaseTraceHierarchyType):
         borderwidth=None,
         shape=None,
         steps=None,
+        stepdefaults=None,
         threshold=None,
         **kwargs
     ):
@@ -506,8 +581,14 @@ class Gauge(_BaseTraceHierarchyType):
         shape
             Set the shape of the gauge
         steps
-            :class:`plotly.graph_objects.indicator.gauge.Steps`
-            instance or dict with compatible properties
+            A tuple of
+            :class:`plotly.graph_objects.indicator.gauge.Step`
+            instances or dicts with compatible properties
+        stepdefaults
+            When used in a template (as
+            layout.template.data.indicator.gauge.stepdefaults),
+            sets the default property values to use for elements of
+            indicator.gauge.steps
         threshold
             :class:`plotly.graph_objects.indicator.gauge.Threshold`
             instance or dict with compatible properties
@@ -573,6 +654,10 @@ an instance of :class:`plotly.graph_objs.indicator.Gauge`"""
         _v = steps if steps is not None else _v
         if _v is not None:
             self["steps"] = _v
+        _v = arg.pop("stepdefaults", None)
+        _v = stepdefaults if stepdefaults is not None else _v
+        if _v is not None:
+            self["stepdefaults"] = _v
         _v = arg.pop("threshold", None)
         _v = threshold if threshold is not None else _v
         if _v is not None:

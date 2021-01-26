@@ -2,12 +2,13 @@ import sys
 
 if sys.version_info < (3, 7):
     from ._diagonal import Diagonal
-    from ._dimensions import Dimensions
+    from ._dimension import Dimension
     from ._hoverlabel import Hoverlabel
     from ._marker import Marker
     from ._selected import Selected
     from ._stream import Stream
     from ._unselected import Unselected
+    from . import dimension
     from . import hoverlabel
     from . import marker
     from . import selected
@@ -17,10 +18,10 @@ else:
 
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
-        [".hoverlabel", ".marker", ".selected", ".unselected"],
+        [".dimension", ".hoverlabel", ".marker", ".selected", ".unselected"],
         [
             "._diagonal.Diagonal",
-            "._dimensions.Dimensions",
+            "._dimension.Dimension",
             "._hoverlabel.Hoverlabel",
             "._marker.Marker",
             "._selected.Selected",

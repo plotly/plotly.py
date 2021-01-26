@@ -105,6 +105,10 @@ class DataValidator(_plotly_utils.basevalidators.CompoundValidator):
             pie
                 A tuple of :class:`plotly.graph_objects.Pie`
                 instances or dicts with compatible properties
+            pointcloud
+                A tuple of
+                :class:`plotly.graph_objects.Pointcloud`
+                instances or dicts with compatible properties
             sankey
                 A tuple of :class:`plotly.graph_objects.Sankey`
                 instances or dicts with compatible properties

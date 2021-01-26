@@ -1,9 +1,9 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._rangebreaks import Rangebreaks
+    from ._rangebreak import Rangebreak
     from ._tickfont import Tickfont
-    from ._tickformatstops import Tickformatstops
+    from ._tickformatstop import Tickformatstop
     from ._title import Title
     from . import title
 else:
@@ -13,9 +13,9 @@ else:
         __name__,
         [".title"],
         [
-            "._rangebreaks.Rangebreaks",
+            "._rangebreak.Rangebreak",
             "._tickfont.Tickfont",
-            "._tickformatstops.Tickformatstops",
+            "._tickformatstop.Tickformatstop",
             "._title.Title",
         ],
     )

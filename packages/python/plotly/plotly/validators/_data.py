@@ -32,6 +32,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "parcats": "Parcats",
                 "parcoords": "Parcoords",
                 "pie": "Pie",
+                "pointcloud": "Pointcloud",
                 "sankey": "Sankey",
                 "scatter": "Scatter",
                 "scatter3d": "Scatter3d",

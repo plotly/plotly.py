@@ -12,6 +12,7 @@ if sys.version_info < (3, 7):
     from ._bgcolor import BgcolorValidator
     from ._aspectratio import AspectratioValidator
     from ._aspectmode import AspectmodeValidator
+    from ._annotationdefaults import AnnotationdefaultsValidator
     from ._annotations import AnnotationsValidator
 else:
     from _plotly_utils.importers import relative_import
@@ -31,6 +32,7 @@ else:
             "._bgcolor.BgcolorValidator",
             "._aspectratio.AspectratioValidator",
             "._aspectmode.AspectmodeValidator",
+            "._annotationdefaults.AnnotationdefaultsValidator",
             "._annotations.AnnotationsValidator",
         ],
     )

@@ -29,8 +29,13 @@ class ParcatsValidator(_plotly_utils.basevalidators.CompoundValidator):
                 Sets the source reference on Chart Studio Cloud
                 for  counts .
             dimensions
-                :class:`plotly.graph_objects.parcats.Dimensions
-                ` instance or dict with compatible properties
+                The dimensions (variables) of the parallel
+                categories diagram.
+            dimensiondefaults
+                When used in a template (as layout.template.dat
+                a.parcats.dimensiondefaults), sets the default
+                property values to use for elements of
+                parcats.dimensions
             domain
                 :class:`plotly.graph_objects.parcats.Domain`
                 instance or dict with compatible properties

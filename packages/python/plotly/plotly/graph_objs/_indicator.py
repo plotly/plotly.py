@@ -214,9 +214,14 @@ class Indicator(_BaseTraceType):
                 shape
                     Set the shape of the gauge
                 steps
-                    :class:`plotly.graph_objects.indicator.gauge.St
-                    eps` instance or dict with compatible
-                    properties
+                    A tuple of :class:`plotly.graph_objects.indicat
+                    or.gauge.Step` instances or dicts with
+                    compatible properties
+                stepdefaults
+                    When used in a template (as layout.template.dat
+                    a.indicator.gauge.stepdefaults), sets the
+                    default property values to use for elements of
+                    indicator.gauge.steps
                 threshold
                     :class:`plotly.graph_objects.indicator.gauge.Th
                     reshold` instance or dict with compatible
