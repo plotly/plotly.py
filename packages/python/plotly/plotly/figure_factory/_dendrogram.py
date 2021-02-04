@@ -158,11 +158,11 @@ class _Dendrogram(object):
         yvals_flat = yvals.flatten()
         xvals_flat = xvals.flatten()
 
-        self.zero_vals = []
+        self.zero_vals = set()
 
-        for i in range(len(yvals_flat)):
-            if yvals_flat[i] == 0.0 and xvals_flat[i] not in self.zero_vals:
-                self.zero_vals.append(xvals_flat[i])
+        for xval, yval in zip(xvals_flat, yvals_flat):
+            if yval == 0.0:  
+                self.zero_vals.add(xval)
 
         if len(self.zero_vals) > len(yvals) + 1:
             # If the length of zero_vals is larger than the length of yvals,
@@ -175,7 +175,7 @@ class _Dendrogram(object):
                 l_border, r_border + 1, int((r_border - l_border) / len(yvals))
             )
             # Regenerating the leaves pos from the self.zero_vals with equally intervals.
-            self.zero_vals = [v for v in correct_leaves_pos]
+            self.zero_vals = list(correct_leaves_pos)
 
         self.zero_vals.sort()
         self.layout = self.set_figure_layout(width, height)
