@@ -102,7 +102,7 @@ By default, the tick labels (and optional ticks) are associated with a specific 
 
 Date axis tick labels have the special property that any portion after the first instance of `'\n'` in `tickformat` will appear on a second line only once per unique value, as with the year numbers in the example below. To have the year number appear on every tick label, `'<br>'` should be used instead of `'\n'`.
 
-Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the acutal date, as below.
+Note that by default, the formatting of values of X and Y values in the hover label matches that of the tick labels of the corresponding axes, so when customizing the tick labels to something broad like "month", it's usually necessary to [customize the hover label](/python/hover-text-and-formatting/) to something narrower like the actual date, as below.
 
 ```python
 import plotly.express as px

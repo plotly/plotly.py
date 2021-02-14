@@ -252,7 +252,7 @@ fig.show(config={
 
 ### Add optional shape-drawing buttons to modebar
 
-Some modebar buttons of Cartesian plots are optional and have to be added explictly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
+Some modebar buttons of Cartesian plots are optional and have to be added explicitly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
 
 ```python
 import plotly.graph_objects as go
