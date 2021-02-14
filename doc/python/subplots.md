@@ -397,7 +397,7 @@ fig.show()
 ```
 
 #### Subplots Types
-By default, the `make_subplots` function assumes that the traces that will be added to all subplots are 2-dimensional cartesian traces (e.g. `scatter`, `bar`, `histogram`, `violin`, etc.).  Traces with other subplot types (e.g. `scatterpolar`, `scattergeo`, `parcoords`, etc.) are supporteed by specifying the `type` subplot option in the `specs` argument to `make_subplots`.
+By default, the `make_subplots` function assumes that the traces that will be added to all subplots are 2-dimensional cartesian traces (e.g. `scatter`, `bar`, `histogram`, `violin`, etc.).  Traces with other subplot types (e.g. `scatterpolar`, `scattergeo`, `parcoords`, etc.) are supported by specifying the `type` subplot option in the `specs` argument to `make_subplots`.
 
 Here are the possible values for the `type` option:
 
