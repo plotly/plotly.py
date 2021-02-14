@@ -153,7 +153,7 @@ fig.update_layout(
 fig.show()
 ```
 ### Performance improvement: put many lines in the same trace
-For very large amounts (>1000) of lines, performance may become critcal. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption.
+For very large amounts (>1000) of lines, performance may become critical. If you can relinquish setting individual line styles (e.g. opacity), you can put multiple paths into one trace. This makes the map render faster and reduces the script execution time and memory consumption.
 
 Use ```None``` between path coordinates to create a break in the otherwise connected paths.
 

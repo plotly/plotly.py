@@ -243,7 +243,7 @@ fig.show()
 
 #### Large Data Sets
 
-Now in Ploty you can implement WebGL with `Scattergl()` in place of `Scatter()` <br>
+Now in Plotly you can implement WebGL with `Scattergl()` in place of `Scatter()` <br>
 for increased speed, improved interactivity, and the ability to plot even more data!
 
 ```python
