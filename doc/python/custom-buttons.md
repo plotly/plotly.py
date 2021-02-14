@@ -348,7 +348,7 @@ fig.show()
 
 #### Update Button
 The `"update"` method should be used when modifying the data and layout sections of the graph.<br>
-This example demonstrates how to update which traces are displayed while simulaneously updating layout attributes such as the chart title and annotations.
+This example demonstrates how to update which traces are displayed while simultaneously updating layout attributes such as the chart title and annotations.
 
 ```python
 import plotly.graph_objects as go

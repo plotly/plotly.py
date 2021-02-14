@@ -40,7 +40,7 @@ This page shows examples of how to configure [2-dimensional Cartesian axes](/pyt
 
 The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
 
-- `'linear'` (see the [linear axes tutoria](/python/axes/))
+- `'linear'` (see the [linear axes tutorial](/python/axes/))
 - `'log'` (see the [log plot tutorial](/python/log-plots/))
 - `'date'` (see the [tutorial on timeseries](/python/time-series/))
 - `'category'` see below
@@ -55,7 +55,7 @@ The axis type is auto-detected by looking at data from the first [trace](/python
 
 ### Forcing an axis to be categorical
 
-It is possible to force the axis type by setting explicitely `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
+It is possible to force the axis type by setting explicitly `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
 
 ```python
 import plotly.express as px
