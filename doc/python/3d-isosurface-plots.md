@@ -130,7 +130,7 @@ fig = go.Figure(data=go.Isosurface(
 fig.show()
 ```
 
-#### Isosurface with Addtional Slices
+#### Isosurface with Additional Slices
 
 Here we visualize slices parallel to the axes on top of isosurfaces. For a clearer visualization, the `fill` ratio of isosurfaces is decreased below 1 (completely filled).
 

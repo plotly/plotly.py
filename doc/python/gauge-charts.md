@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to make guage meter charts in Python with Plotly.
+    description: How to make gauge meter charts in Python with Plotly.
     display_as: financial
     language: python
     layout: base

@@ -59,7 +59,7 @@ conda install geopandas
 <!-- #endraw -->
 
 #### FIPS and Values
-Every US state and county has an assined ID regulated by the US Federal Government under the term FIPS (Federal Information Processing Standards) codes. There are state codes and county codes: the 2016 state and county FIPS codes can be found at the [US Census Website](https://www.census.gov/geographies/reference-files/2016/demo/popest/2016-fips.html).
+Every US state and county has an assigned ID regulated by the US Federal Government under the term FIPS (Federal Information Processing Standards) codes. There are state codes and county codes: the 2016 state and county FIPS codes can be found at the [US Census Website](https://www.census.gov/geographies/reference-files/2016/demo/popest/2016-fips.html).
 
 Combine a state FIPS code (eg. `06` for California) with a county FIPS code of the state (eg. `059` for Orange county) and this new state-county FIPS code (`06059`) uniquely refers to the specified state and county.
 
@@ -197,7 +197,7 @@ Below is a choropleth that uses several other parameters. For a full list of all
 
 - `simplify_county` determines the simplification factor for the counties. The larger the number, the fewer vertices and edges each polygon has. See http://toblerity.org/shapely/manual.html#object.simplify for more information.
 - `simplify_state` simplifies the state outline polygon. See the [documentation](http://toblerity.org/shapely/manual.html#object.simplify) for more information.
-Default for both `simplify_county` and `simplif_state` is 0.02
+Default for both `simplify_county` and `simplify_state` is 0.02
 
 Note: This choropleth uses a divergent categorical colorscale. See http://react-colorscales.getforge.io/ for other cool colorscales.
 
