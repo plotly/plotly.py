@@ -42,7 +42,7 @@ We first show how to visualize data with more than three features using the [sca
 
 t-SNE is a popular dimensionality reduction algorithm that arises from probability theory. Simply put, it projects the high-dimensional data points (sometimes with hundreds of features) into 2D/3D by inducing the projected data to have a similar distribution as the original data points by minimizing something called the [KL divergence](https://towardsdatascience.com/light-on-math-machine-learning-intuitive-guide-to-understanding-kl-divergence-2b382ca2b2a8).
 
-Compared to a method like Principal Component Analysis (PCA), it takes signficantly more time to converge, but present signficiantly better insights when visualized. For example, by projecting features of a flowers, it will be able to distinctly group
+Compared to a method like Principal Component Analysis (PCA), it takes significantly more time to converge, but present significantly better insights when visualized. For example, by projecting features of a flowers, it will be able to distinctly group
 
 
 ### Visualizing high-dimensional data with `px.scatter_matrix`

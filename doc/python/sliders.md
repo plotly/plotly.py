@@ -90,7 +90,7 @@ The method determines which [plotly.js function](https://plot.ly/javascript/plot
 
 
 ### Sliders in Plotly Express
-Plotly Express provide sliders, but with implicit animation using the `"animate"` method described above. The animation play button can be ommited by removing `updatemenus` in the `layout`:
+Plotly Express provide sliders, but with implicit animation using the `"animate"` method described above. The animation play button can be omited by removing `updatemenus` in the `layout`:
 
 ```python
 import plotly.express as px
