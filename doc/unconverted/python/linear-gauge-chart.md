@@ -12,7 +12,7 @@ jupyter:
     language: python
     name: python2
   plotly:
-    description: How to make interactive linear-guage charts in Python with Plotly.
+    description: How to make interactive linear-gauge charts in Python with Plotly.
     display_as: basic
     language: python
     layout: base
