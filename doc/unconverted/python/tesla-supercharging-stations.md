@@ -12,7 +12,7 @@ jupyter:
     language: python
     name: python2
   plotly:
-    description: How to plot car-travel routes between USA and Canada Telsa Supercharging
+    description: How to plot car-travel routes between USA and Canada Tesla Supercharging
       Stations in Python.
     display_as: maps
     language: python

@@ -28,7 +28,7 @@ jupyter:
 
 Circular layout or [Chord diagram](https://en.wikipedia.org/wiki/Chord_diagram) is a method of visualizing  data that describe relationships. It was intensively promoted  through [Circos](http://circos.ca/), a software package in Perl that  was initially designed for displaying genomic data.
 
-M Bostock developed reusable charts  for [chord diagrams](http://bl.ocks.org/mbostock/4062006) in d3.js. Two years ago on [stackoverflow](http://stackoverflow.com/questions/19105801/chord-diagram-in-python), the exsistence of a Python package for plotting chord diagrams was adressed, but the question was closed due to being *off topic*.<br> Here we show that a chord diagram can be generated in Python with Plotly. We illustrate the method of generating a chord diagram from data recorded in a square matrix. The rows and columns represent the same entities.
+M Bostock developed reusable charts  for [chord diagrams](http://bl.ocks.org/mbostock/4062006) in d3.js. Two years ago on [stackoverflow](http://stackoverflow.com/questions/19105801/chord-diagram-in-python), the existence of a Python package for plotting chord diagrams was addressed, but the question was closed due to being *off topic*.<br> Here we show that a chord diagram can be generated in Python with Plotly. We illustrate the method of generating a chord diagram from data recorded in a square matrix. The rows and columns represent the same entities.
 
 This example considers a community of 5 friends on Facebook. We record the number of comments posted by each member on the other friends' walls. The data table is given in the next cell:
 

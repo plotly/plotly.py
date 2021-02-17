@@ -99,7 +99,7 @@ py.iplot(fig, filename='interpolation-and-extrapolation')
 ```
 
 #### Interpolation and Extrapolation of Y From X
-Interpolation and Extrapolation of (x, y) points with pre-existant points and an array of specific x values.
+Interpolation and Extrapolation of (x, y) points with pre-existent points and an array of specific x values.
 
 ```python
 points = np.array([(1, 1), (2, 4), (3, 1), (9, 3)])
