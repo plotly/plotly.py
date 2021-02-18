@@ -83,7 +83,7 @@ IFrame(snippet_url + '3d-mesh', width='100%', height=630)
 
 ### Mesh Tetrahedron
 
-In this example we use the `ì`, `j` and `k` parameters to specify manually the geometry of the triangles of the mesh.
+In this example we use the `i`, `j` and `k` parameters to specify manually the geometry of the triangles of the mesh.
 
 ```python
 import plotly.graph_objects as go

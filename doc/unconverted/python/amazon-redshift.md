@@ -68,7 +68,7 @@ port = 5439
 dbname = 'dev'
 ```
 
-As I mentioned there are numerous ways to connect to a Redshift databause and I've included two below. We can use either the SQLAlchemy package or we can use the psycopg2 package for a more direct access.
+As I mentioned there are numerous ways to connect to a Redshift database and I've included two below. We can use either the SQLAlchemy package or we can use the psycopg2 package for a more direct access.
 
 Both will allow us to execute SQL queries and get results however the SQLAlchemy engine makes it a bit easier to directly return our data as a dataframe using pandas. Plotly has a tight integration with pandas as well, making it extremely easy to make interactive graphs to share with your company.
 
