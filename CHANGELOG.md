@@ -135,7 +135,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   faster image rendering and smaller figure size. Additional optional arguments
   `binary_backend`, `binary_format` and `binary_compression_level` control
   how to generate the b64 string ([#2691](https://github.com/plotly/plotly.py/pull/2691)
-- `px.imshow` has a new `constrast_rescaling` argument in order to choose how
+- `px.imshow` has a new `contrast_rescaling` argument in order to choose how
   to set data values corresponding to the bounds of the color range
   ([#2691](https://github.com/plotly/plotly.py/pull/2691)
 
@@ -239,7 +239,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- The `hover_data` parameter of `px` functions can now be a dictionary. This makes it possible to skip hover information for some arguments or to change the formatting of hover informatiom [#2377](https://github.com/plotly/plotly.py/pull/2377).
+- The `hover_data` parameter of `px` functions can now be a dictionary. This makes it possible to skip hover information for some arguments or to change the formatting of hover information [#2377](https://github.com/plotly/plotly.py/pull/2377).
 - It's now possible to build a development version of Plotly.py against the build artifacts from a non-`master` branch of Plotly.js, which makes for faster QA and development cycles [#2349](https://github.com/plotly/plotly.py/pull/2349). Thanks [@zouhairm](https://github.com/zouhairm) for this Pull Request!
 
 ### Fixed
@@ -252,7 +252,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
  - Child graph objects (e.g. `figure.layout.xaxis`) are no longer created eagerly during graph object construction. Instead, they are created lazily the first time the property is accessed.
  - Property validation is now disabled for select internal operations.
- - When used with Python 3.7 and above, ploty.py now takes advantage of [PEP-562](https://www.python.org/dev/peps/pep-0562/) to perform submodule imports lazily.  This dramatically improves import times.
+ - When used with Python 3.7 and above, plotly.py now takes advantage of [PEP-562](https://www.python.org/dev/peps/pep-0562/) to perform submodule imports lazily.  This dramatically improves import times.
 
 ## [4.6.0] - 2020-03-31
 
@@ -290,7 +290,7 @@ This version includes several performance improvements ([#2368](https://github.c
 
 - Jupyterlab extension now compatible with both Jupyterlab 1.2 and 2.0 [#2261](https://github.com/plotly/plotly.py/pull/2261) with thanks to [@consideRatio](https://github.com/consideRatio) for the contribution!
 - Fixed a bug when using boolean values for the color argument of px functions [#2127](https://github.com/plotly/plotly.py/pull/2127)
-- Corrected import bug which was occuring with old versions of ipywidgets [#2265](https://github.com/plotly/plotly.py/pull/2265)
+- Corrected import bug which was occurring with old versions of ipywidgets [#2265](https://github.com/plotly/plotly.py/pull/2265)
 - Fixed python 3.8 syntax warning [#2262](https://github.com/plotly/plotly.py/pull/2262), with thanks to [@sgn](https://github.com/sgn) for the contribution!
 
 ## [4.5.3] - 2020-03-05
@@ -365,7 +365,7 @@ This version includes several performance improvements ([#2368](https://github.c
  for more information
  - The tutorials of the [plotly.py documentation](https://plot.ly/python/) are
    now in the main [plotly.py Github repository](https://github.com/plotly/plotly.py). Contributions in order to improve or extend the documentation are very welcome!
- - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). To restore the old behavior, set `px.defaults.height=600` once per session, or set the `height` keyword arguement to any `px.function()` to 600.
+ - `plotly.express` generated plots no longer have a default height of 600 pixels, instead they inherit the default height of regular figures [#1990](https://github.com/plotly/plotly.py/pull/1990). To restore the old behavior, set `px.defaults.height=600` once per session, or set the `height` keyword argument to any `px.function()` to 600.
 
 ### Fixed
 
@@ -439,7 +439,7 @@ section [#1969](https://github.com/plotly/plotly.py/pull/1969).
  - The width of a figure produced by the `create_gantt` figure factory now resizes responsively ([#1724](https://github.com/plotly/plotly.py/pull/1724))
 
 ### Fixed
- - The name of the steps property of `graph_objects.indicator.Guage` has been renamed from `stepss` to `steps`
+ - The name of the steps property of `graph_objects.indicator.Gauge` has been renamed from `stepss` to `steps`
  - Avoid crash in iframe renderers when running outside iPython ([#1723](https://github.com/plotly/plotly.py/pull/1723))
 
 ## [4.1.0] - 2019-08-06
@@ -491,7 +491,7 @@ This is a major release that includes many new features, and a few breaking chan
  - Added support for all trace types in `make_subplots` ([#1528](https://github.com/plotly/plotly.py/pull/1528))
  - Added support for secondary y-axes in `make_subplots` ([#1564](https://github.com/plotly/plotly.py/pull/1564))
  - Support passing a scalar trace object (rather than a list or tuple of trace objects) as the `data` property to the `Figure` constructor ([#1614](https://github.com/plotly/plotly.py/pull/1614))
- - Added dictionary-stule `.pop` method to graph object classes ([#1614](https://github.com/plotly/plotly.py/pull/1614))
+ - Added dictionary-style `.pop` method to graph object classes ([#1614](https://github.com/plotly/plotly.py/pull/1614))
  - New `jupyterlab-plotly` JupyterLab extension for rendering figures in JupyterLab. Replaces the `@jupyterlab/plotly-extension` extension, and includes JupyterLab 1.0 support.
  - Added new suite of built-in colorscales to the `plotly.colors` module, and support for specifying this wide range of colorscales by name. Also added support for specifying colorscales as a list of colors, in which case the color spacing is assumed to be uniform ([#1647](https://github.com/plotly/plotly.py/pull/1647)).
  - Added `sphinx-gallery` renderer for embedding plotly figures in [Sphinx-Gallery](https://sphinx-gallery.github.io/) ([#1577](https://github.com/plotly/plotly.py/pull/1577), [plotly/plotly-sphinx-gallery](https://github.com/plotly/plotly-sphinx-gallery)).
@@ -1096,7 +1096,7 @@ must be installed:
   properties are ignored rather than causing an exception.
  - A `to_ordered_dict` method has been added to the `Figure` and `FigureWidget`
   classes. This method returns a representation of the figure as a nested
-  structure of `OrdererdDict` and `list` instances where the keys in each
+  structure of `OrderedDict` and `list` instances where the keys in each
   `OrderedDict` are sorted alphabetically.  This method replaces the
   `get_ordered` method that was available in version 2, and makes it possible
   to traverse the nested structure of a figure in a deterministic order.
@@ -1517,7 +1517,7 @@ gone.
 ## [1.12.10] - 2016-11-28
 ### Updated
 - `FF.create_violin` and `FF.create_scatterplotmatrix` now by default do not print subplot grid information in output
-- Removed alert that occured when downloading plot images offline. Please note: for higher resolution images and more export options, consider making requests to our image servers. See: `help(py.image)` for more details.
+- Removed alert that occurred when downloading plot images offline. Please note: for higher resolution images and more export options, consider making requests to our image servers. See: `help(py.image)` for more details.
 
 ### Added
 - Plot configuration options for offline plots. See the list of [configuration options](https://github.com/Rikorose/plotly.py/blob/master/plotly/offline/offline.py#L189) and [examples](https://plot.ly/javascript/configuration-options/) for more information.
