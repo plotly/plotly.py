@@ -30,7 +30,7 @@ Plotly's Python library is free and open source! [Get started](https://plot.ly/p
 
 
 #### Linear Gauge Chart Shell
-Note the following tutorial shows how to create a linear-gauge chart with 4 gauges. It's recommended to use a `width` between 600-1000px and `ticklen` should be `width/20`. These variables are definied in the code below.
+Note the following tutorial shows how to create a linear-gauge chart with 4 gauges. It's recommended to use a `width` between 600-1000px and `ticklen` should be `width/20`. These variables are defined in the code below.
 
 ```python
 from plotly import tools

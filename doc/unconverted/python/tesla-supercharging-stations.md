@@ -125,7 +125,7 @@ py.iplot(table, filename='supercharger-locations-sample')
 #### Plot the Route
 The server_key should be replaced with your own Google Maps Directions API key.
 
-Be careful! Make sure you are picking a start and end point that can be driven between, eg. both in the United States of America. Otherwise, the Google Maps API cannot comupute directions and will return an empty list.
+Be careful! Make sure you are picking a start and end point that can be driven between, eg. both in the United States of America. Otherwise, the Google Maps API cannot compute directions and will return an empty list.
 
 ```python
 def plot_route_between_tesla_stations(address_start, address_end, zoom=3, endpt_size=6):

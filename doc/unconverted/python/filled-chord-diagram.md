@@ -82,7 +82,7 @@ Let us denote by `total_comments` the total number of posts recorded in this com
 
 Theoretically the interval `[0, total_comments)` is mapped linearly onto the unit circle, identified with the interval $[0,2\pi)$.
 
-For a better looking plot one proceeds as follows: starting from the angular position $0$, in counter-clockwise direction, one draws succesively, around the unit circle,  two parallel arcs of length equal to a mapped row sum value, minus a fixed gap. Click the image below:
+For a better looking plot one proceeds as follows: starting from the angular position $0$, in counter-clockwise direction, one draws successively, around the unit circle,  two parallel arcs of length equal to a mapped row sum value, minus a fixed gap. Click the image below:
 
 
 
@@ -291,7 +291,7 @@ def control_pts(angle, radius):
 
 ```python
 def ctrl_rib_chords(l, r, radius):
-    # this function returns a 2-list containing control poligons of the two quadratic Bezier
+    # this function returns a 2-list containing control polygons of the two quadratic Bezier
     #curves that are opposite sides in a ribbon
     #l (r) the list of angular variables of the ribbon arc ends defining
     #the ribbon starting (ending) arc
