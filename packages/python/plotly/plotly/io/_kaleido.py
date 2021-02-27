@@ -14,7 +14,10 @@ try:
     root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
     package_dir = os.path.join(root_dir, "package_data")
     scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
-    scope.mathjax = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+    if scope.mathjax is None:
+        scope.mathjax = (
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+        )
 except ImportError:
     PlotlyScope = None
     scope = None
