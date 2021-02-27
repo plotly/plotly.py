@@ -92,9 +92,19 @@ def to_image(
     # -------------
     if engine == "auto":
         if scope is not None:
+            # Default to kaleido if available
             engine = "kaleido"
         else:
-            engine = "orca"
+            # See if orca is available
+            from ._orca import validate_executable
+
+            try:
+                validate_executable()
+                engine = "orca"
+            except:
+                # If orca not configured properly, make sure we display the error
+                # message advising the installation of kaleido
+                engine = "kaleido"
 
     if engine == "orca":
         # Fall back to legacy orca image export path
