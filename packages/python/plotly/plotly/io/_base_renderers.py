@@ -545,6 +545,8 @@ class IFrameRenderer(MimetypeRenderer):
         self.animation_opts = animation_opts
         self.include_plotlyjs = include_plotlyjs
         self.html_directory = html_directory
+        self.last_focus_cell = None
+        self.last_focus_cell_output_ct = 1
 
     def to_mimebundle(self, fig_dict):
         from plotly.io import write_html
@@ -608,8 +610,17 @@ class IFrameRenderer(MimetypeRenderer):
     def build_filename(self):
         ip = IPython.get_ipython() if IPython else None
         cell_number = list(ip.history_manager.get_tail(1))[0][1] + 1 if ip else 0
-        filename = "{dirname}/figure_{cell_number}.html".format(
-            dirname=self.html_directory, cell_number=cell_number
+        if self.last_focus_cell == cell_number:
+            output_ct_suffix = f"_{self.last_focus_cell_output_ct}"
+            self.last_focus_cell_output_ct += 1
+        else:
+            self.last_focus_cell = cell_number
+            self.last_focus_cell_output_ct = 1
+            output_ct_suffix = ""
+        filename = "{dirname}/figure_{cell_number}{output_ct_suffix}.html".format(
+            dirname=self.html_directory,
+            cell_number=cell_number,
+            output_ct_suffix=output_ct_suffix,
         )
         return filename
 
