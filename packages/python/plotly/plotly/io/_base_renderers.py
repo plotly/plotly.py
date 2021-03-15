@@ -524,7 +524,10 @@ class IFrameRenderer(MimetypeRenderer):
     Note that the HTML files in `iframe_figures/` are numbered according to
     the IPython cell execution count and so they will start being overwritten
     each time the kernel is restarted.  This directory may be deleted whenever
-    the kernel is restarted and it will be automatically recreated.
+    the kernel is restarted and it will be automatically recreated. If a cell
+    contains multiple plots, a second index is appended to the file name. For
+    example, figure_8_2.html would be the third figure in the eighth cell
+    executed.
 
     mime type: 'text/html'
     """
