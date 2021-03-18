@@ -126,7 +126,7 @@ def to_html(
         JSON, False otherwise.
     compress: bool (default False)
         If True, the figure data is compressed reducing the total file size.
-        It adds an external compression library which requires an active 
+        It adds an external compression library which requires an active
         internet connection.
     Returns
     -------
@@ -240,7 +240,9 @@ def to_html(
     # Compress `jdata` via fflate, and replace `jdata` with a JavaScript variable
     script_compress = ""
     if compress:
-        compressed_data = base64.b64encode(gzip.compress(jdata.encode('utf-8'))).decode('ascii');
+        compressed_data = base64.b64encode(gzip.compress(jdata.encode("utf-8"))).decode(
+            "ascii"
+        )
         script_compress = """\
                 const data_compr_b64 = "{compressed_data}";
                 const data_raw = fflate.decompressSync(
@@ -248,11 +250,10 @@ def to_html(
                 );
                 const data = JSON.parse(fflate.strFromU8(data_raw));     
             """.format(
-                compressed_data=compressed_data
-            )
+            compressed_data=compressed_data
+        )
         # Replace the plotly data with the variable "data".
         jdata = "data"
-
 
     script = """\
                 if (document.getElementById("{id}")) {{\
@@ -329,8 +330,7 @@ def to_html(
     # Add compression library when compression is enabled
     load_fflatejs = ""
     if compress:
-        load_fflatejs = "<script src=\"https://cdn.jsdelivr.net/npm/fflate@0.6.7/umd/index.min.js\"></script>"
-
+        load_fflatejs = '<script src="https://cdn.jsdelivr.net/npm/fflate@0.6.7/umd/index.min.js"></script>'
 
     # ## Handle loading/initializing MathJax ##
     include_mathjax_orig = include_mathjax
@@ -532,7 +532,7 @@ def write_html(
         JSON, False otherwise.
     compress: bool (default False)
         If True, the figure data is compressed reducing the total file size.
-        It adds an external compression library which requires an active 
+        It adds an external compression library which requires an active
         internet connection.
     auto_open: bool (default True
         If True, open the saved file in a web browser after saving.
