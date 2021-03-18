@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [4.14.4] - unreleased
+
+### Added
+
+- `to_html()` and `write_html()` now allows data compression `compress` to reduce the html file size [3117](https://github.com/plotly/plotly.py/pull/3117)
+
 ## [4.14.3] - 2021-01-12
 
 ### Fixed
