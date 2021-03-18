@@ -2,6 +2,8 @@ import uuid
 import json
 import os
 import webbrowser
+import base64
+import gzip
 
 import six
 
@@ -35,6 +37,7 @@ def to_html(
     default_width="100%",
     default_height="100%",
     validate=True,
+    compress=False,
 ):
     """
     Convert a figure to an HTML string representation.
@@ -121,6 +124,10 @@ def to_html(
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
+    compress: bool (default False)
+        If True, the figure data is compressed reducing the total file size.
+        It adds an external compression library which requires an active 
+        internet connection.
     Returns
     -------
     str
@@ -230,8 +237,26 @@ def to_html(
     # Serialize config dict to JSON
     jconfig = json.dumps(config)
 
+    # Compress `jdata` via fflate, and replace `jdata` with a JavaScript variable
+    script_compress = ""
+    if compress:
+        compressed_data = base64.b64encode(gzip.compress(jdata.encode('utf-8'))).decode('ascii');
+        script_compress = """\
+                const data_compr_b64 = "{compressed_data}";
+                const data_raw = fflate.decompressSync(
+                    fflate.strToU8(atob(data_compr_b64), true)
+                );
+                const data = JSON.parse(fflate.strFromU8(data_raw));     
+            """.format(
+                compressed_data=compressed_data
+            )
+        # Replace the plotly data with the variable "data".
+        jdata = "data"
+
+
     script = """\
                 if (document.getElementById("{id}")) {{\
+                    {script_compress}\
                     Plotly.newPlot(\
                         "{id}",\
                         {data},\
@@ -241,6 +266,7 @@ def to_html(
                 }}""".format(
         id=plotdivid,
         data=jdata,
+        script_compress=script_compress,
         layout=jlayout,
         config=jconfig,
         then_addframes=then_addframes,
@@ -300,6 +326,12 @@ def to_html(
             win_config=_window_plotly_config, plotlyjs=get_plotlyjs()
         )
 
+    # Add compression library when compression is enabled
+    load_fflatejs = ""
+    if compress:
+        load_fflatejs = "<script src=\"https://cdn.jsdelivr.net/npm/fflate@0.6.7/umd/index.min.js\"></script>"
+
+
     # ## Handle loading/initializing MathJax ##
     include_mathjax_orig = include_mathjax
     if isinstance(include_mathjax, six.string_types):
@@ -343,6 +375,7 @@ include_mathjax may be specified as False, 'cdn', or a string ending with '.js'
 <div>\
         {mathjax_script}\
         {load_plotlyjs}\
+        {load_fflatejs}\
             <div id="{id}" class="plotly-graph-div" \
 style="height:{height}; width:{width};"></div>\
             <script type="text/javascript">\
@@ -354,6 +387,7 @@ style="height:{height}; width:{width};"></div>\
         </div>""".format(
         mathjax_script=mathjax_script,
         load_plotlyjs=load_plotlyjs,
+        load_fflatejs=load_fflatejs,
         id=plotdivid,
         width=div_width,
         height=div_height,
@@ -388,6 +422,7 @@ def write_html(
     full_html=True,
     animation_opts=None,
     validate=True,
+    compress=False,
     default_width="100%",
     default_height="100%",
     auto_open=False,
@@ -495,6 +530,10 @@ def write_html(
     validate: bool (default True)
         True if the figure should be validated before being converted to
         JSON, False otherwise.
+    compress: bool (default False)
+        If True, the figure data is compressed reducing the total file size.
+        It adds an external compression library which requires an active 
+        internet connection.
     auto_open: bool (default True
         If True, open the saved file in a web browser after saving.
         This argument only applies if `full_html` is True.
@@ -517,6 +556,7 @@ def write_html(
         default_width=default_width,
         default_height=default_height,
         validate=validate,
+        compress=compress,
     )
 
     # Check if file is a string

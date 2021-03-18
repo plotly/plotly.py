@@ -3672,6 +3672,10 @@ Invalid property path '{key_path_str}' for layout
         validate: bool (default True)
             True if the figure should be validated before being converted to
             JSON, False otherwise.
+        compress: bool (default False)
+            If True, the figure data is compressed reducing the total file size.
+            It adds an external compression library which requires an active 
+            internet connection.
         auto_open: bool (default True
             If True, open the saved file in a web browser after saving.
             This argument only applies if `full_html` is True.
