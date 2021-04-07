@@ -1557,7 +1557,11 @@ class Heatmapgl(_BaseTraceType):
         """
         Construct a new Heatmapgl object
         
-        WebGL version of the heatmap trace type.
+        "heatmapgl" trace is deprecated! Please consider switching to
+        the "heatmap" or "image" trace types. Alternatively you could
+        contribute/sponsor rewriting this trace type based on cartesian
+        features and using regl framework. WebGL version of the heatmap
+        trace type.
 
         Parameters
         ----------

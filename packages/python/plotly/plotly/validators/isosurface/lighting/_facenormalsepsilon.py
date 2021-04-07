@@ -14,6 +14,5 @@ class FacenormalsepsilonValidator(_plotly_utils.basevalidators.NumberValidator):
             edit_type=kwargs.pop("edit_type", "calc"),
             max=kwargs.pop("max", 1),
             min=kwargs.pop("min", 0),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

@@ -1,7 +1,6 @@
 import sys
 
 if sys.version_info < (3, 7):
-    from ._area import Area
     from ._bar import Bar
     from ._barpolar import Barpolar
     from ._box import Box
@@ -47,6 +46,7 @@ if sys.version_info < (3, 7):
     from ._histogram import Histogram
     from ._histogram2d import Histogram2d
     from ._histogram2dcontour import Histogram2dContour
+    from ._icicle import Icicle
     from ._image import Image
     from ._indicator import Indicator
     from ._isosurface import Isosurface
@@ -76,7 +76,6 @@ if sys.version_info < (3, 7):
     from ._violin import Violin
     from ._volume import Volume
     from ._waterfall import Waterfall
-    from . import area
     from . import bar
     from . import barpolar
     from . import box
@@ -95,6 +94,7 @@ if sys.version_info < (3, 7):
     from . import histogram
     from . import histogram2d
     from . import histogram2dcontour
+    from . import icicle
     from . import image
     from . import indicator
     from . import isosurface
@@ -130,7 +130,6 @@ else:
     __all__, __getattr__, __dir__ = relative_import(
         __name__,
         [
-            ".area",
             ".bar",
             ".barpolar",
             ".box",
@@ -149,6 +148,7 @@ else:
             ".histogram",
             ".histogram2d",
             ".histogram2dcontour",
+            ".icicle",
             ".image",
             ".indicator",
             ".isosurface",
@@ -180,7 +180,6 @@ else:
             ".waterfall",
         ],
         [
-            "._area.Area",
             "._bar.Bar",
             "._barpolar.Barpolar",
             "._box.Box",
@@ -226,6 +225,7 @@ else:
             "._histogram.Histogram",
             "._histogram2d.Histogram2d",
             "._histogram2dcontour.Histogram2dContour",
+            "._icicle.Icicle",
             "._image.Image",
             "._indicator.Indicator",
             "._isosurface.Isosurface",

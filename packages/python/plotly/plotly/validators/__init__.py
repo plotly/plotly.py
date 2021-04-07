@@ -29,6 +29,7 @@ if sys.version_info < (3, 7):
     from ._isosurface import IsosurfaceValidator
     from ._indicator import IndicatorValidator
     from ._image import ImageValidator
+    from ._icicle import IcicleValidator
     from ._histogram2dcontour import Histogram2DcontourValidator
     from ._histogram2d import Histogram2DValidator
     from ._histogram import HistogramValidator
@@ -47,7 +48,6 @@ if sys.version_info < (3, 7):
     from ._box import BoxValidator
     from ._barpolar import BarpolarValidator
     from ._bar import BarValidator
-    from ._area import AreaValidator
     from ._layout import LayoutValidator
     from ._frames import FramesValidator
     from ._data import DataValidator
@@ -86,6 +86,7 @@ else:
             "._isosurface.IsosurfaceValidator",
             "._indicator.IndicatorValidator",
             "._image.ImageValidator",
+            "._icicle.IcicleValidator",
             "._histogram2dcontour.Histogram2DcontourValidator",
             "._histogram2d.Histogram2DValidator",
             "._histogram.HistogramValidator",
@@ -104,7 +105,6 @@ else:
             "._box.BoxValidator",
             "._barpolar.BarpolarValidator",
             "._bar.BarValidator",
-            "._area.AreaValidator",
             "._layout.LayoutValidator",
             "._frames.FramesValidator",
             "._data.DataValidator",

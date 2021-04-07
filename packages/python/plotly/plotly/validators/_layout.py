@@ -13,9 +13,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             activeshape
                 :class:`plotly.graph_objects.layout.Activeshape
                 ` instance or dict with compatible properties
-            angularaxis
-                :class:`plotly.graph_objects.layout.AngularAxis
-                ` instance or dict with compatible properties
             annotations
                 A tuple of
                 :class:`plotly.graph_objects.layout.Annotation`
@@ -126,11 +123,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 being treated as immutable, thus any data array
                 with a different identity from its predecessor
                 contains new data.
-            direction
-                Legacy polar charts are deprecated! Please
-                switch to "polar" subplots. Sets the direction
-                corresponding to positive angles in legacy
-                polar charts.
             dragmode
                 Determines the mode of drag interactions.
                 "select" and "lasso" apply only to scatter
@@ -144,6 +136,17 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             extendfunnelareacolors
                 If `true`, the funnelarea slice colors (whether
                 given by `funnelareacolorway` or inherited from
+                `colorway`) will be extended to three times its
+                original length by first repeating every color
+                20% lighter then each color 20% darker. This is
+                intended to reduce the likelihood of reusing
+                the same color when you have many slices, but
+                you can set `false` to disable. Colors provided
+                in the trace, using `marker.colors`, are never
+                extended.
+            extendiciclecolors
+                If `true`, the icicle slice colors (whether
+                given by `iciclecolorway` or inherited from
                 `colorway`) will be extended to three times its
                 original length by first repeating every color
                 20% lighter then each color 20% darker. This is
@@ -269,6 +272,12 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 (depending on the trace's `orientation` value)
                 for plots based on cartesian coordinates. For
                 anything else the default value is "closest".
+            iciclecolorway
+                Sets the default icicle slice colors. Defaults
+                to the main `colorway` used for trace colors.
+                If you specify a new list here it can still be
+                extended with lighter and darker colors, see
+                `extendiciclecolors`.
             images
                 A tuple of
                 :class:`plotly.graph_objects.layout.Image`
@@ -308,11 +317,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
             newshape
                 :class:`plotly.graph_objects.layout.Newshape`
                 instance or dict with compatible properties
-            orientation
-                Legacy polar charts are deprecated! Please
-                switch to "polar" subplots. Rotates the entire
-                polar by the given angle in legacy polar
-                charts.
             paper_bgcolor
                 Sets the background color of the paper where
                 the graph is drawn.
@@ -327,9 +331,6 @@ class LayoutValidator(_plotly_utils.basevalidators.CompoundValidator):
                 in-between x and y axes.
             polar
                 :class:`plotly.graph_objects.layout.Polar`
-                instance or dict with compatible properties
-            radialaxis
-                :class:`plotly.graph_objects.layout.RadialAxis`
                 instance or dict with compatible properties
             scene
                 :class:`plotly.graph_objects.layout.Scene`

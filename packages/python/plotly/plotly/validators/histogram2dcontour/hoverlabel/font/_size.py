@@ -14,6 +14,5 @@ class SizeValidator(_plotly_utils.basevalidators.NumberValidator):
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "none"),
             min=kwargs.pop("min", 1),
-            role=kwargs.pop("role", "style"),
             **kwargs
         )

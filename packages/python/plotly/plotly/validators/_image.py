@@ -191,6 +191,10 @@ class ImageValidator(_plotly_utils.basevalidators.CompoundValidator):
                 `rgba256` colormodel, it is [0, 0, 0, 0]. For
                 the `hsl` colormodel, it is [0, 0, 0]. For the
                 `hsla` colormodel, it is [0, 0, 0, 0].
+            zsmooth
+                Picks a smoothing algorithm used to smooth `z`
+                data. This only applies for image traces that
+                use the `source` attribute.
             zsrc
                 Sets the source reference on Chart Studio Cloud
                 for  z .

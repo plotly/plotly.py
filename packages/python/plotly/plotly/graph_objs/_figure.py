@@ -19,21 +19,20 @@ class Figure(BaseFigure):
                 (e.g. Scatter(...), Bar(...), etc.)
               - A list or tuple of dicts of string/value properties where:
                 - The 'type' property specifies the trace type
-                    One of: ['area', 'bar', 'barpolar', 'box',
-                             'candlestick', 'carpet', 'choropleth',
-                             'choroplethmapbox', 'cone', 'contour',
-                             'contourcarpet', 'densitymapbox', 'funnel',
-                             'funnelarea', 'heatmap', 'heatmapgl',
-                             'histogram', 'histogram2d',
-                             'histogram2dcontour', 'image', 'indicator',
-                             'isosurface', 'mesh3d', 'ohlc', 'parcats',
-                             'parcoords', 'pie', 'pointcloud', 'sankey',
-                             'scatter', 'scatter3d', 'scattercarpet',
-                             'scattergeo', 'scattergl', 'scattermapbox',
-                             'scatterpolar', 'scatterpolargl',
-                             'scatterternary', 'splom', 'streamtube',
-                             'sunburst', 'surface', 'table', 'treemap',
-                             'violin', 'volume', 'waterfall']
+                    One of: ['bar', 'barpolar', 'box', 'candlestick',
+                             'carpet', 'choropleth', 'choroplethmapbox',
+                             'cone', 'contour', 'contourcarpet',
+                             'densitymapbox', 'funnel', 'funnelarea',
+                             'heatmap', 'heatmapgl', 'histogram',
+                             'histogram2d', 'histogram2dcontour', 'icicle',
+                             'image', 'indicator', 'isosurface', 'mesh3d',
+                             'ohlc', 'parcats', 'parcoords', 'pie',
+                             'pointcloud', 'sankey', 'scatter',
+                             'scatter3d', 'scattercarpet', 'scattergeo',
+                             'scattergl', 'scattermapbox', 'scatterpolar',
+                             'scatterpolargl', 'scatterternary', 'splom',
+                             'streamtube', 'sunburst', 'surface', 'table',
+                             'treemap', 'violin', 'volume', 'waterfall']
         
                 - All remaining properties are passed to the constructor of
                   the specified trace type
@@ -51,9 +50,6 @@ class Figure(BaseFigure):
                     
                     activeshape
                         :class:`plotly.graph_objects.layout.Activeshape
-                        ` instance or dict with compatible properties
-                    angularaxis
-                        :class:`plotly.graph_objects.layout.AngularAxis
                         ` instance or dict with compatible properties
                     annotations
                         A tuple of
@@ -165,11 +161,6 @@ class Figure(BaseFigure):
                         being treated as immutable, thus any data array
                         with a different identity from its predecessor
                         contains new data.
-                    direction
-                        Legacy polar charts are deprecated! Please
-                        switch to "polar" subplots. Sets the direction
-                        corresponding to positive angles in legacy
-                        polar charts.
                     dragmode
                         Determines the mode of drag interactions.
                         "select" and "lasso" apply only to scatter
@@ -183,6 +174,17 @@ class Figure(BaseFigure):
                     extendfunnelareacolors
                         If `true`, the funnelarea slice colors (whether
                         given by `funnelareacolorway` or inherited from
+                        `colorway`) will be extended to three times its
+                        original length by first repeating every color
+                        20% lighter then each color 20% darker. This is
+                        intended to reduce the likelihood of reusing
+                        the same color when you have many slices, but
+                        you can set `false` to disable. Colors provided
+                        in the trace, using `marker.colors`, are never
+                        extended.
+                    extendiciclecolors
+                        If `true`, the icicle slice colors (whether
+                        given by `iciclecolorway` or inherited from
                         `colorway`) will be extended to three times its
                         original length by first repeating every color
                         20% lighter then each color 20% darker. This is
@@ -308,6 +310,12 @@ class Figure(BaseFigure):
                         (depending on the trace's `orientation` value)
                         for plots based on cartesian coordinates. For
                         anything else the default value is "closest".
+                    iciclecolorway
+                        Sets the default icicle slice colors. Defaults
+                        to the main `colorway` used for trace colors.
+                        If you specify a new list here it can still be
+                        extended with lighter and darker colors, see
+                        `extendiciclecolors`.
                     images
                         A tuple of
                         :class:`plotly.graph_objects.layout.Image`
@@ -347,11 +355,6 @@ class Figure(BaseFigure):
                     newshape
                         :class:`plotly.graph_objects.layout.Newshape`
                         instance or dict with compatible properties
-                    orientation
-                        Legacy polar charts are deprecated! Please
-                        switch to "polar" subplots. Rotates the entire
-                        polar by the given angle in legacy polar
-                        charts.
                     paper_bgcolor
                         Sets the background color of the paper where
                         the graph is drawn.
@@ -366,9 +369,6 @@ class Figure(BaseFigure):
                         in-between x and y axes.
                     polar
                         :class:`plotly.graph_objects.layout.Polar`
-                        instance or dict with compatible properties
-                    radialaxis
-                        :class:`plotly.graph_objects.layout.RadialAxis`
                         instance or dict with compatible properties
                     scene
                         :class:`plotly.graph_objects.layout.Scene`
@@ -595,184 +595,6 @@ class Figure(BaseFigure):
         """
         super(Figure, self).__init__(data, layout, frames, skip_invalid, **kwargs)
 
-    def add_area(
-        self,
-        customdata=None,
-        customdatasrc=None,
-        hoverinfo=None,
-        hoverinfosrc=None,
-        hoverlabel=None,
-        ids=None,
-        idssrc=None,
-        legendgroup=None,
-        marker=None,
-        meta=None,
-        metasrc=None,
-        name=None,
-        opacity=None,
-        r=None,
-        rsrc=None,
-        showlegend=None,
-        stream=None,
-        t=None,
-        tsrc=None,
-        uid=None,
-        uirevision=None,
-        visible=None,
-        row=None,
-        col=None,
-        **kwargs
-    ):
-        """
-        Add a new Area trace
-        
-        Parameters
-        ----------
-        customdata
-            Assigns extra data each datum. This may be useful when
-            listening to hover, click and selection events. Note
-            that, "scatter" traces also appends customdata items in
-            the markers DOM elements
-        customdatasrc
-            Sets the source reference on Chart Studio Cloud for
-            customdata .
-        hoverinfo
-            Determines which trace information appear on hover. If
-            `none` or `skip` are set, no information is displayed
-            upon hovering. But, if `none` is set, click and hover
-            events are still fired.
-        hoverinfosrc
-            Sets the source reference on Chart Studio Cloud for
-            hoverinfo .
-        hoverlabel
-            :class:`plotly.graph_objects.area.Hoverlabel` instance
-            or dict with compatible properties
-        ids
-            Assigns id labels to each datum. These ids for object
-            constancy of data points during animation. Should be an
-            array of strings, not numbers or any other type.
-        idssrc
-            Sets the source reference on Chart Studio Cloud for
-            ids .
-        legendgroup
-            Sets the legend group for this trace. Traces part of
-            the same legend group hide/show at the same time when
-            toggling legend items.
-        marker
-            :class:`plotly.graph_objects.area.Marker` instance or
-            dict with compatible properties
-        meta
-            Assigns extra meta information associated with this
-            trace that can be used in various text attributes.
-            Attributes such as trace `name`, graph, axis and
-            colorbar `title.text`, annotation `text`
-            `rangeselector`, `updatemenues` and `sliders` `label`
-            text all support `meta`. To access the trace `meta`
-            values in an attribute in the same trace, simply use
-            `%{meta[i]}` where `i` is the index or key of the
-            `meta` item in question. To access trace `meta` in
-            layout attributes, use `%{data[n[.meta[i]}` where `i`
-            is the index or key of the `meta` and `n` is the trace
-            index.
-        metasrc
-            Sets the source reference on Chart Studio Cloud for
-            meta .
-        name
-            Sets the trace name. The trace name appear as the
-            legend item and on hover.
-        opacity
-            Sets the opacity of the trace.
-        r
-            Area traces are deprecated! Please switch to the
-            "barpolar" trace type. Sets the radial coordinates for
-            legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
-        showlegend
-            Determines whether or not an item corresponding to this
-            trace is shown in the legend.
-        stream
-            :class:`plotly.graph_objects.area.Stream` instance or
-            dict with compatible properties
-        t
-            Area traces are deprecated! Please switch to the
-            "barpolar" trace type. Sets the angular coordinates for
-            legacy polar chart only.
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
-        uid
-            Assign an id to this trace, Use this to provide object
-            constancy between traces during animations and
-            transitions.
-        uirevision
-            Controls persistence of some user-driven changes to the
-            trace: `constraintrange` in `parcoords` traces, as well
-            as some `editable: true` modifications such as `name`
-            and `colorbar.title`. Defaults to `layout.uirevision`.
-            Note that other user-driven trace attribute changes are
-            controlled by `layout` attributes: `trace.visible` is
-            controlled by `layout.legend.uirevision`,
-            `selectedpoints` is controlled by
-            `layout.selectionrevision`, and `colorbar.(x|y)`
-            (accessible with `config: {editable: true}`) is
-            controlled by `layout.editrevision`. Trace changes are
-            tracked by `uid`, which only falls back on trace index
-            if no `uid` is provided. So if your app can add/remove
-            traces before the end of the `data` array, such that
-            the same trace has a different index, you can still
-            preserve user-driven changes if you give each trace a
-            `uid` that stays with it as it moves.
-        visible
-            Determines whether or not this trace is visible. If
-            "legendonly", the trace is not drawn, but can appear as
-            a legend item (provided that the legend itself is
-            visible).
-        row : 'all', int or None (default)
-            Subplot row index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            rows in the specified column(s).
-        col : 'all', int or None (default)
-            Subplot col index (starting from 1) for the trace to be
-            added. Only valid if figure was created using
-            `plotly.tools.make_subplots`.If 'all', addresses all
-            columns in the specified row(s).
-
-        Returns
-        -------
-        Figure
-        """
-        from plotly.graph_objs import Area
-
-        new_trace = Area(
-            customdata=customdata,
-            customdatasrc=customdatasrc,
-            hoverinfo=hoverinfo,
-            hoverinfosrc=hoverinfosrc,
-            hoverlabel=hoverlabel,
-            ids=ids,
-            idssrc=idssrc,
-            legendgroup=legendgroup,
-            marker=marker,
-            meta=meta,
-            metasrc=metasrc,
-            name=name,
-            opacity=opacity,
-            r=r,
-            rsrc=rsrc,
-            showlegend=showlegend,
-            stream=stream,
-            t=t,
-            tsrc=tsrc,
-            uid=uid,
-            uirevision=uirevision,
-            visible=visible,
-            **kwargs
-        )
-        return self.add_trace(new_trace, row=row, col=col)
-
     def add_bar(
         self,
         alignmentgroup=None,
@@ -808,13 +630,10 @@ class Figure(BaseFigure):
         opacity=None,
         orientation=None,
         outsidetextfont=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stream=None,
-        t=None,
         text=None,
         textangle=None,
         textfont=None,
@@ -823,7 +642,6 @@ class Figure(BaseFigure):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -1005,13 +823,6 @@ class Figure(BaseFigure):
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.bar.Selected` instance or
             dict with compatible properties
@@ -1028,10 +839,6 @@ class Figure(BaseFigure):
         stream
             :class:`plotly.graph_objects.bar.Stream` instance or
             dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -1082,9 +889,6 @@ class Figure(BaseFigure):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -1245,13 +1049,10 @@ class Figure(BaseFigure):
             opacity=opacity,
             orientation=orientation,
             outsidetextfont=outsidetextfont,
-            r=r,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             stream=stream,
-            t=t,
             text=text,
             textangle=textangle,
             textfont=textfont,
@@ -1260,7 +1061,6 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             texttemplate=texttemplate,
             texttemplatesrc=texttemplatesrc,
-            tsrc=tsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,
@@ -6308,7 +6108,11 @@ class Figure(BaseFigure):
         """
         Add a new Heatmapgl trace
         
-        WebGL version of the heatmap trace type.
+        "heatmapgl" trace is deprecated! Please consider switching to
+        the "heatmap" or "image" trace types. Alternatively you could
+        contribute/sponsor rewriting this trace type based on cartesian
+        features and using regl framework. WebGL version of the heatmap
+        trace type.
 
         Parameters
         ----------
@@ -7872,6 +7676,355 @@ class Figure(BaseFigure):
         )
         return self.add_trace(new_trace, row=row, col=col, secondary_y=secondary_y)
 
+    def add_icicle(
+        self,
+        branchvalues=None,
+        count=None,
+        customdata=None,
+        customdatasrc=None,
+        domain=None,
+        hoverinfo=None,
+        hoverinfosrc=None,
+        hoverlabel=None,
+        hovertemplate=None,
+        hovertemplatesrc=None,
+        hovertext=None,
+        hovertextsrc=None,
+        ids=None,
+        idssrc=None,
+        insidetextfont=None,
+        labels=None,
+        labelssrc=None,
+        leaf=None,
+        level=None,
+        marker=None,
+        maxdepth=None,
+        meta=None,
+        metasrc=None,
+        name=None,
+        opacity=None,
+        outsidetextfont=None,
+        parents=None,
+        parentssrc=None,
+        pathbar=None,
+        root=None,
+        sort=None,
+        stream=None,
+        text=None,
+        textfont=None,
+        textinfo=None,
+        textposition=None,
+        textsrc=None,
+        texttemplate=None,
+        texttemplatesrc=None,
+        tiling=None,
+        uid=None,
+        uirevision=None,
+        values=None,
+        valuessrc=None,
+        visible=None,
+        row=None,
+        col=None,
+        **kwargs
+    ):
+        """
+        Add a new Icicle trace
+        
+        Visualize hierarchal data from leaves (and/or outer branches)
+        towards root with rectangles. The icicle sectors are determined
+        by the entries in "labels" or "ids" and in "parents".
+
+        Parameters
+        ----------
+        branchvalues
+            Determines how the items in `values` are summed. When
+            set to "total", items in `values` are taken to be value
+            of all its descendants. When set to "remainder", items
+            in `values` corresponding to the root and the branches
+            sectors are taken to be the extra part not part of the
+            sum of the values at their leaves.
+        count
+            Determines default for `values` when it is not
+            provided, by inferring a 1 for each of the "leaves"
+            and/or "branches", otherwise 0.
+        customdata
+            Assigns extra data each datum. This may be useful when
+            listening to hover, click and selection events. Note
+            that, "scatter" traces also appends customdata items in
+            the markers DOM elements
+        customdatasrc
+            Sets the source reference on Chart Studio Cloud for
+            customdata .
+        domain
+            :class:`plotly.graph_objects.icicle.Domain` instance or
+            dict with compatible properties
+        hoverinfo
+            Determines which trace information appear on hover. If
+            `none` or `skip` are set, no information is displayed
+            upon hovering. But, if `none` is set, click and hover
+            events are still fired.
+        hoverinfosrc
+            Sets the source reference on Chart Studio Cloud for
+            hoverinfo .
+        hoverlabel
+            :class:`plotly.graph_objects.icicle.Hoverlabel`
+            instance or dict with compatible properties
+        hovertemplate
+            Template string used for rendering the information that
+            appear on hover box. Note that this will override
+            `hoverinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format for
+            details on the formatting syntax. Dates are formatted
+            using d3-time-format's syntax %{variable|d3-time-
+            format}, for example "Day: %{2019-01-01|%A}".
+            https://github.com/d3/d3-time-format#locale_format for
+            details on the date formatting syntax. The variables
+            available in `hovertemplate` are the ones emitted as
+            event data described at this link
+            https://plotly.com/javascript/plotlyjs-events/#event-
+            data. Additionally, every attributes that can be
+            specified per-point (the ones that are `arrayOk: true`)
+            are available. variables `currentPath`, `root`,
+            `entry`, `percentRoot`, `percentEntry` and
+            `percentParent`. Anything contained in tag `<extra>` is
+            displayed in the secondary box, for example
+            "<extra>{fullData.name}</extra>". To hide the secondary
+            box completely, use an empty tag `<extra></extra>`.
+        hovertemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            hovertemplate .
+        hovertext
+            Sets hover text elements associated with each sector.
+            If a single string, the same string appears for all
+            data points. If an array of string, the items are
+            mapped in order of this trace's sectors. To be seen,
+            trace `hoverinfo` must contain a "text" flag.
+        hovertextsrc
+            Sets the source reference on Chart Studio Cloud for
+            hovertext .
+        ids
+            Assigns id labels to each datum. These ids for object
+            constancy of data points during animation. Should be an
+            array of strings, not numbers or any other type.
+        idssrc
+            Sets the source reference on Chart Studio Cloud for
+            ids .
+        insidetextfont
+            Sets the font used for `textinfo` lying inside the
+            sector.
+        labels
+            Sets the labels of each of the sectors.
+        labelssrc
+            Sets the source reference on Chart Studio Cloud for
+            labels .
+        leaf
+            :class:`plotly.graph_objects.icicle.Leaf` instance or
+            dict with compatible properties
+        level
+            Sets the level from which this trace hierarchy is
+            rendered. Set `level` to `''` to start from the root
+            node in the hierarchy. Must be an "id" if `ids` is
+            filled in, otherwise plotly attempts to find a matching
+            item in `labels`.
+        marker
+            :class:`plotly.graph_objects.icicle.Marker` instance or
+            dict with compatible properties
+        maxdepth
+            Sets the number of rendered sectors from any given
+            `level`. Set `maxdepth` to "-1" to render all the
+            levels in the hierarchy.
+        meta
+            Assigns extra meta information associated with this
+            trace that can be used in various text attributes.
+            Attributes such as trace `name`, graph, axis and
+            colorbar `title.text`, annotation `text`
+            `rangeselector`, `updatemenues` and `sliders` `label`
+            text all support `meta`. To access the trace `meta`
+            values in an attribute in the same trace, simply use
+            `%{meta[i]}` where `i` is the index or key of the
+            `meta` item in question. To access trace `meta` in
+            layout attributes, use `%{data[n[.meta[i]}` where `i`
+            is the index or key of the `meta` and `n` is the trace
+            index.
+        metasrc
+            Sets the source reference on Chart Studio Cloud for
+            meta .
+        name
+            Sets the trace name. The trace name appear as the
+            legend item and on hover.
+        opacity
+            Sets the opacity of the trace.
+        outsidetextfont
+            Sets the font used for `textinfo` lying outside the
+            sector. This option refers to the root of the hierarchy
+            presented on top left corner of a treemap graph. Please
+            note that if a hierarchy has multiple root nodes, this
+            option won't have any effect and `insidetextfont` would
+            be used.
+        parents
+            Sets the parent sectors for each of the sectors. Empty
+            string items '' are understood to reference the root
+            node in the hierarchy. If `ids` is filled, `parents`
+            items are understood to be "ids" themselves. When `ids`
+            is not set, plotly attempts to find matching items in
+            `labels`, but beware they must be unique.
+        parentssrc
+            Sets the source reference on Chart Studio Cloud for
+            parents .
+        pathbar
+            :class:`plotly.graph_objects.icicle.Pathbar` instance
+            or dict with compatible properties
+        root
+            :class:`plotly.graph_objects.icicle.Root` instance or
+            dict with compatible properties
+        sort
+            Determines whether or not the sectors are reordered
+            from largest to smallest.
+        stream
+            :class:`plotly.graph_objects.icicle.Stream` instance or
+            dict with compatible properties
+        text
+            Sets text elements associated with each sector. If
+            trace `textinfo` contains a "text" flag, these elements
+            will be seen on the chart. If trace `hoverinfo`
+            contains a "text" flag and "hovertext" is not set,
+            these elements will be seen in the hover labels.
+        textfont
+            Sets the font used for `textinfo`.
+        textinfo
+            Determines which trace information appear on the graph.
+        textposition
+            Sets the positions of the `text` elements.
+        textsrc
+            Sets the source reference on Chart Studio Cloud for
+            text .
+        texttemplate
+            Template string used for rendering the information text
+            that appear on points. Note that this will override
+            `textinfo`. Variables are inserted using %{variable},
+            for example "y: %{y}". Numbers are formatted using
+            d3-format's syntax %{variable:d3-format}, for example
+            "Price: %{y:$.2f}". https://github.com/d3/d3-3.x-api-
+            reference/blob/master/Formatting.md#d3_format for
+            details on the formatting syntax. Dates are formatted
+            using d3-time-format's syntax %{variable|d3-time-
+            format}, for example "Day: %{2019-01-01|%A}".
+            https://github.com/d3/d3-time-format#locale_format for
+            details on the date formatting syntax. Every attributes
+            that can be specified per-point (the ones that are
+            `arrayOk: true`) are available. variables
+            `currentPath`, `root`, `entry`, `percentRoot`,
+            `percentEntry`, `percentParent`, `label` and `value`.
+        texttemplatesrc
+            Sets the source reference on Chart Studio Cloud for
+            texttemplate .
+        tiling
+            :class:`plotly.graph_objects.icicle.Tiling` instance or
+            dict with compatible properties
+        uid
+            Assign an id to this trace, Use this to provide object
+            constancy between traces during animations and
+            transitions.
+        uirevision
+            Controls persistence of some user-driven changes to the
+            trace: `constraintrange` in `parcoords` traces, as well
+            as some `editable: true` modifications such as `name`
+            and `colorbar.title`. Defaults to `layout.uirevision`.
+            Note that other user-driven trace attribute changes are
+            controlled by `layout` attributes: `trace.visible` is
+            controlled by `layout.legend.uirevision`,
+            `selectedpoints` is controlled by
+            `layout.selectionrevision`, and `colorbar.(x|y)`
+            (accessible with `config: {editable: true}`) is
+            controlled by `layout.editrevision`. Trace changes are
+            tracked by `uid`, which only falls back on trace index
+            if no `uid` is provided. So if your app can add/remove
+            traces before the end of the `data` array, such that
+            the same trace has a different index, you can still
+            preserve user-driven changes if you give each trace a
+            `uid` that stays with it as it moves.
+        values
+            Sets the values associated with each of the sectors.
+            Use with `branchvalues` to determine how the values are
+            summed.
+        valuessrc
+            Sets the source reference on Chart Studio Cloud for
+            values .
+        visible
+            Determines whether or not this trace is visible. If
+            "legendonly", the trace is not drawn, but can appear as
+            a legend item (provided that the legend itself is
+            visible).
+        row : 'all', int or None (default)
+            Subplot row index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            rows in the specified column(s).
+        col : 'all', int or None (default)
+            Subplot col index (starting from 1) for the trace to be
+            added. Only valid if figure was created using
+            `plotly.tools.make_subplots`.If 'all', addresses all
+            columns in the specified row(s).
+
+        Returns
+        -------
+        Figure
+        """
+        from plotly.graph_objs import Icicle
+
+        new_trace = Icicle(
+            branchvalues=branchvalues,
+            count=count,
+            customdata=customdata,
+            customdatasrc=customdatasrc,
+            domain=domain,
+            hoverinfo=hoverinfo,
+            hoverinfosrc=hoverinfosrc,
+            hoverlabel=hoverlabel,
+            hovertemplate=hovertemplate,
+            hovertemplatesrc=hovertemplatesrc,
+            hovertext=hovertext,
+            hovertextsrc=hovertextsrc,
+            ids=ids,
+            idssrc=idssrc,
+            insidetextfont=insidetextfont,
+            labels=labels,
+            labelssrc=labelssrc,
+            leaf=leaf,
+            level=level,
+            marker=marker,
+            maxdepth=maxdepth,
+            meta=meta,
+            metasrc=metasrc,
+            name=name,
+            opacity=opacity,
+            outsidetextfont=outsidetextfont,
+            parents=parents,
+            parentssrc=parentssrc,
+            pathbar=pathbar,
+            root=root,
+            sort=sort,
+            stream=stream,
+            text=text,
+            textfont=textfont,
+            textinfo=textinfo,
+            textposition=textposition,
+            textsrc=textsrc,
+            texttemplate=texttemplate,
+            texttemplatesrc=texttemplatesrc,
+            tiling=tiling,
+            uid=uid,
+            uirevision=uirevision,
+            values=values,
+            valuessrc=valuessrc,
+            visible=visible,
+            **kwargs
+        )
+        return self.add_trace(new_trace, row=row, col=col)
+
     def add_image(
         self,
         colormodel=None,
@@ -7906,6 +8059,7 @@ class Figure(BaseFigure):
         z=None,
         zmax=None,
         zmin=None,
+        zsmooth=None,
         zsrc=None,
         row=None,
         col=None,
@@ -8084,6 +8238,10 @@ class Figure(BaseFigure):
             the `rgba256` colormodel, it is [0, 0, 0, 0]. For the
             `hsl` colormodel, it is [0, 0, 0]. For the `hsla`
             colormodel, it is [0, 0, 0, 0].
+        zsmooth
+            Picks a smoothing algorithm used to smooth `z` data.
+            This only applies for image traces that use the
+            `source` attribute.
         zsrc
             Sets the source reference on Chart Studio Cloud for  z
             .
@@ -8147,6 +8305,7 @@ class Figure(BaseFigure):
             z=z,
             zmax=zmax,
             zmin=zmin,
+            zsmooth=zsmooth,
             zsrc=zsrc,
             **kwargs
         )
@@ -10287,8 +10446,9 @@ class Figure(BaseFigure):
         """
         Add a new Pointcloud trace
         
-        The data visualized as a point cloud set in `x` and `y` using
-        the WebGl plotting engine.
+        "pointcloud" trace is deprecated! Please consider switching to
+        the "scattergl" trace type. The data visualized as a point
+        cloud set in `x` and `y` using the WebGl plotting engine.
 
         Parameters
         ----------
@@ -10735,15 +10895,12 @@ class Figure(BaseFigure):
         name=None,
         opacity=None,
         orientation=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stackgaps=None,
         stackgroup=None,
         stream=None,
-        t=None,
         text=None,
         textfont=None,
         textposition=None,
@@ -10751,7 +10908,6 @@ class Figure(BaseFigure):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -10958,13 +11114,6 @@ class Figure(BaseFigure):
             if it is `false`. Sets the stacking direction. With "v"
             ("h"), the y (x) values of subsequent traces are added.
             Also affects the default value of `fill`.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.scatter.Selected` instance
             or dict with compatible properties
@@ -11005,10 +11154,6 @@ class Figure(BaseFigure):
         stream
             :class:`plotly.graph_objects.scatter.Stream` instance
             or dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -11046,9 +11191,6 @@ class Figure(BaseFigure):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -11201,15 +11343,12 @@ class Figure(BaseFigure):
             name=name,
             opacity=opacity,
             orientation=orientation,
-            r=r,
-            rsrc=rsrc,
             selected=selected,
             selectedpoints=selectedpoints,
             showlegend=showlegend,
             stackgaps=stackgaps,
             stackgroup=stackgroup,
             stream=stream,
-            t=t,
             text=text,
             textfont=textfont,
             textposition=textposition,
@@ -11217,7 +11356,6 @@ class Figure(BaseFigure):
             textsrc=textsrc,
             texttemplate=texttemplate,
             texttemplatesrc=texttemplatesrc,
-            tsrc=tsrc,
             uid=uid,
             uirevision=uirevision,
             unselected=unselected,

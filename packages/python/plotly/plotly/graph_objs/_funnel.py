@@ -712,6 +712,10 @@ class Funnel(_BaseTraceType):
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
                     for  opacity .
+                pattern
+                    :class:`plotly.graph_objects.funnel.marker.Patt
+                    ern` instance or dict with compatible
+                    properties
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.color`is set to a

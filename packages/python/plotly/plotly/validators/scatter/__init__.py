@@ -21,7 +21,6 @@ if sys.version_info < (3, 7):
     from ._unselected import UnselectedValidator
     from ._uirevision import UirevisionValidator
     from ._uid import UidValidator
-    from ._tsrc import TsrcValidator
     from ._texttemplatesrc import TexttemplatesrcValidator
     from ._texttemplate import TexttemplateValidator
     from ._textsrc import TextsrcValidator
@@ -29,15 +28,12 @@ if sys.version_info < (3, 7):
     from ._textposition import TextpositionValidator
     from ._textfont import TextfontValidator
     from ._text import TextValidator
-    from ._t import TValidator
     from ._stream import StreamValidator
     from ._stackgroup import StackgroupValidator
     from ._stackgaps import StackgapsValidator
     from ._showlegend import ShowlegendValidator
     from ._selectedpoints import SelectedpointsValidator
     from ._selected import SelectedValidator
-    from ._rsrc import RsrcValidator
-    from ._r import RValidator
     from ._orientation import OrientationValidator
     from ._opacity import OpacityValidator
     from ._name import NameValidator
@@ -95,7 +91,6 @@ else:
             "._unselected.UnselectedValidator",
             "._uirevision.UirevisionValidator",
             "._uid.UidValidator",
-            "._tsrc.TsrcValidator",
             "._texttemplatesrc.TexttemplatesrcValidator",
             "._texttemplate.TexttemplateValidator",
             "._textsrc.TextsrcValidator",
@@ -103,15 +98,12 @@ else:
             "._textposition.TextpositionValidator",
             "._textfont.TextfontValidator",
             "._text.TextValidator",
-            "._t.TValidator",
             "._stream.StreamValidator",
             "._stackgroup.StackgroupValidator",
             "._stackgaps.StackgapsValidator",
             "._showlegend.ShowlegendValidator",
             "._selectedpoints.SelectedpointsValidator",
             "._selected.SelectedValidator",
-            "._rsrc.RsrcValidator",
-            "._r.RValidator",
             "._orientation.OrientationValidator",
             "._opacity.OpacityValidator",
             "._name.NameValidator",

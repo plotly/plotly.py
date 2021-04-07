@@ -42,13 +42,10 @@ class Bar(_BaseTraceType):
         "opacity",
         "orientation",
         "outsidetextfont",
-        "r",
-        "rsrc",
         "selected",
         "selectedpoints",
         "showlegend",
         "stream",
-        "t",
         "text",
         "textangle",
         "textfont",
@@ -57,7 +54,6 @@ class Bar(_BaseTraceType):
         "textsrc",
         "texttemplate",
         "texttemplatesrc",
-        "tsrc",
         "type",
         "uid",
         "uirevision",
@@ -890,6 +886,9 @@ class Bar(_BaseTraceType):
                 opacitysrc
                     Sets the source reference on Chart Studio Cloud
                     for  opacity .
+                pattern
+                    :class:`plotly.graph_objects.bar.marker.Pattern
+                    ` instance or dict with compatible properties
                 reversescale
                     Reverses the color mapping if true. Has an
                     effect only if in `marker.color`is set to a
@@ -1146,48 +1145,6 @@ class Bar(_BaseTraceType):
     def outsidetextfont(self, val):
         self["outsidetextfont"] = val
 
-    # r
-    # -
-    @property
-    def r(self):
-        """
-        r coordinates in scatter traces are deprecated!Please switch to
-        the "scatterpolar" trace type.Sets the radial coordinatesfor
-        legacy polar chart only.
-    
-        The 'r' property is an array that may be specified as a tuple,
-        list, numpy array, or pandas Series
-
-        Returns
-        -------
-        numpy.ndarray
-        """
-        return self["r"]
-
-    @r.setter
-    def r(self, val):
-        self["r"] = val
-
-    # rsrc
-    # ----
-    @property
-    def rsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for  r .
-    
-        The 'rsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["rsrc"]
-
-    @rsrc.setter
-    def rsrc(self, val):
-        self["rsrc"] = val
-
     # selected
     # --------
     @property
@@ -1296,28 +1253,6 @@ class Bar(_BaseTraceType):
     @stream.setter
     def stream(self, val):
         self["stream"] = val
-
-    # t
-    # -
-    @property
-    def t(self):
-        """
-        t coordinates in scatter traces are deprecated!Please switch to
-        the "scatterpolar" trace type.Sets the angular coordinatesfor
-        legacy polar chart only.
-    
-        The 't' property is an array that may be specified as a tuple,
-        list, numpy array, or pandas Series
-
-        Returns
-        -------
-        numpy.ndarray
-        """
-        return self["t"]
-
-    @t.setter
-    def t(self, val):
-        self["t"] = val
 
     # text
     # ----
@@ -1551,26 +1486,6 @@ class Bar(_BaseTraceType):
     @texttemplatesrc.setter
     def texttemplatesrc(self, val):
         self["texttemplatesrc"] = val
-
-    # tsrc
-    # ----
-    @property
-    def tsrc(self):
-        """
-        Sets the source reference on Chart Studio Cloud for  t .
-    
-        The 'tsrc' property must be specified as a string or
-        as a plotly.grid_objs.Column object
-
-        Returns
-        -------
-        str
-        """
-        return self["tsrc"]
-
-    @tsrc.setter
-    def tsrc(self, val):
-        self["tsrc"] = val
 
     # uid
     # ---
@@ -2232,13 +2147,6 @@ class Bar(_BaseTraceType):
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.bar.Selected` instance or
             dict with compatible properties
@@ -2255,10 +2163,6 @@ class Bar(_BaseTraceType):
         stream
             :class:`plotly.graph_objects.bar.Stream` instance or
             dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2309,9 +2213,6 @@ class Bar(_BaseTraceType):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2449,13 +2350,10 @@ class Bar(_BaseTraceType):
         opacity=None,
         orientation=None,
         outsidetextfont=None,
-        r=None,
-        rsrc=None,
         selected=None,
         selectedpoints=None,
         showlegend=None,
         stream=None,
-        t=None,
         text=None,
         textangle=None,
         textfont=None,
@@ -2464,7 +2362,6 @@ class Bar(_BaseTraceType):
         textsrc=None,
         texttemplate=None,
         texttemplatesrc=None,
-        tsrc=None,
         uid=None,
         uirevision=None,
         unselected=None,
@@ -2646,13 +2543,6 @@ class Bar(_BaseTraceType):
             (horizontal).
         outsidetextfont
             Sets the font used for `text` lying outside the bar.
-        r
-            r coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the radial
-            coordinatesfor legacy polar chart only.
-        rsrc
-            Sets the source reference on Chart Studio Cloud for  r
-            .
         selected
             :class:`plotly.graph_objects.bar.Selected` instance or
             dict with compatible properties
@@ -2669,10 +2559,6 @@ class Bar(_BaseTraceType):
         stream
             :class:`plotly.graph_objects.bar.Stream` instance or
             dict with compatible properties
-        t
-            t coordinates in scatter traces are deprecated!Please
-            switch to the "scatterpolar" trace type.Sets the
-            angular coordinatesfor legacy polar chart only.
         text
             Sets text elements associated with each (x,y) pair. If
             a single string, the same string appears over all the
@@ -2723,9 +2609,6 @@ class Bar(_BaseTraceType):
         texttemplatesrc
             Sets the source reference on Chart Studio Cloud for
             texttemplate .
-        tsrc
-            Sets the source reference on Chart Studio Cloud for  t
-            .
         uid
             Assign an id to this trace, Use this to provide object
             constancy between traces during animations and
@@ -2991,14 +2874,6 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = outsidetextfont if outsidetextfont is not None else _v
         if _v is not None:
             self["outsidetextfont"] = _v
-        _v = arg.pop("r", None)
-        _v = r if r is not None else _v
-        if _v is not None:
-            self["r"] = _v
-        _v = arg.pop("rsrc", None)
-        _v = rsrc if rsrc is not None else _v
-        if _v is not None:
-            self["rsrc"] = _v
         _v = arg.pop("selected", None)
         _v = selected if selected is not None else _v
         if _v is not None:
@@ -3015,10 +2890,6 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = stream if stream is not None else _v
         if _v is not None:
             self["stream"] = _v
-        _v = arg.pop("t", None)
-        _v = t if t is not None else _v
-        if _v is not None:
-            self["t"] = _v
         _v = arg.pop("text", None)
         _v = text if text is not None else _v
         if _v is not None:
@@ -3051,10 +2922,6 @@ an instance of :class:`plotly.graph_objs.Bar`"""
         _v = texttemplatesrc if texttemplatesrc is not None else _v
         if _v is not None:
             self["texttemplatesrc"] = _v
-        _v = arg.pop("tsrc", None)
-        _v = tsrc if tsrc is not None else _v
-        if _v is not None:
-            self["tsrc"] = _v
         _v = arg.pop("uid", None)
         _v = uid if uid is not None else _v
         if _v is not None:

@@ -8,6 +8,5 @@ class SubplotValidator(_plotly_utils.basevalidators.SubplotidValidator):
             parent_name=parent_name,
             dflt=kwargs.pop("dflt", "polar"),
             edit_type=kwargs.pop("edit_type", "calc"),
-            role=kwargs.pop("role", "info"),
             **kwargs
         )

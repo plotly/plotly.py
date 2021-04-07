@@ -59,7 +59,6 @@ class Layout(_BaseLayoutType):
     _path_str = "layout"
     _valid_props = {
         "activeshape",
-        "angularaxis",
         "annotationdefaults",
         "annotations",
         "autosize",
@@ -78,10 +77,10 @@ class Layout(_BaseLayoutType):
         "colorway",
         "computed",
         "datarevision",
-        "direction",
         "dragmode",
         "editrevision",
         "extendfunnelareacolors",
+        "extendiciclecolors",
         "extendpiecolors",
         "extendsunburstcolors",
         "extendtreemapcolors",
@@ -99,6 +98,7 @@ class Layout(_BaseLayoutType):
         "hoverdistance",
         "hoverlabel",
         "hovermode",
+        "iciclecolorway",
         "imagedefaults",
         "images",
         "legend",
@@ -108,12 +108,10 @@ class Layout(_BaseLayoutType):
         "metasrc",
         "modebar",
         "newshape",
-        "orientation",
         "paper_bgcolor",
         "piecolorway",
         "plot_bgcolor",
         "polar",
-        "radialaxis",
         "scene",
         "selectdirection",
         "selectionrevision",
@@ -174,71 +172,6 @@ class Layout(_BaseLayoutType):
     @activeshape.setter
     def activeshape(self, val):
         self["activeshape"] = val
-
-    # angularaxis
-    # -----------
-    @property
-    def angularaxis(self):
-        """
-        The 'angularaxis' property is an instance of AngularAxis
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.AngularAxis`
-          - A dict of string/value properties that will be passed
-            to the AngularAxis constructor
-    
-            Supported dict properties:
-                
-                domain
-                    Polar chart subplots are not supported yet.
-                    This key has currently no effect.
-                endpadding
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots.
-                range
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Defines the start
-                    and end point of this angular axis.
-                showline
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not the line bounding this angular axis will
-                    be shown on the figure.
-                showticklabels
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not the angular axis ticks will feature tick
-                    labels.
-                tickcolor
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the color of
-                    the tick lines on this angular axis.
-                ticklen
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the length of
-                    the tick lines on this angular axis.
-                tickorientation
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the
-                    orientation (from the paper perspective) of the
-                    angular axis tick labels.
-                ticksuffix
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the length of
-                    the tick lines on this angular axis.
-                visible
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not this axis will be visible.
-
-        Returns
-        -------
-        plotly.graph_objs.layout.AngularAxis
-        """
-        return self["angularaxis"]
-
-    @angularaxis.setter
-    def angularaxis(self, val):
-        self["angularaxis"] = val
 
     # annotations
     # -----------
@@ -1066,29 +999,6 @@ class Layout(_BaseLayoutType):
     def datarevision(self, val):
         self["datarevision"] = val
 
-    # direction
-    # ---------
-    @property
-    def direction(self):
-        """
-        Legacy polar charts are deprecated! Please switch to "polar"
-        subplots. Sets the direction corresponding to positive angles
-        in legacy polar charts.
-    
-        The 'direction' property is an enumeration that may be specified as:
-          - One of the following enumeration values:
-                ['clockwise', 'counterclockwise']
-
-        Returns
-        -------
-        Any
-        """
-        return self["direction"]
-
-    @direction.setter
-    def direction(self, val):
-        self["direction"] = val
-
     # dragmode
     # --------
     @property
@@ -1161,6 +1071,33 @@ class Layout(_BaseLayoutType):
     @extendfunnelareacolors.setter
     def extendfunnelareacolors(self, val):
         self["extendfunnelareacolors"] = val
+
+    # extendiciclecolors
+    # ------------------
+    @property
+    def extendiciclecolors(self):
+        """
+        If `true`, the icicle slice colors (whether given by
+        `iciclecolorway` or inherited from `colorway`) will be extended
+        to three times its original length by first repeating every
+        color 20% lighter then each color 20% darker. This is intended
+        to reduce the likelihood of reusing the same color when you
+        have many slices, but you can set `false` to disable. Colors
+        provided in the trace, using `marker.colors`, are never
+        extended.
+    
+        The 'extendiciclecolors' property must be specified as a bool
+        (either True, or False)
+
+        Returns
+        -------
+        bool
+        """
+        return self["extendiciclecolors"]
+
+    @extendiciclecolors.setter
+    def extendiciclecolors(self, val):
+        self["extendiciclecolors"] = val
 
     # extendpiecolors
     # ---------------
@@ -1805,6 +1742,30 @@ class Layout(_BaseLayoutType):
     def hovermode(self, val):
         self["hovermode"] = val
 
+    # iciclecolorway
+    # --------------
+    @property
+    def iciclecolorway(self):
+        """
+        Sets the default icicle slice colors. Defaults to the main
+        `colorway` used for trace colors. If you specify a new list
+        here it can still be extended with lighter and darker colors,
+        see `extendiciclecolors`.
+    
+        The 'iciclecolorway' property is a colorlist that may be specified
+        as a tuple, list, one-dimensional numpy array, or pandas Series of valid
+        color strings
+
+        Returns
+        -------
+        list
+        """
+        return self["iciclecolorway"]
+
+    @iciclecolorway.setter
+    def iciclecolorway(self, val):
+        self["iciclecolorway"] = val
+
     # images
     # ------
     @property
@@ -2331,30 +2292,6 @@ class Layout(_BaseLayoutType):
     def newshape(self, val):
         self["newshape"] = val
 
-    # orientation
-    # -----------
-    @property
-    def orientation(self):
-        """
-        Legacy polar charts are deprecated! Please switch to "polar"
-        subplots. Rotates the entire polar by the given angle in legacy
-        polar charts.
-    
-        The 'orientation' property is a angle (in degrees) that may be
-        specified as a number between -180 and 180. Numeric values outside this
-        range are converted to the equivalent value
-        (e.g. 270 is converted to -90).
-
-        Returns
-        -------
-        int|float
-        """
-        return self["orientation"]
-
-    @orientation.setter
-    def orientation(self, val):
-        self["orientation"] = val
-
     # paper_bgcolor
     # -------------
     @property
@@ -2570,76 +2507,6 @@ class Layout(_BaseLayoutType):
     @polar.setter
     def polar(self, val):
         self["polar"] = val
-
-    # radialaxis
-    # ----------
-    @property
-    def radialaxis(self):
-        """
-        The 'radialaxis' property is an instance of RadialAxis
-        that may be specified as:
-          - An instance of :class:`plotly.graph_objs.layout.RadialAxis`
-          - A dict of string/value properties that will be passed
-            to the RadialAxis constructor
-    
-            Supported dict properties:
-                
-                domain
-                    Polar chart subplots are not supported yet.
-                    This key has currently no effect.
-                endpadding
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots.
-                orientation
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the
-                    orientation (an angle with respect to the
-                    origin) of the radial axis.
-                range
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Defines the start
-                    and end point of this radial axis.
-                showline
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not the line bounding this radial axis will
-                    be shown on the figure.
-                showticklabels
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not the radial axis ticks will feature tick
-                    labels.
-                tickcolor
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the color of
-                    the tick lines on this radial axis.
-                ticklen
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the length of
-                    the tick lines on this radial axis.
-                tickorientation
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the
-                    orientation (from the paper perspective) of the
-                    radial axis tick labels.
-                ticksuffix
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Sets the length of
-                    the tick lines on this radial axis.
-                visible
-                    Legacy polar charts are deprecated! Please
-                    switch to "polar" subplots. Determines whether
-                    or not this axis will be visible.
-
-        Returns
-        -------
-        plotly.graph_objs.layout.RadialAxis
-        """
-        return self["radialaxis"]
-
-    @radialaxis.setter
-    def radialaxis(self, val):
-        self["radialaxis"] = val
 
     # scene
     # -----
@@ -4845,9 +4712,6 @@ class Layout(_BaseLayoutType):
         activeshape
             :class:`plotly.graph_objects.layout.Activeshape`
             instance or dict with compatible properties
-        angularaxis
-            :class:`plotly.graph_objects.layout.AngularAxis`
-            instance or dict with compatible properties
         annotations
             A tuple of
             :class:`plotly.graph_objects.layout.Annotation`
@@ -4948,10 +4812,6 @@ class Layout(_BaseLayoutType):
             treated as immutable, thus any data array with a
             different identity from its predecessor contains new
             data.
-        direction
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Sets the direction corresponding to
-            positive angles in legacy polar charts.
         dragmode
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
@@ -4969,6 +4829,15 @@ class Layout(_BaseLayoutType):
             of reusing the same color when you have many slices,
             but you can set `false` to disable. Colors provided in
             the trace, using `marker.colors`, are never extended.
+        extendiciclecolors
+            If `true`, the icicle slice colors (whether given by
+            `iciclecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -5075,6 +4944,11 @@ class Layout(_BaseLayoutType):
             on the trace's `orientation` value) for plots based on
             cartesian coordinates. For anything else the default
             value is "closest".
+        iciclecolorway
+            Sets the default icicle slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendiciclecolors`.
         images
             A tuple of :class:`plotly.graph_objects.layout.Image`
             instances or dicts with compatible properties
@@ -5111,10 +4985,6 @@ class Layout(_BaseLayoutType):
         newshape
             :class:`plotly.graph_objects.layout.Newshape` instance
             or dict with compatible properties
-        orientation
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Rotates the entire polar by the given
-            angle in legacy polar charts.
         paper_bgcolor
             Sets the background color of the paper where the graph
             is drawn.
@@ -5129,9 +4999,6 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
-        radialaxis
-            :class:`plotly.graph_objects.layout.RadialAxis`
-            instance or dict with compatible properties
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -5299,7 +5166,6 @@ class Layout(_BaseLayoutType):
         self,
         arg=None,
         activeshape=None,
-        angularaxis=None,
         annotations=None,
         annotationdefaults=None,
         autosize=None,
@@ -5318,10 +5184,10 @@ class Layout(_BaseLayoutType):
         colorway=None,
         computed=None,
         datarevision=None,
-        direction=None,
         dragmode=None,
         editrevision=None,
         extendfunnelareacolors=None,
+        extendiciclecolors=None,
         extendpiecolors=None,
         extendsunburstcolors=None,
         extendtreemapcolors=None,
@@ -5339,6 +5205,7 @@ class Layout(_BaseLayoutType):
         hoverdistance=None,
         hoverlabel=None,
         hovermode=None,
+        iciclecolorway=None,
         images=None,
         imagedefaults=None,
         legend=None,
@@ -5348,12 +5215,10 @@ class Layout(_BaseLayoutType):
         metasrc=None,
         modebar=None,
         newshape=None,
-        orientation=None,
         paper_bgcolor=None,
         piecolorway=None,
         plot_bgcolor=None,
         polar=None,
-        radialaxis=None,
         scene=None,
         selectdirection=None,
         selectionrevision=None,
@@ -5396,9 +5261,6 @@ class Layout(_BaseLayoutType):
             an instance of :class:`plotly.graph_objs.Layout`
         activeshape
             :class:`plotly.graph_objects.layout.Activeshape`
-            instance or dict with compatible properties
-        angularaxis
-            :class:`plotly.graph_objects.layout.AngularAxis`
             instance or dict with compatible properties
         annotations
             A tuple of
@@ -5500,10 +5362,6 @@ class Layout(_BaseLayoutType):
             treated as immutable, thus any data array with a
             different identity from its predecessor contains new
             data.
-        direction
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Sets the direction corresponding to
-            positive angles in legacy polar charts.
         dragmode
             Determines the mode of drag interactions. "select" and
             "lasso" apply only to scatter traces with markers or
@@ -5521,6 +5379,15 @@ class Layout(_BaseLayoutType):
             of reusing the same color when you have many slices,
             but you can set `false` to disable. Colors provided in
             the trace, using `marker.colors`, are never extended.
+        extendiciclecolors
+            If `true`, the icicle slice colors (whether given by
+            `iciclecolorway` or inherited from `colorway`) will be
+            extended to three times its original length by first
+            repeating every color 20% lighter then each color 20%
+            darker. This is intended to reduce the likelihood of
+            reusing the same color when you have many slices, but
+            you can set `false` to disable. Colors provided in the
+            trace, using `marker.colors`, are never extended.
         extendpiecolors
             If `true`, the pie slice colors (whether given by
             `piecolorway` or inherited from `colorway`) will be
@@ -5627,6 +5494,11 @@ class Layout(_BaseLayoutType):
             on the trace's `orientation` value) for plots based on
             cartesian coordinates. For anything else the default
             value is "closest".
+        iciclecolorway
+            Sets the default icicle slice colors. Defaults to the
+            main `colorway` used for trace colors. If you specify a
+            new list here it can still be extended with lighter and
+            darker colors, see `extendiciclecolors`.
         images
             A tuple of :class:`plotly.graph_objects.layout.Image`
             instances or dicts with compatible properties
@@ -5663,10 +5535,6 @@ class Layout(_BaseLayoutType):
         newshape
             :class:`plotly.graph_objects.layout.Newshape` instance
             or dict with compatible properties
-        orientation
-            Legacy polar charts are deprecated! Please switch to
-            "polar" subplots. Rotates the entire polar by the given
-            angle in legacy polar charts.
         paper_bgcolor
             Sets the background color of the paper where the graph
             is drawn.
@@ -5681,9 +5549,6 @@ class Layout(_BaseLayoutType):
         polar
             :class:`plotly.graph_objects.layout.Polar` instance or
             dict with compatible properties
-        radialaxis
-            :class:`plotly.graph_objects.layout.RadialAxis`
-            instance or dict with compatible properties
         scene
             :class:`plotly.graph_objects.layout.Scene` instance or
             dict with compatible properties
@@ -5858,7 +5723,6 @@ class Layout(_BaseLayoutType):
         # to support subplot properties (e.g. xaxis2)
         self._valid_props = {
             "activeshape",
-            "angularaxis",
             "annotationdefaults",
             "annotations",
             "autosize",
@@ -5877,10 +5741,10 @@ class Layout(_BaseLayoutType):
             "colorway",
             "computed",
             "datarevision",
-            "direction",
             "dragmode",
             "editrevision",
             "extendfunnelareacolors",
+            "extendiciclecolors",
             "extendpiecolors",
             "extendsunburstcolors",
             "extendtreemapcolors",
@@ -5898,6 +5762,7 @@ class Layout(_BaseLayoutType):
             "hoverdistance",
             "hoverlabel",
             "hovermode",
+            "iciclecolorway",
             "imagedefaults",
             "images",
             "legend",
@@ -5907,12 +5772,10 @@ class Layout(_BaseLayoutType):
             "metasrc",
             "modebar",
             "newshape",
-            "orientation",
             "paper_bgcolor",
             "piecolorway",
             "plot_bgcolor",
             "polar",
-            "radialaxis",
             "scene",
             "selectdirection",
             "selectionrevision",
@@ -5972,10 +5835,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = activeshape if activeshape is not None else _v
         if _v is not None:
             self["activeshape"] = _v
-        _v = arg.pop("angularaxis", None)
-        _v = angularaxis if angularaxis is not None else _v
-        if _v is not None:
-            self["angularaxis"] = _v
         _v = arg.pop("annotations", None)
         _v = annotations if annotations is not None else _v
         if _v is not None:
@@ -6048,10 +5907,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = datarevision if datarevision is not None else _v
         if _v is not None:
             self["datarevision"] = _v
-        _v = arg.pop("direction", None)
-        _v = direction if direction is not None else _v
-        if _v is not None:
-            self["direction"] = _v
         _v = arg.pop("dragmode", None)
         _v = dragmode if dragmode is not None else _v
         if _v is not None:
@@ -6064,6 +5919,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = extendfunnelareacolors if extendfunnelareacolors is not None else _v
         if _v is not None:
             self["extendfunnelareacolors"] = _v
+        _v = arg.pop("extendiciclecolors", None)
+        _v = extendiciclecolors if extendiciclecolors is not None else _v
+        if _v is not None:
+            self["extendiciclecolors"] = _v
         _v = arg.pop("extendpiecolors", None)
         _v = extendpiecolors if extendpiecolors is not None else _v
         if _v is not None:
@@ -6132,6 +5991,10 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = hovermode if hovermode is not None else _v
         if _v is not None:
             self["hovermode"] = _v
+        _v = arg.pop("iciclecolorway", None)
+        _v = iciclecolorway if iciclecolorway is not None else _v
+        if _v is not None:
+            self["iciclecolorway"] = _v
         _v = arg.pop("images", None)
         _v = images if images is not None else _v
         if _v is not None:
@@ -6168,10 +6031,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = newshape if newshape is not None else _v
         if _v is not None:
             self["newshape"] = _v
-        _v = arg.pop("orientation", None)
-        _v = orientation if orientation is not None else _v
-        if _v is not None:
-            self["orientation"] = _v
         _v = arg.pop("paper_bgcolor", None)
         _v = paper_bgcolor if paper_bgcolor is not None else _v
         if _v is not None:
@@ -6188,10 +6047,6 @@ an instance of :class:`plotly.graph_objs.Layout`"""
         _v = polar if polar is not None else _v
         if _v is not None:
             self["polar"] = _v
-        _v = arg.pop("radialaxis", None)
-        _v = radialaxis if radialaxis is not None else _v
-        if _v is not None:
-            self["radialaxis"] = _v
         _v = arg.pop("scene", None)
         _v = scene if scene is not None else _v
         if _v is not None:

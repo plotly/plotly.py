@@ -9,7 +9,6 @@ class ColorValidator(_plotly_utils.basevalidators.ColorValidator):
             anim=kwargs.pop("anim", True),
             array_ok=kwargs.pop("array_ok", True),
             edit_type=kwargs.pop("edit_type", "style"),
-            role=kwargs.pop("role", "style"),
             colorscale_path=kwargs.pop("colorscale_path", "scatter.marker.colorscale"),
             **kwargs
         )

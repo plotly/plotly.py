@@ -6,7 +6,6 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
 
         super(DataValidator, self).__init__(
             class_strs_map={
-                "area": "Area",
                 "bar": "Bar",
                 "barpolar": "Barpolar",
                 "box": "Box",
@@ -25,6 +24,7 @@ class DataValidator(_plotly_utils.basevalidators.BaseDataValidator):
                 "histogram": "Histogram",
                 "histogram2d": "Histogram2d",
                 "histogram2dcontour": "Histogram2dContour",
+                "icicle": "Icicle",
                 "image": "Image",
                 "indicator": "Indicator",
                 "isosurface": "Isosurface",
