@@ -36,6 +36,7 @@ __all__ = [
     "label_rgb",
     "make_colorscale",
     "n_colors",
+    "sample_colorscale",
     "unconvert_from_RGB_255",
     "unlabel_rgb",
     "validate_colors",

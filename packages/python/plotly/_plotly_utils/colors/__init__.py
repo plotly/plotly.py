@@ -806,3 +806,54 @@ def named_colorscales():
     from _plotly_utils.basevalidators import ColorscaleValidator
 
     return [c for c in ColorscaleValidator("", "").named_colorscales]
+
+
+def sample_colorscale(colorscale, samplepoints, low=0.0, high=1.0, colortype="rgb"):
+    """
+    Samples a colorscale at specific points.
+
+    Interpolates between colors in a colorscale to find the specific colors
+    corresponding to the specified sample values. The colorscale can be specified
+    as a list of `[scale, color]` pairs, as a list of colors, or as a named
+    plotly colorscale. The samplepoints can be specefies an iterable of specific
+    points in the range [0.0, 1.0], or as an integer number of points which will
+    be spaced equally between the low value (default 0.0) and the high value
+    (default 1.0). The output is a list of colors, formatted according to the
+    specified colortype.
+    """
+    from bisect import bisect_left
+
+    try:
+        validate_colorscale(colorscale)
+    except exceptions.PlotlyError:
+        if isinstance(colorscale, str):
+            if colorscale in PLOTLY_SCALES:
+                colorscale = PLOTLY_SCALES[colorscale]
+            else:
+                raise exceptions.PlotlyError(
+                    "If your colors variable is a string, it must be a "
+                    "Plotly scale, an rgb color or a hex color."
+                )
+        else:
+            colorscale = make_colorscale(colorscale)
+
+    scale = colorscale_to_scale(colorscale)
+    validate_scale_values(scale)
+    colors = colorscale_to_colors(colorscale)
+    colors = validate_colors(colors, colortype="tuple")
+
+    if isinstance(samplepoints, int):
+        samplepoints = [
+            low + idx / (samplepoints - 1) * (high - low) for idx in range(samplepoints)
+        ]
+    elif isinstance(samplepoints, float):
+        samplepoints = [samplepoints]
+
+    sampled_colors = []
+    for point in samplepoints:
+        high = bisect_left(scale, point)
+        low = high - 1
+        interpolant = (point - scale[low]) / (scale[high] - scale[low])
+        sampled_color = find_intermediate_color(colors[low], colors[high], interpolant)
+        sampled_colors.append(sampled_color)
+    return validate_colors(sampled_colors, colortype=colortype)
