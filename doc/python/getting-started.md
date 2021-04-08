@@ -144,16 +144,16 @@ For use in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/), install t
 packages using `pip`:
 
 ```
-$ pip install jupyterlab "ipywidgets>=7.5"
+$ pip install jupyterlab "ipywidgets>=7.6"
 ```
 
 or `conda`:
 
 ```
-$ conda install jupyterlab "ipywidgets>=7.5"
+$ conda install jupyterlab "ipywidgets>=7.6"
 ```
 
-Then run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
+For JupyterLab 2 or earlier, run the following commands to install the required JupyterLab extensions (note that this will require [`node`](https://nodejs.org/) to be installed):
 
 ```
 # JupyterLab renderer support

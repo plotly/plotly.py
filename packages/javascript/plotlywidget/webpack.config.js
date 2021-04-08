@@ -1,79 +1,72 @@
-var path = require('path');
-var version = require('./package.json').version;
+const path = require("path");
+const version = require("./package.json").version;
 
-// Custom webpack loaders are generally the same for all webpack bundles, hence
-// stored in a separate local variable.
-var rules = [
-    { test: /\.css$/, use: ['style-loader', 'css-loader']},
-    { test: /\.js$/, use: ['ify-loader']}
+// Custom webpack rules
+const rules = [
+  { test: /\.ts$/, loader: "ts-loader" },
+  { test: /\.css$/, use: ["style-loader", "css-loader"] },
 ];
 
+// Packages that shouldn't be bundled but loaded at runtime
+const externals = ["@jupyter-widgets/base"];
+
+const resolve = {
+  extensions: [".webpack.js", ".web.js", ".ts", ".js"],
+};
 
 module.exports = [
-    {// Notebook extension
-     //
-     // This bundle only contains the part of the JavaScript that is run on
-     // load of the notebook. This section generally only performs
-     // some configuration for requirejs, and provides the legacy
-     // "load_ipython_extension" function which is required for any notebook
-     // extension.
-     //
-        entry: './src/extension.js',
-        output: {
-            filename: 'extension.js',
-            path: path.resolve(
-                __dirname, '..', '..', 'python', 'plotly', 'plotlywidget', 'static'),
-            libraryTarget: 'amd'
-        }
+  /**
+   * Notebook extension
+   *
+   * This bundle only contains the part of the JavaScript that is run on load of
+   * the notebook.
+   */
+  {
+    entry: "./src/extension.ts",
+    output: {
+      filename: "index.js",
+      path: path.resolve(
+        __dirname,
+        "..",
+        "..",
+        "python",
+        "plotly",
+        "plotlywidget",
+        "nbextension"
+      ),
+      libraryTarget: "amd",
+      publicPath: "",
     },
-    {// Bundle for the notebook containing the custom widget views and models
-     //
-     // This bundle contains the implementation for the custom widget views and
-     // custom widget.
-     // It must be an amd module
-     //
-        entry: './src/index.js',
-        output: {
-            filename: 'index.js',
-            path: path.resolve(
-                __dirname, '..', '..', 'python', 'plotly', 'plotlywidget', 'static'),
-            libraryTarget: 'amd'
-        },
-        node: {
-            fs: 'empty'
-        },
-        module: {
-            rules: rules
-        },
-        externals: ['@jupyter-widgets/base']
+    module: {
+      rules: rules,
     },
-    {// Embeddable plotlywidget bundle
-     //
-     // This bundle is generally almost identical to the notebook bundle
-     // containing the custom widget views and models.
-     //
-     // The only difference is in the configuration of the webpack public path
-     // for the static assets.
-     //
-     // It will be automatically distributed by unpkg to work with the static
-     // widget embedder.
-     //
-     // The target bundle is always `dist/index.js`, which is the path required
-     // by the custom widget embedder.
-     //
-        entry: './src/embed.js',
-        output: {
-            filename: 'index.js',
-            path: path.resolve(__dirname, 'dist'),
-            libraryTarget: 'amd',
-            publicPath: 'https://unpkg.com/plotlywidget@' + version + '/dist/'
-        },
-        node: {
-            fs: 'empty'
-        },
-        module: {
-            rules: rules
-        },
-        externals: ['@jupyter-widgets/base']
-    }
+    externals,
+    resolve,
+  },
+
+  /**
+   * Embeddable plotlywidget bundle
+   *
+   * This bundle is almost identical to the notebook extension bundle. The only
+   * difference is in the configuration of the webpack public path for the
+   * static assets.
+   *
+   * The target bundle is always `dist/index.js`, which is the path required by
+   * the custom widget embedder.
+   */
+  {
+    entry: "./src/index.ts",
+    output: {
+      filename: "index.js",
+      path: path.resolve(__dirname, "dist"),
+      libraryTarget: "amd",
+      library: "plotlywidget",
+      publicPath: "https://unpkg.com/plotlywidget@" + version + "/dist/",
+    },
+    module: {
+      rules: rules,
+    },
+    externals,
+    resolve,
+  },
 ];

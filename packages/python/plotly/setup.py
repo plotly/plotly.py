@@ -1,13 +1,19 @@
-from setuptools import setup, Command
-from setuptools.command.egg_info import egg_info
-from subprocess import check_call
-from distutils import log
-import versioneer
-
 import os
 import sys
 import platform
 import json
+
+from setuptools import setup, Command
+from setuptools.command.egg_info import egg_info
+from subprocess import check_call
+from distutils import log
+
+# ensure the current directory is on sys.path; so versioneer can be imported
+# when pip uses PEP 517/518 build rules.
+# https://github.com/python-versioneer/python-versioneer/issues/193
+sys.path.append(os.path.dirname(__file__))
+
+import versioneer
 
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -22,6 +28,18 @@ npm_path = os.pathsep.join(
     ]
 )
 
+labstatic = "plotlywidget/labextension/static"
+if not os.path.exists(labstatic):
+    # Ensure the folder exists when we will look for files in it
+    os.makedirs(labstatic)
+
+if "--skip-npm" in sys.argv or os.environ.get("SKIP_NPM") is not None:
+    print("Skipping npm install as requested.")
+    skip_npm = True
+    if "--skip-npm" in sys.argv:
+        sys.argv.remove("--skip-npm")
+else:
+    skip_npm = False
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
@@ -73,7 +91,30 @@ def js_prerelease(command, strict=False):
 def update_package_data(distribution):
     """update package_data to catch changes during setup"""
     build_py = distribution.get_command_obj("build_py")
-    # distribution.package_data = find_package_data()
+
+    # JS assets will not be present if we are skip npm build
+    if not skip_npm:
+        distribution.data_files.extend(
+            [
+                (
+                    "share/jupyter/labextensions/plotlywidget",
+                    ["plotlywidget/labextension/package.json",],
+                ),
+                (
+                    "share/jupyter/labextensions/plotlywidget/static",
+                    [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+                ),
+                (
+                    "share/jupyter/nbextensions/plotlywidget",
+                    [
+                        "plotlywidget/nbextension/extension.js",
+                        "plotlywidget/nbextension/index.js",
+                        "plotlywidget/nbextension/index.js.LICENSE.txt",
+                    ],
+                ),
+            ]
+        )
+
     # re-init build_py options which load package_data
     build_py.finalize_options()
 
@@ -86,8 +127,9 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "plotlywidget", "static", "extension.js"),
-        os.path.join(here, "plotlywidget", "static", "index.js"),
+        os.path.join(here, "plotlywidget", "nbextension", "extension.js"),
+        os.path.join(here, "plotlywidget", "nbextension", "index.js"),
+        os.path.join(here, "plotlywidget", "labextension", "package.json"),
     ]
 
     def initialize_options(self):
@@ -117,6 +159,10 @@ class NPM(Command):
         return self.has_npm()
 
     def run(self):
+        if skip_npm:
+            log.info("Skipping npm-installation")
+            return
+
         has_npm = self.has_npm()
         if not has_npm:
             log.error(
@@ -138,7 +184,7 @@ class NPM(Command):
                 stderr=sys.stderr,
             )
             check_call(
-                [npmName, "run", "build"],
+                [npmName, "run", "build:prod"],
                 cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
@@ -149,7 +195,7 @@ class NPM(Command):
             if not os.path.exists(t):
                 msg = "Missing file: %s" % t
                 if not has_npm:
-                    msg += "\nnpm is required to build a development version of widgetsnbextension"
+                    msg += "\nnpm is required to build a development version of plotlywidget"
                 raise ValueError(msg)
 
         # update package data in case this created new files
@@ -493,15 +539,9 @@ setup(
             "package_data/templates/*",
             "package_data/datasets/*",
         ],
-        "plotlywidget": ["static/extension.js", "static/index.js"],
+        "plotlywidget": ["nbextension/*", "labextension/*", "labextension/static/*"],
     },
-    data_files=[
-        (
-            "share/jupyter/nbextensions/plotlywidget",
-            ["plotlywidget/static/extension.js", "plotlywidget/static/index.js"],
-        ),
-        ("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),
-    ],
+    data_files=[("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),],
     install_requires=["tenacity>=6.2.0", "six"],
     zip_safe=False,
     cmdclass=dict(

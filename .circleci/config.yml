@@ -212,12 +212,13 @@ jobs:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           LANG: en_US.UTF-8
+    resource_class: large
 
     steps:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect"
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect jupyterlab~=3.0"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
@@ -232,7 +233,6 @@ jobs:
           name: Commit
           command: |
             cd packages/python/plotly
-            sudo mkdir /dist
             git config --global user.email "you@example.com"
             git config --global user.name "Your Name"
             git add -A
@@ -243,15 +243,6 @@ jobs:
           command: |
             cd packages/python/plotly
             python setup.py sdist
-            sudo cp dist/* /dist
-          when: always
-      - run:
-          name: npm-pack widget
-          command: |
-            cd packages/javascript/jupyterlab-plotly/
-            npm install webpack
-            npm pack
-            sudo cp ./jupyterlab-plotly* /dist
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
