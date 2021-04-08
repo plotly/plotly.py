@@ -48,3 +48,7 @@ doc/python/.mapbox_token
 doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
+
+packages/javascript/plotlywidget/lib/
+packages/python/plotly/plotlywidget/labextension/
+packages/python/plotly/plotlywidget/nbextension/index.js*
