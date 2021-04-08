@@ -27,13 +27,13 @@ jupyter:
     language: python
     layout: base
     name: Icicle Charts
-    order: 10
+    order: 13.5
     page_type: u-guide
     permalink: python/icicle-charts/
-    thumbnail: thumbnail/icicle.gif
+    thumbnail: thumbnail/icicle.png
 ---
 
-Similar to Treemap plots and Icicle plots, Icicle plots provide yet another way to visualize hierarchical data. Children are drawn next to their parent boxes, all on one side (eg. each on the right side of their parent). Icicle plots can point in one of four directions (left, right, top, bottom); this direction is acheived with the `tiling` sub-attributes `orientation` and `flip`.
+Icicle charts visualize hierarchical data using rectangular sectors that cascade from root to leaves in one of four directions: up, down, left, or right. Similar to [Sunburst](https://plotly.com/python/sunburst-charts/) and [Treemap](https://plotly.com/python/treemaps/) charts, the hierarchy is defined by `labels` (`names` for `px.icicle`) and `parents` attributes. Click on one sector to zoom in/out, which also displays a pathbar on the top of your icicle. To zoom out, you can click the parent sector or click the pathbar as well.
 
 Main arguments:
 
@@ -43,15 +43,105 @@ Main arguments:
 
 ### Basic Icicle Plot with plotly.express
 
+[Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
+
+With `px.icicle`, each item in the `character` list is represented as a rectangular sector of the icicle.
+
+```python
+import plotly.express as px
+data = dict(
+    character=["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+    parent=["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ],
+    value=[10, 14, 12, 10, 2, 6, 6, 4, 4])
+
+fig =px.icicle(
+    data,
+    names='character',
+    parents='parent',
+    values='value',
+)
+fig.show()
+```
+
 ### Icicle of a rectangular DataFrame with plotly.express
+
+Hierarchical data are often stored as a rectangular dataframe, with different columns corresponding to different levels of the hierarchy. `px.icicle` can take a path parameter corresponding to a list of columns. Note that `id` and `parent` should not be provided if path is given.
+
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.icicle(df, path=['day', 'time', 'sex'], values='total_bill')
+fig.show()
+```
 
 ### Icicle of a rectangular DataFrame with continuous color argument in px.icicle
 
+If a color argument is passed, the color of a node is computed as the average of the color values of its children, weighted by their values.
+
+```python
+import plotly.express as px
+import numpy as np
+df = px.data.gapminder().query("year == 2007")
+fig = px.icicle(df, path=['continent', 'country'], values='pop',
+                  color='lifeExp', hover_data=['iso_alpha'],
+                  color_continuous_scale='RdBu',
+                  color_continuous_midpoint=np.average(df['lifeExp'], weights=df['pop']))
+fig.show()
+```
+
 ### Icicle of a rectangular DataFrame with discrete color argument in px.icicle
+
+When the argument of color corresponds to non-numerical data, discrete colors are used. If a sector has the same value of the color column for all its children, then the corresponding color is used, otherwise the first color of the discrete color sequence is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='day')
+fig.show()
+```
+
+In the example below the color of **Saturday** and **Sunday** sectors is the same as **Dinner** because there are only Dinner entries for Saturday and Sunday. However, for Female -> Friday there are both lunches and dinners, hence the "mixed" color (blue here) is used.
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='time')
+fig.show()
+```
 
 ### Using an explicit mapping for discrete colors
 
+For more information about discrete colors, see the [dedicated page](https://plotly.com/python/discrete-color/).
+
+```python
+import plotly.express as px
+df = px.data.tips()
+fig = px.icicle(df, path=['sex', 'day', 'time'], values='total_bill', color='time',
+                  color_discrete_map={'(?)':'black', 'Lunch':'gold', 'Dinner':'darkblue'})
+fig.show()
+```
+
 ### Rectangular data with missing values
+
+If the dataset is not fully rectangular, missing values should be supplied as **None**. Note that the parents of **None** entries must be a leaf, i.e. it cannot have other children than **None** (otherwise a **ValueError** is raised).
+
+```python
+import plotly.express as px
+import pandas as pd
+vendors = ["A", "B", "C", "D", None, "E", "F", "G", "H", None]
+sectors = ["Tech", "Tech", "Finance", "Finance", "Other",
+           "Tech", "Tech", "Finance", "Finance", "Other"]
+regions = ["North", "North", "North", "North", "North",
+           "South", "South", "South", "South", "South"]
+sales = [1, 3, 2, 4, 1, 2, 2, 1, 4, 1]
+df = pd.DataFrame(
+    dict(vendors=vendors, sectors=sectors, regions=regions, sales=sales)
+)
+print(df)
+fig = px.icicle(df, path=['regions', 'sectors', 'vendors'], values='sales')
+fig.show()
+```
 
 ### Basic Icicle Plot with go.Icicle
 
@@ -198,7 +288,7 @@ value_column = 'calls'
 
 def build_hierarchical_dataframe(df, levels, value_column, color_columns=None):
     """
-    Build a hierarchy of levels for Icicle or Treemap charts.
+    Build a hierarchy of levels for Icicle charts.
 
     Levels are given starting from the bottom to the top of the hierarchy,
     ie the last level corresponds to the root.
@@ -274,7 +364,7 @@ fig = go.Figure(go.Icicle(
 fig.show()
 ```
 
-This example uses treemapcolorway attribute, which should be set in layout.
+This example uses iciclecolorway attribute, which should be set in layout.
 
 ```python
 import plotly.graph_objects as go
@@ -282,12 +372,12 @@ import plotly.graph_objects as go
 labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
 parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
 
-fig = go.Figure(go.Treemap(
+fig = go.Figure(go.Icicle(
     labels = labels,
     parents = parents
 ))
 
-fig.update_layout(treemapcolorway = ["pink", "lightgray"])
+fig.update_layout(iciclecolorway = ["pink", "lightgray"])
 
 fig.show()
 ```
@@ -299,7 +389,7 @@ values = ["11", "12", "13", "14", "15", "20", "30"]
 labels = ["A1", "A2", "A3", "A4", "A5", "B1", "B2"]
 parents = ["", "A1", "A2", "A3", "A4", "", "B1"]
 
-fig = go.Figure(go.Treemap(
+fig = go.Figure(go.Icicle(
     labels = labels,
     values = values,
     parents = parents,
@@ -314,9 +404,10 @@ As mentioned above, Icicle charts can grow in one of four directions. Icicle cha
 
 NB. A "flame chart" refers to an Icicle chart that is pointing upwards.
 
-Up
+**Up Direction**
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
@@ -339,9 +430,10 @@ fig.update_layout(
 fig.show()
 ```
 
-Down
+**Down Direction**
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
@@ -363,9 +455,10 @@ fig.update_layout(
 fig.show()
 ```
 
-Right
+**Right Direction**
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
@@ -387,9 +480,10 @@ fig.update_layout(
 fig.show()
 ```
 
-Left
+**Left Direction**
 
 ```python
+import plotly.graph_objects as go
 import pandas as pd
 
 df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
@@ -414,26 +508,25 @@ fig.show()
 
 ### Pad
 
-Similar to [treemaps](https://plotly.com/python/treemaps/), the space between each Icicle slice can be set with `pad`, a sub-attribute of the `tiling` attribute.
+Similar to [treemaps](https://plotly.com/python/treemaps/), the space between each Icicle slice can be set with `pad`, one of the sub-attributes of the `tiling` attribute.
 
 
 ```python
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
-
 import pandas as pd
 
 df1 = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
 
-pad_vals = [0, 2, 4, 8]
+pad_values = [0, 2, 4, 6]
 num_of_cols = 4
 
 fig = make_subplots(
     rows = 1, cols = 4,
-    column_titles=[f'pad: {pad_vals[i]}' for i in range(num_of_cols)],
+    column_titles=[f'pad: {pad_values[i]}' for i in range(num_of_cols)],
     specs = [
         [
-            {'type': 'icicle', 'rowspan': 1} for i in range(num_of_cols)
+            dict(type = 'icicle', rowspan = 1) for i in range(num_of_cols)
         ]
     ]
 )
@@ -443,9 +536,10 @@ fig.add_trace(
         ids = df1.ids,
         labels = df1.labels,
         parents = df1.parents,
-        root = dict( color = "DodgerBlue" ),
+        pathbar = dict(side = 'bottom'),
+        root = dict(color = 'DodgerBlue'),
         tiling = dict(
-            pad = pad_vals[0]
+            pad = pad_values[0]
         )
     ),
     col = 1,
@@ -457,9 +551,10 @@ fig.add_trace(
         ids = df1.ids,
         labels = df1.labels,
         parents = df1.parents,
-        root = dict( color = "DodgerBlue" ),
+        pathbar = dict(side = 'bottom'),
+        root = dict(color = 'DodgerBlue'),
         tiling = dict(
-            pad = pad_vals[1]
+            pad = pad_values[1]
         )
     ),
     col = 2,
@@ -471,9 +566,10 @@ fig.add_trace(
         ids = df1.ids,
         labels = df1.labels,
         parents = df1.parents,
-        root = dict( color = "DodgerBlue" ),
+        pathbar = dict(side = 'bottom'),
+        root = dict(color = 'DodgerBlue'),
         tiling = dict(
-            pad = pad_vals[2]
+            pad = pad_values[2]
         )
     ),
     col = 3,
@@ -485,9 +581,10 @@ fig.add_trace(
         ids = df1.ids,
         labels = df1.labels,
         parents = df1.parents,
-        root = dict( color = "DodgerBlue" ),
+        pathbar = dict(side = 'bottom'),
+        root = dict(color = 'DodgerBlue'),
         tiling = dict(
-            pad = pad_vals[3]
+            pad = pad_values[3]
         )
     ),
     col = 4,
@@ -495,7 +592,7 @@ fig.add_trace(
 )
 
 fig.update_layout(
-    margin = {'l':0, 'r':0, 'b':0},
+    margin = dict(l=0, r=0)
 )
 
 fig.show()
