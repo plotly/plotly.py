@@ -28,7 +28,7 @@ the structure of the code and of the repository.
   `update_layout`, `add_trace`, etc.
 
 - [the `plotly.express` module](https://plotly.com/python/plotly-express/) (usually imported as `px`) is a high-level
-  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/express`.
+  functional API that uses `graph_objects` under the hood. Its code is in `packages/python/plotly/plotly/express`.
   Plotly Express functions
   are designed to be highly consistent with each other, and to do *as little computation
   in Python as possible*, generally concerning themselves with formatting data and creating
