@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.1.0] - TBD
+
+### Added
+
+- Added icicle trace type: `go.Icicle` added to the `graph_objs` and `px.icicle` to the plotly.express functional API ([#3139](https://github.com/plotly/plotly.py/pull/3139))
+
 ## [4.14.3] - 2021-01-12
 
 ### Fixed
