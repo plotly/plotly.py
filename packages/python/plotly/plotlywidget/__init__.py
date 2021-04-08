@@ -2,7 +2,7 @@ def _jupyter_nbextension_paths():
     return [
         {
             "section": "notebook",
-            "src": "static",
+            "src": "nbextension",
             "dest": "plotlywidget",
             "require": "plotlywidget/extension",
         }
