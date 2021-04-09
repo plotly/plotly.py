@@ -519,9 +519,7 @@ setup(
     data_files=[
         (
             "share/jupyter/labextensions/plotlywidget",
-            [
-                "plotlywidget/labextension/package.json",
-            ],
+            ["plotlywidget/labextension/package.json",],
         ),
         (
             "share/jupyter/nbextensions/plotlywidget",
