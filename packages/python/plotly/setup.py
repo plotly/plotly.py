@@ -94,23 +94,25 @@ def update_package_data(distribution):
 
     # JS assets will not be present if we are skip npm build
     if not skip_npm:
-        distribution.data_files.append(
-            (
-                "share/jupyter/labextensions/plotlywidget",
-                ["plotlywidget/labextension/package.json",],
-            ),
-            (
-                "share/jupyter/labextensions/plotlywidget/static",
-                [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
-            ),
-            (
-                "share/jupyter/nbextensions/plotlywidget",
-                [
-                    "plotlywidget/nbextension/extension.js",
-                    "plotlywidget/nbextension/index.js",
-                    "plotlywidget/nbextension/index.js.LICENSE.txt",
-                ],
-            ),
+        distribution.data_files.extends(
+            [
+                (
+                    "share/jupyter/labextensions/plotlywidget",
+                    ["plotlywidget/labextension/package.json",],
+                ),
+                (
+                    "share/jupyter/labextensions/plotlywidget/static",
+                    [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+                ),
+                (
+                    "share/jupyter/nbextensions/plotlywidget",
+                    [
+                        "plotlywidget/nbextension/extension.js",
+                        "plotlywidget/nbextension/index.js",
+                        "plotlywidget/nbextension/index.js.LICENSE.txt",
+                    ],
+                ),
+            ]
         )
 
     # re-init build_py options which load package_data
