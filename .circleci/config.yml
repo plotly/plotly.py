@@ -93,6 +93,7 @@ jobs:
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
+    resource_class: large
 
     steps:
       - checkout
@@ -249,7 +250,7 @@ jobs:
 
   python-2-7-orca:
     docker:
-      - image: circleci/node:12.22-buster-browsers
+      - image: circleci/node:10.9-stretch-browsers
         environment:
           PYTHON_VERSION: 2.7
 
@@ -279,7 +280,7 @@ jobs:
 
   python-3-5-orca:
     docker:
-      - image: circleci/node:12.22-buster-browsers
+      - image: circleci/node:10.9-stretch-browsers
         environment:
           PYTHON_VERSION: 3.5
 
@@ -309,7 +310,7 @@ jobs:
 
   python-3-7-orca:
     docker:
-      - image: circleci/node:12.22-buster-browsers
+      - image: circleci/node:10.9-stretch-browsers
         environment:
           PYTHON_VERSION: 3.7
 
@@ -389,7 +390,7 @@ jobs:
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.7-stretch-node-browsers
 
-    # working_directory: ~/project
+    working_directory: ~/project
 
     steps:
       - add_ssh_keys:
