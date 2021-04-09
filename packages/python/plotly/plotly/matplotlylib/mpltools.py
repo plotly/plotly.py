@@ -365,7 +365,17 @@ def get_spine_visible(ax, spine_key):
     """Return some spine parameters for the spine, `spine_key`."""
     spine = ax.spines[spine_key]
     ax_frame_on = ax.get_frame_on()
-    spine_frame_like = spine.is_frame_like()
+    position = spine._position or ("outward", 0.0)
+    if isinstance(position, str):
+        if position == "center":
+            position = ("axes", 0.5)
+        elif position == "zero":
+            position = ("data", 0)
+    position_type, amount = position
+    if position_type == "outward" and amount == 0:
+        spine_frame_like = True
+    else:
+        spine_frame_like = False
     if not spine.get_visible():
         return False
     elif not spine._edgecolor[-1]:  # user's may have set edgecolor alpha==0
