@@ -312,10 +312,84 @@ class PlotlyRenderer(Renderer):
                 "assuming data redundancy, not plotting."
             )
 
+    def draw_legend_shapes(self, mode, shape, **props):
+        """Create a shape that matches lines or markers in legends.
+
+        Main issue is that path for circles do not render, so we have to use 'circle'
+        instead of 'path'.
+        """
+        for single_mode in mode.split("+"):
+            x = props["data"][0][0]
+            y = props["data"][0][1]
+            if single_mode == "markers" and props.get("markerstyle"):
+                size = shape.pop("size", 6)
+                symbol = shape.pop("symbol")
+                # aligning to "center"
+                x0 = 0
+                y0 = 0
+                x1 = size
+                y1 = size
+                markerpath = props["markerstyle"].get("markerpath")
+                if markerpath is None and symbol != "circle":
+                    self.msg += "not sure how to handle this marker without a valid path\n"
+                    return
+                # marker path to SVG path conversion
+                path = ' '.join([f"{a} {t[0]},{t[1]}" for a, t in zip(markerpath[1], markerpath[0])])
+
+                if symbol == "circle":
+                    # symbols like . and o in matplotlib, use circle
+                    # plotly also maps many other markers to circle, such as 1,8 and p
+                    path = None
+                    shape_type = "circle"
+                    x0 = -size / 2
+                    y0 = size / 2
+                    x1 = size / 2
+                    y1 = size + size / 2
+                else:
+                    # triangles, star etc
+                    shape_type = "path"
+                legend_shape = go.layout.Shape(
+                    type=shape_type,
+                    xref="paper",
+                    yref="paper",
+                    x0=x0,
+                    y0=y0,
+                    x1=x1,
+                    y1=y1,
+                    xsizemode="pixel",
+                    ysizemode="pixel",
+                    xanchor=x,
+                    yanchor=y,
+                    path=path,
+                    **shape
+                )
+
+            elif single_mode == "lines":
+                mode = "line"
+                x1 = props["data"][1][0]
+                y1 = props["data"][1][1]
+
+                legend_shape = go.layout.Shape(
+                    type=mode,
+                    xref="paper",
+                    yref="paper",
+                    x0=x,
+                    y0=y+0.02,
+                    x1=x1,
+                    y1=y1+0.02,
+                    **shape
+                )
+            else:
+                self.msg += "not sure how to handle this element\n"
+                return
+            self.plotly_fig.add_shape(legend_shape)
+            self.msg += "    Heck yeah, I drew that shape\n"
+
     def draw_marked_line(self, **props):
         """Create a data dict for a line obj.
 
-        This will draw 'lines', 'markers', or 'lines+markers'.
+        This will draw 'lines', 'markers', or 'lines+markers'. For legend elements,
+        this will use layout.shapes, so they can be positioned with paper refs.
 
         props.keys() -- [
         'coordinates',  ('data', 'axes', 'figure', or 'display')
@@ -346,7 +420,7 @@ class PlotlyRenderer(Renderer):
 
         """
         self.msg += "    Attempting to draw a line "
-        line, marker = {}, {}
+        line, marker, shape = {}, {}, {}
         if props["linestyle"] and props["markerstyle"]:
             self.msg += "... with both lines+markers\n"
             mode = "lines+markers"
@@ -361,23 +435,43 @@ class PlotlyRenderer(Renderer):
                 props["linestyle"]["color"], props["linestyle"]["alpha"]
             )
 
-            # print(mpltools.convert_dash(props['linestyle']['dasharray']))
-            line = go.scatter.Line(
-                color=color,
-                width=props["linestyle"]["linewidth"],
-                dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
-            )
+            if props["coordinates"] == "data":
+                line = go.scatter.Line(
+                    color=color,
+                    width=props["linestyle"]["linewidth"],
+                    dash=mpltools.convert_dash(props["linestyle"]["dasharray"]),
+                )
+            else:
+                shape=dict(
+                    line = dict(
+                        color=color,
+                        width=props["linestyle"]["linewidth"],
+                        dash=mpltools.convert_dash(props["linestyle"]["dasharray"])
+                    )
+                )
         if props["markerstyle"]:
-            marker = go.scatter.Marker(
-                opacity=props["markerstyle"]["alpha"],
-                color=props["markerstyle"]["facecolor"],
-                symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
-                size=props["markerstyle"]["markersize"],
-                line=dict(
-                    color=props["markerstyle"]["edgecolor"],
-                    width=props["markerstyle"]["edgewidth"],
-                ),
-            )
+            if props["coordinates"] == "data":
+                marker = go.scatter.Marker(
+                    opacity=props["markerstyle"]["alpha"],
+                    color=props["markerstyle"]["facecolor"],
+                    symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
+                    size=props["markerstyle"]["markersize"],
+                    line=dict(
+                        color=props["markerstyle"]["edgecolor"],
+                        width=props["markerstyle"]["edgewidth"],
+                    ),
+                )
+            else:
+                shape = dict(
+                    opacity=props["markerstyle"]["alpha"],
+                    fillcolor=props["markerstyle"]["facecolor"],
+                    symbol=mpltools.convert_symbol(props["markerstyle"]["marker"]),
+                    size=props["markerstyle"]["markersize"],
+                    line=dict(
+                        color=props["markerstyle"]["edgecolor"],
+                        width=props["markerstyle"]["edgewidth"],
+                    ),
+                )
         if props["coordinates"] == "data":
             marked_line = go.Scatter(
                 mode=mode,
@@ -404,6 +498,9 @@ class PlotlyRenderer(Renderer):
                 )
             self.plotly_fig.add_trace(marked_line),
             self.msg += "    Heck yeah, I drew that line\n"
+        elif props["coordinates"] == "axes":
+            # dealing with legend graphical elements
+            self.draw_legend_shapes(mode=mode,shape=shape, **props)
         else:
             self.msg += "    Line didn't have 'data' coordinates, " "not drawing\n"
             warnings.warn(
