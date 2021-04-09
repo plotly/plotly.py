@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py27-core"
@@ -43,7 +43,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py35-core"
@@ -60,7 +60,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py36-core"
@@ -77,7 +77,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py37-core"
@@ -128,7 +128,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py27-optional"
@@ -145,7 +145,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py35-optional"
@@ -162,7 +162,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py36-optional"
@@ -179,7 +179,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py37-optional"
@@ -197,7 +197,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py27-plot_ly"
@@ -214,7 +214,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py35-plot_ly"
@@ -231,7 +231,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox"
+          command: "sudo pip install tox jupyterlab~=3.0"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
@@ -340,7 +340,7 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install retrying tox black inflect"
+          command: "sudo pip install retrying tox black inflect jupyterlab~=3.0"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
