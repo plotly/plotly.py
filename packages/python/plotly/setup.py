@@ -1,13 +1,19 @@
-from setuptools import setup, Command
-from setuptools.command.egg_info import egg_info
-from subprocess import check_call
-from distutils import log
-import versioneer
-
 import os
 import sys
 import platform
 import json
+
+from setuptools import setup, Command
+from setuptools.command.egg_info import egg_info
+from subprocess import check_call
+from distutils import log
+
+# ensure the current directory is on sys.path; so versioneer can be imported
+# when pip uses PEP 517/518 build rules.
+# https://github.com/python-versioneer/python-versioneer/issues/193
+sys.path.append(os.path.dirname(__file__))
+
+import versioneer
 
 
 here = os.path.dirname(os.path.abspath(__file__))
@@ -97,6 +103,7 @@ class NPM(Command):
     targets = [
         os.path.join(here, "plotlywidget", "nbextension", "extension.js"),
         os.path.join(here, "plotlywidget", "nbextension", "index.js"),
+        os.path.join(here, "plotlywidget", "labextension", "package.json"),
     ]
 
     def initialize_options(self):
