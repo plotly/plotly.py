@@ -23,11 +23,11 @@ function activateWidgetExtension(
 /**
  * The widget plugin.
  */
-const widgetPlugin: IPlugin<Application<Widget>, void> = {
+const widgetPlugin: IPlugin<Application<Widget>, void> = ({
   id: "plotlywidget",
   requires: [IJupyterWidgetRegistry],
   activate: activateWidgetExtension,
   autoStart: true,
-} as IPlugin<Application<Widget>, void>;
+} as unknown) as IPlugin<Application<Widget>, void>;
 
 export default widgetPlugin;

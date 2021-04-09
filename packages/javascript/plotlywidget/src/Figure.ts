@@ -860,31 +860,31 @@ export class FigureView extends DOMWidgetView {
         that._sendLayoutDelta(layout_edit_id);
 
         // Wire up plotly event callbacks
-        that.el.on("plotly_restyle", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_restyle", function (update: any) {
           that.handle_plotly_restyle(update);
         });
-        that.el.on("plotly_relayout", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_relayout", function (update: any) {
           that.handle_plotly_relayout(update);
         });
-        that.el.on("plotly_update", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_update", function (update: any) {
           that.handle_plotly_update(update);
         });
-        that.el.on("plotly_click", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_click", function (update: any) {
           that.handle_plotly_click(update);
         });
-        that.el.on("plotly_hover", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_hover", function (update: any) {
           that.handle_plotly_hover(update);
         });
-        that.el.on("plotly_unhover", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_unhover", function (update: any) {
           that.handle_plotly_unhover(update);
         });
-        that.el.on("plotly_selected", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_selected", function (update: any) {
           that.handle_plotly_selected(update);
         });
-        that.el.on("plotly_deselect", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_deselect", function (update: any) {
           that.handle_plotly_deselect(update);
         });
-        that.el.on("plotly_doubleclick", function (update: any) {
+        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_doubleclick", function (update: any) {
           that.handle_plotly_doubleclick(update);
         });
 
@@ -978,8 +978,8 @@ export class FigureView extends DOMWidgetView {
   getFullData() {
     return _.mergeWith(
       {},
-      this.el._fullData,
-      this.el.data,
+      (<Plotly.PlotlyHTMLElement>this.el)._fullData,
+      (<Plotly.PlotlyHTMLElement>this.el).data,
       fullMergeCustomizer
     );
   }
@@ -993,8 +993,8 @@ export class FigureView extends DOMWidgetView {
   getFullLayout() {
     return _.mergeWith(
       {},
-      this.el._fullLayout,
-      this.el.layout,
+      (<Plotly.PlotlyHTMLElement>this.el)._fullLayout,
+      (<Plotly.PlotlyHTMLElement>this.el).layout,
       fullMergeCustomizer
     );
   }
