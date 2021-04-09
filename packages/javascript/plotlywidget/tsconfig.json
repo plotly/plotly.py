@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
-    "rootDir": "src",
     "declaration": true,
-    "noImplicitAny": true,
-    "noEmitOnError": true,
-    "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "preserveWatchOutput": true,
+    "esModuleInterop":true,
+    "lib": ["es2015", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
     "target": "es2015",
-    "lib": ["dom", "es2015"],
     "types": []
   },
   "include": ["src/*"]

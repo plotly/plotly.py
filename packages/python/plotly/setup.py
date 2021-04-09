@@ -22,6 +22,7 @@ npm_path = os.pathsep.join(
     ]
 )
 
+labstatic = "plotlywidget/labextension/static"
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
@@ -86,8 +87,8 @@ class NPM(Command):
     node_modules = os.path.join(node_root, "node_modules")
 
     targets = [
-        os.path.join(here, "plotlywidget", "static", "extension.js"),
-        os.path.join(here, "plotlywidget", "static", "index.js"),
+        os.path.join(here, "plotlywidget", "nbextension", "extension.js"),
+        os.path.join(here, "plotlywidget", "nbextension", "index.js"),
     ]
 
     def initialize_options(self):
@@ -138,7 +139,7 @@ class NPM(Command):
                 stderr=sys.stderr,
             )
             check_call(
-                [npmName, "run", "build"],
+                [npmName, "run", "build:prod"],
                 cwd=node_root,
                 stdout=sys.stdout,
                 stderr=sys.stderr,
@@ -149,7 +150,7 @@ class NPM(Command):
             if not os.path.exists(t):
                 msg = "Missing file: %s" % t
                 if not has_npm:
-                    msg += "\nnpm is required to build a development version of widgetsnbextension"
+                    msg += "\nnpm is required to build a development version of plotlywidget"
                 raise ValueError(msg)
 
         # update package data in case this created new files
@@ -465,6 +466,8 @@ setup(
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Scientific/Engineering :: Visualization",
     ],
     license="MIT",
@@ -496,12 +499,26 @@ setup(
             "package_data/templates/*",
             "package_data/datasets/*",
         ],
-        "plotlywidget": ["static/extension.js", "static/index.js"],
+        "plotlywidget": ["nbextension/*", "labextension/*", "labextension/static/*"],
     },
     data_files=[
         (
+            "share/jupyter/labextensions/plotlywidget",
+            [
+                "plotlywidget/labextension/package.json",
+            ],
+        ),
+        (
+            "share/jupyter/labextensions/plotlywidget/static",
+            [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+        ),
+        (
             "share/jupyter/nbextensions/plotlywidget",
-            ["plotlywidget/static/extension.js", "plotlywidget/static/index.js"],
+            [
+                "plotlywidget/nbextension/extension.js",
+                "plotlywidget/nbextension/index.js",
+                "plotlywidget/nbextension/index.js.LICENSE.txt",
+            ],
         ),
         ("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),
     ],
