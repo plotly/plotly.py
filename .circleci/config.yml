@@ -345,7 +345,6 @@ jobs:
           name: Commit
           command: |
             cd packages/python/plotly
-            sudo mkdir /dist
             git config --global user.email "you@example.com"
             git config --global user.name "Your Name"
             git add -A
@@ -356,15 +355,6 @@ jobs:
           command: |
             cd packages/python/plotly
             python setup.py sdist
-            sudo cp dist/* /dist
-          when: always
-      - run:
-          name: npm-pack widget
-          command: |
-            cd packages/javascript/jupyterlab-plotly/
-            npm install webpack
-            npm pack
-            sudo cp ./jupyterlab-plotly* /dist
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
