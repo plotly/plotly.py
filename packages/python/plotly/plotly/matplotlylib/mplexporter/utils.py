@@ -217,6 +217,8 @@ def get_axis_properties(axis):
         props['tickformat'] = ""
     elif isinstance(formatter, ticker.FixedFormatter):
         props['tickformat'] = list(formatter.seq)
+    elif isinstance(formatter, ticker.FuncFormatter):
+        props['tickformat'] = list(formatter.func.args[0].values())
     elif not any(label.get_visible() for label in axis.get_ticklabels()):
         props['tickformat'] = ""
     else:
@@ -243,7 +245,7 @@ def get_axis_properties(axis):
 
 def get_grid_style(axis):
     gridlines = axis.get_gridlines()
-    if axis._gridOnMajor and len(gridlines) > 0:
+    if axis._major_tick_kw['gridOn'] and len(gridlines) > 0:
         color = export_color(gridlines[0].get_color())
         alpha = gridlines[0].get_alpha()
         dasharray = get_dasharray(gridlines[0])
