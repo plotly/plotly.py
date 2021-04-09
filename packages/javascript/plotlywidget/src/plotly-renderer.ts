@@ -7,7 +7,7 @@ import { Message } from "@lumino/messaging";
 
 import { IRenderMime } from "@jupyterlab/rendermime-interfaces";
 
-import Plotly from "plotly.js/dist/plotly";
+import type PlotlyType from "plotly.js/dist/plotly";
 
 import "../style/index.css";
 
@@ -28,9 +28,9 @@ const CSS_ICON_CLASS = "jp-MaterialIcon jp-PlotlyIcon";
 export const MIME_TYPE = "application/vnd.plotly.v1+json";
 
 interface IPlotlySpec {
-  data: Plotly.Data;
-  layout: Plotly.Layout;
-  frames?: Plotly.Frame[];
+  data: PlotlyType.Data;
+  layout: PlotlyType.Layout;
+  frames?: PlotlyType.Frame[];
 }
 
 export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
@@ -121,49 +121,60 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
     }
   }
 
-  private createGraph(model: IRenderMime.IMimeModel) {
+  private createGraph(model: IRenderMime.IMimeModel): Promise<void> {
     const { data, layout, frames, config } = model.data[this._mimeType] as
       | any
       | IPlotlySpec;
 
-    return Plotly.react(this.node, data, layout, config).then((plot) => {
-      this.showGraph();
-      this.hideImage();
-      this.update();
-      if (frames) {
-        Plotly.addFrames(this.node, frames);
-      }
-      if (this.node.offsetWidth > 0 && this.node.offsetHeight > 0) {
-        Plotly.toImage(plot, {
-          format: "png",
-          width: this.node.offsetWidth,
-          height: this.node.offsetHeight,
-        }).then((url: string) => {
-          const imageData = url.split(",")[1];
-          if (model.data["image/png"] !== imageData) {
-            model.setData({
-              data: {
-                ...model.data,
-                "image/png": imageData,
-              },
-            });
-          }
-        });
-      }
+    // Load plotly asynchronously
+    const loadPlotly = async (): Promise<void> => {
+      if (RenderedPlotly.Plotly === null) {
+        RenderedPlotly.Plotly = await import("plotly.js/dist/plotly");
+        RenderedPlotly._resolveLoadingPlotly();
+      } 
+      return RenderedPlotly.loadingPlotly;
+    };
 
-      // Handle webgl context lost events
-      (<Plotly.PlotlyHTMLElement>this.node).on(
-        "plotly_webglcontextlost",
-        () => {
-          const png_data = <string>model.data["image/png"];
-          if (png_data !== undefined && png_data !== null) {
-            // We have PNG data, use it
-            this.updateImage(png_data);
-            return Promise.resolve();
-          }
+    return loadPlotly()
+      .then(() => RenderedPlotly.Plotly!.react(this.node, data, layout, config))
+      .then((plot) => {
+        this.showGraph();
+        this.hideImage();
+        this.update();
+        if (frames) {
+          RenderedPlotly.Plotly!.addFrames(this.node, frames);
         }
-      );
-    });
+        if (this.node.offsetWidth > 0 && this.node.offsetHeight > 0) {
+          RenderedPlotly.Plotly!.toImage(plot, {
+            format: "png",
+            width: this.node.offsetWidth,
+            height: this.node.offsetHeight,
+          }).then((url: string) => {
+            const imageData = url.split(",")[1];
+            if (model.data["image/png"] !== imageData) {
+              model.setData({
+                data: {
+                  ...model.data,
+                  "image/png": imageData,
+                },
+              });
+            }
+          });
+        }
+
+        // Handle webgl context lost events
+        (<PlotlyType.PlotlyHTMLElement>this.node).on(
+          "plotly_webglcontextlost",
+          () => {
+            const png_data = <string>model.data["image/png"];
+            if (png_data !== undefined && png_data !== null) {
+              // We have PNG data, use it
+              this.updateImage(png_data);
+              return Promise.resolve();
+            }
+          }
+        );
+      });
   }
 
   /**
@@ -184,9 +195,9 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
    * A message handler invoked on an `'update-request'` message.
    */
   protected onUpdateRequest(msg: Message): void {
-    if (this.isVisible && this.hasGraphElement()) {
-      Plotly.redraw(this.node).then(() => {
-        Plotly.Plots.resize(this.node);
+    if (RenderedPlotly.Plotly && this.isVisible && this.hasGraphElement()) {
+      RenderedPlotly.Plotly.redraw(this.node).then(() => {
+        RenderedPlotly.Plotly!.Plots.resize(this.node);
       });
     }
   }
@@ -194,6 +205,12 @@ export class RenderedPlotly extends Widget implements IRenderMime.IRenderer {
   private _mimeType: string;
   private _img_el: HTMLImageElement;
   private _model: IRenderMime.IMimeModel;
+
+  private static Plotly: typeof PlotlyType | null = null;
+  private static _resolveLoadingPlotly: () => void;
+  private static loadingPlotly = new Promise<void>((resolve) => {
+    RenderedPlotly._resolveLoadingPlotly = resolve;
+  });
 }
 
 /**

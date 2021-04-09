@@ -4,8 +4,6 @@ import { Application, IPlugin } from "@lumino/application";
 
 import { Widget } from "@lumino/widgets";
 
-import * as plotly from "./index";
-
 import { MODULE_NAME, MODULE_VERSION } from "./version";
 
 /**
@@ -18,7 +16,7 @@ function activateWidgetExtension(
   registry.registerWidget({
     name: MODULE_NAME,
     version: MODULE_VERSION,
-    exports: plotly,
+    exports: () => import("./index"),
   });
 }
 

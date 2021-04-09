@@ -3,7 +3,7 @@
     "declaration": true,
     "esModuleInterop":true,
     "lib": ["es2015", "dom"],
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noUnusedLocals": true,
@@ -11,8 +11,6 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
     "strictPropertyInitialization": false,
     "target": "es2015",
     "types": []
