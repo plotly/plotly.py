@@ -3,7 +3,7 @@ version: 2
 jobs:
   check-code-formatting:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
 
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
   # Core
   python-2.7-core:
     docker:
-      - image: circleci/python:2.7-stretch-node-browsers
+      - image: circleci/python:2.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_27: python2.7
 
@@ -33,7 +33,7 @@ jobs:
 
   python-3.5-core:
     docker:
-      - image: circleci/python:3.5-stretch-node-browsers
+      - image: circleci/python:3.5-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_35: python3.5
 
@@ -49,7 +49,7 @@ jobs:
 
   python-3.6-core:
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers
+      - image: circleci/python:3.6-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_36: python3.6
 
@@ -65,7 +65,7 @@ jobs:
 
   python-3.7-core:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
 
@@ -81,7 +81,7 @@ jobs:
 
   python-3.7-percy:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
@@ -114,7 +114,7 @@ jobs:
   # Optional
   python-2.7-optional:
     docker:
-      - image: circleci/python:2.7-stretch-node-browsers
+      - image: circleci/python:2.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_27: python2.7
 
@@ -130,7 +130,7 @@ jobs:
 
   python-3.5-optional:
     docker:
-      - image: circleci/python:3.5-stretch-node-browsers
+      - image: circleci/python:3.5-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_35: python3.5
 
@@ -146,7 +146,7 @@ jobs:
 
   python-3.6-optional:
     docker:
-      - image: circleci/python:3.6-stretch-node-browsers
+      - image: circleci/python:3.6-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_36: python3.6
 
@@ -162,7 +162,7 @@ jobs:
 
   python-3.7-optional:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
 
@@ -179,7 +179,7 @@ jobs:
   # Plot.ly
   python-2.7-plot_ly:
     docker:
-      - image: circleci/python:2.7-stretch-node-browsers
+      - image: circleci/python:2.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_27: python2.7
 
@@ -195,7 +195,7 @@ jobs:
 
   python-3.5-plot_ly:
     docker:
-      - image: circleci/python:3.5-stretch-node-browsers
+      - image: circleci/python:3.5-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_35: python3.5
 
@@ -211,7 +211,7 @@ jobs:
 
   python-3.7-plot_ly:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
 
@@ -227,7 +227,7 @@ jobs:
 
   python-2-7-orca:
     docker:
-      - image: circleci/node:10.9-stretch-browsers
+      - image: circleci/node:12.22-buster-browsers
         environment:
           PYTHON_VERSION: 2.7
 
@@ -257,7 +257,7 @@ jobs:
 
   python-3-5-orca:
     docker:
-      - image: circleci/node:10.9-stretch-browsers
+      - image: circleci/node:12.22-buster-browsers
         environment:
           PYTHON_VERSION: 3.5
 
@@ -287,7 +287,7 @@ jobs:
 
   python-3-7-orca:
     docker:
-      - image: circleci/node:10.9-stretch-browsers
+      - image: circleci/node:12.22-buster-browsers
         environment:
           PYTHON_VERSION: 3.7
 
@@ -318,7 +318,7 @@ jobs:
 
   plotlyjs_dev_build:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
         environment:
           PLOTLY_TOX_PYTHON_37: python3.7
           LANG: en_US.UTF-8
@@ -364,9 +364,9 @@ jobs:
     docker:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.7-buster-node-browsers
 
-        working_directory: ~/project
+    working_directory: ~/project
 
     steps:
       - add_ssh_keys:
