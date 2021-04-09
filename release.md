@@ -2,14 +2,14 @@
 # How to release plotly packages
 
 There are 3 Python packages (`plotly`, `plotly-geo` and `chart-studio`) which need to be
-published to PyPI and conda, and 2 JS packages (`jupyterlab-plotly` and `plotlywdiget`)
+published to PyPI and conda, and 1 JS packages (`plotlywdiget`)
 which need to be published to NPM. In addition, there are various changelogs, github
 releases and forum announcements to do :)
 
 ## Release process - `plotly` package and extensions
 
 This is the release process for releasing `plotly.py` version `X.Y.Z` with
-`plotlywidget`/`jupyterlab-plotly` with matching versions.
+`plotlywidget` with matching versions.
 
 > Note: it's easier to lock all three versions together, even if it means we occasionally
 > push no-change versions to NPM/PyPI/Conda.
@@ -41,12 +41,7 @@ specified below.
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `X.Y.Z`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
- - `packages/javascript/jupyterlab-plotly/package.json`
-   + **Ensure the version of `plotly.js` matches the one in `plotlywidget`**
-   + Update `"version"` to `X.Y.Z`
-   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
+   + Run `rm -rf node_modules && npm install && npm run build:prod`
  - This the last good time to install the extensions locally and check that everything works in dev mode
  - Run `git diff` and ensure that only the files you modified and the build artifacts have changed
  - Ensure that the diff in `package-lock.json` seems sane
@@ -60,8 +55,6 @@ Build and publish the final version of the extensions to NPM. We do this first b
 once we push to PyPI the README will refer to these versions.
 
 ```bash
-cd packages/javascript/jupyterlab-plotly
-npm run build && npm publish --access public
 cd packages/javascript/plotlywidget
 npm run build && npm publish --access public
 ```
@@ -156,12 +149,7 @@ specified below.
  - `packages/javascript/plotlywidget/package.json`
    + Update `"version"` to `X.Y.Z-rc.1`
    + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
- - `packages/javascript/jupyterlab-plotly/package.json`
-   + **Ensure the version of `plotly.js` matches the one in `plotlywidget`**
-   + Update `"version"` to `X.Y.Z-rc.1`
-   + Ensure you're using `node` version 12 and `npm` version 6 to minimize diffs to `package-lock.json`
-   + Run `rm -rf node_modules && npm install && npm run build`
+   + Run `rm -rf node_modules && npm install && npm run build:prod`
 
  2) Commit the changes
 
@@ -214,8 +202,6 @@ npm run build && npm publish --access public --tag next
 
 The `--tag next` part ensures that users won't install this version unless
 they explicitly ask for the version or for the version wtih the `next` tag.
-
-Do the same in the `jupyterlab-plotly` directory.
 
 ### Publish release candidate to plotly anaconda channel
 
