@@ -26,10 +26,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py27-core"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.5-core:
@@ -43,10 +45,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py35-core"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.6-core:
@@ -60,10 +64,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py36-core"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.7-core:
@@ -77,10 +83,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py37-core"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.7-percy:
@@ -128,10 +136,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py27-optional"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.5-optional:
@@ -145,10 +155,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py35-optional"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.6-optional:
@@ -162,10 +174,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py36-optional"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.7-optional:
@@ -179,10 +193,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/plotly; tox -e py37-optional"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   # Plot.ly
@@ -197,10 +213,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py27-plot_ly"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.5-plot_ly:
@@ -214,10 +232,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py35-plot_ly"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-3.7-plot_ly:
@@ -231,10 +251,12 @@ jobs:
       - checkout
       - run:
           name: Install tox
-          command: "sudo pip install tox jupyterlab~=3.0"
+          command: "sudo pip install tox"
       - run:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
+          environment:
+            SKIP_NPM: 1
           no_output_timeout: 20m
 
   python-2-7-orca:

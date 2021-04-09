@@ -29,6 +29,17 @@ npm_path = os.pathsep.join(
 )
 
 labstatic = "plotlywidget/labextension/static"
+if not os.path.exists(labstatic):
+    # Ensure the folder exists when we will look for files in it
+    os.makedirs(labstatic)
+
+if "--skip-npm" in sys.argv or os.environ.get("SKIP_NPM") is not None:
+    print("Skipping npm install as requested.")
+    skip_npm = True
+    if "--skip-npm" in sys.argv:
+        sys.argv.remove("--skip-npm")
+else:
+    skip_npm = False
 
 # Load plotly.js version from js/package.json
 def plotly_js_version():
@@ -133,6 +144,10 @@ class NPM(Command):
         return self.has_npm()
 
     def run(self):
+        if skip_npm:
+            log.info("Skipping npm-installation")
+            return
+
         has_npm = self.has_npm()
         if not has_npm:
             log.error(
