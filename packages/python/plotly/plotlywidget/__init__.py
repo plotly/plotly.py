@@ -1,3 +1,7 @@
+def _jupyter_labextension_paths():
+    return [{"src": "labextension", "dest": "plotlywidget"}]
+
+
 def _jupyter_nbextension_paths():
     return [
         {
@@ -7,6 +11,3 @@ def _jupyter_nbextension_paths():
             "require": "plotlywidget/extension",
         }
     ]
-
-
-__frontend_version__ = "^0.1"

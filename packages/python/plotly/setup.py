@@ -74,7 +74,15 @@ def js_prerelease(command, strict=False):
 def update_package_data(distribution):
     """update package_data to catch changes during setup"""
     build_py = distribution.get_command_obj("build_py")
-    # distribution.package_data = find_package_data()
+
+    # Add JupyterLab extension static files as their names are unknown
+    distribution.data_files.append(
+        (
+            "share/jupyter/labextensions/plotlywidget/static",
+            [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+        )
+    )
+
     # re-init build_py options which load package_data
     build_py.finalize_options()
 
@@ -507,10 +515,6 @@ setup(
             [
                 "plotlywidget/labextension/package.json",
             ],
-        ),
-        (
-            "share/jupyter/labextensions/plotlywidget/static",
-            [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
         ),
         (
             "share/jupyter/nbextensions/plotlywidget",
