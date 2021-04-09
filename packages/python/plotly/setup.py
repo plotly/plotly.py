@@ -92,13 +92,26 @@ def update_package_data(distribution):
     """update package_data to catch changes during setup"""
     build_py = distribution.get_command_obj("build_py")
 
-    # Add JupyterLab extension static files as their names are unknown
-    distribution.data_files.append(
-        (
-            "share/jupyter/labextensions/plotlywidget/static",
-            [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+    # JS assets will not be present if we are skip npm build
+    if not skip_npm:
+        distribution.data_files.append(
+            (
+                "share/jupyter/labextensions/plotlywidget",
+                ["plotlywidget/labextension/package.json",],
+            ),
+            (
+                "share/jupyter/labextensions/plotlywidget/static",
+                [os.path.join(labstatic, f) for f in os.listdir(labstatic)],
+            ),
+            (
+                "share/jupyter/nbextensions/plotlywidget",
+                [
+                    "plotlywidget/nbextension/extension.js",
+                    "plotlywidget/nbextension/index.js",
+                    "plotlywidget/nbextension/index.js.LICENSE.txt",
+                ],
+            ),
         )
-    )
 
     # re-init build_py options which load package_data
     build_py.finalize_options()
@@ -531,21 +544,7 @@ setup(
         ],
         "plotlywidget": ["nbextension/*", "labextension/*", "labextension/static/*"],
     },
-    data_files=[
-        (
-            "share/jupyter/labextensions/plotlywidget",
-            ["plotlywidget/labextension/package.json",],
-        ),
-        (
-            "share/jupyter/nbextensions/plotlywidget",
-            [
-                "plotlywidget/nbextension/extension.js",
-                "plotlywidget/nbextension/index.js",
-                "plotlywidget/nbextension/index.js.LICENSE.txt",
-            ],
-        ),
-        ("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),
-    ],
+    data_files=[("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),],
     install_requires=["retrying>=1.3.3", "six"],
     zip_safe=False,
     cmdclass=dict(
