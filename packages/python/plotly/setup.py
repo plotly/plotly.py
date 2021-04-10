@@ -94,7 +94,7 @@ def update_package_data(distribution):
 
     # JS assets will not be present if we are skip npm build
     if not skip_npm:
-        distribution.data_files.extends(
+        distribution.data_files.extend(
             [
                 (
                     "share/jupyter/labextensions/plotlywidget",
