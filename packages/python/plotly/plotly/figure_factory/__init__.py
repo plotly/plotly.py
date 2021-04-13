@@ -13,6 +13,7 @@ The figure factory module requires the numpy package"""
 
 from plotly.figure_factory._2d_density import create_2d_density
 from plotly.figure_factory._annotated_heatmap import create_annotated_heatmap
+from plotly.figure_factory._annotated_heatmap_of_categorical_data import create_annotated_heatmap_of_categorical_data
 from plotly.figure_factory._bullet import create_bullet
 from plotly.figure_factory._candlestick import create_candlestick
 from plotly.figure_factory._dendrogram import create_dendrogram
@@ -50,6 +51,7 @@ else:
 __all__ = [
     "create_2d_density",
     "create_annotated_heatmap",
+    "create_annotated_heatmap_of_categorical_data",
     "create_bullet",
     "create_candlestick",
     "create_choropleth",
