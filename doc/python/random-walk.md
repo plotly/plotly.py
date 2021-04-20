@@ -38,7 +38,7 @@ A [random walk](https://en.wikipedia.org/wiki/Random_walk) can be thought of as 
 
 #### Random Walk in 1D
 
-The jitter in the data points along the x and y axes are meant to illuminate where the points are being drawn and what the tendancy of the random walk is.
+The jitter in the data points along the x and y axes are meant to illuminate where the points are being drawn and what the tendency of the random walk is.
 
 ```python
 import plotly.graph_objects as go

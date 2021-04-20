@@ -23,7 +23,7 @@ jupyter:
     version: 3.6.8
   plotly:
     description: Add linear Ordinary Least Squares (OLS) regression trendlines or
-      non-linear Locally Weighted Scatterplot Smoothing (LOEWSS) trendlines to scatterplots
+      non-linear Locally Weighted Scatterplot Smoothing (LOWESS) trendlines to scatterplots
       in Python.
     display_as: statistical
     language: python

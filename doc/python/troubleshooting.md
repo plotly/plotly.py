@@ -37,7 +37,7 @@ jupyter:
 <!-- #region -->
 ### Version Problems
 
-In order to follow the examples in this documentation, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3.
+In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (4.x), as detailed in the [Getting Started](/python/getting-started) guide. This documentation (under https://plotly.com/python) is incompatible with `plotly` version 3.x, for which the documentation is available under https://plotly.com/python/v3. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash, Jupyter Lab or Classic Notebook, VSCode etc. Read on for details about troubleshooting `plotly` in these environments.
 
 ### Import Problems
 
@@ -62,24 +62,10 @@ IFrame(snippet_url + 'renderers', width='100%', height=630)
 ```
 
 <!-- #region -->
-### Jupyter Notebook Classic Problems
-
-The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
-
-The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
-
-If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
-
-```python
-import plotly.io as pio
-pio.renderers.default='notebook'
-```
-
-As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
 
 ### JupyterLab Problems
 
-In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There are two extensions: `jupyterlab-plotly` for rendering figures with `fig.show()` and `plotlywidget` for the `FigureWidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together. Note also that these extensions are meant to work with JupyterLab 1.x and 2.x but not 0.x.
+In order to use `plotly` in JupyterLab, you *must have the extensions installed* as detailed in the [Getting Started guide](/python/getting-started). There are two extensions: `jupyterlab-plotly` for rendering figures with `fig.show()` and `plotlywidget` for the `FigureWidget`. Please note that the *extension version matters*: the extension versions in the [Getting Started](/python/getting-started) guide match the version of `plotly` at the top of the guide and so they should be installed together.
 
 To list your current extensions, run the following command in a terminal shell **from the same environment as JupyterLab was launched**:
 
@@ -121,6 +107,22 @@ unset NODE_OPTIONS
 # (Windows)
 set NODE_OPTIONS=
 ```
+
+### Jupyter Classic Notebook Problems
+
+The classic Jupyter Notebook (i.e. launched with `jupyter notebook`) sometimes suffers from a problem whereby if you close the window and reopen it, your plots render as blank spaces.
+
+The easiest solution is to force the `notebook` renderer to reload by calling `fig.show("notebook")` instead of just `fig.show()`.
+
+If this problem is recurrent, you may safely run the following code in a Notebook (not in JupyterLab!) at any time and it should restore your figures (for example, you may put it at the top of your notebook for easy access):
+
+```python
+import plotly.io as pio
+pio.renderers.default='notebook'
+```
+
+As a last resort, you can "Restart & Clear Output" from the Kernel menu and rerun your notebook.
+
 <!-- #endregion -->
 
 ### VSCode Notebook, Nteract and Streamlit Problems
