@@ -16,7 +16,7 @@ psutil
 requests
 networkx
 squarify
-scikit-image
+scikit-image==0.18.1
 scikit-learn
 sphinx
 sphinx_bootstrap_theme
@@ -28,6 +28,6 @@ pyarrow
 cufflinks==0.17.3
 kaleido
 umap-learn==0.5.1
-pooch==1.2.0
+pooch
 wget
 nbconvert==5.6.1
