@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.6
   plotly:
-    description: How to set, create and control continous color scales and color bars
+    description: How to set, create and control continuous color scales and color bars
       in scatter, bar, map and heatmap figures.
     display_as: file_settings
     has_thumbnail: true
@@ -46,7 +46,7 @@ In the same way as the X or Y position of a mark in cartesian coordinates can be
 This document explains the following four continuous-color-related concepts:
 
 - **color scales** represent a mapping between the range 0 to 1 and some color domain within which colors are to be interpolated (unlike [discrete color sequences](/python/discrete-color/) which are never interpolated). Color scale defaults depend on the `layout.colorscales` attributes of the active [template](/python/templates/), and can be explicitly specified using the `color_continuous_scale` argument for many [Plotly Express](/python/plotly-express/) functions or the `colorscale` argument in various `graph_objects` such as `layout.coloraxis` or `marker.colorscale` in `go.Scatter` traces or `colorscale` in `go.Heatmap` traces. For example `[(0,"blue"), (1,"red")]` is a simple color scale that interpolated between blue and red via purple, which can also be implicitly represented as `["blue", "red"]` and happens to be one of the [built-in color scales](/python/builtin-colorscales) and therefore referred to as `"bluered"` or `plotly.colors.sequential.Bluered`.
-- **color ranges** represent the minimum to maximum range of data to be mapped onto the 0 to 1 input range of the color scale. Color ranges default to the range of the input data and can be explicitly specified using either the `range_color` or `color_continous_midpoint` arguments for many Plotly Express functions, or `cmin`/`cmid`/`cmax` or `zmin`/`zmid`/`zmax` for various `graph_objects` such as `layout.coloraxis.cmin` or `marker.cmin` in `go.Scatter` traces or `cmin` in `go.Heatmap` traces. For example, if a color range of `[100, 200]` is used with the color scale above, then any mark with a color value of 100 or less will be blue, and 200 or more will be red. Marks with values in between will be various shades of purple.
+- **color ranges** represent the minimum to maximum range of data to be mapped onto the 0 to 1 input range of the color scale. Color ranges default to the range of the input data and can be explicitly specified using either the `range_color` or `color_continuous_midpoint` arguments for many Plotly Express functions, or `cmin`/`cmid`/`cmax` or `zmin`/`zmid`/`zmax` for various `graph_objects` such as `layout.coloraxis.cmin` or `marker.cmin` in `go.Scatter` traces or `cmin` in `go.Heatmap` traces. For example, if a color range of `[100, 200]` is used with the color scale above, then any mark with a color value of 100 or less will be blue, and 200 or more will be red. Marks with values in between will be various shades of purple.
 - **color bars** are legend-like visible representations of the color range and color scale with optional tick labels and tick marks. Color bars can be configured with attributes inside `layout.coloraxis.colorbar` or in places like `marker.colorbar` in `go.Scatter` traces or `colorbar` in `go.Heatmap` traces.
 - **color axes** connect color scales, color ranges and color bars to a trace's data. By default, any colorable attribute in a trace is attached to its own local color axis, but color axes may also be shared across attributes and traces by setting e.g. `marker.coloraxis` in `go.Scatter` traces or `coloraxis` in `go.Heatmap` traces. Local color axis attributes are configured within traces e.g. `marker.showscale` whereas shared color axis attributes are configured within the Layout e.g. `layout.coloraxis.showscale`.
 
@@ -60,7 +60,7 @@ For example, in the `tips` dataset, the `size` column contains numbers:
 import plotly.express as px
 df = px.data.tips()
 fig = px.scatter(df, x="total_bill", y="tip", color="size",
-                 title="Numeric 'size' values mean continous color")
+                 title="Numeric 'size' values mean continuous color")
 
 fig.show()
 ```
@@ -85,7 +85,7 @@ df = px.data.tips()
 df["size"] = df["size"].astype(str)
 df["size"] = df["size"].astype(float)
 fig = px.scatter(df, x="total_bill", y="tip", color="size",
-                 title="Numeric 'size' values mean continous color")
+                 title="Numeric 'size' values mean continuous color")
 
 fig.show()
 ```
@@ -151,7 +151,7 @@ fig = px.imshow(data, color_continuous_scale=px.colors.sequential.Cividis_r)
 fig.show()
 ```
 
-### Explicity Constructing a Color scale
+### Explicitly Constructing a Color scale
 
 The Plotly Express `color_continuous_scale` argument accepts explicitly-constructed color scales as well:
 

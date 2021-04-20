@@ -174,7 +174,7 @@ fig.show()
 Notice how linear regression fits a straight line, but kNN can take non-linear shapes. Moreover, it is possible to extend linear regression to polynomial regression by using scikit-learn's `PolynomialFeatures`, which lets you fit a slope for your features raised to the power of `n`, where `n=1,2,3,4` in our example.
 
 
-With Plotly, it's easy to diplay latex equations in legend and titles by simply adding `$` before and after your equation. This way, you can see the coefficients that our polynomial regression fitted.
+With Plotly, it's easy to display latex equations in legend and titles by simply adding `$` before and after your equation. This way, you can see the coefficients that our polynomial regression fitted.
 <!-- #endregion -->
 
 ```python

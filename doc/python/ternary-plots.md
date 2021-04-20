@@ -41,7 +41,7 @@ A ternary plot depicts the ratios of three variables as positions in an equilate
 
 [Plotly Express](/python/plotly-express/) is the easy-to-use, high-level interface to Plotly, which [operates on a variety of types of data](/python/px-arguments/) and produces [easy-to-style figures](/python/styling-plotly-express/).
 
-Here we use `px.scatter_ternary` to visualize thre three-way split between the three major candidates in a municipal election.
+Here we use `px.scatter_ternary` to visualize the three-way split between the three major candidates in a municipal election.
 
 ```python
 import plotly.express as px
