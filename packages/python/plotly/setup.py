@@ -245,7 +245,7 @@ def get_latest_publish_build_info(repo, branch):
     builds = [
         j
         for j in branch_jobs
-        if j.get("workflows", {}).get("job_name", None) == "publish"
+        if j.get("workflows", {}).get("job_name", None) == "publish-dist"
         and j.get("status", None) == "success"
     ]
     build = builds[0]
