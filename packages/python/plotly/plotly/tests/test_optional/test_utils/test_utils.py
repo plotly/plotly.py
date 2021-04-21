@@ -451,7 +451,11 @@ if matplotlylib:
 
     @pytest.mark.matplotlib
     def test_masked_constants_example():
-        pd.options.plotting.backend = 'matplotlib'
+        from pandas.errors import OptionError
+        try:
+            pd.options.plotting.backend = 'matplotlib'
+        except OptionError:
+            pass
 
         # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
         data = {
