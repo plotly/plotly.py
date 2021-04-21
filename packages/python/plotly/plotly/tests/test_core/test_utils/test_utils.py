@@ -5,6 +5,7 @@ from unittest import TestCase
 from plotly.utils import PlotlyJSONEncoder, get_by_path, node_generator
 import json as _json
 
+
 class TestJSONEncoder(TestCase):
     def test_nan_to_null(self):
         array = [1, float("NaN"), float("Inf"), float("-Inf"), "platypus"]
@@ -15,6 +16,7 @@ class TestJSONEncoder(TestCase):
     def test_invalid_encode_exception(self):
         with self.assertRaises(TypeError):
             _json.dumps({"a": {1}}, cls=PlotlyJSONEncoder)
+
 
 class TestGetByPath(TestCase):
     def test_get_by_path(self):
