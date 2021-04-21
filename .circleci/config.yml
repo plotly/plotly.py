@@ -454,15 +454,15 @@ workflows:
 
   build:
     jobs:
-      - python-3.6-core
-      - python-3.7-core
-      - python-3.8-core
-      - python-3.9-core
-      - python-3.7-percy
-      - python-3.6-optional
-      - python-3.7-optional
-      - python-3.8-optional
-      - python-3.9-optional
-      - python-3.7-chart_studio
+#      - python-3.6-core
+#      - python-3.7-core
+#      - python-3.8-core
+#      - python-3.9-core
+#      - python-3.7-percy
+#      - python-3.6-optional
+#      - python-3.7-optional
+#      - python-3.8-optional
+#      - python-3.9-optional
+#      - python-3.7-chart_studio
       - python-3-7-orca
-      - build-doc
+#      - build-doc
