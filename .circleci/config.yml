@@ -236,7 +236,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
+            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}-{{ checksum "packages/python/plotly/test_requirements/requirements_37_optional.txt" }}
       - run:
           name: Create conda environment
           command: .circleci/create_conda_optional_env.sh
