@@ -44,7 +44,7 @@ jobs:
 
   python-3.8-core:
     docker:
-      - image: circleci/python:3.8-stretch-node-browsers
+      - image: circleci/python:3.8-buster-node-browsers
     steps:
       - checkout
       - run:
@@ -57,7 +57,7 @@ jobs:
 
   python-3.9-core:
     docker:
-      - image: circleci/python:3.9-stretch-node-browsers
+      - image: circleci/python:3.9-buster-node-browsers
     steps:
       - checkout
       - run:
@@ -161,7 +161,7 @@ jobs:
 
   python-3.8-optional:
     docker:
-      - image: circleci/python:3.8-stretch-node-browsers
+      - image: circleci/python:3.8-buster-node-browsers
 
     steps:
       - checkout
@@ -187,7 +187,7 @@ jobs:
 
   python-3.9-optional:
     docker:
-      - image: circleci/python:3.9-stretch-node-browsers
+      - image: circleci/python:3.9-buster-node-browsers
 
     steps:
       - checkout
