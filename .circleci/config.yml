@@ -18,34 +18,36 @@ jobs:
   python-3.6-core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_36: python3.6
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_core.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py36-core"
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
 
   python-3.7-core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py37-core"
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
+      - run:
+          name: Test dependencdies not imported
+          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
+      - run:
+          name: Test lazy imports
+          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 
   python-3.7-percy:
     docker:
@@ -83,50 +85,68 @@ jobs:
   python-3.6-optional:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_36: python3.6
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_optional.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py36-optional"
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 20m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
           no_output_timeout: 20m
 
   python-3.7-optional:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_optional.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py37-optional"
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 20m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
           no_output_timeout: 20m
 
   # Chart studio
   python-3.7-plot_ly:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./chart-studio/test_requirements/requirements_37.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
+          name: Tests
+          command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
           no_output_timeout: 20m
 
   python-3-7-orca:
@@ -164,14 +184,13 @@ jobs:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
           LANG: en_US.UTF-8
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install retrying tox black inflect"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
@@ -179,12 +198,15 @@ jobs:
           name: Update plotly.js to dev
           command: "cd packages/python/plotly; python setup.py updateplotlyjsdev"
       - run:
-          name: Test with tox
-          command: |
-            cd packages/python/plotly
-            locale
-            tox -e py37-core -- -k 'not nodev'
+          name: Test core
+          command: "cd packages/python/plotly; locale; pytest -k 'not nodev' plotly/tests/test_core"
           no_output_timeout: 20m
+      - run:
+          name: Test dependencdies not imported
+          command: "cd packages/python/plotly; locale;  pytest -x -k 'not nodev' test_init/test_dependencies_not_imported.py"
+      - run:
+          name: Test lazy imports
+          command: "cd packages/python/plotly; locale;  pytest -x -k 'not nodev' test_init/test_lazy_imports.py"
       - run:
           name: Commit
           command: |
