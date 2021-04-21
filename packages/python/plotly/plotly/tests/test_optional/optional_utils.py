@@ -37,7 +37,7 @@ class NumpyTestUtilsMixin(object):
         """
         Helper function for assert_dict_equal
 
-        By defualt removes uid from d1 and/or d2 if present
+        By default removes uid from d1 and/or d2 if present
         then calls assert_dict_equal.
 
         :param (list|tuple) ignore: sequence of key names as
