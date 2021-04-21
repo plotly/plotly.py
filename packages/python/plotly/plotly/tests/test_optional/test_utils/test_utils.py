@@ -451,6 +451,8 @@ if matplotlylib:
 
     @pytest.mark.matplotlib
     def test_masked_constants_example():
+        pd.options.plotting.backend = 'matplotlib'
+
         # example from: https://gist.github.com/tschaume/d123d56bf586276adb98
         data = {
             "esN": [0, 1, 2, 3],
