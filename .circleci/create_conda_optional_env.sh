@@ -15,7 +15,7 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
 
     # Create environment
     # PYTHON_VERSION=2.7 or 3.5
-    $HOME/miniconda/bin/conda create -n circle_optional --yes python=$PYTHON_VERSION
+    $HOME/miniconda/bin/conda create -n circle_optional --yes python=$PYTHON_VERSION poppler
 
     # Install orca into environment
     $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca==1.3.1
