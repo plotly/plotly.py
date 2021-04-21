@@ -135,7 +135,7 @@ jobs:
           no_output_timeout: 20m
 
   # Chart studio
-  python-3.7-plot_ly:
+  python-3.7-chart_studio:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
 
@@ -388,6 +388,6 @@ workflows:
       - python-3.7-percy
       - python-3.6-optional
       - python-3.7-optional
-      - python-3.7-plot_ly
+      - python-3.7-chart_studio
       - python-3-7-orca
       - build-doc
