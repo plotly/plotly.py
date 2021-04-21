@@ -22,5 +22,5 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
 
     # Install additional dependencies
     $HOME/miniconda/bin/conda activate -n circle_optional
-    pip install -r ./packages/python/plotly/test_requirements/requirements_38_optional.txt
+    $HOME/miniconda/bin/pip install -r ./packages/python/plotly/test_requirements/requirements_38_optional.txt
 fi
