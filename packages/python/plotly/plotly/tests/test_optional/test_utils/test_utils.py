@@ -452,7 +452,7 @@ if matplotlylib:
     @pytest.mark.matplotlib
     def test_masked_constants_example():
         try:
-            pd.options.plotting.backend = 'matplotlib'
+            pd.options.plotting.backend = "matplotlib"
         except Exception:
             pass
 
