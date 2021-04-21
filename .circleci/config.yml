@@ -32,7 +32,6 @@ jobs:
   python-3.7-core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-
     steps:
       - checkout
       - run:
@@ -42,12 +41,6 @@ jobs:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
-      - run:
-          name: Test dependencdies not imported
-          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
-      - run:
-          name: Test lazy imports
-          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 
   python-3.7-percy:
     docker:
@@ -133,6 +126,12 @@ jobs:
           name: Test io
           command: "cd packages/python/plotly; pytest plotly/tests/test_io"
           no_output_timeout: 20m
+      - run:
+          name: Test dependencdies not imported
+          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
+      - run:
+          name: Test lazy imports
+          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 
   # Chart studio
   python-3.7-chart_studio:
@@ -201,12 +200,6 @@ jobs:
           name: Test core
           command: "cd packages/python/plotly; locale; pytest -k 'not nodev' plotly/tests/test_core"
           no_output_timeout: 20m
-      - run:
-          name: Test dependencdies not imported
-          command: "cd packages/python/plotly; locale;  pytest -x -k 'not nodev' test_init/test_dependencies_not_imported.py"
-      - run:
-          name: Test lazy imports
-          command: "cd packages/python/plotly; locale;  pytest -x -k 'not nodev' test_init/test_lazy_imports.py"
       - run:
           name: Commit
           command: |
