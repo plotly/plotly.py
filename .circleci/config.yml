@@ -15,38 +15,6 @@ jobs:
           command: "black --check ."
 
   # Core
-  python-2.7-core:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py27-core"
-          no_output_timeout: 20m
-
-  python-3.5-core:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py35-core"
-          no_output_timeout: 20m
-
   python-3.6-core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
@@ -112,38 +80,6 @@ jobs:
             rm test/percy/*.html
 
   # Optional
-  python-2.7-optional:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py27-optional"
-          no_output_timeout: 20m
-
-  python-3.5-optional:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py35-optional"
-          no_output_timeout: 20m
-
   python-3.6-optional:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
@@ -176,39 +112,7 @@ jobs:
           command: "cd packages/python/plotly; tox -e py37-optional"
           no_output_timeout: 20m
 
-  # Plot.ly
-  python-2.7-plot_ly:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py27-plot_ly"
-          no_output_timeout: 20m
-
-  python-3.5-plot_ly:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py35-plot_ly"
-          no_output_timeout: 20m
-
+  # Chart studio
   python-3.7-plot_ly:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
@@ -224,66 +128,6 @@ jobs:
           name: Test with tox
           command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
           no_output_timeout: 20m
-
-  python-2-7-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 2.7
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-27-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-27-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
-
-  python-3-5-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 3.5
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
 
   python-3-7-orca:
     docker:
@@ -517,16 +361,11 @@ workflows:
 
   build:
     jobs:
-      - python-2.7-core
-      - python-3.5-core
       - python-3.6-core
       - python-3.7-core
       - python-3.7-percy
-      - python-2.7-optional
-      - python-3.5-optional
       - python-3.6-optional
       - python-3.7-optional
       - python-3.7-plot_ly
-      - python-2-7-orca
       - python-3-7-orca
       - build-doc
