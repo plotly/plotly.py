@@ -116,7 +116,7 @@ jobs:
           no_output_timeout: 20m
       - run:
           name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          command: "cd packages/python/plotly; pytest -s plotly/tests/test_optional"
           no_output_timeout: 40m
       - run:
           name: Test utils
