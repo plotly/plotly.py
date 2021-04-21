@@ -44,7 +44,7 @@ jobs:
 
   python-3.8-core:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.8-stretch-node-browsers
     steps:
       - checkout
       - run:
@@ -57,7 +57,7 @@ jobs:
 
   python-3.9-core:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.9-stretch-node-browsers
     steps:
       - checkout
       - run:
@@ -159,58 +159,57 @@ jobs:
           name: Test lazy imports
           command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 
+  python-3.8-optional:
+    docker:
+      - image: circleci/python:3.8-stretch-node-browsers
 
-    python-3.8-optional:
-      docker:
-        - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 40m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
+          no_output_timeout: 20m
 
-      steps:
-        - checkout
-        - run:
-            name: Install dependencies
-            command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
-        - run:
-            name: Test core
-            command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-            no_output_timeout: 20m
-        - run:
-            name: Test optional
-            command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-            no_output_timeout: 40m
-        - run:
-            name: Test utils
-            command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-            no_output_timeout: 20m
-        - run:
-            name: Test io
-            command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-            no_output_timeout: 20m
+  python-3.9-optional:
+    docker:
+      - image: circleci/python:3.9-stretch-node-browsers
 
-    python-3.9-optional:
-      docker:
-        - image: circleci/python:3.6-stretch-node-browsers
-
-      steps:
-        - checkout
-        - run:
-            name: Install dependencies
-            command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_optional.txt"
-        - run:
-            name: Test core
-            command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-            no_output_timeout: 20m
-        - run:
-            name: Test optional
-            command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-            no_output_timeout: 40m
-        - run:
-            name: Test utils
-            command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-            no_output_timeout: 20m
-        - run:
-            name: Test io
-            command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-            no_output_timeout: 20m
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_optional.txt"
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 40m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
+          no_output_timeout: 20m
 
   # Chart studio
   python-3.7-chart_studio:
