@@ -21,5 +21,6 @@ if [ ! -d $HOME/miniconda/envs/circle_optional ]; then
     $HOME/miniconda/bin/conda install --yes -n circle_optional -c plotly plotly-orca==1.3.1
 
     # Install additional dependencies
+    $HOME/miniconda/bin/conda activate -n circle_optional
     pip install -r ./packages/python/plotly/test_requirements/requirements_38_optional.txt
 fi
