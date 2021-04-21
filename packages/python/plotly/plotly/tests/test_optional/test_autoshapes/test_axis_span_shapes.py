@@ -3,7 +3,7 @@ from plotly.subplots import make_subplots
 from plotly.basedatatypes import _indexing_combinations
 import plotly.express as px
 import pytest
-from common import _cmp_partial_dict, _check_figure_layout_objects
+from .common import _cmp_partial_dict, _check_figure_layout_objects
 
 
 @pytest.fixture
