@@ -206,7 +206,12 @@ def test_write_image_string(fig1, format):
     file_path = tmp_dir + file_name
 
     pio.write_image(
-        fig1, os.path.join(tmp_dir, file_name), format=format, width=700, height=500, engine="orca"
+        fig1,
+        os.path.join(tmp_dir, file_name),
+        format=format,
+        width=700,
+        height=500,
+        engine="orca",
     )
 
     with open(file_path, "rb") as f:
@@ -225,7 +230,9 @@ def test_write_image_writeable(fig1, format):
         expected_bytes = f.read()
 
     mock_file = MagicMock()
-    pio.write_image(fig1, mock_file, format=format, width=700, height=500, engine="orca")
+    pio.write_image(
+        fig1, mock_file, format=format, width=700, height=500, engine="orca"
+    )
 
     mock_file.write.assert_called_once_with(expected_bytes)
 
@@ -236,7 +243,9 @@ def test_write_image_string_format_inference(fig1, format):
     file_path = os.path.join(tmp_dir, file_name)
 
     # Use file extension to infer image type.
-    pio.write_image(fig1, os.path.join(tmp_dir, file_name), width=700, height=500, engine="orca")
+    pio.write_image(
+        fig1, os.path.join(tmp_dir, file_name), width=700, height=500, engine="orca"
+    )
 
     with open(file_path, "rb") as f:
         written_bytes = f.read()
@@ -288,14 +297,18 @@ def test_write_image_string_bad_extension_override(fig1):
 # Topojson
 # --------
 def test_topojson_fig_to_image(topofig, format):
-    img_bytes = pio.to_image(topofig, format=format, width=700, height=500, engine="orca")
+    img_bytes = pio.to_image(
+        topofig, format=format, width=700, height=500, engine="orca"
+    )
     assert_image_bytes(img_bytes, "topofig." + format)
 
 
 # Latex / MathJax
 # ---------------
 def test_latex_fig_to_image(latexfig, format):
-    img_bytes = pio.to_image(latexfig, format=format, width=700, height=500, engine="orca")
+    img_bytes = pio.to_image(
+        latexfig, format=format, width=700, height=500, engine="orca"
+    )
     assert_image_bytes(img_bytes, "latexfig." + format)
 
 
