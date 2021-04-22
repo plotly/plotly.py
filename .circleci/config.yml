@@ -180,9 +180,10 @@ jobs:
       - run:
           name: Install orca
           command: |
-            sudo apt install poppler-utils
-            sudo npm install -g electron@1.8.4
-            sudo npm install -g orca
+            sudo npm install electron@1.8.4 sudo npm install orca
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
+            echo 'export PATH="/home/circleci/project/doc/node_modules/.bin:$PATH"' >> $BASH_ENV
+
 #      - run:
 #          name: Test core
 #          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
