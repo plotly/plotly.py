@@ -8,8 +8,6 @@ statsmodels
 Pillow==8.2.0
 pytest==6.2.3
 pytz==2021.1
-
---editable=./plotly-geo
 ipython[all]==7.22.0
 ipywidgets==7.6.3
 ipykernel==5.5.3

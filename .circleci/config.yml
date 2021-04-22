@@ -111,6 +111,9 @@ jobs:
           name: Install dependencies
           command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_optional.txt"
       - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
@@ -136,6 +139,9 @@ jobs:
       - run:
           name: Install dependencies
           command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
       - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
@@ -169,6 +175,14 @@ jobs:
           name: Install dependencies
           command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
       - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Install orca
+          command: |
+            npm install electron@1.8.4
+            npm install orca
+      - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
@@ -184,6 +198,10 @@ jobs:
           name: Test io
           command: "cd packages/python/plotly; pytest plotly/tests/test_io"
           no_output_timeout: 20m
+      - run:
+          name: Test orca
+          command: "cd packages/python/plotly; pytest plotly/plotly/tests/test_orca"
+          no_output_timeout: 20m
 
   python-3.9-optional:
     docker:
@@ -194,6 +212,9 @@ jobs:
       - run:
           name: Install dependencies
           command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
       - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
@@ -459,8 +480,8 @@ workflows:
 #      - python-3.7-percy
 #      - python-3.6-optional
 #      - python-3.7-optional
-#      - python-3.8-optional
+      - python-3.8-optional
 #      - python-3.9-optional
 #      - python-3.7-chart_studio
-      - python-3-7-orca
+#      - python-3-7-orca
 #      - build-doc
