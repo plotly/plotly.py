@@ -50,8 +50,8 @@ schools = ["Brown", "NYU", "Notre Dame", "Cornell", "Tufts", "Yale",
            "Princeton", "U.Penn", "Stanford", "MIT", "Harvard"]
 n_schools = len(schools)
 
-men_salary = [72, 67, 73, 80, 76, 79, 84, 78, 86, 93, 94, 90, 92, 96, 94, 112]
-women_salary = [92, 94, 100, 107, 112, 114, 114, 118, 119, 124, 131, 137, 141, 151, 152, 165]
+women_salary = [72, 67, 73, 80, 76, 79, 84, 78, 86, 93, 94, 90, 92, 96, 94, 112]
+men_salary = [92, 94, 100, 107, 112, 114, 114, 118, 119, 124, 131, 137, 141, 151, 152, 165]
 
 df = pd.DataFrame(dict(school=schools*2, salary=men_salary + women_salary,
                        gender=["Men"]*n_schools + ["Women"]*n_schools))
