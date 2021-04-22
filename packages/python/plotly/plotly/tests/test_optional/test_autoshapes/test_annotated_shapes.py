@@ -28,7 +28,7 @@ import os
 import sys
 import pytest
 import json
-from common import _cmp_partial_dict, _check_figure_layout_objects
+from .common import _cmp_partial_dict, _check_figure_layout_objects
 
 
 @pytest.fixture
