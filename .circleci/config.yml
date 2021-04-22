@@ -446,9 +446,9 @@ workflows:
   code_formatting:
     jobs:
       - check-code-formatting
-  dev_build:
-    jobs:
-      - plotlyjs_dev_build
+#  dev_build:
+#    jobs:
+#      - plotlyjs_dev_build
 
   build:
     jobs:
