@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 commands:
   test_core:
@@ -80,35 +80,35 @@ jobs:
           command: "black --check ."
 
   # Core
-  python-3.6-core:
+  python_36_core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
     steps:
       - test_core:
           py: "36"
 
-  python-3.7-core:
+  python_37_core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
     steps:
       - test_core:
           py: "37"
 
-  python-3.8-core:
+  python_38_core:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
     steps:
       - test_core:
           py: "38"
 
-  python-3.9-core:
+  python_39_core:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
     steps:
       - test_core:
           py: "39"
 
-  python-3.7-percy:
+  python_37_percy:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
@@ -142,35 +142,35 @@ jobs:
 
 
   # Optional
-  python-3.6-optional:
+  python_36_optional:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
     steps:
       - test_optional:
           py: "36"
 
-  python-3.7-optional:
+  python_37_optional:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
     steps:
       - test_optional:
           py: "37"
 
-  python-3.8-optional:
+  python_38_optional:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
     steps:
       - test_optional:
           py: "38"
 
-  python-3.9-optional:
+  python_39_optional:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
     steps:
       - test_optional:
           py: "39"
 
-#  python-3.6-optional:
+#  python_3.6_optional:
 #    docker:
 #      - image: circleci/python:3.6-stretch-node-browsers
 #
@@ -199,7 +199,7 @@ jobs:
 #          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
 #          no_output_timeout: 20m
 #
-#  python-3.7-optional:
+#  python_3.7_optional:
 #    docker:
 #      - image: circleci/python:3.7-stretch-node-browsers
 #
@@ -234,7 +234,7 @@ jobs:
 #          name: Test lazy imports
 #          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 #
-#  python-3.8-optional:
+#  python_3.8_optional:
 #    docker:
 #      - image: circleci/python:3.8-buster-node-browsers
 #
@@ -276,7 +276,7 @@ jobs:
 #      - store_artifacts:
 #          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 #
-#  python-3.9-optional:
+#  python_3.9_optional:
 #    docker:
 #      - image: circleci/python:3.9-buster-node-browsers
 #
@@ -306,7 +306,7 @@ jobs:
 #          no_output_timeout: 20m
 
   # Chart studio
-  python-3.7-chart_studio:
+  python_37_chart_studio:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
 
@@ -375,8 +375,6 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.7-stretch-node-browsers
-
-        working_directory: ~/project
 
     steps:
       - add_ssh_keys:
@@ -507,7 +505,7 @@ jobs:
           destination: doc/apidoc/_build/
 
 workflows:
-  version: 2
+
   code_formatting:
     jobs:
       - check-code-formatting
@@ -517,15 +515,15 @@ workflows:
 
   build:
     jobs:
-      - python-3.6-core
-#      - python-3.7-core
-      - python-3.8-core
-#      - python-3.9-core
-#      - python-3.7-percy
-      - python-3.6-optional
-#      - python-3.7-optional
-      - python-3.8-optional
-#      - python-3.9-optional
-#      - python-3.7-chart_studio
-#      - python-3-7-orca
+      - python_36_core
+#      - python_37_core
+      - python_38_core
+#      - python_39_core
+#      - python_37_percy
+      - python_36_optional
+#      - python_37_optional
+      - python_38_optional
+#      - python_39_optional
+#      - python_37_chart_studio
+#      - python_37_orca
 #      - build-doc
