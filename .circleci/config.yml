@@ -158,11 +158,12 @@ jobs:
             python -m venv venv || virtualenv venv
             . venv/bin/activate
             pip install -e ./packages/python/plotly
+            pip install -e ./packages/python/plotly-geo
+            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt"
       - run:
           name: Build html figures
           command: |
             . venv/bin/activate
-            pip install pandas statsmodels --quiet
             python test/percy/plotly-express.py
       - run:
           name: Run percy snapshots
