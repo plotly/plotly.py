@@ -180,6 +180,7 @@ jobs:
       - run:
           name: Install orca
           command: |
+            sudo apt install poppler-utils
             npm install electron@1.8.4
             npm install orca
 #      - run:
