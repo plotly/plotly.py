@@ -11,7 +11,7 @@ import warnings
 from copy import copy
 from contextlib import contextmanager
 
-import retrying
+import tenacity
 from six import string_types
 
 import _plotly_utils.utils
@@ -1173,11 +1173,11 @@ as follows:
 
     >>> import plotly.io as pio
     >>> pio.orca.config.use_xvfb = True
-    
+
 You can save this configuration for use in future sessions as follows:
 
-    >>> pio.orca.config.save() 
-    
+    >>> pio.orca.config.save()
+
 See https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml
 for more info on Xvfb
 """
@@ -1451,7 +1451,9 @@ Install using conda:
                 orca_state["shutdown_timer"] = t
 
 
-@retrying.retry(wait_random_min=5, wait_random_max=10, stop_max_delay=60000)
+@tenacity.retry(
+    wait=tenacity.wait_random(min=5, max=10), stop=tenacity.stop_after_delay(60000),
+)
 def request_image_with_retrying(**kwargs):
     """
     Helper method to perform an image request to a running orca server process
