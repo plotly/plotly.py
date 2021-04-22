@@ -1,4 +1,69 @@
-version: 2
+version: 2.1
+
+commands:
+  test-core:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_core.txt"
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+
+  test-optional:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Install orca
+          command: |
+            sudo npm install electron@1.8.4 sudo npm install orca
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
+            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 40m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
+          no_output_timeout: 20m
+      - run:
+          name: Test dependencdies not imported
+          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
+      - run:
+          name: Test lazy imports
+          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
+      - run:
+          name: Test orca
+          command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
+          no_output_timeout: 20m
+      - store_artifacts:
+          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
+
 
 jobs:
   check-code-formatting:
@@ -18,55 +83,30 @@ jobs:
   python-3.6-core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
+      - test-core:
+          py: "36"
 
   python-3.7-core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
+      - test-core:
+          py: "37"
 
   python-3.8-core:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
+      - test-core:
+          py: "38"
 
   python-3.9-core:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
+      - test-core:
+          py: "39"
 
   python-3.7-percy:
     docker:
@@ -100,141 +140,35 @@ jobs:
             npx percy snapshot test/percy/
             rm test/percy/*.html
 
+
   # Optional
   python-3.6-optional:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
-      - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
+      - test-optional:
+          py: "36"
 
   python-3.7-optional:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
-      - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
-      - run:
-          name: Test dependencdies not imported
-          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
-      - run:
-          name: Test lazy imports
-          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
+      - test-optional:
+          py: "37"
 
   python-3.8-optional:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
-      - run:
-          name: Install orca
-          command: |
-            sudo npm install electron@1.8.4 sudo npm install orca
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-
-#      - run:
-#          name: Test core
-#          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-#          no_output_timeout: 20m
-#      - run:
-#          name: Test optional
-#          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-#          no_output_timeout: 40m
-#      - run:
-#          name: Test utils
-#          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-#          no_output_timeout: 20m
-#      - run:
-#          name: Test io
-#          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-#          no_output_timeout: 20m
-      - run:
-          name: Test orca
-          command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
-          no_output_timeout: 20m
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
+      - test-optional:
+          py: "38"
 
   python-3.9-optional:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_optional.txt"
-      - run:
-          name: Install plotly-geo
-          command: "cd packages/python/plotly-geo; sudo pip install -e ."
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
-      - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
+      - test-optional:
+          py: "39"
 
   # Chart studio
   python-3.7-chart_studio:
@@ -250,35 +184,6 @@ jobs:
           name: Tests
           command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
           no_output_timeout: 20m
-
-  python-3-7-orca:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}-{{ checksum "packages/python/plotly/test_requirements/requirements_37_optional.txt" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
   plotlyjs_dev_build:
     docker:
@@ -477,15 +382,14 @@ workflows:
 
   build:
     jobs:
-#      - python-3.6-core
+      - python-3.6-core
 #      - python-3.7-core
-#      - python-3.8-core
+      - python-3.8-core
 #      - python-3.9-core
 #      - python-3.7-percy
-#      - python-3.6-optional
+      - python-3.6-optional
 #      - python-3.7-optional
       - python-3.8-optional
 #      - python-3.9-optional
 #      - python-3.7-chart_studio
-#      - python-3-7-orca
 #      - build-doc
