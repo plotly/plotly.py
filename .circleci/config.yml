@@ -1,7 +1,7 @@
 version: 2
 
 commands:
-  test-core:
+  test_core:
     parameters:
       py:
         default: "36"
@@ -16,7 +16,7 @@ commands:
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
 
-  test-optional:
+  test_optional:
     parameters:
       py:
         default: "36"
@@ -84,28 +84,28 @@ jobs:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
     steps:
-      - test-core:
+      - test_core:
           py: "36"
 
   python-3.7-core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
     steps:
-      - test-core:
+      - test_core:
           py: "37"
 
   python-3.8-core:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
     steps:
-      - test-core:
+      - test_core:
           py: "38"
 
   python-3.9-core:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
     steps:
-      - test-core:
+      - test_core:
           py: "39"
 
   python-3.7-percy:
@@ -146,28 +146,28 @@ jobs:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
     steps:
-      - test-optional:
+      - test_optional:
           py: "36"
 
   python-3.7-optional:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
     steps:
-      - test-optional:
+      - test_optional:
           py: "37"
 
   python-3.8-optional:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
     steps:
-      - test-optional:
+      - test_optional:
           py: "38"
 
   python-3.9-optional:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
     steps:
-      - test-optional:
+      - test_optional:
           py: "39"
 
 #  python-3.6-optional:
