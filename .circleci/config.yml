@@ -229,8 +229,6 @@ jobs:
   python-3-7-orca:
     docker:
       - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 3.7
 
     steps:
       - checkout
