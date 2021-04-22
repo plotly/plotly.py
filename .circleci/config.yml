@@ -180,7 +180,7 @@ jobs:
             . venv/bin/activate
             pip install -e ./packages/python/plotly
             pip install -e ./packages/python/plotly-geo
-            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt"
+            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt
       - run:
           name: Build html figures
           command: |
