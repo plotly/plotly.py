@@ -1,6 +1,6 @@
 requests==2.12.4
 six==1.10.0
-retrying==1.3.3
+tenacity==6.2.0
 pandas==0.24.2
 numpy==1.19.5
 xarray==0.10.9
