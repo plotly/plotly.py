@@ -30,12 +30,6 @@ commands:
           name: Install plotly-geo
           command: "cd packages/python/plotly-geo; sudo pip install -e ."
       - run:
-          name: Install orca
-          command: |
-            sudo npm install electron@1.8.4 sudo npm install orca
-            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
-            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
-      - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
@@ -57,13 +51,32 @@ commands:
       - run:
           name: Test lazy imports
           command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
+
+  test_orca:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Install orca
+          command: |
+            sudo npm install electron@1.8.4 sudo npm install orca
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
+            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
       - run:
           name: Test orca
           command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
           no_output_timeout: 20m
       - store_artifacts:
           path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
-
 
 jobs:
   check-code-formatting:
@@ -136,6 +149,14 @@ jobs:
     steps:
       - test_optional:
           py: "39"
+
+  # Orca
+  python_38_orca:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+    steps:
+      - test_orca:
+          py: "38"
 
   # Percy
   python_37_percy:
@@ -381,14 +402,15 @@ workflows:
 
   build:
     jobs:
-      - python_36_core
-#      - python_37_core
-      - python_38_core
-#      - python_39_core
-      - python_37_percy
+#      - python_36_core
+      - python_37_core
+#      - python_38_core
+      - python_39_core
       - python_36_optional
 #      - python_37_optional
-      - python_38_optional
-#      - python_39_optional
+#      - python_38_optional
+      - python_39_optional
+      - python_38_orca
+      - python_37_percy
 #      - python_37_chart_studio
 #      - build-doc
