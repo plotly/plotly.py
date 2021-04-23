@@ -20,3 +20,4 @@ matplotlib==2.2.3
 scikit-image==0.18.1
 psutil==5.7.0
 kaleido
+jupyterlab~=3.0
