@@ -22,7 +22,7 @@ jupyter:
     pygments_lexer: ipython3
     version: 3.7.3
   plotly:
-    description: How to make guage charts in Python with Plotly.
+    description: How to make gauge charts in Python with Plotly.
     display_as: financial
     language: python
     layout: base
@@ -63,7 +63,7 @@ In this tutorial we introduce a new trace named "Indicator". The purpose of "ind
       <li> position: position relative to `number` (either top, left, bottom, right)</li>
     </ol>
     Finally, we can have a simple title for the indicator via `title` with 'text' attribute which is a string, and 'align' which can be set to left, center, and right.
-    There are two gauge types: [angular](https://plotly.com/python/gauge-charts/) and [bullet](https://plotly.com/python/bullet-charts/). Here is a combination of both shapes (angular, bullet), and different modes (guage, delta, and value):
+    There are two gauge types: [angular](https://plotly.com/python/gauge-charts/) and [bullet](https://plotly.com/python/bullet-charts/). Here is a combination of both shapes (angular, bullet), and different modes (gauge, delta, and value):
 
 ```python
 import plotly.graph_objects as go

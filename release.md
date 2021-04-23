@@ -24,7 +24,7 @@ with the expected publication date.
 Use the `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, and `Security`
 labels for all changes to plotly.py.  If the version of plotly.js has
 been updated, include this as the first `Updated` entry. Call out any
-noteable changes as sub-bullets (new trace types in particular), and provide
+notable changes as sub-bullets (new trace types in particular), and provide
 a link to the plotly.js CHANGELOG.
 
 ### Finalize versions
@@ -201,7 +201,7 @@ npm run build && npm publish --access public --tag next
 ```
 
 The `--tag next` part ensures that users won't install this version unless
-they explicitly ask for the version or for the version wtih the `next` tag.
+they explicitly ask for the version or for the version with the `next` tag.
 
 ### Publish release candidate to plotly anaconda channel
 
@@ -288,7 +288,7 @@ Publish the final version to PyPI
 
 ### Publish to plotly anaconda channel
 
-From `packages/python/plotly-geo`, build the conda packge
+From `packages/python/plotly-geo`, build the conda package
 ```bash
 (plotly_dev) $ conda build recipe/
 ```
@@ -337,7 +337,7 @@ Publish the final version to PyPI
 
 ### Publish to plotly anaconda channel
 
-From `packages/python/plotly-geo`, build the conda packge
+From `packages/python/plotly-geo`, build the conda package
 ```bash
 (plotly_dev) $ conda build recipe/
 ```

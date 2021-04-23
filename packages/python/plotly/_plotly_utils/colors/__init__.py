@@ -377,7 +377,7 @@ def validate_colors(colors, colortype="tuple"):
 
 def validate_colors_dict(colors, colortype="tuple"):
     """
-    Validates dictioanry of color(s)
+    Validates dictionary of color(s)
     """
     # validate each color element in the dictionary
     for key in colors:
@@ -491,15 +491,15 @@ def convert_colors_to_same_type(
         return (colors_list, scale)
     else:
         raise exceptions.PlotlyError(
-            "You must select either rgb or tuple " "for your colortype variable."
+            "You must select either rgb or tuple for your colortype variable."
         )
 
 
 def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
     """
-    Converts a colors in a dictioanry of colors to the specified color type
+    Converts a colors in a dictionary of colors to the specified color type
 
-    :param (dict) colors_dict: a dictioanry whose values are single colors
+    :param (dict) colors_dict: a dictionary whose values are single colors
     """
     for key in colors_dict:
         if "#" in colors_dict[key]:
@@ -519,7 +519,7 @@ def convert_dict_colors_to_same_type(colors_dict, colortype="rgb"):
         return colors_dict
     else:
         raise exceptions.PlotlyError(
-            "You must select either rgb or tuple " "for your colortype variable."
+            "You must select either rgb or tuple for your colortype variable."
         )
 
 
@@ -536,7 +536,7 @@ def validate_scale_values(scale):
     """
     if len(scale) < 2:
         raise exceptions.PlotlyError(
-            "You must input a list of scale values " "that has at least two values."
+            "You must input a list of scale values that has at least two values."
         )
 
     if (scale[0] != 0) or (scale[-1] != 1):
@@ -584,7 +584,7 @@ def make_colorscale(colors, scale=None):
     # validate minimum colors length of 2
     if len(colors) < 2:
         raise exceptions.PlotlyError(
-            "You must input a list of colors that " "has at least two colors."
+            "You must input a list of colors that has at least two colors."
         )
 
     if scale is None:
@@ -594,7 +594,7 @@ def make_colorscale(colors, scale=None):
     else:
         if len(colors) != len(scale):
             raise exceptions.PlotlyError(
-                "The length of colors and scale " "must be the same."
+                "The length of colors and scale must be the same."
             )
 
         validate_scale_values(scale)

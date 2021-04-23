@@ -74,7 +74,7 @@ The `Stream Id Object` comes bundled in the `graph_objs` package. We can then ca
 help(go.Stream)
 ```
 
-As we can see, the `Stream Id Object` is a dictionary-like object that takes two parameters, and has all the methods that are assoicated with dictionaries.
+As we can see, the `Stream Id Object` is a dictionary-like object that takes two parameters, and has all the methods that are associated with dictionaries.
 We will need one of these objects for each of trace that we wish to stream data to.
 We'll now create a single stream token for our streaming example, which will include one scatter trace.
 
@@ -89,7 +89,7 @@ stream_1 = go.Stream(
 )
 ```
 
-The `'maxpoints'` key sets the maxiumum number of points to keep on the plotting surface at any given time.
+The `'maxpoints'` key sets the maximum number of points to keep on the plotting surface at any given time.
 More over, if you want to avoid the use of these `Stream Id Objects`, you can just create a dictionary with at least the token parameter defined, for example:
 
 ```python

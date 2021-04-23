@@ -192,7 +192,7 @@ Type checking boiler plate
 A `PlotlyRequestError` that prints a useful error message from the server:
 1. Print `response.detail` if provided (Plotly error message)
 2. Otherwise, print `response.body` if the response is plain-text
-3. Otherwise, print the original `requests.expceptions.HTTPError` error message.
+3. Otherwise, print the original `requests.exceptions.HTTPError` error message.
 
 Also, store the status code.
 

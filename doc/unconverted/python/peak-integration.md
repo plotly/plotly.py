@@ -12,7 +12,7 @@ jupyter:
     language: python
     name: python2
   plotly:
-    description: Learn how to integrate the area between peaks and bassline in Python.
+    description: Learn how to integrate the area between peaks and baseline in Python.
     display_as: peak-analysis
     has_thumbnail: false
     language: python

@@ -485,7 +485,7 @@ fig.show()
 ```
 
 #### Adding the Same Shapes to Multiple Subplots
-The same shape can be added to mulitple facets by using the `'all'`
+The same shape can be added to multiple facets by using the `'all'`
 keyword in the `row` and `col` arguments. For example
 ```python
 import plotly.express as px
@@ -579,7 +579,7 @@ fig.show()
 
 _introduced in plotly 4.7_
 
-You can create layout shapes programatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+You can create layout shapes programmatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), [modebar buttons can be added](/python/configuration-options#add-optional-shapedrawing-buttons-to-modebar) in the `config` to select the dragmode. If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
 
 This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](/python/imshow) or [layout images](/python/images).
 

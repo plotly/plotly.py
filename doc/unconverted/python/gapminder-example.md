@@ -62,7 +62,7 @@ py.iplot(table, filename='animations-gapminder-data-preview')
 #### Make the Grid
 Since we are using the v2 api for animations in Plotly, we need to first make a `grid`. You can learn more in the [introduction to animation doc](https://plot.ly/python/animations/).
 
-We will first define a list of _string_ years which will represent the values that our `slider` will take on. Going through the dataset, we will take out all the unique continents from the column `continent` and store them as well. Finally, we make a grid with each column representing a slice of the dataframe by _year_, _continent_ and _column name_, making sure to name each column uniquly by these variables:
+We will first define a list of _string_ years which will represent the values that our `slider` will take on. Going through the dataset, we will take out all the unique continents from the column `continent` and store them as well. Finally, we make a grid with each column representing a slice of the dataframe by _year_, _continent_ and _column name_, making sure to name each column uniquely by these variables:
 
 ```python
 years_from_col = set(dataset['year'])
@@ -259,7 +259,7 @@ Finally we make our `frames`. Here we are running again through the years and co
 ```
 frame = {'data': [], 'name': value-name}
 ```
-We add a dictionary of data to this list and at the end of each loop, we ensure to add the `steps` dictionary to the steps list. At the end, we attatch the `sliders` dictionary to the figure via:
+We add a dictionary of data to this list and at the end of each loop, we ensure to add the `steps` dictionary to the steps list. At the end, we attach the `sliders` dictionary to the figure via:
 
 ```
 figure['layout']['sliders'] = [sliders_dict]

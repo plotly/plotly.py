@@ -25,7 +25,7 @@ jupyter:
 ---
 
 #### New to Plotly?
-Plotly's Python library is free and open source! [Get started](https://plot.ly/python/getting-started/) by dowloading the client and [reading the primer](https://plot.ly/python/getting-started/).
+Plotly's Python library is free and open source! [Get started](https://plot.ly/python/getting-started/) by downloading the client and [reading the primer](https://plot.ly/python/getting-started/).
 <br>You can set up Plotly to work in [online](https://plot.ly/python/getting-started/#initialization-for-online-plotting) or [offline](https://plot.ly/python/getting-started/#initialization-for-offline-plotting) mode, or in [jupyter notebooks](https://plot.ly/python/getting-started/#start-plotting-online).
 <br>We also have a quick-reference [cheatsheet](https://images.plot.ly/plotly-documentation/images/python_cheat_sheet.pdf) (new!) to help you get started!
 
@@ -46,7 +46,7 @@ import scipy
 #### Generate Data
 
 
-Let us generate some random data from the `Normal Distriubtion`. We will sample 50 points from a normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$ and from another with mean $\mu = 2$ and variance $\sigma^2 = 1$.
+Let us generate some random data from the `Normal Distribution`. We will sample 50 points from a normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$ and from another with mean $\mu = 2$ and variance $\sigma^2 = 1$.
 
 ```python
 data1 = np.random.normal(0, 1, size=50)
@@ -82,7 +82,7 @@ py.iplot(data, filename='normal-dists-plot')
 #### One Sample T Test
 
 
-A `One Sample T-Test` is a statistical test used to evaluate the null hypothesis that the mean $m$ of a 1D sample dataset of independant observations is equal to the true mean $\mu$ of the population from which the data is sampled. In other words, our null hypothesis is that
+A `One Sample T-Test` is a statistical test used to evaluate the null hypothesis that the mean $m$ of a 1D sample dataset of independent observations is equal to the true mean $\mu$ of the population from which the data is sampled. In other words, our null hypothesis is that
 
 $$
 \begin{align*}

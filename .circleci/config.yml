@@ -1,4 +1,82 @@
-version: 2
+version: 2.1
+
+commands:
+  test_core:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_core.txt"
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+
+  test_optional:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Test core
+          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
+          no_output_timeout: 20m
+      - run:
+          name: Test optional
+          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
+          no_output_timeout: 40m
+      - run:
+          name: Test utils
+          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
+          no_output_timeout: 20m
+      - run:
+          name: Test io
+          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
+          no_output_timeout: 20m
+      - run:
+          name: Test dependencdies not imported
+          command: "cd packages/python/plotly; pytest -x test_init/test_dependencies_not_imported.py"
+      - run:
+          name: Test lazy imports
+          command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
+
+  test_orca:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Install orca
+          command: |
+            sudo npm install electron@1.8.4 sudo npm install orca
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
+            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Test orca
+          command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
+          no_output_timeout: 20m
+      - store_artifacts:
+          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
 jobs:
   check-code-formatting:
@@ -15,85 +93,89 @@ jobs:
           command: "black --check ."
 
   # Core
-  python-2.7-core:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py27-core"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.5-core:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py35-core"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.6-core:
+  python_36_core:
     docker:
       - image: circleci/python:3.6-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_36: python3.6
-
+          SKIP_NPM: 1
     steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py36-core"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
+      - test_core:
+          py: "36"
 
-  python-3.7-core:
+  python_37_core:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
-
+          SKIP_NPM: 1
     steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py37-core"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
+      - test_core:
+          py: "37"
 
-  python-3.7-percy:
+  python_38_core:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+        environment:
+          SKIP_NPM: 1
+    steps:
+      - test_core:
+          py: "38"
+
+  python_39_core:
+    docker:
+      - image: circleci/python:3.9-buster-node-browsers
+        environment:
+          SKIP_NPM: 1
+    steps:
+      - test_core:
+          py: "39"
+
+  # Optional
+  python_36_optional:
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - test_optional:
+          py: "36"
+
+  python_37_optional:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+    steps:
+      - test_optional:
+          py: "37"
+
+  python_38_optional:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "38"
+
+  python_39_optional:
+    docker:
+      - image: circleci/python:3.9-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "39"
+
+  # Orca
+  python_38_orca:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+        environment:
+          SKIP_NPM: 1
+    steps:
+      - test_orca:
+          py: "38"
+
+  # Percy
+  python_37_percy:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
-    resource_class: large
+          SKIP_NPM: 1
 
     steps:
       - checkout
@@ -108,11 +190,12 @@ jobs:
             python -m venv venv || virtualenv venv
             . venv/bin/activate
             pip install -e ./packages/python/plotly
+            pip install -e ./packages/python/plotly-geo
+            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt
       - run:
           name: Build html figures
           command: |
             . venv/bin/activate
-            pip install pandas statsmodels --quiet
             python test/percy/plotly-express.py
       - run:
           name: Run percy snapshots
@@ -120,238 +203,34 @@ jobs:
             npx percy snapshot test/percy/
             rm test/percy/*.html
 
-  # Optional
-  python-2.7-optional:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py27-optional"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.5-optional:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py35-optional"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.6-optional:
-    docker:
-      - image: circleci/python:3.6-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_36: python3.6
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py36-optional"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.7-optional:
+  # Chart studio
+  python_37_chart_studio:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
+          SKIP_NPM: 1
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install tox"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./chart-studio/test_requirements/requirements_37.txt"
       - run:
-          name: Test with tox
-          command: "cd packages/python/plotly; tox -e py37-optional"
-          environment:
-            SKIP_NPM: 1
+          name: Tests
+          command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
           no_output_timeout: 20m
-
-  # Plot.ly
-  python-2.7-plot_ly:
-    docker:
-      - image: circleci/python:2.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_27: python2.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py27-plot_ly"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.5-plot_ly:
-    docker:
-      - image: circleci/python:3.5-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_35: python3.5
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py35-plot_ly"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-3.7-plot_ly:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
-
-    steps:
-      - checkout
-      - run:
-          name: Install tox
-          command: "sudo pip install tox"
-      - run:
-          name: Test with tox
-          command: "cd packages/python/chart-studio; tox -e py37-plot_ly"
-          environment:
-            SKIP_NPM: 1
-          no_output_timeout: 20m
-
-  python-2-7-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 2.7
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-27-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-27-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
-
-  python-3-5-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 3.5
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-35-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: plotly/tests/test_orca/images/linux/failed
-
-  python-3-7-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 3.7
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
   plotlyjs_dev_build:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
         environment:
-          PLOTLY_TOX_PYTHON_37: python3.7
           LANG: en_US.UTF-8
-    resource_class: large
 
     steps:
       - checkout
       - run:
-          name: Install tox
-          command: "sudo pip install retrying tox black inflect jupyterlab~=3.0"
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
@@ -359,11 +238,8 @@ jobs:
           name: Update plotly.js to dev
           command: "cd packages/python/plotly; python setup.py updateplotlyjsdev"
       - run:
-          name: Test with tox
-          command: |
-            cd packages/python/plotly
-            locale
-            tox -e py37-core -- -k 'not nodev'
+          name: Test core
+          command: "cd packages/python/plotly; locale; pytest -k 'not nodev' plotly/tests/test_core"
           no_output_timeout: 20m
       - run:
           name: Commit
@@ -389,8 +265,8 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.7-stretch-node-browsers
-
-    working_directory: ~/project
+        environment:
+          SKIP_NPM: 1
 
     steps:
       - add_ssh_keys:
@@ -521,7 +397,7 @@ jobs:
           destination: doc/apidoc/_build/
 
 workflows:
-  version: 2
+
   code_formatting:
     jobs:
       - check-code-formatting
@@ -531,16 +407,15 @@ workflows:
 
   build:
     jobs:
-      - python-2.7-core
-      - python-3.5-core
-      - python-3.6-core
-      - python-3.7-core
-      - python-3.7-percy
-      - python-2.7-optional
-      - python-3.5-optional
-      - python-3.6-optional
-      - python-3.7-optional
-      - python-3.7-plot_ly
-      - python-2-7-orca
-      - python-3-7-orca
+      - python_36_core
+      - python_37_core
+      - python_38_core
+      - python_39_core
+      - python_36_optional
+      - python_37_optional
+      - python_38_optional
+      - python_39_optional
+      - python_38_orca
+      - python_37_percy
+      - python_37_chart_studio
       - build-doc
