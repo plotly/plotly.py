@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from six import string_types
 import os
 import json
-from pathlib import Path, PurePath
+from pathlib import Path
 import plotly
 from plotly.io._utils import validate_coerce_fig_to_dict
 
@@ -232,13 +232,13 @@ def write_image(
     # Try to cast `file` as a pathlib object `path`.
     # ----------------------------------------------
     if isinstance(file, string_types):
-        # Use the standard pathlib constructor to make a pathlib object.
+        # Use the standard Path constructor to make a pathlib object.
         path = Path(file)
-    elif isinstance(file, PurePath):  # PurePath is the most general pathlib object.
-        # `file` is already a pathlib object.
+    elif isinstance(file, Path):
+        # `file` is already a Path object.
         path = file
     else:
-        # We could not make a pathlib object out of file. Either `file` is an open file
+        # We could not make a Path object out of file. Either `file` is an open file
         # descriptor with a `write()` method or it's an invalid object.
         path = None
 

@@ -1,6 +1,7 @@
 import uuid
 import json
 import os
+from pathlib import Path
 import webbrowser
 
 import six
@@ -401,7 +402,7 @@ def write_html(
         Figure object or dict representing a figure
     file: str or writeable
         A string representing a local file path or a writeable object
-        (e.g. an open file descriptor)
+        (e.g. a pathlib.Path object or an open file descriptor)
     config: dict or None (default None)
         Plotly.js figure config options
     auto_play: bool (default=True)
@@ -520,24 +521,31 @@ def write_html(
     )
 
     # Check if file is a string
-    file_is_str = isinstance(file, six.string_types)
+    if isinstance(file, six.string_types):
+        # Use the standard pathlib constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):  # PurePath is the most general pathlib object.
+        # `file` is already a pathlib object.
+        path = file
+    else:
+        # We could not make a pathlib object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
 
     # Write HTML string
-    if file_is_str:
-        with open(file, "w") as f:
-            f.write(html_str)
+    if path is not None:
+        path.write_text(html_str)
     else:
         file.write(html_str)
 
     # Check if we should copy plotly.min.js to output directory
-    if file_is_str and full_html and include_plotlyjs == "directory":
-        bundle_path = os.path.join(os.path.dirname(file), "plotly.min.js")
+    if path is not None and full_html and include_plotlyjs == "directory":
+        bundle_path = path.parent / "plotly.min.js"
 
-        if not os.path.exists(bundle_path):
-            with open(bundle_path, "w") as f:
-                f.write(get_plotlyjs())
+        if not bundle_path.exists():
+            bundle_path.write_text(get_plotlyjs())
 
     # Handle auto_open
-    if file_is_str and full_html and auto_open:
-        url = "file://" + os.path.abspath(file)
+    if path is not None and full_html and auto_open:
+        url = path.as_uri()
         webbrowser.open(url)
