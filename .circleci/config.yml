@@ -215,6 +215,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            sudo pip install --upgrade virtualenv
+            python -m venv venv || virtualenv venv
+            . venv/bin/activate
+
             cd packages/python
             pip install -r ./chart-studio/test_requirements/requirements_37.txt
             pip install -e ./plotly
