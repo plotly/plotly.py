@@ -14,7 +14,10 @@ try:
     root_dir = os.path.dirname(os.path.abspath(plotly.__file__))
     package_dir = os.path.join(root_dir, "package_data")
     scope.plotlyjs = os.path.join(package_dir, "plotly.min.js")
-    scope.mathjax = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+    if scope.mathjax is None:
+        scope.mathjax = (
+            "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"
+        )
 except ImportError:
     PlotlyScope = None
     scope = None
@@ -92,9 +95,19 @@ def to_image(
     # -------------
     if engine == "auto":
         if scope is not None:
+            # Default to kaleido if available
             engine = "kaleido"
         else:
-            engine = "orca"
+            # See if orca is available
+            from ._orca import validate_executable
+
+            try:
+                validate_executable()
+                engine = "orca"
+            except:
+                # If orca not configured properly, make sure we display the error
+                # message advising the installation of kaleido
+                engine = "kaleido"
 
     if engine == "orca":
         # Fall back to legacy orca image export path
