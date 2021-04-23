@@ -214,7 +214,10 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./chart-studio/test_requirements/requirements_37.txt"
+          command: |
+            cd packages/python
+            pip install -r ./chart-studio/test_requirements/requirements_37.txt
+            pip install -e ./plotly
       - run:
           name: Tests
           command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
