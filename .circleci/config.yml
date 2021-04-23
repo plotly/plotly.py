@@ -222,12 +222,18 @@ jobs:
 
   plotlyjs_dev_build:
     docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+      - image: circleci/python:3.8-buster-node-browsers
         environment:
           LANG: en_US.UTF-8
 
     steps:
       - checkout
+      - run:
+          name: Display versions
+          command: |
+            npm --version
+            nodejs --version
+            python --version
       - run:
           name: Install dependencies
           command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect"
@@ -258,6 +264,8 @@ jobs:
           when: always
       - store_artifacts:
           path: packages/python/plotly/dist
+      - store_artifacts:
+          path: /home/circleci/.npm/_logs/
 
   build-doc:
     resource_class: xlarge
