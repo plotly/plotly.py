@@ -87,7 +87,7 @@ fig_thresh.show()
 
 Notice how this ROC curve looks similar to the True Positive Rate curve from the previous plot. This is because they are the same curve, except the x-axis consists of increasing values of FPR instead of threshold, which is why the line is flipped and distorted.
 
-We also display the area under the ROC curve (ROC AUC), which is fairly high, thus consistent with our intepretation of the previous plots.
+We also display the area under the ROC curve (ROC AUC), which is fairly high, thus consistent with our interpretation of the previous plots.
 
 ```python
 import plotly.express as px

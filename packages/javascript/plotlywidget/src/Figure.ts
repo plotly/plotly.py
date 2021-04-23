@@ -1,128 +1,9 @@
-import {
-  DOMWidgetModel,
-  DOMWidgetView,
-  ISerializers,
-} from "@jupyter-widgets/base";
+var widgets = require("@jupyter-widgets/base");
+var _ = require("lodash");
 
-import _ from "lodash";
-
-import Plotly from "plotly.js/dist/plotly";
-
-import { MODULE_NAME, MODULE_VERSION } from "./version";
-
-// @ts-ignore
-window.PlotlyConfig = { MathJaxConfig: "local" };
-const semver_range = "^" + MODULE_VERSION;
-
-type InputDeviceState = {
-  alt: any;
-  ctrl: any;
-  meta: any;
-  shift: any;
-  button: any;
-  buttons: any;
-};
-
-type Js2PyLayoutDeltaMsg = {
-  layout_delta: any;
-  layout_edit_id: any;
-};
-
-type Js2PyMsg = {
-  source_view_id: string;
-};
-
-type Js2PyPointsCallbackMsg = {
-  event_type: string;
-  points: Points;
-  device_state: InputDeviceState;
-  selector: Selector;
-};
-
-type Js2PyRelayoutMsg = Js2PyMsg & {
-  relayout_data: any;
-};
-
-type Js2PyRestyleMsg = Js2PyMsg & {
-  style_data: any;
-  style_traces?: null | number | number[];
-};
-
-type Js2PyTraceDeltasMsg = {
-  trace_deltas: any;
-  trace_edit_id: any;
-};
-
-type Js2PyUpdateMsg = Js2PyMsg & {
-  style_data: any;
-  layout_data: any;
-  style_traces?: null | number | number[];
-};
-
-type Points = {
-  trace_indexes: number[];
-  point_indexes: number[];
-  xs: number[];
-  ys: number[];
-  zs?: number[];
-};
-
-type Py2JsMsg = {
-  trace_edit_id?: any;
-  layout_edit_id?: any;
-  source_view_id?: any;
-};
-
-type Py2JsAddTracesMsg = Py2JsMsg & {
-  trace_data: any;
-};
-
-type Py2JsAnimateMsg = Py2JsMsg & {
-  style_data: any;
-  layout_data: any;
-  style_traces?: null | number | number[];
-  animation_opts?: any;
-};
-
-type Py2JsDeleteTracesMsg = Py2JsMsg & {
-  delete_inds: number[];
-};
-
-type Py2JsMoveTracesMsg = {
-  current_trace_inds: number[];
-  new_trace_inds: number[];
-};
-
-type Py2JsRestyleMsg = Py2JsMsg & {
-  restyle_data: any;
-  restyle_traces?: null | number | number[];
-};
-
-type Py2JsRelayoutMsg = Py2JsMsg & {
-  relayout_data: any;
-};
-
-type Py2JsRemoveLayoutPropsMsg = {
-  remove_props: any;
-};
-
-type Py2JsRemoveTracePropsMsg = {
-  remove_props: any;
-  remove_trace: any;
-};
-
-type Py2JsUpdateMsg = Py2JsMsg & {
-  style_data: any;
-  layout_data: any;
-  style_traces?: null | number | number[];
-};
-
-type Selector = {
-  type: "box" | "lasso";
-  selector_state:
-    | { xrange: number[]; yrange: number[] }
-    | { xs: number[]; ys: number[] };
-};
+window.PlotlyConfig = {MathJaxConfig: "local"};
+var Plotly = require("plotly.js/dist/plotly");
+var semver_range = "^" + require("../package.json").version;
 
 // Model
 // =====
@@ -134,18 +15,17 @@ type Selector = {
  * even before the widget is first displayed in the Notebook
  * @type {widgets.DOMWidgetModel}
  */
-export class FigureModel extends DOMWidgetModel {
-  defaults() {
-    return {
-      ...super.defaults(),
+var FigureModel = widgets.DOMWidgetModel.extend(
+  {
+    defaults: _.extend(widgets.DOMWidgetModel.prototype.defaults(), {
       // Model metadata
       // --------------
-      _model_name: FigureModel.model_name,
-      _model_module: FigureModel.model_module,
-      _model_module_version: FigureModel.model_module_version,
-      _view_name: FigureModel.view_name,
-      _view_module: FigureModel.view_module,
-      _view_module_version: FigureModel.view_module_version,
+      _model_name: "FigureModel",
+      _view_name: "FigureView",
+      _model_module: "plotlywidget",
+      _view_module: "plotlywidget",
+      _view_module_version: semver_range,
+      _model_module_version: semver_range,
 
       // Data and Layout
       // ---------------
@@ -501,295 +381,295 @@ export class FigureModel extends DOMWidgetModel {
        * requested by the Python side
        */
       _last_trace_edit_id: 0,
-    };
-  }
+    }),
 
-  /**
-   * Initialize FigureModel. Called when the Python FigureWidget is first
-   * constructed
-   */
-  initialize() {
-    super.initialize.apply(this, arguments);
+    /**
+     * Initialize FigureModel. Called when the Python FigureWidget is first
+     * constructed
+     */
+    initialize: function () {
+      FigureModel.__super__.initialize.apply(this, arguments);
 
-    this.on("change:_data", this.do_data, this);
-    this.on("change:_layout", this.do_layout, this);
-    this.on("change:_py2js_addTraces", this.do_addTraces, this);
-    this.on("change:_py2js_deleteTraces", this.do_deleteTraces, this);
-    this.on("change:_py2js_moveTraces", this.do_moveTraces, this);
-    this.on("change:_py2js_restyle", this.do_restyle, this);
-    this.on("change:_py2js_relayout", this.do_relayout, this);
-    this.on("change:_py2js_update", this.do_update, this);
-    this.on("change:_py2js_animate", this.do_animate, this);
-    this.on("change:_py2js_removeLayoutProps", this.do_removeLayoutProps, this);
-    this.on("change:_py2js_removeTraceProps", this.do_removeTraceProps, this);
-  }
+      this.on("change:_data", this.do_data, this);
+      this.on("change:_layout", this.do_layout, this);
+      this.on("change:_py2js_addTraces", this.do_addTraces, this);
+      this.on("change:_py2js_deleteTraces", this.do_deleteTraces, this);
+      this.on("change:_py2js_moveTraces", this.do_moveTraces, this);
+      this.on("change:_py2js_restyle", this.do_restyle, this);
+      this.on("change:_py2js_relayout", this.do_relayout, this);
+      this.on("change:_py2js_update", this.do_update, this);
+      this.on("change:_py2js_animate", this.do_animate, this);
+      this.on(
+        "change:_py2js_removeLayoutProps",
+        this.do_removeLayoutProps,
+        this
+      );
+      this.on("change:_py2js_removeTraceProps", this.do_removeTraceProps, this);
+    },
 
-  /**
-   * Input a trace index specification and return an Array of trace
-   * indexes where:
-   *
-   *  - null|undefined -> Array of all traces
-   *  - Trace index as Number -> Single element array of input index
-   *  - Array of trace indexes -> Input array unchanged
-   *
-   * @param {undefined|null|Number|Array.<Number>} trace_indexes
-   * @returns {Array.<Number>}
-   *  Array of trace indexes
-   * @private
-   */
-  _normalize_trace_indexes(trace_indexes?: null | number | number[]): number[] {
-    if (trace_indexes === null || trace_indexes === undefined) {
-      var numTraces = this.get("_data").length;
-      trace_indexes = _.range(numTraces);
-    }
-    if (!Array.isArray(trace_indexes)) {
-      // Make sure idx is an array
-      trace_indexes = [trace_indexes];
-    }
-    return trace_indexes;
-  }
-
-  /**
-   * Log changes to the _data trait
-   *
-   * This should only happed on FigureModel initialization
-   */
-  do_data() {}
-
-  /**
-   * Log changes to the _layout trait
-   *
-   * This should only happed on FigureModel initialization
-   */
-  do_layout() {}
-
-  /**
-   * Handle addTraces message
-   */
-  do_addTraces() {
-    // add trace to plot
-    /** @type {Py2JsAddTracesMsg} */
-    var msgData: Py2JsAddTracesMsg = this.get("_py2js_addTraces");
-
-    if (msgData !== null) {
-      var currentTraces = this.get("_data");
-      var newTraces = msgData.trace_data;
-      _.forEach(newTraces, function (newTrace) {
-        currentTraces.push(newTrace);
-      });
-    }
-  }
-
-  /**
-   * Handle deleteTraces message
-   */
-  do_deleteTraces() {
-    // remove traces from plot
-
-    /** @type {Py2JsDeleteTracesMsg} */
-    var msgData: Py2JsDeleteTracesMsg = this.get("_py2js_deleteTraces");
-
-    if (msgData !== null) {
-      var delete_inds = msgData.delete_inds;
-      var tracesData = this.get("_data");
-
-      // Remove del inds in reverse order so indexes remain valid
-      // throughout loop
-      delete_inds
-        .slice()
-        .reverse()
-        .forEach(function (del_ind) {
-          tracesData.splice(del_ind, 1);
-        });
-    }
-  }
-
-  /**
-   * Handle moveTraces message
-   */
-  do_moveTraces() {
-    /** @type {Py2JsMoveTracesMsg} */
-    var msgData: Py2JsMoveTracesMsg = this.get("_py2js_moveTraces");
-
-    if (msgData !== null) {
-      var tracesData = this.get("_data");
-      var currentInds = msgData.current_trace_inds;
-      var newInds = msgData.new_trace_inds;
-
-      performMoveTracesLike(tracesData, currentInds, newInds);
-    }
-  }
-
-  /**
-   * Handle restyle message
-   */
-  do_restyle() {
-    /** @type {Py2JsRestyleMsg} */
-    var msgData: Py2JsRestyleMsg = this.get("_py2js_restyle");
-    if (msgData !== null) {
-      var restyleData = msgData.restyle_data;
-      var restyleTraces = this._normalize_trace_indexes(msgData.restyle_traces);
-      performRestyleLike(this.get("_data"), restyleData, restyleTraces);
-    }
-  }
-
-  /**
-   * Handle relayout message
-   */
-  do_relayout() {
-    /** @type {Py2JsRelayoutMsg} */
-    var msgData: Py2JsRelayoutMsg = this.get("_py2js_relayout");
-
-    if (msgData !== null) {
-      performRelayoutLike(this.get("_layout"), msgData.relayout_data);
-    }
-  }
-
-  /**
-   * Handle update message
-   */
-  do_update() {
-    /** @type {Py2JsUpdateMsg} */
-    var msgData: Py2JsUpdateMsg = this.get("_py2js_update");
-
-    if (msgData !== null) {
-      var style = msgData.style_data;
-      var layout = msgData.layout_data;
-      var styleTraces = this._normalize_trace_indexes(msgData.style_traces);
-      performRestyleLike(this.get("_data"), style, styleTraces);
-      performRelayoutLike(this.get("_layout"), layout);
-    }
-  }
-
-  /**
-   * Handle animate message
-   */
-  do_animate() {
-    /** @type {Py2JsAnimateMsg} */
-    var msgData: Py2JsAnimateMsg = this.get("_py2js_animate");
-    if (msgData !== null) {
-      var styles = msgData.style_data;
-      var layout = msgData.layout_data;
-      var trace_indexes = this._normalize_trace_indexes(msgData.style_traces);
-
-      for (var i = 0; i < styles.length; i++) {
-        var style = styles[i];
-        var trace_index = trace_indexes[i];
-        var trace = this.get("_data")[trace_index];
-        performRelayoutLike(trace, style);
+    /**
+     * Input a trace index specification and return an Array of trace
+     * indexes where:
+     *
+     *  - null|undefined -> Array of all traces
+     *  - Trace index as Number -> Single element array of input index
+     *  - Array of trace indexes -> Input array unchanged
+     *
+     * @param {undefined|null|Number|Array.<Number>} trace_indexes
+     * @returns {Array.<Number>}
+     *  Array of trace indexes
+     * @private
+     */
+    _normalize_trace_indexes: function (trace_indexes) {
+      if (trace_indexes === null || trace_indexes === undefined) {
+        var numTraces = this.get("_data").length;
+        trace_indexes = _.range(numTraces);
       }
+      if (!Array.isArray(trace_indexes)) {
+        // Make sure idx is an array
+        trace_indexes = [trace_indexes];
+      }
+      return trace_indexes;
+    },
 
-      performRelayoutLike(this.get("_layout"), layout);
-    }
+    /**
+     * Log changes to the _data trait
+     *
+     * This should only happed on FigureModel initialization
+     */
+    do_data: function () {},
+
+    /**
+     * Log changes to the _layout trait
+     *
+     * This should only happed on FigureModel initialization
+     */
+    do_layout: function () {},
+
+    /**
+     * Handle addTraces message
+     */
+    do_addTraces: function () {
+      // add trace to plot
+      /** @type {Py2JsAddTracesMsg} */
+      var msgData = this.get("_py2js_addTraces");
+
+      if (msgData !== null) {
+        var currentTraces = this.get("_data");
+        var newTraces = msgData.trace_data;
+        _.forEach(newTraces, function (newTrace) {
+          currentTraces.push(newTrace);
+        });
+      }
+    },
+
+    /**
+     * Handle deleteTraces message
+     */
+    do_deleteTraces: function () {
+      // remove traces from plot
+
+      /** @type {Py2JsDeleteTracesMsg} */
+      var msgData = this.get("_py2js_deleteTraces");
+
+      if (msgData !== null) {
+        var delete_inds = msgData.delete_inds;
+        var tracesData = this.get("_data");
+
+        // Remove del inds in reverse order so indexes remain valid
+        // throughout loop
+        delete_inds
+          .slice()
+          .reverse()
+          .forEach(function (del_ind) {
+            tracesData.splice(del_ind, 1);
+          });
+      }
+    },
+
+    /**
+     * Handle moveTraces message
+     */
+    do_moveTraces: function () {
+      /** @type {Py2JsMoveTracesMsg} */
+      var msgData = this.get("_py2js_moveTraces");
+
+      if (msgData !== null) {
+        var tracesData = this.get("_data");
+        var currentInds = msgData.current_trace_inds;
+        var newInds = msgData.new_trace_inds;
+
+        performMoveTracesLike(tracesData, currentInds, newInds);
+      }
+    },
+
+    /**
+     * Handle restyle message
+     */
+    do_restyle: function () {
+      /** @type {Py2JsRestyleMsg} */
+      var msgData = this.get("_py2js_restyle");
+      if (msgData !== null) {
+        var restyleData = msgData.restyle_data;
+        var restyleTraces = this._normalize_trace_indexes(
+          msgData.restyle_traces
+        );
+        performRestyleLike(this.get("_data"), restyleData, restyleTraces);
+      }
+    },
+
+    /**
+     * Handle relayout message
+     */
+    do_relayout: function () {
+      /** @type {Py2JsRelayoutMsg} */
+      var msgData = this.get("_py2js_relayout");
+
+      if (msgData !== null) {
+        performRelayoutLike(this.get("_layout"), msgData.relayout_data);
+      }
+    },
+
+    /**
+     * Handle update message
+     */
+    do_update: function () {
+      /** @type {Py2JsUpdateMsg} */
+      var msgData = this.get("_py2js_update");
+
+      if (msgData !== null) {
+        var style = msgData.style_data;
+        var layout = msgData.layout_data;
+        var styleTraces = this._normalize_trace_indexes(msgData.style_traces);
+        performRestyleLike(this.get("_data"), style, styleTraces);
+        performRelayoutLike(this.get("_layout"), layout);
+      }
+    },
+
+    /**
+     * Handle animate message
+     */
+    do_animate: function () {
+      /** @type {Py2JsAnimateMsg} */
+      var msgData = this.get("_py2js_animate");
+      if (msgData !== null) {
+        var styles = msgData.style_data;
+        var layout = msgData.layout_data;
+        var trace_indexes = this._normalize_trace_indexes(msgData.style_traces);
+
+        for (var i = 0; i < styles.length; i++) {
+          var style = styles[i];
+          var trace_index = trace_indexes[i];
+          var trace = this.get("_data")[trace_index];
+          performRelayoutLike(trace, style);
+        }
+
+        performRelayoutLike(this.get("_layout"), layout);
+      }
+    },
+
+    /**
+     * Handle removeLayoutProps message
+     */
+    do_removeLayoutProps: function () {
+      /** @type {Py2JsRemoveLayoutPropsMsg} */
+      var msgData = this.get("_py2js_removeLayoutProps");
+
+      if (msgData !== null) {
+        var keyPaths = msgData.remove_props;
+        var layout = this.get("_layout");
+        performRemoveProps(layout, keyPaths);
+      }
+    },
+
+    /**
+     * Handle removeTraceProps message
+     */
+    do_removeTraceProps: function () {
+      /** @type {Py2JsRemoveTracePropsMsg} */
+      var msgData = this.get("_py2js_removeTraceProps");
+      if (msgData !== null) {
+        var keyPaths = msgData.remove_props;
+        var traceIndex = msgData.remove_trace;
+        var trace = this.get("_data")[traceIndex];
+
+        performRemoveProps(trace, keyPaths);
+      }
+    },
+  },
+  {
+    serializers: _.extend(
+      {
+        _data: { deserialize: py2js_deserializer, serialize: js2py_serializer },
+        _layout: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_addTraces: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_deleteTraces: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_moveTraces: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_restyle: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_relayout: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_update: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_animate: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_removeLayoutProps: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _py2js_removeTraceProps: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_restyle: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_relayout: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_update: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_layoutDelta: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_traceDeltas: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+        _js2py_pointsCallback: {
+          deserialize: py2js_deserializer,
+          serialize: js2py_serializer,
+        },
+      },
+      widgets.DOMWidgetModel.serializers
+    ),
   }
-
-  /**
-   * Handle removeLayoutProps message
-   */
-  do_removeLayoutProps() {
-    /** @type {Py2JsRemoveLayoutPropsMsg} */
-    var msgData: Py2JsRemoveLayoutPropsMsg = this.get(
-      "_py2js_removeLayoutProps"
-    );
-
-    if (msgData !== null) {
-      var keyPaths = msgData.remove_props;
-      var layout = this.get("_layout");
-      performRemoveProps(layout, keyPaths);
-    }
-  }
-
-  /**
-   * Handle removeTraceProps message
-   */
-  do_removeTraceProps() {
-    /** @type {Py2JsRemoveTracePropsMsg} */
-    var msgData: Py2JsRemoveTracePropsMsg = this.get("_py2js_removeTraceProps");
-    if (msgData !== null) {
-      var keyPaths = msgData.remove_props;
-      var traceIndex = msgData.remove_trace;
-      var trace = this.get("_data")[traceIndex];
-
-      performRemoveProps(trace, keyPaths);
-    }
-  }
-
-  static serializers: ISerializers = {
-    ...DOMWidgetModel.serializers,
-    _data: { deserialize: py2js_deserializer, serialize: js2py_serializer },
-    _layout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_addTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_deleteTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_moveTraces: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_restyle: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_relayout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_update: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_animate: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_removeLayoutProps: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _py2js_removeTraceProps: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_restyle: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_relayout: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_update: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_layoutDelta: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_traceDeltas: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-    _js2py_pointsCallback: {
-      deserialize: py2js_deserializer,
-      serialize: js2py_serializer,
-    },
-  };
-
-  static model_name = "FigureModel";
-  static model_module = MODULE_NAME;
-  static model_module_version = semver_range;
-  static view_name = "FigureView";
-  static view_module = MODULE_NAME;
-  static view_module_version = semver_range;
-}
+);
 
 // View
 // ====
@@ -802,9 +682,7 @@ export class FigureModel extends DOMWidgetModel {
  *
  * @type {widgets.DOMWidgetView}
  */
-export class FigureView extends DOMWidgetView {
-  viewID: string;
-
+var FigureView = widgets.DOMWidgetView.extend({
   /**
    * The perform_render method is called by processPhosphorMessage
    * after the widget's DOM element has been attached to the notebook
@@ -812,7 +690,7 @@ export class FigureView extends DOMWidgetView {
    * FigureModel, and it won't happen at all if the Python FigureWidget
    * is never displayed in a notebook output cell
    */
-  perform_render() {
+  perform_render: function () {
     var that = this;
 
     // Wire up message property callbacks
@@ -828,8 +706,8 @@ export class FigureView extends DOMWidgetView {
 
     // MathJax configuration
     // ---------------------
-    if ((window as any).MathJax) {
-      (window as any).MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
+    if (window.MathJax) {
+      MathJax.Hub.Config({ SVG: { font: "STIX-Web" } });
     }
 
     // Get message ids
@@ -860,31 +738,31 @@ export class FigureView extends DOMWidgetView {
         that._sendLayoutDelta(layout_edit_id);
 
         // Wire up plotly event callbacks
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_restyle", function (update: any) {
+        that.el.on("plotly_restyle", function (update) {
           that.handle_plotly_restyle(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_relayout", function (update: any) {
+        that.el.on("plotly_relayout", function (update) {
           that.handle_plotly_relayout(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_update", function (update: any) {
+        that.el.on("plotly_update", function (update) {
           that.handle_plotly_update(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_click", function (update: any) {
+        that.el.on("plotly_click", function (update) {
           that.handle_plotly_click(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_hover", function (update: any) {
+        that.el.on("plotly_hover", function (update) {
           that.handle_plotly_hover(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_unhover", function (update: any) {
+        that.el.on("plotly_unhover", function (update) {
           that.handle_plotly_unhover(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_selected", function (update: any) {
+        that.el.on("plotly_selected", function (update) {
           that.handle_plotly_selected(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_deselect", function (update: any) {
+        that.el.on("plotly_deselect", function (update) {
           that.handle_plotly_deselect(update);
         });
-        (<Plotly.PlotlyHTMLElement>that.el).on("plotly_doubleclick", function (update: any) {
+        that.el.on("plotly_doubleclick", function (update) {
           that.handle_plotly_doubleclick(update);
         });
 
@@ -898,13 +776,13 @@ export class FigureView extends DOMWidgetView {
         document.dispatchEvent(event);
       }
     );
-  }
+  },
 
   /**
    * Respond to phosphorjs events
    */
-  processPhosphorMessage(msg: any) {
-    super.processPhosphorMessage.apply(this, arguments);
+  processPhosphorMessage: function (msg) {
+    FigureView.__super__.processPhosphorMessage.apply(this, arguments);
     var that = this;
     switch (msg.type) {
       case "before-attach":
@@ -915,7 +793,7 @@ export class FigureView extends DOMWidgetView {
         var axisHidden = {
           showgrid: false,
           showline: false,
-          tickvals: [] as any[],
+          tickvals: [],
         };
 
         Plotly.newPlot(that.el, [], {
@@ -936,27 +814,26 @@ export class FigureView extends DOMWidgetView {
         this.autosizeFigure();
         break;
     }
-  }
+  },
 
-  autosizeFigure() {
+  autosizeFigure: function () {
     var that = this;
     var layout = that.model.get("_layout");
     if (_.isNil(layout) || _.isNil(layout.width)) {
-      // @ts-ignore
       Plotly.Plots.resize(that.el).then(function () {
         var layout_edit_id = that.model.get("_last_layout_edit_id");
         that._sendLayoutDelta(layout_edit_id);
       });
     }
-  }
+  },
 
   /**
    * Purge Plotly.js data structures from the notebook output display
    * element when the view is destroyed
    */
-  destroy() {
+  destroy: function () {
     Plotly.purge(this.el);
-  }
+  },
 
   /**
    * Return the figure's _fullData array merged with its data array
@@ -975,14 +852,14 @@ export class FigureView extends DOMWidgetView {
    * string, rather than having it overridded by the colorscale array.
    *
    */
-  getFullData() {
+  getFullData: function () {
     return _.mergeWith(
       {},
-      (<Plotly.PlotlyHTMLElement>this.el)._fullData,
-      (<Plotly.PlotlyHTMLElement>this.el).data,
+      this.el._fullData,
+      this.el.data,
       fullMergeCustomizer
     );
-  }
+  },
 
   /**
    * Return the figure's _fullLayout object merged with its layout object
@@ -990,14 +867,14 @@ export class FigureView extends DOMWidgetView {
    * See getFullData documentation for discussion of why the merge is
    * necessary
    */
-  getFullLayout() {
+  getFullLayout: function () {
     return _.mergeWith(
       {},
-      (<Plotly.PlotlyHTMLElement>this.el)._fullLayout,
-      (<Plotly.PlotlyHTMLElement>this.el).layout,
+      this.el._fullLayout,
+      this.el.layout,
       fullMergeCustomizer
     );
-  }
+  },
 
   /**
    * Build Points data structure from data supplied by the plotly_click,
@@ -1005,8 +882,8 @@ export class FigureView extends DOMWidgetView {
    * @param {Object} data
    * @returns {null|Points}
    */
-  buildPointsObject(data: any): null | Points {
-    var pointsObject: Points;
+  buildPointsObject: function (data) {
+    var pointsObject;
     if (data.hasOwnProperty("points")) {
       // Most cartesian plots
       var pointObjects = data["points"];
@@ -1014,9 +891,7 @@ export class FigureView extends DOMWidgetView {
 
       var hasNestedPointObjects = true;
       for (let i = 0; i < numPoints; i++) {
-        hasNestedPointObjects =
-          hasNestedPointObjects &&
-          pointObjects[i].hasOwnProperty("pointNumbers");
+        hasNestedPointObjects = (hasNestedPointObjects && pointObjects[i].hasOwnProperty("pointNumbers"));
         if (!hasNestedPointObjects) break;
       }
       var numPointNumbers = numPoints;
@@ -1036,23 +911,26 @@ export class FigureView extends DOMWidgetView {
       if (hasNestedPointObjects) {
         var flatPointIndex = 0;
         for (var p = 0; p < numPoints; p++) {
-          for (
-            let i = 0;
-            i < pointObjects[p]["pointNumbers"].length;
-            i++, flatPointIndex++
-          ) {
-            pointsObject["point_indexes"][flatPointIndex] =
-              pointObjects[p]["pointNumbers"][i];
+          for (let i = 0; i < pointObjects[p]["pointNumbers"].length; i++, flatPointIndex++) {
+            pointsObject["point_indexes"][flatPointIndex] = pointObjects[p]["pointNumbers"][i]
             // also add xs, ys and traces so that the array doesn't get truncated later
             pointsObject["xs"][flatPointIndex] = pointObjects[p]["x"];
             pointsObject["ys"][flatPointIndex] = pointObjects[p]["y"];
-            pointsObject["trace_indexes"][flatPointIndex] =
-              pointObjects[p]["curveNumber"];
+            pointsObject["trace_indexes"][flatPointIndex] = pointObjects[p]["curveNumber"];
           }
         }
-        pointsObject["point_indexes"].sort(function (a, b) {
-          return a - b;
-        });
+
+        let single_trace = true;
+        for (let i = 1; i < numPointNumbers; i++) {
+          single_trace = single_trace && (pointsObject["trace_indexes"][i - 1] === pointsObject["trace_indexes"][i])
+          if (!single_trace) break;
+        }
+        if (single_trace) {
+          pointsObject["point_indexes"].sort((function (a, b) {
+            return a - b
+          }))
+        }
+
       } else {
         for (var p = 0; p < numPoints; p++) {
           pointsObject["trace_indexes"][p] = pointObjects[p]["curveNumber"];
@@ -1076,7 +954,7 @@ export class FigureView extends DOMWidgetView {
     } else {
       return null;
     }
-  }
+  },
 
   /**
    * Build InputDeviceState data structure from data supplied by the
@@ -1084,13 +962,13 @@ export class FigureView extends DOMWidgetView {
    * @param {Object} data
    * @returns {null|InputDeviceState}
    */
-  buildInputDeviceStateObject(data: any): null | InputDeviceState {
+  buildInputDeviceStateObject: function (data) {
     var event = data["event"];
     if (event === undefined) {
       return null;
     } else {
       /** @type {InputDeviceState} */
-      var inputDeviceState: InputDeviceState = {
+      var inputDeviceState = {
         // Keyboard modifiers
         alt: event["altKey"],
         ctrl: event["ctrlKey"],
@@ -1103,7 +981,7 @@ export class FigureView extends DOMWidgetView {
       };
       return inputDeviceState;
     }
-  }
+  },
 
   /**
    * Build Selector data structure from data supplied by the
@@ -1111,8 +989,8 @@ export class FigureView extends DOMWidgetView {
    * @param data
    * @returns {null|Selector}
    */
-  buildSelectorObject(data: any): null | Selector {
-    var selectorObject: Selector;
+  buildSelectorObject: function (data) {
+    var selectorObject;
 
     if (data.hasOwnProperty("range")) {
       // Box selection
@@ -1136,13 +1014,13 @@ export class FigureView extends DOMWidgetView {
       selectorObject = null;
     }
     return selectorObject;
-  }
+  },
 
   /**
    * Handle ploty_restyle events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_restyle(data: any) {
+  handle_plotly_restyle: function (data) {
     if (data === null || data === undefined) {
       // No data to report to the Python side
       return;
@@ -1159,7 +1037,7 @@ export class FigureView extends DOMWidgetView {
 
     // Construct restyle message to send to the Python side
     /** @type {Js2PyRestyleMsg} */
-    var restyleMsg: Js2PyRestyleMsg = {
+    var restyleMsg = {
       style_data: styleData,
       style_traces: styleTraces,
       source_view_id: this.viewID,
@@ -1167,13 +1045,13 @@ export class FigureView extends DOMWidgetView {
 
     this.model.set("_js2py_restyle", restyleMsg);
     this.touch();
-  }
+  },
 
   /**
    * Handle plotly_relayout events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_relayout(data: any) {
+  handle_plotly_relayout: function (data) {
     if (data === null || data === undefined) {
       // No data to report to the Python side
       return;
@@ -1185,20 +1063,20 @@ export class FigureView extends DOMWidgetView {
     }
 
     /** @type {Js2PyRelayoutMsg} */
-    var relayoutMsg: Js2PyRelayoutMsg = {
+    var relayoutMsg = {
       relayout_data: data,
       source_view_id: this.viewID,
     };
 
     this.model.set("_js2py_relayout", relayoutMsg);
     this.touch();
-  }
+  },
 
   /**
    * Handle plotly_update events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_update(data: any) {
+  handle_plotly_update: function (data) {
     if (data === null || data === undefined) {
       // No data to report to the Python side
       return;
@@ -1210,7 +1088,7 @@ export class FigureView extends DOMWidgetView {
     }
 
     /** @type {Js2PyUpdateMsg} */
-    var updateMsg: Js2PyUpdateMsg = {
+    var updateMsg = {
       style_data: data["data"][0],
       style_traces: data["data"][1],
       layout_data: data["layout"],
@@ -1220,50 +1098,50 @@ export class FigureView extends DOMWidgetView {
     // Log message
     this.model.set("_js2py_update", updateMsg);
     this.touch();
-  }
+  },
 
   /**
    * Handle plotly_click events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_click(data: any) {
+  handle_plotly_click: function (data) {
     this._send_points_callback_message(data, "plotly_click");
-  }
+  },
 
   /**
    * Handle plotly_hover events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_hover(data: any) {
+  handle_plotly_hover: function (data) {
     this._send_points_callback_message(data, "plotly_hover");
-  }
+  },
 
   /**
    * Handle plotly_unhover events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_unhover(data: any) {
+  handle_plotly_unhover: function (data) {
     this._send_points_callback_message(data, "plotly_unhover");
-  }
+  },
 
   /**
    * Handle plotly_selected events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_selected(data: any) {
+  handle_plotly_selected: function (data) {
     this._send_points_callback_message(data, "plotly_selected");
-  }
+  },
 
   /**
    * Handle plotly_deselect events emitted by the Plotly.js library
    * @param data
    */
-  handle_plotly_deselect(data: any) {
+  handle_plotly_deselect: function (data) {
     data = {
       points: [],
     };
     this._send_points_callback_message(data, "plotly_deselect");
-  }
+  },
 
   /**
    * Build and send a points callback message to the Python side
@@ -1276,14 +1154,14 @@ export class FigureView extends DOMWidgetView {
    *  'plotly_hover', 'plotly_unhover', or 'plotly_selected'
    * @private
    */
-  _send_points_callback_message(data: any, event_type: string) {
+  _send_points_callback_message: function (data, event_type) {
     if (data === null || data === undefined) {
       // No data to report to the Python side
       return;
     }
 
     /** @type {Js2PyPointsCallbackMsg} */
-    var pointsMsg: Js2PyPointsCallbackMsg = {
+    var pointsMsg = {
       event_type: event_type,
       points: this.buildPointsObject(data),
       device_state: this.buildInputDeviceStateObject(data),
@@ -1294,22 +1172,25 @@ export class FigureView extends DOMWidgetView {
       this.model.set("_js2py_pointsCallback", pointsMsg);
       this.touch();
     }
-  }
+  },
 
   /**
    * Stub for future handling of plotly_doubleclick
    * @param data
    */
-  handle_plotly_doubleclick(data: any) {}
+  handle_plotly_doubleclick: function (data) {},
 
   /**
    * Handle Plotly.addTraces request
    */
-  do_addTraces() {
+  do_addTraces: function () {
     /** @type {Py2JsAddTracesMsg} */
-    var msgData: Py2JsAddTracesMsg = this.model.get("_py2js_addTraces");
+    var msgData = this.model.get("_py2js_addTraces");
 
     if (msgData !== null) {
+      // Save off original number of traces
+      var prevNumTraces = this.el.data.length;
+
       var that = this;
       Plotly.addTraces(this.el, msgData.trace_data).then(function () {
         // ### Send trace deltas ###
@@ -1320,14 +1201,14 @@ export class FigureView extends DOMWidgetView {
         that._sendLayoutDelta(layout_edit_id);
       });
     }
-  }
+  },
 
   /**
    * Handle Plotly.deleteTraces request
    */
-  do_deleteTraces() {
+  do_deleteTraces: function () {
     /** @type {Py2JsDeleteTracesMsg} */
-    var msgData: Py2JsDeleteTracesMsg = this.model.get("_py2js_deleteTraces");
+    var msgData = this.model.get("_py2js_deleteTraces");
 
     if (msgData !== null) {
       var delete_inds = msgData.delete_inds;
@@ -1342,14 +1223,14 @@ export class FigureView extends DOMWidgetView {
         that._sendLayoutDelta(layout_edit_id);
       });
     }
-  }
+  },
 
   /**
    * Handle Plotly.moveTraces request
    */
-  do_moveTraces() {
+  do_moveTraces: function () {
     /** @type {Py2JsMoveTracesMsg} */
-    var msgData: Py2JsMoveTracesMsg = this.model.get("_py2js_moveTraces");
+    var msgData = this.model.get("_py2js_moveTraces");
 
     if (msgData !== null) {
       // Unpack message
@@ -1364,17 +1245,17 @@ export class FigureView extends DOMWidgetView {
         Plotly.moveTraces(this.el, currentInds, newInds);
       }
     }
-  }
+  },
 
   /**
    * Handle Plotly.restyle request
    */
-  do_restyle() {
+  do_restyle: function () {
     /** @type {Py2JsRestyleMsg} */
-    var msgData: Py2JsRestyleMsg = this.model.get("_py2js_restyle");
+    var msgData = this.model.get("_py2js_restyle");
     if (msgData !== null) {
       var restyleData = msgData.restyle_data;
-      var traceIndexes = (this.model as FigureModel)._normalize_trace_indexes(
+      var traceIndexes = this.model._normalize_trace_indexes(
         msgData.restyle_traces
       );
 
@@ -1390,14 +1271,14 @@ export class FigureView extends DOMWidgetView {
       var layout_edit_id = msgData.layout_edit_id;
       this._sendLayoutDelta(layout_edit_id);
     }
-  }
+  },
 
   /**
    * Handle Plotly.relayout request
    */
-  do_relayout() {
+  do_relayout: function () {
     /** @type {Py2JsRelayoutMsg} */
-    var msgData: Py2JsRelayoutMsg = this.model.get("_py2js_relayout");
+    var msgData = this.model.get("_py2js_relayout");
     if (msgData !== null) {
       if (msgData.source_view_id !== this.viewID) {
         var relayoutData = msgData.relayout_data;
@@ -1409,19 +1290,19 @@ export class FigureView extends DOMWidgetView {
       var layout_edit_id = msgData.layout_edit_id;
       this._sendLayoutDelta(layout_edit_id);
     }
-  }
+  },
 
   /**
    * Handle Plotly.update request
    */
-  do_update() {
+  do_update: function () {
     /** @type {Py2JsUpdateMsg} */
-    var msgData: Py2JsUpdateMsg = this.model.get("_py2js_update");
+    var msgData = this.model.get("_py2js_update");
 
     if (msgData !== null) {
       var style = msgData.style_data || {};
       var layout = msgData.layout_data || {};
-      var traceIndexes = (this.model as FigureModel)._normalize_trace_indexes(
+      var traceIndexes = this.model._normalize_trace_indexes(
         msgData.style_traces
       );
 
@@ -1437,14 +1318,14 @@ export class FigureView extends DOMWidgetView {
       var layout_edit_id = msgData.layout_edit_id;
       this._sendLayoutDelta(layout_edit_id);
     }
-  }
+  },
 
   /**
    * Handle Plotly.animate request
    */
-  do_animate() {
+  do_animate: function () {
     /** @type {Py2JsAnimateMsg} */
-    var msgData: Py2JsAnimateMsg = this.model.get("_py2js_animate");
+    var msgData = this.model.get("_py2js_animate");
 
     if (msgData !== null) {
       // Unpack params
@@ -1453,11 +1334,11 @@ export class FigureView extends DOMWidgetView {
 
       var styles = msgData.style_data;
       var layout = msgData.layout_data;
-      var traceIndexes = (this.model as FigureModel)._normalize_trace_indexes(
+      var traceIndexes = this.model._normalize_trace_indexes(
         msgData.style_traces
       );
 
-      var animationData: any = {
+      var animationData = {
         data: styles,
         layout: layout,
         traces: traceIndexes,
@@ -1466,7 +1347,6 @@ export class FigureView extends DOMWidgetView {
       animationData["_doNotReportToPy"] = true;
       var that = this;
 
-      // @ts-ignore
       Plotly.animate(this.el, animationData, animationOpts).then(function () {
         // ### Send trace deltas ###
         // We create an array of deltas corresponding to the
@@ -1478,7 +1358,7 @@ export class FigureView extends DOMWidgetView {
         that._sendLayoutDelta(layout_edit_id);
       });
     }
-  }
+  },
 
   /**
    * Construct layout delta object and send layoutDelta message to the
@@ -1488,7 +1368,7 @@ export class FigureView extends DOMWidgetView {
    *  Edit ID of message that triggered the creation of the layout delta
    * @private
    */
-  _sendLayoutDelta(layout_edit_id: any) {
+  _sendLayoutDelta: function (layout_edit_id) {
     // ### Handle layout delta ###
     var layout_delta = createDeltaObject(
       this.getFullLayout(),
@@ -1496,14 +1376,14 @@ export class FigureView extends DOMWidgetView {
     );
 
     /** @type{Js2PyLayoutDeltaMsg} */
-    var layoutDeltaMsg: Js2PyLayoutDeltaMsg = {
+    var layoutDeltaMsg = {
       layout_delta: layout_delta,
       layout_edit_id: layout_edit_id,
     };
 
     this.model.set("_js2py_layoutDelta", layoutDeltaMsg);
     this.touch();
-  }
+  },
 
   /**
    * Construct trace deltas array for the requested trace indexes and
@@ -1513,7 +1393,7 @@ export class FigureView extends DOMWidgetView {
    *  Edit ID of message that triggered the creation of trace deltas
    * @private
    */
-  _sendTraceDeltas(trace_edit_id: any) {
+  _sendTraceDeltas: function (trace_edit_id) {
     var trace_data = this.model.get("_data");
     var traceIndexes = _.range(trace_data.length);
     var trace_deltas = new Array(traceIndexes.length);
@@ -1528,22 +1408,22 @@ export class FigureView extends DOMWidgetView {
     }
 
     /** @type{Js2PyTraceDeltasMsg} */
-    var traceDeltasMsg: Js2PyTraceDeltasMsg = {
+    var traceDeltasMsg = {
       trace_deltas: trace_deltas,
       trace_edit_id: trace_edit_id,
     };
 
     this.model.set("_js2py_traceDeltas", traceDeltasMsg);
     this.touch();
-  }
-}
+  },
+});
 
 // Serialization
 /**
  * Create a mapping from numpy dtype strings to corresponding typed array
  * constructors
  */
-const numpy_dtype_to_typedarray_type = {
+var numpy_dtype_to_typedarray_type = {
   int8: Int8Array,
   int16: Int16Array,
   int32: Int32Array,
@@ -1554,7 +1434,7 @@ const numpy_dtype_to_typedarray_type = {
   float64: Float64Array,
 };
 
-function serializeTypedArray(v: ArrayConstructor) {
+function serializeTypedArray(v) {
   var numpyType;
   if (v instanceof Int8Array) {
     numpyType = "int8";
@@ -1587,8 +1467,8 @@ function serializeTypedArray(v: ArrayConstructor) {
 /**
  * ipywidget JavaScript -> Python serializer
  */
-function js2py_serializer(v: any, widgetManager?: any) {
-  var res: any;
+function js2py_serializer(v, widgetManager) {
+  var res;
 
   if (_.isTypedArray(v)) {
     res = serializeTypedArray(v);
@@ -1621,8 +1501,8 @@ function js2py_serializer(v: any, widgetManager?: any) {
 /**
  * ipywidget Python -> Javascript deserializer
  */
-function py2js_deserializer(v: any, widgetManager?: any) {
-  var res: any;
+function py2js_deserializer(v, widgetManager) {
+  var res;
 
   if (Array.isArray(v)) {
     // Deserialize array elements recursively
@@ -1642,7 +1522,6 @@ function py2js_deserializer(v: any, widgetManager?: any) {
       // Note plotly.py<=3.1.1 called the buffer object `buffer`
       // This was renamed `value` in 3.2 to work around a naming conflict
       // when saving widget state to a notebook.
-      // @ts-ignore
       var typedarray_type = numpy_dtype_to_typedarray_type[v.dtype];
       var buffer = _.has(v, "value") ? v.value.buffer : v.buffer.buffer;
       res = new typedarray_type(buffer);
@@ -1671,7 +1550,7 @@ function py2js_deserializer(v: any, widgetManager?: any) {
  *  Value to examine
  * @returns {boolean}
  */
-function isTypedArray(potentialTypedArray: any): boolean {
+function isTypedArray(potentialTypedArray) {
   return (
     ArrayBuffer.isView(potentialTypedArray) &&
     !(potentialTypedArray instanceof DataView)
@@ -1686,7 +1565,7 @@ function isTypedArray(potentialTypedArray: any): boolean {
  *
  * See: https://lodash.com/docs/latest#mergeWith
  */
-function fullMergeCustomizer(objValue: any, srcValue: any, key: string) {
+function fullMergeCustomizer(objValue, srcValue, key) {
   if (key[0] === "_") {
     // Don't recurse into private properties
     return null;
@@ -1718,7 +1597,7 @@ function fullMergeCustomizer(objValue: any, srcValue: any, key: string) {
  *      d -> {foo: {bar: [5, 17]}}
  *
  */
-function performRelayoutLike(parentObj: any, relayoutData: any) {
+function performRelayoutLike(parentObj, relayoutData) {
   // Perform a relayout style operation on a given parent object
   for (var rawKey in relayoutData) {
     if (!relayoutData.hasOwnProperty(rawKey)) {
@@ -1761,11 +1640,7 @@ function performRelayoutLike(parentObj: any, relayoutData: any) {
  *      d -> [{foo: {bar: 2}}, {foo: {bar: 3}}, {foo: {bar: 4}}]
  *
  */
-function performRestyleLike(
-  parentArray: any[],
-  restyleData: any,
-  restyleTraces: number[]
-) {
+function performRestyleLike(parentArray, restyleData, restyleTraces) {
   // Loop over the properties of restyleData
   for (var rawKey in restyleData) {
     if (!restyleData.hasOwnProperty(rawKey)) {
@@ -1816,13 +1691,9 @@ function performRestyleLike(
  *      performMoveTracesLike(d, [0, 2], [1, 2])
  *      d -> [{foo: 1}, {foo: 0}, {foo: 2}]
  */
-function performMoveTracesLike(
-  parentArray: any[],
-  currentInds: number[],
-  newInds: number[]
-) {
+function performMoveTracesLike(parentArray, currentInds, newInds) {
   // ### Remove by currentInds in reverse order ###
-  var movingTracesData: any[] = [];
+  var movingTracesData = [];
   for (var ci = currentInds.length - 1; ci >= 0; ci--) {
     // Insert moving parentArray at beginning of the list
     movingTracesData.splice(0, 0, parentArray[currentInds[ci]]);
@@ -1864,10 +1735,7 @@ function performMoveTracesLike(
  *      d -> {foo: [{bar: 0}, {}]}
  *
  */
-function performRemoveProps(
-  parentObj: object,
-  keyPaths: Array<Array<number | string>>
-) {
+function performRemoveProps(parentObj, keyPaths) {
   for (var i = 0; i < keyPaths.length; i++) {
     var keyPath = keyPaths[i];
     _.unset(parentObj, keyPath);
@@ -1902,9 +1770,9 @@ function performRemoveProps(
  *          -> {baz: 32}
  *
  */
-function createDeltaObject(fullObj: any, removeObj: any) {
+function createDeltaObject(fullObj, removeObj) {
   // Initialize result as object or array
-  var res: any;
+  var res;
   if (Array.isArray(fullObj)) {
     res = new Array(fullObj.length);
   } else {
@@ -1976,12 +1844,7 @@ function createDeltaObject(fullObj: any, removeObj: any) {
   return res;
 }
 
-function randstr(
-  existing?: { [k: string]: any },
-  bits?: number,
-  base?: number,
-  _recursion?: number
-): string {
+function randstr(existing, bits, base, _recursion) {
   if (!base) base = 16;
   if (bits === undefined) bits = 24;
   if (bits <= 0) return "0";
@@ -2013,9 +1876,14 @@ function randstr(
     (parsed !== Infinity && parsed >= Math.pow(2, bits))
   ) {
     if (_recursion > 10) {
-      console.warn("randstr failed uniqueness");
+      lib.warn("randstr failed uniqueness");
       return res;
     }
     return randstr(existing, bits, base, (_recursion || 0) + 1);
   } else return res;
 }
+
+module.exports = {
+  FigureView: FigureView,
+  FigureModel: FigureModel,
+};

@@ -45,10 +45,10 @@ To avoid cluttered edges we adopted the following procedure in choosing the inte
 - define a list,  `Dist`, having as elements the distances between the following pairs of points:
 $$(P_1, P_1), \:(P_1, P_2), \: (P_1, P_3),\: (P_1, P_4),\: (P_1, P_5)$$
 
-- In order to assign the control poligon to the B&eacute;zier curve that will be the edge between two connected
+- In order to assign the control polygon to the B&eacute;zier curve that will be the edge between two connected
 nodes, `V[i], V[j]`, we compute the distance between these nodes, and deduce the interval $k$, of two consecutive values in `Dist`, this distance  belongs to.
 
-- Since there are four such intervals indexed $k=0,1,2,3$, we  define the control poligon as follows: $${\bf b}_0=V[i],\:\: {\bf b}_1=V[i]/param,\:\: {\bf b}_2=V[j]/param, \:\:{\bf b}_3=V[j],$$ where `param` is chosen from the list: `params=[1.2, 1.5, 1.8, 2.1]`.
+- Since there are four such intervals indexed $k=0,1,2,3$, we  define the control polygon as follows: $${\bf b}_0=V[i],\:\: {\bf b}_1=V[i]/param,\:\: {\bf b}_2=V[j]/param, \:\:{\bf b}_3=V[j],$$ where `param` is chosen from the list: `params=[1.2, 1.5, 1.8, 2.1]`.
 
 Namely, if the distance(`V[i], V[j]`), belongs to the $K^{th}$ interval associated to `Dist`, then we choose `param= params[K]`.
 
