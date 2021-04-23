@@ -6,6 +6,7 @@ import shutil
 import pytest
 import sys
 import pandas as pd
+from io import BytesIO
 
 if sys.version_info >= (3, 3):
     from unittest.mock import MagicMock
@@ -234,7 +235,12 @@ def test_write_image_writeable(fig1, format):
         fig1, mock_file, format=format, width=700, height=500, engine="orca"
     )
 
-    mock_file.write.assert_called_once_with(expected_bytes)
+    if mock_file.write_bytes.called:
+        mock_file.write_bytes.assert_called_once_with(expected_bytes)
+    elif mock_file.write.called:
+        mock_file.write.assert_called_once_with(expected_bytes)
+    else:
+        assert "Neither write nor write_bytes was called."
 
 
 def test_write_image_string_format_inference(fig1, format):
@@ -347,3 +353,17 @@ def test_invalid_figure_json():
     )
 
     assert "400: invalid or malformed request syntax" in str(err.value)
+
+
+def test_bytesio(fig1):
+    """Verify that writing to a BytesIO object contains the same data as to_image().
+
+    The goal of this test is to ensure that Plotly correctly handles a writable buffer
+    which doesn't correspond to a filesystem path.
+    """
+    bio = BytesIO()
+    pio.write_image(fig1, bio, format="jpg", validate=False)
+    bio.seek(0)
+    bio_bytes = bio.read()
+    to_image_bytes = pio.to_image(fig1, format="jpg", validate=False)
+    assert bio_bytes == to_image_bytes
