@@ -1,141 +1,34 @@
-version: 2
+version: 2.1
 
-jobs:
-  check-code-formatting:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-
-    steps:
-      - checkout
-      - run:
-          name: Install black
-          command: "sudo pip install black==19.10b0"
-      - run:
-          name: Check formatting with black
-          command: "black --check ."
-
-  # Core
-  python-3.6-core:
-    docker:
-      - image: circleci/python:3.6-stretch-node-browsers
-
+commands:
+  test_core:
+    parameters:
+      py:
+        default: "36"
+        type: string
     steps:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_core.txt"
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_core.txt"
       - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
           no_output_timeout: 20m
 
-  python-3.7-core:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
+  test_optional:
+    parameters:
+      py:
+        default: "36"
+        type: string
     steps:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt"
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
       - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-
-  python-3.8-core:
-    docker:
-      - image: circleci/python:3.8-buster-node-browsers
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-
-  python-3.9-core:
-    docker:
-      - image: circleci/python:3.9-buster-node-browsers
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_core.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-
-  python-3.7-percy:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-        environment:
-          PERCY_ENABLED: True
-          PERCY_PROJECT: plotly/plotly.py
-
-    steps:
-      - checkout
-      - run:
-          name: Inject Percy Environment variables
-          command: |
-            echo 'export PERCY_TOKEN="$PERCY_PYTHON_TOKEN_V0"' >> $BASH_ENV
-      - run:
-          name: Install requirements
-          command: |
-            sudo pip install --upgrade virtualenv
-            python -m venv venv || virtualenv venv
-            . venv/bin/activate
-            pip install -e ./packages/python/plotly
-      - run:
-          name: Build html figures
-          command: |
-            . venv/bin/activate
-            pip install pandas statsmodels --quiet
-            python test/percy/plotly-express.py
-      - run:
-          name: Run percy snapshots
-          command: |
-            npx percy snapshot test/percy/
-            rm test/percy/*.html
-
-  # Optional
-  python-3.6-optional:
-    docker:
-      - image: circleci/python:3.6-stretch-node-browsers
-
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_36_optional.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
-      - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
-
-  python-3.7-optional:
-    docker:
-      - image: circleci/python:3.7-stretch-node-browsers
-
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_optional.txt"
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
       - run:
           name: Test core
           command: "cd packages/python/plotly; pytest plotly/tests/test_core"
@@ -159,60 +52,148 @@ jobs:
           name: Test lazy imports
           command: "cd packages/python/plotly; pytest -x test_init/test_lazy_imports.py"
 
-  python-3.8-optional:
+  test_orca:
+    parameters:
+      py:
+        default: "36"
+        type: string
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_<<parameters.py>>_optional.txt"
+      - run:
+          name: Install plotly-geo
+          command: "cd packages/python/plotly-geo; sudo pip install -e ."
+      - run:
+          name: Install orca
+          command: |
+            sudo npm install electron@1.8.4 sudo npm install orca
+            sudo apt-get install -y poppler-utils libxtst6 xvfb libgtk2.0-0 libgconf-2-4 libnss3 libasound2 rename
+            echo 'export PATH="/home/circleci/project/node_modules/.bin:$PATH"' >> $BASH_ENV
+      - run:
+          name: Test orca
+          command: "cd packages/python/plotly; pytest plotly/tests/test_orca"
+          no_output_timeout: 20m
+      - store_artifacts:
+          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
+
+jobs:
+  check-code-formatting:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+
+    steps:
+      - checkout
+      - run:
+          name: Install black
+          command: "sudo pip install black==19.10b0"
+      - run:
+          name: Check formatting with black
+          command: "black --check ."
+
+  # Core
+  python_36_core:
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - test_core:
+          py: "36"
+
+  python_37_core:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+    steps:
+      - test_core:
+          py: "37"
+
+  python_38_core:
     docker:
       - image: circleci/python:3.8-buster-node-browsers
-
     steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_optional.txt"
-      - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
-      - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
-      - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
+      - test_core:
+          py: "38"
 
-  python-3.9-optional:
+  python_39_core:
     docker:
       - image: circleci/python:3.9-buster-node-browsers
+    steps:
+      - test_core:
+          py: "39"
+
+  # Optional
+  python_36_optional:
+    docker:
+      - image: circleci/python:3.6-stretch-node-browsers
+    steps:
+      - test_optional:
+          py: "36"
+
+  python_37_optional:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+    steps:
+      - test_optional:
+          py: "37"
+
+  python_38_optional:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "38"
+
+  python_39_optional:
+    docker:
+      - image: circleci/python:3.9-buster-node-browsers
+    steps:
+      - test_optional:
+          py: "39"
+
+  # Orca
+  python_38_orca:
+    docker:
+      - image: circleci/python:3.8-buster-node-browsers
+    steps:
+      - test_orca:
+          py: "38"
+
+  # Percy
+  python_37_percy:
+    docker:
+      - image: circleci/python:3.7-stretch-node-browsers
+        environment:
+          PERCY_ENABLED: True
+          PERCY_PROJECT: plotly/plotly.py
 
     steps:
       - checkout
       - run:
-          name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_39_optional.txt"
+          name: Inject Percy Environment variables
+          command: |
+            echo 'export PERCY_TOKEN="$PERCY_PYTHON_TOKEN_V0"' >> $BASH_ENV
       - run:
-          name: Test core
-          command: "cd packages/python/plotly; pytest plotly/tests/test_core"
-          no_output_timeout: 20m
+          name: Install requirements
+          command: |
+            sudo pip install --upgrade virtualenv
+            python -m venv venv || virtualenv venv
+            . venv/bin/activate
+            pip install -e ./packages/python/plotly
+            pip install -e ./packages/python/plotly-geo
+            pip install -r ./packages/python/plotly/test_requirements/requirements_37_optional.txt
       - run:
-          name: Test optional
-          command: "cd packages/python/plotly; pytest plotly/tests/test_optional"
-          no_output_timeout: 40m
+          name: Build html figures
+          command: |
+            . venv/bin/activate
+            python test/percy/plotly-express.py
       - run:
-          name: Test utils
-          command: "cd packages/python/plotly; pytest _plotly_utils/tests/"
-          no_output_timeout: 20m
-      - run:
-          name: Test io
-          command: "cd packages/python/plotly; pytest plotly/tests/test_io"
-          no_output_timeout: 20m
+          name: Run percy snapshots
+          command: |
+            npx percy snapshot test/percy/
+            rm test/percy/*.html
 
   # Chart studio
-  python-3.7-chart_studio:
+  python_37_chart_studio:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
 
@@ -225,37 +206,6 @@ jobs:
           name: Tests
           command: "cd packages/python/chart-studio; pytest -x chart_studio/tests/"
           no_output_timeout: 20m
-
-  python-3-7-orca:
-    docker:
-      - image: circleci/node:10.9-stretch-browsers
-        environment:
-          PYTHON_VERSION: 3.7
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}-{{ checksum "packages/python/plotly/test_requirements/requirements_37_optional.txt" }}
-      - run:
-          name: Create conda environment
-          command: .circleci/create_conda_optional_env.sh
-
-      - save_cache:
-          key: conda-37-v1-{{ checksum ".circleci/create_conda_optional_env.sh" }}
-          paths:
-            - /home/circleci/miniconda/
-      - run:
-          name: Run Tests
-          command: |
-            . /home/circleci/miniconda/etc/profile.d/conda.sh
-            conda activate circle_optional
-            pytest --doctest-modules --ignore packages/python/plotly/plotly/tests --ignore packages/python/plotly/plotly/matplotlylib/mplexporter/tests packages/python/plotly/plotly
-            pytest --disable-warnings packages/python/plotly/plotly/tests/test_core
-            pytest packages/python/plotly/plotly/tests/test_orca
-
-      - store_artifacts:
-          path: packages/python/plotly/plotly/tests/test_orca/images/linux/failed
 
   plotlyjs_dev_build:
     docker:
@@ -312,8 +262,6 @@ jobs:
       # specify the version you desire here
       # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.7-stretch-node-browsers
-
-        working_directory: ~/project
 
     steps:
       - add_ssh_keys:
@@ -444,7 +392,7 @@ jobs:
           destination: doc/apidoc/_build/
 
 workflows:
-  version: 2
+
   code_formatting:
     jobs:
       - check-code-formatting
@@ -454,15 +402,15 @@ workflows:
 
   build:
     jobs:
-      - python-3.6-core
-      - python-3.7-core
-      - python-3.8-core
-      - python-3.9-core
-      - python-3.7-percy
-      - python-3.6-optional
-      - python-3.7-optional
-      - python-3.8-optional
-      - python-3.9-optional
-      - python-3.7-chart_studio
-      - python-3-7-orca
+      - python_36_core
+      - python_37_core
+      - python_38_core
+      - python_39_core
+      - python_36_optional
+      - python_37_optional
+      - python_38_optional
+      - python_39_optional
+      - python_38_orca
+      - python_37_percy
+      - python_37_chart_studio
       - build-doc
