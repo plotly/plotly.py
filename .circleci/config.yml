@@ -221,6 +221,7 @@ jobs:
           no_output_timeout: 20m
 
   plotlyjs_dev_build:
+    resource_class: large
     docker:
       - image: circleci/python:3.8-buster-node-browsers
         environment:
