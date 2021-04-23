@@ -1,7 +1,7 @@
 var widgets = require("@jupyter-widgets/base");
 var _ = require("lodash");
 
-window.PlotlyConfig = { MathJaxConfig: "local" };
+window.PlotlyConfig = {MathJaxConfig: "local"};
 var Plotly = require("plotly.js/dist/plotly");
 var semver_range = "^" + require("../package.json").version;
 
@@ -919,9 +919,18 @@ var FigureView = widgets.DOMWidgetView.extend({
             pointsObject["trace_indexes"][flatPointIndex] = pointObjects[p]["curveNumber"];
           }
         }
-        pointsObject["point_indexes"].sort(function(a, b) {
-          return a - b;
-        });
+
+        let single_trace = true;
+        for (let i = 1; i < numPointNumbers; i++) {
+          single_trace = single_trace && (pointsObject["trace_indexes"][i - 1] === pointsObject["trace_indexes"][i])
+          if (!single_trace) break;
+        }
+        if (single_trace) {
+          pointsObject["point_indexes"].sort((function (a, b) {
+            return a - b
+          }))
+        }
+
       } else {
         for (var p = 0; p < numPoints; p++) {
           pointsObject["trace_indexes"][p] = pointObjects[p]["curveNumber"];
