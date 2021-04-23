@@ -237,7 +237,7 @@ jobs:
             python --version
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect"
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_38_core.txt black inflect"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
