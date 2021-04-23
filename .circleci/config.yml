@@ -414,17 +414,17 @@ workflows:
     jobs:
       - plotlyjs_dev_build
 
-#  build:
-#    jobs:
-#      - python_36_core
-#      - python_37_core
-#      - python_38_core
-#      - python_39_core
-#      - python_36_optional
-#      - python_37_optional
-#      - python_38_optional
-#      - python_39_optional
-#      - python_38_orca
-#      - python_37_percy
-#      - python_37_chart_studio
-#      - build-doc
+  build:
+    jobs:
+      - python_36_core
+      - python_37_core
+      - python_38_core
+      - python_39_core
+      - python_36_optional
+      - python_37_optional
+      - python_38_optional
+      - python_39_optional
+      - python_38_orca
+      - python_37_percy
+      - python_37_chart_studio
+      - build-doc
