@@ -547,5 +547,5 @@ def write_html(
 
     # Handle auto_open
     if path is not None and full_html and auto_open:
-        url = path.as_uri()
+        url = path.absolute().as_uri()
         webbrowser.open(url)
