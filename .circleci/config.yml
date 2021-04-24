@@ -165,6 +165,7 @@ jobs:
         environment:
           PERCY_ENABLED: True
           PERCY_PROJECT: plotly/plotly.py
+    resource_class: large
 
     steps:
       - checkout
@@ -196,6 +197,7 @@ jobs:
   python_37_chart_studio:
     docker:
       - image: circleci/python:3.7-stretch-node-browsers
+    resource_class: large
 
     steps:
       - checkout
@@ -218,7 +220,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect jupyterlab~=3.0"
+          command: "cd packages/python; sudo pip install -r ./plotly/test_requirements/requirements_37_core.txt black inflect; sudo pip install jupyterlab~=3.0"
       - run:
           name: Update jupyterlab-plotly version
           command: "cd packages/python/plotly; python setup.py updateplotlywidgetversion"
