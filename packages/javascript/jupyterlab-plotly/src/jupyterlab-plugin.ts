@@ -24,7 +24,7 @@ function activateWidgetExtension(
  * The widget plugin.
  */
 const widgetPlugin: IPlugin<Application<Widget>, void> = ({
-  id: "plotlywidget",
+  id: "jupyterlab-plotly",
   requires: [IJupyterWidgetRegistry],
   activate: activateWidgetExtension,
   autoStart: true,

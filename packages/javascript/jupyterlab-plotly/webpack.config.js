@@ -31,7 +31,7 @@ module.exports = [
         "..",
         "python",
         "plotly",
-        "plotlywidget",
+        "jupyterlab_plotly",
         "nbextension"
       ),
       libraryTarget: "amd",
@@ -45,7 +45,7 @@ module.exports = [
   },
 
   /**
-   * Embeddable plotlywidget bundle
+   * Embeddable jupyterlab-plotly bundle
    *
    * This bundle is almost identical to the notebook extension bundle. The only
    * difference is in the configuration of the webpack public path for the
@@ -60,8 +60,8 @@ module.exports = [
       filename: "index.js",
       path: path.resolve(__dirname, "dist"),
       libraryTarget: "amd",
-      library: "plotlywidget",
-      publicPath: "https://unpkg.com/plotlywidget@" + version + "/dist/",
+      library: "jupyterlab-plotly",
+      publicPath: "https://unpkg.com/jupyterlab-plotly@" + version + "/dist/",
     },
     module: {
       rules: rules,

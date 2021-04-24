@@ -7,7 +7,7 @@ define(function() {
     window['requirejs'].config({
         map: {
             '*': {
-                'plotlywidget': 'nbextensions/plotlywidget/index',
+                'jupyterlab-plotly': 'nbextensions/jupyterlab-plotly/index',
             },
         }
     });
