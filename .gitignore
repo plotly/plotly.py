@@ -49,6 +49,6 @@ doc/.ipynb_checkpoints
 tags
 doc/check-or-enforce-order.py
 
-packages/javascript/plotlywidget/lib/
-packages/python/plotly/plotlywidget/labextension/
-packages/python/plotly/plotlywidget/nbextension/index.js*
+packages/javascript/jupyterlab-plotly/lib/
+packages/python/plotly/jupyterlab_plotly/labextension/
+packages/python/plotly/jupyterlab_plotly/nbextension/index.js*
