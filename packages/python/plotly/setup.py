@@ -539,7 +539,11 @@ setup(
             "package_data/templates/*",
             "package_data/datasets/*",
         ],
-        "jupyterlab_plotly": ["nbextension/*", "labextension/*", "labextension/static/*"],
+        "jupyterlab_plotly": [
+            "nbextension/*",
+            "labextension/*",
+            "labextension/static/*",
+        ],
     },
     data_files=[("etc/jupyter/nbconfig/notebook.d", ["jupyterlab-plotly.json"]),],
     install_requires=["tenacity>=6.2.0", "six"],
