@@ -39,7 +39,7 @@ jupyter:
 ### Set X and Y Coordinates
 
 
-To set the `x` and `y` coordinates use `x` and `y` attributes. If `x` coordindate values are ommitted a cheater plot will be created. The plot below has a `y` array specified but requires `a` and `b` parameter values before an axis may be plotted.
+To set the `x` and `y` coordinates use `x` and `y` attributes. If `x` coordinate values are omitted a cheater plot will be created. The plot below has a `y` array specified but requires `a` and `b` parameter values before an axis may be plotted.
 <!-- #endregion -->
 
 ```python

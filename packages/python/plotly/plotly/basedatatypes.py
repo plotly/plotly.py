@@ -3593,7 +3593,7 @@ Invalid property path '{key_path_str}' for layout
         ----------
         file: str or writeable
             A string representing a local file path or a writeable object
-            (e.g. an open file descriptor)
+            (e.g. a pathlib.Path object or an open file descriptor)
         config: dict or None (default None)
             Plotly.js figure config options
         auto_play: bool (default=True)
@@ -3766,7 +3766,7 @@ Invalid property path '{key_path_str}' for layout
         ----------
         file: str or writeable
             A string representing a local file path or a writeable object
-            (e.g. an open file descriptor)
+            (e.g. a pathlib.Path object or an open file descriptor)
 
         format: str or None
             The desired image format. One of

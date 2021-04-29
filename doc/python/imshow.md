@@ -412,9 +412,7 @@ See the [tutorial on facet plots](/python/facet-plots/) for more information on 
 ```python
 import plotly.express as px
 from skimage import io
-from skimage.data import image_fetcher
-path = image_fetcher.fetch('data/cells.tif')
-data = io.imread(path)
+data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
 img = data[20:45:2]
 fig = px.imshow(img, facet_col=0, binary_string=True, facet_col_wrap=5)
 fig.show()
@@ -446,9 +444,7 @@ For three-dimensional image datasets, obtained for example by MRI or CT in medic
 ```python
 import plotly.express as px
 from skimage import io
-from skimage.data import image_fetcher
-path = image_fetcher.fetch('data/cells.tif')
-data = io.imread(path)
+data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
 img = data[25:40]
 fig = px.imshow(img, animation_frame=0, binary_string=True, labels=dict(animation_frame="slice"))
 fig.show()
@@ -476,9 +472,7 @@ It is possible to view 4-dimensional datasets (for example, 3-D images evolving 
 ```python
 import plotly.express as px
 from skimage import io
-from skimage.data import image_fetcher
-path = image_fetcher.fetch('data/cells.tif')
-data = io.imread(path)
+data = io.imread("https://github.com/scikit-image/skimage-tutorials/raw/main/images/cells.tif")
 data = data.reshape((15, 4, 256, 256))[5:]
 fig = px.imshow(data, animation_frame=0, facet_col=1, binary_string=True)
 fig.show()

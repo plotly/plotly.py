@@ -229,11 +229,11 @@ fig.show(config=config)
 
 To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration dictionary. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
 
--'2D': `zoom2d`, `pan2d`, `select2d`, `lasso2d`, `zoomIn2d`, `zoomOut2d`, `autoScale2d`, `resetScale2d`
--'3D': `zoom3d`, `pan3d`, `rbitRotation`, `tableRotation`, `handleDrag3d`, `resetCameraDefault3d`, `resetCameraLastSave3d`, `hoverClosest3d`
--'Cartesian': `hoverClosestCartesian`, `hoverCompareCartesian`
--'Geo': `zoomInGeo`, `zoomOutGeo`, `resetGeo`, `hoverClosestGeo`
--'Other': `hoverClosestGl2d`, `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage: sendDataToCloud`, `toggleSpikelines`, `resetViewMapbox`
+  - **2D**: `zoom2d`, `pan2d`, `select2d`, `lasso2d`, `zoomIn2d`, `zoomOut2d`, `autoScale2d`, `resetScale2d`
+  - **3D**: `zoom3d`, `pan3d`, `rbitRotation`, `tableRotation`, `handleDrag3d`, `resetCameraDefault3d`, `resetCameraLastSave3d`, `hoverClosest3d`
+  - **Cartesian**: `hoverClosestCartesian`, `hoverCompareCartesian`
+  - **Geo**: `zoomInGeo`, `zoomOutGeo`, `resetGeo`, `hoverClosestGeo`
+  - **Other**: `hoverClosestGl2d`, `hoverClosestPie`, `toggleHover`, `resetViews`, `toImage: sendDataToCloud`, `toggleSpikelines`, `resetViewMapbox`
 
 ```python
 import plotly.graph_objects as go
@@ -252,7 +252,7 @@ fig.show(config={
 
 ### Add optional shape-drawing buttons to modebar
 
-Some modebar buttons of Cartesian plots are optional and have to be added explictly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
+Some modebar buttons of Cartesian plots are optional and have to be added explicitly, using the `modeBarButtonsToAdd` config attribute. These buttons are used for drawing or erasing shapes. See [the tutorial on shapes and shape drawing](python/shapes#drawing-shapes-on-cartesian-plots) for more details.
 
 ```python
 import plotly.graph_objects as go

@@ -66,7 +66,7 @@ The axis type is auto-detected by looking at data from the first [trace](/python
 
 ### Forcing an axis to be categorical
 
-It is possible to force the axis type by setting explicitely `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
+It is possible to force the axis type by setting explicitly `xaxis_type`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
 
 ```python
 import plotly.express as px
@@ -139,7 +139,7 @@ IFrame(snippet_url + 'axes', width='100%', height=630)
 
 #### Moving Tick Labels Inside the Plot
 
-The `ticklabelposition` attribute moves tick labels inside the plotting area, and modifies the auto-range behaviour to accomodate the labels.
+The `ticklabelposition` attribute moves tick labels inside the plotting area, and modifies the auto-range behaviour to accommodate the labels.
 
 ```python
 import plotly.express as px

@@ -245,7 +245,7 @@ def get_latest_publish_build_info(repo, branch):
     builds = [
         j
         for j in branch_jobs
-        if j.get("workflows", {}).get("job_name", None) == "publish"
+        if j.get("workflows", {}).get("job_name", None) == "publish-dist"
         and j.get("status", None) == "success"
     ]
     build = builds[0]
@@ -457,16 +457,13 @@ setup(
     long_description_content_type="text/markdown",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
         "Topic :: Scientific/Engineering :: Visualization",
     ],
+    python_requires=">=3.6",
     license="MIT",
     packages=[
         "plotly",
@@ -505,7 +502,7 @@ setup(
         ),
         ("etc/jupyter/nbconfig/notebook.d", ["plotlywidget.json"]),
     ],
-    install_requires=["retrying>=1.3.3", "six"],
+    install_requires=["tenacity>=6.2.0", "six"],
     zip_safe=False,
     cmdclass=dict(
         build_py=js_prerelease(versioneer_cmds["build_py"]),
