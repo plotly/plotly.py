@@ -6,6 +6,7 @@ import shutil
 import pytest
 import sys
 import pandas as pd
+from io import BytesIO
 
 if sys.version_info >= (3, 3):
     from unittest.mock import MagicMock
@@ -189,13 +190,13 @@ def assert_image_bytes(img_bytes, file_name, _raise=True):
 # Tests
 # -----
 def test_simple_to_image(fig1, format):
-    img_bytes = pio.to_image(fig1, format=format, width=700, height=500)
+    img_bytes = pio.to_image(fig1, format=format, width=700, height=500, engine="orca")
     assert_image_bytes(img_bytes, "fig1." + format)
 
 
 def test_to_image_default(fig1, format):
     pio.orca.config.default_format = format
-    img_bytes = pio.to_image(fig1, width=700, height=500)
+    img_bytes = pio.to_image(fig1, width=700, height=500, engine="orca")
     assert_image_bytes(img_bytes, "fig1." + format)
 
 
@@ -206,7 +207,12 @@ def test_write_image_string(fig1, format):
     file_path = tmp_dir + file_name
 
     pio.write_image(
-        fig1, os.path.join(tmp_dir, file_name), format=format, width=700, height=500
+        fig1,
+        os.path.join(tmp_dir, file_name),
+        format=format,
+        width=700,
+        height=500,
+        engine="orca",
     )
 
     with open(file_path, "rb") as f:
@@ -225,9 +231,16 @@ def test_write_image_writeable(fig1, format):
         expected_bytes = f.read()
 
     mock_file = MagicMock()
-    pio.write_image(fig1, mock_file, format=format, width=700, height=500)
+    pio.write_image(
+        fig1, mock_file, format=format, width=700, height=500, engine="orca"
+    )
 
-    mock_file.write.assert_called_once_with(expected_bytes)
+    if mock_file.write_bytes.called:
+        mock_file.write_bytes.assert_called_once_with(expected_bytes)
+    elif mock_file.write.called:
+        mock_file.write.assert_called_once_with(expected_bytes)
+    else:
+        assert "Neither write nor write_bytes was called."
 
 
 def test_write_image_string_format_inference(fig1, format):
@@ -236,7 +249,9 @@ def test_write_image_string_format_inference(fig1, format):
     file_path = os.path.join(tmp_dir, file_name)
 
     # Use file extension to infer image type.
-    pio.write_image(fig1, os.path.join(tmp_dir, file_name), width=700, height=500)
+    pio.write_image(
+        fig1, os.path.join(tmp_dir, file_name), width=700, height=500, engine="orca"
+    )
 
     with open(file_path, "rb") as f:
         written_bytes = f.read()
@@ -253,7 +268,7 @@ def test_write_image_string_no_extension_failure(fig1):
 
     # Use file extension to infer image type.
     with pytest.raises(ValueError) as err:
-        pio.write_image(fig1, file_path)
+        pio.write_image(fig1, file_path, engine="orca")
 
     assert "add a file extension or specify the type" in str(err.value)
 
@@ -264,7 +279,7 @@ def test_write_image_string_bad_extension_failure(fig1):
 
     # Use file extension to infer image type.
     with pytest.raises(ValueError) as err:
-        pio.write_image(fig1, file_path)
+        pio.write_image(fig1, file_path, engine="orca")
 
     assert "must be specified as one of the following" in str(err.value)
 
@@ -274,7 +289,7 @@ def test_write_image_string_bad_extension_override(fig1):
     file_name = "fig1.bogus"
     tmp_path = os.path.join(tmp_dir, file_name)
 
-    pio.write_image(fig1, tmp_path, format="eps", width=700, height=500)
+    pio.write_image(fig1, tmp_path, format="eps", width=700, height=500, engine="orca")
 
     with open(tmp_path, "rb") as f:
         written_bytes = f.read()
@@ -288,14 +303,18 @@ def test_write_image_string_bad_extension_override(fig1):
 # Topojson
 # --------
 def test_topojson_fig_to_image(topofig, format):
-    img_bytes = pio.to_image(topofig, format=format, width=700, height=500)
+    img_bytes = pio.to_image(
+        topofig, format=format, width=700, height=500, engine="orca"
+    )
     assert_image_bytes(img_bytes, "topofig." + format)
 
 
 # Latex / MathJax
 # ---------------
 def test_latex_fig_to_image(latexfig, format):
-    img_bytes = pio.to_image(latexfig, format=format, width=700, height=500)
+    img_bytes = pio.to_image(
+        latexfig, format=format, width=700, height=500, engine="orca"
+    )
     assert_image_bytes(img_bytes, "latexfig." + format)
 
 
@@ -308,7 +327,7 @@ def test_problematic_environment_variables(fig1, format):
     os.environ["ELECTRON_RUN_AS_NODE"] = "1"
 
     # Do image export
-    img_bytes = pio.to_image(fig1, format=format, width=700, height=500)
+    img_bytes = pio.to_image(fig1, format=format, width=700, height=500, engine="orca")
     assert_image_bytes(img_bytes, "fig1." + format)
 
     # Check that environment variables were restored
@@ -322,15 +341,29 @@ def test_invalid_figure_json():
     # Do image export
     bad_fig = {"foo": "bar"}
     with pytest.raises(ValueError) as err:
-        pio.to_image(bad_fig, format="png")
+        pio.to_image(bad_fig, format="png", engine="orca")
 
     assert "Invalid" in str(err.value)
 
     with pytest.raises(ValueError) as err:
-        pio.to_image(bad_fig, format="png", validate=False)
+        pio.to_image(bad_fig, format="png", validate=False, engine="orca")
 
     assert "The image request was rejected by the orca conversion utility" in str(
         err.value
     )
 
     assert "400: invalid or malformed request syntax" in str(err.value)
+
+
+def test_bytesio(fig1):
+    """Verify that writing to a BytesIO object contains the same data as to_image().
+
+    The goal of this test is to ensure that Plotly correctly handles a writable buffer
+    which doesn't correspond to a filesystem path.
+    """
+    bio = BytesIO()
+    pio.write_image(fig1, bio, format="jpg", validate=False)
+    bio.seek(0)
+    bio_bytes = bio.read()
+    to_image_bytes = pio.to_image(fig1, format="jpg", validate=False)
+    assert bio_bytes == to_image_bytes

@@ -4,6 +4,7 @@ from six import string_types
 import json
 import decimal
 import datetime
+from pathlib import Path
 
 from plotly.io._utils import validate_coerce_fig_to_dict, validate_coerce_output_type
 from _plotly_utils.optional_imports import get_module
@@ -208,7 +209,7 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
 
     file: str or writeable
         A string representing a local file path or a writeable object
-        (e.g. an open file descriptor)
+        (e.g. a pathlib.Path object or an open file descriptor)
 
     pretty: bool (default False)
         True if JSON representation should be pretty-printed, False if
@@ -236,17 +237,40 @@ def write_json(fig, file, validate=True, pretty=False, remove_uids=True, engine=
         fig, validate=validate, pretty=pretty, remove_uids=remove_uids, engine=engine
     )
 
-    # Check if file is a string
-    # -------------------------
-    file_is_str = isinstance(file, string_types)
+    # Try to cast `file` as a pathlib object `path`.
+    # ----------------------------------------------
+    if isinstance(file, string_types):
+        # Use the standard Path constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):
+        # `file` is already a Path object.
+        path = file
+    else:
+        # We could not make a Path object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
 
     # Open file
     # ---------
-    if file_is_str:
-        with open(file, "w") as f:
-            f.write(json_str)
+    if path is None:
+        # We previously failed to make sense of `file` as a pathlib object.
+        # Attempt to write to `file` as an open file descriptor.
+        try:
+            file.write(json_str)
+            return
+        except AttributeError:
+            pass
+        raise ValueError(
+            """
+The 'file' argument '{file}' is not a string, pathlib.Path object, or file descriptor.
+""".format(
+                file=file
+            )
+        )
     else:
-        file.write(json_str)
+        # We previously succeeded in interpreting `file` as a pathlib object.
+        # Now we can use `write_bytes()`.
+        path.write_text(json_str)
 
 
 def from_json_plotly(value, engine=None):
@@ -375,7 +399,7 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     ----------
     file: str or readable
        A string containing the path to a local file or a read-able Python
-       object (e.g. an open file descriptor)
+       object (e.g. a pathlib.Path object or an open file descriptor)
 
     output_type: type or str (default 'Figure')
         The output figure type or type name.
@@ -400,17 +424,25 @@ def read_json(file, output_type="Figure", skip_invalid=False, engine=None):
     Figure or FigureWidget
     """
 
-    # Check if file is a string
+    # Try to cast `file` as a pathlib object `path`.
     # -------------------------
-    # If it's a string we assume it's a local file path. If it's not a string
-    # then we assume it's a read-able Python object
+    # ----------------------------------------------
     file_is_str = isinstance(file, string_types)
+    if isinstance(file, string_types):
+        # Use the standard Path constructor to make a pathlib object.
+        path = Path(file)
+    elif isinstance(file, Path):
+        # `file` is already a Path object.
+        path = file
+    else:
+        # We could not make a Path object out of file. Either `file` is an open file
+        # descriptor with a `write()` method or it's an invalid object.
+        path = None
 
     # Read file contents into JSON string
     # -----------------------------------
-    if file_is_str:
-        with open(file, "r") as f:
-            json_str = f.read()
+    if path is not None:
+        json_str = path.read_text()
     else:
         json_str = file.read()
 

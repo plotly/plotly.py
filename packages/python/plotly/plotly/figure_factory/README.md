@@ -4,7 +4,7 @@
 In the Python Plotly Library:
 
 We have basic plot types that are created using the `plotly.graph_objs` module.
-These plot types include Scatter, Box and Bar types. For a complete list see the [graph_objs file](https://github.com/plotly/plotly.py/blob/master/plotly/graph_objs/graph_objs.py). They are the basis of the plots and charts instatiated by Plotly.
+These plot types include Scatter, Box and Bar types. For a complete list see the [graph_objs file](https://github.com/plotly/plotly.py/blob/master/plotly/graph_objs/graph_objs.py). They are the basis of the plots and charts instantiated by Plotly.
 
 To create a basic chart like this, first we create the `data` using the tools in `plotly.graph_objs` and then we plot it. For example:
 
@@ -25,7 +25,7 @@ py.iplot(data, filename='new-scatter-plot')
 
 There is another type of chart which uses these basic plot types to make other types of graphs, and these are the figure factories. These are wrappers that utilize the code from `plotly.graph_objs` to build charts that can use their structures. A good example of a figure factory is the [Scatterplot Matrix](https://plot.ly/python/scatterplot-matrix/) as it utilizes `go.Scatter`, `go.Box` and `go.Histogram`.
 
-So if you have ever wanted to contribute to the Plotly Python Library by adding a new chart type we don't have, now you can! This README will help you get started by cloning the plotly.py repo, forking a new branch, creating a new figure factory, and creatng a new Pull Request to get feedback for merging. Just follow all these steps and you'll be ready to go.
+So if you have ever wanted to contribute to the Plotly Python Library by adding a new chart type we don't have, now you can! This README will help you get started by cloning the plotly.py repo, forking a new branch, creating a new figure factory, and creating a new Pull Request to get feedback for merging. Just follow all these steps and you'll be ready to go.
 
 ## Getting Started:
 1. In the Terminal, clone the `plotly.py` repo locally and then check out the master branch.
@@ -45,7 +45,7 @@ $ git checkout -b "add-ff-type"
 ## Create a figure_factory File
 1. Creating python file
 
-Move to the `plotly/figure_factory` directory in the `plotly.py` repo. To do this, open up the Terminal and excute the command:
+Move to the `plotly/figure_factory` directory in the `plotly.py` repo. To do this, open up the Terminal and execute the command:
 
 ```
 cd plotly/figure_factory
@@ -138,7 +138,7 @@ The figure `fig` must be a Plotly Figure, meaning it must have the form `fig = g
 
 5. Useful Tips
 
-It is often not a good idea to put all your code into your `create_foo()` function. It is best practice to not repeat yourself and this requires taking repeated blocks of code and puting them into a seperate function.
+It is often not a good idea to put all your code into your `create_foo()` function. It is best practice to not repeat yourself and this requires taking repeated blocks of code and putting them into a separate function.
 
 It is best to make all other functions besides `create_foo()` secret so a user cannot access them. This is done by placing a `_` before the name of the function, so `_aux_func()` for example.
 
@@ -161,7 +161,7 @@ and commit these changes and write a commit message.
 $ git commit -m "this is the work that I did"
 ```
 
-After you have added and commited all of your changes to the local branch, it is time to create your PR for the Plotly team to review.
+After you have added and committed all of your changes to the local branch, it is time to create your PR for the Plotly team to review.
 
 ```
 $ git push origin add-ff-type

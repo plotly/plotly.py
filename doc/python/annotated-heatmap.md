@@ -82,7 +82,7 @@ fig.show()
 ```
 
 #### Custom Text and X & Y Labels
-set `annotation_text` to a matrix with the same dimmensions as `z`
+set `annotation_text` to a matrix with the same dimensions as `z`
 
 ```python
 import plotly.figure_factory as ff
