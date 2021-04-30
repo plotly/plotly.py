@@ -105,8 +105,8 @@ def make_annotations(pos, text, font_size=10, font_color='rgb(250,250,250)'):
     for k in range(L):
         annotations.append(
             dict(
-                text=labels[k], # or replace labels with a different list for the text within the circle
-                x=pos[k][0], y=2*M-position[k][1],
+                text=text[k], # or replace labels with a different list for the text within the circle
+                x=pos[k][0], y=2*L-position[k][1],
                 xref='x1', yref='y1',
                 font=dict(color=font_color, size=font_size),
                 showarrow=False)
