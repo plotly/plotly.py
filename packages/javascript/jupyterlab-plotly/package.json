@@ -4,7 +4,8 @@
   "description": "The plotly JupyterLab extension",
   "author": "The plotly.py team",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/javascript-renderer-extension.js",
+  "types": "dist/javascript-renderer-extension.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/plotly/plotly.py"
