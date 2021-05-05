@@ -28,11 +28,11 @@ class BaseFigureWidget(BaseFigure, widgets.DOMWidget):
     # Widget traitlets are automatically synchronized with the FigureModel
     # JavaScript object
     _view_name = Unicode("FigureView").tag(sync=True)
-    _view_module = Unicode("plotlywidget").tag(sync=True)
+    _view_module = Unicode("jupyterlab-plotly").tag(sync=True)
     _view_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     _model_name = Unicode("FigureModel").tag(sync=True)
-    _model_module = Unicode("plotlywidget").tag(sync=True)
+    _model_module = Unicode("jupyterlab-plotly").tag(sync=True)
     _model_module_version = Unicode(__frontend_version__).tag(sync=True)
 
     # ### _data and _layout ###
