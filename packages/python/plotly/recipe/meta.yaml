@@ -20,6 +20,7 @@ requirements:
   build:
     - python
     - pip
+    - jupyterlab =3
     - nodejs
     - setuptools
   run:
