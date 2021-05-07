@@ -45,4 +45,5 @@ __all__ = [
     "plotlyjs",
     "DEFAULT_PLOTLY_COLORS",
     "PLOTLY_SCALES",
+    "get_colorscale",
 ]
