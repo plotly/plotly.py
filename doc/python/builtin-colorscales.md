@@ -23,7 +23,7 @@ jupyter:
     version: 3.7.6
   plotly:
     description: A reference for the built-in named continuous (sequential, diverging
-      and cylclical) color scales in Plotly.
+      and cyclical) color scales in Plotly.
     display_as: file_settings
     has_thumbnail: true
     ipynb: ~notebook_demo/187

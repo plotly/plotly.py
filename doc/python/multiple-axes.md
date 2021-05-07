@@ -88,7 +88,7 @@ snippet_url = 'https://dash-gallery.plotly.host/python-docs-dash-snippets/'
 IFrame(snippet_url + 'multiple-axes', width='100%', height=630)
 ```
 
-#### Muliple Y-Axes Subplots
+#### Multiple Y-Axes Subplots
 
 ```python
 import plotly.graph_objects as go

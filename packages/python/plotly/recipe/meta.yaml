@@ -20,11 +20,12 @@ requirements:
   build:
     - python
     - pip
+    - jupyterlab =3
     - nodejs
     - setuptools
   run:
     - python
-    - retrying >=1.3.3
+    - tenacity >=6.2.0
     - six
 
 test:

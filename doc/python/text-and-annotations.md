@@ -393,7 +393,7 @@ fig.show()
 
 ### Positioning Text Annotations Absolutely
 
-By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be intepreted in [paper coordinates](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
+By default, text annotations have `xref` and `yref` set to `"x"` and `"y"`, respectively, meaning that their x/y coordinates are with respect to the axes of the plot. This means that panning the plot will cause the annotations to move. Setting `xref` and/or `yref` to `"paper"` will cause the `x` and `y` attributes to be interpreted in [paper coordinates](/python/figure-structure/#positioning-with-paper-container-coordinates-or-axis-domain-coordinates).
 
 Try panning or zooming in the following figure:
 

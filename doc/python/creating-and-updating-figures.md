@@ -43,7 +43,7 @@ The `plotly` Python package exists to create, manipulate and [render](/python/re
 
 ### Figures As Dictionaries
 
-At a low level, figures can be represented as dictionaries and displayed using functions from the `plotly.io` module. The `fig` dictonary in the example below describes a figure. It contains a single `bar` trace and a title.
+At a low level, figures can be represented as dictionaries and displayed using functions from the `plotly.io` module. The `fig` dictionary in the example below describes a figure. It contains a single `bar` trace and a title.
 
 ```python
 fig = dict({

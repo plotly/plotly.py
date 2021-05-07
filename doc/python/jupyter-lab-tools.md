@@ -42,7 +42,7 @@ Display a FigureWidget and then create a new window to display it in so that you
 
 #### View Live Updates
 
-With the output view it is easy to take full advantage of FigureWidgets new impertive-style graph updates since you can see your code and your graph at the same time.
+With the output view it is easy to take full advantage of FigureWidgets new imperative-style graph updates since you can see your code and your graph at the same time.
 
 <img src='https://raw.githubusercontent.com/michaelbabyn/plot_data/master/demonstrate_view_jupyter_lab.gif'>
 

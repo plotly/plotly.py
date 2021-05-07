@@ -40,6 +40,7 @@ class PlotlyOfflineTestCase(TestCase):
 
         @pytest.mark.matplotlib
         def test_iplot_mpl_works(self):
+            plotly.offline.init_notebook_mode()
             # Generate matplotlib plot for tests
             fig = plt.figure()
 
